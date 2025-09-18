@@ -1,0 +1,413 @@
+package com.wdiscute.starcatcher.fishingbob;
+
+import com.wdiscute.starcatcher.ModDataComponents;
+import com.wdiscute.starcatcher.ModEntities;
+import com.wdiscute.starcatcher.ModParticles;
+import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.networkandstuff.FishProperties;
+import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
+import com.wdiscute.starcatcher.networkandstuff.Payloads;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.network.PacketDistributor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class FishingBobEntity extends Projectile
+{
+    private static final Logger log = LoggerFactory.getLogger(FishingBobEntity.class);
+
+
+    public static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(FishingBobEntity.class, EntityDataSerializers.INT);
+
+
+    public final Player player;
+    private FishHookState currentState;
+    public FishProperties fishProperties;
+    public ItemStack stack;
+    public ItemStack bobber;
+    public ItemStack bait;
+
+    int minTicksToFish;
+    int maxTicksToFish;
+    int chanceToFishEachTick;
+
+    int timeBiting;
+
+    int ticksInWater;
+
+    enum FishHookState
+    {
+        FLYING,
+        HOOKED_IN_ENTITY,
+        BOBBING,
+        BITING,
+        FISHING
+    }
+
+    public FishingBobEntity(EntityType<? extends FishingBobEntity> entityType, Level level)
+    {
+        super(entityType, level);
+        player = null;
+    }
+
+    public FishingBobEntity(Level level, Player player, ItemStack bobber, ItemStack bait)
+    {
+        super(ModEntities.FISHING_BOB.get(), level);
+
+        this.player = player;
+        this.bobber = bobber;
+        this.bait = bait;
+
+        {
+            this.setOwner(player);
+
+            minTicksToFish = 100;
+            maxTicksToFish = 300;
+            chanceToFishEachTick = 100;
+
+            float f = player.getXRot();
+            float f1 = player.getYRot();
+            float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+            float f3 = Mth.sin(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
+            float f4 = -Mth.cos(-f * ((float) Math.PI / 180F));
+            float f5 = Mth.sin(-f * ((float) Math.PI / 180F));
+            double d0 = player.getX() - (double) f3 * 0.3;
+            double d1 = player.getEyeY();
+            double d2 = player.getZ() - (double) f2 * 0.3;
+            this.moveTo(d0, d1, d2, f1, f);
+            Vec3 vec3 = new Vec3(-f3, Mth.clamp(-(f5 / f4), -5.0F, 5.0F), -f2);
+            double d3 = vec3.length();
+            vec3 = vec3.multiply(0.6 / d3 + this.random.triangle(0.5F, 0.0103365), 0.6 / d3 + this.random.triangle(0.5F, 0.0103365), 0.6 / d3 + this.random.triangle(0.5F, 0.0103365));
+            this.setDeltaMovement(vec3);
+            this.setYRot((float) (Mth.atan2(vec3.x, vec3.z) * (double) 180.0F / (double) (float) Math.PI));
+            this.setXRot((float) (Mth.atan2(vec3.y, vec3.horizontalDistance()) * (double) 180.0F / (double) (float) Math.PI));
+            this.yRotO = this.getYRot();
+            this.xRotO = this.getXRot();
+
+        }
+
+        if (!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), this.uuid.toString());
+
+        currentState = FishHookState.FLYING;
+    }
+
+
+    public void reel()
+    {
+        List<FishProperties> available = new ArrayList<>(List.of());
+
+        bobber = player.getMainHandItem().getComponents().get(ModDataComponents.BOBBER.get()).copyOne();
+        bait = player.getMainHandItem().getComponents().get(ModDataComponents.BAIT.get()).copyOne();
+
+
+        for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
+        {
+            //int chance = fp.getChance(level(), blockPosition(), bobber, bait);
+
+            for (int i = 0; i < 2; i++)
+            {
+                available.add(fp);
+            }
+
+        }
+
+        fishProperties = available.get(random.nextInt(available.size()));
+
+
+
+
+//        if (bait.is(Items.BUCKET) && fishProperties.bucketFish != null)
+//        {
+//            stack = new ItemStack(fishProperties.bucketFish);
+//        }
+//        else
+//        {
+//            stack = new ItemStack(fishProperties.fish);
+//        }
+
+
+        if (fishProperties.skipMinigame())
+        {
+            Entity itemFished = new ItemEntity(
+                    level(),
+                    position().x,
+                    position().y + 1.2f,
+                    position().z,
+                    stack);
+
+
+            double x = (player.position().x - position().x) / 25;
+            double y = (player.position().y - position().y) / 20;
+            double z = (player.position().z - position().z) / 25;
+
+            x = Math.clamp(x, -1, 1);
+            y = Math.clamp(y, -1, 1);
+            z = Math.clamp(z, -1, 1);
+
+            //override stack with a creeper and bigger deltaMovement to align creeper angle
+            if (bobber.is(ModItems.CREEPER_BOBBER))
+            {
+                itemFished = new Creeper(EntityType.CREEPER, level());
+
+                itemFished.setPos(position().add(0, 1.2f, 0));
+
+                x *= 2.5;
+                y *= 2;
+                z *= 2.5;
+            }
+
+
+            Vec3 vec3 = new Vec3(x, 0.7 + y, z);
+
+            itemFished.setDeltaMovement(vec3);
+
+            level().addFreshEntity(itemFished);
+
+            player.setData(ModDataAttachments.FISHING, "");
+            if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)) player.getMainHandItem().set(ModDataComponents.CAST, false);
+            kill();
+        }
+        else
+        {
+            ItemStack bobber = player.getMainHandItem().get(ModDataComponents.BOBBER).copyOne();
+            ItemStack bait = player.getMainHandItem().get(ModDataComponents.BOBBER).copyOne();
+
+            if(bait.isEmpty()) bobber = new ItemStack(Items.STONE);
+            if(bait.isEmpty()) bait = new ItemStack(Items.STONE);
+
+            PacketDistributor.sendToPlayer(
+                    ((ServerPlayer) player),
+                    new Payloads.FishingPayload(stack, bobber, bait, 3)
+            );
+        }
+
+
+        //consume bait
+        if (fishProperties.br().consumesBait())
+        {
+            ItemStack bait = player.getMainHandItem().get(ModDataComponents.BAIT).copyOne();
+
+            if (bobber.is(ModItems.BAIT_SAVING_BOBBER))
+            {
+                if (random.nextFloat() > 0.5f) bait.setCount(bait.getCount() - 1);
+            }
+            else
+            {
+                bait.setCount(bait.getCount() - 1);
+            }
+
+            player.getMainHandItem().set(
+                    ModDataComponents.BAIT,
+                    ItemContainerContents.fromItems(List.of(bait)));
+        }
+
+
+    }
+
+
+    private boolean shouldStopFishing(Player player)
+    {
+        ItemStack main = player.getMainHandItem();
+        if (!player.isRemoved() && player.isAlive() && main.is(ModItems.STARCATCHER_FISHING_ROD) && !(this.distanceToSqr(player) > 1024))
+        {
+            return false;
+        }
+        else
+        {
+            player.setData(ModDataAttachments.FISHING.get(), "");
+
+            if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
+                player.getMainHandItem().set(ModDataComponents.CAST, false);
+
+            this.discard();
+            return true;
+        }
+    }
+
+    @Override
+    public void tick()
+    {
+        super.tick();
+
+
+        if (!level().isClientSide)
+        {
+            if (currentState == FishHookState.FLYING) entityData.set(STATE, 1);
+            if (currentState == FishHookState.BOBBING) entityData.set(STATE, 2);
+            if (currentState == FishHookState.BITING) entityData.set(STATE, 3);
+            if (currentState == FishHookState.FISHING) entityData.set(STATE, 4);
+        }
+        else
+        {
+            if (entityData.get(STATE) == 1) currentState = FishHookState.FLYING;
+            if (entityData.get(STATE) == 2) currentState = FishHookState.BOBBING;
+            if (entityData.get(STATE) == 3) currentState = FishHookState.BITING;
+            if (entityData.get(STATE) == 4) currentState = FishHookState.FISHING;
+        }
+
+        Player player = ((Player) this.getOwner());
+        if (player == null || this.shouldStopFishing(player))
+        {
+            this.discard();
+            player.setData(ModDataAttachments.FISHING.get(), "");
+        }
+
+        BlockPos blockpos = this.blockPosition();
+        FluidState fluidstate = this.level().getFluidState(blockpos);
+        FluidState fluidstate1 = this.level().getFluidState(blockpos.below());
+
+        if (this.currentState == FishHookState.FLYING)
+        {
+            if (getDeltaMovement().y < 1.2f)
+                this.setDeltaMovement(this.getDeltaMovement().add(0, -0.02, 0));
+
+            if (fluidstate.is(FluidTags.WATER))
+            {
+                this.setDeltaMovement(this.getDeltaMovement().multiply(0.3, 0.3, 0.3));
+                if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
+                return;
+            }
+        }
+
+        if (this.currentState == FishHookState.BITING)
+        {
+            timeBiting++;
+            for (int i = 0; i < 5; i++)
+            {
+                level().addParticle(
+                        ModParticles.FISHING_BITING.get(),
+                        position().x + random.nextFloat() - 0.5,
+                        position().y + random.nextFloat() * 0.5 - 0.25,
+                        position().z + random.nextFloat() - 0.5,
+                        0, 0, 0);
+            }
+
+            if (timeBiting > 80)
+            {
+                player.setData(ModDataAttachments.FISHING, "");
+                kill();
+            }
+        }
+        else
+        {
+            timeBiting = 0;
+        }
+
+        if (!fluidstate.is(FluidTags.WATER) && !fluidstate1.is(FluidTags.WATER))
+        {
+            if (!level().isClientSide) currentState = FishHookState.FLYING;
+        }
+
+
+        //TODO check for water level instead of just blockstate to make the entity sit better in water
+        if (this.currentState == FishHookState.BOBBING || this.currentState == FishHookState.FISHING)
+        {
+
+            checkForFish();
+
+            if (fluidstate.is(FluidTags.WATER))
+            {
+                setDeltaMovement(this.getDeltaMovement().add(0.0F, 0.01, 0.0F));
+            }
+            else
+            {
+                if (random.nextFloat() > 0.02)
+                {
+                    setDeltaMovement(this.getDeltaMovement().add(0.0F, -0.03, 0.0F));
+                }
+                else
+                {
+                    setDeltaMovement(this.getDeltaMovement().add(0.0F, -0.01, 0.0F));
+                }
+            }
+        }
+
+
+        this.move(MoverType.SELF, this.getDeltaMovement());
+        //this.updateRotation();
+
+        if (this.onGround() || this.horizontalCollision)
+        {
+            this.setDeltaMovement(Vec3.ZERO);
+        }
+
+        this.setDeltaMovement(this.getDeltaMovement().scale(0.92));
+        this.reapplyPosition();
+
+
+    }
+
+    public boolean checkBiting()
+    {
+
+        if (currentState == FishHookState.BITING)
+        {
+            if (!level().isClientSide) currentState = FishHookState.FISHING;
+            if (!level().isClientSide) reel();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void checkForFish()
+    {
+        if (!level().isClientSide && currentState == FishHookState.BOBBING)
+        {
+            ticksInWater++;
+            int i = random.nextInt(chanceToFishEachTick);
+            if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
+            {
+                ((ServerLevel) level()).sendParticles(
+                        ModParticles.FISHING_NOTIFICATION.get(),
+                        position().x, position().y + 1, position().z,
+                        1, 0, 0, 0, 0);
+
+                this.setPos(position().x, position().y - 0.5f, position().z);
+                if (!level().isClientSide) currentState = FishHookState.BITING;
+            }
+        }
+
+
+    }
+
+    @Override
+    public AABB getBoundingBoxForCulling()
+    {
+        AABB box = new AABB(-10, -10, -10, 10, 10, 10);
+        return box.move(position());
+    }
+
+    @Override
+    protected void defineSynchedData(SynchedEntityData.Builder builder)
+    {
+        builder.define(STATE, 0);
+    }
+
+}
