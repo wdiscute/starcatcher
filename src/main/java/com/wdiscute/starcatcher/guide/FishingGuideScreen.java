@@ -36,10 +36,10 @@ import java.util.Optional;
 public class FishingGuideScreen extends Screen
 {
 
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/fishing/guide/background.png");
+    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/guide/background.png");
 
-    private static final ResourceLocation ARROW_PREVIOUS = Starcatcher.rl("textures/gui/notebook/arrow_previous.png");
-    private static final ResourceLocation ARROW_NEXT = Starcatcher.rl("textures/gui/notebook/arrow_next.png");
+    private static final ResourceLocation ARROW_PREVIOUS = Starcatcher.rl("textures/gui/guide/arrow_previous.png");
+    private static final ResourceLocation ARROW_NEXT = Starcatcher.rl("textures/gui/guide/arrow_next.png");
 
     int uiX;
     int uiY;

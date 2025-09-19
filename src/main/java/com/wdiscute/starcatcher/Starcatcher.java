@@ -102,6 +102,7 @@ public class Starcatcher
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
+            ModItemProperties.addCustomItemProperties();
         }
 
         @OnlyIn(Dist.CLIENT)

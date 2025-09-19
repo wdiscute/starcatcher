@@ -1,0 +1,66 @@
+{
+  "creativetab.starcatcher.starcatcher": "Starcatcher's Fishing",
+
+
+  "item.laicaps.starcatcher_fishing_rod": "Starcatcher's Fishing Rod",
+  "tooltip.laicaps.starcatcher_fishing_rod.0": "A special fishing rod which allows",
+  "tooltip.laicaps.starcatcher_fishing_rod.1": "for the use of bobbers and bait.",
+  "tooltip.laicaps.starcatcher_fishing_rod.2": "Who knows what you might catch",
+  "tooltip.laicaps.starcatcher_fishing_rod.3": "given the right conditions are met!",
+  "tooltip.laicaps.starcatcher_fishing_rod.4": "",
+  "tooltip.laicaps.starcatcher_fishing_rod.5": "Crouch + Right click to open",
+  "tooltip.laicaps.starcatcher_fishing_rod.6": "bobber and bait selection",
+
+
+  "item.laicaps.starcatcher_twine": "Starcatcher's Twine",
+  "tooltip.laicaps.starcatcher_twine.0": "A delicate twine covered",
+  "tooltip.laicaps.starcatcher_twine.1": "in enderpearl dust.",
+  "tooltip.laicaps.starcatcher_twine.2": "Vansire can be heard emitting from it.",
+
+
+  "item.laicaps.fish_bones" : "Fish Bones",
+  "item.laicaps.fish_bones.0" : "Some fish bones. All that",
+  "item.laicaps.fish_bones.1" : "remains of a once happy fish.",
+
+  "item.laicaps.waterlogged_satchel" : "Waterlogged Satchel",
+  "tooltip.laicaps.waterlogged_satchel.0" : "A satchel containing many secrets",
+  "tooltip.laicaps.waterlogged_satchel.1" : "from the waters underneath.",
+
+
+
+  "gui.guide.caught" : "Caught ",
+  "gui.guide.not_caught" : "Not Caught yet!",
+
+
+  "gui.guide.planet" : "Planet: ",
+  "gui.guide.biome" : "Biome: ",
+  "gui.guide.blacklisted_biomes" : "Blacklisted Biomes: ",
+  "gui.guide.blacklisted_dimensions" : "Blacklisted Dimensions: ",
+  "gui.guide.bait" : "Bait: ",
+  "gui.guide.weather" : "Weather: ",
+  "gui.guide.raining" : "Raining",
+  "gui.guide.thundering" : "Thundering",
+  "gui.guide.clear" : "Clear",
+  "gui.guide.daytime" : "Daytime: ",
+  "gui.guide.day" : "Day",
+  "gui.guide.noon" : "Noon",
+  "gui.guide.night" : "Night",
+  "gui.guide.midnight" : "Midnight",
+  "gui.guide.min_elevation" : "Minimum Elevation: ",
+  "gui.guide.max_elevation" : "Maximum Elevation: ",
+  "gui.guide.no_restriction" : "No Restriction",
+  "gui.guide.hover" : "[hover]",
+
+
+  "gui.guide.laicaps:ember" : "Ember",
+  "gui.guide.laicaps:asha" : "Asha",
+  "gui.guide.laicaps:lunamar" : "Lunamar",
+  "gui.guide.minecraft:overworld" : "Overworld",
+
+
+
+
+  "gui.laicaps.toast.fish_caught" : "New Fish Caught!",
+
+  "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!"
+}

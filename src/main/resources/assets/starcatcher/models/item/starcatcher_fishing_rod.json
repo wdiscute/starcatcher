@@ -1,0 +1,12 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "starcatcher:item/starcatcher_fishing_rod_uncast"
+  },
+  "overrides": [
+    {
+      "predicate": {"laicaps:cast": 1},
+      "model": "starcatcher:item/starcatcher_fishing_rod_cast"
+    }
+  ]
+}

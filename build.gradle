@@ -21,6 +21,54 @@ repositories {
     // Add here additional repositories if required by some of the dependencies below.
 }
 
+repositories {
+    // Adds the 'libs' folder in the project directory as a flat directory
+    flatDir {
+        dir 'libs'
+    }
+}
+
+dependencies {
+    // Assume we have some artifact 'examplemod' that can be obtained from a specified repository
+    jarJar(implementation(group: 'com.wdiscute', name: 'libtooltips')) {
+        version {
+            // Version used in your workspace and bundled in mod jar
+            prefer '1.0.0'
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifactId base.archivesName.get()
+            from components.java
+        }
+    }
+
+    repositories {
+        if(System.getenv("MAVEN_USER") == null || System.getenv("MAVEN_PASS") == null) {
+            mavenLocal()
+        }
+        else maven {
+            name = "wdReleases"
+            url = "https://maven.favouriteless.net/releases"
+
+            credentials {
+                username = System.getenv("MAVEN_USER")
+                password = System.getenv("MAVEN_PASS")
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
 base {
     archivesName = mod_id
 }
@@ -111,29 +159,7 @@ configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
 
-dependencies {
-    // Example optional mod dependency with JEI
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
-    // We add the full version to localRuntime, not runtimeOnly, so that we do not publish a dependency on it
-    // localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 
-    // Example mod dependency using a mod jar from ./libs with a flat dir repository
-    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
-    // The group id is ignored when searching -- in this case, it is "blank"
-    // implementation "blank:coolmod-${mc_version}:${coolmod_version}"
-
-    // Example mod dependency using a file as dependency
-    // implementation files("libs/coolmod-${mc_version}-${coolmod_version}.jar")
-
-    // Example project dependency using a sister or child project:
-    // implementation project(":myproject")
-
-    // For more info:
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-}
 
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
