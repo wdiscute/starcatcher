@@ -44,8 +44,6 @@ public class PayloadReceiver
                 {
                     if (data.time() != -1)
                     {
-                        if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
-                            player.getMainHandItem().set(ModDataComponents.CAST, false);
 
 
                         //MAKE THIS DATA DRIVEN
@@ -62,7 +60,8 @@ public class PayloadReceiver
                                 fbe.position().x,
                                 fbe.position().y + 1.2f,
                                 fbe.position().z,
-                                fbe.stack);
+                                new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()))
+                        );
 
 
                         double x = (player.position().x - fbe.position().x) / 25;
@@ -85,7 +84,7 @@ public class PayloadReceiver
 
                         //award fish counter
                         List<FishCaughtCounter> list = player.getData(ModDataAttachments.FISHES_CAUGHT);
-                        ResourceLocation rl = BuiltInRegistries.ITEM.getKey(fbe.stack.getItem());
+                        ResourceLocation rl = fbe.fpToFish.fish();
 
                         List<FishCaughtCounter> newlist = new ArrayList<>();
 
@@ -111,7 +110,7 @@ public class PayloadReceiver
 
                             if(player instanceof ServerPlayer sp)
                             {
-                                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(new ItemStack(fbe.stack.getItem())));
+                                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()))));
                             }
                         }
 
@@ -124,7 +123,6 @@ public class PayloadReceiver
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_NO, SoundSource.AMBIENT);
                     }
-
 
                     fbe.kill();
                 }
@@ -151,11 +149,6 @@ public class PayloadReceiver
     @OnlyIn(Dist.CLIENT)
     public static void client(Payloads.FishingPayload data, IPayloadContext context)
     {
-        Minecraft.getInstance().setScreen(new FishingMinigameScreen(
-                data.stack(),
-                data.bobber(),
-                data.bait(),
-                data.difficulty()
-        ));
+        Minecraft.getInstance().setScreen(new FishingMinigameScreen(data.fp(), data.rod()));
     }
 }

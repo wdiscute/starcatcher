@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.fishingbob;
 
 import com.wdiscute.starcatcher.ModDataComponents;
+import com.wdiscute.starcatcher.ModFoodProperties;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
@@ -44,6 +45,42 @@ public class ModItems
     public static final DeferredItem<Item> FISH_SPOTTER = ITEMS.register("fish_spotter", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties()));
+
+
+    //
+    //  ,---. ,--.         ,--.
+    // /  .-' `--'  ,---.  |  ,---.   ,---.   ,---.
+    // |  `-, ,--. (  .-'  |  .-.  | | .-. : (  .-'
+    // |  .-' |  | .-'  `) |  | |  | \   --. .-'  `)
+    // `--'   `--' `----'  `--' `--'  `----' `----'
+    //
+
+    //overworld
+
+    //lake
+
+    //freshwater
+    public static final DeferredItem<Item> SILVERFIN_PIKE = basicFish("silverfin_pike");
+
+    //saltwater
+    public static final DeferredItem<Item> IRONJAW_HERRING = basicFish("ironjaw_herring");
+    public static final DeferredItem<Item> DEEPJAW_HERRING = basicFish("deepjaw_herring");
+    public static final DeferredItem<Item> DUSKTAIL_SNAPPER = basicFish("dusktail_snapper");
+
+    //icy
+    public static final DeferredItem<Item> FROSTGILL_CHUB = basicFish("frostgill_chub");
+
+    //nether
+    public static final DeferredItem<Item> EMBERGILL = basicFish("embergill");
+
+    //the end
+
+
+
+    private static DeferredItem<Item> basicFish(String name)
+    {
+        return ITEMS.register(name, () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+    }
 
 
     public static void register(IEventBus eventBus)

@@ -3,8 +3,10 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishingbob.ModItems;
+import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.Payloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -12,6 +14,7 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -27,7 +30,7 @@ public class
 FishingMinigameScreen extends Screen implements GuiEventListener
 {
 
-    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/fishing/minigame.png");
+    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame.png");
 
     final ItemStack itemBeingFished;
     final ItemStack bobber;
@@ -68,12 +71,13 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     int treasureProgress = 0;
     int treasureProgressSmooth = 0;
 
-    public FishingMinigameScreen(ItemStack stack, ItemStack bobber, ItemStack bait, int dif)
+    public FishingMinigameScreen(FishProperties fp, ItemStack rod)
     {
         super(Component.empty());
-        this.itemBeingFished = stack;
-        this.bobber = bobber;
-        this.bait = bait;
+
+        this.itemBeingFished = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
+        this.bobber = rod.get(ModDataComponents.BOBBER).copyOne();
+        this.bait = rod.get(ModDataComponents.BAIT).copyOne();
 
         sweetSpot1Pos = r.nextInt(360);
         sweetSpot2Pos = 60 + r.nextInt(240) + sweetSpot1Pos;
@@ -83,7 +87,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         if (sweetSpot2Pos > 360) sweetSpot2Pos -= 360;
 
         {
-            if (dif == 1)
+            if (10 == 1)
             {
                 hitReward = 10;
                 hitRewardThin = 20;
@@ -97,7 +101,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 shouldHaveThinSweetSpot = true;
             }
 
-            if (dif == 2)
+            if (10 == 2)
             {
                 hitReward = 10;
                 hitRewardThin = 15;
@@ -111,7 +115,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 shouldHaveThinSweetSpot = true;
             }
 
-            if (dif == 3)
+            if (3 == 3)
             {
                 hitReward = 10;
                 hitRewardThin = 15;
@@ -125,7 +129,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 shouldHaveThinSweetSpot = true;
             }
 
-            if (dif == 4)
+            if (10 == 4)
             {
                 hitReward = 5;
                 hitRewardThin = 15;
@@ -157,7 +161,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-
+        treasureActive = false;
         if (treasureActive)
         {
 

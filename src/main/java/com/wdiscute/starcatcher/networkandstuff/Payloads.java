@@ -11,20 +11,16 @@ import net.minecraft.world.item.ItemStack;
 public class Payloads
 {
 
-    public record FishingPayload(ItemStack stack, ItemStack bobber, ItemStack bait, int difficulty) implements CustomPacketPayload
+    public record FishingPayload(FishProperties fp, ItemStack rod) implements CustomPacketPayload
     {
 
         public static final Type<FishingPayload> TYPE = new Type<>(Starcatcher.rl("fishing"));
 
         public static final StreamCodec<ByteBuf, FishingPayload> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.fromCodec(FishProperties.RECORD_CODEC),
+                FishingPayload::fp,
                 ByteBufCodecs.fromCodec(ItemStack.CODEC),
-                FishingPayload::stack,
-                ByteBufCodecs.fromCodec(ItemStack.CODEC),
-                FishingPayload::bobber,
-                ByteBufCodecs.fromCodec(ItemStack.CODEC),
-                FishingPayload::bait,
-                ByteBufCodecs.INT,
-                FishingPayload::difficulty,
+                FishingPayload::rod,
                 FishingPayload::new
         );
 

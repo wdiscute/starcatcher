@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.fishingbob.ModItems;
+import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import net.minecraft.client.renderer.item.ItemProperties;
 
 public class ModItemProperties
@@ -11,7 +12,10 @@ public class ModItemProperties
                 ModItems.STARCATCHER_FISHING_ROD.get(),
                 Starcatcher.rl("cast"),
                 (stack, level, entity, seed) ->
-                        stack.getOrDefault(ModDataComponents.CAST.get(), Boolean.FALSE) ? 1.0F : 0.0F
+                {
+                    if(entity == null) return 0.0f;
+                    return entity.getData(ModDataAttachments.FISHING).isEmpty() ? 0.0F : 1.0F;
+                }
         );
     }
 

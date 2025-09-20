@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "laicaps:item/starcatcher_twine"
+    "layer0": "starcatcher:item/starcatcher_twine"
   }
 }

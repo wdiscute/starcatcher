@@ -13,6 +13,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
@@ -34,27 +35,19 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
         super(properties);
     }
 
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected)
-    {
-        if (entity instanceof ServerPlayer player)
-        {
-            if (stack != player.getMainHandItem() && Boolean.TRUE.equals(stack.get(ModDataComponents.CAST)))
-                stack.set(ModDataComponents.CAST, false);
-        }
-        super.inventoryTick(stack, level, entity, slotId, isSelected);
-    }
 
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
+        if (!player.getItemInHand(hand).is(ModItems.STARCATCHER_FISHING_ROD))
+            return InteractionResultHolder.pass(player.getItemInHand(hand));
 
-        ItemStack itemstack = player.getItemInHand(hand).copy();
-
-        if (player.isCrouching() && hand == InteractionHand.MAIN_HAND && player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD.get()))
+        if (player.isCrouching())
         {
             player.openMenu(this);
-            return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+            return InteractionResultHolder.success(player.getItemInHand(hand));
         }
+
+        if (level.isClientSide) return InteractionResultHolder.success(player.getItemInHand(hand));
 
 
         if (player.getData(ModDataAttachments.FISHING.get()).isEmpty())
@@ -63,28 +56,13 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
 
             if (level instanceof ServerLevel)
             {
-                ItemStack bobber;
-                ItemStack bait;
+                //TODO ADD CUSTOM STAT FOR NUMBER OF FISHES CAUGHT TOTAL ON STAT SCREEN
 
-                if (itemstack.get(DataComponents.CONTAINER) == null)
-                {
-                    bobber = ItemStack.EMPTY;
-                    bait = ItemStack.EMPTY;
-                }
-                else
-                {
-                    bobber = itemstack.get(ModDataComponents.BOBBER.get()).copyOne();
-                    bait = itemstack.get(ModDataComponents.BAIT.get()).copyOne();
-                }
-
-                Entity entity = new FishingBobEntity(level, player, bobber, bait);
+                Entity entity = new FishingBobEntity(level, player, player.getItemInHand(hand));
                 level.addFreshEntity(entity);
-                if (!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
-                if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
-                    player.getMainHandItem().set(ModDataComponents.CAST, true);
-            }
 
-            player.awardStat(Stats.ITEM_USED.get(this));
+                player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
+            }
         }
         else
         {
@@ -98,16 +76,15 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
                     if (entity instanceof FishingBobEntity fbe && !fbe.checkBiting())
                     {
                         fbe.kill();
-                        if (!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), "");
-                        if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
-                            player.getMainHandItem().set(ModDataComponents.CAST, false);
+                        player.setData(ModDataAttachments.FISHING.get(), "");
                     }
                 }
             }
 
         }
 
-        return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
+
+        return InteractionResultHolder.success(player.getItemInHand(hand));
     }
 
 

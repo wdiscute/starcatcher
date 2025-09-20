@@ -1,0 +1,25 @@
+{
+  "fish": "minecraft:gold_ingot",
+  "base_chance": 52,
+  "bellow_y": 100,
+  "above_y": 44,
+  "skips_minigame": false,
+  "has_guide_entry": true,
+
+  "world_restrictions": {
+    "biome_blacklist_tags": ["starcatcher:freshwater"]
+  },
+
+  "bait_restrictions": {
+
+    "correct_baits": ["laicaps:oakheart_berries_bait"],
+
+    "correct_bait_chance_added": 20,
+    "must_have_correct_bait": false,
+    "consumes_bait": true,
+
+    "incorrect_baits": ["minecraft:wheat"]
+  }
+
+}
+

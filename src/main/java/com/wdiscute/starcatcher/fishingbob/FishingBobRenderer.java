@@ -11,6 +11,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
@@ -77,14 +78,14 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
     }
 
     private Vec3 getPlayerHandPos(Player player, float p_340872_, float partialTick) {
-        int i = -1;
+        int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
         ItemStack itemstack = player.getMainHandItem();
-        if (!itemstack.canPerformAction(ItemAbilities.FISHING_ROD_CAST)) {
+        if (!itemstack.is(ModItems.STARCATCHER_FISHING_ROD)) {
             i = -i;
         }
 
         if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
-            double d4 = (double)960.0F / (double)(Integer)this.entityRenderDispatcher.options.fov().get();
+            double d4 = (double)960.0F / (double) this.entityRenderDispatcher.options.fov().get();
             Vec3 vec3 = this.entityRenderDispatcher.camera.getNearPlane().getPointOnPlane((float)i * 0.525F, -0.1F).scale(d4).yRot(p_340872_ * 0.5F).xRot(-p_340872_ * 0.7F);
             return player.getEyePosition(partialTick).add(vec3);
         } else {

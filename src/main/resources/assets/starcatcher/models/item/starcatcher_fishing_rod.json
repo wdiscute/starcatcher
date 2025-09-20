@@ -5,7 +5,7 @@
   },
   "overrides": [
     {
-      "predicate": {"laicaps:cast": 1},
+      "predicate": {"starcatcher:cast": 1},
       "model": "starcatcher:item/starcatcher_fishing_rod_cast"
     }
   ]

@@ -8,6 +8,7 @@ import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import com.wdiscute.starcatcher.networkandstuff.Payloads;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -46,8 +47,8 @@ public class FishingBobEntity extends Projectile
 
     public final Player player;
     private FishHookState currentState;
-    public FishProperties fishProperties;
-    public ItemStack stack;
+    public FishProperties fpToFish;
+    public ItemStack rod;
     public ItemStack bobber;
     public ItemStack bait;
 
@@ -62,7 +63,6 @@ public class FishingBobEntity extends Projectile
     enum FishHookState
     {
         FLYING,
-        HOOKED_IN_ENTITY,
         BOBBING,
         BITING,
         FISHING
@@ -74,13 +74,15 @@ public class FishingBobEntity extends Projectile
         player = null;
     }
 
-    public FishingBobEntity(Level level, Player player, ItemStack bobber, ItemStack bait)
+    public FishingBobEntity(Level level, Player player, ItemStack rod)
     {
         super(ModEntities.FISHING_BOB.get(), level);
 
         this.player = player;
-        this.bobber = bobber;
-        this.bait = bait;
+        this.rod = rod;
+        this.rod = rod;
+        this.bobber = rod.get(ModDataComponents.BOBBER).copyOne();
+        this.bait = rod.get(ModDataComponents.BAIT).copyOne();
 
         {
             this.setOwner(player);
@@ -107,7 +109,6 @@ public class FishingBobEntity extends Projectile
             this.setXRot((float) (Mth.atan2(vec3.y, vec3.horizontalDistance()) * (double) 180.0F / (double) (float) Math.PI));
             this.yRotO = this.getYRot();
             this.xRotO = this.getXRot();
-
         }
 
         if (!level.isClientSide) player.setData(ModDataAttachments.FISHING.get(), this.uuid.toString());
@@ -120,44 +121,33 @@ public class FishingBobEntity extends Projectile
     {
         List<FishProperties> available = new ArrayList<>(List.of());
 
-        bobber = player.getMainHandItem().getComponents().get(ModDataComponents.BOBBER.get()).copyOne();
-        bait = player.getMainHandItem().getComponents().get(ModDataComponents.BAIT.get()).copyOne();
-
-
         for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
-            //int chance = fp.getChance(level(), blockPosition(), bobber, bait);
+            int chance = FishProperties.getChance(fp, this, rod);
 
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < chance; i++)
             {
                 available.add(fp);
             }
 
         }
 
-        fishProperties = available.get(random.nextInt(available.size()));
+        fpToFish = available.get(random.nextInt(available.size()));
 
 
+        //TODO HANDLE BUCKET FISHES
 
 
-//        if (bait.is(Items.BUCKET) && fishProperties.bucketFish != null)
-//        {
-//            stack = new ItemStack(fishProperties.bucketFish);
-//        }
-//        else
-//        {
-//            stack = new ItemStack(fishProperties.fish);
-//        }
-
-
-        if (fishProperties.skipMinigame())
+        //TODO CHANGE THIS PIECE OF CODE TO BE SOMEWHERE ELSE
+        if (fpToFish.skipMinigame())
         {
             Entity itemFished = new ItemEntity(
                     level(),
                     position().x,
                     position().y + 1.2f,
                     position().z,
-                    stack);
+                    new ItemStack(BuiltInRegistries.ITEM.get(fpToFish.fish())
+                    ));
 
 
             double x = (player.position().x - position().x) / 25;
@@ -188,28 +178,21 @@ public class FishingBobEntity extends Projectile
             level().addFreshEntity(itemFished);
 
             player.setData(ModDataAttachments.FISHING, "");
-            if(player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)) player.getMainHandItem().set(ModDataComponents.CAST, false);
+
             kill();
         }
         else
         {
-            ItemStack bobber = player.getMainHandItem().get(ModDataComponents.BOBBER).copyOne();
-            ItemStack bait = player.getMainHandItem().get(ModDataComponents.BOBBER).copyOne();
-
-            if(bait.isEmpty()) bobber = new ItemStack(Items.STONE);
-            if(bait.isEmpty()) bait = new ItemStack(Items.STONE);
-
             PacketDistributor.sendToPlayer(
                     ((ServerPlayer) player),
-                    new Payloads.FishingPayload(stack, bobber, bait, 3)
+                    new Payloads.FishingPayload(fpToFish, rod)
             );
         }
 
 
         //consume bait
-        if (fishProperties.br().consumesBait())
+        if (fpToFish.br().consumesBait())
         {
-            ItemStack bait = player.getMainHandItem().get(ModDataComponents.BAIT).copyOne();
 
             if (bobber.is(ModItems.BAIT_SAVING_BOBBER))
             {
@@ -220,7 +203,7 @@ public class FishingBobEntity extends Projectile
                 bait.setCount(bait.getCount() - 1);
             }
 
-            player.getMainHandItem().set(
+            rod.set(
                     ModDataComponents.BAIT,
                     ItemContainerContents.fromItems(List.of(bait)));
         }
@@ -231,17 +214,18 @@ public class FishingBobEntity extends Projectile
 
     private boolean shouldStopFishing(Player player)
     {
-        ItemStack main = player.getMainHandItem();
-        if (!player.isRemoved() && player.isAlive() && main.is(ModItems.STARCATCHER_FISHING_ROD) && !(this.distanceToSqr(player) > 1024))
+        if(level().isClientSide) return false;
+
+        boolean holdingRod = player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD)
+                || player.getOffhandItem().is(ModItems.STARCATCHER_FISHING_ROD);
+
+        if (!player.isRemoved() && player.isAlive() && holdingRod && !(this.distanceToSqr(player) > 1024))
         {
             return false;
         }
         else
         {
             player.setData(ModDataAttachments.FISHING.get(), "");
-
-            if (player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD))
-                player.getMainHandItem().set(ModDataComponents.CAST, false);
 
             this.discard();
             return true;
@@ -252,7 +236,6 @@ public class FishingBobEntity extends Projectile
     public void tick()
     {
         super.tick();
-
 
         if (!level().isClientSide)
         {
@@ -366,8 +349,8 @@ public class FishingBobEntity extends Projectile
 
         if (currentState == FishHookState.BITING)
         {
-            if (!level().isClientSide) currentState = FishHookState.FISHING;
-            if (!level().isClientSide) reel();
+            currentState = FishHookState.FISHING;
+            reel();
             return true;
         }
         else

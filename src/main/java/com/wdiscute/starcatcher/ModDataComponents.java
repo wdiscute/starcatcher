@@ -17,15 +17,6 @@ public class ModDataComponents
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE ,Starcatcher.MOD_ID);
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<BlockPos>> COORDINATES = register("coordinates",
-            builder -> builder.persistent(BlockPos.CODEC));
-
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> ENTRY_NAME = register("entry_name",
-            builder -> builder.persistent(Codec.STRING));
-
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Integer>> FUEL = register("fuel",
-            builder -> builder.persistent(ExtraCodecs.intRange(0, 2000)));
-
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BOBBER = register("bobber",
             builder -> builder.persistent(ItemContainerContents.CODEC));
@@ -33,8 +24,8 @@ public class ModDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BAIT = register("bait",
             builder -> builder.persistent(ItemContainerContents.CODEC));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> CAST = register("cast",
-            builder -> builder.persistent(Codec.BOOL));
+//    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> CAST = register("cast",
+//            builder -> builder.persistent(Codec.BOOL));
 
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,

@@ -1,0 +1,30 @@
+{
+  "fish": "minecraft:diamond",
+  "base_chance": 5,
+  "daytime": "night",
+  "weather": "rain",
+  "bellow_y": 100,
+  "above_y": 64,
+  "skips_minigame": false,
+  "has_guide_entry": true,
+
+  "world_restrictions": {
+    "dimensions": ["minecraft:overworld", "minecraft:the_end"],
+    "dimensions_blacklist": ["laicaps:asha", "laicaps:lunamar"],
+    "biomes": ["starcatcher:mybiometag", "starcatcher:biomename"],
+    "biomes_blacklist": ["laicaps:asha_forest"]
+  },
+
+  "bait_restrictions": {
+
+    "correct_baits": ["laicaps:oakheart_berries_bait"],
+
+    "correct_bait_chance_added": 20,
+    "must_have_correct_bait": false,
+    "consumes_bait": true,
+
+    "incorrect_baits": ["minecraft:wheat"]
+  }
+
+}
+
