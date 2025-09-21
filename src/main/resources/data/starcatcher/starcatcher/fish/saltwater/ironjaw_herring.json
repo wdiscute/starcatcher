@@ -1,0 +1,10 @@
+{
+  "fish": "starcatcher:ironjaw_herring",
+  "base_chance": 5,
+
+  "world_restrictions": {
+    "dimensions": ["minecraft:overworld"],
+    "biomes_tags": ["starcatcher:not_freshwater"]
+  }
+}
+

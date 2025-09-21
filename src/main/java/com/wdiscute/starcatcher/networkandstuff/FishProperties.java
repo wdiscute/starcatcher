@@ -4,36 +4,24 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.fishingbob.ModItems;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.HolderSetCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.biome.BiomeSource;
-import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.Tags;
 
-import java.io.File;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public record FishProperties(
         ResourceLocation fish,
@@ -67,6 +55,19 @@ public record FishProperties(
             ).apply(instance, FishProperties::new)
     );
 
+    public static final FishProperties DEFAULT = new FishProperties(
+            Starcatcher.rl("none"),
+            0,
+            WorldRestrictions.DEFAULT,
+            BaitRestrictions.DEFAULT,
+            Daytime.ALL,
+            Weather.ALL,
+            0,
+            0,
+            false,
+            false
+            );
+
 
     public record BaitRestrictions(
             List<ResourceLocation> correctBobber,
@@ -99,8 +100,8 @@ public record FishProperties(
             List<ResourceLocation> dims,
             List<ResourceLocation> dimsBlacklist,
             List<ResourceLocation> biomes,
-            List<ResourceLocation> biomesBlacklist,
             List<ResourceLocation> biomesTags,
+            List<ResourceLocation> biomesBlacklist,
             List<ResourceLocation> biomesBlacklistTags
     )
     {
@@ -109,9 +110,9 @@ public record FishProperties(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions", List.of()).forGetter(WorldRestrictions::dims),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions_blacklist", List.of()).forGetter(WorldRestrictions::dimsBlacklist),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes",List.of()).forGetter(WorldRestrictions::biomes),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_tags", List.of()).forGetter(WorldRestrictions::biomesTags),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", List.of()).forGetter(WorldRestrictions::biomesBlacklist),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biome_tags", List.of()).forGetter(WorldRestrictions::biomesTags),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biome_blacklist_tags", List.of()).forGetter(WorldRestrictions::biomesBlacklistTags)
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", List.of()).forGetter(WorldRestrictions::biomesBlacklistTags)
                 ).apply(instance, WorldRestrictions::new));
 
         public static final WorldRestrictions DEFAULT = new WorldRestrictions(
@@ -168,6 +169,71 @@ public record FishProperties(
         }
     }
 
+    public static List<ResourceLocation> getBiomesAsList(FishProperties fp, Level level)
+    {
+        level.registryAccess().registry(Registries.BIOME);
+
+        List<ResourceLocation> rls = new ArrayList<>();
+
+        for (ResourceLocation rl : fp.wr.biomesTags)
+        {
+            TagKey<Biome> biomeBeingChecked = TagKey.create(Registries.BIOME, rl);
+
+            Optional<HolderSet.Named<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(biomeBeingChecked);
+
+            if(optional.isPresent())
+            {
+                for (Holder<Biome> biomeHolder : optional.get())
+                {
+                    String biomeString = biomeHolder.getRegisteredName();
+
+                    rls.add(ResourceLocation.parse(biomeString));
+                }
+            }
+        }
+
+        for(ResourceLocation rl : fp.wr.biomes)
+        {
+            Optional<Holder.Reference<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(ResourceKey.create(Registries.BIOME, rl));
+            if(optional.isPresent()) if(!rls.contains(rl)) rls.add(rl);
+        }
+
+        return rls;
+    }
+
+    public static List<ResourceLocation> getBiomesBlacklistAsList(FishProperties fp, Level level)
+    {
+        level.registryAccess().registry(Registries.BIOME);
+
+        List<ResourceLocation> rls = new ArrayList<>();
+
+        for (ResourceLocation rl : fp.wr.biomesBlacklistTags)
+        {
+            TagKey<Biome> biomeBeingChecked = TagKey.create(Registries.BIOME, rl);
+
+            Optional<HolderSet.Named<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(biomeBeingChecked);
+
+            if(optional.isPresent())
+            {
+                for (Holder<Biome> biomeHolder : optional.get())
+                {
+                    String biomeString = biomeHolder.getRegisteredName();
+
+                    rls.add(ResourceLocation.parse(biomeString));
+                }
+            }
+        }
+
+        for(ResourceLocation rl : fp.wr.biomesBlacklist)
+        {
+            Optional<Holder.Reference<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(ResourceKey.create(Registries.BIOME, rl));
+            if(optional.isPresent()) if(!rls.contains(rl)) rls.add(rl);
+        }
+
+        return rls;
+    }
+
+
     public static FishProperties getFishProperties(RegistryAccess registry, ItemStack is)
     {
         return getFishProperties(registry, is.getItem());
@@ -215,40 +281,17 @@ public record FishProperties(
             return 0;
 
         //biome check
-        ResourceLocation biome = level.getBiome(entity.blockPosition()).getKey().location();
-        if (!fp.wr.biomes.isEmpty() && !fp.wr.biomes.contains(biome))
+        List<ResourceLocation> biomes = getBiomesAsList(fp, level);
+        List<ResourceLocation> blacklist = getBiomesBlacklistAsList(fp, level);
+        ResourceLocation currentBiome = level.getBiome(entity.blockPosition()).getKey().location();
+
+        if (!biomes.isEmpty() && !biomes.contains(currentBiome))
             return 0;
 
-        if (!fp.wr.biomesTags.isEmpty())
-        {
-            boolean found = false;
-            for (ResourceLocation rl : fp.wr.biomesTags)
-            {
-                TagKey<Biome> biomeBeingChecked = TagKey.create(Registries.BIOME, rl);
-
-                boolean isInTag = level.registryAccess().lookupOrThrow(Registries.BIOME).getOrThrow(biomeBeingChecked).stream()
-                        .anyMatch(holder -> holder.is(level.getBiome(entity.blockPosition()).getKey()));
-
-                if(isInTag) found = true;
-            }
-            if(!found) return 0;
-        }
-
-        if (fp.wr().biomesBlacklist.contains(level.getBiome(entity.blockPosition()).getKey().location()))
+        if (!blacklist.isEmpty() && blacklist.contains(currentBiome))
             return 0;
 
-        if (!fp.wr.biomesBlacklistTags.isEmpty())
-        {
-            for (ResourceLocation rl : fp.wr.biomesBlacklistTags)
-            {
-                TagKey<Biome> biomeBeingChecked = TagKey.create(Registries.BIOME, rl);
 
-                boolean isInTag = level.registryAccess().lookupOrThrow(Registries.BIOME).getOrThrow(biomeBeingChecked).stream()
-                        .anyMatch(holder -> holder.is(level.getBiome(entity.blockPosition()).getKey()));
-
-                if(isInTag) return 0;
-            }
-        }
 
         //blacklisted baits
         if (fp.br().incorrectBaits().contains(BuiltInRegistries.ITEM.getKey(bait.getItem())))

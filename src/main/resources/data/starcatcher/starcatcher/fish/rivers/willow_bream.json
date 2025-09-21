@@ -1,0 +1,11 @@
+{
+  "fish": "starcatcher:willow_bream",
+  "base_chance": 5,
+  "daytime": "night",
+
+  "world_restrictions": {
+    "dimensions": ["minecraft:overworld"],
+    "biomes_tags": ["starcatcher:rivers"]
+  }
+}
+

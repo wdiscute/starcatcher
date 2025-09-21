@@ -22,6 +22,7 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.LivingEntity;
@@ -91,7 +92,7 @@ public class FishingGuideScreen extends Screen
         {
             Minecraft.getInstance().player.setData(
                     ModDataAttachments.FISH_SPOTTER,
-                    entries.get(currentPaper).fish());
+                    entries.get(currentPaper));
 
             return true;
         }
@@ -161,7 +162,7 @@ public class FishingGuideScreen extends Screen
     private void renderPage(GuiGraphics guiGraphics, int mouseX, int mouseY, int xOffset, int pageOffset)
     {
 
-        if(level == null) level = getMinecraft().level;
+        if (level == null) level = getMinecraft().level;
 
         double x = mouseX - uiX;
         double y = mouseY - uiY;
@@ -206,7 +207,7 @@ public class FishingGuideScreen extends Screen
         {
             Component comp;
 
-            if (fp.wr().dims() == null)
+            if (fp.wr().dims().isEmpty())
             {
                 comp = Component.translatable("gui.guide.no_restriction");
             }
@@ -265,7 +266,6 @@ public class FishingGuideScreen extends Screen
             guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
         }
 
-
         //planet blacklist
         {
             if (!fp.wr().dimsBlacklist().isEmpty())
@@ -290,28 +290,22 @@ public class FishingGuideScreen extends Screen
 
         yOffset += 15;
 
+        List<ResourceLocation> biomesBL = FishProperties.getBiomesBlacklistAsList(fp, level);
+        List<ResourceLocation> biomes = FishProperties.getBiomesAsList(fp, level);
         //biome:
         {
-            Component comp;
-
-            if (fp.wr().biomes().isEmpty())
+            MutableComponent comp;
+            if (biomes.isEmpty())
             {
                 comp = Component.translatable("gui.guide.no_restriction");
+                if(!biomesBL.isEmpty()) comp.append("*");
             }
             else
             {
-                //if theres only one planet
-                if (fp.wr().biomes().size() == 1)
+                //if theres only one biome
+                if (biomes.size() == 1)
                 {
-                    //check if planet has a translation
-                    if (I18n.exists("gui.guide." + fp.wr().biomes().getFirst()))
-                    {
-                        comp = Tooltips.DecodeTranslationKeyTags("gui.guide." + fp.wr().biomes().getFirst());
-                    }
-                    else
-                    {
-                        comp = Component.literal(fp.wr().biomes().getFirst().toString());
-                    }
+                    comp = Component.translatable("biome." + biomes.getFirst().toLanguageKey());
                 }
                 else
                 {
@@ -321,23 +315,26 @@ public class FishingGuideScreen extends Screen
                     if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
                     {
                         List<Component> c = new ArrayList<>();
+                        c.add(Component.translatable("gui.guide.biome"));
 
-                        for (int i = 0; i < fp.wr().biomes().size(); i++)
+                        for (ResourceLocation rl : biomes)
                         {
-                            c.add(Component.literal(fp.wr().biomes().get(i).toString()));
+                            c.add(Component.translatable("biome." + rl.toLanguageKey()));
                         }
+
                         guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
                     }
                 }
             }
 
-            if (fp.wr().biomes().isEmpty())
+            if (biomes.isEmpty())
             {
                 comp = comp.copy().withColor(0x00AA00);
             }
             else
             {
-                if (fp.wr().biomes().contains(level.getBiome(Minecraft.getInstance().player.blockPosition()).getKey()))
+                ResourceLocation rl = ResourceLocation.parse(level.getBiome(Minecraft.getInstance().player.blockPosition()).getRegisteredName());
+                if (biomes.contains(rl))
                 {
                     comp = comp.copy().withColor(0x00AA00);
                 }
@@ -355,7 +352,7 @@ public class FishingGuideScreen extends Screen
 
         //biome blacklist
         {
-            if (!fp.wr().biomesBlacklist().isEmpty())
+            if (!biomesBL.isEmpty())
             {
                 guiGraphics.drawString(this.font, Component.literal("[!]").withColor(0xAA0000), uiX + xOffset + 160, uiY + yOffset, 0, false);
 
@@ -366,10 +363,9 @@ public class FishingGuideScreen extends Screen
 
                     c.add(Component.translatable("gui.guide.blacklisted_biomes"));
 
-                    for (int i = 0; i < fp.wr().biomesBlacklist().size(); i++)
-                    {
-                        c.add(Component.literal(fp.wr().biomesBlacklist().get(i).toString()));
-                    }
+                    for (ResourceLocation rl : biomesBL)
+                        c.add(Component.translatable("biome." + rl.toLanguageKey()));
+
                     guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
                 }
             }

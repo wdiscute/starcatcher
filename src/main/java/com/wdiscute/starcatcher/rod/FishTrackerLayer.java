@@ -31,8 +31,6 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
     Font font;
 
-    FishProperties oldFp;
-
     int imageWidth = 150;
     int imageHeight = 100;
 
@@ -65,17 +63,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
             }
         }
 
-        FishProperties fp = FishProperties.getFishProperties(level.registryAccess(), player.getData(ModDataAttachments.FISH_SPOTTER));
-        if (fp == null)
-        {
-            shouldShow = false;
-            fp = oldFp;
-            if (fp == null) return;
-        }
-        else
-        {
-            oldFp = fp;
-        }
+        FishProperties fp = player.getData(ModDataAttachments.FISH_SPOTTER);
 
         if (!shouldShow)
         {

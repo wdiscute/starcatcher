@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
@@ -32,9 +31,9 @@ public class ModDataAttachments
                     .build()
     );
 
-    public static final Supplier<AttachmentType<ResourceLocation>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
-            "fish_spotter", () -> AttachmentType.builder(() -> Starcatcher.rl("none"))
-                    .serialize(ResourceLocation.CODEC)
+    public static final Supplier<AttachmentType<FishProperties>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
+            "fish_spotter", () -> AttachmentType.builder(() -> FishProperties.DEFAULT)
+                    .serialize(FishProperties.RECORD_CODEC)
                     .build()
     );
 

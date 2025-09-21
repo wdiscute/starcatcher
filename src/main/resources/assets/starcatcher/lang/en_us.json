@@ -62,5 +62,27 @@
 
   "gui.laicaps.toast.fish_caught" : "New Fish Caught!",
 
-  "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!"
+  "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
+
+
+  "item.starcatcher.obidontiee" : "Obidontiee",
+
+  "item.starcatcher.silverfin_pike" : "Silverfin Pike",
+  "item.starcatcher.willow_bream" : "Willow Bream",
+  "item.starcatcher.drifting_bream" : "Drifting Bream",
+  "item.starcatcher.downfall_bream" : "Downfall Bream",
+  "item.starcatcher.hollowbelly_darter" : "Hollowbelly Darter",
+  "item.starcatcher.mistback_chub" : "Mistback Chub",
+
+  "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
+  "item.starcatcher.deepjaw_herring" : "Deepjaw Herring",
+  "item.starcatcher.dusktail_snapper" : "Dusktail Snapper",
+
+
+  "item.starcatcher.frostgill_chub" : "Frostgill Chub",
+  "item.starcatcher.crystalback_minnow" : "Crystalback Minnow",
+  "item.starcatcher.azure_crystalback_minnow" : "Azure Crystalback Minnow",
+
+  "item.starcatcher.embergill" : "Embergill"
+
 }

@@ -1,0 +1,9 @@
+{
+  "fish": "starcatcher:embergill",
+  "base_chance": 5,
+
+  "world_restrictions": {
+    "dimensions": ["minecraft:the_nether"]
+  }
+}
+

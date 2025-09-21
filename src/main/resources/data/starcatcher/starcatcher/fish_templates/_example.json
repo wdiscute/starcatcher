@@ -11,13 +11,17 @@
   "world_restrictions": {
     "dimensions": ["minecraft:overworld", "minecraft:the_end"],
     "dimensions_blacklist": ["laicaps:asha", "laicaps:lunamar"],
-    "biomes": ["starcatcher:mybiometag", "starcatcher:biomename"],
-    "biomes_blacklist": ["laicaps:asha_forest"]
+
+    "biomes": ["minecraft:forest"],
+    "biomes_tags": ["starcatcher:my_biome_tag", "starcatcher:another_biomes_tag"],
+
+    "biomes_blacklist": ["starcatcher:my_super_cool_biome"],
+    "biomes_blacklist_tags": ["minecraft:is_beach"]
   },
 
   "bait_restrictions": {
 
-    "correct_baits": ["laicaps:oakheart_berries_bait"],
+    "correct_baits": ["starcatcher:fish_bait"],
 
     "correct_bait_chance_added": 20,
     "must_have_correct_bait": false,

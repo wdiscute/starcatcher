@@ -20,10 +20,8 @@ public class ModItems
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Starcatcher.MOD_ID);
 
-
     public static final DeferredItem<Item> FISHING_GUIDE = ITEMS.register("fishing_guide", () -> new FishingGuideItem(new Item.Properties()));
     public static final DeferredItem<Item> FISH_BONES = ITEMS.register("fish_bones", () -> new Item(new Item.Properties()));
-
 
     public static final DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", () -> new Item(new Item.Properties()));
 
@@ -58,20 +56,28 @@ public class ModItems
     //overworld
 
     //lake
+    public static final DeferredItem<Item> OBIDONTIEE = basicFish("obidontiee"); //description
 
-    //freshwater
-    public static final DeferredItem<Item> SILVERFIN_PIKE = basicFish("silverfin_pike");
+    //rivers
+    public static final DeferredItem<Item> SILVERFIN_PIKE = basicFish("silverfin_pike"); //description
+    public static final DeferredItem<Item> WILLOW_BREAM = basicFish("willow_bream"); //description
+    public static final DeferredItem<Item> DRIFTING_BREAM = basicFish("drifting_bream"); //description
+    public static final DeferredItem<Item> DOWNFALL_BREAM = basicFish("downfall_bream"); //description
+    public static final DeferredItem<Item> HOLLOWBELLY_DARTER = basicFish("hollowbelly_darter"); //description
+    public static final DeferredItem<Item> MISTBACK_CHUB = basicFish("mistback_chub"); //description
 
     //saltwater
-    public static final DeferredItem<Item> IRONJAW_HERRING = basicFish("ironjaw_herring");
-    public static final DeferredItem<Item> DEEPJAW_HERRING = basicFish("deepjaw_herring");
-    public static final DeferredItem<Item> DUSKTAIL_SNAPPER = basicFish("dusktail_snapper");
+    public static final DeferredItem<Item> IRONJAW_HERRING = basicFish("ironjaw_herring"); //description
+    public static final DeferredItem<Item> DEEPJAW_HERRING = basicFish("deepjaw_herring"); //description
+    public static final DeferredItem<Item> DUSKTAIL_SNAPPER = basicFish("dusktail_snapper"); //description
 
     //icy
-    public static final DeferredItem<Item> FROSTGILL_CHUB = basicFish("frostgill_chub");
+    public static final DeferredItem<Item> FROSTGILL_CHUB = basicFish("frostgill_chub"); //description
+    public static final DeferredItem<Item> CRYSTALBACK_MINNOW = basicFish("crystalback_minnow"); //description
+    public static final DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = basicFish("azure_crystalback_minnow"); //description
 
     //nether
-    public static final DeferredItem<Item> EMBERGILL = basicFish("embergill");
+    public static final DeferredItem<Item> EMBERGILL = basicFish("embergill"); //description
 
     //the end
 

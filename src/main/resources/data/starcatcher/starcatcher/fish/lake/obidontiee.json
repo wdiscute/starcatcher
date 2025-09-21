@@ -1,0 +1,10 @@
+{
+  "fish": "starcatcher:obidontiee",
+  "base_chance": 5,
+
+  "world_restrictions": {
+    "dimensions": ["minecraft:overworld"],
+    "biomes_blacklist_tags": ["minecraft:is_river", "minecraft:is_ocean"]
+  }
+}
+
