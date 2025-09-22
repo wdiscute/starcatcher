@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher;
 
-import com.wdiscute.starcatcher.fishingbob.ModItems;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import net.minecraft.client.renderer.item.ItemProperties;
 

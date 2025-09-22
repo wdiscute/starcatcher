@@ -1,19 +1,14 @@
 package com.wdiscute.starcatcher.rod;
 
-import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
-import com.wdiscute.starcatcher.fishingbob.ModItems;
+import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;

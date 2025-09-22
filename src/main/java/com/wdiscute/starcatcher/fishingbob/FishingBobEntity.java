@@ -1,9 +1,6 @@
 package com.wdiscute.starcatcher.fishingbob;
 
-import com.wdiscute.starcatcher.ModDataComponents;
-import com.wdiscute.starcatcher.ModEntities;
-import com.wdiscute.starcatcher.ModParticles;
-import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import com.wdiscute.starcatcher.networkandstuff.Payloads;
@@ -24,7 +21,6 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
@@ -130,6 +126,12 @@ public class FishingBobEntity extends Projectile
                 available.add(fp);
             }
 
+        }
+
+        if(available.isEmpty())
+        {
+            player.setData(ModDataAttachments.FISHING, "");
+            this.discard();
         }
 
         fpToFish = available.get(random.nextInt(available.size()));

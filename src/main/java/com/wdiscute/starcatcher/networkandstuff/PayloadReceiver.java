@@ -1,9 +1,7 @@
 package com.wdiscute.starcatcher.networkandstuff;
 
-import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
-import com.wdiscute.starcatcher.fishingbob.ModItems;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;

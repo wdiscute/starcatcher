@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.rod;
 
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.fishingbob.ModItems;
+import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import net.minecraft.client.DeltaTracker;

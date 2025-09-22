@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.fishingbob.FishingBobModel;
 import com.wdiscute.starcatcher.fishingbob.FishingBobRenderer;
-import com.wdiscute.starcatcher.fishingbob.ModItems;
 import com.wdiscute.starcatcher.guide.FishCaughtToast;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
@@ -35,7 +34,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.neoforge.common.NeoForge;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Starcatcher.MOD_ID)

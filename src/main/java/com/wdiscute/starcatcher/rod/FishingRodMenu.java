@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.rod;
 
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.ModMenuTypes;
-import com.wdiscute.starcatcher.fishingbob.ModItems;
+import com.wdiscute.starcatcher.ModItems;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
