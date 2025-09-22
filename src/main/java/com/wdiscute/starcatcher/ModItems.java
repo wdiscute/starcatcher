@@ -1,8 +1,5 @@
-package com.wdiscute.starcatcher.fishingbob;
+package com.wdiscute.starcatcher;
 
-import com.wdiscute.starcatcher.ModDataComponents;
-import com.wdiscute.starcatcher.ModFoodProperties;
-import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
@@ -43,6 +40,8 @@ public class ModItems
     public static final DeferredItem<Item> FISH_SPOTTER = ITEMS.register("fish_spotter", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties()));
+
+    public static final DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", () -> new Item(new Item.Properties()));
 
 
     //
