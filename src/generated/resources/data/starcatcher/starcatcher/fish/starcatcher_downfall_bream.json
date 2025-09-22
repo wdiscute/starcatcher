@@ -1,0 +1,14 @@
+{
+  "base_chance": 5,
+  "daytime": "night",
+  "fish": "starcatcher:downfall_bream",
+  "weather": "rain",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

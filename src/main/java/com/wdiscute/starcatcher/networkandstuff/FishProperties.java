@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.StarcatcherTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
@@ -57,17 +58,69 @@ public record FishProperties(
 
     public static final FishProperties DEFAULT = new FishProperties(
             Starcatcher.rl("none"),
-            0,
+            5,
             WorldRestrictions.DEFAULT,
             BaitRestrictions.DEFAULT,
             Daytime.ALL,
             Weather.ALL,
-            0,
-            0,
+            Integer.MAX_VALUE,
+            Integer.MIN_VALUE,
             false,
-            false
-            );
+            true
+    );
 
+    public FishProperties withFish(ResourceLocation fish)
+    {
+        return new FishProperties(fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withBaseChance(int baseChance)
+    {
+        return new FishProperties(this.fish, baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withWorldRestrictions(WorldRestrictions wr)
+    {
+        return new FishProperties(this.fish, this.baseChance, wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withBaitRestrictions(BaitRestrictions br)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.wr, br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withDaytime(Daytime daytime)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withWeather(Weather weather)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withMustBeCaughtBellowY(int mustBeCaughtBellowY)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withMustBeCaughtAboveY(int mustBeCaughtAboveY)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withSkipMinigame(boolean skipMinigame)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withHasGuideEntry(boolean hasGuideEntry)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, hasGuideEntry);
+    }
+
+
+    //region bait
 
     public record BaitRestrictions(
             List<ResourceLocation> correctBobber,
@@ -96,6 +149,8 @@ public record FishProperties(
                 false);
     }
 
+    //endregion bait
+
     public record WorldRestrictions(
             List<ResourceLocation> dims,
             List<ResourceLocation> dimsBlacklist,
@@ -109,7 +164,7 @@ public record FishProperties(
                 instance.group(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions", List.of()).forGetter(WorldRestrictions::dims),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions_blacklist", List.of()).forGetter(WorldRestrictions::dimsBlacklist),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes",List.of()).forGetter(WorldRestrictions::biomes),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes", List.of()).forGetter(WorldRestrictions::biomes),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_tags", List.of()).forGetter(WorldRestrictions::biomesTags),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", List.of()).forGetter(WorldRestrictions::biomesBlacklist),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", List.of()).forGetter(WorldRestrictions::biomesBlacklistTags)
@@ -123,6 +178,70 @@ public record FishProperties(
                 List.of(),
                 List.of());
 
+
+        public static final WorldRestrictions OVERWORLD_RIVER =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_RIVER));
+
+        public static final WorldRestrictions OVERWORLD_OCEAN =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_OCEAN));
+
+        public static final WorldRestrictions OVERWORLD_LAKE =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER));
+
+        public static final WorldRestrictions OVERWORLD_ICY_RIVER =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_RIVER));
+
+        public static final WorldRestrictions OVERWORLD_ICY_OCEAN =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_OCEAN));
+
+        public static final WorldRestrictions OVERWORLD_ICY_LAKE =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE));
+
+        public static final WorldRestrictions NETHER =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.NETHER.location()));
+
+        public WorldRestrictions withDims(List<ResourceLocation> dims)
+        {
+            return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+        }
+
+        public WorldRestrictions withDimsBlacklist(List<ResourceLocation> dimsBlacklist)
+        {
+            return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+        }
+
+        public WorldRestrictions withBiomes(List<ResourceLocation> biomes)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+        }
+
+        public WorldRestrictions withBiomesTags(List<ResourceLocation> biomesTags)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+        }
+
+        public WorldRestrictions withBiomesBlacklist(List<ResourceLocation> biomesBlacklist)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags);
+        }
+
+        public WorldRestrictions withBiomesBlacklistTags(List<ResourceLocation> biomesBlacklistTags)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags);
+        }
 
     }
 
@@ -181,7 +300,7 @@ public record FishProperties(
 
             Optional<HolderSet.Named<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(biomeBeingChecked);
 
-            if(optional.isPresent())
+            if (optional.isPresent())
             {
                 for (Holder<Biome> biomeHolder : optional.get())
                 {
@@ -192,10 +311,10 @@ public record FishProperties(
             }
         }
 
-        for(ResourceLocation rl : fp.wr.biomes)
+        for (ResourceLocation rl : fp.wr.biomes)
         {
             Optional<Holder.Reference<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(ResourceKey.create(Registries.BIOME, rl));
-            if(optional.isPresent()) if(!rls.contains(rl)) rls.add(rl);
+            if (optional.isPresent()) if (!rls.contains(rl)) rls.add(rl);
         }
 
         return rls;
@@ -213,7 +332,7 @@ public record FishProperties(
 
             Optional<HolderSet.Named<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(biomeBeingChecked);
 
-            if(optional.isPresent())
+            if (optional.isPresent())
             {
                 for (Holder<Biome> biomeHolder : optional.get())
                 {
@@ -224,10 +343,10 @@ public record FishProperties(
             }
         }
 
-        for(ResourceLocation rl : fp.wr.biomesBlacklist)
+        for (ResourceLocation rl : fp.wr.biomesBlacklist)
         {
             Optional<Holder.Reference<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(ResourceKey.create(Registries.BIOME, rl));
-            if(optional.isPresent()) if(!rls.contains(rl)) rls.add(rl);
+            if (optional.isPresent()) if (!rls.contains(rl)) rls.add(rl);
         }
 
         return rls;
@@ -290,7 +409,6 @@ public record FishProperties(
 
         if (!blacklist.isEmpty() && blacklist.contains(currentBiome))
             return 0;
-
 
 
         //blacklisted baits

@@ -1,0 +1,13 @@
+{
+  "base_chance": 5,
+  "daytime": "midnight",
+  "fish": "starcatcher:azure_crystalback_minnow",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_cold_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

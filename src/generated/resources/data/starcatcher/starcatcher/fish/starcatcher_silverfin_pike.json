@@ -1,0 +1,12 @@
+{
+  "base_chance": 5,
+  "fish": "starcatcher:silverfin_pike",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

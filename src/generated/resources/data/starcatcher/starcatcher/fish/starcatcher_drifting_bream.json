@@ -1,0 +1,13 @@
+{
+  "base_chance": 5,
+  "daytime": "night",
+  "fish": "starcatcher:drifting_bream",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}
