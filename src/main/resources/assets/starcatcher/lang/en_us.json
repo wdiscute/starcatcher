@@ -35,6 +35,7 @@
 
   "gui.guide.caught" : "Caught ",
   "gui.guide.not_caught" : "Not Caught yet!",
+  "gui.guide.not_caught_fish_name" : "???",
 
 
   "gui.guide.planet" : "Planet: ",
@@ -87,7 +88,7 @@
   "item.starcatcher.ghostly_pike" : "Ghostly Pike",
   "item.starcatcher.gold_fan" : "Gold Fan",
   "item.starcatcher.black_eel" : "Black Eel",
-  "item.starcatcher.amethyst_back" : "Amethystback",
+  "item.starcatcher.amethystback" : "Amethystback",
   "item.starcatcher.lush_pike" : "Lush Pike",
 
   "item.starcatcher.embergill" : "Embergill",
