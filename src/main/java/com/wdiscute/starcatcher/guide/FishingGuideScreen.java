@@ -181,19 +181,20 @@ public class FishingGuideScreen extends Screen
 
         for (int i = 0; i < entries.size(); i++)
         {
-            List<FishCaughtCounter> fishCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
+            List<FishCaughtCounter> fishCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
             ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(entries.get(i).fish()));
+            FishProperties fp = entries.get(i);
 
             int caught = 0;
 
             int offsetX = (i % 7) * 24 + 72;
             int offsetY = i / 7 * 24 + 40;
 
-            for (FishCaughtCounter f : fishCounter)
+            for (FishCaughtCounter f : fishCounterList)
             {
-                if (entries.get(i).fish().equals(f.getResourceLocation()))
+                if (fp.equals(f.fp()))
                 {
-                    caught = f.getCount();
+                    caught = f.count();
                     break;
                 }
 
@@ -202,9 +203,9 @@ public class FishingGuideScreen extends Screen
             //outline
             guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff444444);
 
-            for (FishProperties fp : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
+            for (FishProperties fpNotif : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
             {
-                if(fp.equals(entries.get(i)))
+                if (fp.equals(fpNotif))
                     guiGraphics.renderOutline(uiX + offsetX - 1, uiY + offsetY - 1, 8, 7, 0xff444444);
             }
 
@@ -215,16 +216,25 @@ public class FishingGuideScreen extends Screen
             else
                 renderItem(new ItemStack(ModItems.MISSINGNO.get()), uiX + offsetX, uiY + offsetY, 1);
 
-
+            //render tooltip when hovering
             if (mouseX > uiX + offsetX - 3 && mouseX < uiX + offsetX + 21 - 3 && mouseY > uiY + offsetY - 3 && mouseY < uiY + offsetY + 21 - 3)
             {
                 List<Component> components = new ArrayList<>();
 
-                components.add(Component.translatable(is.getDescriptionId()));
-                if (caught != 0)
-                    components.add(Component.translatable("gui.guide.caught").append(Component.literal("[" + caught + "]")).withColor(0x00AA00));
-                else
+                if (caught == 0)
+                {
+                    components.add(Component.translatable("gui.guide.not_caught_fish_name"));
                     components.add(Component.translatable("gui.guide.not_caught").withColor(0xAA0000));
+                }
+                else
+                {
+                    if (fp.customName().isEmpty())
+                        components.add(Component.translatable("item." + fp.fish().toLanguageKey()));
+                    else
+                        components.add(Component.translatable("item.starcatcher." + fp.customName()));
+
+                    components.add(Component.translatable("gui.guide.caught").append(Component.literal("[" + caught + "]")).withColor(0x00AA00));
+                }
 
                 guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
             }
@@ -247,31 +257,47 @@ public class FishingGuideScreen extends Screen
         ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(entries.get(entry).fish()));
         FishProperties fp = entries.get(entry);
 
-        guiGraphics.drawString(this.font, Component.translatable(is.getDescriptionId()), uiX + xOffset + 46, uiY + 60, 0, false);
+        List<FishCaughtCounter> fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
+
+        //get fishCaughtCount
+        int count = 0;
+        for (FishCaughtCounter fcc : fishCaughtCounterList)
+        {
+            if (fp.equals(fcc.fp()))
+            {
+                count = fcc.count();
+                break;
+            }
+        }
+
+
+        if (count == 0)
+        {
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught_fish_name"), uiX + xOffset + 46, uiY + 60, 0, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught").withColor(0xAA0000), uiX + xOffset + 46, uiY + 70, 0, false);
+            renderItem(new ItemStack(ModItems.MISSINGNO.get()), uiX + xOffset + 10, uiY + 60);
+        }
+        else
+        {
+
+            //render fish name
+            MutableComponent compName;
+            if (fp.customName().isEmpty())
+                compName = Component.translatable("item." + fp.fish().toLanguageKey());
+            else
+                compName = Component.translatable("item.starcatcher." + fp.customName());
+
+            guiGraphics.drawString(this.font, compName, uiX + xOffset + 46, uiY + 60, 0, false);
+
+            //render caught count
+            Component c = Component.literal("[" + count + "]").withColor(0x00AA00);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.caught").append(c).withColor(0x00AA00), uiX + xOffset + 46, uiY + 70, 0, false);
+            renderItem(is, uiX + xOffset + 10, uiY + 60);
+        }
+
 
         //icon and count list
         {
-            List<FishCaughtCounter> fishCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
-
-            boolean found = false;
-
-            for (FishCaughtCounter f : fishCounter)
-            {
-                if (fp.fish().equals(f.getResourceLocation()))
-                {
-                    Component c = Component.literal("[" + f.getCount() + "]").withColor(0x00AA00);
-                    guiGraphics.drawString(this.font, Component.translatable("gui.guide.caught").append(c).withColor(0x00AA00), uiX + xOffset + 46, uiY + 70, 0, false);
-                    renderItem(is, uiX + xOffset + 10, uiY + 60);
-                    found = true;
-                    break;
-                }
-            }
-
-            if (!found)
-            {
-                guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught").withColor(0xAA0000), uiX + xOffset + 46, uiY + 70, 0, false);
-                renderItem(new ItemStack(ModItems.MISSINGNO.get()), uiX + xOffset + 10, uiY + 60);
-            }
 
 
         }
@@ -382,7 +408,7 @@ public class FishingGuideScreen extends Screen
                 {
                     comp = Component.translatable("biome." + biomes.getFirst().toLanguageKey());
                 }
-                else if(fp.wr().biomesTags().size() == 1)
+                else if (fp.wr().biomesTags().size() == 1)
                 {
                     comp = Component.translatable("tag." + fp.wr().biomesTags().getFirst().toLanguageKey());
 

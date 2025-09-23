@@ -54,9 +54,9 @@ public class Starcatcher
     public static float hue;
 
     @OnlyIn(Dist.CLIENT)
-    public static void fishCaughtToast(ItemStack is)
+    public static void fishCaughtToast(FishProperties fp)
     {
-        Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(is));
+        Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(fp));
     }
 
     public Starcatcher(IEventBus modEventBus, ModContainer modContainer)
@@ -83,8 +83,8 @@ public class Starcatcher
         {
             event.dataPackRegistry(
                     FISH_REGISTRY,
-                    FishProperties.RECORD_CODEC,
-                    FishProperties.RECORD_CODEC,
+                    FishProperties.CODEC,
+                    FishProperties.CODEC,
                     builder -> builder.maxId(256));
         }
 

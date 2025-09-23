@@ -1,11 +1,15 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
@@ -23,10 +27,18 @@ public class FishCaughtToast implements Toast
     private static final Random r = new Random();
     private final ItemStack is;
 
-    public FishCaughtToast(ItemStack is)
+    public FishCaughtToast(FishProperties fp)
     {
-        this.is = is;
+
+        this.is = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
         this.title = Component.translatable("gui.laicaps.toast.fish_caught");
+
+        String compName;
+        if (fp.customName().isEmpty())
+            compName = I18n.get("item." + fp.fish().toLanguageKey());
+        else
+            compName = I18n.get("item.starcatcher." + fp.customName());
+
         this.description =  is.getHoverName().getString();
     }
 

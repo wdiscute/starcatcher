@@ -19,7 +19,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -510,7 +509,7 @@ public record FishProperties(
 
     //region codecs
 
-    public static final Codec<FishProperties> RECORD_CODEC = RecordCodecBuilder.create(instance ->
+    public static final Codec<FishProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     //mandatory
                     ResourceLocation.CODEC.fieldOf("fish").forGetter(FishProperties::fish),
@@ -529,7 +528,7 @@ public record FishProperties(
             ).apply(instance, FishProperties::new)
     );
 
-    public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.RECORD_CODEC.listOf();
+    public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.CODEC.listOf();
 
     public static final StreamCodec<ByteBuf, FishProperties> STREAM_CODEC = composite(
             ResourceLocation.STREAM_CODEC, FishProperties::fish,

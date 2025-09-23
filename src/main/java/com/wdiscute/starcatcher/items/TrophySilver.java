@@ -40,11 +40,11 @@ public class TrophySilver extends Item
         {
             FishProperties fp = optional.get().value();
 
-            fishCounter.add(new FishCaughtCounter(fp.fish(), 1));
+            fishCounter.add(new FishCaughtCounter(fp, 1));
 
             if(player instanceof ServerPlayer sp)
             {
-                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()))));
+                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
             }
 
         }

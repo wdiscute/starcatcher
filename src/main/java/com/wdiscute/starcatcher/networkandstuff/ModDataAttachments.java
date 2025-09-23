@@ -33,7 +33,7 @@ public class ModDataAttachments
 
     public static final Supplier<AttachmentType<FishProperties>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
             "fish_spotter", () -> AttachmentType.builder(() -> FishProperties.DEFAULT)
-                    .serialize(FishProperties.RECORD_CODEC)
+                    .serialize(FishProperties.CODEC)
                     .sync(new FishSpotterSyncHandler())
                     .copyOnDeath()
                     .build()
@@ -41,7 +41,7 @@ public class ModDataAttachments
 
     public static final Supplier<AttachmentType<List<FishCaughtCounter>>> FISHES_CAUGHT = ATTACHMENT_TYPES.register(
             "fishes_caught", () ->
-                    AttachmentType.builder(() -> List.of(new FishCaughtCounter(Starcatcher.rl("fishes_caught"), 0)))
+                    AttachmentType.builder(() -> List.of(new FishCaughtCounter(FishProperties.DEFAULT, 0)))
                             .serialize(FishCaughtCounter.LIST_CODEC)
                             .sync(new FishCounterSyncHandler())
                             .copyOnDeath()

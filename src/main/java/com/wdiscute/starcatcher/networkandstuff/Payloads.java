@@ -17,7 +17,7 @@ public class Payloads
         public static final Type<FishingPayload> TYPE = new Type<>(Starcatcher.rl("fishing"));
 
         public static final StreamCodec<ByteBuf, FishingPayload> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.fromCodec(FishProperties.RECORD_CODEC),
+                ByteBufCodecs.fromCodec(FishProperties.CODEC),
                 FishingPayload::fp,
                 ByteBufCodecs.fromCodec(ItemStack.CODEC),
                 FishingPayload::rod,
@@ -48,14 +48,14 @@ public class Payloads
         }
     }
 
-    public record FishCaughtPayload(ItemStack is) implements CustomPacketPayload
+    public record FishCaughtPayload(FishProperties fp) implements CustomPacketPayload
     {
 
         public static final Type<FishCaughtPayload> TYPE = new Type<>(Starcatcher.rl("fish_caught"));
 
         public static final StreamCodec<ByteBuf, FishCaughtPayload> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.fromCodec(ItemStack.CODEC),
-                FishCaughtPayload::is,
+                ByteBufCodecs.fromCodec(FishProperties.CODEC),
+                FishCaughtPayload::fp,
                 FishCaughtPayload::new
         );
 

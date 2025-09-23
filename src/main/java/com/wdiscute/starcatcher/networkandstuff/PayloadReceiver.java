@@ -4,7 +4,10 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,7 +45,7 @@ public class PayloadReceiver
                 {
                     if (data.time() != -1)
                     {
-
+                        FishProperties fp = fbe.fpToFish;
 
                         //MAKE THIS DATA DRIVEN
 //                        if (fbe.stack.is(ModItems.THUNDERCHARGED_EEL))
@@ -53,14 +56,18 @@ public class PayloadReceiver
 //                            level.addFreshEntity(strike);
 //                        }
 
+                        ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()));
+
+                        if (!fp.customName().isEmpty())
+                            is.set(DataComponents.CUSTOM_NAME, Component.translatable("item.starcatcher." + fp.customName()));
+
+
                         Entity itemFished = new ItemEntity(
                                 level,
                                 fbe.position().x,
                                 fbe.position().y + 1.2f,
                                 fbe.position().z,
-                                new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()))
-                        );
-
+                                is);
 
                         double x = (player.position().x - fbe.position().x) / 25;
                         double y = (player.position().y - fbe.position().y) / 20;
@@ -81,41 +88,12 @@ public class PayloadReceiver
 
 
                         //award fish counter
-                        List<FishCaughtCounter> list = player.getData(ModDataAttachments.FISHES_CAUGHT);
-                        ResourceLocation rl = fbe.fpToFish.fish();
-
-                        List<FishCaughtCounter> newlist = new ArrayList<>();
-
-                        boolean found = false;
-
-                        for (FishCaughtCounter f : list)
+                        if (FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player) && player instanceof ServerPlayer sp)
                         {
-                            newlist.add(f);
-
-                            if (rl.equals(f.getResourceLocation()))
-                            {
-                                found = true;
-
-                                FishCaughtCounter plusOne = new FishCaughtCounter(rl, f.getCount() + 1);
-                                newlist.remove(f);
-                                newlist.add(plusOne);
-                            }
+                            PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
                         }
-
-                        if(!found)
-                        {
-                            newlist.add(new FishCaughtCounter(rl, 1));
-
-                            if(player instanceof ServerPlayer sp)
-                            {
-                                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()))));
-                            }
-                        }
-
-                        player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
 
                         player.setData(ModDataAttachments.FISHES_NOTIFICATION, List.of(fbe.fpToFish));
-
                     }
                     else
                     {
@@ -136,7 +114,7 @@ public class PayloadReceiver
 
     public static void receiveFishCaught(final Payloads.FishCaughtPayload data, final IPayloadContext context)
     {
-        Starcatcher.fishCaughtToast(data.is());
+        Starcatcher.fishCaughtToast(data.fp());
     }
 
 

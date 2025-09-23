@@ -3,50 +3,65 @@ package com.wdiscute.starcatcher.networkandstuff;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.network.PacketDistributor;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class FishCaughtCounter
+public record FishCaughtCounter(
+        FishProperties fp,
+        int count
+)
 {
 
     public static final Codec<FishCaughtCounter> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    ResourceLocation.CODEC.fieldOf("rl").forGetter(FishCaughtCounter::getResourceLocation),
-                    Codec.INT.optionalFieldOf("count", 0).forGetter(FishCaughtCounter::getCount)
+                    FishProperties.CODEC.fieldOf("fp").forGetter(FishCaughtCounter::fp),
+                    Codec.INT.optionalFieldOf("count", 0).forGetter(FishCaughtCounter::count)
             ).apply(instance, FishCaughtCounter::new)
     );
 
 
     public static final StreamCodec<ByteBuf, List<FishCaughtCounter>> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, FishCaughtCounter::getResourceLocation,
-            ByteBufCodecs.VAR_INT, FishCaughtCounter::getCount, FishCaughtCounter::new
+            FishProperties.STREAM_CODEC, FishCaughtCounter::fp,
+            ByteBufCodecs.VAR_INT, FishCaughtCounter::count,
+            FishCaughtCounter::new
     ).apply(ByteBufCodecs.list());
-
 
 
     public static final Codec<List<FishCaughtCounter>> LIST_CODEC = FishCaughtCounter.CODEC.listOf();
 
 
-    private final ResourceLocation resourceLocation;
-    private final Integer count;
-
-
-    public FishCaughtCounter(ResourceLocation rl, Integer count)
+    public static boolean AwardFishCaughtCounter(FishProperties fp, Player player)
     {
-        this.resourceLocation = rl;
-        this.count = count;
+        List<FishCaughtCounter> listFishCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
+
+        List<FishCaughtCounter> newlist = new ArrayList<>();
+
+
+        for (FishCaughtCounter f : listFishCaughtCounter)
+        {
+
+            if (fp.equals(f.fp))
+            {
+                newlist.add(new FishCaughtCounter(fp, f.count + 1));
+                return false;
+            }
+
+            newlist.add(f);
+        }
+
+        newlist.add(new FishCaughtCounter(fp, 1));
+
+        player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
+        return true;
     }
 
-    public ResourceLocation getResourceLocation()
-    {
-        return resourceLocation;
-    }
-
-    public Integer getCount()
-    {
-        return count;
-    }
 }
