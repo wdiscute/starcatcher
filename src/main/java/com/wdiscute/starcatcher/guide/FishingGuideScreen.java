@@ -202,6 +202,14 @@ public class FishingGuideScreen extends Screen
             //outline
             guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff444444);
 
+            for (FishProperties fp : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
+            {
+                if(fp.equals(entries.get(i)))
+                    guiGraphics.renderOutline(uiX + offsetX - 1, uiY + offsetY - 1, 8, 7, 0xff444444);
+            }
+
+            guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff444444);
+
             if (caught != 0)
                 renderItem(is, uiX + offsetX, uiY + offsetY, 1);
             else
@@ -373,6 +381,24 @@ public class FishingGuideScreen extends Screen
                 if (biomes.size() == 1)
                 {
                     comp = Component.translatable("biome." + biomes.getFirst().toLanguageKey());
+                }
+                else if(fp.wr().biomesTags().size() == 1)
+                {
+                    comp = Component.translatable("tag." + fp.wr().biomesTags().getFirst().toLanguageKey());
+
+                    //show tooltip while hovering
+                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
+                    {
+                        List<Component> c = new ArrayList<>();
+                        c.add(Component.translatable("gui.guide.biome"));
+
+                        for (ResourceLocation rl : biomes)
+                        {
+                            c.add(Component.translatable("biome." + rl.toLanguageKey()));
+                        }
+
+                        guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
+                    }
                 }
                 else
                 {

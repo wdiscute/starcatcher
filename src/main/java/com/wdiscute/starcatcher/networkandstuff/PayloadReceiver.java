@@ -114,6 +114,7 @@ public class PayloadReceiver
 
                         player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
 
+                        player.setData(ModDataAttachments.FISHES_NOTIFICATION, List.of(fbe.fpToFish));
 
                     }
                     else
