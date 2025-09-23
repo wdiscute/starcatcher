@@ -1,15 +1,19 @@
 package com.wdiscute.starcatcher.networkandstuff;
 
+import com.mojang.datafixers.util.Function11;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -19,15 +23,18 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 
 public record FishProperties(
         ResourceLocation fish,
         int baseChance,
 
+        String customName,
         WorldRestrictions wr,
         BaitRestrictions br,
         Daytime daytime,
@@ -38,27 +45,11 @@ public record FishProperties(
         boolean hasGuideEntry
 )
 {
-    public static final Codec<FishProperties> RECORD_CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    //mandatory
-                    ResourceLocation.CODEC.fieldOf("fish").forGetter(FishProperties::fish),
-                    Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
-                    //optional
-                    WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
-                    BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
-                    Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
-                    Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
-                    Codec.INT.optionalFieldOf("bellow_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBellowY),
-                    Codec.INT.optionalFieldOf("above_y", Integer.MIN_VALUE).forGetter(FishProperties::mustBeCaughtAboveY),
-                    Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
-                    Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
-
-            ).apply(instance, FishProperties::new)
-    );
 
     public static final FishProperties DEFAULT = new FishProperties(
             Starcatcher.rl("none"),
             5,
+            "",
             WorldRestrictions.DEFAULT,
             BaitRestrictions.DEFAULT,
             Daytime.ALL,
@@ -69,56 +60,64 @@ public record FishProperties(
             true
     );
 
+    //region with()
+
     public FishProperties withFish(ResourceLocation fish)
     {
-        return new FishProperties(fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(fish, this.baseChance, this.customName, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withBaseChance(int baseChance)
     {
-        return new FishProperties(this.fish, baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, baseChance, this.customName, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withCustomName(String customName)
+    {
+        return new FishProperties(this.fish, this.baseChance, customName, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withWorldRestrictions(WorldRestrictions wr)
     {
-        return new FishProperties(this.fish, this.baseChance, wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withBaitRestrictions(BaitRestrictions br)
     {
-        return new FishProperties(this.fish, this.baseChance, this.wr, br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.wr, br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withDaytime(Daytime daytime)
     {
-        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.wr, this.br, daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withWeather(Weather weather)
     {
-        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.wr, this.br, this.daytime, weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withMustBeCaughtBellowY(int mustBeCaughtBellowY)
     {
-        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.wr, this.br, this.daytime, this.weather, mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withMustBeCaughtAboveY(int mustBeCaughtAboveY)
     {
-        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withSkipMinigame(boolean skipMinigame)
     {
-        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withHasGuideEntry(boolean hasGuideEntry)
     {
-        return new FishProperties(this.fish, this.baseChance, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.wr, this.br, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, hasGuideEntry);
     }
 
+    //endregion with()
 
     //region bait
 
@@ -140,6 +139,17 @@ public record FishProperties(
                         Codec.BOOL.optionalFieldOf("must_have_correct_bait", false).forGetter(BaitRestrictions::mustHaveCorrectBait)
                 ).apply(instance, BaitRestrictions::new));
 
+
+        public static final StreamCodec<ByteBuf, BaitRestrictions> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), BaitRestrictions::correctBobber,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), BaitRestrictions::correctBait,
+                ByteBufCodecs.BOOL, BaitRestrictions::consumesBait,
+                ByteBufCodecs.INT, BaitRestrictions::correctBaitChanceAdded,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), BaitRestrictions::incorrectBaits,
+                ByteBufCodecs.BOOL, BaitRestrictions::mustHaveCorrectBait,
+                BaitRestrictions::new
+        );
+
         public static final BaitRestrictions DEFAULT = new BaitRestrictions(
                 List.of(),
                 List.of(),
@@ -151,6 +161,7 @@ public record FishProperties(
 
     //endregion bait
 
+    //region world
     public record WorldRestrictions(
             List<ResourceLocation> dims,
             List<ResourceLocation> dimsBlacklist,
@@ -170,6 +181,17 @@ public record FishProperties(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", List.of()).forGetter(WorldRestrictions::biomesBlacklistTags)
                 ).apply(instance, WorldRestrictions::new));
 
+
+        public static final StreamCodec<ByteBuf, WorldRestrictions> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dims,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dimsBlacklist,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomes,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesTags,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklist,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklistTags,
+                WorldRestrictions::new
+        );
+
         public static final WorldRestrictions DEFAULT = new WorldRestrictions(
                 List.of(),
                 List.of(),
@@ -178,6 +200,15 @@ public record FishProperties(
                 List.of(),
                 List.of());
 
+
+        public static final WorldRestrictions OVERWORLD =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()));
+
+        public static final WorldRestrictions OVERWORLD_LUSH_CAVES =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomes(List.of(Biomes.LUSH_CAVES.location()));
 
         public static final WorldRestrictions OVERWORLD_RIVER =
                 WorldRestrictions.DEFAULT
@@ -244,6 +275,8 @@ public record FishProperties(
         }
 
     }
+
+    //endregion world
 
     public enum Daytime implements StringRepresentable
     {
@@ -350,26 +383,6 @@ public record FishProperties(
         }
 
         return rls;
-    }
-
-
-    public static FishProperties getFishProperties(RegistryAccess registry, ItemStack is)
-    {
-        return getFishProperties(registry, is.getItem());
-    }
-
-    public static FishProperties getFishProperties(RegistryAccess registry, Item item)
-    {
-        return getFishProperties(registry, BuiltInRegistries.ITEM.getKey(item));
-    }
-
-    public static FishProperties getFishProperties(RegistryAccess registry, ResourceLocation item)
-    {
-        for (FishProperties fp : registry.registryOrThrow(Starcatcher.FISH_REGISTRY))
-        {
-            if (fp.fish == item) return fp;
-        }
-        return null;
     }
 
     public static List<FishProperties> getFPs(Level level)
@@ -494,5 +507,127 @@ public record FishProperties(
 
         return chance;
     }
+
+    //region codecs
+
+    public static final Codec<FishProperties> RECORD_CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    //mandatory
+                    ResourceLocation.CODEC.fieldOf("fish").forGetter(FishProperties::fish),
+                    Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
+                    //optional
+                    Codec.STRING.optionalFieldOf("customName", "").forGetter(FishProperties::customName),
+                    WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
+                    BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
+                    Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
+                    Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
+                    Codec.INT.optionalFieldOf("bellow_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBellowY),
+                    Codec.INT.optionalFieldOf("above_y", Integer.MIN_VALUE).forGetter(FishProperties::mustBeCaughtAboveY),
+                    Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
+                    Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
+
+            ).apply(instance, FishProperties::new)
+    );
+
+    public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.RECORD_CODEC.listOf();
+
+    public static final StreamCodec<ByteBuf, FishProperties> STREAM_CODEC = composite(
+            ResourceLocation.STREAM_CODEC, FishProperties::fish,
+            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
+            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
+            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
+            BaitRestrictions.STREAM_CODEC, FishProperties::br,
+            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
+            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBellowY,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
+            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
+            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
+            FishProperties::new
+    );
+
+    public static final StreamCodec<ByteBuf, List<FishProperties>> STREAM_CODEC_LIST = composite(
+            ResourceLocation.STREAM_CODEC, FishProperties::fish,
+            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
+            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
+            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
+            BaitRestrictions.STREAM_CODEC, FishProperties::br,
+            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
+            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBellowY,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
+            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
+            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
+            FishProperties::new
+    ).apply(ByteBufCodecs.list());
+
+    //endregion codecs
+
+    //region composite
+
+    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> StreamCodec<B, C> composite(
+            final StreamCodec<? super B, T1> codec1,
+            final Function<C, T1> getter1,
+            final StreamCodec<? super B, T2> codec2,
+            final Function<C, T2> getter2,
+            final StreamCodec<? super B, T3> codec3,
+            final Function<C, T3> getter3,
+            final StreamCodec<? super B, T4> codec4,
+            final Function<C, T4> getter4,
+            final StreamCodec<? super B, T5> codec5,
+            final Function<C, T5> getter5,
+            final StreamCodec<? super B, T6> codec6,
+            final Function<C, T6> getter6,
+            final StreamCodec<? super B, T7> codec7,
+            final Function<C, T7> getter7,
+            final StreamCodec<? super B, T8> codec8,
+            final Function<C, T8> getter8,
+            final StreamCodec<? super B, T9> codec9,
+            final Function<C, T9> getter9,
+            final StreamCodec<? super B, T10> codec10,
+            final Function<C, T10> getter10,
+            final StreamCodec<? super B, T11> codec11,
+            final Function<C, T11> getter11,
+            final Function11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, C> factory
+    )
+    {
+        return new StreamCodec<B, C>()
+        {
+            @Override
+            public C decode(B p_330310_)
+            {
+                T1 t1 = codec1.decode(p_330310_);
+                T2 t2 = codec2.decode(p_330310_);
+                T3 t3 = codec3.decode(p_330310_);
+                T4 t4 = codec4.decode(p_330310_);
+                T5 t5 = codec5.decode(p_330310_);
+                T6 t6 = codec6.decode(p_330310_);
+                T7 t7 = codec7.decode(p_330310_);
+                T8 t8 = codec8.decode(p_330310_);
+                T9 t9 = codec9.decode(p_330310_);
+                T10 t10 = codec10.decode(p_330310_);
+                T11 t11 = codec11.decode(p_330310_);
+                return factory.apply(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
+            }
+
+            @Override
+            public void encode(B p_332052_, C p_331912_)
+            {
+                codec1.encode(p_332052_, getter1.apply(p_331912_));
+                codec2.encode(p_332052_, getter2.apply(p_331912_));
+                codec3.encode(p_332052_, getter3.apply(p_331912_));
+                codec4.encode(p_332052_, getter4.apply(p_331912_));
+                codec5.encode(p_332052_, getter5.apply(p_331912_));
+                codec6.encode(p_332052_, getter6.apply(p_331912_));
+                codec7.encode(p_332052_, getter7.apply(p_331912_));
+                codec8.encode(p_332052_, getter8.apply(p_331912_));
+                codec9.encode(p_332052_, getter9.apply(p_331912_));
+                codec10.encode(p_332052_, getter10.apply(p_331912_));
+                codec11.encode(p_332052_, getter11.apply(p_331912_));
+            }
+        };
+    }
+
+    //endregion composite
 
 }
