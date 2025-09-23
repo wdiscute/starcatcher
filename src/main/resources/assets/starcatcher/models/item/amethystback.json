@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "starcatcher:item/amethyst_back"
+    "layer0": "starcatcher:item/amethystback"
   }
 }
