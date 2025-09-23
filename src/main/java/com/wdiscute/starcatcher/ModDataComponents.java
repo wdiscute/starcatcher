@@ -15,25 +15,26 @@ import java.util.function.UnaryOperator;
 public class ModDataComponents
 {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
-            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE ,Starcatcher.MOD_ID);
+            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Starcatcher.MOD_ID);
 
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BOBBER = register("bobber",
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BOBBER = register(
+            "bobber",
             builder -> builder.persistent(ItemContainerContents.CODEC));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BAIT = register("bait",
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BAIT = register(
+            "bait",
             builder -> builder.persistent(ItemContainerContents.CODEC));
-
-//    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> CAST = register("cast",
-//            builder -> builder.persistent(Codec.BOOL));
 
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
-                                                                                           UnaryOperator<DataComponentType.Builder<T>> builderOperator) {
+                                                                                           UnaryOperator<DataComponentType.Builder<T>> builderOperator)
+    {
         return DATA_COMPONENT_TYPES.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());
     }
 
-    public static void register(IEventBus eventBus) {
+    public static void register(IEventBus eventBus)
+    {
         DATA_COMPONENT_TYPES.register(eventBus);
     }
 

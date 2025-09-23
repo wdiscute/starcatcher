@@ -1,6 +1,11 @@
 {
   "creativetab.starcatcher.starcatcher": "Starcatcher's Fishing",
 
+  "tag.starcatcher.is_ocean" : "Oceans",
+  "tag.starcatcher.is_river" : "Rivers",
+  "tag.starcatcher.is_cold_lake" : "Cold Lakes",
+  "tag.starcatcher.is_cold_ocean" : "Cold Oceans",
+  "tag.starcatcher.is_cold_river" : "Cold Rivers",
 
   "item.laicaps.starcatcher_fishing_rod": "Starcatcher's Fishing Rod",
   "tooltip.laicaps.starcatcher_fishing_rod.0": "A special fishing rod which allows",
@@ -52,20 +57,15 @@
   "gui.guide.hover" : "[hover]",
 
 
-  "gui.guide.laicaps:ember" : "Ember",
-  "gui.guide.laicaps:asha" : "Asha",
-  "gui.guide.laicaps:lunamar" : "Lunamar",
-  "gui.guide.minecraft:overworld" : "Overworld",
-
-
-
-
   "gui.laicaps.toast.fish_caught" : "New Fish Caught!",
 
   "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
 
 
   "item.starcatcher.obidontiee" : "Obidontiee",
+  "item.starcatcher.silverveil_perch" : "Silverveil Perch",
+  "item.starcatcher.elderscale" : "Elderscale",
+  "item.starcatcher.driftfin" : "Driftfin",
 
   "item.starcatcher.silverfin_pike" : "Silverfin Pike",
   "item.starcatcher.willow_bream" : "Willow Bream",
@@ -77,12 +77,20 @@
   "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
   "item.starcatcher.deepjaw_herring" : "Deepjaw Herring",
   "item.starcatcher.dusktail_snapper" : "Dusktail Snapper",
-
+  "item.starcatcher.joel" : "Joel",
 
   "item.starcatcher.frostgill_chub" : "Frostgill Chub",
   "item.starcatcher.crystalback_minnow" : "Crystalback Minnow",
   "item.starcatcher.azure_crystalback_minnow" : "Azure Crystalback Minnow",
 
-  "item.starcatcher.embergill" : "Embergill"
+  "item.starcatcher.whiteveil" : "Whiteveil",
+  "item.starcatcher.ghostly_pike" : "Ghostly Pike",
+  "item.starcatcher.gold_fan" : "Gold Fan",
+  "item.starcatcher.black_eel" : "Black Eel",
+  "item.starcatcher.amethyst_back" : "Amethystback",
+  "item.starcatcher.lush_pike" : "Lush Pike",
+
+  "item.starcatcher.embergill" : "Embergill",
+  "item.starcatcher.scalding_pike" : "Scalding Pike"
 
 }

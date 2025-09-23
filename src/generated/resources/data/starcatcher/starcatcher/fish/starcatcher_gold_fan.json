@@ -1,0 +1,10 @@
+{
+  "base_chance": 5,
+  "bellow_y": 50,
+  "fish": "starcatcher:gold_fan",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

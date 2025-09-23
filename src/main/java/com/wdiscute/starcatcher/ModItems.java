@@ -1,6 +1,9 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
+import com.wdiscute.starcatcher.items.TrophyBronze;
+import com.wdiscute.starcatcher.items.TrophyGold;
+import com.wdiscute.starcatcher.items.TrophySilver;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -43,6 +46,10 @@ public class ModItems
 
     public static final DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", () -> new Item(new Item.Properties()));
 
+    public static final DeferredItem<Item> TROPHY_OF_MASTERFUL_FISHING = ITEMS.register("trophy_of_masterful_fishing", () -> new TrophyGold(new Item.Properties()));
+    public static final DeferredItem<Item> TROPHY_OF_FISHING = ITEMS.register("trophy_of_fishing", () -> new TrophySilver(new Item.Properties()));
+    public static final DeferredItem<Item> TROPHY_OF_PITIFUL_FISHING = ITEMS.register("trophy_of_pitiful_fishing", () -> new TrophyBronze(new Item.Properties()));
+
 
     //
     //  ,---. ,--.         ,--.
@@ -56,6 +63,9 @@ public class ModItems
 
     //lake
     public static final DeferredItem<Item> OBIDONTIEE = basicFish("obidontiee"); //description
+    public static final DeferredItem<Item> SILVERVEIL_PERCH = basicFish("silverveil_perch"); //description
+    public static final DeferredItem<Item> ELDERSCALE = basicFish("elderscale"); //description
+    public static final DeferredItem<Item> DRIFTFIN = basicFish("driftfin"); //description
 
     //rivers
     public static final DeferredItem<Item> SILVERFIN_PIKE = basicFish("silverfin_pike"); //description
@@ -69,14 +79,27 @@ public class ModItems
     public static final DeferredItem<Item> IRONJAW_HERRING = basicFish("ironjaw_herring"); //description
     public static final DeferredItem<Item> DEEPJAW_HERRING = basicFish("deepjaw_herring"); //description
     public static final DeferredItem<Item> DUSKTAIL_SNAPPER = basicFish("dusktail_snapper"); //description
+    public static final DeferredItem<Item> JOEL = basicFish("joel"); //description
 
     //icy
     public static final DeferredItem<Item> FROSTGILL_CHUB = basicFish("frostgill_chub"); //description
     public static final DeferredItem<Item> CRYSTALBACK_MINNOW = basicFish("crystalback_minnow"); //description
     public static final DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = basicFish("azure_crystalback_minnow"); //description
 
+    //underground
+    public static final DeferredItem<Item> WHITEVEIL = basicFish("whiteveil"); //description
+    public static final DeferredItem<Item> GHOSTLY_PIKE = basicFish("ghostly_pike"); //description
+    public static final DeferredItem<Item> GOLD_FAN = basicFish("gold_fan"); //description
+    public static final DeferredItem<Item> BLACK_EEL = basicFish("black_eel"); //description
+    public static final DeferredItem<Item> AMETHYSTBACK = basicFish("amethystback"); //description
+
+    //lush caves
+    public static final DeferredItem<Item> LUSH_PIKE = basicFish("lush_pike"); //description
+
+
     //nether
     public static final DeferredItem<Item> EMBERGILL = basicFish("embergill"); //description
+    public static final DeferredItem<Item> SCALDING_PIKE = basicFish("scalding_pike"); //description
 
     //the end
 

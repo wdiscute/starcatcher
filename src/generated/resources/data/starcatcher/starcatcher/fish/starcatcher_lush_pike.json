@@ -1,0 +1,13 @@
+{
+  "base_chance": 5,
+  "bellow_y": 50,
+  "fish": "starcatcher:lush_pike",
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:lush_caves"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

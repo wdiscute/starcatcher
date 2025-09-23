@@ -1,0 +1,9 @@
+{
+  "base_chance": 5,
+  "fish": "starcatcher:scalding_pike",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:the_nether"
+    ]
+  }
+}
