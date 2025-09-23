@@ -317,15 +317,7 @@ public class FishingGuideScreen extends Screen
                 //if theres only one planet
                 if (fp.wr().dims().size() == 1)
                 {
-                    //check if planet has a translation
-                    if (I18n.exists("gui.guide." + fp.wr().dims().getFirst()))
-                    {
-                        comp = Tooltips.DecodeTranslationKeyTags("gui.guide." + fp.wr().dims().getFirst());
-                    }
-                    else
-                    {
-                        comp = Component.literal(fp.wr().dims().getFirst().toString());
-                    }
+                    comp = Component.translatable("dimension." + fp.wr().dims().getFirst().toLanguageKey());
                 }
                 else
                 {
@@ -338,7 +330,7 @@ public class FishingGuideScreen extends Screen
 
                         for (int i = 0; i < fp.wr().dims().size(); i++)
                         {
-                            c.add(Component.literal(fp.wr().dims().get(i).toString()));
+                            c.add(Component.translatable("dimension." + fp.wr().dims().get(i).toLanguageKey()));
                         }
                         guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
                     }
