@@ -1,0 +1,12 @@
+{
+  "base_chance": 5,
+  "fish": "starcatcher:joel",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_ocean"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

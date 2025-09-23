@@ -33,16 +33,21 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                     {
                         //lake
                         register(bootstrap, overworldLakeFish(ModItems.OBIDONTIEE.get()));
-
+                        register(bootstrap, overworldLakeFish(ModItems.SILVERVEIL_PERCH.get()));
+                        register(bootstrap, overworldLakeFish(ModItems.ELDERSCALE.get()));
+                        register(bootstrap, overworldLakeFish(ModItems.DRIFTFIN.get()));
 
                         //river
-                        register(bootstrap, overworldRiverFish(ModItems.DOWNFALL_BREAM.get())
-                                .withDaytime(FishProperties.Daytime.NIGHT)
-                                .withWeather(FishProperties.Weather.RAIN));
-                        register(bootstrap, overworldRiverFish(ModItems.DRIFTING_BREAM.get())
-                                .withDaytime(FishProperties.Daytime.NIGHT));
-                        register(bootstrap, overworldRiverFish(ModItems.WILLOW_BREAM.get())
-                                .withDaytime(FishProperties.Daytime.NIGHT));
+                        register(
+                                bootstrap, overworldRiverFish(ModItems.DOWNFALL_BREAM.get())
+                                        .withDaytime(FishProperties.Daytime.NIGHT)
+                                        .withWeather(FishProperties.Weather.RAIN));
+                        register(
+                                bootstrap, overworldRiverFish(ModItems.DRIFTING_BREAM.get())
+                                        .withDaytime(FishProperties.Daytime.NIGHT));
+                        register(
+                                bootstrap, overworldRiverFish(ModItems.WILLOW_BREAM.get())
+                                        .withDaytime(FishProperties.Daytime.NIGHT));
 
                         register(bootstrap, overworldRiverFish(ModItems.HOLLOWBELLY_DARTER.get()));
                         register(bootstrap, overworldRiverFish(ModItems.MISTBACK_CHUB.get()));
@@ -50,25 +55,37 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
                         register(bootstrap, overworldRiverFish(Items.SALMON));
 
-
                         //icy river
                         register(bootstrap, overworldIcyRiverFish(ModItems.FROSTGILL_CHUB.get()));
-                        register(bootstrap, overworldIcyRiverFish(ModItems.CRYSTALBACK_MINNOW.get())
-                                .withDaytime(FishProperties.Daytime.NIGHT));
-                        register(bootstrap, overworldIcyRiverFish(ModItems.AZURE_CRYSTALBACK_MINNOW.get())
-                                .withDaytime(FishProperties.Daytime.MIDNIGHT));
-
+                        register(
+                                bootstrap, overworldIcyRiverFish(ModItems.CRYSTALBACK_MINNOW.get())
+                                        .withDaytime(FishProperties.Daytime.NIGHT));
+                        register(
+                                bootstrap, overworldIcyRiverFish(ModItems.AZURE_CRYSTALBACK_MINNOW.get())
+                                        .withDaytime(FishProperties.Daytime.MIDNIGHT));
 
                         //ocean
                         register(bootstrap, overworldOceanFish(Items.COD));
+                        register(bootstrap, overworldOceanFish(Items.COD).withCustomName("very_cool_cod"));
+
                         register(bootstrap, overworldOceanFish(ModItems.IRONJAW_HERRING.get()));
                         register(bootstrap, overworldOceanFish(ModItems.DEEPJAW_HERRING.get()));
                         register(bootstrap, overworldOceanFish(ModItems.DUSKTAIL_SNAPPER.get()));
+                        register(bootstrap, overworldOceanFish(ModItems.JOEL.get()));
 
+                        //underground
+                        register(bootstrap, overworldUndergroundFish(ModItems.WHITEVEIL.get()));
+                        register(bootstrap, overworldUndergroundFish(ModItems.GHOSTLY_PIKE.get()));
+                        register(bootstrap, overworldUndergroundFish(ModItems.GOLD_FAN.get()));
+                        register(bootstrap, overworldUndergroundFish(ModItems.BLACK_EEL.get()));
+                        register(bootstrap, overworldUndergroundFish(ModItems.AMETHYSTBACK.get()));
+
+                        //lush caves
+                        register(bootstrap, overworldLushCavesFish(ModItems.LUSH_PIKE.get()));
 
                         //nether
                         register(bootstrap, netherFish(ModItems.EMBERGILL.get()));
-
+                        register(bootstrap, netherFish(ModItems.SCALDING_PIKE.get()));
 
                     }
             );
@@ -77,6 +94,16 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
     public static FishProperties netherFish(Item fish)
     {
         return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.NETHER);
+    }
+
+    public static FishProperties overworldLushCavesFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LUSH_CAVES).withMustBeCaughtBellowY(50);
+    }
+
+    public static FishProperties overworldUndergroundFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD).withMustBeCaughtBellowY(50);
     }
 
     public static FishProperties overworldIcyLakeFish(Item fish)
@@ -111,7 +138,14 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
     public static Holder.Reference<FishProperties> register(BootstrapContext<FishProperties> bootstrap, FishProperties fp)
     {
-        return bootstrap.register(key(fp.fish().getNamespace(), fp.fish().getPath()), fp);
+        if (fp.customName().isEmpty())
+        {
+            return bootstrap.register(key(fp.fish().getNamespace(), fp.fish().getPath()), fp);
+        }
+        else
+        {
+            return bootstrap.register(key("starcatcher", fp.customName()), fp);
+        }
     }
 
     public static ResourceLocation getKey(Item item)

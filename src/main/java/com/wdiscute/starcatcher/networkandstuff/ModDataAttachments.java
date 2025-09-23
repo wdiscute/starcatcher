@@ -34,6 +34,8 @@ public class ModDataAttachments
     public static final Supplier<AttachmentType<FishProperties>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
             "fish_spotter", () -> AttachmentType.builder(() -> FishProperties.DEFAULT)
                     .serialize(FishProperties.RECORD_CODEC)
+                    .sync(new FishSpotterSyncHandler())
+                    .copyOnDeath()
                     .build()
     );
 
@@ -46,12 +48,59 @@ public class ModDataAttachments
                             .build()
     );
 
+    public static final Supplier<AttachmentType<List<FishProperties>>> FISHES_NOTIFICATION = ATTACHMENT_TYPES.register(
+            "fishes_notification", () ->
+                    AttachmentType.builder(() -> List.of(FishProperties.DEFAULT))
+                            .serialize(FishProperties.LIST_CODEC)
+                            .sync(new FishPropertiesListSyncHandler())
+                            .copyOnDeath()
+                            .build()
+    );
 
-    public static void register(IEventBus eventBus)
+
+    public static class FishSpotterSyncHandler implements AttachmentSyncHandler<FishProperties>
     {
-        ATTACHMENT_TYPES.register(eventBus);
+        @Override
+        public void write(@NotNull RegistryFriendlyByteBuf buf, @NotNull FishProperties attachment, boolean initialSync)
+        {
+            FishProperties.STREAM_CODEC.encode(buf, attachment);
+        }
+
+        @Override
+        @Nullable
+        public FishProperties read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable FishProperties previousValue)
+        {
+            return FishProperties.STREAM_CODEC.decode(buf);
+        }
+
+        @Override
+        public boolean sendToPlayer(@NotNull IAttachmentHolder holder, @NotNull ServerPlayer to)
+        {
+            return holder == to;
+        }
     }
 
+    public static class FishPropertiesListSyncHandler implements AttachmentSyncHandler<List<FishProperties>>
+    {
+        @Override
+        public void write(@NotNull RegistryFriendlyByteBuf buf, @NotNull List<FishProperties> attachment, boolean initialSync)
+        {
+            FishProperties.STREAM_CODEC_LIST.encode(buf, attachment);
+        }
+
+        @Override
+        @Nullable
+        public List<FishProperties> read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable List<FishProperties> previousValue)
+        {
+            return FishProperties.STREAM_CODEC_LIST.decode(buf);
+        }
+
+        @Override
+        public boolean sendToPlayer(@NotNull IAttachmentHolder holder, @NotNull ServerPlayer to)
+        {
+            return holder == to;
+        }
+    }
 
     public static class FishingSyncHandler implements AttachmentSyncHandler<String>
     {
@@ -97,5 +146,9 @@ public class ModDataAttachments
         }
     }
 
+    public static void register(IEventBus eventBus)
+    {
+        ATTACHMENT_TYPES.register(eventBus);
+    }
 
 }
