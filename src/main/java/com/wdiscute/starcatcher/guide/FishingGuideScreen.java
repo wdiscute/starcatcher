@@ -295,6 +295,13 @@ public class FishingGuideScreen extends Screen
             renderItem(is, uiX + xOffset + 10, uiY + 60);
         }
 
+
+        //icon and count list
+        {
+
+
+        }
+
         int yOffset = 110;
 
         //planet
