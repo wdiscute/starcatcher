@@ -36,40 +36,36 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     final ItemStack bobber;
     final ItemStack bait;
 
-    int completion = 20;
-    int completionSmooth = 20;
+    final int reward;
+    final int rewardThin;
+    final int penalty;
 
+    final int speed;
 
-    int tickCount = 0;
-
-    Random r = new Random();
-
-    int sweetSpot1Pos;
-    int sweetSpot2Pos;
-    int sweetSpotTreasure;
-
-    int hitReward = 10;
-    int hitRewardThin = 15;
-    int missPenalty = 15;
-
-    int pointerPos = 0;
-
-    boolean shouldFlipRotation;
-    boolean shouldChangeSpeedEveryHit;
-    boolean shouldHaveThinSweetSpot;
-
+    final boolean flipRotation;
     int currentRotation = 1;
 
-    int currentSpeed;
-    int minSpeed;
-    int maxSpeed;
-
-    float partial;
+    int completion = 20;
+    int completionSmooth = 20;
 
     boolean treasureActive;
     boolean treasureCompleted;
     int treasureProgress = 0;
     int treasureProgressSmooth = 0;
+
+    int tickCount = 0;
+
+    Random r = new Random();
+
+    int spot1;
+    int spot2;
+    int spotThin1;
+    int spotThin2;
+    int spotTreasure;
+
+    int pointerPos = 0;
+
+    float partial;
 
     public FishingMinigameScreen(FishProperties fp, ItemStack rod)
     {
@@ -79,19 +75,19 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         this.bobber = rod.get(ModDataComponents.BOBBER).copyOne();
         this.bait = rod.get(ModDataComponents.BAIT).copyOne();
 
-        sweetSpot1Pos = r.nextInt(360);
-        sweetSpot2Pos = 60 + r.nextInt(240) + sweetSpot1Pos;
+        spot1 = r.nextInt(360);
+        spot2 = 60 + r.nextInt(240) + spot1;
 
-        sweetSpotTreasure = 345623482;
+        spotTreasure = 345623482;
 
-        if (sweetSpot2Pos > 360) sweetSpot2Pos -= 360;
+        if (spot2 > 360) spot2 -= 360;
 
         {
             if (10 == 1)
             {
-                hitReward = 10;
-                hitRewardThin = 20;
-                missPenalty = 10;
+                rewardThin = 10;
+                rewardThin = 20;
+                penalty = 10;
 
                 currentSpeed = 6;
 
@@ -103,9 +99,9 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (10 == 2)
             {
-                hitReward = 10;
-                hitRewardThin = 15;
-                missPenalty = 15;
+                rewardThin = 10;
+                rewardThin = 15;
+                penalty = 15;
 
                 currentSpeed = 8;
 
@@ -117,9 +113,9 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (3 == 3)
             {
-                hitReward = 10;
-                hitRewardThin = 15;
-                missPenalty = 10;
+                rewardThin = 10;
+                rewardThin = 15;
+                penalty = 10;
 
                 currentSpeed = 10;
 
@@ -131,9 +127,9 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (10 == 4)
             {
-                hitReward = 5;
-                hitRewardThin = 15;
-                missPenalty = 16;
+                rewardThin = 5;
+                rewardThin = 15;
+                penalty = 16;
 
                 currentSpeed = 7;
 
@@ -201,7 +197,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpot1Pos)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(spot1)));
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
@@ -221,7 +217,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpot2Pos)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(spot2)));
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
@@ -242,7 +238,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpotTreasure)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(spotTreasure)));
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
@@ -326,7 +322,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
 
             //if hit sweet spot 1
-            if (Math.abs(sweetSpot1Pos - pointerPrecise) < 12 || Math.abs(sweetSpot1Pos - pointerPrecise) > 348)
+            if (Math.abs(spot1 - pointerPrecise) < 12 || Math.abs(spot1 - pointerPrecise) > 348)
             {
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
 
@@ -335,23 +331,23 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 do
                 {
                     //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpot1Pos) % 360;
+                    attempted = (60 + r.nextInt(240) + spot1) % 360;
                 }
                 //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot2Pos) < 30 || Math.abs(attempted - sweetSpotTreasure) < 30);
+                while (Math.abs(attempted - spot2) < 30 || Math.abs(attempted - spotTreasure) < 30);
 
-                sweetSpot1Pos = attempted;
+                spot1 = attempted;
 
                 //difficulty checks
                 if (shouldFlipRotation) currentRotation *= -1;
                 if (shouldChangeSpeedEveryHit) currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
 
-                completion += hitReward;
+                completion += rewardThin;
                 safe = true;
             }
 
             //if hit sweet spot 2
-            if (Math.abs(sweetSpot2Pos - pointerPrecise) < 5 || Math.abs(sweetSpot2Pos - pointerPrecise) > 355)
+            if (Math.abs(spot2 - pointerPrecise) < 5 || Math.abs(spot2 - pointerPrecise) > 355)
             {
                 if (!shouldHaveThinSweetSpot) return false;
 
@@ -362,23 +358,23 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 do
                 {
                     //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpot2Pos) % 360;
+                    attempted = (60 + r.nextInt(240) + spot2) % 360;
                 }
                 //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot1Pos) < 30 || Math.abs(attempted - sweetSpotTreasure) < 30);
+                while (Math.abs(attempted - spot1) < 30 || Math.abs(attempted - spotTreasure) < 30);
 
-                sweetSpot2Pos = attempted;
+                spot2 = attempted;
 
                 //difficulty checks
                 if (shouldFlipRotation) currentRotation *= -1;
                 if (shouldChangeSpeedEveryHit) currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
 
-                completion += hitRewardThin;
+                completion += rewardThin;
                 safe = true;
             }
 
             //if hit sweet spot treasure
-            if (Math.abs(sweetSpotTreasure - pointerPrecise) < 7 || Math.abs(sweetSpotTreasure - pointerPrecise) > 353 && treasureActive && !treasureCompleted)
+            if (Math.abs(spotTreasure - pointerPrecise) < 7 || Math.abs(spotTreasure - pointerPrecise) > 353 && treasureActive && !treasureCompleted)
             {
 
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
@@ -388,12 +384,12 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 do
                 {
                     //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpotTreasure) % 360;
+                    attempted = (60 + r.nextInt(240) + spotTreasure) % 360;
                 }
                 //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot1Pos) < 30 || Math.abs(attempted - sweetSpot2Pos) < 30);
+                while (Math.abs(attempted - spot1) < 30 || Math.abs(attempted - spot2) < 30);
 
-                sweetSpotTreasure = attempted;
+                spotTreasure = attempted;
 
                 //difficulty checks
                 if (shouldFlipRotation) currentRotation *= -1;
@@ -443,11 +439,11 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 do
                 {
                     //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpotTreasure) % 360;
+                    attempted = (60 + r.nextInt(240) + spotTreasure) % 360;
                 }
                 //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot1Pos) < 30 || Math.abs(attempted - sweetSpot2Pos) < 30);
-                sweetSpotTreasure = attempted;
+                while (Math.abs(attempted - spot1) < 30 || Math.abs(attempted - spot2) < 30);
+                spotTreasure = attempted;
             }
         }
 
