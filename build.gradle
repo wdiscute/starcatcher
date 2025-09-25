@@ -33,7 +33,7 @@ dependencies {
     jarJar(implementation(group: 'com.wdiscute', name: 'libtooltips')) {
         version {
             // Version used in your workspace and bundled in mod jar
-            prefer '1.0.0'
+            prefer '1.1'
         }
     }
 }

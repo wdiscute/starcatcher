@@ -26,8 +26,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
 
-public class
-FishingMinigameScreen extends Screen implements GuiEventListener
+public class FishingMinigameScreen extends Screen implements GuiEventListener
 {
 
     private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame.png");
@@ -36,40 +35,38 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     final ItemStack bobber;
     final ItemStack bait;
 
+    final float speed;
+    final int reward;
+    final int rewardThin;
+    final int penalty;
+    final int decay;
+    final boolean hasTreasure;
+    final boolean changeRotation;
+
+    final InteractionHand hand;
+
+    int pointerPos = 0;
+
+    int pos1;
+    int pos2;
+    int posThin1;
+    int posThin2;
+    int posTreasure;
+
+    int currentRotation = 1;
+
+    float partial;
+
     int completion = 20;
     int completionSmooth = 20;
 
+    boolean treasureActive;
+    int treasureProgress = 0;
+    int treasureProgressSmooth = 0;
 
     int tickCount = 0;
 
     Random r = new Random();
-
-    int sweetSpot1Pos;
-    int sweetSpot2Pos;
-    int sweetSpotTreasure;
-
-    int hitReward = 10;
-    int hitRewardThin = 15;
-    int missPenalty = 15;
-
-    int pointerPos = 0;
-
-    boolean shouldFlipRotation;
-    boolean shouldChangeSpeedEveryHit;
-    boolean shouldHaveThinSweetSpot;
-
-    int currentRotation = 1;
-
-    int currentSpeed;
-    int minSpeed;
-    int maxSpeed;
-
-    float partial;
-
-    boolean treasureActive;
-    boolean treasureCompleted;
-    int treasureProgress = 0;
-    int treasureProgressSmooth = 0;
 
     public FishingMinigameScreen(FishProperties fp, ItemStack rod)
     {
@@ -79,74 +76,39 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         this.bobber = rod.get(ModDataComponents.BOBBER).copyOne();
         this.bait = rod.get(ModDataComponents.BAIT).copyOne();
 
-        sweetSpot1Pos = r.nextInt(360);
-        sweetSpot2Pos = 60 + r.nextInt(240) + sweetSpot1Pos;
+        pos1 = fp.dif().hasFirstMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        pos2 = fp.dif().hasSecondMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin1 = fp.dif().hasFirstThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin2 = fp.dif().hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posTreasure = Integer.MIN_VALUE;
 
-        sweetSpotTreasure = 345623482;
+        this.speed = fp.dif().speed();
+        this.reward = fp.dif().reward();
+        this.rewardThin = fp.dif().rewardThin();
+        this.penalty = fp.dif().penalty();
+        this.decay = fp.dif().decay();
+        this.hasTreasure = fp.dif().hasTreasure();
+        this.changeRotation = fp.dif().changeRotationOnEveryHit();
 
-        if (sweetSpot2Pos > 360) sweetSpot2Pos -= 360;
+        hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.STARCATCHER_FISHING_ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+    }
 
+    private int getRandomFreePosition()
+    {
+        for (int i = 0; i < 100; i++)
         {
-            if (10 == 1)
-            {
-                hitReward = 10;
-                hitRewardThin = 20;
-                missPenalty = 10;
+            int posBeingChecked = r.nextInt(360);
 
-                currentSpeed = 6;
+            if ((Math.abs(pos1 - posBeingChecked) < 50 || Math.abs(pos1 - posBeingChecked) > 310) && pos1 != Integer.MIN_VALUE) continue;
+            if ((Math.abs(pos2 - posBeingChecked) < 50 || Math.abs(pos2 - posBeingChecked) > 310) && pos2 != Integer.MIN_VALUE) continue;
+            if ((Math.abs(posThin1 - posBeingChecked) < 50 || Math.abs(posThin1 - posBeingChecked) > 310) && posThin1 != Integer.MIN_VALUE) continue;
+            if ((Math.abs(posThin2 - posBeingChecked) < 50 || Math.abs(posThin2 - posBeingChecked) > 310) && posThin2 != Integer.MIN_VALUE) continue;
+            if ((Math.abs(posTreasure - posBeingChecked) < 50 || Math.abs(posTreasure - posBeingChecked) > 310) && posTreasure != Integer.MIN_VALUE) continue;
 
-                shouldFlipRotation = false;
-                shouldChangeSpeedEveryHit = false;
-
-                shouldHaveThinSweetSpot = true;
-            }
-
-            if (10 == 2)
-            {
-                hitReward = 10;
-                hitRewardThin = 15;
-                missPenalty = 15;
-
-                currentSpeed = 8;
-
-                shouldFlipRotation = false;
-                shouldChangeSpeedEveryHit = false;
-
-                shouldHaveThinSweetSpot = true;
-            }
-
-            if (3 == 3)
-            {
-                hitReward = 10;
-                hitRewardThin = 15;
-                missPenalty = 10;
-
-                currentSpeed = 10;
-
-                shouldFlipRotation = true;
-                shouldChangeSpeedEveryHit = false;
-
-                shouldHaveThinSweetSpot = true;
-            }
-
-            if (10 == 4)
-            {
-                hitReward = 5;
-                hitRewardThin = 15;
-                missPenalty = 16;
-
-                currentSpeed = 7;
-
-                shouldFlipRotation = true;
-                shouldChangeSpeedEveryHit = true;
-                minSpeed = 7;
-                maxSpeed = 20;
-
-                shouldHaveThinSweetSpot = true;
-            }
-
+            return posBeingChecked;
         }
 
+        return 0;
     }
 
 
@@ -161,24 +123,20 @@ FishingMinigameScreen extends Screen implements GuiEventListener
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        treasureActive = false;
         if (treasureActive)
         {
-
             //treasure bar
             guiGraphics.blit(
-                    TEXTURE, width / 2 - 158, height / 2 - 42 + (int)(64 - (64f * treasureProgressSmooth) / 100),
+                    TEXTURE, width / 2 - 158, height / 2 - 42 + (int) (64 - (64f * treasureProgressSmooth) / 100),
                     5, 64 * treasureProgressSmooth / 100,
-                    141, 6  + 64 - (float) (64 * treasureProgressSmooth) / 100,
+                    141, 6 + 64 - (float) (64 * treasureProgressSmooth) / 100,
                     5, 64 * treasureProgressSmooth / 100,
                     256, 256);
 
-            //treasure bar
+            //treasure chest?
             guiGraphics.blit(
                     TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
                     32, 96, 96, 0, 32, 96, 256, 256);
-
-
         }
 
         //tank background
@@ -192,7 +150,8 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 64, 64, 0, 192, 64, 64, 256, 256);
 
 
-        //SWEET_SPOT_1
+        //pos 1
+        if (pos1 != Integer.MIN_VALUE)
         {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
@@ -201,7 +160,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpot1Pos)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos1)));
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
@@ -211,8 +170,9 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.popPose();
         }
 
-        //SWEET_SPOT_2
-        if (shouldHaveThinSweetSpot)
+
+        //pos 2
+        if (pos2 != Integer.MIN_VALUE)
         {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
@@ -221,7 +181,27 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpot2Pos)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos2)));
+            poseStack.translate(-centerX, -centerY, 0);
+
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 16, 160, 16, 16, 256, 256);
+
+            poseStack.popPose();
+        }
+
+        //pos thin 1
+        if (posThin1 != Integer.MIN_VALUE)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin1)));
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
@@ -231,9 +211,8 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.popPose();
         }
 
-
-        //SWEET SPOT TREASURE
-        if (treasureActive && treasureProgress < 100)
+        //pos thin 2
+        if (posThin2 != Integer.MIN_VALUE)
         {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
@@ -242,7 +221,27 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(sweetSpotTreasure)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin2)));
+            poseStack.translate(-centerX, -centerY, 0);
+
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 48, 160, 16, 16, 256, 256);
+
+            poseStack.popPose();
+        }
+
+        //pos treasure
+        if (posTreasure != Integer.MIN_VALUE)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posTreasure)));
             poseStack.translate(-centerX, -centerY, 0);
 
             guiGraphics.blit(
@@ -267,7 +266,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pointerPos + ((currentSpeed * partialTick) * currentRotation))));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pointerPos + ((speed * partialTick) * currentRotation))));
             poseStack.translate(-centerX, -centerY, 0);
 
             //16 offset on y for texture centering
@@ -278,7 +277,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.popPose();
         }
 
-        //
+        //silver thing on top
         guiGraphics.blit(
                 TEXTURE, width / 2 - 16, height / 2 - 16,
                 32, 32, 208, 208, 32, 32, 256, 256);
@@ -297,15 +296,21 @@ FishingMinigameScreen extends Screen implements GuiEventListener
                 256, 256);
 
         //FISH
-        {
-            guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
-        }
+        guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
+
+
+        //spacebar
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 16, height / 2 + 160,
+                32, 16, 0, 112, 32, 16, 256, 256);
+
     }
 
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers)
     {
+        //closes when pressing E
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
         {
@@ -313,101 +318,69 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             return true;
         }
 
+        //spacebar input
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue())
         {
-            Minecraft.getInstance().player.swing(InteractionHand.MAIN_HAND, true);
+            Minecraft.getInstance().player.swing(hand, true);
 
-            boolean safe = false;
+            boolean hitSomething = false;
 
             Vec3 pos = Minecraft.getInstance().player.position();
             ClientLevel level = Minecraft.getInstance().level;
 
-            float pointerPrecise = (pointerPos + ((currentSpeed * partial) * currentRotation));
+            float pointerPrecise = (pointerPos + ((speed * partial) * currentRotation));
 
 
-            //if hit sweet spot 1
-            if (Math.abs(sweetSpot1Pos - pointerPrecise) < 12 || Math.abs(sweetSpot1Pos - pointerPrecise) > 348)
+            //pos 1
+            if ((Math.abs(pos1 - pointerPrecise) < 12 || Math.abs(pos1 - pointerPrecise) > 348) && pos1 != Integer.MIN_VALUE)
             {
-                level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
-
-                //reposition sweet spot without overlapping old position or the other sweet spot
-                int attempted;
-                do
-                {
-                    //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpot1Pos) % 360;
-                }
-                //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot2Pos) < 30 || Math.abs(attempted - sweetSpotTreasure) < 30);
-
-                sweetSpot1Pos = attempted;
-
-                //difficulty checks
-                if (shouldFlipRotation) currentRotation *= -1;
-                if (shouldChangeSpeedEveryHit) currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
-
-                completion += hitReward;
-                safe = true;
+                pos1 = getRandomFreePosition();
+                completion += reward;
+                hitSomething = true;
             }
 
-            //if hit sweet spot 2
-            if (Math.abs(sweetSpot2Pos - pointerPrecise) < 5 || Math.abs(sweetSpot2Pos - pointerPrecise) > 355)
+            //pos2
+            if ((Math.abs(pos2 - pointerPrecise) < 12 || Math.abs(pos2 - pointerPrecise) > 348) && pos2 != Integer.MIN_VALUE)
             {
-                if (!shouldHaveThinSweetSpot) return false;
+                pos2 = getRandomFreePosition();
+                completion += reward;
+                hitSomething = true;
+            }
 
-                level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
+            //pos thin 1
+            if ((Math.abs(posThin1 - pointerPrecise) < 5 || Math.abs(posThin1 - pointerPrecise) > 355) && posThin1 != Integer.MIN_VALUE)
+            {
+                posThin1 = getRandomFreePosition();
+                completion += rewardThin;
+                hitSomething = true;
+            }
 
-                //reposition sweet spot without overlapping old position or the other sweet spot
-                int attempted;
-                do
-                {
-                    //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpot2Pos) % 360;
-                }
-                //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot1Pos) < 30 || Math.abs(attempted - sweetSpotTreasure) < 30);
-
-                sweetSpot2Pos = attempted;
-
-                //difficulty checks
-                if (shouldFlipRotation) currentRotation *= -1;
-                if (shouldChangeSpeedEveryHit) currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
-
-                completion += hitRewardThin;
-                safe = true;
+            //pos thin 2
+            if ((Math.abs(posThin2 - pointerPrecise) < 5 || Math.abs(posThin2 - pointerPrecise) > 355) && posThin2 != Integer.MIN_VALUE)
+            {
+                posThin2 = getRandomFreePosition();
+                completion += rewardThin;
+                hitSomething = true;
             }
 
             //if hit sweet spot treasure
-            if (Math.abs(sweetSpotTreasure - pointerPrecise) < 7 || Math.abs(sweetSpotTreasure - pointerPrecise) > 353 && treasureActive && !treasureCompleted)
+            if ((Math.abs(posTreasure - pointerPrecise) < 7 || Math.abs(posTreasure - pointerPrecise) > 353) && posTreasure != Integer.MIN_VALUE)
             {
-
-                level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
-
-                //reposition sweet spot without overlapping old position or the other sweet spot
-                int attempted;
-                do
-                {
-                    //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpotTreasure) % 360;
-                }
-                //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot1Pos) < 30 || Math.abs(attempted - sweetSpot2Pos) < 30);
-
-                sweetSpotTreasure = attempted;
-
-                //difficulty checks
-                if (shouldFlipRotation) currentRotation *= -1;
-                if (shouldChangeSpeedEveryHit) currentSpeed = minSpeed + r.nextInt(maxSpeed - minSpeed);
-
+                posTreasure = getRandomFreePosition();
                 treasureProgress += 15;
-                safe = true;
+                hitSomething = true;
             }
 
 
-            if (!safe)
+            if (hitSomething)
+            {
+                level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
+                if (changeRotation) currentRotation *= -1;
+            }
+            else
             {
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 1, 1, false);
-                completion -= 5;
+                completion -= penalty;
             }
 
         }
@@ -419,42 +392,12 @@ FishingMinigameScreen extends Screen implements GuiEventListener
     @Override
     public void tick()
     {
-        pointerPos += currentSpeed * currentRotation;
+        pointerPos += (int) (speed * currentRotation);
 
         if (pointerPos > 360) pointerPos -= 360;
         if (pointerPos < 0) pointerPos += 360;
 
         tickCount++;
-
-        if (!treasureActive)
-        {
-            float chance = 0.0005f;
-
-            if(bobber.is(ModItems.TREASURE_BOBBER))
-            {
-                chance = 0.0025f;
-            }
-
-            if (r.nextFloat() < chance)
-            {
-                treasureActive = true;
-                treasureProgress = 0;
-                int attempted;
-                do
-                {
-                    //pick random place at least 60 degrees away from current spot
-                    attempted = (60 + r.nextInt(240) + sweetSpotTreasure) % 360;
-                }
-                //do while the picked spot is within 30 degrees of one of the other spots
-                while (Math.abs(attempted - sweetSpot1Pos) < 30 || Math.abs(attempted - sweetSpot2Pos) < 30);
-                sweetSpotTreasure = attempted;
-            }
-        }
-
-        if (treasureProgress > 100)
-        {
-            treasureCompleted = true;
-        }
 
         completionSmooth += (int) Math.signum(completion - completionSmooth);
 
@@ -462,7 +405,7 @@ FishingMinigameScreen extends Screen implements GuiEventListener
 
         if (tickCount % 5 == 0)
         {
-            completion--;
+            completion -= decay;
         }
 
         if (completionSmooth < 0)
@@ -476,7 +419,6 @@ FishingMinigameScreen extends Screen implements GuiEventListener
             PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount));
             this.onClose();
         }
-
     }
 
     @Override

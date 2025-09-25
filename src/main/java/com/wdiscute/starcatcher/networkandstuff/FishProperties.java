@@ -288,14 +288,14 @@ public record FishProperties(
     //region dif
 
     public record Difficulty(
-            float speed,
+            int speed,
             int reward,
             int rewardThin,
             int penalty,
             int decay,
             boolean hasFirstMarker,
-            boolean hasFirstThinMarker,
             boolean hasSecondMarker,
+            boolean hasFirstThinMarker,
             boolean hasSecondThinMarker,
             boolean hasTreasure,
             boolean changeRotationOnEveryHit
@@ -303,14 +303,14 @@ public record FishProperties(
     {
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.FLOAT.optionalFieldOf("speed", 5.0f).forGetter(Difficulty::speed),
-                        Codec.INT.optionalFieldOf("reward", 5).forGetter(Difficulty::reward),
-                        Codec.INT.optionalFieldOf("reward_thin", 10).forGetter(Difficulty::rewardThin),
+                        Codec.INT.optionalFieldOf("speed", 7).forGetter(Difficulty::speed),
+                        Codec.INT.optionalFieldOf("reward", 15).forGetter(Difficulty::reward),
+                        Codec.INT.optionalFieldOf("reward_thin", 45).forGetter(Difficulty::rewardThin),
                         Codec.INT.optionalFieldOf("penalty", 5).forGetter(Difficulty::penalty),
                         Codec.INT.optionalFieldOf("decay", 1).forGetter(Difficulty::decay),
                         Codec.BOOL.optionalFieldOf("has_first_marker", true).forGetter(Difficulty::hasFirstMarker),
-                        Codec.BOOL.optionalFieldOf("has_first_thin_marker", true).forGetter(Difficulty::hasFirstThinMarker),
                         Codec.BOOL.optionalFieldOf("has_second_marker", false).forGetter(Difficulty::hasSecondMarker),
+                        Codec.BOOL.optionalFieldOf("has_first_thin_marker", true).forGetter(Difficulty::hasFirstThinMarker),
                         Codec.BOOL.optionalFieldOf("has_second_thin_marker", false).forGetter(Difficulty::hasSecondThinMarker),
                         Codec.BOOL.optionalFieldOf("has_treasure", true).forGetter(Difficulty::hasTreasure),
                         Codec.BOOL.optionalFieldOf("change_rotation_every_hit", false).forGetter(Difficulty::changeRotationOnEveryHit)
@@ -318,14 +318,14 @@ public record FishProperties(
 
 
         public static final StreamCodec<ByteBuf, Difficulty> STREAM_CODEC = composite(
-                ByteBufCodecs.FLOAT, Difficulty::speed,
+                ByteBufCodecs.INT, Difficulty::speed,
                 ByteBufCodecs.INT, Difficulty::reward,
                 ByteBufCodecs.INT, Difficulty::rewardThin,
                 ByteBufCodecs.INT, Difficulty::penalty,
                 ByteBufCodecs.INT, Difficulty::decay,
                 ByteBufCodecs.BOOL, Difficulty::hasFirstMarker,
-                ByteBufCodecs.BOOL, Difficulty::hasFirstThinMarker,
                 ByteBufCodecs.BOOL, Difficulty::hasSecondMarker,
+                ByteBufCodecs.BOOL, Difficulty::hasFirstThinMarker,
                 ByteBufCodecs.BOOL, Difficulty::hasSecondThinMarker,
                 ByteBufCodecs.BOOL, Difficulty::hasTreasure,
                 ByteBufCodecs.BOOL, Difficulty::changeRotationOnEveryHit,
@@ -333,9 +333,9 @@ public record FishProperties(
         );
 
         public static final Difficulty DEFAULT = new Difficulty(
-                5.0f,
-                5,
-                10,
+                9,
+                15,
+                30,
                 5,
                 1,
                 true,
