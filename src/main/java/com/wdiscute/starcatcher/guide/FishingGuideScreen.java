@@ -201,7 +201,17 @@ public class FishingGuideScreen extends Screen
             }
 
             //outline
-            guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff444444);
+
+            //TODO FIX THIS
+            int color = switch (fp.rarity())
+            {
+                case FishProperties.Rarity.UNCOMMON -> 0xFF7BF266;
+                case FishProperties.Rarity.EPIC -> 0xFFDB66F2;
+                case FishProperties.Rarity.LEGENDARY -> 0xFFFFB947;
+                default -> 0xff444444; //common
+            };
+
+            guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff112233);
 
             for (FishProperties fpNotif : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
             {
@@ -665,7 +675,8 @@ public class FishingGuideScreen extends Screen
                     Lighting.setupForFlatItems();
                 }
 
-                this.minecraft.getItemRenderer().render(stack, ItemDisplayContext.GUI, false, pose, Minecraft.getInstance().renderBuffers().bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
+                this.minecraft.getItemRenderer().render(stack, ItemDisplayContext.GUI, false, pose, Minecraft.getInstance().renderBuffers().bufferSource(),
+                        15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
                 //flush()
                 RenderSystem.disableDepthTest();

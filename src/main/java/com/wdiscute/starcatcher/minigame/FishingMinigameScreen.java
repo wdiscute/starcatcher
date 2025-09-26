@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.minigame;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.ModDataComponents;
@@ -8,23 +9,33 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.Payloads;
+import net.minecraft.CrashReport;
+import net.minecraft.CrashReportCategory;
+import net.minecraft.ReportedException;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
+
+import javax.annotation.Nullable;
 
 public class FishingMinigameScreen extends Screen implements GuiEventListener
 {
@@ -42,6 +53,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final int decay;
     final boolean hasTreasure;
     final boolean changeRotation;
+
+    int gracePeriod = 40;
 
     final InteractionHand hand;
 
@@ -99,11 +112,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         {
             int posBeingChecked = r.nextInt(360);
 
-            if ((Math.abs(pos1 - posBeingChecked) < 50 || Math.abs(pos1 - posBeingChecked) > 310) && pos1 != Integer.MIN_VALUE) continue;
-            if ((Math.abs(pos2 - posBeingChecked) < 50 || Math.abs(pos2 - posBeingChecked) > 310) && pos2 != Integer.MIN_VALUE) continue;
-            if ((Math.abs(posThin1 - posBeingChecked) < 50 || Math.abs(posThin1 - posBeingChecked) > 310) && posThin1 != Integer.MIN_VALUE) continue;
-            if ((Math.abs(posThin2 - posBeingChecked) < 50 || Math.abs(posThin2 - posBeingChecked) > 310) && posThin2 != Integer.MIN_VALUE) continue;
-            if ((Math.abs(posTreasure - posBeingChecked) < 50 || Math.abs(posTreasure - posBeingChecked) > 310) && posTreasure != Integer.MIN_VALUE) continue;
+            if ((Math.abs(pos1 - posBeingChecked) < 50 || Math.abs(pos1 - posBeingChecked) > 310) && pos1 != Integer.MIN_VALUE)
+                continue;
+            if ((Math.abs(pos2 - posBeingChecked) < 50 || Math.abs(pos2 - posBeingChecked) > 310) && pos2 != Integer.MIN_VALUE)
+                continue;
+            if ((Math.abs(posThin1 - posBeingChecked) < 50 || Math.abs(posThin1 - posBeingChecked) > 310) && posThin1 != Integer.MIN_VALUE)
+                continue;
+            if ((Math.abs(posThin2 - posBeingChecked) < 50 || Math.abs(posThin2 - posBeingChecked) > 310) && posThin2 != Integer.MIN_VALUE)
+                continue;
+            if ((Math.abs(posTreasure - posBeingChecked) < 50 || Math.abs(posTreasure - posBeingChecked) > 310) && posTreasure != Integer.MIN_VALUE)
+                continue;
 
             return posBeingChecked;
         }
@@ -295,6 +313,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 16, 112 - completionSmooth,
                 256, 256);
 
+        //Twitch chat didn't force me to write this comment
+        //Lies, kuko010 force me to write said comment
         //FISH
         guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
 
@@ -306,10 +326,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     }
 
-
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers)
     {
+
         //closes when pressing E
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
@@ -321,6 +341,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //spacebar input
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue())
         {
+
+            if (gracePeriod > 0) gracePeriod = 0;
+
             Minecraft.getInstance().player.swing(hand, true);
 
             boolean hitSomething = false;
@@ -397,13 +420,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         if (pointerPos > 360) pointerPos -= 360;
         if (pointerPos < 0) pointerPos += 360;
 
+        gracePeriod--;
+
         tickCount++;
 
+        completionSmooth += (int) Math.signum(completion - completionSmooth);
         completionSmooth += (int) Math.signum(completion - completionSmooth);
 
         treasureProgressSmooth += (int) Math.signum(treasureProgress - treasureProgressSmooth);
 
-        if (tickCount % 5 == 0)
+        if (tickCount % 5 == 0 && gracePeriod < 0)
         {
             completion -= decay;
         }
