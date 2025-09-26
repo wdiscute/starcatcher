@@ -31,8 +31,9 @@ public class TrophySilver extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
         List<FishCaughtCounter> fishCounter;
+        List<FishProperties> fishes = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
 
-        fishCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
+        fishCounter = new ArrayList<>(player.getData(ModDataAttachments.FISHES_CAUGHT));
 
         Optional<Holder.Reference<FishProperties>> optional = level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY).getRandom(level.random);
 
@@ -41,6 +42,7 @@ public class TrophySilver extends Item
             FishProperties fp = optional.get().value();
 
             fishCounter.add(new FishCaughtCounter(fp, 1));
+            fishes.add(fp);
 
             if(player instanceof ServerPlayer sp)
             {
@@ -50,6 +52,7 @@ public class TrophySilver extends Item
         }
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
+        player.setData(ModDataAttachments.FISHES_NOTIFICATION, fishes);
 
 
 

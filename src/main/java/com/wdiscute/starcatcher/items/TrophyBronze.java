@@ -23,6 +23,7 @@ public class TrophyBronze extends Item
     {
         //reset fishes caught
         player.setData(ModDataAttachments.FISHES_CAUGHT, new ArrayList<>());
+        player.setData(ModDataAttachments.FISHES_NOTIFICATION, new ArrayList<>());
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
 }

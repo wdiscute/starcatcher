@@ -33,6 +33,7 @@ public class TrophyGold extends Item
     {
         //sets all fps on fishes caught to 1
         List<FishCaughtCounter> fishCounter = new ArrayList<>();
+        List<FishProperties> fishes = new ArrayList<>();
 
         for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
@@ -40,6 +41,13 @@ public class TrophyGold extends Item
         }
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
+
+        for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
+        {
+            fishes.add(fp);
+        }
+
+        player.setData(ModDataAttachments.FISHES_NOTIFICATION, fishes);
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
