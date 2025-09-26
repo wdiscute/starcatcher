@@ -156,6 +156,12 @@ public class Starcatcher
                     PayloadReceiver::receiveFishCaught
             );
 
+            registrar.playToServer(
+                    Payloads.FPsSeen.TYPE,
+                    Payloads.FPsSeen.STREAM_CODEC,
+                    PayloadReceiver::receiveFPsSeen
+            );
+
         }
 
     }

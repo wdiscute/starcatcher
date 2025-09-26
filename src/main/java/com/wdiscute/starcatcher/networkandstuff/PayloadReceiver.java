@@ -7,8 +7,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -93,7 +91,11 @@ public class PayloadReceiver
                             PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
                         }
 
-                        player.setData(ModDataAttachments.FISHES_NOTIFICATION, List.of(fbe.fpToFish));
+                        List<FishProperties> list = new ArrayList<>(level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY).stream().toList());
+
+                        list.add(fbe.fpToFish);
+
+                        player.setData(ModDataAttachments.FISHES_NOTIFICATION, list);
                     }
                     else
                     {
@@ -111,6 +113,20 @@ public class PayloadReceiver
 
     }
 
+
+    public static void receiveFPsSeen(final Payloads.FPsSeen data, final IPayloadContext context)
+    {
+        List<FishProperties> list = context.player().getData(ModDataAttachments.FISHES_NOTIFICATION);
+        List<FishProperties> newList = new ArrayList<>();
+
+        for(FishProperties fp : list)
+        {
+            if(!data.fps().contains(fp))
+                newList.add(fp);
+        }
+
+        context.player().setData(ModDataAttachments.FISHES_NOTIFICATION, newList);
+    }
 
     public static void receiveFishCaught(final Payloads.FishCaughtPayload data, final IPayloadContext context)
     {

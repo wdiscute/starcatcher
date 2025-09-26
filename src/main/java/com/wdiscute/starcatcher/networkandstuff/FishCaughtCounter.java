@@ -23,7 +23,7 @@ public record FishCaughtCounter(
 
     public static final Codec<FishCaughtCounter> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    FishProperties.CODEC.fieldOf("fp").forGetter(FishCaughtCounter::fp),
+                    FishProperties.CODEC.fieldOf("fps").forGetter(FishCaughtCounter::fp),
                     Codec.INT.optionalFieldOf("count", 0).forGetter(FishCaughtCounter::count)
             ).apply(instance, FishCaughtCounter::new)
     );

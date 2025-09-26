@@ -7,6 +7,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
+
 
 public class Payloads
 {
@@ -57,6 +59,23 @@ public class Payloads
                 ByteBufCodecs.fromCodec(FishProperties.CODEC),
                 FishCaughtPayload::fp,
                 FishCaughtPayload::new
+        );
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record FPsSeen(List<FishProperties> fps) implements CustomPacketPayload
+    {
+
+        public static final Type<FPsSeen> TYPE = new Type<>(Starcatcher.rl("fps_seen"));
+
+        public static final StreamCodec<ByteBuf, FPsSeen> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.fromCodec(FishProperties.LIST_CODEC),
+                FPsSeen::fps,
+                FPsSeen::new
         );
 
         @Override

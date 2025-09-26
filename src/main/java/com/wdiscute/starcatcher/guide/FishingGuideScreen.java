@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
+import com.wdiscute.starcatcher.networkandstuff.Payloads;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
@@ -30,6 +31,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +45,15 @@ public class FishingGuideScreen extends Screen
     private static final ResourceLocation ARROW_PREVIOUS = Starcatcher.rl("textures/gui/guide/arrow_previous.png");
     private static final ResourceLocation ARROW_NEXT = Starcatcher.rl("textures/gui/guide/arrow_next.png");
 
+    private static final ResourceLocation STAR = Starcatcher.rl("textures/gui/guide/star.png");
+
     int uiX;
     int uiY;
 
     int imageWidth;
     int imageHeight;
+
+    List<FishProperties> fpsSeen = new ArrayList<>();
 
     int currentPage;
 
@@ -76,6 +82,12 @@ public class FishingGuideScreen extends Screen
 
     }
 
+    @Override
+    public void onClose()
+    {
+        PacketDistributor.sendToServer(new Payloads.FPsSeen(fpsSeen));
+        super.onClose();
+    }
 
     @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers)
@@ -213,18 +225,17 @@ public class FishingGuideScreen extends Screen
 
             guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff112233);
 
-            for (FishProperties fpNotif : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
-            {
-                if (fp.equals(fpNotif))
-                    guiGraphics.renderOutline(uiX + offsetX - 1, uiY + offsetY - 1, 8, 7, 0xff444444);
-            }
-
-            guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff444444);
-
             if (caught != 0)
                 renderItem(is, uiX + offsetX, uiY + offsetY, 1);
             else
                 renderItem(new ItemStack(ModItems.MISSINGNO.get()), uiX + offsetX, uiY + offsetY, 1);
+
+            for (FishProperties fpNotif : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
+            {
+                if (fp.equals(fpNotif))
+                    guiGraphics.blit(STAR, uiX + offsetX + 10, uiY + offsetY + 7, 0, 0, 10, 10, 10, 10);
+            }
+
 
             //render tooltip when hovering
             if (mouseX > uiX + offsetX - 3 && mouseX < uiX + offsetX + 21 - 3 && mouseY > uiY + offsetY - 3 && mouseY < uiY + offsetY + 21 - 3)
@@ -266,6 +277,8 @@ public class FishingGuideScreen extends Screen
 
         ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(entries.get(entry).fish()));
         FishProperties fp = entries.get(entry);
+
+        if(!fpsSeen.contains(fp)) fpsSeen.add(fp);
 
         List<FishCaughtCounter> fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
 
@@ -675,7 +688,8 @@ public class FishingGuideScreen extends Screen
                     Lighting.setupForFlatItems();
                 }
 
-                this.minecraft.getItemRenderer().render(stack, ItemDisplayContext.GUI, false, pose, Minecraft.getInstance().renderBuffers().bufferSource(),
+                this.minecraft.getItemRenderer().render(
+                        stack, ItemDisplayContext.GUI, false, pose, Minecraft.getInstance().renderBuffers().bufferSource(),
                         15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
 
                 //flush()
