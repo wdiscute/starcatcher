@@ -31,6 +31,7 @@ public class ModCreativeModeTabs
                         output.accept(ModItems.GUIDE.get());
                         output.accept(ModItems.ROD.get());
                         output.accept(ModItems.STARCATCHER_TWINE.get());
+                        output.accept(ModItems.HOOK.get());
 
                         output.accept(ModItems.TROPHY_OF_MASTERFUL_FISHING.get());
                         output.accept(ModItems.TROPHY_OF_FISHING.get());
