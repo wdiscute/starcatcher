@@ -627,64 +627,53 @@ public class FishingGuideScreen extends Screen
             Component start = Component.translatable("gui.guide.daytime");
 
             guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
-
         }
 
-
         yOffset += 15;
-
 
         //elevation
         int above = fp.mustBeCaughtAboveY();
         int bellow = fp.mustBeCaughtBellowY();
         if (above != Integer.MIN_VALUE || bellow != Integer.MAX_VALUE)
         {
-            MutableComponent comp = Component.empty();
+            MutableComponent bellowAbove = Component.empty();
+
+            if (bellow != Integer.MAX_VALUE)
+                bellowAbove.append(Component.translatable("gui.guide.bellow")).append("" + bellow);
+
+            if (above != Integer.MIN_VALUE && bellow != Integer.MAX_VALUE)
+                bellowAbove.append(", ");
+
+            if (above != Integer.MIN_VALUE)
+                bellowAbove.append(Component.translatable("gui.guide.above")).append("" + above);
+
+            MutableComponent comp = bellowAbove;
 
             if (above == 100 && bellow == Integer.MAX_VALUE)
-            {
                 comp = Component.translatable("gui.guide.mountain");
-            }
+
             else if (above == 50 && bellow == Integer.MAX_VALUE)
-            {
                 comp = Component.translatable("gui.guide.surface");
-            }
+
             else if (above == Integer.MIN_VALUE && bellow == 50)
-            {
                 comp = Component.translatable("gui.guide.underground");
-            }
+
             else if (above == 0 && bellow == 50)
-            {
                 comp = Component.translatable("gui.guide.caves");
-            }
+
             else if (above == Integer.MIN_VALUE && bellow == 0)
-            {
                 comp = Component.translatable("gui.guide.deepslate");
-            }
+
+
+            //color the text
+            if (player.getY() > above && player.getY() < bellow)
+                comp.withColor(0x00AA00);
             else
-            {
-                if (bellow != Integer.MAX_VALUE)
-                    comp.append(Component.translatable("gui.guide.bellow")).append("" + bellow);
+                comp.withColor(0xAA0000);
 
-                if (above != Integer.MIN_VALUE && bellow != Integer.MAX_VALUE)
-                    comp.append(", ");
-
-                if (above != Integer.MIN_VALUE)
-                    comp.append(Component.translatable("gui.guide.above")).append("" + above);
-
-
-                if (player.getY() > above && player.getY() < bellow)
-                    comp.withColor(0x00AA00);
-                else
-                    comp.withColor(0xAA0000);
-
-                //todo make this render when a preset is chosen, change "comp" to store the bellow X, above Y and render that on the tooltip instead
-                if (x > xOffset && x < xOffset + 180 && y > yOffset - 2 && y < yOffset + 10)
-                {
-                    guiGraphics.renderTooltip(this.font, Component.literal("dawd"), mouseX, mouseY);
-                }
-
-            }
+            //tooltip only shows if a pre-defined named for the elevation range is used
+            if (x > xOffset && x < xOffset + 140 && y > yOffset - 2 && y < yOffset + 10 && comp != bellowAbove)
+                guiGraphics.renderTooltip(this.font, bellowAbove, mouseX, mouseY);
 
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.elevation").append(comp), uiX + xOffset, uiY + yOffset, 0, false);
 
