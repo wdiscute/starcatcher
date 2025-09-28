@@ -31,7 +31,7 @@ public class FishCaughtToast implements Toast
     {
 
         this.is = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
-        this.title = Component.translatable("gui.laicaps.toast.fish_caught");
+        this.title = Component.translatable("gui.starcatcher.toast.fish_caught");
 
         String compName;
         if (fp.customName().isEmpty())

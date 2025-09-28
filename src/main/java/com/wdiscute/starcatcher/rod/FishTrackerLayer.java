@@ -196,9 +196,9 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         {
             MutableComponent comp = Component.literal("Elevation").withColor(0x00AA00);
 
-            if (fp.mustBeCaughtAboveY() != Integer.MIN_VALUE || fp.mustBeCaughtBellowY() != Integer.MAX_VALUE)
+            if (fp.mustBeCaughtAboveY() != Integer.MIN_VALUE || fp.mustBeCaughtBelowY() != Integer.MAX_VALUE)
             {
-                if (player.position().y > fp.mustBeCaughtBellowY())
+                if (player.position().y > fp.mustBeCaughtBelowY())
                     comp.withColor(0xAA0000);
 
                 if (player.position().y < fp.mustBeCaughtAboveY())

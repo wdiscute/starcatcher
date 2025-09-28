@@ -1,0 +1,13 @@
+{
+  "above_y": 100,
+  "base_chance": 5,
+  "fish": "starcatcher:crystalback_sturgeon",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_cold_lake"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 {
   "above_y": -40,
   "base_chance": 5,
-  "bellow_y": -20,
+  "below_y": -20,
   "difficulty": {
     "change_rotation_every_hit": false,
     "decay": 2,

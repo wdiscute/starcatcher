@@ -15,6 +15,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
@@ -27,10 +28,13 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
     }
 
 
+    public static List<FishProperties> FISHES;
+
     public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder()
             .add(
                     Starcatcher.FISH_REGISTRY, bootstrap ->
                     {
+
                         //lake
                         register(bootstrap, overworldLakeFish(ModItems.OBIDONTIEE.get()));
 
@@ -42,6 +46,57 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                                 .withBaseChance(3));
 
                         register(bootstrap, overworldLakeFish(ModItems.DRIFTFIN.get()));
+
+
+
+
+                        //lake icy
+                        register(bootstrap, overworldIcyLakeFish(ModItems.FROSTJAW_TROUT.get())
+                                .withDifficulty(FishProperties.Difficulty.HARD));
+
+                        register(bootstrap, overworldIcyLakeFish(ModItems.CRYSTALBACK_TROUT.get())
+                                .withDifficulty(FishProperties.Difficulty.MEDIUM));
+
+                        register(bootstrap, overworldIcyLakeFish(ModItems.AURORA.get())
+                                .withRarity(FishProperties.Rarity.LEGENDARY)
+                                .withBaseChance(2)
+                                .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION));
+
+                        register(bootstrap, overworldIcyLakeFish(ModItems.WINTERY_PIKE.get()));
+
+
+
+                        //mountain
+                        register(bootstrap, overworldMountainFish(ModItems.PALECARP.get()));
+
+                        register(bootstrap, overworldMountainFish(ModItems.SUNNY_STURGEON.get())
+                                .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
+                                .withRarity(FishProperties.Rarity.RARE)
+                                .withBaseChance(2));
+
+                        register(bootstrap, overworldMountainFish(ModItems.PEAKDWELLER.get())
+                                .withDifficulty(FishProperties.Difficulty.HARD));
+
+                        register(bootstrap, overworldMountainFish(ModItems.ROCKGILL.get())
+                                .withDifficulty(FishProperties.Difficulty.MEDIUM));
+
+
+
+
+                        //mountain icy
+                        register(bootstrap, overworldIcyMountainFish(ModItems.CRYSTALBACK_STURGEON.get()));
+
+                        register(bootstrap, overworldIcyMountainFish(ModItems.ICETOOTH_STURGEON.get())
+                                .withDifficulty(FishProperties.Difficulty.MEDIUM));
+
+                        register(bootstrap, overworldIcyMountainFish(ModItems.BOREAL.get())
+                                .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
+                                .withRarity(FishProperties.Rarity.LEGENDARY)
+                                .withBaseChance(3));
+
+                        register(bootstrap, overworldIcyMountainFish(ModItems.CRYSTALBACK_BOREAL.get())
+                                .withDifficulty(FishProperties.Difficulty.MEDIUM));
+
 
 
 
@@ -72,6 +127,7 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
 
 
+
                         //icy river
                         register(bootstrap, overworldIcyRiverFish(ModItems.FROSTGILL_CHUB.get()));
 
@@ -83,6 +139,7 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                                 .withRarity(FishProperties.Rarity.LEGENDARY)
                                 .withBaseChance(1)
                                 .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION));
+
 
 
 
@@ -104,22 +161,32 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                                 .withBaseChance(1)
                                 .withRarity(FishProperties.Rarity.LEGENDARY));
 
+
                         //underground
-                        register(bootstrap, overworldUndergroundFish(ModItems.WHITEVEIL.get()));
 
+
+                        //deepslate
                         register(bootstrap, overworldDeepslateFish(ModItems.GHOSTLY_PIKE.get())
-                                .withRarity(FishProperties.Rarity.UNCOMMON)
-                                .withBaseChance(2));
+                                        .withRarity(FishProperties.Rarity.UNCOMMON)
+                                        .withBaseChance(2));
 
-                        register(bootstrap, overworldUndergroundFish(ModItems.GOLD_FAN.get()));
 
-                        register(bootstrap, overworldUndergroundFish(ModItems.BLACK_EEL.get()));
+                        //caves
+                        register(bootstrap, overworldCavesFish(ModItems.WHITEVEIL.get()));
 
-                        register(bootstrap, overworldUndergroundFish(ModItems.AMETHYSTBACK.get())
+                        register(bootstrap, overworldCavesFish(ModItems.BLACK_EEL.get()));
+
+                        register(bootstrap, overworldCavesFish(ModItems.AMETHYSTBACK.get())
                                 .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
                                 .withRarity(FishProperties.Rarity.EPIC)
-                                .withMustBeCaughtBellowY(-20)
+                                .withMustBeCaughtBelowY(-20)
                                 .withMustBeCaughtAboveY(-40));
+
+
+
+                        //underground
+                        register(bootstrap, overworldUndergroundFish(ModItems.GOLD_FAN.get()));
+
 
                         //lush caves
                         register(bootstrap, overworldLushCavesFish(ModItems.LUSH_PIKE.get())
@@ -127,8 +194,20 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                                 .withRarity(FishProperties.Rarity.LEGENDARY)
                                 .withBaseChance(2));
 
+                        register(bootstrap, overworldLushCavesFish(ModItems.VIVID_MOSS.get())
+                                .withDifficulty(FishProperties.Difficulty.HARD)
+                                .withRarity(FishProperties.Rarity.UNCOMMON)
+                                .withBaseChance(4));
+
+
+
                         //nether
                         register(bootstrap, netherFish(ModItems.EMBERGILL.get()));
+
+                        register(bootstrap, netherFish(ModItems.CINDER_SQUID.get())
+                                .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY)
+                                .withRarity(FishProperties.Rarity.RARE)
+                                .withBaseChance(2));
 
                         register(bootstrap, netherFish(ModItems.SCALDING_PIKE.get()));
 
@@ -143,49 +222,97 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
     public static FishProperties overworldLushCavesFish(Item fish)
     {
-        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LUSH_CAVES).withMustBeCaughtBellowY(50);
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LUSH_CAVES)
+                .withMustBeCaughtBelowY(50);
+    }
+
+    public static FishProperties overworldCavesFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish))
+                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD)
+                .withMustBeCaughtBelowY(50).withMustBeCaughtAboveY(0);
     }
 
     public static FishProperties overworldUndergroundFish(Item fish)
     {
         return FishProperties.DEFAULT.withFish(getKey(fish))
-                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD).withMustBeCaughtBellowY(50).withMustBeCaughtAboveY(0);
+                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD)
+                .withMustBeCaughtBelowY(50);
+    }
+
+    public static FishProperties overworldMountainFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish))
+                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAKE)
+                .withMustBeCaughtAboveY(100);
     }
 
     public static FishProperties overworldDeepslateFish(Item fish)
     {
         return FishProperties.DEFAULT.withFish(getKey(fish))
-                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD).withMustBeCaughtBellowY(0);
+                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD)
+                .withMustBeCaughtBelowY(0);
     }
 
     public static FishProperties overworldIcyLakeFish(Item fish)
     {
-        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_ICY_LAKE).withMustBeCaughtAboveY(50);
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_ICY_LAKE)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
+    }
+
+    public static FishProperties overworldWarmLakeFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_LAKE)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
+    }
+
+    public static FishProperties overworldWarmMountainFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_LAKE)
+                .withMustBeCaughtAboveY(100);
+    }
+
+    public static FishProperties overworldIcyMountainFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_ICY_LAKE)
+                .withMustBeCaughtAboveY(100);
     }
 
     public static FishProperties overworldIcyOceanFish(Item fish)
     {
-        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_ICY_OCEAN).withMustBeCaughtAboveY(50);
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_ICY_OCEAN)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
     }
 
     public static FishProperties overworldIcyRiverFish(Item fish)
     {
-        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_ICY_RIVER).withMustBeCaughtAboveY(50);
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_ICY_RIVER)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
     }
 
     public static FishProperties overworldLakeFish(Item fish)
     {
-        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAKE).withMustBeCaughtAboveY(50);
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAKE)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
     }
 
     public static FishProperties overworldOceanFish(Item fish)
     {
-        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN).withMustBeCaughtAboveY(50);
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
     }
 
     public static FishProperties overworldRiverFish(Item fish)
     {
-        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_RIVER).withMustBeCaughtAboveY(50);
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_RIVER)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
     }
 
     public static Holder.Reference<FishProperties> register(BootstrapContext<FishProperties> bootstrap, FishProperties fp)

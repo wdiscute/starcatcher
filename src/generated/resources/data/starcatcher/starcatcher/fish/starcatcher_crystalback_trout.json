@@ -1,0 +1,23 @@
+{
+  "above_y": 50,
+  "base_chance": 5,
+  "below_y": 100,
+  "difficulty": {
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_treasure": true,
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 10
+  },
+  "fish": "starcatcher:crystalback_trout",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_cold_lake"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

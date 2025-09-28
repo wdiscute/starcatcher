@@ -1,6 +1,6 @@
 {
   "base_chance": 2,
-  "bellow_y": 50,
+  "below_y": 50,
   "difficulty": {
     "change_rotation_every_hit": false,
     "decay": 0,

@@ -7,29 +7,28 @@
   "tag.starcatcher.is_cold_ocean" : "Cold Oceans",
   "tag.starcatcher.is_cold_river" : "Cold Rivers",
 
-  "item.laicaps.starcatcher_fishing_rod": "Starcatcher's Fishing Rod",
-  "tooltip.laicaps.starcatcher_fishing_rod.0": "A special fishing rod which allows",
-  "tooltip.laicaps.starcatcher_fishing_rod.1": "for the use of bobbers and bait.",
-  "tooltip.laicaps.starcatcher_fishing_rod.2": "Who knows what you might catch",
-  "tooltip.laicaps.starcatcher_fishing_rod.3": "given the right conditions are met!",
-  "tooltip.laicaps.starcatcher_fishing_rod.4": "",
-  "tooltip.laicaps.starcatcher_fishing_rod.5": "Crouch + Right click to open",
-  "tooltip.laicaps.starcatcher_fishing_rod.6": "bobber and bait selection",
+  "item.starcatcher.starcatcher_fishing_rod": "Starcatcher's Fishing Rod",
+  "tooltip.starcatcher.starcatcher_fishing_rod.0": "A special fishing rod which allows",
+  "tooltip.starcatcher.starcatcher_fishing_rod.1": "for the use of bobbers and bait.",
+  "tooltip.starcatcher.starcatcher_fishing_rod.2": "Who knows what you might catch",
+  "tooltip.starcatcher.starcatcher_fishing_rod.3": "given the right conditions are met!",
+  "tooltip.starcatcher.starcatcher_fishing_rod.4": "",
+  "tooltip.starcatcher.starcatcher_fishing_rod.5": "Crouch + Right click to open",
+  "tooltip.starcatcher.starcatcher_fishing_rod.6": "bobber and bait selection",
 
 
-  "item.laicaps.starcatcher_twine": "Starcatcher's Twine",
-  "tooltip.laicaps.starcatcher_twine.0": "A delicate twine covered",
-  "tooltip.laicaps.starcatcher_twine.1": "in enderpearl dust.",
-  "tooltip.laicaps.starcatcher_twine.2": "Vansire can be heard emitting from it.",
+  "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
+  "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine covered in enderpearl dust.",
+  "tooltip.starcatcher.starcatcher_twine.1": "Vansire used this for string instruments once upon a time.",
 
 
-  "item.laicaps.fish_bones" : "Fish Bones",
-  "item.laicaps.fish_bones.0" : "Some fish bones. All that",
-  "item.laicaps.fish_bones.1" : "remains of a once happy fish.",
+  "item.starcatcher.fish_bones" : "Fish Bones",
+  "item.starcatcher.fish_bones.0" : "Some fish bones. All that",
+  "item.starcatcher.fish_bones.1" : "remains of a once happy fish.",
 
-  "item.laicaps.waterlogged_satchel" : "Waterlogged Satchel",
-  "tooltip.laicaps.waterlogged_satchel.0" : "A satchel containing many secrets",
-  "tooltip.laicaps.waterlogged_satchel.1" : "from the waters underneath.",
+  "item.starcatcher.waterlogged_satchel" : "Waterlogged Satchel",
+  "tooltip.starcatcher.waterlogged_satchel.0" : "A satchel containing many secrets",
+  "tooltip.starcatcher.waterlogged_satchel.1" : "from the waters underneath.",
 
 
 
@@ -53,7 +52,7 @@
   "gui.guide.night" : "Night",
   "gui.guide.midnight" : "Midnight",
   "gui.guide.elevation" : "Elevation: ",
-  "gui.guide.bellow" : "Bellow ",
+  "gui.guide.below" : "Below ",
   "gui.guide.above" : "Above ",
   "gui.guide.mountain" : "Mountains",
   "gui.guide.surface" : "Surface",
@@ -64,15 +63,31 @@
   "gui.guide.hover" : "[hover]",
 
 
-  "gui.laicaps.toast.fish_caught" : "New Fish Caught!",
+  "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
-  "gui.laicaps.toast.entry_unlocked" : "Entry Unlocked!",
+  "gui.starcatcher.toast.entry_unlocked" : "Entry Unlocked!",
 
 
   "item.starcatcher.obidontiee" : "Obidontiee",
   "item.starcatcher.silverveil_perch" : "Silverveil Perch",
   "item.starcatcher.elderscale" : "Elderscale",
   "item.starcatcher.driftfin" : "Driftfin",
+
+  "item.starcatcher.frostjaw_trout" : "Frostjaw Trout",
+  "item.starcatcher.crystalback_trout" : "Crystalback Trout",
+  "item.starcatcher.aurora" : "Aurora",
+  "item.starcatcher.wintery_pike" : "Wintery Pike",
+
+  "item.starcatcher.palecarp" : "Palecarp",
+  "item.starcatcher.sunny_sturgeon" : "Sunny Sturgeon",
+  "item.starcatcher.rockgill" : "Rockgill",
+  "item.starcatcher.peakdweller" : "Peakdweller",
+
+  "item.starcatcher.crystalback_sturgeon" : "Crystalback Sturgeon",
+  "item.starcatcher.icetooth_sturgeon" : "Icetooth Sturgeon",
+  "item.starcatcher.boreal" : "Boreal",
+  "item.starcatcher.crystalback_boreal" : "Crystalback Boreal",
+
 
   "item.starcatcher.silverfin_pike" : "Silverfin Pike",
   "item.starcatcher.willow_bream" : "Willow Bream",
@@ -95,9 +110,12 @@
   "item.starcatcher.gold_fan" : "Gold Fan",
   "item.starcatcher.black_eel" : "Black Eel",
   "item.starcatcher.amethystback" : "Amethystback",
+
   "item.starcatcher.lush_pike" : "Lush Pike",
+  "item.starcatcher.vivid_moss" : "Vivid Moss",
 
   "item.starcatcher.embergill" : "Embergill",
-  "item.starcatcher.scalding_pike" : "Scalding Pike"
+  "item.starcatcher.scalding_pike" : "Scalding Pike",
+  "item.starcatcher.cinder_squid" : "Cinder Squid"
 
 }

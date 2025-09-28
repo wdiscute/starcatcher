@@ -1,0 +1,24 @@
+{
+  "base_chance": 4,
+  "below_y": 50,
+  "difficulty": {
+    "decay": 2,
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_treasure": true,
+    "penalty": 25,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 12
+  },
+  "fish": "starcatcher:vivid_moss",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:lush_caves"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

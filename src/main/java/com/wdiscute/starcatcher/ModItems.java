@@ -67,6 +67,25 @@ public class ModItems
     public static final DeferredItem<Item> ELDERSCALE = basicFish("elderscale"); //description
     public static final DeferredItem<Item> DRIFTFIN = basicFish("driftfin"); //description
 
+    //icy lake
+    public static final DeferredItem<Item> FROSTJAW_TROUT = basicFish("frostjaw_trout"); //description
+    public static final DeferredItem<Item> CRYSTALBACK_TROUT = basicFish("crystalback_trout"); //description
+    public static final DeferredItem<Item> AURORA = basicFish("aurora"); //description
+    public static final DeferredItem<Item> WINTERY_PIKE = basicFish("wintery_pike"); //description
+
+
+    //mountain
+    public static final DeferredItem<Item> PALECARP = basicFish("palecarp"); //description
+    public static final DeferredItem<Item> SUNNY_STURGEON = basicFish("sunny_sturgeon"); //description
+    public static final DeferredItem<Item> ROCKGILL = basicFish("rockgill"); //description
+    public static final DeferredItem<Item> PEAKDWELLER = basicFish("peakdweller"); //description
+
+    //icy mountain
+    public static final DeferredItem<Item> CRYSTALBACK_STURGEON = basicFish("crystalback_sturgeon"); //description
+    public static final DeferredItem<Item> ICETOOTH_STURGEON = basicFish("icetooth_sturgeon"); //description
+    public static final DeferredItem<Item> BOREAL = basicFish("boreal"); //description
+    public static final DeferredItem<Item> CRYSTALBACK_BOREAL = basicFish("crystalback_boreal"); //description
+
     //rivers
     public static final DeferredItem<Item> SILVERFIN_PIKE = basicFish("silverfin_pike"); //description
     public static final DeferredItem<Item> WILLOW_BREAM = basicFish("willow_bream"); //description
@@ -75,16 +94,16 @@ public class ModItems
     public static final DeferredItem<Item> HOLLOWBELLY_DARTER = basicFish("hollowbelly_darter"); //description
     public static final DeferredItem<Item> MISTBACK_CHUB = basicFish("mistback_chub"); //description
 
+    //icy river
+    public static final DeferredItem<Item> FROSTGILL_CHUB = basicFish("frostgill_chub"); //description
+    public static final DeferredItem<Item> CRYSTALBACK_MINNOW = basicFish("crystalback_minnow"); //description
+    public static final DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = basicFish("azure_crystalback_minnow"); //description
+
     //saltwater
     public static final DeferredItem<Item> IRONJAW_HERRING = basicFish("ironjaw_herring"); //description
     public static final DeferredItem<Item> DEEPJAW_HERRING = basicFish("deepjaw_herring"); //description
     public static final DeferredItem<Item> DUSKTAIL_SNAPPER = basicFish("dusktail_snapper"); //description
     public static final DeferredItem<Item> JOEL = basicFish("joel"); //description
-
-    //icy
-    public static final DeferredItem<Item> FROSTGILL_CHUB = basicFish("frostgill_chub"); //description
-    public static final DeferredItem<Item> CRYSTALBACK_MINNOW = basicFish("crystalback_minnow"); //description
-    public static final DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = basicFish("azure_crystalback_minnow"); //description
 
     //underground
     public static final DeferredItem<Item> WHITEVEIL = basicFish("whiteveil"); //description
@@ -95,11 +114,13 @@ public class ModItems
 
     //lush caves
     public static final DeferredItem<Item> LUSH_PIKE = basicFish("lush_pike"); //description
+    public static final DeferredItem<Item> VIVID_MOSS = basicFish("vivid_moss"); //description
 
 
     //nether
     public static final DeferredItem<Item> EMBERGILL = basicFish("embergill"); //description
     public static final DeferredItem<Item> SCALDING_PIKE = basicFish("scalding_pike"); //description
+    public static final DeferredItem<Item> CINDER_SQUID = basicFish("cinder_squid"); //description
 
     //the end
 
@@ -107,6 +128,7 @@ public class ModItems
 
     private static DeferredItem<Item> basicFish(String name)
     {
+        //chat didn't force me to write this comment
         return ITEMS.register(name, () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     }
 

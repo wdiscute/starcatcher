@@ -1,0 +1,18 @@
+{
+  "base_chance": 2,
+  "difficulty": {
+    "change_rotation_every_hit": false,
+    "decay": 0,
+    "has_second_marker": false,
+    "penalty": 15,
+    "reward": 5,
+    "speed": 15
+  },
+  "fish": "starcatcher:cinder_squid",
+  "rarity": "rare",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:the_nether"
+    ]
+  }
+}

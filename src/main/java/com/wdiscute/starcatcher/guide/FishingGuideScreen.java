@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
@@ -19,7 +18,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.model.BakedModel;
@@ -33,9 +31,7 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.w3c.dom.css.RGBColor;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -222,6 +218,7 @@ public class FishingGuideScreen extends Screen
             {
                 case FishProperties.Rarity.COMMON -> guiGraphics.setColor(1, 1, 1, 1);
                 case FishProperties.Rarity.UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
+                case FishProperties.Rarity.RARE -> guiGraphics.setColor(1f, 0.9f, 0f, 0.7f);
                 case FishProperties.Rarity.EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
                 case FishProperties.Rarity.LEGENDARY -> guiGraphics.setColor(1, 0.5f, 0.1f, 0.7f);
             }
@@ -633,47 +630,47 @@ public class FishingGuideScreen extends Screen
 
         //elevation
         int above = fp.mustBeCaughtAboveY();
-        int bellow = fp.mustBeCaughtBellowY();
-        if (above != Integer.MIN_VALUE || bellow != Integer.MAX_VALUE)
+        int below = fp.mustBeCaughtBelowY();
+        if (above != Integer.MIN_VALUE || below != Integer.MAX_VALUE)
         {
-            MutableComponent bellowAbove = Component.empty();
-
-            if (bellow != Integer.MAX_VALUE)
-                bellowAbove.append(Component.translatable("gui.guide.bellow")).append("" + bellow);
-
-            if (above != Integer.MIN_VALUE && bellow != Integer.MAX_VALUE)
-                bellowAbove.append(", ");
+            MutableComponent belowAbove = Component.empty();
 
             if (above != Integer.MIN_VALUE)
-                bellowAbove.append(Component.translatable("gui.guide.above")).append("" + above);
+                belowAbove.append(Component.translatable("gui.guide.above")).append("" + above);
 
-            MutableComponent comp = bellowAbove;
+            if (above != Integer.MIN_VALUE && below != Integer.MAX_VALUE)
+                belowAbove.append(", ");
 
-            if (above == 100 && bellow == Integer.MAX_VALUE)
+            if (below != Integer.MAX_VALUE)
+                belowAbove.append(Component.translatable("gui.guide.below")).append("" + below);
+
+            MutableComponent comp = belowAbove;
+
+            if (above == 100 && below == Integer.MAX_VALUE)
                 comp = Component.translatable("gui.guide.mountain");
 
-            else if (above == 50 && bellow == Integer.MAX_VALUE)
+            else if (above == 50 && below == 100)
                 comp = Component.translatable("gui.guide.surface");
 
-            else if (above == Integer.MIN_VALUE && bellow == 50)
+            else if (above == Integer.MIN_VALUE && below == 50)
                 comp = Component.translatable("gui.guide.underground");
 
-            else if (above == 0 && bellow == 50)
+            else if (above == 0 && below == 50)
                 comp = Component.translatable("gui.guide.caves");
 
-            else if (above == Integer.MIN_VALUE && bellow == 0)
+            else if (above == Integer.MIN_VALUE && below == 0)
                 comp = Component.translatable("gui.guide.deepslate");
 
 
             //color the text
-            if (player.getY() > above && player.getY() < bellow)
+            if (player.getY() > above && player.getY() < below)
                 comp.withColor(0x00AA00);
             else
                 comp.withColor(0xAA0000);
 
             //tooltip only shows if a pre-defined named for the elevation range is used
-            if (x > xOffset && x < xOffset + 140 && y > yOffset - 2 && y < yOffset + 10 && comp != bellowAbove)
-                guiGraphics.renderTooltip(this.font, bellowAbove, mouseX, mouseY);
+            if (x > xOffset && x < xOffset + 140 && y > yOffset - 2 && y < yOffset + 10 && comp != belowAbove)
+                guiGraphics.renderTooltip(this.font, belowAbove, mouseX, mouseY);
 
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.elevation").append(comp), uiX + xOffset, uiY + yOffset, 0, false);
 

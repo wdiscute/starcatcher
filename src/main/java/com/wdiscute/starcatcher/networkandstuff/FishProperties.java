@@ -9,7 +9,6 @@ import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.core.Cloner;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
@@ -43,7 +42,7 @@ public record FishProperties(
         Difficulty dif,
         Daytime daytime,
         Weather weather,
-        int mustBeCaughtBellowY,
+        int mustBeCaughtBelowY,
         int mustBeCaughtAboveY,
         boolean skipMinigame,
         boolean hasGuideEntry
@@ -70,67 +69,67 @@ public record FishProperties(
 
     public FishProperties withFish(ResourceLocation fish)
     {
-        return new FishProperties(fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withBaseChance(int baseChance)
     {
-        return new FishProperties(this.fish, baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withCustomName(String customName)
     {
-        return new FishProperties(this.fish, this.baseChance, customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withRarity(Rarity rarity)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withWorldRestrictions(WorldRestrictions wr)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withBaitRestrictions(BaitRestrictions br)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withDifficulty(Difficulty dif)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withDaytime(Daytime daytime)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withWeather(Weather weather)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
-    public FishProperties withMustBeCaughtBellowY(int mustBeCaughtBellowY)
+    public FishProperties withMustBeCaughtBelowY(int mustBeCaughtBelowY)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withMustBeCaughtAboveY(int mustBeCaughtAboveY)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withSkipMinigame(boolean skipMinigame)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withHasGuideEntry(boolean hasGuideEntry)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, hasGuideEntry);
     }
 
     //endregion with()
@@ -241,6 +240,12 @@ public record FishProperties(
                         .withDims(List.of(Level.OVERWORLD.location()))
                         .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER));
 
+        public static final WorldRestrictions OVERWORLD_WARM_LAKE =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM));
+
         public static final WorldRestrictions OVERWORLD_ICY_RIVER =
                 WorldRestrictions.DEFAULT
                         .withDims(List.of(Level.OVERWORLD.location()))
@@ -326,7 +331,7 @@ public record FishProperties(
         );
 
         public static final Difficulty MEDIUM = new Difficulty(
-                9,
+                10,
                 15,
                 35,
                 15,
@@ -353,11 +358,39 @@ public record FishProperties(
                 true
         );
 
+        public static final Difficulty HARD_ONLY_THIN = new Difficulty(
+                9,
+                15,
+                20,
+                25,
+                2,
+                false,
+                false,
+                true,
+                true,
+                true,
+                true
+        );
+
         public static final Difficulty THIN_NO_DECAY = new Difficulty(
                 9,
                 0,
                 15,
                 30,
+                0,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false
+        );
+
+        public static final Difficulty THIN_NO_DECAY_NOT_FORGIVING = new Difficulty(
+                9,
+                0,
+                15,
+                999,
                 0,
                 false,
                 false,
@@ -475,6 +508,7 @@ public record FishProperties(
     {
         COMMON("day"),
         UNCOMMON("uncommon"),
+        RARE("rare"),
         EPIC("epic"),
         LEGENDARY("legendary");
 
@@ -645,7 +679,7 @@ public record FishProperties(
         }
 
         //y level check
-        if (entity.position().y > fp.mustBeCaughtBellowY())
+        if (entity.position().y > fp.mustBeCaughtBelowY())
         {
             return 0;
         }
@@ -737,7 +771,7 @@ public record FishProperties(
                     Difficulty.CODEC.optionalFieldOf("difficulty", Difficulty.DEFAULT).forGetter(FishProperties::dif),
                     Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
                     Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
-                    Codec.INT.optionalFieldOf("bellow_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBellowY),
+                    Codec.INT.optionalFieldOf("below_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBelowY),
                     Codec.INT.optionalFieldOf("above_y", Integer.MIN_VALUE).forGetter(FishProperties::mustBeCaughtAboveY),
                     Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
                     Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
@@ -757,7 +791,7 @@ public record FishProperties(
             Difficulty.STREAM_CODEC, FishProperties::dif,
             ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
             ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBellowY,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
             ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
             ByteBufCodecs.BOOL, FishProperties::skipMinigame,
             ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
@@ -774,7 +808,7 @@ public record FishProperties(
             Difficulty.STREAM_CODEC, FishProperties::dif,
             ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
             ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBellowY,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
             ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
             ByteBufCodecs.BOOL, FishProperties::skipMinigame,
             ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
