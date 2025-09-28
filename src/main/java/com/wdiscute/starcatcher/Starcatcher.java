@@ -1,5 +1,7 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.starcatcher.fishentity.FishEntity;
+import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.fishingbob.FishingBobModel;
 import com.wdiscute.starcatcher.fishingbob.FishingBobRenderer;
 import com.wdiscute.starcatcher.guide.FishCaughtToast;
@@ -22,6 +24,7 @@ import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.*;
@@ -88,11 +91,10 @@ public class Starcatcher
                     builder -> builder.maxId(256));
         }
 
-        @OnlyIn(Dist.CLIENT)
         @SubscribeEvent
-        public static void renderFrame(RenderFrameEvent.Post event)
+        public static void registerAttributed(EntityAttributeCreationEvent event)
         {
-            Starcatcher.hue += 0.001f;
+            event.put(ModEntities.FISH.get(), FishEntity.createAttributes().build());
         }
 
         @OnlyIn(Dist.CLIENT)
@@ -100,6 +102,7 @@ public class Starcatcher
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
+            EntityRenderers.register(ModEntities.FISH.get(), FishRenderer::new);
             ModItemProperties.addCustomItemProperties();
         }
 

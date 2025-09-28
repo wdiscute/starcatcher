@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
+import com.wdiscute.starcatcher.items.FishItem;
 import com.wdiscute.starcatcher.items.TrophyBronze;
 import com.wdiscute.starcatcher.items.TrophyGold;
 import com.wdiscute.starcatcher.items.TrophySilver;
@@ -34,6 +35,8 @@ public class ModItems
                             .component(ModDataComponents.BOBBER.get(), ItemContainerContents.fromItems(List.of(ItemStack.EMPTY)))
                             .component(ModDataComponents.BAIT.get(), ItemContainerContents.fromItems(List.of(ItemStack.EMPTY))))
     );
+
+    public static final DeferredItem<Item> HOOK = ITEMS.register("hook", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> CREEPER_BOBBER = ITEMS.register("creeper_bobber", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> TREASURE_BOBBER = ITEMS.register("treasure_bobber", () -> new Item(new Item.Properties()));
@@ -129,7 +132,7 @@ public class ModItems
     private static DeferredItem<Item> basicFish(String name)
     {
         //chat didn't force me to write this comment
-        return ITEMS.register(name, () -> new Item(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+        return ITEMS.register(name, () -> new FishItem(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
     }
 
 
