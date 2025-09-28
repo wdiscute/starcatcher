@@ -13,7 +13,7 @@
   "tooltip.starcatcher.starcatcher_rod.2": "Who knows what you might catch",
   "tooltip.starcatcher.starcatcher_rod.3": "given the right conditions are met!",
   "tooltip.starcatcher.starcatcher_rod.4": "",
-  "tooltip.starcatcher.starcatcher_rod.5": "Crouch + Right click to open",
+  "tooltip.starcatcher.starcatcher_rod.5": "Crouch + use to open",
   "tooltip.starcatcher.starcatcher_rod.6": "bobber and bait selection",
 
   "item.starcatcher.starcatcher_guide": "Starcatcher's Guide",
@@ -24,6 +24,15 @@
   "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
   "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine covered in enderpearl dust.",
   "tooltip.starcatcher.starcatcher_twine.1": "Vansire used this for string instruments once upon a time.",
+
+  "item.starcatcher.fish_spotter": "Fish Spotter",
+  "tooltip.starcatcher.fish_spotter.0": "A handy tool to any angler which",
+  "tooltip.starcatcher.fish_spotter.1": "displays the fishes around the area.",
+  "tooltip.starcatcher.fish_spotter.2": "Can lock unto a specific fish to aid",
+  "tooltip.starcatcher.fish_spotter.3": "in searching for the right conditions.",
+  "tooltip.starcatcher.fish_spotter.4": "",
+  "tooltip.starcatcher.fish_spotter.5": "Can be used as a stand-alone or as an",
+  "tooltip.starcatcher.fish_spotter.6": "upgrade to your Starcatcher's Rod.",
 
 
   "item.starcatcher.fish_bones" : "Fish Bones",
