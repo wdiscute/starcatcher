@@ -20,13 +20,13 @@ public class ModItems
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Starcatcher.MOD_ID);
 
-    public static final DeferredItem<Item> FISHING_GUIDE = ITEMS.register("fishing_guide", () -> new FishingGuideItem(new Item.Properties()));
+    public static final DeferredItem<Item> GUIDE = ITEMS.register("starcatcher_guide", () -> new FishingGuideItem(new Item.Properties()));
     public static final DeferredItem<Item> FISH_BONES = ITEMS.register("fish_bones", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", () -> new Item(new Item.Properties()));
 
-    public static final DeferredItem<Item> STARCATCHER_FISHING_ROD = ITEMS.register(
-            "starcatcher_fishing_rod",
+    public static final DeferredItem<Item> ROD = ITEMS.register(
+            "starcatcher_rod",
             () -> new StarcatcherFishingRod(
                     new Item.Properties()
                             .rarity(Rarity.EPIC)

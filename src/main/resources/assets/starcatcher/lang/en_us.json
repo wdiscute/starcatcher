@@ -1,5 +1,5 @@
 {
-  "creativetab.starcatcher.starcatcher": "Starcatcher's Fishing",
+  "creativetab.starcatcher.starcatcher": "Starcatcher",
 
   "tag.starcatcher.is_ocean" : "Oceans",
   "tag.starcatcher.is_river" : "Rivers",
@@ -7,15 +7,19 @@
   "tag.starcatcher.is_cold_ocean" : "Cold Oceans",
   "tag.starcatcher.is_cold_river" : "Cold Rivers",
 
-  "item.starcatcher.starcatcher_fishing_rod": "Starcatcher's Fishing Rod",
-  "tooltip.starcatcher.starcatcher_fishing_rod.0": "A special fishing rod which allows",
-  "tooltip.starcatcher.starcatcher_fishing_rod.1": "for the use of bobbers and bait.",
-  "tooltip.starcatcher.starcatcher_fishing_rod.2": "Who knows what you might catch",
-  "tooltip.starcatcher.starcatcher_fishing_rod.3": "given the right conditions are met!",
-  "tooltip.starcatcher.starcatcher_fishing_rod.4": "",
-  "tooltip.starcatcher.starcatcher_fishing_rod.5": "Crouch + Right click to open",
-  "tooltip.starcatcher.starcatcher_fishing_rod.6": "bobber and bait selection",
+  "item.starcatcher.starcatcher_rod": "Starcatcher's Rod",
+  "tooltip.starcatcher.starcatcher_rod.0": "A special fishing rod which allows",
+  "tooltip.starcatcher.starcatcher_rod.1": "for the use of bobbers and bait.",
+  "tooltip.starcatcher.starcatcher_rod.2": "Who knows what you might catch",
+  "tooltip.starcatcher.starcatcher_rod.3": "given the right conditions are met!",
+  "tooltip.starcatcher.starcatcher_rod.4": "",
+  "tooltip.starcatcher.starcatcher_rod.5": "Crouch + Right click to open",
+  "tooltip.starcatcher.starcatcher_rod.6": "bobber and bait selection",
 
+  "item.starcatcher.starcatcher_guide": "Starcatcher's Guide",
+  "tooltip.starcatcher.starcatcher_guide.0": "An angler's best companion, keeping track",
+  "tooltip.starcatcher.starcatcher_guide.1": "of all the fishes you've caught, and",
+  "tooltip.starcatcher.starcatcher_guide.2": "those you've yet to reel in!",
 
   "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
   "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine covered in enderpearl dust.",
@@ -31,6 +35,7 @@
   "tooltip.starcatcher.waterlogged_satchel.1" : "from the waters underneath.",
 
 
+  "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
   "gui.guide.caught" : "Caught ",
   "gui.guide.not_caught" : "Not Caught yet!",
@@ -61,11 +66,6 @@
   "gui.guide.deepslate" : "Deepslate",
   "gui.guide.no_restriction" : "No Restriction",
   "gui.guide.hover" : "[hover]",
-
-
-  "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
-
-  "gui.starcatcher.toast.entry_unlocked" : "Entry Unlocked!",
 
 
   "item.starcatcher.obidontiee" : "Obidontiee",

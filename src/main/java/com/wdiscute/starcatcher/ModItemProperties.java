@@ -8,7 +8,7 @@ public class ModItemProperties
 
     public static void addCustomItemProperties() {
         ItemProperties.register(
-                ModItems.STARCATCHER_FISHING_ROD.get(),
+                ModItems.ROD.get(),
                 Starcatcher.rl("cast"),
                 (stack, level, entity, seed) ->
                 {

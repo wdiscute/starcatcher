@@ -22,14 +22,14 @@ public class ModCreativeModeTabs
 
 
     public static final Supplier<CreativeModeTab> STARCATCHER = CREATIVE_MODE_TABS.register(
-            "starcatcher", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.STARCATCHER_FISHING_ROD.get()))
+            "starcatcher", () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModItems.ROD.get()))
                     .title(Component.translatable("creativetab.starcatcher.starcatcher"))
                     .displayItems((itemDisplayParameters, output) ->
                     {
 
                         //fishing
-                        output.accept(ModItems.FISHING_GUIDE.get());
-                        output.accept(ModItems.STARCATCHER_FISHING_ROD.get());
+                        output.accept(ModItems.GUIDE.get());
+                        output.accept(ModItems.ROD.get());
                         output.accept(ModItems.STARCATCHER_TWINE.get());
 
                         output.accept(ModItems.TROPHY_OF_MASTERFUL_FISHING.get());

@@ -34,7 +34,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
     //comment - kuko010
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
-        if (!player.getItemInHand(hand).is(ModItems.STARCATCHER_FISHING_ROD))
+        if (!player.getItemInHand(hand).is(ModItems.ROD))
             return InteractionResultHolder.pass(player.getItemInHand(hand));
 
         if (player.isCrouching())

@@ -77,7 +77,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         }
 
 
-        ItemStack rod = new ItemStack(ModItems.STARCATCHER_FISHING_ROD.get());
+        ItemStack rod = new ItemStack(ModItems.ROD.get());
         ItemStack bait = rod.get(ModDataComponents.BAIT).copyOne();
 
         int total = 0;
