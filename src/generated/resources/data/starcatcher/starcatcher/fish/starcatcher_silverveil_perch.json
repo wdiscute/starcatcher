@@ -1,4 +1,5 @@
 {
+  "above_y": 50,
   "base_chance": 5,
   "fish": "starcatcher:silverveil_perch",
   "world_restrictions": {

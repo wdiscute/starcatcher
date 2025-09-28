@@ -1,6 +1,16 @@
 {
+  "above_y": 50,
   "base_chance": 5,
+  "difficulty": {
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_treasure": true,
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 35
+  },
   "fish": "starcatcher:silverfin_pike",
+  "rarity": "uncommon",
   "world_restrictions": {
     "biomes_tags": [
       "starcatcher:is_river"

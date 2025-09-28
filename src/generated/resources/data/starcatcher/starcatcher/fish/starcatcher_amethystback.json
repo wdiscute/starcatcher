@@ -1,7 +1,17 @@
 {
+  "above_y": -40,
   "base_chance": 5,
-  "bellow_y": 50,
+  "bellow_y": -20,
+  "difficulty": {
+    "change_rotation_every_hit": false,
+    "decay": 2,
+    "has_second_marker": false,
+    "penalty": 15,
+    "reward": 5,
+    "speed": 15
+  },
   "fish": "starcatcher:amethystback",
+  "rarity": "epic",
   "world_restrictions": {
     "dimensions": [
       "minecraft:overworld"

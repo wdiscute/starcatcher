@@ -91,7 +91,7 @@ public class PayloadReceiver
                             PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
                         }
 
-                        List<FishProperties> list = new ArrayList<>(level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY).stream().toList());
+                        List<FishProperties> list = player.getData(ModDataAttachments.FISHES_NOTIFICATION);
 
                         list.add(fbe.fpToFish);
 

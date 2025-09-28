@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Cloner;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
@@ -53,10 +54,10 @@ public record FishProperties(
             Starcatcher.rl("none"),
             5,
             "",
-            Rarity.EPIC,
+            Rarity.COMMON,
             WorldRestrictions.DEFAULT,
             BaitRestrictions.DEFAULT,
-            Difficulty.NON_STOP_ACTION,
+            Difficulty.DEFAULT,
             Daytime.ALL,
             Weather.ALL,
             Integer.MAX_VALUE,
@@ -80,6 +81,11 @@ public record FishProperties(
     public FishProperties withCustomName(String customName)
     {
         return new FishProperties(this.fish, this.baseChance, customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withRarity(Rarity rarity)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.customName, rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBellowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withWorldRestrictions(WorldRestrictions wr)
@@ -304,19 +310,146 @@ public record FishProperties(
             boolean changeRotationOnEveryHit
     )
     {
+
+        public static final Difficulty DEFAULT = new Difficulty(
+                9,
+                20,
+                0,
+                6,
+                1,
+                true,
+                true,
+                false,
+                false,
+                false,
+                true
+        );
+
+        public static final Difficulty MEDIUM = new Difficulty(
+                9,
+                15,
+                35,
+                15,
+                1,
+                true,
+                false,
+                true,
+                false,
+                true,
+                true
+        );
+
+        public static final Difficulty HARD = new Difficulty(
+                12,
+                15,
+                35,
+                25,
+                2,
+                true,
+                false,
+                true,
+                false,
+                true,
+                true
+        );
+
+        public static final Difficulty THIN_NO_DECAY = new Difficulty(
+                9,
+                0,
+                15,
+                30,
+                0,
+                false,
+                false,
+                true,
+                true,
+                true,
+                false
+        );
+
+        public static final Difficulty SINGLE_BIG_FAST_NO_DECAY = new Difficulty(
+                15,
+                5,
+                0,
+                15,
+                0,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false
+        );
+
+        public static final Difficulty SINGLE_BIG_FAST = new Difficulty(
+                15,
+                5,
+                0,
+                15,
+                2,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false
+        );
+
+        public static final Difficulty EVERYTHING = new Difficulty(
+                12,
+                15,
+                30,
+                15,
+                3,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+        );
+
+        public static final Difficulty EVERYTHING_FLIP = new Difficulty(
+                12,
+                15,
+                30,
+                15,
+                3,
+                true,
+                true,
+                true,
+                true,
+                false,
+                true
+        );
+
+        public static final Difficulty NON_STOP_ACTION = new Difficulty(
+                15,
+                18,
+                30,
+                0,
+                10,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false
+        );
+
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.INT.optionalFieldOf("speed", 7).forGetter(Difficulty::speed),
-                        Codec.INT.optionalFieldOf("reward", 15).forGetter(Difficulty::reward),
-                        Codec.INT.optionalFieldOf("reward_thin", 45).forGetter(Difficulty::rewardThin),
-                        Codec.INT.optionalFieldOf("penalty", 5).forGetter(Difficulty::penalty),
-                        Codec.INT.optionalFieldOf("decay", 1).forGetter(Difficulty::decay),
-                        Codec.BOOL.optionalFieldOf("has_first_marker", true).forGetter(Difficulty::hasFirstMarker),
-                        Codec.BOOL.optionalFieldOf("has_second_marker", false).forGetter(Difficulty::hasSecondMarker),
-                        Codec.BOOL.optionalFieldOf("has_first_thin_marker", true).forGetter(Difficulty::hasFirstThinMarker),
-                        Codec.BOOL.optionalFieldOf("has_second_thin_marker", false).forGetter(Difficulty::hasSecondThinMarker),
-                        Codec.BOOL.optionalFieldOf("has_treasure", true).forGetter(Difficulty::hasTreasure),
-                        Codec.BOOL.optionalFieldOf("change_rotation_every_hit", false).forGetter(Difficulty::changeRotationOnEveryHit)
+                        Codec.INT.optionalFieldOf("speed", DEFAULT.speed).forGetter(Difficulty::speed),
+                        Codec.INT.optionalFieldOf("reward", DEFAULT.reward).forGetter(Difficulty::reward),
+                        Codec.INT.optionalFieldOf("reward_thin", DEFAULT.rewardThin).forGetter(Difficulty::rewardThin),
+                        Codec.INT.optionalFieldOf("penalty", DEFAULT.penalty).forGetter(Difficulty::penalty),
+                        Codec.INT.optionalFieldOf("decay", DEFAULT.decay).forGetter(Difficulty::decay),
+                        Codec.BOOL.optionalFieldOf("has_first_marker", DEFAULT.hasFirstMarker).forGetter(Difficulty::hasFirstMarker),
+                        Codec.BOOL.optionalFieldOf("has_second_marker", DEFAULT.hasSecondMarker).forGetter(Difficulty::hasSecondMarker),
+                        Codec.BOOL.optionalFieldOf("has_first_thin_marker", DEFAULT.hasFirstThinMarker).forGetter(Difficulty::hasFirstThinMarker),
+                        Codec.BOOL.optionalFieldOf("has_second_thin_marker", DEFAULT.hasSecondThinMarker).forGetter(Difficulty::hasSecondThinMarker),
+                        Codec.BOOL.optionalFieldOf("has_treasure", DEFAULT.hasTreasure).forGetter(Difficulty::hasTreasure),
+                        Codec.BOOL.optionalFieldOf("change_rotation_every_hit", DEFAULT.changeRotationOnEveryHit).forGetter(Difficulty::changeRotationOnEveryHit)
                 ).apply(instance, Difficulty::new));
 
 
@@ -334,35 +467,6 @@ public record FishProperties(
                 ByteBufCodecs.BOOL, Difficulty::changeRotationOnEveryHit,
                 Difficulty::new
         );
-
-        public static final Difficulty DEFAULT = new Difficulty(
-                9,
-                15,
-                30,
-                5,
-                1,
-                true,
-                true,
-                false,
-                false,
-                true,
-                false
-        );
-
-        public static final Difficulty NON_STOP_ACTION = new Difficulty(
-                15,
-                18,
-                30,
-                0,
-                10,
-                true,
-                true,
-                false,
-                false,
-                true,
-                false
-        );
-
     }
 
     //endregion dif
@@ -627,10 +731,10 @@ public record FishProperties(
                     Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
                     //optional
                     Codec.STRING.optionalFieldOf("customName", "").forGetter(FishProperties::customName),
-                    Rarity.CODEC.optionalFieldOf("rarity", Rarity.EPIC).forGetter(FishProperties::rarity),
+                    Rarity.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(FishProperties::rarity),
                     WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
                     BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
-                    Difficulty.CODEC.optionalFieldOf("difficulty", Difficulty.NON_STOP_ACTION).forGetter(FishProperties::dif),
+                    Difficulty.CODEC.optionalFieldOf("difficulty", Difficulty.DEFAULT).forGetter(FishProperties::dif),
                     Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
                     Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
                     Codec.INT.optionalFieldOf("bellow_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBellowY),

@@ -321,7 +321,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         //spacebar
         guiGraphics.blit(
-                TEXTURE, width / 2 - 16, height / 2 + 160,
+                TEXTURE, width / 2 - 16, height / 2 + 40,
                 32, 16, 0, 112, 32, 16, 256, 256);
 
     }

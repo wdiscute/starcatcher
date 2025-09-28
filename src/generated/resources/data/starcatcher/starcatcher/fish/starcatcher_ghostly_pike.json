@@ -1,7 +1,8 @@
 {
-  "base_chance": 5,
-  "bellow_y": 50,
+  "base_chance": 2,
+  "bellow_y": 0,
   "fish": "starcatcher:ghostly_pike",
+  "rarity": "uncommon",
   "world_restrictions": {
     "dimensions": [
       "minecraft:overworld"

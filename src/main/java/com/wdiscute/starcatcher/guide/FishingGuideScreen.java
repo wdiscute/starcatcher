@@ -19,6 +19,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.model.BakedModel;
@@ -32,7 +33,9 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.w3c.dom.css.RGBColor;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,6 +49,7 @@ public class FishingGuideScreen extends Screen
     private static final ResourceLocation ARROW_NEXT = Starcatcher.rl("textures/gui/guide/arrow_next.png");
 
     private static final ResourceLocation STAR = Starcatcher.rl("textures/gui/guide/star.png");
+    private static final ResourceLocation GLOW = Starcatcher.rl("textures/gui/guide/glow.png");
 
     int uiX;
     int uiY;
@@ -209,21 +213,25 @@ public class FishingGuideScreen extends Screen
                     caught = f.count();
                     break;
                 }
-
             }
 
             //outline
-
-            //TODO FIX THIS
-            int color = switch (fp.rarity())
-            {
-                case FishProperties.Rarity.UNCOMMON -> 0xFF7BF266;
-                case FishProperties.Rarity.EPIC -> 0xFFDB66F2;
-                case FishProperties.Rarity.LEGENDARY -> 0xFFFFB947;
-                default -> 0xff444444; //common
-            };
-
             guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff112233);
+
+            switch (fp.rarity())
+            {
+                case FishProperties.Rarity.COMMON -> guiGraphics.setColor(1, 1, 1, 1);
+                case FishProperties.Rarity.UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
+                case FishProperties.Rarity.EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
+                case FishProperties.Rarity.LEGENDARY -> guiGraphics.setColor(1, 0.5f, 0.1f, 0.7f);
+            }
+
+            RenderSystem.enableBlend();
+            guiGraphics.blit(
+                    GLOW, uiX + offsetX - 1, uiY + offsetY - 1,
+                    0, 0, 18, 18, 18, 18);
+            RenderSystem.disableBlend();
+            guiGraphics.setColor(1, 1, 1, 1);
 
             if (caught != 0)
                 renderItem(is, uiX + offsetX, uiY + offsetY, 1);
@@ -235,7 +243,6 @@ public class FishingGuideScreen extends Screen
                 if (fp.equals(fpNotif))
                     guiGraphics.blit(STAR, uiX + offsetX + 10, uiY + offsetY + 7, 0, 0, 10, 10, 10, 10);
             }
-
 
             //render tooltip when hovering
             if (mouseX > uiX + offsetX - 3 && mouseX < uiX + offsetX + 21 - 3 && mouseY > uiY + offsetY - 3 && mouseY < uiY + offsetY + 21 - 3)
@@ -278,7 +285,7 @@ public class FishingGuideScreen extends Screen
         ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(entries.get(entry).fish()));
         FishProperties fp = entries.get(entry);
 
-        if(!fpsSeen.contains(fp)) fpsSeen.add(fp);
+        if (!fpsSeen.contains(fp)) fpsSeen.add(fp);
 
         List<FishCaughtCounter> fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
 
@@ -626,16 +633,61 @@ public class FishingGuideScreen extends Screen
 
         yOffset += 15;
 
-        if (fp.mustBeCaughtAboveY() != Integer.MIN_VALUE)
+
+        //elevation
+        int above = fp.mustBeCaughtAboveY();
+        int bellow = fp.mustBeCaughtBellowY();
+        if (above != Integer.MIN_VALUE || bellow != Integer.MAX_VALUE)
         {
-            guiGraphics.drawString(this.font, I18n.get("gui.guide.min_elevation") + fp.mustBeCaughtAboveY(), uiX + xOffset, uiY + yOffset, 0, false);
-            yOffset += 15;
-        }
+            MutableComponent comp = Component.empty();
+
+            if (above == 100 && bellow == Integer.MAX_VALUE)
+            {
+                comp = Component.translatable("gui.guide.mountain");
+            }
+            else if (above == 50 && bellow == Integer.MAX_VALUE)
+            {
+                comp = Component.translatable("gui.guide.surface");
+            }
+            else if (above == Integer.MIN_VALUE && bellow == 50)
+            {
+                comp = Component.translatable("gui.guide.underground");
+            }
+            else if (above == 0 && bellow == 50)
+            {
+                comp = Component.translatable("gui.guide.caves");
+            }
+            else if (above == Integer.MIN_VALUE && bellow == 0)
+            {
+                comp = Component.translatable("gui.guide.deepslate");
+            }
+            else
+            {
+                if (bellow != Integer.MAX_VALUE)
+                    comp.append(Component.translatable("gui.guide.bellow")).append("" + bellow);
+
+                if (above != Integer.MIN_VALUE && bellow != Integer.MAX_VALUE)
+                    comp.append(", ");
+
+                if (above != Integer.MIN_VALUE)
+                    comp.append(Component.translatable("gui.guide.above")).append("" + above);
 
 
-        if (fp.mustBeCaughtBellowY() != Integer.MAX_VALUE)
-        {
-            guiGraphics.drawString(this.font, I18n.get("gui.guide.max_elevation") + fp.mustBeCaughtBellowY(), uiX + xOffset, uiY + yOffset, 0, false);
+                if (player.getY() > above && player.getY() < bellow)
+                    comp.withColor(0x00AA00);
+                else
+                    comp.withColor(0xAA0000);
+
+                //todo make this render when a preset is chosen, change "comp" to store the bellow X, above Y and render that on the tooltip instead
+                if (x > xOffset && x < xOffset + 180 && y > yOffset - 2 && y < yOffset + 10)
+                {
+                    guiGraphics.renderTooltip(this.font, Component.literal("dawd"), mouseX, mouseY);
+                }
+
+            }
+
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.elevation").append(comp), uiX + xOffset, uiY + yOffset, 0, false);
+
         }
 
 
