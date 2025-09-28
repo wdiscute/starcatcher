@@ -7,6 +7,7 @@
   "tag.starcatcher.is_cold_ocean" : "Cold Oceans",
   "tag.starcatcher.is_cold_river" : "Cold Rivers",
 
+
   "item.starcatcher.starcatcher_rod": "Starcatcher's Rod",
   "tooltip.starcatcher.starcatcher_rod.0": "A special fishing rod which allows",
   "tooltip.starcatcher.starcatcher_rod.1": "for the use of bobbers and bait.",
@@ -26,7 +27,7 @@
   "tooltip.starcatcher.starcatcher_twine.1": "Vansire used this for string instruments once upon a time.",
 
   "item.starcatcher.fish_spotter": "Fish Spotter",
-  "tooltip.starcatcher.fish_spotter.0": "A handy tool to any angler which",
+  "tooltip.starcatcher.fish_spotter.0": "A handy tool to any <rgb>angler</rgb> which",
   "tooltip.starcatcher.fish_spotter.1": "displays the fishes around the area.",
   "tooltip.starcatcher.fish_spotter.2": "Can lock unto a specific fish to aid",
   "tooltip.starcatcher.fish_spotter.3": "in searching for the right conditions.",
@@ -42,6 +43,21 @@
   "item.starcatcher.waterlogged_satchel" : "Waterlogged Satchel",
   "tooltip.starcatcher.waterlogged_satchel.0" : "A satchel containing many secrets",
   "tooltip.starcatcher.waterlogged_satchel.1" : "from the waters underneath.",
+
+  "item.starcatcher.trophy_of_masterful_fishing" : "Trophy Of Masterful Fishing",
+  "tooltip.starcatcher.trophy_of_masterful_fishing.0" : "Right clicking this Trophy will",
+  "tooltip.starcatcher.trophy_of_masterful_fishing.1" : "award you every fish entry.",
+
+  "item.starcatcher.trophy_of_fishing" : "Trophy Of Fishing",
+  "tooltip.starcatcher.trophy_of_fishing.0" : "Right clicking this Trophy will",
+  "tooltip.starcatcher.trophy_of_fishing.1" : "award you a random fish entry.",
+
+  "item.starcatcher.trophy_of_pitiful_fishing" : "Trophy Of Pitiful Fishing",
+  "tooltip.starcatcher.trophy_of_pitiful_fishing.0" : "Right clicking this Trophy will",
+  "tooltip.starcatcher.trophy_of_pitiful_fishing.1" : "reset your fishes caught.",
+
+
+
 
 
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
