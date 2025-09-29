@@ -64,7 +64,8 @@ public class FishingGuideScreen extends Screen
     LocalPlayer player;
 
     List<FishProperties> entries = new ArrayList<>(999);
-
+    List<FishProperties> fishInArea = new ArrayList<>();
+    List<FishCaughtCounter> fishCaughtCounterList = new ArrayList<>();
     int clickedX;
     int clickedY;
 
@@ -85,7 +86,8 @@ public class FishingGuideScreen extends Screen
         player = Minecraft.getInstance().player;
 
         for (FishProperties fp : FishProperties.getFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
-
+        fishInArea = FishProperties.getFpsForArea(player);
+        fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
     }
 
     @Override
@@ -191,7 +193,7 @@ public class FishingGuideScreen extends Screen
         int sectionGap = 35;
         int squareSizeGap = 24;
 
-        int nextPageThreshold = 235;
+        int nextPageThreshold = 220;
         int nextLineThreshold = 150;
 
         guiGraphics.drawString(this.font, "Fishes available:", uiX + xOffset, uiY + yOffset, 0, false);
@@ -199,7 +201,6 @@ public class FishingGuideScreen extends Screen
         yOffset += 15;
 
         //fish in area
-        List<FishProperties> fishInArea = FishProperties.getFpsForArea(player);
         for (FishProperties fp : fishInArea)
         {
             renderFishIndex(guiGraphics, xOffset, yOffset, mouseX, mouseY, fp);
@@ -360,8 +361,6 @@ public class FishingGuideScreen extends Screen
         FishProperties fp = entries.get(entry);
 
         if (!fpsSeen.contains(fp)) fpsSeen.add(fp);
-
-        List<FishCaughtCounter> fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
 
         //get fishCaughtCount
         int count = 0;
