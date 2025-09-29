@@ -55,6 +55,24 @@ public class ModCreativeModeTabs
                         output.accept(ModItems.ELDERSCALE.get());
                         output.accept(ModItems.DRIFTFIN.get());
 
+                        //icy lake
+                        output.accept(ModItems.FROSTJAW_TROUT.get());
+                        output.accept(ModItems.CRYSTALBACK_TROUT.get());
+                        output.accept(ModItems.AURORA.get());
+                        output.accept(ModItems.WINTERY_PIKE.get());
+
+                        //mountain
+                        output.accept(ModItems.PALECARP.get());
+                        output.accept(ModItems.SUNNY_STURGEON.get());
+                        output.accept(ModItems.ROCKGILL.get());
+                        output.accept(ModItems.PEAKDWELLER.get());
+
+                        //icy mountain
+                        output.accept(ModItems.CRYSTALBACK_STURGEON.get());
+                        output.accept(ModItems.ICETOOTH_STURGEON.get());
+                        output.accept(ModItems.BOREAL.get());
+                        output.accept(ModItems.CRYSTALBACK_BOREAL.get());
+
                         //river
                         output.accept(ModItems.SILVERFIN_PIKE.get());
                         output.accept(ModItems.WILLOW_BREAM.get());
@@ -63,16 +81,17 @@ public class ModCreativeModeTabs
                         output.accept(ModItems.HOLLOWBELLY_DARTER.get());
                         output.accept(ModItems.MISTBACK_CHUB.get());
 
+                        //icy river
+                        output.accept(ModItems.FROSTGILL_CHUB.get());
+                        output.accept(ModItems.CRYSTALBACK_MINNOW.get());
+                        output.accept(ModItems.AZURE_CRYSTALBACK_MINNOW.get());
+
                         //saltwater
                         output.accept(ModItems.IRONJAW_HERRING.get());
                         output.accept(ModItems.DEEPJAW_HERRING.get());
                         output.accept(ModItems.DUSKTAIL_SNAPPER.get());
                         output.accept(ModItems.JOEL.get());
 
-                        //icy
-                        output.accept(ModItems.FROSTGILL_CHUB.get());
-                        output.accept(ModItems.CRYSTALBACK_MINNOW.get());
-                        output.accept(ModItems.AZURE_CRYSTALBACK_MINNOW.get());
 
                         //underground
                         output.accept(ModItems.WHITEVEIL.get());
@@ -83,10 +102,12 @@ public class ModCreativeModeTabs
 
                         //lush caves
                         output.accept(ModItems.LUSH_PIKE.get());
+                        output.accept(ModItems.VIVID_MOSS.get());
 
                         //nether
                         output.accept(ModItems.EMBERGILL.get());
                         output.accept(ModItems.SCALDING_PIKE.get());
+                        output.accept(ModItems.CINDER_SQUID.get());
 
 
                     })
