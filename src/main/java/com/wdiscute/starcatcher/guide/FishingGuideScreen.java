@@ -47,6 +47,9 @@ public class FishingGuideScreen extends Screen
     private static final ResourceLocation STAR = Starcatcher.rl("textures/gui/guide/star.png");
     private static final ResourceLocation GLOW = Starcatcher.rl("textures/gui/guide/glow.png");
 
+    private static final ResourceLocation BOOKMARK = Starcatcher.rl("textures/gui/guide/bookmark.png");
+    private static final ResourceLocation BOOKMARK_SELECTED = Starcatcher.rl("textures/gui/guide/bookmark_selected.png");
+
     int uiX;
     int uiY;
 
@@ -99,15 +102,6 @@ public class FishingGuideScreen extends Screen
             return true;
         }
 
-        if (this.minecraft.options.keyDrop.isActiveAndMatches(key))
-        {
-            Minecraft.getInstance().player.setData(
-                    ModDataAttachments.FISH_SPOTTER,
-                    entries.get(currentPage));
-
-            return true;
-        }
-
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
@@ -126,7 +120,6 @@ public class FishingGuideScreen extends Screen
                 currentPage--;
             }
         }
-
 
         //next arrow
         if (x > 420 && x < 440 && y > 230 && y < 240)
@@ -675,6 +668,12 @@ public class FishingGuideScreen extends Screen
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.elevation").append(comp), uiX + xOffset, uiY + yOffset, 0, false);
 
         }
+
+        //TODO bookmark
+        if(player.getData(ModDataAttachments.FISH_SPOTTER).equals(fp))
+            guiGraphics.blit(BOOKMARK, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);
+        else
+            guiGraphics.blit(BOOKMARK_SELECTED, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);
 
 
     }
