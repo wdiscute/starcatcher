@@ -65,6 +65,9 @@ public class FishingGuideScreen extends Screen
 
     List<FishProperties> entries = new ArrayList<>(999);
 
+    int clickedX;
+    int clickedY;
+
     @Override
     protected void init()
     {
@@ -133,17 +136,8 @@ public class FishingGuideScreen extends Screen
 
         if (currentPage == 0)
         {
-            for (int i = 0; i < entries.size(); i++)
-            {
-                int offsetX = (i % 7) * 24 + 72;
-                int offsetY = i / 7 * 24 + 40;
-
-                if (mouseX > uiX + offsetX - 3 && mouseX < uiX + offsetX + 21 - 3 && mouseY > uiY + offsetY - 3 && mouseY < uiY + offsetY + 21 - 3)
-                {
-                    minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    currentPage = i / 2 + 1;
-                }
-            }
+            clickedX = (int) mouseX;
+            clickedY = (int) mouseY;
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
@@ -178,87 +172,177 @@ public class FishingGuideScreen extends Screen
             guiGraphics.blit(ARROW_PREVIOUS, uiX + 65, uiY + 227, 0, 0, 23, 13, 23, 13);
         if (currentPage < entries.size() / 2 + 1)
             guiGraphics.blit(ARROW_NEXT, uiX + 420, uiY + 227, 0, 0, 23, 13, 23, 13);
+
+        clickedX = 0;
+        clickedY = 0;
     }
 
 
     private void renderIndex(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
 
-        for (int i = 0; i < entries.size(); i++)
+        int xReset = 75;
+        int xNextPage = 276;
+        int yReset = 25;
+
+        int xOffset = xReset;
+        int yOffset = yReset;
+
+        int sectionGap = 35;
+        int squareSizeGap = 24;
+
+        int nextPageThreshold = 235;
+        int nextLineThreshold = 150;
+
+        guiGraphics.drawString(this.font, "Fishes available:", uiX + xOffset, uiY + yOffset, 0, false);
+
+        yOffset += 15;
+
+        //fish in area
+        List<FishProperties> fishInArea = FishProperties.getFpsForArea(player);
+        for (FishProperties fp : fishInArea)
         {
-            List<FishCaughtCounter> fishCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
-            ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(entries.get(i).fish()));
-            FishProperties fp = entries.get(i);
-
-            int caught = 0;
-
-            int offsetX = (i % 7) * 24 + 72;
-            int offsetY = i / 7 * 24 + 40;
-
-            for (FishCaughtCounter f : fishCounterList)
+            renderFishIndex(guiGraphics, xOffset, yOffset, mouseX, mouseY, fp);
+            xOffset += squareSizeGap;
+            if (xOffset > xReset + nextLineThreshold)
             {
-                if (fp.equals(f.fp()))
-                {
-                    caught = f.count();
-                    break;
-                }
+                xOffset = xReset;
+                yOffset += squareSizeGap;
             }
 
-            //outline
-            guiGraphics.renderOutline(uiX + offsetX - 2, uiY + offsetY - 2, 20, 20, 0xff112233);
-
-            switch (fp.rarity())
+            if (yOffset > nextPageThreshold)
             {
-                case FishProperties.Rarity.COMMON -> guiGraphics.setColor(1, 1, 1, 1);
-                case FishProperties.Rarity.UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
-                case FishProperties.Rarity.RARE -> guiGraphics.setColor(1f, 0.9f, 0f, 0.7f);
-                case FishProperties.Rarity.EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
-                case FishProperties.Rarity.LEGENDARY -> guiGraphics.setColor(1, 0.5f, 0.1f, 0.7f);
+                xReset = xNextPage;
+                xOffset = xReset;
+                yOffset = yReset;
             }
-
-            RenderSystem.enableBlend();
-            guiGraphics.blit(
-                    GLOW, uiX + offsetX - 1, uiY + offsetY - 1,
-                    0, 0, 18, 18, 18, 18);
-            RenderSystem.disableBlend();
-            guiGraphics.setColor(1, 1, 1, 1);
-
-            if (caught != 0)
-                renderItem(is, uiX + offsetX, uiY + offsetY, 1);
-            else
-                renderItem(new ItemStack(ModItems.MISSINGNO.get()), uiX + offsetX, uiY + offsetY, 1);
-
-            for (FishProperties fpNotif : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
-            {
-                if (fp.equals(fpNotif))
-                    guiGraphics.blit(STAR, uiX + offsetX + 10, uiY + offsetY + 7, 0, 0, 10, 10, 10, 10);
-            }
-
-            //render tooltip when hovering
-            if (mouseX > uiX + offsetX - 3 && mouseX < uiX + offsetX + 21 - 3 && mouseY > uiY + offsetY - 3 && mouseY < uiY + offsetY + 21 - 3)
-            {
-                List<Component> components = new ArrayList<>();
-
-                if (caught == 0)
-                {
-                    components.add(Component.translatable("gui.guide.not_caught_fish_name"));
-                    components.add(Component.translatable("gui.guide.not_caught").withColor(0xAA0000));
-                }
-                else
-                {
-                    if (fp.customName().isEmpty())
-                        components.add(Component.translatable("item." + fp.fish().toLanguageKey()));
-                    else
-                        components.add(Component.translatable("item.starcatcher." + fp.customName()));
-
-                    components.add(Component.translatable("gui.guide.caught").append(Component.literal("[" + caught + "]")).withColor(0x00AA00));
-                }
-
-                guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
-            }
-
 
         }
+
+        //reset to start of line and move down a bit
+        xOffset = xReset;
+        yOffset += sectionGap;
+
+        guiGraphics.drawString(this.font, "All fishes:", uiX + xOffset, uiY + yOffset, 0, false);
+
+        yOffset += 15;
+
+        //all fish
+        for (FishProperties fp : entries)
+        {
+            renderFishIndex(guiGraphics, xOffset, yOffset, mouseX, mouseY, fp);
+
+            xOffset += squareSizeGap;
+            //go down 1 line
+            if (xOffset > xReset + nextLineThreshold)
+            {
+                xOffset = xReset;
+                yOffset += squareSizeGap;
+            }
+
+            //go to next page
+            if (yOffset > nextPageThreshold)
+            {
+                xReset = xNextPage;
+                xOffset = xReset;
+                yOffset = yReset;
+            }
+
+        }
+    }
+
+    private void renderFishIndex(GuiGraphics guiGraphics, int xOffset, int yOffset, int mouseX, int mouseY, FishProperties fp)
+    {
+        List<FishCaughtCounter> fishCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
+        ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
+
+        int caught = 0;
+
+        for (FishCaughtCounter f : fishCounterList)
+        {
+            if (fp.equals(f.fp()))
+            {
+                caught = f.count();
+                break;
+            }
+        }
+
+        //outline
+        guiGraphics.renderOutline(uiX + xOffset - 2, uiY + yOffset - 2, 20, 20, 0xff112233);
+
+        switch (fp.rarity())
+        {
+            case FishProperties.Rarity.COMMON -> guiGraphics.setColor(1, 1, 1, 1);
+            case FishProperties.Rarity.UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
+            case FishProperties.Rarity.RARE -> guiGraphics.setColor(1f, 0.9f, 0f, 0.7f);
+            case FishProperties.Rarity.EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
+            case FishProperties.Rarity.LEGENDARY -> guiGraphics.setColor(1, 0.5f, 0.1f, 0.7f);
+        }
+
+        RenderSystem.enableBlend();
+        guiGraphics.blit(
+                GLOW, uiX + xOffset - 1, uiY + yOffset - 1,
+                0, 0, 18, 18, 18, 18);
+        RenderSystem.disableBlend();
+        guiGraphics.setColor(1, 1, 1, 1);
+
+        if (caught != 0)
+            renderItem(is, uiX + xOffset, uiY + yOffset, 1);
+        else
+            renderItem(new ItemStack(ModItems.MISSINGNO.get()), uiX + xOffset, uiY + yOffset, 1);
+
+        for (FishProperties fpNotif : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
+        {
+            if (fp.equals(fpNotif))
+                guiGraphics.blit(STAR, uiX + xOffset + 10, uiY + yOffset + 7, 0, 0, 10, 10, 10, 10);
+        }
+
+        //render tooltip when hovering
+        if (mouseX > uiX + xOffset - 3 && mouseX < uiX + xOffset + 21 - 3 && mouseY > uiY + yOffset - 3 && mouseY < uiY + yOffset + 21 - 3)
+        {
+            List<Component> components = new ArrayList<>();
+
+            if (caught == 0)
+            {
+                components.add(Component.translatable("gui.guide.not_caught_fish_name"));
+                components.add(Component.translatable("gui.guide.not_caught").withColor(0xAA0000));
+            }
+            else
+            {
+                if (fp.customName().isEmpty())
+                    components.add(Component.translatable("item." + fp.fish().toLanguageKey()));
+                else
+                    components.add(Component.translatable("item.starcatcher." + fp.customName()));
+
+                components.add(Component.translatable("gui.guide.caught").append(Component.literal("[" + caught + "]")).withColor(0x00AA00));
+            }
+
+            guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
+        }
+
+
+        if(clickedX != 0)
+        {
+
+            var awd = true;
+
+            if (clickedX > uiX + xOffset - 3 && clickedX < uiX + xOffset + 21 - 3 && clickedY > uiY + yOffset - 3 && clickedY < uiY + yOffset + 21 - 3)
+            {
+                for (int i = 0; i < entries.size(); i++)
+                {
+                    if(fp.equals(entries.get(i)))
+                    {
+                        currentPage = i / 2 + 1;
+                    }
+                }
+
+            }
+        }
+
+        //check clicked
+
+
+
     }
 
 
@@ -670,7 +754,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //TODO bookmark
-        if(player.getData(ModDataAttachments.FISH_SPOTTER).equals(fp))
+        if (player.getData(ModDataAttachments.FISH_SPOTTER).equals(fp))
             guiGraphics.blit(BOOKMARK, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);
         else
             guiGraphics.blit(BOOKMARK_SELECTED, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);

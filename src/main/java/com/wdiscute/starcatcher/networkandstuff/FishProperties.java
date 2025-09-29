@@ -6,6 +6,7 @@ import com.mojang.datafixers.util.Function13;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModDataComponents;
+import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import io.netty.buffer.ByteBuf;
@@ -21,6 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -754,6 +756,17 @@ public record FishProperties(
         }
 
         return chance;
+    }
+
+    public static List<FishProperties> getFpsForArea(Entity entity)
+    {
+        List<FishProperties> list = new ArrayList<>();
+
+        for (FishProperties fp : entity.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
+            if (getChance(fp, entity, new ItemStack(ModItems.ROD.get())) > 0)
+                list.add(fp);
+
+        return list;
     }
 
     //region codecs

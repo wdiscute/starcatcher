@@ -76,7 +76,6 @@ public class ModItems
     public static final DeferredItem<Item> AURORA = basicFish("aurora"); //description
     public static final DeferredItem<Item> WINTERY_PIKE = basicFish("wintery_pike"); //description
 
-
     //mountain
     public static final DeferredItem<Item> PALECARP = basicFish("palecarp"); //description
     public static final DeferredItem<Item> SUNNY_STURGEON = basicFish("sunny_sturgeon"); //description
@@ -118,7 +117,6 @@ public class ModItems
     //lush caves
     public static final DeferredItem<Item> LUSH_PIKE = basicFish("lush_pike"); //description
     public static final DeferredItem<Item> VIVID_MOSS = basicFish("vivid_moss"); //description
-
 
     //nether
     public static final DeferredItem<Item> EMBERGILL = basicFish("embergill"); //description
