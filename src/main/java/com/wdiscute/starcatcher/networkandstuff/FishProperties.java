@@ -227,6 +227,11 @@ public record FishProperties(
                         .withDims(List.of(Level.OVERWORLD.location()))
                         .withBiomes(List.of(Biomes.LUSH_CAVES.location()));
 
+        public static final WorldRestrictions OVERWORLD_DEEP_DARK =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomes(List.of(Biomes.DEEP_DARK.location()));
+
         public static final WorldRestrictions OVERWORLD_RIVER =
                 WorldRestrictions.DEFAULT
                         .withDims(List.of(Level.OVERWORLD.location()))
@@ -266,6 +271,10 @@ public record FishProperties(
         public static final WorldRestrictions NETHER =
                 WorldRestrictions.DEFAULT
                         .withDims(List.of(Level.NETHER.location()));
+
+        public static final WorldRestrictions END =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.END.location()));
 
         public WorldRestrictions withDims(List<ResourceLocation> dims)
         {

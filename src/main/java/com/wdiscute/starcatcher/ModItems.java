@@ -69,6 +69,9 @@ public class ModItems
     public static final DeferredItem<Item> SILVERVEIL_PERCH = basicFish("silverveil_perch"); //description
     public static final DeferredItem<Item> ELDERSCALE = basicFish("elderscale"); //description
     public static final DeferredItem<Item> DRIFTFIN = basicFish("driftfin"); //description
+    public static final DeferredItem<Item> TWILIGHT_KOI = basicFish("twilight_koi"); //description
+    public static final DeferredItem<Item> THUNDER_BASS = basicFish("thunder_bass"); //description
+    public static final DeferredItem<Item> LIGHTNING_BASS = basicFish("lightning_bass"); //description
 
     //icy lake
     public static final DeferredItem<Item> FROSTJAW_TROUT = basicFish("frostjaw_trout"); //description
@@ -76,11 +79,19 @@ public class ModItems
     public static final DeferredItem<Item> AURORA = basicFish("aurora"); //description
     public static final DeferredItem<Item> WINTERY_PIKE = basicFish("wintery_pike"); //description
 
+    //warm lake (desert/savanna etc)
+    public static final DeferredItem<Item> SANDTAIL = basicFish("sandtail"); //description
+    public static final DeferredItem<Item> MIRAGE_CARP = basicFish("mirage_carp"); //description
+    public static final DeferredItem<Item> SCORCHFISH = basicFish("scorchfish"); //description
+    public static final DeferredItem<Item> CACTIFISH = basicFish("cactifish"); //description
+    public static final DeferredItem<Item> AGAVE_BREAM = basicFish("agave_bream"); //TODO CHOSEN BY MANGO
+
     //mountain
     public static final DeferredItem<Item> PALECARP = basicFish("palecarp"); //description
     public static final DeferredItem<Item> SUNNY_STURGEON = basicFish("sunny_sturgeon"); //description
     public static final DeferredItem<Item> ROCKGILL = basicFish("rockgill"); //description
     public static final DeferredItem<Item> PEAKDWELLER = basicFish("peakdweller"); //description
+    public static final DeferredItem<Item> SUN_SEEKING_CARP = basicFish("sun_seeking_carp"); //description
 
     //icy mountain
     public static final DeferredItem<Item> CRYSTALBACK_STURGEON = basicFish("crystalback_sturgeon"); //description
@@ -106,11 +117,17 @@ public class ModItems
     public static final DeferredItem<Item> DEEPJAW_HERRING = basicFish("deepjaw_herring"); //description
     public static final DeferredItem<Item> DUSKTAIL_SNAPPER = basicFish("dusktail_snapper"); //description
     public static final DeferredItem<Item> JOEL = basicFish("joel"); //description
+    public static final DeferredItem<Item> REDSCALED_TUNA = basicFish("redscaled_tuna"); //description
+    public static final DeferredItem<Item> SEA_BASS = basicFish("sea_bass"); //description
+
+    //mushroom islands
+    public static final DeferredItem<Item> SHROOMFISH = basicFish("shroomfish"); //description
 
     //underground
-    public static final DeferredItem<Item> WHITEVEIL = basicFish("whiteveil"); //description
-    public static final DeferredItem<Item> GHOSTLY_PIKE = basicFish("ghostly_pike"); //description
     public static final DeferredItem<Item> GOLD_FAN = basicFish("gold_fan"); //description
+
+    //caves
+    public static final DeferredItem<Item> WHITEVEIL = basicFish("whiteveil"); //description
     public static final DeferredItem<Item> BLACK_EEL = basicFish("black_eel"); //description
     public static final DeferredItem<Item> AMETHYSTBACK = basicFish("amethystback"); //description
 
@@ -118,12 +135,21 @@ public class ModItems
     public static final DeferredItem<Item> LUSH_PIKE = basicFish("lush_pike"); //description
     public static final DeferredItem<Item> VIVID_MOSS = basicFish("vivid_moss"); //description
 
+    //deepslate
+    public static final DeferredItem<Item> GHOSTLY_PIKE = basicFish("ghostly_pike"); //description
+
+    //deep dark
+    public static final DeferredItem<Item> SKULKFISH = basicFish("skulkfish"); //description
+    public static final DeferredItem<Item> WARD = basicFish("ward"); //description
+    public static final DeferredItem<Item> GLOWING_DARK = basicFish("glowing_dark"); //description
+
     //nether
     public static final DeferredItem<Item> EMBERGILL = basicFish("embergill"); //description
     public static final DeferredItem<Item> SCALDING_PIKE = basicFish("scalding_pike"); //description
     public static final DeferredItem<Item> CINDER_SQUID = basicFish("cinder_squid"); //description
 
     //the end
+    public static final DeferredItem<Item> CHARFISH = basicFish("charfish"); //todo chosen by charry
 
 
 

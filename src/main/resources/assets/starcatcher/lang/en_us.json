@@ -97,22 +97,32 @@
   "item.starcatcher.silverveil_perch" : "Silverveil Perch",
   "item.starcatcher.elderscale" : "Elderscale",
   "item.starcatcher.driftfin" : "Driftfin",
+  "item.starcatcher.twilight_koi" : "Twilight Koi",
+  "item.starcatcher.thunder_bass" : "Thunder Bass",
+  "item.starcatcher.lightning_bass" : "Lightning Bass",
 
   "item.starcatcher.frostjaw_trout" : "Frostjaw Trout",
   "item.starcatcher.crystalback_trout" : "Crystalback Trout",
   "item.starcatcher.aurora" : "Aurora",
   "item.starcatcher.wintery_pike" : "Wintery Pike",
 
+  "item.starcatcher.sandtail" : "Sandtail",
+  "item.starcatcher.mirage_carp" : "Mirage Carp",
+  "item.starcatcher.scorchfish" : "Scorchfish",
+  "item.starcatcher.cactifish" : "Cactifish",
+  "item.starcatcher.agave_bream" : "Agave Bream",
+
+
   "item.starcatcher.palecarp" : "Palecarp",
   "item.starcatcher.sunny_sturgeon" : "Sunny Sturgeon",
   "item.starcatcher.rockgill" : "Rockgill",
   "item.starcatcher.peakdweller" : "Peakdweller",
+  "item.starcatcher.sun_seeking_carp" : "Sun Seeking Carp",
 
   "item.starcatcher.crystalback_sturgeon" : "Crystalback Sturgeon",
   "item.starcatcher.icetooth_sturgeon" : "Icetooth Sturgeon",
   "item.starcatcher.boreal" : "Boreal",
   "item.starcatcher.crystalback_boreal" : "Crystalback Boreal",
-
 
   "item.starcatcher.silverfin_pike" : "Silverfin Pike",
   "item.starcatcher.willow_bream" : "Willow Bream",
@@ -124,6 +134,8 @@
   "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
   "item.starcatcher.deepjaw_herring" : "Deepjaw Herring",
   "item.starcatcher.dusktail_snapper" : "Dusktail Snapper",
+  "item.starcatcher.redscaled_tuna" : "Redscaled Tuna",
+  "item.starcatcher.sea_bass" : "Sea Bass",
   "item.starcatcher.joel" : "Joel",
 
   "item.starcatcher.frostgill_chub" : "Frostgill Chub",
@@ -139,8 +151,15 @@
   "item.starcatcher.lush_pike" : "Lush Pike",
   "item.starcatcher.vivid_moss" : "Vivid Moss",
 
+  "item.starcatcher.skulkfish" : "Skulkfish",
+  "item.starcatcher.ward" : "Ward",
+  "item.starcatcher.glowing_dark" : "Glowing Dark",
+
+
+
   "item.starcatcher.embergill" : "Embergill",
   "item.starcatcher.scalding_pike" : "Scalding Pike",
-  "item.starcatcher.cinder_squid" : "Cinder Squid"
+  "item.starcatcher.cinder_squid" : "Cinder Squid",
 
+  "item.starcatcher.charfish" : "Charfish"
 }

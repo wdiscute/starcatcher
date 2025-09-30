@@ -1,6 +1,7 @@
 {
   "above_y": 100,
   "base_chance": 2,
+  "daytime": "day",
   "difficulty": {
     "decay": 2,
     "has_first_marker": false,
