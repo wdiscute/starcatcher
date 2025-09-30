@@ -1,0 +1,23 @@
+{
+  "base_chance": 2,
+  "below_y": 50,
+  "difficulty": {
+    "change_rotation_every_hit": false,
+    "decay": 10,
+    "has_treasure": true,
+    "penalty": 0,
+    "reward": 18,
+    "reward_thin": 30,
+    "speed": 15
+  },
+  "fish": "starcatcher:ward",
+  "rarity": "legendary",
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:deep_dark"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

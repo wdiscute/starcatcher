@@ -1,0 +1,19 @@
+{
+  "above_y": 50,
+  "base_chance": 5,
+  "below_y": 100,
+  "fish": "starcatcher:scorchfish",
+  "weather": "clear",
+  "world_restrictions": {
+    "biomes_blacklist_tags": [
+      "starcatcher:is_ocean",
+      "starcatcher:is_river"
+    ],
+    "biomes_tags": [
+      "starcatcher:is_warm"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

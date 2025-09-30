@@ -1,0 +1,24 @@
+{
+  "base_chance": 5,
+  "below_y": 50,
+  "difficulty": {
+    "decay": 2,
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_treasure": true,
+    "penalty": 25,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 12
+  },
+  "fish": "starcatcher:glowing_dark",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:deep_dark"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}
