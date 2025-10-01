@@ -1,0 +1,14 @@
+{
+  "above_y": 0,
+  "base_chance": 5,
+  "fish": "starcatcher:sludge_catfish",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_swamp"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

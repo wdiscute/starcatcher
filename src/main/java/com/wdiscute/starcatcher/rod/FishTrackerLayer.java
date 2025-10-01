@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.rod;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import net.minecraft.client.DeltaTracker;
@@ -16,13 +17,17 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FishTrackerLayer implements LayeredDraw.Layer
 {
 
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/fishing/fish_tracker.png");
+    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/fish_tracker.png");
 
     int uiX;
     int uiY;
@@ -63,7 +68,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
             }
         }
 
-        FishProperties fp = player.getData(ModDataAttachments.FISH_SPOTTER);
+        FishProperties fpTracked = player.getData(ModDataAttachments.FISH_SPOTTER);
 
         if (!shouldShow)
         {
@@ -76,7 +81,6 @@ public class FishTrackerLayer implements LayeredDraw.Layer
             if (offScreen > 0) offScreen = 0;
         }
 
-
         ItemStack rod = new ItemStack(ModItems.ROD.get());
         ItemStack bait = rod.get(ModDataComponents.BAIT).copyOne();
 
@@ -87,11 +91,11 @@ public class FishTrackerLayer implements LayeredDraw.Layer
             total += FishProperties.getChance(d, player, rod);
         }
 
-        int specific = FishProperties.getChance(fp, player, rod);
+        int specific = FishProperties.getChance(fpTracked, player, rod);
 
         int chance = ((int) (((float) specific / total) * 100));
 
-        ItemStack fishBeingTracked = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
+        ItemStack fishBeingTracked = new ItemStack(BuiltInRegistries.ITEM.get(fpTracked.fish()));
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(-offScreen, 0, 0);
@@ -100,113 +104,30 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
         guiGraphics.renderItem(fishBeingTracked, uiX + 50, uiY + 10);
 
-        guiGraphics.drawString(
-                Minecraft.getInstance().font, fishBeingTracked.getItem().getDescription(),
-                uiX + 70, uiY + 15, 0, false);
+        List<FishProperties> fpsInArea = FishProperties.getFpsForArea(player);
+        List<FishCaughtCounter> fishesCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
+        List<FishProperties> fishesCaught = new ArrayList<>();
 
-        guiGraphics.drawString(
-                Minecraft.getInstance().font, chance + "%",
-                uiX + 27, uiY + 37, 0, false);
-
-        guiGraphics.drawString(
-                Minecraft.getInstance().font, "(" + specific + "/" + total + ")",
-                uiX + 20, uiY + 47, 0, false);
-
-        //planet
+        for (FishCaughtCounter fishes : fishesCaughtCounter)
         {
-            MutableComponent comp = Component.literal("Planet").withColor(0x00AA00);
-
-            if (!fp.wr().dims().isEmpty() && !fp.wr().dims().contains(level.dimension().location()))
-                comp.withColor(0xAA0000);
-            if (fp.wr().dimsBlacklist().contains(level.dimension().location()))
-                comp.withColor(0xAA0000);
-
-            drawComp(guiGraphics, comp, 70, 30);
+            fishesCaught.add(fishes.fp());
         }
 
-        //biome
+
+        for (int i = 0; i < fpsInArea.size(); i++)
         {
-            MutableComponent comp = Component.literal("Biome").withColor(0x00AA00);
+            ItemStack is = new ItemStack(ModItems.MISSINGNO.get());
 
-            if (!fp.wr().biomes().isEmpty() && !fp.wr().biomes().contains(level.getBiome(player.blockPosition()).getKey().location()))
-                comp.withColor(0xAA0000);
-            if (fp.wr().biomesBlacklist().contains(level.getBiome(player.blockPosition()).getKey().location()))
-                comp.withColor(0xAA0000);
-
-            drawComp(guiGraphics, comp, 70, 40);
-        }
-
-        //bait
-        {
-            MutableComponent comp = Component.literal("Bait").withColor(0x00AA00);
-
-            if (fp.br().mustHaveCorrectBait() && !fp.br().correctBait().contains(BuiltInRegistries.ITEM.getKey(bait.getItem())))
-                comp.withColor(0xAA0000);
-
-            drawComp(guiGraphics, comp, 70, 50);
-        }
-
-        //weather
-        {
-            MutableComponent comp = Component.literal("Weather").withColor(0x00AA00);
-
-            if (fp.weather() == FishProperties.Weather.CLEAR && (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5))
-                comp.withColor(0xAA0000);
-            if (fp.weather() == FishProperties.Weather.RAIN && level.getRainLevel(0) < 0.5)
-                comp.withColor(0xAA0000);
-            if (fp.weather() == FishProperties.Weather.THUNDER && level.getThunderLevel(0) < 0.5)
-                comp.withColor(0xAA0000);
-
-            drawComp(guiGraphics, comp, 70, 60);
-        }
-
-        //Daytime
-        {
-            MutableComponent comp = Component.literal("Daytime").withColor(0x00AA00);
-
-            if (fp.daytime() != FishProperties.Daytime.ALL)
+            if(fishesCaught.contains(fpsInArea.get(i)))
             {
-                //TODO change 24000 to the fraction of level day cycle
-                long time = level.getDayTime() % 24000;
-
-                switch (fp.daytime())
-                {
-                    case FishProperties.Daytime.DAY:
-                        if (!(time > 23000 || time < 12700)) comp.withColor(0xAA0000);
-                        break;
-
-                    case FishProperties.Daytime.NOON:
-                        if (!(time > 3500 && time < 8500)) comp.withColor(0xAA0000);
-                        break;
-
-                    case FishProperties.Daytime.NIGHT:
-                        if (!(time < 23000 && time > 12700)) comp.withColor(0xAA0000);
-                        break;
-
-                    case FishProperties.Daytime.MIDNIGHT:
-                        if (!(time > 16500 && time < 19500)) comp.withColor(0xAA0000);
-                        break;
-                }
+                is = new ItemStack(BuiltInRegistries.ITEM.get(fpsInArea.get(i).fish()));
             }
 
-            drawComp(guiGraphics, comp, 70, 70);
+            guiGraphics.renderItem(is,
+                    uiX + 50 + i * 20 % 100,
+                    uiY + 10 + i / 5 * 20);
         }
 
-        //mustBeCaughtAboveY
-        {
-            MutableComponent comp = Component.literal("Elevation").withColor(0x00AA00);
-
-            if (fp.mustBeCaughtAboveY() != Integer.MIN_VALUE || fp.mustBeCaughtBelowY() != Integer.MAX_VALUE)
-            {
-                if (player.position().y > fp.mustBeCaughtBelowY())
-                    comp.withColor(0xAA0000);
-
-                if (player.position().y < fp.mustBeCaughtAboveY())
-                    comp.withColor(0xAA0000);
-
-                drawComp(guiGraphics, comp, 70, 80);
-            }
-        }
 
         guiGraphics.pose().popPose();
 

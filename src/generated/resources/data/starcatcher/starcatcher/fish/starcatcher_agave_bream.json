@@ -17,8 +17,12 @@
   "rarity": "rare",
   "weather": "clear",
   "world_restrictions": {
+    "biomes_blacklist_tags": [
+      "starcatcher:is_ocean",
+      "starcatcher:is_river"
+    ],
     "biomes_tags": [
-      "starcatcher:is_cold_lake"
+      "starcatcher:is_warm"
     ],
     "dimensions": [
       "minecraft:overworld"

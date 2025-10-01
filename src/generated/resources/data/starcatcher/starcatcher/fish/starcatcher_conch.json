@@ -1,0 +1,15 @@
+{
+  "above_y": 0,
+  "base_chance": 15,
+  "fish": "starcatcher:conch",
+  "has_guide_entry": false,
+  "skips_minigame": true,
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_beach"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

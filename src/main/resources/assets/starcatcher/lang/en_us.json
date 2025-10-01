@@ -100,6 +100,16 @@
   "item.starcatcher.twilight_koi" : "Twilight Koi",
   "item.starcatcher.thunder_bass" : "Thunder Bass",
   "item.starcatcher.lightning_bass" : "Lightning Bass",
+  "item.starcatcher.boot" : "Boot",
+
+  "item.starcatcher.sludge_catfish" : "Sludge Catfish",
+  "item.starcatcher.lily_snapper" : "Lily Snapper",
+  "item.starcatcher.sage_catfish" : "Sage Catfish",
+  "item.starcatcher.mossy_boot" : "Mossy Boot",
+
+  "item.starcatcher.pale_carp" : "Pale Carp",
+  "item.starcatcher.pale_pinfish" : "Pale Pinfish",
+  "item.starcatcher.pinfish" : "Pinfish",
 
   "item.starcatcher.frostjaw_trout" : "Frostjaw Trout",
   "item.starcatcher.crystalback_trout" : "Crystalback Trout",
@@ -112,12 +122,16 @@
   "item.starcatcher.cactifish" : "Cactifish",
   "item.starcatcher.agave_bream" : "Agave Bream",
 
-
-  "item.starcatcher.palecarp" : "Palecarp",
   "item.starcatcher.sunny_sturgeon" : "Sunny Sturgeon",
   "item.starcatcher.rockgill" : "Rockgill",
   "item.starcatcher.peakdweller" : "Peakdweller",
   "item.starcatcher.sun_seeking_carp" : "Sun Seeking Carp",
+
+  "item.starcatcher.blossomfish" : "Blossomfish",
+  "item.starcatcher.petaldrift_carp" : "Petaldrift Carp",
+  "item.starcatcher.pink_koi" : "Pink Koi",
+  "item.starcatcher.morganite" : "Morganite",
+  "item.starcatcher.rose_siamese_fish" : "Rose Siamese Fish",
 
   "item.starcatcher.crystalback_sturgeon" : "Crystalback Sturgeon",
   "item.starcatcher.icetooth_sturgeon" : "Icetooth Sturgeon",
@@ -130,36 +144,60 @@
   "item.starcatcher.downfall_bream" : "Downfall Bream",
   "item.starcatcher.hollowbelly_darter" : "Hollowbelly Darter",
   "item.starcatcher.mistback_chub" : "Mistback Chub",
-
-  "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
-  "item.starcatcher.deepjaw_herring" : "Deepjaw Herring",
-  "item.starcatcher.dusktail_snapper" : "Dusktail Snapper",
-  "item.starcatcher.redscaled_tuna" : "Redscaled Tuna",
-  "item.starcatcher.sea_bass" : "Sea Bass",
-  "item.starcatcher.joel" : "Joel",
+  "item.starcatcher.dried_seaweed" : "Dried Seaweed",
 
   "item.starcatcher.frostgill_chub" : "Frostgill Chub",
   "item.starcatcher.crystalback_minnow" : "Crystalback Minnow",
   "item.starcatcher.azure_crystalback_minnow" : "Azure Crystalback Minnow",
+  "item.starcatcher.blue_crystal_fin" : "Blue Crystal Fin",
+
+  "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
+  "item.starcatcher.deepjaw_herring" : "Deepjaw Herring",
+  "item.starcatcher.dusktail_snapper" : "Dusktail Snapper",
+  "item.starcatcher.joel" : "Joel",
+  "item.starcatcher.redscaled_tuna" : "Redscaled Tuna",
+  "item.starcatcher.sea_bass" : "Sea Bass",
+  "item.starcatcher.waterlogged_bottle" : "Waterlogged Bottle",
+
+  "item.starcatcher.conch" : "Conch",
+  "item.starcatcher.clam" : "Clam",
+
+  "item.starcatcher.shroomfish" : "Shroomfish",
+  "item.starcatcher.sporefish" : "Sporefish",
+
+  "item.starcatcher.gold_fan" : "Gold Fan",
+  "item.starcatcher.geode_eel" : "Geode Eel",
 
   "item.starcatcher.whiteveil" : "Whiteveil",
-  "item.starcatcher.ghostly_pike" : "Ghostly Pike",
-  "item.starcatcher.gold_fan" : "Gold Fan",
   "item.starcatcher.black_eel" : "Black Eel",
   "item.starcatcher.amethystback" : "Amethystback",
+  "item.starcatcher.stonefish" : "Stonefish",
+
+  "item.starcatcher.fossilized_angelfish" : "Fossilized Angelfish",
+  "item.starcatcher.dripfin" : "Dripfin",
+  "item.starcatcher.yellowstone_fish" : "Yellowstone Fish",
 
   "item.starcatcher.lush_pike" : "Lush Pike",
   "item.starcatcher.vivid_moss" : "Vivid Moss",
+
+  "item.starcatcher.ghostly_pike" : "Ghostly Pike",
+  "item.starcatcher.aquamarine_pike" : "Aquamarine Pike",
+  "item.starcatcher.garnet_mackerel" : "Garnet Mackerel",
+  "item.starcatcher.bright_amethyst_snapper" : "Bright Amethyst Snapper",
+  "item.starcatcher.dark_amethyst_snapper" : "Dark Amethyst Snapper",
+  "item.starcatcher.deepslatefish" : "Deepslatefish",
 
   "item.starcatcher.skulkfish" : "Skulkfish",
   "item.starcatcher.ward" : "Ward",
   "item.starcatcher.glowing_dark" : "Glowing Dark",
 
-
-
   "item.starcatcher.embergill" : "Embergill",
   "item.starcatcher.scalding_pike" : "Scalding Pike",
   "item.starcatcher.cinder_squid" : "Cinder Squid",
+  "item.starcatcher.lava_crab" : "Lava Crab",
+  "item.starcatcher.magma_fish" : "Magma Fish",
+  "item.starcatcher.glowstone_seeker" : "Glowstone Seeker",
+  "item.starcatcher.lava_crab_claw" : "Lava Crab Claw",
 
   "item.starcatcher.charfish" : "Charfish"
 }

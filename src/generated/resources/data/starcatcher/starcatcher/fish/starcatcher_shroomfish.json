@@ -1,11 +1,23 @@
 {
-  "above_y": 50,
+  "above_y": 0,
   "base_chance": 5,
-  "below_y": 100,
+  "difficulty": {
+    "change_rotation_every_hit": false,
+    "decay": 0,
+    "has_first_marker": false,
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_second_thin_marker": true,
+    "has_treasure": true,
+    "penalty": 999,
+    "reward": 0,
+    "reward_thin": 15
+  },
   "fish": "starcatcher:shroomfish",
+  "rarity": "legendary",
   "world_restrictions": {
     "biomes_tags": [
-      "starcatcher:is_ocean"
+      "starcatcher:is_mushroom_fields"
     ],
     "dimensions": [
       "minecraft:overworld"

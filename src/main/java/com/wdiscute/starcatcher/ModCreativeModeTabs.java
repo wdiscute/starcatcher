@@ -3,10 +3,14 @@ package com.wdiscute.starcatcher;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Collection;
 import java.util.function.Supplier;
 
 
@@ -26,88 +30,10 @@ public class ModCreativeModeTabs
                     .title(Component.translatable("creativetab.starcatcher.starcatcher"))
                     .displayItems((itemDisplayParameters, output) ->
                     {
-
-                        //fishing
-                        output.accept(ModItems.GUIDE.get());
-                        output.accept(ModItems.ROD.get());
-                        output.accept(ModItems.STARCATCHER_TWINE.get());
-                        output.accept(ModItems.HOOK.get());
-
-                        output.accept(ModItems.TROPHY_OF_MASTERFUL_FISHING.get());
-                        output.accept(ModItems.TROPHY_OF_FISHING.get());
-                        output.accept(ModItems.TROPHY_OF_PITIFUL_FISHING.get());
-
-                        output.accept(ModItems.FISH_SPOTTER.get());
-
-                        output.accept(ModItems.BAIT_SAVING_BOBBER.get());
-                        output.accept(ModItems.DIFFICULTY_BOBBER.get());
-                        output.accept(ModItems.CREEPER_BOBBER.get());
-                        output.accept(ModItems.TREASURE_BOBBER.get());
-                        output.accept(ModItems.FAST_BITING_BOBBER.get());
-
-                        output.accept(ModItems.WATERLOGGED_SATCHEL.get());
-                        output.accept(ModItems.FISH_BONES.get());
-
-                        //fishes
-                        //lake
-                        output.accept(ModItems.OBIDONTIEE.get());
-                        output.accept(ModItems.SILVERVEIL_PERCH.get());
-                        output.accept(ModItems.ELDERSCALE.get());
-                        output.accept(ModItems.DRIFTFIN.get());
-
-                        //icy lake
-                        output.accept(ModItems.FROSTJAW_TROUT.get());
-                        output.accept(ModItems.CRYSTALBACK_TROUT.get());
-                        output.accept(ModItems.AURORA.get());
-                        output.accept(ModItems.WINTERY_PIKE.get());
-
-                        //mountain
-                        output.accept(ModItems.PALECARP.get());
-                        output.accept(ModItems.SUNNY_STURGEON.get());
-                        output.accept(ModItems.ROCKGILL.get());
-                        output.accept(ModItems.PEAKDWELLER.get());
-
-                        //icy mountain
-                        output.accept(ModItems.CRYSTALBACK_STURGEON.get());
-                        output.accept(ModItems.ICETOOTH_STURGEON.get());
-                        output.accept(ModItems.BOREAL.get());
-                        output.accept(ModItems.CRYSTALBACK_BOREAL.get());
-
-                        //river
-                        output.accept(ModItems.SILVERFIN_PIKE.get());
-                        output.accept(ModItems.WILLOW_BREAM.get());
-                        output.accept(ModItems.DRIFTING_BREAM.get());
-                        output.accept(ModItems.DOWNFALL_BREAM.get());
-                        output.accept(ModItems.HOLLOWBELLY_DARTER.get());
-                        output.accept(ModItems.MISTBACK_CHUB.get());
-
-                        //icy river
-                        output.accept(ModItems.FROSTGILL_CHUB.get());
-                        output.accept(ModItems.CRYSTALBACK_MINNOW.get());
-                        output.accept(ModItems.AZURE_CRYSTALBACK_MINNOW.get());
-
-                        //saltwater
-                        output.accept(ModItems.IRONJAW_HERRING.get());
-                        output.accept(ModItems.DEEPJAW_HERRING.get());
-                        output.accept(ModItems.DUSKTAIL_SNAPPER.get());
-                        output.accept(ModItems.JOEL.get());
-
-
-                        //underground
-                        output.accept(ModItems.WHITEVEIL.get());
-                        output.accept(ModItems.GHOSTLY_PIKE.get());
-                        output.accept(ModItems.GOLD_FAN.get());
-                        output.accept(ModItems.BLACK_EEL.get());
-                        output.accept(ModItems.AMETHYSTBACK.get());
-
-                        //lush caves
-                        output.accept(ModItems.LUSH_PIKE.get());
-                        output.accept(ModItems.VIVID_MOSS.get());
-
-                        //nether
-                        output.accept(ModItems.EMBERGILL.get());
-                        output.accept(ModItems.SCALDING_PIKE.get());
-                        output.accept(ModItems.CINDER_SQUID.get());
+                        //adds all entries because im lazy
+                        for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS.getEntries())
+                            if (!(item.get() == ModItems.MISSINGNO.get()))
+                                output.accept(item.get());
 
 
                     })

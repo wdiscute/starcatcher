@@ -1,0 +1,20 @@
+{
+  "base_chance": 5,
+  "difficulty": {
+    "decay": 2,
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_treasure": true,
+    "penalty": 25,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 12
+  },
+  "fish": "starcatcher:magma_fish",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:the_nether"
+    ]
+  }
+}

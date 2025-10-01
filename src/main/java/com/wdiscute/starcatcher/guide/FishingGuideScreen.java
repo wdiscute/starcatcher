@@ -728,6 +728,9 @@ public class FishingGuideScreen extends Screen
             else if (above == 50 && below == 100)
                 comp = Component.translatable("gui.guide.surface");
 
+            else if (above == 0 && below == Integer.MAX_VALUE)
+                comp = Component.translatable("gui.guide.surface");
+
             else if (above == Integer.MIN_VALUE && below == 50)
                 comp = Component.translatable("gui.guide.underground");
 

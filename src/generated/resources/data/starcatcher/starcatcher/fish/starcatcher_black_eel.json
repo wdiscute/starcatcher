@@ -2,7 +2,17 @@
   "above_y": 0,
   "base_chance": 5,
   "below_y": 50,
+  "difficulty": {
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_treasure": true,
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 10
+  },
   "fish": "starcatcher:black_eel",
+  "rarity": "uncommon",
   "world_restrictions": {
     "dimensions": [
       "minecraft:overworld"

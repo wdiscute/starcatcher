@@ -22,7 +22,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
@@ -267,6 +266,31 @@ public record FishProperties(
                 WorldRestrictions.DEFAULT
                         .withDims(List.of(Level.OVERWORLD.location()))
                         .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE));
+
+        public static final WorldRestrictions OVERWORLD_BEACH =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_BEACH));
+
+        public static final WorldRestrictions OVERWORLD_MUSHROOM_FIELDS =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_MUSHROOM_FIELDS));
+
+        public static final WorldRestrictions OVERWORLD_CHERRY_GROVE =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_CHERRY_GROVE));
+
+        public static final WorldRestrictions OVERWORLD_SWAMP =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_SWAMP));
+
+        public static final WorldRestrictions OVERWORLD_DARK_FOREST =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_DARK_FOREST));
 
         public static final WorldRestrictions NETHER =
                 WorldRestrictions.DEFAULT

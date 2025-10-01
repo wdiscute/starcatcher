@@ -20,5 +20,4 @@ public class StarcatcherTags
     public static final ResourceLocation IS_MUSHROOM_FIELDS = Starcatcher.rl("is_mushroom_fields");
     public static final ResourceLocation IS_DARK_FOREST = Starcatcher.rl("is_dark_forest");
 
-
 }

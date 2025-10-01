@@ -1,0 +1,16 @@
+{
+  "above_y": 50,
+  "base_chance": 1,
+  "below_y": 100,
+  "fish": "starcatcher:dried_seaweed",
+  "has_guide_entry": false,
+  "skips_minigame": true,
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

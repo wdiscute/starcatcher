@@ -1,0 +1,11 @@
+{
+  "base_chance": 1,
+  "fish": "starcatcher:lava_crab_claw",
+  "has_guide_entry": false,
+  "skips_minigame": true,
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:the_nether"
+    ]
+  }
+}
