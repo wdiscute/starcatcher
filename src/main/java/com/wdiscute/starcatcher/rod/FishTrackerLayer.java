@@ -14,10 +14,8 @@ import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
 
@@ -104,7 +102,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
         guiGraphics.renderItem(fishBeingTracked, uiX + 50, uiY + 10);
 
-        List<FishProperties> fpsInArea = FishProperties.getFpsForArea(player);
+        List<FishProperties> fpsInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         List<FishCaughtCounter> fishesCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
         List<FishProperties> fishesCaught = new ArrayList<>();
 

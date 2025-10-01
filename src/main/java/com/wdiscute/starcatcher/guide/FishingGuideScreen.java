@@ -86,7 +86,7 @@ public class FishingGuideScreen extends Screen
         player = Minecraft.getInstance().player;
 
         for (FishProperties fp : FishProperties.getFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
-        fishInArea = FishProperties.getFpsForArea(player);
+        fishInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
     }
 

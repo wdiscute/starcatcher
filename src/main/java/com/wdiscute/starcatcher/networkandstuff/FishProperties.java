@@ -796,12 +796,12 @@ public record FishProperties(
         return chance;
     }
 
-    public static List<FishProperties> getFpsForArea(Entity entity)
+    public static List<FishProperties> getFpsWithGuideEntryForArea(Entity entity)
     {
         List<FishProperties> list = new ArrayList<>();
 
         for (FishProperties fp : entity.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
-            if (getChance(fp, entity, new ItemStack(ModItems.ROD.get())) > 0)
+            if (getChance(fp, entity, new ItemStack(ModItems.ROD.get())) > 0 && fp.hasGuideEntry)
                 list.add(fp);
 
         return list;
