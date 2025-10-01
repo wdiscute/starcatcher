@@ -14,6 +14,9 @@
   "world_restrictions": {
     "dimensions": [
       "minecraft:the_nether"
+    ],
+    "fluids": [
+      "minecraft:lava"
     ]
   }
 }
