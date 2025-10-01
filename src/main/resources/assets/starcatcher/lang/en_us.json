@@ -1,11 +1,21 @@
 {
   "creativetab.starcatcher.starcatcher": "Starcatcher",
 
-  "tag.starcatcher.is_ocean" : "Oceans",
-  "tag.starcatcher.is_river" : "Rivers",
   "tag.starcatcher.is_cold_lake" : "Cold Lakes",
   "tag.starcatcher.is_cold_ocean" : "Cold Oceans",
   "tag.starcatcher.is_cold_river" : "Cold Rivers",
+
+  "tag.starcatcher.is_ocean" : "Oceans",
+  "tag.starcatcher.is_deep_ocean" : "Deep Oceans",
+  "tag.starcatcher.is_river" : "Rivers",
+
+  "tag.starcatcher.is_warm" : "Warm Climate",
+
+  "tag.starcatcher.is_beach" : "Beaches",
+  "tag.starcatcher.is_swamp" : "Swamp",
+  "tag.starcatcher.is_cherry_grove" : "Cherry Groves",
+  "tag.starcatcher.is_mushroom_fields" : "Mushroom Fields",
+  "tag.starcatcher.is_dark_forest" : "Dark Forests",
 
 
   "item.starcatcher.starcatcher_rod": "Starcatcher's Rod",
