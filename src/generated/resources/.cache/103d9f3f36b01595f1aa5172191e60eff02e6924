@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-01T01:15:43.3411397	Registries
+// 1.21.1	2025-10-01T14:08:24.6827652	Registries
 138659fbce2333aec7aaa1bdac982ebcb9ff84b4 data/starcatcher/starcatcher/fish/minecraft_cod.json
 01677dcc5d0469ffb5086adc02795c1e081cdeec data/starcatcher/starcatcher/fish/minecraft_salmon.json
 6801a4c379499ff025d37075a3c643c76e4dddd5 data/starcatcher/starcatcher/fish/starcatcher_agave_bream.json
@@ -6,6 +6,7 @@
 a9764036f5f3fcf3b03facf63a7811fdd2f5b8ea data/starcatcher/starcatcher/fish/starcatcher_aquamarine_pike.json
 f60f1b77313c4970442e90614472989772a768ae data/starcatcher/starcatcher/fish/starcatcher_aurora.json
 36a1c5539e06e25a81ed985dc58cb0c340acb8d2 data/starcatcher/starcatcher/fish/starcatcher_azure_crystalback_minnow.json
+8372237731027837ffce34676d44c6a1c1f3cba7 data/starcatcher/starcatcher/fish/starcatcher_bigeye_tuna.json
 1e15820c63dcd4062264f5427e7cb5a6f5503ccc data/starcatcher/starcatcher/fish/starcatcher_black_eel.json
 b6de5d51fc77e31620c2c1fcbeda9f2f32c770bf data/starcatcher/starcatcher/fish/starcatcher_blossomfish.json
 6060051ff0bcce88c3b2511c0b997418e6785b29 data/starcatcher/starcatcher/fish/starcatcher_blue_crystal_fin.json

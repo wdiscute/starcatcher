@@ -286,6 +286,12 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                                 .withHasGuideEntry(false)
                                 .withSkipMinigame(true));
 
+                        //deep ocean
+                        register(bootstrap, overworldDeepOceanFish(ModItems.BIGEYE_TUNA.get())
+                                .withDaytime(FishProperties.Daytime.NIGHT)
+                                .withRarity(FishProperties.Rarity.UNCOMMON)
+                                .withDifficulty(FishProperties.Difficulty.HARD));
+
                         //beach
                         register(bootstrap, overworldBeachFish(ModItems.CONCH.get())
                                 .withBaseChance(15)
@@ -536,6 +542,13 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
     public static FishProperties overworldOceanFish(Item fish)
     {
         return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN)
+                .withMustBeCaughtAboveY(50)
+                .withMustBeCaughtBelowY(100);
+    }
+
+    public static FishProperties overworldDeepOceanFish(Item fish)
+    {
+        return FishProperties.DEFAULT.withFish(getKey(fish)).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DEEP_OCEAN)
                 .withMustBeCaughtAboveY(50)
                 .withMustBeCaughtBelowY(100);
     }

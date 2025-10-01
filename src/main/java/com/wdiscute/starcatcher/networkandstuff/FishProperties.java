@@ -241,6 +241,11 @@ public record FishProperties(
                         .withDims(List.of(Level.OVERWORLD.location()))
                         .withBiomesTags(List.of(StarcatcherTags.IS_OCEAN));
 
+        public static final WorldRestrictions OVERWORLD_DEEP_OCEAN =
+                WorldRestrictions.DEFAULT
+                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withBiomesTags(List.of(StarcatcherTags.IS_DEEP_OCEAN));
+
         public static final WorldRestrictions OVERWORLD_LAKE =
                 WorldRestrictions.DEFAULT
                         .withDims(List.of(Level.OVERWORLD.location()))

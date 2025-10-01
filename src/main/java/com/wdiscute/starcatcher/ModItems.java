@@ -140,6 +140,7 @@ public class ModItems
     public static final DeferredItem<Item> DUSKTAIL_SNAPPER = basicFish("dusktail_snapper"); //description
     public static final DeferredItem<Item> JOEL = basicFish("joel"); //description
     public static final DeferredItem<Item> REDSCALED_TUNA = basicFish("redscaled_tuna"); //description
+    public static final DeferredItem<Item> BIGEYE_TUNA = basicFish("bigeye_tuna"); //added by Tuna Feesh
     public static final DeferredItem<Item> SEA_BASS = basicFish("sea_bass"); //description
     public static final DeferredItem<Item> WATERLOGGED_BOTTLE = basicFish("waterlogged_bottle"); //description
 
