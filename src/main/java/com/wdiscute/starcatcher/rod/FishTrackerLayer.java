@@ -12,6 +12,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -37,6 +38,25 @@ public class FishTrackerLayer implements LayeredDraw.Layer
     int imageWidth = 150;
     int imageHeight = 100;
 
+    float counterSinceLastRefresh = 999;
+
+    Player player;
+    ClientLevel level;
+
+    List<FishProperties> fpsInArea = new ArrayList<>();
+    List<FishProperties> fishesCaught;
+
+    private void recalculate()
+    {
+        System.out.println("calling!!!!!!");
+
+        fpsInArea = FishProperties.getFpsWithGuideEntryForArea(player);
+
+        fishesCaught = new ArrayList<>();
+        for (FishCaughtCounter fishes : player.getData(ModDataAttachments.FISHES_CAUGHT)) fishesCaught.add(fishes.fp());
+
+    }
+
     @Override
     public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker)
     {
@@ -45,83 +65,47 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         uiY = Minecraft.getInstance().getWindow().getGuiScaledHeight() - imageHeight - 80;
 
         if (Minecraft.getInstance().level == null) return;
+        else level = Minecraft.getInstance().level;
         if (Minecraft.getInstance().player == null) return;
+        else player = Minecraft.getInstance().player;
 
-        Player player = Minecraft.getInstance().player;
-        ClientLevel level = Minecraft.getInstance().level;
+        boolean shouldShow = player.getMainHandItem().is(ModItems.FISH_SPOTTER) || player.getOffhandItem().is(ModItems.FISH_SPOTTER);
 
-        boolean shouldShow = false;
-
-        if (player.getMainHandItem().is(ModItems.FISH_SPOTTER) || player.getOffhandItem().is(ModItems.FISH_SPOTTER))
-        {
-            shouldShow = true;
-        }
-        else
-        {
-            ItemContainerContents icc = player.getMainHandItem().get(ModDataComponents.BOBBER);
-            if (icc != null)
-            {
-                ItemStack is = icc.copyOne();
-                if (is.is(ModItems.FISH_SPOTTER)) shouldShow = true;
-            }
-        }
-
-        FishProperties fpTracked = player.getData(ModDataAttachments.FISH_SPOTTER);
-
+        //smoothly moves ui in and out of screen
         if (!shouldShow)
-        {
-            offScreen -= 15 * deltaTracker.getGameTimeDeltaTicks();
-            if (offScreen < -150) offScreen = -150;
-        }
-        else
-        {
+            if (offScreen > -150)
+                offScreen -= 15 * deltaTracker.getGameTimeDeltaTicks();
+            else
+            {
+                offScreen = -150;
+                return;
+            }
+        else if (offScreen < 0)
             offScreen += 15 * deltaTracker.getGameTimeDeltaTicks();
-            if (offScreen > 0) offScreen = 0;
-        }
+        else
+            offScreen = 0;
 
-        ItemStack rod = new ItemStack(ModItems.ROD.get());
-        ItemStack bait = rod.get(ModDataComponents.BAIT).copyOne();
-
-        int total = 0;
-
-        for (FishProperties d : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
-        {
-            total += FishProperties.getChance(d, player, rod);
-        }
-
-        int specific = FishProperties.getChance(fpTracked, player, rod);
-
-        int chance = ((int) (((float) specific / total) * 100));
-
-        ItemStack fishBeingTracked = new ItemStack(BuiltInRegistries.ITEM.get(fpTracked.fish()));
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(-offScreen, 0, 0);
 
         renderImage(guiGraphics, BACKGROUND);
 
-        guiGraphics.renderItem(fishBeingTracked, uiX + 50, uiY + 10);
-
-        List<FishProperties> fpsInArea = FishProperties.getFpsWithGuideEntryForArea(player);
-        List<FishCaughtCounter> fishesCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
-        List<FishProperties> fishesCaught = new ArrayList<>();
-
-        for (FishCaughtCounter fishes : fishesCaughtCounter)
-        {
-            fishesCaught.add(fishes.fp());
-        }
-
+        //recalculate every 100 ticks?
+        counterSinceLastRefresh += 1 * deltaTracker.getGameTimeDeltaTicks();
+        if (counterSinceLastRefresh > 100) recalculate();
 
         for (int i = 0; i < fpsInArea.size(); i++)
         {
             ItemStack is = new ItemStack(ModItems.MISSINGNO.get());
 
-            if(fishesCaught.contains(fpsInArea.get(i)))
+            if (fishesCaught.contains(fpsInArea.get(i)))
             {
                 is = new ItemStack(BuiltInRegistries.ITEM.get(fpsInArea.get(i).fish()));
             }
 
-            guiGraphics.renderItem(is,
+            guiGraphics.renderItem(
+                    is,
                     uiX + 50 + i * 20 % 100,
                     uiY + 10 + i / 5 * 20);
         }

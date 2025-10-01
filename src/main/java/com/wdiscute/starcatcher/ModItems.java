@@ -185,13 +185,13 @@ public class ModItems
     public static final DeferredItem<Item> GLOWING_DARK = basicFish("glowing_dark"); //description
 
     //nether
-    public static final DeferredItem<Item> EMBERGILL = basicItem("embergill"); //description
-    public static final DeferredItem<Item> SCALDING_PIKE = basicItem("scalding_pike"); //description
-    public static final DeferredItem<Item> CINDER_SQUID = basicItem("cinder_squid"); //description
-    public static final DeferredItem<Item> LAVA_CRAB = basicItem("lava_crab"); //description
-    public static final DeferredItem<Item> MAGMA_FISH = basicItem("magma_fish"); //description
-    public static final DeferredItem<Item> GLOWSTONE_SEEKER = basicItem("glowstone_seeker"); //description
-    public static final DeferredItem<Item> LAVA_CRAB_CLAW = basicItem("lava_crab_claw"); //description
+    public static final DeferredItem<Item> EMBERGILL = netherFish("embergill"); //description
+    public static final DeferredItem<Item> SCALDING_PIKE = netherFish("scalding_pike"); //description
+    public static final DeferredItem<Item> CINDER_SQUID = netherFish("cinder_squid"); //description
+    public static final DeferredItem<Item> LAVA_CRAB = netherFish("lava_crab"); //description
+    public static final DeferredItem<Item> MAGMA_FISH = netherFish("magma_fish"); //description
+    public static final DeferredItem<Item> GLOWSTONE_SEEKER = netherFish("glowstone_seeker"); //description
+    public static final DeferredItem<Item> LAVA_CRAB_CLAW = netherFish("lava_crab_claw"); //description
 
     //the end
     public static final DeferredItem<Item> CHARFISH = basicFish("charfish"); //todo chosen by charry
@@ -208,6 +208,12 @@ public class ModItems
     {
         //chat didn't force me to write this comment
         return ITEMS.register(name, () -> new Item(new Item.Properties()));
+    }
+
+    private static DeferredItem<Item> netherFish(String name)
+    {
+        //chat didn't force me to write this comment
+        return ITEMS.register(name, () -> new Item(new Item.Properties().fireResistant()));
     }
 
 

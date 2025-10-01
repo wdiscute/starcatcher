@@ -11,7 +11,6 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -54,7 +53,7 @@ public class FishingBobEntity extends Projectile
 
     int timeBiting;
 
-    int ticksInWater;
+    int ticksInFluid;
 
     enum FishHookState
     {
@@ -75,7 +74,6 @@ public class FishingBobEntity extends Projectile
         super(ModEntities.FISHING_BOB.get(), level);
 
         this.player = player;
-        this.rod = rod;
         this.rod = rod;
         this.bobber = rod.get(ModDataComponents.BOBBER).copyOne();
         this.bait = rod.get(ModDataComponents.BAIT).copyOne();
@@ -235,6 +233,12 @@ public class FishingBobEntity extends Projectile
     }
 
     @Override
+    public boolean isOnFire()
+    {
+        return false;
+    }
+
+    @Override
     public void tick()
     {
         super.tick();
@@ -262,15 +266,15 @@ public class FishingBobEntity extends Projectile
         }
 
         BlockPos blockpos = this.blockPosition();
-        FluidState fluidstate = this.level().getFluidState(blockpos);
-        FluidState fluidstate1 = this.level().getFluidState(blockpos.below());
+        FluidState fluid = this.level().getFluidState(blockpos);
+        FluidState fluidBellow = this.level().getFluidState(blockpos.below());
 
         if (this.currentState == FishHookState.FLYING)
         {
             if (getDeltaMovement().y < 1.2f)
                 this.setDeltaMovement(this.getDeltaMovement().add(0, -0.02, 0));
 
-            if (fluidstate.is(FluidTags.WATER))
+            if (!fluid.isEmpty())
             {
                 this.setDeltaMovement(this.getDeltaMovement().multiply(0.3, 0.3, 0.3));
                 if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
@@ -302,11 +306,11 @@ public class FishingBobEntity extends Projectile
             timeBiting = 0;
         }
 
-        if (!fluidstate.is(FluidTags.WATER) && !fluidstate1.is(FluidTags.WATER))
+        //if theres no fluid on block or under, changes to FLYING
+        if (fluid.isEmpty() && fluidBellow.isEmpty())
         {
             if (!level().isClientSide) currentState = FishHookState.FLYING;
         }
-
 
         //TODO check for water level instead of just blockstate to make the entity sit better in water
         if (this.currentState == FishHookState.BOBBING || this.currentState == FishHookState.FISHING)
@@ -314,7 +318,7 @@ public class FishingBobEntity extends Projectile
 
             checkForFish();
 
-            if (fluidstate.is(FluidTags.WATER))
+            if (!fluid.isEmpty())
             {
                 setDeltaMovement(this.getDeltaMovement().add(0.0F, 0.01, 0.0F));
             }
@@ -365,9 +369,9 @@ public class FishingBobEntity extends Projectile
     {
         if (!level().isClientSide && currentState == FishHookState.BOBBING)
         {
-            ticksInWater++;
+            ticksInFluid++;
             int i = random.nextInt(chanceToFishEachTick);
-            if ((i == 1 || ticksInWater > maxTicksToFish) && ticksInWater > minTicksToFish)
+            if ((i == 1 || ticksInFluid > maxTicksToFish) && ticksInFluid > minTicksToFish)
             {
                 ((ServerLevel) level()).sendParticles(
                         ModParticles.FISHING_NOTIFICATION.get(),

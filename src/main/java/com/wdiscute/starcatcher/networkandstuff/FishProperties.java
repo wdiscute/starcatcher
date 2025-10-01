@@ -3,12 +3,14 @@ package com.wdiscute.starcatcher.networkandstuff;
 import com.mojang.datafixers.util.Function11;
 import com.mojang.datafixers.util.Function12;
 import com.mojang.datafixers.util.Function13;
+import com.mojang.datafixers.util.Function7;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
+import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -26,6 +28,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -184,7 +190,8 @@ public record FishProperties(
             List<ResourceLocation> biomes,
             List<ResourceLocation> biomesTags,
             List<ResourceLocation> biomesBlacklist,
-            List<ResourceLocation> biomesBlacklistTags
+            List<ResourceLocation> biomesBlacklistTags,
+            List<ResourceLocation> fluids
     )
     {
         public static final Codec<WorldRestrictions> CODEC = RecordCodecBuilder.create(instance ->
@@ -194,17 +201,19 @@ public record FishProperties(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes", List.of()).forGetter(WorldRestrictions::biomes),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_tags", List.of()).forGetter(WorldRestrictions::biomesTags),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", List.of()).forGetter(WorldRestrictions::biomesBlacklist),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", List.of()).forGetter(WorldRestrictions::biomesBlacklistTags)
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", List.of()).forGetter(WorldRestrictions::biomesBlacklistTags),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("fluids", List.of(ResourceLocation.withDefaultNamespace("water"))).forGetter(WorldRestrictions::fluids)
                 ).apply(instance, WorldRestrictions::new));
 
 
-        public static final StreamCodec<ByteBuf, WorldRestrictions> STREAM_CODEC = StreamCodec.composite(
+        public static final StreamCodec<ByteBuf, WorldRestrictions> STREAM_CODEC = composite(
                 ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dims,
                 ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dimsBlacklist,
                 ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomes,
                 ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesTags,
                 ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklist,
                 ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklistTags,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::fluids,
                 WorldRestrictions::new
         );
 
@@ -214,7 +223,8 @@ public record FishProperties(
                 List.of(),
                 List.of(),
                 List.of(),
-                List.of());
+                List.of(),
+                List.of(ResourceLocation.withDefaultNamespace("water")));
 
 
         public static final WorldRestrictions OVERWORLD =
@@ -299,7 +309,8 @@ public record FishProperties(
 
         public static final WorldRestrictions NETHER =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.NETHER.location()));
+                        .withDims(List.of(Level.NETHER.location()))
+                        .withFluids(List.of(ResourceLocation.withDefaultNamespace("lava")));
 
         public static final WorldRestrictions END =
                 WorldRestrictions.DEFAULT
@@ -307,32 +318,37 @@ public record FishProperties(
 
         public WorldRestrictions withDims(List<ResourceLocation> dims)
         {
-            return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+            return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
         public WorldRestrictions withDimsBlacklist(List<ResourceLocation> dimsBlacklist)
         {
-            return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+            return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
         public WorldRestrictions withBiomes(List<ResourceLocation> biomes)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
         public WorldRestrictions withBiomesTags(List<ResourceLocation> biomesTags)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, biomesTags, this.biomesBlacklist, this.biomesBlacklistTags);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
         public WorldRestrictions withBiomesBlacklist(List<ResourceLocation> biomesBlacklist)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
         public WorldRestrictions withBiomesBlacklistTags(List<ResourceLocation> biomesBlacklistTags)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags, this.fluids);
+        }
+
+        public WorldRestrictions withFluids(List<ResourceLocation> fluids)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, fluids);
         }
 
     }
@@ -711,6 +727,13 @@ public record FishProperties(
         if (!blacklist.isEmpty() && blacklist.contains(currentBiome))
             return 0;
 
+        //fluid check
+        boolean fluid = fp.wr.fluids.contains(BuiltInRegistries.FLUID.getKey(getSource(level.getFluidState(entity.blockPosition()).getType())));
+        boolean fluidAbove = fp.wr.fluids.contains(BuiltInRegistries.FLUID.getKey(getSource(level.getFluidState(entity.blockPosition().above()).getType())));
+        boolean fluidBelow = fp.wr.fluids.contains(BuiltInRegistries.FLUID.getKey(getSource(level.getFluidState(entity.blockPosition().below()).getType())));
+
+        if(!fluid && !fluidAbove && !fluidBelow && entity instanceof FishingBobEntity)
+            return 0;
 
         //blacklisted baits
         if (fp.br().incorrectBaits().contains(BuiltInRegistries.ITEM.getKey(bait.getItem())))
@@ -868,7 +891,63 @@ public record FishProperties(
 
     //endregion codecs
 
+    public static Fluid getSource(Fluid fluid1) {
+        if (fluid1 instanceof FlowingFluid fluid) {
+            return fluid.getSource();
+        }
+
+        return fluid1;
+    }
+
+
     //region composite
+
+    static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(
+            final StreamCodec<? super B, T1> codec1,
+            final Function<C, T1> getter1,
+            final StreamCodec<? super B, T2> codec2,
+            final Function<C, T2> getter2,
+            final StreamCodec<? super B, T3> codec3,
+            final Function<C, T3> getter3,
+            final StreamCodec<? super B, T4> codec4,
+            final Function<C, T4> getter4,
+            final StreamCodec<? super B, T5> codec5,
+            final Function<C, T5> getter5,
+            final StreamCodec<? super B, T6> codec6,
+            final Function<C, T6> getter6,
+            final StreamCodec<? super B, T7> codec7,
+            final Function<C, T7> getter7,
+            final Function7<T1, T2, T3, T4, T5, T6, T7, C> factory
+    )
+    {
+        return new StreamCodec<B, C>()
+        {
+            @Override
+            public C decode(B p_330310_)
+            {
+                T1 t1 = codec1.decode(p_330310_);
+                T2 t2 = codec2.decode(p_330310_);
+                T3 t3 = codec3.decode(p_330310_);
+                T4 t4 = codec4.decode(p_330310_);
+                T5 t5 = codec5.decode(p_330310_);
+                T6 t6 = codec6.decode(p_330310_);
+                T7 t7 = codec7.decode(p_330310_);
+                return factory.apply(t1, t2, t3, t4, t5, t6, t7);
+            }
+
+            @Override
+            public void encode(B p_332052_, C p_331912_)
+            {
+                codec1.encode(p_332052_, getter1.apply(p_331912_));
+                codec2.encode(p_332052_, getter2.apply(p_331912_));
+                codec3.encode(p_332052_, getter3.apply(p_331912_));
+                codec4.encode(p_332052_, getter4.apply(p_331912_));
+                codec5.encode(p_332052_, getter5.apply(p_331912_));
+                codec6.encode(p_332052_, getter6.apply(p_331912_));
+                codec7.encode(p_332052_, getter7.apply(p_331912_));
+            }
+        };
+    }
 
     static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
