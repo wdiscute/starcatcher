@@ -756,11 +756,11 @@ public class FishingGuideScreen extends Screen
         }
 
         //TODO bookmark
-        if (player.getData(ModDataAttachments.FISH_SPOTTER).equals(fp))
-            guiGraphics.blit(BOOKMARK, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);
-        else
-            guiGraphics.blit(BOOKMARK_SELECTED, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);
-
+//        if (player.getData(ModDataAttachments.FISH_SPOTTER).equals(fp))
+//            guiGraphics.blit(BOOKMARK, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);
+//        else
+//            guiGraphics.blit(BOOKMARK_SELECTED, uiX + xOffset, uiY, 0, 0, 32, 32, 32, 32);
+//
 
     }
 

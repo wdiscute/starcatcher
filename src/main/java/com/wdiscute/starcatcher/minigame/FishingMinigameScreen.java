@@ -399,7 +399,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (hitSomething)
             {
-                if(hasTreasure && r.nextFloat() > 0.0 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
+                if(hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
                 {
                     treasureActive = true;
                     posTreasure = getRandomFreePosition();

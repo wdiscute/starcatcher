@@ -30,8 +30,6 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -264,8 +262,7 @@ public record FishProperties(
         public static final WorldRestrictions OVERWORLD_WARM_LAKE =
                 WorldRestrictions.DEFAULT
                         .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM));
+                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM_LAKE));
 
         public static final WorldRestrictions OVERWORLD_ICY_RIVER =
                 WorldRestrictions.DEFAULT

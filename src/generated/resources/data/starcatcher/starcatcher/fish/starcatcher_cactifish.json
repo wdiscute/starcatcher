@@ -5,10 +5,6 @@
   "daytime": "day",
   "fish": "starcatcher:cactifish",
   "world_restrictions": {
-    "biomes_blacklist_tags": [
-      "starcatcher:is_ocean",
-      "starcatcher:is_river"
-    ],
     "biomes_tags": [
       "starcatcher:is_warm"
     ],
