@@ -20,12 +20,12 @@ issueTrackerURL="https://discord.gg/WsuFsGSegD" #optional
 [[mods]] #mandatory
 
 modId="starcatcher"
-version="0.1"
+version="0.3"
 displayName="Starcatcher"
 displayURL="http://curseforge.com/minecraft/mc-mods/starcatcher"
-logoFile="starcatcher 400x400.png" #optional
+logoFile="starcatcher 256x256.png" #optional
 authors="wdiscute" #optional
-description='''A fishing mod. With lots of fish.'''
+description='''A fishing mod with lots of fishes to collect!'''
 
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
