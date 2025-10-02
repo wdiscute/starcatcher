@@ -24,7 +24,7 @@
   "tooltip.starcatcher.starcatcher_rod.2": "Who knows what you might catch",
   "tooltip.starcatcher.starcatcher_rod.3": "given the right conditions are met!",
   "tooltip.starcatcher.starcatcher_rod.4": "",
-  "tooltip.starcatcher.starcatcher_rod.5": "Crouch + use to open",
+  "tooltip.starcatcher.starcatcher_rod.5": "[wip] Crouch + use to open",
   "tooltip.starcatcher.starcatcher_rod.6": "bobber and bait selection",
 
   "item.starcatcher.starcatcher_guide": "Starcatcher's Guide",
@@ -35,6 +35,10 @@
   "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
   "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine covered in enderpearl dust.",
   "tooltip.starcatcher.starcatcher_twine.1": "Vansire used this for string instruments once upon a time.",
+
+  "item.starcatcher.hook": "Iron Hook",
+  "tooltip.starcatcher.hook.0": "A basic iron hook for your fishing rod.",
+
 
   "item.starcatcher.fish_spotter": "Fish Spotter",
   "tooltip.starcatcher.fish_spotter.0": "A handy tool to any <rgb>angler</rgb> which",
@@ -49,6 +53,9 @@
   "item.starcatcher.fish_bones" : "Fish Bones",
   "item.starcatcher.fish_bones.0" : "Some fish bones. All that",
   "item.starcatcher.fish_bones.1" : "remains of a once happy fish.",
+
+  "item.starcatcher.treasure" : "Treasure",
+  "item.starcatcher.scalding_treasure" : "Scalding Treasure",
 
   "item.starcatcher.waterlogged_satchel" : "Waterlogged Satchel",
   "tooltip.starcatcher.waterlogged_satchel.0" : "A satchel containing many secrets",

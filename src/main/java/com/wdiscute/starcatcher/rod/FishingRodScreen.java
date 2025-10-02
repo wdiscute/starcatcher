@@ -12,7 +12,7 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class FishingRodScreen extends AbstractContainerScreen<FishingRodMenu>
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/refuel_station/background.png");
+    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/rod_screen.png");
 
 
     public FishingRodScreen(FishingRodMenu menu, Inventory playerInventory, Component title)

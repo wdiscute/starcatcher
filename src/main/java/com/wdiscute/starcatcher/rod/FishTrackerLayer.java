@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.rod;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
@@ -89,7 +90,11 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(-offScreen, 0, 0);
 
+        RenderSystem.enableBlend();
+
         renderImage(guiGraphics, BACKGROUND);
+
+        RenderSystem.disableBlend();
 
         //recalculate every 100 ticks?
         counterSinceLastRefresh += 1 * deltaTracker.getGameTimeDeltaTicks();
