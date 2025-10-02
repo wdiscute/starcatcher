@@ -8,10 +8,14 @@
     "has_first_thin_marker": true,
     "has_second_marker": false,
     "has_second_thin_marker": true,
-    "has_treasure": true,
     "penalty": 999,
     "reward": 0,
-    "reward_thin": 15
+    "reward_thin": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
   },
   "fish": "starcatcher:boreal",
   "rarity": "legendary",

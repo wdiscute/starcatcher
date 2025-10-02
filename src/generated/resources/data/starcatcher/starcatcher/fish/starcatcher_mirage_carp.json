@@ -6,11 +6,15 @@
   "difficulty": {
     "has_first_thin_marker": true,
     "has_second_marker": false,
-    "has_treasure": true,
     "penalty": 15,
     "reward": 15,
     "reward_thin": 35,
-    "speed": 10
+    "speed": 10,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 28,
+      "loot": "starcatcher:waterlogged_satchel"
+    }
   },
   "fish": "starcatcher:mirage_carp",
   "rarity": "uncommon",

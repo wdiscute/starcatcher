@@ -355,6 +355,60 @@ public record FishProperties(
 
     //endregion world
 
+
+    //region treasure
+
+    public record Treasure(
+            boolean hasTreasure,
+            ResourceLocation loot,
+            int hitReward
+    )
+    {
+
+        public static final Codec<Treasure> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(
+                        Codec.BOOL.optionalFieldOf("has_treasure", false).forGetter(Treasure::hasTreasure),
+                        ResourceLocation.CODEC.optionalFieldOf("loot", Starcatcher.rl("none")).forGetter(Treasure::loot),
+                        Codec.INT.optionalFieldOf("hit_reward", 0).forGetter(Treasure::hitReward)
+                ).apply(instance, Treasure::new));
+
+        public static final StreamCodec<ByteBuf, Treasure> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.BOOL, Treasure::hasTreasure,
+                ResourceLocation.STREAM_CODEC, Treasure::loot,
+                ByteBufCodecs.INT, Treasure::hitReward,
+                Treasure::new
+        );
+
+        public static final Treasure DEFAULT = new Treasure(
+                false,
+                Starcatcher.rl("none"),
+                0
+        );
+
+        public static final Treasure UNCOMMON = new Treasure(
+                true,
+                Starcatcher.rl("waterlogged_satchel"),
+                28
+        );
+
+        public static final Treasure HARD = new Treasure(
+                true,
+                Starcatcher.rl("treasure"),
+                15
+        );
+
+
+        public static final Treasure NETHER = new Treasure(
+                true,
+                Starcatcher.rl("scalding_treasure"),
+                28
+        );
+
+    }
+
+    //endregion treasure
+
+
     //region dif
 
     public record Difficulty(
@@ -367,7 +421,7 @@ public record FishProperties(
             boolean hasSecondMarker,
             boolean hasFirstThinMarker,
             boolean hasSecondThinMarker,
-            boolean hasTreasure,
+            Treasure treasure,
             boolean changeRotationOnEveryHit
     )
     {
@@ -382,7 +436,7 @@ public record FishProperties(
                 true,
                 false,
                 false,
-                false,
+                Treasure.DEFAULT,
                 true
         );
 
@@ -396,7 +450,7 @@ public record FishProperties(
                 false,
                 true,
                 false,
-                true,
+                Treasure.UNCOMMON,
                 true
         );
 
@@ -410,7 +464,7 @@ public record FishProperties(
                 false,
                 true,
                 false,
-                true,
+                Treasure.HARD,
                 true
         );
 
@@ -424,7 +478,7 @@ public record FishProperties(
                 false,
                 true,
                 true,
-                true,
+                Treasure.HARD,
                 true
         );
 
@@ -438,7 +492,7 @@ public record FishProperties(
                 false,
                 true,
                 true,
-                true,
+                Treasure.HARD,
                 false
         );
 
@@ -452,7 +506,7 @@ public record FishProperties(
                 false,
                 true,
                 true,
-                true,
+                Treasure.HARD,
                 false
         );
 
@@ -466,7 +520,7 @@ public record FishProperties(
                 false,
                 false,
                 false,
-                false,
+                Treasure.HARD,
                 false
         );
 
@@ -480,7 +534,7 @@ public record FishProperties(
                 false,
                 false,
                 false,
-                false,
+                Treasure.HARD,
                 false
         );
 
@@ -494,7 +548,7 @@ public record FishProperties(
                 true,
                 true,
                 true,
-                false,
+                Treasure.HARD,
                 false
         );
 
@@ -508,7 +562,7 @@ public record FishProperties(
                 true,
                 true,
                 true,
-                false,
+                Treasure.HARD,
                 true
         );
 
@@ -522,9 +576,14 @@ public record FishProperties(
                 true,
                 false,
                 false,
-                true,
+                Treasure.HARD,
                 false
         );
+
+        public Difficulty withTreasure(Treasure treasure)
+        {
+            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.hasFirstMarker, this.hasSecondMarker, this.hasFirstThinMarker, this.hasSecondThinMarker, treasure, this.changeRotationOnEveryHit);
+        }
 
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
@@ -537,7 +596,7 @@ public record FishProperties(
                         Codec.BOOL.optionalFieldOf("has_second_marker", DEFAULT.hasSecondMarker).forGetter(Difficulty::hasSecondMarker),
                         Codec.BOOL.optionalFieldOf("has_first_thin_marker", DEFAULT.hasFirstThinMarker).forGetter(Difficulty::hasFirstThinMarker),
                         Codec.BOOL.optionalFieldOf("has_second_thin_marker", DEFAULT.hasSecondThinMarker).forGetter(Difficulty::hasSecondThinMarker),
-                        Codec.BOOL.optionalFieldOf("has_treasure", DEFAULT.hasTreasure).forGetter(Difficulty::hasTreasure),
+                        Treasure.CODEC.optionalFieldOf("treasure", Treasure.DEFAULT).forGetter(Difficulty::treasure),
                         Codec.BOOL.optionalFieldOf("change_rotation_every_hit", DEFAULT.changeRotationOnEveryHit).forGetter(Difficulty::changeRotationOnEveryHit)
                 ).apply(instance, Difficulty::new));
 
@@ -552,7 +611,7 @@ public record FishProperties(
                 ByteBufCodecs.BOOL, Difficulty::hasSecondMarker,
                 ByteBufCodecs.BOOL, Difficulty::hasFirstThinMarker,
                 ByteBufCodecs.BOOL, Difficulty::hasSecondThinMarker,
-                ByteBufCodecs.BOOL, Difficulty::hasTreasure,
+                Treasure.STREAM_CODEC, Difficulty::treasure,
                 ByteBufCodecs.BOOL, Difficulty::changeRotationOnEveryHit,
                 Difficulty::new
         );

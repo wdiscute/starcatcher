@@ -10,7 +10,12 @@
     "penalty": 15,
     "reward": 15,
     "reward_thin": 30,
-    "speed": 12
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
   },
   "fish": "starcatcher:joel",
   "rarity": "legendary",

@@ -31,6 +31,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame.png");
 
+    private static final int SIZE_1 = 5;
+    private static final int SIZE_2 = 7;
+    private static final int SIZE_3 = 12;
+    private static final int SIZE_4 = 17;
+
     final ItemStack itemBeingFished;
     final ItemStack bobber;
     final ItemStack bait;
@@ -38,6 +43,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final float speed;
     final int reward;
     final int rewardThin;
+    final int treasureReward;
     final int penalty;
     final int decay;
     final boolean hasTreasure;
@@ -63,8 +69,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int completionSmooth = 20;
 
     boolean treasureActive;
-    int treasureProgress = 0;
-    int treasureProgressSmooth = 0;
+    int treasureProgress = Integer.MIN_VALUE;
+    int treasureProgressSmooth = Integer.MIN_VALUE;
+
+    int bigForgiving = SIZE_3;
+    int thinForgiving = SIZE_1;
+    int treasureForgiving = SIZE_2;
 
     int tickCount = 0;
 
@@ -87,9 +97,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         this.speed = fp.dif().speed();
         this.reward = fp.dif().reward();
         this.rewardThin = fp.dif().rewardThin();
+        this.treasureReward = fp.dif().treasure().hitReward();
         this.penalty = fp.dif().penalty();
         this.decay = fp.dif().decay();
-        this.hasTreasure = fp.dif().hasTreasure();
+        this.hasTreasure = fp.dif().treasure().hasTreasure();
         this.changeRotation = fp.dif().changeRotationOnEveryHit();
 
         hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
@@ -155,6 +166,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         guiGraphics.blit(
                 TEXTURE, width / 2 - 32, height / 2 - 32,
                 64, 64, 0, 192, 64, 64, 256, 256);
+
+        //spacebar
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 16, height / 2 + 40,
+                32, 16, 0, 112, 32, 16, 256, 256);
 
 
         //pos 1
@@ -238,6 +254,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.popPose();
         }
 
+        System.out.println(treasureProgress);
+        System.out.println(treasureProgressSmooth);
+
         //pos treasure
         if (posTreasure != Integer.MIN_VALUE)
         {
@@ -307,12 +326,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //FISH
         guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
 
-
-        //spacebar
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 16, height / 2 + 40,
-                32, 16, 0, 112, 32, 16, 256, 256);
-
     }
 
     @Override
@@ -340,11 +353,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             Vec3 pos = Minecraft.getInstance().player.position();
             ClientLevel level = Minecraft.getInstance().level;
 
-            float pointerPrecise = (pointerPos + ((speed * partial) * currentRotation));
+            float pointerPosPrecise = (pointerPos + ((speed * partial) * currentRotation));
 
 
             //pos 1
-            if ((Math.abs(pos1 - pointerPrecise) < 12 || Math.abs(pos1 - pointerPrecise) > 348) && pos1 != Integer.MIN_VALUE)
+            if ((Math.abs(pos1 - pointerPosPrecise) < bigForgiving || Math.abs(pos1 - pointerPosPrecise) > 360 - bigForgiving) && pos1 != Integer.MIN_VALUE)
             {
                 pos1 = getRandomFreePosition();
                 completion += reward;
@@ -352,7 +365,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos2
-            if ((Math.abs(pos2 - pointerPrecise) < 12 || Math.abs(pos2 - pointerPrecise) > 348) && pos2 != Integer.MIN_VALUE)
+            if ((Math.abs(pos2 - pointerPosPrecise) < bigForgiving || Math.abs(pos2 - pointerPosPrecise) > 360 - bigForgiving) && pos2 != Integer.MIN_VALUE)
             {
                 pos2 = getRandomFreePosition();
                 completion += reward;
@@ -360,7 +373,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos thin 1
-            if ((Math.abs(posThin1 - pointerPrecise) < 5 || Math.abs(posThin1 - pointerPrecise) > 355) && posThin1 != Integer.MIN_VALUE)
+            if ((Math.abs(posThin1 - pointerPosPrecise) < thinForgiving || Math.abs(posThin1 - pointerPosPrecise) > 360 - thinForgiving) && posThin1 != Integer.MIN_VALUE)
             {
                 posThin1 = getRandomFreePosition();
                 completion += rewardThin;
@@ -368,7 +381,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos thin 2
-            if ((Math.abs(posThin2 - pointerPrecise) < 5 || Math.abs(posThin2 - pointerPrecise) > 355) && posThin2 != Integer.MIN_VALUE)
+            if ((Math.abs(posThin2 - pointerPosPrecise) < thinForgiving || Math.abs(posThin2 - pointerPosPrecise) > 360 - thinForgiving) && posThin2 != Integer.MIN_VALUE)
             {
                 posThin2 = getRandomFreePosition();
                 completion += rewardThin;
@@ -376,16 +389,24 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //if hit sweet spot treasure
-            if ((Math.abs(posTreasure - pointerPrecise) < 7 || Math.abs(posTreasure - pointerPrecise) > 353) && posTreasure != Integer.MIN_VALUE)
+            if ((Math.abs(posTreasure - pointerPosPrecise) < treasureForgiving || Math.abs(posTreasure - pointerPosPrecise) > 360 - treasureForgiving) && posTreasure != Integer.MIN_VALUE)
             {
                 posTreasure = getRandomFreePosition();
-                treasureProgress += 15;
+                treasureProgress += treasureReward;
                 hitSomething = true;
             }
 
 
             if (hitSomething)
             {
+                if(hasTreasure && r.nextFloat() > 0.0 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
+                {
+                    treasureActive = true;
+                    posTreasure = getRandomFreePosition();
+                    treasureProgress = 0;
+                    treasureProgressSmooth = 0;
+                }
+
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
                 if (changeRotation) currentRotation *= -1;
             }
@@ -428,10 +449,14 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             this.onClose();
         }
 
-        //if (completionSmooth > 10)
+        if(treasureProgressSmooth > 100)
+        {
+            posTreasure = Integer.MIN_VALUE;
+        }
+
         if (completionSmooth > 75)
         {
-            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount));
+            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount, treasureProgressSmooth > 100));
             this.onClose();
         }
     }
@@ -439,7 +464,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     @Override
     public void onClose()
     {
-        PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1));
+        PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1, false));
         this.minecraft.popGuiLayer();
     }
 

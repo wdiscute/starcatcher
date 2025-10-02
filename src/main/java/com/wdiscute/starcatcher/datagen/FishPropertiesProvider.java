@@ -405,25 +405,32 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
                         //nether
                         register(bootstrap, netherFish(ModItems.EMBERGILL.get())
-                                .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN));
+                                .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN
+                                        .withTreasure(FishProperties.Treasure.NETHER)));
 
                         register(bootstrap, netherFish(ModItems.LAVA_CRAB.get())
                                 .withRarity(FishProperties.Rarity.EPIC)
-                                .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP));
+                                .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP
+                                        .withTreasure(FishProperties.Treasure.NETHER)));
 
                         register(bootstrap, netherFish(ModItems.MAGMA_FISH.get())
                                 .withRarity(FishProperties.Rarity.UNCOMMON)
-                                .withDifficulty(FishProperties.Difficulty.HARD));
+                                .withDifficulty(FishProperties.Difficulty.HARD
+                                        .withTreasure(FishProperties.Treasure.NETHER)));
 
                         register(bootstrap, netherFish(ModItems.GLOWSTONE_SEEKER.get())
-                                .withDifficulty(FishProperties.Difficulty.MEDIUM));
+                                .withDifficulty(FishProperties.Difficulty.MEDIUM
+                                        .withTreasure(FishProperties.Treasure.NETHER)));
 
                         register(bootstrap, netherFish(ModItems.CINDER_SQUID.get())
-                                .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY)
+                                .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY
+                                        .withTreasure(FishProperties.Treasure.NETHER))
                                 .withRarity(FishProperties.Rarity.RARE)
                                 .withBaseChance(2));
 
-                        register(bootstrap, netherFish(ModItems.SCALDING_PIKE.get()));
+                        register(bootstrap, netherFish(ModItems.SCALDING_PIKE.get())
+                                .withDifficulty(FishProperties.Difficulty.MEDIUM
+                                        .withTreasure(FishProperties.Treasure.NETHER)));
 
                         register(bootstrap, netherFish(ModItems.LAVA_CRAB_CLAW.get())
                                 .withBaseChance(1)

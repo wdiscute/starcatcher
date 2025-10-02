@@ -6,7 +6,12 @@
     "has_second_marker": false,
     "penalty": 15,
     "reward": 5,
-    "speed": 15
+    "speed": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 28,
+      "loot": "starcatcher:scalding_treasure"
+    }
   },
   "fish": "starcatcher:cinder_squid",
   "rarity": "rare",

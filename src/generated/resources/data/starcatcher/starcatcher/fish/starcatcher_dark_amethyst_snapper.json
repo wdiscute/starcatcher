@@ -7,7 +7,12 @@
     "has_second_marker": false,
     "penalty": 15,
     "reward": 5,
-    "speed": 15
+    "speed": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
   },
   "fish": "starcatcher:dark_amethyst_snapper",
   "rarity": "epic",

@@ -55,6 +55,7 @@ public class PayloadReceiver
 //                        }
 
                         ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()));
+                        ItemStack treasure = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.dif().treasure().loot()));
 
                         if (!fp.customName().isEmpty())
                             is.set(DataComponents.CUSTOM_NAME, Component.translatable("item.starcatcher." + fp.customName()));
@@ -67,6 +68,13 @@ public class PayloadReceiver
                                 fbe.position().z,
                                 is);
 
+                        Entity treasureFished = new ItemEntity(
+                                level,
+                                fbe.position().x,
+                                fbe.position().y + 1.2f,
+                                fbe.position().z,
+                                treasure);
+
                         double x = (player.position().x - fbe.position().x) / 25;
                         double y = (player.position().y - fbe.position().y) / 20;
                         double z = (player.position().z - fbe.position().z) / 25;
@@ -78,12 +86,13 @@ public class PayloadReceiver
                         Vec3 vec3 = new Vec3(x, 0.7 + y, z);
 
                         itemFished.setDeltaMovement(vec3);
+                        treasureFished.setDeltaMovement(vec3);
 
                         level.addFreshEntity(itemFished);
+                        if(fbe.fpToFish.dif().treasure().hasTreasure() && data.completedTreasure()) level.addFreshEntity(treasureFished);
 
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
-
 
                         //award fish counter
                         if (FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player) && player instanceof ServerPlayer sp)
