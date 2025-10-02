@@ -54,6 +54,8 @@ public class ModItems
     public static final DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", () -> new Item(new Item.Properties()));
 
     public static final DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> TREASURE = ITEMS.register("treasure", () -> new Item(new Item.Properties()));
+    public static final DeferredItem<Item> SCALDING_TREASURE = ITEMS.register("scalding_treasure", () -> new Item(new Item.Properties()));
     public static final DeferredItem<Item> FISH_BONES = ITEMS.register("fish_bones", () -> new Item(new Item.Properties()));
 
 
