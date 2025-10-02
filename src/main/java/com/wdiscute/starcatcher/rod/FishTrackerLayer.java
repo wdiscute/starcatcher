@@ -49,13 +49,9 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
     private void recalculate()
     {
-        System.out.println("calling!!!!!!");
-
         fpsInArea = FishProperties.getFpsWithGuideEntryForArea(player);
-
         fishesCaught = new ArrayList<>();
         for (FishCaughtCounter fishes : player.getData(ModDataAttachments.FISHES_CAUGHT)) fishesCaught.add(fishes.fp());
-
     }
 
     @Override

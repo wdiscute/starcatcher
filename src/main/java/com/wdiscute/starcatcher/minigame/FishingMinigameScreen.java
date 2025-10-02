@@ -254,9 +254,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.popPose();
         }
 
-        System.out.println(treasureProgress);
-        System.out.println(treasureProgressSmooth);
-
         //pos treasure
         if (posTreasure != Integer.MIN_VALUE)
         {
