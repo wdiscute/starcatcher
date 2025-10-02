@@ -19,13 +19,17 @@ public class FishItem extends Item
     @Override
     public InteractionResult useOn(UseOnContext context)
     {
+        //Twitch chat didn't force me to do write this
         FishEntity fe = new FishEntity(ModEntities.FISH.get(), context.getLevel());
         fe.setFish(new ItemStack(this.asItem()));
         fe.setPos(new Vec3(context.getClickedPos().above().getX(), context.getClickedPos().above().getY(), context.getClickedPos().above().getZ()));
 
         context.getLevel().addFreshEntity(fe);
 
+        ItemStack is = context.getPlayer().getItemInHand(context.getHand());
+        is.shrink(1);
 
+        context.getPlayer().setItemInHand(context.getHand(), is);
 
         return InteractionResult.CONSUME;
     }
