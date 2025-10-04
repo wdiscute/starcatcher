@@ -3,10 +3,12 @@ package com.wdiscute.starcatcher.rod;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.ModMenuTypes;
 import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.ItemContainerContents;
@@ -27,6 +29,8 @@ public class FishingRodMenu extends AbstractContainerMenu
 
     };
 
+    public final ItemStack is;
+
     public FishingRodMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
         this(containerId, inv, inv.player.getMainHandItem());
@@ -35,6 +39,8 @@ public class FishingRodMenu extends AbstractContainerMenu
     public FishingRodMenu(int containerId, Inventory inv, ItemStack itemStack)
     {
         super(ModMenuTypes.FISHING_ROD_MENU.get(), containerId);
+
+        is = itemStack;
 
         //player inventory
         for (int i = 0; i < 3; ++i)
@@ -51,30 +57,48 @@ public class FishingRodMenu extends AbstractContainerMenu
         }
 
 
-        inventory.setStackInSlot(0, itemStack.get(ModDataComponents.BOBBER.get()).copyOne());
-        inventory.setStackInSlot(1, itemStack.get(ModDataComponents.BAIT.get()).copyOne());
+        inventory.setStackInSlot(0, is.get(ModDataComponents.BOBBER.get()).stack().copy());
+        inventory.setStackInSlot(1, is.get(ModDataComponents.BAIT.get()).stack().copy());
 
         this.addSlot(new SlotItemHandler(inventory, 0, 53, 35));
         this.addSlot(new SlotItemHandler(inventory, 1, 107, 35));
     }
 
     @Override
-    public void removed(Player player)
+    protected boolean moveItemStackTo(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection)
     {
-        if (!player.level().isClientSide)
+        return super.moveItemStackTo(stack, startIndex, endIndex, reverseDirection);
+    }
+
+    @Override
+    public void clicked(int slotId, int button, ClickType clickType, Player player)
+    {
+        if(slotId >= 0 && this.getSlot(slotId).getItem().equals(is)) return;
+
+        if (clickType == ClickType.SWAP)
         {
-            player.getMainHandItem().set(
-                    ModDataComponents.BOBBER.get(),
-                    ItemContainerContents.fromItems(List.of(inventory.getStackInSlot(0).copy())));
-
-            player.getMainHandItem().set(
-                    ModDataComponents.BAIT.get(),
-                    ItemContainerContents.fromItems(List.of(inventory.getStackInSlot(1).copy())));
-
+            // When clickType is SWAP, the action is the hotbar number to swap it to.
+            int hotbarSlotId = 2 + 3 * 9 + button;
+            if (slotId == hotbarSlotId)
+            {
+                return;
+            }
         }
 
+        super.clicked(slotId, button, clickType, player);
+    }
 
+    @Override
+    public void removed(Player player)
+    {
         super.removed(player);
+
+        if (!player.level().isClientSide)
+        {
+            is.set(ModDataComponents.BOBBER.get(), new SingleStackContainer(inventory.getStackInSlot(0)));
+            is.set(ModDataComponents.BAIT.get(), new SingleStackContainer(inventory.getStackInSlot(1)));
+        }
+
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -113,14 +137,16 @@ public class FishingRodMenu extends AbstractContainerMenu
             {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
             }
-        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT)
+        }
+        else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT)
         {
             // This is a TE slot so merge the stack into the players inventory
             if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false))
             {
                 return ItemStack.EMPTY;
             }
-        } else
+        }
+        else
         {
             return ItemStack.EMPTY;
         }
@@ -128,7 +154,8 @@ public class FishingRodMenu extends AbstractContainerMenu
         if (sourceStack.getCount() == 0)
         {
             sourceSlot.set(ItemStack.EMPTY);
-        } else
+        }
+        else
         {
             sourceSlot.setChanged();
         }

@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import com.wdiscute.starcatcher.networkandstuff.Payloads;
+import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -75,8 +76,8 @@ public class FishingBobEntity extends Projectile
 
         this.player = player;
         this.rod = rod;
-        this.bobber = rod.get(ModDataComponents.BOBBER).copyOne();
-        this.bait = rod.get(ModDataComponents.BAIT).copyOne();
+        this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
+        this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
 
         {
             this.setOwner(player);
@@ -203,9 +204,7 @@ public class FishingBobEntity extends Projectile
                 bait.setCount(bait.getCount() - 1);
             }
 
-            rod.set(
-                    ModDataComponents.BAIT,
-                    ItemContainerContents.fromItems(List.of(bait)));
+            rod.set(ModDataComponents.BAIT, new SingleStackContainer(bait));
         }
 
 

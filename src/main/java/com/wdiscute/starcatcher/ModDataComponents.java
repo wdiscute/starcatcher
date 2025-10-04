@@ -1,11 +1,8 @@
 package com.wdiscute.starcatcher;
 
-import com.mojang.serialization.Codec;
-import net.minecraft.core.BlockPos;
+import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -18,13 +15,14 @@ public class ModDataComponents
             DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Starcatcher.MOD_ID);
 
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BOBBER = register(
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SingleStackContainer>> BOBBER = register(
             "bobber",
-            builder -> builder.persistent(ItemContainerContents.CODEC));
+            builder -> builder.persistent(SingleStackContainer.CODEC));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> BAIT = register(
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SingleStackContainer>> BAIT = register(
             "bait",
-            builder -> builder.persistent(ItemContainerContents.CODEC));
+            builder -> builder.persistent(SingleStackContainer.CODEC));
+
 
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,

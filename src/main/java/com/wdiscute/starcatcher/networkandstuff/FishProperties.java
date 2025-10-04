@@ -839,8 +839,8 @@ public record FishProperties(
 
         int chance = fp.baseChance();
 
-        ItemStack bobber = rod.get(ModDataComponents.BOBBER).copyOne();
-        ItemStack bait = rod.get(ModDataComponents.BAIT).copyOne();
+        ItemStack bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
+        ItemStack bait = rod.get(ModDataComponents.BAIT).stack().copy();
 
         //dimension  check
         if (!fp.wr.dims.isEmpty() && !fp.wr().dims().contains(level.dimension().location()))

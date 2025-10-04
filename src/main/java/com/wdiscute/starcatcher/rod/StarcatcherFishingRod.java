@@ -101,8 +101,10 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        return new FishingRodMenu(i, inventory, player.getMainHandItem());
-
+        if(player.getMainHandItem().is(ModItems.ROD))
+            return new FishingRodMenu(i, inventory, player.getMainHandItem());
+        else
+            return new FishingRodMenu(i, inventory, player.getOffhandItem());
     }
 }
 
