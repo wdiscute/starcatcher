@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
+import com.wdiscute.starcatcher.datagen.FishPropertiesWithModRestriction;
 import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
@@ -53,6 +54,76 @@ public record FishProperties(
         boolean hasGuideEntry
 )
 {
+    public static final Codec<FishProperties> CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    //mandatory
+                    ResourceLocation.CODEC.fieldOf("fish").forGetter(FishProperties::fish),
+                    Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
+                    //optional
+                    Codec.STRING.optionalFieldOf("customName", "").forGetter(FishProperties::customName),
+                    Rarity.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(FishProperties::rarity),
+                    WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
+                    BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
+                    Difficulty.CODEC.optionalFieldOf("difficulty", Difficulty.DEFAULT).forGetter(FishProperties::dif),
+                    Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
+                    Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
+                    Codec.INT.optionalFieldOf("below_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBelowY),
+                    Codec.INT.optionalFieldOf("above_y", Integer.MIN_VALUE).forGetter(FishProperties::mustBeCaughtAboveY),
+                    Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
+                    Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
+
+            ).apply(instance, FishProperties::checkFP)
+    );
+
+
+
+    private static FishProperties checkFP(ResourceLocation fish, Integer baseChance, String customName, Rarity rarity, WorldRestrictions wr, BaitRestrictions br, Difficulty dif, Daytime daytime, Weather weather, Integer bellowY, Integer aboveY, Boolean skipMinigame, Boolean hasGuideEntry)
+    {
+        //TODO make this use the conditions feature of neoforge instead but the datagen for it is god awful so im not gonna do that right now teehee
+
+        if (!new ItemStack(BuiltInRegistries.ITEM.get(fish)).isEmpty())
+            return new FishProperties(fish, baseChance, customName, rarity, wr, br, dif, daytime, weather, bellowY, aboveY, skipMinigame, hasGuideEntry);
+        else
+            return null;
+    }
+
+
+    public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.CODEC.listOf();
+
+    public static final StreamCodec<ByteBuf, FishProperties> STREAM_CODEC = composite(
+            ResourceLocation.STREAM_CODEC, FishProperties::fish,
+            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
+            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
+            ByteBufCodecs.fromCodec(Rarity.CODEC), FishProperties::rarity,
+            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
+            BaitRestrictions.STREAM_CODEC, FishProperties::br,
+            Difficulty.STREAM_CODEC, FishProperties::dif,
+            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
+            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
+            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
+            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
+            FishProperties::new
+    );
+
+    public static final StreamCodec<ByteBuf, List<FishProperties>> STREAM_CODEC_LIST = composite(
+            ResourceLocation.STREAM_CODEC, FishProperties::fish,
+            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
+            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
+            ByteBufCodecs.fromCodec(Rarity.CODEC), FishProperties::rarity,
+            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
+            BaitRestrictions.STREAM_CODEC, FishProperties::br,
+            Difficulty.STREAM_CODEC, FishProperties::dif,
+            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
+            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
+            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
+            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
+            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
+            FishProperties::new
+    ).apply(ByteBufCodecs.list());
+
 
     public static final FishProperties DEFAULT = new FishProperties(
             Starcatcher.rl("none"),
@@ -70,7 +141,13 @@ public record FishProperties(
             true
     );
 
+
     //region with()
+
+    public FishPropertiesWithModRestriction withRestrictions(String modid)
+    {
+        return new FishPropertiesWithModRestriction(this, modid);
+    }
 
     public FishProperties withFish(ResourceLocation fish)
     {
@@ -788,7 +865,7 @@ public record FishProperties(
         boolean fluidAbove = fp.wr.fluids.contains(BuiltInRegistries.FLUID.getKey(getSource(level.getFluidState(entity.blockPosition().above()).getType())));
         boolean fluidBelow = fp.wr.fluids.contains(BuiltInRegistries.FLUID.getKey(getSource(level.getFluidState(entity.blockPosition().below()).getType())));
 
-        if(!fluid && !fluidAbove && !fluidBelow && entity instanceof FishingBobEntity)
+        if (!fluid && !fluidAbove && !fluidBelow && entity instanceof FishingBobEntity)
             return 0;
 
         //blacklisted baits
@@ -886,69 +963,10 @@ public record FishProperties(
         return list;
     }
 
-    //region codecs
-
-    public static final Codec<FishProperties> CODEC = RecordCodecBuilder.create(instance ->
-            instance.group(
-                    //mandatory
-                    ResourceLocation.CODEC.fieldOf("fish").forGetter(FishProperties::fish),
-                    Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
-                    //optional
-                    Codec.STRING.optionalFieldOf("customName", "").forGetter(FishProperties::customName),
-                    Rarity.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(FishProperties::rarity),
-                    WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
-                    BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
-                    Difficulty.CODEC.optionalFieldOf("difficulty", Difficulty.DEFAULT).forGetter(FishProperties::dif),
-                    Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
-                    Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
-                    Codec.INT.optionalFieldOf("below_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBelowY),
-                    Codec.INT.optionalFieldOf("above_y", Integer.MIN_VALUE).forGetter(FishProperties::mustBeCaughtAboveY),
-                    Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
-                    Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
-
-            ).apply(instance, FishProperties::new)
-    );
-
-    public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.CODEC.listOf();
-
-    public static final StreamCodec<ByteBuf, FishProperties> STREAM_CODEC = composite(
-            ResourceLocation.STREAM_CODEC, FishProperties::fish,
-            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
-            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
-            ByteBufCodecs.fromCodec(Rarity.CODEC), FishProperties::rarity,
-            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
-            BaitRestrictions.STREAM_CODEC, FishProperties::br,
-            Difficulty.STREAM_CODEC, FishProperties::dif,
-            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
-            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
-            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
-            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
-            FishProperties::new
-    );
-
-    public static final StreamCodec<ByteBuf, List<FishProperties>> STREAM_CODEC_LIST = composite(
-            ResourceLocation.STREAM_CODEC, FishProperties::fish,
-            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
-            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
-            ByteBufCodecs.fromCodec(Rarity.CODEC), FishProperties::rarity,
-            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
-            BaitRestrictions.STREAM_CODEC, FishProperties::br,
-            Difficulty.STREAM_CODEC, FishProperties::dif,
-            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
-            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
-            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
-            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
-            FishProperties::new
-    ).apply(ByteBufCodecs.list());
-
-    //endregion codecs
-
-    public static Fluid getSource(Fluid fluid1) {
-        if (fluid1 instanceof FlowingFluid fluid) {
+    public static Fluid getSource(Fluid fluid1)
+    {
+        if (fluid1 instanceof FlowingFluid fluid)
+        {
             return fluid.getSource();
         }
 

@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-02T16:19:22.8913621	Registries
+// 1.21.1	2025-10-04T15:13:51.0056545	Registries
 138659fbce2333aec7aaa1bdac982ebcb9ff84b4 data/starcatcher/starcatcher/fish/minecraft_cod.json
 01677dcc5d0469ffb5086adc02795c1e081cdeec data/starcatcher/starcatcher/fish/minecraft_salmon.json
 adff36ab18ed48bc569283c63b30533764ca7b83 data/starcatcher/starcatcher/fish/starcatcher_agave_bream.json
@@ -89,3 +89,4 @@ fc53a1b944a622163b2ddb5733af9612fd5f16ee data/starcatcher/starcatcher/fish/starc
 75a239c05bc58cc4197fc4691ce7174fb83d530c data/starcatcher/starcatcher/fish/starcatcher_willow_bream.json
 930c80632e3c87d35a8afefeb35b6a28f919077a data/starcatcher/starcatcher/fish/starcatcher_wintery_pike.json
 64e4a46592f4131de33deb8f3d6f5c449b903423 data/starcatcher/starcatcher/fish/starcatcher_yellowstone_fish.json
+163e50812016deb44776ac27934d7805fad78f5d data/starcatcher/starcatcher/fish/tide_tuna.json
