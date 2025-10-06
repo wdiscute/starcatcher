@@ -5,19 +5,11 @@ import com.wdiscute.starcatcher.items.FishItem;
 import com.wdiscute.starcatcher.items.TrophyBronze;
 import com.wdiscute.starcatcher.items.TrophyGold;
 import com.wdiscute.starcatcher.items.TrophySilver;
-import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
-import com.wdiscute.starcatcher.networkandstuff.FishProperties;
-import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.component.ItemContainerContents;
-import net.minecraft.world.item.context.UseOnContext;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -35,7 +27,23 @@ public interface ModItems
 
     DeferredItem<Item> GUIDE = ITEMS.register("starcatcher_guide", () -> new FishingGuideItem(new Item.Properties()));
 
-    DeferredItem<Item> FISH_SPOTTER = ITEMS.register("fish_spotter", () -> new Item(new Item.Properties()));
+    DeferredItem<Item> FISH_SPOTTER = singleStackItem("fish_spotter");
+
+    DeferredItem<Item> STARCATCHER_TWINE = basicItem("starcatcher_twine");
+
+    DeferredItem<Item> HOOK = singleStackItem("hook");
+    DeferredItem<Item> DIAMOND_HOOK = singleStackItem("shiny_hook");
+    DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");
+    DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");
+    DeferredItem<Item> CRYSTAL_HOOK = singleStackItem("crystal_hook");
+    DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");
+    DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");
+
+    DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber");
+    DeferredItem<Item> BAIT_SAVING_BOBBER = singleStackItem("bait_saving_bobber");
+    DeferredItem<Item> DIFFICULTY_BOBBER = singleStackItem("difficulty_bobber");
+    DeferredItem<Item> FAST_BITING_BOBBER = singleStackItem("fast_biting_bobber");
+    DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
 
     DeferredItem<Item> ROD = ITEMS.register(
             "starcatcher_rod",
@@ -45,63 +53,20 @@ public interface ModItems
                             .stacksTo(1)
                             .component(ModDataComponents.BOBBER.get(), SingleStackContainer.EMPTY)
                             .component(ModDataComponents.BAIT.get(), SingleStackContainer.EMPTY)
+                            .component(ModDataComponents.HOOK.get(), new SingleStackContainer(new ItemStack(ModItems.HOOK.get())))
             ));
-
-    DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", () -> new Item(new Item.Properties()));
-
-
-    DeferredItem<Item> HOOK = ITEMS.register("hook", () -> new Item(new Item.Properties()));
-
-    DeferredItem<Item> CREEPER_BOBBER = ITEMS.register("creeper_bobber", () -> new Item(new Item.Properties()));
-    DeferredItem<Item> TREASURE_BOBBER = ITEMS.register("treasure_bobber", () -> new Item(new Item.Properties()));
-    DeferredItem<Item> BAIT_SAVING_BOBBER = ITEMS.register("bait_saving_bobber", () -> new Item(new Item.Properties()));
-    DeferredItem<Item> DIFFICULTY_BOBBER = ITEMS.register("difficulty_bobber", () -> new Item(new Item.Properties()));
-    DeferredItem<Item> FAST_BITING_BOBBER = ITEMS.register("fast_biting_bobber", () -> new Item(new Item.Properties()));
-
 
     DeferredItem<Item> TROPHY_OF_MASTERFUL_FISHING = ITEMS.register("trophy_of_masterful_fishing", () -> new TrophyGold(new Item.Properties()));
     DeferredItem<Item> TROPHY_OF_FISHING = ITEMS.register("trophy_of_fishing", () -> new TrophySilver(new Item.Properties()));
     DeferredItem<Item> TROPHY_OF_PITIFUL_FISHING = ITEMS.register("trophy_of_pitiful_fishing", () -> new TrophyBronze(new Item.Properties()));
 
-    DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", () -> new Item(new Item.Properties()));
+    DeferredItem<Item> MISSINGNO = basicItem("missingno");
 
-    DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties())
-    {
-        @Override
-        public InteractionResult useOn(UseOnContext context)
-        {
+    DeferredItem<Item> WATERLOGGED_SATCHEL = singleStackItem("waterlogged_satchel");
+    DeferredItem<Item> TREASURE = singleStackItem("treasure");
+    DeferredItem<Item> SCALDING_TREASURE = singleStackItem("scalding_treasure");
 
-            List<FishCaughtCounter> list = new ArrayList<>();
-
-            Player player = context.getPlayer();
-
-
-            for(FishCaughtCounter fishCaughtCounter : player.getData(ModDataAttachments.FISHES_CAUGHT))
-            {
-                System.out.println(context.getLevel() + "   " + fishCaughtCounter.fp().fish());
-                System.out.println(context.getLevel() + "   " + fishCaughtCounter.count());
-                System.out.println("---------------");
-
-            }
-
-            for (FishProperties fp : context.getLevel().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
-            {
-
-                if(!fp.fish().equals(Starcatcher.rl("joel")))
-                {
-                    list.add(new FishCaughtCounter(fp, 1));
-                }
-
-            }
-
-            //context.getPlayer().setData(ModDataAttachments.FISHES_CAUGHT, list);
-
-            return super.useOn(context);
-        }
-    });
-    DeferredItem<Item> TREASURE = ITEMS.register("treasure", () -> new Item(new Item.Properties()));
-    DeferredItem<Item> SCALDING_TREASURE = ITEMS.register("scalding_treasure", () -> new Item(new Item.Properties()));
-    DeferredItem<Item> FISH_BONES = ITEMS.register("fish_bones", () -> new Item(new Item.Properties()));
+    DeferredItem<Item> FISH_BONES = basicItem("fish_bones");
 
 
     //
@@ -272,6 +237,16 @@ public interface ModItems
         DeferredItem<Item> item = ITEMS.register(name, () -> new FishItem(new Item.Properties().fireResistant()));
         trash.add(item);
         return item;
+    }
+
+    static DeferredItem<Item> singleStackItem(String name)
+    {
+        return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(1)));
+    }
+
+    static DeferredItem<Item> basicItem(String name)
+    {
+        return ITEMS.register(name, () -> new Item(new Item.Properties()));
     }
 
 
