@@ -57,6 +57,7 @@ public class PayloadReceiver
                         ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()));
                         ItemStack treasure = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.dif().treasure().loot()));
 
+
                         if (!fp.customName().isEmpty())
                             is.set(DataComponents.CUSTOM_NAME, Component.translatable("item.starcatcher." + fp.customName()));
 

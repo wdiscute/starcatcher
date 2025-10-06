@@ -42,26 +42,26 @@ public record FishCaughtCounter(
     public static boolean AwardFishCaughtCounter(FishProperties fp, Player player)
     {
         List<FishCaughtCounter> listFishCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
-
         List<FishCaughtCounter> newlist = new ArrayList<>();
 
+        boolean newFish = true;
 
         for (FishCaughtCounter f : listFishCaughtCounter)
         {
-
             if (fp.equals(f.fp))
             {
                 newlist.add(new FishCaughtCounter(fp, f.count + 1));
-                return false;
+                newFish = false;
+            }else
+            {
+                newlist.add(f);
             }
-
-            newlist.add(f);
         }
 
         newlist.add(new FishCaughtCounter(fp, 1));
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
-        return true;
+        return newFish;
     }
 
 }
