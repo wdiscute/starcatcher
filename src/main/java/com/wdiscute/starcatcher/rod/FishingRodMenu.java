@@ -11,15 +11,12 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 
-import java.util.List;
-
 public class FishingRodMenu extends AbstractContainerMenu
 {
-    public final ItemStackHandler inventory = new ItemStackHandler(2)
+    public final ItemStackHandler inventory = new ItemStackHandler(3)
     {
         @Override
         protected int getStackLimit(int slot, ItemStack stack)
@@ -56,12 +53,13 @@ public class FishingRodMenu extends AbstractContainerMenu
             this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
         }
 
-
         inventory.setStackInSlot(0, is.get(ModDataComponents.BOBBER.get()).stack().copy());
         inventory.setStackInSlot(1, is.get(ModDataComponents.BAIT.get()).stack().copy());
+        inventory.setStackInSlot(2, is.get(ModDataComponents.HOOK.get()).stack().copy());
 
         this.addSlot(new SlotItemHandler(inventory, 0, 53, 35));
-        this.addSlot(new SlotItemHandler(inventory, 1, 107, 35));
+        this.addSlot(new SlotItemHandler(inventory, 1, 70, 35));
+        this.addSlot(new SlotItemHandler(inventory, 2, 100, 35));
     }
 
     @Override

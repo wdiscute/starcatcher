@@ -39,6 +39,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final ItemStack itemBeingFished;
     final ItemStack bobber;
     final ItemStack bait;
+    final ItemStack hook;
 
     final float speed;
     final int reward;
@@ -68,6 +69,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int completion = 20;
     int completionSmooth = 20;
 
+    boolean perfectCatch;
+
     boolean treasureActive;
     int treasureProgress = Integer.MIN_VALUE;
     int treasureProgressSmooth = Integer.MIN_VALUE;
@@ -87,21 +90,30 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         this.itemBeingFished = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
         this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
         this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
+        this.hook = rod.get(ModDataComponents.HOOK).stack().copy();
 
-        pos1 = fp.dif().hasFirstMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        pos2 = fp.dif().hasSecondMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin1 = fp.dif().hasFirstThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin2 = fp.dif().hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
         posTreasure = Integer.MIN_VALUE;
 
-        this.speed = fp.dif().speed();
-        this.reward = fp.dif().reward();
-        this.rewardThin = fp.dif().rewardThin();
-        this.treasureReward = fp.dif().treasure().hitReward();
-        this.penalty = fp.dif().penalty();
-        this.decay = fp.dif().decay();
-        this.hasTreasure = fp.dif().treasure().hasTreasure();
-        this.changeRotation = fp.dif().changeRotationOnEveryHit();
+        //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
+        FishProperties.Difficulty difficulty = bobber.is(ModItems.MOSSY_HOOK) &&
+                (fp.rarity() == FishProperties.Rarity.COMMON ||
+                        fp.rarity() == FishProperties.Rarity.UNCOMMON || fp.rarity() ==
+                        FishProperties.Rarity.RARE) ?
+                FishProperties.Difficulty.HARD : fp.dif();
+
+        this.speed = difficulty.speed();
+        this.reward = difficulty.reward();
+        this.rewardThin = difficulty.rewardThin();
+        this.treasureReward = difficulty.treasure().hitReward();
+        this.penalty = difficulty.penalty();
+        this.decay = difficulty.decay();
+        this.hasTreasure = difficulty.treasure().hasTreasure();
+        this.changeRotation = difficulty.changeRotationOnEveryHit();
+
+        pos1 = difficulty.hasFirstMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        pos2 = difficulty.hasSecondMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin1 = difficulty.hasFirstThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin2 = difficulty.hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
 
         hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
@@ -396,7 +408,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (hitSomething)
             {
-                if(hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
+                if (hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
                 {
                     treasureActive = true;
                     posTreasure = getRandomFreePosition();
@@ -411,6 +423,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             {
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 1, 1, false);
                 completion -= penalty;
+                perfectCatch = false;
             }
 
         }
@@ -446,14 +459,17 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             this.onClose();
         }
 
-        if(treasureProgressSmooth > 100)
+        if (treasureProgressSmooth > 100)
         {
             posTreasure = Integer.MIN_VALUE;
         }
 
         if (completionSmooth > 75)
         {
-            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount, treasureProgressSmooth > 100));
+            //if completed treasure minigame, or is a perfect catch with the mossy hook
+            boolean awardTreasure = treasureProgressSmooth > 100 || (perfectCatch && hook.is(ModItems.MOSSY_HOOK));
+
+            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount, awardTreasure , perfectCatch));
             this.onClose();
         }
     }
@@ -461,7 +477,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     @Override
     public void onClose()
     {
-        PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1, false));
+        PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1, false, false));
         this.minecraft.popGuiLayer();
     }
 
