@@ -69,7 +69,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int completion = 20;
     int completionSmooth = 20;
 
-    boolean perfectCatch;
+    boolean perfectCatch = true;
 
     boolean treasureActive;
     int treasureProgress = Integer.MIN_VALUE;

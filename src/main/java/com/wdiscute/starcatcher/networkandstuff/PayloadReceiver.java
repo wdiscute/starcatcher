@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.networkandstuff;
 
+import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
@@ -61,15 +62,17 @@ public class PayloadReceiver
                         if (!fp.customName().isEmpty())
                             is.set(DataComponents.CUSTOM_NAME, Component.translatable("item.starcatcher." + fp.customName()));
 
+                        //split hook double drops
+                        if(data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);
 
-                        Entity itemFished = new ItemEntity(
+                        ItemEntity itemFished = new ItemEntity(
                                 level,
                                 fbe.position().x,
                                 fbe.position().y + 1.2f,
                                 fbe.position().z,
                                 is);
 
-                        Entity treasureFished = new ItemEntity(
+                        ItemEntity treasureFished = new ItemEntity(
                                 level,
                                 fbe.position().x,
                                 fbe.position().y + 1.2f,

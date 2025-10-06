@@ -103,6 +103,7 @@ public class FishingRodMenu extends AbstractContainerMenu
         {
             is.set(ModDataComponents.BOBBER.get(), new SingleStackContainer(inventory.getStackInSlot(0)));
             is.set(ModDataComponents.BAIT.get(), new SingleStackContainer(inventory.getStackInSlot(1)));
+            is.set(ModDataComponents.HOOK.get(), new SingleStackContainer(inventory.getStackInSlot(2)));
         }
 
     }

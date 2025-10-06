@@ -46,6 +46,7 @@ public class FishingBobEntity extends Projectile
     public FishProperties fpToFish;
     public ItemStack rod;
     public ItemStack bobber;
+    public ItemStack hook;
     public ItemStack bait;
 
     int minTicksToFish;
@@ -78,6 +79,7 @@ public class FishingBobEntity extends Projectile
         this.rod = rod;
         this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
         this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
+        this.hook = rod.get(ModDataComponents.HOOK).stack().copy();
 
         {
             this.setOwner(player);

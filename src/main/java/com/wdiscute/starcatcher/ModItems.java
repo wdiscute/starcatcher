@@ -31,13 +31,13 @@ public interface ModItems
 
     DeferredItem<Item> STARCATCHER_TWINE = basicItem("starcatcher_twine");
 
-    DeferredItem<Item> HOOK = singleStackItem("hook");
+    DeferredItem<Item> HOOK = singleStackItem("hook");  //done
     DeferredItem<Item> DIAMOND_HOOK = singleStackItem("shiny_hook");
     DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");
-    DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");
+    DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");  //done
     DeferredItem<Item> CRYSTAL_HOOK = singleStackItem("crystal_hook");
     DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");
-    DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");
+    DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");  //done
 
     DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber");
     DeferredItem<Item> BAIT_SAVING_BOBBER = singleStackItem("bait_saving_bobber");
