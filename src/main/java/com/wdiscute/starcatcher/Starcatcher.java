@@ -52,8 +52,6 @@ public class Starcatcher
         return ResourceLocation.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
     }
 
-    public static float hue;
-
     @OnlyIn(Dist.CLIENT)
     public static void fishCaughtToast(FishProperties fp)
     {
@@ -83,9 +81,7 @@ public class Starcatcher
         public static void addRegistry(DataPackRegistryEvent.NewRegistry event)
         {
             event.dataPackRegistry(
-                    FISH_REGISTRY,
-                    FishProperties.CODEC,
-                    FishProperties.CODEC,
+                    FISH_REGISTRY, FishProperties.CODEC, FishProperties.CODEC,
                     builder -> builder.maxId(256));
         }
 
@@ -94,46 +90,6 @@ public class Starcatcher
         {
             event.put(ModEntities.FISH.get(), FishEntity.createAttributes().build());
         }
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event)
-        {
-            EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
-            EntityRenderers.register(ModEntities.FISH.get(), FishRenderer::new);
-            ModItemProperties.addCustomItemProperties();
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void FishSpotterLayer(RegisterGuiLayersEvent event)
-        {
-            event.registerAboveAll(Starcatcher.rl("fish_tracker"), new FishTrackerLayer());
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void registerParticleFactories(RegisterParticleProvidersEvent event)
-        {
-            event.registerSpriteSet(ModParticles.FISHING_NOTIFICATION.get(), FishingNotificationParticles.Provider::new);
-            event.registerSpriteSet(ModParticles.FISHING_BITING.get(), FishingBitingParticles.Provider::new);
-        }
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void registerScreens(RegisterMenuScreensEvent event)
-        {
-            event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
-        }
-
-
-        @OnlyIn(Dist.CLIENT)
-        @SubscribeEvent
-        public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
-        {
-            event.registerLayerDefinition(FishingBobModel.LAYER_LOCATION, FishingBobModel::createBodyLayer);
-        }
-
 
         @SubscribeEvent
         public static void registerPayloads(final RegisterPayloadHandlersEvent event)
@@ -163,6 +119,47 @@ public class Starcatcher
                     PayloadReceiver::receiveFPsSeen
             );
 
+        }
+
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
+    public static class ModClientEvents
+    {
+
+        @SubscribeEvent
+        public static void onClientSetup(FMLClientSetupEvent event)
+        {
+            EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
+            EntityRenderers.register(ModEntities.FISH.get(), FishRenderer::new);
+            ModItemProperties.addCustomItemProperties();
+        }
+
+        @SubscribeEvent
+        public static void FishSpotterLayer(RegisterGuiLayersEvent event)
+        {
+            event.registerAboveAll(Starcatcher.rl("fish_tracker"), new FishTrackerLayer());
+        }
+
+        @SubscribeEvent
+        public static void registerParticleFactories(RegisterParticleProvidersEvent event)
+        {
+            event.registerSpriteSet(ModParticles.FISHING_NOTIFICATION.get(), FishingNotificationParticles.Provider::new);
+            event.registerSpriteSet(ModParticles.FISHING_BITING.get(), FishingBitingParticles.Provider::new);
+        }
+
+        @SubscribeEvent
+        public static void registerScreens(RegisterMenuScreensEvent event)
+        {
+            event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
+        }
+
+
+        @SubscribeEvent
+        public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
+        {
+            event.registerLayerDefinition(FishingBobModel.LAYER_LOCATION, FishingBobModel::createBodyLayer);
         }
 
     }

@@ -5,12 +5,19 @@ import com.wdiscute.starcatcher.items.FishItem;
 import com.wdiscute.starcatcher.items.TrophyBronze;
 import com.wdiscute.starcatcher.items.TrophyGold;
 import com.wdiscute.starcatcher.items.TrophySilver;
+import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
+import com.wdiscute.starcatcher.networkandstuff.FishProperties;
+import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.component.ItemContainerContents;
+import net.minecraft.world.item.context.UseOnContext;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -58,7 +65,40 @@ public interface ModItems
 
     DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", () -> new Item(new Item.Properties()));
 
-    DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties()));
+    DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new Item(new Item.Properties())
+    {
+        @Override
+        public InteractionResult useOn(UseOnContext context)
+        {
+
+            List<FishCaughtCounter> list = new ArrayList<>();
+
+            Player player = context.getPlayer();
+
+
+            for(FishCaughtCounter fishCaughtCounter : player.getData(ModDataAttachments.FISHES_CAUGHT))
+            {
+                System.out.println(context.getLevel() + "   " + fishCaughtCounter.fp().fish());
+                System.out.println(context.getLevel() + "   " + fishCaughtCounter.count());
+                System.out.println("---------------");
+
+            }
+
+            for (FishProperties fp : context.getLevel().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
+            {
+
+                if(!fp.fish().equals(Starcatcher.rl("joel")))
+                {
+                    list.add(new FishCaughtCounter(fp, 1));
+                }
+
+            }
+
+            //context.getPlayer().setData(ModDataAttachments.FISHES_CAUGHT, list);
+
+            return super.useOn(context);
+        }
+    });
     DeferredItem<Item> TREASURE = ITEMS.register("treasure", () -> new Item(new Item.Properties()));
     DeferredItem<Item> SCALDING_TREASURE = ITEMS.register("scalding_treasure", () -> new Item(new Item.Properties()));
     DeferredItem<Item> FISH_BONES = ITEMS.register("fish_bones", () -> new Item(new Item.Properties()));

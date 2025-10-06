@@ -136,11 +136,8 @@ public class FishingBobEntity extends Projectile
         fpToFish = available.get(random.nextInt(available.size()));
 
 
-        //TODO HANDLE BUCKET FISHES
-
-
         //TODO CHANGE THIS PIECE OF CODE TO BE SOMEWHERE ELSE
-        if (fpToFish.skipMinigame())
+        if (fpToFish.skipMinigame() || bobber.is(ModItems.CREEPER_BOBBER))
         {
             Entity itemFished = new ItemEntity(
                     level(),
