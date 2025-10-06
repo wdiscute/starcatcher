@@ -17,6 +17,8 @@
   "tag.starcatcher.is_mushroom_fields" : "Mushroom Fields",
   "tag.starcatcher.is_dark_forest" : "Dark Forests",
 
+  "tag.starcatcher.hooks" : "Fishing Hooks",
+
 
   "item.starcatcher.starcatcher_rod": "Starcatcher's Rod",
   "tooltip.starcatcher.starcatcher_rod.0": "A special fishing rod which allows",
@@ -38,6 +40,67 @@
 
   "item.starcatcher.hook": "Iron Hook",
   "tooltip.starcatcher.hook.0": "A basic iron hook for your fishing rod.",
+  "tooltip.starcatcher.hook.1": "Everyone starts somewhere.",
+
+  "item.starcatcher.shiny_hook": "Shiny Hook",
+  "tooltip.starcatcher.shiny_hook.0": "A very shiny hook!",
+  "tooltip.starcatcher.shiny_hook.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.shiny_hook.2": "hitting 3 consecutive sweet-spots on a",
+  "tooltip.starcatcher.shiny_hook.3": "not-common fish spawn a treasure!",
+
+  "item.starcatcher.gold_hook": "Gold Hook",
+  "tooltip.starcatcher.gold_hook.0": "A glittering gold hook!",
+  "tooltip.starcatcher.gold_hook.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.gold_hook.2": "it increases the experience you get from",
+  "tooltip.starcatcher.gold_hook.3": "fishing based on your performance.",
+
+  "item.starcatcher.mossy_hook": "Mossy Hook",
+  "tooltip.starcatcher.mossy_hook.0": "A rusty hook covered in moss!",
+  "tooltip.starcatcher.mossy_hook.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.mossy_hook.2": "it will increase the difficulty of fishes,",
+  "tooltip.starcatcher.mossy_hook.3": "but a perfect catch will award you a treasure.",
+
+  "item.starcatcher.crystal_hook": "Crystal Hook",
+  "tooltip.starcatcher.crystal_hook.0": "An incredibly durable hook, perfect for lava fishing!",
+  "tooltip.starcatcher.crystal_hook.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.crystal_hook.2": "allows you to fish in lava. Hot.",
+
+  "item.starcatcher.stone_hook": "Stone Hook",
+  "tooltip.starcatcher.stone_hook.0": "An very sturdy hook!",
+  "tooltip.starcatcher.stone_hook.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.stone_hook.2": "hitting a sweet-spot will lock the fish into",
+  "tooltip.starcatcher.stone_hook.3": "place for a moment, preventing it from escaping.",
+
+  "item.starcatcher.split_hook": "Split Hook",
+  "tooltip.starcatcher.split_hook.0": "An elegantly designed split hook!",
+  "tooltip.starcatcher.split_hook.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.split_hook.2": "completing a perfect catch will award 2 fishes.",
+
+  "item.starcatcher.creeper_bobber": "Creeper Bobber",
+  "tooltip.starcatcher.creeper_bobber.0": "A creeper shaped bobber.",
+  "tooltip.starcatcher.creeper_bobber.1": "Whilst equipped in your Starcatcher's rod...",
+  "tooltip.starcatcher.creeper_bobber.2": "who knows what might happen?",
+
+  "item.starcatcher.bait_saving_bobber": "Frugal Bobber",
+  "tooltip.starcatcher.bait_saving_bobber.0": "A bobber with a unique bait-saving mechanism.",
+  "tooltip.starcatcher.bait_saving_bobber.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.bait_saving_bobber.2": "there is a chance fishes wont eat your bait away.",
+
+  "item.starcatcher.difficulty_bobber": "Steady Bobber",
+  "tooltip.starcatcher.difficulty_bobber.0": "A stiff heavy bobber.",
+  "tooltip.starcatcher.difficulty_bobber.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.difficulty_bobber.2": "it will make fishing a lot easier.",
+
+  "item.starcatcher.fast_biting_bobber": "Impatient Bobber",
+  "tooltip.starcatcher.fast_biting_bobber.0": "A bobber specifically designed to attract fishes quicker.",
+  "tooltip.starcatcher.fast_biting_bobber.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.fast_biting_bobber.2": "fishes will be more likely to rush to bite.",
+
+  "item.starcatcher.frog_bobber": "Frog Bobber",
+  "tooltip.starcatcher.frog_bobber.0": "A frog-looking bobber.",
+  "tooltip.starcatcher.frog_bobber.1": "Whilst equipped in your Starcatcher's rod,",
+  "tooltip.starcatcher.frog_bobber.2": "it will make behave like a frog. Somewhat.",
+
 
 
   "item.starcatcher.fish_spotter": "Fish Spotter",

@@ -1,0 +1,11 @@
+{
+  "values": [
+    "starcatcher:hook",
+    "starcatcher:shiny_hook",
+    "starcatcher:gold_hook",
+    "starcatcher:mossy_hook",
+    "starcatcher:crystal_hook",
+    "starcatcher:stone_hook",
+    "starcatcher:split_hook"
+  ]
+}

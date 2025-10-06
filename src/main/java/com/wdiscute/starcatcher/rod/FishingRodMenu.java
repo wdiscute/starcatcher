@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.rod;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.ModMenuTypes;
 import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.StarcatcherTags;
 import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
@@ -59,7 +60,14 @@ public class FishingRodMenu extends AbstractContainerMenu
 
         this.addSlot(new SlotItemHandler(inventory, 0, 53, 35));
         this.addSlot(new SlotItemHandler(inventory, 1, 70, 35));
-        this.addSlot(new SlotItemHandler(inventory, 2, 100, 35));
+        this.addSlot(new SlotItemHandler(inventory, 2, 100, 35)
+        {
+            @Override
+            public boolean mayPlace(ItemStack stack)
+            {
+                return stack.is(StarcatcherTags.HOOKS);
+            }
+        });
     }
 
     @Override

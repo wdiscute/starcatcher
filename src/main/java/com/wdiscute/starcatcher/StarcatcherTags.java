@@ -1,6 +1,10 @@
 package com.wdiscute.starcatcher;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
+import net.neoforged.neoforge.common.Tags;
 
 public class StarcatcherTags
 {
@@ -20,5 +24,7 @@ public class StarcatcherTags
     public static final ResourceLocation IS_CHERRY_GROVE = Starcatcher.rl("is_cherry_grove");
     public static final ResourceLocation IS_MUSHROOM_FIELDS = Starcatcher.rl("is_mushroom_fields");
     public static final ResourceLocation IS_DARK_FOREST = Starcatcher.rl("is_dark_forest");
+
+    public static final TagKey<Item> HOOKS = ItemTags.create(Starcatcher.rl("hooks"));
 
 }

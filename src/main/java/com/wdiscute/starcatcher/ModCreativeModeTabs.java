@@ -30,9 +30,12 @@ public class ModCreativeModeTabs
                     .title(Component.translatable("creativetab.starcatcher.starcatcher"))
                     .displayItems((itemDisplayParameters, output) ->
                     {
+
+                        output.accept(ModItems.ROD);
+
                         //adds all entries because im lazy
                         for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS.getEntries())
-                            if (!(item.get() == ModItems.MISSINGNO.get()))
+                            if (!(item.get() == ModItems.MISSINGNO.get() && item.get() == ModItems.ROD.get()))
                                 output.accept(item.get());
 
 
