@@ -41,7 +41,7 @@ public class TrophySilver extends Item
         {
             FishProperties fp = optional.get().value();
 
-            fishCounter.add(new FishCaughtCounter(fp, 1));
+            fishCounter.add(new FishCaughtCounter(fp, 1, Integer.MAX_VALUE, 99999));
             fishes.add(fp);
 
             if(player instanceof ServerPlayer sp)

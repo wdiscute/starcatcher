@@ -321,17 +321,14 @@ public class FishingGuideScreen extends Screen
             guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
         }
 
-
-        if(clickedX != 0)
+        //check clicked on an index
+        if (clickedX != 0)
         {
-
-            var awd = true;
-
             if (clickedX > uiX + xOffset - 3 && clickedX < uiX + xOffset + 21 - 3 && clickedY > uiY + yOffset - 3 && clickedY < uiY + yOffset + 21 - 3)
             {
                 for (int i = 0; i < entries.size(); i++)
                 {
-                    if(fp.equals(entries.get(i)))
+                    if (fp.equals(entries.get(i)))
                     {
                         currentPage = i / 2 + 1;
                     }
@@ -339,11 +336,6 @@ public class FishingGuideScreen extends Screen
 
             }
         }
-
-        //check clicked
-
-
-
     }
 
 
@@ -363,18 +355,18 @@ public class FishingGuideScreen extends Screen
         if (!fpsSeen.contains(fp)) fpsSeen.add(fp);
 
         //get fishCaughtCount
-        int count = 0;
-        for (FishCaughtCounter fcc : fishCaughtCounterList)
+        FishCaughtCounter fcc = null;
+        for (FishCaughtCounter fccAll : fishCaughtCounterList)
         {
-            if (fp.equals(fcc.fp()))
+            if (fp.equals(fccAll.fp()))
             {
-                count = fcc.count();
+                fcc = fccAll;
                 break;
             }
         }
 
 
-        if (count == 0)
+        if (fcc == null)
         {
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught_fish_name"), uiX + xOffset + 46, uiY + 60, 0, false);
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught").withColor(0xAA0000), uiX + xOffset + 46, uiY + 70, 0, false);
@@ -382,7 +374,6 @@ public class FishingGuideScreen extends Screen
         }
         else
         {
-
             //render fish name
             MutableComponent compName;
             if (fp.customName().isEmpty())
@@ -393,9 +384,22 @@ public class FishingGuideScreen extends Screen
             guiGraphics.drawString(this.font, compName, uiX + xOffset + 46, uiY + 60, 0, false);
 
             //render caught count
-            Component c = Component.literal("[" + count + "]").withColor(0x00AA00);
+            Component c = Component.literal("[" + fcc.count() + "]").withColor(0x00AA00);
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.caught").append(c).withColor(0x00AA00), uiX + xOffset + 46, uiY + 70, 0, false);
             renderItem(is, uiX + xOffset + 10, uiY + 60);
+
+            if (mouseX > uiX + xOffset + 46 && mouseX < uiX + xOffset + 150 && mouseY > uiY + 57 && mouseY < uiY + 80)
+            {
+                List<Component> components = new ArrayList<>();
+
+                float fastest = fcc.fastestTicks();
+                float average = fcc.averageTicks();
+
+                components.add(Component.literal("Fastest Catch: " + ((int) Math.floor(fastest / 20)) + "." + (int)Math.floor(fastest % ((double) 20 /2)) + "s"));
+                components.add(Component.literal("Average: " + ((int) Math.floor(average / 20)) + "." + (int)Math.floor(average % ((double) 20 /2)) + "s"));
+
+                guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
+            }
         }
 
 

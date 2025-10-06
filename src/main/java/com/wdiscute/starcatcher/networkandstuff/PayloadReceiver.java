@@ -96,7 +96,7 @@ public class PayloadReceiver
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
 
                         //award fish counter
-                        if (FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player) && player instanceof ServerPlayer sp)
+                        if (FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time()) && player instanceof ServerPlayer sp)
                         {
                             PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
                         }

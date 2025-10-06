@@ -33,7 +33,7 @@ public class Payloads
     }
 
 
-    public record FishingCompletedPayload(int time, boolean completedTreasure) implements CustomPacketPayload
+    public record FishingCompletedPayload(int time, boolean completedTreasure, boolean perfectCatch) implements CustomPacketPayload
     {
 
         public static final Type<FishingCompletedPayload> TYPE = new Type<>(Starcatcher.rl("fishing_completed"));
@@ -43,6 +43,8 @@ public class Payloads
                 FishingCompletedPayload::time,
                 ByteBufCodecs.BOOL,
                 FishingCompletedPayload::completedTreasure,
+                ByteBufCodecs.BOOL,
+                FishingCompletedPayload::perfectCatch,
                 FishingCompletedPayload::new
         );
 

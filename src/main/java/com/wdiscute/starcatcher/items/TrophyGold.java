@@ -37,7 +37,7 @@ public class TrophyGold extends Item
 
         for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
-            fishCounter.add(new FishCaughtCounter(fp, 1));
+            fishCounter.add(new FishCaughtCounter(fp, 1, Integer.MAX_VALUE, 99999));
         }
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
