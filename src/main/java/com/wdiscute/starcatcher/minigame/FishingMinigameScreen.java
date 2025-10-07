@@ -82,6 +82,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int treasureProgress = Integer.MIN_VALUE;
     int treasureProgressSmooth = Integer.MIN_VALUE;
 
+    int difficultyBobberOffset = 0;
     int bigForgiving = SIZE_3;
     int thinForgiving = SIZE_1;
     int treasureForgiving = SIZE_2;
@@ -122,6 +123,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         pos2 = difficulty.hasSecondMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
         posThin1 = difficulty.hasFirstThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
         posThin2 = difficulty.hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+
+        //make sweet spots fatter if difficulty bobber is being used
+        if(bobber.is(ModItems.DIFFICULTY_BOBBER))
+        {
+            bigForgiving = SIZE_4;
+            thinForgiving = SIZE_2;
+            treasureForgiving = SIZE_2;
+            difficultyBobberOffset = 16;
+        }
 
         hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
@@ -208,7 +218,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
-                    16, 16, 16, 160, 16, 16, 256, 256);
+                    16, 16, 16 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
             poseStack.popPose();
         }
@@ -229,7 +239,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
-                    16, 16, 16, 160, 16, 16, 256, 256);
+                    16, 16, 16 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
             poseStack.popPose();
         }
@@ -249,7 +259,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
-                    16, 16, 48, 160, 16, 16, 256, 256);
+                    16, 16, 48 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
             poseStack.popPose();
         }
@@ -269,7 +279,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
-                    16, 16, 48, 160, 16, 16, 256, 256);
+                    16, 16, 48 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
             poseStack.popPose();
         }
