@@ -40,6 +40,7 @@ public interface ModItems
     DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");  //done
 
     DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
+    DeferredItem<Item> SPARKLY_BOBBER = singleStackItem("sparkly_bobber"); //done
     DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
     DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
     DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber");

@@ -55,63 +55,59 @@ public class PayloadReceiver
 //                            level.addFreshEntity(strike);
 //                        }
 
+                        //create itemStacks
                         ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()));
                         ItemStack treasure = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.dif().treasure().loot()));
 
-
+                        //assign custom name if fish has one
                         if (!fp.customName().isEmpty())
                             is.set(DataComponents.CUSTOM_NAME, Component.translatable("item.starcatcher." + fp.customName()));
 
                         //split hook double drops
                         if(data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);
 
-                        ItemEntity itemFished = new ItemEntity(
-                                level,
-                                fbe.position().x,
-                                fbe.position().y + 1.2f,
-                                fbe.position().z,
-                                is);
+                        //make ItemEntities for fish and treasure
+                        ItemEntity itemFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, is);
+                        ItemEntity treasureFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, treasure);
 
-                        ItemEntity treasureFished = new ItemEntity(
-                                level,
-                                fbe.position().x,
-                                fbe.position().y + 1.2f,
-                                fbe.position().z,
-                                treasure);
-
-                        double x = (player.position().x - fbe.position().x) / 25;
-                        double y = (player.position().y - fbe.position().y) / 20;
-                        double z = (player.position().z - fbe.position().z) / 25;
-
-                        x = Math.clamp(x, -1, 1);
-                        y = Math.clamp(y, -1, 1);
-                        z = Math.clamp(z, -1, 1);
-
+                        //assign delta movement so fish flies towards player
+                        double x = Math.clamp((player.position().x - fbe.position().x) / 25, -1, 1);
+                        double y = Math.clamp((player.position().y - fbe.position().y) / 20, -1, 1);
+                        double z = Math.clamp((player.position().z - fbe.position().z) / 25, -1, 1);
                         Vec3 vec3 = new Vec3(x, 0.7 + y, z);
-
                         itemFished.setDeltaMovement(vec3);
                         treasureFished.setDeltaMovement(vec3);
 
+                        //add itemEntities to level
                         level.addFreshEntity(itemFished);
-                        if(fbe.fpToFish.dif().treasure().hasTreasure() && data.completedTreasure()) level.addFreshEntity(treasureFished);
+                        if(data.completedTreasure()) level.addFreshEntity(treasureFished);
 
+                        //play sound
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
 
                         //award fish counter
                         if (FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time()) && player instanceof ServerPlayer sp)
-                        {
                             PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
-                        }
 
+                        //award fish counter
                         List<FishProperties> list = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
-
                         list.add(fbe.fpToFish);
-
                         player.setData(ModDataAttachments.FISHES_NOTIFICATION, list);
+
+                        //award exp
+                        int exp = 4;
+                        if(fp.rarity() == FishProperties.Rarity.UNCOMMON) exp = 8;
+                        if(fp.rarity() == FishProperties.Rarity.RARE) exp = 12;
+                        if(fp.rarity() == FishProperties.Rarity.EPIC) exp = 20;
+                        if(fp.rarity() == FishProperties.Rarity.LEGENDARY) exp = 35;
+                        if(fbe.hook.is(ModItems.GOLD_HOOK)) exp *= (int) ((double) data.hits() / 3) + 1; //extra exp if gold hook is used
+                        player.giveExperiencePoints(exp);
+
                     }
                     else
                     {
+                        //if fish minigame failed/canceled, play sound
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_NO, SoundSource.AMBIENT);
                     }
