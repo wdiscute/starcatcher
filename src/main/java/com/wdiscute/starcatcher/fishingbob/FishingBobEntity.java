@@ -44,10 +44,10 @@ public class FishingBobEntity extends Projectile
     public final Player player;
     private FishHookState currentState;
     public FishProperties fpToFish;
-    public ItemStack rod;
-    public ItemStack bobber;
-    public ItemStack hook;
-    public ItemStack bait;
+    public ItemStack rod = ItemStack.EMPTY;
+    public ItemStack bobber = ItemStack.EMPTY;
+    public ItemStack hook = ItemStack.EMPTY;
+    public ItemStack bait = ItemStack.EMPTY;
 
     int minTicksToFish;
     int maxTicksToFish;
@@ -231,9 +231,9 @@ public class FishingBobEntity extends Projectile
     }
 
     @Override
-    public boolean isOnFire()
+    public boolean fireImmune()
     {
-        return false;
+        return hook.is(StarcatcherTags.HOOKS_SURVIVE_FIRE);
     }
 
     @Override

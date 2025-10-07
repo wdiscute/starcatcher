@@ -26,5 +26,6 @@ public class StarcatcherTags
     public static final ResourceLocation IS_DARK_FOREST = Starcatcher.rl("is_dark_forest");
 
     public static final TagKey<Item> HOOKS = ItemTags.create(Starcatcher.rl("hooks"));
+    public static final TagKey<Item> HOOKS_SURVIVE_FIRE = ItemTags.create(Starcatcher.rl("hooks_survive_fire"));
 
 }

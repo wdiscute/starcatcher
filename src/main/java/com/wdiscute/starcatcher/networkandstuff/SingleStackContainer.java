@@ -1,11 +1,12 @@
 package com.wdiscute.starcatcher.networkandstuff;
 
 import com.mojang.serialization.Codec;
+import com.wdiscute.starcatcher.ModItems;
 import net.minecraft.world.item.ItemStack;
 
 public record SingleStackContainer(ItemStack stack) {
 
-    public static final Codec<SingleStackContainer> CODEC = ItemStack.CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stack);
+    public static final Codec<SingleStackContainer> CODEC = ItemStack.OPTIONAL_CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stack);
 
     @Override
     public boolean equals(Object o) {

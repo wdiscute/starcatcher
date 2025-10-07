@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
