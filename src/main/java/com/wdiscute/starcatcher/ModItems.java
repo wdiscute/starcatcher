@@ -32,17 +32,17 @@ public interface ModItems
     DeferredItem<Item> STARCATCHER_TWINE = basicItem("starcatcher_twine");
 
     DeferredItem<Item> HOOK = singleStackItem("hook");  //done
-    DeferredItem<Item> SHINY_HOOK = singleStackItem("shiny_hook");
+    DeferredItem<Item> SHINY_HOOK = singleStackItem("shiny_hook");  //done
     DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");
     DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");  //done
-    DeferredItem<Item> CRYSTAL_HOOK = singleStackItem("crystal_hook");
-    DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");
+    DeferredItem<Item> CRYSTAL_HOOK = singleStackItem("crystal_hook"); //done
+    DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");  //done
     DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");  //done
 
-    DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber");
-    DeferredItem<Item> BAIT_SAVING_BOBBER = singleStackItem("bait_saving_bobber");
-    DeferredItem<Item> DIFFICULTY_BOBBER = singleStackItem("difficulty_bobber");
-    DeferredItem<Item> FAST_BITING_BOBBER = singleStackItem("fast_biting_bobber");
+    DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
+    DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
+    DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
+    DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber");
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
 
     DeferredItem<Item> ROD = ITEMS.register(

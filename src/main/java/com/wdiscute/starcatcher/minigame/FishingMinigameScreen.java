@@ -125,7 +125,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         posThin2 = difficulty.hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
 
         //make sweet spots fatter if difficulty bobber is being used
-        if(bobber.is(ModItems.DIFFICULTY_BOBBER))
+        if(bobber.is(ModItems.STEADY_BOBBER))
         {
             bigForgiving = SIZE_4;
             thinForgiving = SIZE_2;

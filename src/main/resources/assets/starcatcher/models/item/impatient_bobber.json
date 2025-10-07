@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "starcatcher:item/difficulty_bobber"
+    "layer0": "starcatcher:item/impatient_bobber"
   }
 }
