@@ -41,6 +41,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     private static final int SIZE_3 = 12;
     private static final int SIZE_4 = 17;
 
+    final FishProperties fp;
     final ItemStack itemBeingFished;
     final ItemStack bobber;
     final ItemStack bait;
@@ -55,7 +56,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final boolean hasTreasure;
     final boolean changeRotation;
 
-    int gracePeriod = 40;
+    int gracePeriod = 80;
 
     final InteractionHand hand;
 
@@ -93,6 +94,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         super(Component.empty());
 
+        this.fp = fp;
         this.itemBeingFished = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
         this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
         this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
@@ -447,6 +449,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                     posTreasure = getRandomFreePosition();
                     treasureProgress = 0;
                     treasureProgressSmooth = 0;
+                }
+
+                if(hook.is(ModItems.STONE_HOOK))
+                {
+                    if(fp.rarity() == FishProperties.Rarity.COMMON) gracePeriod = 40;
+                    if(fp.rarity() == FishProperties.Rarity.UNCOMMON) gracePeriod = 20;
+                    if(fp.rarity() == FishProperties.Rarity.RARE) gracePeriod = 15;
+                    if(fp.rarity() == FishProperties.Rarity.EPIC) gracePeriod = 10;
+                    if(fp.rarity() == FishProperties.Rarity.LEGENDARY) gracePeriod = 5;
                 }
 
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
