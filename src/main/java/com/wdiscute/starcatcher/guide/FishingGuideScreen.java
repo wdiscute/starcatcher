@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.minigame.HitFakeParticle;
 import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
 import com.wdiscute.starcatcher.networkandstuff.FishProperties;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
@@ -56,18 +57,19 @@ public class FishingGuideScreen extends Screen
     int imageWidth;
     int imageHeight;
 
-    List<FishProperties> fpsSeen = new ArrayList<>();
+    int clickedX;
+    int clickedY;
 
     int currentPage;
 
     ClientLevel level;
     LocalPlayer player;
 
+    List<FishProperties> fpsSeen = new ArrayList<>();
     List<FishProperties> entries = new ArrayList<>(999);
     List<FishProperties> fishInArea = new ArrayList<>();
     List<FishCaughtCounter> fishCaughtCounterList = new ArrayList<>();
-    int clickedX;
-    int clickedY;
+
 
     @Override
     protected void init()
@@ -392,11 +394,8 @@ public class FishingGuideScreen extends Screen
             {
                 List<Component> components = new ArrayList<>();
 
-                float fastest = fcc.fastestTicks();
-                float average = fcc.averageTicks();
-
-                components.add(Component.literal("Fastest Catch: " + ((int) Math.floor(fastest / 20)) + "." + (int)Math.floor(fastest % ((double) 20 /2)) + "s"));
-                components.add(Component.literal("Average: " + ((int) Math.floor(average / 20)) + "." + (int)Math.floor(average % ((double) 20 /2)) + "s"));
+                components.add(Component.literal("Fastest Catch: " + (float)(fcc.fastestTicks() / 20) + "s"));
+                components.add(Component.literal("Average: " + (fcc.averageTicks() / 20) + "s"));
 
                 guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
             }
