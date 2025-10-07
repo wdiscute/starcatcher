@@ -104,7 +104,7 @@ public class PayloadReceiver
                             PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
                         }
 
-                        List<FishProperties> list = player.getData(ModDataAttachments.FISHES_NOTIFICATION);
+                        List<FishProperties> list = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
 
                         list.add(fbe.fpToFish);
 
