@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.sun.jna.platform.win32.Guid;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
@@ -22,9 +21,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ISystemReportExtender;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
@@ -78,6 +75,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int completionSmooth = 20;
 
     boolean perfectCatch = true;
+    int consecutiveHits = 0;
 
     boolean treasureActive;
     int treasureProgress = Integer.MIN_VALUE;
@@ -434,10 +432,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 hitSomething = true;
             }
 
+            System.out.println("treasureReward " + treasureReward);
+            System.out.println("treasureProgress " + treasureProgress);
+
 
             if (hitSomething)
             {
-                if (hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
+                consecutiveHits++;
+                if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
+                ||
+                (consecutiveHits == 3 && treasureProgress == Integer.MIN_VALUE && hook.is(ModItems.SHINY_HOOK)))
                 {
                     treasureActive = true;
                     posTreasure = getRandomFreePosition();
@@ -450,6 +454,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
             else
             {
+                consecutiveHits = 0;
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 1, 1, false);
                 completion -= penalty;
                 perfectCatch = false;

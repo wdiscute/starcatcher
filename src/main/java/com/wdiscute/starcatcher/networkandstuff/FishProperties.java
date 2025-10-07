@@ -455,14 +455,14 @@ public record FishProperties(
 
         public static final Treasure DEFAULT = new Treasure(
                 false,
-                Starcatcher.rl("none"),
-                0
+                Starcatcher.rl("waterlogged_satchel"),
+                15
         );
 
         public static final Treasure UNCOMMON = new Treasure(
                 true,
                 Starcatcher.rl("waterlogged_satchel"),
-                28
+                15
         );
 
         public static final Treasure HARD = new Treasure(

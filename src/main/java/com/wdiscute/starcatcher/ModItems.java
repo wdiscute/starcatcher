@@ -9,7 +9,6 @@ import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Rarity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -33,7 +32,7 @@ public interface ModItems
     DeferredItem<Item> STARCATCHER_TWINE = basicItem("starcatcher_twine");
 
     DeferredItem<Item> HOOK = singleStackItem("hook");  //done
-    DeferredItem<Item> DIAMOND_HOOK = singleStackItem("shiny_hook");
+    DeferredItem<Item> SHINY_HOOK = singleStackItem("shiny_hook");
     DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");
     DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");  //done
     DeferredItem<Item> CRYSTAL_HOOK = singleStackItem("crystal_hook");
