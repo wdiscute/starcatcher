@@ -550,15 +550,22 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         for (int i = 0; i < count; i++)
         {
+            if(bobber.is(ModItems.GLITTER_BOBBER))
+            {
+                hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
+                        r.nextFloat(),
+                        r.nextFloat(),
+                        r.nextFloat(),
+                        1
+                ));
+                continue;
+            }
+
             if (treasure)
             {
                 //red particles if treasure sweet spot was hit
-                hitParticles.add(new HitFakeParticle(
-                        xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
-                        0.7f + r.nextFloat() / 3,
-                        0.5f,
-                        0.5f,
-                        1
+                hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
+                        0.7f + r.nextFloat() / 3, 0.5f, 0.5f, 1
                 ));
             }
             else

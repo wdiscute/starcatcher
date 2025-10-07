@@ -82,6 +82,11 @@
   "tooltip.starcatcher.creeper_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>...",
   "tooltip.starcatcher.creeper_bobber.2": "who knows what might happen?",
 
+  "item.starcatcher.glitter_bobber": "Glitter Bobber",
+  "tooltip.starcatcher.glitter_bobber.0": "A very sparkly bobber!",
+  "tooltip.starcatcher.glitter_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
+  "tooltip.starcatcher.glitter_bobber.2": "you'll feel the power of glitter.",
+
   "item.starcatcher.frugal_bobber": "Frugal Bobber",
   "tooltip.starcatcher.frugal_bobber.0": "A bobber with a unique bait-saving mechanism.",
   "tooltip.starcatcher.frugal_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",

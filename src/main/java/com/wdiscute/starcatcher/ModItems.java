@@ -33,14 +33,14 @@ public interface ModItems
 
     DeferredItem<Item> HOOK = singleStackItem("hook");  //done
     DeferredItem<Item> SHINY_HOOK = singleStackItem("shiny_hook");  //done
-    DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");
+    DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");    //done
     DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");  //done
     DeferredItem<Item> CRYSTAL_HOOK = singleStackItem("crystal_hook"); //done
     DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");  //done
     DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");  //done
 
     DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
-    DeferredItem<Item> SPARKLY_BOBBER = singleStackItem("sparkly_bobber"); //done
+    DeferredItem<Item> GLITTER_BOBBER = singleStackItem("glitter_bobber"); //done
     DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
     DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
     DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber");
