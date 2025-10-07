@@ -21,7 +21,6 @@ import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
@@ -194,7 +193,7 @@ public class FishingBobEntity extends Projectile
         if (fpToFish.br().consumesBait())
         {
 
-            if (bobber.is(ModItems.BAIT_SAVING_BOBBER))
+            if (bobber.is(ModItems.FRUGAL_BOBBER))
             {
                 if (random.nextFloat() > 0.5f) bait.setCount(bait.getCount() - 1);
             }

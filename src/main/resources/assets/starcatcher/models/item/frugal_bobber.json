@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "starcatcher:item/bait_saving_bobber"
+    "layer0": "starcatcher:item/frugal_bobber"
   }
 }
