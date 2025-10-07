@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.sun.jna.platform.win32.Guid;
 import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
@@ -21,15 +22,22 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.fml.ISystemReportExtender;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
+import org.joml.Vector2d;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FishingMinigameScreen extends Screen implements GuiEventListener
 {
-
+    private static final Random r = new Random();
     private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame.png");
+    private static final ResourceLocation TEXTURE_TEST = Starcatcher.rl("textures/gui/minigame2.png");
 
     private static final int SIZE_1 = 5;
     private static final int SIZE_2 = 7;
@@ -80,8 +88,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int treasureForgiving = SIZE_2;
 
     int tickCount = 0;
+    List<HitFakeParticle> hitParticles = new ArrayList<>();
 
-    Random r = new Random();
 
     public FishingMinigameScreen(FishProperties fp, ItemStack rod)
     {
@@ -335,6 +343,22 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //FISH
         guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
 
+        //particles
+        for (HitFakeParticle instance : hitParticles)
+        {
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(instance.pos.x, instance.pos.y, 0);
+            RenderSystem.setShaderColor(instance.r, instance.g, instance.b, instance.a);
+
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 8, height / 2 - 8,
+                    16, 16, 80, 160, 16, 16, 256, 256);
+
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            guiGraphics.pose().popPose();
+        }
+
+
     }
 
     @Override
@@ -368,6 +392,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             //pos 1
             if ((Math.abs(pos1 - pointerPosPrecise) < bigForgiving || Math.abs(pos1 - pointerPosPrecise) > 360 - bigForgiving) && pos1 != Integer.MIN_VALUE)
             {
+                addParticles(pos1, 15);
                 pos1 = getRandomFreePosition();
                 completion += reward;
                 hitSomething = true;
@@ -376,6 +401,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             //pos2
             if ((Math.abs(pos2 - pointerPosPrecise) < bigForgiving || Math.abs(pos2 - pointerPosPrecise) > 360 - bigForgiving) && pos2 != Integer.MIN_VALUE)
             {
+                addParticles(pos2, 15);
                 pos2 = getRandomFreePosition();
                 completion += reward;
                 hitSomething = true;
@@ -384,6 +410,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             //pos thin 1
             if ((Math.abs(posThin1 - pointerPosPrecise) < thinForgiving || Math.abs(posThin1 - pointerPosPrecise) > 360 - thinForgiving) && posThin1 != Integer.MIN_VALUE)
             {
+                addParticles(posThin1, 30);
                 posThin1 = getRandomFreePosition();
                 completion += rewardThin;
                 hitSomething = true;
@@ -392,6 +419,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             //pos thin 2
             if ((Math.abs(posThin2 - pointerPosPrecise) < thinForgiving || Math.abs(posThin2 - pointerPosPrecise) > 360 - thinForgiving) && posThin2 != Integer.MIN_VALUE)
             {
+                addParticles(posThin2, 30);
                 posThin2 = getRandomFreePosition();
                 completion += rewardThin;
                 hitSomething = true;
@@ -400,6 +428,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             //if hit sweet spot treasure
             if ((Math.abs(posTreasure - pointerPosPrecise) < treasureForgiving || Math.abs(posTreasure - pointerPosPrecise) > 360 - treasureForgiving) && posTreasure != Integer.MIN_VALUE)
             {
+                addParticles(posTreasure, 30, true);
                 posTreasure = getRandomFreePosition();
                 treasureProgress += treasureReward;
                 hitSomething = true;
@@ -430,7 +459,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
-
 
     @Override
     public void tick()
@@ -469,9 +497,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             //if completed treasure minigame, or is a perfect catch with the mossy hook
             boolean awardTreasure = treasureProgressSmooth > 100 || (perfectCatch && hook.is(ModItems.MOSSY_HOOK));
 
-            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount, awardTreasure , perfectCatch));
+            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount, awardTreasure, perfectCatch));
             this.onClose();
         }
+
+        hitParticles.removeIf(HitFakeParticle::tick);
+
     }
 
     @Override
@@ -479,6 +510,37 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1, false, false));
         this.minecraft.popGuiLayer();
+    }
+
+    private void addParticles(int posInDegrees, int count)
+    {
+        addParticles(posInDegrees, count, false);
+    }
+
+    private void addParticles(int posInDegrees, int count, boolean treasure)
+    {
+        int xPos = (int) (30 * Math.cos(Math.toRadians(posInDegrees - 90)));
+        int yPos = (int) (30 * Math.sin(Math.toRadians(posInDegrees - 90)));
+
+        for (int i = 0; i < count; i++)
+        {
+            if (treasure)
+            {
+                //red particles if treasure sweet spot was hit
+                hitParticles.add(new HitFakeParticle(
+                        xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
+                        0.7f + r.nextFloat() / 3,
+                        0.5f,
+                        0.5f,
+                        1
+                ));
+            }
+            else
+            {
+                hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1)));
+            }
+
+        }
     }
 
     @Override
