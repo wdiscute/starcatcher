@@ -126,12 +126,19 @@
   "item.starcatcher.fish_bones.0" : "Some fish bones. All that",
   "item.starcatcher.fish_bones.1" : "remains of a once happy fish.",
 
-  "item.starcatcher.treasure" : "Treasure",
-  "item.starcatcher.scalding_treasure" : "Scalding Treasure",
-
   "item.starcatcher.waterlogged_satchel" : "Waterlogged Satchel",
   "tooltip.starcatcher.waterlogged_satchel.0" : "A satchel containing many secrets",
   "tooltip.starcatcher.waterlogged_satchel.1" : "from the waters underneath.",
+
+  "item.starcatcher.treasure" : "Treasure",
+  "tooltip.starcatcher.treasure.0" : "A shiny treasure fished by a skilled angler.",
+  "tooltip.starcatcher.treasure.1" : "What could be hiding inside?",
+
+  "item.starcatcher.scalding_treasure" : "Scalding Treasure",
+  "tooltip.starcatcher.scalding_treasure.0" : "A treasure fished directly from the scalding",
+  "tooltip.starcatcher.scalding_treasure.1" : "lands of The Nether. What's inside?",
+
+
 
   "item.starcatcher.trophy_of_masterful_fishing" : "Trophy Of Masterful Fishing",
   "tooltip.starcatcher.trophy_of_masterful_fishing.0" : "Right clicking this Trophy will",
