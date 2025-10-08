@@ -11,13 +11,16 @@
     "speed": 10,
     "treasure": {
       "has_treasure": true,
-      "hit_reward": 28,
+      "hit_reward": 15,
       "loot": "starcatcher:waterlogged_satchel"
     }
   },
   "fish": "starcatcher:yellowstone_fish",
   "rarity": "uncommon",
   "world_restrictions": {
+    "biomes": [
+      "minecraft:dripstone_caves"
+    ],
     "dimensions": [
       "minecraft:overworld"
     ]

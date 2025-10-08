@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher;
 
+import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -27,9 +28,9 @@ public class ModDataComponents
             "hook",
             builder -> builder.persistent(SingleStackContainer.CODEC));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SingleStackContainer>> HOOK = register(
-            "hook",
-            builder -> builder.persistent(SingleStackContainer.CODEC));
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> COLOR = register(
+            "color",
+            builder -> builder.persistent(Codec.STRING));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator)

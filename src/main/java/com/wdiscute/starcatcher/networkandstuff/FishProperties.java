@@ -22,6 +22,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
@@ -144,7 +145,7 @@ public record FishProperties(
 
     //region with()
 
-    public FishPropertiesWithModRestriction withRestrictions(String modid)
+    public FishPropertiesWithModRestriction withMod(String modid)
     {
         return new FishPropertiesWithModRestriction(this, modid);
     }
@@ -304,95 +305,140 @@ public record FishProperties(
 
         public static final WorldRestrictions OVERWORLD =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()));
+                        .withDims(Level.OVERWORLD.location());
 
         public static final WorldRestrictions OVERWORLD_LUSH_CAVES =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomes(List.of(Biomes.LUSH_CAVES.location()));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomes(Biomes.LUSH_CAVES.location());
+
+        public static final WorldRestrictions OVERWORLD_DRIPSTONE_CAVES =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomes(Biomes.DRIPSTONE_CAVES.location());
 
         public static final WorldRestrictions OVERWORLD_DEEP_DARK =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomes(List.of(Biomes.DEEP_DARK.location()));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomes(Biomes.DEEP_DARK.location());
 
         public static final WorldRestrictions OVERWORLD_RIVER =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_RIVER));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_RIVER);
 
         public static final WorldRestrictions OVERWORLD_OCEAN =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_OCEAN));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags((StarcatcherTags.IS_OCEAN));
+
+        public static final WorldRestrictions OVERWORLD_WARM_OCEAN =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_WARM_OCEAN);
 
         public static final WorldRestrictions OVERWORLD_DEEP_OCEAN =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_DEEP_OCEAN));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_DEEP_OCEAN);
 
         public static final WorldRestrictions OVERWORLD_LAKE =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
+                        .withDims(Level.OVERWORLD.location())
                         .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER));
+
+        public static final WorldRestrictions OVERWORLD_FRESHWATER =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesBlacklistTags(StarcatcherTags.IS_OCEAN);
+
+        public static final WorldRestrictions OVERWORLD_COLD_FRESHWATER =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE, StarcatcherTags.IS_COLD_RIVER));
+
+        public static final WorldRestrictions OVERWORLD_WARM_FRESHWATER =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM_LAKE, StarcatcherTags.IS_WARM_RIVER));
 
         public static final WorldRestrictions OVERWORLD_WARM_LAKE =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM_LAKE));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_WARM_LAKE);
 
-        public static final WorldRestrictions OVERWORLD_ICY_RIVER =
+        public static final WorldRestrictions OVERWORLD_COLD_RIVER =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_RIVER));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_COLD_RIVER);
 
-        public static final WorldRestrictions OVERWORLD_ICY_OCEAN =
+        public static final WorldRestrictions OVERWORLD_COLD_OCEAN =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_OCEAN));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_COLD_OCEAN);
 
-        public static final WorldRestrictions OVERWORLD_ICY_LAKE =
+        public static final WorldRestrictions OVERWORLD_COLD_LAKE =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_COLD_LAKE);
 
         public static final WorldRestrictions OVERWORLD_BEACH =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_BEACH));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_BEACH);
 
         public static final WorldRestrictions OVERWORLD_MUSHROOM_FIELDS =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_MUSHROOM_FIELDS));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_MUSHROOM_FIELDS);
+
+        public static final WorldRestrictions OVERWORLD_JUNGLE =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(BiomeTags.IS_JUNGLE.location());
+
+        public static final WorldRestrictions OVERWORLD_TAIGA =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(BiomeTags.IS_TAIGA.location());
 
         public static final WorldRestrictions OVERWORLD_CHERRY_GROVE =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_CHERRY_GROVE));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_CHERRY_GROVE);
 
         public static final WorldRestrictions OVERWORLD_SWAMP =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_SWAMP));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_SWAMP);
 
         public static final WorldRestrictions OVERWORLD_DARK_FOREST =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.OVERWORLD.location()))
-                        .withBiomesTags(List.of(StarcatcherTags.IS_DARK_FOREST));
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_DARK_FOREST);
 
-        public static final WorldRestrictions NETHER =
+        public static final WorldRestrictions NETHER_LAVA =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.NETHER.location()))
-                        .withFluids(List.of(ResourceLocation.withDefaultNamespace("lava")));
+                        .withDims(Level.NETHER.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
 
         public static final WorldRestrictions END =
                 WorldRestrictions.DEFAULT
-                        .withDims(List.of(Level.END.location()));
+                        .withDims(Level.END.location());
+
+        public WorldRestrictions withDims(ResourceLocation dims)
+        {
+            return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+        }
 
         public WorldRestrictions withDims(List<ResourceLocation> dims)
         {
             return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+        }
+
+        public WorldRestrictions withDimsBlacklist(ResourceLocation dimsBlacklist)
+        {
+            return new WorldRestrictions(this.dims, List.of(dimsBlacklist), this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
         public WorldRestrictions withDimsBlacklist(List<ResourceLocation> dimsBlacklist)
@@ -400,9 +446,19 @@ public record FishProperties(
             return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
+        public WorldRestrictions withBiomes(ResourceLocation biome)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, List.of(biome), this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+        }
+
         public WorldRestrictions withBiomes(List<ResourceLocation> biomes)
         {
             return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+        }
+
+        public WorldRestrictions withBiomesTags(ResourceLocation biomesTag)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, List.of(biomesTag), this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
         public WorldRestrictions withBiomesTags(List<ResourceLocation> biomesTags)
@@ -415,14 +471,29 @@ public record FishProperties(
             return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags, this.fluids);
         }
 
+        public WorldRestrictions withBiomesBlacklist(ResourceLocation biomesBlacklist)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, List.of(biomesBlacklist), this.biomesBlacklistTags, this.fluids);
+        }
+
         public WorldRestrictions withBiomesBlacklistTags(List<ResourceLocation> biomesBlacklistTags)
         {
             return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags, this.fluids);
         }
 
+        public WorldRestrictions withBiomesBlacklistTags(ResourceLocation biomesBlacklistTags)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, List.of(biomesBlacklistTags), this.fluids);
+        }
+
         public WorldRestrictions withFluids(List<ResourceLocation> fluids)
         {
             return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, fluids);
+        }
+
+        public WorldRestrictions withFluids(ResourceLocation fluids)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, List.of(fluids));
         }
 
     }

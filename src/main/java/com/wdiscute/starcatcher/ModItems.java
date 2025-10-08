@@ -41,7 +41,7 @@ public interface ModItems
     DeferredItem<Item> COLORFUL_BOBBER = ITEMS.register("colorful_bobber", ColorfulBobber::new);
     DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
     DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
-    DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber");
+    DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber"); //done
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
 
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new);

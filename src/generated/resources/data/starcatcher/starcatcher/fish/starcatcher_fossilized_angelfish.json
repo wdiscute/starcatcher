@@ -19,6 +19,9 @@
   "fish": "starcatcher:fossilized_angelfish",
   "rarity": "rare",
   "world_restrictions": {
+    "biomes": [
+      "minecraft:dripstone_caves"
+    ],
     "dimensions": [
       "minecraft:overworld"
     ]

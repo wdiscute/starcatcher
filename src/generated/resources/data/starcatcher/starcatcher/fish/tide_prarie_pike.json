@@ -1,0 +1,16 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 5,
+  "fish": "tide:prarie_pike",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:plains"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "above_y": 0,
+  "base_chance": 5,
+  "below_y": 50,
+  "fish": "tide:gilded_minnow",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}
