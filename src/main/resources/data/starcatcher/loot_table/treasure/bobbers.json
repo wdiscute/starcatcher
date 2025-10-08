@@ -31,6 +31,10 @@
         {
           "type": "minecraft:item",
           "name": "starcatcher:frog_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:fish_spotter"
         }
       ],
       "rolls": 1
