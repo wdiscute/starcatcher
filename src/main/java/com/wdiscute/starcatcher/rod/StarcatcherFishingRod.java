@@ -67,6 +67,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
                 level.addFreshEntity(entity);
 
                 player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
+                entity.setData(ModDataAttachments.BOBBER.get(), player.getItemInHand(hand).get(ModDataComponents.BOBBER));
             }
         }
         else

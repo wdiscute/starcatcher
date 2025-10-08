@@ -2,11 +2,20 @@ package com.wdiscute.starcatcher.networkandstuff;
 
 import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.ModItems;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 
 public record SingleStackContainer(ItemStack stack) {
 
     public static final Codec<SingleStackContainer> CODEC = ItemStack.OPTIONAL_CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stack);
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, SingleStackContainer> STREAM_CODEC = StreamCodec.composite(
+            ItemStack.OPTIONAL_STREAM_CODEC, SingleStackContainer::stack,
+            SingleStackContainer::new
+    );
 
     @Override
     public boolean equals(Object o) {

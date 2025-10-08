@@ -5,14 +5,16 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModDataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
-import java.awt.*;
+import java.util.List;
 import java.util.Random;
 
 public class ColorfulBobber extends Item
@@ -24,6 +26,13 @@ public class ColorfulBobber extends Item
     }
 
     @Override
+    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    {
+        tooltipComponents.add(Component.literal("It shines...").withColor(stack.get(ModDataComponents.BOBBER_COLOR).getColorAsInt()));
+        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    }
+
+    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
 
@@ -31,8 +40,9 @@ public class ColorfulBobber extends Item
         {
             BobberColor bobberColor = BobberColor.random();
             player.getItemInHand(usedHand).set(ModDataComponents.BOBBER_COLOR, bobberColor);
-            sp.displayClientMessage(Component.literal("Your bobber shines differently...")
-                    .withColor(bobberColor.getColorAsInt()), true);
+            sp.displayClientMessage(
+                    Component.literal("Your bobber shines differently...")
+                            .withColor(bobberColor.getColorAsInt()), true);
         }
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
@@ -62,8 +72,11 @@ public class ColorfulBobber extends Item
 
         public int getColorAsInt()
         {
-            float[] hsb = Color.RGBtoHSB(((int) (this.r * 255)), ((int) (this.g * 255)), ((int) (this.b * 255)), null);
-            return Color.getHSBColor(hsb[0], hsb[1], hsb[2]).getRGB();
+            return FastColor.ARGB32.color(
+                    255,
+                    ((int) (this.r * 255)),
+                    ((int) (this.g * 255)),
+                    ((int) (this.b * 255)));
         }
 
     }

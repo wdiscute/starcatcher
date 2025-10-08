@@ -1,9 +1,13 @@
 package com.wdiscute.starcatcher.fishingbob;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.items.ColorfulBobber;
+import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -42,10 +46,18 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
         poseStack.translate(0.0F, 1.5F, 0.0F);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
 
-        this.model.setupAnim(fishingBobEntity, 0.0F, 0.0F, fishingBobEntity.tickCount + partialTicks, 0.0F, 0.0F);
+        int color = 0xff9999;
+
+        ItemStack bobber = fishingBobEntity.getData(ModDataAttachments.BOBBER).stack().copy();
+
+        if(bobber.is(ModItems.COLORFUL_BOBBER))
+        {
+            //why is rendering so annoying
+            color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
+        }
 
         VertexConsumer vertexconsumer = buffer.getBuffer(this.model.renderType(this.getTextureLocation(fishingBobEntity)));
-        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        this.model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY, color);
 
         poseStack.popPose();
 
@@ -69,6 +81,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
                 stringVertex(f2, f3, f4, vertexconsumer1, posestack$pose1, fraction(j, 16), fraction(j + 1, 16));
             }
 
+            //RenderSystem.setShaderColor(1, 1, 1, 1);
             poseStack.popPose();
         }
     }
