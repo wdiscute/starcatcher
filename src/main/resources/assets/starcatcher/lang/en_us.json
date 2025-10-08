@@ -21,6 +21,8 @@
   "tag.starcatcher.hooks_survive_fire" : "Hooks that survive Fire",
 
 
+
+
   "item.starcatcher.starcatcher_rod": "Starcatcher's Rod",
   "tooltip.starcatcher.starcatcher_rod.0": "A special fishing rod which allows",
   "tooltip.starcatcher.starcatcher_rod.1": "for the use of bobbers, bait and hooks!",
@@ -110,8 +112,6 @@
   "tooltip.starcatcher.frog_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
   "tooltip.starcatcher.frog_bobber.2": "it will make behave like a frog. Somewhat.",
 
-
-
   "item.starcatcher.fish_spotter": "Fish Spotter",
   "tooltip.starcatcher.fish_spotter.0": "A handy tool to any <rgb>angler</rgb> which",
   "tooltip.starcatcher.fish_spotter.1": "displays the fishes around the area.",
@@ -120,7 +120,6 @@
   "tooltip.starcatcher.fish_spotter.4": "",
   "tooltip.starcatcher.fish_spotter.5": "Can be used as a stand-alone or as an",
   "tooltip.starcatcher.fish_spotter.6": "upgrade to your <gradient-67>Starcatcher's rod</gradient-90>.",
-
 
   "item.starcatcher.fish_bones" : "Fish Bones",
   "item.starcatcher.fish_bones.0" : "Some fish bones. All that",
@@ -137,8 +136,6 @@
   "item.starcatcher.scalding_treasure" : "Scalding Treasure",
   "tooltip.starcatcher.scalding_treasure.0" : "A treasure fished directly from the scalding",
   "tooltip.starcatcher.scalding_treasure.1" : "lands of The Nether. What's inside?",
-
-
 
   "item.starcatcher.trophy_of_masterful_fishing" : "Trophy Of Masterful Fishing",
   "tooltip.starcatcher.trophy_of_masterful_fishing.0" : "Right clicking this Trophy will",
@@ -186,7 +183,6 @@
   "gui.guide.deepslate" : "Deepslate",
   "gui.guide.no_restriction" : "No Restriction",
   "gui.guide.hover" : "[hover]",
-
 
   "gui.guide.rarity.common" : "Common",
   "gui.guide.rarity.uncommon" : "<gradient-37>Uncommon</gradient-43>",

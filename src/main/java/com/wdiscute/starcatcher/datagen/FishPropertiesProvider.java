@@ -825,7 +825,7 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                         register(bootstrap, endFish(getKey(ModItems.CHARFISH.get()))
                                         .withRarity(FishProperties.Rarity.RARE)
                                         //.withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP));
-                                        .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION));
+                                        .withDifficulty(FishProperties.Difficulty.HARD));
 
 
                     }
