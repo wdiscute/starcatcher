@@ -84,8 +84,11 @@
 
   "item.starcatcher.glitter_bobber": "Glitter Bobber",
   "tooltip.starcatcher.glitter_bobber.0": "A very sparkly bobber!",
-  "tooltip.starcatcher.glitter_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
-  "tooltip.starcatcher.glitter_bobber.2": "you'll feel the power of glitter.",
+  "tooltip.starcatcher.glitter_bobber.1": "Feel the power of glitter.",
+
+  "item.starcatcher.colorful_bobber": "Colorful Bobber",
+  "tooltip.starcatcher.colorful_bobber.0": "A very colorful bobber!",
+  "tooltip.starcatcher.colorful_bobber.999": "It shines as if saying [click me]",
 
   "item.starcatcher.frugal_bobber": "Frugal Bobber",
   "tooltip.starcatcher.frugal_bobber.0": "A bobber with a unique bait-saving mechanism.",

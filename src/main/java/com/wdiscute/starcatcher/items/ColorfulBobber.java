@@ -28,7 +28,7 @@ public class ColorfulBobber extends Item
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
-        tooltipComponents.add(Component.literal("It shines...").withColor(stack.get(ModDataComponents.BOBBER_COLOR).getColorAsInt()));
+        tooltipComponents.add(Component.translatable("tooltip.starcatcher.colorful_bobber.999").withColor(stack.get(ModDataComponents.BOBBER_COLOR).getColorAsInt()));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 
