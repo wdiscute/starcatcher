@@ -153,9 +153,6 @@
   "tooltip.starcatcher.trophy_of_pitiful_fishing.1" : "reset your fishes caught.",
 
 
-
-
-
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
   "gui.guide.caught" : "Caught ",
@@ -163,8 +160,10 @@
   "gui.guide.not_caught_fish_name" : "???",
 
 
-  "gui.guide.planet" : "Planet: ",
+  "gui.guide.dimension" : "Dimension: ",
+  "gui.guide.dimensions" : "Dimensions: ",
   "gui.guide.biome" : "Biome: ",
+  "gui.guide.biomes" : "Biomes: ",
   "gui.guide.blacklisted_biomes" : "Blacklisted Biomes: ",
   "gui.guide.blacklisted_dimensions" : "Blacklisted Dimensions: ",
   "gui.guide.bait" : "Bait: ",
@@ -187,6 +186,13 @@
   "gui.guide.deepslate" : "Deepslate",
   "gui.guide.no_restriction" : "No Restriction",
   "gui.guide.hover" : "[hover]",
+
+
+  "gui.guide.rarity.common" : "Common",
+  "gui.guide.rarity.uncommon" : "<gradient-37>Uncommon</gradient-43>",
+  "gui.guide.rarity.rare" : "<gradient-57>Rare</gradient-67>",
+  "gui.guide.rarity.epic" : "<gradient-80>Epic</gradient-90>",
+  "gui.guide.rarity.legendary" : "<rgb>Legendary</rgb>",
 
 
   "item.starcatcher.obidontiee" : "Obidontiee",

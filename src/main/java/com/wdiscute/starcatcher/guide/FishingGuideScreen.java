@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.minigame.HitFakeParticle;
@@ -33,6 +34,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -277,9 +279,18 @@ public class FishingGuideScreen extends Screen
         {
             case FishProperties.Rarity.COMMON -> guiGraphics.setColor(1, 1, 1, 1);
             case FishProperties.Rarity.UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
-            case FishProperties.Rarity.RARE -> guiGraphics.setColor(1f, 0.9f, 0f, 0.7f);
+            case FishProperties.Rarity.RARE -> guiGraphics.setColor(0.2f, 0.4f, 0.7f, 0.7f);
             case FishProperties.Rarity.EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
-            case FishProperties.Rarity.LEGENDARY -> guiGraphics.setColor(1, 0.5f, 0.1f, 0.7f);
+            case FishProperties.Rarity.LEGENDARY -> {
+
+                Color color = Color.getHSBColor(Tooltips.hue * 2,1 ,1);
+
+                float r = (float) color.getRed() / 255;
+                float g = (float) color.getGreen() / 255;
+                float b = (float) color.getBlue() / 255;
+
+                guiGraphics.setColor(r, g, b, 0.7f);
+            }
         }
 
         RenderSystem.enableBlend();
@@ -383,13 +394,45 @@ public class FishingGuideScreen extends Screen
             else
                 compName = Component.translatable("item.starcatcher." + fp.customName());
 
-            guiGraphics.drawString(this.font, compName, uiX + xOffset + 46, uiY + 60, 0, false);
+            //render fish name
+            guiGraphics.drawString(this.font, compName, uiX + xOffset + 46, uiY + 55, 0, false);
 
             //render caught count
             Component c = Component.literal("[" + fcc.count() + "]").withColor(0x00AA00);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.caught").append(c).withColor(0x00AA00), uiX + xOffset + 46, uiY + 70, 0, false);
-            renderItem(is, uiX + xOffset + 10, uiY + 60);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.caught").append(c).withColor(0x00AA00), uiX + xOffset + 46, uiY + 65, 0, false);
 
+            //render rarity
+            Component rarity = Tooltips.DecodeTranslationKeyTags("gui.guide.rarity." + fp.rarity().getSerializedName());
+            guiGraphics.drawString(this.font, rarity, uiX + xOffset + 46, uiY + 75, 0, false);
+
+            //render fish
+            renderItem(is, uiX + xOffset + 10, uiY + 60);
+            switch (fp.rarity())
+            {
+                case FishProperties.Rarity.COMMON -> guiGraphics.setColor(1, 1, 1, 1);
+                case FishProperties.Rarity.UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
+                case FishProperties.Rarity.RARE -> guiGraphics.setColor(0.2f, 0.4f, 0.7f, 0.7f);
+                case FishProperties.Rarity.EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
+                case FishProperties.Rarity.LEGENDARY -> {
+
+                    Color color = Color.getHSBColor(Tooltips.hue,1 ,1);
+                    float r = (float) color.getRed() / 255;
+                    float g = (float) color.getGreen() / 255;
+                    float b = (float) color.getBlue() / 255;
+
+                    guiGraphics.setColor(r, g, b, 0.7f);
+                }
+            }
+
+            //render glow
+            RenderSystem.enableBlend();
+            guiGraphics.blit(
+                    GLOW, uiX + xOffset - 6, uiY + 40,
+                    0, 0, 48, 48, 48, 48);
+            RenderSystem.disableBlend();
+            guiGraphics.setColor(1, 1, 1, 1);
+
+            //render tooltip
             if (mouseX > uiX + xOffset + 46 && mouseX < uiX + xOffset + 150 && mouseY > uiY + 57 && mouseY < uiY + 80)
             {
                 List<Component> components = new ArrayList<>();
@@ -401,16 +444,9 @@ public class FishingGuideScreen extends Screen
             }
         }
 
-
-        //icon and count list
-        {
-
-
-        }
-
         int yOffset = 110;
 
-        //planet
+        //dimension
         {
             Component comp;
 
@@ -420,7 +456,7 @@ public class FishingGuideScreen extends Screen
             }
             else
             {
-                //if theres only one planet
+                //if theres only one dimension
                 if (fp.wr().dims().size() == 1)
                 {
                     comp = Component.translatable("dimension." + fp.wr().dims().getFirst().toLanguageKey());
@@ -433,6 +469,8 @@ public class FishingGuideScreen extends Screen
                     if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
                     {
                         List<Component> c = new ArrayList<>();
+
+                        c.add(Component.translatable("gui.guide.dimensions"));
 
                         for (int i = 0; i < fp.wr().dims().size(); i++)
                         {
@@ -460,12 +498,12 @@ public class FishingGuideScreen extends Screen
             }
 
 
-            Component start = Component.translatable("gui.guide.planet");
+            Component start = Component.translatable("gui.guide.dimension");
 
             guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
         }
 
-        //planet blacklist
+        //dimension blacklist
         {
             if (!fp.wr().dimsBlacklist().isEmpty())
             {
@@ -514,7 +552,7 @@ public class FishingGuideScreen extends Screen
                     if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
                     {
                         List<Component> c = new ArrayList<>();
-                        c.add(Component.translatable("gui.guide.biome"));
+                        c.add(Component.translatable("gui.guide.biomes"));
 
                         for (ResourceLocation rl : biomes)
                         {
@@ -589,14 +627,11 @@ public class FishingGuideScreen extends Screen
         }
 
 
-        yOffset += 15;
 
-        if (fp.br().correctBait().isEmpty())
+        if (!fp.br().correctBait().isEmpty())
         {
-            guiGraphics.drawString(this.font, I18n.get("gui.guide.bait") + I18n.get("gui.guide.no_restriction"), uiX + xOffset, uiY + yOffset, 0, false);
-        }
-        else
-        {
+            yOffset += 15;
+
             ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(fp.br().correctBait().getFirst()));
             guiGraphics.drawString(this.font, I18n.get("gui.guide.bait") + I18n.get(stack.getDescriptionId()), uiX + xOffset, uiY + yOffset, 0, false);
 

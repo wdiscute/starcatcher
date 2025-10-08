@@ -766,7 +766,7 @@ public record FishProperties(
 
     public enum Rarity implements StringRepresentable
     {
-        COMMON("day"),
+        COMMON("common"),
         UNCOMMON("uncommon"),
         RARE("rare"),
         EPIC("epic"),

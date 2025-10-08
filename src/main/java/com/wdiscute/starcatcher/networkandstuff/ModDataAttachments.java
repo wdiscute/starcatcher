@@ -32,14 +32,6 @@ public class ModDataAttachments
                     .build()
     );
 
-    public static final Supplier<AttachmentType<FishProperties>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
-            "fish_spotter", () -> AttachmentType.builder(() -> FishProperties.DEFAULT)
-                    .serialize(FishProperties.CODEC)
-                    .sync(FishProperties.STREAM_CODEC)
-                    .copyOnDeath()
-                    .build()
-    );
-
     public static final Supplier<AttachmentType<List<FishCaughtCounter>>> FISHES_CAUGHT = ATTACHMENT_TYPES.register(
             "fishes_caught", () ->
                     AttachmentType.builder(() -> List.of(new FishCaughtCounter(FishProperties.DEFAULT, 0, 0, 0)))
