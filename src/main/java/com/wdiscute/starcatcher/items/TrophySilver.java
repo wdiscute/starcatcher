@@ -22,9 +22,9 @@ import java.util.Optional;
 
 public class TrophySilver extends Item
 {
-    public TrophySilver(Properties properties)
+    public TrophySilver()
     {
-        super(properties);
+        super(new Item.Properties());
     }
 
     @Override

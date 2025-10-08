@@ -27,6 +27,9 @@ public class ModDataComponents
             "hook",
             builder -> builder.persistent(SingleStackContainer.CODEC));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SingleStackContainer>> HOOK = register(
+            "hook",
+            builder -> builder.persistent(SingleStackContainer.CODEC));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator)

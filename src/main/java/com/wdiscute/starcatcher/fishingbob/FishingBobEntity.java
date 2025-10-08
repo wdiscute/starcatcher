@@ -87,6 +87,8 @@ public class FishingBobEntity extends Projectile
             maxTicksToFish = 300;
             chanceToFishEachTick = 100;
 
+            if(bobber.is(ModItems.IMPATIENT_BOBBER)) chanceToFishEachTick = 200;
+
             float f = player.getXRot();
             float f1 = player.getYRot();
             float f2 = Mth.cos(-f1 * ((float) Math.PI / 180F) - (float) Math.PI);
@@ -312,7 +314,6 @@ public class FishingBobEntity extends Projectile
         //TODO check for water level instead of just blockstate to make the entity sit better in water
         if (this.currentState == FishHookState.BOBBING || this.currentState == FishHookState.FISHING)
         {
-
             checkForFish();
 
             if (!fluid.isEmpty())
@@ -343,8 +344,6 @@ public class FishingBobEntity extends Projectile
 
         this.setDeltaMovement(this.getDeltaMovement().scale(0.92));
         this.reapplyPosition();
-
-
     }
 
     public boolean checkBiting()

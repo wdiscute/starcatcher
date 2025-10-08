@@ -1,8 +1,10 @@
 package com.wdiscute.starcatcher.rod;
 
+import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
+import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -16,6 +18,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
@@ -25,9 +28,15 @@ import java.util.List;
 
 public class StarcatcherFishingRod extends Item implements MenuProvider
 {
-    public StarcatcherFishingRod(Properties properties)
+    public StarcatcherFishingRod()
     {
-        super(properties);
+        super(new Item.Properties()
+                .rarity(Rarity.EPIC)
+                .stacksTo(1)
+                .component(ModDataComponents.BOBBER.get(), SingleStackContainer.EMPTY)
+                .component(ModDataComponents.BAIT.get(), SingleStackContainer.EMPTY)
+                .component(ModDataComponents.HOOK.get(), new SingleStackContainer(new ItemStack(ModItems.HOOK.get())))
+        );
     }
 
 
@@ -101,7 +110,7 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
     @Override
     public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        if(player.getMainHandItem().is(ModItems.ROD))
+        if (player.getMainHandItem().is(ModItems.ROD))
             return new FishingRodMenu(i, inventory, player.getMainHandItem());
         else
             return new FishingRodMenu(i, inventory, player.getOffhandItem());

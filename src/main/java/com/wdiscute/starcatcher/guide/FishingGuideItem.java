@@ -12,9 +12,9 @@ import net.neoforged.api.distmarker.OnlyIn;
 
 public class FishingGuideItem extends Item
 {
-    public FishingGuideItem(Properties properties)
+    public FishingGuideItem()
     {
-        super(properties);
+        super(new Item.Properties());
     }
 
     @Override

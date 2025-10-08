@@ -1,10 +1,7 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
-import com.wdiscute.starcatcher.items.FishItem;
-import com.wdiscute.starcatcher.items.TrophyBronze;
-import com.wdiscute.starcatcher.items.TrophyGold;
-import com.wdiscute.starcatcher.items.TrophySilver;
+import com.wdiscute.starcatcher.items.*;
 import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
@@ -25,7 +22,7 @@ public interface ModItems
 
     DeferredRegister.Items ITEMS = DeferredRegister.createItems(Starcatcher.MOD_ID);
 
-    DeferredItem<Item> GUIDE = ITEMS.register("starcatcher_guide", () -> new FishingGuideItem(new Item.Properties()));
+    DeferredItem<Item> GUIDE = ITEMS.register("starcatcher_guide", FishingGuideItem::new);
 
     DeferredItem<Item> FISH_SPOTTER = singleStackItem("fish_spotter");
 
@@ -41,25 +38,17 @@ public interface ModItems
 
     DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
     DeferredItem<Item> GLITTER_BOBBER = singleStackItem("glitter_bobber"); //done
+    DeferredItem<Item> COLORFUL_BOBBER = ITEMS.register("colorful_bobber", ColorfulBobber::new);
     DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
     DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
     DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber");
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
 
-    DeferredItem<Item> ROD = ITEMS.register(
-            "starcatcher_rod",
-            () -> new StarcatcherFishingRod(
-                    new Item.Properties()
-                            .rarity(Rarity.EPIC)
-                            .stacksTo(1)
-                            .component(ModDataComponents.BOBBER.get(), SingleStackContainer.EMPTY)
-                            .component(ModDataComponents.BAIT.get(), SingleStackContainer.EMPTY)
-                            .component(ModDataComponents.HOOK.get(), new SingleStackContainer(new ItemStack(ModItems.HOOK.get())))
-            ));
+    DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new);
 
-    DeferredItem<Item> TROPHY_OF_MASTERFUL_FISHING = ITEMS.register("trophy_of_masterful_fishing", () -> new TrophyGold(new Item.Properties()));
-    DeferredItem<Item> TROPHY_OF_FISHING = ITEMS.register("trophy_of_fishing", () -> new TrophySilver(new Item.Properties()));
-    DeferredItem<Item> TROPHY_OF_PITIFUL_FISHING = ITEMS.register("trophy_of_pitiful_fishing", () -> new TrophyBronze(new Item.Properties()));
+    DeferredItem<Item> TROPHY_OF_MASTERFUL_FISHING = ITEMS.register("trophy_of_masterful_fishing", TrophyGold::new);
+    DeferredItem<Item> TROPHY_OF_FISHING =           ITEMS.register("trophy_of_fishing",           TrophySilver::new);
+    DeferredItem<Item> TROPHY_OF_PITIFUL_FISHING =   ITEMS.register("trophy_of_pitiful_fishing",   TrophyBronze::new);
 
     DeferredItem<Item> MISSINGNO = basicItem("missingno");
 

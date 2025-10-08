@@ -23,9 +23,9 @@ import java.util.List;
 
 public class TrophyGold extends Item
 {
-    public TrophyGold(Properties properties)
+    public TrophyGold()
     {
-        super(properties);
+        super(new Item.Properties());
     }
 
     @Override
