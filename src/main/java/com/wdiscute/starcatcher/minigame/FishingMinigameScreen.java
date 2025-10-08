@@ -445,9 +445,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 hitSomething = true;
             }
 
-            System.out.println("treasureReward " + treasureReward);
-            System.out.println("treasureProgress " + treasureProgress);
-
 
             if (hitSomething)
             {
