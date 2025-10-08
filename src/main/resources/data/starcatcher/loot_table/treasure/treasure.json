@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:empty",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:loot_table",
+          "value": "starcatcher:treasure/bobbers",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "starcatcher:treasure/hooks",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "starcatcher:treasure/loot",
+          "weight": 15
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "starcatcher:waterlogged_satchel"
+}

@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:shiny_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:gold_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:mossy_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:crystal_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:stone_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:split_hook"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "starcatcher:hooks"
+}

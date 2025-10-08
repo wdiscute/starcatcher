@@ -52,9 +52,9 @@ public interface ModItems
 
     DeferredItem<Item> MISSINGNO = basicItem("missingno");
 
-    DeferredItem<Item> WATERLOGGED_SATCHEL = singleStackItem("waterlogged_satchel");
-    DeferredItem<Item> TREASURE = singleStackItem("treasure");
-    DeferredItem<Item> SCALDING_TREASURE = singleStackItem("scalding_treasure");
+    DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new FishingTreasure(Starcatcher.rl("treasure/waterlogged_satchel")));
+    DeferredItem<Item> TREASURE = ITEMS.register("treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/treasure")));
+    DeferredItem<Item> SCALDING_TREASURE = ITEMS.register("scalding_treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/scalding_treasure")));
 
     DeferredItem<Item> FISH_BONES = basicItem("fish_bones");
 

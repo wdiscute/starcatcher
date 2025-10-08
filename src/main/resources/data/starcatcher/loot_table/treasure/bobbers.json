@@ -1,0 +1,40 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:creeper_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:glitter_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:colorful_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:frugal_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:steady_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:impatient_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:frog_bobber"
+        }
+      ],
+      "rolls": 1
+    }
+  ],
+  "random_sequence": "starcatcher:bobbers"
+}

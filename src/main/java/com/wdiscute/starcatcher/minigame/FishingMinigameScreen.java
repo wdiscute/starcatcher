@@ -104,11 +104,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         posTreasure = Integer.MIN_VALUE;
 
         //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
-        FishProperties.Difficulty difficulty = bobber.is(ModItems.MOSSY_HOOK) &&
-                (fp.rarity() == FishProperties.Rarity.COMMON ||
-                        fp.rarity() == FishProperties.Rarity.UNCOMMON || fp.rarity() ==
-                        FishProperties.Rarity.RARE) ?
-                FishProperties.Difficulty.HARD : fp.dif();
+        FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
+                (
+                        fp.rarity() == FishProperties.Rarity.COMMON ||
+                        fp.rarity() == FishProperties.Rarity.UNCOMMON ||
+                        fp.rarity() == FishProperties.Rarity.RARE
+                ) ? FishProperties.Difficulty.HARD : fp.dif();
 
         this.speed = difficulty.speed();
         this.reward = difficulty.reward();
