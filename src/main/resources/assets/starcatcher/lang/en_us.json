@@ -1,21 +1,21 @@
 {
   "creativetab.starcatcher.starcatcher": "Starcatcher",
 
+  "tag.starcatcher.is_beach" : "Beaches",
+  "tag.starcatcher.is_birch_forest" : "Birch Forests",
+  "tag.starcatcher.is_cherry_grove" : "Cherry Groves",
   "tag.starcatcher.is_cold_lake" : "Cold Lakes",
   "tag.starcatcher.is_cold_ocean" : "Cold Oceans",
   "tag.starcatcher.is_cold_river" : "Cold Rivers",
-
-  "tag.starcatcher.is_ocean" : "Oceans",
-  "tag.starcatcher.is_deep_ocean" : "Deep Oceans",
-  "tag.starcatcher.is_river" : "Rivers",
-
-  "tag.starcatcher.is_warm" : "Warm Climate",
-
-  "tag.starcatcher.is_beach" : "Beaches",
-  "tag.starcatcher.is_swamp" : "Swamp",
-  "tag.starcatcher.is_cherry_grove" : "Cherry Groves",
-  "tag.starcatcher.is_mushroom_fields" : "Mushroom Fields",
   "tag.starcatcher.is_dark_forest" : "Dark Forests",
+  "tag.starcatcher.is_deep_ocean" : "Deep Oceans",
+  "tag.starcatcher.is_mushroom_fields" : "Mushroom Fields",
+  "tag.starcatcher.is_ocean" : "Oceans",
+  "tag.starcatcher.is_river" : "Rivers",
+  "tag.starcatcher.is_swamp" : "Swamps",
+  "tag.starcatcher.is_warm" : "Warm Climate",
+  "tag.starcatcher.is_warm_ocean" : "Warm Oceans",
+  "tag.starcatcher.is_warm_river" : "Warm Rivers",
 
   "tag.starcatcher.hooks" : "Fishing Hooks",
   "tag.starcatcher.hooks_survive_fire" : "Hooks that survive Fire",
@@ -27,13 +27,13 @@
   "tooltip.starcatcher.starcatcher_rod.2": "Who knows what you might catch",
   "tooltip.starcatcher.starcatcher_rod.3": "given the right conditions are met!",
   "tooltip.starcatcher.starcatcher_rod.4": "",
-  "tooltip.starcatcher.starcatcher_rod.5": "Crouch + use to open",
+  "tooltip.starcatcher.starcatcher_rod.5": "use whilst crouching to open",
   "tooltip.starcatcher.starcatcher_rod.6": "bobber, bait and hook selection",
 
   "item.starcatcher.starcatcher_guide": "Starcatcher's Guide",
   "tooltip.starcatcher.starcatcher_guide.0": "An angler's best companion, keeping track",
   "tooltip.starcatcher.starcatcher_guide.1": "of all the fishes you've caught, and",
-  "tooltip.starcatcher.starcatcher_guide.2": "those you've yet to reel in!",
+  "tooltip.starcatcher.starcatcher_guide.2": "those you have yet to reel in!",
 
   "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
   "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine covered in enderpearl dust.",

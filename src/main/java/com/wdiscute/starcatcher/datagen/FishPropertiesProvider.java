@@ -39,6 +39,7 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
         }
     }
 
+    //region restricted
     public static final List<FishPropertiesWithModRestriction> RESTRICTED_FPS = List.of(
 
             //list to store all fishes from other mods for compatibility, alongside the modid so it
@@ -402,8 +403,7 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
 
             );
-
-
+    //endregion restricted
 
     public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder()
             .add(
@@ -416,7 +416,6 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                             register(bootstrap, restriction.fp());
                         }
 
-
                         //datagen all starcatcher fishes
 
                         //lakes
@@ -426,8 +425,6 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                                         .withWeather(FishProperties.Weather.RAIN)
                                         .withRarity(FishProperties.Rarity.UNCOMMON)
                                         .withDifficulty(FishProperties.Difficulty.HARD));
-
-
 
                         register(bootstrap, overworldLakeFish(getKey(ModItems.ELDERSCALE.get()))
                                         .withDifficulty(FishProperties.Difficulty.MEDIUM)
@@ -475,28 +472,23 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
 
                         //lake warm
-                        register(
-                                bootstrap, overworldWarmLakeFish(getKey(ModItems.SANDTAIL.get()))
+                        register(bootstrap, overworldWarmLakeFish(getKey(ModItems.SANDTAIL.get()))
                                         .withDaytime(FishProperties.Daytime.NIGHT));
 
-                        register(
-                                bootstrap, overworldWarmLakeFish(getKey(ModItems.MIRAGE_CARP.get()))
+                        register(bootstrap, overworldWarmLakeFish(getKey(ModItems.MIRAGE_CARP.get()))
                                         .withDifficulty(FishProperties.Difficulty.MEDIUM)
                                         .withDaytime(FishProperties.Daytime.DAY)
                                         .withWeather(FishProperties.Weather.CLEAR)
                                         .withRarity(FishProperties.Rarity.UNCOMMON));
 
-                        register(
-                                bootstrap, overworldWarmLakeFish(getKey(ModItems.SCORCHFISH.get()))
+                        register(bootstrap, overworldWarmLakeFish(getKey(ModItems.SCORCHFISH.get()))
                                         .withWeather(FishProperties.Weather.CLEAR));
 
-                        register(
-                                bootstrap, overworldWarmLakeFish(getKey(ModItems.CACTIFISH.get()))
+                        register(bootstrap, overworldWarmLakeFish(getKey(ModItems.CACTIFISH.get()))
                                         .withDaytime(FishProperties.Daytime.DAY));
 
 
-                        register(
-                                bootstrap, overworldWarmLakeFish(getKey(ModItems.AGAVE_BREAM.get()))
+                        register(bootstrap, overworldWarmLakeFish(getKey(ModItems.AGAVE_BREAM.get()))
                                         .withRarity(FishProperties.Rarity.RARE)
                                         .withDaytime(FishProperties.Daytime.NIGHT)
                                         .withWeather(FishProperties.Weather.CLEAR)
@@ -504,23 +496,19 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
 
 
                         //mountain
-                        register(
-                                bootstrap, overworldMountainFish(getKey(ModItems.SUNNY_STURGEON.get()))
+                        register(bootstrap, overworldMountainFish(getKey(ModItems.SUNNY_STURGEON.get()))
                                         .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
                                         .withRarity(FishProperties.Rarity.RARE)
                                         .withDaytime(FishProperties.Daytime.DAY)
                                         .withBaseChance(2));
 
-                        register(
-                                bootstrap, overworldMountainFish(getKey(ModItems.PEAKDWELLER.get()))
+                        register(bootstrap, overworldMountainFish(getKey(ModItems.PEAKDWELLER.get()))
                                         .withDifficulty(FishProperties.Difficulty.HARD));
 
-                        register(
-                                bootstrap, overworldMountainFish(getKey(ModItems.ROCKGILL.get()))
+                        register(bootstrap, overworldMountainFish(getKey(ModItems.ROCKGILL.get()))
                                         .withDifficulty(FishProperties.Difficulty.MEDIUM));
 
-                        register(
-                                bootstrap, overworldMountainFish(getKey(ModItems.SUN_SEEKING_CARP.get()))
+                        register(bootstrap, overworldMountainFish(getKey(ModItems.SUN_SEEKING_CARP.get()))
                                         .withRarity(FishProperties.Rarity.RARE)
                                         .withBaseChance(2)
                                         .withDaytime(FishProperties.Daytime.NOON));
