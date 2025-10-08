@@ -561,6 +561,17 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 continue;
             }
 
+            if(bobber.is(ModItems.COLORFUL_BOBBER))
+            {
+                hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
+                        bobber.get(ModDataComponents.BOBBER_COLOR).r(),
+                        bobber.get(ModDataComponents.BOBBER_COLOR).g(),
+                        bobber.get(ModDataComponents.BOBBER_COLOR).b(),
+                        1
+                ));
+                continue;
+            }
+
             if (treasure)
             {
                 //red particles if treasure sweet spot was hit

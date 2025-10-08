@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher;
 
-import com.mojang.serialization.Codec;
+import com.wdiscute.starcatcher.items.ColorfulBobber;
 import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
@@ -28,9 +28,9 @@ public class ModDataComponents
             "hook",
             builder -> builder.persistent(SingleStackContainer.CODEC));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<String>> COLOR = register(
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ColorfulBobber.BobberColor>> BOBBER_COLOR = register(
             "color",
-            builder -> builder.persistent(Codec.STRING));
+            builder -> builder.persistent(ColorfulBobber.BobberColor.CODEC));
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator)
