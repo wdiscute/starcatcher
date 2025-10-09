@@ -17,7 +17,7 @@
         {
           "type": "minecraft:loot_table",
           "value": "starcatcher:treasure/loot",
-          "weight": 6
+          "weight": 3
         }
       ],
       "rolls": 1
