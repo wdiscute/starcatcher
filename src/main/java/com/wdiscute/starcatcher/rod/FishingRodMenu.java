@@ -58,9 +58,9 @@ public class FishingRodMenu extends AbstractContainerMenu
         inventory.setStackInSlot(1, is.get(ModDataComponents.BAIT.get()).stack().copy());
         inventory.setStackInSlot(2, is.get(ModDataComponents.HOOK.get()).stack().copy());
 
-        this.addSlot(new SlotItemHandler(inventory, 0, 53, 35));
-        this.addSlot(new SlotItemHandler(inventory, 1, 70, 35));
-        this.addSlot(new SlotItemHandler(inventory, 2, 100, 35)
+        this.addSlot(new SlotItemHandler(inventory, 0, 50, 35));
+        this.addSlot(new SlotItemHandler(inventory, 1, 80, 35));
+        this.addSlot(new SlotItemHandler(inventory, 2, 110, 35)
         {
             @Override
             public boolean mayPlace(ItemStack stack)
