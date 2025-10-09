@@ -44,35 +44,25 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
     @Override
     public void render(FishingBobEntity fishingBobEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
-//        poseStack.pushPose();
-//        poseStack.translate(0.0F, 1.5F, 0.0F);
-//        poseStack.scale(-1.0F, -1.0F, 1.0F);
-//        int color = 0xff9999;
-//        ItemStack bobber = fishingBobEntity.getData(ModDataAttachments.BOBBER).stack().copy();
-//        if (bobber.is(ModItems.COLORFUL_BOBBER))
-//        {
-//            //why is rendering so annoying
-//            color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
-//        }
-//        VertexConsumer vertexbobber = buffer.getBuffer(this.model.renderType(this.getTextureLocation(fishingBobEntity)));
-//        this.model.renderToBuffer(poseStack, vertexbobber, packedLight, OverlayTexture.NO_OVERLAY, color);
-//        poseStack.popPose();
+        poseStack.pushPose();
+        poseStack.translate(0.0F, 1.5F, 0.0F);
+        poseStack.scale(-1.0F, -1.0F, 1.0F);
+        int color = 0xff9999;
+        ItemStack bobber = fishingBobEntity.getData(ModDataAttachments.BOBBER).stack().copy();
+        if (bobber.is(ModItems.COLORFUL_BOBBER))
+        {
+            //why is rendering so annoying
+            color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
+        }
+        VertexConsumer vertexbobber = buffer.getBuffer(this.model.renderType(this.getTextureLocation(fishingBobEntity)));
+        this.model.renderToBuffer(poseStack, vertexbobber, packedLight, OverlayTexture.NO_OVERLAY, color);
+        poseStack.popPose();
 
 
         if (fishingBobEntity.getOwner() instanceof Player player)
         {
 
             poseStack.pushPose();
-            poseStack.pushPose();
-            poseStack.scale(0.5F, 0.5F, 0.5F);
-            poseStack.mulPose(this.entityRenderDispatcher.cameraOrientation());
-            PoseStack.Pose posestack$pose = poseStack.last();
-            VertexConsumer vertexconsumer = buffer.getBuffer(RENDER_TYPE);
-            vertex(vertexconsumer, posestack$pose, packedLight, 0.0F, 0, 0, 1);
-            vertex(vertexconsumer, posestack$pose, packedLight, 1.0F, 0, 1, 1);
-            vertex(vertexconsumer, posestack$pose, packedLight, 1.0F, 1, 1, 0);
-            vertex(vertexconsumer, posestack$pose, packedLight, 0.0F, 1, 0, 0);
-            poseStack.popPose();
             float f = player.getAttackAnim(partialTicks);
             float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
             Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTicks);
@@ -82,11 +72,10 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
             float f4 = (float) (vec3.z - vec31.z);
             VertexConsumer vertexconsumer1 = buffer.getBuffer(RenderType.lineStrip());
             PoseStack.Pose posestack$pose1 = poseStack.last();
-            int i = 16;
 
-            for (int j = 0; j <= 16; j++)
+            for (int j = 0 ; j <= 16; j++)
             {
-                stringVertex(f2, f3, f4, vertexconsumer1, posestack$pose1, fraction(j, 16), fraction(j + 1, 16));
+                stringVertex(color, f2, f3, f4, vertexconsumer1, posestack$pose1, fraction(j, 16), fraction(j + 1, 16));
             }
 
             poseStack.popPose();
@@ -97,9 +86,10 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 
     }
 
-    private static void stringVertex(
-            float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction
+    private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction
     ) {
+        if(color == 0xff9999) color = -16777216;
+
         float f = x * stringFraction;
         float f1 = y * (stringFraction * stringFraction + stringFraction) * 0.5F + 0.25F;
         float f2 = z * stringFraction;
@@ -110,7 +100,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
         f3 /= f6;
         f4 /= f6;
         f5 /= f6;
-        consumer.addVertex(pose, f, f1, f2).setColor(-16777216).setNormal(pose, f3, f4, f5);
+        consumer.addVertex(pose, f, f1, f2).setColor(color).setNormal(pose, f3, f4, f5);
     }
 
     private static float fraction(int numerator, int denominator) {
