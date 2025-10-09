@@ -25,9 +25,6 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 {
     protected FishingBobModel<FishingBobEntity> model;
 
-    private static final ResourceLocation TEXTURE_LOCATION = ResourceLocation.withDefaultNamespace("textures/entity/fishing_hook.png");
-    private static final RenderType RENDER_TYPE = RenderType.entityCutout(TEXTURE_LOCATION);
-
     public FishingBobRenderer(EntityRendererProvider.Context context)
     {
         super(context);
@@ -47,7 +44,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
         poseStack.pushPose();
         poseStack.translate(0.0F, 1.5F, 0.0F);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
-        int color = 0xff9999;
+        int color = 0xffff9999;
         ItemStack bobber = fishingBobEntity.getData(ModDataAttachments.BOBBER).stack().copy();
         if (bobber.is(ModItems.COLORFUL_BOBBER))
         {
@@ -105,15 +102,6 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 
     private static float fraction(int numerator, int denominator) {
         return (float)numerator / (float)denominator;
-    }
-
-    private static void vertex(VertexConsumer consumer, PoseStack.Pose pose, int packedLight, float x, int y, int u, int v) {
-        consumer.addVertex(pose, x - 0.5F, (float)y - 0.5F, 0.0F)
-                .setColor(-1)
-                .setUv((float)u, (float)v)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(packedLight)
-                .setNormal(pose, 0.0F, 1.0F, 0.0F);
     }
 
     private Vec3 getPlayerHandPos(Player player, float p_340872_, float partialTick) {
