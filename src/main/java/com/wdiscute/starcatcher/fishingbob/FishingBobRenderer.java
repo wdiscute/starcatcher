@@ -85,7 +85,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 
     private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction
     ) {
-        if(color == 0xff9999) color = -16777216;
+        if(color == 0xffff9999) color = -16777216;
 
         float f = x * stringFraction;
         float f1 = y * (stringFraction * stringFraction + stringFraction) * 0.5F + 0.25F;
