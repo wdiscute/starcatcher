@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-09T00:33:01.4803253	Registries
+// 1.21.1	2025-10-09T15:18:24.2266714	Registries
 af15197980888df35cebb5db2916b811f68aca2b data/starcatcher/starcatcher/fish/starcatcher_agave_bream.json
 1c4c7bbedf357ddce4b53cb6d2837cc6c445907c data/starcatcher/starcatcher/fish/starcatcher_amethystback.json
 5e42d869eff5b87ec9b482538fbe30ba24b74b8b data/starcatcher/starcatcher/fish/starcatcher_aquamarine_pike.json
@@ -113,7 +113,7 @@ fa51b296b609ad8cc5de26ed515f56eb5a339eb8 data/starcatcher/starcatcher/fish/tide_
 5a501c78afb324536b507e27b5bd2f7dfc8dc80e data/starcatcher/starcatcher/fish/tide_ember_koi.json
 59494e14855871225521edcfe59d00772a87d52a data/starcatcher/starcatcher/fish/tide_enderfin.json
 f86caddda17148a1e7d38f52529ef5f369f94b21 data/starcatcher/starcatcher/fish/tide_endergazer.json
-c649ad3ac86db7ec796d4d5c12cfc40f95089d57 data/starcatcher/starcatcher/fish/tide_end_stone_perch.json
+ff8023eac4f961dacdb4a98844824da849aaa4af data/starcatcher/starcatcher/fish/tide_endstone_perch.json
 b024384bab501aa5352f2d62870db5e190fd67ad data/starcatcher/starcatcher/fish/tide_fluttergill.json
 2834d551426672b2f1afd255ddaf8aa19464aa70 data/starcatcher/starcatcher/fish/tide_frostbite_flounder.json
 be9dac10727a3a500c35acd793c2a5d10ab2dacb data/starcatcher/starcatcher/fish/tide_gilded_minnow.json

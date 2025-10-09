@@ -18,7 +18,7 @@
       "loot": "starcatcher:waterlogged_satchel"
     }
   },
-  "fish": "tide:end_stone_perch",
+  "fish": "tide:endstone_perch",
   "world_restrictions": {
     "dimensions": [
       "minecraft:the_end"

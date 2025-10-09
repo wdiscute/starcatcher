@@ -351,7 +351,7 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                     .withMod("tide"),
 
             //tide end
-            endFish(fromRL("tide", "end_stone_perch"))
+            endFish(fromRL("tide", "endstone_perch"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
