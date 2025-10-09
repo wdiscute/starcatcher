@@ -322,7 +322,7 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            netherLavaFish(fromRL("tide", "ash_perch"))
+            netherLavaFish(fromRL("tide", "ashen_perch"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 

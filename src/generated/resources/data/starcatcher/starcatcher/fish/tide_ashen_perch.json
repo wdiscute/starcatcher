@@ -18,7 +18,7 @@
       "loot": "starcatcher:waterlogged_satchel"
     }
   },
-  "fish": "tide:ash_perch",
+  "fish": "tide:ashen_perch",
   "world_restrictions": {
     "dimensions": [
       "minecraft:the_nether"
