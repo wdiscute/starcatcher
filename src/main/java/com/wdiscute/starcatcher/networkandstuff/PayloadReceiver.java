@@ -56,7 +56,7 @@ public class PayloadReceiver
 //                        }
 
                         //create itemStacks
-                        ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.fish()));
+                        ItemStack is = new ItemStack(fbe.fpToFish.fish());
                         ItemStack treasure = new ItemStack(BuiltInRegistries.ITEM.get(fbe.fpToFish.dif().treasure().loot()));
 
                         //assign custom name if fish has one

@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "base_chance": 5,
   "difficulty": {
     "decay": 3,
     "has_first_thin_marker": true,

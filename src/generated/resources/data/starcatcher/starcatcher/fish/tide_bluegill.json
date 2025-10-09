@@ -6,7 +6,6 @@
     }
   ],
   "above_y": 50,
-  "base_chance": 5,
   "below_y": 100,
   "fish": "tide:bluegill",
   "world_restrictions": {

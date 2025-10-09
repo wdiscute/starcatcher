@@ -18,6 +18,8 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
@@ -26,12 +28,14 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +43,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public record FishProperties(
-        ResourceLocation fish,
+        Holder<Item> fish,
         int baseChance,
 
         String customName,
@@ -58,9 +62,9 @@ public record FishProperties(
     public static final Codec<FishProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     //mandatory
-                    ResourceLocation.CODEC.fieldOf("fish").forGetter(FishProperties::fish),
-                    Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
+                    BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("fish").forGetter(FishProperties::fish),
                     //optional
+                    Codec.INT.optionalFieldOf("base_chance", 5).forGetter(FishProperties::baseChance),
                     Codec.STRING.optionalFieldOf("customName", "").forGetter(FishProperties::customName),
                     Rarity.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(FishProperties::rarity),
                     WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
@@ -73,34 +77,21 @@ public record FishProperties(
                     Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
                     Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
 
-            ).apply(instance, FishProperties::checkFP)
+            ).apply(instance, FishProperties::new)
     );
-
-
-
-    private static FishProperties checkFP(ResourceLocation fish, Integer baseChance, String customName, Rarity rarity, WorldRestrictions wr, BaitRestrictions br, Difficulty dif, Daytime daytime, Weather weather, Integer bellowY, Integer aboveY, Boolean skipMinigame, Boolean hasGuideEntry)
-    {
-        //TODO make this use the conditions feature of neoforge instead but the datagen for it is god awful so im not gonna do that right now teehee
-
-        if (!new ItemStack(BuiltInRegistries.ITEM.get(fish)).isEmpty())
-            return new FishProperties(fish, baseChance, customName, rarity, wr, br, dif, daytime, weather, bellowY, aboveY, skipMinigame, hasGuideEntry);
-        else
-            return null;
-    }
-
 
     public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.CODEC.listOf();
 
-    public static final StreamCodec<ByteBuf, FishProperties> STREAM_CODEC = composite(
-            ResourceLocation.STREAM_CODEC, FishProperties::fish,
+    public static final StreamCodec<RegistryFriendlyByteBuf, FishProperties> STREAM_CODEC = composite(
+            ByteBufCodecs.holderRegistry(Registries.ITEM), FishProperties::fish,
             ByteBufCodecs.VAR_INT, FishProperties::baseChance,
             ByteBufCodecs.STRING_UTF8, FishProperties::customName,
-            ByteBufCodecs.fromCodec(Rarity.CODEC), FishProperties::rarity,
+            Rarity.STREAM_CODEC, FishProperties::rarity,
             WorldRestrictions.STREAM_CODEC, FishProperties::wr,
             BaitRestrictions.STREAM_CODEC, FishProperties::br,
             Difficulty.STREAM_CODEC, FishProperties::dif,
-            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
-            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
+            Daytime.STREAM_CODEC, FishProperties::daytime,
+            Weather.STREAM_CODEC, FishProperties::weather,
             ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
             ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
             ByteBufCodecs.BOOL, FishProperties::skipMinigame,
@@ -108,26 +99,11 @@ public record FishProperties(
             FishProperties::new
     );
 
-    public static final StreamCodec<ByteBuf, List<FishProperties>> STREAM_CODEC_LIST = composite(
-            ResourceLocation.STREAM_CODEC, FishProperties::fish,
-            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
-            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
-            ByteBufCodecs.fromCodec(Rarity.CODEC), FishProperties::rarity,
-            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
-            BaitRestrictions.STREAM_CODEC, FishProperties::br,
-            Difficulty.STREAM_CODEC, FishProperties::dif,
-            ByteBufCodecs.fromCodec(Daytime.CODEC), FishProperties::daytime,
-            ByteBufCodecs.fromCodec(Weather.CODEC), FishProperties::weather,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
-            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
-            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
-            FishProperties::new
-    ).apply(ByteBufCodecs.list());
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<FishProperties>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
 
 
     public static final FishProperties DEFAULT = new FishProperties(
-            Starcatcher.rl("none"),
+            ModItems.MISSINGNO,
             5,
             "",
             Rarity.COMMON,
@@ -150,7 +126,7 @@ public record FishProperties(
         return new FishPropertiesWithModRestriction(this, modid);
     }
 
-    public FishProperties withFish(ResourceLocation fish)
+    public FishProperties withFish(Holder<Item> fish)
     {
         return new FishProperties(fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
     }
@@ -773,6 +749,7 @@ public record FishProperties(
         LEGENDARY("legendary");
 
         public static final Codec<Rarity> CODEC = StringRepresentable.fromEnum(Rarity::values);
+        public static final StreamCodec<FriendlyByteBuf, Rarity> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Rarity.class);
         private final String key;
 
         Rarity(String key)
@@ -795,6 +772,7 @@ public record FishProperties(
         MIDNIGHT("midnight");
 
         public static final Codec<Daytime> CODEC = StringRepresentable.fromEnum(Daytime::values);
+        public static final StreamCodec<FriendlyByteBuf, Daytime> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Daytime.class);
         private final String key;
 
         Daytime(String key)
@@ -816,6 +794,7 @@ public record FishProperties(
         THUNDER("thunder");
 
         public static final Codec<Weather> CODEC = StringRepresentable.fromEnum(Weather::values);
+        public static final StreamCodec<FriendlyByteBuf, Weather> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Weather.class);
         private final String key;
 
         Weather(String key)

@@ -9,6 +9,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentSyncHandler;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.attachment.IAttachmentHolder;
+import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.NotNull;
@@ -27,15 +28,7 @@ public class ModDataAttachments
     public static final Supplier<AttachmentType<String>> FISHING = ATTACHMENT_TYPES.register(
             "fishing", () -> AttachmentType.builder(() -> "")
                     .serialize(Codec.unit(""))
-                    .sync(new FishingSyncHandler())
-                    .build()
-    );
-
-    public static final Supplier<AttachmentType<FishProperties>> FISH_SPOTTER = ATTACHMENT_TYPES.register(
-            "fish_spotter", () -> AttachmentType.builder(() -> FishProperties.DEFAULT)
-                    .serialize(FishProperties.CODEC)
-                    .sync(new FishSpotterSyncHandler())
-                    .copyOnDeath()
+                    .sync(ByteBufCodecs.STRING_UTF8)
                     .build()
     );
 
@@ -43,7 +36,7 @@ public class ModDataAttachments
             "fishes_caught", () ->
                     AttachmentType.builder(() -> List.of(new FishCaughtCounter(FishProperties.DEFAULT, 0, 0, 0)))
                             .serialize(FishCaughtCounter.LIST_CODEC)
-                            .sync(new FishCounterSyncHandler())
+                            .sync(FishCaughtCounter.STREAM_CODEC)
                             .copyOnDeath()
                             .build()
     );
@@ -52,7 +45,7 @@ public class ModDataAttachments
             "fishes_notification", () ->
                     AttachmentType.builder(() -> List.of(FishProperties.DEFAULT))
                             .serialize(FishProperties.LIST_CODEC)
-                            .sync(new FishPropertiesListSyncHandler())
+                            .sync(FishProperties.STREAM_CODEC_LIST)
                             .copyOnDeath()
                             .build()
     );
@@ -64,95 +57,6 @@ public class ModDataAttachments
                             .sync(SingleStackContainer.STREAM_CODEC)
                             .build()
     );
-
-
-    public static class FishSpotterSyncHandler implements AttachmentSyncHandler<FishProperties>
-    {
-        @Override
-        public void write(@NotNull RegistryFriendlyByteBuf buf, @NotNull FishProperties attachment, boolean initialSync)
-        {
-            FishProperties.STREAM_CODEC.encode(buf, attachment);
-        }
-
-        @Override
-        @Nullable
-        public FishProperties read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable FishProperties previousValue)
-        {
-            return FishProperties.STREAM_CODEC.decode(buf);
-        }
-
-        @Override
-        public boolean sendToPlayer(@NotNull IAttachmentHolder holder, @NotNull ServerPlayer to)
-        {
-            return holder == to;
-        }
-    }
-
-    public static class FishPropertiesListSyncHandler implements AttachmentSyncHandler<List<FishProperties>>
-    {
-        @Override
-        public void write(@NotNull RegistryFriendlyByteBuf buf, @NotNull List<FishProperties> attachment, boolean initialSync)
-        {
-            FishProperties.STREAM_CODEC_LIST.encode(buf, attachment);
-        }
-
-        @Override
-        @Nullable
-        public List<FishProperties> read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable List<FishProperties> previousValue)
-        {
-            return FishProperties.STREAM_CODEC_LIST.decode(buf);
-        }
-
-        @Override
-        public boolean sendToPlayer(@NotNull IAttachmentHolder holder, @NotNull ServerPlayer to)
-        {
-            return holder == to;
-        }
-    }
-
-    public static class FishingSyncHandler implements AttachmentSyncHandler<String>
-    {
-        @Override
-        public void write(@NotNull RegistryFriendlyByteBuf buf, @NotNull String attachment, boolean initialSync)
-        {
-            ByteBufCodecs.STRING_UTF8.encode(buf, attachment);
-        }
-
-        @Override
-        @Nullable
-        public String read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable String previousValue)
-        {
-            return ByteBufCodecs.STRING_UTF8.decode(buf);
-        }
-
-        @Override
-        public boolean sendToPlayer(@NotNull IAttachmentHolder holder, @NotNull ServerPlayer to)
-        {
-            return holder == to;
-        }
-    }
-
-    public static class FishCounterSyncHandler implements AttachmentSyncHandler<List<FishCaughtCounter>>
-    {
-        @Override
-        public void write(@NotNull RegistryFriendlyByteBuf buf, @NotNull List<FishCaughtCounter> attachment, boolean initialSync)
-        {
-            FishCaughtCounter.STREAM_CODEC.encode(buf, attachment);
-        }
-
-        @Override
-        @Nullable
-        public List<FishCaughtCounter> read(@NotNull IAttachmentHolder holder, @NotNull RegistryFriendlyByteBuf buf, @Nullable List<FishCaughtCounter> previousValue)
-        {
-            return FishCaughtCounter.STREAM_CODEC.decode(buf);
-        }
-
-        @Override
-        public boolean sendToPlayer(@NotNull IAttachmentHolder holder, @NotNull ServerPlayer to)
-        {
-            return holder == to;
-        }
-    }
 
     public static void register(IEventBus eventBus)
     {

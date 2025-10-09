@@ -1,6 +1,5 @@
 {
   "above_y": 0,
-  "base_chance": 5,
   "fish": "starcatcher:blossomfish",
   "weather": "clear",
   "world_restrictions": {

@@ -259,7 +259,7 @@ public class FishingGuideScreen extends Screen
     private void renderFishIndex(GuiGraphics guiGraphics, int xOffset, int yOffset, int mouseX, int mouseY, FishProperties fp)
     {
         List<FishCaughtCounter> fishCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
-        ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
+        ItemStack is = new ItemStack(fp.fish());
 
         int caught = 0;
 
@@ -324,7 +324,7 @@ public class FishingGuideScreen extends Screen
             else
             {
                 if (fp.customName().isEmpty())
-                    components.add(Component.translatable("item." + fp.fish().toLanguageKey()));
+                    components.add(Component.translatable("item." + fp.fish().getRegisteredName().replace(":", ".")));
                 else
                     components.add(Component.translatable("item.starcatcher." + fp.customName()));
 
@@ -362,7 +362,7 @@ public class FishingGuideScreen extends Screen
 
         if (entries.size() <= entry) return;
 
-        ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(entries.get(entry).fish()));
+        ItemStack is = new ItemStack(entries.get(entry).fish());
         FishProperties fp = entries.get(entry);
 
         if (!fpsSeen.contains(fp)) fpsSeen.add(fp);
@@ -390,9 +390,11 @@ public class FishingGuideScreen extends Screen
             //render fish name
             MutableComponent compName;
             if (fp.customName().isEmpty())
-                compName = Component.translatable("item." + fp.fish().toLanguageKey());
+                compName = Component.translatable("item." + fp.fish().getRegisteredName().replace(":", "."));
             else
                 compName = Component.translatable("item.starcatcher." + fp.customName());
+
+            System.out.println();
 
             //render fish name
             guiGraphics.drawString(this.font, compName, uiX + xOffset + 46, uiY + 55, 0, false);

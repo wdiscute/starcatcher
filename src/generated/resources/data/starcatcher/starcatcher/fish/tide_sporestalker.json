@@ -6,7 +6,6 @@
     }
   ],
   "above_y": 0,
-  "base_chance": 5,
   "difficulty": {
     "change_rotation_every_hit": false,
     "decay": 0,

@@ -6,7 +6,6 @@
     }
   ],
   "above_y": 0,
-  "base_chance": 5,
   "below_y": 50,
   "fish": "tide:anglerfish",
   "world_restrictions": {

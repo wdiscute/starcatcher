@@ -96,7 +96,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         super(Component.empty());
 
         this.fp = fp;
-        this.itemBeingFished = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
+        this.itemBeingFished = new ItemStack(fp.fish());
         this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
         this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
         this.hook = rod.get(ModDataComponents.HOOK).stack().copy();

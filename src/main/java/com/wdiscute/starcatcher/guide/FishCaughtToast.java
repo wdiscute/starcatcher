@@ -30,12 +30,12 @@ public class FishCaughtToast implements Toast
     public FishCaughtToast(FishProperties fp)
     {
 
-        this.is = new ItemStack(BuiltInRegistries.ITEM.get(fp.fish()));
+        this.is = new ItemStack(fp.fish());
         this.title = Component.translatable("gui.starcatcher.toast.fish_caught");
 
         String compName;
         if (fp.customName().isEmpty())
-            compName = I18n.get("item." + fp.fish().toLanguageKey());
+            compName = I18n.get("item." + fp.fish().getRegisteredName().replace(":", "."));
         else
             compName = I18n.get("item.starcatcher." + fp.customName());
 

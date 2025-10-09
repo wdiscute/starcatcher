@@ -147,7 +147,7 @@ public class FishingBobEntity extends Projectile
                     position().x,
                     position().y + 1.2f,
                     position().z,
-                    new ItemStack(BuiltInRegistries.ITEM.get(fpToFish.fish())
+                    new ItemStack(fpToFish.fish()
                     ));
 
 

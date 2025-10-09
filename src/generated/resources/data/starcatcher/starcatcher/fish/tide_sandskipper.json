@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "base_chance": 5,
   "difficulty": {
     "change_rotation_every_hit": false,
     "decay": 2,

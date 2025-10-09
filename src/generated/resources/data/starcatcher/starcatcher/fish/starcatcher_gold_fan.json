@@ -1,5 +1,4 @@
 {
-  "base_chance": 5,
   "below_y": 50,
   "fish": "starcatcher:gold_fan",
   "world_restrictions": {

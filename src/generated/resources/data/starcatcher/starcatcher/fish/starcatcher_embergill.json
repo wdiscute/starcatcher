@@ -1,5 +1,4 @@
 {
-  "base_chance": 5,
   "difficulty": {
     "decay": 2,
     "has_first_marker": false,

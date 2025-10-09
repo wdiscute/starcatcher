@@ -97,7 +97,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
             if (fishesCaught.contains(fpsInArea.get(i)))
             {
-                is = new ItemStack(BuiltInRegistries.ITEM.get(fpsInArea.get(i).fish()));
+                is = new ItemStack(fpsInArea.get(i).fish());
             }
 
             guiGraphics.renderItem(
