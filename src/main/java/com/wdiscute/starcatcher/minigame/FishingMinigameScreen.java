@@ -449,7 +449,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             if (hitSomething)
             {
                 consecutiveHits++;
-                if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 40 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
+                if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
                 ||
                 (consecutiveHits == 3 && treasureProgress == Integer.MIN_VALUE && hook.is(ModItems.SHINY_HOOK)))
                 {
