@@ -29,7 +29,16 @@ public class ModDataAttachments
             "fishes_caught", () ->
                     AttachmentType.builder(() -> List.of(new FishCaughtCounter(FishProperties.DEFAULT, 0, 0, 0)))
                             .serialize(FishCaughtCounter.LIST_CODEC)
-                            .sync(FishCaughtCounter.STREAM_CODEC)
+                            .sync(FishCaughtCounter.LIST_STREAM_CODEC)
+                            .copyOnDeath()
+                            .build()
+    );
+
+    public static final Supplier<AttachmentType<List<TrophyProperties>>> TROPHIES_CAUGHT = ATTACHMENT_TYPES.register(
+            "trophies_caught", () ->
+                    AttachmentType.builder(() -> List.of(TrophyProperties.DEFAULT))
+                            .serialize(TrophyProperties.LIST_CODEC)
+                            .sync(TrophyProperties.LIST_STREAM_CODEC)
                             .copyOnDeath()
                             .build()
     );

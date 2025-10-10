@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.bob;
 import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -83,7 +85,7 @@ public class FishingBobEntity extends Projectile
             maxTicksToFish = 300;
             chanceToFishEachTick = 100;
 
-            if(bobber.is(ModItems.IMPATIENT_BOBBER)) chanceToFishEachTick = 200;
+            if (bobber.is(ModItems.IMPATIENT_BOBBER)) chanceToFishEachTick = 200;
 
             float f = player.getXRot();
             float f1 = player.getYRot();
@@ -113,7 +115,46 @@ public class FishingBobEntity extends Projectile
 
     public void reel()
     {
+        //server only
         List<FishProperties> available = new ArrayList<>(List.of());
+
+        int numberOfUniqueFishesCaught = player.getData(ModDataAttachments.FISHES_CAUGHT).size() - 1;
+        int numberOfTotalFishesCaught = 0;
+
+        for (FishCaughtCounter fcc : player.getData(ModDataAttachments.FISHES_CAUGHT))
+        {
+            numberOfTotalFishesCaught += fcc.count();
+        }
+
+        for (TrophyProperties tp : level().registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
+        {
+            System.out.println("looked through " + tp);
+
+            List<TrophyProperties> trophiesCaught = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
+
+            if(numberOfTotalFishesCaught >= tp.TotalCaughtCount()  && numberOfUniqueFishesCaught >= tp.UniqueFishCount() &&
+            !trophiesCaught.contains(tp))
+            {
+                Entity itemFished = new ItemEntity(level(), position().x, position().y + 1.2f, position().z,
+                        new ItemStack(BuiltInRegistries.ITEM.get(tp.rl())));
+
+                Vec3 vec3 = new Vec3(Math.clamp((player.position().x - position().x) / 25, -1, 1),
+                        0.7 + Math.clamp((player.position().y - position().y) / 20, -1, 1),
+                        Math.clamp((player.position().z - position().z) / 25, -1, 1));
+
+                itemFished.setDeltaMovement(vec3);
+                level().addFreshEntity(itemFished);
+
+                trophiesCaught.add(tp);
+
+                player.setData(ModDataAttachments.TROPHIES_CAUGHT, trophiesCaught);
+                player.setData(ModDataAttachments.FISHING, "");
+                kill();
+                return;
+            }
+        }
+
+
 
         for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
@@ -123,10 +164,9 @@ public class FishingBobEntity extends Projectile
             {
                 available.add(fp);
             }
-
         }
 
-        if(available.isEmpty())
+        if (available.isEmpty())
         {
             player.setData(ModDataAttachments.FISHING, "");
             this.discard();
@@ -156,7 +196,7 @@ public class FishingBobEntity extends Projectile
             z = Math.clamp(z, -1, 1);
 
             //override stack with a creeper and bigger deltaMovement to align creeper angle
-            if (bobber.is(ModItems.CREEPER_BOBBER))
+            if (bobber.is(ModItems.CREEPER_BOBBER) && random.nextFloat() > 0.8)
             {
                 itemFished = new Creeper(EntityType.CREEPER, level());
 
@@ -209,7 +249,7 @@ public class FishingBobEntity extends Projectile
 
     private boolean shouldStopFishing(Player player)
     {
-        if(level().isClientSide) return false;
+        if (level().isClientSide) return false;
 
         boolean holdingRod = player.getMainHandItem().is(ModItems.ROD)
                 || player.getOffhandItem().is(ModItems.ROD);

@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
@@ -13,6 +14,8 @@ import net.minecraft.util.StringRepresentable;
 import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 public record TrophyProperties
         (
                 TrophyType type,
@@ -21,6 +24,7 @@ public record TrophyProperties
                 int TotalCaughtCount
         )
 {
+
 
     public static final Codec<TrophyProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -39,6 +43,13 @@ public record TrophyProperties
             TrophyProperties::new
     );
 
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<TrophyProperties>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+
+    public static final Codec<List<TrophyProperties>> LIST_CODEC = TrophyProperties.CODEC.listOf();
+
+
+    public static final TrophyProperties DEFAULT = new TrophyProperties(TrophyType.ITEM, Starcatcher.rl("missingno"), Integer.MAX_VALUE, Integer.MAX_VALUE);
+
     public enum TrophyType implements StringRepresentable
     {
         ITEM("item"),
@@ -49,7 +60,10 @@ public record TrophyProperties
         public static final StreamCodec<FriendlyByteBuf, TrophyType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(TrophyType.class);
         private final String key;
 
-        TrophyType(String key) {this.key = key;}
+        TrophyType(String key)
+        {
+            this.key = key;
+        }
 
         public @NotNull String getSerializedName()
         {

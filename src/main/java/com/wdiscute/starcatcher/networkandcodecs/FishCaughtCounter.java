@@ -27,14 +27,15 @@ public record FishCaughtCounter(
             ).apply(instance, FishCaughtCounter::new)
     );
 
-
-    public static final StreamCodec<RegistryFriendlyByteBuf, List<FishCaughtCounter>> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, FishCaughtCounter> STREAM_CODEC = StreamCodec.composite(
             FishProperties.STREAM_CODEC, FishCaughtCounter::fp,
             ByteBufCodecs.VAR_INT, FishCaughtCounter::count,
             ByteBufCodecs.VAR_INT, FishCaughtCounter::fastestTicks,
             ByteBufCodecs.FLOAT, FishCaughtCounter::averageTicks,
             FishCaughtCounter::new
-    ).apply(ByteBufCodecs.list());
+    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<FishCaughtCounter>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
 
 
     public static final Codec<List<FishCaughtCounter>> LIST_CODEC = FishCaughtCounter.CODEC.listOf();
