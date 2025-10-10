@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -12,6 +13,7 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
@@ -21,24 +23,434 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
+public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesProvider
 {
 
-    public FishPropertiesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
+    public FishAndTrophiesPropertiesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
     {
-        super(output, registries, REGISTRY, FishPropertiesProvider::addConditions, Set.of(Starcatcher.MOD_ID));
+        super(output, registries, REGISTRY, FishAndTrophiesPropertiesProvider::addConditions, Set.of(Starcatcher.MOD_ID));
     }
 
     private static void addConditions(final BiConsumer<ResourceKey<?>, ICondition> consumer)
     {
-
-        for(FishPropertiesWithModRestriction restricted : RESTRICTED_FPS)
+        for (FishPropertiesWithModRestriction restricted : RESTRICTED_FPS)
         {
             consumer.accept(createKey(restricted.fp()), new ModLoadedCondition(restricted.modid()));
         }
     }
 
-    //region restricted
+    //region fps
+    public static final List<FishProperties> FPS = List.of(
+
+            //lakes
+            overworldLakeFish(ModItems.OBIDONTIEE),
+
+            overworldLakeFish(ModItems.SILVERVEIL_PERCH)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldLakeFish(ModItems.ELDERSCALE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withBaseChance(3),
+
+            overworldLakeFish(ModItems.DRIFTFIN)
+                    .withWeather(FishProperties.Weather.CLEAR),
+
+            overworldLakeFish(ModItems.TWILIGHT_KOI)
+                    .withDaytime(FishProperties.Daytime.MIDNIGHT)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldLakeFish(ModItems.THUNDER_BASS)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withWeather(FishProperties.Weather.THUNDER)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldLakeFish(ModItems.LIGHTNING_BASS)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withWeather(FishProperties.Weather.THUNDER)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldLakeFish(ModItems.BOOT)
+                    .withBaseChance(1)
+                    .withSkipMinigame(true)
+                    .withHasGuideEntry(false),
+
+
+            //cold lake
+            overworldColdLakeFish(ModItems.FROSTJAW_TROUT)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldColdLakeFish(ModItems.CRYSTALBACK_TROUT)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldColdLakeFish(ModItems.AURORA)
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withBaseChance(2)
+                    .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION),
+
+            overworldColdLakeFish(ModItems.WINTERY_PIKE),
+
+
+            //lake warm
+            overworldWarmLakeFish(ModItems.SANDTAIL)
+                    .withDaytime(FishProperties.Daytime.NIGHT),
+
+            overworldWarmLakeFish(ModItems.MIRAGE_CARP)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withWeather(FishProperties.Weather.CLEAR)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldWarmLakeFish(ModItems.SCORCHFISH)
+                    .withWeather(FishProperties.Weather.CLEAR),
+
+            overworldWarmLakeFish(ModItems.CACTIFISH)
+                    .withDaytime(FishProperties.Daytime.DAY),
+
+
+            overworldWarmLakeFish(ModItems.AGAVE_BREAM)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withWeather(FishProperties.Weather.CLEAR)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+
+            //mountain
+            overworldMountainFish(ModItems.SUNNY_STURGEON)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withBaseChance(2),
+
+            overworldMountainFish(ModItems.PEAKDWELLER)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldMountainFish(ModItems.ROCKGILL)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldMountainFish(ModItems.SUN_SEEKING_CARP)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withBaseChance(2)
+                    .withDaytime(FishProperties.Daytime.NOON),
+
+
+            //swamp
+            overworldSwampFish(ModItems.SLUDGE_CATFISH)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldSwampFish(ModItems.LILY_SNAPPER)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldSwampFish(ModItems.SAGE_CATFISH)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withWeather(FishProperties.Weather.CLEAR),
+
+            overworldSwampFish(ModItems.MOSSY_BOOT)
+                    .withBaseChance(1)
+                    .withSkipMinigame(true)
+                    .withHasGuideEntry(false),
+
+            //darkoak forest
+            overworldDarkForestFish(ModItems.PALE_PINFISH)
+                    .withDaytime(FishProperties.Daytime.MIDNIGHT)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldDarkForestFish(ModItems.PINFISH)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldDarkForestFish(ModItems.PALE_CARP)
+                    .withDaytime(FishProperties.Daytime.DAY),
+
+
+            //cherry grove
+            overworldCherryGroveFish(ModItems.BLOSSOMFISH)
+                    .withWeather(FishProperties.Weather.CLEAR),
+
+            overworldCherryGroveFish(ModItems.PETALDRIFT_CARP)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldCherryGroveFish(ModItems.PINK_KOI)
+                    .withWeather(FishProperties.Weather.RAIN),
+
+            overworldCherryGroveFish(ModItems.MORGANITE)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldCherryGroveFish(ModItems.ROSE_SIAMESE_FISH)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withRarity(FishProperties.Rarity.EPIC),
+
+
+            //cold mountain
+            overworldColdMountainFish(ModItems.CRYSTALBACK_STURGEON),
+
+            overworldColdMountainFish(ModItems.ICETOOTH_STURGEON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldColdMountainFish(ModItems.BOREAL)
+                    .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withBaseChance(3),
+
+            overworldColdMountainFish(ModItems.CRYSTALBACK_BOREAL)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+
+            //river
+            overworldRiverFish(ModItems.DOWNFALL_BREAM)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldRiverFish(ModItems.DRIFTING_BREAM)
+                    .withDaytime(FishProperties.Daytime.NIGHT),
+
+            overworldRiverFish(ModItems.WILLOW_BREAM)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withBaseChance(2),
+
+            overworldRiverFish(ModItems.HOLLOWBELLY_DARTER),
+
+            overworldRiverFish(ModItems.MISTBACK_CHUB),
+
+            overworldRiverFish(ModItems.SILVERFIN_PIKE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldRiverFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.SALMON)),
+
+            overworldRiverFish(ModItems.DRIED_SEAWEED)
+                    .withBaseChance(1)
+                    .withSkipMinigame(true)
+                    .withHasGuideEntry(false),
+
+
+            //cold river
+            overworldColdRiverFish(ModItems.FROSTGILL_CHUB),
+
+            overworldColdRiverFish(ModItems.CRYSTALBACK_MINNOW)
+                    .withDaytime(FishProperties.Daytime.NIGHT),
+
+            overworldColdRiverFish(ModItems.AZURE_CRYSTALBACK_MINNOW)
+                    .withDaytime(FishProperties.Daytime.MIDNIGHT)
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withBaseChance(1)
+                    .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION),
+
+            overworldColdRiverFish(ModItems.BLUE_CRYSTAL_FIN)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+
+            //ocean
+            overworldOceanFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.COD)),
+
+            overworldOceanFish(ModItems.SEA_BASS)
+                    .withBaseChance(15)
+                    .withDaytime(FishProperties.Daytime.DAY),
+
+            overworldOceanFish(ModItems.IRONJAW_HERRING)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withBaseChance(2)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldOceanFish(ModItems.DEEPJAW_HERRING)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldOceanFish(ModItems.DUSKTAIL_SNAPPER),
+
+            overworldOceanFish(ModItems.JOEL)
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING)
+                    .withBaseChance(1)
+                    .withRarity(FishProperties.Rarity.LEGENDARY),
+
+            overworldOceanFish(ModItems.REDSCALED_TUNA)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldOceanFish(ModItems.WATERLOGGED_BOTTLE)
+                    .withBaseChance(1)
+                    .withHasGuideEntry(false)
+                    .withSkipMinigame(true),
+
+            //deep ocean
+            overworldDeepOceanFish(ModItems.BIGEYE_TUNA)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            //beach
+            overworldBeachFish(ModItems.CONCH)
+                    .withBaseChance(15)
+                    .withHasGuideEntry(false)
+                    .withSkipMinigame(true),
+
+            overworldBeachFish(ModItems.CLAM)
+                    .withBaseChance(15)
+                    .withHasGuideEntry(false)
+                    .withSkipMinigame(true),
+
+            //mushroom islands
+            overworldMushroomFieldsFish(ModItems.SHROOMFISH)
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING),
+
+            overworldMushroomFieldsFish(ModItems.SPOREFISH)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+
+            //underground
+            overworldUndergroundFish(ModItems.GOLD_FAN),
+
+            overworldUndergroundFish(ModItems.GEODE_EEL)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withBaseChance(1)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            //caves
+            overworldCavesFish(ModItems.WHITEVEIL),
+
+            overworldCavesFish(ModItems.BLACK_EEL)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldCavesFish(ModItems.STONEFISH)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldCavesFish(ModItems.AMETHYSTBACK)
+                    .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withMustBeCaughtBelowY(-20)
+                    .withMustBeCaughtAboveY(-40),
+
+            //dripstone caves
+            overworldDripstoneCavesFish(ModItems.FOSSILIZED_ANGELFISH)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldDripstoneCavesFish(ModItems.DRIPFIN)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldDripstoneCavesFish(ModItems.YELLOWSTONE_FISH)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+
+            //lush caves
+            overworldLushCavesFish(ModItems.LUSH_PIKE)
+                    .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY)
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withBaseChance(2),
+
+            overworldLushCavesFish(ModItems.VIVID_MOSS)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withBaseChance(4),
+
+
+            //deepslate
+            overworldDeepslateFish(ModItems.GHOSTLY_PIKE)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withBaseChance(2),
+
+            overworldDeepslateFish(ModItems.DEEPSLATEFISH)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+            overworldDeepslateFish(ModItems.AQUAMARINE_PIKE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+            overworldDeepslateFish(ModItems.GARNET_MACKEREL)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldDeepslateFish(ModItems.BRIGHT_AMETHYST_SNAPPER)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withBaseChance(2),
+
+            overworldDeepslateFish(ModItems.DARK_AMETHYST_SNAPPER)
+                    .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withBaseChance(2),
+
+
+            //deep dark
+            overworldDeepDarkFish(ModItems.SKULKFISH)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.UNCOMMON),
+
+            overworldDeepDarkFish(ModItems.WARD)
+                    .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION)
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withBaseChance(2),
+
+            overworldDeepDarkFish(ModItems.GLOWING_DARK)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.HARD),
+
+
+            //nether
+            netherLavaFish(ModItems.EMBERGILL)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN
+                            .withTreasure(FishProperties.Treasure.NETHER)),
+
+            netherLavaFish(ModItems.LAVA_CRAB)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP
+                            .withTreasure(FishProperties.Treasure.NETHER)),
+
+            netherLavaFish(ModItems.MAGMA_FISH)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.HARD
+                            .withTreasure(FishProperties.Treasure.NETHER)),
+
+            netherLavaFish(ModItems.GLOWSTONE_SEEKER)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM
+                            .withTreasure(FishProperties.Treasure.NETHER)),
+
+            netherLavaFish(ModItems.CINDER_SQUID)
+                    .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withBaseChance(2),
+
+            netherLavaFish(ModItems.SCALDING_PIKE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM
+                            .withTreasure(FishProperties.Treasure.NETHER)),
+
+            netherLavaFish(ModItems.LAVA_CRAB_CLAW)
+                    .withBaseChance(1)
+                    .withSkipMinigame(true)
+                    .withHasGuideEntry(false),
+
+
+            //the end
+            endFish(ModItems.CHARFISH)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+
+    );
+    //endregion fps
+
+    //region restricted fps
     public static final List<FishPropertiesWithModRestriction> RESTRICTED_FPS = List.of(
 
             //list to store all fishes from other mods for compatibility, alongside the modid so it
@@ -402,432 +814,57 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
                     .withMod("tide")
 
 
-            );
-    //endregion restricted
+    );
+    //endregion restricted fps
+
+    //region trophies
+    public static final List<TrophyProperties> TROPHIES = List.of(
+
+
+            new TrophyProperties(
+                    TrophyProperties.TrophyType.ITEM,
+                    Starcatcher.rl("trophy_of_pitiful_fishing"),
+                    5,
+                    0
+            ),
+
+
+            new TrophyProperties(
+                    TrophyProperties.TrophyType.ITEM,
+                    Starcatcher.rl("trophy_of_fishing"),
+                    25,
+                    0
+            ),
+
+
+            new TrophyProperties(
+                    TrophyProperties.TrophyType.ITEM,
+                    Starcatcher.rl("trophy_of_masterful_fishing"),
+                    50,
+                    0
+            ));
+    //endregion trophies
 
     public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder()
+            //fishes
             .add(
                     Starcatcher.FISH_REGISTRY, bootstrap ->
                     {
-
                         //datagen all mod-restricted fishes
                         for (FishPropertiesWithModRestriction restriction : RESTRICTED_FPS)
-                        {
-                            register(bootstrap, restriction.fp());
-                        }
+                            bootstrap.register(createKey(restriction.fp()), restriction.fp());
 
                         //datagen all starcatcher fishes
-
-                        //lakes
-                        register(bootstrap, overworldLakeFish(ModItems.OBIDONTIEE));
-
-                        register(bootstrap, overworldLakeFish(ModItems.SILVERVEIL_PERCH)
-                                        .withWeather(FishProperties.Weather.RAIN)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldLakeFish(ModItems.ELDERSCALE)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withBaseChance(3));
-
-                        register(bootstrap, overworldLakeFish(ModItems.DRIFTFIN)
-                                        .withWeather(FishProperties.Weather.CLEAR));
-
-                        register(bootstrap, overworldLakeFish(ModItems.TWILIGHT_KOI)
-                                        .withDaytime(FishProperties.Daytime.MIDNIGHT)
-                                        .withRarity(FishProperties.Rarity.EPIC)
-                                        .withWeather(FishProperties.Weather.RAIN)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldLakeFish(ModItems.THUNDER_BASS)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withWeather(FishProperties.Weather.THUNDER)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldLakeFish(ModItems.LIGHTNING_BASS)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withWeather(FishProperties.Weather.THUNDER)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldLakeFish(ModItems.BOOT)
-                                        .withBaseChance(1)
-                                        .withSkipMinigame(true)
-                                        .withHasGuideEntry(false));
-
-
-                        //cold lake
-                        register(bootstrap, overworldColdLakeFish(ModItems.FROSTJAW_TROUT)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldColdLakeFish(ModItems.CRYSTALBACK_TROUT)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldColdLakeFish(ModItems.AURORA)
-                                        .withRarity(FishProperties.Rarity.LEGENDARY)
-                                        .withBaseChance(2)
-                                        .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION));
-
-                        register(bootstrap, overworldColdLakeFish(ModItems.WINTERY_PIKE));
-
-
-                        //lake warm
-                        register(bootstrap, overworldWarmLakeFish(ModItems.SANDTAIL)
-                                        .withDaytime(FishProperties.Daytime.NIGHT));
-
-                        register(bootstrap, overworldWarmLakeFish(ModItems.MIRAGE_CARP)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM)
-                                        .withDaytime(FishProperties.Daytime.DAY)
-                                        .withWeather(FishProperties.Weather.CLEAR)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        register(bootstrap, overworldWarmLakeFish(ModItems.SCORCHFISH)
-                                        .withWeather(FishProperties.Weather.CLEAR));
-
-                        register(bootstrap, overworldWarmLakeFish(ModItems.CACTIFISH)
-                                        .withDaytime(FishProperties.Daytime.DAY));
-
-
-                        register(bootstrap, overworldWarmLakeFish(ModItems.AGAVE_BREAM)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withDaytime(FishProperties.Daytime.NIGHT)
-                                        .withWeather(FishProperties.Weather.CLEAR)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-
-                        //mountain
-                        register(bootstrap, overworldMountainFish(ModItems.SUNNY_STURGEON)
-                                        .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withDaytime(FishProperties.Daytime.DAY)
-                                        .withBaseChance(2));
-
-                        register(bootstrap, overworldMountainFish(ModItems.PEAKDWELLER)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldMountainFish(ModItems.ROCKGILL)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldMountainFish(ModItems.SUN_SEEKING_CARP)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withBaseChance(2)
-                                        .withDaytime(FishProperties.Daytime.NOON));
-
-
-                        //swamp
-                        register(bootstrap, overworldSwampFish(ModItems.SLUDGE_CATFISH)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        register(bootstrap, overworldSwampFish(ModItems.LILY_SNAPPER)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldSwampFish(ModItems.SAGE_CATFISH)
-                                        .withRarity(FishProperties.Rarity.EPIC)
-                                        .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY)
-                                        .withDaytime(FishProperties.Daytime.NIGHT)
-                                        .withWeather(FishProperties.Weather.CLEAR));
-
-                        register(bootstrap, overworldSwampFish(ModItems.MOSSY_BOOT)
-                                        .withBaseChance(1)
-                                        .withSkipMinigame(true)
-                                        .withHasGuideEntry(false));
-
-                        //darkoak forest
-                        register(bootstrap, overworldDarkForestFish(ModItems.PALE_PINFISH)
-                                        .withDaytime(FishProperties.Daytime.MIDNIGHT)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldDarkForestFish(ModItems.PINFISH)
-                                        .withDaytime(FishProperties.Daytime.NIGHT)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldDarkForestFish(ModItems.PALE_CARP)
-                                        .withDaytime(FishProperties.Daytime.DAY));
-
-
-                        //cherry grove
-                        register(bootstrap, overworldCherryGroveFish(ModItems.BLOSSOMFISH)
-                                        .withWeather(FishProperties.Weather.CLEAR));
-
-                        register(bootstrap, overworldCherryGroveFish(ModItems.PETALDRIFT_CARP)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM)
-                                        .withWeather(FishProperties.Weather.RAIN)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        register(bootstrap, overworldCherryGroveFish(ModItems.PINK_KOI)
-                                        .withWeather(FishProperties.Weather.RAIN));
-
-                        register(bootstrap, overworldCherryGroveFish(ModItems.MORGANITE)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(
-                                bootstrap, overworldCherryGroveFish(ModItems.ROSE_SIAMESE_FISH)
-                                        .withDifficulty(FishProperties.Difficulty.HARD)
-                                        .withDaytime(FishProperties.Daytime.DAY)
-                                        .withWeather(FishProperties.Weather.RAIN)
-                                        .withRarity(FishProperties.Rarity.EPIC));
-
-
-                        //cold mountain
-                        register(bootstrap, overworldColdMountainFish(ModItems.CRYSTALBACK_STURGEON));
-
-                        register(bootstrap, overworldColdMountainFish(ModItems.ICETOOTH_STURGEON)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldColdMountainFish(ModItems.BOREAL)
-                                        .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
-                                        .withRarity(FishProperties.Rarity.LEGENDARY)
-                                        .withBaseChance(3));
-
-                        register(bootstrap, overworldColdMountainFish(ModItems.CRYSTALBACK_BOREAL)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-
-                        //river
-                        register(bootstrap, overworldRiverFish(ModItems.DOWNFALL_BREAM)
-                                        .withDaytime(FishProperties.Daytime.NIGHT)
-                                        .withWeather(FishProperties.Weather.RAIN)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldRiverFish(ModItems.DRIFTING_BREAM)
-                                        .withDaytime(FishProperties.Daytime.NIGHT));
-
-                        register(bootstrap, overworldRiverFish(ModItems.WILLOW_BREAM)
-                                        .withDaytime(FishProperties.Daytime.NIGHT)
-                                        .withDifficulty(FishProperties.Difficulty.HARD)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withBaseChance(2));
-
-                        register(bootstrap, overworldRiverFish(ModItems.HOLLOWBELLY_DARTER));
-
-                        register(bootstrap, overworldRiverFish(ModItems.MISTBACK_CHUB));
-
-                        register(
-                                bootstrap, overworldRiverFish(ModItems.SILVERFIN_PIKE)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        //register(bootstrap, overworldRiverFish(Items.SALMON)));
-
-                        register(
-                                bootstrap, overworldRiverFish(ModItems.DRIED_SEAWEED)
-                                        .withBaseChance(1)
-                                        .withSkipMinigame(true)
-                                        .withHasGuideEntry(false));
-
-
-                        //cold river
-                        register(bootstrap, overworldColdRiverFish(ModItems.FROSTGILL_CHUB));
-
-                        register(bootstrap, overworldColdRiverFish(ModItems.CRYSTALBACK_MINNOW)
-                                        .withDaytime(FishProperties.Daytime.NIGHT));
-
-                        register(bootstrap, overworldColdRiverFish(ModItems.AZURE_CRYSTALBACK_MINNOW)
-                                        .withDaytime(FishProperties.Daytime.MIDNIGHT)
-                                        .withRarity(FishProperties.Rarity.LEGENDARY)
-                                        .withBaseChance(1)
-                                        .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION));
-
-                        register(bootstrap, overworldColdRiverFish(ModItems.BLUE_CRYSTAL_FIN)
-                                        .withDaytime(FishProperties.Daytime.DAY)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-
-                        //ocean
-                        // register(bootstrap, overworldOceanFish(Items.COD)));
-
-                        register(bootstrap, overworldOceanFish(ModItems.SEA_BASS)
-                                        .withBaseChance(15)
-                                        .withDaytime(FishProperties.Daytime.DAY));
-
-                        register(bootstrap, overworldOceanFish(ModItems.IRONJAW_HERRING)
-                                        .withDifficulty(FishProperties.Difficulty.HARD)
-                                        .withBaseChance(2)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        register(bootstrap, overworldOceanFish(ModItems.DEEPJAW_HERRING)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldOceanFish(ModItems.DUSKTAIL_SNAPPER));
-
-                        register(bootstrap, overworldOceanFish(ModItems.JOEL)
-                                        .withDifficulty(FishProperties.Difficulty.EVERYTHING)
-                                        .withBaseChance(1)
-                                        .withRarity(FishProperties.Rarity.LEGENDARY));
-
-                        register(bootstrap, overworldOceanFish(ModItems.REDSCALED_TUNA)
-                                        .withDaytime(FishProperties.Daytime.NIGHT)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldOceanFish(ModItems.WATERLOGGED_BOTTLE)
-                                        .withBaseChance(1)
-                                        .withHasGuideEntry(false)
-                                        .withSkipMinigame(true));
-
-                        //deep ocean
-                        register(bootstrap, overworldDeepOceanFish(ModItems.BIGEYE_TUNA)
-                                        .withDaytime(FishProperties.Daytime.NIGHT)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        //beach
-                        register(bootstrap, overworldBeachFish(ModItems.CONCH)
-                                        .withBaseChance(15)
-                                        .withHasGuideEntry(false)
-                                        .withSkipMinigame(true));
-
-                        register(bootstrap, overworldBeachFish(ModItems.CLAM)
-                                        .withBaseChance(15)
-                                        .withHasGuideEntry(false)
-                                        .withSkipMinigame(true));
-
-                        //mushroom islands
-                        register(bootstrap, overworldMushroomFieldsFish(ModItems.SHROOMFISH)
-                                        .withRarity(FishProperties.Rarity.LEGENDARY)
-                                        .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING));
-
-                        register(bootstrap, overworldMushroomFieldsFish(ModItems.SPOREFISH)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-
-                        //underground
-                        register(bootstrap, overworldUndergroundFish(ModItems.GOLD_FAN));
-
-                        register(bootstrap, overworldUndergroundFish(ModItems.GEODE_EEL)
-                                        .withRarity(FishProperties.Rarity.EPIC)
-                                        .withBaseChance(1)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        //caves
-                        register(bootstrap, overworldCavesFish(ModItems.WHITEVEIL));
-
-                        register(bootstrap, overworldCavesFish(ModItems.BLACK_EEL)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        register(bootstrap, overworldCavesFish(ModItems.STONEFISH)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldCavesFish(ModItems.AMETHYSTBACK)
-                                        .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
-                                        .withRarity(FishProperties.Rarity.EPIC)
-                                        .withMustBeCaughtBelowY(-20)
-                                        .withMustBeCaughtAboveY(-40));
-
-                        //dripstone caves
-                        register(bootstrap, overworldDripstoneCavesFish(ModItems.FOSSILIZED_ANGELFISH)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldDripstoneCavesFish(ModItems.DRIPFIN)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldDripstoneCavesFish(ModItems.YELLOWSTONE_FISH)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-
-                        //lush caves
-                        register(bootstrap, overworldLushCavesFish(ModItems.LUSH_PIKE)
-                                        .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY)
-                                        .withRarity(FishProperties.Rarity.LEGENDARY)
-                                        .withBaseChance(2));
-
-                        register(bootstrap, overworldLushCavesFish(ModItems.VIVID_MOSS)
-                                        .withDifficulty(FishProperties.Difficulty.HARD)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withBaseChance(4));
-
-
-                        //deepslate
-                        register(bootstrap, overworldDeepslateFish(ModItems.GHOSTLY_PIKE)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withBaseChance(2));
-
-                        register(bootstrap, overworldDeepslateFish(ModItems.DEEPSLATEFISH)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-                        register(bootstrap, overworldDeepslateFish(ModItems.AQUAMARINE_PIKE)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM));
-
-                        register(bootstrap, overworldDeepslateFish(ModItems.GARNET_MACKEREL)
-                                        .withDifficulty(FishProperties.Difficulty.HARD)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        register(bootstrap, overworldDeepslateFish(ModItems.BRIGHT_AMETHYST_SNAPPER)
-                                        .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
-                                        .withRarity(FishProperties.Rarity.EPIC)
-                                        .withBaseChance(2));
-
-                        register(bootstrap, overworldDeepslateFish(ModItems.DARK_AMETHYST_SNAPPER)
-                                        .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY)
-                                        .withRarity(FishProperties.Rarity.EPIC)
-                                        .withBaseChance(2));
-
-
-                        //deep dark
-                        register(bootstrap, overworldDeepDarkFish(ModItems.SKULKFISH)
-                                        .withDifficulty(FishProperties.Difficulty.HARD)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON));
-
-                        register(bootstrap, overworldDeepDarkFish(ModItems.WARD)
-                                        .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION)
-                                        .withRarity(FishProperties.Rarity.LEGENDARY)
-                                        .withBaseChance(2));
-
-                        register(bootstrap, overworldDeepDarkFish(ModItems.GLOWING_DARK)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-
-                        //nether
-                        register(bootstrap, netherLavaFish(ModItems.EMBERGILL)
-                                        .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN
-                                                .withTreasure(FishProperties.Treasure.NETHER)));
-
-                        register(bootstrap, netherLavaFish(ModItems.LAVA_CRAB)
-                                        .withRarity(FishProperties.Rarity.EPIC)
-                                        .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP
-                                                .withTreasure(FishProperties.Treasure.NETHER)));
-
-                        register(bootstrap, netherLavaFish(ModItems.MAGMA_FISH)
-                                        .withRarity(FishProperties.Rarity.UNCOMMON)
-                                        .withDifficulty(FishProperties.Difficulty.HARD
-                                                .withTreasure(FishProperties.Treasure.NETHER)));
-
-                        register(bootstrap, netherLavaFish(ModItems.GLOWSTONE_SEEKER)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM
-                                                .withTreasure(FishProperties.Treasure.NETHER)));
-
-                        register(bootstrap, netherLavaFish(ModItems.CINDER_SQUID)
-                                        .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY
-                                                .withTreasure(FishProperties.Treasure.NETHER))
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        .withBaseChance(2));
-
-                        register(bootstrap, netherLavaFish(ModItems.SCALDING_PIKE)
-                                        .withDifficulty(FishProperties.Difficulty.MEDIUM
-                                                .withTreasure(FishProperties.Treasure.NETHER)));
-
-                        register(bootstrap, netherLavaFish(ModItems.LAVA_CRAB_CLAW)
-                                        .withBaseChance(1)
-                                        .withSkipMinigame(true)
-                                        .withHasGuideEntry(false));
-
-
-                        //the end
-                        register(bootstrap, endFish(ModItems.CHARFISH)
-                                        .withRarity(FishProperties.Rarity.RARE)
-                                        //.withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP));
-                                        .withDifficulty(FishProperties.Difficulty.HARD));
-
-
+                        for (FishProperties fp : FPS)
+                            bootstrap.register(createKey(fp), fp);
+                    }
+            )
+            //trophies
+            .add(
+                    Starcatcher.TROPHY_REGISTRY, bootstrap ->
+                    {
+                        for (TrophyProperties tp : TROPHIES)
+                            bootstrap.register(createKey(tp), tp);
                     }
             );
 
@@ -1039,17 +1076,9 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
     }
 
 
-
     public static ResourceLocation rl(String namespace, String path)
     {
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
-    }
-
-
-
-    public static Holder.Reference<FishProperties> register(BootstrapContext<FishProperties> bootstrap, FishProperties fp)
-    {
-        return bootstrap.register(createKey(fp), fp);
     }
 
     public static Holder<Item> fromRL(String ns, String path)
@@ -1063,7 +1092,8 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
     {
         if (fp.customName().isEmpty())
         {
-            return ResourceKey.create(Starcatcher.FISH_REGISTRY,
+            return ResourceKey.create(
+                    Starcatcher.FISH_REGISTRY,
                     Starcatcher.rl(fp.fish().getRegisteredName().replace(":", "_")));
         }
         else
@@ -1071,4 +1101,17 @@ public class FishPropertiesProvider extends DatapackBuiltinEntriesProvider
             return ResourceKey.create(Starcatcher.FISH_REGISTRY, Starcatcher.rl("starcatcher" + "_" + fp.customName()));
         }
     }
+
+    public static Holder.Reference<TrophyProperties> register(BootstrapContext<TrophyProperties> bootstrap, TrophyProperties tp)
+    {
+        return bootstrap.register(createKey(tp), tp);
+    }
+
+    public static ResourceKey<TrophyProperties> createKey(TrophyProperties tp)
+    {
+        return ResourceKey.create(
+                Starcatcher.TROPHY_REGISTRY,
+                Starcatcher.rl(tp.rl().getNamespace() + "_" + tp.rl().getPath()));
+    }
+
 }

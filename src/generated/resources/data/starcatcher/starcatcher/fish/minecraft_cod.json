@@ -1,0 +1,13 @@
+{
+  "above_y": 50,
+  "below_y": 100,
+  "fish": "minecraft:cod",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_ocean"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

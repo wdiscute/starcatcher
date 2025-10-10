@@ -43,6 +43,9 @@ public class Starcatcher
     public static final ResourceKey<Registry<FishProperties>> FISH_REGISTRY =
             ResourceKey.createRegistryKey(Starcatcher.rl("fish"));
 
+    public static final ResourceKey<Registry<TrophyProperties>> TROPHY_REGISTRY =
+            ResourceKey.createRegistryKey(Starcatcher.rl("trophy"));
+
     private static final Logger LOGGER = LogUtils.getLogger();
 
     public static ResourceLocation rl(String s)
@@ -80,6 +83,10 @@ public class Starcatcher
         {
             event.dataPackRegistry(
                     FISH_REGISTRY, FishProperties.CODEC, FishProperties.CODEC,
+                    builder -> builder.maxId(256));
+
+            event.dataPackRegistry(
+                    TROPHY_REGISTRY, TrophyProperties.CODEC, TrophyProperties.CODEC,
                     builder -> builder.maxId(256));
         }
 

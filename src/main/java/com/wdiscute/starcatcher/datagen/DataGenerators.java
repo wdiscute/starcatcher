@@ -14,11 +14,11 @@ public class DataGenerators
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {
-
+        //fish properties
         event.getGenerator().addProvider(
                 event.includeServer(),
-                (DataProvider.Factory<FishPropertiesProvider>) output -> new FishPropertiesProvider(output,
-                        event.getLookupProvider())
+                (DataProvider.Factory<FishAndTrophiesPropertiesProvider>) output -> new FishAndTrophiesPropertiesProvider(output,
+                       event.getLookupProvider())
         );
 
         BlockTagsProvider btp = new ModBlocksTagProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper());

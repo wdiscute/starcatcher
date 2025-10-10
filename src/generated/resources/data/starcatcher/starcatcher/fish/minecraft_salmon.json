@@ -1,0 +1,13 @@
+{
+  "above_y": 50,
+  "below_y": 100,
+  "fish": "minecraft:salmon",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}
