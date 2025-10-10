@@ -1,22 +1,15 @@
-package com.wdiscute.starcatcher.items;
+package com.wdiscute.starcatcher.guide;
 
-import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
-import com.wdiscute.starcatcher.networkandstuff.FishProperties;
-import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandstuff.Payloads;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
+import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
+import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;

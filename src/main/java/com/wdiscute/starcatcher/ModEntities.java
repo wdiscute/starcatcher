@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
+import com.wdiscute.starcatcher.bob.FishingBobEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;

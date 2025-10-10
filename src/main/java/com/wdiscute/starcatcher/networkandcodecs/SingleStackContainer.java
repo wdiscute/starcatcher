@@ -1,10 +1,7 @@
-package com.wdiscute.starcatcher.networkandstuff;
+package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.mojang.serialization.Codec;
-import com.wdiscute.starcatcher.ModItems;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 

@@ -1,12 +1,8 @@
-package com.wdiscute.starcatcher.fishingbob;
+package com.wdiscute.starcatcher.bob;
 
 import com.wdiscute.starcatcher.*;
-import com.wdiscute.starcatcher.networkandstuff.FishProperties;
-import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandstuff.Payloads;
-import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
+import com.wdiscute.starcatcher.networkandcodecs.*;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;

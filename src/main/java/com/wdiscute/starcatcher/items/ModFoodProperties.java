@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.items;
 
 import net.minecraft.world.food.FoodProperties;
 

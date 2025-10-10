@@ -1,12 +1,9 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.networkandcodecs;
 
-import com.mojang.serialization.Codec;
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.items.ColorfulBobber;
-import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.util.ExtraCodecs;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;

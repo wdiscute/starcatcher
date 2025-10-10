@@ -1,12 +1,12 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
+import com.wdiscute.starcatcher.guide.TrophyBronze;
+import com.wdiscute.starcatcher.guide.TrophyGold;
+import com.wdiscute.starcatcher.guide.TrophySilver;
 import com.wdiscute.starcatcher.items.*;
-import com.wdiscute.starcatcher.networkandstuff.SingleStackContainer;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;

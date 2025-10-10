@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.networkandstuff;
+package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.mojang.datafixers.util.Function11;
 import com.mojang.datafixers.util.Function12;
@@ -6,12 +6,11 @@ import com.mojang.datafixers.util.Function13;
 import com.mojang.datafixers.util.Function7;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.ModDataComponents;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import com.wdiscute.starcatcher.datagen.FishPropertiesWithModRestriction;
-import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
+import com.wdiscute.starcatcher.bob.FishingBobEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;

@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.networkandstuff;
+package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import io.netty.buffer.ByteBuf;

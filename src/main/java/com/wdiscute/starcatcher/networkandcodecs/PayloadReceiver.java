@@ -1,8 +1,8 @@
-package com.wdiscute.starcatcher.networkandstuff;
+package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.fishingbob.FishingBobEntity;
+import com.wdiscute.starcatcher.bob.FishingBobEntity;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;

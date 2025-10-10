@@ -1,12 +1,11 @@
-package com.wdiscute.starcatcher.items;
+package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandstuff.FishCaughtCounter;
-import com.wdiscute.starcatcher.networkandstuff.FishProperties;
-import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandstuff.Payloads;
+import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
+import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
+import com.wdiscute.starcatcher.networkandcodecs.Payloads;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

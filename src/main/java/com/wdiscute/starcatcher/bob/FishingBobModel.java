@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.fishingbob;
+package com.wdiscute.starcatcher.bob;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

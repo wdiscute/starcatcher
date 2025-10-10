@@ -1,6 +1,6 @@
-package com.wdiscute.starcatcher.items;
+package com.wdiscute.starcatcher.guide;
 
-import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
+import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

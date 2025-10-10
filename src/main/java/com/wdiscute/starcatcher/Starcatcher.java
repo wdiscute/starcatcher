@@ -2,13 +2,11 @@ package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
-import com.wdiscute.starcatcher.fishingbob.FishingBobModel;
-import com.wdiscute.starcatcher.fishingbob.FishingBobRenderer;
+import com.wdiscute.starcatcher.bob.FishingBobModel;
+import com.wdiscute.starcatcher.bob.FishingBobRenderer;
+import com.wdiscute.starcatcher.fishspotter.FishTrackerLayer;
 import com.wdiscute.starcatcher.guide.FishCaughtToast;
-import com.wdiscute.starcatcher.networkandstuff.FishProperties;
-import com.wdiscute.starcatcher.networkandstuff.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandstuff.PayloadReceiver;
-import com.wdiscute.starcatcher.networkandstuff.Payloads;
+import com.wdiscute.starcatcher.networkandcodecs.*;
 import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.rod.FishingRodScreen;
