@@ -71,8 +71,6 @@ public class FishingGuideScreen extends Screen
     boolean arrowNextPressed;
     boolean arrowIndexPressed;
 
-    int indexPages;
-
     int currentMenu = 0;
     int currentPage = 0;
 
@@ -146,7 +144,7 @@ public class FishingGuideScreen extends Screen
             {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 currentMenu = 0;
-                currentPage = indexPages;
+                currentPage = 0;
                 return true;
             }
 
@@ -254,8 +252,6 @@ public class FishingGuideScreen extends Screen
 
         renderImage(guiGraphics, BACKGROUND);
 
-
-
         if (currentMenu == 0)
         {
             renderIndex(guiGraphics, mouseX, mouseY);
@@ -343,7 +339,6 @@ public class FishingGuideScreen extends Screen
             rowNumber = 0;
             semiPageNumber++;
         }
-
 
         guiGraphics.drawString(this.font, Component.translatable("gui.guide.all"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
         rowNumber++;
