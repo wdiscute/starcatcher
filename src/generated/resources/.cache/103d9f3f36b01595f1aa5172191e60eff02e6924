@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-10T13:37:50.3622959	Registries
+// 1.21.1	2025-10-15T14:56:28.1123241	Registries
 61c9536916e8b3deac1fb910301d9f3779033e3a data/starcatcher/starcatcher/fish/minecraft_cod.json
 70f5b6954b48ac30df3b77cff35059bf2044f1a4 data/starcatcher/starcatcher/fish/minecraft_salmon.json
 af15197980888df35cebb5db2916b811f68aca2b data/starcatcher/starcatcher/fish/starcatcher_agave_bream.json
@@ -155,5 +155,7 @@ a1299f3f7621160923318310e238ab2d4c04aace data/starcatcher/starcatcher/fish/tide_
 281620f5c9d0d117569f3f56342eb8b00b4b43d6 data/starcatcher/starcatcher/fish/tide_witherfin.json
 ac94896e34be52d738784002aa1bbbb6fa230ac1 data/starcatcher/starcatcher/fish/tide_yellow_perch.json
 f442bdfe0b10cc52507bb45a21765319332923df data/starcatcher/starcatcher/trophy/starcatcher_trophy_of_fishing.json
+8cc84a92da58dbbec6f84f8bf37ed0291b9bc7bd data/starcatcher/starcatcher/trophy/starcatcher_trophy_of_flowing_fishes.json
+c7534321c5c4952bc6de7f9e862ecba4ac63f148 data/starcatcher/starcatcher/trophy/starcatcher_trophy_of_infinite_fishes.json
 45a5688877a7b104b3c0d64b9af11772f2314d87 data/starcatcher/starcatcher/trophy/starcatcher_trophy_of_masterful_fishing.json
-f25faa64006bd041c8038334241d5190442e1427 data/starcatcher/starcatcher/trophy/starcatcher_trophy_of_pitiful_fishing.json
+c9a3c97f4ce937a865699ce8de4c00c20869b294 data/starcatcher/starcatcher/trophy/starcatcher_trophy_of_pitiful_fishing.json

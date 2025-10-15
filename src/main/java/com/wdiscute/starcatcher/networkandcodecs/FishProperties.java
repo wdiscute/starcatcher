@@ -43,8 +43,8 @@ import java.util.function.Function;
 
 public record FishProperties(
         Holder<Item> fish,
-        int baseChance,
 
+        int baseChance,
         String customName,
         Rarity rarity,
         WorldRestrictions wr,
@@ -64,7 +64,7 @@ public record FishProperties(
                     BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("fish").forGetter(FishProperties::fish),
                     //optional
                     Codec.INT.optionalFieldOf("base_chance", 5).forGetter(FishProperties::baseChance),
-                    Codec.STRING.optionalFieldOf("customName", "").forGetter(FishProperties::customName),
+                    Codec.STRING.optionalFieldOf("custom_name", "").forGetter(FishProperties::customName),
                     Rarity.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(FishProperties::rarity),
                     WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
                     BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
@@ -230,6 +230,52 @@ public record FishProperties(
                 0,
                 List.of(),
                 false);
+
+        public BaitRestrictions withCorrectBobber(ResourceLocation correctBobber)
+        {
+            return new BaitRestrictions(List.of(correctBobber), this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withCorrectBobber(List<ResourceLocation> correctBobber)
+        {
+            return new BaitRestrictions(correctBobber, this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withCorrectBait(ResourceLocation correctBait)
+        {
+            return new BaitRestrictions(this.correctBobber, List.of(correctBait), this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withCorrectBait(List<ResourceLocation> correctBait)
+        {
+            return new BaitRestrictions(this.correctBobber, correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withConsumesBait(boolean consumesBait)
+        {
+            return new BaitRestrictions(this.correctBobber, this.correctBait, consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withCorrectBaitChanceAdded(int correctBaitChanceAdded)
+        {
+            return new BaitRestrictions(this.correctBobber, this.correctBait, consumesBait, correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withIncorrectBaits(ResourceLocation incorrectBaits)
+        {
+            return new BaitRestrictions(this.correctBobber, this.correctBait, this.consumesBait, this.correctBaitChanceAdded, List.of(incorrectBaits), this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withIncorrectBaits(List<ResourceLocation> incorrectBaits)
+        {
+            return new BaitRestrictions(this.correctBobber, correctBait, this.consumesBait, this.correctBaitChanceAdded, incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withMustHaveCorrectBait(boolean mustHaveCorrectBait)
+        {
+            return new BaitRestrictions(this.correctBobber, correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, mustHaveCorrectBait);
+        }
+
     }
 
     //endregion bait

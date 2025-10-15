@@ -23,13 +23,15 @@ public class TrophySilver extends Item
 {
     public TrophySilver()
     {
-        super(new Item.Properties());
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
-        List<FishCaughtCounter> fishCounter;
+        if(!player.isCreative())
+            return InteractionResultHolder.pass(player.getItemInHand(usedHand));List<FishCaughtCounter> fishCounter;
+
         List<FishProperties> fishes = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
 
         fishCounter = new ArrayList<>(player.getData(ModDataAttachments.FISHES_CAUGHT));

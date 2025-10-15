@@ -18,12 +18,15 @@ public class TrophyGold extends Item
 {
     public TrophyGold()
     {
-        super(new Item.Properties());
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
+        if(!player.isCreative())
+            return InteractionResultHolder.pass(player.getItemInHand(usedHand));
+
         //sets all fps on fishes caught to 1
         List<FishCaughtCounter> fishCounter = new ArrayList<>();
         List<FishProperties> fishes = new ArrayList<>();
