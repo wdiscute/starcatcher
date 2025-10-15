@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "minecraft:fishes"
+      "item": "starcatcher:starcatcher_rod"
     },
     {
       "item": "minecraft:book"

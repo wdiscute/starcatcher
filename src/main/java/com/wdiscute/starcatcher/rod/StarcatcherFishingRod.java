@@ -95,11 +95,15 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
 
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public boolean hasCraftingRemainingItem(ItemStack stack)
     {
+        return true;
+    }
 
-
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+    @Override
+    public ItemStack getCraftingRemainingItem(ItemStack itemStack)
+    {
+        return itemStack.copy();
     }
 
     @Override
