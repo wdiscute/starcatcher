@@ -1,0 +1,303 @@
+{
+  "creativetab.starcatcher.starcatcher": "Starcatcher",
+
+  "tag.starcatcher.is_beach" : "砂浜",
+  "tag.starcatcher.is_birch_forest" : "シラカバの森",
+  "tag.starcatcher.is_cherry_grove" : "サクラの林",
+  "tag.starcatcher.is_cold_lake" : "凍った湖",
+  "tag.starcatcher.is_cold_ocean" : "凍った海",
+  "tag.starcatcher.is_cold_river" : "凍った川",
+  "tag.starcatcher.is_dark_forest" : "暗い森",
+  "tag.starcatcher.is_deep_ocean" : "深海",
+  "tag.starcatcher.is_mushroom_fields" : "キノコ島",
+  "tag.starcatcher.is_ocean" : "海洋",
+  "tag.starcatcher.is_river" : "河川",
+  "tag.starcatcher.is_swamp" : "沼地",
+  "tag.starcatcher.is_warm" : "暖かい気候",
+  "tag.starcatcher.is_warm_ocean" : "暖かい海",
+  "tag.starcatcher.is_warm_river" : "暖かい川",
+
+  "tag.starcatcher.hooks" : "Fishing Hooks",
+  "tag.starcatcher.hooks_survive_fire" : "Hooks that survive Fire",
+
+
+
+
+  "item.starcatcher.starcatcher_rod": "Starcatcherの釣竿",
+  "tooltip.starcatcher.starcatcher_rod.0": "ウキ、餌、釣り針を取り付けて使用できる。特別な釣竿です！",
+  "tooltip.starcatcher.starcatcher_rod.1": "条件さえ整えば、何が釣れるか全くの未知数！",
+  "tooltip.starcatcher.starcatcher_rod.2": "",
+  "tooltip.starcatcher.starcatcher_rod.3": "スニークしながら使用すると",
+  "tooltip.starcatcher.starcatcher_rod.4": "ウキ、餌、釣り針の選択画面が開きます",
+  "tooltip.starcatcher.starcatcher_rod.5": "",
+  "tooltip.starcatcher.starcatcher_rod.6": "",
+
+  "item.starcatcher.starcatcher_guide": "Starcatcherのガイド",
+  "tooltip.starcatcher.starcatcher_guide.0": "釣り人の最高の相棒。釣果などを記録してくれます。",
+  "tooltip.starcatcher.starcatcher_guide.1": "これまでに釣った魚、そしてまだ釣り上げていない魚の情報までも！",
+  "tooltip.starcatcher.starcatcher_guide.2": "",
+
+  "item.starcatcher.starcatcher_twine": "Starcatcherの釣り糸",
+  "tooltip.starcatcher.starcatcher_twine.0": "エンダーパールの粉に覆われた、細いひも。",
+  "tooltip.starcatcher.starcatcher_twine.1": "かつてVansireが弦楽器に用いたという。",
+
+  "item.starcatcher.hook": "鉄の釣り針",
+  "tooltip.starcatcher.hook.0": "釣竿に使う、鉄の釣り針。",
+  "tooltip.starcatcher.hook.1": "誰でも最初は初心者です。",
+
+  "item.starcatcher.shiny_hook": "輝く釣り針",
+  "tooltip.starcatcher.shiny_hook.0": "光り輝く釣り針！",
+  "tooltip.starcatcher.shiny_hook.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.shiny_hook.2": "コモンではない魚に最適なポイントを3回連続で当てると",
+  "tooltip.starcatcher.shiny_hook.3": "お宝が現れます！",
+
+  "item.starcatcher.gold_hook": "金の釣り針",
+  "tooltip.starcatcher.gold_hook.0": "黄金に輝く釣り針！",
+  "tooltip.starcatcher.gold_hook.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.gold_hook.2": "あなたの腕前に応じて",
+  "tooltip.starcatcher.gold_hook.3": "獲得経験値が上昇します。",
+
+  "item.starcatcher.mossy_hook": "苔むした釣り針",
+  "tooltip.starcatcher.mossy_hook.0": "苔むして錆びた釣り針だ！",
+  "tooltip.starcatcher.mossy_hook.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.mossy_hook.2": "釣りの難易度が上がりますが",
+  "tooltip.starcatcher.mossy_hook.3": "完璧に釣ると必ずお宝が獲得できます。",
+
+  "item.starcatcher.crystal_hook": "水晶の釣り針",
+  "tooltip.starcatcher.crystal_hook.0": "超頑丈な釣り針。溶岩でも問題なし！",
+  "tooltip.starcatcher.crystal_hook.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.crystal_hook.2": "溶岩で釣りができるようになる。ｱﾁﾁﾁﾁ!!",
+
+  "item.starcatcher.stone_hook": "石の釣り針",
+  "tooltip.starcatcher.stone_hook.0": "超頑丈な釣り針！",
+  "tooltip.starcatcher.stone_hook.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.stone_hook.2": "最適なポイントに当てると",
+  "tooltip.starcatcher.stone_hook.3": "魚がしばらく動けなくなり、逃げられなくなります。",
+
+  "item.starcatcher.split_hook": "二股釣り針",
+  "tooltip.starcatcher.split_hook.0": "洗練されたデザインの二股釣り針！",
+  "tooltip.starcatcher.split_hook.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.split_hook.2": "完璧に釣ると魚を2匹獲得できます。",
+
+  "item.starcatcher.creeper_bobber": "クリーパーなウキ",
+  "tooltip.starcatcher.creeper_bobber.0": "クリーパー型のウキ。",
+  "tooltip.starcatcher.creeper_bobber.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に…",
+  "tooltip.starcatcher.creeper_bobber.2": "どうなるかは、お楽しみに！",
+
+  "item.starcatcher.glitter_bobber": "キラキラなウキ",
+  "tooltip.starcatcher.glitter_bobber.0": "かなりきらめくウキ！",
+  "tooltip.starcatcher.glitter_bobber.1": "きらめきを感じなさい。",
+
+  "item.starcatcher.colorful_bobber": "カラフルなウキ",
+  "tooltip.starcatcher.colorful_bobber.0": "やたらカラフルなウキ！",
+  "tooltip.starcatcher.colorful_bobber.999": "「クリックして！」とでも言うようにピカピカしている",
+
+  "item.starcatcher.frugal_bobber": "節約上手なウキ",
+  "tooltip.starcatcher.frugal_bobber.0": "独自の餌節約機能を持つウキ。",
+  "tooltip.starcatcher.frugal_bobber.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.frugal_bobber.2": "魚に餌を取られないかもしれない。",
+
+  "item.starcatcher.steady_bobber": "安定大好きなウキ",
+  "tooltip.starcatcher.steady_bobber.0": "硬くて重いウキ。",
+  "tooltip.starcatcher.steady_bobber.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.steady_bobber.2": "釣りが簡単になります。",
+
+  "item.starcatcher.impatient_bobber": "即食いなウキ",
+  "tooltip.starcatcher.impatient_bobber.0": "魚の食いつきを早めるために、特別に設計されたウキ。",
+  "tooltip.starcatcher.impatient_bobber.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.impatient_bobber.2": "魚が早く食いつくようになります。",
+
+  "item.starcatcher.frog_bobber": "カエルなウキ",
+  "tooltip.starcatcher.frog_bobber.0": "カエルみたいなウキ。",
+  "tooltip.starcatcher.frog_bobber.1": "<gradient-67>Starcatcherの釣竿</gradient-90>を装備中に",
+  "tooltip.starcatcher.frog_bobber.2": "たまにカエルみたいに動くよ。たまにだけどね。",
+
+  "item.starcatcher.fish_spotter": "魚発見器",
+  "tooltip.starcatcher.fish_spotter.0": "あらゆる<rgb>釣り人</rgb>に役立つ道具で",
+  "tooltip.starcatcher.fish_spotter.1": "周辺に生息している魚を表示します。",
+  "tooltip.starcatcher.fish_spotter.2": "狙った魚をロックオンすることで",
+  "tooltip.starcatcher.fish_spotter.3": "その魚の出現条件を特定するのに役立ちます。",
+  "tooltip.starcatcher.fish_spotter.4": "",
+  "tooltip.starcatcher.fish_spotter.5": "単体でも使用可能",
+  "tooltip.starcatcher.fish_spotter.6": "または<gradient-67>Starcatcherの釣竿</gradient-90> を強化するためにも使うことができます。",
+
+  "item.starcatcher.fish_bones" : "魚の骨",
+  "item.starcatcher.fish_bones.0" : "かつて幸せだった魚たちの名残。",
+  "item.starcatcher.fish_bones.1" : "",
+
+  "item.starcatcher.waterlogged_satchel" : "水浸しのカバン",
+  "tooltip.starcatcher.waterlogged_satchel.0" : "水の底の謎を抱えたカバン",
+  "tooltip.starcatcher.waterlogged_satchel.1" : "",
+
+  "item.starcatcher.treasure" : "お宝",
+  "tooltip.starcatcher.treasure.0" : "熟練の釣り人に釣り上げられた、ピカピカのお宝。",
+  "tooltip.starcatcher.treasure.1" : "中には何があるんだろう？",
+
+  "item.starcatcher.scalding_treasure" : "灼熱のお宝",
+  "tooltip.starcatcher.scalding_treasure.0" : "焼けるように熱い場所から釣り上げられたお宝。",
+  "tooltip.starcatcher.scalding_treasure.1" : "さあ、ネザーのお宝の中身は？",
+
+  "item.starcatcher.trophy_of_masterful_fishing" : "達人の釣りトロフィー",
+  "tooltip.starcatcher.trophy_of_masterful_fishing.0" : "このトロフィーを右クリックすると",
+  "tooltip.starcatcher.trophy_of_masterful_fishing.1" : "魚図鑑がコンプリートされる。",
+
+  "item.starcatcher.trophy_of_fishing" : "釣りトロフィー",
+  "tooltip.starcatcher.trophy_of_fishing.0" : "このトロフィーを右クリックすると",
+  "tooltip.starcatcher.trophy_of_fishing.1" : "ランダムな魚の図鑑データが登録される。",
+
+  "item.starcatcher.trophy_of_pitiful_fishing" : "みじめな釣りトロフィー",
+  "tooltip.starcatcher.trophy_of_pitiful_fishing.0" : "このトロフィーを右クリックすると",
+  "tooltip.starcatcher.trophy_of_pitiful_fishing.1" : "釣った魚の図鑑をリセットします。",
+
+
+  "gui.starcatcher.toast.fish_caught" : "新しい魚を釣り上げました！",
+
+  "gui.guide.caught" : "捕獲済み",
+  "gui.guide.not_caught" : "未捕獲！",
+  "gui.guide.not_caught_fish_name" : "???",
+
+
+  "gui.guide.dimension" : "ディメンション: ",
+  "gui.guide.dimensions" : "ディメンション群: ",
+  "gui.guide.biome" : "バイオーム: ",
+  "gui.guide.biomes" : "バイオーム群: ",
+  "gui.guide.blacklisted_biomes" : "禁止バイオーム: ",
+  "gui.guide.blacklisted_dimensions" : "禁止ディメンション: ",
+  "gui.guide.bait" : "餌: ",
+  "gui.guide.weather" : "天候: ",
+  "gui.guide.raining" : "雨",
+  "gui.guide.thundering" : "雷雨",
+  "gui.guide.clear" : "晴れ",
+  "gui.guide.daytime" : "時間: ",
+  "gui.guide.day" : "朝",
+  "gui.guide.noon" : "昼",
+  "gui.guide.night" : "夜",
+  "gui.guide.midnight" : "深夜",
+  "gui.guide.elevation" : "高度: ",
+  "gui.guide.below" : "以下 ",
+  "gui.guide.above" : "以上 ",
+  "gui.guide.mountain" : "山",
+  "gui.guide.surface" : "地上",
+  "gui.guide.underground" : "地下",
+  "gui.guide.caves" : "洞窟",
+  "gui.guide.deepslate" : "深層",
+  "gui.guide.no_restriction" : "制限なし",
+  "gui.guide.hover" : "[カーソルを合わせる]",
+
+  "gui.guide.rarity.common" : "コモン",
+  "gui.guide.rarity.uncommon" : "<gradient-37>アンコモン</gradient-43>",
+  "gui.guide.rarity.rare" : "<gradient-57>レア</gradient-67>",
+  "gui.guide.rarity.epic" : "<gradient-80>エピック</gradient-90>",
+  "gui.guide.rarity.legendary" : "<rgb>レジェンダリー</rgb>",
+
+
+  "item.starcatcher.obidontiee" : "オビドンティー",
+  "item.starcatcher.silverveil_perch" : "シルバーヴェール・パーチ",
+  "item.starcatcher.elderscale" : "エルダースケール",
+  "item.starcatcher.driftfin" : "ドリフトフィン",
+  "item.starcatcher.twilight_koi" : "トワイライト・コイ",
+  "item.starcatcher.thunder_bass" : "サンダー・バス",
+  "item.starcatcher.lightning_bass" : "ライトニング・バス",
+  "item.starcatcher.boot" : "ブーツ",
+
+  "item.starcatcher.sludge_catfish" : "スラッジ・ナマズ",
+  "item.starcatcher.lily_snapper" : "リリィ・スナッパー",
+  "item.starcatcher.sage_catfish" : "セージ・ナマズ",
+  "item.starcatcher.mossy_boot" : "苔むしたブーツ",
+
+  "item.starcatcher.pale_carp" : "ペイル・カープ",
+  "item.starcatcher.pale_pinfish" : "ペイル・ピンフィッシュ",
+  "item.starcatcher.pinfish" : "ピンフィッシュ",
+
+  "item.starcatcher.frostjaw_trout" : "フロストジョー・トラウト",
+  "item.starcatcher.crystalback_trout" : "クリスタルバック・トラウト",
+  "item.starcatcher.aurora" : "オーロラ",
+  "item.starcatcher.wintery_pike" : "ウィンタリー・パイク",
+
+  "item.starcatcher.sandtail" : "サンドテイル",
+  "item.starcatcher.mirage_carp" : "ミラージュ・コイ",
+  "item.starcatcher.scorchfish" : "スコーチフィッシュ",
+  "item.starcatcher.cactifish" : "カクティフィッシュ",
+  "item.starcatcher.agave_bream" : "アガベ・フナ",
+
+  "item.starcatcher.sunny_sturgeon" : "サニー・スタージョン",
+  "item.starcatcher.rockgill" : "ロックギル",
+  "item.starcatcher.peakdweller" : "ピークドウェラー",
+  "item.starcatcher.sun_seeking_carp" : "サンシー・キング・コイ",
+
+  "item.starcatcher.blossomfish" : "ブロッサムフィッシュ",
+  "item.starcatcher.petaldrift_carp" : "ペタルドリフト・コイ",
+  "item.starcatcher.pink_koi" : "ピンク・コイ",
+  "item.starcatcher.morganite" : "モルガナイト",
+  "item.starcatcher.rose_siamese_fish" : "ローズ・シャム・フィッシュ",
+
+  "item.starcatcher.crystalback_sturgeon" : "クリスタルバック・スタージョン",
+  "item.starcatcher.icetooth_sturgeon" : "アイスティース・スタージョン",
+  "item.starcatcher.boreal" : "ボリアル",
+  "item.starcatcher.crystalback_boreal" : "クリスタルバック・ボリアル",
+
+  "item.starcatcher.silverfin_pike" : "シルバーフィン・パイク",
+  "item.starcatcher.willow_bream" : "ヤナギ・フナ",
+  "item.starcatcher.drifting_bream" : "ドリフティング・フナ",
+  "item.starcatcher.downfall_bream" : "ダウンフォール・フナ",
+  "item.starcatcher.hollowbelly_darter" : "ホローベリー・ダーター",
+  "item.starcatcher.mistback_chub" : "ミストバック・チャブ",
+  "item.starcatcher.dried_seaweed" : "乾燥した海藻",
+
+  "item.starcatcher.frostgill_chub" : "フロストギル・チャブ",
+  "item.starcatcher.crystalback_minnow" : "クリスタルバック・ミノー",
+  "item.starcatcher.azure_crystalback_minnow" : "アズールクリスタルバック・ミノー",
+  "item.starcatcher.blue_crystal_fin" : "ブルークリスタル・フィン",
+
+  "item.starcatcher.ironjaw_herring" : "アイアンジョー・ヘリング",
+  "item.starcatcher.deepjaw_herring" : "ディープジョー・へリング",
+  "item.starcatcher.dusktail_snapper" : "ダスクテイル・スナッパー",
+  "item.starcatcher.joel" : "ジョエル",
+  "item.starcatcher.redscaled_tuna" : "レッドスケイルド・マグロ",
+  "item.starcatcher.sea_bass" : "シー・バス",
+  "item.starcatcher.waterlogged_bottle" : "水浸しのボトル",
+
+  "item.starcatcher.bigeye_tuna" : "メバチ・マグロ",
+
+  "item.starcatcher.conch" : "巻貝",
+  "item.starcatcher.clam" : "ハマグリ",
+
+  "item.starcatcher.shroomfish" : "シュルームフィッシュ",
+  "item.starcatcher.sporefish" : "スポアフィッシュ",
+
+  "item.starcatcher.gold_fan" : "ゴールド・ファン",
+  "item.starcatcher.geode_eel" : "ジオード・イール",
+
+  "item.starcatcher.whiteveil" : "ホワイトベール",
+  "item.starcatcher.black_eel" : "ブラック・イール",
+  "item.starcatcher.amethystback" : "アメジストバック",
+  "item.starcatcher.stonefish" : "ストーンフィッシュ",
+
+  "item.starcatcher.fossilized_angelfish" : "フォスライズド・エンゼルフィッシュ",
+  "item.starcatcher.dripfin" : "ドリップフィン",
+  "item.starcatcher.yellowstone_fish" : "イエローストーン・フィッシュ",
+
+  "item.starcatcher.lush_pike" : "ラッシュ・パイク",
+  "item.starcatcher.vivid_moss" : "ビビッド・モス",
+
+  "item.starcatcher.ghostly_pike" : "ゴーストリー・パイク",
+  "item.starcatcher.aquamarine_pike" : "アクアマリン・パイク",
+  "item.starcatcher.garnet_mackerel" : "ガーネット・サバ",
+  "item.starcatcher.bright_amethyst_snapper" : "ブライト・アメジスト・スナッパー",
+  "item.starcatcher.dark_amethyst_snapper" : "ダーク・アメジスト・スナッパー",
+  "item.starcatcher.deepslatefish" : "ディープスレートフィッシュ",
+
+  "item.starcatcher.skulkfish" : "スカルフィッシュ",
+  "item.starcatcher.ward" : "ウォード",
+  "item.starcatcher.glowing_dark" : "グローイング・ダーク",
+
+  "item.starcatcher.embergill" : "エンバーギル",
+  "item.starcatcher.scalding_pike" : "スコールディング・パイク",
+  "item.starcatcher.cinder_squid" : "シンダー・イカ",
+  "item.starcatcher.lava_crab" : "ラヴァ・クラブ",
+  "item.starcatcher.magma_fish" : "マグマ・フィッシュ",
+  "item.starcatcher.glowstone_seeker" : "グローストーン・シーカー",
+  "item.starcatcher.lava_crab_claw" : "ラヴァ・クラブ・クロウ",
+
+  "item.starcatcher.charfish" : "チャーフィッシュ"
+}
