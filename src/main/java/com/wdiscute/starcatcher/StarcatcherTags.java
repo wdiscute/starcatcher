@@ -30,4 +30,6 @@ public class StarcatcherTags
     public static final TagKey<Item> HOOKS = ItemTags.create(Starcatcher.rl("hooks"));
     public static final TagKey<Item> HOOKS_SURVIVE_FIRE = ItemTags.create(Starcatcher.rl("hooks_survive_fire"));
 
+    public static final TagKey<Item> CURATED_TREASURE = ItemTags.create(Starcatcher.rl("curated_treasure"));
+
 }

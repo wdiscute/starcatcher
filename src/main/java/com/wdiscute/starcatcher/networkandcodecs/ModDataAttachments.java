@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.networkandcodecs;
 import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -39,6 +40,15 @@ public class ModDataAttachments
                     AttachmentType.builder(() -> List.of(TrophyProperties.DEFAULT))
                             .serialize(TrophyProperties.LIST_CODEC)
                             .sync(TrophyProperties.LIST_STREAM_CODEC)
+                            .copyOnDeath()
+                            .build()
+    );
+
+    public static final Supplier<AttachmentType<List<ResourceLocation>>> TREASURES_CAUGHT = ATTACHMENT_TYPES.register(
+            "treasures_caught", () ->
+                    AttachmentType.builder(() -> List.of(Starcatcher.rl("missingno")))
+                            .serialize(ResourceLocation.CODEC.listOf())
+                            .sync(ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()))
                             .copyOnDeath()
                             .build()
     );
