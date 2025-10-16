@@ -500,6 +500,7 @@ public class FishingGuideScreen extends Screen
         }
 
 
+        //render not caught text
         if (fcc == null)
         {
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught_fish_name"), uiX + xOffset + 46, uiY + 60, 0, false);
@@ -511,7 +512,7 @@ public class FishingGuideScreen extends Screen
             //render fish name
             MutableComponent compName;
             if (fp.customName().isEmpty())
-                compName = Component.translatable("item." + fp.fish().getRegisteredName().replace(":", "."));
+                compName = Component.translatable(fp.fish().value().getDescriptionId());
             else
                 compName = Component.translatable("item.starcatcher." + fp.customName());
 
