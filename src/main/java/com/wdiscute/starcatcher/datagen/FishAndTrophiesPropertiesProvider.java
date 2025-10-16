@@ -1050,10 +1050,65 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             //anywhere
             overworldFish(fromRL("aquaculture", "goldfish"))
                     .withBaseChance(1)
-                    .withMod("aquaculture")
+                    .withMod("aquaculture"),
 
             //endregion Aquaculture 2
 
+            //region Fish of Thieves
+
+            overworldOceanFish(fromRL("fishofthieves", "splashtail"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withMod("fishofthieves"),
+
+            overworldFreshwaterFish(fromRL("fishofthieves", "pondie"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withBaseChance(2)
+                    .withMod("fishofthieves"),
+
+            overworldFreshwaterFish(fromRL("fishofthieves", "islehopper"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withBaseChance(2)
+                    .withMod("fishofthieves"),
+
+            overworldWarmOceanFish(fromRL("fishofthieves", "ancientscale"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withMod("fishofthieves"),
+
+            overworldWarmOceanFish(fromRL("fishofthieves", "plentifin"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withMod("fishofthieves"),
+
+            overworldLushCavesFish(fromRL("fishofthieves", "wildsplash"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withMod("fishofthieves"),
+
+            overworldDeepslateFish(fromRL("fishofthieves", "devilfish"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withMod("fishofthieves"),
+
+            overworldColdOceanFish(fromRL("fishofthieves", "battlegill"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withMod("fishofthieves"),
+
+            endFish(fromRL("fishofthieves", "wrecker"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withMod("fishofthieves"),
+
+            overworldOceanFish(fromRL("fishofthieves", "stormfish"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withWeather(FishProperties.Weather.THUNDER)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withMod("fishofthieves")
+
+            //endregion Fish of Thieves
 
     );
     //endregion restricted fps
