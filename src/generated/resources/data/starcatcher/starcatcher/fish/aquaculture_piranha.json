@@ -5,7 +5,7 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 0,
+  "above_y": 50,
   "daytime": "noon",
   "difficulty": {
     "decay": 3,

@@ -5,7 +5,7 @@
       "modid": "tide"
     }
   ],
-  "above_y": 0,
+  "above_y": 50,
   "difficulty": {
     "has_first_thin_marker": true,
     "has_second_marker": false,

@@ -1,5 +1,5 @@
 {
-  "above_y": 0,
+  "above_y": 50,
   "difficulty": {
     "decay": 2,
     "has_first_thin_marker": true,

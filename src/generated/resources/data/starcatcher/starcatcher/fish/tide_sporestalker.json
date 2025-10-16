@@ -5,7 +5,7 @@
       "modid": "tide"
     }
   ],
-  "above_y": 0,
+  "above_y": 50,
   "difficulty": {
     "change_rotation_every_hit": false,
     "decay": 0,
