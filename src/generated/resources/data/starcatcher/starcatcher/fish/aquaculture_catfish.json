@@ -1,0 +1,37 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "above_y": 50,
+  "below_y": 100,
+  "difficulty": {
+    "change_rotation_every_hit": false,
+    "decay": 0,
+    "has_first_marker": false,
+    "has_first_thin_marker": true,
+    "has_second_marker": false,
+    "has_second_thin_marker": true,
+    "penalty": 999,
+    "reward": 0,
+    "reward_thin": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "aquaculture:catfish",
+  "rarity": "epic",
+  "weather": "rain",
+  "world_restrictions": {
+    "biomes_blacklist_tags": [
+      "starcatcher:is_ocean"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

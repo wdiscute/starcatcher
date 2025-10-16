@@ -1,0 +1,15 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "base_chance": 1,
+  "fish": "aquaculture:goldfish",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

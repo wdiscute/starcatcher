@@ -523,6 +523,16 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 //                    .withMod("mysticcraft")
 
 
+            //region Tide
+
+            //
+            //  ,--.   ,--.    ,--.
+            //,-'  '-. `--'  ,-|  |  ,---.
+            //'-.  .-' ,--. ' .-. | | .-. :
+            //  |  |   |  | \ `-' | \   --.
+            //  `--'   `--'  `---'   `----'
+            //
+
             //tide freshwater
 
             overworldColdFreshwaterFish(fromRL("tide", "trout"))
@@ -862,7 +872,187 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDaytime(FishProperties.Daytime.MIDNIGHT)
                     .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
-                    .withMod("tide")
+                    .withMod("tide"),
+
+            //endregion Tide
+
+
+            //region Aquaculture 2
+
+            //
+            //                                                   ,--.   ,--.                                 ,---.
+            // ,--,--.  ,---.  ,--.,--.  ,--,--.  ,---. ,--.,--. |  | ,-'  '-. ,--.,--. ,--.--.  ,---.      '.-.  \
+            //' ,-.  | | .-. | |  ||  | ' ,-.  | | .--' |  ||  | |  | '-.  .-' |  ||  | |  .--' | .-. :      .-' .'
+            //\ '-'  | ' '-' | '  ''  ' \ '-'  | \ `--. '  ''  ' |  |   |  |   '  ''  ' |  |    \   --.     /   '-.
+            // `--`--'  `-|  |  `----'   `--`--'  `---'  `----'  `--'   `--'    `----'  `--'     `----'     '-----'
+            //            `--'
+
+
+            //freshwater
+            overworldFreshwaterFish(fromRL("aquaculture", "smallmouth_bass"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "bluegill"))
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "brown_trout"))
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withWeather(FishProperties.Weather.CLEAR)
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "carp"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "catfish"))
+                    .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "gar"))
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "minnow"))
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "muskellunge"))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDaytime(FishProperties.Daytime.MIDNIGHT)
+                    .withMod("aquaculture"),
+
+            overworldFreshwaterFish(fromRL("aquaculture", "perch"))
+                    .withMod("aquaculture"),
+
+            //arid
+            overworldWarmMountainFish(fromRL("aquaculture", "bayad"))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withMod("aquaculture"),
+
+            overworldWarmFreshwaterFish(fromRL("aquaculture", "boulti"))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withMod("aquaculture"),
+
+            overworldWarmMountainFish(fromRL("aquaculture", "capitaine"))
+                    .withMod("aquaculture"),
+
+            overworldWarmMountainFish(fromRL("aquaculture", "synodontis"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withMod("aquaculture"),
+
+            //arctic ocean
+            overworldColdOceanFish(fromRL("aquaculture", "atlantic_cod"))
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withMod("aquaculture"),
+
+            overworldColdOceanFish(fromRL("aquaculture", "blackfish"))
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withMod("aquaculture"),
+
+            overworldColdOceanFish(fromRL("aquaculture", "pacific_halibut"))
+                    .withMod("aquaculture"),
+
+            overworldColdOceanFish(fromRL("aquaculture", "atlantic_halibut"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withMod("aquaculture"),
+
+            overworldColdOceanFish(fromRL("aquaculture", "atlantic_herring"))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withMod("aquaculture"),
+
+            overworldColdOceanFish(fromRL("aquaculture", "pink_salmon"))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withWeather(FishProperties.Weather.THUNDER)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withMod("aquaculture"),
+
+            overworldColdOceanFish(fromRL("aquaculture", "pollock"))
+                    .withMod("aquaculture"),
+
+            overworldColdOceanFish(fromRL("aquaculture", "rainbow_trout"))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDaytime(FishProperties.Daytime.DAY)
+                    .withMod("aquaculture"),
+
+            //saltwater
+            overworldOceanFish(fromRL("aquaculture", "jellyfish"))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withBaseChance(3)
+                    .withMod("aquaculture"),
+
+            overworldOceanFish(fromRL("aquaculture", "red_grouper"))
+                    .withMod("aquaculture"),
+
+            overworldOceanFish(fromRL("aquaculture", "tuna"))
+                    .withMod("aquaculture"),
+
+            //jungle
+            overworldJungleFish(fromRL("aquaculture", "arapaima"))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withMod("aquaculture"),
+
+            overworldJungleFish(fromRL("aquaculture", "arrau_turtle"))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withMod("aquaculture"),
+
+
+            overworldJungleFish(fromRL("aquaculture", "piranha"))
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
+                    .withDaytime(FishProperties.Daytime.NOON)
+                    .withMod("aquaculture"),
+
+            overworldJungleFish(fromRL("aquaculture", "tambaqui"))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withMod("aquaculture"),
+
+            //swamp
+            overworldSwampFish(fromRL("aquaculture", "leech"))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withMod("aquaculture"),
+
+            overworldSwampFish(fromRL("aquaculture", "box_turtle"))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withMod("aquaculture"),
+
+            //mushroom island
+            overworldMushroomFieldsFish(fromRL("aquaculture", "brown_shrooma"))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING)
+                    .withMod("aquaculture"),
+
+            overworldMushroomFieldsFish(fromRL("aquaculture", "red_shrooma"))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
+                    .withMod("aquaculture"),
+
+            //anywhere
+            overworldFish(fromRL("aquaculture", "goldfish"))
+                    .withBaseChance(1)
+                    .withMod("aquaculture")
+
+            //endregion Aquaculture 2
 
 
     );
@@ -1102,44 +1292,44 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     public static FishProperties overworldBeachFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_BEACH)
-                .withMustBeCaughtAboveY(0);
+                .withMustBeCaughtAboveY(50);
     }
 
 
     public static FishProperties overworldMushroomFieldsFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_MUSHROOM_FIELDS)
-                .withMustBeCaughtAboveY(0);
+                .withMustBeCaughtAboveY(50);
     }
 
     public static FishProperties overworldJungleFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_JUNGLE)
-                .withMustBeCaughtAboveY(0);
+                .withMustBeCaughtAboveY(50);
     }
 
     public static FishProperties overworldTaigaFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_TAIGA)
-                .withMustBeCaughtAboveY(0);
+                .withMustBeCaughtAboveY(50);
     }
 
     public static FishProperties overworldCherryGroveFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_CHERRY_GROVE)
-                .withMustBeCaughtAboveY(0);
+                .withMustBeCaughtAboveY(50);
     }
 
     public static FishProperties overworldSwampFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_SWAMP)
-                .withMustBeCaughtAboveY(0);
+                .withMustBeCaughtAboveY(50);
     }
 
     public static FishProperties overworldDarkForestFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DARK_FOREST)
-                .withMustBeCaughtAboveY(0);
+                .withMustBeCaughtAboveY(50);
     }
 
 

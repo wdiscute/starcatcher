@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "above_y": 100,
+  "fish": "aquaculture:capitaine",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_warm"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "above_y": 50,
+  "below_y": 100,
+  "fish": "aquaculture:pollock",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_cold_ocean"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

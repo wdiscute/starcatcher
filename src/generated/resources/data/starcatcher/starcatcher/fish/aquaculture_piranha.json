@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "above_y": 0,
+  "daytime": "noon",
+  "difficulty": {
+    "decay": 3,
+    "has_first_thin_marker": true,
+    "has_second_thin_marker": true,
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 30,
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "aquaculture:piranha",
+  "rarity": "legendary",
+  "world_restrictions": {
+    "biomes_tags": [
+      "minecraft:is_jungle"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}
