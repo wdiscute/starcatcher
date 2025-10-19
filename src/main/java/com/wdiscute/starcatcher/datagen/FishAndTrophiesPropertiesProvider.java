@@ -12,12 +12,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
@@ -510,12 +506,12 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             //example of a custom fish using starcatcher's pink_koi as a base for the item
 
 //            FishProperties.DEFAULT
-//                    .withFish(rl("starcatcher", "pink_koi"))
+//                    .withFish(baseItem("starcatcher", "pink_koi"))
 //                    .withCustomName("Very Cool Mysticcraft Fish")
 //                    .withWorldRestrictions(
 //                            FishProperties.WorldRestrictions.DEFAULT
-//                                    .withBiomes(List.of(rl("mysticcraft", "cool_biome")))
-//                                    .withFluids(List.of(rl("mysticcraft", "magical_water"))))
+//                                    .withBiomes(List.of(baseItem("mysticcraft", "cool_biome")))
+//                                    .withFluids(List.of(baseItem("mysticcraft", "magical_water"))))
 //                    .withDifficulty(FishProperties.Difficulty.HARD)
 //                    .withRarity(FishProperties.Rarity.EPIC)
 //                    .withWeather(FishProperties.Weather.RAIN)
@@ -1423,7 +1419,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     {
         return ResourceKey.create(
                 Starcatcher.TROPHY_REGISTRY,
-                Starcatcher.rl(tp.rl().getNamespace() + "_" + tp.rl().getPath()));
+                Starcatcher.rl(tp.baseItem().getNamespace() + "_" + tp.baseItem().getPath()));
     }
 
 }

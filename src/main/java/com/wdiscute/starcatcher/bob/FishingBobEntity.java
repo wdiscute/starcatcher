@@ -22,7 +22,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -136,7 +135,7 @@ public class FishingBobEntity extends Projectile
             !trophiesCaught.contains(tp))
             {
                 Entity itemFished = new ItemEntity(level(), position().x, position().y + 1.2f, position().z,
-                        new ItemStack(BuiltInRegistries.ITEM.get(tp.rl())));
+                        new ItemStack(BuiltInRegistries.ITEM.get(tp.baseItem())));
 
                 Vec3 vec3 = new Vec3(Math.clamp((player.position().x - position().x) / 25, -1, 1),
                         0.7 + Math.clamp((player.position().y - position().y) / 20, -1, 1),
