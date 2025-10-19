@@ -22,15 +22,15 @@ public record TrophyProperties
                 TrophyType type,
                 Holder<Item> baseItem,
                 String customName,
-                int UniqueFishCount,
-                int TotalCaughtCount,
+                int uniqueFishCount,
+                int totalCaughtCount,
                 int chanceToCatch
         )
 {
 
     public static final TrophyProperties DEFAULT = new TrophyProperties(
             TrophyType.TROPHY,
-            ModItems.TROPHY_OF_MASTERFUL_FISHING,
+            ModItems.TROPHY_GOLD,
             "Missingno Trophy",
             Integer.MAX_VALUE,
             Integer.MAX_VALUE,
@@ -42,8 +42,8 @@ public record TrophyProperties
                     TrophyType.CODEC.fieldOf("trophy_type").forGetter(TrophyProperties::type),
                     BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("base_item").forGetter(TrophyProperties::baseItem),
                     Codec.STRING.optionalFieldOf("custom_name", DEFAULT.customName).forGetter(TrophyProperties::customName),
-                    Codec.INT.optionalFieldOf("unique_fishes", DEFAULT.UniqueFishCount).forGetter(TrophyProperties::UniqueFishCount),
-                    Codec.INT.optionalFieldOf("total_fishes", DEFAULT.TotalCaughtCount).forGetter(TrophyProperties::TotalCaughtCount),
+                    Codec.INT.optionalFieldOf("unique_fishes", DEFAULT.uniqueFishCount).forGetter(TrophyProperties::uniqueFishCount),
+                    Codec.INT.optionalFieldOf("total_fishes", DEFAULT.totalCaughtCount).forGetter(TrophyProperties::totalCaughtCount),
                     Codec.INT.optionalFieldOf("chance_to_catch", DEFAULT.chanceToCatch).forGetter(TrophyProperties::chanceToCatch)
             ).apply(instance, TrophyProperties::new)
     );
@@ -52,8 +52,8 @@ public record TrophyProperties
             TrophyType.STREAM_CODEC, TrophyProperties::type,
             ByteBufCodecs.holderRegistry(Registries.ITEM), TrophyProperties::baseItem,
             ByteBufCodecs.STRING_UTF8, TrophyProperties::customName,
-            ByteBufCodecs.VAR_INT, TrophyProperties::UniqueFishCount,
-            ByteBufCodecs.VAR_INT, TrophyProperties::TotalCaughtCount,
+            ByteBufCodecs.VAR_INT, TrophyProperties::uniqueFishCount,
+            ByteBufCodecs.VAR_INT, TrophyProperties::totalCaughtCount,
             ByteBufCodecs.VAR_INT, TrophyProperties::chanceToCatch,
             TrophyProperties::new
     );

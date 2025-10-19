@@ -1114,41 +1114,51 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             new TrophyProperties(
-                    TrophyProperties.TrophyType.ITEM,
-                    Starcatcher.rl("trophy_of_pitiful_fishing"),
-                    10,
-                    0
-            ),
-
-
-            new TrophyProperties(
-                    TrophyProperties.TrophyType.ITEM,
-                    Starcatcher.rl("trophy_of_fishing"),
-                    25,
-                    0
-            ),
-
-
-            new TrophyProperties(
-                    TrophyProperties.TrophyType.ITEM,
-                    Starcatcher.rl("trophy_of_masterful_fishing"),
+                    TrophyProperties.TrophyType.TROPHY,
+                    ModItems.TROPHY_GOLD,
+                    "Trophy of Masterful Fishing",
                     50,
-                    0
+                    0,
+                    TrophyProperties.DEFAULT.chanceToCatch()
             ),
 
             new TrophyProperties(
-                    TrophyProperties.TrophyType.ITEM,
-                    Starcatcher.rl("trophy_of_infinite_fishes"),
+                    TrophyProperties.TrophyType.TROPHY,
+                    ModItems.TROPHY_SILVER,
+                    "Trophy of Skilled Fishing",
+                    25,
                     0,
-                    150
+                    TrophyProperties.DEFAULT.chanceToCatch()
             ),
 
             new TrophyProperties(
-                    TrophyProperties.TrophyType.ITEM,
-                    Starcatcher.rl("trophy_of_flowing_fishes"),
+                    TrophyProperties.TrophyType.TROPHY,
+                    ModItems.TROPHY_BRONZE,
+                    "Trophy of Pitiful Fishing",
+                    10,
                     0,
-                    75
+                    TrophyProperties.DEFAULT.chanceToCatch()
+            ),
+
+
+            new TrophyProperties(
+                    TrophyProperties.TrophyType.TROPHY,
+                    ModItems.TROPHY_GOLD,
+                    "Trophy of Overflowing Fishes",
+                    0,
+                    75,
+                    TrophyProperties.DEFAULT.chanceToCatch()
+            ),
+
+            new TrophyProperties(
+                    TrophyProperties.TrophyType.TROPHY,
+                    ModItems.TROPHY_SILVER,
+                    "Trophy of Fishes",
+                    0,
+                    150,
+                    TrophyProperties.DEFAULT.chanceToCatch()
             )
+
     );
 
     //endregion trophies
@@ -1419,7 +1429,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     {
         return ResourceKey.create(
                 Starcatcher.TROPHY_REGISTRY,
-                Starcatcher.rl(tp.baseItem().getNamespace() + "_" + tp.baseItem().getPath()));
+                Starcatcher.rl(tp.type().getSerializedName() + "_" + tp.uniqueFishCount() + "_" + tp.totalCaughtCount()));
     }
 
 }

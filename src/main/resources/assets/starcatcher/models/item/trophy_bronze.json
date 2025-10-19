@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "starcatcher:item/trophy_of_pitiful_fishing"
+    "layer0": "starcatcher:item/trophy_bronze"
   }
 }

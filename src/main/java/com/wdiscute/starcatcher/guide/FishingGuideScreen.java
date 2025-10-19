@@ -7,10 +7,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandcodecs.Payloads;
+import com.wdiscute.starcatcher.networkandcodecs.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -110,6 +107,7 @@ public class FishingGuideScreen extends Screen
 
     List<FishProperties> fpsSeen = new ArrayList<>();
     List<FishProperties> entries = new ArrayList<>(999);
+    List<TrophyProperties> tps = new ArrayList<>();
     List<FishProperties> fishInArea = new ArrayList<>();
     List<FishCaughtCounter> fishCaughtCounterList = new ArrayList<>();
 
@@ -130,6 +128,8 @@ public class FishingGuideScreen extends Screen
         player = Minecraft.getInstance().player;
 
         for (FishProperties fp : FishProperties.getFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
+        for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY)) if(tp.type() == TrophyProperties.TrophyType.TROPHY) tps.add(tp);
+
         fishInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
     }
@@ -419,6 +419,23 @@ public class FishingGuideScreen extends Screen
             guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
     }
 
+    private void renderTps(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    {
+
+        List<TrophyProperties> tpsLeft = tps;
+        for (int i = 0; i < tps.size(); i++)
+        {
+            ItemStack is = new ItemStack(tps.get(i).baseItem());
+            int x = tpsLeft.size() / 5 - i / 5;
+            int y = tpsLeft.size() / 5 * 35;
+
+            renderItem(is, uiX + x, uiY + y, 1);
+
+            tpsLeft.remove(tps.get(i));
+        }
+
+    }
+
     private void renderTheBasics(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
 
@@ -460,13 +477,13 @@ public class FishingGuideScreen extends Screen
 
         if (page == 3)
         {
+            //gadgets
             renderHelpTitle(guiGraphics, fishSpotter, Component.translatable("gui.guide.gadgets"), 70, 15);
-
             renderItemWithOutlineAndHover(guiGraphics, fishSpotter, 150, 170, mouseX, mouseY);
 
+            //trophies
             renderHelpTitle(guiGraphics, trophies, Component.translatable("gui.guide.trophies"), 280, 15);
-            renderItemWithOutlineAndHover(guiGraphics, steadyBobber,    308, 200, mouseX, mouseY);
-
+            renderTps(guiGraphics, mouseX, mouseY);
 
 
         }
@@ -577,7 +594,7 @@ public class FishingGuideScreen extends Screen
         columnNumber++;
         auxX = x - 2 + (columnNumber * 25);
         guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.TROPHY_OF_MASTERFUL_FISHING.get()), x + (columnNumber * 25), y, 1);
+        renderItem(new ItemStack(ModItems.TROPHY_GOLD.get()), x + (columnNumber * 25), y, 1);
         if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
         {
             guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.trophies"), mouseX, mouseY);
@@ -1319,7 +1336,7 @@ public class FishingGuideScreen extends Screen
         frogBobber = new ItemStack(ModItems.FROG_BOBBER.get());
 
         fishSpotter = new ItemStack(ModItems.FISH_SPOTTER.get());
-        trophies = new ItemStack(ModItems.TROPHY_OF_MASTERFUL_FISHING.get());
+        trophies = new ItemStack(ModItems.TROPHY_GOLD.get());
         secrets = new ItemStack(ModItems.WATERLOGGED_BOTTLE.get());
 
     }

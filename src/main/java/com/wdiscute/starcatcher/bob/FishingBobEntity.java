@@ -131,11 +131,11 @@ public class FishingBobEntity extends Projectile
 
             List<TrophyProperties> trophiesCaught = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
 
-            if(numberOfTotalFishesCaught >= tp.TotalCaughtCount()  && numberOfUniqueFishesCaught >= tp.UniqueFishCount() &&
+            if(numberOfTotalFishesCaught >= tp.totalCaughtCount()  && numberOfUniqueFishesCaught >= tp.uniqueFishCount() &&
             !trophiesCaught.contains(tp))
             {
                 Entity itemFished = new ItemEntity(level(), position().x, position().y + 1.2f, position().z,
-                        new ItemStack(BuiltInRegistries.ITEM.get(tp.baseItem())));
+                        new ItemStack(BuiltInRegistries.ITEM.get(tp.baseItem().getKey())));
 
                 Vec3 vec3 = new Vec3(Math.clamp((player.position().x - position().x) / 25, -1, 1),
                         0.7 + Math.clamp((player.position().y - position().y) / 20, -1, 1),
