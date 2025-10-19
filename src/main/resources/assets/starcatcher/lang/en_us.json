@@ -135,30 +135,19 @@
   "tooltip.starcatcher.scalding_treasure.0" : "A treasure fished directly from the scalding",
   "tooltip.starcatcher.scalding_treasure.1" : "lands of The Nether. What's inside?",
 
-  "item.starcatcher.trophy_of_masterful_fishing" : "Trophy Of Masterful Fishing",
-  "tooltip.starcatcher.trophy_of_masterful_fishing.0" : "A trophy proving of one's skill.",
-  "tooltip.starcatcher.trophy_of_masterful_fishing.1" : "It is said to appear in an angler's fishing line",
-  "tooltip.starcatcher.trophy_of_masterful_fishing.2" : "once <rgb>[50]</rgb> unique fishes have been caught!",
+  "item.starcatcher.trophy_gold" : "Gold Trophy",
+  "item.starcatcher.trophy_silver" : "Silver Trophy",
+  "item.starcatcher.trophy_bronze" : "Bronze Trophy",
 
-  "item.starcatcher.trophy_of_fishing" : "Trophy Of Fishing",
-  "tooltip.starcatcher.trophy_of_fishing.0" : "A trophy proving of one's skill.",
-  "tooltip.starcatcher.trophy_of_fishing.1" : "It is said to appear in an angler's fishing line",
-  "tooltip.starcatcher.trophy_of_fishing.2" : "once <rgb>[25]</rgb> unique fishes have been caught!",
+  "tooltip.starcatcher.trophy.0" : "A trophy proving of one's skill.",
+  "tooltip.starcatcher.trophy.1" : "It is said to appear in an angler's fishing line",
 
-  "item.starcatcher.trophy_of_pitiful_fishing" : "Trophy Of Pitiful Fishing",
-  "tooltip.starcatcher.trophy_of_pitiful_fishing.0" : "A trophy proving of one's skill.",
-  "tooltip.starcatcher.trophy_of_pitiful_fishing.1" : "It is said to appear in an angler's fishing line",
-  "tooltip.starcatcher.trophy_of_pitiful_fishing.2" : "once <rgb>[10]</rgb> unique fishes have been caught!",
+  "tooltip.starcatcher.trophy.unique" : "once <rgb>[&]</rgb> unique fishes have been caught!",
+  "tooltip.starcatcher.trophy.total" : "once <rgb>[&]</rgb> total fishes have been caught!",
 
-  "item.starcatcher.trophy_of_infinite_fishes" : "Trophy Of Infinite Fishing",
-  "tooltip.starcatcher.trophy_of_infinite_fishes.0" : "A trophy proving of one's skill.",
-  "tooltip.starcatcher.trophy_of_infinite_fishes.1" : "It is said to appear in an angler's fishing line",
-  "tooltip.starcatcher.trophy_of_infinite_fishes.2" : "once a total of <rgb>[150]</rgb> fishes have been caught!",
+  "tooltip.starcatcher.trophy.both.0" : "once both <rgb>[&]</rgb> unique fishes,",
+  "tooltip.starcatcher.trophy.both.1" : "and <rgb>[&]</rgb> total fishes have been caught!",
 
-  "item.starcatcher.trophy_of_flowing_fishes" : "Trophy Of Flowing Fishing",
-  "tooltip.starcatcher.trophy_of_flowing_fishes.0" : "A trophy proving of one's skill.",
-  "tooltip.starcatcher.trophy_of_flowing_fishes.1" : "It is said to appear in an angler's fishing line",
-  "tooltip.starcatcher.trophy_of_flowing_fishes.2" : "once a total of <rgb>[75]</rgb> fishes have been caught!",
 
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
@@ -302,8 +291,15 @@
   "gui.guide.page3.right.10" : "These trophies are a display of",
   "gui.guide.page3.right.11" : "one's skill in angling and are",
   "gui.guide.page3.right.12" : "sure to put others to shame for",
-  "gui.guide.page3.right.13" : "their lack of trophy-ing",
+  "gui.guide.page3.right.13" : "their lack of trophy-ing.",
 
+
+  "gui.guide.page4.left.0" : "",
+  "gui.guide.page4.left.1" : "",
+  "gui.guide.page4.left.2" : "",
+  "gui.guide.page4.left.3" : "",
+  "gui.guide.page4.left.4" : "",
+  "gui.guide.page4.left.5" : "<gradient-00>[wip]</gradient-01>",
 
 
   "gui.guide.available" : "Fishes in the area:",

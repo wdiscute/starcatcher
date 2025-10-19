@@ -1157,7 +1157,19 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     0,
                     150,
                     TrophyProperties.DEFAULT.chanceToCatch()
+            ),
+
+            new TrophyProperties(
+                    TrophyProperties.TrophyType.TROPHY,
+                    ModItems.TROPHY_GOLD,
+                    "Trophy of the Older Angler",
+                    75,
+                    200,
+                    TrophyProperties.DEFAULT.chanceToCatch()
             )
+
+
+
 
     );
 

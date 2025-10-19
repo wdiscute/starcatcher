@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.bob.FishingBobModel;
@@ -12,15 +13,21 @@ import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.rod.FishingRodScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.*;
@@ -33,6 +40,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
+
+import java.util.List;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Starcatcher.MOD_ID)
@@ -132,6 +141,57 @@ public class Starcatcher
     @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
     public static class ModClientEvents
     {
+
+        @SubscribeEvent
+        public static void trophyTooltip(ItemTooltipEvent event)
+        {
+            List<Component> tooltipComponents = event.getToolTip();
+            ItemStack stack = event.getItemStack();
+
+            if(stack.has(ModDataComponents.TROPHY))
+            {
+                TrophyProperties tp = stack.get(ModDataComponents.TROPHY);
+
+                if (event.getFlags().hasShiftDown())
+                {
+                    tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.shift_down"));
+                    tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.empty"));
+                    tooltipComponents.add(Component.translatable("tooltip.starcatcher.trophy.0"));
+                    tooltipComponents.add(Component.translatable("tooltip.starcatcher.trophy.1"));
+
+                    if(tp.totalCaughtCount() != 0 && tp.uniqueFishCount() != 0)
+                    {
+                        String u = I18n.get("tooltip.starcatcher.trophy.both.0")
+                                .replace("&", tp.uniqueFishCount() + "");
+                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(u));
+
+                        String t = I18n.get("tooltip.starcatcher.trophy.both.1")
+                                .replace("&", tp.totalCaughtCount() + "");
+                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(t));
+                    }
+
+                    if(tp.totalCaughtCount() == 0 && tp.uniqueFishCount() != 0)
+                    {
+                        String s = I18n.get("tooltip.starcatcher.trophy.unique")
+                                .replace("&", tp.uniqueFishCount() + "");
+                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(s));
+                    }
+
+                    if(tp.totalCaughtCount() != 0 && tp.uniqueFishCount() == 0)
+                    {
+                        String s = I18n.get("tooltip.starcatcher.trophy.total")
+                                .replace("&", tp.totalCaughtCount() + "");
+                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(s));
+                    }
+
+                }
+                else
+                {
+                    tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.shift_up"));
+                }
+
+            }
+        }
 
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)

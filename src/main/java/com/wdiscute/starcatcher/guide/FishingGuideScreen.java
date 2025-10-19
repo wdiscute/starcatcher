@@ -16,6 +16,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -117,6 +119,7 @@ public class FishingGuideScreen extends Screen
     {
         super.init();
         entries = new ArrayList<>(999);
+        tps = new ArrayList<>(999);
 
         imageWidth = 512;
         imageHeight = 256;
@@ -128,7 +131,8 @@ public class FishingGuideScreen extends Screen
         player = Minecraft.getInstance().player;
 
         for (FishProperties fp : FishProperties.getFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
-        for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY)) if(tp.type() == TrophyProperties.TrophyType.TROPHY) tps.add(tp);
+        for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
+            if (tp.type() == TrophyProperties.TrophyType.TROPHY) tps.add(tp);
 
         fishInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
@@ -421,17 +425,34 @@ public class FishingGuideScreen extends Screen
 
     private void renderTps(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
-
-        List<TrophyProperties> tpsLeft = tps;
         for (int i = 0; i < tps.size(); i++)
         {
-            ItemStack is = new ItemStack(tps.get(i).baseItem());
-            int x = tpsLeft.size() / 5 - i / 5;
-            int y = tpsLeft.size() / 5 * 35;
 
-            renderItem(is, uiX + x, uiY + y, 1);
+            int rowSize = Math.min(7, (tps.size() - i / 7 * 7));
+            int x = 90 - rowSize * 23 / 2;
 
-            tpsLeft.remove(tps.get(i));
+            int xrender = x + (i % 7) * 23;
+            int y = i / 7 * 25;
+
+            //offset to page
+            xrender += uiX + 280;
+            y += uiY + 160;
+
+            TrophyProperties tp = tps.get(i);
+
+            ItemStack is = new ItemStack(tp.baseItem());
+            is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
+            is.set(ModDataComponents.TROPHY, tp);
+
+            guiGraphics.renderOutline(xrender - 10, y - 2, 20, 20, 0xff000000);
+            renderItem(is, xrender - 8, y, 1);
+
+            if (mouseX > xrender - 10 && mouseX < xrender + 10 && mouseY > y - 2 && mouseY < y + 18)
+            {
+                guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
+            }
+
+
         }
 
     }
@@ -456,23 +477,22 @@ public class FishingGuideScreen extends Screen
         if (page == 2)
         {
             renderHelpTitle(guiGraphics, ironHook, Component.translatable("gui.guide.hooks"), 70, 15);
-            renderItemWithOutlineAndHover(guiGraphics, ironHook,    85,  170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, goldHook,    125, 170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, shinyHook,   165, 170, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, ironHook, 85, 170, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, goldHook, 125, 170, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, shinyHook, 165, 170, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, crystalHook, 205, 170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, mossyHook,   105, 200, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, splitHook,   145, 200, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, stoneHook,   185, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, mossyHook, 105, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, splitHook, 145, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, stoneHook, 185, 200, mouseX, mouseY);
 
             renderHelpTitle(guiGraphics, frugalBobber, Component.translatable("gui.guide.bobbers"), 280, 15);
-            renderItemWithOutlineAndHover(guiGraphics, creeperBobber,   288, 170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, glitterBobber,   328, 170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, colorfulBobber,  368, 170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, frugalBobber,    408, 170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, steadyBobber,    308, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, creeperBobber, 288, 170, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, glitterBobber, 328, 170, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, colorfulBobber, 368, 170, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, frugalBobber, 408, 170, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, steadyBobber, 308, 200, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, impatientBobber, 348, 200, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, frogBobber,      388, 200, mouseX, mouseY);
-
+            renderItemWithOutlineAndHover(guiGraphics, frogBobber, 388, 200, mouseX, mouseY);
         }
 
         if (page == 3)
@@ -484,8 +504,6 @@ public class FishingGuideScreen extends Screen
             //trophies
             renderHelpTitle(guiGraphics, trophies, Component.translatable("gui.guide.trophies"), 280, 15);
             renderTps(guiGraphics, mouseX, mouseY);
-
-
         }
 
         if (page == 4)

@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-19T15:58:55.6775015	Registries
+// 1.21.1	2025-10-20T00:41:34.9690018	Registries
 94b214250fce025e4735b37e729d68ee498ddf7d data/starcatcher/starcatcher/fish/aquaculture_arapaima.json
 f85473ca619126056a0d03f36179cad4acff8969 data/starcatcher/starcatcher/fish/aquaculture_arrau_turtle.json
 ec9beec01d07d9e92ddde1858201d472b3e4c326 data/starcatcher/starcatcher/fish/aquaculture_atlantic_cod.json
@@ -202,3 +202,4 @@ e3fe7e6f4b0ebcc55db8c4d90e35f5f26eead351 data/starcatcher/starcatcher/trophy/tro
 54add5910157b18595a2cacbd2e6fab27216c6d0 data/starcatcher/starcatcher/trophy/trophy_10_0.json
 9ad5bac7dfcc89b591a86bafbffa4d9cb48040e7 data/starcatcher/starcatcher/trophy/trophy_25_0.json
 ee7c4926f71e9c597ad5d72c29b907cab440b5ca data/starcatcher/starcatcher/trophy/trophy_50_0.json
+473a66c213bf303dc055303abd9afe8ed5ece4ac data/starcatcher/starcatcher/trophy/trophy_75_200.json

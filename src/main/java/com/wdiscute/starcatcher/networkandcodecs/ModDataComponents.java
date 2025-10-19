@@ -32,6 +32,10 @@ public class ModDataComponents
             "color",
             builder -> builder.persistent(ColorfulBobber.BobberColor.CODEC));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<TrophyProperties>> TROPHY = register(
+            "trophy",
+            builder -> builder.persistent(TrophyProperties.CODEC));
+
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator)
