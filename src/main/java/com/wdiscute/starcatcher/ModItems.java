@@ -44,6 +44,8 @@ public interface ModItems
     DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber"); //done
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
 
+    DeferredItem<Item> BAIT = singleStackItem("bait");
+
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new);
 
     //unique fishes
