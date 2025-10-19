@@ -49,13 +49,9 @@ public interface ModItems
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new);
 
     //unique fishes
-    DeferredItem<Item> TROPHY_OF_MASTERFUL_FISHING = ITEMS.register("trophy_of_masterful_fishing", TrophyGold::new);
-    DeferredItem<Item> TROPHY_OF_FISHING =           ITEMS.register("trophy_of_fishing",           TrophySilver::new);
-    DeferredItem<Item> TROPHY_OF_PITIFUL_FISHING =   ITEMS.register("trophy_of_pitiful_fishing",   TrophyBronze::new);
-
-    //total fishes
-    DeferredItem<Item> TROPHY_OF_INFINITE_FISHES = singleStackItem("trophy_of_infinite_fishes");
-    DeferredItem<Item> TROPHY_OF_FLOWING_FISHES = singleStackItem("trophy_of_flowing_fishes");
+    DeferredItem<Item> TROPHY_GOLD = ITEMS.register("trophy_gold", TrophyGold::new);
+    DeferredItem<Item> TROPHY_SILVER = ITEMS.register("trophy_silver", TrophySilver::new);
+    DeferredItem<Item> TROPHY_BRONZE = ITEMS.register("trophy_bronze", TrophyBronze::new);
 
     DeferredItem<Item> MISSINGNO = basicItem("missingno");
 
@@ -204,7 +200,6 @@ public interface ModItems
 
     //the end
     DeferredItem<Item> CHARFISH = fish("charfish"); //todo chosen by charry
-
 
 
     private static DeferredItem<Item> fish(String name)
