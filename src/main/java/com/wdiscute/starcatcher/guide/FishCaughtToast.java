@@ -30,21 +30,12 @@ public class FishCaughtToast implements Toast
 
         this.is = new ItemStack(fp.fish());
         this.title = Component.translatable("gui.starcatcher.toast.fish_caught");
-
-        String compName;
-        if (fp.customName().isEmpty())
-            compName = I18n.get("item." + fp.fish().getRegisteredName().replace(":", "."));
-        else
-            compName = I18n.get("item.starcatcher." + fp.customName());
-
         this.description =  is.getHoverName().getString();
     }
 
     public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)
     {
-
         guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
-        //guiGraphics.blit(icon, 6, 6, 0, 0, 20, 20, 20, 20);
 
         guiGraphics.renderItem(is, 8, 8);
 
@@ -62,7 +53,6 @@ public class FishCaughtToast implements Toast
                 .append(Component.literal(gibberish.substring(0, description.length() - lettersRevealed + 2)));
 
         guiGraphics.drawString(toastComponent.getMinecraft().font, comp, 30, 18, 0, false);
-
 
         if (timeSinceLastVisible < 10000)
         {
