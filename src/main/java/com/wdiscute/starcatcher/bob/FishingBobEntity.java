@@ -278,6 +278,17 @@ public class FishingBobEntity extends Projectile
     }
 
     @Override
+    public void lavaHurt()
+    {
+        super.lavaHurt();
+        if(!hook.is(StarcatcherTags.HOOKS_SURVIVE_FIRE) && !level().isClientSide)
+        {
+            player.setData(ModDataAttachments.FISHING, "");
+            kill();
+        }
+    }
+
+    @Override
     public void tick()
     {
         super.tick();
