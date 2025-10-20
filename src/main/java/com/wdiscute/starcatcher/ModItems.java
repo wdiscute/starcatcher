@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.guide.TrophyBronze;
 import com.wdiscute.starcatcher.guide.TrophyGold;
 import com.wdiscute.starcatcher.guide.TrophySilver;
 import com.wdiscute.starcatcher.items.*;
+import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -189,6 +190,20 @@ public interface ModItems
     DeferredItem<Item> WARD = fish("ward"); //description
     DeferredItem<Item> GLOWING_DARK = fish("glowing_dark"); //description
 
+    //overworld surface lava
+    DeferredItem<Item> SUNEATER = fish("suneater"); //description make sure to mention it eats sunfishes
+    DeferredItem<Item> PYROTROUT = fish("pyrotrout"); //description
+    DeferredItem<Item> OBSIDIAN_EEL = fish("obsidian_eel"); //description
+
+    //overworld underground lava
+    DeferredItem<Item> MOLTEN_SHRIMP = fish("molten_shrimp"); //description
+    DeferredItem<Item> OBSIDIAN_CRAB = fish("obsidian_crab"); //description
+
+    //overworld deepslate lava
+    DeferredItem<Item> SCORCHED_BLOODSUCKER = fish("scorched_bloodsucker"); //description
+    DeferredItem<Item> MOLTEN_DEEPSLATE_CRAB = fish("molten_deepslate_crab"); //description
+
+
     //nether
     DeferredItem<Item> EMBERGILL = fireResistantFish("embergill"); //description
     DeferredItem<Item> SCALDING_PIKE = fireResistantFish("scalding_pike"); //description
@@ -196,10 +211,13 @@ public interface ModItems
     DeferredItem<Item> LAVA_CRAB = fireResistantFish("lava_crab"); //description
     DeferredItem<Item> MAGMA_FISH = fireResistantFish("magma_fish"); //description
     DeferredItem<Item> GLOWSTONE_SEEKER = fireResistantFish("glowstone_seeker"); //description
+    DeferredItem<Item> GLOWSTONE_PUFFERFISH = fireResistantFish("glowstone_pufferfish"); //description
     DeferredItem<Item> LAVA_CRAB_CLAW = fireResistantTrash("lava_crab_claw"); //description
 
     //the end
     DeferredItem<Item> CHARFISH = fish("charfish"); //todo chosen by charry
+    DeferredItem<Item> CHORUS_CRAB = fish("chorus_crab"); //description
+    DeferredItem<Item> END_GLOW = fish("end_glow"); //description
 
 
     private static DeferredItem<Item> fish(String name)

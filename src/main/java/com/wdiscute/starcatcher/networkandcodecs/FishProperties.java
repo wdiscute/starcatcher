@@ -438,6 +438,11 @@ public record FishProperties(
                         .withDims(Level.OVERWORLD.location())
                         .withBiomesTags(StarcatcherTags.IS_DARK_FOREST);
 
+        public static final WorldRestrictions OVERWORLD_LAVA =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
+
         public static final WorldRestrictions NETHER_LAVA =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.NETHER.location())

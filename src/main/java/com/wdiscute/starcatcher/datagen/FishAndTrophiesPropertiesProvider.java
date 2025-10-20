@@ -17,6 +17,7 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +40,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             consumer.accept(createKey(restricted.fp()), new ModLoadedCondition(restricted.modid()));
         }
     }
+
 
 
     //region fps
@@ -454,6 +456,39 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.HARD),
 
 
+                    //overworld surface lava
+                    overworldSurfaceLava(ModItems.SUNEATER)
+                            .withRarity(FishProperties.Rarity.RARE)
+                            .withDifficulty(FishProperties.Difficulty.HARD),
+
+                    overworldSurfaceLava(ModItems.PYROTROUT)
+                            .withRarity(FishProperties.Rarity.UNCOMMON)
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM),
+
+                    overworldSurfaceLava(ModItems.OBSIDIAN_EEL)
+                            .withWeather(FishProperties.Weather.RAIN)
+                            .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
+                            .withRarity(FishProperties.Rarity.LEGENDARY),
+
+                    //overworld underground lava
+                    overworldUndergroundLava(ModItems.MOLTEN_SHRIMP)
+                            .withRarity(FishProperties.Rarity.RARE)
+                            .withDifficulty(FishProperties.Difficulty.HARD),
+
+                    overworldUndergroundLava(ModItems.OBSIDIAN_CRAB)
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                            .withRarity(FishProperties.Rarity.UNCOMMON),
+
+                    //overworld deepslate lava
+                    overworldDeepslateLava(ModItems.SCORCHED_BLOODSUCKER)
+                            .withRarity(FishProperties.Rarity.EPIC)
+                            .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN),
+
+                    overworldDeepslateLava(ModItems.MOLTEN_DEEPSLATE_CRAB)
+                            .withRarity(FishProperties.Rarity.RARE)
+                            .withDifficulty(FishProperties.Difficulty.HARD),
+
+
                     //nether
                     netherLavaFish(ModItems.EMBERGILL)
                             .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN
@@ -483,16 +518,27 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.MEDIUM
                                     .withTreasure(FishProperties.Treasure.NETHER)),
 
+                    netherLavaFish(ModItems.GLOWSTONE_PUFFERFISH)
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM
+                                    .withTreasure(FishProperties.Treasure.NETHER)),
+
                     netherLavaFish(ModItems.LAVA_CRAB_CLAW)
                             .withBaseChance(1)
                             .withSkipMinigame(true)
                             .withHasGuideEntry(false),
 
-
                     //the end
                     endFish(ModItems.CHARFISH)
                             .withRarity(FishProperties.Rarity.RARE)
-                            .withDifficulty(FishProperties.Difficulty.HARD)
+                            .withDifficulty(FishProperties.Difficulty.HARD),
+
+                    endFish(ModItems.CHORUS_CRAB)
+                            .withRarity(FishProperties.Rarity.EPIC)
+                            .withDifficulty(FishProperties.Difficulty.EVERYTHING),
+
+                    endFish(ModItems.END_GLOW)
+                            .withRarity(FishProperties.Rarity.UNCOMMON)
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM)
 
             ));
     //endregion fps
@@ -1231,6 +1277,12 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                 .withMustBeCaughtBelowY(50);
     }
 
+    public static FishProperties overworldSurfaceLava(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAVA)
+                .withMustBeCaughtAboveY(50);
+    }
+
     public static FishProperties overworldCavesFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish)
@@ -1252,6 +1304,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                 .withMustBeCaughtBelowY(50);
     }
 
+    public static FishProperties overworldUndergroundLava(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish)
+                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAVA)
+                .withMustBeCaughtBelowY(50);
+    }
+
     public static FishProperties overworldMountainFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish)
@@ -1263,6 +1322,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD)
+                .withMustBeCaughtBelowY(0);
+    }
+
+    public static FishProperties overworldDeepslateLava(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish)
+                .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAVA)
                 .withMustBeCaughtBelowY(0);
     }
 

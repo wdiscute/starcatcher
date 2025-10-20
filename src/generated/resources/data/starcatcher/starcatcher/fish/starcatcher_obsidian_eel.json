@@ -1,0 +1,28 @@
+{
+  "above_y": 50,
+  "difficulty": {
+    "decay": 3,
+    "has_first_thin_marker": true,
+    "has_second_thin_marker": true,
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 30,
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "starcatcher:obsidian_eel",
+  "rarity": "legendary",
+  "weather": "rain",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:overworld"
+    ],
+    "fluids": [
+      "minecraft:lava"
+    ]
+  }
+}

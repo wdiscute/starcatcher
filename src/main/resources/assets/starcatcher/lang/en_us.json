@@ -459,13 +459,26 @@
   "item.starcatcher.ward" : "Ward",
   "item.starcatcher.glowing_dark" : "Glowing Dark",
 
+  "item.starcatcher.suneater" : "Suneater",
+  "item.starcatcher.pyrotrout" : "Pyrotrout",
+  "item.starcatcher.obsidian_eel" : "Obsidian Eel",
+
+  "item.starcatcher.molten_shrimp" : "Molten Shrimp",
+  "item.starcatcher.obsidian_crab" : "Obsidian Crab",
+
+  "item.starcatcher.scorched_bloodsucker" : "Scorched Bloodsucker",
+  "item.starcatcher.molten_deepslate_crab" : "Molten Deepslate Crab",
+
   "item.starcatcher.embergill" : "Embergill",
   "item.starcatcher.scalding_pike" : "Scalding Pike",
   "item.starcatcher.cinder_squid" : "Cinder Squid",
   "item.starcatcher.lava_crab" : "Lava Crab",
   "item.starcatcher.magma_fish" : "Magma Fish",
   "item.starcatcher.glowstone_seeker" : "Glowstone Seeker",
+  "item.starcatcher.glowstone_pufferfish" : "Glowstone Pufferfish",
   "item.starcatcher.lava_crab_claw" : "Lava Crab Claw",
 
-  "item.starcatcher.charfish" : "Charfish"
+  "item.starcatcher.charfish" : "Charfish",
+  "item.starcatcher.chorus_crab" : "Chorus Crab",
+  "item.starcatcher.end_glow" : "End Glow"
 }

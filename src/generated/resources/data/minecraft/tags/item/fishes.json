@@ -74,12 +74,22 @@
     "starcatcher:skulkfish",
     "starcatcher:ward",
     "starcatcher:glowing_dark",
+    "starcatcher:suneater",
+    "starcatcher:pyrotrout",
+    "starcatcher:obsidian_eel",
+    "starcatcher:molten_shrimp",
+    "starcatcher:obsidian_crab",
+    "starcatcher:scorched_bloodsucker",
+    "starcatcher:molten_deepslate_crab",
     "starcatcher:embergill",
     "starcatcher:scalding_pike",
     "starcatcher:cinder_squid",
     "starcatcher:lava_crab",
     "starcatcher:magma_fish",
     "starcatcher:glowstone_seeker",
-    "starcatcher:charfish"
+    "starcatcher:glowstone_pufferfish",
+    "starcatcher:charfish",
+    "starcatcher:chorus_crab",
+    "starcatcher:end_glow"
   ]
 }
