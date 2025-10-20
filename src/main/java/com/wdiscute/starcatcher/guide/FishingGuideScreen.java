@@ -273,7 +273,7 @@ public class FishingGuideScreen extends Screen
             return true;
         }
 
-        if (page == 0 && button == 0)
+        if (menu == 0 && button == 0)
         {
             clickedX = (int) mouseX;
             clickedY = (int) mouseY;
@@ -458,10 +458,7 @@ public class FishingGuideScreen extends Screen
             {
                 guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
             }
-
-
         }
-
     }
 
     private void renderTheBasics(GuiGraphics guiGraphics, int mouseX, int mouseY)
@@ -532,133 +529,138 @@ public class FishingGuideScreen extends Screen
 
         hasNextEntryPage = false;
 
+        if(page == 0)
+        {
+            //all about fishing
+            //todo make this code not shitty
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.fishing"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
+            rowNumber++;
 
-        //all about fishing
-        //todo make this code not shitty
-        guiGraphics.drawString(this.font, Component.translatable("gui.guide.fishing"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
-        rowNumber++;
+            int auxX;
 
-        int auxX;
+            //fishing rod
+            columnNumber++;
+            auxX = x - 2 + (columnNumber * 25);
+            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+            renderItem(new ItemStack(ModItems.ROD.get()), x + (columnNumber * 25), y, 1);
+            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+            {
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.basics"), mouseX, mouseY);
+            }
+            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+            {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = 1;
+                page = 0;
+            }
 
-        //fishing rod
-        columnNumber++;
-        auxX = x - 2 + (columnNumber * 25);
-        guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.ROD.get()), x + (columnNumber * 25), y, 1);
-        if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-        {
-            guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.basics"), mouseX, mouseY);
-        }
-        if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
-        {
-            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 1;
-            page = 0;
-        }
+            //treasure
+            columnNumber++;
+            auxX = x - 2 + (columnNumber * 25);
+            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+            renderItem(new ItemStack(ModItems.WATERLOGGED_SATCHEL.get()), x + (columnNumber * 25), y, 1);
+            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+            {
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.treasures"), mouseX, mouseY);
+            }
+            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+            {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = 1;
+                page = 1;
+            }
 
-        //treasure
-        columnNumber++;
-        auxX = x - 2 + (columnNumber * 25);
-        guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.WATERLOGGED_SATCHEL.get()), x + (columnNumber * 25), y, 1);
-        if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-        {
-            guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.treasures"), mouseX, mouseY);
-        }
-        if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
-        {
-            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 1;
-            page = 1;
-        }
+            //hooks
+            columnNumber++;
+            auxX = x - 2 + (columnNumber * 25);
+            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+            renderItem(new ItemStack(ModItems.HOOK.get()), x + (columnNumber * 25), y, 1);
+            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+            {
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.hooks"), mouseX, mouseY);
+            }
+            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+            {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = 1;
+                page = 2;
+            }
 
-        //hooks
-        columnNumber++;
-        auxX = x - 2 + (columnNumber * 25);
-        guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.HOOK.get()), x + (columnNumber * 25), y, 1);
-        if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-        {
-            guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.hooks"), mouseX, mouseY);
-        }
-        if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
-        {
-            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 1;
-            page = 2;
-        }
+            //bobbers
+            columnNumber++;
+            auxX = x - 2 + (columnNumber * 25);
+            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+            renderItem(new ItemStack(ModItems.FRUGAL_BOBBER.get()), x + (columnNumber * 25), y, 1);
+            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+            {
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.bobbers"), mouseX, mouseY);
+            }
+            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+            {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = 1;
+                page = 2;
+            }
 
-        //bobbers
-        columnNumber++;
-        auxX = x - 2 + (columnNumber * 25);
-        guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.FRUGAL_BOBBER.get()), x + (columnNumber * 25), y, 1);
-        if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-        {
-            guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.bobbers"), mouseX, mouseY);
-        }
-        if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
-        {
-            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 1;
-            page = 2;
-        }
+            //fish spotter
+            columnNumber++;
+            auxX = x - 2 + (columnNumber * 25);
+            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+            renderItem(new ItemStack(ModItems.FISH_SPOTTER.get()), x + (columnNumber * 25), y, 1);
+            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+            {
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.gadgets"), mouseX, mouseY);
+            }
+            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+            {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = 1;
+                page = 3;
+            }
 
-        //fish spotter
-        columnNumber++;
-        auxX = x - 2 + (columnNumber * 25);
-        guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.FISH_SPOTTER.get()), x + (columnNumber * 25), y, 1);
-        if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-        {
-            guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.gadgets"), mouseX, mouseY);
-        }
-        if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
-        {
-            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 1;
-            page = 3;
-        }
+            //trophies
+            columnNumber++;
+            auxX = x - 2 + (columnNumber * 25);
+            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+            renderItem(new ItemStack(ModItems.TROPHY_GOLD.get()), x + (columnNumber * 25), y, 1);
+            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+            {
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.trophies"), mouseX, mouseY);
+            }
+            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+            {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = 1;
+                page = 3;
+            }
 
-        //trophies
-        columnNumber++;
-        auxX = x - 2 + (columnNumber * 25);
-        guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.TROPHY_GOLD.get()), x + (columnNumber * 25), y, 1);
-        if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-        {
-            guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.trophies"), mouseX, mouseY);
+            //secret messages
+            columnNumber++;
+            auxX = x - 2 + (columnNumber * 25);
+            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+            renderItem(new ItemStack(ModItems.WATERLOGGED_BOTTLE.get()), x + (columnNumber * 25), y, 1);
+            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+            {
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.secrets"), mouseX, mouseY);
+            }
+            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+            {
+                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = 1;
+                page = 4;
+            }
         }
-        if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+        else
         {
-            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 1;
-            page = 3;
+            rowNumber++;
         }
-
-        //secret messages
-        columnNumber++;
-        auxX = x - 2 + (columnNumber * 25);
-        guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-        renderItem(new ItemStack(ModItems.WATERLOGGED_BOTTLE.get()), x + (columnNumber * 25), y, 1);
-        if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-        {
-            guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.secrets"), mouseX, mouseY);
-        }
-        if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
-        {
-            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 1;
-            page = 4;
-        }
-
 
         //setup for next line
         rowNumber++;
         columnNumber = -1;
 
         //render fishes in area
-        guiGraphics.drawString(this.font, Component.translatable("gui.guide.available"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
+        if(page == 0) guiGraphics.drawString(this.font, Component.translatable("gui.guide.available"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
         rowNumber++;
 
         for (FishProperties fp : fishInArea)
@@ -691,13 +693,13 @@ public class FishingGuideScreen extends Screen
             semiPageNumber++;
         }
 
+        //todo bug: if there are enough fishes in area to use both pages fully, the "all fishes:" text wont render on second page
         //render all fishes
-        guiGraphics.drawString(this.font, Component.translatable("gui.guide.all"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
+        if(page == 0) guiGraphics.drawString(this.font, Component.translatable("gui.guide.all"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
         rowNumber++;
 
         for (FishProperties fp : entries)
         {
-
             columnNumber++;
             if (columnNumber > 6)
             {
