@@ -115,6 +115,8 @@
 
   "item.starcatcher.bait": "Bait",
 
+  "item.starcatcher.missingno": "???",
+
   "item.starcatcher.fish_spotter": "Fish Spotter",
   "tooltip.starcatcher.fish_spotter.0": "A handy tool to any <rgb>angler</rgb> which",
   "tooltip.starcatcher.fish_spotter.1": "displays the fishes around the area.",

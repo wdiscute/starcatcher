@@ -427,7 +427,6 @@ public class FishingGuideScreen extends Screen
     {
         for (int i = 0; i < tps.size(); i++)
         {
-
             int rowSize = Math.min(7, (tps.size() - i / 7 * 7));
             int x = 90 - rowSize * 23 / 2;
 
@@ -440,9 +439,17 @@ public class FishingGuideScreen extends Screen
 
             TrophyProperties tp = tps.get(i);
 
-            ItemStack is = new ItemStack(tp.baseItem());
-            is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
-            is.set(ModDataComponents.TROPHY, tp);
+            ItemStack is;
+            if (player.getData(ModDataAttachments.TROPHIES_CAUGHT).contains(tp))
+            {
+                is = new ItemStack(tp.baseItem());
+                is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
+                is.set(ModDataComponents.TROPHY, tp);
+            }
+            else
+            {
+                is = new ItemStack(ModItems.MISSINGNO.get());
+            }
 
             guiGraphics.renderOutline(xrender - 10, y - 2, 20, 20, 0xff000000);
             renderItem(is, xrender - 8, y, 1);
@@ -544,6 +551,7 @@ public class FishingGuideScreen extends Screen
         }
         if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
         {
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = 0;
         }
@@ -559,6 +567,7 @@ public class FishingGuideScreen extends Screen
         }
         if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
         {
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = 1;
         }
@@ -574,6 +583,7 @@ public class FishingGuideScreen extends Screen
         }
         if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
         {
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = 2;
         }
@@ -589,6 +599,7 @@ public class FishingGuideScreen extends Screen
         }
         if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
         {
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = 2;
         }
@@ -604,6 +615,7 @@ public class FishingGuideScreen extends Screen
         }
         if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
         {
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = 3;
         }
@@ -619,6 +631,7 @@ public class FishingGuideScreen extends Screen
         }
         if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
         {
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = 3;
         }
@@ -634,6 +647,7 @@ public class FishingGuideScreen extends Screen
         }
         if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
         {
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = 4;
         }
@@ -726,7 +740,8 @@ public class FishingGuideScreen extends Screen
         //handle click
         if (clickedX > xOffset - 3 && clickedX < xOffset + 21 - 3 && clickedY > yOffset - 3 && clickedY < yOffset + 21 - 3)
         {
-            menu = 1;
+            minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+            menu = 2;
             page = entries.indexOf(fp) / 2;
         }
 
@@ -776,13 +791,6 @@ public class FishingGuideScreen extends Screen
         {
             if (fp.equals(fpNotif))
                 guiGraphics.blit(STAR, xOffset + 10, yOffset + 7, 0, 0, 10, 10, 10, 10);
-        }
-
-        //render tooltip when hovering
-        if (clickedX > xOffset - 3 && clickedX < xOffset + 21 - 3 && clickedY > yOffset - 3 && clickedY < yOffset + 21 - 3)
-        {
-            menu = 1;
-            page = entries.indexOf(fp) / 2;
         }
 
         //render tooltip

@@ -3,7 +3,9 @@ package com.wdiscute.starcatcher.bob;
 import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -127,15 +129,18 @@ public class FishingBobEntity extends Projectile
 
         for (TrophyProperties tp : level().registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
         {
-            System.out.println("looked through " + tp);
-
             List<TrophyProperties> trophiesCaught = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
 
             if(numberOfTotalFishesCaught >= tp.totalCaughtCount()  && numberOfUniqueFishesCaught >= tp.uniqueFishCount() &&
             !trophiesCaught.contains(tp))
             {
+
+                ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(tp.baseItem().getKey()));
+                is.set(ModDataComponents.TROPHY, tp);
+                is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
+
                 Entity itemFished = new ItemEntity(level(), position().x, position().y + 1.2f, position().z,
-                        new ItemStack(BuiltInRegistries.ITEM.get(tp.baseItem().getKey())));
+                        is);
 
                 Vec3 vec3 = new Vec3(Math.clamp((player.position().x - position().x) / 25, -1, 1),
                         0.7 + Math.clamp((player.position().y - position().y) / 20, -1, 1),
