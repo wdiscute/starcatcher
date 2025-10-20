@@ -92,7 +92,7 @@ public class Starcatcher
         {
             event.dataPackRegistry(
                     FISH_REGISTRY, FishProperties.CODEC, FishProperties.CODEC,
-                    builder -> builder.maxId(256));
+                    builder -> builder.maxId(512));
 
             event.dataPackRegistry(
                     TROPHY_REGISTRY, TrophyProperties.CODEC, TrophyProperties.CODEC,
