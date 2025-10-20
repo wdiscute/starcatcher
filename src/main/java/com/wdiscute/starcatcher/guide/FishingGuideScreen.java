@@ -1208,13 +1208,13 @@ public class FishingGuideScreen extends Screen
             guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0, false);
         }
 
-        yOffset += 15;
 
         //elevation
         int above = fp.mustBeCaughtAboveY();
         int below = fp.mustBeCaughtBelowY();
         if (above != Integer.MIN_VALUE || below != Integer.MAX_VALUE)
         {
+            yOffset += 15;
             MutableComponent belowAbove = Component.empty();
 
             if (above != Integer.MIN_VALUE)
@@ -1260,6 +1260,40 @@ public class FishingGuideScreen extends Screen
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.elevation").append(comp), uiX + xOffset, uiY + yOffset, 0, false);
 
         }
+
+
+        //fluid
+        List<ResourceLocation> fluids = fp.wr().fluids();
+        if (!fluids.equals(FishProperties.WorldRestrictions.DEFAULT.fluids()))
+        {
+            yOffset += 15;
+            MutableComponent comp;
+            if(fluids.size() == 1)
+            {
+                comp = Component.translatable("block." + fluids.getFirst().toLanguageKey());
+            }
+            else
+            {
+                comp = Component.translatable("gui.guide.hover");
+
+                //show tooltip while hovering
+                if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
+                {
+                    List<Component> c = new ArrayList<>();
+                    c.add(Component.translatable("gui.guide.fluids"));
+
+                    for (ResourceLocation rl : fluids)
+                    {
+                        c.add(Component.translatable("block." + rl.toLanguageKey()));
+                    }
+
+                    guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
+                }
+            }
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.fluids").append(comp), uiX + xOffset, uiY + yOffset, 0, false);
+
+        }
+
     }
 
     private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)

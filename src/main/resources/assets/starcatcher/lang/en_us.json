@@ -331,8 +331,11 @@
   "gui.guide.underground" : "Underground",
   "gui.guide.caves" : "Caves",
   "gui.guide.deepslate" : "Deepslate",
+  "gui.guide.fluid" : "Fluid: ",
+  "gui.guide.fluids" : "Fluids: ",
   "gui.guide.no_restriction" : "No Restriction",
   "gui.guide.hover" : "[hover]",
+
 
   "gui.guide.rarity.common" : "Common",
   "gui.guide.rarity.uncommon" : "<gradient-37>Uncommon</gradient-43>",
