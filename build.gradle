@@ -26,6 +26,9 @@ repositories {
     maven {
         url = "https://maven.favouriteless.net/releases"
     }
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
 }
 
 dependencies {
@@ -36,6 +39,14 @@ dependencies {
             prefer '1.1'
         }
     }
+
+    jarJar(implementation "maven.modrinth:kap_lib:v${kap_lib_version}-mc${minecraft_version}:util") {
+        version
+                {
+                    prefer "${kap_lib_version}"
+                }
+    }
+
 }
 
 publishing {
@@ -47,10 +58,9 @@ publishing {
     }
 
     repositories {
-        if(System.getenv("MAVEN_USER") == null || System.getenv("MAVEN_PASS") == null) {
+        if (System.getenv("MAVEN_USER") == null || System.getenv("MAVEN_PASS") == null) {
             mavenLocal()
-        }
-        else maven {
+        } else maven {
             name = "wdReleases"
             url = "https://maven.favouriteless.net/releases"
 
@@ -153,7 +163,6 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
-
 
 
 // This block of code expands all declared replace properties in the specified resource targets.
