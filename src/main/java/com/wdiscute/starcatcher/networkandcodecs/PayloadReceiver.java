@@ -63,6 +63,9 @@ public class PayloadReceiver
                         if (!fp.customName().isEmpty())
                             is.set(DataComponents.CUSTOM_NAME, Component.translatable("item.starcatcher." + fp.customName()));
 
+                        //store fish properties in itemstack
+                        is.set(ModDataComponents.FISH_PROPERTIES, fp);
+
                         //split hook double drops
                         if(data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);
 
