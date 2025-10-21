@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "minecraft:mangrove_leaves"
+    }
+  ],
+  "result": {
+    "id": "starcatcher:murkwater_bait",
+    "count": 4
+  }
+}

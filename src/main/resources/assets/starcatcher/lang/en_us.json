@@ -113,7 +113,40 @@
   "tooltip.starcatcher.frog_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
   "tooltip.starcatcher.frog_bobber.2": "it will make behave like a frog. Somewhat.",
 
-  "item.starcatcher.bait": "Bait",
+  "item.starcatcher.cherry_bait": "Cherry Bait",
+  "tooltip.starcatcher.cherry_bait.0": "A bait made of pink petals which fish",
+  "tooltip.starcatcher.cherry_bait.1": "common to cherry groves love.",
+
+  "item.starcatcher.lush_bait": "Lush Bait",
+  "tooltip.starcatcher.lush_bait.0": "A lush bait made mostly of moss which",
+  "tooltip.starcatcher.lush_bait.1": "often attracts fish living in the Lush Caves.",
+
+  "item.starcatcher.sculk_bait": "Sculk Bait",
+  "tooltip.starcatcher.sculk_bait.0": "A silent bait made from sculk remains",
+  "tooltip.starcatcher.sculk_bait.1": "known for attracting even the quietest",
+  "tooltip.starcatcher.sculk_bait.2": "fish down in the Deep Dark.",
+
+  "item.starcatcher.dripstone_bait": "Dripstone Bait",
+  "tooltip.starcatcher.dripstone_bait.0": "A hard bait made from dripstone,",
+  "tooltip.starcatcher.dripstone_bait.1": "sure to charm in even the stiffest of fishes",
+
+  "item.starcatcher.murkwater_bait": "Murkwater Bait",
+  "tooltip.starcatcher.murkwater_bait.0": "A murky bait suited for swamp fishing.",
+
+  "item.starcatcher.meteorological_bait": "Meteorological Bait",
+  "tooltip.starcatcher.meteorological_bait.0": "This slightly-magical bait attracts fish",
+  "tooltip.starcatcher.meteorological_bait.1": "who would usually only come out during",
+  "tooltip.starcatcher.meteorological_bait.2": "specific weather! Very handy.",
+
+
+  "item.starcatcher.legendary_bait": "Legendary Bait",
+  "tooltip.starcatcher.legendary_bait.0": "A shiny golden bait which <rgb>legendary</rgb>",
+  "tooltip.starcatcher.legendary_bait.1": "fish can't seem to swim past.",
+
+
+
+
+
 
   "item.starcatcher.missingno": "???",
 
@@ -455,7 +488,7 @@
   "item.starcatcher.dark_amethyst_snapper" : "Dark Amethyst Snapper",
   "item.starcatcher.deepslatefish" : "Deepslatefish",
 
-  "item.starcatcher.skulkfish" : "Skulkfish",
+  "item.starcatcher.sculkfish" : "Sculkfish",
   "item.starcatcher.ward" : "Ward",
   "item.starcatcher.glowing_dark" : "Glowing Dark",
 

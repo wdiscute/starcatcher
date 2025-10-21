@@ -5,7 +5,6 @@ import com.wdiscute.starcatcher.guide.TrophyBronze;
 import com.wdiscute.starcatcher.guide.TrophyGold;
 import com.wdiscute.starcatcher.guide.TrophySilver;
 import com.wdiscute.starcatcher.items.*;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
@@ -45,16 +44,20 @@ public interface ModItems
     DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber"); //done
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
 
-    DeferredItem<Item> BAIT = singleStackItem("bait");
+    DeferredItem<Item> CHERRY_BAIT = basicItem("cherry_bait"); //missing datagen for fishes
+    DeferredItem<Item> LUSH_BAIT = basicItem("lush_bait");
+    DeferredItem<Item> SCULK_BAIT = basicItem("sculk_bait");
+    DeferredItem<Item> DRIPSTONE_BAIT = basicItem("dripstone_bait");
+    DeferredItem<Item> MURKWATER_BAIT = basicItem("murkwater_bait");
+    DeferredItem<Item> LEGENDARY_BAIT = basicItem("legendary_bait");
+    DeferredItem<Item> METEOROLOGICAL_BAIT = basicItem("meteorological_bait");
 
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new);
 
-    //unique fishes
     DeferredItem<Item> TROPHY_GOLD = ITEMS.register("trophy_gold", TrophyGold::new);
     DeferredItem<Item> TROPHY_SILVER = ITEMS.register("trophy_silver", TrophySilver::new);
     DeferredItem<Item> TROPHY_BRONZE = ITEMS.register("trophy_bronze", TrophyBronze::new);
 
-    DeferredItem<Item> MISSINGNO = basicItem("missingno");
 
     DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new FishingTreasure(Starcatcher.rl("treasure/waterlogged_satchel")));
     DeferredItem<Item> TREASURE = ITEMS.register("treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/treasure")));
@@ -62,6 +65,7 @@ public interface ModItems
 
     DeferredItem<Item> FISH_BONES = basicItem("fish_bones");
 
+    DeferredItem<Item> MISSINGNO = basicItem("missingno");
 
     //
     //  ,---. ,--.         ,--.
@@ -186,22 +190,22 @@ public interface ModItems
     DeferredItem<Item> DEEPSLATEFISH = fish("deepslatefish"); //description
 
     //deep dark
-    DeferredItem<Item> SKULKFISH = fish("skulkfish"); //description
+    DeferredItem<Item> SCULKFISH = fish("sculkfish"); //description
     DeferredItem<Item> WARD = fish("ward"); //description
     DeferredItem<Item> GLOWING_DARK = fish("glowing_dark"); //description
 
     //overworld surface lava
-    DeferredItem<Item> SUNEATER = fish("suneater"); //description make sure to mention it eats sunfishes
-    DeferredItem<Item> PYROTROUT = fish("pyrotrout"); //description
-    DeferredItem<Item> OBSIDIAN_EEL = fish("obsidian_eel"); //description
+    DeferredItem<Item> SUNEATER = fireResistantFish("suneater"); //description make sure to mention it eats sunfishes
+    DeferredItem<Item> PYROTROUT = fireResistantFish("pyrotrout"); //description
+    DeferredItem<Item> OBSIDIAN_EEL = fireResistantFish("obsidian_eel"); //description
 
     //overworld underground lava
-    DeferredItem<Item> MOLTEN_SHRIMP = fish("molten_shrimp"); //description
-    DeferredItem<Item> OBSIDIAN_CRAB = fish("obsidian_crab"); //description
+    DeferredItem<Item> MOLTEN_SHRIMP = fireResistantFish("molten_shrimp"); //description
+    DeferredItem<Item> OBSIDIAN_CRAB = fireResistantFish("obsidian_crab"); //description
 
     //overworld deepslate lava
-    DeferredItem<Item> SCORCHED_BLOODSUCKER = fish("scorched_bloodsucker"); //description
-    DeferredItem<Item> MOLTEN_DEEPSLATE_CRAB = fish("molten_deepslate_crab"); //description
+    DeferredItem<Item> SCORCHED_BLOODSUCKER = fireResistantFish("scorched_bloodsucker"); //description
+    DeferredItem<Item> MOLTEN_DEEPSLATE_CRAB = fireResistantFish("molten_deepslate_crab"); //description
 
 
     //nether
