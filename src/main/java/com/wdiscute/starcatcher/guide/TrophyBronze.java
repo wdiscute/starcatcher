@@ -17,7 +17,7 @@ public class TrophyBronze extends Item
 
     public TrophyBronze()
     {
-        super(new Item.Properties().stacksTo(1));
+        super(new Item.Properties().stacksTo(1).fireResistant());
     }
 
     @Override
