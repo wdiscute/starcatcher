@@ -1,21 +1,18 @@
 {
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
-      "starcatcher:legendary_bait"
+      "starcatcher:sculk_bait"
     ]
   },
-  "base_chance": 1,
-  "below_y": 100,
+  "below_y": 50,
   "difficulty": {
-    "change_rotation_every_hit": false,
-    "decay": 3,
+    "decay": 2,
     "has_first_thin_marker": true,
-    "has_second_thin_marker": true,
-    "penalty": 15,
+    "has_second_marker": false,
+    "penalty": 25,
     "reward": 15,
-    "reward_thin": 30,
+    "reward_thin": 35,
     "speed": 12,
     "treasure": {
       "has_treasure": true,
@@ -23,11 +20,11 @@
       "loot": "starcatcher:treasure"
     }
   },
-  "fish": "starcatcher:joel",
-  "rarity": "legendary",
+  "fish": "starcatcher:sculkfish",
+  "rarity": "uncommon",
   "world_restrictions": {
-    "biomes_tags": [
-      "starcatcher:is_ocean"
+    "biomes": [
+      "minecraft:deep_dark"
     ],
     "dimensions": [
       "minecraft:overworld"

@@ -5,6 +5,12 @@
       "modid": "tide"
     }
   ],
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:legendary_bait"
+    ]
+  },
   "base_chance": 1,
   "difficulty": {
     "change_rotation_every_hit": false,

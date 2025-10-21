@@ -1,4 +1,10 @@
 {
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:legendary_bait"
+    ]
+  },
   "base_chance": 2,
   "below_y": 50,
   "difficulty": {

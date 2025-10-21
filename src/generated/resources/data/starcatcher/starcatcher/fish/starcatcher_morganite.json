@@ -1,5 +1,11 @@
 {
   "above_y": 50,
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:cherry_bait"
+    ]
+  },
   "difficulty": {
     "has_first_thin_marker": true,
     "has_second_marker": false,

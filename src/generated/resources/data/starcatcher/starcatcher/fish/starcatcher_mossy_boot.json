@@ -1,5 +1,11 @@
 {
   "above_y": 50,
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:murkwater_bait"
+    ]
+  },
   "base_chance": 1,
   "fish": "starcatcher:mossy_boot",
   "has_guide_entry": false,

@@ -231,6 +231,54 @@ public record FishProperties(
                 List.of(),
                 false);
 
+        public static final BaitRestrictions CHERRY_BAIT = new BaitRestrictions(
+                List.of(),
+                List.of(ModItems.CHERRY_BAIT.getId()),
+                true,
+                15,
+                List.of(),
+                false);
+
+        public static final BaitRestrictions LUSH_BAIT = new BaitRestrictions(
+                List.of(),
+                List.of(ModItems.LUSH_BAIT.getId()),
+                true,
+                15,
+                List.of(),
+                false);
+
+        public static final BaitRestrictions SCULK_BAIT = new BaitRestrictions(
+                List.of(),
+                List.of(ModItems.SCULK_BAIT.getId()),
+                true,
+                15,
+                List.of(),
+                false);
+
+        public static final BaitRestrictions DRIPSTONE_BAIT = new BaitRestrictions(
+                List.of(),
+                List.of(ModItems.DRIPSTONE_BAIT.getId()),
+                true,
+                15,
+                List.of(),
+                false);
+
+        public static final BaitRestrictions MURKWATER_BAIT = new BaitRestrictions(
+                List.of(),
+                List.of(ModItems.MURKWATER_BAIT.getId()),
+                true,
+                15,
+                List.of(),
+                false);
+
+        public static final BaitRestrictions LEGENDARY_BAIT = new BaitRestrictions(
+                List.of(),
+                List.of(ModItems.LEGENDARY_BAIT.getId()),
+                true,
+                15,
+                List.of(),
+                false);
+
         public BaitRestrictions withCorrectBobber(ResourceLocation correctBobber)
         {
             return new BaitRestrictions(List.of(correctBobber), this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);

@@ -1,5 +1,11 @@
 {
   "above_y": 50,
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:murkwater_bait"
+    ]
+  },
   "daytime": "night",
   "difficulty": {
     "change_rotation_every_hit": false,

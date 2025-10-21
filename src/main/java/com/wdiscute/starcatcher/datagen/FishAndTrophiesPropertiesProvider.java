@@ -17,7 +17,6 @@ import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
         }
     }
 
-
+    private static int customFishCount = 0;
 
     //region fps
     public static final List<FishProperties> FPS = new ArrayList<>(
@@ -138,6 +137,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     overworldColdLakeFish(ModItems.AURORA)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withBaseChance(2)
                             .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION),
 
@@ -206,6 +206,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withSkipMinigame(true)
                             .withHasGuideEntry(false),
 
+
                     //darkoak forest
                     overworldDarkForestFish(ModItems.PALE_PINFISH)
                             .withDaytime(FishProperties.Daytime.MIDNIGHT)
@@ -253,6 +254,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldColdMountainFish(ModItems.BOREAL)
                             .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withBaseChance(3),
 
                     overworldColdMountainFish(ModItems.CRYSTALBACK_BOREAL)
@@ -299,6 +301,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldColdRiverFish(ModItems.AZURE_CRYSTALBACK_MINNOW)
                             .withDaytime(FishProperties.Daytime.MIDNIGHT)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withBaseChance(1)
                             .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION),
 
@@ -327,6 +330,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldOceanFish(ModItems.JOEL)
                             .withDifficulty(FishProperties.Difficulty.EVERYTHING)
                             .withBaseChance(1)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withRarity(FishProperties.Rarity.LEGENDARY),
 
                     overworldOceanFish(ModItems.REDSCALED_TUNA)
@@ -359,6 +363,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     //mushroom islands
                     overworldMushroomFieldsFish(ModItems.SHROOMFISH)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING),
 
                     overworldMushroomFieldsFish(ModItems.SPOREFISH)
@@ -406,6 +411,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     //lush caves
                     overworldLushCavesFish(ModItems.LUSH_PIKE)
                             .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
                             .withBaseChance(2),
 
@@ -442,12 +448,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
                     //deep dark
-                    overworldDeepDarkFish(ModItems.SKULKFISH)
+                    overworldDeepDarkFish(ModItems.SCULKFISH)
                             .withDifficulty(FishProperties.Difficulty.HARD)
                             .withRarity(FishProperties.Rarity.UNCOMMON),
 
                     overworldDeepDarkFish(ModItems.WARD)
                             .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
                             .withBaseChance(2),
 
@@ -468,6 +475,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldSurfaceLava(ModItems.OBSIDIAN_EEL)
                             .withWeather(FishProperties.Weather.RAIN)
                             .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withRarity(FishProperties.Rarity.LEGENDARY),
 
                     //overworld underground lava
@@ -723,8 +731,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
                     .withMod("tide"),
 
-            fish(fromRL("tide", "blossom_bass"))
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_CHERRY_GROVE)
+            overworldCherryGroveFish(fromRL("tide", "blossom_bass"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
@@ -899,18 +906,21 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldFreshwaterFish(fromRL("tide", "midas_fish"))
                     .withBaseChance(1)
+                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
                     .withMod("tide"),
 
             endFish(fromRL("tide", "voidseeker"))
                     .withBaseChance(1)
+                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
                     .withMod("tide"),
 
             overworldOceanFish(fromRL("tide", "shooting_starfish"))
                     .withBaseChance(1)
+                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDaytime(FishProperties.Daytime.MIDNIGHT)
                     .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
@@ -1056,6 +1066,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             overworldJungleFish(fromRL("aquaculture", "piranha"))
+                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
                     .withDaytime(FishProperties.Daytime.NOON)
@@ -1268,12 +1279,14 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     public static FishProperties overworldLushCavesFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LUSH_CAVES)
+                .withBaitRestrictions(FishProperties.BaitRestrictions.LUSH_BAIT)
                 .withMustBeCaughtBelowY(50);
     }
 
     public static FishProperties overworldDeepDarkFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DEEP_DARK)
+                .withBaitRestrictions(FishProperties.BaitRestrictions.SCULK_BAIT)
                 .withMustBeCaughtBelowY(50);
     }
 
@@ -1294,6 +1307,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DRIPSTONE_CAVES)
+                .withBaitRestrictions(FishProperties.BaitRestrictions.DRIPSTONE_BAIT)
                 .withMustBeCaughtBelowY(50).withMustBeCaughtAboveY(0);
     }
 
@@ -1456,12 +1470,14 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     public static FishProperties overworldCherryGroveFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_CHERRY_GROVE)
+                .withBaitRestrictions(FishProperties.BaitRestrictions.CHERRY_BAIT)
                 .withMustBeCaughtAboveY(50);
     }
 
     public static FishProperties overworldSwampFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_SWAMP)
+                .withBaitRestrictions(FishProperties.BaitRestrictions.MURKWATER_BAIT)
                 .withMustBeCaughtAboveY(50);
     }
 
@@ -1494,7 +1510,10 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
         }
         else
         {
-            return ResourceKey.create(Starcatcher.FISH_REGISTRY, Starcatcher.rl("starcatcher" + "_" + fp.customName()));
+            customFishCount++;
+            return ResourceKey.create(
+                    Starcatcher.FISH_REGISTRY,
+                    Starcatcher.rl(fp.fish().getRegisteredName().replace(":", "_") + "_" + customFishCount));
         }
     }
 
