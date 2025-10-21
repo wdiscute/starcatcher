@@ -36,6 +36,10 @@ public class ModDataComponents
             "trophy",
             builder -> builder.persistent(TrophyProperties.CODEC));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<FishProperties>> FISH_PROPERTIES = register(
+            "fish_properties",
+            builder -> builder.persistent(FishProperties.CODEC));
+
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator)
