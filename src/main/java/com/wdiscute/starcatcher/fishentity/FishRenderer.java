@@ -44,9 +44,9 @@ public class FishRenderer extends EntityRenderer<FishEntity>
             poseStack.mulPose(Axis.YP.rotationDegrees(90));
         }
 
-        if(fish.is != null && !fish.is.isEmpty())
+        if(!fish.getBodyArmorItem().isEmpty())
         {
-            this.itemRenderer.renderStatic(fish.is, ItemDisplayContext.FIXED, packedLight,
+            this.itemRenderer.renderStatic(fish.getBodyArmorItem(), ItemDisplayContext.FIXED, packedLight,
                     OverlayTexture.NO_OVERLAY, poseStack, buffer, fish.level(), fish.getId());
         }
 

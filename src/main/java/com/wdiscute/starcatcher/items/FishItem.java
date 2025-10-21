@@ -22,7 +22,11 @@ public class FishItem extends Item
         //Twitch chat didn't force me to do write this
         FishEntity fe = new FishEntity(ModEntities.FISH.get(), context.getLevel());
         fe.setFish(new ItemStack(this.asItem()));
-        fe.setPos(new Vec3(context.getClickedPos().above().getX(), context.getClickedPos().above().getY(), context.getClickedPos().above().getZ()));
+        fe.setPos(new Vec3(
+                context.getClickedPos().relative(context.getClickedFace()).getX() + 0.5f,
+                context.getClickedPos().relative(context.getClickedFace()).getY() + 0.5f,
+                context.getClickedPos().relative(context.getClickedFace()).getZ() + 0.5f
+        ));
 
         context.getLevel().addFreshEntity(fe);
 
