@@ -237,7 +237,7 @@ public class FishingBobEntity extends Projectile
 
             if (bobber.is(ModItems.FRUGAL_BOBBER))
             {
-                if (random.nextFloat() > 0.5f) bait.setCount(bait.getCount() - 1);
+                if (random.nextFloat() > 0.8f) bait.setCount(bait.getCount() - 1);
             }
             else
             {
