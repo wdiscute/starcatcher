@@ -529,7 +529,7 @@ public class FishingGuideScreen extends Screen
 
         hasNextEntryPage = false;
 
-        if(page == 0)
+        if (page == 0)
         {
             //all about fishing
             //todo make this code not shitty
@@ -660,7 +660,8 @@ public class FishingGuideScreen extends Screen
         columnNumber = -1;
 
         //render fishes in area
-        if(page == 0) guiGraphics.drawString(this.font, Component.translatable("gui.guide.available"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
+        if (page == 0)
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.available"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
         rowNumber++;
 
         for (FishProperties fp : fishInArea)
@@ -695,7 +696,8 @@ public class FishingGuideScreen extends Screen
 
         //todo bug: if there are enough fishes in area to use both pages fully, the "all fishes:" text wont render on second page
         //render all fishes
-        if(page == 0) guiGraphics.drawString(this.font, Component.translatable("gui.guide.all"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
+        if (page == 0)
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.all"), x + 25 + (columnNumber * 25) + (semiPageNumber * 205), y + 10 + (rowNumber * 25), 0, false);
         rowNumber++;
 
         for (FishProperties fp : entries)
@@ -1102,12 +1104,32 @@ public class FishingGuideScreen extends Screen
         {
             yOffset += 15;
 
-            ItemStack stack = new ItemStack(BuiltInRegistries.ITEM.get(fp.br().correctBait().getFirst()));
-            guiGraphics.drawString(this.font, I18n.get("gui.guide.bait") + I18n.get(stack.getDescriptionId()), uiX + xOffset, uiY + yOffset, 0, false);
+            ItemStack bait = new ItemStack(BuiltInRegistries.ITEM.get(fp.br().correctBait().getFirst()));
+            int bonus = fp.br().correctBaitChanceAdded() / fp.baseChance() * 100;
+            Component extra = Component.literal(" (+" + bonus + "%)");
+
+            if (bait.is(ModItems.LEGENDARY_BAIT.get()))
+            {
+                guiGraphics.drawString(
+                        this.font,
+                        Component.translatable("gui.guide.bait")
+                                .append(Tooltips.RGBEachLetter(Tooltips.hue, I18n.get(bait.getDescriptionId()), 0.03f))
+                                .append(extra),
+                        uiX + xOffset, uiY + yOffset, 0, false);
+            }
+            else
+            {
+                guiGraphics.drawString(this.font,
+                        Component.translatable("gui.guide.bait")
+                                .append(Component.translatable(bait.getDescriptionId()))
+                                .append(extra),
+                        uiX + xOffset, uiY + yOffset, 0, false);
+            }
+
 
             if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
             {
-                guiGraphics.renderTooltip(this.font, stack, mouseX, mouseY);
+                guiGraphics.renderTooltip(this.font, bait, mouseX, mouseY);
             }
         }
 
@@ -1270,7 +1292,7 @@ public class FishingGuideScreen extends Screen
         {
             yOffset += 15;
             MutableComponent comp;
-            if(fluids.size() == 1)
+            if (fluids.size() == 1)
             {
                 comp = Component.translatable("block." + fluids.getFirst().toLanguageKey());
             }
