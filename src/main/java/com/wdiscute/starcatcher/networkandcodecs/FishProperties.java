@@ -1013,22 +1013,25 @@ public record FishProperties(
             }
         }
 
-        //clear check
-        if (fp.weather() == Weather.CLEAR && (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5))
+        if(!bait.is(ModItems.METEOROLOGICAL_BAIT))
         {
-            return 0;
-        }
+            //clear check
+            if (fp.weather() == Weather.CLEAR && (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5))
+            {
+                return 0;
+            }
 
-        //rain check
-        if (fp.weather() == Weather.RAIN && level.getRainLevel(0) < 0.5)
-        {
-            return 0;
-        }
+            //rain check
+            if (fp.weather() == Weather.RAIN && level.getRainLevel(0) < 0.5)
+            {
+                return 0;
+            }
 
-        //thunder check
-        if (fp.weather() == Weather.THUNDER && level.getThunderLevel(0) < 0.5)
-        {
-            return 0;
+            //thunder check
+            if (fp.weather() == Weather.THUNDER && level.getThunderLevel(0) < 0.5)
+            {
+                return 0;
+            }
         }
 
         //correct bait check
