@@ -163,25 +163,25 @@ public class Starcatcher
                     {
                         String u = I18n.get("tooltip.starcatcher.trophy.both.0")
                                 .replace("&", tp.uniqueFishCount() + "");
-                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(u));
+                        tooltipComponents.add(Tooltips.decodeTranslationKeyTags(u));
 
                         String t = I18n.get("tooltip.starcatcher.trophy.both.1")
                                 .replace("&", tp.totalCaughtCount() + "");
-                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(t));
+                        tooltipComponents.add(Tooltips.decodeTranslationKeyTags(t));
                     }
 
                     if(tp.totalCaughtCount() == 0 && tp.uniqueFishCount() != 0)
                     {
                         String s = I18n.get("tooltip.starcatcher.trophy.unique")
                                 .replace("&", tp.uniqueFishCount() + "");
-                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(s));
+                        tooltipComponents.add(Tooltips.decodeTranslationKeyTags(s));
                     }
 
                     if(tp.totalCaughtCount() != 0 && tp.uniqueFishCount() == 0)
                     {
                         String s = I18n.get("tooltip.starcatcher.trophy.total")
                                 .replace("&", tp.totalCaughtCount() + "");
-                        tooltipComponents.add(Tooltips.DecodeTranslationKeyTags(s));
+                        tooltipComponents.add(Tooltips.decodeTranslationKeyTags(s));
                     }
 
                 }

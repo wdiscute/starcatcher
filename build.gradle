@@ -22,7 +22,6 @@ java {
 }
 
 repositories {
-    // Adds the 'libs' folder in the project directory as a flat directory
     maven {
         url = "https://maven.favouriteless.net/releases"
     }
@@ -32,11 +31,10 @@ repositories {
 }
 
 dependencies {
-    // Assume we have some artifact 'examplemod' that can be obtained from a specified repository
     jarJar(implementation(group: 'com.wdiscute', name: 'libtooltips')) {
         version {
             // Version used in your workspace and bundled in mod jar
-            prefer '1.1'
+            prefer '1.2'
         }
     }
 
