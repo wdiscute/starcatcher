@@ -403,14 +403,14 @@ public class FishingGuideScreen extends Screen
         {
             if (!I18n.exists("gui.guide.page" + page + ".left." + i)) break;
 
-            Component comp = Tooltips.decodeTranslationKeyTags("gui.guide.page" + page + ".left." + i);
+            Component comp = Tooltips.decodeTranslationKey("gui.guide.page" + page + ".left." + i);
             guiGraphics.drawString(this.font, comp, uiX + 70, uiY + 10 * i + 10, 0xff000000, false);
         }
 
         for (int i = 0; i < 40; i++)
         {
             if (!I18n.exists("gui.guide.page" + page + ".right." + i)) break;
-            Component comp = Tooltips.decodeTranslationKeyTags("gui.guide.page" + page + ".right." + i);
+            Component comp = Tooltips.decodeTranslationKey("gui.guide.page" + page + ".right." + i);
             guiGraphics.drawString(this.font, comp, uiX + 278, uiY + 10 * i + 10, 0xff000000, false);
         }
     }
@@ -874,7 +874,7 @@ public class FishingGuideScreen extends Screen
             guiGraphics.drawString(this.font, Component.translatable("gui.guide.caught").append(c).withColor(0x00AA00), uiX + xOffset + 46, uiY + 65, 0, false);
 
             //render rarity
-            Component rarity = Tooltips.decodeTranslationKeyTags("gui.guide.rarity." + fp.rarity().getSerializedName());
+            Component rarity = Tooltips.decodeTranslationKey("gui.guide.rarity." + fp.rarity().getSerializedName());
             guiGraphics.drawString(this.font, rarity, uiX + xOffset + 46, uiY + 75, 0, false);
 
             //render fish
