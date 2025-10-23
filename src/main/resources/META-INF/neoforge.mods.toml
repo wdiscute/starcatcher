@@ -24,7 +24,7 @@ version="0.8"
 displayName="Starcatcher"
 displayURL="http://curseforge.com/minecraft/mc-mods/starcatcher"
 logoFile="starcatcher 256x256.png" #optional
-authors="wdiscute" #optional
+authors="wdiscute, Nikdo53" #optional
 description='''A fishing mod with lots of fishes to collect!'''
 
 # A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
