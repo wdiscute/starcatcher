@@ -24,8 +24,8 @@
   "fish": "aquaculture:smallmouth_bass",
   "rarity": "uncommon",
   "world_restrictions": {
-    "biomes_blacklist_tags": [
-      "starcatcher:is_ocean"
+    "biomes_tags": [
+      "starcatcher:is_river"
     ],
     "dimensions": [
       "minecraft:overworld"

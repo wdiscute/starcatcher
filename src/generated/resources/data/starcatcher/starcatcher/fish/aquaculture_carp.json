@@ -25,8 +25,8 @@
   "rarity": "rare",
   "weather": "rain",
   "world_restrictions": {
-    "biomes_blacklist_tags": [
-      "starcatcher:is_ocean"
+    "biomes_tags": [
+      "starcatcher:is_river"
     ],
     "dimensions": [
       "minecraft:overworld"
