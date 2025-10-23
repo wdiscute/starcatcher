@@ -1,0 +1,9 @@
+{
+  "custom_name": "Trophy of Masterful Fishing",
+  "fish_properties": {
+    "fish": "starcatcher:trophy_gold"
+  },
+  "total_fishes": 0,
+  "trophy_type": "trophy",
+  "unique_fishes": 50
+}
