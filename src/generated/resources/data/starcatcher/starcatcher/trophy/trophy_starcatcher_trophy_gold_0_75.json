@@ -1,0 +1,9 @@
+{
+  "custom_name": "Trophy of Overflowing Fishes",
+  "fish_properties": {
+    "fish": "starcatcher:trophy_gold"
+  },
+  "total_fishes": 75,
+  "trophy_type": "trophy",
+  "unique_fishes": 0
+}

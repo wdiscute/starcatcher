@@ -1,0 +1,9 @@
+{
+  "custom_name": "Trophy of Fishes",
+  "fish_properties": {
+    "fish": "starcatcher:trophy_bronze"
+  },
+  "total_fishes": 150,
+  "trophy_type": "trophy",
+  "unique_fishes": 0
+}

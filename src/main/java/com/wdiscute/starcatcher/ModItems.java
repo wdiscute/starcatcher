@@ -1,11 +1,13 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
-import com.wdiscute.starcatcher.guide.TrophyBronze;
-import com.wdiscute.starcatcher.guide.TrophyGold;
-import com.wdiscute.starcatcher.guide.TrophySilver;
+import com.wdiscute.starcatcher.items.TrophyBronze;
+import com.wdiscute.starcatcher.items.TrophyGold;
+import com.wdiscute.starcatcher.items.TrophySilver;
 import com.wdiscute.starcatcher.items.*;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
+import com.wdiscute.starcatcher.secretnotes.SecretNote;
+import com.wdiscute.starcatcher.secretnotes.NoteContainer;
 import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -57,6 +59,26 @@ public interface ModItems
     DeferredItem<Item> TROPHY_GOLD = ITEMS.register("trophy_gold", TrophyGold::new);
     DeferredItem<Item> TROPHY_SILVER = ITEMS.register("trophy_silver", TrophySilver::new);
     DeferredItem<Item> TROPHY_BRONZE = ITEMS.register("trophy_bronze", TrophyBronze::new);
+
+
+
+
+
+
+
+
+    DeferredItem<Item> SECRET_NOTE = ITEMS.register("secret_note", SecretNote::new);
+    DeferredItem<Item> BROKEN_BOTTLE = singleStackItem("broken_bottle");
+
+    DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () -> new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
+
+
+
+
+
+
+
+
 
 
     DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new FishingTreasure(Starcatcher.rl("treasure/waterlogged_satchel")));

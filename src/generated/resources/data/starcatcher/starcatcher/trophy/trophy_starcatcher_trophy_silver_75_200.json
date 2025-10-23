@@ -1,0 +1,9 @@
+{
+  "custom_name": "Trophy of the Older Angler",
+  "fish_properties": {
+    "fish": "starcatcher:trophy_silver"
+  },
+  "total_fishes": 200,
+  "trophy_type": "trophy",
+  "unique_fishes": 75
+}
