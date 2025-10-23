@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.guide;
+package com.wdiscute.starcatcher.items;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;

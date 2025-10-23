@@ -1,6 +1,5 @@
-package com.wdiscute.starcatcher.guide;
+package com.wdiscute.starcatcher.items;
 
-import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
 import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -10,7 +9,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class TrophyBronze extends Item
 {
