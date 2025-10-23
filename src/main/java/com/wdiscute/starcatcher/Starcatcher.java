@@ -152,7 +152,7 @@ public class Starcatcher
             {
                 TrophyProperties tp = stack.get(ModDataComponents.TROPHY);
 
-                if (event.getFlags().hasShiftDown())
+                if (event.getFlags().hasShiftDown() && tp.trophyType() == TrophyProperties.TrophyType.TROPHY)
                 {
                     tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.shift_down"));
                     tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.empty"));
