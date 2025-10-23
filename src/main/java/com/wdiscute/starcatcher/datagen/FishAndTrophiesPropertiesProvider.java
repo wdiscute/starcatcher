@@ -941,44 +941,44 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             //freshwater
-            overworldFreshwaterFish(fromRL("aquaculture", "smallmouth_bass"))
+            overworldRiverFish(fromRL("aquaculture", "smallmouth_bass"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "bluegill"))
+            overworldRiverFish(fromRL("aquaculture", "bluegill"))
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "brown_trout"))
+            overworldRiverFish(fromRL("aquaculture", "brown_trout"))
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withWeather(FishProperties.Weather.CLEAR)
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "carp"))
+            overworldRiverFish(fromRL("aquaculture", "carp"))
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "catfish"))
+            overworldMountainFish(fromRL("aquaculture", "catfish"))
                     .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "gar"))
+            overworldMountainFish(fromRL("aquaculture", "gar"))
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "minnow"))
+            overworldLakeFish(fromRL("aquaculture", "minnow"))
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "muskellunge"))
+            overworldLakeFish(fromRL("aquaculture", "muskellunge"))
                     .withRarity(FishProperties.Rarity.RARE)
                     .withDaytime(FishProperties.Daytime.MIDNIGHT)
                     .withMod("aquaculture"),
 
-            overworldFreshwaterFish(fromRL("aquaculture", "perch"))
+            overworldLakeFish(fromRL("aquaculture", "perch"))
                     .withMod("aquaculture"),
 
             //arid
@@ -1171,8 +1171,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
                     TrophyProperties.TrophyType.TROPHY,
-                    ModItems.TROPHY_GOLD,
                     "Trophy of Masterful Fishing",
                     50,
                     0,
@@ -1180,8 +1180,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
                     TrophyProperties.TrophyType.TROPHY,
-                    ModItems.TROPHY_SILVER,
                     "Trophy of Skilled Fishing",
                     25,
                     0,
@@ -1189,8 +1189,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_BRONZE),
                     TrophyProperties.TrophyType.TROPHY,
-                    ModItems.TROPHY_BRONZE,
                     "Trophy of Pitiful Fishing",
                     10,
                     0,
@@ -1199,8 +1199,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
                     TrophyProperties.TrophyType.TROPHY,
-                    ModItems.TROPHY_GOLD,
                     "Trophy of Overflowing Fishes",
                     0,
                     75,
@@ -1208,8 +1208,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_BRONZE),
                     TrophyProperties.TrophyType.TROPHY,
-                    ModItems.TROPHY_SILVER,
                     "Trophy of Fishes",
                     0,
                     150,
@@ -1217,13 +1217,34 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
                     TrophyProperties.TrophyType.TROPHY,
-                    ModItems.TROPHY_GOLD,
                     "Trophy of the Older Angler",
                     75,
                     200,
                     TrophyProperties.DEFAULT.chanceToCatch()
+            ),
+
+
+            //                                         ,--.
+            // ,---.   ,---.   ,---. ,--.--.  ,---.  ,-'  '-.  ,---.
+            //(  .-'  | .-. : | .--' |  .--' | .-. : '-.  .-' (  .-'
+            //.-'  `) \   --. \ `--. |  |    \   --.   |  |   .-'  `)
+            //`----'   `----'  `---' `--'     `----'   `--'   `----'
+            //
+
+            new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.DRIFTING_WATERLOGGED_BOTTLE)
+                            .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN),
+                    TrophyProperties.TrophyType.SECRET,
+                    "",
+                    6,
+                    15,
+                    100
             )
+
+
+
 
 
 
@@ -1526,7 +1547,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     {
         return ResourceKey.create(
                 Starcatcher.TROPHY_REGISTRY,
-                Starcatcher.rl(tp.type().getSerializedName() + "_" + tp.uniqueFishCount() + "_" + tp.totalCaughtCount()));
+                Starcatcher.rl(tp.trophyType().getSerializedName() + "_"  + tp.fp().fish().getRegisteredName().replace(":", "_") + "_" + tp.uniqueFishCount() + "_" + tp.totalCaughtCount()));
     }
 
 }

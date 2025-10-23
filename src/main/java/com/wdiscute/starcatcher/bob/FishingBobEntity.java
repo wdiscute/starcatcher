@@ -135,7 +135,7 @@ public class FishingBobEntity extends Projectile
             !trophiesCaught.contains(tp))
             {
 
-                ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(tp.baseItem().getKey()));
+                ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(tp.fp().fish().getKey()));
                 is.set(ModDataComponents.TROPHY, tp);
                 is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
 

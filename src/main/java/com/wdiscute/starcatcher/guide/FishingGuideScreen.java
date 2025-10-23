@@ -132,7 +132,7 @@ public class FishingGuideScreen extends Screen
 
         for (FishProperties fp : FishProperties.getFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
         for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
-            if (tp.type() == TrophyProperties.TrophyType.TROPHY) tps.add(tp);
+            if (tp.trophyType() == TrophyProperties.TrophyType.TROPHY) tps.add(tp);
 
         fishInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
@@ -442,7 +442,7 @@ public class FishingGuideScreen extends Screen
             ItemStack is;
             if (player.getData(ModDataAttachments.TROPHIES_CAUGHT).contains(tp))
             {
-                is = new ItemStack(tp.baseItem());
+                is = new ItemStack(tp.fp().fish());
                 is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
                 is.set(ModDataComponents.TROPHY, tp);
             }

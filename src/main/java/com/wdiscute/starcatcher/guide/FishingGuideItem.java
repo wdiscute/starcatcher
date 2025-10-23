@@ -20,7 +20,6 @@ public class FishingGuideItem extends Item
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
-        if(usedHand.equals(InteractionHand.OFF_HAND)) return super.use(level, player, usedHand);
         if(level.isClientSide) openScreen();
         return super.use(level, player, usedHand);
     }
@@ -29,8 +28,5 @@ public class FishingGuideItem extends Item
     private void openScreen()
     {
         Minecraft.getInstance().setScreen(new FishingGuideScreen());
-        //Minecraft.getInstance().setScreen(new FishingMinigameScreen(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, 1));
     }
-
-
 }

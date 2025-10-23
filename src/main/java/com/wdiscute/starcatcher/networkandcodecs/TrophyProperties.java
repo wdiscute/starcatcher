@@ -3,15 +3,11 @@ package com.wdiscute.starcatcher.networkandcodecs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModItems;
-import net.minecraft.core.Holder;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,8 +15,8 @@ import java.util.List;
 
 public record TrophyProperties
         (
-                TrophyType type,
-                Holder<Item> baseItem,
+                FishProperties fp,
+                TrophyType trophyType,
                 String customName,
                 int uniqueFishCount,
                 int totalCaughtCount,
@@ -29,8 +25,8 @@ public record TrophyProperties
 {
 
     public static final TrophyProperties DEFAULT = new TrophyProperties(
-            TrophyType.TROPHY,
-            ModItems.TROPHY_GOLD,
+            FishProperties.DEFAULT.withFish(ModItems.MISSINGNO),
+            TrophyType.NONE,
             "Missingno Trophy",
             Integer.MAX_VALUE,
             Integer.MAX_VALUE,
@@ -39,8 +35,8 @@ public record TrophyProperties
 
     public static final Codec<TrophyProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    TrophyType.CODEC.fieldOf("trophy_type").forGetter(TrophyProperties::type),
-                    BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("base_item").forGetter(TrophyProperties::baseItem),
+                    FishProperties.CODEC.optionalFieldOf("fish_properties", DEFAULT.fp).forGetter(TrophyProperties::fp),
+                    TrophyType.CODEC.optionalFieldOf("trophy_type", DEFAULT.trophyType).forGetter(TrophyProperties::trophyType),
                     Codec.STRING.optionalFieldOf("custom_name", DEFAULT.customName).forGetter(TrophyProperties::customName),
                     Codec.INT.optionalFieldOf("unique_fishes", DEFAULT.uniqueFishCount).forGetter(TrophyProperties::uniqueFishCount),
                     Codec.INT.optionalFieldOf("total_fishes", DEFAULT.totalCaughtCount).forGetter(TrophyProperties::totalCaughtCount),
@@ -49,8 +45,8 @@ public record TrophyProperties
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, TrophyProperties> STREAM_CODEC = StreamCodec.composite(
-            TrophyType.STREAM_CODEC, TrophyProperties::type,
-            ByteBufCodecs.holderRegistry(Registries.ITEM), TrophyProperties::baseItem,
+            FishProperties.STREAM_CODEC, TrophyProperties::fp,
+            TrophyType.STREAM_CODEC, TrophyProperties::trophyType,
             ByteBufCodecs.STRING_UTF8, TrophyProperties::customName,
             ByteBufCodecs.VAR_INT, TrophyProperties::uniqueFishCount,
             ByteBufCodecs.VAR_INT, TrophyProperties::totalCaughtCount,
@@ -62,13 +58,11 @@ public record TrophyProperties
 
     public static final Codec<List<TrophyProperties>> LIST_CODEC = TrophyProperties.CODEC.listOf();
 
-
-
     public enum TrophyType implements StringRepresentable
     {
         TROPHY("trophy"),
         SECRET("secret"),
-        TRASH("trash");
+        NONE("none");
 
         public static final Codec<TrophyType> CODEC = StringRepresentable.fromEnum(TrophyType::values);
         public static final StreamCodec<FriendlyByteBuf, TrophyType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(TrophyType.class);
@@ -84,6 +78,5 @@ public record TrophyProperties
             return this.key;
         }
     }
-
 
 }

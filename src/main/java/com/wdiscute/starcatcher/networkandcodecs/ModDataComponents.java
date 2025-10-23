@@ -1,7 +1,9 @@
 package com.wdiscute.starcatcher.networkandcodecs;
 
+import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.items.ColorfulBobber;
+import com.wdiscute.starcatcher.secretnotes.SecretNote;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
@@ -39,6 +41,10 @@ public class ModDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<FishProperties>> FISH_PROPERTIES = register(
             "fish_properties",
             builder -> builder.persistent(FishProperties.CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<SecretNote.Note>> SECRET_NOTE = register(
+            "secret_note",
+            builder -> builder.persistent(SecretNote.Note.CODEC));
 
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
