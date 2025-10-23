@@ -20,6 +20,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
@@ -106,6 +108,10 @@ public class PayloadReceiver
                         if(fp.rarity() == FishProperties.Rarity.LEGENDARY) exp = 35;
                         if(fbe.hook.is(ModItems.GOLD_HOOK)) exp *= (int) ((double) data.hits() / 3) + 1; //extra exp if gold hook is used
                         player.giveExperiencePoints(exp);
+
+                        //trigger item fished event
+                        ItemFishedEvent event = new ItemFishedEvent(List.of(is), 0, null);
+                        NeoForge.EVENT_BUS.post(event);
 
                     }
                     else
