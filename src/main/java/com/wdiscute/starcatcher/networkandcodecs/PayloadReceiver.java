@@ -109,9 +109,9 @@ public class PayloadReceiver
                         if(fbe.hook.is(ModItems.GOLD_HOOK)) exp *= (int) ((double) data.hits() / 3) + 1; //extra exp if gold hook is used
                         player.giveExperiencePoints(exp);
 
-                        //trigger item fished event
-                        ItemFishedEvent event = new ItemFishedEvent(List.of(is), 0, null);
-                        NeoForge.EVENT_BUS.post(event);
+                        //todo trigger item fished event
+                        //ItemFishedEvent event = new ItemFishedEvent(List.of(is), 0, null);
+                        //NeoForge.EVENT_BUS.post(event);
 
                     }
                     else
