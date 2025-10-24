@@ -640,7 +640,7 @@ public class FishingGuideScreen extends Screen
             columnNumber++;
             auxX = x - 2 + (columnNumber * 25);
             guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-            renderItem(new ItemStack(ModItems.HOOK.get()), x + (columnNumber * 25), y, 1);
+            renderItem(ironHook, x + (columnNumber * 25), y, 1);
             if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
             {
                 guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.hooks"), mouseX, mouseY);
@@ -656,7 +656,7 @@ public class FishingGuideScreen extends Screen
             columnNumber++;
             auxX = x - 2 + (columnNumber * 25);
             guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-            renderItem(new ItemStack(ModItems.FRUGAL_BOBBER.get()), x + (columnNumber * 25), y, 1);
+            renderItem(frugalBobber, x + (columnNumber * 25), y, 1);
             if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
             {
                 guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.bobbers"), mouseX, mouseY);
@@ -688,7 +688,7 @@ public class FishingGuideScreen extends Screen
             columnNumber++;
             auxX = x - 2 + (columnNumber * 25);
             guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-            renderItem(new ItemStack(ModItems.FISH_SPOTTER.get()), x + (columnNumber * 25), y, 1);
+            renderItem(fishSpotter, x + (columnNumber * 25), y, 1);
             if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
             {
                 guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.gadgets"), mouseX, mouseY);
@@ -704,7 +704,7 @@ public class FishingGuideScreen extends Screen
             columnNumber++;
             auxX = x - 2 + (columnNumber * 25);
             guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-            renderItem(new ItemStack(ModItems.TROPHY_GOLD.get()), x + (columnNumber * 25), y, 1);
+            renderItem(trophies, x + (columnNumber * 25), y, 1);
             if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
             {
                 guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.trophies"), mouseX, mouseY);
@@ -720,7 +720,7 @@ public class FishingGuideScreen extends Screen
             columnNumber++;
             auxX = x - 2 + (columnNumber * 25);
             guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-            renderItem(new ItemStack(ModItems.WATERLOGGED_BOTTLE.get()), x + (columnNumber * 25), y, 1);
+            renderItem(secrets, x + (columnNumber * 25), y, 1);
             if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
             {
                 guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.secrets"), mouseX, mouseY);
