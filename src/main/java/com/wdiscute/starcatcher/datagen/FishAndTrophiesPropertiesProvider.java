@@ -585,44 +585,44 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             //tide freshwater
 
-            overworldColdFreshwaterFish(fromRL("tide", "trout"))
+            overworldColdLakeFish(fromRL("tide", "trout"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldFreshwaterFish(fromRL("tide", "bass"))
+            overworldLakeFish(fromRL("tide", "bass"))
                     .withWeather(FishProperties.Weather.CLEAR)
                     .withMod("tide"),
 
-            overworldFreshwaterFish(fromRL("tide", "yellow_perch"))
+            overworldLakeFish(fromRL("tide", "yellow_perch"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("tide"),
 
-            overworldFreshwaterFish(fromRL("tide", "bluegill"))
+            overworldMountainFish(fromRL("tide", "bluegill"))
                     .withMod("tide"),
 
-            overworldWarmFreshwaterFish(fromRL("tide", "mint_carp"))
+            overworldWarmMountainFish(fromRL("tide", "mint_carp"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldColdFreshwaterFish(fromRL("tide", "pike"))
+            overworldColdRiverFish(fromRL("tide", "pike"))
                     .withMod("tide"),
 
-            overworldWarmFreshwaterFish(fromRL("tide", "guppy"))
+            overworldWarmLakeFish(fromRL("tide", "guppy"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withMod("tide"),
 
-            overworldColdFreshwaterFish(fromRL("tide", "catfish"))
+            overworldColdLakeFish(fromRL("tide", "catfish"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldColdFreshwaterFish(fromRL("tide", "clayfish"))
+            overworldColdLakeFish(fromRL("tide", "clayfish"))
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("tide"),
 
@@ -736,20 +736,20 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            fish(fromRL("tide", "oakfish"))
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT
+            overworldFish(fromRL("tide", "oakfish"))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD
                             .withBiomes(rl("minecraft", "forest")))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            overworldColdFreshwaterFish(fromRL("tide", "frostbite_flounder"))
+            overworldColdLakeFish(fromRL("tide", "frostbite_flounder"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            fish(fromRL("tide", "mirage_catfish"))
+            overworldFish(fromRL("tide", "mirage_catfish"))
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD
                             .withBiomesTags(rl("minecraft", "is_badlands")))
                     .withMod("tide"),
 
@@ -758,15 +758,15 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            fish(fromRL("tide", "sunspike_goby"))
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT
+            overworldFish(fromRL("tide", "sunspike_goby"))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD
                             .withBiomesTags(rl("minecraft", "is_savanna")))
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            fish(fromRL("tide", "birch_trout"))
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT
+            overworldFish(fromRL("tide", "birch_trout"))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD
                             .withBiomesTags(StarcatcherTags.IS_BIRCH_FOREST))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
@@ -904,7 +904,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            overworldFreshwaterFish(fromRL("tide", "midas_fish"))
+            overworldLakeFish(fromRL("tide", "midas_fish"))
                     .withBaseChance(1)
                     .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
@@ -988,7 +988,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withMod("aquaculture"),
 
-            overworldWarmFreshwaterFish(fromRL("aquaculture", "boulti"))
+            overworldWarmLakeFish(fromRL("aquaculture", "boulti"))
                     .withRarity(FishProperties.Rarity.RARE)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withDifficulty(FishProperties.Difficulty.HARD)
@@ -1113,13 +1113,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("fishofthieves"),
 
-            overworldFreshwaterFish(fromRL("fishofthieves", "pondie"))
+            overworldLakeFish(fromRL("fishofthieves", "pondie"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withBaseChance(2)
                     .withMod("fishofthieves"),
 
-            overworldFreshwaterFish(fromRL("fishofthieves", "islehopper"))
+            overworldRiverFish(fromRL("fishofthieves", "islehopper"))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withBaseChance(2)
@@ -1196,7 +1196,6 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     0,
                     TrophyProperties.DEFAULT.chanceToCatch()
             ),
-
 
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
@@ -1410,27 +1409,6 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     public static FishProperties overworldLakeFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAKE)
-                .withMustBeCaughtAboveY(50)
-                .withMustBeCaughtBelowY(100);
-    }
-
-    public static FishProperties overworldFreshwaterFish(Holder<Item> fish)
-    {
-        return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_FRESHWATER)
-                .withMustBeCaughtAboveY(50)
-                .withMustBeCaughtBelowY(100);
-    }
-
-    public static FishProperties overworldWarmFreshwaterFish(Holder<Item> fish)
-    {
-        return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_FRESHWATER)
-                .withMustBeCaughtAboveY(50)
-                .withMustBeCaughtBelowY(100);
-    }
-
-    public static FishProperties overworldColdFreshwaterFish(Holder<Item> fish)
-    {
-        return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_COLD_FRESHWATER)
                 .withMustBeCaughtAboveY(50)
                 .withMustBeCaughtBelowY(100);
     }
