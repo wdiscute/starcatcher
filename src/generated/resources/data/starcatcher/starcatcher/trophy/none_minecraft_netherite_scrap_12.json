@@ -1,21 +1,18 @@
 {
   "chance_to_catch": 33,
   "custom_name": "",
-  "epic": {
-    "total": 1,
-    "unique": 10
-  },
   "fish_properties": {
-    "above_y": 50,
-    "fish": "starcatcher:scalding_bottle",
+    "fish": "minecraft:netherite_scrap",
     "world_restrictions": {
       "dimensions": [
-        "minecraft:overworld"
+        "minecraft:the_nether"
       ],
       "fluids": [
         "minecraft:lava"
       ]
     }
   },
-  "trophy_type": "secret"
+  "legendary": {
+    "total": 3
+  }
 }

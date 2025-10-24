@@ -149,7 +149,7 @@
   "item.starcatcher.missingno": "???",
 
   "item.starcatcher.fish_spotter": "Fish Spotter",
-  "tooltip.starcatcher.fish_spotter.0": "A handy tool to any <rgb>angler</rgb> which",
+  "tooltip.starcatcher.fish_spotter.0": "A handy tool to any angler which",
   "tooltip.starcatcher.fish_spotter.1": "displays the fishes around the area.",
 
   "item.starcatcher.fish_bones" : "Fish Bones",
@@ -175,11 +175,13 @@
   "tooltip.starcatcher.trophy.0" : "A trophy proving of one's skill.",
   "tooltip.starcatcher.trophy.1" : "It is said to appear in an angler's fishing line",
   "tooltip.starcatcher.trophy.2" : "once they have caught:",
+  "tooltip.starcatcher.trophy.once" : "once ",
+  "tooltip.starcatcher.trophy.have_been_caught" : " have been caught.",
 
   "tooltip.starcatcher.trophy.unique" : "<rgb>[&]</rgb> unique$fishes",
   "tooltip.starcatcher.trophy.total" : "<rgb>[&]</rgb> total$fishes",
 
-  "tooltip.starcatcher.trophy.all" : "",
+  "tooltip.starcatcher.trophy.all" : " ",
   "tooltip.starcatcher.trophy.common" : " common ",
   "tooltip.starcatcher.trophy.uncommon" : " <gradient-37>uncommon</gradient-43> ",
   "tooltip.starcatcher.trophy.rare" : " <gradient-57>rare</gradient-67> ",
@@ -424,7 +426,7 @@
   "gui.secret_note.crystal_hook.10" : "If anyone finds this letter drifting amid the",
   "gui.secret_note.crystal_hook.11" : "oceans, you are welcome to take my precious",
   "gui.secret_note.crystal_hook.12" : "Crystal Hook. Once you've caught at least",
-  "gui.secret_note.crystal_hook.13" : "one legendary fish, the Older Anglers",
+  "gui.secret_note.crystal_hook.13" : "one legendary fish, the <gradient-30>Older Anglers</gradient-50>",
   "gui.secret_note.crystal_hook.14" : "will shine their blessing upon you and",
   "gui.secret_note.crystal_hook.15" : "my crystal hook will bite your hook.",
 
