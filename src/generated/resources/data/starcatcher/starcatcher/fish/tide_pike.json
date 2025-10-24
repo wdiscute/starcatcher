@@ -10,7 +10,6 @@
   "fish": "tide:pike",
   "world_restrictions": {
     "biomes_tags": [
-      "starcatcher:is_cold_lake",
       "starcatcher:is_cold_river"
     ],
     "dimensions": [

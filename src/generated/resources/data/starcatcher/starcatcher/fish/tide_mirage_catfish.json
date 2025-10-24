@@ -24,6 +24,9 @@
   "world_restrictions": {
     "biomes_tags": [
       "minecraft:is_badlands"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
     ]
   }
 }

@@ -22,6 +22,9 @@
   "world_restrictions": {
     "biomes": [
       "minecraft:forest"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
     ]
   }
 }

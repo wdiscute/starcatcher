@@ -24,7 +24,8 @@
   "weather": "rain",
   "world_restrictions": {
     "biomes_blacklist_tags": [
-      "starcatcher:is_ocean"
+      "starcatcher:is_ocean",
+      "starcatcher:is_river"
     ],
     "dimensions": [
       "minecraft:overworld"

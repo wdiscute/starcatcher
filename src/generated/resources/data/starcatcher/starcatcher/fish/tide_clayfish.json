@@ -11,8 +11,7 @@
   "weather": "rain",
   "world_restrictions": {
     "biomes_tags": [
-      "starcatcher:is_cold_lake",
-      "starcatcher:is_cold_river"
+      "starcatcher:is_cold_lake"
     ],
     "dimensions": [
       "minecraft:overworld"

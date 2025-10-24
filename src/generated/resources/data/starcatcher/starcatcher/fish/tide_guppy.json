@@ -24,8 +24,7 @@
   "fish": "tide:guppy",
   "world_restrictions": {
     "biomes_tags": [
-      "starcatcher:is_warm",
-      "starcatcher:is_warm_river"
+      "starcatcher:is_warm"
     ],
     "dimensions": [
       "minecraft:overworld"
