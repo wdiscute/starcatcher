@@ -41,6 +41,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     }
 
     private static int customFishCount = 0;
+    private static int customTrophyCount = 0;
 
     //region fps
     public static final List<FishProperties> FPS = new ArrayList<>(
@@ -1169,58 +1170,94 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     //region trophies
     public static final List<TrophyProperties> TROPHIES = List.of(
 
+            new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
+                    TrophyProperties.TrophyType.TROPHY,
+                    "Trophy of Masterful Fishing",
+                    new TrophyProperties.RarityProgress(50, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()
+            ),
+
+            new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
+                    TrophyProperties.TrophyType.TROPHY,
+                    "Trophy of Masterful Fishing",
+                    new TrophyProperties.RarityProgress(25, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()
+            ),
+
+            new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_BRONZE),
+                    TrophyProperties.TrophyType.TROPHY,
+                    "Trophy of Masterful Fishing",
+                    new TrophyProperties.RarityProgress(10, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()
+            ),
+
+            new TrophyProperties(
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
+                    TrophyProperties.TrophyType.TROPHY,
+                    "Trophy of Masterful Fishing",
+                    new TrophyProperties.RarityProgress(0, 75),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()
+            ),
 
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of Masterful Fishing",
-                    50,
-                    0,
-                    TrophyProperties.DEFAULT.chanceToCatch()
-            ),
-
-            new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
-                    TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Skilled Fishing",
-                    25,
-                    0,
-                    TrophyProperties.DEFAULT.chanceToCatch()
-            ),
-
-            new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_BRONZE),
-                    TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Pitiful Fishing",
-                    10,
-                    0,
+                    new TrophyProperties.RarityProgress(0, 150),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.DEFAULT.chanceToCatch()
             ),
 
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
                     TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Overflowing Fishes",
-                    0,
-                    75,
+                    "Trophy of Masterful Fishing",
+                    new TrophyProperties.RarityProgress(75, 200),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.DEFAULT.chanceToCatch()
             ),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_BRONZE),
+                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
                     TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Fishes",
-                    0,
-                    150,
-                    TrophyProperties.DEFAULT.chanceToCatch()
-            ),
-
-            new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
-                    TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of the Older Angler",
-                    75,
-                    200,
+                    "test trophy",
+                    new TrophyProperties.RarityProgress(1, 1),
+                    new TrophyProperties.RarityProgress(1, 1),
+                    new TrophyProperties.RarityProgress(1, 1),
+                    new TrophyProperties.RarityProgress(1, 1),
+                    new TrophyProperties.RarityProgress(0, 1),
+                    new TrophyProperties.RarityProgress(0, 1),
                     TrophyProperties.DEFAULT.chanceToCatch()
             ),
 
@@ -1237,15 +1274,90 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN),
                     TrophyProperties.TrophyType.SECRET,
                     "",
-                    6,
-                    15,
+                    new TrophyProperties.RarityProgress(6, 15),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
                     100
+            ),
+
+            new TrophyProperties(
+                    overworldLakeFish(ModItems.SCALDING_BOTTLE)
+                            .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN),
+                    TrophyProperties.TrophyType.SECRET,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(1, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    33
+            ),
+
+
+            //
+            //          ,--.   ,--.
+            // ,---.  ,-'  '-. |  ,---.   ,---.  ,--.--.  ,---.
+            //| .-. | '-.  .-' |  .-.  | | .-. : |  .--' (  .-'
+            //' '-' '   |  |   |  | |  | \   --. |  |    .-'  `)
+            // `---'    `--'   `--' `--'  `----' `--'    `----'
+            //
+
+
+            new TrophyProperties(
+                    overworldDeepslateFish(ModItems.CRYSTAL_HOOK),
+                    TrophyProperties.TrophyType.NONE,
+                    "",
+                    new TrophyProperties.RarityProgress(6, 15),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(1, 0),
+                    100
+            ),
+
+            new TrophyProperties(
+                    overworldDeepslateFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.DIAMOND)),
+                    TrophyProperties.TrophyType.NONE,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(1, 4),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    100
+            ),
+
+            new TrophyProperties(
+                    netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP)),
+                    TrophyProperties.TrophyType.NONE,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(3, 0),
+                    33
+            ),
+
+            new TrophyProperties(
+                    netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP)),
+                    TrophyProperties.TrophyType.NONE,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(0, 10),
+                    33
             )
-
-
-
-
-
 
 
     );
@@ -1523,9 +1635,10 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
     public static ResourceKey<TrophyProperties> createKey(TrophyProperties tp)
     {
+        customTrophyCount++;
         return ResourceKey.create(
                 Starcatcher.TROPHY_REGISTRY,
-                Starcatcher.rl(tp.trophyType().getSerializedName() + "_"  + tp.fp().fish().getRegisteredName().replace(":", "_") + "_" + tp.uniqueFishCount() + "_" + tp.totalCaughtCount()));
+                Starcatcher.rl(tp.trophyType().getSerializedName() + "_" + tp.fp().fish().getRegisteredName().replace(":", "_") + "_" + customTrophyCount));
     }
 
 }
