@@ -1186,7 +1186,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
                     TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Masterful Fishing",
+                    "Trophy of Skilled Fishing",
                     new TrophyProperties.RarityProgress(25, 0),
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1199,7 +1199,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_BRONZE),
                     TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Masterful Fishing",
+                    "Trophy of Pitiful Fishing",
                     new TrophyProperties.RarityProgress(10, 0),
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1212,7 +1212,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
                     TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Masterful Fishing",
+                    "Trophy of Flowing Fishes",
                     new TrophyProperties.RarityProgress(0, 75),
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1225,7 +1225,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
                     TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Masterful Fishing",
+                    "Trophy of Infinite Fishes",
                     new TrophyProperties.RarityProgress(0, 150),
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1238,26 +1238,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             new TrophyProperties(
                     FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
                     TrophyProperties.TrophyType.TROPHY,
-                    "Trophy of Masterful Fishing",
-                    new TrophyProperties.RarityProgress(75, 200),
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.DEFAULT.chanceToCatch()
-            ),
-
-            new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
-                    TrophyProperties.TrophyType.TROPHY,
-                    "test trophy",
-                    new TrophyProperties.RarityProgress(1, 1),
-                    new TrophyProperties.RarityProgress(1, 1),
-                    new TrophyProperties.RarityProgress(1, 1),
-                    new TrophyProperties.RarityProgress(1, 1),
-                    new TrophyProperties.RarityProgress(0, 1),
-                    new TrophyProperties.RarityProgress(0, 1),
+                    "Trophy of the Older Angler",
+                    new TrophyProperties.RarityProgress(0, 0),
+                    new TrophyProperties.RarityProgress(50, 100),
+                    new TrophyProperties.RarityProgress(25, 50),
+                    new TrophyProperties.RarityProgress(17, 30),
+                    new TrophyProperties.RarityProgress(12, 20),
+                    new TrophyProperties.RarityProgress(8, 10),
                     TrophyProperties.DEFAULT.chanceToCatch()
             ),
 
