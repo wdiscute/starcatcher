@@ -174,9 +174,18 @@
 
   "tooltip.starcatcher.trophy.0" : "A trophy proving of one's skill.",
   "tooltip.starcatcher.trophy.1" : "It is said to appear in an angler's fishing line",
+  "tooltip.starcatcher.trophy.2" : "once they have caught:",
 
-  "tooltip.starcatcher.trophy.unique" : "once <rgb>[&]</rgb> unique fishes have been caught!",
-  "tooltip.starcatcher.trophy.total" : "once <rgb>[&]</rgb> total fishes have been caught!",
+  "tooltip.starcatcher.trophy.unique" : "<rgb>[&]</rgb> unique$fishes",
+  "tooltip.starcatcher.trophy.total" : "<rgb>[&]</rgb> total$fishes",
+
+  "tooltip.starcatcher.trophy.all" : "",
+  "tooltip.starcatcher.trophy.common" : " common ",
+  "tooltip.starcatcher.trophy.uncommon" : " <gradient-37>uncommon</gradient-43> ",
+  "tooltip.starcatcher.trophy.rare" : " <gradient-57>rare</gradient-67> ",
+  "tooltip.starcatcher.trophy.epic" : " <gradient-80>epic</gradient-90> ",
+  "tooltip.starcatcher.trophy.legendary" : " <rgb>legendary</rgb> ",
+
 
   "tooltip.starcatcher.trophy.both.0" : "once both <rgb>[&]</rgb> unique fishes,",
   "tooltip.starcatcher.trophy.both.1" : "and <rgb>[&]</rgb> total fishes have been caught!",
@@ -401,22 +410,32 @@
   "gui.secret_note.crystal_hook.4" : "",
   "gui.secret_note.crystal_hook.5" : "That's what past me thought anyways,",
   "gui.secret_note.crystal_hook.6" : "if I knew I would accidentally drop my",
-  "gui.secret_note.crystal_hook.7" : "crystal hook down by a deepslate water lakes",
+  "gui.secret_note.crystal_hook.7" : "crystal hook down by the deepslate water lakes",
   "gui.secret_note.crystal_hook.8" : "I would have never went down there.",
   "gui.secret_note.crystal_hook.9" : "",
   "gui.secret_note.crystal_hook.10" : "If anyone finds this letter drifting amid the",
   "gui.secret_note.crystal_hook.11" : "oceans, you are welcome to take my precious",
-  "gui.secret_note.crystal_hook.12" : " Crystal Hook",
-  "gui.secret_note.crystal_hook.13" : "and use it for lava fishing.",
-  "gui.secret_note.crystal_hook.14" : "",
-  "gui.secret_note.crystal_hook.15" : "Please make good use of it. There are a",
-  "gui.secret_note.crystal_hook.16" : "lot of tasty fishes down by the lava lakes.",
-  "gui.secret_note.crystal_hook.17" : "If you have the teeth to bite through",
-  "gui.secret_note.crystal_hook.18" : "obsidian anyways.",
+  "gui.secret_note.crystal_hook.12" : "Crystal Hook. Once you've caught at least",
+  "gui.secret_note.crystal_hook.13" : "one legendary fish, the Older Anglers",
+  "gui.secret_note.crystal_hook.14" : "will shine their blessing upon you and",
+  "gui.secret_note.crystal_hook.15" : "my crystal hook will bite your hook.",
 
 
 
-
+  "gui.secret_note.lava_note.0" : "",
+  "gui.secret_note.lava_note.1" : "",
+  "gui.secret_note.lava_note.2" : "'Buy my bottles! Buy my bottles! They are lava-proof™!!'",
+  "gui.secret_note.lava_note.3" : "",
+  "gui.secret_note.lava_note.4" : "'I promise they really are lava-proof™'",
+  "gui.secret_note.lava_note.5" : "",
+  "gui.secret_note.lava_note.6" : "I am so tired of these SCAMMERS promising",
+  "gui.secret_note.lava_note.7" : "lava-proof™ bottles, as if anything could survive",
+  "gui.secret_note.lava_note.8" : "being submerged in lava! Wanna see what I think",
+  "gui.secret_note.lava_note.9" : "of your stupid lava-proof™ bottles??",
+  "gui.secret_note.lava_note.10" : "",
+  "gui.secret_note.lava_note.11" : "This letter is going right into this so-called",
+  "gui.secret_note.lava_note.12" : "'Lava-Proof™ Bottle' and straight to the",
+  "gui.secret_note.lava_note.13" : "nearest lava pool I can find! Heh that will show them.",
 
 
 

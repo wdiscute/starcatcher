@@ -1,0 +1,15 @@
+{
+  "custom_name": "",
+  "epic": {
+    "total": 1
+  },
+  "fish_properties": {
+    "below_y": 0,
+    "fish": "minecraft:netherite_ingot",
+    "world_restrictions": {
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "custom_name": "",
+  "fish_properties": {
+    "below_y": 0,
+    "fish": "minecraft:diamond",
+    "world_restrictions": {
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    }
+  },
+  "rare": {
+    "total": 1,
+    "unique": 4
+  }
+}

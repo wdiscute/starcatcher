@@ -1,0 +1,10 @@
+{
+  "all": {
+    "total": 50
+  },
+  "custom_name": "Trophy of Masterful Fishing",
+  "fish_properties": {
+    "fish": "starcatcher:trophy_gold"
+  },
+  "trophy_type": "trophy"
+}

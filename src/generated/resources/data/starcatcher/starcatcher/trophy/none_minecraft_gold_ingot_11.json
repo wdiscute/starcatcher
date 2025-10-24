@@ -1,0 +1,15 @@
+{
+  "custom_name": "",
+  "fish_properties": {
+    "below_y": 0,
+    "fish": "minecraft:gold_ingot",
+    "world_restrictions": {
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    }
+  },
+  "uncommon": {
+    "total": 1
+  }
+}

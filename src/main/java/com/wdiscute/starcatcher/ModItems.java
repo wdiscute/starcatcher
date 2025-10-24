@@ -71,6 +71,7 @@ public interface ModItems
     DeferredItem<Item> BROKEN_BOTTLE = singleStackItem("broken_bottle");
 
     DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () -> new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
+    DeferredItem<Item> SCALDING_BOTTLE = ITEMS.register("scalding_bottle", () -> new NoteContainer(SecretNote.Note.LAVA_NOTE));
 
 
 

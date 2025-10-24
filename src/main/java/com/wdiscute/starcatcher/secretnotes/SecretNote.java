@@ -45,6 +45,7 @@ public class SecretNote extends Item
     public enum Note implements StringRepresentable
     {
         CRYSTAL_HOOK("crystal_hook"),
+        LAVA_NOTE("lava_note"),
         NOTE_1("note_1");
 
         public static final Codec<Note> CODEC = StringRepresentable.fromEnum(Note::values);

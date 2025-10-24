@@ -1,0 +1,19 @@
+{
+  "all": {
+    "total": 6,
+    "unique": 15
+  },
+  "custom_name": "",
+  "fish_properties": {
+    "below_y": 0,
+    "fish": "starcatcher:crystal_hook",
+    "world_restrictions": {
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    }
+  },
+  "legendary": {
+    "total": 1
+  }
+}
