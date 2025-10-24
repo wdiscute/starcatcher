@@ -30,6 +30,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class FishingBobEntity extends Projectile
 {
@@ -119,31 +120,66 @@ public class FishingBobEntity extends Projectile
         //server only
         List<FishProperties> available = new ArrayList<>(List.of());
 
-        int numberOfUniqueFishesCaught = player.getData(ModDataAttachments.FISHES_CAUGHT).size() - 1;
-        int numberOfTotalFishesCaught = 0;
+        List<TrophyProperties> trophiesCaught = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
+
+        List<FishCaughtCounter> fcc2 = player.getData(ModDataAttachments.FISHES_CAUGHT);
+        List<TrophyProperties> tc = player.getData(ModDataAttachments.TROPHIES_CAUGHT);
+
+        //-1 on the common to account for the default "fish" unfortunately, theres probably a way to fix this
+        TrophyProperties.RarityProgress all = new TrophyProperties.RarityProgress(0, player.getData(ModDataAttachments.FISHES_CAUGHT).size() - 1); //-1 to remove the default
+        TrophyProperties.RarityProgress common = new TrophyProperties.RarityProgress(0, -1);
+        TrophyProperties.RarityProgress uncommon = TrophyProperties.RarityProgress.DEFAULT;
+        TrophyProperties.RarityProgress rare = TrophyProperties.RarityProgress.DEFAULT;
+        TrophyProperties.RarityProgress epic = TrophyProperties.RarityProgress.DEFAULT;
+        TrophyProperties.RarityProgress legendary = TrophyProperties.RarityProgress.DEFAULT;
 
         for (FishCaughtCounter fcc : player.getData(ModDataAttachments.FISHES_CAUGHT))
         {
-            numberOfTotalFishesCaught += fcc.count();
+            all = new TrophyProperties.RarityProgress(all.total() + fcc.count(), all.unique());
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.COMMON)
+                common = new TrophyProperties.RarityProgress(common.total() + fcc.count(), common.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.UNCOMMON)
+                uncommon = new TrophyProperties.RarityProgress(uncommon.total() + fcc.count(), uncommon.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.RARE)
+                rare = new TrophyProperties.RarityProgress(rare.total() + fcc.count(), rare.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.EPIC)
+                epic = new TrophyProperties.RarityProgress(epic.total() + fcc.count(), epic.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.LEGENDARY)
+                legendary = new TrophyProperties.RarityProgress(legendary.total() + fcc.count(), legendary.unique() + 1);
+
         }
 
         for (TrophyProperties tp : level().registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
         {
-            List<TrophyProperties> trophiesCaught = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
-
-            if(numberOfTotalFishesCaught >= tp.totalCaughtCount()  && numberOfUniqueFishesCaught >= tp.uniqueFishCount() &&
-            !trophiesCaught.contains(tp))
+            //if tp can be caught
+            if (check(all, tp.all())
+                    && check(common, tp.common())
+                    && check(uncommon, tp.uncommon())
+                    && check(rare, tp.rare())
+                    && check(epic, tp.epic())
+                    && check(legendary, tp.legendary())
+                    && !trophiesCaught.contains(tp)
+                    && FishProperties.getChance(tp.fp(), this, new ItemStack(ModItems.ROD.get())) > 0
+                    && random.nextIntBetweenInclusive(0, 99) < tp.chanceToCatch()
+            )
             {
 
                 ItemStack is = new ItemStack(BuiltInRegistries.ITEM.get(tp.fp().fish().getKey()));
                 is.set(ModDataComponents.TROPHY, tp);
-                if(!fpToFish.customName().isEmpty())
+                if (!tp.customName().isEmpty())
                     is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
 
-                Entity itemFished = new ItemEntity(level(), position().x, position().y + 1.2f, position().z,
+                Entity itemFished = new ItemEntity(
+                        level(), position().x, position().y + 1.2f, position().z,
                         is);
 
-                Vec3 vec3 = new Vec3(Math.clamp((player.position().x - position().x) / 25, -1, 1),
+                Vec3 vec3 = new Vec3(
+                        Math.clamp((player.position().x - position().x) / 25, -1, 1),
                         0.7 + Math.clamp((player.position().y - position().y) / 20, -1, 1),
                         Math.clamp((player.position().z - position().z) / 25, -1, 1));
 
@@ -157,8 +193,8 @@ public class FishingBobEntity extends Projectile
                 kill();
                 return;
             }
-        }
 
+        }
 
 
         for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
@@ -282,7 +318,7 @@ public class FishingBobEntity extends Projectile
     public void lavaHurt()
     {
         super.lavaHurt();
-        if(!hook.is(StarcatcherTags.HOOKS_SURVIVE_FIRE) && !level().isClientSide)
+        if (!hook.is(StarcatcherTags.HOOKS_SURVIVE_FIRE) && !level().isClientSide)
         {
             player.setData(ModDataAttachments.FISHING, "");
             kill();
@@ -445,6 +481,11 @@ public class FishingBobEntity extends Projectile
     protected void defineSynchedData(SynchedEntityData.Builder builder)
     {
         builder.define(STATE, 0);
+    }
+
+    public static boolean check(TrophyProperties.RarityProgress current, TrophyProperties.RarityProgress restriction)
+    {
+        return current.total() >= restriction.total() && current.unique() >= restriction.unique();
     }
 
 }
