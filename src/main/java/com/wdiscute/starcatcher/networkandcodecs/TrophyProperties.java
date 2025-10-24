@@ -18,6 +18,7 @@ public record TrophyProperties
                 FishProperties fp,
                 TrophyType trophyType,
                 String customName,
+                RarityProgress all,
                 RarityProgress common,
                 RarityProgress uncommon,
                 RarityProgress rare,
@@ -36,6 +37,7 @@ public record TrophyProperties
             RarityProgress.DEFAULT,
             RarityProgress.DEFAULT,
             RarityProgress.DEFAULT,
+            RarityProgress.DEFAULT,
             100
             );
 
@@ -44,6 +46,7 @@ public record TrophyProperties
                     FishProperties.CODEC.optionalFieldOf("fish_properties", DEFAULT.fp).forGetter(TrophyProperties::fp),
                     TrophyType.CODEC.optionalFieldOf("trophy_type", DEFAULT.trophyType).forGetter(TrophyProperties::trophyType),
                     Codec.STRING.optionalFieldOf("custom_name", DEFAULT.customName).forGetter(TrophyProperties::customName),
+                    RarityProgress.CODEC.optionalFieldOf("all", DEFAULT.common).forGetter(TrophyProperties::all),
                     RarityProgress.CODEC.optionalFieldOf("common", DEFAULT.common).forGetter(TrophyProperties::common),
                     RarityProgress.CODEC.optionalFieldOf("uncommon", DEFAULT.common).forGetter(TrophyProperties::uncommon),
                     RarityProgress.CODEC.optionalFieldOf("rare", DEFAULT.common).forGetter(TrophyProperties::rare),
@@ -57,6 +60,7 @@ public record TrophyProperties
             FishProperties.STREAM_CODEC, TrophyProperties::fp,
             TrophyType.STREAM_CODEC, TrophyProperties::trophyType,
             ByteBufCodecs.STRING_UTF8, TrophyProperties::customName,
+            RarityProgress.STREAM_CODEC, TrophyProperties::all,
             RarityProgress.STREAM_CODEC, TrophyProperties::common,
             RarityProgress.STREAM_CODEC, TrophyProperties::uncommon,
             RarityProgress.STREAM_CODEC, TrophyProperties::rare,
@@ -85,7 +89,6 @@ public record TrophyProperties
         );
 
         public static final RarityProgress DEFAULT = new RarityProgress(0, 0);
-
     }
 
     public enum TrophyType implements StringRepresentable
