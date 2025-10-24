@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-23T16:48:24.3203454	Item Models: starcatcher
+// 1.21.1	2025-10-24T17:41:08.226185	Item Models: starcatcher
 190248e04c8aaf81e80cc0d828c1b3f9addf4641 assets/starcatcher/models/item/agave_bream.json
 033477fbb520065b97801242f6e7c58288fea05d assets/starcatcher/models/item/amethystback.json
 c9d191032ac9251c4e385286728bcf4b6bb965b2 assets/starcatcher/models/item/aquamarine_pike.json
@@ -12,6 +12,7 @@ f6622b9583e175a1425975e29509e36f596ff8ec assets/starcatcher/models/item/blue_cry
 838c373fd291ce73dedf6024df8f9e3021aa278e assets/starcatcher/models/item/boreal.json
 7cb8ba8815449855022e8935862fa20a52eee3a8 assets/starcatcher/models/item/bright_amethyst_snapper.json
 5becb58593d2ba6ec1da2dab7983c07b6ffd0c56 assets/starcatcher/models/item/broken_bottle.json
+62ceb251bfbc13f7cb95f66013984bdea191c2e5 assets/starcatcher/models/item/burning_bottle.json
 4f3eb43e292dace969f2c5503fb98cb88e976f33 assets/starcatcher/models/item/cactifish.json
 79b5cc1a5234adfd11b11def8c91364aa4a44655 assets/starcatcher/models/item/charfish.json
 0c77190e961a836d737046d35796897c2585f4fd assets/starcatcher/models/item/cherry_bait.json
@@ -95,6 +96,7 @@ c9dc38049fcc1a77e54fb6b7e295462ff987fd3f assets/starcatcher/models/item/pyrotrou
 9bd9b57e46cd5e12aaa0fd4c734049ec0c0fa36e assets/starcatcher/models/item/rose_siamese_fish.json
 3c4cd0702fa550bd122de83061ef2a4600a4143b assets/starcatcher/models/item/sage_catfish.json
 738d3b60bd2d0291668337ed7ba12c423f01da7b assets/starcatcher/models/item/sandtail.json
+9cb06e480135f992b0e7f6ead2055e2dc1f2adff assets/starcatcher/models/item/scalding_bottle.json
 6c088ceab662d333017cb31aabb5f39f0af97183 assets/starcatcher/models/item/scalding_pike.json
 c94605c331615ae8e07c32188719848afef5bae2 assets/starcatcher/models/item/scalding_treasure.json
 9bfa39c76b6f9c50217fcf329ce238772351e2e7 assets/starcatcher/models/item/scorched_bloodsucker.json

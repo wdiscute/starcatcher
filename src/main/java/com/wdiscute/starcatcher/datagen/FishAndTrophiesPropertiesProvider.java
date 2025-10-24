@@ -1284,8 +1284,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
-                    overworldLakeFish(ModItems.SCALDING_BOTTLE)
-                            .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN),
+                    overworldSurfaceLava(ModItems.SCALDING_BOTTLE),
                     TrophyProperties.TrophyType.SECRET,
                     "",
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1296,6 +1295,20 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     TrophyProperties.RarityProgress.DEFAULT,
                     33
             ),
+
+            new TrophyProperties(
+                    overworldSurfaceLava(ModItems.SCALDING_BOTTLE),
+                    TrophyProperties.TrophyType.SECRET,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(1, 10),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    33
+            ),
+
 
 
             //

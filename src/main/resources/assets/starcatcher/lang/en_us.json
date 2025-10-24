@@ -403,14 +403,22 @@
 
 
 
+
+  "gui.secret_note.sample_note.0" : "Hey how did you get this note??",
+  "gui.secret_note.sample_note.1" : "Are you cheating in creative mode??",
+  "gui.secret_note.sample_note.2" : "",
+  "gui.secret_note.sample_note.3" : "These notes should only be obtained through",
+  "gui.secret_note.sample_note.4" : "bottles otherwise they won't have the correct",
+  "gui.secret_note.sample_note.5" : "data and might crash the game! Be careful.",
+
   "gui.secret_note.crystal_hook.0" : "Day 34",
   "gui.secret_note.crystal_hook.1" : "",
   "gui.secret_note.crystal_hook.2" : "After yesterday's trouble I decided it's best",
   "gui.secret_note.crystal_hook.3" : "I finally get my hands on some diamond tools.",
   "gui.secret_note.crystal_hook.4" : "",
   "gui.secret_note.crystal_hook.5" : "That's what past me thought anyways,",
-  "gui.secret_note.crystal_hook.6" : "if I knew I would accidentally drop my",
-  "gui.secret_note.crystal_hook.7" : "crystal hook down by the deepslate water lakes",
+  "gui.secret_note.crystal_hook.6" : "if I knew I would accidentally drop my crystal",
+  "gui.secret_note.crystal_hook.7" : "hook down by the deepslate water lakes",
   "gui.secret_note.crystal_hook.8" : "I would have never went down there.",
   "gui.secret_note.crystal_hook.9" : "",
   "gui.secret_note.crystal_hook.10" : "If anyone finds this letter drifting amid the",
@@ -420,32 +428,53 @@
   "gui.secret_note.crystal_hook.14" : "will shine their blessing upon you and",
   "gui.secret_note.crystal_hook.15" : "my crystal hook will bite your hook.",
 
+  "gui.secret_note.lava_proof_bottle_1.0" : "",
+  "gui.secret_note.lava_proof_bottle_1.1" : "'Buy my bottles! Buy my bottles!'",
+  "gui.secret_note.lava_proof_bottle_1.2" : "'They are <gradient-00>Lava-Proof™</gradient-14>!!'",
+  "gui.secret_note.lava_proof_bottle_1.3" : "",
+  "gui.secret_note.lava_proof_bottle_1.4" : "'I promise they really are Lava-Proof™!'",
+  "gui.secret_note.lava_proof_bottle_1.5" : "",
+  "gui.secret_note.lava_proof_bottle_1.6" : "I am so tired of these SCAMMERS promising",
+  "gui.secret_note.lava_proof_bottle_1.7" : "<gradient-00>Lava-Proof™</gradient-14> bottles, as if anything could",
+  "gui.secret_note.lava_proof_bottle_1.8" : "survive being submerged in lava! Wanna see",
+  "gui.secret_note.lava_proof_bottle_1.9" : "what I think of your stupid <gradient-00>Lava-Proof™</gradient-14>",
+  "gui.secret_note.lava_proof_bottle_1.10" : "bottles??",
+  "gui.secret_note.lava_proof_bottle_1.11" : "",
+  "gui.secret_note.lava_proof_bottle_1.12" : "This letter is going right into this so-called",
+  "gui.secret_note.lava_proof_bottle_1.13" : "'<gradient-00>Lava-Proof™</gradient-14> Bottle' and straight to the",
+  "gui.secret_note.lava_proof_bottle_1.14" : "nearest lava pool I can find! Heh that will",
+  "gui.secret_note.lava_proof_bottle_1.15" : "show them.",
+
+  "gui.secret_note.lava_proof_bottle_2.0" : "",
+  "gui.secret_note.lava_proof_bottle_2.1" : "If anyone finds this letter, I would like",
+  "gui.secret_note.lava_proof_bottle_2.2" : "to apologise about my previous letter.",
+  "gui.secret_note.lava_proof_bottle_2.3" : "",
+  "gui.secret_note.lava_proof_bottle_2.4" : "These <gradient-00>Lava-Proof™</gradient-14> bottles really work.",
+  "gui.secret_note.lava_proof_bottle_2.5" : "",
+  "gui.secret_note.lava_proof_bottle_2.6" : "I must admit after so many scams and",
+  "gui.secret_note.lava_proof_bottle_2.7" : "promises of <gradient-00>Lava-Proof™</gradient-14> bottles I was",
+  "gui.secret_note.lava_proof_bottle_2.8" : "skeptical and never even gave them a shot.",
+  "gui.secret_note.lava_proof_bottle_2.9" : "",
+  "gui.secret_note.lava_proof_bottle_2.10" : "What can I say, you live and you learn.",
+  "gui.secret_note.lava_proof_bottle_2.11" : "",
+  "gui.secret_note.lava_proof_bottle_2.12" : "I have to go now, I heard there's a new",
+  "gui.secret_note.lava_proof_bottle_2.13" : "so-called 'lava-proof' enchantment. As if.",
 
 
-  "gui.secret_note.lava_note.0" : "",
-  "gui.secret_note.lava_note.1" : "",
-  "gui.secret_note.lava_note.2" : "'Buy my bottles! Buy my bottles! They are lava-proof™!!'",
-  "gui.secret_note.lava_note.3" : "",
-  "gui.secret_note.lava_note.4" : "'I promise they really are lava-proof™'",
-  "gui.secret_note.lava_note.5" : "",
-  "gui.secret_note.lava_note.6" : "I am so tired of these SCAMMERS promising",
-  "gui.secret_note.lava_note.7" : "lava-proof™ bottles, as if anything could survive",
-  "gui.secret_note.lava_note.8" : "being submerged in lava! Wanna see what I think",
-  "gui.secret_note.lava_note.9" : "of your stupid lava-proof™ bottles??",
-  "gui.secret_note.lava_note.10" : "",
-  "gui.secret_note.lava_note.11" : "This letter is going right into this so-called",
-  "gui.secret_note.lava_note.12" : "'Lava-Proof™ Bottle' and straight to the",
-  "gui.secret_note.lava_note.13" : "nearest lava pool I can find! Heh that will show them.",
 
 
+  "item.starcatcher.secret_note" : "Secret Note",
+  "item.starcatcher.broken_bottle" : "Broken Bottle",
+  "item.starcatcher.drifting_waterlogged_bottle" : "Secret Note",
 
+  "item.starcatcher.scalding_bottle" : "Scalding Bottle",
+  "tooltip.starcatcher.scalding_bottle.0" : "A scalding hot. Nothing remarkable about it.",
+  "tooltip.starcatcher.scalding_bottle.1" : "Wait... Could this really be a <gradient-00>Lava-Proof™</gradient-14> bottle!?",
+  "tooltip.starcatcher.scalding_bottle.2" : "I never thought these were real!",
+  "tooltip.starcatcher.scalding_bottle.3" : "Unfortunately it seems like breaking it open is the",
+  "tooltip.starcatcher.scalding_bottle.4" : "only way to get the message out...",
 
-
-
-
-
-
-
+  "item.starcatcher.burning_bottle" : "Burning Bottle",
 
   "item.starcatcher.obidontiee" : "Obidontiee",
   "item.starcatcher.silverveil_perch" : "Silverveil Perch",

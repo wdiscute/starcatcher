@@ -56,6 +56,7 @@ public interface ModItems
 
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new);
 
+    //trophies
     DeferredItem<Item> TROPHY_GOLD = ITEMS.register("trophy_gold", TrophyGold::new);
     DeferredItem<Item> TROPHY_SILVER = ITEMS.register("trophy_silver", TrophySilver::new);
     DeferredItem<Item> TROPHY_BRONZE = ITEMS.register("trophy_bronze", TrophyBronze::new);
@@ -65,13 +66,20 @@ public interface ModItems
 
 
 
-
+    //secrets
 
     DeferredItem<Item> SECRET_NOTE = ITEMS.register("secret_note", SecretNote::new);
     DeferredItem<Item> BROKEN_BOTTLE = singleStackItem("broken_bottle");
 
-    DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () -> new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
-    DeferredItem<Item> SCALDING_BOTTLE = ITEMS.register("scalding_bottle", () -> new NoteContainer(SecretNote.Note.LAVA_NOTE));
+    //notes
+    DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () ->
+            new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
+
+    DeferredItem<Item> SCALDING_BOTTLE = ITEMS.register("scalding_bottle", () ->
+            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_1));
+
+    DeferredItem<Item> BURNING_BOTTLE = ITEMS.register("burning_bottle", () ->
+            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_2));
 
 
 

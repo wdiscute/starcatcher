@@ -26,7 +26,7 @@ public class SecretNote extends Item
 {
     public SecretNote()
     {
-        super(new Properties().stacksTo(1));
+        super(new Properties().stacksTo(1).component(ModDataComponents.SECRET_NOTE, Note.SAMPLE_NOTE));
     }
 
     @Override
@@ -44,9 +44,10 @@ public class SecretNote extends Item
 
     public enum Note implements StringRepresentable
     {
+        SAMPLE_NOTE("sample_note"),
         CRYSTAL_HOOK("crystal_hook"),
-        LAVA_NOTE("lava_note"),
-        NOTE_1("note_1");
+        LAVA_PROOF_BOTTLE_1("lava_proof_bottle_1"),
+        LAVA_PROOF_BOTTLE_2("lava_proof_bottle_2");
 
         public static final Codec<Note> CODEC = StringRepresentable.fromEnum(Note::values);
         public static final StreamCodec<FriendlyByteBuf, Note> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Note.class);
