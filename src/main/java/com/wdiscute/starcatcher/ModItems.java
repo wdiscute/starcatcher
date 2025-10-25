@@ -1,10 +1,8 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
-import com.wdiscute.starcatcher.items.TrophyBronze;
-import com.wdiscute.starcatcher.items.TrophyGold;
-import com.wdiscute.starcatcher.items.TrophySilver;
 import com.wdiscute.starcatcher.items.*;
+import com.wdiscute.starcatcher.items.cheater.*;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
@@ -30,44 +28,43 @@ public interface ModItems
 
     DeferredItem<Item> STARCATCHER_TWINE = basicItem("starcatcher_twine");
 
+    //hooks
     DeferredItem<Item> HOOK = singleStackItem("hook");  //done
     DeferredItem<Item> SHINY_HOOK = singleStackItem("shiny_hook");  //done
     DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");    //done
     DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");  //done
-    DeferredItem<Item> CRYSTAL_HOOK = singleStackItem("crystal_hook"); //done
+    DeferredItem<Item> CRYSTAL_HOOK = singleStackItemFireResistant("crystal_hook"); //done
     DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");  //done
     DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");  //done
 
+    //bobbers
     DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
     DeferredItem<Item> GLITTER_BOBBER = singleStackItem("glitter_bobber"); //done
-    DeferredItem<Item> COLORFUL_BOBBER = ITEMS.register("colorful_bobber", ColorfulBobber::new);
+    DeferredItem<Item> COLORFUL_BOBBER = ITEMS.register("colorful_bobber", ColorfulBobber::new); //done
     DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
     DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
     DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber"); //done
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
 
-    DeferredItem<Item> CHERRY_BAIT = basicItem("cherry_bait"); //missing datagen for fishes
-    DeferredItem<Item> LUSH_BAIT = basicItem("lush_bait");
-    DeferredItem<Item> SCULK_BAIT = basicItem("sculk_bait");
-    DeferredItem<Item> DRIPSTONE_BAIT = basicItem("dripstone_bait");
-    DeferredItem<Item> MURKWATER_BAIT = basicItem("murkwater_bait");
-    DeferredItem<Item> LEGENDARY_BAIT = basicItem("legendary_bait");
-    DeferredItem<Item> METEOROLOGICAL_BAIT = basicItem("meteorological_bait");
+    //baits
+    DeferredItem<Item> CHERRY_BAIT = basicItem("cherry_bait"); //done
+    DeferredItem<Item> LUSH_BAIT = basicItem("lush_bait"); //done
+    DeferredItem<Item> SCULK_BAIT = basicItem("sculk_bait"); //done
+    DeferredItem<Item> DRIPSTONE_BAIT = basicItem("dripstone_bait"); //done
+    DeferredItem<Item> MURKWATER_BAIT = basicItem("murkwater_bait"); //done
+    DeferredItem<Item> LEGENDARY_BAIT = basicItem("legendary_bait"); //done
+    DeferredItem<Item> METEOROLOGICAL_BAIT = basicItem("meteorological_bait"); //done
 
-    DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new);
+    DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
 
     //trophies
-    DeferredItem<Item> TROPHY_GOLD = ITEMS.register("trophy_gold", TrophyGold::new);
-    DeferredItem<Item> TROPHY_SILVER = ITEMS.register("trophy_silver", TrophySilver::new);
-    DeferredItem<Item> TROPHY_BRONZE = ITEMS.register("trophy_bronze", TrophyBronze::new);
-
-
-
+    DeferredItem<Item> TROPHY_GOLD = singleStackItemFireResistant("trophy_gold");
+    DeferredItem<Item> TROPHY_SILVER = singleStackItemFireResistant("trophy_silver");
+    DeferredItem<Item> TROPHY_BRONZE = singleStackItemFireResistant("trophy_bronze");
 
 
 
     //secrets
-
     DeferredItem<Item> SECRET_NOTE = ITEMS.register("secret_note", SecretNote::new);
     DeferredItem<Item> BROKEN_BOTTLE = ITEMS.register("broken_bottle", BrokenBottle::new);
 
@@ -81,17 +78,26 @@ public interface ModItems
     DeferredItem<Item> BURNING_BOTTLE = ITEMS.register("burning_bottle", () ->
             new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_2));
 
-    DeferredItem<Item> BURNING_BOT2TLE = ITEMS.register("burningd_bottle", () ->
-            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_2));
+    DeferredItem<Item> HOPEFUL_BOTTLE = ITEMS.register("hopeful_bottle", () ->
+            new NoteContainer(SecretNote.Note.HOPEFUL_NOTE));
 
+    DeferredItem<Item> HOPELESS_BOTTLE = ITEMS.register("hopeless_bottle", () ->
+            new NoteContainer(SecretNote.Note.HOPELESS_NOTE));
 
+    //cheater items
+    DeferredItem<Item> AWARD_ALL_FISHES = ITEMS.register("award_all_fishes", AwardAllFishes::new);
+    DeferredItem<Item> AWARD_ONE_FISH = ITEMS.register("award_one_fish", AwardOneFish::new);
+    DeferredItem<Item> REVOKE_ALL_FISHES = ITEMS.register("revoke_all_fishes", RevokeAllFishes::new);
 
+    DeferredItem<Item> AWARD_ALL_TROPHIES = ITEMS.register("award_all_trophies", AwardAllTrophies::new);
+    DeferredItem<Item> REVOKE_ALL_TROPHIES = ITEMS.register("revoke_all_trophies", RevokeAllTrophies::new);
 
+    DeferredItem<Item> AWARD_ALL_SECRETS = ITEMS.register("award_all_secrets", AwardAllSecrets::new);
+    DeferredItem<Item> REVOKE_ALL_SECRETS = ITEMS.register("revoke_all_secrets", RevokeAllSecrets::new);
 
+    DeferredItem<Item> REVOKE_ALL_EXTRAS = ITEMS.register("revoke_all_extras", RevokeAllExtras::new);
 
-
-
-
+    //treasure
     DeferredItem<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new FishingTreasure(Starcatcher.rl("treasure/waterlogged_satchel")));
     DeferredItem<Item> TREASURE = ITEMS.register("treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/treasure")));
     DeferredItem<Item> SCALDING_TREASURE = ITEMS.register("scalding_treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/scalding_treasure")));
@@ -289,6 +295,11 @@ public interface ModItems
     static DeferredItem<Item> singleStackItem(String name)
     {
         return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(1)));
+    }
+
+    static DeferredItem<Item> singleStackItemFireResistant(String name)
+    {
+        return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(1).fireResistant()));
     }
 
     static DeferredItem<Item> basicItem(String name)
