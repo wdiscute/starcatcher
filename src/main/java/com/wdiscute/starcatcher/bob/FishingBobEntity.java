@@ -122,9 +122,6 @@ public class FishingBobEntity extends Projectile
 
         List<TrophyProperties> trophiesCaught = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
 
-        List<FishCaughtCounter> fcc2 = player.getData(ModDataAttachments.FISHES_CAUGHT);
-        List<TrophyProperties> tc = player.getData(ModDataAttachments.TROPHIES_CAUGHT);
-
         //-1 on the common to account for the default "fish" unfortunately, theres probably a way to fix this
         TrophyProperties.RarityProgress all = new TrophyProperties.RarityProgress(0, player.getData(ModDataAttachments.FISHES_CAUGHT).size() - 1); //-1 to remove the default
         TrophyProperties.RarityProgress common = new TrophyProperties.RarityProgress(0, -1);
