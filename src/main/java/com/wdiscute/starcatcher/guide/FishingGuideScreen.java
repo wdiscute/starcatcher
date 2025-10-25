@@ -58,6 +58,8 @@ public class FishingGuideScreen extends Screen
 
     private static final int MAX_HELP_PAGES = 4;
 
+    final boolean advancedTooltips;
+
     private final ItemStack basics;
     private final ItemStack treasures;
 
@@ -84,8 +86,6 @@ public class FishingGuideScreen extends Screen
     private final ItemStack murkwaterBait;
     private final ItemStack legendaryBait;
     private final ItemStack meteorologicalBait;
-
-
 
     private final ItemStack fishSpotter;
 
@@ -1463,6 +1463,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public void onClose()
     {
+        Minecraft.getInstance().options.advancedItemTooltips = advancedTooltips;
         PacketDistributor.sendToServer(new Payloads.FPsSeen(fpsSeen));
         super.onClose();
     }
@@ -1515,5 +1516,7 @@ public class FishingGuideScreen extends Screen
         trophies = new ItemStack(ModItems.TROPHY_GOLD.get());
         secrets = new ItemStack(ModItems.WATERLOGGED_BOTTLE.get());
 
+        advancedTooltips = Minecraft.getInstance().options.advancedItemTooltips;
+        Minecraft.getInstance().options.advancedItemTooltips = Minecraft.getInstance().player.isCreative() && advancedTooltips;
     }
 }
