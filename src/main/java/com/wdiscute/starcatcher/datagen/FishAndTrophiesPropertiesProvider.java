@@ -1296,6 +1296,45 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     33
             ),
 
+            new TrophyProperties(
+                    overworldSurfaceLava(ModItems.HOPEFUL_BOTTLE),
+                    TrophyProperties.TrophyType.SECRET,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(1, 10),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    33
+            ),
+
+            new TrophyProperties(
+                    overworldDeepOceanFish(ModItems.HOPELESS_BOTTLE),
+                    TrophyProperties.TrophyType.SECRET,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    5
+            ),
+
+            new TrophyProperties(
+                    overworldDeepOceanFish(ModItems.HOPEFUL_BOTTLE),
+                    TrophyProperties.TrophyType.SECRET,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    5
+            ),
+
 
 
             //
@@ -1309,7 +1348,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             new TrophyProperties(
                     overworldDeepslateFish(ModItems.CRYSTAL_HOOK),
-                    TrophyProperties.TrophyType.NONE,
+                    TrophyProperties.TrophyType.EXTRA,
                     "",
                     new TrophyProperties.RarityProgress(6, 15),
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1322,7 +1361,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             new TrophyProperties(
                     overworldDeepslateFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.DIAMOND)),
-                    TrophyProperties.TrophyType.NONE,
+                    TrophyProperties.TrophyType.EXTRA,
                     "",
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1335,7 +1374,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             new TrophyProperties(
                     netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP)),
-                    TrophyProperties.TrophyType.NONE,
+                    TrophyProperties.TrophyType.EXTRA,
                     "",
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1348,7 +1387,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             new TrophyProperties(
                     netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP)),
-                    TrophyProperties.TrophyType.NONE,
+                    TrophyProperties.TrophyType.EXTRA,
                     "",
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,

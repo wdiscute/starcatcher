@@ -153,99 +153,100 @@ public class Starcatcher
             {
                 TrophyProperties tp = stack.get(ModDataComponents.TROPHY);
 
-                if (event.getFlags().hasShiftDown() && tp.trophyType() == TrophyProperties.TrophyType.TROPHY)
-                {
-                    comp.add(Component.translatable("tooltip.libtooltips.generic.shift_down"));
-                    comp.add(Component.translatable("tooltip.libtooltips.generic.empty"));
-                    comp.add(Component.translatable("tooltip.starcatcher.trophy.0"));
-                    comp.add(Component.translatable("tooltip.starcatcher.trophy.1"));
-
-                    List<Component> list = new java.util.ArrayList<>();
-
-                    //all
-                    if (tp.all().total() != 0) list.add(Tooltips.decodeString(
-                            I18n.get("tooltip.starcatcher.trophy.total")
-                                    .replace("&", tp.all().total() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.all"))
-                    ));
-
-                    if (tp.all().unique() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
-                                    .replace("&", tp.all().unique() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.all"))));
-
-                    //common
-                    if (tp.common().total() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
-                                    .replace("&", tp.common().total() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.common"))));
-
-                    if (tp.common().unique() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
-                                    .replace("&", tp.common().unique() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.common"))));
-
-                    //uncommon
-                    if (tp.uncommon().total() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
-                                    .replace("&", tp.uncommon().total() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.uncommon"))));
-
-                    if (tp.uncommon().unique() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
-                                    .replace("&", tp.uncommon().unique() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.uncommon"))));
-
-                    //rare
-                    if (tp.rare().total() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
-                                    .replace("&", tp.rare().total() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.rare"))));
-
-                    if (tp.rare().unique() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
-                                    .replace("&", tp.rare().unique() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.rare"))));
-
-                    //epic
-                    if (tp.epic().total() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
-                                    .replace("&", tp.epic().total() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.epic"))));
-
-                    if (tp.epic().unique() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
-                                    .replace("&", tp.epic().unique() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.epic"))));
-
-                    //legendary
-                    if (tp.legendary().total() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
-                                    .replace("&", tp.legendary().total() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.legendary"))));
-
-                    if (tp.legendary().unique() != 0) list.add(
-                            Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
-                                    .replace("&", tp.legendary().unique() + "")
-                                    .replace("$", I18n.get("tooltip.starcatcher.trophy.legendary"))));
-
-                    if(list.size() == 1)
+                if (tp.trophyType() == TrophyProperties.TrophyType.TROPHY)
+                    if (event.getFlags().hasShiftDown())
                     {
-                        comp.add(Component.translatable("tooltip.starcatcher.trophy.once")
-                                .append(list.getFirst())
-                                .append(Component.translatable("tooltip.starcatcher.trophy.have_been_caught")));
+                        comp.add(Component.translatable("tooltip.libtooltips.generic.shift_down"));
+                        comp.add(Component.translatable("tooltip.libtooltips.generic.empty"));
+                        comp.add(Component.translatable("tooltip.starcatcher.trophy.0"));
+                        comp.add(Component.translatable("tooltip.starcatcher.trophy.1"));
+
+                        List<Component> list = new java.util.ArrayList<>();
+
+                        //all
+                        if (tp.all().total() != 0) list.add(Tooltips.decodeString(
+                                I18n.get("tooltip.starcatcher.trophy.total")
+                                        .replace("&", tp.all().total() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.all"))
+                        ));
+
+                        if (tp.all().unique() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
+                                        .replace("&", tp.all().unique() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.all"))));
+
+                        //common
+                        if (tp.common().total() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
+                                        .replace("&", tp.common().total() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.common"))));
+
+                        if (tp.common().unique() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
+                                        .replace("&", tp.common().unique() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.common"))));
+
+                        //uncommon
+                        if (tp.uncommon().total() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
+                                        .replace("&", tp.uncommon().total() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.uncommon"))));
+
+                        if (tp.uncommon().unique() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
+                                        .replace("&", tp.uncommon().unique() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.uncommon"))));
+
+                        //rare
+                        if (tp.rare().total() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
+                                        .replace("&", tp.rare().total() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.rare"))));
+
+                        if (tp.rare().unique() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
+                                        .replace("&", tp.rare().unique() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.rare"))));
+
+                        //epic
+                        if (tp.epic().total() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
+                                        .replace("&", tp.epic().total() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.epic"))));
+
+                        if (tp.epic().unique() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
+                                        .replace("&", tp.epic().unique() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.epic"))));
+
+                        //legendary
+                        if (tp.legendary().total() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.total")
+                                        .replace("&", tp.legendary().total() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.legendary"))));
+
+                        if (tp.legendary().unique() != 0) list.add(
+                                Tooltips.decodeString(I18n.get("tooltip.starcatcher.trophy.unique")
+                                        .replace("&", tp.legendary().unique() + "")
+                                        .replace("$", I18n.get("tooltip.starcatcher.trophy.legendary"))));
+
+                        if (list.size() == 1)
+                        {
+                            comp.add(Component.translatable("tooltip.starcatcher.trophy.once")
+                                    .append(list.getFirst())
+                                    .append(Component.translatable("tooltip.starcatcher.trophy.have_been_caught")));
+                        }
+                        else
+                        {
+                            comp.add(Component.translatable("tooltip.starcatcher.trophy.2"));
+                            comp.addAll(list);
+                        }
+
                     }
                     else
                     {
-                        comp.add(Component.translatable("tooltip.starcatcher.trophy.2"));
-                        comp.addAll(list);
+                        comp.add(Component.translatable("tooltip.libtooltips.generic.shift_up"));
                     }
-
-                }
-                else
-                {
-                    comp.add(Component.translatable("tooltip.libtooltips.generic.shift_up"));
-                }
 
             }
         }

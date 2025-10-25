@@ -47,7 +47,9 @@ public class SecretNote extends Item
         SAMPLE_NOTE("sample_note"),
         CRYSTAL_HOOK("crystal_hook"),
         LAVA_PROOF_BOTTLE_1("lava_proof_bottle_1"),
-        LAVA_PROOF_BOTTLE_2("lava_proof_bottle_2");
+        LAVA_PROOF_BOTTLE_2("lava_proof_bottle_2"),
+        HOPEFUL_NOTE("hopeful_note"),
+        HOPELESS_NOTE("hopeless_note");
 
         public static final Codec<Note> CODEC = StringRepresentable.fromEnum(Note::values);
         public static final StreamCodec<FriendlyByteBuf, Note> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Note.class);
