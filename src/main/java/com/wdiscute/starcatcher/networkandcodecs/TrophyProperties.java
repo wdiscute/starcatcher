@@ -30,7 +30,7 @@ public record TrophyProperties
 
     public static final TrophyProperties DEFAULT = new TrophyProperties(
             FishProperties.DEFAULT.withFish(ModItems.MISSINGNO),
-            TrophyType.NONE,
+            TrophyType.EXTRA,
             "Missingno Trophy",
             RarityProgress.DEFAULT,
             RarityProgress.DEFAULT,
@@ -95,7 +95,7 @@ public record TrophyProperties
     {
         TROPHY("trophy"),
         SECRET("secret"),
-        NONE("none");
+        EXTRA("extra");
 
         public static final Codec<TrophyType> CODEC = StringRepresentable.fromEnum(TrophyType::values);
         public static final StreamCodec<FriendlyByteBuf, TrophyType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(TrophyType.class);

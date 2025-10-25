@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.items;
+package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
@@ -14,11 +14,11 @@ import net.minecraft.world.level.Level;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrophyGold extends Item
+public class AwardAllFishes extends Item
 {
-    public TrophyGold()
+    public AwardAllFishes()
     {
-        super(new Item.Properties().stacksTo(1).fireResistant());
+        super(new Item.Properties().stacksTo(1));
     }
 
     @Override
@@ -47,4 +47,6 @@ public class TrophyGold extends Item
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
+
+
 }

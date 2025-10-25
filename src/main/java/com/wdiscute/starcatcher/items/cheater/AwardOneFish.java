@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.items;
+package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class TrophySilver extends Item
+public class AwardOneFish extends Item
 {
-    public TrophySilver()
+    public AwardOneFish()
     {
-        super(new Item.Properties().stacksTo(1).fireResistant());
+        super(new Properties().stacksTo(1));
     }
 
     @Override
@@ -49,14 +49,13 @@ public class TrophySilver extends Item
             {
                 PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
             }
-
         }
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
         player.setData(ModDataAttachments.FISHES_NOTIFICATION, fishes);
 
-
-
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
+
+
 }
