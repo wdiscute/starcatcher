@@ -1,8 +1,12 @@
-// 1.21.1	2025-10-24T17:41:08.226185	Item Models: starcatcher
+// 1.21.1	2025-10-25T18:07:07.3019268	Item Models: starcatcher
 190248e04c8aaf81e80cc0d828c1b3f9addf4641 assets/starcatcher/models/item/agave_bream.json
 033477fbb520065b97801242f6e7c58288fea05d assets/starcatcher/models/item/amethystback.json
 c9d191032ac9251c4e385286728bcf4b6bb965b2 assets/starcatcher/models/item/aquamarine_pike.json
 70cd9103418171fc70d6792227ba0363d6cfe066 assets/starcatcher/models/item/aurora.json
+5412903464c651f2c9e14725c0f5b6fe7f9b9f09 assets/starcatcher/models/item/award_all_fishes.json
+c007f738b59628173a4a4bf67ce10b0ce06078de assets/starcatcher/models/item/award_all_secrets.json
+9912bf5fd23d1bdbe2207dc4374c27895eaa6874 assets/starcatcher/models/item/award_all_trophies.json
+d71713800f131972a7e1f775ae1c366b21b81f4f assets/starcatcher/models/item/award_one_fish.json
 3b80783c5d6efbd00485ec91b81037c52b011e21 assets/starcatcher/models/item/azure_crystalback_minnow.json
 ed4db0845e3c00f1d0bcc6b044c4bf70e42597e0 assets/starcatcher/models/item/bigeye_tuna.json
 c4633791b8c040d3d2abb5b6e5cd32396ceb7a26 assets/starcatcher/models/item/black_eel.json
@@ -59,6 +63,8 @@ b36b128fa801cbb9408d2fd22a19205dbba08c4e assets/starcatcher/models/item/glowston
 ca50f132187554666f3f9ad54003c3999b672b57 assets/starcatcher/models/item/gold_hook.json
 ae00df136477e53a52813f73d02163bd6dc902ab assets/starcatcher/models/item/hollowbelly_darter.json
 d4ef58b79b88f3995d547d4571fbc502b5a0590f assets/starcatcher/models/item/hook.json
+505df45024edc3c7cf934e6f0296c5f6c30fca2b assets/starcatcher/models/item/hopeful_bottle.json
+5f72fa7cd4cc205cb28cc81d567c80ef1e1ea3ed assets/starcatcher/models/item/hopeless_bottle.json
 d2723d60eb3f0c4b23296d49fcb9a2d5ea8bca65 assets/starcatcher/models/item/icetooth_sturgeon.json
 d854deda73ba7d94e434f443060eb15c1c42545b assets/starcatcher/models/item/impatient_bobber.json
 6962ffb2b3b432228587826f936b584ce25897b7 assets/starcatcher/models/item/ironjaw_herring.json
@@ -92,6 +98,10 @@ f03df0085ca72f8e6b99ee8170144ec41fc4c357 assets/starcatcher/models/item/peakdwel
 9d9af629ceab2b9158a92968a9483373aba1eef2 assets/starcatcher/models/item/pink_koi.json
 c9dc38049fcc1a77e54fb6b7e295462ff987fd3f assets/starcatcher/models/item/pyrotrout.json
 84fcc355cf21726de316d194e7f96c4d897b9a50 assets/starcatcher/models/item/redscaled_tuna.json
+1c08625ed9fc2a51356702c0813054c94e2e9163 assets/starcatcher/models/item/revoke_all_extras.json
+71eb33e3c596e264826b0a0c4d85272d4417f23f assets/starcatcher/models/item/revoke_all_fishes.json
+60eb2971d1378c22c5e26f095756da220d80cc23 assets/starcatcher/models/item/revoke_all_secrets.json
+cefd9aa813a444f7543e87b92737a61fa2c65038 assets/starcatcher/models/item/revoke_all_trophies.json
 6c3a55061144f9826e0adf18ba7f1f7d047d0259 assets/starcatcher/models/item/rockgill.json
 9bd9b57e46cd5e12aaa0fd4c734049ec0c0fa36e assets/starcatcher/models/item/rose_siamese_fish.json
 3c4cd0702fa550bd122de83061ef2a4600a4143b assets/starcatcher/models/item/sage_catfish.json
