@@ -69,7 +69,7 @@ public interface ModItems
     //secrets
 
     DeferredItem<Item> SECRET_NOTE = ITEMS.register("secret_note", SecretNote::new);
-    DeferredItem<Item> BROKEN_BOTTLE = singleStackItem("broken_bottle");
+    DeferredItem<Item> BROKEN_BOTTLE = ITEMS.register("broken_bottle", BrokenBottle::new);
 
     //notes
     DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () ->
@@ -81,6 +81,8 @@ public interface ModItems
     DeferredItem<Item> BURNING_BOTTLE = ITEMS.register("burning_bottle", () ->
             new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_2));
 
+    DeferredItem<Item> BURNING_BOT2TLE = ITEMS.register("burningd_bottle", () ->
+            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_2));
 
 
 

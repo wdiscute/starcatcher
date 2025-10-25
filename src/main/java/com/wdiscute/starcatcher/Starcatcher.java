@@ -13,6 +13,7 @@ import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.rod.FishingRodScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -253,6 +254,7 @@ public class Starcatcher
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
+            EntityRenderers.register(ModEntities.BOTTLE.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntities.FISH.get(), FishRenderer::new);
             ModItemProperties.addCustomItemProperties();
         }
