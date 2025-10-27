@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-25T18:07:07.3019268	Item Models: starcatcher
+// 1.21.1	2025-10-26T02:06:15.9152494	Item Models: starcatcher
 190248e04c8aaf81e80cc0d828c1b3f9addf4641 assets/starcatcher/models/item/agave_bream.json
 033477fbb520065b97801242f6e7c58288fea05d assets/starcatcher/models/item/amethystback.json
 c9d191032ac9251c4e385286728bcf4b6bb965b2 assets/starcatcher/models/item/aquamarine_pike.json
@@ -135,6 +135,7 @@ fae193138ec4619b25eeea36f035ddde469644b8 assets/starcatcher/models/item/sunny_st
 ae1d6faf022894dbd8acdc2bb974dfa4ee1a7d60 assets/starcatcher/models/item/trophy_bronze.json
 2c6ab99b5125a548e58355714e9b584f946a4d60 assets/starcatcher/models/item/trophy_gold.json
 4bbb418193a946c61d97c75767aeeccaf4ce3697 assets/starcatcher/models/item/trophy_silver.json
+6f13c844b940f4cd884b98b5493ffc4d7686a988 assets/starcatcher/models/item/true_blue_bottle.json
 0d146fe6435760833a0678c8ffda95f73a139b12 assets/starcatcher/models/item/twilight_koi.json
 38d92c7bf5f06561e97a46df04099c8c0354ec7d assets/starcatcher/models/item/vivid_moss.json
 9b811446384ffb617b1d650af26591b19e6c112f assets/starcatcher/models/item/ward.json

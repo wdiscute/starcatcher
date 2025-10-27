@@ -197,7 +197,7 @@
   "tooltip.starcatcher.trophy.all" : " ",
   "tooltip.starcatcher.trophy.common" : " common ",
   "tooltip.starcatcher.trophy.uncommon" : " <gradient-37>uncommon</gradient-43> ",
-  "tooltip.starcatcher.trophy.rare" : " <gradient-57>rare</gradient-67> ",
+  "tooltip.starcatcher.trophy.rare" : " <gradient-57>rare</gradient-63> ",
   "tooltip.starcatcher.trophy.epic" : " <gradient-80>epic</gradient-90> ",
   "tooltip.starcatcher.trophy.legendary" : " <rgb>legendary</rgb> ",
 
@@ -221,6 +221,7 @@
   "gui.guide.baits" : "Baits",
   "gui.guide.trophies" : "Trophies",
   "gui.guide.secrets" : "Secrets",
+
 
 
   "gui.guide.page0.left.0" : "",
@@ -365,15 +366,39 @@
   "gui.guide.page4.left.12" : "sure to put others to shame for",
   "gui.guide.page4.left.13" : "their lack of trophy-ing.",
 
+  "gui.guide.trophy.all.total" : "Total fishes: ",
+  "gui.guide.trophy.all.unique" : "Unique fishes: ",
+
+  "gui.guide.trophy.common.total" : "Total common fishes: ",
+  "gui.guide.trophy.common.unique" : "Unique common fishes: ",
+
+  "gui.guide.trophy.uncommon.total" : "Total <gradient-37>Uncommon</gradient-43> fishes: ",
+  "gui.guide.trophy.uncommon.unique" : "Unique <gradient-37>Uncommon</gradient-43> fishes: ",
+
+  "gui.guide.trophy.rare.total" : "Total <gradient-57>Rare</gradient-63> fishes: ",
+  "gui.guide.trophy.rare.unique" : "Unique <gradient-57>Rare</gradient-63> fishes: ",
+
+  "gui.guide.trophy.epic.total" : "Total <gradient-80>Epic</gradient-90> fishes: ",
+  "gui.guide.trophy.epic.unique" : "Unique <gradient-80>Epic</gradient-90> fishes: ",
+
+  "gui.guide.trophy.legendary.total" : "Total <rgb>Legendary</rgb> fishes: ",
+  "gui.guide.trophy.legendary.unique" : "Unique <rgb>Legendary</rgb> fishes: ",
 
   "gui.guide.page4.right.0" : "",
   "gui.guide.page4.right.1" : "",
   "gui.guide.page4.right.2" : "",
   "gui.guide.page4.right.3" : "",
   "gui.guide.page4.right.4" : "",
-  "gui.guide.page4.right.5" : "secrets",
-  "gui.guide.page4.right.6" : "I don't wanna tell you",
-  "gui.guide.page4.right.7" : "everything about me",
+  "gui.guide.page4.right.5" : "",
+  "gui.guide.page4.right.6" : "Sometimes while fishing you might",
+  "gui.guide.page4.right.7" : "catch something unusual.",
+  "gui.guide.page4.right.8" : "",
+  "gui.guide.page4.right.9" : "Who knows what forgotten stories",
+  "gui.guide.page4.right.10" : "you might find encapsulated in ",
+  "gui.guide.page4.right.11" : "bottle adrift the waves.",
+  "gui.guide.page4.right.12" : "",
+  "gui.guide.page4.right.13" : "All of those stories will be saved",
+  "gui.guide.page4.right.14" : "here once found.",
 
 
   "gui.guide.available" : "Fishes in the area:",
@@ -411,7 +436,7 @@
 
   "gui.guide.rarity.common" : "Common",
   "gui.guide.rarity.uncommon" : "<gradient-37>Uncommon</gradient-43>",
-  "gui.guide.rarity.rare" : "<gradient-57>Rare</gradient-67>",
+  "gui.guide.rarity.rare" : "<gradient-57>Rare</gradient-63>",
   "gui.guide.rarity.epic" : "<gradient-80>Epic</gradient-90>",
   "gui.guide.rarity.legendary" : "<rgb>Legendary</rgb>",
 
@@ -447,7 +472,7 @@
   "gui.secret_note.lava_proof_bottle_1.0" : "'Buy my bottles! Buy my bottles!'",
   "gui.secret_note.lava_proof_bottle_1.1" : "'They are <gradient-00>Lava-Proof™</gradient-14>!!'",
   "gui.secret_note.lava_proof_bottle_1.2" : "",
-  "gui.secret_note.lava_proof_bottle_1.3" : "'I promise they really are Lava-Proof™!'",
+  "gui.secret_note.lava_proof_bottle_1.3" : "'I promise they really are <gradient-00>Lava-Proof™</gradient-14>™!'",
   "gui.secret_note.lava_proof_bottle_1.4" : "",
   "gui.secret_note.lava_proof_bottle_1.5" : "I am so tired of these SCAMMERS promising",
   "gui.secret_note.lava_proof_bottle_1.6" : "<gradient-00>Lava-Proof™</gradient-14> bottles, as if anything could",
@@ -460,7 +485,7 @@
   "gui.secret_note.lava_proof_bottle_1.13" : "nearest lava pool I can find! Heh that will",
   "gui.secret_note.lava_proof_bottle_1.14" : "show them.",
   "gui.secret_note.lava_proof_bottle_1.15" : "",
-  "gui.secret_note.lava_proof_bottle_1.16" : "-Arnwulf",
+  "gui.secret_note.lava_proof_bottle_1.16" : "-Arnwulf the Skeptic",
 
   "gui.secret_note.lava_proof_bottle_2.0" : "",
   "gui.secret_note.lava_proof_bottle_2.1" : "If anyone finds this letter, I would like",
@@ -478,7 +503,7 @@
   "gui.secret_note.lava_proof_bottle_2.13" : "so-called 'lava-proof' enchantment. As if.",
   "gui.secret_note.lava_proof_bottle_2.14" : "",
   "gui.secret_note.lava_proof_bottle_2.15" : "",
-  "gui.secret_note.lava_proof_bottle_2.16" : "-Arnwulf",
+  "gui.secret_note.lava_proof_bottle_2.16" : "-Arnwulf the Skeptic",
 
   "gui.secret_note.hopeful_note.0" : "",
   "gui.secret_note.hopeful_note.1" : "",
@@ -516,6 +541,24 @@
   "gui.secret_note.hopeless_note.15" : "",
   "gui.secret_note.hopeless_note.16" : "-Gauward",
 
+  "gui.secret_note.true_blue.0"  : "   Something is inserted,",
+  "gui.secret_note.true_blue.1"  : "   or taken out, or examined.",
+  "gui.secret_note.true_blue.2"  : "",
+  "gui.secret_note.true_blue.3"  : "               Something lies dormant inside and ",
+  "gui.secret_note.true_blue.4"  : "               it's been there all along.",
+  "gui.secret_note.true_blue.5"  : "",
+  "gui.secret_note.true_blue.6"  : "   Or you've swallowed it,",
+  "gui.secret_note.true_blue.7"  : "   or you've spit it out.",
+  "gui.secret_note.true_blue.8"  : "",
+  "gui.secret_note.true_blue.9"  : "               Ten years or ten moments ago,",
+  "gui.secret_note.true_blue.10" : "               reflected in my eyes,",
+  "gui.secret_note.true_blue.11" : "               or floating behind yours.",
+  "gui.secret_note.true_blue.12" : "",
+  "gui.secret_note.true_blue.13" : "   In your mother's mother,",
+  "gui.secret_note.true_blue.14" : "   or your child's child,",
+  "gui.secret_note.true_blue.15" : "   in dream or awake.",
+
+
   "item.starcatcher.secret_note" : "Secret Note",
   "tooltip.starcatcher.secret_note.0" : "An old secret note almost lost to time.",
   "tooltip.starcatcher.secret_note.1" : "Holding nothing more than the thoughts of",
@@ -545,7 +588,9 @@
   "tooltip.starcatcher.hopeful_bottle.0" : "Somehow just looking at this bottle",
   "tooltip.starcatcher.hopeful_bottle.1" : "makes you hopeful of the future to come.",
 
-
+  "item.starcatcher.true_blue_bottle" : "True Blue Bottle",
+  "tooltip.starcatcher.true_blue_bottle.0" : "A bottle glimmering a pale blue.",
+  "tooltip.starcatcher.true_blue_bottle.1" : "The purest version of yourself shines from inside.",
 
 
   "item.starcatcher.obidontiee" : "Obidontiee",
