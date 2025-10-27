@@ -8,6 +8,8 @@ import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandcodecs.*;
+import com.wdiscute.starcatcher.secretnotes.NoteContainer;
+import com.wdiscute.starcatcher.secretnotes.SecretNoteScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -27,6 +29,8 @@ import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -57,6 +61,7 @@ public class FishingGuideScreen extends Screen
     private static final ResourceLocation GLOW = Starcatcher.rl("textures/gui/guide/glow.png");
 
     private static final int MAX_HELP_PAGES = 4;
+    private static final Logger log = LoggerFactory.getLogger(FishingGuideScreen.class);
 
     final boolean advancedTooltips;
 
@@ -91,7 +96,6 @@ public class FishingGuideScreen extends Screen
 
     private final ItemStack trophies;
     private final ItemStack secrets;
-
     int uiX;
     int uiY;
 
@@ -100,9 +104,6 @@ public class FishingGuideScreen extends Screen
 
     int clickedX;
     int clickedY;
-
-    int clickedXDown;
-    int clickedYDown;
 
     boolean arrowPreviousPressed;
     boolean arrowNextPressed;
@@ -123,11 +124,18 @@ public class FishingGuideScreen extends Screen
     List<FishProperties> fishInArea = new ArrayList<>();
     List<FishCaughtCounter> fishCaughtCounterList = new ArrayList<>();
 
+    TrophyProperties.RarityProgress all = new TrophyProperties.RarityProgress(0, Minecraft.getInstance().player.getData(ModDataAttachments.FISHES_CAUGHT).size() - 1); //-1 to remove the default
+    TrophyProperties.RarityProgress common = new TrophyProperties.RarityProgress(0, -1);
+    TrophyProperties.RarityProgress uncommon = TrophyProperties.RarityProgress.DEFAULT;
+    TrophyProperties.RarityProgress rare = TrophyProperties.RarityProgress.DEFAULT;
+    TrophyProperties.RarityProgress epic = TrophyProperties.RarityProgress.DEFAULT;
+    TrophyProperties.RarityProgress legendary = TrophyProperties.RarityProgress.DEFAULT;
 
     @Override
     protected void init()
     {
         super.init();
+
         entries = new ArrayList<>(999);
         trophiesTps = new ArrayList<>(999);
         secretsTps = new ArrayList<>(999);
@@ -141,15 +149,52 @@ public class FishingGuideScreen extends Screen
         level = Minecraft.getInstance().level;
         player = Minecraft.getInstance().player;
 
+
+        var wadawd = player.getData(ModDataAttachments.FISHES_CAUGHT);
+
         for (FishProperties fp : FishProperties.getFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
         for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
             if (tp.trophyType() == TrophyProperties.TrophyType.TROPHY) trophiesTps.add(tp);
 
+
         for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
-            if (tp.trophyType() == TrophyProperties.TrophyType.SECRET) secretsTps.add(tp);
+        {
+            if (tp.trophyType() == TrophyProperties.TrophyType.SECRET
+                    && player.getData(ModDataAttachments.TROPHIES_CAUGHT).contains(tp)) secretsTps.add(tp);
+        }
 
         fishInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         fishCaughtCounterList = player.getData(ModDataAttachments.FISHES_CAUGHT);
+
+        //-1 on the common to account for the default "fish" unfortunately, theres probably a way to fix this
+        all = new TrophyProperties.RarityProgress(0, player.getData(ModDataAttachments.FISHES_CAUGHT).size() - 1); //-1 to remove the default
+        common = new TrophyProperties.RarityProgress(0, -1);
+        uncommon = TrophyProperties.RarityProgress.DEFAULT;
+        rare = TrophyProperties.RarityProgress.DEFAULT;
+        epic = TrophyProperties.RarityProgress.DEFAULT;
+        legendary = TrophyProperties.RarityProgress.DEFAULT;
+
+        for (FishCaughtCounter fcc : player.getData(ModDataAttachments.FISHES_CAUGHT))
+        {
+            all = new TrophyProperties.RarityProgress(all.total() + fcc.count(), all.unique());
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.COMMON)
+                common = new TrophyProperties.RarityProgress(common.total() + fcc.count(), common.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.UNCOMMON)
+                uncommon = new TrophyProperties.RarityProgress(uncommon.total() + fcc.count(), uncommon.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.RARE)
+                rare = new TrophyProperties.RarityProgress(rare.total() + fcc.count(), rare.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.EPIC)
+                epic = new TrophyProperties.RarityProgress(epic.total() + fcc.count(), epic.unique() + 1);
+
+            if (fcc.fp().rarity() == FishProperties.Rarity.LEGENDARY)
+                legendary = new TrophyProperties.RarityProgress(legendary.total() + fcc.count(), legendary.unique() + 1);
+
+        }
+
     }
 
     @Override
@@ -287,12 +332,10 @@ public class FishingGuideScreen extends Screen
             return true;
         }
 
-        if (menu == 0 && button == 0)
+        if (button == 0)
         {
             clickedX = (int) mouseX;
             clickedY = (int) mouseY;
-            clickedXDown = 0;
-            clickedYDown = 0;
         }
 
         return super.mouseReleased(mouseX, mouseY, button);
@@ -326,12 +369,6 @@ public class FishingGuideScreen extends Screen
         if (x > 225 && x < 245 && y > 223 && y < 243)
         {
             arrowIndexPressed = true;
-        }
-
-        if (page == 0 && button == 0)
-        {
-            clickedXDown = (int) mouseX;
-            clickedYDown = (int) mouseY;
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
@@ -449,21 +486,16 @@ public class FishingGuideScreen extends Screen
 
             //offset to page
             xrender += uiX + 280;
-            y += uiY + 160;
+            y += uiY + 167;
 
             TrophyProperties tp = secretsTps.get(i);
 
             ItemStack is;
-            if (player.getData(ModDataAttachments.TROPHIES_CAUGHT).contains(tp))
-            {
-                is = new ItemStack(tp.fp().fish());
-                if (!tp.customName().isEmpty()) is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
-                is.set(ModDataComponents.TROPHY, tp);
-            }
-            else
-            {
-                is = new ItemStack(ModItems.MISSINGNO.get());
-            }
+
+            is = new ItemStack(tp.fp().fish());
+            if (!tp.customName().isEmpty()) is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
+            is.set(ModDataComponents.TROPHY, tp);
+
 
             guiGraphics.renderOutline(xrender - 10, y - 2, 20, 20, 0xff000000);
             renderItem(is, xrender - 8, y, 1);
@@ -472,10 +504,26 @@ public class FishingGuideScreen extends Screen
             {
                 guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
             }
+
+
+            System.out.println(clickedX);
+            if(clickedX != 0)
+            {
+                System.out.println("triggered");
+            }
+            if (clickedX > xrender - 10 && clickedX < xrender + 10 && clickedY > y - 2 && clickedY < y + 18)
+            {
+                if(is.getItem() instanceof NoteContainer nc)
+                {
+                    Minecraft.getInstance().setScreen(new SecretNoteScreen(nc.note));
+                }
+
+            }
+
         }
     }
 
-    private void renderTps(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    private void renderTrophies(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
         for (int i = 0; i < trophiesTps.size(); i++)
         {
@@ -492,24 +540,50 @@ public class FishingGuideScreen extends Screen
             TrophyProperties tp = trophiesTps.get(i);
 
             ItemStack is;
+            boolean isMouseOnTop = mouseX > xrender - 10 && mouseX < xrender + 10 && mouseY > y - 2 && mouseY < y + 18;
             if (player.getData(ModDataAttachments.TROPHIES_CAUGHT).contains(tp))
             {
                 is = new ItemStack(tp.fp().fish());
                 is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
                 is.set(ModDataComponents.TROPHY, tp);
+                if (isMouseOnTop)
+                {
+                    guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
+                }
             }
             else
             {
+                if (isMouseOnTop)
+                {
+                    List<Component> list = new ArrayList<>(List.of(Component.literal("Requirements:")));
+
+                    if(tp.all().total() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.all.total")).append("[" + all.total() + "/" + tp.all().total() + "]"));
+                    if(tp.all().unique() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.all.unique")).append("[" + all.unique() + "/" + tp.all().unique() + "]"));
+
+                    if(tp.common().total() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.common.total")).append("[" + common.total() + "/" + tp.common().total() + "]"));
+                    if(tp.common().unique() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.common.unique")).append("[" + common.unique() + "/" + tp.common().unique() + "]"));
+
+                    if(tp.uncommon().total() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.uncommon.total")).append("[" + uncommon.total() + "/" + tp.uncommon().total() + "]"));
+                    if(tp.uncommon().unique() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.uncommon.unique")).append("[" + uncommon.unique() + "/" + tp.uncommon().unique() + "]"));
+
+                    if(tp.rare().total() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.rare.total")).append("[" + rare.total() + "/" + tp.rare().total() + "]"));
+                    if(tp.rare().unique() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.rare.unique")).append("[" + rare.unique() + "/" + tp.rare().unique() + "]"));
+
+                    if(tp.epic().total() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.epic.total")).append("[" + epic.total() + "/" + tp.epic().total() + "]"));
+                    if(tp.epic().unique() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.epic.unique")).append("[" + epic.unique() + "/" + tp.epic().unique() + "]"));
+
+                    if(tp.legendary().total() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.legendary.total")).append("[" + legendary.total() + "/" + tp.legendary().total() + "]"));
+                    if(tp.legendary().unique() != 0) list.add(Component.empty().append(Tooltips.decodeTranslationKey("gui.guide.trophy.legendary.unique")).append("[" + legendary.unique() + "/" + tp.legendary().unique() + "]"));
+
+                    guiGraphics.renderTooltip(this.font, list, Optional.empty(), mouseX, mouseY);
+                }
                 is = new ItemStack(ModItems.MISSINGNO.get());
             }
 
             guiGraphics.renderOutline(xrender - 10, y - 2, 20, 20, 0xff000000);
             renderItem(is, xrender - 8, y, 1);
 
-            if (mouseX > xrender - 10 && mouseX < xrender + 10 && mouseY > y - 2 && mouseY < y + 18)
-            {
-                guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
-            }
+
         }
     }
 
@@ -575,7 +649,7 @@ public class FishingGuideScreen extends Screen
         {
             //trophies
             renderHelpTitle(guiGraphics, trophies, Component.translatable("gui.guide.trophies"), 70, 15);
-            renderTps(guiGraphics, mouseX, mouseY);
+            renderTrophies(guiGraphics, mouseX, mouseY);
 
             renderHelpTitle(guiGraphics, secrets, Component.translatable("gui.guide.secrets"), 280, 15);
             renderHelpText(guiGraphics);
@@ -831,16 +905,10 @@ public class FishingGuideScreen extends Screen
             page = entries.indexOf(fp) / 2;
         }
 
-        //makes outline brighter when held down
-        int outlineColor = 0xff112233;
-        if (clickedXDown > xOffset - 3 && clickedXDown < xOffset + 21 - 3 && clickedYDown > yOffset - 3 && clickedYDown < yOffset + 21 - 3)
-        {
-            outlineColor = 0xff44aa44;
-        }
-
         //outline
-        guiGraphics.renderOutline(xOffset - 2, yOffset - 2, 20, 20, outlineColor);
+        guiGraphics.renderOutline(xOffset - 2, yOffset - 2, 20, 20, 0xff112233);
 
+        //glow color
         switch (fp.rarity())
         {
             case FishProperties.Rarity.COMMON -> guiGraphics.setColor(1, 1, 1, 1);
@@ -888,6 +956,7 @@ public class FishingGuideScreen extends Screen
             {
                 components.add(Component.translatable("gui.guide.not_caught_fish_name"));
                 components.add(Component.translatable("gui.guide.not_caught").withColor(0xAA0000));
+                components.add(Tooltips.decodeTranslationKey("gui.guide.rarity." + fp.rarity().getSerializedName()));
             }
             else
             {
@@ -935,8 +1004,9 @@ public class FishingGuideScreen extends Screen
         //render not caught text
         if (fcc == null)
         {
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught_fish_name"), uiX + xOffset + 46, uiY + 60, 0, false);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught").withColor(0xAA0000), uiX + xOffset + 46, uiY + 70, 0, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught_fish_name"), uiX + xOffset + 46, uiY + 55, 0, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.not_caught").withColor(0xAA0000), uiX + xOffset + 46, uiY + 65, 0, false);
+            guiGraphics.drawString(this.font, Tooltips.decodeTranslationKey("gui.guide.rarity." + fp.rarity().getSerializedName()), uiX + xOffset + 46, uiY + 75, 0, false);
             renderItem(new ItemStack(ModItems.MISSINGNO.get()), uiX + xOffset + 10, uiY + 60);
         }
         else
