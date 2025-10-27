@@ -1240,11 +1240,11 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of the Older Angler",
                     new TrophyProperties.RarityProgress(0, 0),
-                    new TrophyProperties.RarityProgress(50, 100),
-                    new TrophyProperties.RarityProgress(25, 50),
-                    new TrophyProperties.RarityProgress(17, 30),
-                    new TrophyProperties.RarityProgress(12, 20),
-                    new TrophyProperties.RarityProgress(8, 10),
+                    new TrophyProperties.RarityProgress(100, 50),
+                    new TrophyProperties.RarityProgress(50, 25),
+                    new TrophyProperties.RarityProgress(30, 17),
+                    new TrophyProperties.RarityProgress(20, 12),
+                    new TrophyProperties.RarityProgress(10, 8),
                     TrophyProperties.DEFAULT.chanceToCatch()
             ),
 
@@ -1257,8 +1257,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             //
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.DRIFTING_WATERLOGGED_BOTTLE)
-                            .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN),
+                    overworldFish(ModItems.DRIFTING_WATERLOGGED_BOTTLE),
                     TrophyProperties.TrophyType.SECRET,
                     "",
                     new TrophyProperties.RarityProgress(6, 15),
@@ -1274,37 +1273,37 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldSurfaceLava(ModItems.SCALDING_BOTTLE),
                     TrophyProperties.TrophyType.SECRET,
                     "",
+                    new TrophyProperties.RarityProgress(0, 27),
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
-                    new TrophyProperties.RarityProgress(1, 0),
                     TrophyProperties.RarityProgress.DEFAULT,
                     33
             ),
 
             new TrophyProperties(
-                    overworldSurfaceLava(ModItems.SCALDING_BOTTLE),
+                    overworldSurfaceLava(ModItems.BURNING_BOTTLE),
+                    TrophyProperties.TrophyType.SECRET,
+                    "",
+                    new TrophyProperties.RarityProgress(0, 42),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    33
+            ),
+
+            new TrophyProperties(
+                    overworldDeepOceanFish(ModItems.HOPEFUL_BOTTLE),
                     TrophyProperties.TrophyType.SECRET,
                     "",
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
-                    new TrophyProperties.RarityProgress(1, 10),
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    33
-            ),
-
-            new TrophyProperties(
-                    overworldSurfaceLava(ModItems.HOPEFUL_BOTTLE),
-                    TrophyProperties.TrophyType.SECRET,
-                    "",
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    new TrophyProperties.RarityProgress(1, 10),
+                    new TrophyProperties.RarityProgress(5, 0),
                     TrophyProperties.RarityProgress.DEFAULT,
                     33
             ),
@@ -1317,13 +1316,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
+                    new TrophyProperties.RarityProgress(5, 0),
                     TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    5
+                    33
             ),
 
             new TrophyProperties(
-                    overworldDeepOceanFish(ModItems.HOPEFUL_BOTTLE),
+                    overworldRiverFish(ModItems.TRUE_BLUE_BOTTLE),
                     TrophyProperties.TrophyType.SECRET,
                     "",
                     TrophyProperties.RarityProgress.DEFAULT,
@@ -1331,8 +1330,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
                     TrophyProperties.RarityProgress.DEFAULT,
-                    TrophyProperties.RarityProgress.DEFAULT,
-                    5
+                    new TrophyProperties.RarityProgress(1, 0),
+                    1
             ),
 
 
@@ -1396,6 +1395,45 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     TrophyProperties.RarityProgress.DEFAULT,
                     new TrophyProperties.RarityProgress(0, 10),
                     33
+            ),
+
+            new TrophyProperties(
+                    netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP)),
+                    TrophyProperties.TrophyType.EXTRA,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    1
+            ),
+
+            new TrophyProperties(
+                    netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP)),
+                    TrophyProperties.TrophyType.EXTRA,
+                    "",
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    1
+            ),
+
+            new TrophyProperties(
+                    netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.HEART_OF_THE_SEA)),
+                    TrophyProperties.TrophyType.EXTRA,
+                    "",
+                    new TrophyProperties.RarityProgress(25, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    1
             )
 
 
@@ -1677,7 +1715,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
         customTrophyCount++;
         return ResourceKey.create(
                 Starcatcher.TROPHY_REGISTRY,
-                Starcatcher.rl(tp.trophyType().getSerializedName() + "_" + tp.fp().fish().getRegisteredName().replace(":", "_") + "_" + customTrophyCount));
+                Starcatcher.rl(tp.trophyType().getSerializedName() + "_" + customTrophyCount + "_" + tp.fp().fish().getRegisteredName().replace(":", "_")));
     }
 
 }
