@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 public class NoteContainer extends Item
 {
-    final SecretNote.Note note;
+    public final SecretNote.Note note;
     final Item turnsInto;
 
     public NoteContainer(SecretNote.Note noteName)

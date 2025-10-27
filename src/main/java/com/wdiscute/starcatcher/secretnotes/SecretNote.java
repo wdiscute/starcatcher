@@ -1,15 +1,10 @@
 package com.wdiscute.starcatcher.secretnotes;
 
 import com.mojang.serialization.Codec;
-import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -46,10 +41,11 @@ public class SecretNote extends Item
     {
         SAMPLE_NOTE("sample_note"),
         CRYSTAL_HOOK("crystal_hook"),
-        LAVA_PROOF_BOTTLE_1("lava_proof_bottle_1"),
-        LAVA_PROOF_BOTTLE_2("lava_proof_bottle_2"),
+        ARNWULF_1("lava_proof_bottle_1"),
+        ARNWULF_2("lava_proof_bottle_2"),
         HOPEFUL_NOTE("hopeful_note"),
-        HOPELESS_NOTE("hopeless_note");
+        HOPELESS_NOTE("hopeless_note"),
+        TRUE_BLUE("true_blue");
 
         public static final Codec<Note> CODEC = StringRepresentable.fromEnum(Note::values);
         public static final StreamCodec<FriendlyByteBuf, Note> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Note.class);

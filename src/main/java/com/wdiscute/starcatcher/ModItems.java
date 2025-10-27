@@ -73,16 +73,21 @@ public interface ModItems
             new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
 
     DeferredItem<Item> SCALDING_BOTTLE = ITEMS.register("scalding_bottle", () ->
-            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_1));
+            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_1));
 
     DeferredItem<Item> BURNING_BOTTLE = ITEMS.register("burning_bottle", () ->
-            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.LAVA_PROOF_BOTTLE_2));
+            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_2));
 
     DeferredItem<Item> HOPEFUL_BOTTLE = ITEMS.register("hopeful_bottle", () ->
             new NoteContainer(SecretNote.Note.HOPEFUL_NOTE));
 
     DeferredItem<Item> HOPELESS_BOTTLE = ITEMS.register("hopeless_bottle", () ->
             new NoteContainer(SecretNote.Note.HOPELESS_NOTE));
+
+    DeferredItem<Item> TRUE_BLUE_BOTTLE = ITEMS.register("true_blue_bottle", () ->
+            new NoteContainer(SecretNote.Note.TRUE_BLUE));
+
+
 
     //cheater items
     DeferredItem<Item> AWARD_ALL_FISHES = ITEMS.register("award_all_fishes", AwardAllFishes::new);

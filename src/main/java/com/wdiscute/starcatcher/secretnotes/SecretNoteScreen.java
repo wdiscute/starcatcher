@@ -60,7 +60,7 @@ public class SecretNoteScreen extends Screen
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
-    protected SecretNoteScreen(SecretNote.Note note)
+    public SecretNoteScreen(SecretNote.Note note)
     {
         super(Component.empty());
         this.note = note;
