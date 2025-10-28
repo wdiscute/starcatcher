@@ -22,7 +22,7 @@ public class ColorfulBobber extends Item
     public ColorfulBobber()
     {
         super(new Properties()
-                .component(ModDataComponents.BOBBER_COLOR, BobberColor.DEFAULT));
+                .component(ModDataComponents.BOBBER_COLOR, BobberColor.DEFAULT).stacksTo(1));
     }
 
     @Override
