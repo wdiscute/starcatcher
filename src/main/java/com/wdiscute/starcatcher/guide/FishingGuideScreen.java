@@ -505,12 +505,6 @@ public class FishingGuideScreen extends Screen
                 guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
             }
 
-
-            System.out.println(clickedX);
-            if(clickedX != 0)
-            {
-                System.out.println("triggered");
-            }
             if (clickedX > xrender - 10 && clickedX < xrender + 10 && clickedY > y - 2 && clickedY < y + 18)
             {
                 if(is.getItem() instanceof NoteContainer nc)
