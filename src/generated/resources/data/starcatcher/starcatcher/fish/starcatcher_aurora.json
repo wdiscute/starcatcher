@@ -6,7 +6,7 @@
       "starcatcher:legendary_bait"
     ]
   },
-  "base_chance": 200,
+  "base_chance": 2,
   "below_y": 100,
   "difficulty": {
     "change_rotation_every_hit": false,
