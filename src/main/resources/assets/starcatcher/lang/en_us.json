@@ -1,6 +1,7 @@
 {
   "creativetab.starcatcher.starcatcher": "Starcatcher",
 
+
   "tag.starcatcher.is_beach" : "Beaches",
   "tag.starcatcher.is_birch_forest" : "Birch Forests",
   "tag.starcatcher.is_cherry_grove" : "Cherry Groves",
@@ -17,11 +18,31 @@
   "tag.starcatcher.is_warm_ocean" : "Warm Oceans",
   "tag.starcatcher.is_warm_river" : "Warm Rivers",
 
+  "tag.minecraft.is_badlands" : "Badlands",
+  "tag.minecraft.is_beach" : "Beaches",
+  "tag.minecraft.is_deep_ocean" : "Deep Oceans",
+  "tag.minecraft.is_end" : "The End Biomes",
+  "tag.minecraft.is_forest" : "Forests",
+  "tag.minecraft.is_hill" : "Hills",
+  "tag.minecraft.is_jungle" : "Jungles",
+  "tag.minecraft.is_mountain" : "Mountains",
+  "tag.minecraft.is_nether" : "Nether Biomes",
+  "tag.minecraft.is_ocean" : "Ocean",
+  "tag.minecraft.is_overworld" : "Overworld Biomes",
+  "tag.minecraft.is_river" : "Rivers",
+  "tag.minecraft.is_savanna" : "Savannas",
+  "tag.minecraft.is_taiga" : "Taigas",
+
+
   "tag.starcatcher.hooks" : "Fishing Hooks",
   "tag.starcatcher.bobbers" : "Bobbers",
   "tag.starcatcher.hooks_survive_fire" : "Hooks that survive Fire",
 
   "tag.starcatcher.curated_treasure" : "Curated Treasure",
+
+
+
+
 
 
   "item.starcatcher.starcatcher_rod": "Starcatcher's Rod",
