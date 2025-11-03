@@ -105,6 +105,11 @@ public class FishTrackerLayer implements LayeredDraw.Layer
                     is,
                     uiX + 50 + i * 20 % 100,
                     uiY + 10 + i / 5 * 20);
+
+            if(i > 8)
+            {
+                break;
+            }
         }
 
 
