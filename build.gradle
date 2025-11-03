@@ -38,12 +38,12 @@ dependencies {
         }
     }
 
-    jarJar(implementation "maven.modrinth:kap_lib:v${kap_lib_version}-mc${minecraft_version}:util") {
-        version
-                {
-                    prefer "${kap_lib_version}"
-                }
-    }
+//    jarJar(implementation "maven.modrinth:kap_lib:v${kap_lib_version}-mc${minecraft_version}:util") {
+//        version
+//                {
+//                    prefer "${kap_lib_version}"
+//                }
+//    }
 
 }
 
