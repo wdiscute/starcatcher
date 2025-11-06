@@ -213,8 +213,9 @@ public class FishingBobEntity extends Projectile
         fpToFish = available.get(random.nextInt(available.size()));
 
 
-        //TODO CHANGE THIS PIECE OF CODE TO BE SOMEWHERE ELSE
-        if (fpToFish.skipMinigame() || bobber.is(ModItems.CREEPER_BOBBER))
+        boolean skipsMinigame = fpToFish.skipMinigame() || (bobber.is(ModItems.CREEPER_BOBBER) && random.nextFloat() > 0.8);
+
+        if (skipsMinigame)
         {
             Entity itemFished = new ItemEntity(
                     level(),
@@ -234,7 +235,7 @@ public class FishingBobEntity extends Projectile
             z = Math.clamp(z, -1, 1);
 
             //override stack with a creeper and bigger deltaMovement to align creeper angle
-            if (bobber.is(ModItems.CREEPER_BOBBER) && random.nextFloat() > 0.8)
+            if (bobber.is(ModItems.CREEPER_BOBBER))
             {
                 itemFished = new Creeper(EntityType.CREEPER, level());
 
