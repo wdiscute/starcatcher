@@ -87,7 +87,8 @@ public class FishingBobEntity extends Projectile
             maxTicksToFish = 300;
             chanceToFishEachTick = 100;
 
-            if (bobber.is(ModItems.IMPATIENT_BOBBER)) chanceToFishEachTick = 200;
+            if (bobber.is(ModItems.IMPATIENT_BOBBER)) chanceToFishEachTick = 20;
+            if (bobber.is(ModItems.IMPATIENT_BOBBER)) minTicksToFish = 80;
 
             float f = player.getXRot();
             float f1 = player.getYRot();
