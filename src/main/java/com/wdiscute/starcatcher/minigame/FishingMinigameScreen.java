@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.wdiscute.starcatcher.Config;
 import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
@@ -89,10 +90,14 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int tickCount = 0;
     List<HitFakeParticle> hitParticles = new ArrayList<>();
 
+    int previousGuiScale;
 
     public FishingMinigameScreen(FishProperties fp, ItemStack rod)
     {
         super(Component.empty());
+
+        previousGuiScale = Minecraft.getInstance().options.guiScale().get();
+        Minecraft.getInstance().options.guiScale().set(Config.MINIGAME_GUI_SCALE.get());
 
         this.fp = fp;
         this.itemBeingFished = new ItemStack(fp.fish());
@@ -531,6 +536,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     @Override
     public void onClose()
     {
+        Minecraft.getInstance().options.guiScale().set(previousGuiScale);
+
         PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1, false, false, consecutiveHits));
         this.minecraft.popGuiLayer();
     }

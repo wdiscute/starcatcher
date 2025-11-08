@@ -25,6 +25,8 @@ import net.minecraft.world.phys.Vec3;
 import org.joml.Quaternionf;
 import org.joml.Random;
 import org.joml.Vector2d;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +37,13 @@ public class SettingsScreen extends Screen
     private static final Random r = new Random();
     private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame.png");
     private static final ResourceLocation SETTINGS = Starcatcher.rl("textures/gui/settings.png");
+    private static final ResourceLocation GUI_SCALE = Starcatcher.rl("textures/gui/gui_scale.png");
 
     private static final int SIZE_1 = 5;
     private static final int SIZE_2 = 7;
     private static final int SIZE_3 = 12;
     private static final int SIZE_4 = 17;
+    private static final Logger log = LoggerFactory.getLogger(SettingsScreen.class);
 
     final FishProperties fp;
     final ItemStack itemBeingFished;
@@ -47,8 +51,7 @@ public class SettingsScreen extends Screen
     final ItemStack bait;
     final ItemStack hook;
 
-    float hitDelay = 0;
-
+    float hitDelay;
 
     float speed;
     int reward;
@@ -95,6 +98,8 @@ public class SettingsScreen extends Screen
     int thinForgiving = SIZE_1;
     int treasureForgiving = SIZE_2;
 
+    int previousGuiScale;
+
     int tickCount = 0;
     List<HitFakeParticle> hitParticles = new ArrayList<>();
 
@@ -102,6 +107,9 @@ public class SettingsScreen extends Screen
     public SettingsScreen(FishProperties fp, ItemStack rod)
     {
         super(Component.empty());
+
+        previousGuiScale = Minecraft.getInstance().options.guiScale().get();
+        Minecraft.getInstance().options.guiScale().set(Config.MINIGAME_GUI_SCALE.get());
 
         hitDelay = Config.HIT_DELAY.get().floatValue();
 
@@ -194,6 +202,12 @@ public class SettingsScreen extends Screen
         guiGraphics.blit(
                 SETTINGS, width / 2 - 100, height / 2 - 128,
                 256, 256, 0, 0, 256, 256, 256, 256);
+
+        //GUI SCALE
+        guiGraphics.blit(
+                GUI_SCALE, width / 2 - 50, 0,
+                100, 50, 0, 0, 100, 50, 100, 50);
+
 
         //move markers
         guiGraphics.drawString(this.font, "Move Markers", width / 2 + 72, height / 2 - 24, 0x000000, false);
@@ -590,6 +604,21 @@ public class SettingsScreen extends Screen
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
+        //gui less
+        if (x > 226 && x < 240 && mouseY > 20 && mouseY < 50)
+        {
+            int current = Minecraft.getInstance().options.guiScale().get();
+            if (current > 1)
+                Minecraft.getInstance().options.guiScale().set(current - 1);
+        }
+
+        //gui more
+        if (x > 267 && x < 280 && mouseY > 20 && mouseY < 50)
+        {
+            int current = Minecraft.getInstance().options.guiScale().get();
+            Minecraft.getInstance().options.guiScale().set(current + 1);
+        }
+
         //move markers
         if (x > 316 && x < 328 && y > 105 && y < 112)
         {
@@ -847,6 +876,11 @@ public class SettingsScreen extends Screen
     {
         Config.HIT_DELAY.set((double) hitDelay);
         Config.HIT_DELAY.save();
+
+        Config.MINIGAME_GUI_SCALE.set(Minecraft.getInstance().options.guiScale().get());
+        Config.MINIGAME_GUI_SCALE.save();
+
+        Minecraft.getInstance().options.guiScale().set(previousGuiScale);
 
         this.minecraft.popGuiLayer();
     }
