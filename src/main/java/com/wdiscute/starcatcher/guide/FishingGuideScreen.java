@@ -813,7 +813,7 @@ public class FishingGuideScreen extends Screen
             renderItem(settings, x + (columnNumber * 25), y, 1);
             if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
             {
-                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.secrets"), mouseX, mouseY);
+                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.settings"), mouseX, mouseY);
             }
             if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
             {

@@ -35,7 +35,7 @@ public class ModCreativeModeTabs
 
                         //adds all entries because im lazy
                         for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS.getEntries())
-                            if (!(item.get() == ModItems.MISSINGNO.get() && item.get() == ModItems.ROD.get()))
+                            if (!(item.get() == ModItems.MISSINGNO.get() && item.get() == ModItems.ROD.get() && item.get() == ModItems.SETTINGS.get()))
                                 output.accept(item.get());
 
 

@@ -590,6 +590,8 @@
   "item.starcatcher.broken_bottle" : "Broken Bottle",
   "tooltip.starcatcher.broken_bottle.0" : "The remains of a once intact bottle.",
 
+  "item.starcatcher.settings" : "Settings",
+
   "item.starcatcher.drifting_waterlogged_bottle" : "Drifting Waterlogged Bottle",
   "tooltip.starcatcher.drifting_waterlogged_bottle.0" : "A bottle found drifting amid the oceans.",
 

@@ -1,4 +1,4 @@
-// 1.21.1	2025-10-26T02:06:15.9152494	Item Models: starcatcher
+// 1.21.1	2025-11-08T19:16:21.5271933	Item Models: starcatcher
 190248e04c8aaf81e80cc0d828c1b3f9addf4641 assets/starcatcher/models/item/agave_bream.json
 033477fbb520065b97801242f6e7c58288fea05d assets/starcatcher/models/item/amethystback.json
 c9d191032ac9251c4e385286728bcf4b6bb965b2 assets/starcatcher/models/item/aquamarine_pike.json
@@ -115,6 +115,7 @@ c94605c331615ae8e07c32188719848afef5bae2 assets/starcatcher/models/item/scalding
 a96c0d50e137e9a61e0785e7e7436f054e513b3b assets/starcatcher/models/item/sculk_bait.json
 1d8f62486d4ade7697dd259e7eea2956f4ade753 assets/starcatcher/models/item/sea_bass.json
 3b7cc3ef25c6fee16f9bc653d335763ae86c99a7 assets/starcatcher/models/item/secret_note.json
+684fcbf65e58f0269bae19af7eb216d245f46d62 assets/starcatcher/models/item/settings.json
 f0fd4696bb77c46600fcd8b72e54bdda3fddef98 assets/starcatcher/models/item/shiny_hook.json
 81456b1f9eb5728e0607552f79a87045108cb312 assets/starcatcher/models/item/shroomfish.json
 5bbde87872195b4130ab5b7aae61995c4c597225 assets/starcatcher/models/item/silverfin_pike.json
