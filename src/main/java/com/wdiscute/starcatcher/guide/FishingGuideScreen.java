@@ -97,6 +97,9 @@ public class FishingGuideScreen extends Screen
 
     private final ItemStack trophies;
     private final ItemStack secrets;
+
+    private final ItemStack settings;
+
     int uiX;
     int uiY;
 
@@ -149,9 +152,6 @@ public class FishingGuideScreen extends Screen
 
         level = Minecraft.getInstance().level;
         player = Minecraft.getInstance().player;
-
-
-        var wadawd = player.getData(ModDataAttachments.FISHES_CAUGHT);
 
         for (FishProperties fp : FishProperties.getFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
         for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
@@ -375,11 +375,22 @@ public class FishingGuideScreen extends Screen
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
     {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
+
+        //render index
+        if (menu == -1)
+        {
+            Minecraft.getInstance().setScreen(
+                    new SettingsScreen(
+                            FishProperties.DEFAULT.withFish(ModItems.AURORA),
+                            new ItemStack(ModItems.ROD.get()
+                            )
+                    ));
+            return;
+        }
 
         renderImage(guiGraphics, BACKGROUND);
 
@@ -435,7 +446,6 @@ public class FishingGuideScreen extends Screen
         clickedX = 0;
         clickedY = 0;
     }
-
 
     private void renderHelpTitle(GuiGraphics guiGraphics, ItemStack is, Component comp, int x, int y)
     {
@@ -664,7 +674,6 @@ public class FishingGuideScreen extends Screen
         }
     }
 
-
     private void renderIndex(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
         int x = uiX + 70;
@@ -700,22 +709,6 @@ public class FishingGuideScreen extends Screen
                 menu = 1;
                 page = 0;
             }
-
-            //treasure - not rendered as there was not enough space and still look nice
-//            columnNumber++;
-//            auxX = x - 2 + (columnNumber * 25);
-//            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-//            renderItem(new ItemStack(ModItems.WATERLOGGED_SATCHEL.get()), x + (columnNumber * 25), y, 1);
-//            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
-//            {
-//                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.treasures"), mouseX, mouseY);
-//            }
-//            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
-//            {
-//                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-//                menu = 1;
-//                page = 1;
-//            }
 
             //hooks
             columnNumber++;
@@ -797,11 +790,27 @@ public class FishingGuideScreen extends Screen
                 page = 4;
             }
 
-            //secret messages
+//            //secret messages
+//            columnNumber++;
+//            auxX = x - 2 + (columnNumber * 25);
+//            guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
+//            renderItem(secrets, x + (columnNumber * 25), y, 1);
+//            if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
+//            {
+//                guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.secrets"), mouseX, mouseY);
+//            }
+//            if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
+//            {
+//                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+//                menu = 1;
+//                page = 4;
+//            }
+
+            //settings
             columnNumber++;
             auxX = x - 2 + (columnNumber * 25);
             guiGraphics.renderOutline(auxX, y - 2, 20, 20, 0xff000000);
-            renderItem(secrets, x + (columnNumber * 25), y, 1);
+            renderItem(settings, x + (columnNumber * 25), y, 1);
             if (mouseX > auxX && mouseX < auxX + 20 && mouseY > y - 2 && mouseY < y + 20)
             {
                 guiGraphics.renderTooltip(this.font, Component.translatable("gui.guide.secrets"), mouseX, mouseY);
@@ -809,9 +818,11 @@ public class FishingGuideScreen extends Screen
             if (clickedX > auxX && clickedX < auxX + 20 && clickedY > y - 2 && clickedY < y + 20)
             {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                menu = 1;
-                page = 4;
+                menu = -1;
+                page = 0;
             }
+
+
         }
         else
         {
@@ -979,7 +990,6 @@ public class FishingGuideScreen extends Screen
         }
 
     }
-
 
     private void renderEntry(GuiGraphics guiGraphics, int mouseX, int mouseY, int xOffset, int entry)
     {
@@ -1185,7 +1195,7 @@ public class FishingGuideScreen extends Screen
                     {
                         List<Component> c = new ArrayList<>();
 
-                        if(!fp.wr().biomesTags().isEmpty())
+                        if (!fp.wr().biomesTags().isEmpty())
                         {
                             c.add(Component.translatable("gui.guide.biome_tags").withStyle(Style.EMPTY.withBold(true)));
 
@@ -1193,7 +1203,6 @@ public class FishingGuideScreen extends Screen
                                 c.add(Component.translatable("tag." + rl.toLanguageKey()));
                             c.add(Component.empty());
                         }
-
 
 
                         c.add(Component.translatable("gui.guide.biomes").withStyle(Style.EMPTY.withBold(true)));
@@ -1229,12 +1238,12 @@ public class FishingGuideScreen extends Screen
 
             comp = comp.copy().withColor(0x00AA00);
 
-            if(!biomes.contains(rl) && !biomes.isEmpty())
+            if (!biomes.contains(rl) && !biomes.isEmpty())
             {
                 comp = comp.copy().withColor(0xAA0000);
             }
 
-            if(biomesBL.contains(rl))
+            if (biomesBL.contains(rl))
             {
                 comp = comp.copy().withColor(0xAA0000);
             }
@@ -1608,6 +1617,8 @@ public class FishingGuideScreen extends Screen
         fishSpotter = new ItemStack(ModItems.FISH_SPOTTER.get());
         trophies = new ItemStack(ModItems.TROPHY_GOLD.get());
         secrets = new ItemStack(ModItems.WATERLOGGED_BOTTLE.get());
+
+        settings = new ItemStack(ModItems.SETTINGS.get());
 
         advancedTooltips = Minecraft.getInstance().options.advancedItemTooltips;
         Minecraft.getInstance().options.advancedItemTooltips = Minecraft.getInstance().player.isCreative() && advancedTooltips;

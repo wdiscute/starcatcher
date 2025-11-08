@@ -62,6 +62,7 @@ public interface ModItems
     DeferredItem<Item> TROPHY_SILVER = singleStackItemFireResistant("trophy_silver");
     DeferredItem<Item> TROPHY_BRONZE = singleStackItemFireResistant("trophy_bronze");
 
+    DeferredItem<Item> SETTINGS = singleStackItem("settings");
 
 
     //secrets
