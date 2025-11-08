@@ -23,6 +23,7 @@ import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -53,8 +54,6 @@ public class Starcatcher
     public static final ResourceKey<Registry<TrophyProperties>> TROPHY_REGISTRY =
             ResourceKey.createRegistryKey(Starcatcher.rl("trophy"));
 
-    private static final Logger LOGGER = LogUtils.getLogger();
-
     public static ResourceLocation rl(String s)
     {
         return ResourceLocation.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
@@ -77,7 +76,7 @@ public class Starcatcher
         ModMenuTypes.register(modEventBus);
         ModDataAttachments.register(modEventBus);
 
-        //modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
     }
 
 
