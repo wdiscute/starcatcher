@@ -66,7 +66,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final boolean changeRotation;
 
     float lastHitMarkerPos = 0;
-    float kimbeColor = 1;
+    float kimbeColor = 0;
 
     int gracePeriod = 80;
 
@@ -362,7 +362,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.popPose();
         }
 
-        //LAST HIT MARKER
+        //KIMBE MARKER
         {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
@@ -374,14 +374,20 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(lastHitMarkerPos)));
             poseStack.translate(-centerX, -centerY, 0);
 
-            RenderSystem.setShaderColor(1, 1, 1, kimbeColor);
+            RenderSystem.setShaderColor(1, 0, 0, kimbeColor);
             RenderSystem.enableBlend();
 
             //16 offset on y for texture centering
             if (bobber.is(ModItems.KIMBE_BOBBER))
-                guiGraphics.blit(
-                        TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
-                        64, 64, 128, 128, 64, 64, 256, 256);
+            {
+                if (bobber.is(ModItems.KIMBE_BOBBER))
+                    guiGraphics.blit(
+                            TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
+                            64, 64, 128, 128, 64, 64, 256, 256);
+            }
+
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            RenderSystem.disableBlend();
 
             poseStack.popPose();
         }
@@ -506,8 +512,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (hitSomething)
             {
-                kimbeColor = 1;
-
                 consecutiveHits++;
                 if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
                         ||
@@ -533,6 +537,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
             else
             {
+                if (bobber.is(ModItems.KIMBE_BOBBER))
+                    Minecraft.getInstance().player.playSound(SoundEvents.VILLAGER_NO, 1, 1);
+                kimbeColor = 1;
                 consecutiveHits = 0;
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 1, 1, false);
                 completion -= penalty;
