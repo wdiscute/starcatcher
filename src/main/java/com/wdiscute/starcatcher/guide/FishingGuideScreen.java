@@ -85,6 +85,7 @@ public class FishingGuideScreen extends Screen
     private final ItemStack steadyBobber;
     private final ItemStack impatientBobber;
     private final ItemStack frogBobber;
+    private final ItemStack kimbeBobber;
 
     private final ItemStack cherryBait;
     private final ItemStack lushBait;
@@ -643,9 +644,10 @@ public class FishingGuideScreen extends Screen
             renderItemWithOutlineAndHover(guiGraphics, colorfulBobber, 368, 170, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, frugalBobber, 408, 170, mouseX, mouseY);
 
-            renderItemWithOutlineAndHover(guiGraphics, steadyBobber, 308, 200, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, impatientBobber, 348, 200, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, frogBobber, 388, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, steadyBobber, 288, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, impatientBobber, 328, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, frogBobber, 368, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, kimbeBobber, 408, 200, mouseX, mouseY);
         }
 
         if (page == 3)
@@ -1609,6 +1611,7 @@ public class FishingGuideScreen extends Screen
         steadyBobber = new ItemStack(ModItems.STEADY_BOBBER.get());
         impatientBobber = new ItemStack(ModItems.IMPATIENT_BOBBER.get());
         frogBobber = new ItemStack(ModItems.FROG_BOBBER.get());
+        kimbeBobber = new ItemStack(ModItems.KIMBE_BOBBER.get());
 
         cherryBait = new ItemStack(ModItems.CHERRY_BAIT.get());
         lushBait = new ItemStack(ModItems.LUSH_BAIT.get());

@@ -25,6 +25,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
@@ -63,6 +64,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final int decay;
     final boolean hasTreasure;
     final boolean changeRotation;
+
+    float lastHitMarkerPos = 0;
+    float kimbeColor = 1;
 
     int gracePeriod = 80;
 
@@ -124,18 +128,18 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //tank texture change
         ResourceKey<Level> dim = Minecraft.getInstance().level.dimension();
         Player player = Minecraft.getInstance().player;
-        if(player.getY() < 50 && dim.equals(Level.OVERWORLD))
+        if (player.getY() < 50 && dim.equals(Level.OVERWORLD))
             tankTexture = CAVE;
 
-        if(dim.equals(Level.NETHER))
+        if (dim.equals(Level.NETHER))
             tankTexture = NETHER;
 
         //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
         FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
                 (
                         fp.rarity() == FishProperties.Rarity.COMMON ||
-                        fp.rarity() == FishProperties.Rarity.UNCOMMON ||
-                        fp.rarity() == FishProperties.Rarity.RARE
+                                fp.rarity() == FishProperties.Rarity.UNCOMMON ||
+                                fp.rarity() == FishProperties.Rarity.RARE
                 ) ? FishProperties.Difficulty.HARD : fp.dif();
 
         this.speed = difficulty.speed();
@@ -153,7 +157,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         posThin2 = difficulty.hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
 
         //make sweet spots fatter if difficulty bobber is being used
-        if(bobber.is(ModItems.STEADY_BOBBER))
+        if (bobber.is(ModItems.STEADY_BOBBER))
         {
             bigForgiving = SIZE_4;
             thinForgiving = SIZE_2;
@@ -358,6 +362,30 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.popPose();
         }
 
+        //LAST HIT MARKER
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(lastHitMarkerPos)));
+            poseStack.translate(-centerX, -centerY, 0);
+
+            RenderSystem.setShaderColor(1, 1, 1, kimbeColor);
+            RenderSystem.enableBlend();
+
+            //16 offset on y for texture centering
+            if (bobber.is(ModItems.KIMBE_BOBBER))
+                guiGraphics.blit(
+                        TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
+                        64, 64, 128, 128, 64, 64, 256, 256);
+
+            poseStack.popPose();
+        }
+
         //silver thing on top
         guiGraphics.blit(
                 TEXTURE, width / 2 - 16, height / 2 - 16,
@@ -428,6 +456,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             pointerPosPrecise += hitDelay * speed * currentRotation;
 
+            lastHitMarkerPos = pointerPosPrecise;
+
             //pos 1
             if ((Math.abs(pos1 - pointerPosPrecise) < bigForgiving || Math.abs(pos1 - pointerPosPrecise) > 360 - bigForgiving) && pos1 != Integer.MIN_VALUE)
             {
@@ -476,10 +506,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (hitSomething)
             {
+                kimbeColor = 1;
+
                 consecutiveHits++;
                 if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
-                ||
-                (consecutiveHits == 3 && treasureProgress == Integer.MIN_VALUE && hook.is(ModItems.SHINY_HOOK)))
+                        ||
+                        (consecutiveHits == 3 && treasureProgress == Integer.MIN_VALUE && hook.is(ModItems.SHINY_HOOK)))
                 {
                     treasureActive = true;
                     posTreasure = getRandomFreePosition();
@@ -487,13 +519,13 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                     treasureProgressSmooth = 0;
                 }
 
-                if(hook.is(ModItems.STONE_HOOK))
+                if (hook.is(ModItems.STONE_HOOK))
                 {
-                    if(fp.rarity() == FishProperties.Rarity.COMMON) gracePeriod = 40;
-                    if(fp.rarity() == FishProperties.Rarity.UNCOMMON) gracePeriod = 20;
-                    if(fp.rarity() == FishProperties.Rarity.RARE) gracePeriod = 15;
-                    if(fp.rarity() == FishProperties.Rarity.EPIC) gracePeriod = 10;
-                    if(fp.rarity() == FishProperties.Rarity.LEGENDARY) gracePeriod = 5;
+                    if (fp.rarity() == FishProperties.Rarity.COMMON) gracePeriod = 40;
+                    if (fp.rarity() == FishProperties.Rarity.UNCOMMON) gracePeriod = 20;
+                    if (fp.rarity() == FishProperties.Rarity.RARE) gracePeriod = 15;
+                    if (fp.rarity() == FishProperties.Rarity.EPIC) gracePeriod = 10;
+                    if (fp.rarity() == FishProperties.Rarity.LEGENDARY) gracePeriod = 5;
                 }
 
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
@@ -516,6 +548,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     public void tick()
     {
         pointerPos += (int) (speed * currentRotation);
+
+        kimbeColor -= 0.1f;
 
         if (pointerPos > 360) pointerPos -= 360;
         if (pointerPos < 0) pointerPos += 360;
@@ -577,9 +611,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         for (int i = 0; i < count; i++)
         {
-            if(bobber.is(ModItems.GLITTER_BOBBER))
+            if (bobber.is(ModItems.GLITTER_BOBBER))
             {
-                hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
+                hitParticles.add(new HitFakeParticle(
+                        xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
                         r.nextFloat(),
                         r.nextFloat(),
                         r.nextFloat(),
@@ -588,9 +623,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 continue;
             }
 
-            if(bobber.is(ModItems.COLORFUL_BOBBER))
+            if (bobber.is(ModItems.COLORFUL_BOBBER))
             {
-                hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
+                hitParticles.add(new HitFakeParticle(
+                        xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
                         bobber.get(ModDataComponents.BOBBER_COLOR).r(),
                         bobber.get(ModDataComponents.BOBBER_COLOR).g(),
                         bobber.get(ModDataComponents.BOBBER_COLOR).b(),
@@ -602,7 +638,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             if (treasure)
             {
                 //red particles if treasure sweet spot was hit
-                hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
+                hitParticles.add(new HitFakeParticle(
+                        xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
                         0.7f + r.nextFloat() / 3, 0.5f, 0.5f, 1
                 ));
             }
