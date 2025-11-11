@@ -25,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
@@ -85,6 +84,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     float posThin1Vanishing = 1;
     float posThin2Vanishing = 1;
 
+    float vanishingRate = 0;
+    int moveRate = 0;
+
     int currentRotation = 1;
 
     float partial;
@@ -122,7 +124,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         hitDelay = Config.HIT_DELAY.get().floatValue();
 
-        this.fp = fp.withDifficulty(fp.dif().withVanishing(true));
+        //TODO REMOVE THIS!! TEST ONLY
+        fp = fp.withDifficulty(FishProperties.Difficulty.DEFAULT.withExtras(FishProperties.Difficulty.Extras.TTT)).withRarity(FishProperties.Rarity.COMMON);
+
+        this.fp = fp;
         this.itemBeingFished = new ItemStack(fp.fish());
         this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
         this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
@@ -140,12 +145,33 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             tankTexture = NETHER;
 
         //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
+        boolean commonUncommonRareFish = fp.rarity() == FishProperties.Rarity.COMMON ||
+                fp.rarity() == FishProperties.Rarity.UNCOMMON ||
+                fp.rarity() == FishProperties.Rarity.RARE;
+
         FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
-                (
-                        fp.rarity() == FishProperties.Rarity.COMMON ||
-                                fp.rarity() == FishProperties.Rarity.UNCOMMON ||
-                                fp.rarity() == FishProperties.Rarity.RARE
-                ) ? FishProperties.Difficulty.HARD : fp.dif();
+                (commonUncommonRareFish) ? FishProperties.Difficulty.HARD : fp.dif();
+
+        if(fp.dif().extras().isMoving())
+        {
+            if(commonUncommonRareFish)
+                moveRate = 1;
+            if(fp.rarity().equals(FishProperties.Rarity.EPIC))
+                moveRate = 6;
+            if(fp.rarity().equals(FishProperties.Rarity.LEGENDARY))
+                moveRate = 8;
+        }
+
+        if(fp.dif().extras().isVanishing())
+        {
+            if(commonUncommonRareFish)
+                vanishingRate = 0.03f;
+            if(fp.rarity().equals(FishProperties.Rarity.EPIC))
+                vanishingRate = 0.1f;
+            if(fp.rarity().equals(FishProperties.Rarity.LEGENDARY))
+                vanishingRate = 0.2f;
+        }
+
 
         this.speed = difficulty.speed();
         this.reward = difficulty.reward();
@@ -154,12 +180,14 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         this.penalty = difficulty.penalty();
         this.decay = difficulty.decay();
         this.hasTreasure = difficulty.treasure().hasTreasure();
-        this.changeRotation = difficulty.changeRotationOnEveryHit() && !hook.is(ModItems.STABILIZING_HOOK);
+        this.changeRotation = difficulty.extras().isFlip() && !hook.is(ModItems.STABILIZING_HOOK);
 
-        pos1 = difficulty.hasFirstMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        pos2 = difficulty.hasSecondMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin1 = difficulty.hasFirstThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin2 = difficulty.hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        pos1 = difficulty.markers().first() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        pos2 = difficulty.markers().second() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin1 = difficulty.markers().firstThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin2 = difficulty.markers().secondThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
+
+
 
         //make sweet spots fatter if difficulty bobber is being used
         if (bobber.is(ModItems.STEADY_BOBBER))
@@ -251,7 +279,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos1)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos1 - partialTick * currentRotation * moveRate)));
             poseStack.translate(-centerX, -centerY, 0);
             RenderSystem.setShaderColor(1, 1, 1, pos1Vanishing);
             RenderSystem.enableBlend();
@@ -276,7 +304,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos2)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos2 - partialTick * currentRotation * moveRate)));
             poseStack.translate(-centerX, -centerY, 0);
             RenderSystem.setShaderColor(1, 1, 1, pos2Vanishing);
             RenderSystem.enableBlend();
@@ -300,7 +328,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin1)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin1 - partialTick * currentRotation * moveRate)));
             poseStack.translate(-centerX, -centerY, 0);
             RenderSystem.setShaderColor(1, 1, 1, posThin1Vanishing);
             RenderSystem.enableBlend();
@@ -324,7 +352,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             float centerY = height / 2f;
 
             poseStack.translate(centerX, centerY, 0);
-            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin2)));
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin2 - partialTick * currentRotation * moveRate)));
             poseStack.translate(-centerX, -centerY, 0);
             RenderSystem.setShaderColor(1, 1, 1, posThin2Vanishing);
             RenderSystem.enableBlend();
@@ -588,13 +616,26 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         pointerPos += (int) (speed * currentRotation);
 
         kimbeColor -= 0.1f;
-        if(fp.dif().isVanishing())
+        if(fp.dif().extras().isVanishing())
         {
-            pos1Vanishing -= 0.1f;
-            pos2Vanishing -= 0.1f;
-            posThin1Vanishing -= 0.1f;
-            posThin2Vanishing -= 0.1f;
+            pos1Vanishing -= vanishingRate;
+            pos2Vanishing -= vanishingRate;
+            posThin1Vanishing -= vanishingRate;
+            posThin2Vanishing -= vanishingRate;
         }
+
+        if(fp.dif().extras().isMoving())
+        {
+            if(pos1 != Integer.MIN_VALUE) pos1 -= moveRate * currentRotation;
+            if(pos2 != Integer.MIN_VALUE) pos2 -= moveRate * currentRotation;
+            if(posThin1 != Integer.MIN_VALUE) posThin1 -= moveRate * currentRotation;
+            if(posThin2 != Integer.MIN_VALUE) posThin2 -= moveRate * currentRotation;
+        }
+
+        if(pos1 < 0 && pos1 != Integer.MIN_VALUE) pos1 += 360;
+        if(pos2 < 0 && pos2 != Integer.MIN_VALUE) pos2 += 360;
+        if(posThin1 < 0 && posThin1 != Integer.MIN_VALUE) posThin1 += 360;
+        if(posThin2 < 0 && posThin2 != Integer.MIN_VALUE) posThin2 += 360;
 
         if (pointerPos > 360) pointerPos -= 360;
         if (pointerPos < 0) pointerPos += 360;

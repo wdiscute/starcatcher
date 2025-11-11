@@ -136,12 +136,12 @@ public class SettingsScreen extends Screen
         this.penalty = difficulty.penalty();
         this.decay = difficulty.decay();
         this.hasTreasure = difficulty.treasure().hasTreasure();
-        this.changeRotation = difficulty.changeRotationOnEveryHit();
+        this.changeRotation = difficulty.extras().isFlip();
 
-        pos1 = difficulty.hasFirstMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        pos2 = difficulty.hasSecondMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin1 = difficulty.hasFirstThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin2 = difficulty.hasSecondThinMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        pos1 = difficulty.markers().first() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        pos2 = difficulty.markers().second() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin1 = difficulty.markers().firstThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin2 = difficulty.markers().secondThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
 
         //make sweet spots fatter if difficulty bobber is being used
         if (bobber.is(ModItems.STEADY_BOBBER))
