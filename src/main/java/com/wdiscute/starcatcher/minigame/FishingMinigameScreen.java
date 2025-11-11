@@ -80,6 +80,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int posThin2;
     int posTreasure;
 
+    float pos1Vanishing = 1;
+    float pos2Vanishing = 1;
+    float posThin1Vanishing = 1;
+    float posThin2Vanishing = 1;
+
     int currentRotation = 1;
 
     float partial;
@@ -117,7 +122,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         hitDelay = Config.HIT_DELAY.get().floatValue();
 
-        this.fp = fp;
+        this.fp = fp.withDifficulty(fp.dif().withVanishing(true));
         this.itemBeingFished = new ItemStack(fp.fish());
         this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
         this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
@@ -244,14 +249,19 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             float centerX = width / 2f;
             float centerY = height / 2f;
 
+
             poseStack.translate(centerX, centerY, 0);
             poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos1)));
             poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, pos1Vanishing);
+            RenderSystem.enableBlend();
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
                     16, 16, 16 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
             poseStack.popPose();
         }
 
@@ -268,11 +278,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.translate(centerX, centerY, 0);
             poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos2)));
             poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, pos2Vanishing);
+            RenderSystem.enableBlend();
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
                     16, 16, 16 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
             poseStack.popPose();
         }
 
@@ -288,11 +302,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.translate(centerX, centerY, 0);
             poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin1)));
             poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, posThin1Vanishing);
+            RenderSystem.enableBlend();
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
                     16, 16, 48 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
             poseStack.popPose();
         }
 
@@ -308,11 +326,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             poseStack.translate(centerX, centerY, 0);
             poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin2)));
             poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, posThin2Vanishing);
+            RenderSystem.enableBlend();
 
             guiGraphics.blit(
                     TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
                     16, 16, 48 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
             poseStack.popPose();
         }
 
@@ -471,6 +493,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 pos1 = getRandomFreePosition();
                 completion += reward;
                 hitSomething = true;
+                pos1Vanishing = 1;
             }
 
             //pos2
@@ -480,6 +503,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 pos2 = getRandomFreePosition();
                 completion += reward;
                 hitSomething = true;
+                pos2Vanishing = 1;
             }
 
             //pos thin 1
@@ -489,6 +513,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 posThin1 = getRandomFreePosition();
                 completion += rewardThin;
                 hitSomething = true;
+                posThin1Vanishing = 1;
             }
 
             //pos thin 2
@@ -498,6 +523,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 posThin2 = getRandomFreePosition();
                 completion += rewardThin;
                 hitSomething = true;
+                posThin2Vanishing = 1;
             }
 
             //if hit sweet spot treasure
@@ -537,6 +563,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
             else
             {
+                pos1Vanishing = 1;
+                pos2Vanishing = 1;
+                posThin1Vanishing = 1;
+                posThin2Vanishing = 1;
+
                 if (bobber.is(ModItems.KIMBE_BOBBER))
                     Minecraft.getInstance().player.playSound(SoundEvents.VILLAGER_NO, 1, 1);
                 kimbeColor = 1;
@@ -557,6 +588,13 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         pointerPos += (int) (speed * currentRotation);
 
         kimbeColor -= 0.1f;
+        if(fp.dif().isVanishing())
+        {
+            pos1Vanishing -= 0.1f;
+            pos2Vanishing -= 0.1f;
+            posThin1Vanishing -= 0.1f;
+            posThin2Vanishing -= 0.1f;
+        }
 
         if (pointerPos > 360) pointerPos -= 360;
         if (pointerPos < 0) pointerPos += 360;

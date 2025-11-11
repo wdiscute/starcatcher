@@ -638,7 +638,8 @@ public record FishProperties(
             boolean hasFirstThinMarker,
             boolean hasSecondThinMarker,
             Treasure treasure,
-            boolean changeRotationOnEveryHit
+            boolean changeRotationOnEveryHit,
+            boolean isVanishing
     )
     {
 
@@ -653,6 +654,22 @@ public record FishProperties(
                 false,
                 false,
                 Treasure.DEFAULT,
+                true,
+                false
+        );
+
+        public static final Difficulty VANISHING_EASY = new Difficulty(
+                9,
+                20,
+                0,
+                6,
+                1,
+                true,
+                true,
+                false,
+                false,
+                Treasure.DEFAULT,
+                true,
                 true
         );
 
@@ -667,8 +684,27 @@ public record FishProperties(
                 true,
                 false,
                 Treasure.UNCOMMON,
+                true,
+                false
+        );
+
+
+        public static final Difficulty VANISHING_MEDIUM = new Difficulty(
+                10,
+                15,
+                35,
+                15,
+                1,
+                true,
+                false,
+                true,
+                false,
+                Treasure.UNCOMMON,
+                true,
                 true
         );
+
+
 
         public static final Difficulty HARD = new Difficulty(
                 12,
@@ -681,7 +717,8 @@ public record FishProperties(
                 true,
                 false,
                 Treasure.HARD,
-                true
+                true,
+                false
         );
 
         public static final Difficulty HARD_ONLY_THIN = new Difficulty(
@@ -695,7 +732,8 @@ public record FishProperties(
                 true,
                 true,
                 Treasure.HARD,
-                true
+                true,
+                false
         );
 
         public static final Difficulty THIN_NO_DECAY = new Difficulty(
@@ -709,6 +747,7 @@ public record FishProperties(
                 true,
                 true,
                 Treasure.HARD,
+                false,
                 false
         );
 
@@ -723,6 +762,7 @@ public record FishProperties(
                 true,
                 true,
                 Treasure.HARD,
+                false,
                 false
         );
 
@@ -737,7 +777,23 @@ public record FishProperties(
                 false,
                 false,
                 Treasure.HARD,
+                false,
                 false
+        );
+
+        public static final Difficulty VANISHING_SINGLE_BIG_FAST_NO_DECAY = new Difficulty(
+                15,
+                5,
+                0,
+                15,
+                0,
+                true,
+                false,
+                false,
+                false,
+                Treasure.HARD,
+                false,
+                true
         );
 
         public static final Difficulty SINGLE_BIG_FAST = new Difficulty(
@@ -751,6 +807,7 @@ public record FishProperties(
                 false,
                 false,
                 Treasure.HARD,
+                false,
                 false
         );
 
@@ -765,6 +822,7 @@ public record FishProperties(
                 true,
                 true,
                 Treasure.HARD,
+                false,
                 false
         );
 
@@ -779,7 +837,8 @@ public record FishProperties(
                 true,
                 true,
                 Treasure.HARD,
-                true
+                true,
+                false
         );
 
         public static final Difficulty NON_STOP_ACTION = new Difficulty(
@@ -793,12 +852,18 @@ public record FishProperties(
                 false,
                 false,
                 Treasure.HARD,
+                false,
                 false
         );
 
         public Difficulty withTreasure(Treasure treasure)
         {
-            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.hasFirstMarker, this.hasSecondMarker, this.hasFirstThinMarker, this.hasSecondThinMarker, treasure, this.changeRotationOnEveryHit);
+            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.hasFirstMarker, this.hasSecondMarker, this.hasFirstThinMarker, this.hasSecondThinMarker, treasure, this.changeRotationOnEveryHit, this.isVanishing);
+        }
+
+        public Difficulty withVanishing(boolean vanishing)
+        {
+            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.hasFirstMarker, this.hasSecondMarker, this.hasFirstThinMarker, this.hasSecondThinMarker, this.treasure, this.changeRotationOnEveryHit, vanishing);
         }
 
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
@@ -813,7 +878,8 @@ public record FishProperties(
                         Codec.BOOL.optionalFieldOf("has_first_thin_marker", DEFAULT.hasFirstThinMarker).forGetter(Difficulty::hasFirstThinMarker),
                         Codec.BOOL.optionalFieldOf("has_second_thin_marker", DEFAULT.hasSecondThinMarker).forGetter(Difficulty::hasSecondThinMarker),
                         Treasure.CODEC.optionalFieldOf("treasure", Treasure.DEFAULT).forGetter(Difficulty::treasure),
-                        Codec.BOOL.optionalFieldOf("change_rotation_every_hit", DEFAULT.changeRotationOnEveryHit).forGetter(Difficulty::changeRotationOnEveryHit)
+                        Codec.BOOL.optionalFieldOf("change_rotation_every_hit", DEFAULT.changeRotationOnEveryHit).forGetter(Difficulty::changeRotationOnEveryHit),
+                        Codec.BOOL.optionalFieldOf("is_vanishing", DEFAULT.isVanishing).forGetter(Difficulty::isVanishing)
                 ).apply(instance, Difficulty::new));
 
 
@@ -829,6 +895,7 @@ public record FishProperties(
                 ByteBufCodecs.BOOL, Difficulty::hasSecondThinMarker,
                 Treasure.STREAM_CODEC, Difficulty::treasure,
                 ByteBufCodecs.BOOL, Difficulty::changeRotationOnEveryHit,
+                ByteBufCodecs.BOOL, Difficulty::isVanishing,
                 Difficulty::new
         );
     }
