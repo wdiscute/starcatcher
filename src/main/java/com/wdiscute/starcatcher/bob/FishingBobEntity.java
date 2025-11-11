@@ -465,10 +465,11 @@ public class FishingBobEntity extends Projectile
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInFluid > maxTicksToFish) && ticksInFluid > minTicksToFish)
             {
-                ((ServerLevel) level()).sendParticles(
-                        ModParticles.FISHING_NOTIFICATION.get(),
-                        position().x, position().y + 1, position().z,
-                        1, 0, 0, 0, 0);
+                if (Config.SHOW_EXCLAMATION_MARK_PARTICLE.get())
+                    ((ServerLevel) level()).sendParticles(
+                            ModParticles.FISHING_NOTIFICATION.get(),
+                            position().x, position().y + 1, position().z,
+                            1, 0, 0, 0, 0);
 
                 this.setPos(position().x, position().y - 0.5f, position().z);
                 if (!level().isClientSide) currentState = FishHookState.BITING;
