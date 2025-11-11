@@ -32,9 +32,6 @@ import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.*;
-import org.slf4j.Logger;
-
-import com.mojang.logging.LogUtils;
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -78,6 +75,7 @@ public class Starcatcher
         ModDataAttachments.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
+        modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC_SERVER);
     }
 
 
