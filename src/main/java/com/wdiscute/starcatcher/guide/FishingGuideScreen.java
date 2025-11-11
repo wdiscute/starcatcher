@@ -76,6 +76,7 @@ public class FishingGuideScreen extends Screen
     private final ItemStack crystalHook;
     private final ItemStack stoneHook;
     private final ItemStack splitHook;
+    private final ItemStack stabHook;
 
     private final ItemStack frugalBobber;
     private final ItemStack creeperBobber;
@@ -629,9 +630,11 @@ public class FishingGuideScreen extends Screen
             renderItemWithOutlineAndHover(guiGraphics, goldHook, 125, 170, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, shinyHook, 165, 170, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, crystalHook, 205, 170, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, mossyHook, 105, 200, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, splitHook, 145, 200, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, stoneHook, 185, 200, mouseX, mouseY);
+
+            renderItemWithOutlineAndHover(guiGraphics, mossyHook, 85, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, splitHook, 125, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, stoneHook, 165, 200, mouseX, mouseY);
+            renderItemWithOutlineAndHover(guiGraphics, stabHook, 205, 200, mouseX, mouseY);
 
             //bobbers
             renderHelpTitle(guiGraphics, frugalBobber, Component.translatable("gui.guide.bobbers"), 280, 15);
@@ -639,6 +642,7 @@ public class FishingGuideScreen extends Screen
             renderItemWithOutlineAndHover(guiGraphics, glitterBobber, 328, 170, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, colorfulBobber, 368, 170, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, frugalBobber, 408, 170, mouseX, mouseY);
+
             renderItemWithOutlineAndHover(guiGraphics, steadyBobber, 308, 200, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, impatientBobber, 348, 200, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, frogBobber, 388, 200, mouseX, mouseY);
@@ -1596,6 +1600,7 @@ public class FishingGuideScreen extends Screen
         crystalHook = new ItemStack(ModItems.CRYSTAL_HOOK.get());
         stoneHook = new ItemStack(ModItems.STONE_HOOK.get());
         splitHook = new ItemStack(ModItems.SPLIT_HOOK.get());
+        stabHook = new ItemStack(ModItems.STABILIZING_HOOK.get());
 
         frugalBobber = new ItemStack(ModItems.FRUGAL_BOBBER.get());
         creeperBobber = new ItemStack(ModItems.CREEPER_BOBBER.get());

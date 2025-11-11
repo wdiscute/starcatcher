@@ -101,6 +101,14 @@
   "tooltip.starcatcher.split_hook.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
   "tooltip.starcatcher.split_hook.2": "completing a perfect catch will award 2 fishes.",
 
+  "item.starcatcher.stabilizing_hook": "Stabilizing Hook",
+  "tooltip.starcatcher.stabilizing_hook.0": "A thin self-balancing hook!",
+  "tooltip.starcatcher.stabilizing_hook.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
+  "tooltip.starcatcher.stabilizing_hook.2": "fishes won't turn around while being reeled in.",
+
+
+
+
   "item.starcatcher.creeper_bobber": "Creeper Bobber",
   "tooltip.starcatcher.creeper_bobber.0": "A creeper shaped bobber.",
   "tooltip.starcatcher.creeper_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>...",
@@ -133,6 +141,16 @@
   "tooltip.starcatcher.frog_bobber.0": "A frog-looking bobber.",
   "tooltip.starcatcher.frog_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
   "tooltip.starcatcher.frog_bobber.2": "it will behave like a frog. Somewhat.",
+
+  "item.starcatcher.kimbe_bobber": "Kimbe Bobber",
+  "tooltip.starcatcher.kimbe_bobber.0": "A weird looking bobber.",
+  "tooltip.starcatcher.kimbe_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
+  "tooltip.starcatcher.kimbe_bobber.2": "it will criticize you everytime you miss a sweet-spot.",
+
+
+
+
+
 
   "item.starcatcher.cherry_bait": "Cherry Bait",
   "tooltip.starcatcher.cherry_bait.0": "A bait made of pink petals which fish",

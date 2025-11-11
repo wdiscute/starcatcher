@@ -145,7 +145,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         this.penalty = difficulty.penalty();
         this.decay = difficulty.decay();
         this.hasTreasure = difficulty.treasure().hasTreasure();
-        this.changeRotation = difficulty.changeRotationOnEveryHit();
+        this.changeRotation = difficulty.changeRotationOnEveryHit() && !hook.is(ModItems.STABILIZING_HOOK);
 
         pos1 = difficulty.hasFirstMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
         pos2 = difficulty.hasSecondMarker() ? getRandomFreePosition() : Integer.MIN_VALUE;
