@@ -16,11 +16,14 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
@@ -33,7 +36,12 @@ import java.util.List;
 public class FishingMinigameScreen extends Screen implements GuiEventListener
 {
     private static final Random r = new Random();
-    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame.png");
+
+    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
+    private static final ResourceLocation NETHER = Starcatcher.rl("textures/gui/minigame/nether.png");
+    private static final ResourceLocation CAVE = Starcatcher.rl("textures/gui/minigame/cave.png");
+    private static final ResourceLocation SURFACE = Starcatcher.rl("textures/gui/minigame/surface.png");
+
     private static final ResourceLocation TEXTURE_TEST = Starcatcher.rl("textures/gui/minigame2.png");
 
     private static final int SIZE_1 = 5;
@@ -92,6 +100,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     int previousGuiScale;
 
+    ResourceLocation tankTexture = SURFACE;
+
     public FishingMinigameScreen(FishProperties fp, ItemStack rod)
     {
         super(Component.empty());
@@ -106,6 +116,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         this.hook = rod.get(ModDataComponents.HOOK).stack().copy();
 
         posTreasure = Integer.MIN_VALUE;
+
+        //tank texture change
+        ResourceKey<Level> dim = Minecraft.getInstance().level.dimension();
+        Player player = Minecraft.getInstance().player;
+        if(player.getY() < 50 && dim.equals(Level.OVERWORLD))
+            tankTexture = CAVE;
+
+        if(dim.equals(Level.NETHER))
+            tankTexture = NETHER;
 
         //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
         FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
@@ -194,8 +213,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         //tank background
         guiGraphics.blit(
-                TEXTURE, width / 2 - 42 - 100, height / 2 - 48,
-                85, 97, 0, 0, 85, 97, 256, 256);
+                tankTexture, width / 2 - 42 - 100, height / 2 - 48,
+                85, 97, 0, 0, 85, 97, 85, 97);
 
         //wheel background
         guiGraphics.blit(
@@ -530,7 +549,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         hitParticles.removeIf(HitFakeParticle::tick);
-
     }
 
     @Override
