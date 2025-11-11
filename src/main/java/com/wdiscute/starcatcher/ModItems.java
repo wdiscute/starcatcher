@@ -37,6 +37,7 @@ public interface ModItems
     DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");  //done
     DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");  //done
     DeferredItem<Item> STABILIZING_HOOK = singleStackItem("stabilizing_hook");  //
+    DeferredItem<Item> HEAVY_HOOK = singleStackItem("heavy_hook");  //
 
     //bobbers
     DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
@@ -47,6 +48,7 @@ public interface ModItems
     DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber"); //done
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
     DeferredItem<Item> KIMBE_BOBBER = singleStackItem("kimbe_bobber");
+    DeferredItem<Item> CLEAR_BOBBER = singleStackItem("clear_bobber");  //
 
     //baits
     DeferredItem<Item> CHERRY_BAIT = basicItem("cherry_bait"); //done

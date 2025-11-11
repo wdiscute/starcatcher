@@ -106,6 +106,11 @@
   "tooltip.starcatcher.stabilizing_hook.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
   "tooltip.starcatcher.stabilizing_hook.2": "fishes won't turn around while being reeled in.",
 
+  "item.starcatcher.heavy_hook": "Heavy Hook",
+  "tooltip.starcatcher.heavy_hook.0": "A weird looking bobber.",
+  "tooltip.starcatcher.heavy_hook.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
+  "tooltip.starcatcher.heavy_hook.2": "sweet-spots will move around slower.",
+
 
 
 
@@ -148,7 +153,10 @@
   "tooltip.starcatcher.kimbe_bobber.2": "it will criticize you everytime you miss a sweet-spot.",
   "tooltip.starcatcher.kimbe_bobber.3" : "It might help you better understand why you missed a spot.",
 
-
+  "item.starcatcher.clear_bobber": "Clear Bobber",
+  "tooltip.starcatcher.clear_bobber.0": "A crystal clear bobber.",
+  "tooltip.starcatcher.clear_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
+  "tooltip.starcatcher.clear_bobber.2": "it will make vanishing sweet-spots easier to see.",
 
 
 

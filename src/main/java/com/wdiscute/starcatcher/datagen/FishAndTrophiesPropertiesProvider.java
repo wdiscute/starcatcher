@@ -100,7 +100,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.HARD),
 
                     overworldLakeFish(ModItems.ELDERSCALE)
-                            .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                            .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
                             .withBaseChance(3),
 
@@ -111,7 +111,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDaytime(FishProperties.Daytime.MIDNIGHT)
                             .withRarity(FishProperties.Rarity.EPIC)
                             .withWeather(FishProperties.Weather.RAIN)
-                            .withDifficulty(FishProperties.Difficulty.MEDIUM),
+                            .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING),
 
                     overworldLakeFish(ModItems.THUNDER_BASS)
                             .withRarity(FishProperties.Rarity.RARE)
@@ -131,7 +131,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     //cold lake
                     overworldColdLakeFish(ModItems.FROSTJAW_TROUT)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.EVERYTHING_VANISHING),
 
                     overworldColdLakeFish(ModItems.CRYSTALBACK_TROUT)
                             .withDifficulty(FishProperties.Difficulty.MEDIUM),
@@ -140,7 +140,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withRarity(FishProperties.Rarity.LEGENDARY)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withBaseChance(2)
-                            .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION),
+                            .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION_VANISHING),
 
                     overworldColdLakeFish(ModItems.WINTERY_PIKE),
 
