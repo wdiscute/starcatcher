@@ -80,6 +80,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     float partial;
 
+    float hitDelay;
+
     int completion = 20;
     int completionSmooth = 20;
 
@@ -108,6 +110,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         previousGuiScale = Minecraft.getInstance().options.guiScale().get();
         Minecraft.getInstance().options.guiScale().set(Config.MINIGAME_GUI_SCALE.get());
+
+        hitDelay = Config.HIT_DELAY.get().floatValue();
 
         this.fp = fp;
         this.itemBeingFished = new ItemStack(fp.fish());
@@ -422,6 +426,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             float pointerPosPrecise = (pointerPos + ((speed * partial) * currentRotation));
 
+            pointerPosPrecise += hitDelay * speed * currentRotation;
 
             //pos 1
             if ((Math.abs(pos1 - pointerPosPrecise) < bigForgiving || Math.abs(pos1 - pointerPosPrecise) > 360 - bigForgiving) && pos1 != Integer.MIN_VALUE)

@@ -666,13 +666,13 @@ public class SettingsScreen extends Screen
         //hit delay
         if (x > 316 && x < 325 && y > 70 && y < 100)
         {
-            hitDelay -= 0.5f;
+            hitDelay -= 0.1f;
         }
 
         //hit delay
         if (x > 396 && x < 410 && y > 70 && y < 100)
         {
-            hitDelay += 0.5f;
+            hitDelay += 0.1f;
         }
 
         //markers
