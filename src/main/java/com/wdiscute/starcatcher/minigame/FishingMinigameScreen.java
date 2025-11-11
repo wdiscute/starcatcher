@@ -152,24 +152,27 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
                 (commonUncommonRareFish) ? FishProperties.Difficulty.HARD : fp.dif();
 
-        if(fp.dif().extras().isMoving())
+        if (fp.dif().extras().isMoving())
         {
-            if(commonUncommonRareFish)
+            if (commonUncommonRareFish)
                 moveRate = 1;
-            if(fp.rarity().equals(FishProperties.Rarity.EPIC))
-                moveRate = 6;
-            if(fp.rarity().equals(FishProperties.Rarity.LEGENDARY))
-                moveRate = 8;
+            else
+            {
+                if (fp.rarity().equals(FishProperties.Rarity.EPIC))
+                    moveRate = 6;
+                if (fp.rarity().equals(FishProperties.Rarity.LEGENDARY))
+                    moveRate = 8;
+                if (hook.is(ModItems.HEAVY_HOOK)) moveRate = 3;
+            }
         }
 
-        if(fp.dif().extras().isVanishing())
+        if (fp.dif().extras().isVanishing())
         {
-            if(commonUncommonRareFish)
-                vanishingRate = 0.03f;
-            if(fp.rarity().equals(FishProperties.Rarity.EPIC))
-                vanishingRate = 0.1f;
-            if(fp.rarity().equals(FishProperties.Rarity.LEGENDARY))
-                vanishingRate = 0.2f;
+            if (commonUncommonRareFish) vanishingRate = 0.03f;
+            if (fp.rarity().equals(FishProperties.Rarity.EPIC)) vanishingRate = 0.1f;
+            if (fp.rarity().equals(FishProperties.Rarity.LEGENDARY)) vanishingRate = 0.2f;
+
+            if (bobber.is(ModItems.CLEAR_BOBBER)) vanishingRate /= 2;
         }
 
 
@@ -186,7 +189,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         pos2 = difficulty.markers().second() ? getRandomFreePosition() : Integer.MIN_VALUE;
         posThin1 = difficulty.markers().firstThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
         posThin2 = difficulty.markers().secondThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
-
 
 
         //make sweet spots fatter if difficulty bobber is being used
@@ -616,7 +618,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         pointerPos += (int) (speed * currentRotation);
 
         kimbeColor -= 0.1f;
-        if(fp.dif().extras().isVanishing())
+        if (fp.dif().extras().isVanishing())
         {
             pos1Vanishing -= vanishingRate;
             pos2Vanishing -= vanishingRate;
@@ -624,18 +626,18 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             posThin2Vanishing -= vanishingRate;
         }
 
-        if(fp.dif().extras().isMoving())
+        if (fp.dif().extras().isMoving())
         {
-            if(pos1 != Integer.MIN_VALUE) pos1 -= moveRate * currentRotation;
-            if(pos2 != Integer.MIN_VALUE) pos2 -= moveRate * currentRotation;
-            if(posThin1 != Integer.MIN_VALUE) posThin1 -= moveRate * currentRotation;
-            if(posThin2 != Integer.MIN_VALUE) posThin2 -= moveRate * currentRotation;
+            if (pos1 != Integer.MIN_VALUE) pos1 -= moveRate * currentRotation;
+            if (pos2 != Integer.MIN_VALUE) pos2 -= moveRate * currentRotation;
+            if (posThin1 != Integer.MIN_VALUE) posThin1 -= moveRate * currentRotation;
+            if (posThin2 != Integer.MIN_VALUE) posThin2 -= moveRate * currentRotation;
         }
 
-        if(pos1 < 0 && pos1 != Integer.MIN_VALUE) pos1 += 360;
-        if(pos2 < 0 && pos2 != Integer.MIN_VALUE) pos2 += 360;
-        if(posThin1 < 0 && posThin1 != Integer.MIN_VALUE) posThin1 += 360;
-        if(posThin2 < 0 && posThin2 != Integer.MIN_VALUE) posThin2 += 360;
+        if (pos1 < 0 && pos1 != Integer.MIN_VALUE) pos1 += 360;
+        if (pos2 < 0 && pos2 != Integer.MIN_VALUE) pos2 += 360;
+        if (posThin1 < 0 && posThin1 != Integer.MIN_VALUE) posThin1 += 360;
+        if (posThin2 < 0 && posThin2 != Integer.MIN_VALUE) posThin2 += 360;
 
         if (pointerPos > 360) pointerPos -= 360;
         if (pointerPos < 0) pointerPos += 360;
