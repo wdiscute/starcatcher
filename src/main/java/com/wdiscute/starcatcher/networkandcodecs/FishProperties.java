@@ -633,15 +633,66 @@ public record FishProperties(
             int rewardThin,
             int penalty,
             int decay,
-            boolean hasFirstMarker,
-            boolean hasSecondMarker,
-            boolean hasFirstThinMarker,
-            boolean hasSecondThinMarker,
+            Markers markers,
             Treasure treasure,
-            boolean changeRotationOnEveryHit,
-            boolean isVanishing
+            Extras extras
     )
     {
+        public record Markers(boolean first, boolean second, boolean firstThin, boolean secondThin)
+        {
+            public static final Markers DEFAULT = new Markers(true, true, false, false);
+            public static final Markers TTFF = new Markers(true, true, false, false);
+            public static final Markers TTTF = new Markers(true, true, true, false);
+            public static final Markers TFTF = new Markers(true, false, true, false);
+            public static final Markers FFTT = new Markers(false, false, true, true);
+            public static final Markers TFFF = new Markers(true, false, false, false);
+            public static final Markers TTTT = new Markers(true, true, true, true);
+
+            public static final Codec<Markers> CODEC = RecordCodecBuilder.create(instance ->
+                    instance.group(
+                            Codec.BOOL.optionalFieldOf("has_first_marker", DEFAULT.first).forGetter(Markers::first),
+                            Codec.BOOL.optionalFieldOf("has_second_marker", DEFAULT.second).forGetter(Markers::second),
+                            Codec.BOOL.optionalFieldOf("has_first_thin_marker", DEFAULT.firstThin).forGetter(Markers::firstThin),
+                            Codec.BOOL.optionalFieldOf("has_second_thin_marker", DEFAULT.secondThin).forGetter(Markers::secondThin)
+                    ).apply(instance, Markers::new));
+
+            public static final StreamCodec<ByteBuf, Markers> STREAM_CODEC = StreamCodec.composite(
+                    ByteBufCodecs.BOOL, Markers::first,
+                    ByteBufCodecs.BOOL, Markers::second,
+                    ByteBufCodecs.BOOL, Markers::firstThin,
+                    ByteBufCodecs.BOOL, Markers::secondThin,
+                    Markers::new
+            );
+
+        }
+
+        public record Extras(boolean isFlip, boolean isVanishing, boolean isMoving)
+        {
+            public static final Extras TFF = new Extras(true, false, false);
+            public static final Extras FFF = new Extras(false, false, false);
+            public static final Extras TTT = new Extras(true, true, true);
+            public static final Extras TTF = new Extras(true, true, false);
+            public static final Extras TFT = new Extras(true, false, true);
+            public static final Extras FTF = new Extras(false, true, false);
+            public static final Extras FFT = new Extras(false, false, true);
+
+            public static final Extras DEFAULT = TFF;
+
+            public static final Codec<Extras> CODEC = RecordCodecBuilder.create(instance ->
+                    instance.group(
+                            Codec.BOOL.optionalFieldOf("flips_rotation_every_hit", DEFAULT.isFlip).forGetter(Extras::isFlip),
+                            Codec.BOOL.optionalFieldOf("has_vanishing_markers", DEFAULT.isVanishing).forGetter(Extras::isVanishing),
+                            Codec.BOOL.optionalFieldOf("has_moving_markers", DEFAULT.isMoving).forGetter(Extras::isMoving)
+                    ).apply(instance, Extras::new));
+
+            public static final StreamCodec<ByteBuf, Extras> STREAM_CODEC = StreamCodec.composite(
+                    ByteBufCodecs.BOOL, Extras::isFlip,
+                    ByteBufCodecs.BOOL, Extras::isVanishing,
+                    ByteBufCodecs.BOOL, Extras::isMoving,
+                    Extras::new
+            );
+
+        }
 
         public static final Difficulty DEFAULT = new Difficulty(
                 9,
@@ -649,28 +700,31 @@ public record FishProperties(
                 0,
                 6,
                 1,
-                true,
-                true,
-                false,
-                false,
+                Markers.DEFAULT,
                 Treasure.DEFAULT,
-                true,
-                false
+                Extras.DEFAULT
         );
 
-        public static final Difficulty VANISHING_EASY = new Difficulty(
+        public static final Difficulty EASY_VANISHING = new Difficulty(
                 9,
                 20,
                 0,
                 6,
                 1,
-                true,
-                true,
-                false,
-                false,
+                Markers.DEFAULT,
                 Treasure.DEFAULT,
-                true,
-                true
+                Extras.TTF
+        );
+
+        public static final Difficulty EASY_NO_FLIP_VANISHING = new Difficulty(
+                9,
+                20,
+                0,
+                6,
+                1,
+                Markers.DEFAULT,
+                Treasure.DEFAULT,
+                Extras.FTF
         );
 
         public static final Difficulty MEDIUM = new Difficulty(
@@ -679,32 +733,32 @@ public record FishProperties(
                 35,
                 15,
                 1,
-                true,
-                false,
-                true,
-                false,
+                Markers.TFTF,
                 Treasure.UNCOMMON,
-                true,
-                false
+                Extras.DEFAULT
         );
 
-
-        public static final Difficulty VANISHING_MEDIUM = new Difficulty(
+        public static final Difficulty MEDIUM_VANISHING = new Difficulty(
                 10,
                 15,
                 35,
                 15,
                 1,
-                true,
-                false,
-                true,
-                false,
+                Markers.TFTF,
                 Treasure.UNCOMMON,
-                true,
-                true
+                Extras.TTF
         );
 
-
+        public static final Difficulty MEDIUM_VANISHING_MOVING = new Difficulty(
+                10,
+                15,
+                35,
+                15,
+                1,
+                Markers.TTTF,
+                Treasure.UNCOMMON,
+                Extras.TTT
+        );
 
         public static final Difficulty HARD = new Difficulty(
                 12,
@@ -712,13 +766,9 @@ public record FishProperties(
                 35,
                 25,
                 2,
-                true,
-                false,
-                true,
-                false,
+                Markers.TFTF,
                 Treasure.HARD,
-                true,
-                false
+                Extras.TFF
         );
 
         public static final Difficulty HARD_ONLY_THIN = new Difficulty(
@@ -727,13 +777,20 @@ public record FishProperties(
                 20,
                 25,
                 2,
-                false,
-                false,
-                true,
-                true,
+                Markers.FFTT,
                 Treasure.HARD,
-                true,
-                false
+                Extras.TFF
+        );
+
+        public static final Difficulty HARD_ONLY_THIN_MOVING = new Difficulty(
+                9,
+                15,
+                20,
+                25,
+                2,
+                Markers.FFTT,
+                Treasure.HARD,
+                Extras.TFT
         );
 
         public static final Difficulty THIN_NO_DECAY = new Difficulty(
@@ -742,13 +799,20 @@ public record FishProperties(
                 15,
                 30,
                 0,
-                false,
-                false,
-                true,
-                true,
+                Markers.FFTT,
                 Treasure.HARD,
-                false,
-                false
+                Extras.TFF
+        );
+
+        public static final Difficulty MOVING_THIN_NO_DECAY = new Difficulty(
+                9,
+                0,
+                15,
+                30,
+                0,
+                Markers.FFTT,
+                Treasure.HARD,
+                Extras.TFT
         );
 
         public static final Difficulty THIN_NO_DECAY_NOT_FORGIVING = new Difficulty(
@@ -757,13 +821,9 @@ public record FishProperties(
                 15,
                 999,
                 0,
-                false,
-                false,
-                true,
-                true,
+                Markers.FFTT,
                 Treasure.HARD,
-                false,
-                false
+                Extras.TFF
         );
 
         public static final Difficulty SINGLE_BIG_FAST_NO_DECAY = new Difficulty(
@@ -772,28 +832,20 @@ public record FishProperties(
                 0,
                 15,
                 0,
-                true,
-                false,
-                false,
-                false,
+                Markers.TFFF,
                 Treasure.HARD,
-                false,
-                false
+                Extras.FFF
         );
 
-        public static final Difficulty VANISHING_SINGLE_BIG_FAST_NO_DECAY = new Difficulty(
+        public static final Difficulty SINGLE_BIG_FAST_NO_DECAY_VANISHING = new Difficulty(
                 15,
                 5,
                 0,
                 15,
                 0,
-                true,
-                false,
-                false,
-                false,
+                Markers.TFFF,
                 Treasure.HARD,
-                false,
-                true
+                Extras.FTF
         );
 
         public static final Difficulty SINGLE_BIG_FAST = new Difficulty(
@@ -802,13 +854,20 @@ public record FishProperties(
                 0,
                 15,
                 2,
-                true,
-                false,
-                false,
-                false,
+                Markers.TFFF,
                 Treasure.HARD,
-                false,
-                false
+                Extras.FFF
+        );
+
+        public static final Difficulty SINGLE_BIG_FAST_MOVING = new Difficulty(
+                15,
+                5,
+                0,
+                15,
+                2,
+                Markers.TFFF,
+                Treasure.HARD,
+                Extras.FFT
         );
 
         public static final Difficulty EVERYTHING = new Difficulty(
@@ -817,13 +876,20 @@ public record FishProperties(
                 30,
                 15,
                 3,
-                true,
-                true,
-                true,
-                true,
+                Markers.TTTT,
                 Treasure.HARD,
-                false,
-                false
+                Extras.FFF
+        );
+
+        public static final Difficulty EVERYTHING_VANISHING = new Difficulty(
+                12,
+                15,
+                30,
+                15,
+                3,
+                Markers.TTTT,
+                Treasure.HARD,
+                Extras.FTF
         );
 
         public static final Difficulty EVERYTHING_FLIP = new Difficulty(
@@ -832,13 +898,20 @@ public record FishProperties(
                 30,
                 15,
                 3,
-                true,
-                true,
-                true,
-                true,
+                Markers.TTTT,
                 Treasure.HARD,
-                true,
-                false
+                Extras.TFF
+        );
+
+        public static final Difficulty EVERYTHING_FLIP_MOVING = new Difficulty(
+                12,
+                15,
+                30,
+                15,
+                3,
+                Markers.TTTT,
+                Treasure.HARD,
+                Extras.TFT
         );
 
         public static final Difficulty NON_STOP_ACTION = new Difficulty(
@@ -847,23 +920,35 @@ public record FishProperties(
                 30,
                 0,
                 10,
-                true,
-                true,
-                false,
-                false,
+                Markers.TTFF,
                 Treasure.HARD,
-                false,
-                false
+                Extras.FFF
+        );
+
+        public static final Difficulty NON_STOP_ACTION_VANISHING = new Difficulty(
+                15,
+                18,
+                30,
+                0,
+                10,
+                Markers.TTFF,
+                Treasure.HARD,
+                Extras.FTF
         );
 
         public Difficulty withTreasure(Treasure treasure)
         {
-            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.hasFirstMarker, this.hasSecondMarker, this.hasFirstThinMarker, this.hasSecondThinMarker, treasure, this.changeRotationOnEveryHit, this.isVanishing);
+            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.markers, treasure, this.extras);
         }
 
-        public Difficulty withVanishing(boolean vanishing)
+        public Difficulty withExtras(Extras extras)
         {
-            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.hasFirstMarker, this.hasSecondMarker, this.hasFirstThinMarker, this.hasSecondThinMarker, this.treasure, this.changeRotationOnEveryHit, vanishing);
+            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, this.markers, this.treasure, extras);
+        }
+
+        public Difficulty withMarkers(Markers markers)
+        {
+            return new Difficulty(this.speed, this.reward, this.rewardThin, this.penalty, this.decay, markers, this.treasure, this.extras);
         }
 
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
@@ -873,13 +958,9 @@ public record FishProperties(
                         Codec.INT.optionalFieldOf("reward_thin", DEFAULT.rewardThin).forGetter(Difficulty::rewardThin),
                         Codec.INT.optionalFieldOf("penalty", DEFAULT.penalty).forGetter(Difficulty::penalty),
                         Codec.INT.optionalFieldOf("decay", DEFAULT.decay).forGetter(Difficulty::decay),
-                        Codec.BOOL.optionalFieldOf("has_first_marker", DEFAULT.hasFirstMarker).forGetter(Difficulty::hasFirstMarker),
-                        Codec.BOOL.optionalFieldOf("has_second_marker", DEFAULT.hasSecondMarker).forGetter(Difficulty::hasSecondMarker),
-                        Codec.BOOL.optionalFieldOf("has_first_thin_marker", DEFAULT.hasFirstThinMarker).forGetter(Difficulty::hasFirstThinMarker),
-                        Codec.BOOL.optionalFieldOf("has_second_thin_marker", DEFAULT.hasSecondThinMarker).forGetter(Difficulty::hasSecondThinMarker),
-                        Treasure.CODEC.optionalFieldOf("treasure", Treasure.DEFAULT).forGetter(Difficulty::treasure),
-                        Codec.BOOL.optionalFieldOf("change_rotation_every_hit", DEFAULT.changeRotationOnEveryHit).forGetter(Difficulty::changeRotationOnEveryHit),
-                        Codec.BOOL.optionalFieldOf("is_vanishing", DEFAULT.isVanishing).forGetter(Difficulty::isVanishing)
+                        Markers.CODEC.optionalFieldOf("markers", DEFAULT.markers).forGetter(Difficulty::markers),
+                        Treasure.CODEC.optionalFieldOf("treasure", DEFAULT.treasure).forGetter(Difficulty::treasure),
+                        Extras.CODEC.optionalFieldOf("extras", DEFAULT.extras).forGetter(Difficulty::extras)
                 ).apply(instance, Difficulty::new));
 
 
@@ -889,13 +970,9 @@ public record FishProperties(
                 ByteBufCodecs.INT, Difficulty::rewardThin,
                 ByteBufCodecs.INT, Difficulty::penalty,
                 ByteBufCodecs.INT, Difficulty::decay,
-                ByteBufCodecs.BOOL, Difficulty::hasFirstMarker,
-                ByteBufCodecs.BOOL, Difficulty::hasSecondMarker,
-                ByteBufCodecs.BOOL, Difficulty::hasFirstThinMarker,
-                ByteBufCodecs.BOOL, Difficulty::hasSecondThinMarker,
+                Markers.STREAM_CODEC, Difficulty::markers,
                 Treasure.STREAM_CODEC, Difficulty::treasure,
-                ByteBufCodecs.BOOL, Difficulty::changeRotationOnEveryHit,
-                ByteBufCodecs.BOOL, Difficulty::isVanishing,
+                Extras.STREAM_CODEC, Difficulty::extras,
                 Difficulty::new
         );
     }
@@ -1125,7 +1202,7 @@ public record FishProperties(
             }
         }
 
-        if(!bait.is(ModItems.METEOROLOGICAL_BAIT))
+        if (!bait.is(ModItems.METEOROLOGICAL_BAIT))
         {
             //clear check
             if (fp.weather() == Weather.CLEAR && (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5))
