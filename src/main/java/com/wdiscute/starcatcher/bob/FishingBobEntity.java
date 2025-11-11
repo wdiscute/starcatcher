@@ -22,6 +22,7 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -373,12 +374,20 @@ public class FishingBobEntity extends Projectile
             timeBiting++;
             for (int i = 0; i < 5; i++)
             {
-                level().addParticle(
-                        ModParticles.FISHING_BITING.get(),
-                        position().x + random.nextFloat() - 0.5,
-                        position().y + random.nextFloat() * 0.5 - 0.25,
-                        position().z + random.nextFloat() - 0.5,
-                        0, 0, 0);
+                if (level().getFluidState(blockpos).is(Fluids.LAVA))
+                    level().addParticle(
+                            ModParticles.FISHING_BITING_LAVA.get(),
+                            position().x + random.nextFloat() - 0.5,
+                            position().y + random.nextFloat() * 0.5 - 0.25,
+                            position().z + random.nextFloat() - 0.5,
+                            0, 0, 0);
+                else
+                    level().addParticle(
+                            ModParticles.FISHING_BITING.get(),
+                            position().x + random.nextFloat() - 0.5,
+                            position().y + random.nextFloat() * 0.5 - 0.25,
+                            position().z + random.nextFloat() - 0.5,
+                            0, 0, 0);
             }
 
             if (timeBiting > 80)

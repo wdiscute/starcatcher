@@ -8,6 +8,7 @@ import com.wdiscute.starcatcher.bob.FishingBobRenderer;
 import com.wdiscute.starcatcher.fishspotter.FishTrackerLayer;
 import com.wdiscute.starcatcher.guide.FishCaughtToast;
 import com.wdiscute.starcatcher.networkandcodecs.*;
+import com.wdiscute.starcatcher.particles.FishingBitingLavaParticles;
 import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.rod.FishingRodScreen;
@@ -267,6 +268,7 @@ public class Starcatcher
         {
             event.registerSpriteSet(ModParticles.FISHING_NOTIFICATION.get(), FishingNotificationParticles.Provider::new);
             event.registerSpriteSet(ModParticles.FISHING_BITING.get(), FishingBitingParticles.Provider::new);
+            event.registerSpriteSet(ModParticles.FISHING_BITING_LAVA.get(), FishingBitingLavaParticles.Provider::new);
         }
 
         @SubscribeEvent
