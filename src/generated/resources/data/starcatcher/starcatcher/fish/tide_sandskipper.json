@@ -6,9 +6,13 @@
     }
   ],
   "difficulty": {
-    "change_rotation_every_hit": false,
     "decay": 2,
-    "has_second_marker": false,
+    "extras": {
+      "flips_rotation_every_hit": false
+    },
+    "markers": {
+      "has_second_marker": false
+    },
     "penalty": 15,
     "reward": 5,
     "speed": 15,

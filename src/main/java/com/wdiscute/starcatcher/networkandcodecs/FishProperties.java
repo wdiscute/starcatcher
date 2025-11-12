@@ -716,6 +716,17 @@ public record FishProperties(
                 Extras.TTF
         );
 
+        public static final Difficulty EASY_MOVING = new Difficulty(
+                9,
+                20,
+                0,
+                6,
+                1,
+                Markers.DEFAULT,
+                Treasure.DEFAULT,
+                Extras.TTF
+        );
+
         public static final Difficulty EASY_NO_FLIP_VANISHING = new Difficulty(
                 9,
                 20,
@@ -769,6 +780,28 @@ public record FishProperties(
                 Markers.TFTF,
                 Treasure.HARD,
                 Extras.TFF
+        );
+
+        public static final Difficulty HARD_VANISHING = new Difficulty(
+                12,
+                15,
+                35,
+                25,
+                2,
+                Markers.TFTF,
+                Treasure.HARD,
+                Extras.TTF
+        );
+
+        public static final Difficulty HARD_MOVING = new Difficulty(
+                12,
+                15,
+                35,
+                25,
+                2,
+                Markers.TFTF,
+                Treasure.HARD,
+                Extras.TFT
         );
 
         public static final Difficulty HARD_ONLY_THIN = new Difficulty(

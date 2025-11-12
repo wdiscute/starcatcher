@@ -1,7 +1,6 @@
 {
   "creativetab.starcatcher.starcatcher": "Starcatcher",
 
-
   "tag.starcatcher.is_beach" : "Beaches",
   "tag.starcatcher.is_birch_forest" : "Birch Forests",
   "tag.starcatcher.is_cherry_grove" : "Cherry Groves",
@@ -33,15 +32,10 @@
   "tag.minecraft.is_savanna" : "Savannas",
   "tag.minecraft.is_taiga" : "Taigas",
 
-
   "tag.starcatcher.hooks" : "Fishing Hooks",
   "tag.starcatcher.bobbers" : "Bobbers",
   "tag.starcatcher.hooks_survive_fire" : "Hooks that survive Fire",
-
   "tag.starcatcher.curated_treasure" : "Curated Treasure",
-
-
-
 
 
 

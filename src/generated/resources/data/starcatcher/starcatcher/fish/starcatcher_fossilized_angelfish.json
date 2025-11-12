@@ -8,13 +8,16 @@
   },
   "below_y": 50,
   "difficulty": {
-    "decay": 2,
-    "has_first_thin_marker": true,
-    "has_second_marker": false,
-    "penalty": 25,
-    "reward": 15,
-    "reward_thin": 35,
-    "speed": 12,
+    "decay": 0,
+    "markers": {
+      "has_first_marker": false,
+      "has_first_thin_marker": true,
+      "has_second_marker": false,
+      "has_second_thin_marker": true
+    },
+    "penalty": 30,
+    "reward": 0,
+    "reward_thin": 15,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,

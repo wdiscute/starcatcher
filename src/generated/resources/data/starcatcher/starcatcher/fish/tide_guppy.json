@@ -9,8 +9,10 @@
   "below_y": 100,
   "daytime": "night",
   "difficulty": {
-    "has_first_thin_marker": true,
-    "has_second_marker": false,
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_marker": false
+    },
     "penalty": 15,
     "reward": 15,
     "reward_thin": 35,

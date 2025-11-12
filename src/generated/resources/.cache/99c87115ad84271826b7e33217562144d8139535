@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-11T14:36:36.7566937	Item Models: starcatcher
+// 1.21.1	2025-11-11T17:29:20.3820211	Item Models: starcatcher
 190248e04c8aaf81e80cc0d828c1b3f9addf4641 assets/starcatcher/models/item/agave_bream.json
 033477fbb520065b97801242f6e7c58288fea05d assets/starcatcher/models/item/amethystback.json
 c9d191032ac9251c4e385286728bcf4b6bb965b2 assets/starcatcher/models/item/aquamarine_pike.json
@@ -23,6 +23,7 @@ f6622b9583e175a1425975e29509e36f596ff8ec assets/starcatcher/models/item/blue_cry
 2868c28fc9094f68a9e7f4909b441d9299d5f279 assets/starcatcher/models/item/chorus_crab.json
 3bb359940e775f1b106d2866999ccd8768a094ad assets/starcatcher/models/item/cinder_squid.json
 466ccba57f59a2202e00d64369b6d8f2f72fcc66 assets/starcatcher/models/item/clam.json
+413dc56c829ae02782003df0fd89bc51a45b17da assets/starcatcher/models/item/clear_bobber.json
 9d16509607579d5c1322672d4ab7a428a4f44873 assets/starcatcher/models/item/colorful_bobber.json
 c21ddccb5dd997a4a4d122dfb83dabfe68c27dd5 assets/starcatcher/models/item/conch.json
 1c7fbd88278ab052d5cc10a97e262159afcc5fab assets/starcatcher/models/item/creeper_bobber.json
@@ -61,6 +62,7 @@ af52bda323b44617619515667949a62d36bd7443 assets/starcatcher/models/item/glowston
 b36b128fa801cbb9408d2fd22a19205dbba08c4e assets/starcatcher/models/item/glowstone_seeker.json
 0cec096e2ac653e2fc204248ac0b760c09316e2d assets/starcatcher/models/item/gold_fan.json
 ca50f132187554666f3f9ad54003c3999b672b57 assets/starcatcher/models/item/gold_hook.json
+933a2bf2227c12a70a336d3b77275e2c41c311e4 assets/starcatcher/models/item/heavy_hook.json
 ae00df136477e53a52813f73d02163bd6dc902ab assets/starcatcher/models/item/hollowbelly_darter.json
 d4ef58b79b88f3995d547d4571fbc502b5a0590f assets/starcatcher/models/item/hook.json
 505df45024edc3c7cf934e6f0296c5f6c30fca2b assets/starcatcher/models/item/hopeful_bottle.json

@@ -97,7 +97,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldLakeFish(ModItems.SILVERVEIL_PERCH)
                             .withWeather(FishProperties.Weather.RAIN)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.EVERYTHING_VANISHING),
 
                     overworldLakeFish(ModItems.ELDERSCALE)
                             .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
@@ -116,12 +116,12 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldLakeFish(ModItems.THUNDER_BASS)
                             .withRarity(FishProperties.Rarity.RARE)
                             .withWeather(FishProperties.Weather.THUNDER)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING),
 
                     overworldLakeFish(ModItems.LIGHTNING_BASS)
                             .withRarity(FishProperties.Rarity.RARE)
                             .withWeather(FishProperties.Weather.THUNDER)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.HARD_VANISHING),
 
                     overworldLakeFish(ModItems.BOOT)
                             .withBaseChance(1)
@@ -142,7 +142,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withBaseChance(2)
                             .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION_VANISHING),
 
-                    overworldColdLakeFish(ModItems.WINTERY_PIKE),
+                    overworldColdLakeFish(ModItems.WINTERY_PIKE)
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING),
 
 
                     //lake warm
@@ -212,7 +213,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldDarkForestFish(ModItems.PALE_PINFISH)
                             .withDaytime(FishProperties.Daytime.MIDNIGHT)
                             .withRarity(FishProperties.Rarity.RARE)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.EASY_NO_FLIP_VANISHING),
 
                     overworldDarkForestFish(ModItems.PINFISH)
                             .withDaytime(FishProperties.Daytime.NIGHT)
@@ -240,7 +241,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
                     overworldCherryGroveFish(ModItems.ROSE_SIAMESE_FISH)
-                            .withDifficulty(FishProperties.Difficulty.HARD)
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING)
                             .withDaytime(FishProperties.Daytime.DAY)
                             .withWeather(FishProperties.Weather.RAIN)
                             .withRarity(FishProperties.Rarity.EPIC),
@@ -253,7 +254,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
                     overworldColdMountainFish(ModItems.BOREAL)
-                            .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING_MOVING)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withBaseChance(3),
@@ -273,7 +274,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     overworldRiverFish(ModItems.WILLOW_BREAM)
                             .withDaytime(FishProperties.Daytime.NIGHT)
-                            .withDifficulty(FishProperties.Difficulty.HARD)
+                            .withDifficulty(FishProperties.Difficulty.HARD_VANISHING)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
                             .withBaseChance(2),
 
@@ -319,7 +320,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDaytime(FishProperties.Daytime.DAY),
 
                     overworldOceanFish(ModItems.IRONJAW_HERRING)
-                            .withDifficulty(FishProperties.Difficulty.HARD)
+                            .withDifficulty(FishProperties.Difficulty.MOVING_THIN_NO_DECAY)
                             .withBaseChance(2)
                             .withRarity(FishProperties.Rarity.UNCOMMON),
 
@@ -337,7 +338,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldOceanFish(ModItems.REDSCALED_TUNA)
                             .withDaytime(FishProperties.Daytime.NIGHT)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY_VANISHING),
 
                     overworldOceanFish(ModItems.WATERLOGGED_BOTTLE)
                             .withBaseChance(1)
@@ -348,7 +349,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldDeepOceanFish(ModItems.BIGEYE_TUNA)
                             .withDaytime(FishProperties.Daytime.NIGHT)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.HARD_MOVING),
 
                     //beach
                     overworldBeachFish(ModItems.CONCH)
@@ -378,7 +379,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldUndergroundFish(ModItems.GEODE_EEL)
                             .withRarity(FishProperties.Rarity.EPIC)
                             .withBaseChance(1)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.HARD_VANISHING),
 
                     //caves
                     overworldCavesFish(ModItems.WHITEVEIL),
@@ -399,10 +400,10 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     //dripstone caves
                     overworldDripstoneCavesFish(ModItems.FOSSILIZED_ANGELFISH)
                             .withRarity(FishProperties.Rarity.RARE)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY),
 
                     overworldDripstoneCavesFish(ModItems.DRIPFIN)
-                            .withDifficulty(FishProperties.Difficulty.MEDIUM),
+                            .withDifficulty(FishProperties.Difficulty.EASY_VANISHING),
 
                     overworldDripstoneCavesFish(ModItems.YELLOWSTONE_FISH)
                             .withDifficulty(FishProperties.Difficulty.MEDIUM)
@@ -417,7 +418,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withBaseChance(2),
 
                     overworldLushCavesFish(ModItems.VIVID_MOSS)
-                            .withDifficulty(FishProperties.Difficulty.HARD)
+                            .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
                             .withBaseChance(4),
 
@@ -434,7 +435,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
                     overworldDeepslateFish(ModItems.GARNET_MACKEREL)
-                            .withDifficulty(FishProperties.Difficulty.HARD)
+                            .withDifficulty(FishProperties.Difficulty.HARD_VANISHING)
                             .withRarity(FishProperties.Rarity.UNCOMMON),
 
                     overworldDeepslateFish(ModItems.BRIGHT_AMETHYST_SNAPPER)
@@ -450,24 +451,24 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     //deep dark
                     overworldDeepDarkFish(ModItems.SCULKFISH)
-                            .withDifficulty(FishProperties.Difficulty.HARD)
+                            .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
                             .withRarity(FishProperties.Rarity.UNCOMMON),
 
                     overworldDeepDarkFish(ModItems.WARD)
-                            .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION)
+                            .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY_VANISHING)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
                             .withBaseChance(2),
 
                     overworldDeepDarkFish(ModItems.GLOWING_DARK)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_MOVING),
 
 
                     //overworld surface lava
                     overworldSurfaceLava(ModItems.SUNEATER)
                             .withRarity(FishProperties.Rarity.RARE)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_MOVING),
 
                     overworldSurfaceLava(ModItems.PYROTROUT)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
@@ -475,7 +476,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     overworldSurfaceLava(ModItems.OBSIDIAN_EEL)
                             .withWeather(FishProperties.Weather.RAIN)
-                            .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING_MOVING)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withRarity(FishProperties.Rarity.LEGENDARY),
 
@@ -485,7 +486,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.HARD),
 
                     overworldUndergroundLava(ModItems.OBSIDIAN_CRAB)
-                            .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                            .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                             .withRarity(FishProperties.Rarity.UNCOMMON),
 
                     //overworld deepslate lava
@@ -495,7 +496,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     overworldDeepslateLava(ModItems.MOLTEN_DEEPSLATE_CRAB)
                             .withRarity(FishProperties.Rarity.RARE)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.HARD_VANISHING),
 
 
                     //nether
@@ -514,7 +515,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                                     .withTreasure(FishProperties.Treasure.NETHER)),
 
                     netherLavaFish(ModItems.GLOWSTONE_SEEKER)
-                            .withDifficulty(FishProperties.Difficulty.MEDIUM
+                            .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP_MOVING
                                     .withTreasure(FishProperties.Treasure.NETHER)),
 
                     netherLavaFish(ModItems.CINDER_SQUID)
@@ -543,11 +544,11 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     endFish(ModItems.CHORUS_CRAB)
                             .withRarity(FishProperties.Rarity.EPIC)
-                            .withDifficulty(FishProperties.Difficulty.EVERYTHING),
+                            .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP_MOVING),
 
                     endFish(ModItems.END_GLOW)
                             .withRarity(FishProperties.Rarity.UNCOMMON)
-                            .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                            .withDifficulty(FishProperties.Difficulty.MOVING_THIN_NO_DECAY)
 
             ));
     //endregion fps
@@ -605,7 +606,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("tide"),
 
             overworldWarmMountainFish(fromRL("tide", "mint_carp"))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
@@ -619,7 +620,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("tide"),
 
             overworldColdLakeFish(fromRL("tide", "catfish"))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
@@ -632,7 +633,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("tide"),
 
             overworldColdOceanFish(fromRL("tide", "ocean_perch"))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
@@ -658,7 +659,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             //tide underground
             overworldCavesFish(fromRL("tide", "cave_eel"))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withMod("tide"),
 
             overworldCavesFish(fromRL("tide", "crystal_shrimp"))
@@ -677,7 +678,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("tide"),
 
             overworldCavesFish(fromRL("tide", "cave_crawler"))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withMod("tide"),
 
             overworldCavesFish(fromRL("tide", "gilded_minnow"))
@@ -686,7 +687,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             //tide deepslate
             overworldDeepslateFish(fromRL("tide", "deep_grouper"))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withMod("tide"),
 
             overworldDeepslateFish(fromRL("tide", "shadow_snapper"))
@@ -705,7 +706,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldDeepslateFish(fromRL("tide", "luminescent_jellyfish"))
                     .withRarity(FishProperties.Rarity.UNCOMMON)
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withMod("tide"),
 
             overworldDeepslateFish(fromRL("tide", "crystalline_carp"))
@@ -744,7 +745,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("tide"),
 
             overworldColdLakeFish(fromRL("tide", "frostbite_flounder"))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withMod("tide"),
 
             overworldFish(fromRL("tide", "mirage_catfish"))
@@ -756,7 +757,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldDeepDarkFish(fromRL("tide", "echofin_snapper"))
                     .withRarity(FishProperties.Rarity.RARE)
-                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withDifficulty(FishProperties.Difficulty.HARD_VANISHING)
                     .withMod("tide"),
 
             overworldFish(fromRL("tide", "sunspike_goby"))
@@ -817,7 +818,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("tide"),
 
             fish(fromRL("tide", "inferno_guppy"))
-                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD
                             .withFluids(rl("minecraft", "lava")))
@@ -834,7 +835,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             fish(fromRL("tide", "volcano_tuna"))
                     .withRarity(FishProperties.Rarity.RARE)
-                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
                     .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD
                             .withFluids(rl("minecraft", "lava")))
                     .withMustBeCaughtAboveY(50)
@@ -999,7 +1000,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("aquaculture"),
 
             overworldWarmMountainFish(fromRL("aquaculture", "synodontis"))
-                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withMod("aquaculture"),
 
@@ -1022,7 +1023,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("aquaculture"),
 
             overworldColdOceanFish(fromRL("aquaculture", "atlantic_herring"))
-                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withMod("aquaculture"),

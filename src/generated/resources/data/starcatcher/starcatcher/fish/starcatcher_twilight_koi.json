@@ -3,16 +3,23 @@
   "below_y": 100,
   "daytime": "midnight",
   "difficulty": {
-    "has_first_thin_marker": true,
-    "has_second_marker": false,
-    "penalty": 15,
+    "decay": 2,
+    "extras": {
+      "has_moving_markers": true
+    },
+    "markers": {
+      "has_first_marker": false,
+      "has_first_thin_marker": true,
+      "has_second_marker": false,
+      "has_second_thin_marker": true
+    },
+    "penalty": 25,
     "reward": 15,
-    "reward_thin": 35,
-    "speed": 10,
+    "reward_thin": 20,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,
-      "loot": "starcatcher:waterlogged_satchel"
+      "loot": "starcatcher:treasure"
     }
   },
   "fish": "starcatcher:twilight_koi",

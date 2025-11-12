@@ -9,10 +9,14 @@
   "base_chance": 1,
   "below_y": 100,
   "difficulty": {
-    "change_rotation_every_hit": false,
     "decay": 3,
-    "has_first_thin_marker": true,
-    "has_second_thin_marker": true,
+    "extras": {
+      "flips_rotation_every_hit": false
+    },
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_thin_marker": true
+    },
     "penalty": 15,
     "reward": 15,
     "reward_thin": 30,

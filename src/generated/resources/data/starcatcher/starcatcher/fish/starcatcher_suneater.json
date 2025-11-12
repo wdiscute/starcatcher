@@ -2,12 +2,16 @@
   "above_y": 50,
   "difficulty": {
     "decay": 2,
-    "has_first_thin_marker": true,
-    "has_second_marker": false,
-    "penalty": 25,
-    "reward": 15,
-    "reward_thin": 35,
-    "speed": 12,
+    "extras": {
+      "flips_rotation_every_hit": false,
+      "has_moving_markers": true
+    },
+    "markers": {
+      "has_second_marker": false
+    },
+    "penalty": 15,
+    "reward": 5,
+    "speed": 15,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,

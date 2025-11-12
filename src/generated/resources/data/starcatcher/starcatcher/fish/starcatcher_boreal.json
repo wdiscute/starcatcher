@@ -8,19 +8,21 @@
   },
   "base_chance": 3,
   "difficulty": {
-    "change_rotation_every_hit": false,
-    "decay": 0,
-    "has_first_marker": false,
-    "has_first_thin_marker": true,
-    "has_second_marker": false,
-    "has_second_thin_marker": true,
-    "penalty": 999,
-    "reward": 0,
-    "reward_thin": 15,
+    "extras": {
+      "has_moving_markers": true,
+      "has_vanishing_markers": true
+    },
+    "markers": {
+      "has_first_thin_marker": true
+    },
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 10,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,
-      "loot": "starcatcher:treasure"
+      "loot": "starcatcher:waterlogged_satchel"
     }
   },
   "fish": "starcatcher:boreal",
