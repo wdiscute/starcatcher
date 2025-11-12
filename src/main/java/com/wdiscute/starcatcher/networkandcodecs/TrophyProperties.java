@@ -56,7 +56,7 @@ public record TrophyProperties
             ).apply(instance, TrophyProperties::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, TrophyProperties> STREAM_CODEC = FishProperties.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, TrophyProperties> STREAM_CODEC = ExtraComposites.composite(
             FishProperties.STREAM_CODEC, TrophyProperties::fp,
             TrophyType.STREAM_CODEC, TrophyProperties::trophyType,
             ByteBufCodecs.STRING_UTF8, TrophyProperties::customName,
