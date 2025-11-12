@@ -35,9 +35,9 @@ import java.util.Optional;
 public class SettingsScreen extends Screen
 {
     private static final Random r = new Random();
-    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame.png");
-    private static final ResourceLocation SETTINGS = Starcatcher.rl("textures/gui/settings.png");
-    private static final ResourceLocation GUI_SCALE = Starcatcher.rl("textures/gui/gui_scale.png");
+    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
+    private static final ResourceLocation SETTINGS = Starcatcher.rl("textures/gui/minigame/settings.png");
+    private static final ResourceLocation GUI_SCALE = Starcatcher.rl("textures/gui/minigame/gui_scale.png");
 
     private static final int SIZE_1 = 5;
     private static final int SIZE_2 = 7;
