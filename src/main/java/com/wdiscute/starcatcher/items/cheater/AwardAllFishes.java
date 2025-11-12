@@ -33,7 +33,7 @@ public class AwardAllFishes extends Item
 
         for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
-            fishCounter.add(new FishCaughtCounter(fp, 1, Integer.MAX_VALUE, 99999));
+            fishCounter.add(new FishCaughtCounter(fp, 1, Integer.MAX_VALUE, 99999, 0, 0, false));
         }
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);

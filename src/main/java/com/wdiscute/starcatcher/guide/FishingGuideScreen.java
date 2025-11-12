@@ -1429,8 +1429,8 @@ public class FishingGuideScreen extends Screen
 
 
         //elevation
-        int above = fp.mustBeCaughtAboveY();
-        int below = fp.mustBeCaughtBelowY();
+        int above = fp.wr().mustBeCaughtAboveY();
+        int below = fp.wr().mustBeCaughtBelowY();
         if (above != Integer.MIN_VALUE || below != Integer.MAX_VALUE)
         {
             yOffset += 15;

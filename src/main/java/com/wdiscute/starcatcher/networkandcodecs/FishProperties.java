@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.networkandcodecs;
 
-import com.mojang.datafixers.util.*;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModItems;
@@ -36,21 +35,19 @@ import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 public record FishProperties(
         Holder<Item> fish,
-
         int baseChance,
         String customName,
+
+        SizeAndWeight sw,
         Rarity rarity,
         WorldRestrictions wr,
         BaitRestrictions br,
         Difficulty dif,
         Daytime daytime,
         Weather weather,
-        int mustBeCaughtBelowY,
-        int mustBeCaughtAboveY,
         boolean skipMinigame,
         boolean hasGuideEntry
 )
@@ -62,14 +59,13 @@ public record FishProperties(
                     //optional
                     Codec.INT.optionalFieldOf("base_chance", 5).forGetter(FishProperties::baseChance),
                     Codec.STRING.optionalFieldOf("custom_name", "").forGetter(FishProperties::customName),
+                    SizeAndWeight.CODEC.optionalFieldOf("size_and_weight", SizeAndWeight.DEFAULT).forGetter(FishProperties::sw),
                     Rarity.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(FishProperties::rarity),
                     WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
                     BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
                     Difficulty.CODEC.optionalFieldOf("difficulty", Difficulty.DEFAULT).forGetter(FishProperties::dif),
                     Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
                     Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
-                    Codec.INT.optionalFieldOf("below_y", Integer.MAX_VALUE).forGetter(FishProperties::mustBeCaughtBelowY),
-                    Codec.INT.optionalFieldOf("above_y", Integer.MIN_VALUE).forGetter(FishProperties::mustBeCaughtAboveY),
                     Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
                     Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
 
@@ -78,18 +74,17 @@ public record FishProperties(
 
     public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.CODEC.listOf();
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, FishProperties> STREAM_CODEC = composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, FishProperties> STREAM_CODEC = ExtraComposites.composite(
             ByteBufCodecs.holderRegistry(Registries.ITEM), FishProperties::fish,
             ByteBufCodecs.VAR_INT, FishProperties::baseChance,
             ByteBufCodecs.STRING_UTF8, FishProperties::customName,
+            SizeAndWeight.STREAM_CODEC, FishProperties::sw,
             Rarity.STREAM_CODEC, FishProperties::rarity,
             WorldRestrictions.STREAM_CODEC, FishProperties::wr,
             BaitRestrictions.STREAM_CODEC, FishProperties::br,
             Difficulty.STREAM_CODEC, FishProperties::dif,
             Daytime.STREAM_CODEC, FishProperties::daytime,
             Weather.STREAM_CODEC, FishProperties::weather,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtBelowY,
-            ByteBufCodecs.VAR_INT, FishProperties::mustBeCaughtAboveY,
             ByteBufCodecs.BOOL, FishProperties::skipMinigame,
             ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
             FishProperties::new
@@ -102,14 +97,13 @@ public record FishProperties(
             ModItems.MISSINGNO,
             5,
             "",
+            SizeAndWeight.DEFAULT,
             Rarity.COMMON,
             WorldRestrictions.DEFAULT,
             BaitRestrictions.DEFAULT,
             Difficulty.DEFAULT,
             Daytime.ALL,
             Weather.ALL,
-            Integer.MAX_VALUE,
-            Integer.MIN_VALUE,
             false,
             true
     );
@@ -124,67 +118,62 @@ public record FishProperties(
 
     public FishProperties withFish(Holder<Item> fish)
     {
-        return new FishProperties(fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withBaseChance(int baseChance)
     {
-        return new FishProperties(this.fish, baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withCustomName(String customName)
     {
-        return new FishProperties(this.fish, this.baseChance, customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
+    }
+
+    public FishProperties withSizeAndWeight(SizeAndWeight sizeAndWeight)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.customName, sizeAndWeight, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withRarity(Rarity rarity)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withWorldRestrictions(WorldRestrictions wr)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withBaitRestrictions(BaitRestrictions br)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withDifficulty(Difficulty dif)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withDaytime(Daytime daytime)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withWeather(Weather weather)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
-    }
-
-    public FishProperties withMustBeCaughtBelowY(int mustBeCaughtBelowY)
-    {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
-    }
-
-    public FishProperties withMustBeCaughtAboveY(int mustBeCaughtAboveY)
-    {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, mustBeCaughtAboveY, this.skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, weather, this.skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withSkipMinigame(boolean skipMinigame)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, skipMinigame, this.hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, skipMinigame, this.hasGuideEntry);
     }
 
     public FishProperties withHasGuideEntry(boolean hasGuideEntry)
     {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY, this.skipMinigame, hasGuideEntry);
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, hasGuideEntry);
     }
 
     //endregion with()
@@ -333,31 +322,11 @@ public record FishProperties(
             List<ResourceLocation> biomesTags,
             List<ResourceLocation> biomesBlacklist,
             List<ResourceLocation> biomesBlacklistTags,
-            List<ResourceLocation> fluids
+            List<ResourceLocation> fluids,
+            int mustBeCaughtBelowY,
+            int mustBeCaughtAboveY
     )
     {
-        public static final Codec<WorldRestrictions> CODEC = RecordCodecBuilder.create(instance ->
-                instance.group(
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions", List.of()).forGetter(WorldRestrictions::dims),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions_blacklist", List.of()).forGetter(WorldRestrictions::dimsBlacklist),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes", List.of()).forGetter(WorldRestrictions::biomes),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_tags", List.of()).forGetter(WorldRestrictions::biomesTags),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", List.of()).forGetter(WorldRestrictions::biomesBlacklist),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", List.of()).forGetter(WorldRestrictions::biomesBlacklistTags),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("fluids", List.of(ResourceLocation.withDefaultNamespace("water"))).forGetter(WorldRestrictions::fluids)
-                ).apply(instance, WorldRestrictions::new));
-
-
-        public static final StreamCodec<ByteBuf, WorldRestrictions> STREAM_CODEC = composite(
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dims,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dimsBlacklist,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomes,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesTags,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklist,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklistTags,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::fluids,
-                WorldRestrictions::new
-        );
 
         public static final WorldRestrictions DEFAULT = new WorldRestrictions(
                 List.of(),
@@ -366,8 +335,35 @@ public record FishProperties(
                 List.of(),
                 List.of(),
                 List.of(),
-                List.of(ResourceLocation.withDefaultNamespace("water")));
+                List.of(ResourceLocation.withDefaultNamespace("water")),
+                Integer.MAX_VALUE,
+                Integer.MIN_VALUE);
 
+        public static final Codec<WorldRestrictions> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions", DEFAULT.dims).forGetter(WorldRestrictions::dims),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions_blacklist", DEFAULT.dimsBlacklist).forGetter(WorldRestrictions::dimsBlacklist),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes", DEFAULT.biomes).forGetter(WorldRestrictions::biomes),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_tags", DEFAULT.biomesTags).forGetter(WorldRestrictions::biomesTags),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", DEFAULT.biomesBlacklist).forGetter(WorldRestrictions::biomesBlacklist),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", DEFAULT.biomesBlacklistTags).forGetter(WorldRestrictions::biomesBlacklistTags),
+                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("fluids", DEFAULT.fluids).forGetter(WorldRestrictions::fluids),
+                        Codec.INT.optionalFieldOf("below_y", DEFAULT.mustBeCaughtBelowY).forGetter(WorldRestrictions::mustBeCaughtBelowY),
+                        Codec.INT.optionalFieldOf("above_y", DEFAULT.mustBeCaughtAboveY).forGetter(WorldRestrictions::mustBeCaughtAboveY)
+                ).apply(instance, WorldRestrictions::new));
+
+        public static final StreamCodec<ByteBuf, WorldRestrictions> STREAM_CODEC = ExtraComposites.composite(
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dims,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dimsBlacklist,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomes,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesTags,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklist,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklistTags,
+                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::fluids,
+                ByteBufCodecs.VAR_INT, WorldRestrictions::mustBeCaughtBelowY,
+                ByteBufCodecs.VAR_INT, WorldRestrictions::mustBeCaughtAboveY,
+                WorldRestrictions::new
+        );
 
         public static final WorldRestrictions OVERWORLD =
                 WorldRestrictions.DEFAULT
@@ -376,117 +372,185 @@ public record FishProperties(
         public static final WorldRestrictions OVERWORLD_LUSH_CAVES =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomes(Biomes.LUSH_CAVES.location());
+                        .withBiomes(Biomes.LUSH_CAVES.location())
+                        .withMustBeCaughtBelowY(50);
+
+        public static final WorldRestrictions OVERWORLD_CAVES =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomes(Biomes.LUSH_CAVES.location())
+                        .withMustBeCaughtBelowY(50)
+                        .withMustBeCaughtAboveY(0);
+
+        public static final WorldRestrictions OVERWORLD_DEEPSLATE =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withMustBeCaughtBelowY(0);
 
         public static final WorldRestrictions OVERWORLD_DRIPSTONE_CAVES =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomes(Biomes.DRIPSTONE_CAVES.location());
+                        .withBiomes(Biomes.DRIPSTONE_CAVES.location())
+                        .withMustBeCaughtBelowY(50)
+                        .withMustBeCaughtAboveY(0);
 
         public static final WorldRestrictions OVERWORLD_DEEP_DARK =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomes(Biomes.DEEP_DARK.location());
+                        .withBiomes(Biomes.DEEP_DARK.location())
+                        .withMustBeCaughtBelowY(50);
 
         public static final WorldRestrictions OVERWORLD_RIVER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_RIVER);
+                        .withBiomesTags(StarcatcherTags.IS_RIVER)
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_OCEAN =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags((StarcatcherTags.IS_OCEAN));
+                        .withBiomesTags((StarcatcherTags.IS_OCEAN))
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_WARM_OCEAN =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_WARM_OCEAN);
+                        .withBiomesTags(StarcatcherTags.IS_WARM_OCEAN)
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_DEEP_OCEAN =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_DEEP_OCEAN);
+                        .withBiomesTags(StarcatcherTags.IS_DEEP_OCEAN)
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_LAKE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER));
+                        .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER))
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_FRESHWATER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesBlacklistTags(StarcatcherTags.IS_OCEAN);
+                        .withBiomesBlacklistTags(StarcatcherTags.IS_OCEAN)
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_COLD_FRESHWATER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE, StarcatcherTags.IS_COLD_RIVER));
+                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE, StarcatcherTags.IS_COLD_RIVER))
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_WARM_FRESHWATER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM_LAKE, StarcatcherTags.IS_WARM_RIVER));
+                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM_LAKE, StarcatcherTags.IS_WARM_RIVER))
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_WARM_LAKE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_WARM_LAKE);
+                        .withBiomesTags(StarcatcherTags.IS_WARM_LAKE)
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_COLD_RIVER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_COLD_RIVER);
+                        .withBiomesTags(StarcatcherTags.IS_COLD_RIVER)
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_COLD_OCEAN =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_COLD_OCEAN);
+                        .withBiomesTags(StarcatcherTags.IS_COLD_OCEAN)
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
 
         public static final WorldRestrictions OVERWORLD_COLD_LAKE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_COLD_LAKE);
+                        .withBiomesTags(StarcatcherTags.IS_COLD_LAKE)
+                        .withMustBeCaughtAboveY(50)
+                        .withMustBeCaughtBelowY(100);
+
+        public static final WorldRestrictions OVERWORLD_COLD_MOUNTAIN =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withBiomesTags(StarcatcherTags.IS_COLD_LAKE)
+                        .withMustBeCaughtAboveY(100);
 
         public static final WorldRestrictions OVERWORLD_BEACH =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_BEACH);
+                        .withBiomesTags(StarcatcherTags.IS_BEACH)
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_MUSHROOM_FIELDS =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_MUSHROOM_FIELDS);
+                        .withBiomesTags(StarcatcherTags.IS_MUSHROOM_FIELDS)
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_JUNGLE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(BiomeTags.IS_JUNGLE.location());
+                        .withBiomesTags(BiomeTags.IS_JUNGLE.location())
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_TAIGA =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(BiomeTags.IS_TAIGA.location());
+                        .withBiomesTags(BiomeTags.IS_TAIGA.location())
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_CHERRY_GROVE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_CHERRY_GROVE);
+                        .withBiomesTags(StarcatcherTags.IS_CHERRY_GROVE)
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_SWAMP =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_SWAMP);
+                        .withBiomesTags(StarcatcherTags.IS_SWAMP)
+                        .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_DARK_FOREST =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_DARK_FOREST);
+                        .withBiomesTags(StarcatcherTags.IS_DARK_FOREST)
+                        .withMustBeCaughtAboveY(50);
 
-        public static final WorldRestrictions OVERWORLD_LAVA =
+        public static final WorldRestrictions OVERWORLD_LAVA_SURFACE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"))
+                        .withMustBeCaughtAboveY(50);
+
+        public static final WorldRestrictions OVERWORLD_LAVA_UNDERGROUND =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"))
+                        .withMustBeCaughtBelowY(50);
+
+        public static final WorldRestrictions OVERWORLD_UNDERGROUND =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withMustBeCaughtBelowY(50);
+
+        public static final WorldRestrictions OVERWORLD_LAVA_DEEPSLATE =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.OVERWORLD.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"))
+                        .withMustBeCaughtBelowY(0);
 
         public static final WorldRestrictions NETHER_LAVA =
                 WorldRestrictions.DEFAULT
@@ -499,72 +563,82 @@ public record FishProperties(
 
         public WorldRestrictions withDims(ResourceLocation dims)
         {
-            return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withDims(List<ResourceLocation> dims)
         {
-            return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withDimsBlacklist(ResourceLocation dimsBlacklist)
         {
-            return new WorldRestrictions(this.dims, List.of(dimsBlacklist), this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, List.of(dimsBlacklist), this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withDimsBlacklist(List<ResourceLocation> dimsBlacklist)
         {
-            return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomes(ResourceLocation biome)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, List.of(biome), this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, List.of(biome), this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomes(List<ResourceLocation> biomes)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomesTags(ResourceLocation biomesTag)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, List.of(biomesTag), this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, List.of(biomesTag), this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomesTags(List<ResourceLocation> biomesTags)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomesBlacklist(List<ResourceLocation> biomesBlacklist)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomesBlacklist(ResourceLocation biomesBlacklist)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, List.of(biomesBlacklist), this.biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, List.of(biomesBlacklist), this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomesBlacklistTags(List<ResourceLocation> biomesBlacklistTags)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags, this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withBiomesBlacklistTags(ResourceLocation biomesBlacklistTags)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, List.of(biomesBlacklistTags), this.fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, List.of(biomesBlacklistTags), this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withFluids(List<ResourceLocation> fluids)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, fluids);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withFluids(ResourceLocation fluids)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, List.of(fluids));
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, List.of(fluids), this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withMustBeCaughtBelowY(int mustBeCaughtBelowY)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withMustBeCaughtAboveY(int mustBeCaughtAboveY)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, mustBeCaughtAboveY);
         }
 
     }
@@ -997,7 +1071,7 @@ public record FishProperties(
                 ).apply(instance, Difficulty::new));
 
 
-        public static final StreamCodec<ByteBuf, Difficulty> STREAM_CODEC = composite(
+        public static final StreamCodec<ByteBuf, Difficulty> STREAM_CODEC = ExtraComposites.composite(
                 ByteBufCodecs.INT, Difficulty::speed,
                 ByteBufCodecs.INT, Difficulty::reward,
                 ByteBufCodecs.INT, Difficulty::rewardThin,
@@ -1011,6 +1085,33 @@ public record FishProperties(
     }
 
     //endregion dif
+
+    public record SizeAndWeight(float sizeAverage, float sizeDeviation, float weightAverage, float weightDeviation,
+                                int goldenChance, int goldenIncrease)
+    {
+        public static final SizeAndWeight DEFAULT = new SizeAndWeight(40f, 20f, 9f, 1f, 1, 20);
+
+        public static final Codec<SizeAndWeight> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(
+                        Codec.FLOAT.optionalFieldOf("average_size_cm", DEFAULT.sizeAverage).forGetter(SizeAndWeight::sizeAverage),
+                        Codec.FLOAT.optionalFieldOf("deviation_size_cm", DEFAULT.sizeDeviation).forGetter(SizeAndWeight::sizeDeviation),
+                        Codec.FLOAT.optionalFieldOf("average_weight_grams", DEFAULT.weightAverage).forGetter(SizeAndWeight::weightAverage),
+                        Codec.FLOAT.optionalFieldOf("deviation_weight_grams", DEFAULT.weightDeviation).forGetter(SizeAndWeight::weightDeviation),
+                        Codec.INT.optionalFieldOf("golden_chance_percentage", DEFAULT.goldenChance).forGetter(SizeAndWeight::goldenChance),
+                        Codec.INT.optionalFieldOf("golden_state_increase", DEFAULT.goldenIncrease).forGetter(SizeAndWeight::goldenIncrease)
+                ).apply(instance, SizeAndWeight::new));
+
+        public static final StreamCodec<ByteBuf, SizeAndWeight> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.FLOAT, SizeAndWeight::sizeAverage,
+                ByteBufCodecs.FLOAT, SizeAndWeight::sizeDeviation,
+                ByteBufCodecs.FLOAT, SizeAndWeight::weightAverage,
+                ByteBufCodecs.FLOAT, SizeAndWeight::weightDeviation,
+                ByteBufCodecs.INT, SizeAndWeight::goldenChance,
+                ByteBufCodecs.INT, SizeAndWeight::goldenIncrease,
+                SizeAndWeight::new
+        );
+    }
+
 
     public enum Rarity implements StringRepresentable
     {
@@ -1197,13 +1298,13 @@ public record FishProperties(
         }
 
         //y level check
-        if (entity.position().y > fp.mustBeCaughtBelowY())
+        if (entity.position().y > fp.wr.mustBeCaughtBelowY())
         {
             return 0;
         }
 
         //y level check
-        if (entity.position().y < fp.mustBeCaughtAboveY())
+        if (entity.position().y < fp.wr.mustBeCaughtAboveY())
         {
             return 0;
         }
@@ -1298,423 +1399,8 @@ public record FishProperties(
         return fluid1;
     }
 
-
-    //region composite
-
-    static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
-            final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
-            final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
-            final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
-            final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
-            final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
-            final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
-            final Function<C, T7> getter7,
-            final Function7<T1, T2, T3, T4, T5, T6, T7, C> factory
-    )
+    public static SizeAndWeight sw(float s, float s1, float w, float w1, int g, int g1)
     {
-        return new StreamCodec<B, C>()
-        {
-            @Override
-            public C decode(B decode)
-            {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
-                T7 t7 = codec7.decode(decode);
-                return factory.apply(t1, t2, t3, t4, t5, t6, t7);
-            }
-
-            @Override
-            public void encode(B encode, C apply)
-            {
-                codec1.encode(encode, getter1.apply(apply));
-                codec2.encode(encode, getter2.apply(apply));
-                codec3.encode(encode, getter3.apply(apply));
-                codec4.encode(encode, getter4.apply(apply));
-                codec5.encode(encode, getter5.apply(apply));
-                codec6.encode(encode, getter6.apply(apply));
-                codec7.encode(encode, getter7.apply(apply));
-            }
-        };
+        return new SizeAndWeight(s, s1, w, w1, g, g1);
     }
-
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
-            final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
-            final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
-            final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
-            final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
-            final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
-            final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
-            final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
-            final Function<C, T8> getter8,
-            final Function8<T1, T2, T3, T4, T5, T6, T7, T8, C> factory
-    )
-    {
-        return new StreamCodec<B, C>()
-        {
-            @Override
-            public C decode(B decode)
-            {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
-                T7 t7 = codec7.decode(decode);
-                T8 t8 = codec8.decode(decode);
-                return factory.apply(t1, t2, t3, t4, t5, t6, t7, t8);
-            }
-
-            @Override
-            public void encode(B encode, C apply)
-            {
-                codec1.encode(encode, getter1.apply(apply));
-                codec2.encode(encode, getter2.apply(apply));
-                codec3.encode(encode, getter3.apply(apply));
-                codec4.encode(encode, getter4.apply(apply));
-                codec5.encode(encode, getter5.apply(apply));
-                codec6.encode(encode, getter6.apply(apply));
-                codec7.encode(encode, getter7.apply(apply));
-                codec8.encode(encode, getter8.apply(apply));
-            }
-        };
-    }
-
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
-            final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
-            final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
-            final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
-            final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
-            final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
-            final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
-            final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
-            final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
-            final Function<C, T9> getter9,
-            final Function9<T1, T2, T3, T4, T5, T6, T7, T8, T9, C> factory
-    )
-    {
-        return new StreamCodec<B, C>()
-        {
-            @Override
-            public C decode(B decode)
-            {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
-                T7 t7 = codec7.decode(decode);
-                T8 t8 = codec8.decode(decode);
-                T9 t9 = codec9.decode(decode);
-                return factory.apply(t1, t2, t3, t4, t5, t6, t7, t8, t9);
-            }
-
-            @Override
-            public void encode(B encode, C apply)
-            {
-                codec1.encode(encode, getter1.apply(apply));
-                codec2.encode(encode, getter2.apply(apply));
-                codec3.encode(encode, getter3.apply(apply));
-                codec4.encode(encode, getter4.apply(apply));
-                codec5.encode(encode, getter5.apply(apply));
-                codec6.encode(encode, getter6.apply(apply));
-                codec7.encode(encode, getter7.apply(apply));
-                codec8.encode(encode, getter8.apply(apply));
-                codec9.encode(encode, getter9.apply(apply));
-            }
-        };
-    }
-
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
-            final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
-            final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
-            final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
-            final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
-            final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
-            final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
-            final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
-            final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
-            final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
-            final Function<C, T10> getter10,
-            final Function10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, C> factory
-    )
-    {
-        return new StreamCodec<B, C>()
-        {
-            @Override
-            public C decode(B decode)
-            {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
-                T7 t7 = codec7.decode(decode);
-                T8 t8 = codec8.decode(decode);
-                T9 t9 = codec9.decode(decode);
-                T10 t10 = codec10.decode(decode);
-                return factory.apply(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10);
-            }
-
-            @Override
-            public void encode(B encode, C apply)
-            {
-                codec1.encode(encode, getter1.apply(apply));
-                codec2.encode(encode, getter2.apply(apply));
-                codec3.encode(encode, getter3.apply(apply));
-                codec4.encode(encode, getter4.apply(apply));
-                codec5.encode(encode, getter5.apply(apply));
-                codec6.encode(encode, getter6.apply(apply));
-                codec7.encode(encode, getter7.apply(apply));
-                codec8.encode(encode, getter8.apply(apply));
-                codec9.encode(encode, getter9.apply(apply));
-                codec10.encode(encode, getter10.apply(apply));
-            }
-        };
-    }
-
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
-            final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
-            final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
-            final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
-            final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
-            final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
-            final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
-            final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
-            final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
-            final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
-            final Function<C, T10> getter10,
-            final StreamCodec<? super B, T11> codec11,
-            final Function<C, T11> getter11,
-            final Function11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, C> factory
-    )
-    {
-        return new StreamCodec<B, C>()
-        {
-            @Override
-            public C decode(B decode)
-            {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
-                T7 t7 = codec7.decode(decode);
-                T8 t8 = codec8.decode(decode);
-                T9 t9 = codec9.decode(decode);
-                T10 t10 = codec10.decode(decode);
-                T11 t11 = codec11.decode(decode);
-                return factory.apply(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11);
-            }
-
-            @Override
-            public void encode(B encode, C apply)
-            {
-                codec1.encode(encode, getter1.apply(apply));
-                codec2.encode(encode, getter2.apply(apply));
-                codec3.encode(encode, getter3.apply(apply));
-                codec4.encode(encode, getter4.apply(apply));
-                codec5.encode(encode, getter5.apply(apply));
-                codec6.encode(encode, getter6.apply(apply));
-                codec7.encode(encode, getter7.apply(apply));
-                codec8.encode(encode, getter8.apply(apply));
-                codec9.encode(encode, getter9.apply(apply));
-                codec10.encode(encode, getter10.apply(apply));
-                codec11.encode(encode, getter11.apply(apply));
-            }
-        };
-    }
-
-
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
-            final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
-            final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
-            final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
-            final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
-            final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
-            final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
-            final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
-            final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
-            final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
-            final Function<C, T10> getter10,
-            final StreamCodec<? super B, T11> codec11,
-            final Function<C, T11> getter11,
-            final StreamCodec<? super B, T12> codec12,
-            final Function<C, T12> getter12,
-            final Function12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, C> factory
-    )
-    {
-        return new StreamCodec<B, C>()
-        {
-            @Override
-            public C decode(B decode)
-            {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
-                T7 t7 = codec7.decode(decode);
-                T8 t8 = codec8.decode(decode);
-                T9 t9 = codec9.decode(decode);
-                T10 t10 = codec10.decode(decode);
-                T11 t11 = codec11.decode(decode);
-                T12 t12 = codec12.decode(decode);
-                return factory.apply(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12);
-            }
-
-            @Override
-            public void encode(B encode, C apply)
-            {
-                codec1.encode(encode, getter1.apply(apply));
-                codec2.encode(encode, getter2.apply(apply));
-                codec3.encode(encode, getter3.apply(apply));
-                codec4.encode(encode, getter4.apply(apply));
-                codec5.encode(encode, getter5.apply(apply));
-                codec6.encode(encode, getter6.apply(apply));
-                codec7.encode(encode, getter7.apply(apply));
-                codec8.encode(encode, getter8.apply(apply));
-                codec9.encode(encode, getter9.apply(apply));
-                codec10.encode(encode, getter10.apply(apply));
-                codec11.encode(encode, getter11.apply(apply));
-                codec12.encode(encode, getter12.apply(apply));
-            }
-        };
-    }
-
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
-            final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
-            final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
-            final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
-            final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
-            final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
-            final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
-            final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
-            final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
-            final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
-            final Function<C, T10> getter10,
-            final StreamCodec<? super B, T11> codec11,
-            final Function<C, T11> getter11,
-            final StreamCodec<? super B, T12> codec12,
-            final Function<C, T12> getter12,
-            final StreamCodec<? super B, T13> codec13,
-            final Function<C, T13> getter13,
-            final Function13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, C> factory
-    )
-    {
-        return new StreamCodec<B, C>()
-        {
-            @Override
-            public C decode(B decode)
-            {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
-                T7 t7 = codec7.decode(decode);
-                T8 t8 = codec8.decode(decode);
-                T9 t9 = codec9.decode(decode);
-                T10 t10 = codec10.decode(decode);
-                T11 t11 = codec11.decode(decode);
-                T12 t12 = codec12.decode(decode);
-                T13 t13 = codec13.decode(decode);
-                return factory.apply(t1, t2, t3, t4, t5, t6, t7, t8, t9, t10, t11, t12, t13);
-            }
-
-            @Override
-            public void encode(B encode, C apply)
-            {
-                codec1.encode(encode, getter1.apply(apply));
-                codec2.encode(encode, getter2.apply(apply));
-                codec3.encode(encode, getter3.apply(apply));
-                codec4.encode(encode, getter4.apply(apply));
-                codec5.encode(encode, getter5.apply(apply));
-                codec6.encode(encode, getter6.apply(apply));
-                codec7.encode(encode, getter7.apply(apply));
-                codec8.encode(encode, getter8.apply(apply));
-                codec9.encode(encode, getter9.apply(apply));
-                codec10.encode(encode, getter10.apply(apply));
-                codec11.encode(encode, getter11.apply(apply));
-                codec12.encode(encode, getter12.apply(apply));
-                codec13.encode(encode, getter13.apply(apply));
-            }
-        };
-    }
-
-    //endregion composite
-
 }
