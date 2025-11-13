@@ -639,125 +639,450 @@
 
 
   "item.starcatcher.obidontiee" : "Obidontiee",
+  "tooltip.starcatcher.obidontiee.0" : "A small devious fish. Said to often mispronounce words.",
+
   "item.starcatcher.silverveil_perch" : "Silverveil Perch",
+  "tooltip.starcatcher.silverveil_perch.0" : "A small perch with scaled resembling silver.",
+  "tooltip.starcatcher.silverveil_perch.1" : "Most commonly found during rainy days.",
+
   "item.starcatcher.elderscale" : "Elderscale",
+  "tooltip.starcatcher.elderscale.0" : "A deceiving fish often found in lakes.",
+  "tooltip.starcatcher.elderscale.1" : "Elderscales may live up to several decades and often",
+  "tooltip.starcatcher.elderscale.2" : "spend all day hiding during their youth, making sighing a",
+  "tooltip.starcatcher.elderscale.3" : "young one little more than a rumor, therefore the name.",
+
   "item.starcatcher.driftfin" : "Driftfin",
+  "tooltip.starcatcher.driftfin.0" : "A small fish which loves drifting close to",
+  "tooltip.starcatcher.driftfin.1" : "the surface on clear weather days.",
+
   "item.starcatcher.twilight_koi" : "Twilight Koi",
+  "tooltip.starcatcher.twilight_koi.0" : "A rather rare species of Koi said to",
+  "tooltip.starcatcher.twilight_koi.1" : "only appear at lakes during the midnight hours.",
+
   "item.starcatcher.thunder_bass" : "Thunder Bass",
+  "tooltip.starcatcher.thunder_bass.0" : "A unique species of bass which seems to be",
+  "tooltip.starcatcher.thunder_bass.1" : "attracted by the thunder sounds during storms.",
+  "tooltip.starcatcher.thunder_bass.2" : "Often seen swimming around with Lighting Bass.",
+
   "item.starcatcher.lightning_bass" : "Lightning Bass",
+  "tooltip.starcatcher.lightning_bass.0" : "A unique species of bass which seems to be",
+  "tooltip.starcatcher.lightning_bass.1" : "attracted by the lighting flashes during storms.",
+  "tooltip.starcatcher.lightning_bass.2" : "Often seen swimming around with Thunder Bass.",
+
   "item.starcatcher.boot" : "Boot",
+  "tooltip.starcatcher.boot.0" : "An incredibly high quality boot fished from a lake.",
+  "tooltip.starcatcher.boot.1" : "Every fisherman's dream.",
 
-  "item.starcatcher.sludge_catfish" : "Sludge Catfish",
-  "item.starcatcher.lily_snapper" : "Lily Snapper",
-  "item.starcatcher.sage_catfish" : "Sage Catfish",
-  "item.starcatcher.mossy_boot" : "Mossy Boot",
 
-  "item.starcatcher.pale_carp" : "Pale Carp",
-  "item.starcatcher.pale_pinfish" : "Pale Pinfish",
-  "item.starcatcher.pinfish" : "Pinfish",
+
+
 
   "item.starcatcher.frostjaw_trout" : "Frostjaw Trout",
+  "tooltip.starcatcher.frostjaw_trout.0" : "A trout species known for it's sharp",
+  "tooltip.starcatcher.frostjaw_trout.1" : "jaws made of petrified ice crystals.",
+
   "item.starcatcher.crystalback_trout" : "Crystalback Trout",
+  "tooltip.starcatcher.crystalback_trout.0" : "A tough trout species which uses it's",
+  "tooltip.starcatcher.crystalback_trout.1" : "back as a way to protect itself when attacked.",
+
   "item.starcatcher.aurora" : "Aurora",
+  "tooltip.starcatcher.aurora.0" : "A beautiful <rgb>legendary</rgb> fish. It's size makes for an",
+  "tooltip.starcatcher.aurora.1" : "incredibly hard and evasive catch, not letting the angler",
+  "tooltip.starcatcher.aurora.2" : "rest if they wish to take it home as proof of their skills.",
+
   "item.starcatcher.wintery_pike" : "Wintery Pike",
+  "tooltip.starcatcher.wintery_pike.0" : "A predatory fish. This specific species loves cold",
+  "tooltip.starcatcher.wintery_pike.1" : "climates and is often found inside icy lakes.",
+
+
+
 
   "item.starcatcher.sandtail" : "Sandtail",
+  "tooltip.starcatcher.sandtail.0" : "A long sand-covered fish, which although mostly",
+  "tooltip.starcatcher.sandtail.1" : "found in warm climates, it prefers the cold so",
+  "tooltip.starcatcher.sandtail.2" : "it's only active during nighttime.",
+
   "item.starcatcher.mirage_carp" : "Mirage Carp",
+  "tooltip.starcatcher.mirage_carp.0" : "A carp species found during warm sunny days on warm climates.",
+
   "item.starcatcher.scorchfish" : "Scorchfish",
+  "tooltip.starcatcher.scorchfish.0" : "A fish species which hates the rain,",
+  "tooltip.starcatcher.scorchfish.1" : "and as such prefers to stay around warmer climates.",
+
   "item.starcatcher.cactifish" : "Cactifish",
+  "tooltip.starcatcher.cactifish.0" : "Although the name might suggest this fish",
+  "tooltip.starcatcher.cactifish.1" : "is connected to cacti in some way, it is",
+  "tooltip.starcatcher.cactifish.2" : "just a coincidence on it's green colored scales.",
+
   "item.starcatcher.agave_bream" : "Agave Bream",
+  "tooltip.starcatcher.agave_bream.0" : "A rare bream which only comes out at night",
+  "tooltip.starcatcher.agave_bream.1" : "during clear weather. It's long fins help",
+  "tooltip.starcatcher.agave_bream.2" : "navigating the dirty lakes of deserts.",
+
+
+
 
   "item.starcatcher.sunny_sturgeon" : "Sunny Sturgeon",
-  "item.starcatcher.rockgill" : "Rockgill",
+  "tooltip.starcatcher.sunny_sturgeon.0" : "A rare surgeon often found high up in mountains during sunny days.",
+  "tooltip.starcatcher.sunny_sturgeon.1" : "Because of it's size it's a rather hard catch,",
+  "tooltip.starcatcher.sunny_sturgeon.2" : "requiring a strong grip and tight adjustments of your rod.",
+
   "item.starcatcher.peakdweller" : "Peakdweller",
+  "tooltip.starcatcher.peakdweller.0" : "A golden colored fish common to mountains.",
+  "tooltip.starcatcher.peakdweller.1" : "Not an easy catch for inexperienced anglers.",
+
+  "item.starcatcher.rockgill" : "Rockgill",
+  "tooltip.starcatcher.rockgill.0" : "A rock-hard fish common to the high mountains.",
+  "tooltip.starcatcher.rockgill.1" : "It is said to make for a great stew, at least for",
+  "tooltip.starcatcher.rockgill.2" : "those who have the teeth to bite through its skin",
+
   "item.starcatcher.sun_seeking_carp" : "Sun Seeking Carp",
+  "tooltip.starcatcher.sun_seeking_carp.0" : "A rare sun-loving carp, only found when",
+  "tooltip.starcatcher.sun_seeking_carp.1" : "the sun is right above your head.",
+
+
+
+
+  "item.starcatcher.sludge_catfish" : "Sludge Catfish",
+  "tooltip.starcatcher.sludge_catfish.0" : "A dirty catfish species common to murky swamp",
+  "tooltip.starcatcher.sludge_catfish.1" : "waters. Said to make a great dish if washes properly.",
+
+  "item.starcatcher.lily_snapper" : "Lily Snapper",
+  "tooltip.starcatcher.lily_snapper.0" : "A thin long rare snapper species common to swamps.",
+  "tooltip.starcatcher.lily_snapper.1" : "It hunts other fishes with it's pointy mouth.",
+
+  "item.starcatcher.sage_catfish" : "Sage Catfish",
+  "tooltip.starcatcher.sage_catfish.0" : "A beautiful sage-colored catfish found in swamps.",
+  "tooltip.starcatcher.sage_catfish.1" : "It only comes out during clear nights to admire",
+  "tooltip.starcatcher.sage_catfish.2" : "the tranquility of nighttime swamps.",
+
+  "item.starcatcher.mossy_boot" : "Mossy Boot",
+  "tooltips.starcatcher.mossy_boot.0" : "A boot, but this time it's mossy!",
+
+
+
+
+  "item.starcatcher.pale_pinfish" : "Pale Pinfish",
+  "tooltip.starcatcher.pale_pinfish.0" : "A tiny pale pinfish, only found around midnight",
+  "tooltip.starcatcher.pale_pinfish.1" : "in dark forests. It wishes to exist in a version",
+  "tooltip.starcatcher.pale_pinfish.2" : "where pale gardens exist.",
+
+  "item.starcatcher.pinfish" : "Pinfish",
+  "tooltip.starcatcher.pinfish.0" : "A tiny pale pinfish, only found around midnight",
+
+  "item.starcatcher.pale_carp" : "Pale Carp",
+  "tooltip.starcatcher.pale_carp.0" : "A carp species common to the [redacted].",
+  "tooltip.starcatcher.pale_carp.1" : "Their habitat is still under construction in this",
+  "tooltip.starcatcher.pale_carp.2" : "universe so instead they stick to the dark forest.",
+
+
+
 
   "item.starcatcher.blossomfish" : "Blossomfish",
+  "tooltip.starcatcher.blossomfish.0" : "A beautiful fish resembling the pink petals of Cherry Grooves.",
+  "tooltip.starcatcher.blossomfish.1" : "It prefers to swim around in the warm sunlight.",
+
   "item.starcatcher.petaldrift_carp" : "Petaldrift Carp",
+  "tooltip.starcatcher.petaldrift_carp.0" : "A pink carp common to Cherry Grooves which",
+  "tooltip.starcatcher.petaldrift_carp.1" : "prefers to come out during the rain.",
+
   "item.starcatcher.pink_koi" : "Pink Koi",
+  "tooltip.starcatcher.pink_koi.0" : "A pink koi most commonly found in Cherry Grooves.",
+  "tooltip.starcatcher.pink_koi.1" : "It comes out during rainy days to feed.",
+
   "item.starcatcher.morganite" : "Morganite",
+  "tooltip.starcatcher.morganite.0" : "A fish resembling Morganite gemstones.",
+
   "item.starcatcher.rose_siamese_fish" : "Rose Siamese Fish",
+  "tooltip.starcatcher.rose_siamese_fish.0" : "A rare gorgeous fish found during rainy days.",
+  "tooltip.starcatcher.rose_siamese_fish.1" : "A decently challenging catch for even experienced anglers.",
+
+
+
 
   "item.starcatcher.crystalback_sturgeon" : "Crystalback Sturgeon",
+  "tooltip.starcatcher.crystalback_sturgeon.0" : "A sturgeon often found in high altitudes,",
+  "tooltip.starcatcher.crystalback_sturgeon.1" : "known for it's crystalback which helps it passively",
+  "tooltip.starcatcher.crystalback_sturgeon.2" : "defend from attackers whilst hunting.",
+
   "item.starcatcher.icetooth_sturgeon" : "Icetooth Sturgeon",
+  "tooltip.starcatcher.icetooth_sturgeon.0" : "Found high up in the mountains, this sturgeon",
+  "tooltip.starcatcher.icetooth_sturgeon.1" : "uses it's sharp petrified ice teeth to bite down on prey.",
+
   "item.starcatcher.boreal" : "Boreal",
+  "tooltip.starcatcher.boreal.0" : "A <rgb>legendary</rgb>  fish found in icy mountains.",
+  "tooltip.starcatcher.boreal.1" : "A real challenge even for skilled anglers, they are",
+  "tooltip.starcatcher.boreal.2" : "known for blending into the icy waters making it hard",
+  "tooltip.starcatcher.boreal.3" : "follow their quick movements.",
+
   "item.starcatcher.crystalback_boreal" : "Crystalback Boreal",
+  "tooltip.starcatcher.crystalback_boreal.0" : "Although named after the <rgb>legendary</rgb>  fish <rgb>Boreal</rgb>, this",
+  "tooltip.starcatcher.crystalback_boreal.1" : "fish is not nearly as hard to catch. Its shiny back makes it",
+  "tooltip.starcatcher.crystalback_boreal.2" : "easy to keep track and the crystallized back slows down its swimming speed.",
+
+
+
 
   "item.starcatcher.silverfin_pike" : "Silverfin Pike",
+  "tooltip.starcatcher.silverfin_pike.0" : "A large pike common to rivers.",
+
   "item.starcatcher.willow_bream" : "Willow Bream",
+  "tooltip.starcatcher.willow_bream.0" : "A really trick to catch fish which",
+  "tooltip.starcatcher.willow_bream.1" : "only reveals itself during nighttime.",
+
   "item.starcatcher.drifting_bream" : "Drifting Bream",
+  "tooltip.starcatcher.drifting_bream.0" : "A species of bream known for slowly",
+  "tooltip.starcatcher.drifting_bream.1" : "drifting atop rivers during nighttime",
+
   "item.starcatcher.downfall_bream" : "Downfall Bream",
+  "tooltip.starcatcher.downfall_bream.0" : "A hard to spot but easy to catch bream,",
+  "tooltip.starcatcher.downfall_bream.1" : "only coming out during rainy nights.",
+
   "item.starcatcher.hollowbelly_darter" : "Hollowbelly Darter",
+  "tooltip.starcatcher.hollowbelly_darter.0" : "A small each to catch river fish.",
+
   "item.starcatcher.mistback_chub" : "Mistback Chub",
+  "tooltip.starcatcher.mistback_chub.0" : "A river fish known for its silver colored scaled",
+
   "item.starcatcher.dried_seaweed" : "Dried Seaweed",
+  "tooltip.starcatcher.dried_seaweed.0" : "A piece of dead seaweed which got",
+  "tooltip.starcatcher.dried_seaweed.1" : "caught up in your hook.",
+
+
+
 
   "item.starcatcher.frostgill_chub" : "Frostgill Chub",
+  "tooltip.starcatcher.frostgill_chub.0" : "A popular fish amongst anglers",
+  "tooltip.starcatcher.frostgill_chub.1" : "commonly found in rivers",
+
   "item.starcatcher.crystalback_minnow" : "Crystalback Minnow",
+  "tooltip.starcatcher.crystalback_minnow.0" : "A really small fish often used as bait.",
+  "tooltip.starcatcher.crystalback_minnow.1" : "This specific species is most common at nighttime.",
+
   "item.starcatcher.azure_crystalback_minnow" : "Azure Crystalback Minnow",
+  "tooltip.starcatcher.azure_crystalback_minnow.0" : "A rare mutation of crystalback minnow's",
+  "tooltip.starcatcher.azure_crystalback_minnow.1" : "which glows a soft blue tone during midnight.",
+  "tooltip.starcatcher.azure_crystalback_minnow.2" : "A challenging catch due to it's tiny size.",
+
   "item.starcatcher.blue_crystal_fin" : "Blue Crystal Fin",
+  "tooltip.starcatcher.blue_crystal_fin.0" : "An uncommon fish most commonly found during daytime.",
+
+
 
   "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
+  "tooltip.starcatcher.ironjaw_herring.0" : "This type of herring common to the ocean often",
+  "tooltip.starcatcher.ironjaw_herring.1" : "has a petrified silvery jaw resembling iron.",
+
   "item.starcatcher.deepjaw_herring" : "Deepjaw Herring",
+  "tooltip.starcatcher.deepjaw_herring.0" : "A fish common to oceans, often regarded highly for trading.",
+
   "item.starcatcher.dusktail_snapper" : "Dusktail Snapper",
+  "tooltip.starcatcher.dusktail_snapper.0" : "A heavy fish for it's size often used in dishes.",
+
   "item.starcatcher.joel" : "Joel",
+  "tooltip.starcatcher.joel.0" : "A rare <rgb>legendary</rgb> fish found in oceans.",
+  "tooltip.starcatcher.joel.1" : "It has a <rgb>nice</rgb> size",
+
   "item.starcatcher.redscaled_tuna" : "Redscaled Tuna",
+  "tooltip.starcatcher.redscaled_tuna.0" : "A large tuna with red colored scales.",
+  "tooltip.starcatcher.redscaled_tuna.1" : "A single one of these often feeds an entire village.",
+
   "item.starcatcher.sea_bass" : "Sea Bass",
+  "tooltip.starcatcher.sea_bass.0" : "A popular type of bass common to the ocean.",
+  "tooltip.starcatcher.sea_bass.1" : "It hides during the night due to it's lack bravery.",
+
   "item.starcatcher.waterlogged_bottle" : "Waterlogged Bottle",
+  "tooltip.starcatcher.waterlogged_bottle.0" : "A bottle thrown into the ocean many moons ago.",
+  "tooltip.starcatcher.waterlogged_bottle.1" : "Whatever it once held, it's long gone by now.",
 
   "item.starcatcher.bigeye_tuna" : "Bigeye Tuna",
+  "tooltip.starcatcher.bigeye_tuna.0" : "A big heavy fish known for it's big eye.",
+  "tooltip.starcatcher.bigeye_tuna.1" : "This species is only found in deep ocean waters.",
 
   "item.starcatcher.conch" : "Conch",
+  "tooltip.starcatcher.conch.0" : "The remains of a mollusk with a spiral shell often used as an ornament.",
+
   "item.starcatcher.clam" : "Clam",
+  "tooltip.starcatcher.clam.0" : "Once a bivalve mollusk living in the sandy shores, now just a shell.",
 
   "item.starcatcher.shroomfish" : "Shroomfish",
+  "tooltip.starcatcher.shroomfish.0" : "An antique <rgb>legendary</rgb> fish species taken over by the spores",
+  "tooltip.starcatcher.shroomfish.1" : "of the Mushroom Islands. A really tasty dish for mushroom enjoyers.",
+
   "item.starcatcher.sporefish" : "Sporefish",
+  "tooltip.starcatcher.sporefish.0" : "A rare fish found in the Mushroom Islands, may prove a",
+  "tooltip.starcatcher.sporefish.1" : "tough catch for inexperienced anglers.",
+
+
+
 
   "item.starcatcher.gold_fan" : "Gold Fan",
+  "tooltip.starcatcher.gold_fan.0" : "An underground fish with a tail that resembles a fan.",
+  "tooltip.starcatcher.gold_fan.1" : "As funny as it would be, it does not spin its tail like a fan to move around.",
+
   "item.starcatcher.geode_eel" : "Geode Eel",
+  "tooltip.starcatcher.geode_eel.0" : "A shiny, heavy, long eel.",
+  "tooltip.starcatcher.geode_eel.1" : "Their color and texture comes from infused amethyst",
+  "tooltip.starcatcher.geode_eel.2" : "due to their eggs being hatched inside amethyst geodes.",
+
+
 
   "item.starcatcher.whiteveil" : "Whiteveil",
+  "tooltip.starcatcher.whiteveil.0" : "A pale long-finned fish common underground.",
+  "tooltip.starcatcher.whiteveil.1" : "surprisingly heavy for what looks like a ghost.",
+
   "item.starcatcher.black_eel" : "Black Eel",
+  "tooltip.starcatcher.black_eel.0" : "A carnivorous black eel common underground.",
+
   "item.starcatcher.amethystback" : "Amethystback",
+  "tooltip.starcatcher.amethystback.0" : "A rare hard to catch fish common close to amethyst geodes.",
+
   "item.starcatcher.stonefish" : "Stonefish",
+  "tooltip.starcatcher.stonefish.0" : "A huge heavy fish made of stone,",
+  "tooltip.starcatcher.stonefish.1" : "often feeding miners for days.",
+
+
 
   "item.starcatcher.fossilized_angelfish" : "Fossilized Angelfish",
+  "tooltip.starcatcher.fossilized_angelfish.0" : "An angelfish resembling a fossil.",
+  "tooltip.starcatcher.fossilized_angelfish.1" : "It is not actually fossilised and is often",
+  "tooltip.starcatcher.fossilized_angelfish.2" : "ignored due to its low nutritional value,",
+  "tooltip.starcatcher.fossilized_angelfish.3" : "heavy weight and high difficulty to catch.",
+
   "item.starcatcher.dripfin" : "Dripfin",
+  "tooltip.starcatcher.dripfin.0" : "A basic fish which inhabits the",
+  "tooltip.starcatcher.dripfin.1" : "water pools of dripstone caves.",
+
   "item.starcatcher.yellowstone_fish" : "Yellowstone Fish",
+  "tooltip.starcatcher.yellowstone_fish.0" : "A beautiful gold colored fish",
+  "tooltip.starcatcher.yellowstone_fish.1" : "common to dripstone caves.",
+
+
+
+
 
   "item.starcatcher.lush_pike" : "Lush Pike",
+  "tooltip.starcatcher.lush_pike.0" : "A mossy <rgb>legendary</rgb> pike rarely",
+  "tooltip.starcatcher.lush_pike.1" : "found in the Lush Caves. A real tough",
+  "tooltip.starcatcher.lush_pike.2" : "catch even for experienced anglers.",
+
   "item.starcatcher.vivid_moss" : "Vivid Moss",
+  "tooltip.starcatcher.vivid_moss.0" : "A piece of moss resembling a fish found in Lush Caves.",
+  "tooltip.starcatcher.vivid_moss.1" : "Or perhaps an actual fish consumed in moss?",
+  "tooltip.starcatcher.vivid_moss.2" : "Either way it's a hard catch due to its slipperiness.",
+
+
+
+
 
   "item.starcatcher.ghostly_pike" : "Ghostly Pike",
+  "tooltip.starcatcher.ghostly_pike.0" : "A ghost-looking pike rarely found deep underground.",
+
   "item.starcatcher.aquamarine_pike" : "Aquamarine Pike",
+  "tooltip.starcatcher.aquamarine_pike.0" : "A predatory fish found deep underground.",
+
   "item.starcatcher.garnet_mackerel" : "Garnet Mackerel",
+  "tooltip.starcatcher.garnet_mackerel.0" : "A hard to catch mackerel species found deep in caves.",
+
   "item.starcatcher.bright_amethyst_snapper" : "Bright Amethyst Snapper",
+  "tooltip.starcatcher.bright_amethyst_snapper.0" : "A gorgeous pink colored fish found at deepslate level.",
+  "tooltip.starcatcher.bright_amethyst_snapper.1" : "It's said to swim around in pairs with a Dark Amethyst Snapper.",
+
   "item.starcatcher.dark_amethyst_snapper" : "Dark Amethyst Snapper",
+  "tooltip.starcatcher.dark_amethyst_snapper.0" : "A gorgeous dark blue colored fish found at deepslate level.",
+  "tooltip.starcatcher.dark_amethyst_snapper.1" : "It's said to swim around in pairs with a Dark Amethyst Snapper.",
+
   "item.starcatcher.deepslatefish" : "Deepslatefish",
+  "tooltip.starcatcher.deepslatefish.0" : "A hard to catch fish found high up in the mountains.",
+  "tooltip.starcatcher.deepslatefish.1" : "Just kidding. It's found at deepslate.",
+
+
+
 
   "item.starcatcher.sculkfish" : "Sculkfish",
+  "tooltip.starcatcher.sculkfish.0" : "A tricky fish corrupted by Sculk.",
+
   "item.starcatcher.ward" : "Ward",
+  "tooltip.starcatcher.ward.0" : "A <rgb>legendary</rgb> fish said to be best friends with the warden.",
+  "tooltip.starcatcher.ward.1" : "Instead of resisting Sculk, this fish embraced it and became stronger for it.",
+
   "item.starcatcher.glowing_dark" : "Glowing Dark",
+  "tooltip.starcatcher.glowing_dark.0" : "A fast fish only found in the deep dark.",
+  "tooltip.starcatcher.glowing_dark.1" : "A fast fish only found in the deep dark.",
+
+
 
   "item.starcatcher.suneater" : "Suneater",
+  "tooltip.starcatcher.suneater.0" : "A rare fish found in the lava lakes of the Overworld.",
+
   "item.starcatcher.pyrotrout" : "Pyrotrout",
+  "tooltip.starcatcher.pyrotrout.0" : "A trout adapted to live in the surface lava of the Overworld.",
+
   "item.starcatcher.obsidian_eel" : "Obsidian Eel",
+  "tooltip.starcatcher.obsidian_eel.0" : "A <rgb>legendary</rgb> species of eel made of obsidian, found",
+  "tooltip.starcatcher.obsidian_eel.1" : "during rainy days inside Overworld lava lakes.",
+  "tooltip.starcatcher.obsidian_eel.2" : "It often requires several anglers to carry",
+  "tooltip.starcatcher.obsidian_eel.3" : "it back to the village.",
+
+
+
 
   "item.starcatcher.molten_shrimp" : "Molten Shrimp",
+  "tooltip.starcatcher.molten_shrimp.0" : "A small shrimp found in lava rivers underground.",
+
   "item.starcatcher.obsidian_crab" : "Obsidian Crab",
+  "tooltip.starcatcher.obsidian_crab.0" : "An illusive crab found close to underground lava pools.",
+
+
+
 
   "item.starcatcher.scorched_bloodsucker" : "Scorched Bloodsucker",
+  "tooltip.starcatcher.scorched_bloodsucker.0" : "A hard to catch parasite found in deepslate lava lakes.",
+
   "item.starcatcher.molten_deepslate_crab" : "Molten Deepslate Crab",
+  "tooltip.starcatcher.molten_deepslate_crab.0" : "A gold colored crab found at deepslate levels close to lava rivers.",
+
+
+
 
   "item.starcatcher.embergill" : "Embergill",
+  "tooltip.starcatcher.embergill.0" : "A fish found in the vast lava oceans of The Nether.",
+
   "item.starcatcher.scalding_pike" : "Scalding Pike",
+  "tooltip.starcatcher.scalding_pike.0" : "A predatory fish only found in The Nether.",
+
   "item.starcatcher.cinder_squid" : "Cinder Squid",
+  "tooltip.starcatcher.cinder_squid.0" : "A slippery squid found in The Nether.",
+
   "item.starcatcher.lava_crab" : "Lava Crab",
+  "tooltip.starcatcher.lava_crab.0" : "This particular species of crab somehow entered The Nether",
+  "tooltip.starcatcher.lava_crab.1" : "and evolved a protective shell out of netherrack.",
+
   "item.starcatcher.magma_fish" : "Magma Fish",
+  "tooltip.starcatcher.magma_fish.0" : "A common Nether fish known for it's red glowing fins.",
+
   "item.starcatcher.glowstone_seeker" : "Glowstone Seeker",
+  "tooltip.starcatcher.glowstone_seeker.0" : "A fish which seems to be weirdly attracted",
+  "tooltip.starcatcher.glowstone_seeker.1" : "to glowstone, usually swimming under it.",
+
   "item.starcatcher.glowstone_pufferfish" : "Glowstone Pufferfish",
+  "tooltip.starcatcher.glowstone_pufferfish.0" : "A pufferfish glittering just like glowstone.",
+
   "item.starcatcher.lava_crab_claw" : "Lava Crab Claw",
+  "tooltip.starcatcher.lava_crab_claw.0" : "A claw ripped off from a Lava Crab.",
+  "tooltip.starcatcher.lava_crab_claw.1" : "Due to the aggressive nature of Lava Crabs,",
+  "tooltip.starcatcher.lava_crab_claw.2" : "it's quite a common find in The Nether.",
+
+
 
   "item.starcatcher.charfish" : "Charfish",
+  "tooltip.starcatcher.charfish.0" : "A purple fish only found in The End.",
+
   "item.starcatcher.chorus_crab" : "Chorus Crab",
-  "item.starcatcher.end_glow" : "End Glow"
+  "tooltip.starcatcher.chorus_crab.0" : "This crab species uses Chorus fruit as it's main source of food.",
+  "tooltip.starcatcher.chorus_crab.1" : "It is said it can teleport around at will after feeding.",
+
+  "item.starcatcher.end_glow" : "End Glow",
+  "tooltip.starcatcher.end_glow.0" : "A tricky fish only found in The End.",
+  "tooltip.starcatcher.end_glow.1" : "Enderman don't seem to mind it."
 }
