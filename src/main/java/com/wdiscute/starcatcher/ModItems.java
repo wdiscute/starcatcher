@@ -246,7 +246,7 @@ public interface ModItems
     //overworld surface lava
     DeferredItem<Item> SUNEATER = fireResistantFish("suneater"); //description make sure to mention it eats sunfishes
     DeferredItem<Item> PYROTROUT = fireResistantFish("pyrotrout"); //description
-    DeferredItem<Item> OBSIDIAN_EEL = singleStackItemFireResistant("obsidian_eel"); //description
+    DeferredItem<Item> OBSIDIAN_EEL = fireResistantFish("obsidian_eel"); //description
 
     //overworld underground lava
     DeferredItem<Item> MOLTEN_SHRIMP = fireResistantFish("molten_shrimp"); //description

@@ -8,6 +8,9 @@
   "base_chance": 2,
   "difficulty": {
     "decay": 0,
+    "extras": {
+      "has_moving_markers": true
+    },
     "markers": {
       "has_first_marker": false,
       "has_first_thin_marker": true,

@@ -27,9 +27,9 @@
   "rarity": "legendary",
   "size_and_weight": {
     "average_size_cm": 500.0,
-    "average_weight_grams": 10000.0,
+    "average_weight_grams": 70000.0,
     "deviation_size_cm": 150.0,
-    "deviation_weight_grams": 2000.0,
+    "deviation_weight_grams": 13000.0,
     "golden_chance_percentage": 10
   },
   "weather": "rain",

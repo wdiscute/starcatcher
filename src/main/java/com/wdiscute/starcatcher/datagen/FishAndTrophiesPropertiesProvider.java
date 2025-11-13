@@ -313,7 +313,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withSizeAndWeight(FishProperties.sw(36, 12, 2000, 1000, 10, 10))
                             .withDaytime(FishProperties.Daytime.NIGHT)
                             .withDifficulty(FishProperties.Difficulty.HARD_VANISHING)
-                            .withRarity(FishProperties.Rarity.UNCOMMON)
+                            .withRarity(FishProperties.Rarity.EPIC)
                             .withBaseChance(2),
 
                     overworldRiverFish(ModItems.HOLLOWBELLY_DARTER)
@@ -381,7 +381,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withSizeAndWeight(FishProperties.sw(60, 20, 7000, 2000, 10, 20)),
 
                     overworldOceanFish(ModItems.JOEL)
-                            .withSizeAndWeight(FishProperties.sw(69, 0, 2000, 600, 10, 20))
+                            .withSizeAndWeight(FishProperties.sw(69, 0, 2000, 600, 10, 0))
                             .withDifficulty(FishProperties.Difficulty.EVERYTHING)
                             .withBaseChance(1)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
@@ -479,7 +479,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     //lush caves
                     overworldLushCavesFish(ModItems.LUSH_PIKE)
                             .withSizeAndWeight(FishProperties.sw(75, 20, 5000, 3000, 10, 20))
-                            .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY)
+                            .withDifficulty(FishProperties.Difficulty.MOVING_THIN_NO_DECAY)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                             .withRarity(FishProperties.Rarity.LEGENDARY)
                             .withBaseChance(2),
@@ -554,7 +554,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
                     overworldSurfaceLava(ModItems.OBSIDIAN_EEL)
-                            .withSizeAndWeight(FishProperties.sw(500, 150, 10000, 2000, 10, 20))
+                            .withSizeAndWeight(FishProperties.sw(500, 150, 70000, 13000, 10, 20))
                             .withWeather(FishProperties.Weather.RAIN)
                             .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING_MOVING)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
