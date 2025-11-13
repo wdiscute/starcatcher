@@ -5,7 +5,6 @@
       "starcatcher:sculk_bait"
     ]
   },
-  "below_y": 50,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -26,7 +25,15 @@
   },
   "fish": "starcatcher:glowing_dark",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 3000.0,
+    "deviation_size_cm": 10.0,
+    "deviation_weight_grams": 600.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 50,
     "biomes": [
       "minecraft:deep_dark"
     ],

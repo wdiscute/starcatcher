@@ -5,8 +5,6 @@
       "modid": "tide"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "daytime": "night",
   "difficulty": {
     "extras": {
@@ -16,6 +14,8 @@
   "fish": "tide:ocean_perch",
   "rarity": "uncommon",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_ocean"
     ],

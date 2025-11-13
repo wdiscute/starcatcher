@@ -1,6 +1,5 @@
 {
   "base_chance": 1,
-  "below_y": 50,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -22,7 +21,15 @@
   },
   "fish": "starcatcher:geode_eel",
   "rarity": "epic",
+  "size_and_weight": {
+    "average_size_cm": 500.0,
+    "average_weight_grams": 10000.0,
+    "deviation_size_cm": 150.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 50,
     "dimensions": [
       "minecraft:overworld"
     ]

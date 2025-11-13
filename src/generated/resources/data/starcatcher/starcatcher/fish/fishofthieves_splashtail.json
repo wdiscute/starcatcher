@@ -5,8 +5,6 @@
       "modid": "fishofthieves"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "difficulty": {
     "markers": {
       "has_first_thin_marker": true,
@@ -24,6 +22,8 @@
   },
   "fish": "fishofthieves:splashtail",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_ocean"
     ],

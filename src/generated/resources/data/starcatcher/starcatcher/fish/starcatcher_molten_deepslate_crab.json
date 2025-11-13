@@ -1,5 +1,4 @@
 {
-  "below_y": 0,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -21,7 +20,15 @@
   },
   "fish": "starcatcher:molten_deepslate_crab",
   "rarity": "rare",
+  "size_and_weight": {
+    "average_size_cm": 15.0,
+    "average_weight_grams": 700.0,
+    "deviation_size_cm": 8.0,
+    "deviation_weight_grams": 300.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 0,
     "dimensions": [
       "minecraft:overworld"
     ],

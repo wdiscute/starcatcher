@@ -1,6 +1,4 @@
 {
-  "above_y": -40,
-  "below_y": -20,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -20,7 +18,19 @@
   },
   "fish": "starcatcher:amethystback",
   "rarity": "epic",
+  "size_and_weight": {
+    "average_size_cm": 300.0,
+    "average_weight_grams": 16000.0,
+    "deviation_size_cm": 150.0,
+    "deviation_weight_grams": 7000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": -40,
+    "below_y": -20,
+    "biomes": [
+      "minecraft:lush_caves"
+    ],
     "dimensions": [
       "minecraft:overworld"
     ]

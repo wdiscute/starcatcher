@@ -5,7 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -26,6 +25,7 @@
   "rarity": "rare",
   "weather": "rain",
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "minecraft:is_jungle"
     ],

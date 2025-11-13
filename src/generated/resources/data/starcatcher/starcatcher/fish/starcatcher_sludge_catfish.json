@@ -1,5 +1,4 @@
 {
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -8,7 +7,15 @@
   },
   "fish": "starcatcher:sludge_catfish",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 10000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 3000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_swamp"
     ],

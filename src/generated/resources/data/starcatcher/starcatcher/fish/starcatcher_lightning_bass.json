@@ -1,6 +1,4 @@
 {
-  "above_y": 50,
-  "below_y": 100,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -22,8 +20,16 @@
   },
   "fish": "starcatcher:lightning_bass",
   "rarity": "rare",
+  "size_and_weight": {
+    "average_weight_grams": 1300.0,
+    "deviation_size_cm": 12.0,
+    "deviation_weight_grams": 620.0,
+    "golden_chance_percentage": 10
+  },
   "weather": "thunder",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"

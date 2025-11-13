@@ -1,5 +1,4 @@
 {
-  "above_y": 100,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -17,7 +16,17 @@
     }
   },
   "fish": "starcatcher:peakdweller",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 10000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 5000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 10
+  },
   "world_restrictions": {
+    "above_y": 100,
+    "below_y": 100,
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"

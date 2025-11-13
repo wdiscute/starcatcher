@@ -1,5 +1,4 @@
 {
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -7,7 +6,6 @@
     ]
   },
   "base_chance": 1,
-  "below_y": 100,
   "daytime": "midnight",
   "difficulty": {
     "decay": 10,
@@ -26,7 +24,17 @@
   },
   "fish": "starcatcher:azure_crystalback_minnow",
   "rarity": "legendary",
+  "size_and_weight": {
+    "average_size_cm": 6.0,
+    "average_weight_grams": 5.0,
+    "deviation_size_cm": 4.0,
+    "deviation_weight_grams": 3.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_river"
     ],

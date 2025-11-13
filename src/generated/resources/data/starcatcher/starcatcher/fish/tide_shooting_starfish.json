@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -13,7 +12,6 @@
     ]
   },
   "base_chance": 1,
-  "below_y": 100,
   "daytime": "midnight",
   "difficulty": {
     "decay": 2,
@@ -35,6 +33,8 @@
   "fish": "tide:shooting_starfish",
   "rarity": "legendary",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_ocean"
     ],

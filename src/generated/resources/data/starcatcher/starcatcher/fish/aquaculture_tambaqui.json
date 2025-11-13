@@ -5,7 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
   "difficulty": {
     "markers": {
       "has_first_thin_marker": true,
@@ -24,6 +23,7 @@
   "fish": "aquaculture:tambaqui",
   "rarity": "uncommon",
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "minecraft:is_jungle"
     ],

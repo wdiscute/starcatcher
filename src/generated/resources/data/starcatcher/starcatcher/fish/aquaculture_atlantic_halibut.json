@@ -5,8 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "difficulty": {
     "markers": {
       "has_first_thin_marker": true,
@@ -25,6 +23,8 @@
   "fish": "aquaculture:atlantic_halibut",
   "weather": "rain",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_ocean"
     ],

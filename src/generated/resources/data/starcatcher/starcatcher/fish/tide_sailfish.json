@@ -5,11 +5,11 @@
       "modid": "tide"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "fish": "tide:sailfish",
   "weather": "rain",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_warm_river"
     ],

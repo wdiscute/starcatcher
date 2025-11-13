@@ -6,7 +6,6 @@
     ]
   },
   "base_chance": 4,
-  "below_y": 50,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -28,7 +27,15 @@
   },
   "fish": "starcatcher:vivid_moss",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 120.0,
+    "average_weight_grams": 7000.0,
+    "deviation_size_cm": 70.0,
+    "deviation_weight_grams": 3000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 50,
     "biomes": [
       "minecraft:lush_caves"
     ],

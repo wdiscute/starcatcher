@@ -1,5 +1,4 @@
 {
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -25,7 +24,15 @@
   },
   "fish": "starcatcher:shroomfish",
   "rarity": "legendary",
+  "size_and_weight": {
+    "average_size_cm": 70.0,
+    "average_weight_grams": 4000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_mushroom_fields"
     ],

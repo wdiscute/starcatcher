@@ -5,7 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 100,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -29,6 +28,8 @@
   "fish": "aquaculture:synodontis",
   "rarity": "epic",
   "world_restrictions": {
+    "above_y": 100,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_warm"
     ],

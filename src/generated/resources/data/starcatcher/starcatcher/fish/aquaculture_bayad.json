@@ -5,7 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 100,
   "daytime": "night",
   "difficulty": {
     "markers": {
@@ -25,6 +24,8 @@
   "fish": "aquaculture:bayad",
   "rarity": "uncommon",
   "world_restrictions": {
+    "above_y": 100,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_warm"
     ],

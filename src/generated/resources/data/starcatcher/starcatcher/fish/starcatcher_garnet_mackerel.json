@@ -1,5 +1,4 @@
 {
-  "below_y": 0,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -21,7 +20,13 @@
   },
   "fish": "starcatcher:garnet_mackerel",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_weight_grams": 2000.0,
+    "deviation_weight_grams": 1500.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 0,
     "dimensions": [
       "minecraft:overworld"
     ]

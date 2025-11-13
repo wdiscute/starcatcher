@@ -1,12 +1,10 @@
 {
-  "above_y": 0,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
       "starcatcher:dripstone_bait"
     ]
   },
-  "below_y": 50,
   "difficulty": {
     "markers": {
       "has_first_thin_marker": true,
@@ -24,7 +22,16 @@
   },
   "fish": "starcatcher:yellowstone_fish",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 600.0,
+    "average_weight_grams": 22000.0,
+    "deviation_size_cm": 150.0,
+    "deviation_weight_grams": 7000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 0,
+    "below_y": 50,
     "biomes": [
       "minecraft:dripstone_caves"
     ],

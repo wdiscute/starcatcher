@@ -1,8 +1,16 @@
 {
-  "above_y": 50,
-  "below_y": 100,
   "fish": "starcatcher:obidontiee",
+  "size_and_weight": {
+    "average_size_cm": 17.7,
+    "average_weight_grams": 1200.0,
+    "deviation_size_cm": 5.0,
+    "deviation_weight_grams": 200.0,
+    "golden_chance_percentage": 20,
+    "golden_state_increase": 33
+  },
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"

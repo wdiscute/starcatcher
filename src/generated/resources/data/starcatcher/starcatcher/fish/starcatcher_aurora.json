@@ -1,5 +1,4 @@
 {
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -7,7 +6,6 @@
     ]
   },
   "base_chance": 2,
-  "below_y": 100,
   "difficulty": {
     "decay": 10,
     "extras": {
@@ -26,7 +24,16 @@
   },
   "fish": "starcatcher:aurora",
   "rarity": "legendary",
+  "size_and_weight": {
+    "average_size_cm": 10.0,
+    "average_weight_grams": 120.0,
+    "deviation_size_cm": 8.0,
+    "deviation_weight_grams": 30.0,
+    "golden_chance_percentage": 30
+  },
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_lake"
     ],

@@ -5,7 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -32,6 +31,7 @@
   "rarity": "epic",
   "weather": "rain",
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_swamp"
     ],

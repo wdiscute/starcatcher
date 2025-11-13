@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -32,6 +31,7 @@
   "fish": "tide:slimefin_snapper",
   "rarity": "rare",
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_swamp"
     ],

@@ -6,7 +6,6 @@
     ]
   },
   "base_chance": 2,
-  "below_y": 50,
   "difficulty": {
     "decay": 0,
     "markers": {
@@ -26,7 +25,14 @@
   },
   "fish": "starcatcher:lush_pike",
   "rarity": "legendary",
+  "size_and_weight": {
+    "average_size_cm": 75.0,
+    "average_weight_grams": 5000.0,
+    "deviation_weight_grams": 3000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 50,
     "biomes": [
       "minecraft:lush_caves"
     ],

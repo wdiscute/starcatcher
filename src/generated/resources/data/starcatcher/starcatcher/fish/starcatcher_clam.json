@@ -1,10 +1,10 @@
 {
-  "above_y": 50,
   "base_chance": 15,
   "fish": "starcatcher:clam",
   "has_guide_entry": false,
   "skips_minigame": true,
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_beach"
     ],

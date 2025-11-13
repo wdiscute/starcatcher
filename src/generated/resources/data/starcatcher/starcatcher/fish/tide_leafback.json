@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "above_y": 50,
   "difficulty": {
     "decay": 3,
     "extras": {
@@ -28,6 +27,7 @@
   "fish": "tide:leafback",
   "rarity": "epic",
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "minecraft:is_jungle"
     ],

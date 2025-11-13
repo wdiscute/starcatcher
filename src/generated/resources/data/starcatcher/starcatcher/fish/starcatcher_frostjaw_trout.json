@@ -1,6 +1,4 @@
 {
-  "above_y": 50,
-  "below_y": 100,
   "difficulty": {
     "decay": 3,
     "extras": {
@@ -22,7 +20,16 @@
     }
   },
   "fish": "starcatcher:frostjaw_trout",
+  "size_and_weight": {
+    "average_size_cm": 35.0,
+    "average_weight_grams": 1600.0,
+    "deviation_size_cm": 8.0,
+    "deviation_weight_grams": 1200.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_lake"
     ],

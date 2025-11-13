@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "below_y": 0,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -26,6 +25,7 @@
   "fish": "tide:crystalline_carp",
   "rarity": "rare",
   "world_restrictions": {
+    "below_y": 0,
     "dimensions": [
       "minecraft:overworld"
     ]

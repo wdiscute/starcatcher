@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "above_y": 50,
   "difficulty": {
     "decay": 2,
     "extras": {
@@ -28,6 +27,7 @@
   "fish": "tide:inferno_guppy",
   "rarity": "rare",
   "world_restrictions": {
+    "above_y": 50,
     "dimensions": [
       "minecraft:overworld"
     ],

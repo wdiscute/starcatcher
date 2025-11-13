@@ -1,5 +1,4 @@
 {
-  "above_y": 50,
   "daytime": "midnight",
   "difficulty": {
     "extras": {
@@ -9,7 +8,15 @@
   },
   "fish": "starcatcher:pale_pinfish",
   "rarity": "rare",
+  "size_and_weight": {
+    "average_size_cm": 15.0,
+    "average_weight_grams": 150.0,
+    "deviation_size_cm": 5.0,
+    "deviation_weight_grams": 100.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_dark_forest"
     ],

@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -13,7 +12,6 @@
     ]
   },
   "base_chance": 1,
-  "below_y": 100,
   "difficulty": {
     "decay": 3,
     "markers": {
@@ -33,6 +31,8 @@
   "fish": "tide:midas_fish",
   "rarity": "legendary",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"

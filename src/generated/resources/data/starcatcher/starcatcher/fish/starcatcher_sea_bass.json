@@ -1,10 +1,17 @@
 {
-  "above_y": 50,
   "base_chance": 15,
-  "below_y": 100,
   "daytime": "day",
   "fish": "starcatcher:sea_bass",
+  "size_and_weight": {
+    "average_weight_grams": 1600.0,
+    "deviation_size_cm": 12.0,
+    "deviation_weight_grams": 1100.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_ocean"
     ],

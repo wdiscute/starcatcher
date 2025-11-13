@@ -1,5 +1,4 @@
 {
-  "above_y": 50,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
@@ -11,6 +10,7 @@
   "has_guide_entry": false,
   "skips_minigame": true,
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_swamp"
     ],

@@ -6,7 +6,6 @@
     }
   ],
   "base_chance": 2,
-  "below_y": 0,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -26,6 +25,7 @@
   "fish": "tide:abyss_angler",
   "rarity": "epic",
   "world_restrictions": {
+    "below_y": 0,
     "dimensions": [
       "minecraft:overworld"
     ]

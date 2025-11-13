@@ -5,7 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
   "difficulty": {
     "decay": 3,
     "extras": {
@@ -28,6 +27,7 @@
   "fish": "aquaculture:brown_shrooma",
   "rarity": "epic",
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_mushroom_fields"
     ],

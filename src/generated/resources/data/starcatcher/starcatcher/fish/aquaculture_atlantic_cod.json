@@ -5,11 +5,11 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "daytime": "day",
   "fish": "aquaculture:atlantic_cod",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_ocean"
     ],

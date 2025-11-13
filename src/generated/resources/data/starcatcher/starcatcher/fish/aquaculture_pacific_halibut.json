@@ -5,10 +5,10 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "fish": "aquaculture:pacific_halibut",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_ocean"
     ],

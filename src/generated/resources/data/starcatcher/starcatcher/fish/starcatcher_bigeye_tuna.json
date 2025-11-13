@@ -1,6 +1,4 @@
 {
-  "above_y": 50,
-  "below_y": 100,
   "daytime": "night",
   "difficulty": {
     "decay": 2,
@@ -23,7 +21,16 @@
   },
   "fish": "starcatcher:bigeye_tuna",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 150.0,
+    "average_weight_grams": 120000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 60000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_deep_ocean"
     ],

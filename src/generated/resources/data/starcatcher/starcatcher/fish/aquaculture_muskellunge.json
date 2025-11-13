@@ -5,12 +5,12 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "daytime": "midnight",
   "fish": "aquaculture:muskellunge",
   "rarity": "rare",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"

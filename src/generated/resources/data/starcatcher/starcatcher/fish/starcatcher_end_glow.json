@@ -21,6 +21,13 @@
   },
   "fish": "starcatcher:end_glow",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 235.0,
+    "average_weight_grams": 7000.0,
+    "deviation_size_cm": 25.0,
+    "deviation_weight_grams": 700.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
     "dimensions": [
       "minecraft:the_end"

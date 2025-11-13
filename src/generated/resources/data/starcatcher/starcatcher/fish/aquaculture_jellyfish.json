@@ -5,9 +5,7 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
   "base_chance": 3,
-  "below_y": 100,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -27,6 +25,8 @@
   "fish": "aquaculture:jellyfish",
   "rarity": "uncommon",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_ocean"
     ],

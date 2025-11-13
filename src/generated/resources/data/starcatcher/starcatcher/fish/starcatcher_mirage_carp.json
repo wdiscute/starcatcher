@@ -1,6 +1,4 @@
 {
-  "above_y": 50,
-  "below_y": 100,
   "daytime": "day",
   "difficulty": {
     "markers": {
@@ -19,8 +17,16 @@
   },
   "fish": "starcatcher:mirage_carp",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 60.0,
+    "average_weight_grams": 6000.0,
+    "deviation_weight_grams": 4000.0,
+    "golden_chance_percentage": 10
+  },
   "weather": "clear",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_warm"
     ],

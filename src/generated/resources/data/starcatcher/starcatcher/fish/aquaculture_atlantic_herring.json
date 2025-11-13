@@ -5,8 +5,6 @@
       "modid": "aquaculture"
     }
   ],
-  "above_y": 50,
-  "below_y": 100,
   "daytime": "day",
   "difficulty": {
     "decay": 2,
@@ -31,6 +29,8 @@
   "fish": "aquaculture:atlantic_herring",
   "rarity": "rare",
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_cold_ocean"
     ],

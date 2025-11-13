@@ -1,5 +1,4 @@
 {
-  "below_y": 50,
   "difficulty": {
     "extras": {
       "has_vanishing_markers": true
@@ -7,7 +6,15 @@
   },
   "fish": "starcatcher:obsidian_crab",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 15.0,
+    "average_weight_grams": 700.0,
+    "deviation_size_cm": 8.0,
+    "deviation_weight_grams": 300.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 50,
     "dimensions": [
       "minecraft:overworld"
     ],

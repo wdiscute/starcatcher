@@ -1,5 +1,4 @@
 {
-  "above_y": 50,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -18,7 +17,15 @@
   },
   "fish": "starcatcher:sporefish",
   "rarity": "rare",
+  "size_and_weight": {
+    "average_size_cm": 70.0,
+    "average_weight_grams": 4000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
     "biomes_tags": [
       "starcatcher:is_mushroom_fields"
     ],

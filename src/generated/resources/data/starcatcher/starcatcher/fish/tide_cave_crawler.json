@@ -5,8 +5,6 @@
       "modid": "tide"
     }
   ],
-  "above_y": 0,
-  "below_y": 50,
   "difficulty": {
     "extras": {
       "has_vanishing_markers": true
@@ -14,6 +12,11 @@
   },
   "fish": "tide:cave_crawler",
   "world_restrictions": {
+    "above_y": 0,
+    "below_y": 50,
+    "biomes": [
+      "minecraft:lush_caves"
+    ],
     "dimensions": [
       "minecraft:overworld"
     ]

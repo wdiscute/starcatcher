@@ -5,9 +5,9 @@
   },
   "custom_name": "",
   "fish_properties": {
-    "below_y": 0,
     "fish": "starcatcher:crystal_hook",
     "world_restrictions": {
+      "below_y": 0,
       "dimensions": [
         "minecraft:overworld"
       ]

@@ -1,7 +1,14 @@
 {
-  "below_y": 50,
   "fish": "starcatcher:gold_fan",
+  "size_and_weight": {
+    "average_size_cm": 70.0,
+    "average_weight_grams": 4000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 50,
     "dimensions": [
       "minecraft:overworld"
     ]

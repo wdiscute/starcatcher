@@ -11,7 +11,6 @@
       "starcatcher:lush_bait"
     ]
   },
-  "below_y": 50,
   "difficulty": {
     "markers": {
       "has_first_thin_marker": true,
@@ -30,6 +29,7 @@
   "fish": "fishofthieves:wildsplash",
   "rarity": "uncommon",
   "world_restrictions": {
+    "below_y": 50,
     "biomes": [
       "minecraft:lush_caves"
     ],

@@ -19,6 +19,13 @@
     }
   },
   "fish": "starcatcher:glowstone_seeker",
+  "size_and_weight": {
+    "average_size_cm": 120.0,
+    "average_weight_grams": 3700.0,
+    "deviation_size_cm": 40.0,
+    "deviation_weight_grams": 900.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
     "dimensions": [
       "minecraft:the_nether"

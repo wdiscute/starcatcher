@@ -1,8 +1,16 @@
 {
-  "above_y": 50,
-  "below_y": 100,
   "fish": "starcatcher:hollowbelly_darter",
+  "size_and_weight": {
+    "average_size_cm": 6.0,
+    "average_weight_grams": 7.0,
+    "deviation_size_cm": 2.0,
+    "deviation_weight_grams": 6.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 10
+  },
   "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_river"
     ],

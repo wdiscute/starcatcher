@@ -1,5 +1,4 @@
 {
-  "below_y": 50,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -18,7 +17,15 @@
   },
   "fish": "starcatcher:molten_shrimp",
   "rarity": "rare",
+  "size_and_weight": {
+    "average_size_cm": 10.0,
+    "average_weight_grams": 20.0,
+    "deviation_size_cm": 3.0,
+    "deviation_weight_grams": 10.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "below_y": 50,
     "dimensions": [
       "minecraft:overworld"
     ],

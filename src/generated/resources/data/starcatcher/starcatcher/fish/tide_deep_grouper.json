@@ -5,7 +5,6 @@
       "modid": "tide"
     }
   ],
-  "below_y": 0,
   "difficulty": {
     "extras": {
       "has_vanishing_markers": true
@@ -13,6 +12,7 @@
   },
   "fish": "tide:deep_grouper",
   "world_restrictions": {
+    "below_y": 0,
     "dimensions": [
       "minecraft:overworld"
     ]

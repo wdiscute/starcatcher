@@ -5,14 +5,12 @@
       "modid": "tide"
     }
   ],
-  "above_y": 0,
   "bait_restrictions": {
     "correct_bait_chance_added": 15,
     "correct_baits": [
       "starcatcher:dripstone_bait"
     ]
   },
-  "below_y": 50,
   "difficulty": {
     "decay": 2,
     "markers": {
@@ -32,6 +30,8 @@
   "fish": "tide:dripstone_darter",
   "rarity": "uncommon",
   "world_restrictions": {
+    "above_y": 0,
+    "below_y": 50,
     "biomes": [
       "minecraft:dripstone_caves"
     ],

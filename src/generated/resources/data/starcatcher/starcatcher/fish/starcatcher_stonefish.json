@@ -1,6 +1,4 @@
 {
-  "above_y": 0,
-  "below_y": 50,
   "difficulty": {
     "markers": {
       "has_first_thin_marker": true,
@@ -17,7 +15,19 @@
     }
   },
   "fish": "starcatcher:stonefish",
+  "size_and_weight": {
+    "average_size_cm": 300.0,
+    "average_weight_grams": 26000.0,
+    "deviation_size_cm": 150.0,
+    "deviation_weight_grams": 7000.0,
+    "golden_chance_percentage": 10
+  },
   "world_restrictions": {
+    "above_y": 0,
+    "below_y": 50,
+    "biomes": [
+      "minecraft:lush_caves"
+    ],
     "dimensions": [
       "minecraft:overworld"
     ]
