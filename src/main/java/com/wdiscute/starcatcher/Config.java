@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.starcatcher.guide.SettingsScreen;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class Config
@@ -7,10 +8,16 @@ public class Config
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.IntValue MINIGAME_GUI_SCALE = BUILDER
+            .comment("//ALL THESE SETTINGS CAN ALSO BE ACCESSED")
+            .comment("//THROUGH THE IN-GAME SETTING TAB INSIDE")
+            .comment("//THE STARCATCHER'S GUIDE")
             .defineInRange("minigame_gui_scale", 3, 0, 6);
 
     public static final ModConfigSpec.DoubleValue HIT_DELAY = BUILDER
             .defineInRange("hit_delay", 0.0d, 0.0d, Double.MAX_VALUE);
+
+    public static final ModConfigSpec.EnumValue<SettingsScreen.Units> UNIT = BUILDER
+            .defineEnum("units", SettingsScreen.Units.IMPERIAL);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 

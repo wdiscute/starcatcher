@@ -5,11 +5,13 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.libtooltips.Tooltips;
+import com.wdiscute.starcatcher.Config;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
 import com.wdiscute.starcatcher.secretnotes.SecretNoteScreen;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -40,7 +42,6 @@ import java.util.Optional;
 
 public class FishingGuideScreen extends Screen
 {
-
     private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/guide/background.png");
 
     private static final ResourceLocation HELP_PAGE_1 = Starcatcher.rl("textures/gui/guide/help_1.png");
@@ -62,7 +63,6 @@ public class FishingGuideScreen extends Screen
     private static final ResourceLocation GLOW = Starcatcher.rl("textures/gui/guide/glow.png");
 
     private static final int MAX_HELP_PAGES = 4;
-    private static final Logger log = LoggerFactory.getLogger(FishingGuideScreen.class);
 
     final boolean advancedTooltips;
 
@@ -197,7 +197,6 @@ public class FishingGuideScreen extends Screen
 
             if (fcc.fp().rarity() == FishProperties.Rarity.LEGENDARY)
                 legendary = new TrophyProperties.RarityProgress(legendary.total() + fcc.count(), legendary.unique() + 1);
-
         }
 
     }
@@ -218,7 +217,6 @@ public class FishingGuideScreen extends Screen
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button)
     {
-
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
@@ -1091,8 +1089,17 @@ public class FishingGuideScreen extends Screen
 
                 float averageTicks = (int)((fcc.averageTicks() / 20) * 100) / 100.0f;
 
-                components.add(Component.literal("Fastest Catch: " + (((float) fcc.fastestTicks()) / 20) + "s"));
-                components.add(Component.literal("Average: " + averageTicks+ "s"));
+                SettingsScreen.Units unit = Config.UNIT.get();
+
+                String size = unit.getSizeAsString(fcc.size());
+                String weight = unit.getWeightAsString(fcc.weight());
+
+
+                components.add(Component.literal("Fastest Catch: " ).append(Component.literal((((float) fcc.fastestTicks()) / 20) + "s").withStyle(ChatFormatting.BOLD)));
+                components.add(Component.literal("Average Catch: ").append(Component.literal(averageTicks + "s").withStyle(ChatFormatting.BOLD)));
+                components.add(Component.literal(""));
+                components.add(Component.literal("Biggest Catch: ").append(Component.literal(size).withStyle(ChatFormatting.BOLD)));
+                components.add(Component.literal("Heaviest Catch: ").append(Component.literal(weight).withStyle(ChatFormatting.BOLD)));
 
                 guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
             }

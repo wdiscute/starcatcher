@@ -248,6 +248,36 @@
 
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
+
+  "gui.guide.units.metric" : "Metric (cm & kg)",
+  "gui.guide.units.imperial" : "Imperial (in & lb)",
+
+  "gui.guide.units.cheeseburger" : "Cheeseburger",
+  "gui.guide.units.cheeseburger.size" : "Cheeseburgers",
+  "gui.guide.units.cheeseburger.weight" : "Cheeseburgers",
+
+  "gui.guide.units.football" : "Football",
+  "gui.guide.units.football.size" : "Footballs",
+  "gui.guide.units.football.weight" : "Footballs",
+
+  "gui.guide.units.developer" : "Developer",
+  "gui.guide.units.developer.size" : "wds",
+  "gui.guide.units.developer.weight" : "wds",
+
+  "gui.guide.units.banana" : "Banana",
+  "gui.guide.units.banana.size" : "Bananas",
+  "gui.guide.units.banana.weight" : "Bananas",
+
+  "gui.guide.units.duck" : "Average Duck",
+  "gui.guide.units.duck.size" : "Ducks",
+  "gui.guide.units.duck.weight" : "Ducks",
+
+  "gui.guide.units.space_whale" : "Space Whale",
+  "gui.guide.units.scientific" : "Scientific",
+
+
+
+
   "gui.guide.caught" : "Caught ",
   "gui.guide.not_caught" : "Not Caught yet!",
   "gui.guide.not_caught_fish_name" : "???",

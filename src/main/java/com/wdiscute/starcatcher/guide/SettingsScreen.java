@@ -9,12 +9,12 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.HitFakeParticle;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import com.wdiscute.starcatcher.networkandcodecs.Payloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
@@ -36,6 +36,7 @@ public class SettingsScreen extends Screen
 {
     private static final Random r = new Random();
     private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
+    private static final ResourceLocation TANK = Starcatcher.rl("textures/gui/minigame/surface.png");
     private static final ResourceLocation SETTINGS = Starcatcher.rl("textures/gui/minigame/settings.png");
     private static final ResourceLocation GUI_SCALE = Starcatcher.rl("textures/gui/minigame/gui_scale.png");
 
@@ -99,10 +100,10 @@ public class SettingsScreen extends Screen
     int treasureForgiving = SIZE_2;
 
     int previousGuiScale;
+    Units unitSelected;
 
     int tickCount = 0;
     List<HitFakeParticle> hitParticles = new ArrayList<>();
-
 
     public SettingsScreen(FishProperties fp, ItemStack rod)
     {
@@ -120,6 +121,8 @@ public class SettingsScreen extends Screen
         this.hook = rod.get(ModDataComponents.HOOK).stack().copy();
 
         posTreasure = Integer.MIN_VALUE;
+
+        unitSelected = Config.UNIT.get();
 
         //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
         FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
@@ -327,6 +330,9 @@ public class SettingsScreen extends Screen
                 0xffff00ff
         );
 
+        //Units
+        guiGraphics.drawString(this.font, Component.translatable(unitSelected.translationKey), width / 2 - 50, height / 2 + 102, 0x000000, false);
+
 
         if (treasureActive)
         {
@@ -346,8 +352,8 @@ public class SettingsScreen extends Screen
 
         //tank background
         guiGraphics.blit(
-                TEXTURE, width / 2 - 42 - 100, height / 2 - 48,
-                85, 97, 0, 0, 85, 97, 256, 256);
+                TANK, width / 2 - 42 - 100, height / 2 - 48,
+                85, 97, 0, 0, 85, 97, 85, 97);
 
         //wheel background
         guiGraphics.blit(
@@ -586,8 +592,6 @@ public class SettingsScreen extends Screen
             RenderSystem.setShaderColor(1, 1, 1, 1);
             guiGraphics.pose().popPose();
         }
-
-
     }
 
     @Override
@@ -673,6 +677,25 @@ public class SettingsScreen extends Screen
         if (x > 396 && x < 410 && y > 70 && y < 100)
         {
             hitDelay += 0.1f;
+        }
+
+        //hit delay next
+        if (x > 312 && x < 330 && y > 226 && y < 240)
+        {
+            unitSelected = unitSelected.next();
+            Config.UNIT.set(unitSelected);
+            Config.UNIT.save();
+        }
+
+        System.out.println(x);
+        System.out.println(y);
+
+        //hit delay next
+        if (x > 193 && x < 205 && y > 226 && y < 240)
+        {
+            unitSelected = unitSelected.previous();
+            Config.UNIT.set(unitSelected);
+            Config.UNIT.save();
         }
 
         //markers
@@ -936,6 +959,108 @@ public class SettingsScreen extends Screen
 
         }
     }
+
+    public enum Units
+    {
+        METRIC("gui.guide.units.metric", 1f, 1f),
+        IMPERIAL("gui.guide.units.imperial", 0.3937f, 0.0352739619495804f),
+        CHEESEBURGER("gui.guide.units.cheeseburger", 0.09f, 0.0087f),
+        FOOTBALL("gui.guide.units.football", 0.04545f, 0.00233f),
+        DEVELOPER_HEIGHT("gui.guide.units.developer", 0.00592f, 0.000005614f),
+        BANANA("gui.guide.units.banana", 0.05f, 0.00833f),
+        DUCK("gui.guide.units.duck", 0.02f, 0.0006667f),
+        SPACE_WHALE("gui.guide.units.space_whale", 1f, 1f),
+        SCIENTIFIC("gui.guide.units.scientific", 1f, 1f),
+        ;
+
+        private static final Units[] vals = values();
+        private final String translationKey;
+        private final float multiplierSize;
+        private final float multiplierWeight;
+
+        Units(String translationKey, float multiplierSize, float multiplierWeight)
+        {
+            this.translationKey = translationKey;
+            this.multiplierSize = multiplierSize;
+            this.multiplierWeight = multiplierWeight;
+        }
+
+        public String getTranslationKey()
+        {
+            return this.translationKey;
+        }
+
+        public float getMultiplierSize()
+        {
+            return this.multiplierSize;
+        }
+
+        public float getMultiplierWeight()
+        {
+            return this.multiplierWeight;
+        }
+
+        public Units next()
+        {
+            return vals[(this.ordinal() + 1) % vals.length];
+        }
+
+        public Units previous()
+        {
+            if (this.ordinal() == 0) return vals[vals.length - 1];
+            return vals[(this.ordinal() - 1) % vals.length];
+        }
+
+        String getSizeAsString(int sizeInCm)
+        {
+            //space whale is always infinite
+            if (this.equals(SettingsScreen.Units.SPACE_WHALE)) return "∞ space whales";
+            if (this.equals(Units.SCIENTIFIC)) return "0 AU";
+
+            float size = sizeInCm * this.getMultiplierSize();
+            String sizeString = ((float) (int) (size * 100)) / 100 + " " + I18n.get(this.getTranslationKey() + ".size");
+
+            if (this.equals(SettingsScreen.Units.METRIC))
+            {
+                sizeString = ((int) size) + "cm";
+                if (size > 100) sizeString = (float) ((int) (size / 100 * 100)) / 100 + "m";
+            }
+
+            if (this.equals(SettingsScreen.Units.IMPERIAL))
+            {
+                sizeString = size + "in";
+                if (size > 12) sizeString = ((int) (size / 12)) + "'" + ((int) (size % 12)) + "''";
+            }
+
+            return sizeString;
+        }
+
+        String getWeightAsString(int weightInGrams)
+        {
+            //space whale is always infinite
+            if (this.equals(SettingsScreen.Units.SPACE_WHALE)) return "∞ space whales";
+            if (this.equals(Units.SCIENTIFIC)) return "0 R136a1's";
+
+            float weight = weightInGrams * this.getMultiplierWeight();
+            String weightString = ((float) (int) (weight * 100)) / 100 + " " + I18n.get(this.getTranslationKey() + ".weight");
+
+            if (this.equals(SettingsScreen.Units.METRIC))
+            {
+                if (weight < 1000) weightString = ((int) weight) + "g";
+                if (weight > 1000) weightString = (float) ((int) (weight / 1000 * 100)) / 100 + "kg";
+            }
+
+            if (this.equals(SettingsScreen.Units.IMPERIAL))
+            {
+                weightString = ((int) weight) + "oz";
+                if (weight > 12) weightString = ((int) (weight / 16)) + " lb " + ((int) (weight % 16)) + " oz";
+            }
+
+            return weightString;
+        }
+
+    }
+
 
     @Override
     public boolean isPauseScreen()
