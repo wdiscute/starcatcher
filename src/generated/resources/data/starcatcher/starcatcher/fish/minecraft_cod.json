@@ -1,4 +1,9 @@
 {
+  "difficulty": {
+    "extras": {
+      "has_vanishing_markers": true
+    }
+  },
   "fish": "minecraft:cod",
   "size_and_weight": {
     "average_size_cm": 80.0,

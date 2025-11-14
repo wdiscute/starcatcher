@@ -1,6 +1,11 @@
 {
   "base_chance": 15,
   "daytime": "day",
+  "difficulty": {
+    "extras": {
+      "has_vanishing_markers": true
+    }
+  },
   "fish": "starcatcher:sea_bass",
   "size_and_weight": {
     "average_weight_grams": 1600.0,

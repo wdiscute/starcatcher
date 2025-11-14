@@ -42,8 +42,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     private static final ResourceLocation CAVE = Starcatcher.rl("textures/gui/minigame/cave.png");
     private static final ResourceLocation SURFACE = Starcatcher.rl("textures/gui/minigame/surface.png");
 
-    private static final ResourceLocation TEXTURE_TEST = Starcatcher.rl("textures/gui/minigame2.png");
-
     private static final int SIZE_1 = 5;
     private static final int SIZE_2 = 7;
     private static final int SIZE_3 = 12;
@@ -123,9 +121,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         Minecraft.getInstance().options.guiScale().set(Config.MINIGAME_GUI_SCALE.get());
 
         hitDelay = Config.HIT_DELAY.get().floatValue();
-
-        //TODO REMOVE THIS!! TEST ONLY
-        fp = fp.withDifficulty(FishProperties.Difficulty.DEFAULT.withExtras(FishProperties.Difficulty.Extras.TTT)).withRarity(FishProperties.Rarity.COMMON);
 
         this.fp = fp;
         this.itemBeingFished = new ItemStack(fp.fish());

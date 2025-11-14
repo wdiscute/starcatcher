@@ -307,7 +307,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     overworldRiverFish(ModItems.DRIFTING_BREAM)
                             .withSizeAndWeight(FishProperties.sw(36, 12, 2000, 1000, 10, 10))
-                            .withDaytime(FishProperties.Daytime.NIGHT),
+                            .withDaytime(FishProperties.Daytime.NIGHT)
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING),
 
                     overworldRiverFish(ModItems.WILLOW_BREAM)
                             .withSizeAndWeight(FishProperties.sw(36, 12, 2000, 1000, 10, 10))
@@ -317,7 +318,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withBaseChance(2),
 
                     overworldRiverFish(ModItems.HOLLOWBELLY_DARTER)
-                            .withSizeAndWeight(FishProperties.sw(6, 2, 7, 6, 10, 10)),
+                            .withSizeAndWeight(FishProperties.sw(6, 2, 7, 6, 10, 10))
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING),
 
                     overworldRiverFish(ModItems.MISTBACK_CHUB)
                             .withSizeAndWeight(FishProperties.sw(30, 10, 1400, 600, 10, 10)),
@@ -325,6 +327,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldRiverFish(ModItems.SILVERFIN_PIKE)
                             .withSizeAndWeight(FishProperties.sw(75, 20, 5000, 3000, 10, 20))
                             .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                             .withRarity(FishProperties.Rarity.UNCOMMON),
 
                     overworldRiverFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.SALMON))
@@ -342,6 +345,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     overworldColdRiverFish(ModItems.CRYSTALBACK_MINNOW)
                             .withSizeAndWeight(FishProperties.sw(6, 4, 5, 3, 10, 10))
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                             .withDaytime(FishProperties.Daytime.NIGHT),
 
                     overworldColdRiverFish(ModItems.AZURE_CRYSTALBACK_MINNOW)
@@ -355,16 +359,19 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     overworldColdRiverFish(ModItems.BLUE_CRYSTAL_FIN)
                             .withSizeAndWeight(FishProperties.sw(12, 4, 70, 30, 10, 10))
                             .withDaytime(FishProperties.Daytime.DAY)
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                             .withRarity(FishProperties.Rarity.UNCOMMON),
 
 
                     //ocean
                     overworldOceanFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.COD))
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                             .withSizeAndWeight(FishProperties.sw(80, 40, 12000, 7000, 10, 10)),
 
                     overworldOceanFish(ModItems.SEA_BASS)
                             .withSizeAndWeight(FishProperties.sw(40, 12, 1600, 1100, 10, 10))
                             .withBaseChance(15)
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                             .withDaytime(FishProperties.Daytime.DAY),
 
                     overworldOceanFish(ModItems.IRONJAW_HERRING)
@@ -421,12 +428,12 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withSizeAndWeight(FishProperties.sw(70, 50, 4000, 2000, 10, 20))
                             .withRarity(FishProperties.Rarity.LEGENDARY)
                             .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
-                            .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING),
+                            .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING_MOVING),
 
                     overworldMushroomFieldsFish(ModItems.SPOREFISH)
                             .withSizeAndWeight(FishProperties.sw(70, 50, 4000, 2000, 10, 20))
                             .withRarity(FishProperties.Rarity.RARE)
-                            .withDifficulty(FishProperties.Difficulty.HARD),
+                            .withDifficulty(FishProperties.Difficulty.HARD_MOVING),
 
 
                     //underground
@@ -441,7 +448,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     //caves
                     overworldCavesFish(ModItems.WHITEVEIL)
-                            .withSizeAndWeight(FishProperties.sw(100, 30, 3000, 2000, 10, 20)),
+                            .withSizeAndWeight(FishProperties.sw(100, 30, 3000, 2000, 10, 20))
+                            .withDifficulty(FishProperties.Difficulty.EASY_MOVING),
 
                     overworldCavesFish(ModItems.BLACK_EEL)
                             .withSizeAndWeight(FishProperties.sw(500, 150, 6000, 2000, 10, 20))
@@ -450,7 +458,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
                     overworldCavesFish(ModItems.STONEFISH)
                             .withSizeAndWeight(FishProperties.sw(300, 150, 26000, 7000, 10, 20))
-                            .withDifficulty(FishProperties.Difficulty.MEDIUM),
+                            .withDifficulty(FishProperties.Difficulty.MEDIUM_MOVING),
 
                     overworldCavesFish(ModItems.AMETHYSTBACK)
                             .withSizeAndWeight(FishProperties.sw(300, 150, 16000, 7000, 10, 20))

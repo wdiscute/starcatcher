@@ -1,5 +1,10 @@
 {
   "daytime": "night",
+  "difficulty": {
+    "extras": {
+      "has_vanishing_markers": true
+    }
+  },
   "fish": "starcatcher:drifting_bream",
   "size_and_weight": {
     "average_size_cm": 36.0,

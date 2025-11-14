@@ -823,6 +823,17 @@ public record FishProperties(
                 Extras.DEFAULT
         );
 
+        public static final Difficulty MEDIUM_MOVING = new Difficulty(
+                10,
+                15,
+                35,
+                15,
+                1,
+                Markers.TFTF,
+                Treasure.UNCOMMON,
+                Extras.TFT
+        );
+
         public static final Difficulty MEDIUM_VANISHING = new Difficulty(
                 10,
                 15,
@@ -931,6 +942,17 @@ public record FishProperties(
                 Markers.FFTT,
                 Treasure.HARD,
                 Extras.TFF
+        );
+
+        public static final Difficulty THIN_NO_DECAY_NOT_FORGIVING_MOVING = new Difficulty(
+                9,
+                0,
+                15,
+                999,
+                0,
+                Markers.FFTT,
+                Treasure.HARD,
+                Extras.TFT
         );
 
         public static final Difficulty SINGLE_BIG_FAST_NO_DECAY = new Difficulty(
