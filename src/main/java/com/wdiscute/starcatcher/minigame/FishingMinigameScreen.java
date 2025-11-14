@@ -61,6 +61,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final int decay;
     final boolean hasTreasure;
     final boolean changeRotation;
+    final boolean isFlip;
+    final boolean isVanishing;
+    final boolean isMoving;
 
     float lastHitMarkerPos = 0;
     float kimbeColor = 0;
@@ -145,12 +148,37 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 fp.rarity() == FishProperties.Rarity.RARE;
 
         FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
-                (commonUncommonRareFish) ? FishProperties.Difficulty.HARD : fp.dif();
+                (commonUncommonRareFish) ? FishProperties.Difficulty.MEDIUM_VANISHING_MOVING : fp.dif();
 
-        if (fp.dif().extras().isMoving())
+        //base
+        this.speed = difficulty.speed();
+        this.reward = difficulty.reward();
+        this.rewardThin = difficulty.rewardThin();
+        this.treasureReward = difficulty.treasure().hitReward();
+        this.penalty = difficulty.penalty();
+        this.decay = difficulty.decay();
+        this.hasTreasure = difficulty.treasure().hasTreasure();
+        this.changeRotation = difficulty.extras().isFlip() && !hook.is(ModItems.STABILIZING_HOOK);
+
+        //extras
+        this.isFlip = difficulty.extras().isFlip();
+        this.isVanishing = difficulty.extras().isVanishing();
+        this.isMoving = difficulty.extras().isMoving();
+
+        //markers
+        pos1 = difficulty.markers().first() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        pos2 = difficulty.markers().second() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin1 = difficulty.markers().firstThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
+        posThin2 = difficulty.markers().secondThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
+
+        //assign moving speed
+        if (isMoving)
         {
             if (commonUncommonRareFish)
+            {
                 moveRate = 1;
+                if(hook.is(ModItems.MOSSY_HOOK)) moveRate = 3;
+            }
             else
             {
                 if (fp.rarity().equals(FishProperties.Rarity.EPIC))
@@ -161,7 +189,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
         }
 
-        if (fp.dif().extras().isVanishing())
+        //assign vanishing speed
+        if (isVanishing)
         {
             if (commonUncommonRareFish) vanishingRate = 0.03f;
             if (fp.rarity().equals(FishProperties.Rarity.EPIC)) vanishingRate = 0.1f;
@@ -169,22 +198,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (bobber.is(ModItems.CLEAR_BOBBER)) vanishingRate /= 2;
         }
-
-
-        this.speed = difficulty.speed();
-        this.reward = difficulty.reward();
-        this.rewardThin = difficulty.rewardThin();
-        this.treasureReward = difficulty.treasure().hitReward();
-        this.penalty = difficulty.penalty();
-        this.decay = difficulty.decay();
-        this.hasTreasure = difficulty.treasure().hasTreasure();
-        this.changeRotation = difficulty.extras().isFlip() && !hook.is(ModItems.STABILIZING_HOOK);
-
-        pos1 = difficulty.markers().first() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        pos2 = difficulty.markers().second() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin1 = difficulty.markers().firstThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
-        posThin2 = difficulty.markers().secondThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
-
 
         //make sweet spots fatter if difficulty bobber is being used
         if (bobber.is(ModItems.STEADY_BOBBER))
@@ -612,7 +625,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         pointerPos += (int) (speed * currentRotation);
 
         kimbeColor -= 0.1f;
-        if (fp.dif().extras().isVanishing())
+        if (isVanishing)
         {
             pos1Vanishing -= vanishingRate;
             pos2Vanishing -= vanishingRate;
@@ -620,7 +633,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             posThin2Vanishing -= vanishingRate;
         }
 
-        if (fp.dif().extras().isMoving())
+        if (isMoving)
         {
             if (pos1 != Integer.MIN_VALUE) pos1 -= moveRate * currentRotation;
             if (pos2 != Integer.MIN_VALUE) pos2 -= moveRate * currentRotation;
