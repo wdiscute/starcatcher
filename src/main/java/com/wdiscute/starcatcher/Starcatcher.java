@@ -39,6 +39,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.ModContainer;
 
 import java.util.List;
+import java.util.Random;
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(Starcatcher.MOD_ID)
@@ -51,6 +52,20 @@ public class Starcatcher
 
     public static final ResourceKey<Registry<TrophyProperties>> TROPHY_REGISTRY =
             ResourceKey.createRegistryKey(Starcatcher.rl("trophy"));
+
+    public static final Random r = new Random();
+
+    public static double truncatedNormal(double mean, double deviation)
+    {
+        while (true)
+        {
+            double value = mean + deviation * r.nextGaussian();
+            if (value >= mean - deviation && value <= mean + deviation)
+            {
+                return value;
+            }
+        }
+    }
 
     public static ResourceLocation rl(String s)
     {
@@ -274,7 +289,6 @@ public class Starcatcher
         {
             event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
         }
-
 
         @SubscribeEvent
         public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
