@@ -143,7 +143,8 @@
   "item.starcatcher.kimbe_bobber": "Kimbe Bobber",
   "tooltip.starcatcher.kimbe_bobber.0": "A weird looking bobber.",
   "tooltip.starcatcher.kimbe_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
-  "tooltip.starcatcher.kimbe_bobber.2": "it will criticize you everytime you miss a sweet-spot.",
+  "tooltip.starcatcher.kimbe_bobber.2": "it will criticize you everytime you miss a sweet-spot,",
+  "tooltip.starcatcher.kimbe_bobber.3": "Without providing any help or explanation of why you missed.",
 
   "item.starcatcher.clear_bobber": "Clear Bobber",
   "tooltip.starcatcher.clear_bobber.0": "A crystal clear bobber.",

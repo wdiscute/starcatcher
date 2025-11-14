@@ -430,12 +430,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             RenderSystem.enableBlend();
 
             //16 offset on y for texture centering
-            //if (bobber.is(ModItems.KIMBE_BOBBER))
+            if (!bobber.is(ModItems.KIMBE_BOBBER))
             {
-                if (bobber.is(ModItems.KIMBE_BOBBER))
-                    guiGraphics.blit(
-                            TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
-                            64, 64, 128, 128, 64, 64, 256, 256);
+                guiGraphics.blit(
+                        TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
+                        64, 64, 128, 128, 64, 64, 256, 256);
             }
 
             RenderSystem.setShaderColor(1, 1, 1, 1);
