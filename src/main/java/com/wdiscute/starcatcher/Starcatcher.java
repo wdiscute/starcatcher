@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.bob.FishingBobModel;
 import com.wdiscute.starcatcher.bob.FishingBobRenderer;
 import com.wdiscute.starcatcher.fishspotter.FishTrackerLayer;
 import com.wdiscute.starcatcher.guide.FishCaughtToast;
+import com.wdiscute.starcatcher.guide.SettingsScreen;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import com.wdiscute.starcatcher.particles.FishingBitingLavaParticles;
 import com.wdiscute.starcatcher.particles.FishingBitingParticles;
@@ -73,9 +74,21 @@ public class Starcatcher
     }
 
     @OnlyIn(Dist.CLIENT)
-    public static void fishCaughtToast(FishProperties fp)
+    public static void fishCaughtToast(FishProperties fp, boolean newFish, int sizeCM, int weightCM)
     {
-        Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(fp));
+        if(newFish) Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(fp));
+
+        SettingsScreen.Units units = Config.UNIT.get();
+
+        String size = units.getSizeAsString(sizeCM);
+        String weight = units.getWeightAsString(weightCM);
+
+        Minecraft.getInstance().player.displayClientMessage(
+                Component.literal("Caught ")
+                        .append(Component.translatable(fp.fish().getDelegate().value().getDescriptionId()))
+                        .append(Component.literal(" - " + size + " - " + weight))
+                , true);
+
     }
 
     public Starcatcher(IEventBus modEventBus, ModContainer modContainer)

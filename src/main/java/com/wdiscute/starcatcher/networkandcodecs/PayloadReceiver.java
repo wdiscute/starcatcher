@@ -92,8 +92,7 @@ public class PayloadReceiver
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
 
                         //award fish counter
-                        if (FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time()) && player instanceof ServerPlayer sp)
-                            PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
+                        FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time());
 
                         //award fish counter
                         List<FishProperties> list = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
@@ -144,7 +143,7 @@ public class PayloadReceiver
 
     public static void receiveFishCaught(final Payloads.FishCaughtPayload data, final IPayloadContext context)
     {
-        Starcatcher.fishCaughtToast(data.fp());
+        Starcatcher.fishCaughtToast(data.fp(), data.newFish(), data.size(), data.weight());
     }
 
 
