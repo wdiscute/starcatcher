@@ -1089,8 +1089,10 @@ public class FishingGuideScreen extends Screen
             {
                 List<Component> components = new ArrayList<>();
 
+                float averageTicks = (int)((fcc.averageTicks() / 20) * 100) / 100.0f;
+
                 components.add(Component.literal("Fastest Catch: " + (((float) fcc.fastestTicks()) / 20) + "s"));
-                components.add(Component.literal("Average: " + (fcc.averageTicks() / 20) + "s"));
+                components.add(Component.literal("Average: " + averageTicks+ "s"));
 
                 guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
             }
