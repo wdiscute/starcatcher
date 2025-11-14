@@ -22,7 +22,7 @@ public class FishingGuideItem extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
         if(level.isClientSide) openScreen();
-        return super.use(level, player, usedHand);
+        return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
 
     @OnlyIn(Dist.CLIENT)
