@@ -1,0 +1,14 @@
+{
+  "all": {
+    "total": 15
+  },
+  "custom_name": "",
+  "fish_properties": {
+    "fish": "starcatcher:shiny_hook",
+    "world_restrictions": {
+      "dimensions": [
+        "minecraft:overworld"
+      ]
+    }
+  }
+}

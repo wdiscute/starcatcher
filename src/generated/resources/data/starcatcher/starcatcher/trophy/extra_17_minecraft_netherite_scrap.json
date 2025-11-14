@@ -1,5 +1,5 @@
 {
-  "chance_to_catch": 1,
+  "chance_to_catch": 33,
   "custom_name": "",
   "fish_properties": {
     "fish": "minecraft:netherite_scrap",
@@ -11,5 +11,8 @@
         "minecraft:lava"
       ]
     }
+  },
+  "legendary": {
+    "unique": 10
   }
 }
