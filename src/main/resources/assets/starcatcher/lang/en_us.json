@@ -35,7 +35,6 @@
   "tag.starcatcher.hooks" : "Fishing Hooks",
   "tag.starcatcher.bobbers" : "Bobbers",
   "tag.starcatcher.hooks_survive_fire" : "Hooks that survive Fire",
-  "tag.starcatcher.curated_treasure" : "Curated Treasure",
 
 
 
@@ -145,7 +144,6 @@
   "tooltip.starcatcher.kimbe_bobber.0": "A weird looking bobber.",
   "tooltip.starcatcher.kimbe_bobber.1": "Whilst equipped in your <gradient-67>Starcatcher's rod</gradient-90>,",
   "tooltip.starcatcher.kimbe_bobber.2": "it will criticize you everytime you miss a sweet-spot.",
-  "tooltip.starcatcher.kimbe_bobber.3" : "It might help you better understand why you missed a spot.",
 
   "item.starcatcher.clear_bobber": "Clear Bobber",
   "tooltip.starcatcher.clear_bobber.0": "A crystal clear bobber.",
