@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -9,14 +10,15 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public record FishCaughtCounter(
         FishProperties fp,
         int count,
         int fastestTicks,
         float averageTicks,
-        float weight,
-        float size,
+        int size,
+        int weight,
         boolean caughtGolden
 )
 {
@@ -27,8 +29,8 @@ public record FishCaughtCounter(
                     Codec.INT.optionalFieldOf("count", 0).forGetter(FishCaughtCounter::count),
                     Codec.INT.optionalFieldOf("fastest_ticks", 0).forGetter(FishCaughtCounter::fastestTicks),
                     Codec.FLOAT.optionalFieldOf("average_ticks", 0.0f).forGetter(FishCaughtCounter::averageTicks),
-                    Codec.FLOAT.optionalFieldOf("best_size", 0.0f).forGetter(FishCaughtCounter::size),
-                    Codec.FLOAT.optionalFieldOf("best_weight", 0.0f).forGetter(FishCaughtCounter::weight),
+                    Codec.INT.optionalFieldOf("best_size", 0).forGetter(FishCaughtCounter::size),
+                    Codec.INT.optionalFieldOf("best_weight", 0).forGetter(FishCaughtCounter::weight),
                     Codec.BOOL.optionalFieldOf("caught_golden", false).forGetter(FishCaughtCounter::caughtGolden)
             ).apply(instance, FishCaughtCounter::new)
     );
@@ -38,8 +40,8 @@ public record FishCaughtCounter(
             ByteBufCodecs.VAR_INT, FishCaughtCounter::count,
             ByteBufCodecs.VAR_INT, FishCaughtCounter::fastestTicks,
             ByteBufCodecs.FLOAT, FishCaughtCounter::averageTicks,
-            ByteBufCodecs.FLOAT, FishCaughtCounter::size,
-            ByteBufCodecs.FLOAT, FishCaughtCounter::weight,
+            ByteBufCodecs.INT, FishCaughtCounter::size,
+            ByteBufCodecs.INT, FishCaughtCounter::weight,
             ByteBufCodecs.BOOL, FishCaughtCounter::caughtGolden,
             FishCaughtCounter::new
     );
@@ -57,16 +59,24 @@ public record FishCaughtCounter(
 
         boolean newFish = true;
 
+        int size = ((int) Starcatcher.truncatedNormal(fpCaught.sw().sizeAverage(), fpCaught.sw().sizeDeviation()));
+        int weight = ((int) Starcatcher.truncatedNormal(fpCaught.sw().weightAverage(), fpCaught.sw().weightDeviation()));
+
         for (FishCaughtCounter fcc : listFishCaughtCounter)
         {
             if (fpCaught.equals(fcc.fp))
             {
-                int newFastestTicks = Math.min(fcc.fastestTicks, ticks);
+                int fastestToSave = Math.min(fcc.fastestTicks, ticks);
 
-                float newAverageTicks = (fcc.averageTicks * fcc.count + ticks) / (fcc.count + 1);
+                float averageToSave = (fcc.averageTicks * fcc.count + ticks) / (fcc.count + 1);
 
-                //todo add weight and stuff
-                newlist.add(new FishCaughtCounter(fpCaught, fcc.count + 1, newFastestTicks, newAverageTicks, 0, 0, false));
+                if(fcc.fastestTicks == 0) fastestToSave = ticks;
+                if(fcc.averageTicks == 0) averageToSave = ticks;
+
+                int sizeToSave = Math.max(size, fcc.size);
+                int weightToSave = Math.max(weight, fcc.weight);
+
+                newlist.add(new FishCaughtCounter(fpCaught, fcc.count + 1, fastestToSave, averageToSave, sizeToSave, weightToSave, false));
                 newFish = false;
 
             }
@@ -76,7 +86,7 @@ public record FishCaughtCounter(
             }
         }
 
-        if (newFish) newlist.add(new FishCaughtCounter(fpCaught, 1, ticks, ticks, 0, 0, false));
+        if (newFish) newlist.add(new FishCaughtCounter(fpCaught, 1, ticks, ticks, size, weight, false));
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
         return newFish;
