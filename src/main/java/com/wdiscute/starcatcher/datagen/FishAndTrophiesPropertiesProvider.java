@@ -1454,6 +1454,20 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
+                    overworldFish(ModItems.SHINY_HOOK),
+                    TrophyProperties.TrophyType.EXTRA,
+                    "",
+                    new TrophyProperties.RarityProgress(15, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    100
+            ),
+
+
+            new TrophyProperties(
                     overworldDeepslateFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.DIAMOND)),
                     TrophyProperties.TrophyType.EXTRA,
                     "",
