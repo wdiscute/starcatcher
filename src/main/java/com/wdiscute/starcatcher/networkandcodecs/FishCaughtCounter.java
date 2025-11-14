@@ -67,16 +67,18 @@ public record FishCaughtCounter(
             if (fpCaught.equals(fcc.fp))
             {
                 int fastestToSave = Math.min(fcc.fastestTicks, ticks);
-
                 float averageToSave = (fcc.averageTicks * fcc.count + ticks) / (fcc.count + 1);
+                int countToSave = fcc.count;
 
+                //if cheated in, fixes trackers
                 if(fcc.fastestTicks == 0) fastestToSave = ticks;
                 if(fcc.averageTicks == 0) averageToSave = ticks;
+                if(fcc.count == 999999) countToSave = 0;
 
                 int sizeToSave = Math.max(size, fcc.size);
                 int weightToSave = Math.max(weight, fcc.weight);
 
-                newlist.add(new FishCaughtCounter(fpCaught, fcc.count + 1, fastestToSave, averageToSave, sizeToSave, weightToSave, false));
+                newlist.add(new FishCaughtCounter(fpCaught, countToSave + 1, fastestToSave, averageToSave, sizeToSave, weightToSave, false));
                 newFish = false;
 
             }
