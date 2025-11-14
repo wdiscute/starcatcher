@@ -687,9 +687,6 @@ public class SettingsScreen extends Screen
             Config.UNIT.save();
         }
 
-        System.out.println(x);
-        System.out.println(y);
-
         //hit delay next
         if (x > 193 && x < 205 && y > 226 && y < 240)
         {
@@ -966,7 +963,7 @@ public class SettingsScreen extends Screen
         IMPERIAL("gui.guide.units.imperial", 0.3937f, 0.0352739619495804f),
         CHEESEBURGER("gui.guide.units.cheeseburger", 0.09f, 0.0087f),
         FOOTBALL("gui.guide.units.football", 0.04545f, 0.00233f),
-        DEVELOPER_HEIGHT("gui.guide.units.developer", 0.00592f, 0.000005614f),
+        DEVELOPER_HEIGHT("gui.guide.units.developer", 0.00592f, 0.0000140845f),
         BANANA("gui.guide.units.banana", 0.05f, 0.00833f),
         DUCK("gui.guide.units.duck", 0.02f, 0.0006667f),
         SPACE_WHALE("gui.guide.units.space_whale", 1f, 1f),
@@ -1011,7 +1008,7 @@ public class SettingsScreen extends Screen
             return vals[(this.ordinal() - 1) % vals.length];
         }
 
-        String getSizeAsString(int sizeInCm)
+        public String getSizeAsString(int sizeInCm)
         {
             //space whale is always infinite
             if (this.equals(SettingsScreen.Units.SPACE_WHALE)) return "∞ space whales";
@@ -1035,7 +1032,7 @@ public class SettingsScreen extends Screen
             return sizeString;
         }
 
-        String getWeightAsString(int weightInGrams)
+        public String getWeightAsString(int weightInGrams)
         {
             //space whale is always infinite
             if (this.equals(SettingsScreen.Units.SPACE_WHALE)) return "∞ space whales";
