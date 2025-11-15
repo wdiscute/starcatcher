@@ -274,7 +274,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
 
             int color = Tooltips.hueToRGBInt(Tooltips.hue);
-            color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
+            if(bobber.is(ModItems.COLORFUL_BOBBER)) color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
             if(bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
             if(bobber.is(ModItems.COLORFUL_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
 
