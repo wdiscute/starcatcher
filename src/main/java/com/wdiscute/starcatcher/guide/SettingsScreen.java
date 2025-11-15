@@ -670,13 +670,21 @@ public class SettingsScreen extends Screen
         //hit delay
         if (x > 316 && x < 325 && y > 70 && y < 100)
         {
-            hitDelay -= 0.1f;
+            hitDelay = (float) ((int) (hitDelay * 10)) / 10;
+            hitDelay -= 0.2f;
+            hitDelay = (float) ((int) (hitDelay * 10)) / 10;
+            Config.HIT_DELAY.set(((double) hitDelay));
+            Config.HIT_DELAY.save();
         }
 
         //hit delay
         if (x > 396 && x < 410 && y > 70 && y < 100)
         {
-            hitDelay += 0.1f;
+            hitDelay = (float) ((int) (hitDelay * 10)) / 10;
+            hitDelay += 0.2f;
+            hitDelay = (float) ((int) (hitDelay * 10)) / 10;
+            Config.HIT_DELAY.set(((double) hitDelay));
+            Config.HIT_DELAY.save();
         }
 
         //hit delay next
