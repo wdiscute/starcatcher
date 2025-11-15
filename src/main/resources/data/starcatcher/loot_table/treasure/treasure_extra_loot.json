@@ -6,6 +6,10 @@
       "entries": [
         {
           "type": "minecraft:item",
+          "name": "starcatcher:fish_spotter"
+        },
+        {
+          "type": "minecraft:item",
           "name": "minecraft:diamond"
         },
         {

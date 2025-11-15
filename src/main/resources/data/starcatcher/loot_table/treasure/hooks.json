@@ -27,6 +27,14 @@
         {
           "type": "minecraft:item",
           "name": "starcatcher:split_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:heavy_hook"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:stabilizing_hook"
         }
       ],
       "rolls": 1

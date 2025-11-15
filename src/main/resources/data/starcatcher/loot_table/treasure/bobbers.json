@@ -34,7 +34,11 @@
         },
         {
           "type": "minecraft:item",
-          "name": "starcatcher:fish_spotter"
+          "name": "starcatcher:clear_bobber"
+        },
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:kimbe_bobber"
         }
       ],
       "rolls": 1
