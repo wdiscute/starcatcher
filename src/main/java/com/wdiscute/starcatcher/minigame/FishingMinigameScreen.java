@@ -274,8 +274,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
 
             int color = Tooltips.hueToRGBInt(Tooltips.hue);
-            if(bobber.is(ModItems.COLORFUL_BOBBER)) color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
             if(bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
+            if(bobber.is(ModItems.COLORFUL_BOBBER)) color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
             if(bobber.is(ModItems.COLORFUL_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
 
             //outline when treasure complete
@@ -284,7 +284,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                     TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
                     32, 96, 64, 0, 32, 96, 256, 256);
 
-            if(bobber.is(ModItems.COLORFUL_BOBBER)) RenderSystem.setShaderColor(1, 1, 1, 1);
+            if(bobber.is(ModItems.COLORFUL_BOBBER) || bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor(1, 1, 1, 1);
 
         }
 
