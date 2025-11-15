@@ -570,6 +570,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 posTreasure = getRandomFreePosition();
                 treasureProgress += treasureReward;
                 hitSomething = true;
+                //prevents spot from showing for a bit after completion
+                if (treasureProgress > 100) posTreasure = Integer.MIN_VALUE;
             }
 
 
@@ -668,15 +670,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             this.onClose();
         }
 
-        if (treasureProgressSmooth > 100)
-        {
-            posTreasure = Integer.MIN_VALUE;
-        }
-
         if (completionSmooth > 75)
         {
             //if completed treasure minigame, or is a perfect catch with the mossy hook
-            boolean awardTreasure = treasureProgressSmooth > 100 || (perfectCatch && hook.is(ModItems.MOSSY_HOOK));
+            boolean awardTreasure = treasureProgress > 100 || (perfectCatch && hook.is(ModItems.MOSSY_HOOK));
 
             PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits));
             this.onClose();
