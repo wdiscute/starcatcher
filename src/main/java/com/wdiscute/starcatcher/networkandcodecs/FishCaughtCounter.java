@@ -57,15 +57,12 @@ public record FishCaughtCounter(
     public static final Codec<List<FishCaughtCounter>> LIST_CODEC = FishCaughtCounter.CODEC.listOf();
 
 
-    public static boolean AwardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks)
+    public static boolean AwardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks, int size, int weight)
     {
         List<FishCaughtCounter> listFishCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
         List<FishCaughtCounter> newlist = new ArrayList<>();
 
         boolean newFish = true;
-
-        int size = ((int) Starcatcher.truncatedNormal(fpCaught.sw().sizeAverage(), fpCaught.sw().sizeDeviation()));
-        int weight = ((int) Starcatcher.truncatedNormal(fpCaught.sw().weightAverage(), fpCaught.sw().weightDeviation()));
 
         for (FishCaughtCounter fcc : listFishCaughtCounter)
         {

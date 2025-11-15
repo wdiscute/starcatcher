@@ -68,6 +68,14 @@ public class PayloadReceiver
                         //store fish properties in itemstack
                         is.set(ModDataComponents.FISH_PROPERTIES, fp);
 
+                        //store size and weight data component
+                        int size = ((int) Starcatcher.truncatedNormal(fp.sw().sizeAverage(), fp.sw().sizeDeviation()));
+                        int weight = ((int) Starcatcher.truncatedNormal(fp.sw().weightAverage(), fp.sw().weightDeviation()));
+                        is.set(ModDataComponents.SIZE_AND_WEIGHT, new SizeAndWeight(size, weight));
+
+                        //award fish counter
+                        FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time(), size, weight);
+
                         //split hook double drops
                         if(data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);
 
@@ -90,9 +98,6 @@ public class PayloadReceiver
                         //play sound
                         Vec3 p = player.position();
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
-
-                        //award fish counter
-                        FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time());
 
                         //award fish counter
                         List<FishProperties> list = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
@@ -122,8 +127,6 @@ public class PayloadReceiver
         }
 
         player.setData(ModDataAttachments.FISHING.get(), "");
-
-
     }
 
 
