@@ -16,7 +16,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "starcatcher:treasure/loot",
+          "value": "starcatcher:treasure/treasure_extra_loot",
           "weight": 17
         }
       ],
