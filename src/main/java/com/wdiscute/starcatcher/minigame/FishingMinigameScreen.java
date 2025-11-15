@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Config;
 import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -15,16 +16,19 @@ import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
@@ -52,6 +56,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     final ItemStack bobber;
     final ItemStack bait;
     final ItemStack hook;
+    final ItemStack treasureIS;
 
     final float speed;
     final int reward;
@@ -133,6 +138,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         posTreasure = Integer.MIN_VALUE;
 
+        treasureIS = new ItemStack(BuiltInRegistries.ITEM.get(fp.dif().treasure().loot()));
+        
         //tank texture change
         ResourceKey<Level> dim = Minecraft.getInstance().level.dimension();
         Player player = Minecraft.getInstance().player;
@@ -260,6 +267,25 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             guiGraphics.blit(
                     TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
                     32, 96, 96, 0, 32, 96, 256, 256);
+
+            //render treasure on top of bar
+            guiGraphics.renderItem(treasureIS, width / 2 - 163, ((int) ((float) height / 2 - (64f * treasureProgressSmooth) / 100) + 15));
+
+
+
+            int color = Tooltips.hueToRGBInt(Tooltips.hue);
+            color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
+            if(bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
+            if(bobber.is(ModItems.COLORFUL_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
+
+            //outline when treasure complete
+            if(treasureProgress > 99)
+                guiGraphics.blit(
+                    TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
+                    32, 96, 64, 0, 32, 96, 256, 256);
+
+            if(bobber.is(ModItems.COLORFUL_BOBBER)) RenderSystem.setShaderColor(1, 1, 1, 1);
+
         }
 
         //tank background
