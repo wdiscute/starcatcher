@@ -1111,7 +1111,7 @@ public record FishProperties(
     public record SizeAndWeight(float sizeAverage, float sizeDeviation, float weightAverage, float weightDeviation,
                                 int goldenChance, int goldenIncrease)
     {
-        public static final SizeAndWeight DEFAULT = new SizeAndWeight(40f, 20f, 2000f, 700f, 1, 20);
+        public static final SizeAndWeight DEFAULT = new SizeAndWeight(41f, 21f, 2001f, 701f, 11, 21);
 
         public static final Codec<SizeAndWeight> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(

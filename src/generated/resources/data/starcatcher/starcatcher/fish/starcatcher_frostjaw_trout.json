@@ -25,7 +25,8 @@
     "average_weight_grams": 1600.0,
     "deviation_size_cm": 8.0,
     "deviation_weight_grams": 1200.0,
-    "golden_chance_percentage": 10
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
   },
   "world_restrictions": {
     "above_y": 50,

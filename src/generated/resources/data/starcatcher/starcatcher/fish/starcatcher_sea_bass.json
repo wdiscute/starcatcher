@@ -8,6 +8,7 @@
   },
   "fish": "starcatcher:sea_bass",
   "size_and_weight": {
+    "average_size_cm": 40.0,
     "average_weight_grams": 1600.0,
     "deviation_size_cm": 12.0,
     "deviation_weight_grams": 1100.0,
