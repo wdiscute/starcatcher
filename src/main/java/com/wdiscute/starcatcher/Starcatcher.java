@@ -174,6 +174,18 @@ public class Starcatcher
             List<Component> comp = event.getToolTip();
             ItemStack stack = event.getItemStack();
 
+            if (stack.has(ModDataComponents.SIZE_AND_WEIGHT))
+            {
+                SizeAndWeight sw = stack.get(ModDataComponents.SIZE_AND_WEIGHT);
+
+                SettingsScreen.Units units = Config.UNIT.get();
+
+                String size = units.getSizeAsString(sw.sizeInCentimeters());
+                String weight = units.getWeightAsString(sw.weightInGrams());
+
+                comp.add(1, Component.literal(size + " - " + weight).withColor(0x888888));
+            }
+
             if (stack.has(ModDataComponents.TROPHY))
             {
                 TrophyProperties tp = stack.get(ModDataComponents.TROPHY);

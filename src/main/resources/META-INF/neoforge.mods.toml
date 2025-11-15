@@ -31,8 +31,8 @@ description='''A fishing mod with lots of fishes to collect!'''
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 
 # The [[mixins]] block allows you to declare your mixin config to FML so that it gets loaded.
-#[[mixins]]
-#config="laicaps.mixins.json"
+[[mixins]]
+config="starcatcher.mixins.json"
 
 # In neoforge.mods.toml:
 [[accessTransformers]]
