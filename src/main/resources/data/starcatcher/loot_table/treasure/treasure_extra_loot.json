@@ -82,7 +82,7 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:broken_bottle"
+          "name": "starcatcher:broken_bottle"
         },
         {
           "type": "minecraft:item",
