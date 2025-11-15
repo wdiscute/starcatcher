@@ -22,17 +22,12 @@ public class RemoveFishSizeAndWeightWhenStacking
         ItemStack itemBeingClickedOn = player.getSlot(slot.index).get();
         ItemStack itemInHand = (ItemStack) (Object)this;
 
-        if(itemInHand.has(ModDataComponents.SIZE_AND_WEIGHT) &&
-                itemBeingClickedOn.has(ModDataComponents.SIZE_AND_WEIGHT) &&
-                itemBeingClickedOn.is(itemInHand.getItem()))
+        if(itemBeingClickedOn.is(itemInHand.getItem()))
         {
-            itemBeingClickedOn.remove(ModDataComponents.SIZE_AND_WEIGHT);
             itemInHand.remove(ModDataComponents.SIZE_AND_WEIGHT);
+            itemBeingClickedOn.remove(ModDataComponents.SIZE_AND_WEIGHT);
         }
+
     }
-
-
-
-
 
 }
