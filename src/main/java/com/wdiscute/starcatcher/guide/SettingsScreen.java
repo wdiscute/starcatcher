@@ -673,8 +673,6 @@ public class SettingsScreen extends Screen
             hitDelay = (float) ((int) (hitDelay * 10)) / 10;
             hitDelay -= 0.2f;
             hitDelay = (float) ((int) (hitDelay * 10)) / 10;
-            Config.HIT_DELAY.set(((double) hitDelay));
-            Config.HIT_DELAY.save();
         }
 
         //hit delay
@@ -683,8 +681,6 @@ public class SettingsScreen extends Screen
             hitDelay = (float) ((int) (hitDelay * 10)) / 10;
             hitDelay += 0.2f;
             hitDelay = (float) ((int) (hitDelay * 10)) / 10;
-            Config.HIT_DELAY.set(((double) hitDelay));
-            Config.HIT_DELAY.save();
         }
 
         //hit delay next

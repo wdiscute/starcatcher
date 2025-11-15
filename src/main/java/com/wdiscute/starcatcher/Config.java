@@ -14,7 +14,7 @@ public class Config
             .defineInRange("minigame_gui_scale", 3, 0, 6);
 
     public static final ModConfigSpec.DoubleValue HIT_DELAY = BUILDER
-            .defineInRange("hit_delay", 0.0d, 0.0d, Double.MAX_VALUE);
+            .defineInRange("hit_delay", 0.0d, -20, 20);
 
     public static final ModConfigSpec.EnumValue<SettingsScreen.Units> UNIT = BUILDER
             .defineEnum("units", SettingsScreen.Units.IMPERIAL);
