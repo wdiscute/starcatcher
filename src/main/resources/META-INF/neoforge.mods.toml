@@ -34,6 +34,12 @@ description='''A fishing mod with lots of fishes to collect!'''
 #[[mixins]]
 #config="laicaps.mixins.json"
 
+# In neoforge.mods.toml:
+[[accessTransformers]]
+## The file is relative to the output directory of the resources, or the root path inside the jar when compiled
+## The 'resources' directory represents the root output directory of the resources
+file="META-INF/accesstransformer.cfg"
+
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.starcatcher]] #optional
 # the modid of the dependency

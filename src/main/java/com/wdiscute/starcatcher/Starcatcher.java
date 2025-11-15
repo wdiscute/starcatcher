@@ -84,10 +84,12 @@ public class Starcatcher
         String weight = units.getWeightAsString(weightCM);
 
         Minecraft.getInstance().player.displayClientMessage(
-                Component.literal("Caught ")
+                Component.literal("")
                         .append(Component.translatable(fp.fish().getDelegate().value().getDescriptionId()))
                         .append(Component.literal(" - " + size + " - " + weight))
                 , true);
+
+        Minecraft.getInstance().gui.overlayMessageTime = 180;
 
     }
 
