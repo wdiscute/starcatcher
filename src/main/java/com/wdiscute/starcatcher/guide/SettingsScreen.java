@@ -1011,21 +1011,21 @@ public class SettingsScreen extends Screen
         public String getSizeAsString(int sizeInCm)
         {
             //space whale is always infinite
-            if (this.equals(SettingsScreen.Units.SPACE_WHALE)) return "∞ space whales";
+            if (this.equals(Units.SPACE_WHALE)) return "∞ space whales";
             if (this.equals(Units.SCIENTIFIC)) return "0 AU";
 
             float size = sizeInCm * this.getMultiplierSize();
             String sizeString = ((float) (int) (size * 100)) / 100 + " " + I18n.get(this.getTranslationKey() + ".size");
 
-            if (this.equals(SettingsScreen.Units.METRIC))
+            if (this.equals(Units.METRIC))
             {
                 sizeString = ((int) size) + "cm";
                 if (size > 100) sizeString = (float) ((int) (size / 100 * 100)) / 100 + "m";
             }
 
-            if (this.equals(SettingsScreen.Units.IMPERIAL))
+            if (this.equals(Units.IMPERIAL))
             {
-                sizeString = size + "in";
+                sizeString = ((int) size) + "''";
                 if (size > 12) sizeString = ((int) (size / 12)) + "'" + ((int) (size % 12)) + "''";
             }
 
@@ -1035,19 +1035,19 @@ public class SettingsScreen extends Screen
         public String getWeightAsString(int weightInGrams)
         {
             //space whale is always infinite
-            if (this.equals(SettingsScreen.Units.SPACE_WHALE)) return "∞ space whales";
+            if (this.equals(Units.SPACE_WHALE)) return "∞ space whales";
             if (this.equals(Units.SCIENTIFIC)) return "0 R136a1's";
 
             float weight = weightInGrams * this.getMultiplierWeight();
             String weightString = ((float) (int) (weight * 100)) / 100 + " " + I18n.get(this.getTranslationKey() + ".weight");
 
-            if (this.equals(SettingsScreen.Units.METRIC))
+            if (this.equals(Units.METRIC))
             {
                 if (weight < 1000) weightString = ((int) weight) + "g";
                 if (weight > 1000) weightString = (float) ((int) (weight / 1000 * 100)) / 100 + "kg";
             }
 
-            if (this.equals(SettingsScreen.Units.IMPERIAL))
+            if (this.equals(Units.IMPERIAL))
             {
                 weightString = ((int) weight) + "oz";
                 if (weight > 12) weightString = ((int) (weight / 16)) + " lb " + ((int) (weight % 16)) + " oz";
