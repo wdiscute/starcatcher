@@ -29,35 +29,35 @@ public interface ModItems
     DeferredItem<Item> STARCATCHER_TWINE = basicItem("starcatcher_twine");
 
     //hooks
-    DeferredItem<Item> HOOK = singleStackItem("hook");  //done
-    DeferredItem<Item> SHINY_HOOK = singleStackItem("shiny_hook");  //done
-    DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");    //done
-    DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");  //done
-    DeferredItem<Item> CRYSTAL_HOOK = singleStackItemFireResistant("crystal_hook"); //done
-    DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");  //done
-    DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");  //done
-    DeferredItem<Item> STABILIZING_HOOK = singleStackItem("stabilizing_hook");  //
-    DeferredItem<Item> HEAVY_HOOK = singleStackItem("heavy_hook");  //
+    DeferredItem<Item> HOOK = singleStackItem("hook");
+    DeferredItem<Item> SHINY_HOOK = singleStackItem("shiny_hook");
+    DeferredItem<Item> GOLD_HOOK = singleStackItem("gold_hook");
+    DeferredItem<Item> MOSSY_HOOK = singleStackItem("mossy_hook");
+    DeferredItem<Item> CRYSTAL_HOOK = singleStackItemFireResistant("crystal_hook");
+    DeferredItem<Item> STONE_HOOK = singleStackItem("stone_hook");
+    DeferredItem<Item> SPLIT_HOOK = singleStackItem("split_hook");
+    DeferredItem<Item> STABILIZING_HOOK = singleStackItem("stabilizing_hook");
+    DeferredItem<Item> HEAVY_HOOK = singleStackItem("heavy_hook");
 
     //bobbers
-    DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
-    DeferredItem<Item> GLITTER_BOBBER = singleStackItem("glitter_bobber"); //done
-    DeferredItem<Item> COLORFUL_BOBBER = ITEMS.register("colorful_bobber", ColorfulBobber::new); //done
-    DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
-    DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
-    DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber"); //done
+    DeferredItem<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber");
+    DeferredItem<Item> GLITTER_BOBBER = singleStackItem("glitter_bobber");
+    DeferredItem<Item> COLORFUL_BOBBER = ITEMS.register("colorful_bobber", ColorfulBobber::new);
+    DeferredItem<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber");
+    DeferredItem<Item> STEADY_BOBBER = singleStackItem("steady_bobber");
+    DeferredItem<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber");
     DeferredItem<Item> FROG_BOBBER = singleStackItem("frog_bobber");
     DeferredItem<Item> KIMBE_BOBBER = singleStackItem("kimbe_bobber");
-    DeferredItem<Item> CLEAR_BOBBER = singleStackItem("clear_bobber");  //
+    DeferredItem<Item> CLEAR_BOBBER = singleStackItem("clear_bobber");
 
     //baits
-    DeferredItem<Item> CHERRY_BAIT = basicItem("cherry_bait"); //done
-    DeferredItem<Item> LUSH_BAIT = basicItem("lush_bait"); //done
-    DeferredItem<Item> SCULK_BAIT = basicItem("sculk_bait"); //done
-    DeferredItem<Item> DRIPSTONE_BAIT = basicItem("dripstone_bait"); //done
-    DeferredItem<Item> MURKWATER_BAIT = basicItem("murkwater_bait"); //done
-    DeferredItem<Item> LEGENDARY_BAIT = basicItem("legendary_bait"); //done
-    DeferredItem<Item> METEOROLOGICAL_BAIT = basicItem("meteorological_bait"); //done
+    DeferredItem<Item> CHERRY_BAIT = basicItem("cherry_bait");
+    DeferredItem<Item> LUSH_BAIT = basicItem("lush_bait");
+    DeferredItem<Item> SCULK_BAIT = basicItem("sculk_bait");
+    DeferredItem<Item> DRIPSTONE_BAIT = basicItem("dripstone_bait");
+    DeferredItem<Item> MURKWATER_BAIT = basicItem("murkwater_bait");
+    DeferredItem<Item> LEGENDARY_BAIT = basicItem("legendary_bait");
+    DeferredItem<Item> METEOROLOGICAL_BAIT = basicItem("meteorological_bait");
 
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
 
@@ -126,151 +126,151 @@ public interface ModItems
 
 
     //lake
-    DeferredItem<Item> OBIDONTIEE = fish("obidontiee"); //description
-    DeferredItem<Item> SILVERVEIL_PERCH = fish("silverveil_perch"); //description
-    DeferredItem<Item> ELDERSCALE = fish("elderscale"); //description
-    DeferredItem<Item> DRIFTFIN = fish("driftfin"); //description
-    DeferredItem<Item> TWILIGHT_KOI = fish("twilight_koi"); //description
-    DeferredItem<Item> THUNDER_BASS = fish("thunder_bass"); //description
-    DeferredItem<Item> LIGHTNING_BASS = fish("lightning_bass"); //description
-    DeferredItem<Item> BOOT = trash("boot"); //description
+    DeferredItem<Item> OBIDONTIEE = fish("obidontiee");
+    DeferredItem<Item> SILVERVEIL_PERCH = fish("silverveil_perch");
+    DeferredItem<Item> ELDERSCALE = fish("elderscale");
+    DeferredItem<Item> DRIFTFIN = fish("driftfin");
+    DeferredItem<Item> TWILIGHT_KOI = fish("twilight_koi");
+    DeferredItem<Item> THUNDER_BASS = fish("thunder_bass");
+    DeferredItem<Item> LIGHTNING_BASS = fish("lightning_bass");
+    DeferredItem<Item> BOOT = trash("boot");
 
     //swamp
-    DeferredItem<Item> SLUDGE_CATFISH = fish("sludge_catfish"); //description
-    DeferredItem<Item> LILY_SNAPPER = fish("lily_snapper"); //description
-    DeferredItem<Item> SAGE_CATFISH = fish("sage_catfish"); //description
-    DeferredItem<Item> MOSSY_BOOT = trash("mossy_boot"); //description
+    DeferredItem<Item> SLUDGE_CATFISH = fish("sludge_catfish");
+    DeferredItem<Item> LILY_SNAPPER = fish("lily_snapper");
+    DeferredItem<Item> SAGE_CATFISH = fish("sage_catfish");
+    DeferredItem<Item> MOSSY_BOOT = trash("mossy_boot");
 
     //darkoak_forest
-    DeferredItem<Item> PALE_CARP = fish("pale_carp"); //description
-    DeferredItem<Item> PALE_PINFISH = fish("pale_pinfish"); //description
-    DeferredItem<Item> PINFISH = fish("pinfish"); //description
+    DeferredItem<Item> PALE_CARP = fish("pale_carp");
+    DeferredItem<Item> PALE_PINFISH = fish("pale_pinfish");
+    DeferredItem<Item> PINFISH = fish("pinfish");
 
     //icy lake
-    DeferredItem<Item> FROSTJAW_TROUT = fish("frostjaw_trout"); //description
-    DeferredItem<Item> CRYSTALBACK_TROUT = fish("crystalback_trout"); //description
-    DeferredItem<Item> AURORA = fish("aurora"); //description
-    DeferredItem<Item> WINTERY_PIKE = fish("wintery_pike"); //description
+    DeferredItem<Item> FROSTJAW_TROUT = fish("frostjaw_trout");
+    DeferredItem<Item> CRYSTALBACK_TROUT = fish("crystalback_trout");
+    DeferredItem<Item> AURORA = fish("aurora");
+    DeferredItem<Item> WINTERY_PIKE = fish("wintery_pike");
 
     //warm lake (desert/savanna etc)
-    DeferredItem<Item> SANDTAIL = fish("sandtail"); //description
-    DeferredItem<Item> MIRAGE_CARP = fish("mirage_carp"); //description
-    DeferredItem<Item> SCORCHFISH = fish("scorchfish"); //description
-    DeferredItem<Item> CACTIFISH = fish("cactifish"); //description
+    DeferredItem<Item> SANDTAIL = fish("sandtail");
+    DeferredItem<Item> MIRAGE_CARP = fish("mirage_carp");
+    DeferredItem<Item> SCORCHFISH = fish("scorchfish");
+    DeferredItem<Item> CACTIFISH = fish("cactifish");
     DeferredItem<Item> AGAVE_BREAM = fish("agave_bream"); //TODO CHOSEN BY MANGO
 
     //mountain
-    DeferredItem<Item> SUNNY_STURGEON = fish("sunny_sturgeon"); //description
-    DeferredItem<Item> ROCKGILL = fish("rockgill"); //description
-    DeferredItem<Item> PEAKDWELLER = fish("peakdweller"); //description
-    DeferredItem<Item> SUN_SEEKING_CARP = fish("sun_seeking_carp"); //description
+    DeferredItem<Item> SUNNY_STURGEON = fish("sunny_sturgeon");
+    DeferredItem<Item> ROCKGILL = fish("rockgill");
+    DeferredItem<Item> PEAKDWELLER = fish("peakdweller");
+    DeferredItem<Item> SUN_SEEKING_CARP = fish("sun_seeking_carp");
 
     //cherry grove
-    DeferredItem<Item> BLOSSOMFISH = fish("blossomfish"); //description
-    DeferredItem<Item> PETALDRIFT_CARP = fish("petaldrift_carp"); //description
-    DeferredItem<Item> PINK_KOI = fish("pink_koi"); //description
-    DeferredItem<Item> MORGANITE = fish("morganite"); //description
-    DeferredItem<Item> ROSE_SIAMESE_FISH = fish("rose_siamese_fish"); //description
+    DeferredItem<Item> BLOSSOMFISH = fish("blossomfish");
+    DeferredItem<Item> PETALDRIFT_CARP = fish("petaldrift_carp");
+    DeferredItem<Item> PINK_KOI = fish("pink_koi");
+    DeferredItem<Item> MORGANITE = fish("morganite");
+    DeferredItem<Item> ROSE_SIAMESE_FISH = fish("rose_siamese_fish");
 
     //icy mountain
-    DeferredItem<Item> CRYSTALBACK_STURGEON = fish("crystalback_sturgeon"); //description
-    DeferredItem<Item> ICETOOTH_STURGEON = fish("icetooth_sturgeon"); //description
-    DeferredItem<Item> BOREAL = fish("boreal"); //description
-    DeferredItem<Item> CRYSTALBACK_BOREAL = fish("crystalback_boreal"); //description
+    DeferredItem<Item> CRYSTALBACK_STURGEON = fish("crystalback_sturgeon");
+    DeferredItem<Item> ICETOOTH_STURGEON = fish("icetooth_sturgeon");
+    DeferredItem<Item> BOREAL = fish("boreal");
+    DeferredItem<Item> CRYSTALBACK_BOREAL = fish("crystalback_boreal");
 
     //rivers
-    DeferredItem<Item> SILVERFIN_PIKE = fish("silverfin_pike"); //description
-    DeferredItem<Item> WILLOW_BREAM = fish("willow_bream"); //description
-    DeferredItem<Item> DRIFTING_BREAM = fish("drifting_bream"); //description
-    DeferredItem<Item> DOWNFALL_BREAM = fish("downfall_bream"); //description
-    DeferredItem<Item> HOLLOWBELLY_DARTER = fish("hollowbelly_darter"); //description
-    DeferredItem<Item> MISTBACK_CHUB = fish("mistback_chub"); //description
-    DeferredItem<Item> DRIED_SEAWEED = trash("dried_seaweed"); //description
+    DeferredItem<Item> SILVERFIN_PIKE = fish("silverfin_pike");
+    DeferredItem<Item> WILLOW_BREAM = fish("willow_bream");
+    DeferredItem<Item> DRIFTING_BREAM = fish("drifting_bream");
+    DeferredItem<Item> DOWNFALL_BREAM = fish("downfall_bream");
+    DeferredItem<Item> HOLLOWBELLY_DARTER = fish("hollowbelly_darter");
+    DeferredItem<Item> MISTBACK_CHUB = fish("mistback_chub");
+    DeferredItem<Item> DRIED_SEAWEED = trash("dried_seaweed");
 
     //icy river
-    DeferredItem<Item> FROSTGILL_CHUB = fish("frostgill_chub"); //description
-    DeferredItem<Item> CRYSTALBACK_MINNOW = fish("crystalback_minnow"); //description
-    DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = fish("azure_crystalback_minnow"); //description
-    DeferredItem<Item> BLUE_CRYSTAL_FIN = fish("blue_crystal_fin"); //description
+    DeferredItem<Item> FROSTGILL_CHUB = fish("frostgill_chub");
+    DeferredItem<Item> CRYSTALBACK_MINNOW = fish("crystalback_minnow");
+    DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = fish("azure_crystalback_minnow");
+    DeferredItem<Item> BLUE_CRYSTAL_FIN = fish("blue_crystal_fin");
 
     //saltwater
-    DeferredItem<Item> IRONJAW_HERRING = fish("ironjaw_herring"); //description
-    DeferredItem<Item> DEEPJAW_HERRING = fish("deepjaw_herring"); //description
-    DeferredItem<Item> DUSKTAIL_SNAPPER = fish("dusktail_snapper"); //description
-    DeferredItem<Item> JOEL = fish("joel"); //description
-    DeferredItem<Item> REDSCALED_TUNA = fish("redscaled_tuna"); //description
+    DeferredItem<Item> IRONJAW_HERRING = fish("ironjaw_herring");
+    DeferredItem<Item> DEEPJAW_HERRING = fish("deepjaw_herring");
+    DeferredItem<Item> DUSKTAIL_SNAPPER = fish("dusktail_snapper");
+    DeferredItem<Item> JOEL = fish("joel");
+    DeferredItem<Item> REDSCALED_TUNA = fish("redscaled_tuna");
     DeferredItem<Item> BIGEYE_TUNA = fish("bigeye_tuna"); //added by Tuna Feesh
-    DeferredItem<Item> SEA_BASS = fish("sea_bass"); //description
-    DeferredItem<Item> WATERLOGGED_BOTTLE = trash("waterlogged_bottle"); //description
+    DeferredItem<Item> SEA_BASS = fish("sea_bass");
+    DeferredItem<Item> WATERLOGGED_BOTTLE = trash("waterlogged_bottle");
 
     //beaches
-    DeferredItem<Item> CONCH = trash("conch"); //description
-    DeferredItem<Item> CLAM = trash("clam"); //description
+    DeferredItem<Item> CONCH = trash("conch");
+    DeferredItem<Item> CLAM = trash("clam");
 
     //mushroom islands
-    DeferredItem<Item> SHROOMFISH = fish("shroomfish"); //description
-    DeferredItem<Item> SPOREFISH = fish("sporefish"); //description
+    DeferredItem<Item> SHROOMFISH = fish("shroomfish");
+    DeferredItem<Item> SPOREFISH = fish("sporefish");
 
     //underground
-    DeferredItem<Item> GOLD_FAN = fish("gold_fan"); //description
-    DeferredItem<Item> GEODE_EEL = fish("geode_eel"); //description
+    DeferredItem<Item> GOLD_FAN = fish("gold_fan");
+    DeferredItem<Item> GEODE_EEL = fish("geode_eel");
 
     //caves
-    DeferredItem<Item> WHITEVEIL = fish("whiteveil"); //description
-    DeferredItem<Item> BLACK_EEL = fish("black_eel"); //description
-    DeferredItem<Item> AMETHYSTBACK = fish("amethystback"); //description
-    DeferredItem<Item> STONEFISH = fish("stonefish"); //description
+    DeferredItem<Item> WHITEVEIL = fish("whiteveil");
+    DeferredItem<Item> BLACK_EEL = fish("black_eel");
+    DeferredItem<Item> AMETHYSTBACK = fish("amethystback");
+    DeferredItem<Item> STONEFISH = fish("stonefish");
 
     //dripstone caves
-    DeferredItem<Item> FOSSILIZED_ANGELFISH = fish("fossilized_angelfish"); //description
-    DeferredItem<Item> DRIPFIN = fish("dripfin"); //description
-    DeferredItem<Item> YELLOWSTONE_FISH = fish("yellowstone_fish"); //description
+    DeferredItem<Item> FOSSILIZED_ANGELFISH = fish("fossilized_angelfish");
+    DeferredItem<Item> DRIPFIN = fish("dripfin");
+    DeferredItem<Item> YELLOWSTONE_FISH = fish("yellowstone_fish");
 
     //lush caves
-    DeferredItem<Item> LUSH_PIKE = fish("lush_pike"); //description
-    DeferredItem<Item> VIVID_MOSS = fish("vivid_moss"); //description
+    DeferredItem<Item> LUSH_PIKE = fish("lush_pike");
+    DeferredItem<Item> VIVID_MOSS = fish("vivid_moss");
 
     //deepslate
-    DeferredItem<Item> GHOSTLY_PIKE = fish("ghostly_pike"); //description
-    DeferredItem<Item> AQUAMARINE_PIKE = fish("aquamarine_pike"); //description
-    DeferredItem<Item> GARNET_MACKEREL = fish("garnet_mackerel"); //description
-    DeferredItem<Item> BRIGHT_AMETHYST_SNAPPER = fish("bright_amethyst_snapper"); //description
-    DeferredItem<Item> DARK_AMETHYST_SNAPPER = fish("dark_amethyst_snapper"); //description
-    DeferredItem<Item> DEEPSLATEFISH = fish("deepslatefish"); //description
+    DeferredItem<Item> GHOSTLY_PIKE = fish("ghostly_pike");
+    DeferredItem<Item> AQUAMARINE_PIKE = fish("aquamarine_pike");
+    DeferredItem<Item> GARNET_MACKEREL = fish("garnet_mackerel");
+    DeferredItem<Item> BRIGHT_AMETHYST_SNAPPER = fish("bright_amethyst_snapper");
+    DeferredItem<Item> DARK_AMETHYST_SNAPPER = fish("dark_amethyst_snapper");
+    DeferredItem<Item> DEEPSLATEFISH = fish("deepslatefish");
 
     //deep dark
-    DeferredItem<Item> SCULKFISH = fish("sculkfish"); //description
-    DeferredItem<Item> WARD = fish("ward"); //description
-    DeferredItem<Item> GLOWING_DARK = fish("glowing_dark"); //description
+    DeferredItem<Item> SCULKFISH = fish("sculkfish");
+    DeferredItem<Item> WARD = fish("ward");
+    DeferredItem<Item> GLOWING_DARK = fish("glowing_dark");
 
     //overworld surface lava
     DeferredItem<Item> SUNEATER = fireResistantFish("suneater"); //description make sure to mention it eats sunfishes
-    DeferredItem<Item> PYROTROUT = fireResistantFish("pyrotrout"); //description
-    DeferredItem<Item> OBSIDIAN_EEL = fireResistantFish("obsidian_eel"); //description
+    DeferredItem<Item> PYROTROUT = fireResistantFish("pyrotrout");
+    DeferredItem<Item> OBSIDIAN_EEL = fireResistantFish("obsidian_eel");
 
     //overworld underground lava
-    DeferredItem<Item> MOLTEN_SHRIMP = fireResistantFish("molten_shrimp"); //description
-    DeferredItem<Item> OBSIDIAN_CRAB = fireResistantFish("obsidian_crab"); //description
+    DeferredItem<Item> MOLTEN_SHRIMP = fireResistantFish("molten_shrimp");
+    DeferredItem<Item> OBSIDIAN_CRAB = fireResistantFish("obsidian_crab");
 
     //overworld deepslate lava
-    DeferredItem<Item> SCORCHED_BLOODSUCKER = fireResistantFish("scorched_bloodsucker"); //description
-    DeferredItem<Item> MOLTEN_DEEPSLATE_CRAB = fireResistantFish("molten_deepslate_crab"); //description
+    DeferredItem<Item> SCORCHED_BLOODSUCKER = fireResistantFish("scorched_bloodsucker");
+    DeferredItem<Item> MOLTEN_DEEPSLATE_CRAB = fireResistantFish("molten_deepslate_crab");
 
 
     //nether
-    DeferredItem<Item> EMBERGILL = fireResistantFish("embergill"); //description
-    DeferredItem<Item> SCALDING_PIKE = fireResistantFish("scalding_pike"); //description
-    DeferredItem<Item> CINDER_SQUID = fireResistantFish("cinder_squid"); //description
-    DeferredItem<Item> LAVA_CRAB = fireResistantFish("lava_crab"); //description
-    DeferredItem<Item> MAGMA_FISH = fireResistantFish("magma_fish"); //description
-    DeferredItem<Item> GLOWSTONE_SEEKER = fireResistantFish("glowstone_seeker"); //description
-    DeferredItem<Item> GLOWSTONE_PUFFERFISH = fireResistantFish("glowstone_pufferfish"); //description
-    DeferredItem<Item> LAVA_CRAB_CLAW = fireResistantTrash("lava_crab_claw"); //description
+    DeferredItem<Item> EMBERGILL = fireResistantFish("embergill");
+    DeferredItem<Item> SCALDING_PIKE = fireResistantFish("scalding_pike");
+    DeferredItem<Item> CINDER_SQUID = fireResistantFish("cinder_squid");
+    DeferredItem<Item> LAVA_CRAB = fireResistantFish("lava_crab");
+    DeferredItem<Item> MAGMA_FISH = fireResistantFish("magma_fish");
+    DeferredItem<Item> GLOWSTONE_SEEKER = fireResistantFish("glowstone_seeker");
+    DeferredItem<Item> GLOWSTONE_PUFFERFISH = fireResistantFish("glowstone_pufferfish");
+    DeferredItem<Item> LAVA_CRAB_CLAW = fireResistantTrash("lava_crab_claw");
 
     //the end
     DeferredItem<Item> CHARFISH = fish("charfish"); //todo chosen by charry
-    DeferredItem<Item> CHORUS_CRAB = fish("chorus_crab"); //description
-    DeferredItem<Item> END_GLOW = fish("end_glow"); //description
+    DeferredItem<Item> CHORUS_CRAB = fish("chorus_crab");
+    DeferredItem<Item> END_GLOW = fish("end_glow");
 
 
     private static DeferredItem<Item> fish(String name)
