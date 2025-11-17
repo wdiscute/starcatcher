@@ -1,12 +1,12 @@
 {
   "bait_restrictions": {
-    "correct_bait_chance_added": 15,
+    "correct_bait_chance_added": 50,
     "correct_baits": [
       "starcatcher:legendary_bait"
     ]
   },
   "difficulty": {
-    "decay": 3,
+    "decay": 2,
     "extras": {
       "has_moving_markers": true,
       "has_vanishing_markers": true
@@ -17,10 +17,10 @@
       "has_second_marker": false,
       "has_second_thin_marker": true
     },
-    "penalty": 40,
+    "penalty": 20,
     "reward": 0,
     "reward_thin": 10,
-    "speed": 14,
+    "speed": 12,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,

@@ -265,6 +265,14 @@ public record FishProperties(
                 List.of(),
                 false);
 
+        public static final BaitRestrictions LEGENDARY_BAIT_VOIDBITER = new BaitRestrictions(
+                List.of(),
+                List.of(ModItems.LEGENDARY_BAIT.getId()),
+                true,
+                50,
+                List.of(),
+                false);
+
         public BaitRestrictions withCorrectBobber(ResourceLocation correctBobber)
         {
             return new BaitRestrictions(List.of(correctBobber), this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
@@ -951,11 +959,11 @@ public record FishProperties(
         );
 
         public static final Difficulty VOIDBITER = new Difficulty(
-                14,
+                12,
                 0,
                 10,
-                40,
-                3,
+                20,
+                2,
                 Markers.FFTT,
                 Treasure.HARD,
                 Extras.TTT

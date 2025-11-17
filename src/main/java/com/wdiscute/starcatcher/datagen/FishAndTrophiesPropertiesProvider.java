@@ -667,7 +667,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withSizeAndWeight(FishProperties.sw(50, 15, 2000, 200, 10, 20))
                             .withRarity(FishProperties.Rarity.EPIC)
                             .withDifficulty(FishProperties.Difficulty.VOIDBITER)
-                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT_VOIDBITER)
 
 
 
