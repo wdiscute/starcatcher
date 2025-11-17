@@ -1,0 +1,10 @@
+{
+  "all": {
+    "unique": 75
+  },
+  "custom_name": "Trophy of Flowing Fishes",
+  "fish_properties": {
+    "fish": "starcatcher:trophy_silver"
+  },
+  "trophy_type": "trophy"
+}

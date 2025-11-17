@@ -229,6 +229,7 @@ public interface ModItems
     //lush caves
     DeferredItem<Item> LUSH_PIKE = fish("lush_pike");
     DeferredItem<Item> VIVID_MOSS = fish("vivid_moss");
+    DeferredItem<Item> THE_QUARRISH = fish("the_quarrish");
 
     //deepslate
     DeferredItem<Item> GHOSTLY_PIKE = fish("ghostly_pike");
@@ -271,6 +272,7 @@ public interface ModItems
     DeferredItem<Item> CHARFISH = fish("charfish"); //todo chosen by charry
     DeferredItem<Item> CHORUS_CRAB = fish("chorus_crab");
     DeferredItem<Item> END_GLOW = fish("end_glow");
+    DeferredItem<Item> VOIDBITER = fish("voidbiter");
 
 
     private static DeferredItem<Item> fish(String name)

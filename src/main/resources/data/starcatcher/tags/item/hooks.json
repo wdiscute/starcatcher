@@ -7,6 +7,7 @@
     "starcatcher:crystal_hook",
     "starcatcher:stone_hook",
     "starcatcher:split_hook",
-    "starcatcher:stabilizing_hook"
+    "starcatcher:stabilizing_hook",
+    "starcatcher:heavy_hook"
   ]
 }

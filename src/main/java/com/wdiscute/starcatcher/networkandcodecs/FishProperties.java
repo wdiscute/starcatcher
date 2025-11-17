@@ -561,6 +561,12 @@ public record FishProperties(
                 WorldRestrictions.DEFAULT
                         .withDims(Level.END.location());
 
+        public static final WorldRestrictions END_OUTER_ISLANDS =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.END.location())
+                        .withBiomesTags(BiomeTags.IS_END.location())
+                        .withBiomesBlacklist(Biomes.THE_END.location());
+
         public WorldRestrictions withDims(ResourceLocation dims)
         {
             return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
@@ -889,6 +895,17 @@ public record FishProperties(
                 Extras.TFT
         );
 
+        public static final Difficulty FAT_CATCH = new Difficulty(
+                12,
+                1,
+                0,
+                5,
+                0,
+                Markers.TTFF,
+                Treasure.HARD,
+                Extras.FFF
+        );
+
         public static final Difficulty HARD_ONLY_THIN = new Difficulty(
                 9,
                 15,
@@ -931,6 +948,17 @@ public record FishProperties(
                 Markers.FFTT,
                 Treasure.HARD,
                 Extras.TFT
+        );
+
+        public static final Difficulty VOIDBITER = new Difficulty(
+                14,
+                0,
+                10,
+                40,
+                3,
+                Markers.FFTT,
+                Treasure.HARD,
+                Extras.TTT
         );
 
         public static final Difficulty THIN_NO_DECAY_NOT_FORGIVING = new Difficulty(
@@ -1055,6 +1083,17 @@ public record FishProperties(
         );
 
         public static final Difficulty NON_STOP_ACTION_VANISHING = new Difficulty(
+                15,
+                18,
+                30,
+                0,
+                10,
+                Markers.TTFF,
+                Treasure.HARD,
+                Extras.FTF
+        );
+
+        public static final Difficulty NON_STOP_ACTION_VANISHING_MOVING = new Difficulty(
                 15,
                 18,
                 30,

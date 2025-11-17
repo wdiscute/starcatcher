@@ -1,0 +1,43 @@
+{
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:lush_bait"
+    ]
+  },
+  "difficulty": {
+    "decay": 0,
+    "extras": {
+      "flips_rotation_every_hit": false
+    },
+    "penalty": 5,
+    "reward": 1,
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "starcatcher:the_quarrish",
+  "rarity": "epic",
+  "size_and_weight": {
+    "average_size_cm": 120.0,
+    "average_weight_grams": 7000.0,
+    "deviation_size_cm": 70.0,
+    "deviation_weight_grams": 3000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:lush_caves"
+    ],
+    "biomes_tags": [
+      "minecraft:is_jungle"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

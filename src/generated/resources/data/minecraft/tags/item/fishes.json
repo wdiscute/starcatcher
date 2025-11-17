@@ -65,6 +65,7 @@
     "starcatcher:yellowstone_fish",
     "starcatcher:lush_pike",
     "starcatcher:vivid_moss",
+    "starcatcher:the_quarrish",
     "starcatcher:ghostly_pike",
     "starcatcher:aquamarine_pike",
     "starcatcher:garnet_mackerel",
@@ -90,6 +91,7 @@
     "starcatcher:glowstone_pufferfish",
     "starcatcher:charfish",
     "starcatcher:chorus_crab",
-    "starcatcher:end_glow"
+    "starcatcher:end_glow",
+    "starcatcher:voidbiter"
   ]
 }

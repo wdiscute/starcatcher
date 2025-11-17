@@ -12,8 +12,10 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
@@ -498,6 +500,15 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                             .withRarity(FishProperties.Rarity.UNCOMMON)
                             .withBaseChance(4),
 
+                    overworldLushCavesFish(ModItems.THE_QUARRISH)
+                            .withSizeAndWeight(FishProperties.sw(120, 70, 7000, 3000, 10, 20))
+                            .withDifficulty(FishProperties.Difficulty.FAT_CATCH)
+                            .withRarity(FishProperties.Rarity.EPIC)
+                            .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD
+                                    .withBiomes(Biomes.LUSH_CAVES.location())
+                                    .withBiomesTags(BiomeTags.IS_JUNGLE.location()))
+                    ,
+
 
                     //deepslate
                     overworldDeepslateFish(ModItems.GHOSTLY_PIKE)
@@ -650,7 +661,17 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     endFish(ModItems.END_GLOW)
                             .withSizeAndWeight(FishProperties.sw(235, 25, 7000, 700, 10, 20))
                             .withRarity(FishProperties.Rarity.UNCOMMON)
-                            .withDifficulty(FishProperties.Difficulty.MOVING_THIN_NO_DECAY)
+                            .withDifficulty(FishProperties.Difficulty.MOVING_THIN_NO_DECAY),
+
+                    endOuterIslandsFish(ModItems.VOIDBITER)
+                            .withSizeAndWeight(FishProperties.sw(50, 15, 2000, 200, 10, 20))
+                            .withRarity(FishProperties.Rarity.EPIC)
+                            .withDifficulty(FishProperties.Difficulty.VOIDBITER)
+                            .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
+
+
+
+
 
             ));
     //endregion fps
@@ -1597,6 +1618,11 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.END);
     }
 
+    public static FishProperties endOuterIslandsFish(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.END_OUTER_ISLANDS);
+    }
+
     public static FishProperties netherLavaFish(Holder<Item> fish)
     {
         return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA);
@@ -1670,8 +1696,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
     public static FishProperties overworldWarmMountainFish(Holder<Item> fish)
     {
-        return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_LAKE
-                .withMustBeCaughtAboveY(100));
+        return FishProperties.DEFAULT.withFish(fish).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_LAKE);
     }
 
     public static FishProperties overworldColdMountainFish(Holder<Item> fish)

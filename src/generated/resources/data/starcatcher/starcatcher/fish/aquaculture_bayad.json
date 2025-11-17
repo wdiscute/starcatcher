@@ -24,7 +24,7 @@
   "fish": "aquaculture:bayad",
   "rarity": "uncommon",
   "world_restrictions": {
-    "above_y": 100,
+    "above_y": 50,
     "below_y": 100,
     "biomes_tags": [
       "starcatcher:is_warm"
