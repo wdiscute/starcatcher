@@ -1043,6 +1043,10 @@ public class FishingGuideScreen extends Screen
         RenderSystem.disableBlend();
         guiGraphics.setColor(1, 1, 1, 1);
 
+        //render new fish icon
+        if (player.getData(ModDataAttachments.FISHES_NOTIFICATION).contains(fp))
+            renderImage(guiGraphics, NEW_FISH, xOffset - 52, 0);
+
         //render fish tooltip
         if (mouseX > uiX + xOffset + 0 && mouseX < uiX + xOffset + 65 && mouseY > uiY + 45 && mouseY < uiY + 110 && fcc != null)
         {
@@ -1067,11 +1071,6 @@ public class FishingGuideScreen extends Screen
 
             guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
         }
-
-        //render new fish icon
-        if (player.getData(ModDataAttachments.FISHES_NOTIFICATION).contains(fp))
-            renderImage(guiGraphics, NEW_FISH, xOffset - 52, 0);
-
 
         int yOffset = 121;
 
