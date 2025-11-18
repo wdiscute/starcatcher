@@ -238,9 +238,6 @@ public class FishingGuideScreen extends Screen
         arrowNextPressed = false;
         arrowPreviousPressed = false;
 
-        System.out.println(x);
-        System.out.println(y);
-
         //previous arrow
         if (x > 49 && x < 69 && y > 203 && y < 217)
         {
@@ -418,7 +415,6 @@ public class FishingGuideScreen extends Screen
             if (page == 0) renderImage(guiGraphics, BACKGROUND_INDEX_FIRST);
             else renderImage(guiGraphics, BACKGROUND_INDEX_SECOND);
             renderIndex(guiGraphics, mouseX, mouseY);
-            System.out.println(page);
         }
 
         //render help page
