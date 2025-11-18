@@ -610,21 +610,20 @@ public class FishingGuideScreen extends Screen
 
     private void renderTheBasics(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
-
         renderHelpText(guiGraphics);
 
         if (page == 0)
         {
             renderImage(guiGraphics, HELP_PAGE_1);
             renderItem(basics, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.basics"), uiX / 2 + 130, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.basics"), uiX + 80, uiY + 45, 0xff000000, false);
         }
 
         if (page == 1)
         {
             renderImage(guiGraphics, HELP_PAGE_2);
             renderItem(treasures, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.treasures"), uiX / 2 + 130, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.treasures"), uiX + 80, uiY + 45, 0xff000000, false);
         }
 
         if (page == 2)
@@ -633,7 +632,7 @@ public class FishingGuideScreen extends Screen
 
             //hooks
             renderItem(ironHook, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.hooks"), uiX / 2 + 130, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.hooks"), uiX + 80, uiY + 45, 0xff000000, false);
 
             renderItemWithOutlineAndHover(guiGraphics, ironHook, 56, 157, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, goldHook, 84, 157, mouseX, mouseY);
@@ -648,7 +647,7 @@ public class FishingGuideScreen extends Screen
 
             //bobbers
             renderItem(frugalBobber, uiX + 321, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.bobbers"), uiX / 2 + 280, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.bobbers"), uiX + 228, uiY + 45, 0xff000000, false);
 
             renderItemWithOutlineAndHover(guiGraphics, creeperBobber, 220, 157, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, glitterBobber, 248, 157, mouseX, mouseY);
@@ -668,7 +667,7 @@ public class FishingGuideScreen extends Screen
 
             //bait
             renderItem(cherryBait, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.baits"), uiX / 2 + 130, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.baits"), uiX + 80, uiY + 45, 0xff000000, false);
 
             renderItemWithOutlineAndHover(guiGraphics, cherryBait, 56, 157, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, lushBait, 94, 157, mouseX, mouseY);
@@ -682,7 +681,7 @@ public class FishingGuideScreen extends Screen
 
             //gadgets
             renderItem(fishSpotter, uiX + 321, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.gadgets"), uiX / 2 + 280, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.gadgets"), uiX + 228, uiY + 45, 0xff000000, false);
             renderItemWithOutlineAndHover(guiGraphics, fishSpotter, 276, 170, mouseX, mouseY);
         }
 
@@ -692,11 +691,11 @@ public class FishingGuideScreen extends Screen
 
             //trophies
             renderItem(trophies, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.trophies"), uiX / 2 + 130, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.trophies"), uiX + 80, uiY + 45, 0xff000000, false);
             renderTrophies(guiGraphics, mouseX, mouseY);
 
             renderItem(secrets, uiX + 321, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.secrets"), uiX / 2 + 280, uiY / 2 + 65, 0xff000000, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.secrets"), uiX + 228, uiY + 45, 0xff000000, false);
             renderSecrets(guiGraphics, mouseX, mouseY);
         }
     }
