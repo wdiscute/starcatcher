@@ -20,7 +20,7 @@ issueTrackerURL="https://discord.gg/WsuFsGSegD" #optional
 [[mods]] #mandatory
 
 modId="starcatcher"
-version="1.0"
+version="1.1"
 displayName="Starcatcher"
 displayURL="http://curseforge.com/minecraft/mc-mods/starcatcher"
 logoFile="starcatcher 256x256.png" #optional
