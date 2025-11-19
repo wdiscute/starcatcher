@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "starcatcher:block/trophy_gold"
+    },
+    "facing=east": {
+      "model": "starcatcher:block/trophy_gold",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "starcatcher:block/trophy_gold",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "starcatcher:block/trophy_gold",
+      "y": 270
+    }
+  }
+}

@@ -8,6 +8,7 @@ import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Config;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.blocks.ModBlocks;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
 import com.wdiscute.starcatcher.secretnotes.SecretNoteScreen;
@@ -1801,7 +1802,7 @@ public class FishingGuideScreen extends Screen
 
 
         fishSpotter = new ItemStack(ModItems.FISH_SPOTTER.get());
-        trophies = new ItemStack(ModItems.TROPHY_GOLD.get());
+        trophies = new ItemStack(ModBlocks.TROPHY_GOLD.get());
         secrets = new ItemStack(ModItems.WATERLOGGED_BOTTLE.get());
 
         settings = new ItemStack(ModItems.SETTINGS.get());

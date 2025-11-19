@@ -208,9 +208,9 @@
   "tooltip.starcatcher.scalding_treasure.0" : "A treasure fished directly from the scalding",
   "tooltip.starcatcher.scalding_treasure.1" : "lands of The Nether. What's inside?",
 
-  "item.starcatcher.trophy_gold" : "Gold Trophy",
-  "item.starcatcher.trophy_silver" : "Silver Trophy",
-  "item.starcatcher.trophy_bronze" : "Bronze Trophy",
+  "block.starcatcher.trophy_gold" : "Gold Trophy",
+  "block.starcatcher.trophy_silver" : "Silver Trophy",
+  "block.starcatcher.trophy_bronze" : "Bronze Trophy",
 
   "item.starcatcher.award_all_fishes" : "Award All Fishes",
   "item.starcatcher.award_one_fish" : "Award One Fish",

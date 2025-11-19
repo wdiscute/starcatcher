@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.datagen;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.StarcatcherTags;
+import com.wdiscute.starcatcher.blocks.ModBlocks;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
 import net.minecraft.core.*;
@@ -2002,7 +2003,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     public static final List<TrophyProperties> TROPHIES = List.of(
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder()),
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of Masterful Fishing",
                     new TrophyProperties.RarityProgress(50, 0),
@@ -2015,7 +2016,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_SILVER.asItem().builtInRegistryHolder()),
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of Skilled Fishing",
                     new TrophyProperties.RarityProgress(25, 0),
@@ -2028,7 +2029,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_BRONZE),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_BRONZE.asItem().builtInRegistryHolder()),
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of Pitiful Fishing",
                     new TrophyProperties.RarityProgress(10, 0),
@@ -2041,7 +2042,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_SILVER),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_SILVER.asItem().builtInRegistryHolder()),
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of Flowing Fishes",
                     new TrophyProperties.RarityProgress(0, 75),
@@ -2054,7 +2055,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder()),
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of Infinite Fishes",
                     new TrophyProperties.RarityProgress(0, 150),
@@ -2067,7 +2068,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             ),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModItems.TROPHY_GOLD),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder()),
                     TrophyProperties.TrophyType.TROPHY,
                     "Trophy of the Older Angler",
                     new TrophyProperties.RarityProgress(0, 0),
