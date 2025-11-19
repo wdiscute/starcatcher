@@ -1,4 +1,4 @@
-// 1.21.1	2025-11-17T17:23:15.7476197	Registries
+// 1.21.1	2025-11-18T20:42:00.7320734	Registries
 406101b061911d64e7b0610868ef2dec53c5aa56 data/starcatcher/starcatcher/fish/aquaculture_arapaima.json
 23dc0e2ffc0a3cc64ad2b2eb72215707ad1d2abd data/starcatcher/starcatcher/fish/aquaculture_arrau_turtle.json
 cb4ad70fdb027670d3ff19a1c8e435bdf38a6790 data/starcatcher/starcatcher/fish/aquaculture_atlantic_cod.json
@@ -43,6 +43,7 @@ fb9070f39b1ea4ca6e29f25525878c4414cfdb2b data/starcatcher/starcatcher/fish/fisho
 66da66c3690e36c925e0381bebf455ab21364fdf data/starcatcher/starcatcher/fish/fishofthieves_wildsplash.json
 1e1d0b904085e33f63e3e47cd6464ad7a8e46271 data/starcatcher/starcatcher/fish/fishofthieves_wrecker.json
 f93da0b3c184f1045169e6fbd6d762d043badcc4 data/starcatcher/starcatcher/fish/minecraft_cod.json
+ef64db201422004891c4056a435e48de784c567b data/starcatcher/starcatcher/fish/minecraft_pufferfish_1.json
 f8bca50431dffec017bfb7db7968af9d65673e54 data/starcatcher/starcatcher/fish/minecraft_salmon.json
 62565880c7add7eeacd68bf384903e07b979a418 data/starcatcher/starcatcher/fish/starcatcher_agave_bream.json
 65b3fcfdf9248b5ff6c9b9ef4ba75e7c0558cc52 data/starcatcher/starcatcher/fish/starcatcher_amethystback.json
