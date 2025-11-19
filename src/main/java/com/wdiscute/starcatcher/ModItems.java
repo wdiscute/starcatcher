@@ -61,11 +61,6 @@ public interface ModItems
 
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
 
-    //trophies
-    DeferredItem<Item> TROPHY_GOLD = singleStackItemFireResistant("trophy_gold");
-    DeferredItem<Item> TROPHY_SILVER = singleStackItemFireResistant("trophy_silver");
-    DeferredItem<Item> TROPHY_BRONZE = singleStackItemFireResistant("trophy_bronze");
-
     DeferredItem<Item> SETTINGS = singleStackItem("settings");
 
 

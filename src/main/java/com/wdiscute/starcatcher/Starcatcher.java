@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.libtooltips.Tooltips;
+import com.wdiscute.starcatcher.blocks.ModBlocks;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.bob.FishingBobModel;
@@ -97,6 +98,7 @@ public class Starcatcher
     {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
         ModDataComponents.register(modEventBus);
         ModSounds.register(modEventBus);
         ModEntities.register(modEventBus);
