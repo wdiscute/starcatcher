@@ -248,16 +248,16 @@
 
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
-  "gui.guide.sort.alphabetical_up" : "Alphabetical ⏬",
-  "gui.guide.sort.alphabetical_down" : "Alphabetical ⏫",
-  "gui.guide.sort.mod_up" : "Mod Name ⏬",
-  "gui.guide.sort.mod_down" : "Mod Name ⏫",
-  "gui.guide.sort.rarity_up" : "Rarity ⏬",
-  "gui.guide.sort.rarity_down" : "Rarity ⏫",
-  "gui.guide.sort.caught_up" : "Caught ⏬",
-  "gui.guide.sort.caught_down" : "Caught ⏫",
-  "gui.guide.sort.fluid_up" : "Fluid ⏬",
-  "gui.guide.sort.fluid_down" : "Fluid ⏫",
+  "gui.guide.sort.alphabetical_up" : "⏬ Alphabetical",
+  "gui.guide.sort.alphabetical_down" : "⏫ Alphabetical",
+  "gui.guide.sort.mod_up" : "⏬ Mod Name",
+  "gui.guide.sort.mod_down" : "⏫ Mod Name",
+  "gui.guide.sort.rarity_up" : "⏬ Rarity",
+  "gui.guide.sort.rarity_down" : "⏫ Rarity",
+  "gui.guide.sort.caught_up" : "⏬ Caught",
+  "gui.guide.sort.caught_down" : "⏫ Caught",
+  "gui.guide.sort.fluid_up" : "⏬ Fluid",
+  "gui.guide.sort.fluid_down" : "⏫ Fluid",
 
 
 
