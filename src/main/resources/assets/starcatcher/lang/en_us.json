@@ -640,7 +640,7 @@
   "tooltip.starcatcher.secret_note.2" : "those probably not amongst us anymore.",
 
   "item.starcatcher.broken_bottle" : "Broken Bottle",
-  "tooltip.starcatcher.broken_bottle.0" : "The remains of a once intact bottle.",
+  "tooltip.starcatcher.broken_bottle.0" : "The remains of an once intact bottle.",
 
   "item.starcatcher.settings" : "Settings",
 
@@ -668,6 +668,9 @@
   "item.starcatcher.true_blue_bottle" : "True Blue Bottle",
   "tooltip.starcatcher.true_blue_bottle.0" : "A bottle glimmering a pale blue.",
   "tooltip.starcatcher.true_blue_bottle.1" : "The purest version of yourself shines from inside.",
+  "tooltip.starcatcher.true_blue_bottle.2" : "",
+  "tooltip.starcatcher.true_blue_bottle.3" : "Instinctive, impatient, impossible.",
+  "tooltip.starcatcher.true_blue_bottle.4" : "In memory, mirror, and membrane.",
 
 
   "item.starcatcher.obidontiee" : "Obidontiee",
