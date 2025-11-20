@@ -23,8 +23,26 @@ java {
 
 repositories {
     maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+
+    maven {
+        // location of a maven mirror for JEI files, as a fallback
+        name = "ModMaven"
+        url = "https://modmaven.dev"
+    }
+
+    maven {
         url = "https://maven.favouriteless.net/releases"
     }
+
     maven {
         url = "https://api.modrinth.com/maven"
     }
@@ -37,6 +55,14 @@ dependencies {
             prefer '1.3'
         }
     }
+
+    //emi
+    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+
+    //jei
+    //compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    //runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
 //    jarJar(implementation "maven.modrinth:kap_lib:v${kap_lib_version}-mc${minecraft_version}:util") {
 //        version
