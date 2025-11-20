@@ -252,7 +252,6 @@ public interface ModItems
     DeferredItem<Item> SCORCHED_BLOODSUCKER = fireResistantFish("scorched_bloodsucker");
     DeferredItem<Item> MOLTEN_DEEPSLATE_CRAB = fireResistantFish("molten_deepslate_crab");
 
-
     //nether
     DeferredItem<Item> EMBERGILL = fireResistantFish("embergill");
     DeferredItem<Item> SCALDING_PIKE = fireResistantFish("scalding_pike");
@@ -268,6 +267,9 @@ public interface ModItems
     DeferredItem<Item> CHORUS_CRAB = fish("chorus_crab");
     DeferredItem<Item> END_GLOW = fish("end_glow");
     DeferredItem<Item> VOIDBITER = fish("voidbiter");
+
+
+
 
 
     private static DeferredItem<Item> fish(String name)
