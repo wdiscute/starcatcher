@@ -20,10 +20,9 @@ public class StarcatcherEmiPlugin implements EmiPlugin
     public static final ResourceLocation MY_SPRITE_SHEET = Starcatcher.rl("textures/gui/emi_simplified_textures.png");
     public static final EmiStack MY_WORKSTATION = EmiStack.of(ModItems.ROD);
     public static final EmiRecipeCategory STARCATCHER_CATEGORY
-            = new StarcatcherEmiRecipeCategory(
-            Starcatcher.rl("starcatcher"),
-            MY_WORKSTATION,
-            new EmiTexture(MY_SPRITE_SHEET, 0, 0, 16, 16));
+            = new EmiRecipeCategory(
+            Starcatcher.rl("fishing"),
+            MY_WORKSTATION);
 
     @Override
     public void register(EmiRegistry registry)

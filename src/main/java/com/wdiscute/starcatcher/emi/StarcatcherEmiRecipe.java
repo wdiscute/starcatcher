@@ -95,39 +95,24 @@ public class StarcatcherEmiRecipe implements EmiRecipe
     @Override
     public void addWidgets(WidgetHolder widgets)
     {
-
-        // Adds an input slot on the left
         widgets.addSlot(INPUT.get(0), 5, 2);
         widgets.addSlot(INPUT.get(1), 23, 2);
 
-        // Add an arrow texture to indicate processing
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 45, 2);
 
         ItemStack is = new ItemStack(fp.fish());
 
         if (!this.fp.customName().equals(FishProperties.DEFAULT.customName()))
-        {
             is.set(DataComponents.ITEM_NAME, Component.translatable(fp.customName()));
-        }
 
         if (this.tp != null)
         {
             if (!this.tp.customName().equals(TrophyProperties.DEFAULT.customName()) && tp.trophyType().equals(TrophyProperties.TrophyType.TROPHY))
-            {
                 is.set(DataComponents.ITEM_NAME, Component.translatable(tp.customName()));
-            }
 
             is.set(ModDataComponents.TROPHY, this.tp);
         }
 
-
         widgets.addSlot(EmiIngredient.of(Ingredient.of(is)), 73, 2).recipeContext(this);
-
-
-        //widgets.addText(Component.translatable("emi.starcatcher.guide"), 0, 0, 0xffffff, true);
-
-        // Adds an output slot on the right
-        // Note that output slots need to call `recipeContext` to inform EMI about their recipe context
-        // This includes being able to resolve recipe trees, favorite stacks with recipe context, and more
     }
 }
