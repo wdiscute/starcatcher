@@ -31,10 +31,14 @@ public class AwardAllFishes extends Item
         List<FishCaughtCounter> fishCounter = new ArrayList<>();
         List<FishProperties> fishes = new ArrayList<>();
 
+        FishProperties awd;
+
         for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
-            fishCounter.add(new FishCaughtCounter(fp, 999999, 0, 0, 0, 0, false));
+            if(fp.hasGuideEntry())
+                fishCounter.add(new FishCaughtCounter(fp, 999999, 0, 0, 0, 0, false));
         }
+
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
 
