@@ -1191,28 +1191,72 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     public static final List<TrophyProperties> TROPHIES = List.of(
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem()
-                            .builtInRegistryHolder()), TrophyProperties.TrophyType.TROPHY, "Trophy of Masterful Fishing", new TrophyProperties.RarityProgress(50, 0), TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.DEFAULT.chanceToCatch()),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder()),
+                    TrophyProperties.TrophyType.TROPHY,
+                    "Trophy of Masterful Fishing",
+                    new TrophyProperties.RarityProgress(50, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.DEFAULT.chanceToCatch()),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_SILVER.asItem()
-                            .builtInRegistryHolder()), TrophyProperties.TrophyType.TROPHY, "Trophy of Skilled Fishing", new TrophyProperties.RarityProgress(25, 0), TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.DEFAULT.chanceToCatch()),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_SILVER.asItem().builtInRegistryHolder()),
+                    TrophyProperties.TrophyType.TROPHY,
+                    "Trophy of Skilled Fishing",
+                    new TrophyProperties.RarityProgress(25, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_BRONZE.asItem()
-                            .builtInRegistryHolder()), TrophyProperties.TrophyType.TROPHY, "Trophy of Pitiful Fishing", new TrophyProperties.RarityProgress(10, 0), TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.DEFAULT.chanceToCatch()),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_BRONZE.asItem().builtInRegistryHolder()),
+                    TrophyProperties.TrophyType.TROPHY,
+                    "Trophy of Pitiful Fishing",
+                    new TrophyProperties.RarityProgress(10, 0),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_SILVER.asItem()
-                            .builtInRegistryHolder()), TrophyProperties.TrophyType.TROPHY, "Trophy of Flowing Fishes", new TrophyProperties.RarityProgress(0, 75), TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.DEFAULT.chanceToCatch()),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_SILVER.asItem().builtInRegistryHolder()),
+                    TrophyProperties.TrophyType.TROPHY, "Trophy of Flowing Fishes",
+                    new TrophyProperties.RarityProgress(0, 50),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem()
-                            .builtInRegistryHolder()), TrophyProperties.TrophyType.TROPHY, "Trophy of Infinite Fishes", new TrophyProperties.RarityProgress(0, 150), TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.RarityProgress.DEFAULT, TrophyProperties.DEFAULT.chanceToCatch()),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder()),
+                    TrophyProperties.TrophyType.TROPHY, "Trophy of Infinite Fishes",
+                    new TrophyProperties.RarityProgress(0, 90),
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.RarityProgress.DEFAULT,
+                    TrophyProperties.DEFAULT.chanceToCatch()),
 
             new TrophyProperties(
-                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem()
-                            .builtInRegistryHolder()), TrophyProperties.TrophyType.TROPHY, "Trophy of the Older Angler", new TrophyProperties.RarityProgress(0, 0), new TrophyProperties.RarityProgress(100, 50), new TrophyProperties.RarityProgress(50, 25), new TrophyProperties.RarityProgress(30, 17), new TrophyProperties.RarityProgress(20, 12), new TrophyProperties.RarityProgress(10, 8), TrophyProperties.DEFAULT.chanceToCatch()),
+                    FishProperties.DEFAULT.withFish(ModBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder()),
+                    TrophyProperties.TrophyType.TROPHY, "Trophy of the Older Angler",
+                    new TrophyProperties.RarityProgress(200, 0),
+                    new TrophyProperties.RarityProgress(0, 36),
+                    new TrophyProperties.RarityProgress(0, 23),
+                    new TrophyProperties.RarityProgress(0, 14),
+                    new TrophyProperties.RarityProgress(0, 13),
+                    new TrophyProperties.RarityProgress(0, 8),
+                    TrophyProperties.DEFAULT.chanceToCatch()),
 
 
             //                                         ,--.

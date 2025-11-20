@@ -1,27 +1,25 @@
 {
+  "all": {
+    "total": 200
+  },
   "common": {
-    "total": 100,
-    "unique": 50
+    "unique": 36
   },
   "custom_name": "Trophy of the Older Angler",
   "epic": {
-    "total": 20,
-    "unique": 12
+    "unique": 13
   },
   "fish_properties": {
     "fish": "starcatcher:trophy_gold"
   },
   "legendary": {
-    "total": 10,
     "unique": 8
   },
   "rare": {
-    "total": 30,
-    "unique": 17
+    "unique": 14
   },
   "trophy_type": "trophy",
   "uncommon": {
-    "total": 50,
-    "unique": 25
+    "unique": 23
   }
 }
