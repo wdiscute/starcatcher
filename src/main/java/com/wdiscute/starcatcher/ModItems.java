@@ -3,13 +3,21 @@ package com.wdiscute.starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
 import com.wdiscute.starcatcher.items.*;
 import com.wdiscute.starcatcher.items.cheater.*;
+import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import sereneseasons.api.season.SeasonHelper;
+import sereneseasons.season.SeasonTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +69,22 @@ public interface ModItems
 
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
 
-    DeferredItem<Item> SETTINGS = singleStackItem("settings");
+    DeferredItem<Item> SETTINGS = ITEMS.register(
+            "settings", () -> new Item(new Item.Properties())
+            {
+                @Override
+                public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+                {
+
+                    System.out.println("current season " + SeasonHelper.getSeasonState(level).getSeason());
+                    System.out.println("current season starcatcher " + FishProperties.WorldRestrictions.Seasons.get(SeasonHelper.getSeasonState(level).getSeason()));
+
+                    System.out.println("current subseason " + SeasonHelper.getSeasonState(level).getSubSeason());
+                    System.out.println("current subseason starcatcher " + FishProperties.WorldRestrictions.Seasons.get(SeasonHelper.getSeasonState(level).getSubSeason()));
+
+                    return super.use(level, player, usedHand);
+                }
+            });
 
 
     //secrets
@@ -69,24 +92,29 @@ public interface ModItems
     DeferredItem<Item> BROKEN_BOTTLE = ITEMS.register("broken_bottle", BrokenBottle::new);
 
     //notes
-    DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () ->
-            new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
+    DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register(
+            "drifting_waterlogged_bottle", () ->
+                    new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
 
-    DeferredItem<Item> SCALDING_BOTTLE = ITEMS.register("scalding_bottle", () ->
-            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_1));
+    DeferredItem<Item> SCALDING_BOTTLE = ITEMS.register(
+            "scalding_bottle", () ->
+                    new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_1));
 
-    DeferredItem<Item> BURNING_BOTTLE = ITEMS.register("burning_bottle", () ->
-            new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_2));
+    DeferredItem<Item> BURNING_BOTTLE = ITEMS.register(
+            "burning_bottle", () ->
+                    new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_2));
 
-    DeferredItem<Item> HOPEFUL_BOTTLE = ITEMS.register("hopeful_bottle", () ->
-            new NoteContainer(SecretNote.Note.HOPEFUL_NOTE));
+    DeferredItem<Item> HOPEFUL_BOTTLE = ITEMS.register(
+            "hopeful_bottle", () ->
+                    new NoteContainer(SecretNote.Note.HOPEFUL_NOTE));
 
-    DeferredItem<Item> HOPELESS_BOTTLE = ITEMS.register("hopeless_bottle", () ->
-            new NoteContainer(SecretNote.Note.HOPELESS_NOTE));
+    DeferredItem<Item> HOPELESS_BOTTLE = ITEMS.register(
+            "hopeless_bottle", () ->
+                    new NoteContainer(SecretNote.Note.HOPELESS_NOTE));
 
-    DeferredItem<Item> TRUE_BLUE_BOTTLE = ITEMS.register("true_blue_bottle", () ->
-            new NoteContainer(SecretNote.Note.TRUE_BLUE));
-
+    DeferredItem<Item> TRUE_BLUE_BOTTLE = ITEMS.register(
+            "true_blue_bottle", () ->
+                    new NoteContainer(SecretNote.Note.TRUE_BLUE));
 
 
     //cheater items
@@ -267,9 +295,6 @@ public interface ModItems
     DeferredItem<Item> CHORUS_CRAB = fish("chorus_crab");
     DeferredItem<Item> END_GLOW = fish("end_glow");
     DeferredItem<Item> VOIDBITER = fish("voidbiter");
-
-
-
 
 
     private static DeferredItem<Item> fish(String name)

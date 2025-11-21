@@ -21,28 +21,20 @@ java {
     withSourcesJar()
 }
 
-repositories {
-    maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-
+repositories
+{
+    //emi
     maven {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
 
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-
+    //favouriteless
     maven {
         url = "https://maven.favouriteless.net/releases"
     }
 
+    //modrinth
     maven {
         url = "https://api.modrinth.com/maven"
     }
@@ -56,20 +48,28 @@ dependencies {
         }
     }
 
+    // Example mod dependency using a file as dependency
+    //files("libs/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
+
     //emi
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 
-    //jei
-    //compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
-    //runtimeOnly "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
+    // Example mod dependency using a mod jar from ./libs with a flat dir repository
+    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
+    // The group id is ignored when searching -- in this case, it is "blank"
+    // implementation "blank:coolmod-${mc_version}:${coolmod_version}"
 
-//    jarJar(implementation "maven.modrinth:kap_lib:v${kap_lib_version}-mc${minecraft_version}:util") {
-//        version
-//                {
-//                    prefer "${kap_lib_version}"
-//                }
-//    }
+    // Example mod dependency using a file as dependency
+    implementation files(".libs/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
+    implementation files(".libs/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
+
+    // Example project dependency using a sister or child project:
+    // implementation project(":myproject")
+
+    // For more info:
+    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
+    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
 }
 

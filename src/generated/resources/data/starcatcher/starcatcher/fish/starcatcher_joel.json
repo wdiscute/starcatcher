@@ -43,6 +43,9 @@
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "seasons": [
+      "summer"
     ]
   }
 }

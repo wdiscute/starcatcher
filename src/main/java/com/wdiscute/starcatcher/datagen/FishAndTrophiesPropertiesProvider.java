@@ -18,10 +18,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,6 +126,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withSizeAndWeight(FishProperties.sw(17.7f, 5, 1200, 200, 20, 33)),
 
             overworldLakeFish(ModItems.SILVERVEIL_PERCH)
+                    .withSeasons(Seasons.SPRING, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(27.0f, 11, 500, 352, 5, 36))
                     .withWeather(FishProperties.Weather.RAIN)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
@@ -133,12 +134,14 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldLakeFish(ModItems.ELDERSCALE)
                     .withSizeAndWeight(FishProperties.sw(160.0f, 85, 2300, 652, 10, 20))
+                    .withSeasons(Seasons.LATE_SPRING, Seasons.SUMMER, Seasons.AUTUMN)
                     .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withBaseChance(3),
 
             overworldLakeFish(ModItems.DRIFTFIN)
                     .withSizeAndWeight(FishProperties.sw(16.0f, 3, 167, 70, 10, 20))
+                    .withSeasons(Seasons.SUMMER, Seasons.AUTUMN)
                     .withWeather(FishProperties.Weather.CLEAR),
 
             overworldLakeFish(ModItems.TWILIGHT_KOI)
@@ -150,12 +153,14 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldLakeFish(ModItems.THUNDER_BASS)
                     .withSizeAndWeight(FishProperties.sw(40, 12, 1200, 800, 10, 20))
+                    .withSeasons(Seasons.SUMMER, Seasons.AUTUMN)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withWeather(FishProperties.Weather.THUNDER)
                     .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING),
 
             overworldLakeFish(ModItems.LIGHTNING_BASS)
                     .withSizeAndWeight(FishProperties.sw(40, 12, 1300, 620, 10, 20))
+                    .withSeasons(Seasons.SUMMER, Seasons.AUTUMN)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withWeather(FishProperties.Weather.THUNDER)
                     .withDifficulty(FishProperties.Difficulty.HARD_VANISHING),
@@ -172,6 +177,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldColdLakeFish(ModItems.CRYSTALBACK_TROUT)
                     .withSizeAndWeight(FishProperties.sw(35, 8, 1600, 1200, 10, 20))
+                    .withSeasons(Seasons.WINTER)
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
             overworldColdLakeFish(ModItems.AURORA)
@@ -182,6 +188,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION_VANISHING),
 
             overworldColdLakeFish(ModItems.WINTERY_PIKE)
+                    .withSeasons(Seasons.EARLY_SPRING, Seasons.LATE_AUTUMN, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(75, 20, 5000, 3000, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING),
 
@@ -189,6 +196,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             //lake warm
             overworldWarmLakeFish(ModItems.SANDTAIL)
                     .withSizeAndWeight(FishProperties.sw(200, 100, 1600, 1200, 10, 20))
+                    .withSeasons(Seasons.SUMMER)
                     .withDaytime(FishProperties.Daytime.NIGHT),
 
             overworldWarmLakeFish(ModItems.MIRAGE_CARP)
@@ -200,10 +208,12 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldWarmLakeFish(ModItems.SCORCHFISH)
                     .withSizeAndWeight(FishProperties.sw(60, 20, 6000, 4000, 10, 20))
+                    .withSeasons(Seasons.SPRING, Seasons.SUMMER, Seasons.AUTUMN)
                     .withWeather(FishProperties.Weather.CLEAR),
 
             overworldWarmLakeFish(ModItems.CACTIFISH)
                     .withSizeAndWeight(FishProperties.sw(100, 50, 10000, 3000, 10, 20))
+                    .withSeasons(Seasons.SUMMER)
                     .withDaytime(FishProperties.Daytime.DAY),
 
 
@@ -218,12 +228,14 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             //mountain
             overworldMountainFish(ModItems.SUNNY_STURGEON)
                     .withSizeAndWeight(FishProperties.sw(400, 200, 100000, 50000, 10, 10))
+                    .withSeasons(Seasons.SPRING, Seasons.SUMMER)
                     .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withBaseChance(2),
 
             overworldMountainFish(ModItems.PEAKDWELLER)
+                    .withSeasons(Seasons.EARLY_SPRING, Seasons.AUTUMN, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(100, 50, 10000, 5000, 10, 10))
                     .withDifficulty(FishProperties.Difficulty.HARD),
 
@@ -232,6 +244,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
             overworldMountainFish(ModItems.SUN_SEEKING_CARP)
+                    .withSeasons(Seasons.LATE_SPRING, Seasons.SUMMER, Seasons.EARLY_AUTUMN)
                     .withSizeAndWeight(FishProperties.sw(60, 20, 6000, 4000, 10, 20))
                     .withRarity(FishProperties.Rarity.RARE)
                     .withBaseChance(2)
@@ -241,6 +254,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             //swamp
             overworldSwampFish(ModItems.SLUDGE_CATFISH)
                     .withSizeAndWeight(FishProperties.sw(100, 50, 10000, 3000, 10, 20))
+                    .withSeasons(Seasons.SPRING)
                     .withRarity(FishProperties.Rarity.UNCOMMON),
 
             overworldSwampFish(ModItems.LILY_SNAPPER)
@@ -250,6 +264,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             overworldSwampFish(ModItems.SAGE_CATFISH)
                     .withSizeAndWeight(FishProperties.sw(100, 50, 10000, 3000, 10, 20))
+                    .withSeasons(Seasons.EARLY_SPRING, Seasons.AUTUMN, Seasons.WINTER)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST_NO_DECAY)
                     .withDaytime(FishProperties.Daytime.NIGHT)
@@ -263,6 +278,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
             //darkoak forest
             overworldDarkForestFish(ModItems.PALE_PINFISH)
                     .withSizeAndWeight(FishProperties.sw(15, 5, 150, 100, 10, 20))
+                    .withSeasons(Seasons.EARLY_SPRING, Seasons.LATE_AUTUMN, Seasons.WINTER)
                     .withDaytime(FishProperties.Daytime.MIDNIGHT)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withDifficulty(FishProperties.Difficulty.EASY_NO_FLIP_VANISHING),
@@ -274,12 +290,14 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
             overworldDarkForestFish(ModItems.PALE_CARP)
+                    .withSeasons(Seasons.EARLY_SPRING, Seasons.LATE_AUTUMN, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(60, 20, 6000, 4000, 10, 20))
                     .withDaytime(FishProperties.Daytime.DAY),
 
 
             //cherry grove
             overworldCherryGroveFish(ModItems.BLOSSOMFISH)
+                    .withSeasons(Seasons.SPRING)
                     .withSizeAndWeight(FishProperties.sw(60, 20, 6000, 4000, 10, 20))
                     .withWeather(FishProperties.Weather.CLEAR),
 
@@ -290,15 +308,18 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withRarity(FishProperties.Rarity.UNCOMMON),
 
             overworldCherryGroveFish(ModItems.PINK_KOI)
+                    .withSeasons(Seasons.SPRING)
                     .withSizeAndWeight(FishProperties.sw(60, 20, 3000, 2000, 10, 20))
                     .withWeather(FishProperties.Weather.RAIN),
 
             overworldCherryGroveFish(ModItems.MORGANITE)
+                    .withSeasons(Seasons.SUMMER)
                     .withSizeAndWeight(FishProperties.sw(120, 80, 7000, 1000, 10, 20))
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
             overworldCherryGroveFish(ModItems.ROSE_SIAMESE_FISH)
+                    .withSeasons(Seasons.SPRING, Seasons.AUTUMN)
                     .withSizeAndWeight(FishProperties.sw(30, 10, 1000, 500, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING)
                     .withDaytime(FishProperties.Daytime.DAY)
@@ -312,6 +333,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     withSizeAndWeight(FishProperties.sw(400, 200, 100000, 50000, 10, 10)),
 
             overworldColdMountainFish(ModItems.ICETOOTH_STURGEON)
+                    .withSeasons(Seasons.EARLY_SPRING, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(400, 200, 100000, 50000, 10, 10))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
@@ -323,6 +345,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withBaseChance(3),
 
             overworldColdMountainFish(ModItems.CRYSTALBACK_BOREAL)
+                    .withSeasons(Seasons.SUMMER, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(30, 15, 6000, 2000, 10, 10))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
@@ -335,11 +358,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.EASY_VANISHING),
 
             overworldRiverFish(ModItems.DRIFTING_BREAM)
+                    .withSeasons(Seasons.SUMMER, Seasons.AUTUMN)
                     .withSizeAndWeight(FishProperties.sw(36, 12, 2000, 1000, 10, 10))
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING),
 
             overworldRiverFish(ModItems.WILLOW_BREAM)
+                    .withSeasons(Seasons.SUMMER, Seasons.AUTUMN)
                     .withSizeAndWeight(FishProperties.sw(36, 12, 2000, 1000, 10, 10))
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withDifficulty(FishProperties.Difficulty.HARD_VANISHING)
@@ -347,12 +372,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withBaseChance(2),
 
             overworldRiverFish(ModItems.HOLLOWBELLY_DARTER)
+                    .withSeasons(Seasons.SPRING)
                     .withSizeAndWeight(FishProperties.sw(6, 2, 7, 6, 10, 10))
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING),
 
-            overworldRiverFish(ModItems.MISTBACK_CHUB).
-
-                    withSizeAndWeight(FishProperties.sw(30, 10, 1400, 600, 10, 10)),
+            overworldRiverFish(ModItems.MISTBACK_CHUB)
+                    .withSeasons(Seasons.SPRING)
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 1400, 600, 10, 10)),
 
             overworldRiverFish(ModItems.SILVERFIN_PIKE)
                     .withSizeAndWeight(FishProperties.sw(75, 20, 5000, 3000, 10, 20))
@@ -360,9 +386,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withRarity(FishProperties.Rarity.UNCOMMON),
 
-            overworldRiverFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.SALMON)).
-
-                    withSizeAndWeight(FishProperties.sw(80, 40, 10000, 8000, 10, 20)),
+            overworldRiverFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.SALMON))
+                    .withSizeAndWeight(FishProperties.sw(80, 40, 10000, 8000, 10, 20)),
 
             overworldRiverFish(ModItems.DRIED_SEAWEED).withBaseChance(1)
                     .withSkipMinigame(true)
@@ -370,12 +395,13 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             //cold river
-            overworldColdRiverFish(ModItems.FROSTGILL_CHUB).
-
-                    withSizeAndWeight(FishProperties.sw(30, 10, 1400, 600, 10, 10)),
+            overworldColdRiverFish(ModItems.FROSTGILL_CHUB)
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 1400, 600, 10, 10))
+                    .withSeasons(Seasons.SPRING, Seasons.SUMMER, Seasons.AUTUMN),
 
             overworldColdRiverFish(ModItems.CRYSTALBACK_MINNOW)
                     .withSizeAndWeight(FishProperties.sw(6, 4, 5, 3, 10, 10))
+                    .withSeasons(Seasons.WINTER)
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withDaytime(FishProperties.Daytime.NIGHT),
 
@@ -388,6 +414,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION),
 
             overworldColdRiverFish(ModItems.BLUE_CRYSTAL_FIN)
+                    .withSeasons(Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(12, 4, 70, 30, 10, 10))
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
@@ -399,6 +426,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withSizeAndWeight(FishProperties.sw(80, 40, 12000, 7000, 10, 10)),
 
             overworldOceanFish(ModItems.SEA_BASS)
+                    .withSeasons(Seasons.EARLY_SPRING, Seasons.MID_AUTUMN, Seasons.LATE_AUTUMN, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(40, 12, 1600, 1100, 10, 10))
                     .withBaseChance(15)
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
@@ -411,14 +439,16 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withRarity(FishProperties.Rarity.UNCOMMON),
 
             overworldOceanFish(ModItems.DEEPJAW_HERRING)
+                    .withSeasons(Seasons.SPRING, Seasons.SUMMER)
                     .withSizeAndWeight(FishProperties.sw(30, 8, 300, 100, 10, 10))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
-            overworldOceanFish(ModItems.DUSKTAIL_SNAPPER).
-
-                    withSizeAndWeight(FishProperties.sw(60, 20, 7000, 2000, 10, 20)),
+            overworldOceanFish(ModItems.DUSKTAIL_SNAPPER)
+                    .withSeasons(Seasons.SPRING, Seasons.SUMMER)
+                    .withSizeAndWeight(FishProperties.sw(60, 20, 7000, 2000, 10, 20)),
 
             overworldOceanFish(ModItems.JOEL)
+                    .withSeasons(Seasons.SUMMER)
                     .withSizeAndWeight(FishProperties.sw(69, 0, 2000, 600, 10, 0))
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING)
                     .withBaseChance(1)
@@ -437,6 +467,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             //deep ocean
             overworldDeepOceanFish(ModItems.BIGEYE_TUNA)
+                    .withSeasons(Seasons.SPRING, Seasons.WINTER)
                     .withSizeAndWeight(FishProperties.sw(150, 50, 120000, 60000, 10, 20))
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
@@ -465,9 +496,8 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             //underground
-            overworldUndergroundFish(ModItems.GOLD_FAN).
-
-                    withSizeAndWeight(FishProperties.sw(70, 50, 4000, 2000, 10, 20)),
+            overworldUndergroundFish(ModItems.GOLD_FAN)
+                    .withSizeAndWeight(FishProperties.sw(70, 50, 4000, 2000, 10, 20)),
 
             overworldUndergroundFish(ModItems.GEODE_EEL)
                     .withSizeAndWeight(FishProperties.sw(500, 150, 10000, 2000, 10, 20))
@@ -1257,6 +1287,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     new TrophyProperties.RarityProgress(0, 13),
                     new TrophyProperties.RarityProgress(0, 8),
                     TrophyProperties.DEFAULT.chanceToCatch()),
+
 
 
             //                                         ,--.
