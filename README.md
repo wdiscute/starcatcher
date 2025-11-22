@@ -2,21 +2,29 @@
 
 ![Minigame](https://github.com/user-attachments/assets/c1878f20-655c-40cd-9f50-ea18107ee24b)
 
-Fishes are now restricted by a number of conditions, such as Dimension, Biome, Elevation, Daytime, Weather, and more! 🐟 🐠
+The 90+ new fishes added are restricted by a number of conditions, such as Dimension, Biome, Elevation, Daytime, Weather, Fluid, and more! 🐟 🐠
 
-Starcatcher features a fully in-game guide which will show you where you can catch each fish, alongside it's rarity and more.
+Starcatcher features a fully in-game guide which will serve as a handy companion throughout your fish catching journey! It will guide you through hooks, bobbers, baits, treasures, trophies and many secrets!
 
-![Fishing Guide Index](https://cdn.modrinth.com/data/cached_images/f6b8c259cef4a6b170152d3a1b4654a358d939bc.png)
+![Index](https://cdn.modrinth.com/data/cached_images/b94b8c911433e0a25eafd0fcecad6c6e4a1fea2e.png)
 
-![Replace this with a description](https://cdn.modrinth.com/data/cached_images/bbf83f4ba09b9bfe71b3bbb67f2e66d72568b67e.png)
+![The Basics](https://cdn.modrinth.com/data/cached_images/04ebf4b9783b1c34fa0da177e3e6c7c55aed285e.png)
 
 Will you fill out your collection? 🔎 Some of these catches are harder than they appear!
 
-![output](https://github.com/user-attachments/assets/3f0baab4-d0b4-4a11-b2ae-68a5e3001126)
+![entry](https://cdn.modrinth.com/data/cached_images/516bfce357c06aa5709a75ad23ab11f8f42347d9.gif)
+
+There are several hooks and bobbers made to modify the way you fish, either by aiding the difficulty, or providing an extra challenge for better loot!
+
+![Hooks and Bobbers](https://cdn.modrinth.com/data/cached_images/d046f349f3fc4cbeb5c169fad54d53a37565b500.png)
+
+Starcatcher also features plenty of secret messages and bits of story to be fished out of the sea 🌊 Will you follow behind Arnwulf the Skeptic's steps?
+
+![Arnwulf the Skeptic](https://cdn.modrinth.com/data/cached_images/0b8a75a535c1e386126ff12c7b8a3b932c9a135b.gif)
 
 ### For devs
 
-Each fish is highly costumizable through data-packs, perfect for modpacks and mods looking to add compatibility with their own fishes!
+Each fish is highly costumizable through data-packs, perfect for modpacks and mods looking to add compatibility with their own fishes, or gating progression or items behind a specific fishing achievement!
 
 Check the wiki page on how to add your custom fish json with your restrictions, starcatcher will handle everything else.
 
