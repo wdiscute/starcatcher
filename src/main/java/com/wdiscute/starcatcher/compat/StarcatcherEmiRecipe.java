@@ -39,6 +39,9 @@ public class StarcatcherEmiRecipe implements EmiRecipe
         this.fp = fp;
         this.tp = null;
         this.is = new ItemStack(fp.fish());
+        if (!this.fp.customName().equals(FishProperties.DEFAULT.customName()))
+            is.set(DataComponents.ITEM_NAME, Component.translatable(fp.customName()));
+
     }
 
     public StarcatcherEmiRecipe(ResourceLocation id, TrophyProperties tp)
@@ -47,9 +50,12 @@ public class StarcatcherEmiRecipe implements EmiRecipe
         this.id = id;
         this.fp = tp.fp();
         this.tp = tp;
+
         this.is = new ItemStack(fp.fish());
+
         if (!this.tp.customName().equals(TrophyProperties.DEFAULT.customName()) && tp.trophyType().equals(TrophyProperties.TrophyType.TROPHY))
             is.set(DataComponents.ITEM_NAME, Component.translatable(tp.customName()));
+
         is.set(ModDataComponents.TROPHY, this.tp);
 
     }
@@ -104,17 +110,6 @@ public class StarcatcherEmiRecipe implements EmiRecipe
         widgets.addSlot(input.get(1), 23, 2);
 
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 45, 2);
-
-        if (!this.fp.customName().equals(FishProperties.DEFAULT.customName()))
-            is.set(DataComponents.ITEM_NAME, Component.translatable(fp.customName()));
-
-        if (this.tp != null)
-        {
-            if (!this.tp.customName().equals(TrophyProperties.DEFAULT.customName()) && tp.trophyType().equals(TrophyProperties.TrophyType.TROPHY))
-                is.set(DataComponents.ITEM_NAME, Component.translatable(tp.customName()));
-
-            is.set(ModDataComponents.TROPHY, this.tp);
-        }
 
         widgets.addSlot(EmiIngredient.of(Ingredient.of(is)), 73, 2).recipeContext(this);
     }
