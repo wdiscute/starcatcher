@@ -1,5 +1,6 @@
 {
 	"format_version": "1.9.0",
+	"render_type":"cutout_mipped",
 	"credit": "Made with Blockbench",
 	"texture_size": [64, 64],
 	"textures": {
