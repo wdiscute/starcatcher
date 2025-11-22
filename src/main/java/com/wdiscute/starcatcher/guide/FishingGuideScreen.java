@@ -263,20 +263,30 @@ public class FishingGuideScreen extends Screen
         //mod
         if (sort.equals(Sort.MOD_DOWN) || sort.equals(Sort.MOD_UP))
         {
+            Config.SORT.set(Sort.ALPHABETICAL_UP);
+            Config.SORT.save();
+            sortEntries();
+            Config.SORT.set(sort);
+            Config.SORT.save();
+
             List<FishProperties> entriesSorted = new ArrayList<>();
-            Map<String, FishProperties> map = new HashMap<>();
-            List<String> entriesString = new ArrayList<>();
+            List<String> allNamespaces = new ArrayList<>();
 
             for (FishProperties fp : entries)
             {
-                String namespace = fp.fish().unwrapKey().get().location().getPath();
-                map.put(namespace, fp);
-                entriesString.add(namespace);
+                String namespace = fp.fish().unwrapKey().get().location().getNamespace();
+                if(!allNamespaces.contains(namespace)) allNamespaces.add(namespace);
             }
 
-            entriesString = entriesString.stream().sorted().toList();
+            for (String s : allNamespaces)
+            {
+                for (FishProperties fp : entries)
+                {
+                    String namespace = fp.fish().unwrapKey().get().location().getNamespace();
+                    if(namespace.equals(s)) entriesSorted.add(fp);
+                }
 
-            for (String s : entriesString) entriesSorted.add(map.get(s));
+            }
 
             entries = sort.equals(Sort.MOD_UP) ? entriesSorted : entriesSorted.reversed();
         }
