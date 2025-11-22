@@ -28,6 +28,10 @@
   "world_restrictions": {
     "dimensions": [
       "minecraft:the_end"
+    ],
+    "seasons": [
+      "spring",
+      "autumn"
     ]
   }
 }
