@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
+import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
@@ -36,7 +37,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
-import sereneseasons.api.season.SeasonHelper;
 
 import java.awt.*;
 import java.util.*;
@@ -1250,10 +1250,7 @@ public class FishingGuideScreen extends Screen
 
             if(ModList.get().isLoaded("sereneseasons"))
             {
-                Seasons season = Seasons.get(SeasonHelper.getSeasonState(level).getSeason());
-                Seasons subSeason = Seasons.get(SeasonHelper.getSeasonState(level).getSubSeason());
-
-                if(U.containsAny(fp.wr().seasons(), season, subSeason, Seasons.ALL))
+                if(SereneSeasonsCompat.canCatch(fp, level))
                 {
                     components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
                 }

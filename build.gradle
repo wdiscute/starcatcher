@@ -61,8 +61,8 @@ dependencies {
     // implementation "blank:coolmod-${mc_version}:${coolmod_version}"
 
     // Example mod dependency using a file as dependency
-    implementation files(".libs/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
-    implementation files(".libs/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
+    compileOnly files(".libs/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
+    compileOnly files(".libs/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
 
     // Example project dependency using a sister or child project:
     // implementation project(":myproject")

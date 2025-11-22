@@ -70,21 +70,7 @@ public interface ModItems
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
 
     DeferredItem<Item> SETTINGS = ITEMS.register(
-            "settings", () -> new Item(new Item.Properties())
-            {
-                @Override
-                public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
-                {
-
-                    System.out.println("current season " + SeasonHelper.getSeasonState(level).getSeason());
-                    System.out.println("current season starcatcher " + FishProperties.WorldRestrictions.Seasons.get(SeasonHelper.getSeasonState(level).getSeason()));
-
-                    System.out.println("current subseason " + SeasonHelper.getSeasonState(level).getSubSeason());
-                    System.out.println("current subseason starcatcher " + FishProperties.WorldRestrictions.Seasons.get(SeasonHelper.getSeasonState(level).getSubSeason()));
-
-                    return super.use(level, player, usedHand);
-                }
-            });
+            "settings", () -> new Item(new Item.Properties()));
 
 
     //secrets

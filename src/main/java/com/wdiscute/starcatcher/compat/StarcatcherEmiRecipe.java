@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.emi;
+package com.wdiscute.starcatcher.compat;
 
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -11,11 +11,9 @@ import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +27,7 @@ public class StarcatcherEmiRecipe implements EmiRecipe
     private final List<EmiStack> output;
     private final FishProperties fp;
     private final TrophyProperties tp;
-    private static final List<EmiIngredient> INPUT = List.of(
+    private List<EmiIngredient> input = List.of(
             EmiIngredient.of(Ingredient.of(ModItems.GUIDE)),
             EmiIngredient.of(Ingredient.of(ModItems.ROD)));
 
@@ -70,7 +68,7 @@ public class StarcatcherEmiRecipe implements EmiRecipe
     @Override
     public List<EmiIngredient> getCatalysts()
     {
-        return INPUT;
+        return input;
     }
 
     @Override
@@ -95,8 +93,8 @@ public class StarcatcherEmiRecipe implements EmiRecipe
     @Override
     public void addWidgets(WidgetHolder widgets)
     {
-        widgets.addSlot(INPUT.get(0), 5, 2);
-        widgets.addSlot(INPUT.get(1), 23, 2);
+        widgets.addSlot(input.get(0), 5, 2);
+        widgets.addSlot(input.get(1), 23, 2);
 
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 45, 2);
 

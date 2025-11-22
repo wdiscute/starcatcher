@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.emi;
+package com.wdiscute.starcatcher.compat;
 
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -8,7 +8,6 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
-import dev.emi.emi.api.render.EmiTexture;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
