@@ -23,6 +23,14 @@
   },
   "fish": "aquaculture:red_shrooma",
   "rarity": "epic",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 3000.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 500.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "world_restrictions": {
     "above_y": 50,
     "biomes_tags": [

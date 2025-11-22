@@ -12,6 +12,14 @@
   },
   "fish": "tide:mint_carp",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 80.0,
+    "average_weight_grams": 10000.0,
+    "deviation_size_cm": 40.0,
+    "deviation_weight_grams": 5000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "weather": "rain",
   "world_restrictions": {
     "above_y": 50,

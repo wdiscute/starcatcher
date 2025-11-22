@@ -23,6 +23,14 @@
   },
   "fish": "aquaculture:carp",
   "rarity": "rare",
+  "size_and_weight": {
+    "average_size_cm": 60.0,
+    "average_weight_grams": 10000.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 4000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "weather": "rain",
   "world_restrictions": {
     "above_y": 50,

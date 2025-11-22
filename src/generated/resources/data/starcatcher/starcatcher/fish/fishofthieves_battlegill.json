@@ -6,23 +6,33 @@
     }
   ],
   "difficulty": {
-    "decay": 2,
+    "extras": {
+      "has_vanishing_markers": true
+    },
     "markers": {
       "has_first_thin_marker": true,
       "has_second_marker": false
     },
-    "penalty": 25,
+    "penalty": 15,
     "reward": 15,
     "reward_thin": 35,
-    "speed": 12,
+    "speed": 10,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,
-      "loot": "starcatcher:treasure"
+      "loot": "starcatcher:waterlogged_satchel"
     }
   },
   "fish": "fishofthieves:battlegill",
   "rarity": "uncommon",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 19000.0,
+    "deviation_size_cm": 10.0,
+    "deviation_weight_grams": 4200.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "world_restrictions": {
     "above_y": 50,
     "below_y": 100,

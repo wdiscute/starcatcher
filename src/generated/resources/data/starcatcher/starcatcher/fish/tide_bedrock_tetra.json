@@ -24,6 +24,14 @@
   },
   "fish": "tide:bedrock_tetra",
   "rarity": "epic",
+  "size_and_weight": {
+    "average_size_cm": 4.0,
+    "average_weight_grams": 2.0,
+    "deviation_size_cm": 1.0,
+    "deviation_weight_grams": 1.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "world_restrictions": {
     "below_y": 0,
     "dimensions": [

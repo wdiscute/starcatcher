@@ -423,24 +423,30 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             //ocean
             overworldOceanFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.COD)).withDifficulty(FishProperties.Difficulty.EASY_MOVING)
-                    .withSizeAndWeight(FishProperties.sw(80, 40, 12000, 7000, 10, 10)),
+                    .withSizeAndWeight(FishProperties.sw(80, 40, 12000, 7000, 10, 20)),
+
+            overworldOceanFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.PUFFERFISH))
+                    .withSizeAndWeight(FishProperties.sw(70, 20, 10000, 3000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING_VANISHING)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withBaseChance(4),
 
             overworldOceanFish(ModItems.SEA_BASS)
                     .withSeasons(Seasons.EARLY_SPRING, Seasons.MID_AUTUMN, Seasons.LATE_AUTUMN, Seasons.WINTER)
-                    .withSizeAndWeight(FishProperties.sw(40, 12, 1600, 1100, 10, 10))
+                    .withSizeAndWeight(FishProperties.sw(40, 12, 1600, 1100, 10, 20))
                     .withBaseChance(15)
                     .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withDaytime(FishProperties.Daytime.DAY),
 
             overworldOceanFish(ModItems.IRONJAW_HERRING)
-                    .withSizeAndWeight(FishProperties.sw(30, 8, 300, 100, 10, 10))
+                    .withSizeAndWeight(FishProperties.sw(30, 8, 300, 100, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.MOVING_THIN_NO_DECAY)
                     .withBaseChance(2)
                     .withRarity(FishProperties.Rarity.UNCOMMON),
 
             overworldOceanFish(ModItems.DEEPJAW_HERRING)
                     .withSeasons(Seasons.SPRING, Seasons.SUMMER)
-                    .withSizeAndWeight(FishProperties.sw(30, 8, 300, 100, 10, 10))
+                    .withSizeAndWeight(FishProperties.sw(30, 8, 300, 100, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM),
 
             overworldOceanFish(ModItems.DUSKTAIL_SNAPPER)
@@ -753,267 +759,392 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             //tide freshwater
 
-            overworldColdLakeFish(fromRL("tide", "trout")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldColdLakeFish(fromRL("tide", "trout"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 2000, 1600, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldLakeFish(fromRL("tide", "bass")).withWeather(FishProperties.Weather.CLEAR)
+            overworldLakeFish(fromRL("tide", "bass"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 2000, 1600, 10, 20))
+                    .withWeather(FishProperties.Weather.CLEAR)
                     .withMod("tide"),
 
-            overworldLakeFish(fromRL("tide", "yellow_perch")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldLakeFish(fromRL("tide", "yellow_perch"))
+                    .withSizeAndWeight(FishProperties.sw(25, 10, 200, 20, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("tide"),
 
-            overworldMountainFish(fromRL("tide", "bluegill")).withMod("tide"),
+            overworldMountainFish(fromRL("tide", "bluegill"))
+                    .withSizeAndWeight(FishProperties.sw(15, 5, 200, 20, 10, 20))
+                    .withMod("tide"),
 
-            overworldWarmMountainFish(fromRL("tide", "mint_carp")).withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
+            overworldWarmMountainFish(fromRL("tide", "mint_carp"))
+                    .withSizeAndWeight(FishProperties.sw(80, 40, 10000, 5000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldColdRiverFish(fromRL("tide", "pike")).withMod("tide"),
+            overworldColdRiverFish(fromRL("tide", "pike"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 5000, 10, 20))
+                    .withMod("tide"),
 
-            overworldWarmLakeFish(fromRL("tide", "guppy")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldWarmLakeFish(fromRL("tide", "guppy"))
+                    .withSizeAndWeight(FishProperties.sw(4, 1, 2, 1, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withMod("tide"),
 
-            overworldColdLakeFish(fromRL("tide", "catfish")).withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
+            overworldColdLakeFish(fromRL("tide", "catfish"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 5000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldColdLakeFish(fromRL("tide", "clayfish")).withWeather(FishProperties.Weather.RAIN)
+            overworldColdLakeFish(fromRL("tide", "clayfish"))
+                    .withSizeAndWeight(FishProperties.sw(15, 5, 200, 100, 10, 20))
+                    .withWeather(FishProperties.Weather.RAIN)
                     .withMod("tide"),
 
             //tide saltwater
-            overworldOceanFish(fromRL("tide", "tuna")).withMod("tide"),
+            overworldOceanFish(fromRL("tide", "tuna"))
+                    .withSizeAndWeight(FishProperties.sw(200, 100, 200000, 150000, 10, 20))
+                    .withMod("tide"),
 
-            overworldColdOceanFish(fromRL("tide", "ocean_perch")).withDifficulty(FishProperties.Difficulty.EASY_MOVING)
+            overworldColdOceanFish(fromRL("tide", "ocean_perch"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 2000, 1600, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldOceanFish(fromRL("tide", "mackerel")).withDifficulty(FishProperties.Difficulty.MEDIUM)
-                    .withMod("tide"),
-
-            overworldWarmOceanFish(fromRL("tide", "angelfish")).withWeather(FishProperties.Weather.RAIN)
-                    .withMod("tide"),
-
-            overworldOceanFish(fromRL("tide", "barracuda")).withRarity(FishProperties.Rarity.RARE)
-                    .withDaytime(FishProperties.Daytime.NIGHT)
-                    .withWeather(FishProperties.Weather.RAIN)
+            overworldOceanFish(fromRL("tide", "mackerel"))
+                    .withSizeAndWeight(FishProperties.sw(35, 15, 500, 400, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            overworldWarmOceanFish(fromRL("tide", "sailfish")).withWeather(FishProperties.Weather.RAIN)
+            overworldWarmOceanFish(fromRL("tide", "angelfish"))
+                    .withSizeAndWeight(FishProperties.sw(15, 5, 100, 5, 10, 20))
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withMod("tide"),
+
+            overworldOceanFish(fromRL("tide", "barracuda"))
+                    .withSizeAndWeight(FishProperties.sw(150, 50, 30000, 20000, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDaytime(FishProperties.Daytime.NIGHT)
+                    .withWeather(FishProperties.Weather.RAIN)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_MOVING)
+                    .withMod("tide"),
+
+            overworldWarmOceanFish(fromRL("tide", "sailfish"))
+                    .withSizeAndWeight(FishProperties.sw(250, 50, 100000, 50000, 10, 20))
+                    .withWeather(FishProperties.Weather.RAIN)
                     .withMod("tide"),
 
             //tide underground
-            overworldCavesFish(fromRL("tide", "cave_eel")).withDifficulty(FishProperties.Difficulty.EASY_MOVING)
+            overworldCavesFish(fromRL("tide", "cave_eel"))
+                    .withSizeAndWeight(FishProperties.sw(15, 5, 5, 3, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withMod("tide"),
 
-            overworldCavesFish(fromRL("tide", "crystal_shrimp")).withMod("tide"),
-
-            overworldCavesFish(fromRL("tide", "iron_tetra")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldCavesFish(fromRL("tide", "crystal_shrimp"))
+                    .withSizeAndWeight(FishProperties.sw(10, 5, 2, 1, 10, 20))
                     .withMod("tide"),
 
-            overworldCavesFish(fromRL("tide", "glowfish")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldCavesFish(fromRL("tide", "iron_tetra"))
+                    .withSizeAndWeight(FishProperties.sw(4, 1, 2, 1, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING)
+                    .withMod("tide"),
+
+            overworldCavesFish(fromRL("tide", "glowfish"))
+                    .withSizeAndWeight(FishProperties.sw(20, 10, 10, 5, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            overworldCavesFish(fromRL("tide", "anglerfish")).withMod("tide"),
-
-            overworldCavesFish(fromRL("tide", "cave_crawler")).withDifficulty(FishProperties.Difficulty.EASY_MOVING)
+            overworldCavesFish(fromRL("tide", "anglerfish"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 20000, 15000, 10, 20))
                     .withMod("tide"),
 
-            overworldCavesFish(fromRL("tide", "gilded_minnow")).withMod("tide"),
+            overworldCavesFish(fromRL("tide", "cave_crawler"))
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 1000, 500, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
+                    .withMod("tide"),
+
+            overworldCavesFish(fromRL("tide", "gilded_minnow"))
+                    .withSizeAndWeight(FishProperties.sw(5, 2, 10, 6, 10, 20))
+                    .withMod("tide"),
 
 
             //tide deepslate
-            overworldDeepslateFish(fromRL("tide", "deep_grouper")).withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
-                    .withMod("tide"),
-
-            overworldDeepslateFish(fromRL("tide", "shadow_snapper")).withDifficulty(FishProperties.Difficulty.MEDIUM)
-                    .withMod("tide"),
-
-            overworldDeepslateFish(fromRL("tide", "abyss_angler")).withRarity(FishProperties.Rarity.EPIC)
-                    .withDifficulty(FishProperties.Difficulty.HARD)
-                    .withBaseChance(2)
-                    .withMod("tide"),
-
-            overworldDeepslateFish(fromRL("tide", "lapis_lanternfish")).withDifficulty(FishProperties.Difficulty.MEDIUM)
-                    .withMod("tide"),
-
-            overworldDeepslateFish(fromRL("tide", "luminescent_jellyfish")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldDeepslateFish(fromRL("tide", "deep_grouper"))
+                    .withSizeAndWeight(FishProperties.sw(200, 50, 200000, 100000, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withMod("tide"),
 
-            overworldDeepslateFish(fromRL("tide", "crystalline_carp")).withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
+            overworldDeepslateFish(fromRL("tide", "shadow_snapper"))
+                    .withSizeAndWeight(FishProperties.sw(80, 40, 10000, 5000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withMod("tide"),
+
+            overworldDeepslateFish(fromRL("tide", "abyss_angler"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 20000, 15000, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
+                    .withBaseChance(2)
+                    .withMod("tide"),
+
+            overworldDeepslateFish(fromRL("tide", "lapis_lanternfish"))
+                    .withSizeAndWeight(FishProperties.sw(20, 10, 100, 5, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withMod("tide"),
+
+            overworldDeepslateFish(fromRL("tide", "luminescent_jellyfish"))
+                    .withSizeAndWeight(FishProperties.sw(50, 30, 5000, 3000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
+                    .withMod("tide"),
+
+            overworldDeepslateFish(fromRL("tide", "crystalline_carp"))
+                    .withSizeAndWeight(FishProperties.sw(80, 30, 10000, 5000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withMod("tide"),
 
-            overworldDeepslateFish(fromRL("tide", "bedrock_tetra")).withRarity(FishProperties.Rarity.EPIC)
+            overworldDeepslateFish(fromRL("tide", "bedrock_tetra"))
+                    .withSizeAndWeight(FishProperties.sw(4, 1, 2, 1, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
                     .withMod("tide"),
 
             //tide biome specific
-            fish(fromRL("tide", "prarie_pike")).withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT.withBiomes(rl("minecraft", "plains")))
+            fish(fromRL("tide", "prarie_pike"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT.withBiomes(rl("minecraft", "plains")))
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            fish(fromRL("tide", "sandskipper")).withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT.withBiomes(rl("minecraft", "desert")))
+            fish(fromRL("tide", "sandskipper"))
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 1000, 500, 10, 20))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.DEFAULT.withBiomes(rl("minecraft", "desert")))
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
                     .withMod("tide"),
 
-            overworldCherryGroveFish(fromRL("tide", "blossom_bass")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldCherryGroveFish(fromRL("tide", "blossom_bass"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 5000, 3000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("tide"),
 
-            overworldFish(fromRL("tide", "oakfish")).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomes(rl("minecraft", "forest")))
+            overworldFish(fromRL("tide", "oakfish"))
+                    .withSizeAndWeight(FishProperties.sw(40, 20, 3000, 2000, 10, 20))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomesTags(BiomeTags.IS_FOREST.location()))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            overworldColdLakeFish(fromRL("tide", "frostbite_flounder")).withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
+            overworldColdLakeFish(fromRL("tide", "frostbite_flounder"))
+                    .withSizeAndWeight(FishProperties.sw(60, 30, 6000, 4000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_VANISHING)
                     .withMod("tide"),
 
-            overworldFish(fromRL("tide", "mirage_catfish")).withRarity(FishProperties.Rarity.EPIC)
+            overworldFish(fromRL("tide", "mirage_catfish"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomesTags(rl("minecraft", "is_badlands")))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomesTags(BiomeTags.IS_BADLANDS.location()))
                     .withMod("tide"),
 
-            overworldDeepDarkFish(fromRL("tide", "echofin_snapper")).withRarity(FishProperties.Rarity.RARE)
+            overworldDeepDarkFish(fromRL("tide", "echofin_snapper"))
+                    .withSizeAndWeight(FishProperties.sw(80, 30, 10000, 5000, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
                     .withDifficulty(FishProperties.Difficulty.HARD_VANISHING)
                     .withMod("tide"),
 
-            overworldFish(fromRL("tide", "sunspike_goby")).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomesTags(rl("minecraft", "is_savanna")))
+            overworldFish(fromRL("tide", "sunspike_goby"))
+                    .withSizeAndWeight(FishProperties.sw(15, 5, 100, 5, 10, 20))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomesTags(BiomeTags.IS_BADLANDS.location()))
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            overworldFish(fromRL("tide", "birch_trout")).withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomesTags(StarcatcherTags.IS_BIRCH_FOREST))
+            overworldFish(fromRL("tide", "birch_trout"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 2000, 1700, 10, 20))
+                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomesTags(StarcatcherTags.IS_BIRCH_FOREST))
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            overworldMountainFish(fromRL("tide", "stonefish")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldMountainFish(fromRL("tide", "stonefish"))
+                    .withSizeAndWeight(FishProperties.sw(40, 20, 2000, 1700, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            overworldDripstoneCavesFish(fromRL("tide", "dripstone_darter")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldDripstoneCavesFish(fromRL("tide", "dripstone_darter"))
+                    .withSizeAndWeight(FishProperties.sw(5, 2, 5, 1, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            overworldSwampFish(fromRL("tide", "slimefin_snapper")).withRarity(FishProperties.Rarity.RARE)
+            overworldSwampFish(fromRL("tide", "slimefin_snapper"))
+                    .withSizeAndWeight(FishProperties.sw(80, 40, 10000, 10000, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
                     .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
                     .withMod("tide"),
 
-            overworldMushroomFieldsFish(fromRL("tide", "sporestalker")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldMushroomFieldsFish(fromRL("tide", "sporestalker"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 5000, 3000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY)
                     .withMod("tide"),
 
-            overworldJungleFish(fromRL("tide", "leafback")).withRarity(FishProperties.Rarity.EPIC)
+            overworldJungleFish(fromRL("tide", "leafback"))
+                    .withSizeAndWeight(FishProperties.sw(40, 20, 3000, 2000, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING)
                     .withMod("tide"),
 
-            overworldLushCavesFish(fromRL("tide", "fluttergill")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldLushCavesFish(fromRL("tide", "fluttergill"))
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 1000, 500, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            overworldTaigaFish(fromRL("tide", "pine_perch")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldTaigaFish(fromRL("tide", "pine_perch"))
+                    .withSizeAndWeight(FishProperties.sw(25, 10, 500, 300, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
             //missing structure restriction support to add windbass and aquathorn from tide mod
 
-            //ride overworld lava
-            fish(fromRL("tide", "ember_koi")).withDifficulty(FishProperties.Difficulty.EVERYTHING)
+            //tide overworld lava
+            overworldSurfaceLava(fromRL("tide", "ember_koi"))
+                    .withSizeAndWeight(FishProperties.sw(40, 20, 3000, 2000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING)
                     .withRarity(FishProperties.Rarity.EPIC)
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withFluids(rl("minecraft", "lava"))
-                            .withMustBeCaughtAboveY(50))
                     .withMod("tide"),
 
-            fish(fromRL("tide", "inferno_guppy")).withDifficulty(FishProperties.Difficulty.HARD_MOVING)
-                    .withRarity(FishProperties.Rarity.RARE)
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withFluids(rl("minecraft", "lava"))
-                            .withMustBeCaughtAboveY(50))
-
-                    .withMod("tide"),
-
-            overworldSurfaceLava(fromRL("tide", "obsidian_pike")).withRarity(FishProperties.Rarity.UNCOMMON)
-                    .withDifficulty(FishProperties.Difficulty.HARD)
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withFluids(rl("minecraft", "lava"))
-                            .withMustBeCaughtAboveY(50))
-                    .withMod("tide"),
-
-            fish(fromRL("tide", "volcano_tuna")).withRarity(FishProperties.Rarity.RARE)
+            overworldSurfaceLava(fromRL("tide", "inferno_guppy"))
+                    .withSizeAndWeight(FishProperties.sw(4, 1, 20, 2, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
-                    .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withFluids(rl("minecraft", "lava"))
-                            .withMustBeCaughtAboveY(50))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withMod("tide"),
+
+            overworldSurfaceLava(fromRL("tide", "obsidian_pike"))
+                    .withSizeAndWeight(FishProperties.sw(100, 5, 15000, 10000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.HARD)
+                    .withMod("tide"),
+
+            overworldSurfaceLava(fromRL("tide", "volcano_tuna"))
+                    .withSizeAndWeight(FishProperties.sw(200, 100, 150000, 50000, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
                     .withMod("tide"),
 
             //tide nether
-            netherLavaFish(fromRL("tide", "magma_mackerel")).withDifficulty(FishProperties.Difficulty.HARD)
+            netherLavaFish(fromRL("tide", "magma_mackerel"))
+                    .withSizeAndWeight(FishProperties.sw(35, 15, 500, 300, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            netherLavaFish(fromRL("tide", "ashen_perch")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            netherLavaBasaltDeltasFish(fromRL("tide", "ashen_perch"))
+                    .withSizeAndWeight(FishProperties.sw(25, 10, 200, 100, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            netherLavaFish(fromRL("tide", "soulscaler")).withRarity(FishProperties.Rarity.RARE)
+            netherLavaSoulSandValleyFish(fromRL("tide", "soulscaler"))
+                    .withSizeAndWeight(FishProperties.sw(80, 30, 10000, 5000, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING_MOVING)
                     .withBaseChance(3)
                     .withMod("tide"),
 
-            netherLavaFish(fromRL("tide", "warped_guppy")).withMod("tide"),
-
-            netherLavaFish(fromRL("tide", "crimson_fangjaw")).withDifficulty(FishProperties.Difficulty.MEDIUM)
-                    .withRarity(FishProperties.Rarity.UNCOMMON)
-                    .withMod("tide"),
-
-            netherLavaFish(fromRL("tide", "witherfin")).withRarity(FishProperties.Rarity.EPIC)
+            netherLavaWarpedForestFish(fromRL("tide", "warped_guppy"))
+                    .withSizeAndWeight(FishProperties.sw(4, 1, 4, 1, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
                     .withMod("tide"),
 
-            netherLavaFish(fromRL("tide", "blazing_swordfish")).withBaseChance(2)
+            netherLavaCrimsonForestFish(fromRL("tide", "crimson_fangjaw"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withMod("tide"),
+
+            netherLavaSoulSandValleyFish(fromRL("tide", "witherfin"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN)
+                    .withMod("tide"),
+
+            netherLavaFish(fromRL("tide", "blazing_swordfish"))
+                    .withSizeAndWeight(FishProperties.sw(200, 100, 100000, 50000, 10, 20))
+                    .withBaseChance(2)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING)
                     .withMod("tide"),
 
             //tide end
-            endFish(fromRL("tide", "endstone_perch")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            endFish(fromRL("tide", "endstone_perch"))
+                    .withSizeAndWeight(FishProperties.sw(25, 10, 500, 300, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_MOVING_NO_FLIP)
                     .withMod("tide"),
 
-            endFish(fromRL("tide", "enderfin")).withBaseChance(2)
+            endFish(fromRL("tide", "enderfin"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 5000, 3000, 10, 20))
+                    .withBaseChance(2)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("tide"),
 
-            endFish(fromRL("tide", "endergazer")).withBaseChance(2)
-                    .withDifficulty(FishProperties.Difficulty.HARD)
+            endFish(fromRL("tide", "endergazer"))
+                    .withSizeAndWeight(FishProperties.sw(60, 30, 6000, 4000, 10, 20))
+                    .withBaseChance(2)
+                    .withDifficulty(FishProperties.Difficulty.HARD_MOVING)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withMod("tide"),
 
-            endFish(fromRL("tide", "purpur_pike")).withRarity(FishProperties.Rarity.UNCOMMON)
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
+            endOuterIslandsFish(fromRL("tide", "purpur_pike"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING)
                     .withMod("tide"),
 
-            endFish(fromRL("tide", "chorus_cod")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            endOuterIslandsFish(fromRL("tide", "chorus_cod"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_FAST_FISH_VANISHING)
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withMod("tide"),
 
-            endFish(fromRL("tide", "elytrout")).withBaseChance(2)
+            endFish(fromRL("tide", "elytrout"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 5000, 3000, 10, 20))
+                    .withBaseChance(2)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("tide"),
 
-            overworldLakeFish(fromRL("tide", "midas_fish")).withBaseChance(1)
-                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
-                    .withRarity(FishProperties.Rarity.LEGENDARY)
-                    .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
-                    .withMod("tide"),
-
-            endFish(fromRL("tide", "voidseeker")).withBaseChance(1)
+            endFish(fromRL("tide", "voidseeker"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withBaseChance(1)
                     .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
                     .withMod("tide"),
 
-            overworldOceanFish(fromRL("tide", "shooting_starfish")).withBaseChance(1)
+
+            overworldLakeFish(fromRL("tide", "midas_fish"))
+                    .withSizeAndWeight(FishProperties.sw(800, 50, 310000, 120000, 10, 20))
+                    .withBaseChance(1)
+                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP_MOVING)
+                    .withMod("tide"),
+
+            overworldOceanFish(fromRL("tide", "shooting_starfish"))
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 1000, 500, 10, 20))
+                    .withBaseChance(1)
                     .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDaytime(FishProperties.Daytime.MIDNIGHT)
@@ -1021,7 +1152,6 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("tide"),
 
             //endregion Tide
-
 
             //region Aquaculture 2
 
@@ -1035,184 +1165,363 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
 
             //freshwater
-            overworldRiverFish(fromRL("aquaculture", "smallmouth_bass")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldRiverFish(fromRL("aquaculture", "smallmouth_bass"))
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 1500, 500, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("aquaculture"),
 
-            overworldRiverFish(fromRL("aquaculture", "bluegill")).withMod("aquaculture"),
+            overworldRiverFish(fromRL("aquaculture", "bluegill"))
+                    .withSizeAndWeight(FishProperties.sw(15, 3, 300, 200, 10, 20))
+                    .withMod("aquaculture"),
 
-            overworldRiverFish(fromRL("aquaculture", "brown_trout")).withDaytime(FishProperties.Daytime.NIGHT)
+            overworldRiverFish(fromRL("aquaculture", "brown_trout"))
+                    .withSizeAndWeight(FishProperties.sw(45, 15, 3000, 2000, 10, 20))
+                    .withDaytime(FishProperties.Daytime.NIGHT)
                     .withWeather(FishProperties.Weather.CLEAR)
                     .withMod("aquaculture"),
 
-            overworldRiverFish(fromRL("aquaculture", "carp")).withDifficulty(FishProperties.Difficulty.HARD)
+            overworldRiverFish(fromRL("aquaculture", "carp"))
+                    .withSizeAndWeight(FishProperties.sw(60, 20, 10000, 4000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("aquaculture"),
 
-            overworldMountainFish(fromRL("aquaculture", "catfish")).withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
+            overworldMountainFish(fromRL("aquaculture", "catfish"))
+                    .withSizeAndWeight(FishProperties.sw(150, 40, 100000, 25000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.THIN_NO_DECAY_NOT_FORGIVING)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("aquaculture"),
 
-            overworldMountainFish(fromRL("aquaculture", "gar")).withMod("aquaculture"),
+            overworldMountainFish(fromRL("aquaculture", "gar"))
+                    .withSizeAndWeight(FishProperties.sw(160, 30, 160000, 20000, 10, 20))
+                    .withMod("aquaculture"),
 
-            overworldLakeFish(fromRL("aquaculture", "minnow")).withMod("aquaculture"),
+            overworldLakeFish(fromRL("aquaculture", "minnow"))
+                    .withSizeAndWeight(FishProperties.sw(6, 4, 200, 100, 10, 20))
+                    .withMod("aquaculture"),
 
-            overworldLakeFish(fromRL("aquaculture", "muskellunge")).withRarity(FishProperties.Rarity.RARE)
+            overworldLakeFish(fromRL("aquaculture", "muskellunge"))
+                    .withSizeAndWeight(FishProperties.sw(100, 10, 7000, 3000, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
                     .withDaytime(FishProperties.Daytime.MIDNIGHT)
                     .withMod("aquaculture"),
 
-            overworldLakeFish(fromRL("aquaculture", "perch")).withMod("aquaculture"),
+            overworldLakeFish(fromRL("aquaculture", "perch"))
+                    .withSizeAndWeight(FishProperties.sw(20, 5, 500, 200, 10, 20))
+                    .withMod("aquaculture"),
 
             //arid
-            overworldWarmMountainFish(fromRL("aquaculture", "bayad")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldWarmMountainFish(fromRL("aquaculture", "bayad"))
+                    .withSizeAndWeight(FishProperties.sw(170, 30, 150000, 20000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withDaytime(FishProperties.Daytime.NIGHT)
                     .withMod("aquaculture"),
 
-            overworldWarmLakeFish(fromRL("aquaculture", "boulti")).withRarity(FishProperties.Rarity.RARE)
+            overworldWarmLakeFish(fromRL("aquaculture", "boulti"))
+                    .withSizeAndWeight(FishProperties.sw(40, 10, 4000, 300, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("aquaculture"),
 
-            overworldWarmMountainFish(fromRL("aquaculture", "capitaine")).withMod("aquaculture"),
+            overworldWarmMountainFish(fromRL("aquaculture", "capitaine"))
+                    .withSizeAndWeight(FishProperties.sw(130, 50, 12000, 3000, 10, 20))
+                    .withMod("aquaculture"),
 
-            overworldWarmMountainFish(fromRL("aquaculture", "synodontis")).withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING)
+            overworldWarmMountainFish(fromRL("aquaculture", "synodontis"))
+                    .withSizeAndWeight(FishProperties.sw(35, 15, 1000, 300, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withMod("aquaculture"),
 
             //arctic ocean
-            overworldColdOceanFish(fromRL("aquaculture", "atlantic_cod")).withDaytime(FishProperties.Daytime.DAY)
+            overworldColdOceanFish(fromRL("aquaculture", "atlantic_cod"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withDaytime(FishProperties.Daytime.DAY)
                     .withMod("aquaculture"),
 
-            overworldColdOceanFish(fromRL("aquaculture", "blackfish")).withDaytime(FishProperties.Daytime.NIGHT)
+            overworldColdOceanFish(fromRL("aquaculture", "blackfish"))
+                    .withSizeAndWeight(FishProperties.sw(50, 20, 5000, 3000, 10, 20))
+                    .withDaytime(FishProperties.Daytime.NIGHT)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("aquaculture"),
 
-            overworldColdOceanFish(fromRL("aquaculture", "pacific_halibut")).withMod("aquaculture"),
+            overworldColdOceanFish(fromRL("aquaculture", "pacific_halibut"))
+                    .withSizeAndWeight(FishProperties.sw(150, 50, 80000, 5000, 10, 20))
+                    .withMod("aquaculture"),
 
-            overworldColdOceanFish(fromRL("aquaculture", "atlantic_halibut")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldColdOceanFish(fromRL("aquaculture", "atlantic_halibut"))
+                    .withSizeAndWeight(FishProperties.sw(200, 80, 150000, 10000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("aquaculture"),
 
-            overworldColdOceanFish(fromRL("aquaculture", "atlantic_herring")).withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING)
+            overworldColdOceanFish(fromRL("aquaculture", "atlantic_herring"))
+                    .withSizeAndWeight(FishProperties.sw(25, 5, 200, 100, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withMod("aquaculture"),
 
-            overworldColdOceanFish(fromRL("aquaculture", "pink_salmon")).withRarity(FishProperties.Rarity.EPIC)
+            overworldColdOceanFish(fromRL("aquaculture", "pink_salmon"))
+                    .withSizeAndWeight(FishProperties.sw(50, 10, 2000, 1000, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withWeather(FishProperties.Weather.THUNDER)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("aquaculture"),
 
-            overworldColdOceanFish(fromRL("aquaculture", "pollock")).withMod("aquaculture"),
+            overworldColdOceanFish(fromRL("aquaculture", "pollock"))
+                    .withSizeAndWeight(FishProperties.sw(70, 30, 5000, 4000, 10, 20))
+                    .withMod("aquaculture"),
 
-            overworldColdOceanFish(fromRL("aquaculture", "rainbow_trout")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldColdOceanFish(fromRL("aquaculture", "rainbow_trout"))
+                    .withSizeAndWeight(FishProperties.sw(60, 20, 2000, 1500, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDaytime(FishProperties.Daytime.DAY)
                     .withMod("aquaculture"),
 
             //saltwater
-            overworldOceanFish(fromRL("aquaculture", "jellyfish")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldOceanFish(fromRL("aquaculture", "jellyfish"))
+                    .withSizeAndWeight(FishProperties.sw(100, 70, 50000, 40000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withBaseChance(3)
                     .withMod("aquaculture"),
 
-            overworldOceanFish(fromRL("aquaculture", "red_grouper")).withMod("aquaculture"),
+            overworldOceanFish(fromRL("aquaculture", "red_grouper"))
+                    .withSizeAndWeight(FishProperties.sw(100, 50, 15000, 10000, 10, 20))
+                    .withMod("aquaculture"),
 
-            overworldOceanFish(fromRL("aquaculture", "tuna")).withMod("aquaculture"),
+            overworldOceanFish(fromRL("aquaculture", "tuna"))
+                    .withSizeAndWeight(FishProperties.sw(200, 100, 200000, 150000, 10, 20))
+                    .withMod("aquaculture"),
 
             //jungle
-            overworldJungleFish(fromRL("aquaculture", "arapaima")).withRarity(FishProperties.Rarity.RARE)
+            overworldJungleFish(fromRL("aquaculture", "arapaima"))
+                    .withSizeAndWeight(FishProperties.sw(250, 50, 50000, 150000, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("aquaculture"),
 
-            overworldJungleFish(fromRL("aquaculture", "arrau_turtle")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldJungleFish(fromRL("aquaculture", "arrau_turtle"))
+                    .withSizeAndWeight(FishProperties.sw(100, 30, 80000, 150000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("aquaculture"),
 
 
-            overworldJungleFish(fromRL("aquaculture", "piranha")).withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
+            overworldJungleFish(fromRL("aquaculture", "piranha"))
+                    .withSizeAndWeight(FishProperties.sw(30, 10, 500, 300, 10, 20))
+                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
                     .withRarity(FishProperties.Rarity.LEGENDARY)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
                     .withDaytime(FishProperties.Daytime.NOON)
                     .withMod("aquaculture"),
 
-            overworldJungleFish(fromRL("aquaculture", "tambaqui")).withRarity(FishProperties.Rarity.UNCOMMON)
+            overworldJungleFish(fromRL("aquaculture", "tambaqui"))
+                    .withSizeAndWeight(FishProperties.sw(100, 30, 150000, 10000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withMod("aquaculture"),
 
             //swamp
-            overworldSwampFish(fromRL("aquaculture", "leech")).withRarity(FishProperties.Rarity.RARE)
+            overworldSwampFish(fromRL("aquaculture", "leech"))
+                    .withSizeAndWeight(FishProperties.sw(10, 5, 5, 3, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withMod("aquaculture"),
 
-            overworldSwampFish(fromRL("aquaculture", "box_turtle")).withRarity(FishProperties.Rarity.EPIC)
+            overworldSwampFish(fromRL("aquaculture", "box_turtle"))
+                    .withSizeAndWeight(FishProperties.sw(20, 5, 1000, 500, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.HARD)
                     .withWeather(FishProperties.Weather.RAIN)
                     .withMod("aquaculture"),
 
             //mushroom island
-            overworldMushroomFieldsFish(fromRL("aquaculture", "brown_shrooma")).withRarity(FishProperties.Rarity.EPIC)
+            overworldMushroomFieldsFish(fromRL("aquaculture", "brown_shrooma"))
+                    .withSizeAndWeight(FishProperties.sw(100, 20, 3000, 500, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING)
                     .withMod("aquaculture"),
 
-            overworldMushroomFieldsFish(fromRL("aquaculture", "red_shrooma")).withRarity(FishProperties.Rarity.EPIC)
+            overworldMushroomFieldsFish(fromRL("aquaculture", "red_shrooma"))
+                    .withSizeAndWeight(FishProperties.sw(100, 20, 3000, 500, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
                     .withDifficulty(FishProperties.Difficulty.EVERYTHING_FLIP)
                     .withMod("aquaculture"),
 
             //anywhere
-            overworldFish(fromRL("aquaculture", "goldfish")).withBaseChance(1)
+            overworldFish(fromRL("aquaculture", "goldfish"))
+                    .withSizeAndWeight(FishProperties.sw(15, 5, 100, 5, 10, 20))
+                    .withBaseChance(1)
                     .withMod("aquaculture"),
 
             //endregion Aquaculture 2
 
             //region Fish of Thieves
 
-            overworldOceanFish(fromRL("fishofthieves", "splashtail")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldOceanFish(fromRL("fishofthieves", "splashtail"))
+                    .withSizeAndWeight(FishProperties.sw(250, 70, 7600, 2000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING)
                     .withMod("fishofthieves"),
 
-            overworldLakeFish(fromRL("fishofthieves", "pondie")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldLakeFish(fromRL("fishofthieves", "pondie"))
+                    .withSizeAndWeight(FishProperties.sw(190, 30, 9000, 3600, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withBaseChance(2)
                     .withMod("fishofthieves"),
 
-            overworldRiverFish(fromRL("fishofthieves", "islehopper")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldRiverFish(fromRL("fishofthieves", "islehopper"))
+                    .withSizeAndWeight(FishProperties.sw(300, 20, 23000, 3600, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withBaseChance(2)
                     .withMod("fishofthieves"),
 
-            overworldWarmOceanFish(fromRL("fishofthieves", "ancientscale")).withDifficulty(FishProperties.Difficulty.HARD)
+            overworldWarmOceanFish(fromRL("fishofthieves", "ancientscale"))
+                    .withSizeAndWeight(FishProperties.sw(70, 10, 4000, 2000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.HARD_VANISHING)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withMod("fishofthieves"),
 
-            overworldWarmOceanFish(fromRL("fishofthieves", "plentifin")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldWarmOceanFish(fromRL("fishofthieves", "plentifin"))
+                    .withSizeAndWeight(FishProperties.sw(90, 10, 4300, 2500, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("fishofthieves"),
 
-            overworldLushCavesFish(fromRL("fishofthieves", "wildsplash")).withDifficulty(FishProperties.Difficulty.MEDIUM)
+            overworldLushCavesFish(fromRL("fishofthieves", "wildsplash"))
+                    .withSizeAndWeight(FishProperties.sw(120, 30, 8000, 2200, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_MOVING)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("fishofthieves"),
 
-            overworldDeepslateFish(fromRL("fishofthieves", "devilfish")).withDifficulty(FishProperties.Difficulty.HARD)
+            overworldDeepslateFish(fromRL("fishofthieves", "devilfish"))
+                    .withSizeAndWeight(FishProperties.sw(180, 80, 20000, 2200, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.HARD)
                     .withRarity(FishProperties.Rarity.RARE)
                     .withMod("fishofthieves"),
 
-            overworldColdOceanFish(fromRL("fishofthieves", "battlegill")).withDifficulty(FishProperties.Difficulty.HARD)
+            overworldColdOceanFish(fromRL("fishofthieves", "battlegill"))
+                    .withSizeAndWeight(FishProperties.sw(100, 10, 19000, 4200, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING)
                     .withRarity(FishProperties.Rarity.UNCOMMON)
                     .withMod("fishofthieves"),
 
-            endFish(fromRL("fishofthieves", "wrecker")).withDifficulty(FishProperties.Difficulty.HARD)
+            endFish(fromRL("fishofthieves", "wrecker"))
+                    .withSizeAndWeight(FishProperties.sw(100, 10, 19000, 4200, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_FAST_FISH_VANISHING)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withMod("fishofthieves"),
 
-            overworldOceanFish(fromRL("fishofthieves", "stormfish")).withDifficulty(FishProperties.Difficulty.HARD)
+            overworldOceanFish(fromRL("fishofthieves", "stormfish"))
+                    .withSizeAndWeight(FishProperties.sw(150, 30, 14000, 2000, 10, 20))
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_FAST_FISH_VANISHING)
                     .withWeather(FishProperties.Weather.THUNDER)
                     .withRarity(FishProperties.Rarity.RARE)
-                    .withMod("fishofthieves")
+                    .withMod("fishofthieves"),
 
             //endregion Fish of Thieves
+
+            //region Nether Depths Upgrade
+
+            //
+            //,--.  ,--.           ,--.   ,--.                          ,------.                     ,--.   ,--.
+            //|  ,'.|  |  ,---.  ,-'  '-. |  ,---.   ,---.  ,--.--.     |  .-.  \   ,---.   ,---.  ,-'  '-. |  ,---.   ,---.
+            //|  |' '  | | .-. : '-.  .-' |  .-.  | | .-. : |  .--'     |  |  \  : | .-. : | .-. | '-.  .-' |  .-.  | (  .-'
+            //|  | `   | \   --.   |  |   |  | |  | \   --. |  |        |  '--'  / \   --. | '-' '   |  |   |  | |  | .-'  `)
+            //`--'  `--'  `----'   `--'   `--' `--'  `----' `--'        `-------'   `----' |  |-'    `--'   `--' `--' `----'
+            //                                                                             `--'
+            //
+            //,--. ,--.                                     ,--.
+            //|  | |  |  ,---.   ,---.  ,--.--.  ,--,--.  ,-|  |  ,---.
+            //|  | |  | | .-. | | .-. | |  .--' ' ,-.  | ' .-. | | .-. :
+            //'  '-'  ' | '-' ' ' '-' ' |  |    \ '-'  | \ `-' | \   --.
+            // `-----'  |  |-'  .`-  /  `--'     `--`--'  `---'   `----'
+            //          `--'    `---'
+
+
+            netherLavaFish(fromRL("netherdepthsupgrade", "bonefish"))
+                    .withSizeAndWeight(FishProperties.sw(120, 40, 700, 200, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_MOVING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            //TODO ADD STRUCTURE RESTRICTION
+            netherLavaFish(fromRL("netherdepthsupgrade", "blazefish"))
+                    .withSizeAndWeight(FishProperties.sw(560, 129, 5200, 1200, 20, 30))
+                    .withRarity(FishProperties.Rarity.LEGENDARY)
+                    .withBaitRestrictions(FishProperties.BaitRestrictions.LEGENDARY_BAIT)
+                    .withDifficulty(FishProperties.Difficulty.HARD_VANISHING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaCrimsonForestFish(fromRL("netherdepthsupgrade", "eyeball_fish"))
+                    .withSizeAndWeight(FishProperties.sw(70, 40, 700, 200, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.HARD_MOVING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaFish(fromRL("netherdepthsupgrade", "glowdine"))
+                    .withSizeAndWeight(FishProperties.sw(130, 30, 3400, 900, 10, 20))
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING_MOVING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaWarpedForestFish(fromRL("netherdepthsupgrade", "lava_pufferfish"))
+                    .withSizeAndWeight(FishProperties.sw(90, 30, 3700, 900, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaBasaltDeltasFish(fromRL("netherdepthsupgrade", "magmacubefish"))
+                    .withSizeAndWeight(FishProperties.sw(120, 40, 3000, 400, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.EASY_MOVING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaBasaltDeltasFish(fromRL("netherdepthsupgrade", "obsidianfish"))
+                    .withSizeAndWeight(FishProperties.sw(200, 50, 500000, 68000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.REALLY_HEAVY_FISH
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaFish(fromRL("netherdepthsupgrade", "searing_cod"))
+                    .withSizeAndWeight(FishProperties.sw(500, 50, 80000, 20000, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.EASY_FAST_FISH
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaSoulSandValleyFish(fromRL("netherdepthsupgrade", "soulsucker"))
+                    .withSizeAndWeight(FishProperties.sw(140, 30, 12000, 3000, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_FAST_FISH_VANISHING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade"),
+
+            netherLavaSoulSandValleyFish(fromRL("netherdepthsupgrade", "wither_bonefish"))
+                    .withSizeAndWeight(FishProperties.sw(400, 100, 32000, 7000, 10, 20))
+                    .withRarity(FishProperties.Rarity.EPIC)
+                    .withDifficulty(FishProperties.Difficulty.HARD_ONLY_THIN_MOVING
+                            .withTreasure(FishProperties.Treasure.NETHER))
+                    .withMod("netherdepthsupgrade")
+
+            //endregion Nether Depths Upgrade
+
 
     );
     //endregion restricted fps
@@ -1287,7 +1596,6 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     new TrophyProperties.RarityProgress(0, 13),
                     new TrophyProperties.RarityProgress(0, 8),
                     TrophyProperties.DEFAULT.chanceToCatch()),
-
 
 
             //                                         ,--.
@@ -1389,6 +1697,30 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
     {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA);
+    }
+
+    public static FishProperties netherLavaCrimsonForestFish(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish)
+                .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_CRIMSON_FOREST);
+    }
+
+    public static FishProperties netherLavaWarpedForestFish(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish)
+                .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_WARPED_FOREST);
+    }
+
+    public static FishProperties netherLavaSoulSandValleyFish(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish)
+                .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_SOUL_SAND_VALLEY);
+    }
+
+    public static FishProperties netherLavaBasaltDeltasFish(Holder<Item> fish)
+    {
+        return FishProperties.DEFAULT.withFish(fish)
+                .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_BASALT_DELTAS);
     }
 
     public static FishProperties overworldLushCavesFish(Holder<Item> fish)

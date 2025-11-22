@@ -6,6 +6,14 @@
     }
   ],
   "fish": "tide:sailfish",
+  "size_and_weight": {
+    "average_size_cm": 250.0,
+    "average_weight_grams": 100000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 50000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "weather": "rain",
   "world_restrictions": {
     "above_y": 50,
