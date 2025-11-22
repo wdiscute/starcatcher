@@ -22,6 +22,11 @@
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "seasons": [
+      "winter",
+      "autumn",
+      "spring"
     ]
   }
 }

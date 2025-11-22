@@ -38,6 +38,9 @@
     ],
     "fluids": [
       "minecraft:lava"
+    ],
+    "seasons": [
+      "summer"
     ]
   }
 }

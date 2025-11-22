@@ -18,6 +18,9 @@
   "world_restrictions": {
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "seasons": [
+      "summer"
     ]
   }
 }
