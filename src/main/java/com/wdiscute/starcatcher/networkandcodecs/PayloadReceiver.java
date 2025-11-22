@@ -63,7 +63,7 @@ public class PayloadReceiver
 
                         //assign custom name if fish has one
                         if (!fp.customName().isEmpty())
-                            is.set(DataComponents.ITEM_NAME, Component.literal(fp.customName()));
+                            is.set(DataComponents.ITEM_NAME, Component.translatable(fp.customName()));
 
                         //store fish properties in itemstack
                         is.set(ModDataComponents.FISH_PROPERTIES, fp);

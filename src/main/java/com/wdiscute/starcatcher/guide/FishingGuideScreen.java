@@ -814,7 +814,7 @@ public class FishingGuideScreen extends Screen
             ItemStack is;
 
             is = new ItemStack(tp.fp().fish());
-            if (!tp.customName().isEmpty()) is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
+            if (!tp.customName().isEmpty()) is.set(DataComponents.ITEM_NAME, Component.translatable(tp.customName()));
             is.set(ModDataComponents.TROPHY, tp);
 
 
@@ -859,7 +859,7 @@ public class FishingGuideScreen extends Screen
             if (player.getData(ModDataAttachments.TROPHIES_CAUGHT).contains(tp))
             {
                 is = new ItemStack(tp.fp().fish());
-                is.set(DataComponents.ITEM_NAME, Component.literal(tp.customName()));
+                is.set(DataComponents.ITEM_NAME, Component.translatable(tp.customName()));
                 is.set(ModDataComponents.TROPHY, tp);
                 if (isMouseOnTop)
                 {

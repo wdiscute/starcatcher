@@ -11,7 +11,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.slf4j.Logger;
@@ -20,7 +19,6 @@ public class TrophyBlockEntity extends BlockEntity
 {
     private static final Logger LOGGER = LogUtils.getLogger();
     private TrophyProperties trophyProperties;
-    private Component trophyName;
 
     public TrophyBlockEntity(BlockPos pPos, BlockState pBlockState)
     {
@@ -32,7 +30,7 @@ public class TrophyBlockEntity extends BlockEntity
     {
         super.applyImplicitComponents(componentInput);
         this.trophyProperties = componentInput.getOrDefault(ModDataComponents.TROPHY.get(), TrophyProperties.DEFAULT);
-        this.trophyName = componentInput.getOrDefault(DataComponents.ITEM_NAME, Component.empty());
+        setChanged();
     }
 
     @Override
@@ -40,7 +38,12 @@ public class TrophyBlockEntity extends BlockEntity
     {
         super.collectImplicitComponents(components);
         components.set(ModDataComponents.TROPHY, trophyProperties);
-        components.set(DataComponents.ITEM_NAME, trophyName);
+
+        if(!trophyProperties.customName().equals(TrophyProperties.DEFAULT.customName()))
+        {
+            components.set(DataComponents.ITEM_NAME, Component.translatable(trophyProperties.customName()));
+        }
+
     }
 
     @Override
@@ -50,9 +53,6 @@ public class TrophyBlockEntity extends BlockEntity
 
         TrophyProperties.CODEC.encode(this.trophyProperties, NbtOps.INSTANCE, tag)
                 .resultOrPartial(LOGGER::warn).ifPresent(tag1 -> tag.put("trophy_properties", tag1));
-
-        ComponentSerialization.CODEC.encode(this.trophyName, NbtOps.INSTANCE, tag)
-                .resultOrPartial(LOGGER::warn).ifPresent(tag1 -> tag.put("trophy_name", tag1));
     }
 
     @Override
@@ -65,13 +65,6 @@ public class TrophyBlockEntity extends BlockEntity
             CompoundTag trophyProperties = tag.getCompound("trophy_properties");
             DataResult<TrophyProperties> decode = TrophyProperties.CODEC.parse(NbtOps.INSTANCE, trophyProperties);
             this.trophyProperties = decode.result().orElse(TrophyProperties.DEFAULT);
-        }
-
-        if (tag.contains("trophy_name"))
-        {
-            CompoundTag trophyName = tag.getCompound("trophy_name");
-            DataResult<Component> decode = ComponentSerialization.CODEC.parse(NbtOps.INSTANCE, trophyName);
-            this.trophyName = decode.result().orElse(Component.empty());
         }
     }
 }
