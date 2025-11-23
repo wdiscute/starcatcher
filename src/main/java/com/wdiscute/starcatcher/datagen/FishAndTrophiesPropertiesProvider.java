@@ -1229,7 +1229,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("aquaculture"),
 
             overworldLakeFish(fromRL("aquaculture", "minnow"))
-                    .withSizeAndWeight(FishProperties.sw(6, 4, 200, 100, 10, 20))
+                    .withSizeAndWeight(FishProperties.sw(6, 4, 10, 4, 10, 20))
                     .withMod("aquaculture"),
 
             overworldLakeFish(fromRL("aquaculture", "muskellunge"))

@@ -22,10 +22,10 @@
   "fish": "starcatcher:the_quarrish",
   "rarity": "epic",
   "size_and_weight": {
-    "average_size_cm": 120.0,
-    "average_weight_grams": 7000.0,
-    "deviation_size_cm": 70.0,
-    "deviation_weight_grams": 3000.0,
+    "average_size_cm": 620.0,
+    "average_weight_grams": 700000.0,
+    "deviation_size_cm": 270.0,
+    "deviation_weight_grams": 300000.0,
     "golden_chance_percentage": 10,
     "golden_state_increase": 20
   },
