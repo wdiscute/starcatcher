@@ -2,20 +2,16 @@ package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.Config;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public record FishCaughtCounter(
         FishProperties fp,
@@ -69,7 +65,7 @@ public record FishCaughtCounter(
 
     }
 
-    public static boolean AwardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks, int size, int weight)
+    public static void AwardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks, int size, int weight)
     {
         List<FishCaughtCounter> listFishCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
         List<FishCaughtCounter> newlist = new ArrayList<>();
@@ -109,7 +105,6 @@ public record FishCaughtCounter(
         PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishCaughtPayload(fpCaught, newFish, size, weight));
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
-        return newFish;
     }
 
 }
