@@ -13,9 +13,9 @@ public class SereneSeasonsCompat
     {
         if (!fp.wr().seasons().contains(FishProperties.WorldRestrictions.Seasons.ALL))
         {
-            return !fp.wr().seasons().contains(getSeason(level)) && !fp.wr().seasons().contains(getSubSeason(level));
+            return fp.wr().seasons().contains(getSeason(level)) || fp.wr().seasons().contains(getSubSeason(level));
         }
-        return false;
+        return true;
     }
 
     public static Seasons getSeason(Level level)
