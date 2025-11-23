@@ -122,7 +122,7 @@ public class Starcatcher
         Payloads.register();
 
         context.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
-        context.registerConfig(ModConfig.Type.SERVER, Config.SPEC_SERVER);
+        context.registerConfig(ModConfig.Type.COMMON, Config.SPEC_SERVER);
     }
 
     @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)

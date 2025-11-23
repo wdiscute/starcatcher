@@ -9,9 +9,9 @@ public class Config
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     public static final ForgeConfigSpec.IntValue MINIGAME_GUI_SCALE = BUILDER
-            .comment("//ALL THESE SETTINGS CAN ALSO BE ACCESSED")
-            .comment("//THROUGH THE IN-GAME SETTING TAB INSIDE")
-            .comment("//THE STARCATCHER'S GUIDE")
+            .comment("ALL THESE SETTINGS CAN ALSO BE ACCESSED")
+            .comment("THROUGH THE IN-GAME SETTING TAB INSIDE")
+            .comment("THE STARCATCHER'S GUIDE")
             .defineInRange("minigame_gui_scale", 3, 0, 6);
 
     public static final ForgeConfigSpec.DoubleValue HIT_DELAY = BUILDER
@@ -26,10 +26,17 @@ public class Config
     static final ForgeConfigSpec SPEC = BUILDER.build();
 
 
+
+
     private static final ForgeConfigSpec.Builder BUILDER_SERVER = new ForgeConfigSpec.Builder();
 
     public static final ForgeConfigSpec.BooleanValue SHOW_EXCLAMATION_MARK_PARTICLE = BUILDER_SERVER
+            .comment("Server Only")
             .define("show_exclamation_mark_particle", true);
+
+    public static final ForgeConfigSpec.BooleanValue ENABLE_MINIGAME = BUILDER_SERVER
+            .comment("Server Only")
+            .define("enable_minigame", true);
 
     static final ForgeConfigSpec SPEC_SERVER = BUILDER_SERVER.build();
 

@@ -219,29 +219,44 @@ public class FishingBobEntity extends Projectile
 
         fpToFish = available.get(random.nextInt(available.size()));
 
+        boolean skipsMinigame = fpToFish.skipMinigame() || (bobber.is(ModItems.CREEPER_BOBBER.get()) && random.nextFloat() > 0.8);
 
-        //TODO CHANGE THIS PIECE OF CODE TO BE SOMEWHERE ELSE
-        if (fpToFish.skipMinigame() || bobber.is(ModItems.CREEPER_BOBBER.get()))
+        //skip minigame if server config says so
+        if (!Config.ENABLE_MINIGAME.get())
+            skipsMinigame = true;
+
+        if (skipsMinigame)
         {
+
+            ItemStack is = new ItemStack(fpToFish.fish());
+
+            if (!Config.ENABLE_MINIGAME.get() && !fpToFish.skipMinigame())
+            {
+                int size = FishCaughtCounter.getRandomSize(fpToFish);
+                int weight = FishCaughtCounter.getRandomWeight(fpToFish);
+                DataComponents.setSizeAndWeight(is, new SizeAndWeight(size, weight));
+                FishCaughtCounter.AwardFishCaughtCounter(fpToFish, player, 0, size, weight);
+            }
+
             Entity itemFished = new ItemEntity(
                     level(),
                     position().x,
                     position().y + 1.2f,
                     position().z,
-                    new ItemStack(fpToFish.fish()
-                    ));
+                    is
+            );
 
 
             double x = (player.position().x - position().x) / 25;
             double y = (player.position().y - position().y) / 20;
             double z = (player.position().z - position().z) / 25;
 
-            x = org.joml.Math.clamp(x, -1, 1);
-            y = org.joml.Math.clamp(y, -1, 1);
-            z = org.joml.Math.clamp(z, -1, 1);
+            x = Mth.clamp(x, -1, 1);
+            y = Mth.clamp(y, -1, 1);
+            z = Mth.clamp(z, -1, 1);
 
             //override stack with a creeper and bigger deltaMovement to align creeper angle
-            if (bobber.is(ModItems.CREEPER_BOBBER.get()) && random.nextFloat() > 0.8)
+            if (bobber.is(ModItems.CREEPER_BOBBER.get()))
             {
                 itemFished = new Creeper(EntityType.CREEPER, level());
 
@@ -469,10 +484,11 @@ public class FishingBobEntity extends Projectile
             int i = random.nextInt(chanceToFishEachTick);
             if ((i == 1 || ticksInFluid > maxTicksToFish) && ticksInFluid > minTicksToFish)
             {
-                ((ServerLevel) level()).sendParticles(
-                        ModParticles.FISHING_NOTIFICATION.get(),
-                        position().x, position().y + 1, position().z,
-                        1, 0, 0, 0, 0);
+                if (Config.SHOW_EXCLAMATION_MARK_PARTICLE.get())
+                    ((ServerLevel) level()).sendParticles(
+                            ModParticles.FISHING_NOTIFICATION.get(),
+                            position().x, position().y + 1, position().z,
+                            1, 0, 0, 0, 0);
 
                 this.setPos(position().x, position().y - 0.5f, position().z);
                 if (!level().isClientSide) currentState = FishHookState.BITING;

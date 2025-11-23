@@ -500,8 +500,8 @@ public class Payloads
                                 DataComponents.setFishProperties(is, fp);
 
                                 //store size and weight data component
-                                int size = ((int) Starcatcher.truncatedNormal(fp.sw().sizeAverage(), fp.sw().sizeDeviation()));
-                                int weight = ((int) Starcatcher.truncatedNormal(fp.sw().weightAverage(), fp.sw().weightDeviation()));
+                                int size = FishCaughtCounter.getRandomSize(fp);
+                                int weight = FishCaughtCounter.getRandomWeight(fp);
                                 DataComponents.setSizeAndWeight(is, new SizeAndWeight(size, weight));
 
                                 //award fish counter
