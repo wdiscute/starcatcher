@@ -29,6 +29,14 @@
   },
   "fish": "aquaculture:leech",
   "rarity": "rare",
+  "size_and_weight": {
+    "average_size_cm": 10.0,
+    "average_weight_grams": 5.0,
+    "deviation_size_cm": 5.0,
+    "deviation_weight_grams": 3.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "world_restrictions": {
     "above_y": 50,
     "biomes_tags": [
@@ -36,6 +44,9 @@
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "seasons": [
+      "autumn"
     ]
   }
 }

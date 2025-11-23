@@ -6,22 +6,32 @@
     }
   ],
   "difficulty": {
-    "markers": {
-      "has_first_thin_marker": true,
-      "has_second_marker": false
+    "decay": 2,
+    "extras": {
+      "flips_rotation_every_hit": false,
+      "has_vanishing_markers": true
     },
-    "penalty": 15,
-    "reward": 15,
-    "reward_thin": 35,
-    "speed": 10,
-    "treasure": {
-      "has_treasure": true,
-      "hit_reward": 15,
-      "loot": "starcatcher:waterlogged_satchel"
-    }
+    "penalty": 12,
+    "reward": 10,
+    "speed": 13
   },
   "fish": "tide:chorus_cod",
+  "rarity": "epic",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 15000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 10000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "world_restrictions": {
+    "biomes_blacklist": [
+      "minecraft:the_end"
+    ],
+    "biomes_tags": [
+      "minecraft:is_end"
+    ],
     "dimensions": [
       "minecraft:the_end"
     ]

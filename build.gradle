@@ -22,6 +22,12 @@ dependencies {
     //emi
     compileOnly "dev.emi:emi-forge:${emi_version}:api"
     //runtimeOnly "dev.emi:emi-forge:${emi_version}"
+
+    modImplementation("maven.modrinth:serene-seasons:9.1.0.2")
+    modImplementation("maven.modrinth:glitchcore:0.0.1.1")
+
+    //compileOnly "maven.modrinth:serene-seasons:9.1.0.2"
+    //compileOnly "maven.modrinth:glitchcore:0.0.1.1"
 }
 
 repositories

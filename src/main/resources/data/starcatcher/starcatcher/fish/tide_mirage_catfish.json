@@ -23,6 +23,14 @@
   },
   "fish": "tide:mirage_catfish",
   "rarity": "epic",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 15000.0,
+    "deviation_size_cm": 50.0,
+    "deviation_weight_grams": 10000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "world_restrictions": {
     "biomes_tags": [
       "minecraft:is_badlands"

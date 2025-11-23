@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;
+import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
@@ -25,8 +26,10 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -152,6 +155,11 @@ public record FishProperties(
         return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, hasGuideEntry);
     }
 
+    public FishProperties withSeasons(WorldRestrictions.Seasons... seasons)
+    {
+        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr.withSeasons(seasons), this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
+    }
+
     //endregion with()
 
     //region bait
@@ -238,24 +246,14 @@ public record FishProperties(
                 List.of(),
                 false);
 
-        public BaitRestrictions withCorrectBobber(ResourceLocation correctBobber)
+        public BaitRestrictions withCorrectBobber(ResourceLocation ...correctBobber)
         {
             return new BaitRestrictions(List.of(correctBobber), this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
         }
 
-        public BaitRestrictions withCorrectBobber(List<ResourceLocation> correctBobber)
-        {
-            return new BaitRestrictions(correctBobber, this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
-        }
-
-        public BaitRestrictions withCorrectBait(ResourceLocation correctBait)
+        public BaitRestrictions withCorrectBait(ResourceLocation ...correctBait)
         {
             return new BaitRestrictions(this.correctBobber, List.of(correctBait), this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
-        }
-
-        public BaitRestrictions withCorrectBait(List<ResourceLocation> correctBait)
-        {
-            return new BaitRestrictions(this.correctBobber, correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
         }
 
         public BaitRestrictions withConsumesBait(boolean consumesBait)
@@ -268,14 +266,9 @@ public record FishProperties(
             return new BaitRestrictions(this.correctBobber, this.correctBait, consumesBait, correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
         }
 
-        public BaitRestrictions withIncorrectBaits(ResourceLocation incorrectBaits)
+        public BaitRestrictions withIncorrectBaits(ResourceLocation ...incorrectBaits)
         {
             return new BaitRestrictions(this.correctBobber, this.correctBait, this.consumesBait, this.correctBaitChanceAdded, List.of(incorrectBaits), this.mustHaveCorrectBait);
-        }
-
-        public BaitRestrictions withIncorrectBaits(List<ResourceLocation> incorrectBaits)
-        {
-            return new BaitRestrictions(this.correctBobber, correctBait, this.consumesBait, this.correctBaitChanceAdded, incorrectBaits, this.mustHaveCorrectBait);
         }
 
         public BaitRestrictions withMustHaveCorrectBait(boolean mustHaveCorrectBait)
@@ -296,10 +289,51 @@ public record FishProperties(
             List<ResourceLocation> biomesBlacklist,
             List<ResourceLocation> biomesBlacklistTags,
             List<ResourceLocation> fluids,
+            List<Seasons> seasons,
             int mustBeCaughtBelowY,
             int mustBeCaughtAboveY
     )
     {
+        public enum Seasons implements StringRepresentable
+        {
+            ALL("all"),
+
+            SPRING("spring"),
+            EARLY_SPRING("early_spring"),
+            MID_SPRING("mid_spring"),
+            LATE_SPRING("late_spring"),
+
+            SUMMER("summer"),
+            EARLY_SUMMER("early_summer"),
+            MID_SUMMER("mid_summer"),
+            LATE_SUMMER("late_summer"),
+
+            AUTUMN("autumn"),
+            EARLY_AUTUMN("early_autumn"),
+            MID_AUTUMN("mid_autumn"),
+            LATE_AUTUMN("late_autumn"),
+
+            WINTER("winter"),
+            EARLY_WINTER("early_winter"),
+            MID_WINTER("mid_winter"),
+            LATE_WINTER("late_winter");
+
+            public static final Codec<FishProperties.WorldRestrictions.Seasons> CODEC = StringRepresentable.fromEnum(FishProperties.WorldRestrictions.Seasons::values);
+            public static final Codec<List<FishProperties.WorldRestrictions.Seasons>> LIST_CODEC = Seasons.CODEC.listOf();
+            private final String key;
+
+            Seasons(String key)
+            {
+                this.key = key;
+            }
+
+            public String getSerializedName()
+            {
+                return this.key;
+            }
+
+        }
+
 
         public static final WorldRestrictions DEFAULT = new WorldRestrictions(
                 List.of(),
@@ -309,6 +343,7 @@ public record FishProperties(
                 List.of(),
                 List.of(),
                 List.of(ResourceLocation.withDefaultNamespace("water")),
+                List.of(Seasons.ALL),
                 Integer.MAX_VALUE,
                 Integer.MIN_VALUE);
 
@@ -321,6 +356,7 @@ public record FishProperties(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", DEFAULT.biomesBlacklist).forGetter(WorldRestrictions::biomesBlacklist),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", DEFAULT.biomesBlacklistTags).forGetter(WorldRestrictions::biomesBlacklistTags),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("fluids", DEFAULT.fluids).forGetter(WorldRestrictions::fluids),
+                        Seasons.LIST_CODEC.optionalFieldOf("seasons", DEFAULT.seasons).forGetter(WorldRestrictions::seasons),
                         Codec.INT.optionalFieldOf("below_y", DEFAULT.mustBeCaughtBelowY).forGetter(WorldRestrictions::mustBeCaughtBelowY),
                         Codec.INT.optionalFieldOf("above_y", DEFAULT.mustBeCaughtAboveY).forGetter(WorldRestrictions::mustBeCaughtAboveY)
                 ).apply(instance, WorldRestrictions::new));
@@ -391,7 +427,7 @@ public record FishProperties(
         public static final WorldRestrictions OVERWORLD_LAKE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER))
+                        .withBiomesBlacklistTags(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER)
                         .withMustBeCaughtAboveY(50)
                         .withMustBeCaughtBelowY(100);
 
@@ -404,13 +440,13 @@ public record FishProperties(
         public static final WorldRestrictions OVERWORLD_COLD_FRESHWATER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE, StarcatcherTags.IS_COLD_RIVER))
+                        .withBiomesTags(StarcatcherTags.IS_COLD_LAKE, StarcatcherTags.IS_COLD_RIVER)
                         .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_WARM_FRESHWATER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM_LAKE, StarcatcherTags.IS_WARM_RIVER))
+                        .withBiomesTags(StarcatcherTags.IS_WARM_LAKE, StarcatcherTags.IS_WARM_RIVER)
                         .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_WARM_LAKE =
@@ -517,6 +553,30 @@ public record FishProperties(
                         .withDims(Level.NETHER.location())
                         .withFluids(ResourceLocation.withDefaultNamespace("lava"));
 
+        public static final WorldRestrictions NETHER_LAVA_CRIMSON_FOREST =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.NETHER.location())
+                        .withBiomes(Biomes.CRIMSON_FOREST.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
+
+        public static final WorldRestrictions NETHER_LAVA_WARPED_FOREST =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.NETHER.location())
+                        .withBiomes(Biomes.WARPED_FOREST.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
+
+        public static final WorldRestrictions NETHER_LAVA_SOUL_SAND_VALLEY =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.NETHER.location())
+                        .withBiomes(Biomes.SOUL_SAND_VALLEY.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
+
+        public static final WorldRestrictions NETHER_LAVA_BASALT_DELTAS =
+                WorldRestrictions.DEFAULT
+                        .withDims(Level.NETHER.location())
+                        .withBiomes(Biomes.BASALT_DELTAS.location())
+                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
+
         public static final WorldRestrictions END =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.END.location());
@@ -527,84 +587,54 @@ public record FishProperties(
                         .withBiomesTags(BiomeTags.IS_END.location())
                         .withBiomesBlacklist(Biomes.THE_END.location());
 
-        public WorldRestrictions withDims(ResourceLocation dims)
+        public WorldRestrictions withDims(ResourceLocation ...dims)
         {
-            return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withDims(List<ResourceLocation> dims)
+        public WorldRestrictions withDimsBlacklist(ResourceLocation ...dimsBlacklist)
         {
-            return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, List.of(dimsBlacklist), this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withDimsBlacklist(ResourceLocation dimsBlacklist)
+        public WorldRestrictions withBiomes(ResourceLocation ...biome)
         {
-            return new WorldRestrictions(this.dims, List.of(dimsBlacklist), this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, List.of(biome), this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withDimsBlacklist(List<ResourceLocation> dimsBlacklist)
+        public WorldRestrictions withBiomesTags(ResourceLocation ...biomesTag)
         {
-            return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, List.of(biomesTag), this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomes(ResourceLocation biome)
+        public WorldRestrictions withBiomesBlacklist(ResourceLocation ...biomesBlacklist)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, List.of(biome), this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, List.of(biomesBlacklist), this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomes(List<ResourceLocation> biomes)
+        public WorldRestrictions withBiomesBlacklistTags(ResourceLocation ...biomesBlacklistTags)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, List.of(biomesBlacklistTags), this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomesTags(ResourceLocation biomesTag)
+        public WorldRestrictions withFluids(ResourceLocation... fluids)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, List.of(biomesTag), this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, List.of(fluids), this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomesTags(List<ResourceLocation> biomesTags)
+        public WorldRestrictions withSeasons(Seasons ...seasons)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
-        }
-
-        public WorldRestrictions withBiomesBlacklist(List<ResourceLocation> biomesBlacklist)
-        {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
-        }
-
-        public WorldRestrictions withBiomesBlacklist(ResourceLocation biomesBlacklist)
-        {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, List.of(biomesBlacklist), this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
-        }
-
-        public WorldRestrictions withBiomesBlacklistTags(List<ResourceLocation> biomesBlacklistTags)
-        {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
-        }
-
-        public WorldRestrictions withBiomesBlacklistTags(ResourceLocation biomesBlacklistTags)
-        {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, List.of(biomesBlacklistTags), this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
-        }
-
-        public WorldRestrictions withFluids(List<ResourceLocation> fluids)
-        {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
-        }
-
-        public WorldRestrictions withFluids(ResourceLocation fluids)
-        {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, List.of(fluids), this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, Arrays.stream(seasons).toList(), this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withMustBeCaughtBelowY(int mustBeCaughtBelowY)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withMustBeCaughtAboveY(int mustBeCaughtAboveY)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, mustBeCaughtAboveY);
         }
 
     }
@@ -745,6 +775,18 @@ public record FishProperties(
                 Extras.TTF
         );
 
+
+        public static final Difficulty REALLY_HEAVY_FISH = new Difficulty(
+                10,
+                1,
+                0,
+                6,
+                0,
+                Markers.TTFF,
+                Treasure.DEFAULT,
+                Extras.FFF
+        );
+
         public static final Difficulty EASY_NO_FLIP_VANISHING = new Difficulty(
                 9,
                 20,
@@ -755,6 +797,30 @@ public record FishProperties(
                 Treasure.DEFAULT,
                 Extras.FTF
         );
+
+        public static final Difficulty EASY_FAST_FISH = new Difficulty(
+                13,
+                15,
+                0,
+                6,
+                2,
+                Markers.TTFF,
+                Treasure.DEFAULT,
+                Extras.FFF
+        );
+
+
+        public static final Difficulty MEDIUM_FAST_FISH_VANISHING = new Difficulty(
+                13,
+                10,
+                0,
+                12,
+                2,
+                Markers.TTFF,
+                Treasure.DEFAULT,
+                Extras.FTF
+        );
+
 
         public static final Difficulty MEDIUM = new Difficulty(
                 10,
@@ -776,6 +842,17 @@ public record FishProperties(
                 Markers.TFTF,
                 Treasure.UNCOMMON,
                 Extras.TFT
+        );
+
+        public static final Difficulty MEDIUM_MOVING_NO_FLIP = new Difficulty(
+                10,
+                15,
+                35,
+                15,
+                1,
+                Markers.TFTF,
+                Treasure.UNCOMMON,
+                Extras.FFT
         );
 
         public static final Difficulty MEDIUM_VANISHING = new Difficulty(
@@ -1240,6 +1317,13 @@ public record FishProperties(
         ItemStack bobber = DataComponents.getItemInSlot(rod, DataComponents.Slots.BOBBER).copy();
         ItemStack bait = DataComponents.getItemInSlot(rod, DataComponents.Slots.BAIT).copy();
 
+
+        //seasons check
+        if (ModList.get().isLoaded("sereneseasons"))
+        {
+            if (!SereneSeasonsCompat.canCatch(fp, level)) return 0;
+        }
+
         //dimension  check
         if (!fp.wr.dims.isEmpty() && !fp.wr().dims().contains(level.dimension().location()))
             return 0;
@@ -1378,4 +1462,5 @@ public record FishProperties(
     {
         return new SizeAndWeight(s, s1, w, w1, g, g1);
     }
+
 }

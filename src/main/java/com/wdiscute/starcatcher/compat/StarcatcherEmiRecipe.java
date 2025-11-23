@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.emi;
+package com.wdiscute.starcatcher.compat;
 
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -25,9 +25,11 @@ public class StarcatcherEmiRecipe implements EmiRecipe
     private final List<EmiStack> output;
     private final FishProperties fp;
     private final TrophyProperties tp;
-    private static final List<EmiIngredient> INPUT = List.of(
+    private static final List<EmiIngredient> input = List.of(
             EmiIngredient.of(Ingredient.of(ModItems.GUIDE.get())),
             EmiIngredient.of(Ingredient.of(ModItems.ROD.get())));
+
+    private final ItemStack is;
 
     public StarcatcherEmiRecipe(ResourceLocation id, FishProperties fp)
     {
@@ -35,6 +37,9 @@ public class StarcatcherEmiRecipe implements EmiRecipe
         this.id = id;
         this.fp = fp;
         this.tp = null;
+        this.is = new ItemStack(fp.fish());
+        if (!this.fp.customName().equals(FishProperties.DEFAULT.customName()))
+            is.setHoverName(Component.translatable(fp.customName()));
     }
 
     public StarcatcherEmiRecipe(ResourceLocation id, TrophyProperties tp)
@@ -43,6 +48,14 @@ public class StarcatcherEmiRecipe implements EmiRecipe
         this.id = id;
         this.fp = tp.fp();
         this.tp = tp;
+
+        this.is = new ItemStack(fp.fish());
+
+        if (!this.tp.customName().equals(TrophyProperties.DEFAULT.customName()) && tp.trophyType().equals(TrophyProperties.TrophyType.TROPHY))
+            is.setHoverName(Component.translatable(tp.customName()));
+
+        DataComponents.setTrophyProperties(is, this.tp);
+
     }
 
     @Override
@@ -66,7 +79,7 @@ public class StarcatcherEmiRecipe implements EmiRecipe
     @Override
     public List<EmiIngredient> getCatalysts()
     {
-        return INPUT;
+        return input;
     }
 
     @Override
@@ -91,23 +104,10 @@ public class StarcatcherEmiRecipe implements EmiRecipe
     @Override
     public void addWidgets(WidgetHolder widgets)
     {
-        widgets.addSlot(INPUT.get(0), 5, 2);
-        widgets.addSlot(INPUT.get(1), 23, 2);
+        widgets.addSlot(input.get(0), 5, 2);
+        widgets.addSlot(input.get(1), 23, 2);
 
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 45, 2);
-
-        ItemStack is = new ItemStack(fp.fish());
-
-        if (!this.fp.customName().equals(FishProperties.DEFAULT.customName()))
-            is.setHoverName(Component.translatable(fp.customName()));
-
-        if (this.tp != null)
-        {
-            if (!this.tp.customName().equals(TrophyProperties.DEFAULT.customName()) && tp.trophyType().equals(TrophyProperties.TrophyType.TROPHY))
-                is.setHoverName(Component.translatable(tp.customName()));
-
-            DataComponents.setTrophyProperties(is, this.tp);
-        }
 
         widgets.addSlot(EmiIngredient.of(Ingredient.of(is)), 73, 2).recipeContext(this);
     }

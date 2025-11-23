@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.emi;
+package com.wdiscute.starcatcher.compat;
 
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;

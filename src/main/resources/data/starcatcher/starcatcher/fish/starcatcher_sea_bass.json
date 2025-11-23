@@ -13,7 +13,7 @@
     "deviation_size_cm": 12.0,
     "deviation_weight_grams": 1100.0,
     "golden_chance_percentage": 10,
-    "golden_state_increase": 10
+    "golden_state_increase": 20
   },
   "world_restrictions": {
     "above_y": 50,
@@ -23,6 +23,12 @@
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "seasons": [
+      "early_spring",
+      "mid_autumn",
+      "late_autumn",
+      "winter"
     ]
   }
 }

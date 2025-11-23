@@ -7,6 +7,14 @@
   ],
   "daytime": "night",
   "fish": "aquaculture:brown_trout",
+  "size_and_weight": {
+    "average_size_cm": 45.0,
+    "average_weight_grams": 3000.0,
+    "deviation_size_cm": 15.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "weather": "clear",
   "world_restrictions": {
     "above_y": 50,
@@ -16,6 +24,11 @@
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "seasons": [
+      "summer",
+      "autumn",
+      "winter"
     ]
   }
 }

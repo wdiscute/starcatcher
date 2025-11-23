@@ -21,6 +21,14 @@
     }
   },
   "fish": "tide:shadow_snapper",
+  "size_and_weight": {
+    "average_size_cm": 80.0,
+    "average_weight_grams": 10000.0,
+    "deviation_size_cm": 40.0,
+    "deviation_weight_grams": 5000.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "world_restrictions": {
     "below_y": 0,
     "dimensions": [

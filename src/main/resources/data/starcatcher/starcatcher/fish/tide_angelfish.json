@@ -6,6 +6,14 @@
     }
   ],
   "fish": "tide:angelfish",
+  "size_and_weight": {
+    "average_size_cm": 15.0,
+    "average_weight_grams": 100.0,
+    "deviation_size_cm": 5.0,
+    "deviation_weight_grams": 5.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
   "weather": "rain",
   "world_restrictions": {
     "above_y": 50,
@@ -15,6 +23,9 @@
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "seasons": [
+      "summer"
     ]
   }
 }
