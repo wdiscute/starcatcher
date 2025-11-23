@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.minigame;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
 import org.joml.Vector2d;
 
 import java.util.Random;

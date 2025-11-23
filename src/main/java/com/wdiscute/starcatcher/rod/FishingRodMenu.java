@@ -1,10 +1,9 @@
 package com.wdiscute.starcatcher.rod;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import com.wdiscute.starcatcher.ModMenuTypes;
 import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.ModMenuTypes;
 import com.wdiscute.starcatcher.StarcatcherTags;
-import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
+import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -12,8 +11,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ClickType;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemStackHandler;
-import net.neoforged.neoforge.items.SlotItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
 public class FishingRodMenu extends AbstractContainerMenu
 {
@@ -54,9 +53,9 @@ public class FishingRodMenu extends AbstractContainerMenu
             this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
         }
 
-        inventory.setStackInSlot(0, is.get(ModDataComponents.BOBBER.get()).stack().copy());
-        inventory.setStackInSlot(1, is.get(ModDataComponents.BAIT.get()).stack().copy());
-        inventory.setStackInSlot(2, is.get(ModDataComponents.HOOK.get()).stack().copy());
+        inventory.setStackInSlot(0, DataComponents.getItemInSlot(is, DataComponents.Slots.BOBBER).copy());
+        inventory.setStackInSlot(1, DataComponents.getItemInSlot(is, DataComponents.Slots.BAIT).copy());
+        inventory.setStackInSlot(2, DataComponents.getItemInSlot(is, DataComponents.Slots.HOOK).copy());
 
         this.addSlot(new SlotItemHandler(inventory, 0, 50, 35)
         {
@@ -115,9 +114,9 @@ public class FishingRodMenu extends AbstractContainerMenu
 
         if (!player.level().isClientSide)
         {
-            is.set(ModDataComponents.BOBBER.get(), new SingleStackContainer(inventory.getStackInSlot(0)));
-            is.set(ModDataComponents.BAIT.get(), new SingleStackContainer(inventory.getStackInSlot(1)));
-            is.set(ModDataComponents.HOOK.get(), new SingleStackContainer(inventory.getStackInSlot(2)));
+            DataComponents.setItemInSlot(is, DataComponents.Slots.BOBBER, inventory.getStackInSlot(0));
+            DataComponents.setItemInSlot(is, DataComponents.Slots.BAIT, inventory.getStackInSlot(1));
+            DataComponents.setItemInSlot(is, DataComponents.Slots.HOOK, inventory.getStackInSlot(2));
         }
 
     }

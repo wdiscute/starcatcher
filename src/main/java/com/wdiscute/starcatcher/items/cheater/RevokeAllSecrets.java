@@ -1,7 +1,8 @@
 package com.wdiscute.starcatcher.items.cheater;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
+import com.wdiscute.starcatcher.networkandcodecs.DataAttachments;
 import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -22,15 +23,17 @@ public class RevokeAllSecrets extends Item
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
-        //revoke all secrets
-        List<TrophyProperties> list = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
+        if(!(level instanceof ServerLevel)) return InteractionResultHolder.success(player.getItemInHand(usedHand));
 
-        player.getData(ModDataAttachments.TROPHIES_CAUGHT).forEach(tp ->
+        //revoke all secrets
+        List<TrophyProperties> tpsCaught = new ArrayList<>(DataAttachments.get(player).trophiesCaught());
+
+        DataAttachments.get(player).trophiesCaught().forEach(tp ->
         {
-            if(tp.trophyType() == TrophyProperties.TrophyType.SECRET) list.remove(tp);
+            if(tp.trophyType() == TrophyProperties.TrophyType.SECRET) tpsCaught.remove(tp);
         });
 
-        player.setData(ModDataAttachments.TROPHIES_CAUGHT, list);
+        DataAttachments.get(player).setTrophiesCaught(tpsCaught);
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
 

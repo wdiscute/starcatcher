@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.items;
 import com.wdiscute.starcatcher.ModEntities;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
@@ -21,7 +20,7 @@ public class FishItem extends Item
     {
         //Twitch chat didn't force me to do write this
         FishEntity fe = new FishEntity(ModEntities.FISH.get(), context.getLevel());
-        fe.setFish(context.getItemInHand().copyWithCount(1));
+        fe.setFish(context.getItemInHand().copy());
         fe.setPos(new Vec3(
                 context.getClickedPos().relative(context.getClickedFace()).getX() + 0.5f,
                 context.getClickedPos().relative(context.getClickedFace()).getY() + 0.5f,

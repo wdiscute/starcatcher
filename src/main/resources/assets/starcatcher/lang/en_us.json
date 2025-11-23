@@ -1,7 +1,12 @@
 {
-  "creativetab.starcatcher.starcatcher": "Starcatcher",
+
+  "dimension.minecraft.overworld": "Overworld",
+  "dimension.minecraft.the_end": "The End",
+  "dimension.minecraft.the_nether": "The Nether",
 
   "emi.category.starcatcher.fishing" : "Starcatcher's Fishing",
+
+  "creativetab.starcatcher.starcatcher": "Starcatcher",
 
   "tag.starcatcher.is_beach" : "Beaches",
   "tag.starcatcher.is_birch_forest" : "Birch Forests",
@@ -250,12 +255,6 @@
 
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
-
-  "gui.guide.seasons" : "Seasons:",
-  "gui.guide.seasons.all" : "All",
-  "gui.guide.seasons.in_season" : "In season!",
-  "gui.guide.seasons.not_in_season" : "Not in season",
-
   "gui.guide.sort.alphabetical_up" : "⏬ Alphabetical",
   "gui.guide.sort.alphabetical_down" : "⏫ Alphabetical",
   "gui.guide.sort.mod_up" : "⏬ Mod Name",
@@ -266,8 +265,7 @@
   "gui.guide.sort.caught_down" : "⏫ Caught",
   "gui.guide.sort.fluid_up" : "⏬ Fluid",
   "gui.guide.sort.fluid_down" : "⏫ Fluid",
-  "gui.guide.sort.season_up" : "⏬ Season",
-  "gui.guide.sort.season_down" : "⏫ Season",
+
 
   "gui.guide.units.metric" : "Metric (cm & kg)",
   "gui.guide.units.imperial" : "Imperial (in & lb)",

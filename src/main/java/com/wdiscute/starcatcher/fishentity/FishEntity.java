@@ -1,10 +1,11 @@
 package com.wdiscute.starcatcher.fishentity;
 
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.AbstractFish;
@@ -47,20 +48,14 @@ public class FishEntity extends AbstractFish
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0F);
     }
 
-    @Override
-    protected void dropAllDeathLoot(ServerLevel p_level, DamageSource damageSource)
-    {
-        super.dropAllDeathLoot(p_level, damageSource);
-    }
-
     public void setFish(ItemStack is)
     {
-        setBodyArmorItem(is);
+        setItemSlot(EquipmentSlot.CHEST, is);
     }
 
     @Override
     public ItemStack getBucketItemStack()
     {
-        return getBodyArmorItem();
+        return getItemBySlot(EquipmentSlot.CHEST);
     }
 }

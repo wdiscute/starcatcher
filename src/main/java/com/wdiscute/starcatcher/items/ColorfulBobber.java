@@ -1,9 +1,8 @@
 package com.wdiscute.starcatcher.items;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
+import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.InteractionHand;
@@ -14,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Random;
 
@@ -21,15 +21,20 @@ public class ColorfulBobber extends Item
 {
     public ColorfulBobber()
     {
-        super(new Properties()
-                .component(ModDataComponents.BOBBER_COLOR, BobberColor.DEFAULT).stacksTo(1));
+        super(new Properties().stacksTo(1));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltipComponents, TooltipFlag isAdvanced)
     {
-        tooltipComponents.add(Component.translatable("tooltip.starcatcher.colorful_bobber.999").withColor(stack.get(ModDataComponents.BOBBER_COLOR).getColorAsInt()));
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
+
+        BobberColor bobberColor = DataComponents.getBobberColor(stack);
+
+        tooltipComponents.add(Component.translatable("tooltip.starcatcher.colorful_bobber.999")
+                .withStyle(Style.EMPTY.withColor(bobberColor.getColorAsInt())));
+
+        super.appendHoverText(stack, level, tooltipComponents, isAdvanced);
     }
 
     @Override
@@ -39,10 +44,13 @@ public class ColorfulBobber extends Item
         if (player instanceof ServerPlayer sp)
         {
             BobberColor bobberColor = BobberColor.random();
-            player.getItemInHand(usedHand).set(ModDataComponents.BOBBER_COLOR, bobberColor);
+
+            DataComponents.setBobberColor(player.getItemInHand(usedHand), bobberColor);
+
             sp.displayClientMessage(
                     Component.literal("Your bobber shines differently...")
-                            .withColor(bobberColor.getColorAsInt()), true);
+                            .withStyle(Style.EMPTY.withColor(bobberColor.getColorAsInt())),
+                    true);
         }
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
@@ -55,12 +63,13 @@ public class ColorfulBobber extends Item
             float b
     )
     {
-        public static final Codec<BobberColor> CODEC = RecordCodecBuilder.create(instance ->
-                instance.group(
-                        Codec.FLOAT.fieldOf("r").forGetter(BobberColor::r),
-                        Codec.FLOAT.fieldOf("g").forGetter(BobberColor::g),
-                        Codec.FLOAT.fieldOf("b").forGetter(BobberColor::b)
-                ).apply(instance, BobberColor::new));
+        //not used in 1.20
+//        public static final Codec<BobberColor> CODEC = RecordCodecBuilder.create(instance ->
+//                instance.group(
+//                        Codec.FLOAT.fieldOf("r").forGetter(BobberColor::r),
+//                        Codec.FLOAT.fieldOf("g").forGetter(BobberColor::g),
+//                        Codec.FLOAT.fieldOf("b").forGetter(BobberColor::b)
+//                ).apply(instance, BobberColor::new));
 
         public static final BobberColor DEFAULT = new BobberColor(0.5f, 0.8f, 0.5f);
 

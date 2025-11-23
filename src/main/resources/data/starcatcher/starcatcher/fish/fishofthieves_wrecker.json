@@ -1,0 +1,31 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "fishofthieves"
+    }
+  ],
+  "difficulty": {
+    "decay": 2,
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_marker": false
+    },
+    "penalty": 25,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "fishofthieves:wrecker",
+  "rarity": "epic",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:the_end"
+    ]
+  }
+}

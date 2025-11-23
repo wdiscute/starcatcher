@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 
 public class FishRenderer extends EntityRenderer<FishEntity>
@@ -44,9 +45,9 @@ public class FishRenderer extends EntityRenderer<FishEntity>
             poseStack.mulPose(Axis.YP.rotationDegrees(90));
         }
 
-        if(!fish.getBodyArmorItem().isEmpty())
+        if(!fish.getItemBySlot(EquipmentSlot.CHEST).isEmpty())
         {
-            this.itemRenderer.renderStatic(fish.getBodyArmorItem(), ItemDisplayContext.FIXED, packedLight,
+            this.itemRenderer.renderStatic(fish.getItemBySlot(EquipmentSlot.CHEST), ItemDisplayContext.FIXED, packedLight,
                     OverlayTexture.NO_OVERLAY, poseStack, buffer, fish.level(), fish.getId());
         }
 

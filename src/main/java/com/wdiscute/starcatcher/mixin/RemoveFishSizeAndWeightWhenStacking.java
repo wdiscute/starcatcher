@@ -1,7 +1,5 @@
 package com.wdiscute.starcatcher.mixin;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
@@ -15,19 +13,20 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ItemStack.class)
 public class RemoveFishSizeAndWeightWhenStacking
 {
-
     @Inject(at = @At("HEAD"), method = "overrideStackedOnOther", cancellable = true)
-    private void stackedOnMe(Slot slot, ClickAction action, Player player, CallbackInfoReturnable<Boolean> cir)
+    private void stackedOnOther(Slot slot, ClickAction action, Player player, CallbackInfoReturnable<Boolean> cir)
     {
-        ItemStack itemBeingClickedOn = player.getSlot(slot.index).get();
+        ItemStack itemBeingClickedOn = slot.getItem();
         ItemStack itemInHand = (ItemStack) (Object)this;
 
         if(itemBeingClickedOn.is(itemInHand.getItem()))
         {
-            itemInHand.remove(ModDataComponents.SIZE_AND_WEIGHT);
-            itemBeingClickedOn.remove(ModDataComponents.SIZE_AND_WEIGHT);
-        }
+            if(itemInHand.hasTag()) itemInHand.getTag().remove("starcatcher_size");
+            if(itemInHand.hasTag()) itemInHand.getTag().remove("starcatcher_weight");
 
+            if(itemBeingClickedOn.hasTag()) itemBeingClickedOn.getTag().remove("starcatcher_size");
+            if(itemBeingClickedOn.hasTag()) itemBeingClickedOn.getTag().remove("starcatcher_weight");
+        }
     }
 
 }

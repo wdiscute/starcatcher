@@ -1,0 +1,42 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:legendary_bait"
+    ]
+  },
+  "daytime": "noon",
+  "difficulty": {
+    "decay": 3,
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_thin_marker": true
+    },
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 30,
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "aquaculture:piranha",
+  "rarity": "legendary",
+  "world_restrictions": {
+    "above_y": 50,
+    "biomes_tags": [
+      "minecraft:is_jungle"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

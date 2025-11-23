@@ -4,7 +4,6 @@ package com.wdiscute.starcatcher.particles;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -67,7 +66,6 @@ public class FishingBitingParticles extends TextureSheetParticle
             this.spriteSet = spriteSet;
         }
 
-        @Nullable
         @Override
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
         {

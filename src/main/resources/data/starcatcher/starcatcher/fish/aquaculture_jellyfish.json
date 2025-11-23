@@ -1,0 +1,37 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "base_chance": 3,
+  "difficulty": {
+    "decay": 2,
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_marker": false
+    },
+    "penalty": 25,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "aquaculture:jellyfish",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
+    "biomes_tags": [
+      "starcatcher:is_ocean"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

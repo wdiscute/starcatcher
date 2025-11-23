@@ -1,0 +1,32 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "difficulty": {
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_marker": false
+    },
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 10,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:waterlogged_satchel"
+    }
+  },
+  "fish": "tide:birch_trout",
+  "world_restrictions": {
+    "biomes_tags": [
+      "starcatcher:is_birch_forest"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

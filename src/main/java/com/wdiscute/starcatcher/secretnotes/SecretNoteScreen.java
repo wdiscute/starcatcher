@@ -1,8 +1,8 @@
 package com.wdiscute.starcatcher.secretnotes;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.Tooltips;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.resources.language.I18n;
@@ -13,7 +13,6 @@ public class SecretNoteScreen extends Screen
 {
     private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/secret_note.png");
 
-    private final SecretNote.Note note;
     private final String translationKey;
 
     int uiX;
@@ -63,7 +62,6 @@ public class SecretNoteScreen extends Screen
     public SecretNoteScreen(SecretNote.Note note)
     {
         super(Component.empty());
-        this.note = note;
         this.translationKey = "gui.secret_note." + note.getSerializedName() + ".";
     }
 

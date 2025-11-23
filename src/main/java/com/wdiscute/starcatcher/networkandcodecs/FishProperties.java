@@ -5,19 +5,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
-import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
-import com.wdiscute.starcatcher.datagen.FishPropertiesWithModRestriction;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
@@ -26,16 +19,14 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -55,6 +46,11 @@ public record FishProperties(
         boolean hasGuideEntry
 )
 {
+    public static FishProperties getByRL(ResourceLocation resourceLocation, Level level)
+    {
+        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY).get(resourceLocation);
+    }
+
     public static final Codec<FishProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     //mandatory
@@ -77,27 +73,9 @@ public record FishProperties(
 
     public static final Codec<List<FishProperties>> LIST_CODEC = FishProperties.CODEC.listOf();
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, FishProperties> STREAM_CODEC = ExtraComposites.composite(
-            ByteBufCodecs.holderRegistry(Registries.ITEM), FishProperties::fish,
-            ByteBufCodecs.VAR_INT, FishProperties::baseChance,
-            ByteBufCodecs.STRING_UTF8, FishProperties::customName,
-            SizeAndWeight.STREAM_CODEC, FishProperties::sw,
-            Rarity.STREAM_CODEC, FishProperties::rarity,
-            WorldRestrictions.STREAM_CODEC, FishProperties::wr,
-            BaitRestrictions.STREAM_CODEC, FishProperties::br,
-            Difficulty.STREAM_CODEC, FishProperties::dif,
-            Daytime.STREAM_CODEC, FishProperties::daytime,
-            Weather.STREAM_CODEC, FishProperties::weather,
-            ByteBufCodecs.BOOL, FishProperties::skipMinigame,
-            ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
-            FishProperties::new
-    );
-
-    public static final StreamCodec<RegistryFriendlyByteBuf, List<FishProperties>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
-
 
     public static final FishProperties DEFAULT = new FishProperties(
-            ModItems.MISSINGNO,
+            ModItems.MISSINGNO.getHolder().orElse(Items.AIR.builtInRegistryHolder()),
             5,
             "",
             SizeAndWeight.DEFAULT,
@@ -113,11 +91,6 @@ public record FishProperties(
 
 
     //region with()
-
-    public FishPropertiesWithModRestriction withMod(String modid)
-    {
-        return new FishPropertiesWithModRestriction(this, modid);
-    }
 
     public FishProperties withFish(Holder<Item> fish)
     {
@@ -179,11 +152,6 @@ public record FishProperties(
         return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr, this.br, this.dif, this.daytime, this.weather, this.skipMinigame, hasGuideEntry);
     }
 
-    public FishProperties withSeasons(WorldRestrictions.Seasons... seasons)
-    {
-        return new FishProperties(this.fish, this.baseChance, this.customName, this.sw, this.rarity, this.wr.withSeasons(seasons), this.br, this.dif, this.daytime, this.weather, this.skipMinigame, this.hasGuideEntry);
-    }
-
     //endregion with()
 
     //region bait
@@ -205,17 +173,6 @@ public record FishProperties(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("incorrect_baits", List.of()).forGetter(BaitRestrictions::incorrectBaits),
                         Codec.BOOL.optionalFieldOf("must_have_correct_bait", false).forGetter(BaitRestrictions::mustHaveCorrectBait)
                 ).apply(instance, BaitRestrictions::new));
-
-
-        public static final StreamCodec<ByteBuf, BaitRestrictions> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), BaitRestrictions::correctBobber,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), BaitRestrictions::correctBait,
-                ByteBufCodecs.BOOL, BaitRestrictions::consumesBait,
-                ByteBufCodecs.INT, BaitRestrictions::correctBaitChanceAdded,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), BaitRestrictions::incorrectBaits,
-                ByteBufCodecs.BOOL, BaitRestrictions::mustHaveCorrectBait,
-                BaitRestrictions::new
-        );
 
         public static final BaitRestrictions DEFAULT = new BaitRestrictions(
                 List.of(),
@@ -281,14 +238,24 @@ public record FishProperties(
                 List.of(),
                 false);
 
-        public BaitRestrictions withCorrectBobber(ResourceLocation ...correctBobber)
+        public BaitRestrictions withCorrectBobber(ResourceLocation correctBobber)
         {
             return new BaitRestrictions(List.of(correctBobber), this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
         }
 
-        public BaitRestrictions withCorrectBait(ResourceLocation ...correctBait)
+        public BaitRestrictions withCorrectBobber(List<ResourceLocation> correctBobber)
+        {
+            return new BaitRestrictions(correctBobber, this.correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withCorrectBait(ResourceLocation correctBait)
         {
             return new BaitRestrictions(this.correctBobber, List.of(correctBait), this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withCorrectBait(List<ResourceLocation> correctBait)
+        {
+            return new BaitRestrictions(this.correctBobber, correctBait, this.consumesBait, this.correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
         }
 
         public BaitRestrictions withConsumesBait(boolean consumesBait)
@@ -301,9 +268,14 @@ public record FishProperties(
             return new BaitRestrictions(this.correctBobber, this.correctBait, consumesBait, correctBaitChanceAdded, this.incorrectBaits, this.mustHaveCorrectBait);
         }
 
-        public BaitRestrictions withIncorrectBaits(ResourceLocation ...incorrectBaits)
+        public BaitRestrictions withIncorrectBaits(ResourceLocation incorrectBaits)
         {
             return new BaitRestrictions(this.correctBobber, this.correctBait, this.consumesBait, this.correctBaitChanceAdded, List.of(incorrectBaits), this.mustHaveCorrectBait);
+        }
+
+        public BaitRestrictions withIncorrectBaits(List<ResourceLocation> incorrectBaits)
+        {
+            return new BaitRestrictions(this.correctBobber, correctBait, this.consumesBait, this.correctBaitChanceAdded, incorrectBaits, this.mustHaveCorrectBait);
         }
 
         public BaitRestrictions withMustHaveCorrectBait(boolean mustHaveCorrectBait)
@@ -324,54 +296,10 @@ public record FishProperties(
             List<ResourceLocation> biomesBlacklist,
             List<ResourceLocation> biomesBlacklistTags,
             List<ResourceLocation> fluids,
-            List<Seasons> seasons,
             int mustBeCaughtBelowY,
             int mustBeCaughtAboveY
     )
     {
-
-        public enum Seasons implements StringRepresentable
-        {
-            ALL("all"),
-
-            SPRING("spring"),
-            EARLY_SPRING("early_spring"),
-            MID_SPRING("mid_spring"),
-            LATE_SPRING("late_spring"),
-
-            SUMMER("summer"),
-            EARLY_SUMMER("early_summer"),
-            MID_SUMMER("mid_summer"),
-            LATE_SUMMER("late_summer"),
-
-            AUTUMN("autumn"),
-            EARLY_AUTUMN("early_autumn"),
-            MID_AUTUMN("mid_autumn"),
-            LATE_AUTUMN("late_autumn"),
-
-            WINTER("winter"),
-            EARLY_WINTER("early_winter"),
-            MID_WINTER("mid_winter"),
-            LATE_WINTER("late_winter");
-
-            public static final Codec<FishProperties.WorldRestrictions.Seasons> CODEC = StringRepresentable.fromEnum(FishProperties.WorldRestrictions.Seasons::values);
-            public static final Codec<List<FishProperties.WorldRestrictions.Seasons>> LIST_CODEC = Seasons.CODEC.listOf();
-            public static final StreamCodec<RegistryFriendlyByteBuf, FishProperties.WorldRestrictions.Seasons> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(FishProperties.WorldRestrictions.Seasons.class);
-            public static final StreamCodec<RegistryFriendlyByteBuf, List<FishProperties.WorldRestrictions.Seasons>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
-            private final String key;
-
-            Seasons(String key)
-            {
-                this.key = key;
-            }
-
-            public String getSerializedName()
-            {
-                return this.key;
-            }
-
-        }
-
 
         public static final WorldRestrictions DEFAULT = new WorldRestrictions(
                 List.of(),
@@ -381,7 +309,6 @@ public record FishProperties(
                 List.of(),
                 List.of(),
                 List.of(ResourceLocation.withDefaultNamespace("water")),
-                List.of(Seasons.ALL),
                 Integer.MAX_VALUE,
                 Integer.MIN_VALUE);
 
@@ -394,24 +321,9 @@ public record FishProperties(
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", DEFAULT.biomesBlacklist).forGetter(WorldRestrictions::biomesBlacklist),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", DEFAULT.biomesBlacklistTags).forGetter(WorldRestrictions::biomesBlacklistTags),
                         Codec.list(ResourceLocation.CODEC).optionalFieldOf("fluids", DEFAULT.fluids).forGetter(WorldRestrictions::fluids),
-                        Seasons.LIST_CODEC.optionalFieldOf("seasons", DEFAULT.seasons).forGetter(WorldRestrictions::seasons),
                         Codec.INT.optionalFieldOf("below_y", DEFAULT.mustBeCaughtBelowY).forGetter(WorldRestrictions::mustBeCaughtBelowY),
                         Codec.INT.optionalFieldOf("above_y", DEFAULT.mustBeCaughtAboveY).forGetter(WorldRestrictions::mustBeCaughtAboveY)
                 ).apply(instance, WorldRestrictions::new));
-
-        public static final StreamCodec<RegistryFriendlyByteBuf, WorldRestrictions> STREAM_CODEC = ExtraComposites.composite(
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dims,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::dimsBlacklist,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomes,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesTags,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklist,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::biomesBlacklistTags,
-                ByteBufCodecs.fromCodec(Codec.list(ResourceLocation.CODEC)), WorldRestrictions::fluids,
-                Seasons.LIST_STREAM_CODEC, WorldRestrictions::seasons,
-                ByteBufCodecs.VAR_INT, WorldRestrictions::mustBeCaughtBelowY,
-                ByteBufCodecs.VAR_INT, WorldRestrictions::mustBeCaughtAboveY,
-                WorldRestrictions::new
-        );
 
         public static final WorldRestrictions OVERWORLD =
                 WorldRestrictions.DEFAULT
@@ -479,7 +391,7 @@ public record FishProperties(
         public static final WorldRestrictions OVERWORLD_LAKE =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesBlacklistTags(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER)
+                        .withBiomesBlacklistTags(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER))
                         .withMustBeCaughtAboveY(50)
                         .withMustBeCaughtBelowY(100);
 
@@ -492,13 +404,13 @@ public record FishProperties(
         public static final WorldRestrictions OVERWORLD_COLD_FRESHWATER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_COLD_LAKE, StarcatcherTags.IS_COLD_RIVER)
+                        .withBiomesTags(List.of(StarcatcherTags.IS_COLD_LAKE, StarcatcherTags.IS_COLD_RIVER))
                         .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_WARM_FRESHWATER =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.OVERWORLD.location())
-                        .withBiomesTags(StarcatcherTags.IS_WARM_LAKE, StarcatcherTags.IS_WARM_RIVER)
+                        .withBiomesTags(List.of(StarcatcherTags.IS_WARM_LAKE, StarcatcherTags.IS_WARM_RIVER))
                         .withMustBeCaughtAboveY(50);
 
         public static final WorldRestrictions OVERWORLD_WARM_LAKE =
@@ -605,30 +517,6 @@ public record FishProperties(
                         .withDims(Level.NETHER.location())
                         .withFluids(ResourceLocation.withDefaultNamespace("lava"));
 
-        public static final WorldRestrictions NETHER_LAVA_CRIMSON_FOREST =
-                WorldRestrictions.DEFAULT
-                        .withDims(Level.NETHER.location())
-                        .withBiomes(Biomes.CRIMSON_FOREST.location())
-                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
-
-        public static final WorldRestrictions NETHER_LAVA_WARPED_FOREST =
-                WorldRestrictions.DEFAULT
-                        .withDims(Level.NETHER.location())
-                        .withBiomes(Biomes.WARPED_FOREST.location())
-                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
-
-        public static final WorldRestrictions NETHER_LAVA_SOUL_SAND_VALLEY =
-                WorldRestrictions.DEFAULT
-                        .withDims(Level.NETHER.location())
-                        .withBiomes(Biomes.SOUL_SAND_VALLEY.location())
-                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
-
-        public static final WorldRestrictions NETHER_LAVA_BASALT_DELTAS =
-                WorldRestrictions.DEFAULT
-                        .withDims(Level.NETHER.location())
-                        .withBiomes(Biomes.BASALT_DELTAS.location())
-                        .withFluids(ResourceLocation.withDefaultNamespace("lava"));
-
         public static final WorldRestrictions END =
                 WorldRestrictions.DEFAULT
                         .withDims(Level.END.location());
@@ -639,54 +527,84 @@ public record FishProperties(
                         .withBiomesTags(BiomeTags.IS_END.location())
                         .withBiomesBlacklist(Biomes.THE_END.location());
 
-        public WorldRestrictions withDims(ResourceLocation ...dims)
+        public WorldRestrictions withDims(ResourceLocation dims)
         {
-            return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(List.of(dims), this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withDimsBlacklist(ResourceLocation ...dimsBlacklist)
+        public WorldRestrictions withDims(List<ResourceLocation> dims)
         {
-            return new WorldRestrictions(this.dims, List.of(dimsBlacklist), this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomes(ResourceLocation ...biome)
+        public WorldRestrictions withDimsBlacklist(ResourceLocation dimsBlacklist)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, List.of(biome), this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, List.of(dimsBlacklist), this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomesTags(ResourceLocation ...biomesTag)
+        public WorldRestrictions withDimsBlacklist(List<ResourceLocation> dimsBlacklist)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, List.of(biomesTag), this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomesBlacklist(ResourceLocation ...biomesBlacklist)
+        public WorldRestrictions withBiomes(ResourceLocation biome)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, List.of(biomesBlacklist), this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, List.of(biome), this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withBiomesBlacklistTags(ResourceLocation ...biomesBlacklistTags)
+        public WorldRestrictions withBiomes(List<ResourceLocation> biomes)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, List.of(biomesBlacklistTags), this.fluids, this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withFluids(ResourceLocation... fluids)
+        public WorldRestrictions withBiomesTags(ResourceLocation biomesTag)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, List.of(fluids), this.seasons, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, List.of(biomesTag), this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
-        public WorldRestrictions withSeasons(Seasons ...seasons)
+        public WorldRestrictions withBiomesTags(List<ResourceLocation> biomesTags)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, Arrays.stream(seasons).toList(), this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withBiomesBlacklist(List<ResourceLocation> biomesBlacklist)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withBiomesBlacklist(ResourceLocation biomesBlacklist)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, List.of(biomesBlacklist), this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withBiomesBlacklistTags(List<ResourceLocation> biomesBlacklistTags)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withBiomesBlacklistTags(ResourceLocation biomesBlacklistTags)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, List.of(biomesBlacklistTags), this.fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withFluids(List<ResourceLocation> fluids)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, fluids, this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+        }
+
+        public WorldRestrictions withFluids(ResourceLocation fluids)
+        {
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, List.of(fluids), this.mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withMustBeCaughtBelowY(int mustBeCaughtBelowY)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, mustBeCaughtBelowY, this.mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, mustBeCaughtBelowY, this.mustBeCaughtAboveY);
         }
 
         public WorldRestrictions withMustBeCaughtAboveY(int mustBeCaughtAboveY)
         {
-            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.seasons, this.mustBeCaughtBelowY, mustBeCaughtAboveY);
+            return new WorldRestrictions(this.dims, this.dimsBlacklist, this.biomes, this.biomesTags, this.biomesBlacklist, this.biomesBlacklistTags, this.fluids, this.mustBeCaughtBelowY, mustBeCaughtAboveY);
         }
 
     }
@@ -709,13 +627,6 @@ public record FishProperties(
                         ResourceLocation.CODEC.optionalFieldOf("loot", Starcatcher.rl("none")).forGetter(Treasure::loot),
                         Codec.INT.optionalFieldOf("hit_reward", 0).forGetter(Treasure::hitReward)
                 ).apply(instance, Treasure::new));
-
-        public static final StreamCodec<ByteBuf, Treasure> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.BOOL, Treasure::hasTreasure,
-                ResourceLocation.STREAM_CODEC, Treasure::loot,
-                ByteBufCodecs.INT, Treasure::hitReward,
-                Treasure::new
-        );
 
         public static final Treasure DEFAULT = new Treasure(
                 false,
@@ -778,14 +689,6 @@ public record FishProperties(
                             Codec.BOOL.optionalFieldOf("has_second_thin_marker", DEFAULT.secondThin).forGetter(Markers::secondThin)
                     ).apply(instance, Markers::new));
 
-            public static final StreamCodec<ByteBuf, Markers> STREAM_CODEC = StreamCodec.composite(
-                    ByteBufCodecs.BOOL, Markers::first,
-                    ByteBufCodecs.BOOL, Markers::second,
-                    ByteBufCodecs.BOOL, Markers::firstThin,
-                    ByteBufCodecs.BOOL, Markers::secondThin,
-                    Markers::new
-            );
-
         }
 
         public record Extras(boolean isFlip, boolean isVanishing, boolean isMoving)
@@ -806,13 +709,6 @@ public record FishProperties(
                             Codec.BOOL.optionalFieldOf("has_vanishing_markers", DEFAULT.isVanishing).forGetter(Extras::isVanishing),
                             Codec.BOOL.optionalFieldOf("has_moving_markers", DEFAULT.isMoving).forGetter(Extras::isMoving)
                     ).apply(instance, Extras::new));
-
-            public static final StreamCodec<ByteBuf, Extras> STREAM_CODEC = StreamCodec.composite(
-                    ByteBufCodecs.BOOL, Extras::isFlip,
-                    ByteBufCodecs.BOOL, Extras::isVanishing,
-                    ByteBufCodecs.BOOL, Extras::isMoving,
-                    Extras::new
-            );
 
         }
 
@@ -849,18 +745,6 @@ public record FishProperties(
                 Extras.TTF
         );
 
-
-        public static final Difficulty REALLY_HEAVY_FISH = new Difficulty(
-                10,
-                1,
-                0,
-                6,
-                0,
-                Markers.TTFF,
-                Treasure.DEFAULT,
-                Extras.FFF
-        );
-
         public static final Difficulty EASY_NO_FLIP_VANISHING = new Difficulty(
                 9,
                 20,
@@ -871,30 +755,6 @@ public record FishProperties(
                 Treasure.DEFAULT,
                 Extras.FTF
         );
-
-        public static final Difficulty EASY_FAST_FISH = new Difficulty(
-                13,
-                15,
-                0,
-                6,
-                2,
-                Markers.TTFF,
-                Treasure.DEFAULT,
-                Extras.FFF
-        );
-
-
-        public static final Difficulty MEDIUM_FAST_FISH_VANISHING = new Difficulty(
-                13,
-                10,
-                0,
-                12,
-                2,
-                Markers.TTFF,
-                Treasure.DEFAULT,
-                Extras.FTF
-        );
-
 
         public static final Difficulty MEDIUM = new Difficulty(
                 10,
@@ -916,17 +776,6 @@ public record FishProperties(
                 Markers.TFTF,
                 Treasure.UNCOMMON,
                 Extras.TFT
-        );
-
-        public static final Difficulty MEDIUM_MOVING_NO_FLIP = new Difficulty(
-                10,
-                15,
-                35,
-                15,
-                1,
-                Markers.TFTF,
-                Treasure.UNCOMMON,
-                Extras.FFT
         );
 
         public static final Difficulty MEDIUM_VANISHING = new Difficulty(
@@ -1220,18 +1069,6 @@ public record FishProperties(
                         Extras.CODEC.optionalFieldOf("extras", DEFAULT.extras).forGetter(Difficulty::extras)
                 ).apply(instance, Difficulty::new));
 
-
-        public static final StreamCodec<ByteBuf, Difficulty> STREAM_CODEC = ExtraComposites.composite(
-                ByteBufCodecs.INT, Difficulty::speed,
-                ByteBufCodecs.INT, Difficulty::reward,
-                ByteBufCodecs.INT, Difficulty::rewardThin,
-                ByteBufCodecs.INT, Difficulty::penalty,
-                ByteBufCodecs.INT, Difficulty::decay,
-                Markers.STREAM_CODEC, Difficulty::markers,
-                Treasure.STREAM_CODEC, Difficulty::treasure,
-                Extras.STREAM_CODEC, Difficulty::extras,
-                Difficulty::new
-        );
     }
 
     //endregion dif
@@ -1251,15 +1088,6 @@ public record FishProperties(
                         Codec.INT.optionalFieldOf("golden_state_increase", DEFAULT.goldenIncrease).forGetter(SizeAndWeight::goldenIncrease)
                 ).apply(instance, SizeAndWeight::new));
 
-        public static final StreamCodec<ByteBuf, SizeAndWeight> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.FLOAT, SizeAndWeight::sizeAverage,
-                ByteBufCodecs.FLOAT, SizeAndWeight::sizeDeviation,
-                ByteBufCodecs.FLOAT, SizeAndWeight::weightAverage,
-                ByteBufCodecs.FLOAT, SizeAndWeight::weightDeviation,
-                ByteBufCodecs.INT, SizeAndWeight::goldenChance,
-                ByteBufCodecs.INT, SizeAndWeight::goldenIncrease,
-                SizeAndWeight::new
-        );
     }
 
 
@@ -1272,7 +1100,6 @@ public record FishProperties(
         LEGENDARY("legendary");
 
         public static final Codec<Rarity> CODEC = StringRepresentable.fromEnum(Rarity::values);
-        public static final StreamCodec<FriendlyByteBuf, Rarity> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Rarity.class);
         private final String key;
 
         Rarity(String key)
@@ -1295,7 +1122,6 @@ public record FishProperties(
         MIDNIGHT("midnight");
 
         public static final Codec<Daytime> CODEC = StringRepresentable.fromEnum(Daytime::values);
-        public static final StreamCodec<FriendlyByteBuf, Daytime> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Daytime.class);
         private final String key;
 
         Daytime(String key)
@@ -1317,7 +1143,6 @@ public record FishProperties(
         THUNDER("thunder");
 
         public static final Codec<Weather> CODEC = StringRepresentable.fromEnum(Weather::values);
-        public static final StreamCodec<FriendlyByteBuf, Weather> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Weather.class);
         private final String key;
 
         Weather(String key)
@@ -1347,7 +1172,7 @@ public record FishProperties(
             {
                 for (Holder<Biome> biomeHolder : optional.get())
                 {
-                    String biomeString = biomeHolder.getRegisteredName();
+                    String biomeString = biomeHolder.unwrapKey().get().location().toString();
 
                     rls.add(ResourceLocation.parse(biomeString));
                 }
@@ -1379,7 +1204,7 @@ public record FishProperties(
             {
                 for (Holder<Biome> biomeHolder : optional.get())
                 {
-                    String biomeString = biomeHolder.getRegisteredName();
+                    String biomeString = biomeHolder.unwrapKey().get().location().toString();
 
                     rls.add(ResourceLocation.parse(biomeString));
                 }
@@ -1412,15 +1237,8 @@ public record FishProperties(
 
         int chance = fp.baseChance();
 
-        ItemStack bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
-        ItemStack bait = rod.get(ModDataComponents.BAIT).stack().copy();
-
-
-        //seasons check
-        if (ModList.get().isLoaded("sereneseasons"))
-        {
-            if (!SereneSeasonsCompat.canCatch(fp, level)) return 0;
-        }
+        ItemStack bobber = DataComponents.getItemInSlot(rod, DataComponents.Slots.BOBBER).copy();
+        ItemStack bait = DataComponents.getItemInSlot(rod, DataComponents.Slots.BAIT).copy();
 
         //dimension  check
         if (!fp.wr.dims.isEmpty() && !fp.wr().dims().contains(level.dimension().location()))
@@ -1432,7 +1250,7 @@ public record FishProperties(
         //biome check
         List<ResourceLocation> biomes = getBiomesAsList(fp, level);
         List<ResourceLocation> blacklist = getBiomesBlacklistAsList(fp, level);
-        ResourceLocation currentBiome = level.getBiome(entity.blockPosition()).getKey().location();
+        ResourceLocation currentBiome = level.getBiome(entity.blockPosition()).unwrapKey().get().location();
 
         if (!biomes.isEmpty() && !biomes.contains(currentBiome))
             return 0;
@@ -1475,25 +1293,25 @@ public record FishProperties(
 
             switch (fp.daytime())
             {
-                case Daytime.DAY:
+                case DAY:
                     if (!(time > 23000 || time < 12700)) return 0;
                     break;
 
-                case Daytime.NOON:
+                case NOON:
                     if (!(time > 3500 && time < 8500)) return 0;
                     break;
 
-                case Daytime.NIGHT:
+                case NIGHT:
                     if (!(time < 23000 && time > 12700)) return 0;
                     break;
 
-                case Daytime.MIDNIGHT:
+                case MIDNIGHT:
                     if (!(time > 16500 && time < 19500)) return 0;
                     break;
             }
         }
 
-        if (!bait.is(ModItems.METEOROLOGICAL_BAIT))
+        if (!bait.is(ModItems.METEOROLOGICAL_BAIT.get()))
         {
             //clear check
             if (fp.weather() == Weather.CLEAR && (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5))
@@ -1560,5 +1378,4 @@ public record FishProperties(
     {
         return new SizeAndWeight(s, s1, w, w1, g, g1);
     }
-
 }

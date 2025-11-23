@@ -1,0 +1,20 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "fish": "aquaculture:gar",
+  "world_restrictions": {
+    "above_y": 100,
+    "below_y": 100,
+    "biomes_blacklist_tags": [
+      "starcatcher:is_ocean",
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

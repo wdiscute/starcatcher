@@ -1,14 +1,14 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.starcatcher.bob.FishingBobEntity;
 import com.wdiscute.starcatcher.brokenbottle.BottleEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.bob.FishingBobEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
@@ -16,7 +16,7 @@ import java.util.function.UnaryOperator;
 public class ModEntities
 {
     public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Starcatcher.MOD_ID);
+            DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, Starcatcher.MOD_ID);
 
     public static final Supplier<EntityType<FishingBobEntity>> FISHING_BOB =
             register("fishing_bob", FishingBobEntity::new, MobCategory.MISC,

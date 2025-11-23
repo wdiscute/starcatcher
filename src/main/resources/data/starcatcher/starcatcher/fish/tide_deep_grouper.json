@@ -1,0 +1,20 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "difficulty": {
+    "extras": {
+      "has_vanishing_markers": true
+    }
+  },
+  "fish": "tide:deep_grouper",
+  "world_restrictions": {
+    "below_y": 0,
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

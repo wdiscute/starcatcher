@@ -1,10 +1,9 @@
 package com.wdiscute.starcatcher.rod;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import com.wdiscute.starcatcher.bob.FishingBobEntity;
 import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
+import com.wdiscute.starcatcher.bob.FishingBobEntity;
+import com.wdiscute.starcatcher.networkandcodecs.DataAttachments;
+import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -19,10 +18,8 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -30,59 +27,59 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
 {
     public StarcatcherFishingRod()
     {
-        super(new Item.Properties()
+        super(new Properties()
                 .rarity(Rarity.EPIC)
                 .stacksTo(1)
-                .component(ModDataComponents.BOBBER.get(), SingleStackContainer.EMPTY)
-                .component(ModDataComponents.BAIT.get(), SingleStackContainer.EMPTY)
-                .component(ModDataComponents.HOOK.get(), new SingleStackContainer(new ItemStack(ModItems.HOOK.get())))
         );
-    }
 
+
+    }
 
     //comment - kuko010
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
     {
-        if (!player.getItemInHand(hand).is(ModItems.ROD))
+        if (!player.getItemInHand(hand).is(ModItems.ROD.get()))
             return InteractionResultHolder.pass(player.getItemInHand(hand));
 
         if (player.isCrouching())
         {
+            ItemStack is = player.getItemInHand(hand);
+
+            if(!is.hasTag())
+            {
+                DataComponents.setItemInSlot(is, DataComponents.Slots.HOOK, new ItemStack(ModItems.HOOK.get()));
+            }
             player.openMenu(this);
             return InteractionResultHolder.success(player.getItemInHand(hand));
         }
 
         if (level.isClientSide) return InteractionResultHolder.success(player.getItemInHand(hand));
 
-
-        if (player.getData(ModDataAttachments.FISHING.get()).isEmpty())
+        if (DataAttachments.get(player).fishing().isEmpty())
         {
             level.playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.FISHING_BOBBER_THROW, SoundSource.NEUTRAL, 0.5F, 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F));
 
             if (level instanceof ServerLevel)
             {
-                //TODO ADD CUSTOM STAT FOR NUMBER OF FISHES CAUGHT TOTAL ON STAT SCREEN
-
-                Entity entity = new FishingBobEntity(level, player, player.getItemInHand(hand));
+                FishingBobEntity entity = new FishingBobEntity(level, player, player.getItemInHand(hand));
                 level.addFreshEntity(entity);
 
-                player.setData(ModDataAttachments.FISHING.get(), entity.getStringUUID());
-                entity.setData(ModDataAttachments.BOBBER.get(), player.getItemInHand(hand).get(ModDataComponents.BOBBER));
+                DataAttachments.get(player).setFishing(entity.getStringUUID());
             }
         }
         else
         {
-
             List<Entity> entities = level.getEntities(null, new AABB(-25, -65, -25, 25, 65, 25).move(player.position()));
 
             for (Entity entity : entities)
             {
-                if (entity.getUUID().toString().equals(player.getData(ModDataAttachments.FISHING.get())))
+
+                if (entity.getUUID().toString().equals(DataAttachments.get(player).fishing()))
                 {
                     if (entity instanceof FishingBobEntity fbe && !fbe.checkBiting())
                     {
                         fbe.kill();
-                        player.setData(ModDataAttachments.FISHING.get(), "");
+                        DataAttachments.get(player).setFishing("");
                     }
                 }
             }
@@ -113,9 +110,9 @@ public class StarcatcherFishingRod extends Item implements MenuProvider
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
+    public AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
     {
-        if (player.getMainHandItem().is(ModItems.ROD))
+        if (player.getMainHandItem().is(ModItems.ROD.get()))
             return new FishingRodMenu(i, inventory, player.getMainHandItem());
         else
             return new FishingRodMenu(i, inventory, player.getOffhandItem());

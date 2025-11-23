@@ -1,8 +1,8 @@
 plugins {
+    id 'idea'
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.107'
-    id 'idea'
+    id 'net.neoforged.moddev.legacyforge' version '2.0.91'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -17,97 +17,42 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
-java {
-    withSourcesJar()
+
+dependencies {
+    //emi
+    compileOnly "dev.emi:emi-forge:${emi_version}:api"
+    //runtimeOnly "dev.emi:emi-forge:${emi_version}"
 }
 
 repositories
-{
-    //emi
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
+        {
+            //emi
+            maven {
+                name = "TerraformersMC"
+                url = "https://maven.terraformersmc.com/"
+            }
 
-    //favouriteless
-    maven {
-        url = "https://maven.favouriteless.net/releases"
-    }
+            //favouriteless
+            maven {
+                url = "https://maven.favouriteless.net/releases"
+            }
 
-    //modrinth
-    maven {
-        url = "https://api.modrinth.com/maven"
-    }
-}
-
-dependencies {
-    jarJar(implementation(group: 'com.wdiscute', name: 'libtooltips')) {
-        version {
-            // Version used in your workspace and bundled in mod jar
-            prefer '1.3'
-        }
-    }
-
-    // Example mod dependency using a file as dependency
-    //files("libs/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
-
-    //emi
-    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
-
-    // Example mod dependency using a mod jar from ./libs with a flat dir repository
-    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
-    // The group id is ignored when searching -- in this case, it is "blank"
-    // implementation "blank:coolmod-${mc_version}:${coolmod_version}"
-
-    // Example mod dependency using a file as dependency
-    compileOnly files(".libs/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
-    compileOnly files(".libs/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
-
-    // Example project dependency using a sister or child project:
-    // implementation project(":myproject")
-
-    // For more info:
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId base.archivesName.get()
-            from components.java
-        }
-    }
-
-    repositories {
-        if (System.getenv("MAVEN_USER") == null || System.getenv("MAVEN_PASS") == null) {
-            mavenLocal()
-        } else maven {
-            name = "wdReleases"
-            url = "https://maven.favouriteless.net/releases"
-
-            credentials {
-                username = System.getenv("MAVEN_USER")
-                password = System.getenv("MAVEN_PASS")
+            //modrinth
+            maven {
+                url = "https://api.modrinth.com/maven"
             }
         }
-    }
-}
 
 base {
     archivesName = mod_id
 }
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
-    withSourcesJar()
-}
+// Mojang ships Java 17 to end users in 1.20.1, so mods should target Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-neoForge {
-    // Specify the version of NeoForge to use.
-    version = project.neo_version
+legacyForge {
+    // Specify the version of MinecraftForge to use.
+    version = project.minecraft_version + '-' + project.forge_version
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
@@ -115,7 +60,7 @@ neoForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -124,13 +69,14 @@ neoForge {
             client()
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
 
+
+        }
         server {
             server()
             programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -138,7 +84,7 @@ neoForge {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
@@ -170,7 +116,8 @@ neoForge {
     mods {
         // define mod <-> source bindings
         // these are used to tell the game which sources are for which mod
-        // multi mod projects should define one per mod
+        // mostly optional in a single mod project
+        // but multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
         }
@@ -180,12 +127,21 @@ neoForge {
 // Include resources generated by data generators.
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-// Sets up a dependency configuration called 'localRuntime'.
-// This configuration should be used instead of 'runtimeOnly' to declare
+// Sets up a dependency configuration called 'localRuntime' and a deobfuscating one called 'modLocalRuntime'
+// These configurations should be used instead of 'runtimeOnly' to declare
 // a dependency that will be present for runtime testing but that is
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
     runtimeClasspath.extendsFrom localRuntime
+}
+obfuscation {
+    createRemappingConfiguration(configurations.localRuntime)
+}
+
+// Uncomment the lines below if you wish to configure mixin. The mixin file should be named modid.mixins.json.
+mixin {
+    //add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
 }
 
 
@@ -195,7 +151,8 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
-            neo_version            : neo_version,
+            forge_version          : forge_version,
+            forge_version_range    : forge_version_range,
             loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
@@ -213,8 +170,21 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
 // this works with both building through Gradle and the IDE.
 sourceSets.main.resources.srcDir generateModMetadata
 // To avoid having to run "generateModMetadata" manually, make it run on every project reload
-neoForge.ideSyncTask generateModMetadata
+legacyForge.ideSyncTask generateModMetadata
 
+// Example configuration to allow publishing using the maven-publish plugin
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
+}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation

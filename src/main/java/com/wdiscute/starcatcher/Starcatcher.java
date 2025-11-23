@@ -1,12 +1,11 @@
 package com.wdiscute.starcatcher;
 
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.blocks.ModBlockEntities;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
-import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.bob.FishingBobModel;
 import com.wdiscute.starcatcher.bob.FishingBobRenderer;
+import com.wdiscute.starcatcher.fishentity.FishEntity;
+import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.fishspotter.FishTrackerLayer;
 import com.wdiscute.starcatcher.guide.FishCaughtToast;
 import com.wdiscute.starcatcher.guide.SettingsScreen;
@@ -16,32 +15,42 @@ import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.rod.FishingRodScreen;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.*;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.registries.*;
-
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.ModContainer;
-import sereneseasons.item.CalendarItem;
-import sereneseasons.neoforge.core.SereneSeasonsNeoForge;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.EntityRenderersEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
+import net.minecraftforge.common.capabilities.*;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.registries.DataPackRegistryEvent;
 
 import java.util.List;
 import java.util.Random;
@@ -58,6 +67,11 @@ public class Starcatcher
     public static final ResourceKey<Registry<TrophyProperties>> TROPHY_REGISTRY =
             ResourceKey.createRegistryKey(Starcatcher.rl("trophy"));
 
+    public static ResourceLocation rl(String s)
+    {
+        return ResourceLocation.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
+    }
+
     public static final Random r = new Random();
 
     public static double truncatedNormal(double mean, double deviation)
@@ -72,11 +86,6 @@ public class Starcatcher
         }
     }
 
-    public static ResourceLocation rl(String s)
-    {
-        return ResourceLocation.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
-    }
-
     @OnlyIn(Dist.CLIENT)
     public static void fishCaughtToast(FishProperties fp, boolean newFish, int sizeCM, int weightCM)
     {
@@ -89,7 +98,7 @@ public class Starcatcher
 
         Minecraft.getInstance().player.displayClientMessage(
                 Component.literal("")
-                        .append(Component.translatable(fp.fish().getDelegate().value().getDescriptionId()))
+                        .append(Component.translatable(fp.fish().value().getDescriptionId()))
                         .append(Component.literal(" - " + size + " - " + weight))
                 , true);
 
@@ -97,84 +106,96 @@ public class Starcatcher
 
     }
 
-
-
-    public Starcatcher(IEventBus modEventBus, ModContainer modContainer)
+    public Starcatcher(FMLJavaModLoadingContext context)
     {
-        ModCreativeModeTabs.register(modEventBus);
-        ModItems.register(modEventBus);
-        ModBlocks.register(modEventBus);
-        ModBlockEntities.register(modEventBus);
-        ModDataComponents.register(modEventBus);
-        ModSounds.register(modEventBus);
-        ModEntities.register(modEventBus);
-        ModParticles.register(modEventBus);
-        ModMenuTypes.register(modEventBus);
-        ModDataAttachments.register(modEventBus);
+        IEventBus eventBus = context.getModEventBus();
 
-        modContainer.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
-        modContainer.registerConfig(ModConfig.Type.SERVER, Config.SPEC_SERVER);
+        ModCreativeModeTabs.register(eventBus);
+        ModItems.register(eventBus);
+        ModBlocks.register(eventBus);
+        ModBlockEntities.register(eventBus);
+        ModSounds.register(eventBus);
+        ModEntities.register(eventBus);
+        ModParticles.register(eventBus);
+        ModMenuTypes.register(eventBus);
+
+        Payloads.register();
+
+        context.registerConfig(ModConfig.Type.CLIENT, Config.SPEC);
+        context.registerConfig(ModConfig.Type.SERVER, Config.SPEC_SERVER);
     }
 
-
-    @EventBusSubscriber(modid = MOD_ID)
-    public static class ModEvents
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+    public static class IHateForge
     {
-
         @SubscribeEvent
-        public static void addRegistry(DataPackRegistryEvent.NewRegistry event)
+        public static void attachEvent(AttachCapabilitiesEvent<Entity> event)
         {
-            event.dataPackRegistry(
-                    FISH_REGISTRY, FishProperties.CODEC, FishProperties.CODEC,
-                    builder -> builder.maxId(512));
+            if (!(event.getObject() instanceof Player player)) return;
 
-            event.dataPackRegistry(
-                    TROPHY_REGISTRY, TrophyProperties.CODEC, TrophyProperties.CODEC,
-                    builder -> builder.maxId(256));
+            DataAttachments modCapabilities = new DataAttachments(player);
+            LazyOptional<DataAttachmentCapability> optionalStorage = LazyOptional.of(() -> modCapabilities);
+
+            ICapabilityProvider provider = new ICapabilitySerializable<CompoundTag>() {
+                @Override
+                public CompoundTag serializeNBT()
+                {
+                    return modCapabilities.serializeNBT();
+                }
+
+                @Override
+                public void deserializeNBT(CompoundTag tag)
+                {
+                    modCapabilities.deserializeNBT(tag);
+                }
+
+                @Override
+                public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction direction) {
+                    if (cap == DataAttachmentCapability.PLAYER_DATA) {
+                        return optionalStorage.cast();
+                    }
+                    return LazyOptional.empty();
+                }
+            };
+
+            event.addCapability(Starcatcher.rl("fish"), provider);
         }
 
         @SubscribeEvent
-        public static void registerAttributed(EntityAttributeCreationEvent event)
+        public static void playerOnDeath(PlayerEvent.Clone event)
         {
-            event.put(ModEntities.FISH.get(), FishEntity.createAttributes().build());
+            if(event.isWasDeath())
+            {
+                event.getOriginal().reviveCaps();
+                event.getOriginal().getCapability(DataAttachments.PLAYER_DATA).ifPresent(oldData ->
+                {
+                    DataAttachments.get(event.getEntity()).setFishNotifications(oldData.fishNotifications());
+                    DataAttachments.get(event.getEntity()).setTrophiesCaught(oldData.trophiesCaught());
+                    DataAttachments.get(event.getEntity()).setFishesCaught(oldData.fishesCaught());
+                });
+            }
         }
 
         @SubscribeEvent
-        public static void registerPayloads(final RegisterPayloadHandlersEvent event)
+        public static void playerLogInEvent(PlayerEvent.PlayerLoggedInEvent event)
         {
-            final PayloadRegistrar registrar = event.registrar("1");
-            registrar.playToClient(
-                    Payloads.FishingPayload.TYPE,
-                    Payloads.FishingPayload.STREAM_CODEC,
-                    PayloadReceiver::receiveFishingClient
-            );
+            Player player = event.getEntity();
 
-            registrar.playToServer(
-                    Payloads.FishingCompletedPayload.TYPE,
-                    Payloads.FishingCompletedPayload.STREAM_CODEC,
-                    PayloadReceiver::receiveFishingCompletedServer
-            );
+            if(player instanceof ServerPlayer sp)
+            {
+                DataAttachmentCapability playerCap = DataAttachments.get(player);
 
-            registrar.playToClient(
-                    Payloads.FishCaughtPayload.TYPE,
-                    Payloads.FishCaughtPayload.STREAM_CODEC,
-                    PayloadReceiver::receiveFishCaught
-            );
+                Payloads.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp),
+                        new Payloads.FishesCaughtPayload(playerCap.fishesCaught(), sp));
 
-            registrar.playToServer(
-                    Payloads.FPsSeen.TYPE,
-                    Payloads.FPsSeen.STREAM_CODEC,
-                    PayloadReceiver::receiveFPsSeen
-            );
+                Payloads.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp),
+                        new Payloads.TrophiesCaughtPayload(playerCap.trophiesCaught()));
+
+                Payloads.CHANNEL.send(PacketDistributor.PLAYER.with(() -> sp),
+                        new Payloads.FishesNotificationPayload(playerCap.fishNotifications(), sp));
+            }
 
         }
-
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    @EventBusSubscriber(modid = MOD_ID, value = Dist.CLIENT)
-    public static class ModClientEvents
-    {
 
         @SubscribeEvent
         public static void trophyTooltip(ItemTooltipEvent event)
@@ -182,24 +203,26 @@ public class Starcatcher
             List<Component> comp = event.getToolTip();
             ItemStack stack = event.getItemStack();
 
-            if (stack.has(ModDataComponents.SIZE_AND_WEIGHT))
+            if (!DataComponents.getSizeAndWeight(stack).equals(SizeAndWeight.DEFAULT))
             {
-                SizeAndWeight sw = stack.get(ModDataComponents.SIZE_AND_WEIGHT);
+                SizeAndWeight sw = DataComponents.getSizeAndWeight(stack);
 
                 SettingsScreen.Units units = Config.UNIT.get();
 
                 String size = units.getSizeAsString(sw.sizeInCentimeters());
                 String weight = units.getWeightAsString(sw.weightInGrams());
 
-                comp.add(1, Component.literal(size + " - " + weight).withColor(0x888888));
+                comp.add(1, Component.literal(size + " - " + weight).withStyle(Style.EMPTY.withColor(0x888888)));
             }
 
-            if (stack.has(ModDataComponents.TROPHY))
+            if (!DataComponents.getTrophyProperties(stack).equals(TrophyProperties.DEFAULT))
             {
-                TrophyProperties tp = stack.get(ModDataComponents.TROPHY);
+                TrophyProperties tp = DataComponents.getTrophyProperties(stack);
+
+                comp.set(0, comp.get(0).copy().withStyle(Style.EMPTY.withItalic(false)));
 
                 if (tp.trophyType() == TrophyProperties.TrophyType.TROPHY)
-                    if (event.getFlags().hasShiftDown())
+                    if (Screen.hasShiftDown())
                     {
                         comp.add(Component.translatable("tooltip.libtooltips.generic.shift_down"));
                         comp.add(Component.translatable("tooltip.libtooltips.generic.empty"));
@@ -278,7 +301,7 @@ public class Starcatcher
                         if (list.size() == 1)
                         {
                             comp.add(Component.translatable("tooltip.starcatcher.trophy.once")
-                                    .append(list.getFirst())
+                                    .append(list.get(0))
                                     .append(Component.translatable("tooltip.starcatcher.trophy.have_been_caught")));
                         }
                         else
@@ -296,19 +319,50 @@ public class Starcatcher
             }
         }
 
+
+    }
+
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class ModEvents
+    {
+        @SubscribeEvent
+        public static void addRegistry(DataPackRegistryEvent.NewRegistry event)
+        {
+            event.dataPackRegistry(
+                    FISH_REGISTRY, FishProperties.CODEC, FishProperties.CODEC);
+
+            event.dataPackRegistry(
+                    TROPHY_REGISTRY, TrophyProperties.CODEC, TrophyProperties.CODEC);
+        }
+
+        @SubscribeEvent
+        public static void registerAttributed(EntityAttributeCreationEvent event)
+        {
+            event.put(ModEntities.FISH.get(), FishEntity.createAttributes().build());
+        }
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+    public static class ModClientEvents
+    {
+
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             EntityRenderers.register(ModEntities.FISHING_BOB.get(), FishingBobRenderer::new);
             EntityRenderers.register(ModEntities.BOTTLE.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntities.FISH.get(), FishRenderer::new);
+
             ModItemProperties.addCustomItemProperties();
+
+            MenuScreens.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
         }
 
         @SubscribeEvent
-        public static void FishSpotterLayer(RegisterGuiLayersEvent event)
+        public static void FishSpotterLayer(RegisterGuiOverlaysEvent event)
         {
-            event.registerAboveAll(Starcatcher.rl("fish_tracker"), new FishTrackerLayer());
+            event.registerAboveAll("fish_tracker", new FishTrackerLayer());
         }
 
         @SubscribeEvent
@@ -317,12 +371,6 @@ public class Starcatcher
             event.registerSpriteSet(ModParticles.FISHING_NOTIFICATION.get(), FishingNotificationParticles.Provider::new);
             event.registerSpriteSet(ModParticles.FISHING_BITING.get(), FishingBitingParticles.Provider::new);
             event.registerSpriteSet(ModParticles.FISHING_BITING_LAVA.get(), FishingBitingLavaParticles.Provider::new);
-        }
-
-        @SubscribeEvent
-        public static void registerScreens(RegisterMenuScreensEvent event)
-        {
-            event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
         }
 
         @SubscribeEvent

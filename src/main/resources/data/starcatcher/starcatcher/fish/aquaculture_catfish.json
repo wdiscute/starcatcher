@@ -1,0 +1,39 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "difficulty": {
+    "decay": 0,
+    "markers": {
+      "has_first_marker": false,
+      "has_first_thin_marker": true,
+      "has_second_marker": false,
+      "has_second_thin_marker": true
+    },
+    "penalty": 999,
+    "reward": 0,
+    "reward_thin": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "aquaculture:catfish",
+  "rarity": "epic",
+  "weather": "rain",
+  "world_restrictions": {
+    "above_y": 100,
+    "below_y": 100,
+    "biomes_blacklist_tags": [
+      "starcatcher:is_ocean",
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

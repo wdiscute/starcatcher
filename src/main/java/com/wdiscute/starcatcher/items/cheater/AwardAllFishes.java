@@ -1,9 +1,11 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.networkandcodecs.DataAttachments;
 import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +20,7 @@ public class AwardAllFishes extends Item
 {
     public AwardAllFishes()
     {
-        super(new Item.Properties().stacksTo(1));
+        super(new Properties().stacksTo(1));
     }
 
     @Override
@@ -27,27 +29,25 @@ public class AwardAllFishes extends Item
         if(!player.isCreative())
             return InteractionResultHolder.pass(player.getItemInHand(usedHand));
 
+        if(!(level instanceof ServerLevel)) return InteractionResultHolder.success(player.getItemInHand(usedHand));
+
         //sets all fps on fishes caught to 1
         List<FishCaughtCounter> fishCounter = new ArrayList<>();
         List<FishProperties> fishes = new ArrayList<>();
 
-        FishProperties awd;
-
         for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
-            if(fp.hasGuideEntry())
-                fishCounter.add(new FishCaughtCounter(fp, 999999, 0, 0, 0, 0, false));
+            fishCounter.add(new FishCaughtCounter(fp, 999999, 0, 0, 0, 0, false));
         }
 
-
-        player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
+        DataAttachments.get(player).setFishesCaught(fishCounter);
 
         for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
             fishes.add(fp);
         }
 
-        player.setData(ModDataAttachments.FISHES_NOTIFICATION, fishes);
+        DataAttachments.get(player).setFishNotifications(fishes);
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }

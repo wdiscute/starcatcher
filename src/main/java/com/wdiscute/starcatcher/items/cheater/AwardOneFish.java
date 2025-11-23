@@ -1,11 +1,11 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.networkandcodecs.DataAttachments;
 import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandcodecs.Payloads;
 import net.minecraft.core.Holder;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -13,7 +13,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,30 +28,35 @@ public class AwardOneFish extends Item
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
-        if(!player.isCreative())
-            return InteractionResultHolder.pass(player.getItemInHand(usedHand));List<FishCaughtCounter> fishCounter;
+        if (!player.isCreative())
+            return InteractionResultHolder.pass(player.getItemInHand(usedHand));
 
-        List<FishProperties> fishes = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
+        if(!(level instanceof ServerLevel)) return InteractionResultHolder.success(player.getItemInHand(usedHand));
 
-        fishCounter = new ArrayList<>(player.getData(ModDataAttachments.FISHES_CAUGHT));
+        List<FishCaughtCounter> fishCounter;
+
+        List<FishProperties> fishesNotification = new ArrayList<>(DataAttachments.get(player).fishNotifications());
+
+        fishCounter = new ArrayList<>(DataAttachments.get(player).fishesCaught());
 
         Optional<Holder.Reference<FishProperties>> optional = level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY).getRandom(level.random);
 
-        if(optional.isPresent())
+        if (optional.isPresent())
         {
             FishProperties fp = optional.get().value();
 
             fishCounter.add(new FishCaughtCounter(fp, 999999, 0, 0, 0, 0, false));
-            fishes.add(fp);
+            fishesNotification.add(fp);
 
-            if(player instanceof ServerPlayer sp)
+            if (player instanceof ServerPlayer sp)
             {
-                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp, false, 0, 0));
+                //todo send notification
+                //PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp));
             }
         }
 
-        player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
-        player.setData(ModDataAttachments.FISHES_NOTIFICATION, fishes);
+        DataAttachments.get(player).setFishesCaught(fishCounter);
+        DataAttachments.get(player).setFishNotifications(fishesNotification);
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }

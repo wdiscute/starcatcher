@@ -1,0 +1,39 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:legendary_bait"
+    ]
+  },
+  "base_chance": 1,
+  "difficulty": {
+    "decay": 0,
+    "markers": {
+      "has_first_marker": false,
+      "has_first_thin_marker": true,
+      "has_second_marker": false,
+      "has_second_thin_marker": true
+    },
+    "penalty": 999,
+    "reward": 0,
+    "reward_thin": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "tide:voidseeker",
+  "rarity": "legendary",
+  "world_restrictions": {
+    "dimensions": [
+      "minecraft:the_end"
+    ]
+  }
+}

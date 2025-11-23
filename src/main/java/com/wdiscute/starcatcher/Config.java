@@ -2,36 +2,36 @@ package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.SettingsScreen;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class Config
 {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    public static final ModConfigSpec.IntValue MINIGAME_GUI_SCALE = BUILDER
+    public static final ForgeConfigSpec.IntValue MINIGAME_GUI_SCALE = BUILDER
             .comment("//ALL THESE SETTINGS CAN ALSO BE ACCESSED")
             .comment("//THROUGH THE IN-GAME SETTING TAB INSIDE")
             .comment("//THE STARCATCHER'S GUIDE")
             .defineInRange("minigame_gui_scale", 3, 0, 6);
 
-    public static final ModConfigSpec.DoubleValue HIT_DELAY = BUILDER
+    public static final ForgeConfigSpec.DoubleValue HIT_DELAY = BUILDER
             .defineInRange("hit_delay", 0.0d, -20, 20);
 
-    public static final ModConfigSpec.EnumValue<SettingsScreen.Units> UNIT = BUILDER
+    public static final ForgeConfigSpec.EnumValue<SettingsScreen.Units> UNIT = BUILDER
             .defineEnum("units", SettingsScreen.Units.IMPERIAL);
 
-    public static final ModConfigSpec.EnumValue<FishingGuideScreen.Sort> SORT = BUILDER
+    public static final ForgeConfigSpec.EnumValue<FishingGuideScreen.Sort> SORT = BUILDER
             .defineEnum("sort", FishingGuideScreen.Sort.ALPHABETICAL_DOWN);
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+    static final ForgeConfigSpec SPEC = BUILDER.build();
 
 
-    private static final ModConfigSpec.Builder BUILDER_SERVER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER_SERVER = new ForgeConfigSpec.Builder();
 
-    public static final ModConfigSpec.BooleanValue SHOW_EXCLAMATION_MARK_PARTICLE = BUILDER_SERVER
+    public static final ForgeConfigSpec.BooleanValue SHOW_EXCLAMATION_MARK_PARTICLE = BUILDER_SERVER
             .define("show_exclamation_mark_particle", true);
 
-    static final ModConfigSpec SPEC_SERVER = BUILDER_SERVER.build();
+    static final ForgeConfigSpec SPEC_SERVER = BUILDER_SERVER.build();
 
 
 }

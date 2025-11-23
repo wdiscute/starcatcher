@@ -1,0 +1,20 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "daytime": "day",
+  "fish": "aquaculture:atlantic_cod",
+  "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
+    "biomes_tags": [
+      "starcatcher:is_cold_ocean"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "fish": "tide:prarie_pike",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:plains"
+    ]
+  }
+}

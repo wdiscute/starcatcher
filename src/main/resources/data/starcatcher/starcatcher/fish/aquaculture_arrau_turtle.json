@@ -1,0 +1,33 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "difficulty": {
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_marker": false
+    },
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 35,
+    "speed": 10,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:waterlogged_satchel"
+    }
+  },
+  "fish": "aquaculture:arrau_turtle",
+  "world_restrictions": {
+    "above_y": 50,
+    "biomes_tags": [
+      "minecraft:is_jungle"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "difficulty": {
+    "decay": 2,
+    "extras": {
+      "flips_rotation_every_hit": false
+    },
+    "markers": {
+      "has_second_marker": false
+    },
+    "penalty": 15,
+    "reward": 5,
+    "speed": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "tide:sandskipper",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "biomes": [
+      "minecraft:desert"
+    ]
+  }
+}

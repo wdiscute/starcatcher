@@ -1,0 +1,43 @@
+
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "bait_restrictions": {
+    "correct_bait_chance_added": 15,
+    "correct_baits": [
+      "starcatcher:murkwater_bait"
+    ]
+  },
+  "difficulty": {
+    "decay": 2,
+    "extras": {
+      "flips_rotation_every_hit": false
+    },
+    "markers": {
+      "has_second_marker": false
+    },
+    "penalty": 15,
+    "reward": 5,
+    "speed": 15,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "tide:slimefin_snapper",
+  "rarity": "rare",
+  "world_restrictions": {
+    "above_y": 50,
+    "biomes_tags": [
+      "starcatcher:is_swamp"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

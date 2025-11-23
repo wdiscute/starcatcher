@@ -15,4 +15,6 @@ public record SizeAndWeight(
                     Codec.INT.fieldOf("weight").forGetter(SizeAndWeight::weightInGrams)
             ).apply(instance, SizeAndWeight::new));
 
+    public static final SizeAndWeight DEFAULT = new SizeAndWeight(0, 0);
+
 }

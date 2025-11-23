@@ -7,8 +7,9 @@ import com.wdiscute.starcatcher.Config;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.HitFakeParticle;
+import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -82,7 +83,9 @@ public class SettingsScreen extends Screen
 
     int currentRotation = 1;
 
-    float partial;
+    float partialTick;
+    int lastTick;
+    long milisLastTick;
 
     int completion = 20;
     int completionSmooth = 20;
@@ -111,21 +114,22 @@ public class SettingsScreen extends Screen
 
         previousGuiScale = Minecraft.getInstance().options.guiScale().get();
         Minecraft.getInstance().options.guiScale().set(Config.MINIGAME_GUI_SCALE.get());
+        Minecraft.getInstance().resizeDisplay();
 
         hitDelay = Config.HIT_DELAY.get().floatValue();
 
         this.fp = fp;
         this.itemBeingFished = new ItemStack(fp.fish());
-        this.bobber = rod.get(ModDataComponents.BOBBER).stack().copy();
-        this.bait = rod.get(ModDataComponents.BAIT).stack().copy();
-        this.hook = rod.get(ModDataComponents.HOOK).stack().copy();
+        this.bobber = DataComponents.getItemInSlot(rod, DataComponents.Slots.BOBBER);
+        this.bait = DataComponents.getItemInSlot(rod, DataComponents.Slots.BAIT);
+        this.hook = DataComponents.getItemInSlot(rod, DataComponents.Slots.HOOK);
 
         posTreasure = Integer.MIN_VALUE;
 
         unitSelected = Config.UNIT.get();
 
         //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
-        FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
+        FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK.get()) &&
                 (
                         fp.rarity() == FishProperties.Rarity.COMMON ||
                                 fp.rarity() == FishProperties.Rarity.UNCOMMON ||
@@ -147,7 +151,7 @@ public class SettingsScreen extends Screen
         posThin2 = difficulty.markers().secondThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
 
         //make sweet spots fatter if difficulty bobber is being used
-        if (bobber.is(ModItems.STEADY_BOBBER))
+        if (bobber.is(ModItems.STEADY_BOBBER.get()))
         {
             bigForgiving = SIZE_4;
             thinForgiving = SIZE_2;
@@ -155,7 +159,7 @@ public class SettingsScreen extends Screen
             difficultyBobberOffset = 16;
         }
 
-        hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD.get()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
 
     private int getRandomFreePosition()
@@ -182,11 +186,19 @@ public class SettingsScreen extends Screen
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float FRACTION_OF_A_TICK_THAT_HAPPENED_SINCE_THE_LAST_FRAME_NOT_TO_BE_CONFUSED_TO_WHAT_A_PARTIAL_TICK_IS_IN_ONE_DOT_TWENTY_ONE_WHERE_A_PARTIAL_TICK_IS_THE_FRACTION_OF_A_TICK_SINCE_THE_LAST_TICK_NOT_THE_LAST_FRAME_WOW_THATS_SO_COOL_IM_SO_HAPPY_THIS_WAS_CHANGED_AND_THEY_KEPT_THE_SAME_NAME_SO_IT_TOOK_AGES_TO_DEBUG_AND_FIND_OUT_WHAT_WAS_CAUSING_IT)
     {
-        super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
+        super.renderBackground(guiGraphics);
 
-        partial = partialTick;
+        if (this.tickCount != lastTick)
+        {
+            lastTick = this.tickCount;
+            milisLastTick = Util.getMillis();
+        }
+
+        partialTick = (float) ((((double) (Util.getMillis() - milisLastTick))) / 50);
+
+        //if(partialTick > 1) System.out.println(partialTick);
 
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -474,7 +486,6 @@ public class SettingsScreen extends Screen
 
         //POINTER
         {
-            //TODO make it not use the partial ticks from rendering thread of whatever honestly its just nerd stuff that no one will care about
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -614,6 +625,7 @@ public class SettingsScreen extends Screen
             int current = Minecraft.getInstance().options.guiScale().get();
             if (current > 1)
                 Minecraft.getInstance().options.guiScale().set(current - 1);
+            Minecraft.getInstance().resizeDisplay();
         }
 
         //gui more
@@ -621,6 +633,7 @@ public class SettingsScreen extends Screen
         {
             int current = Minecraft.getInstance().options.guiScale().get();
             Minecraft.getInstance().options.guiScale().set(current + 1);
+            Minecraft.getInstance().resizeDisplay();
         }
 
         //move markers
@@ -768,7 +781,7 @@ public class SettingsScreen extends Screen
             Vec3 pos = Minecraft.getInstance().player.position();
             ClientLevel level = Minecraft.getInstance().level;
 
-            float pointerPosPrecise = (pointerPos + ((speed * partial) * currentRotation));
+            float pointerPosPrecise = (pointerPos + ((speed * partialTick) * currentRotation));
 
             pointerPosPrecise += hitDelay * speed * currentRotation;
 
@@ -826,7 +839,7 @@ public class SettingsScreen extends Screen
             {
                 consecutiveHits++;
 
-                if (hook.is(ModItems.STONE_HOOK))
+                if (hook.is(ModItems.STONE_HOOK.get()))
                 {
                     if (fp.rarity() == FishProperties.Rarity.COMMON) gracePeriod = 40;
                     if (fp.rarity() == FishProperties.Rarity.UNCOMMON) gracePeriod = 20;
@@ -905,6 +918,7 @@ public class SettingsScreen extends Screen
         Config.MINIGAME_GUI_SCALE.save();
 
         Minecraft.getInstance().options.guiScale().set(previousGuiScale);
+        Minecraft.getInstance().resizeDisplay();
 
         this.minecraft.popGuiLayer();
     }
@@ -921,7 +935,7 @@ public class SettingsScreen extends Screen
 
         for (int i = 0; i < count; i++)
         {
-            if (bobber.is(ModItems.GLITTER_BOBBER))
+            if (bobber.is(ModItems.GLITTER_BOBBER.get()))
             {
                 hitParticles.add(new HitFakeParticle(
                         xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
@@ -933,13 +947,13 @@ public class SettingsScreen extends Screen
                 continue;
             }
 
-            if (bobber.is(ModItems.COLORFUL_BOBBER))
+            if (bobber.is(ModItems.COLORFUL_BOBBER.get()))
             {
                 hitParticles.add(new HitFakeParticle(
                         xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
-                        bobber.get(ModDataComponents.BOBBER_COLOR).r(),
-                        bobber.get(ModDataComponents.BOBBER_COLOR).g(),
-                        bobber.get(ModDataComponents.BOBBER_COLOR).b(),
+                        DataComponents.getBobberColor(bobber).r(),
+                        DataComponents.getBobberColor(bobber).g(),
+                        DataComponents.getBobberColor(bobber).b(),
                         1
                 ));
                 continue;

@@ -1,0 +1,21 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "difficulty": {
+    "extras": {
+      "has_vanishing_markers": true
+    }
+  },
+  "fish": "tide:luminescent_jellyfish",
+  "rarity": "uncommon",
+  "world_restrictions": {
+    "below_y": 0,
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

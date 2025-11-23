@@ -1,0 +1,34 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "difficulty": {
+    "decay": 3,
+    "markers": {
+      "has_first_thin_marker": true,
+      "has_second_thin_marker": true
+    },
+    "penalty": 15,
+    "reward": 15,
+    "reward_thin": 30,
+    "speed": 12,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 15,
+      "loot": "starcatcher:treasure"
+    }
+  },
+  "fish": "tide:mirage_catfish",
+  "rarity": "epic",
+  "world_restrictions": {
+    "biomes_tags": [
+      "minecraft:is_badlands"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}

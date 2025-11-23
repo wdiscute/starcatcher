@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "starcatcher:fish_bones"
+    }
+  ],
+  "result": {
+    "item": "minecraft:bone_meal",
+    "count": 4
+  }
+}

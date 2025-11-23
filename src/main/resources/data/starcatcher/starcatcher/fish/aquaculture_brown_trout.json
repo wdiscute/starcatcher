@@ -1,0 +1,21 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "daytime": "night",
+  "fish": "aquaculture:brown_trout",
+  "weather": "clear",
+  "world_restrictions": {
+    "above_y": 50,
+    "below_y": 100,
+    "biomes_tags": [
+      "starcatcher:is_river"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ]
+  }
+}
