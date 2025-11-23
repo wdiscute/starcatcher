@@ -567,7 +567,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withBaseChance(4),
 
             overworldLushCavesFish(ModItems.THE_QUARRISH)
-                    .withSizeAndWeight(FishProperties.sw(120, 70, 7000, 3000, 10, 20))
+                    .withSizeAndWeight(FishProperties.sw(620, 270, 700000, 300000, 10, 20))
                     .withDifficulty(FishProperties.Difficulty.FAT_CATCH)
                     .withRarity(FishProperties.Rarity.EPIC)
                     .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD.withBiomes(Biomes.LUSH_CAVES.location())
