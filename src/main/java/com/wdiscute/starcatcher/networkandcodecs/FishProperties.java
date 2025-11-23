@@ -329,7 +329,6 @@ public record FishProperties(
             int mustBeCaughtAboveY
     )
     {
-
         public enum Seasons implements StringRepresentable
         {
             ALL("all"),

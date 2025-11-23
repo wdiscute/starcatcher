@@ -215,18 +215,32 @@ public class FishingBobEntity extends Projectile
 
         fpToFish = available.get(random.nextInt(available.size()));
 
-
         boolean skipsMinigame = fpToFish.skipMinigame() || (bobber.is(ModItems.CREEPER_BOBBER) && random.nextFloat() > 0.8);
+
+        //skip minigame if server config says so
+        if (!Config.ENABLE_MINIGAME.get())
+            skipsMinigame = true;
 
         if (skipsMinigame)
         {
+
+            ItemStack is = new ItemStack(fpToFish.fish());
+
+            if (!Config.ENABLE_MINIGAME.get() && !fpToFish.skipMinigame())
+            {
+                int size = FishCaughtCounter.getRandomSize(fpToFish);
+                int weight = FishCaughtCounter.getRandomWeight(fpToFish);
+                is.set(ModDataComponents.SIZE_AND_WEIGHT, new SizeAndWeight(size, weight));
+                FishCaughtCounter.AwardFishCaughtCounter(fpToFish, player, 0, size, weight);
+            }
+
             Entity itemFished = new ItemEntity(
                     level(),
                     position().x,
                     position().y + 1.2f,
                     position().z,
-                    new ItemStack(fpToFish.fish()
-                    ));
+                    is
+            );
 
 
             double x = (player.position().x - position().x) / 25;

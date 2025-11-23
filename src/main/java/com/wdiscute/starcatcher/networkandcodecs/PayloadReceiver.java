@@ -69,8 +69,8 @@ public class PayloadReceiver
                         is.set(ModDataComponents.FISH_PROPERTIES, fp);
 
                         //store size and weight data component
-                        int size = ((int) Starcatcher.truncatedNormal(fp.sw().sizeAverage(), fp.sw().sizeDeviation()));
-                        int weight = ((int) Starcatcher.truncatedNormal(fp.sw().weightAverage(), fp.sw().weightDeviation()));
+                        int size = FishCaughtCounter.getRandomSize(fp);
+                        int weight = FishCaughtCounter.getRandomWeight(fp);
                         is.set(ModDataComponents.SIZE_AND_WEIGHT, new SizeAndWeight(size, weight));
 
                         //award fish counter
