@@ -42,12 +42,6 @@ public class StandBlock extends Block implements EntityBlock
     }
 
     @Override
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
-    {
-        return super.playerWillDestroy(level, pos, state, player);
-    }
-
-    @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
     {
         super.onRemove(state, level, pos, newState, movedByPiston);
