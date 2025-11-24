@@ -51,6 +51,8 @@ public class TrophyBlockEntity extends BlockEntity
     {
         super.saveAdditional(tag, registries);
 
+        if(this.trophyProperties == null) return;
+
         TrophyProperties.CODEC.encode(this.trophyProperties, NbtOps.INSTANCE, tag)
                 .resultOrPartial(LOGGER::warn).ifPresent(tag1 -> tag.put("trophy_properties", tag1));
     }
