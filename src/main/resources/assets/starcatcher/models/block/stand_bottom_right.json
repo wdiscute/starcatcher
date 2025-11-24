@@ -1,0 +1,84 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"1": "starcatcher:block/stand",
+		"3": "starcatcher:block/bucket",
+		"particle": "minecraft:block/barrel_side"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 0],
+			"to": [16, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 0, 14]},
+			"faces": {
+				"north": {"uv": [3, 4, 4, 5.75], "texture": "#1"},
+				"east": {"uv": [4, 2, 6, 3.75], "texture": "#1"},
+				"south": {"uv": [4, 3.75, 5, 5.5], "texture": "#1"},
+				"west": {"uv": [4, 5.5, 6, 7.25], "texture": "#1"},
+				"up": {"uv": [2, 6, 0, 4], "texture": "#1"},
+				"down": {"uv": [6, 0, 5, 2], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 14, 0],
+			"to": [16, 16, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [16, 0, 0]},
+			"faces": {
+				"north": {"uv": [8, 1.75, 10, 2], "texture": "#1"},
+				"east": {"uv": [6, 2.25, 8, 2.5], "texture": "#1"},
+				"south": {"uv": [6, 2, 8, 2.25], "texture": "#1"},
+				"west": {"uv": [6, 2.5, 8, 2.75], "texture": "#1"},
+				"up": {"uv": [4, 2, 2, 0], "texture": "#1"},
+				"down": {"uv": [4, 2, 2, 4], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 0, 0],
+			"to": [8, 14, 0],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 0, 0]},
+			"faces": {
+				"north": {"uv": [0, 6, 1, 7.75], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 1.75], "texture": "#1"},
+				"south": {"uv": [6, 0, 7, 1.75], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 1.75], "texture": "#1"},
+				"up": {"uv": [1, 0, 0, 0], "texture": "#1"},
+				"down": {"uv": [1, 0, 0, 0], "texture": "#1"}
+			}
+		},
+		{
+			"from": [0, 0, 16],
+			"to": [8, 14, 16],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-8, 0, 16]},
+			"faces": {
+				"north": {"uv": [0, 6, 1, 7.75], "texture": "#1"},
+				"east": {"uv": [0, 0, 0, 1.75], "texture": "#1"},
+				"south": {"uv": [6, 0, 7, 1.75], "texture": "#1"},
+				"west": {"uv": [0, 0, 0, 1.75], "texture": "#1"},
+				"up": {"uv": [1, 0, 0, 0], "texture": "#1"},
+				"down": {"uv": [1, 0, 0, 0], "texture": "#1"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "table",
+			"origin": [-8, 0, 14],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		},
+		{
+			"name": "Trophy",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "bucket",
+			"origin": [0, 0, 2],
+			"color": 0,
+			"children": [4, 5, 6, 7, 8]
+		}
+	]
+}

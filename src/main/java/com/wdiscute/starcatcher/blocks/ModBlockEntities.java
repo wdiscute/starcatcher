@@ -19,8 +19,12 @@ public class ModBlockEntities
                             ModBlocks.TROPHY_GOLD.get(),
                             ModBlocks.TROPHY_SILVER.get(),
                             ModBlocks.TROPHY_BRONZE.get()
-                    )
-                    .build(null));
+                    ).build(null));
+
+    public static final Supplier<BlockEntityType<StandBlockEntity>> STAND = BLOCK_ENTITIES.register("stand",
+            () -> BlockEntityType.Builder.of(StandBlockEntity::new,
+                            ModBlocks.STAND.get()
+                    ).build(null));
 
 
 

@@ -1,0 +1,75 @@
+{
+  "variants": {
+    "stand_part=bottom_right,facing=north": {
+      "model": "starcatcher:block/stand_bottom_right"
+    },
+    "stand_part=bottom_left,facing=north": {
+      "model": "starcatcher:block/stand_bottom_left"
+    },
+    "stand_part=top_right,facing=north": {
+      "model": "starcatcher:block/stand_top_right"
+    },
+    "stand_part=top_left,facing=north": {
+      "model": "starcatcher:block/stand_top_left"
+    },
+
+
+
+
+    "stand_part=bottom_right,facing=east": {
+      "model": "starcatcher:block/stand_bottom_right",
+      "y": 90
+    },
+    "stand_part=bottom_left,facing=east": {
+      "model": "starcatcher:block/stand_bottom_left",
+      "y": 90
+    },
+    "stand_part=top_right,facing=east": {
+      "model": "starcatcher:block/stand_top_right",
+      "y": 90
+    },
+    "stand_part=top_left,facing=east": {
+      "model": "starcatcher:block/stand_top_left",
+      "y": 90
+    },
+
+
+
+    "stand_part=bottom_right,facing=south": {
+      "model": "starcatcher:block/stand_bottom_right",
+      "y": 180
+    },
+    "stand_part=bottom_left,facing=south": {
+      "model": "starcatcher:block/stand_bottom_left",
+      "y": 180
+    },
+    "stand_part=top_right,facing=south": {
+      "model": "starcatcher:block/stand_top_right",
+      "y": 180
+    },
+    "stand_part=top_left,facing=south": {
+      "model": "starcatcher:block/stand_top_left",
+      "y": 180
+    },
+
+
+
+    "stand_part=bottom_right,facing=west": {
+      "model": "starcatcher:block/stand_bottom_right",
+      "y": 270
+    },
+    "stand_part=bottom_left,facing=west": {
+      "model": "starcatcher:block/stand_bottom_left",
+      "y": 270
+    },
+    "stand_part=top_right,facing=west": {
+      "model": "starcatcher:block/stand_top_right",
+      "y": 270
+    },
+    "stand_part=top_left,facing=west": {
+      "model": "starcatcher:block/stand_top_left",
+      "y": 270
+    }
+
+  }
+}
