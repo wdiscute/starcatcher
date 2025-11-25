@@ -201,8 +201,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         if (isVanishing)
         {
             if (commonUncommonRareFish) vanishingRate = 0.03f;
-            if (fp.rarity().equals(FishProperties.Rarity.EPIC)) vanishingRate = 0.1f;
-            if (fp.rarity().equals(FishProperties.Rarity.LEGENDARY)) vanishingRate = 0.2f;
+            if (fp.rarity().equals(FishProperties.Rarity.EPIC)) vanishingRate = 0.06f;
+            if (fp.rarity().equals(FishProperties.Rarity.LEGENDARY)) vanishingRate = 0.1f;
 
             if (bobber.is(ModItems.CLEAR_BOBBER.get())) vanishingRate /= 2;
         }
