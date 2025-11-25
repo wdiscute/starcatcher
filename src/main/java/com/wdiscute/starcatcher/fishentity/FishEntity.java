@@ -10,6 +10,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 public class FishEntity extends AbstractFish
 {
@@ -34,6 +35,12 @@ public class FishEntity extends AbstractFish
     protected SoundEvent getHurtSound(DamageSource damageSource)
     {
         return SoundEvents.TROPICAL_FISH_HURT;
+    }
+
+    @Override
+    public @Nullable ItemStack getPickResult()
+    {
+        return getBodyArmorItem();
     }
 
     @Override
