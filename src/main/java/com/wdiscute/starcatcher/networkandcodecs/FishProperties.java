@@ -5,6 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
+import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
 import com.wdiscute.starcatcher.datagen.FishPropertiesWithModRestriction;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;
@@ -1415,10 +1416,16 @@ public record FishProperties(
         ItemStack bait = rod.get(ModDataComponents.BAIT).stack().copy();
 
 
-        //seasons check
+        //Serene Seasons check
         if (ModList.get().isLoaded("sereneseasons"))
         {
             if (!SereneSeasonsCompat.canCatch(fp, level)) return 0;
+        }
+
+        //Ecliptic Seasons check
+        if (ModList.get().isLoaded("sereneseasons"))
+        {
+            if (!EclipticSeasonsCompat.canCatch(fp, level)) return 0;
         }
 
         //dimension  check

@@ -5,11 +5,9 @@ import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.libtooltips.Tooltips;
-import com.wdiscute.starcatcher.Config;
-import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.U;
+import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
+import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
@@ -1248,9 +1246,23 @@ public class FishingGuideScreen extends Screen
                 components.add(Component.translatable("gui.guide.caught").append(Component.literal(" [" + caught + "]")).withColor(0x40752c));
             }
 
+            //Serene Seasons compat
             if(ModList.get().isLoaded("sereneseasons"))
             {
                 if(SereneSeasonsCompat.canCatch(fp, level))
+                {
+                    components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
+                }
+                else
+                {
+                    components.add(Component.translatable("gui.guide.seasons.not_in_season").withStyle(Style.EMPTY.withColor(0xa34536)));
+                }
+            }
+
+            //Ecliptic Seasons compat
+            if(ModList.get().isLoaded("eclipticseasons"))
+            {
+                if(EclipticSeasonsCompat.canCatch(fp, level))
                 {
                     components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
                 }
@@ -1325,7 +1337,7 @@ public class FishingGuideScreen extends Screen
 
 
         //render seasons
-        if (ModList.get().isLoaded("sereneseasons"))
+        if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons") )
         {
 
             int seasonX = 79;
@@ -1362,8 +1374,7 @@ public class FishingGuideScreen extends Screen
                 }
                 else
                 {
-                    for (Seasons s : seasons) seasonsComp.add(Component.translatable("desc.sereneseasons." + s.getSerializedName()));
-
+                    for (Seasons s : seasons) seasonsComp.add(Component.translatable("gui.guide.seasons." + s.getSerializedName()));
                 }
                 guiGraphics.renderTooltip(this.font, seasonsComp, Optional.empty(),  mouseX, mouseY);
             }
@@ -1546,6 +1557,17 @@ public class FishingGuideScreen extends Screen
             if (biomes.isEmpty())
             {
                 comp = Component.translatable("gui.guide.no_restriction");
+
+                if(fp.wr().biomesBlacklistTags().equals(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER)))
+                {
+                    comp = Component.translatable("gui.guide.lakes");
+                }
+
+                if (x > 25 + xOffset && x < 120 + xOffset && y > 133 && y < 140 )
+                {
+                    Component c = Component.translatable("gui.guide.lakes.hover");
+                    guiGraphics.renderTooltip(this.font, c, mouseX, mouseY);
+                }
             }
             else
             {

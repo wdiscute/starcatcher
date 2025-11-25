@@ -252,7 +252,30 @@
 
 
   "gui.guide.seasons" : "Seasons:",
+
   "gui.guide.seasons.all" : "All",
+
+  "gui.guide.seasons.spring" : "Spring",
+  "gui.guide.seasons.early_spring" : "Early Spring",
+  "gui.guide.seasons.mid_spring" : "Mid Spring",
+  "gui.guide.seasons.late_spring" : "Late Spring",
+
+  "gui.guide.seasons.summer" : "Summer",
+  "gui.guide.seasons.early_summer" : "Early Summer",
+  "gui.guide.seasons.mid_summer" : "Mid Summer",
+  "gui.guide.seasons.late_summer" : "Late Summer",
+
+  "gui.guide.seasons.autumn" : "Autumn",
+  "gui.guide.seasons.early_autumn" : "Early Autumn",
+  "gui.guide.seasons.mid_autumn" : "Mid Autumn",
+  "gui.guide.seasons.late_autumn" : "Late Autumn",
+
+  "gui.guide.seasons.winter" : "Winter",
+  "gui.guide.seasons.early_winter" : "Early Winter",
+  "gui.guide.seasons.mid_winter" : "Mid Winter",
+  "gui.guide.seasons.late_winter" : "Late Winter",
+
+
   "gui.guide.seasons.in_season" : "In season!",
   "gui.guide.seasons.not_in_season" : "Not in season",
 
@@ -497,6 +520,9 @@
 
   "gui.guide.available" : "Fishes in the area:",
   "gui.guide.all" : "All Fishes:",
+
+  "gui.guide.lakes" : "Lakes",
+  "gui.guide.lakes.hover" : "Surface biomes besides Rivers and Oceans",
 
   "gui.guide.dimension" : "Dimension: ",
   "gui.guide.dimensions" : "Dimensions: ",
