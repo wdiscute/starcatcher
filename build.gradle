@@ -23,14 +23,18 @@ dependencies {
     compileOnly "dev.emi:emi-forge:${emi_version}:api"
     //runtimeOnly "dev.emi:emi-forge:${emi_version}"
 
-    compileOnly modImplementation("maven.modrinth:serene-seasons:9.1.0.2")
+    compileOnly "maven.modrinth:serene-seasons:9.1.0.2"
+    compileOnly "maven.modrinth:glitchcore:0.0.1.1"
+
+    //runtimeOnly "maven.modrinth:serene-seasons:9.1.0.2"
+    //runtimeOnly "maven.modrinth:glitchcore:0.0.1.1"
 
     //modImplementation("maven.modrinth:serene-seasons:9.1.0.2")
     //modImplementation("maven.modrinth:glitchcore:0.0.1.1")
 
     //Ecliptic Seasons
     compileOnly files(".libs/EclipticSeasons-1.20.1-forge-0.12.5-all.jar")
-    //runtimeOnly files(".libs/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
+    //runtimeOnly files(".libs/EclipticSeasons-1.20.1-forge-0.12.5-all.jar")
 
     //compileOnly "maven.modrinth:serene-seasons:9.1.0.2"
     //compileOnly "maven.modrinth:glitchcore:0.0.1.1"

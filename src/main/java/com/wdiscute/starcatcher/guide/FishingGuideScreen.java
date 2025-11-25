@@ -1327,7 +1327,7 @@ public class FishingGuideScreen extends Screen
 
 
         //render seasons
-        if (ModList.get().isLoaded("sereneseasons"))
+        if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"))
         {
 
             int seasonX = 79;
