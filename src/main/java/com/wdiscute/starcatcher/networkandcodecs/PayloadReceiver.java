@@ -83,7 +83,7 @@ public class PayloadReceiver
                         ItemEntity itemFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, is);
                         ItemEntity treasureFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, treasure);
 
-                        //assign delta movement so fish flies towards player
+                        //assign delta movement so fish flies towards uuid
                         double x = Math.clamp((player.position().x - fbe.position().x) / 25, -1, 1);
                         double y = Math.clamp((player.position().y - fbe.position().y) / 20, -1, 1);
                         double z = Math.clamp((player.position().z - fbe.position().z) / 25, -1, 1);

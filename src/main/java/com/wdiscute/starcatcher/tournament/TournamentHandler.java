@@ -8,8 +8,24 @@ import java.util.List;
 public class TournamentHandler
 {
 
-    public static List<Tournament> tournaments = new ArrayList<>();
+    private static final List<Tournament> tournaments = new ArrayList<>();
 
+    public static List<Tournament> getAllTournaments()
+    {
+        return tournaments;
+    }
+
+    public static Tournament getTournament(int id)
+    {
+        if(id > tournaments.size()) return null;
+        return tournaments.get(id);
+    }
+
+    public static int addTournament(Tournament tournament)
+    {
+        tournaments.add(tournament);
+        return tournaments.size();
+    }
 
     public static void tick(ServerTickEvent.Post event)
     {

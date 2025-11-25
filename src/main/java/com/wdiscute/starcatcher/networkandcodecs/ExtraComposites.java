@@ -7,7 +7,50 @@ import java.util.function.Function;
 
 public class ExtraComposites
 {
-    static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(
+    public static <B, C, T1, T2, T3, T4, T5, T6> StreamCodec<B, C> composite(
+            final StreamCodec<? super B, T1> codec1,
+            final Function<C, T1> getter1,
+            final StreamCodec<? super B, T2> codec2,
+            final Function<C, T2> getter2,
+            final StreamCodec<? super B, T3> codec3,
+            final Function<C, T3> getter3,
+            final StreamCodec<? super B, T4> codec4,
+            final Function<C, T4> getter4,
+            final StreamCodec<? super B, T5> codec5,
+            final Function<C, T5> getter5,
+            final StreamCodec<? super B, T6> codec6,
+            final Function<C, T6> getter6,
+            final Function6<T1, T2, T3, T4, T5, T6, C> factory
+    )
+    {
+        return new StreamCodec<B, C>()
+        {
+            @Override
+            public C decode(B decode)
+            {
+                T1 t1 = codec1.decode(decode);
+                T2 t2 = codec2.decode(decode);
+                T3 t3 = codec3.decode(decode);
+                T4 t4 = codec4.decode(decode);
+                T5 t5 = codec5.decode(decode);
+                T6 t6 = codec6.decode(decode);
+                return factory.apply(t1, t2, t3, t4, t5, t6);
+            }
+
+            @Override
+            public void encode(B encode, C apply)
+            {
+                codec1.encode(encode, getter1.apply(apply));
+                codec2.encode(encode, getter2.apply(apply));
+                codec3.encode(encode, getter3.apply(apply));
+                codec4.encode(encode, getter4.apply(apply));
+                codec5.encode(encode, getter5.apply(apply));
+                codec6.encode(encode, getter6.apply(apply));
+            }
+        };
+    }
+
+    public static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
             final Function<C, T1> getter1,
             final StreamCodec<? super B, T2> codec2,
@@ -54,7 +97,7 @@ public class ExtraComposites
         };
     }
 
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8> StreamCodec<B, C> composite(
+    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
             final Function<C, T1> getter1,
             final StreamCodec<? super B, T2> codec2,
@@ -105,7 +148,7 @@ public class ExtraComposites
         };
     }
 
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9> StreamCodec<B, C> composite(
+    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
             final Function<C, T1> getter1,
             final StreamCodec<? super B, T2> codec2,
@@ -160,7 +203,7 @@ public class ExtraComposites
         };
     }
 
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> StreamCodec<B, C> composite(
+    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
             final Function<C, T1> getter1,
             final StreamCodec<? super B, T2> codec2,
@@ -219,7 +262,7 @@ public class ExtraComposites
         };
     }
 
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> StreamCodec<B, C> composite(
+    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
             final Function<C, T1> getter1,
             final StreamCodec<? super B, T2> codec2,
@@ -283,7 +326,7 @@ public class ExtraComposites
     }
 
 
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> StreamCodec<B, C> composite(
+    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
             final Function<C, T1> getter1,
             final StreamCodec<? super B, T2> codec2,
@@ -350,7 +393,7 @@ public class ExtraComposites
         };
     }
 
-    static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> StreamCodec<B, C> composite(
+    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> StreamCodec<B, C> composite(
             final StreamCodec<? super B, T1> codec1,
             final Function<C, T1> getter1,
             final StreamCodec<? super B, T2> codec2,

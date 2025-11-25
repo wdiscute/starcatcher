@@ -189,7 +189,7 @@ public class FishingGuideScreen extends Screen
         public Sort previous()
         {
             int lenght = vals.length - 2;
-            if(ModList.get().isLoaded("sereneseasons")) lenght += 2;
+            if(ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
 
             if (this.ordinal() == 0) return vals[lenght - 1];
             return vals[(this.ordinal() - 1) % lenght];
@@ -198,7 +198,7 @@ public class FishingGuideScreen extends Screen
         public Sort next()
         {
             int lenght = vals.length - 2;
-            if(ModList.get().isLoaded("sereneseasons")) lenght += 2;
+            if(ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
 
             return vals[(this.ordinal() + 1) % lenght];
         }
@@ -622,7 +622,7 @@ public class FishingGuideScreen extends Screen
             //entries -> leaderboards??
             if (menu == 2)
             {
-                //minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                //minecraft.uuid.playSound(SoundEvents.BOOK_PAGE_TURN);
                 //currentMenu = 3;
                 //currentPage = 0;
                 return true;

@@ -40,7 +40,7 @@ public class FishingRodMenu extends AbstractContainerMenu
 
         is = itemStack;
 
-        //player inventory
+        //uuid inventory
         for (int i = 0; i < 3; ++i)
         {
             for (int l = 0; l < 9; ++l)
@@ -48,7 +48,7 @@ public class FishingRodMenu extends AbstractContainerMenu
                 this.addSlot(new Slot(inv, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
-        //player hotbar
+        //uuid hotbar
         for (int i = 0; i < 9; ++i)
         {
             this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
@@ -124,10 +124,10 @@ public class FishingRodMenu extends AbstractContainerMenu
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
-    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
+    // For this container, we can see both the tile inventory's slots as well as the uuid inventory slots and the hotbar.
     // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
     //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
-    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
+    //  9 - 35 = uuid inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
     //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
     private static final int HOTBAR_SLOT_COUNT = 9;
     private static final int PLAYER_INVENTORY_ROW_COUNT = 3;

@@ -2,18 +2,25 @@ package com.wdiscute.starcatcher.networkandcodecs;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public record SingleStackContainer(ItemStack stack)
 {
 
     public static final Codec<SingleStackContainer> CODEC = ItemStack.OPTIONAL_CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stack);
 
+    public static final Codec<List<SingleStackContainer>> LIST_CODEC = SingleStackContainer.CODEC.listOf();
+
     public static final StreamCodec<RegistryFriendlyByteBuf, SingleStackContainer> STREAM_CODEC = StreamCodec.composite(
             ItemStack.OPTIONAL_STREAM_CODEC, SingleStackContainer::stack,
             SingleStackContainer::new
     );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<SingleStackContainer>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
 
     @Override
     public boolean equals(Object o)
@@ -24,4 +31,5 @@ public record SingleStackContainer(ItemStack stack)
     }
 
     public static final SingleStackContainer EMPTY = new SingleStackContainer(ItemStack.EMPTY);
+    public static final List<SingleStackContainer> EMPTY_LIST = List.of();
 }
