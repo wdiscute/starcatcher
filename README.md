@@ -8,9 +8,9 @@ Starcatcher features a fully in-game guide which will serve as a handy companion
 
 ![Index](https://cdn.modrinth.com/data/cached_images/b94b8c911433e0a25eafd0fcecad6c6e4a1fea2e.png)
 
-![The Basics](https://cdn.modrinth.com/data/cached_images/04ebf4b9783b1c34fa0da177e3e6c7c55aed285e.png)
-
 Will you fill out your collection? 🔎 Some of these catches are harder than they appear!
+
+![ezgif-4899b53fc537ecae](https://github.com/user-attachments/assets/881fa853-065f-45e0-b755-1cb141ae8f0e)
 
 ![entry](https://cdn.modrinth.com/data/cached_images/516bfce357c06aa5709a75ad23ab11f8f42347d9.gif)
 
