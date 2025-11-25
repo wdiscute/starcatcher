@@ -364,7 +364,7 @@ public class FishingBobEntity extends Projectile
         if (player == null || this.shouldStopFishing(player))
         {
             this.discard();
-            player.setData(ModDataAttachments.FISHING.get(), "");
+            if(player != null) player.setData(ModDataAttachments.FISHING.get(), "");
         }
 
         BlockPos blockpos = this.blockPosition();
