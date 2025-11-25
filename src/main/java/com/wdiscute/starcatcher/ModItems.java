@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
 import com.wdiscute.starcatcher.items.*;
 import com.wdiscute.starcatcher.items.cheater.*;
@@ -7,6 +8,7 @@ import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
@@ -69,8 +71,7 @@ public interface ModItems
 
     DeferredItem<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
 
-    DeferredItem<Item> SETTINGS = ITEMS.register(
-            "settings", () -> new Item(new Item.Properties()));
+    DeferredItem<Item> SETTINGS = ITEMS.register("settings", () -> new Item(new Item.Properties()));
 
 
     //secrets

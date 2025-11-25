@@ -38,7 +38,10 @@
   "tag.starcatcher.bobbers" : "Bobbers",
   "tag.starcatcher.hooks_survive_fire" : "Hooks that survive Fire",
 
-
+  "tooltip.minecraft.fishing_rod.0": "A simple fishing rod used for catching",
+  "tooltip.minecraft.fishing_rod.1": "the most basic of fishes.",
+  "tooltip.minecraft.fishing_rod.2": "One can only dream of upgrading",
+  "tooltip.minecraft.fishing_rod.3": "it to a <gradient-67>Starcatcher's rod</gradient-90>.",
 
   "item.starcatcher.starcatcher_rod": "Starcatcher's Rod",
   "tooltip.starcatcher.starcatcher_rod.0": "A special fishing rod which allows",
