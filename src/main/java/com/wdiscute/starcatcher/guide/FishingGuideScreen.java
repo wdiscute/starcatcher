@@ -6,6 +6,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
+import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
 import com.wdiscute.starcatcher.networkandcodecs.*;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
@@ -187,7 +188,7 @@ public class FishingGuideScreen extends Screen
         public Sort previous()
         {
             int lenght = vals.length - 2;
-            if(ModList.get().isLoaded("sereneseasons")) lenght += 2;
+            if(ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
 
             if (this.ordinal() == 0) return vals[lenght - 1];
             return vals[(this.ordinal() - 1) % lenght];
@@ -196,7 +197,7 @@ public class FishingGuideScreen extends Screen
         public Sort next()
         {
             int lenght = vals.length - 2;
-            if(ModList.get().isLoaded("sereneseasons")) lenght += 2;
+            if(ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
 
             return vals[(this.ordinal() + 1) % lenght];
         }
@@ -1240,6 +1241,18 @@ public class FishingGuideScreen extends Screen
             if(ModList.get().isLoaded("sereneseasons"))
             {
                 if(SereneSeasonsCompat.canCatch(fp, level))
+                {
+                    components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
+                }
+                else
+                {
+                    components.add(Component.translatable("gui.guide.seasons.not_in_season").withStyle(Style.EMPTY.withColor(0xa34536)));
+                }
+            }
+
+            if(ModList.get().isLoaded("eclipticseasons"))
+            {
+                if(EclipticSeasonsCompat.canCatch(fp, level))
                 {
                     components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
                 }

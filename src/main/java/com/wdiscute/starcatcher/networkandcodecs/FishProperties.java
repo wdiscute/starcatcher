@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;
+import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -1318,11 +1319,18 @@ public record FishProperties(
         ItemStack bait = DataComponents.getItemInSlot(rod, DataComponents.Slots.BAIT).copy();
 
 
-        //seasons check
+        //Serene Seasons
         if (ModList.get().isLoaded("sereneseasons"))
         {
             if (!SereneSeasonsCompat.canCatch(fp, level)) return 0;
         }
+
+        //Ecliptic Seasons
+        if (ModList.get().isLoaded("eclipticseasons"))
+        {
+            if (!EclipticSeasonsCompat.canCatch(fp, level)) return 0;
+        }
+
 
         //dimension  check
         if (!fp.wr.dims.isEmpty() && !fp.wr().dims().contains(level.dimension().location()))
