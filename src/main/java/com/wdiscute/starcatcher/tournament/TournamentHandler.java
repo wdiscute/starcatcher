@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.tournament;
 
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ public class TournamentHandler
         return tournaments.size();
     }
 
-    public static void tick(ServerTickEvent.Post event)
+    public static void tick(LevelTickEvent.Post event)
     {
-        event.getServer();
+
     }
 
 }
