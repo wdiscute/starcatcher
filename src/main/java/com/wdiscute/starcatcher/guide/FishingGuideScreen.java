@@ -189,7 +189,7 @@ public class FishingGuideScreen extends Screen
         public Sort previous()
         {
             int lenght = vals.length - 2;
-            if(ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
+            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
 
             if (this.ordinal() == 0) return vals[lenght - 1];
             return vals[(this.ordinal() - 1) % lenght];
@@ -198,7 +198,7 @@ public class FishingGuideScreen extends Screen
         public Sort next()
         {
             int lenght = vals.length - 2;
-            if(ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
+            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
 
             return vals[(this.ordinal() + 1) % lenght];
         }
@@ -273,7 +273,7 @@ public class FishingGuideScreen extends Screen
             for (FishProperties fp : entries)
             {
                 String namespace = fp.fish().unwrapKey().get().location().getNamespace();
-                if(!allNamespaces.contains(namespace)) allNamespaces.add(namespace);
+                if (!allNamespaces.contains(namespace)) allNamespaces.add(namespace);
             }
 
             for (String s : allNamespaces)
@@ -281,7 +281,7 @@ public class FishingGuideScreen extends Screen
                 for (FishProperties fp : entries)
                 {
                     String namespace = fp.fish().unwrapKey().get().location().getNamespace();
-                    if(namespace.equals(s)) entriesSorted.add(fp);
+                    if (namespace.equals(s)) entriesSorted.add(fp);
                 }
 
             }
@@ -368,71 +368,71 @@ public class FishingGuideScreen extends Screen
             List<FishProperties> entriesUnsorted = new ArrayList<>(entries);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.ALL)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.ALL)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.SPRING)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.SPRING)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.EARLY_SPRING)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.EARLY_SPRING)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.MID_SPRING)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.MID_SPRING)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.LATE_SPRING)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.LATE_SPRING)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.SUMMER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.SUMMER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.EARLY_SUMMER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.EARLY_SUMMER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.MID_SUMMER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.MID_SUMMER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.LATE_SUMMER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.LATE_SUMMER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.AUTUMN)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.AUTUMN)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.EARLY_AUTUMN)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.EARLY_AUTUMN)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.MID_AUTUMN)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.MID_AUTUMN)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.LATE_AUTUMN)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.LATE_AUTUMN)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.WINTER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.WINTER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.EARLY_WINTER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.EARLY_WINTER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.MID_WINTER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.MID_WINTER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             for (FishProperties fp : entriesUnsorted)
-                if(fp.wr().seasons().contains(Seasons.LATE_WINTER)) entriesSorted.add(fp);
+                if (fp.wr().seasons().contains(Seasons.LATE_WINTER)) entriesSorted.add(fp);
             entriesUnsorted.removeAll(entriesSorted);
 
             entries = sort.equals(Sort.SEASON_UP) ? entriesSorted : entriesSorted.reversed();
@@ -1247,9 +1247,9 @@ public class FishingGuideScreen extends Screen
             }
 
             //Serene Seasons compat
-            if(ModList.get().isLoaded("sereneseasons"))
+            if (ModList.get().isLoaded("sereneseasons"))
             {
-                if(SereneSeasonsCompat.canCatch(fp, level))
+                if (SereneSeasonsCompat.canCatch(fp, level))
                 {
                     components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
                 }
@@ -1260,9 +1260,9 @@ public class FishingGuideScreen extends Screen
             }
 
             //Ecliptic Seasons compat
-            if(ModList.get().isLoaded("eclipticseasons"))
+            if (ModList.get().isLoaded("eclipticseasons"))
             {
-                if(EclipticSeasonsCompat.canCatch(fp, level))
+                if (EclipticSeasonsCompat.canCatch(fp, level))
                 {
                     components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
                 }
@@ -1337,7 +1337,7 @@ public class FishingGuideScreen extends Screen
 
 
         //render seasons
-        if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons") )
+        if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"))
         {
 
             int seasonX = 79;
@@ -1368,15 +1368,16 @@ public class FishingGuideScreen extends Screen
                 List<Component> seasonsComp = new ArrayList<>();
                 seasonsComp.add(Component.translatable("gui.guide.seasons"));
 
-                if(fp.wr().seasons().contains(Seasons.ALL))
+                if (fp.wr().seasons().contains(Seasons.ALL))
                 {
                     seasonsComp.add(Component.translatable("gui.guide.seasons.all"));
                 }
                 else
                 {
-                    for (Seasons s : seasons) seasonsComp.add(Component.translatable("gui.guide.seasons." + s.getSerializedName()));
+                    for (Seasons s : seasons)
+                        seasonsComp.add(Component.translatable("gui.guide.seasons." + s.getSerializedName()));
                 }
-                guiGraphics.renderTooltip(this.font, seasonsComp, Optional.empty(),  mouseX, mouseY);
+                guiGraphics.renderTooltip(this.font, seasonsComp, Optional.empty(), mouseX, mouseY);
             }
 
         }
@@ -1558,12 +1559,12 @@ public class FishingGuideScreen extends Screen
             {
                 comp = Component.translatable("gui.guide.no_restriction");
 
-                if(fp.wr().biomesBlacklistTags().equals(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER)))
+                if (fp.wr().biomesBlacklistTags().equals(List.of(StarcatcherTags.IS_OCEAN, StarcatcherTags.IS_RIVER)))
                 {
                     comp = Component.translatable("gui.guide.lakes");
                 }
 
-                if (x > 25 + xOffset && x < 120 + xOffset && y > 133 && y < 140 )
+                if (x > 25 + xOffset && x < 120 + xOffset && y > 133 && y < 140)
                 {
                     Component c = Component.translatable("gui.guide.lakes.hover");
                     guiGraphics.renderTooltip(this.font, c, mouseX, mouseY);
