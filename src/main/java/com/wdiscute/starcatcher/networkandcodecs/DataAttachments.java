@@ -40,7 +40,56 @@ public class DataAttachments implements DataAttachmentCapability, INBTSerializab
 
     public static DataAttachmentCapability get(Player player)
     {
-        return player.getCapability(PLAYER_DATA).orElse(null);
+        return player.getCapability(PLAYER_DATA).orElse(new DataAttachmentCapability()
+        {
+            @Override
+            public String fishing()
+            {
+                return "";
+            }
+
+            @Override
+            public void setFishing(String s)
+            {
+
+            }
+
+            @Override
+            public List<FishCaughtCounter> fishesCaught()
+            {
+                return List.of();
+            }
+
+            @Override
+            public void setFishesCaught(List<FishCaughtCounter> list)
+            {
+
+            }
+
+            @Override
+            public List<TrophyProperties> trophiesCaught()
+            {
+                return List.of();
+            }
+
+            @Override
+            public void setTrophiesCaught(List<TrophyProperties> list)
+            {
+
+            }
+
+            @Override
+            public List<FishProperties> fishNotifications()
+            {
+                return List.of();
+            }
+
+            @Override
+            public void setFishNotifications(List<FishProperties> list)
+            {
+
+            }
+        });
     }
 
     @Override
