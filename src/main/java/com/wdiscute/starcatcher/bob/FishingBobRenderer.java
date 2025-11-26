@@ -2,10 +2,10 @@ package com.wdiscute.starcatcher.bob;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
+import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -18,6 +18,8 @@ import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+
+import static java.lang.Float.NaN;
 
 public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 {
@@ -72,6 +74,9 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
             {
                 stringVertex(color, f2, f3, f4, vertexconsumer1, posestack$pose1, fraction(j, 16), fraction(j + 1, 16));
             }
+
+            //PLEASE FOR THE LOVE OF GOD DONT REMOVE THIS LINE JUST DONT PLEASE THIS TOOK TOO FUCKING LONG DONT YOU DARE TOUCH IT
+            vertexconsumer1.addVertex(NaN, NaN, NaN).setColor(color).setNormal(posestack$pose1, 0, 0, 0);
 
             poseStack.popPose();
             super.render(fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
