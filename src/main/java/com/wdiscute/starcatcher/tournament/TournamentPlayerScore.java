@@ -25,34 +25,39 @@ public record TournamentPlayerScore
         )
 {
 
-        public static List<TournamentPlayerScore> makeEmptyListWithPlayers;
 
-        public static final Codec<TournamentPlayerScore> CODEC = RecordCodecBuilder.create(instance ->
-                instance.group(
-                        Codec.INT.optionalFieldOf("score", 0).forGetter(TournamentPlayerScore::score),
-                        Codec.INT.optionalFieldOf("misses", 0).forGetter(TournamentPlayerScore::misses),
-                        Codec.INT.optionalFieldOf("common", 0).forGetter(TournamentPlayerScore::common),
-                        Codec.INT.optionalFieldOf("uncommon", 0).forGetter(TournamentPlayerScore::uncommon),
-                        Codec.INT.optionalFieldOf("rare", 0).forGetter(TournamentPlayerScore::rare),
-                        Codec.INT.optionalFieldOf("epic", 0).forGetter(TournamentPlayerScore::epic),
-                        Codec.INT.optionalFieldOf("legendary", 0).forGetter(TournamentPlayerScore::legendary)
-                ).apply(instance, TournamentPlayerScore::new)
-        );
+    public TournamentPlayerScore withScore(int score)
+    {
+        return new TournamentPlayerScore(score, this.misses, this.common, this.uncommon, this.rare, this.epic, this.legendary);
+    }
 
-        public static final Codec<List<TournamentPlayerScore>> LIST_CODEC = TournamentPlayerScore.CODEC.listOf();
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, TournamentPlayerScore> STREAM_CODEC = ExtraComposites.composite(
-                ByteBufCodecs.VAR_INT, TournamentPlayerScore::score,
-                ByteBufCodecs.VAR_INT, TournamentPlayerScore::misses,
-                ByteBufCodecs.VAR_INT, TournamentPlayerScore::common,
-                ByteBufCodecs.VAR_INT, TournamentPlayerScore::uncommon,
-                ByteBufCodecs.VAR_INT, TournamentPlayerScore::rare,
-                ByteBufCodecs.VAR_INT, TournamentPlayerScore::epic,
-                ByteBufCodecs.VAR_INT, TournamentPlayerScore::legendary,
-                TournamentPlayerScore::new
-        );
+    public static final Codec<TournamentPlayerScore> CODEC = RecordCodecBuilder.create(instance ->
+            instance.group(
+                    Codec.INT.optionalFieldOf("score", 0).forGetter(TournamentPlayerScore::score),
+                    Codec.INT.optionalFieldOf("misses", 0).forGetter(TournamentPlayerScore::misses),
+                    Codec.INT.optionalFieldOf("common", 0).forGetter(TournamentPlayerScore::common),
+                    Codec.INT.optionalFieldOf("uncommon", 0).forGetter(TournamentPlayerScore::uncommon),
+                    Codec.INT.optionalFieldOf("rare", 0).forGetter(TournamentPlayerScore::rare),
+                    Codec.INT.optionalFieldOf("epic", 0).forGetter(TournamentPlayerScore::epic),
+                    Codec.INT.optionalFieldOf("legendary", 0).forGetter(TournamentPlayerScore::legendary)
+            ).apply(instance, TournamentPlayerScore::new)
+    );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, List<TournamentPlayerScore>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
+    public static final Codec<List<TournamentPlayerScore>> LIST_CODEC = TournamentPlayerScore.CODEC.listOf();
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, TournamentPlayerScore> STREAM_CODEC = ExtraComposites.composite(
+            ByteBufCodecs.VAR_INT, TournamentPlayerScore::score,
+            ByteBufCodecs.VAR_INT, TournamentPlayerScore::misses,
+            ByteBufCodecs.VAR_INT, TournamentPlayerScore::common,
+            ByteBufCodecs.VAR_INT, TournamentPlayerScore::uncommon,
+            ByteBufCodecs.VAR_INT, TournamentPlayerScore::rare,
+            ByteBufCodecs.VAR_INT, TournamentPlayerScore::epic,
+            ByteBufCodecs.VAR_INT, TournamentPlayerScore::legendary,
+            TournamentPlayerScore::new
+    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, List<TournamentPlayerScore>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
 
 
 }

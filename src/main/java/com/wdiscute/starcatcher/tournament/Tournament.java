@@ -1,13 +1,7 @@
 package com.wdiscute.starcatcher.tournament;
 
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
-import com.mojang.serialization.Keyable;
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.MapEncoder;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sun.jna.platform.win32.OaIdl;
-import com.wdiscute.starcatcher.networkandcodecs.ExtraComposites;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
 import net.minecraft.core.UUIDUtil;
@@ -16,7 +10,7 @@ import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.levelgen.structure.pools.StructurePoolElement;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 
 import java.util.List;
@@ -28,7 +22,7 @@ public record Tournament
                 String name,
                 Status status,
                 UUID owner,
-                Map<UUID, TournamentPlayerScore> players,
+                Map<UUID, TournamentPlayerScore> playerScores,
                 TournamentSettings settings,
                 List<SingleStackContainer> pool,
                 long lastsUntil
@@ -37,6 +31,17 @@ public record Tournament
 
     public void addScore(Player player, FishProperties fp, boolean perfectCatch)
     {
+        if(playerScores.containsKey(player.getUUID()))
+        {
+            if(settings.type().equals(TournamentSettings.Type.SIMPLE))
+            {
+                TournamentPlayerScore ps = playerScores.get(player.getUUID());
+                ps = ps.withScore(ps.score() + 1);
+
+                playerScores.put(player.getUUID(), ps);
+            }
+        }
+
 
 
     }
@@ -46,7 +51,7 @@ public record Tournament
                     Codec.STRING.optionalFieldOf("name", "Unnamed Tournament").forGetter(Tournament::name),
                     Status.CODEC.fieldOf("status").forGetter(Tournament::status),
                     UUIDUtil.CODEC.fieldOf("owner").forGetter(Tournament::owner),
-                    Codec.unboundedMap(UUIDUtil.CODEC, TournamentPlayerScore.CODEC).fieldOf("player_scores").forGetter(Tournament::players),
+                    Codec.unboundedMap(UUIDUtil.CODEC, TournamentPlayerScore.CODEC).fieldOf("player_scores").forGetter(Tournament::playerScores),
                     TournamentSettings.CODEC.fieldOf("settings").forGetter(Tournament::settings),
                     SingleStackContainer.LIST_CODEC.optionalFieldOf("legendary", SingleStackContainer.EMPTY_LIST).forGetter(Tournament::pool),
                     Codec.LONG.fieldOf("lastsUntil").forGetter(Tournament::lastsUntil)
@@ -59,7 +64,7 @@ public record Tournament
 //            ByteBufCodecs.STRING_UTF8, Tournament::name,
 //            Status.STREAM_CODEC, Tournament::status,
 //            UUIDUtil.STREAM_CODEC, Tournament::owner,
-//            TournamentPlayerScore.STREAM_CODEC_LIST, Tournament::players,
+//            TournamentPlayerScore.STREAM_CODEC_LIST, Tournament::playerScores,
 //            TournamentSettings.STREAM_CODEC, Tournament::settings,
 //            SingleStackContainer.STREAM_CODEC_LIST, Tournament::pool,
 //            ByteBufCodecs.VAR_LONG, Tournament::lastsUntil,
