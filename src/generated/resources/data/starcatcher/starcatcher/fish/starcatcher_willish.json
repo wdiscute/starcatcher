@@ -1,7 +1,7 @@
 {
   "difficulty": {
     "extras": {
-      "has_vanishing_markers": true
+      "has_moving_markers": true
     },
     "markers": {
       "has_first_thin_marker": true,
@@ -17,17 +17,20 @@
       "loot": "starcatcher:scalding_treasure"
     }
   },
-  "fish": "starcatcher:glowstone_pufferfish",
-  "rarity": "rare",
+  "fish": "starcatcher:willish",
+  "rarity": "uncommon",
   "size_and_weight": {
-    "average_size_cm": 35.0,
-    "average_weight_grams": 1000.0,
+    "average_size_cm": 75.0,
+    "average_weight_grams": 4000.0,
     "deviation_size_cm": 25.0,
     "deviation_weight_grams": 700.0,
     "golden_chance_percentage": 10,
     "golden_state_increase": 20
   },
   "world_restrictions": {
+    "biomes": [
+      "minecraft:basalt_deltas"
+    ],
     "dimensions": [
       "minecraft:the_nether"
     ],

@@ -1154,6 +1154,12 @@
   "item.starcatcher.glowstone_pufferfish" : "Glowstone Pufferfish",
   "tooltip.starcatcher.glowstone_pufferfish.0" : "A pufferfish glittering just like glowstone.",
 
+  "item.starcatcher.willish" : "Willish",
+  "tooltip.starcatcher.willish.0" : "A fish commonly known for scamming",
+  "tooltip.starcatcher.willish.1" : "other fishes out of their food.",
+  "tooltip.starcatcher.willish.2" : "It is incredibly ugly and should be",
+  "tooltip.starcatcher.willish.3" : "discarded back to The Nether where it belongs.",
+
   "item.starcatcher.lava_crab_claw" : "Lava Crab Claw",
   "tooltip.starcatcher.lava_crab_claw.0" : "A claw ripped off from a Lava Crab.",
   "tooltip.starcatcher.lava_crab_claw.1" : "Due to the aggressive nature of Lava Crabs,",

@@ -693,11 +693,17 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
 
             netherLavaFish(ModItems.SCALDING_PIKE)
                     .withSizeAndWeight(FishProperties.sw(75, 20, 5000, 3000, 10, 20))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM.withTreasure(FishProperties.Treasure.NETHER)),
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING.withTreasure(FishProperties.Treasure.NETHER)),
 
             netherLavaFish(ModItems.GLOWSTONE_PUFFERFISH)
                     .withSizeAndWeight(FishProperties.sw(35, 25, 1000, 700, 10, 20))
-                    .withDifficulty(FishProperties.Difficulty.MEDIUM.withTreasure(FishProperties.Treasure.NETHER)),
+                    .withRarity(FishProperties.Rarity.RARE)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_VANISHING.withTreasure(FishProperties.Treasure.NETHER)),
+
+            netherLavaBasaltDeltasFish(ModItems.WILLISH)
+                    .withSizeAndWeight(FishProperties.sw(75, 25, 4000, 700, 10, 20))
+                    .withRarity(FishProperties.Rarity.UNCOMMON)
+                    .withDifficulty(FishProperties.Difficulty.MEDIUM_MOVING.withTreasure(FishProperties.Treasure.NETHER)),
 
             netherLavaFish(ModItems.LAVA_CRAB_CLAW).withBaseChance(1)
                     .withSkipMinigame(true)

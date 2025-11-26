@@ -275,6 +275,8 @@ public interface ModItems
     DeferredItem<Item> MAGMA_FISH = fireResistantFish("magma_fish");
     DeferredItem<Item> GLOWSTONE_SEEKER = fireResistantFish("glowstone_seeker");
     DeferredItem<Item> GLOWSTONE_PUFFERFISH = fireResistantFish("glowstone_pufferfish");
+    DeferredItem<Item> WILLISH = fireResistantFish("willish");
+
     DeferredItem<Item> LAVA_CRAB_CLAW = fireResistantTrash("lava_crab_claw");
 
     //the end
