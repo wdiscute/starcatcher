@@ -74,7 +74,7 @@ public class PayloadReceiver
                         is.set(ModDataComponents.SIZE_AND_WEIGHT, new SizeAndWeight(size, weight));
 
                         //award fish counter
-                        FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time(), size, weight);
+                        FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time(), size, weight, data.perfectCatch());
 
                         //split hook double drops
                         if(data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);

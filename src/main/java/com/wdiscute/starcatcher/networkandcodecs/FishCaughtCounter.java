@@ -20,7 +20,8 @@ public record FishCaughtCounter(
         float averageTicks,
         int size,
         int weight,
-        boolean caughtGolden
+        boolean caughtGolden,
+        boolean perfectCatch
 )
 {
 
@@ -32,7 +33,8 @@ public record FishCaughtCounter(
                     Codec.FLOAT.optionalFieldOf("average_ticks", 0.0f).forGetter(FishCaughtCounter::averageTicks),
                     Codec.INT.optionalFieldOf("best_size", 0).forGetter(FishCaughtCounter::size),
                     Codec.INT.optionalFieldOf("best_weight", 0).forGetter(FishCaughtCounter::weight),
-                    Codec.BOOL.optionalFieldOf("caught_golden", false).forGetter(FishCaughtCounter::caughtGolden)
+                    Codec.BOOL.optionalFieldOf("caught_golden", false).forGetter(FishCaughtCounter::caughtGolden),
+                    Codec.BOOL.optionalFieldOf("perfect_catch", false).forGetter(FishCaughtCounter::caughtGolden)
             ).apply(instance, FishCaughtCounter::new)
     );
 
@@ -44,6 +46,7 @@ public record FishCaughtCounter(
             ByteBufCodecs.INT, FishCaughtCounter::size,
             ByteBufCodecs.INT, FishCaughtCounter::weight,
             ByteBufCodecs.BOOL, FishCaughtCounter::caughtGolden,
+            ByteBufCodecs.BOOL, FishCaughtCounter::perfectCatch,
             FishCaughtCounter::new
     );
 
@@ -65,7 +68,7 @@ public record FishCaughtCounter(
 
     }
 
-    public static void AwardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks, int size, int weight)
+    public static void AwardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks, int size, int weight, boolean perfectCatch)
     {
         List<FishCaughtCounter> listFishCaughtCounter = player.getData(ModDataAttachments.FISHES_CAUGHT);
         List<FishCaughtCounter> newlist = new ArrayList<>();
@@ -79,6 +82,7 @@ public record FishCaughtCounter(
                 int fastestToSave = Math.min(fcc.fastestTicks, ticks);
                 float averageToSave = (fcc.averageTicks * fcc.count + ticks) / (fcc.count + 1);
                 int countToSave = fcc.count;
+                boolean perfect = perfectCatch || fcc.perfectCatch;
 
                 //if cheated in, fixes trackers
                 if(fcc.fastestTicks == 0) fastestToSave = ticks;
@@ -88,7 +92,13 @@ public record FishCaughtCounter(
                 int sizeToSave = Math.max(size, fcc.size);
                 int weightToSave = Math.max(weight, fcc.weight);
 
-                newlist.add(new FishCaughtCounter(fpCaught, countToSave + 1, fastestToSave, averageToSave, sizeToSave, weightToSave, false));
+                newlist.add(new FishCaughtCounter(
+                        fpCaught,
+                        countToSave + 1,
+                        fastestToSave,
+                        averageToSave, sizeToSave, weightToSave,
+                        false,
+                        perfect));
 
 
                 newFish = false;
@@ -99,7 +109,7 @@ public record FishCaughtCounter(
             }
         }
 
-        if (newFish) newlist.add(new FishCaughtCounter(fpCaught, 1, ticks, ticks, size, weight, false));
+        if (newFish) newlist.add(new FishCaughtCounter(fpCaught, 1, ticks, ticks, size, weight, false, perfectCatch));
 
         //display message above exp bar
         PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishCaughtPayload(fpCaught, newFish, size, weight));

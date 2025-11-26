@@ -17,7 +17,6 @@ public record TournamentPlayerScore
         (
                 int score,
                 int misses,
-                UUID uuid,
                 int common,
                 int uncommon,
                 int rare,
@@ -25,11 +24,13 @@ public record TournamentPlayerScore
                 int legendary
         )
 {
+
+        public static List<TournamentPlayerScore> makeEmptyListWithPlayers;
+
         public static final Codec<TournamentPlayerScore> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
                         Codec.INT.optionalFieldOf("score", 0).forGetter(TournamentPlayerScore::score),
                         Codec.INT.optionalFieldOf("misses", 0).forGetter(TournamentPlayerScore::misses),
-                        UUIDUtil.CODEC.optionalFieldOf("uuid", UUID.fromString("0")).forGetter(TournamentPlayerScore::uuid),
                         Codec.INT.optionalFieldOf("common", 0).forGetter(TournamentPlayerScore::common),
                         Codec.INT.optionalFieldOf("uncommon", 0).forGetter(TournamentPlayerScore::uncommon),
                         Codec.INT.optionalFieldOf("rare", 0).forGetter(TournamentPlayerScore::rare),
@@ -43,7 +44,6 @@ public record TournamentPlayerScore
         public static final StreamCodec<RegistryFriendlyByteBuf, TournamentPlayerScore> STREAM_CODEC = ExtraComposites.composite(
                 ByteBufCodecs.VAR_INT, TournamentPlayerScore::score,
                 ByteBufCodecs.VAR_INT, TournamentPlayerScore::misses,
-                UUIDUtil.STREAM_CODEC, TournamentPlayerScore::uuid,
                 ByteBufCodecs.VAR_INT, TournamentPlayerScore::common,
                 ByteBufCodecs.VAR_INT, TournamentPlayerScore::uncommon,
                 ByteBufCodecs.VAR_INT, TournamentPlayerScore::rare,

@@ -1423,7 +1423,7 @@ public record FishProperties(
         }
 
         //Ecliptic Seasons check
-        if (ModList.get().isLoaded("sereneseasons"))
+        if (ModList.get().isLoaded("eclipticseasons"))
         {
             if (!EclipticSeasonsCompat.canCatch(fp, level)) return 0;
         }
