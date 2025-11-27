@@ -1,26 +1,21 @@
 package com.wdiscute.starcatcher.compat;
 
-import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.Seasons;
 import net.minecraft.world.level.Level;
 import sereneseasons.api.season.Season;
 import sereneseasons.api.season.SeasonHelper;
 
-public class SereneSeasonsCompat
-{
+public class SereneSeasonsCompat {
 
-    public static boolean canCatch(FishProperties fp, Level level)
-    {
-        if (!fp.wr().seasons().contains(FishProperties.WorldRestrictions.Seasons.ALL))
-        {
+    public static boolean canCatch(FishProperties fp, Level level) {
+        if (!fp.wr().seasons().contains(FishProperties.WorldRestrictions.Seasons.ALL)) {
             return fp.wr().seasons().contains(getSeason(level)) || fp.wr().seasons().contains(getSubSeason(level));
         }
         return true;
     }
 
-    public static Seasons getSeason(Level level)
-    {
+    public static Seasons getSeason(Level level) {
         Season season = SeasonHelper.getSeasonState(level).getSeason();
         return switch (season)
         {
@@ -31,11 +26,9 @@ public class SereneSeasonsCompat
         };
     }
 
-    public static Seasons getSubSeason(Level level)
-    {
+    public static Seasons getSubSeason(Level level) {
         Season.SubSeason season = SeasonHelper.getSeasonState(level).getSubSeason();
-        return switch (season)
-        {
+        return switch (season) {
             case EARLY_SPRING -> Seasons.EARLY_SPRING;
             case MID_SPRING -> Seasons.MID_SPRING;
             case LATE_SPRING -> Seasons.LATE_SPRING;

@@ -1,9 +1,9 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.DataAttachments;
-import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.io.DataAttachments;
+import com.wdiscute.starcatcher.io.FishCaughtCounter;
+import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;

@@ -1,0 +1,25 @@
+package com.wdiscute.starcatcher.registry;
+
+import com.wdiscute.starcatcher.Starcatcher;
+import net.minecraft.core.particles.ParticleType;
+import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+
+import java.util.function.Supplier;
+
+public interface ModParticles
+{
+    DeferredRegister<ParticleType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Starcatcher.MOD_ID);
+
+    Supplier<SimpleParticleType> FISHING_NOTIFICATION =
+            REGISTRY.register("fishing_notification", () -> new SimpleParticleType(true));
+
+    Supplier<SimpleParticleType> FISHING_BITING =
+            REGISTRY.register("fishing_biting", () -> new SimpleParticleType(true));
+
+    Supplier<SimpleParticleType> FISHING_BITING_LAVA =
+            REGISTRY.register("fishing_biting_lava", () -> new SimpleParticleType(true));
+
+}

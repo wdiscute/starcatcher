@@ -6,9 +6,7 @@ import org.joml.Vector2d;
 
 import java.util.Random;
 
-public class HitFakeParticle
-{
-
+public class HitFakeParticle {
     private static final Random random = new Random();
 
     public float r;
@@ -23,13 +21,11 @@ public class HitFakeParticle
     public int maxLifetime;
     public ResourceLocation rl;
 
-    public HitFakeParticle(int x, int y, Vector2d vec)
-    {
+    public HitFakeParticle(int x, int y, Vector2d vec) {
         this(x, y, vec,0.5f, 0.7f + random.nextFloat() / 3, 0.5f + random.nextFloat() / 5, 1);
     }
 
-    public HitFakeParticle(int x, int y, Vector2d vec, float r, float g, float b, float a)
-    {
+    public HitFakeParticle(int x, int y, Vector2d vec, float r, float g, float b, float a) {
         this.r = r;
         this.g = g;
         this.b = b;
@@ -45,8 +41,7 @@ public class HitFakeParticle
         this.rl = Starcatcher.rl("textures/gui/minigame.png");
     }
 
-    public boolean tick()
-    {
+    public boolean tick() {
         lifetime++;
 
         pos = pos.add(new Vector2d(vecDirection.x * speed, vecDirection.y * speed));

@@ -1,11 +1,11 @@
 package com.wdiscute.starcatcher.fishspotter;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.DataAttachments;
-import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.io.DataAttachments;
+import com.wdiscute.starcatcher.io.FishCaughtCounter;
+import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -13,18 +13,15 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
-import net.minecraftforge.fml.ISystemReportExtender;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FishTrackerLayer implements IGuiOverlay
-{
+public class FishTrackerLayer implements IGuiOverlay {
 
     private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/fish_tracker.png");
 
@@ -48,8 +45,7 @@ public class FishTrackerLayer implements IGuiOverlay
     List<FishProperties> fpsInArea = new ArrayList<>();
     List<FishProperties> fishesCaught;
 
-    private void recalculate()
-    {
+    private void recalculate() {
         fpsInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         fishesCaught = new ArrayList<>();
         for (FishCaughtCounter fishes : DataAttachments.get(player).fishesCaught()) fishesCaught.add(fishes.fp());
@@ -57,8 +53,7 @@ public class FishTrackerLayer implements IGuiOverlay
 
 
     @Override
-    public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight)
-    {
+    public void render(ForgeGui forgeGui, GuiGraphics guiGraphics, float partialTick, int screenWidth, int screenHeight) {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
         uiY = Minecraft.getInstance().getWindow().getGuiScaledHeight() - imageHeight - 80;
@@ -76,14 +71,14 @@ public class FishTrackerLayer implements IGuiOverlay
         //smoothly moves ui in and out of screen
         if (!shouldShow)
             if (offScreen > -150)
-                offScreen -= 15 * (mil / 70);
+                offScreen -= (float) (15 * (mil / 70));
             else
             {
                 offScreen = -150;
                 return;
             }
         else if (offScreen < 0)
-            offScreen += 15 * (mil / 70);
+            offScreen += (float) (15 * (mil / 70));
         else
             offScreen = 0;
 

@@ -5,12 +5,10 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 
-public class FishingNotificationParticles extends TextureSheetParticle
-{
+public class FishingNotificationParticles extends TextureSheetParticle {
     private final SpriteSet sprites;
 
-    protected FishingNotificationParticles(ClientLevel level, double x, double y, double z, SpriteSet spriteSet)
-    {
+    protected FishingNotificationParticles(ClientLevel level, double x, double y, double z, SpriteSet spriteSet) {
         super(level, x, y, z);
 
         this.xd = 0f;
@@ -26,18 +24,14 @@ public class FishingNotificationParticles extends TextureSheetParticle
     }
 
     @Override
-    public void tick()
-    {
+    public void tick() {
         this.setSpriteFromAge(this.sprites);
 
 
         if(age % 20 > 10)
-        {
             this.yd = 0.04f;
-        }else
-        {
+        else
             this.yd = -0.04f;
-        }
 
         this.xo = this.x;
         this.yo = this.y;
@@ -53,9 +47,7 @@ public class FishingNotificationParticles extends TextureSheetParticle
         return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
     }
 
-
-    public static class Provider implements ParticleProvider<SimpleParticleType>
-    {
+    public static class Provider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet spriteSet;
 
         public Provider(SpriteSet spriteSet)
@@ -64,8 +56,7 @@ public class FishingNotificationParticles extends TextureSheetParticle
         }
 
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
-        {
+        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed) {
             return new FishingNotificationParticles(clientLevel, x, y, z, this.spriteSet);
         }
     }

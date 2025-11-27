@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.blocks;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.DataResult;
-import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
+import com.wdiscute.starcatcher.io.TrophyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
@@ -45,7 +45,7 @@ public class TrophyBlockEntity extends BlockEntity
         {
             CompoundTag trophyProperties = tag.getCompound("trophy_properties");
             DataResult<TrophyProperties> decode = TrophyProperties.CODEC.parse(NbtOps.INSTANCE, trophyProperties);
-            this.trophyProperties = decode.result().orElse(TrophyProperties.DEFAULT);
+            this.trophyProperties = decode.resultOrPartial(LOGGER::warn).orElse(TrophyProperties.DEFAULT);
         }
     }
 }

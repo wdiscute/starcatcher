@@ -1,5 +1,6 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.registry;
 
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
 import com.wdiscute.starcatcher.items.*;
 import com.wdiscute.starcatcher.items.cheater.*;
@@ -7,7 +8,6 @@ import com.wdiscute.starcatcher.rod.StarcatcherFishingRod;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -15,15 +15,14 @@ import net.minecraftforge.registries.RegistryObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public interface ModItems
-{
+public interface ModItems {
 
     List<RegistryObject<Item>> fishes = new ArrayList<>();
     List<RegistryObject<Item>> trash = new ArrayList<>();
 
-    DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Starcatcher.MOD_ID);
+    DeferredRegister<Item> REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, Starcatcher.MOD_ID);
 
-    RegistryObject<Item> GUIDE = ITEMS.register("starcatcher_guide", FishingGuideItem::new);
+    RegistryObject<Item> GUIDE = REGISTRY.register("starcatcher_guide", FishingGuideItem::new);
 
     RegistryObject<Item> FISH_SPOTTER = singleStackItem("fish_spotter");
 
@@ -43,7 +42,7 @@ public interface ModItems
     //bobbers
     RegistryObject<Item> CREEPER_BOBBER = singleStackItem("creeper_bobber"); //done
     RegistryObject<Item> GLITTER_BOBBER = singleStackItem("glitter_bobber"); //done
-    RegistryObject<Item> COLORFUL_BOBBER = ITEMS.register("colorful_bobber", ColorfulBobber::new); //done
+    RegistryObject<Item> COLORFUL_BOBBER = REGISTRY.register("colorful_bobber", ColorfulBobber::new); //done
     RegistryObject<Item> FRUGAL_BOBBER = singleStackItem("frugal_bobber"); //done
     RegistryObject<Item> STEADY_BOBBER = singleStackItem("steady_bobber"); //done
     RegistryObject<Item> IMPATIENT_BOBBER = singleStackItem("impatient_bobber"); //done
@@ -60,53 +59,53 @@ public interface ModItems
     RegistryObject<Item> LEGENDARY_BAIT = basicItem("legendary_bait"); //done
     RegistryObject<Item> METEOROLOGICAL_BAIT = basicItem("meteorological_bait"); //done
 
-    RegistryObject<Item> ROD = ITEMS.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
+    RegistryObject<Item> ROD = REGISTRY.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
 
     RegistryObject<Item> SETTINGS = singleStackItem("settings");
 
 
     //secrets
-    RegistryObject<Item> SECRET_NOTE = ITEMS.register("secret_note", SecretNote::new);
-    RegistryObject<Item> BROKEN_BOTTLE = ITEMS.register("broken_bottle", BrokenBottle::new);
+    RegistryObject<Item> SECRET_NOTE = REGISTRY.register("secret_note", SecretNote::new);
+    RegistryObject<Item> BROKEN_BOTTLE = REGISTRY.register("broken_bottle", BrokenBottle::new);
 
     //notes
-    RegistryObject<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () ->
+    RegistryObject<Item> DRIFTING_WATERLOGGED_BOTTLE = REGISTRY.register("drifting_waterlogged_bottle", () ->
             new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
 
-    RegistryObject<Item> SCALDING_BOTTLE = ITEMS.register("scalding_bottle", () ->
+    RegistryObject<Item> SCALDING_BOTTLE = REGISTRY.register("scalding_bottle", () ->
             new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_1));
 
-    RegistryObject<Item> BURNING_BOTTLE = ITEMS.register("burning_bottle", () ->
+    RegistryObject<Item> BURNING_BOTTLE = REGISTRY.register("burning_bottle", () ->
             new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_2));
 
-    RegistryObject<Item> HOPEFUL_BOTTLE = ITEMS.register("hopeful_bottle", () ->
+    RegistryObject<Item> HOPEFUL_BOTTLE = REGISTRY.register("hopeful_bottle", () ->
             new NoteContainer(SecretNote.Note.HOPEFUL_NOTE));
 
-    RegistryObject<Item> HOPELESS_BOTTLE = ITEMS.register("hopeless_bottle", () ->
+    RegistryObject<Item> HOPELESS_BOTTLE = REGISTRY.register("hopeless_bottle", () ->
             new NoteContainer(SecretNote.Note.HOPELESS_NOTE));
 
-    RegistryObject<Item> TRUE_BLUE_BOTTLE = ITEMS.register("true_blue_bottle", () ->
+    RegistryObject<Item> TRUE_BLUE_BOTTLE = REGISTRY.register("true_blue_bottle", () ->
             new NoteContainer(SecretNote.Note.TRUE_BLUE));
 
 
 
     //cheater items
-    RegistryObject<Item> AWARD_ALL_FISHES = ITEMS.register("award_all_fishes", AwardAllFishes::new);
-    RegistryObject<Item> AWARD_ONE_FISH = ITEMS.register("award_one_fish", AwardOneFish::new);
-    RegistryObject<Item> REVOKE_ALL_FISHES = ITEMS.register("revoke_all_fishes", RevokeAllFishes::new);
+    RegistryObject<Item> AWARD_ALL_FISHES = REGISTRY.register("award_all_fishes", AwardAllFishes::new);
+    RegistryObject<Item> AWARD_ONE_FISH = REGISTRY.register("award_one_fish", AwardOneFish::new);
+    RegistryObject<Item> REVOKE_ALL_FISHES = REGISTRY.register("revoke_all_fishes", RevokeAllFishes::new);
 
-    RegistryObject<Item> AWARD_ALL_TROPHIES = ITEMS.register("award_all_trophies", AwardAllTrophies::new);
-    RegistryObject<Item> REVOKE_ALL_TROPHIES = ITEMS.register("revoke_all_trophies", RevokeAllTrophies::new);
+    RegistryObject<Item> AWARD_ALL_TROPHIES = REGISTRY.register("award_all_trophies", AwardAllTrophies::new);
+    RegistryObject<Item> REVOKE_ALL_TROPHIES = REGISTRY.register("revoke_all_trophies", RevokeAllTrophies::new);
 
-    RegistryObject<Item> AWARD_ALL_SECRETS = ITEMS.register("award_all_secrets", AwardAllSecrets::new);
-    RegistryObject<Item> REVOKE_ALL_SECRETS = ITEMS.register("revoke_all_secrets", RevokeAllSecrets::new);
+    RegistryObject<Item> AWARD_ALL_SECRETS = REGISTRY.register("award_all_secrets", AwardAllSecrets::new);
+    RegistryObject<Item> REVOKE_ALL_SECRETS = REGISTRY.register("revoke_all_secrets", RevokeAllSecrets::new);
 
-    RegistryObject<Item> REVOKE_ALL_EXTRAS = ITEMS.register("revoke_all_extras", RevokeAllExtras::new);
+    RegistryObject<Item> REVOKE_ALL_EXTRAS = REGISTRY.register("revoke_all_extras", RevokeAllExtras::new);
 
     //treasure
-    RegistryObject<Item> WATERLOGGED_SATCHEL = ITEMS.register("waterlogged_satchel", () -> new FishingTreasure(Starcatcher.rl("treasure/waterlogged_satchel")));
-    RegistryObject<Item> TREASURE = ITEMS.register("treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/treasure")));
-    RegistryObject<Item> SCALDING_TREASURE = ITEMS.register("scalding_treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/scalding_treasure")));
+    RegistryObject<Item> WATERLOGGED_SATCHEL = REGISTRY.register("waterlogged_satchel", () -> new FishingTreasure(Starcatcher.rl("treasure/waterlogged_satchel")));
+    RegistryObject<Item> TREASURE = REGISTRY.register("treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/treasure")));
+    RegistryObject<Item> SCALDING_TREASURE = REGISTRY.register("scalding_treasure", () -> new FishingTreasure(Starcatcher.rl("treasure/scalding_treasure")));
 
     RegistryObject<Item> FISH_BONES = basicItem("fish_bones");
 
@@ -119,7 +118,6 @@ public interface ModItems
     // |  .-' |  | .-'  `) |  | |  | \   --. .-'  `)
     // `--'   `--' `----'  `--' `--'  `----' `----'
     //
-
 
     //lake
     RegistryObject<Item> OBIDONTIEE = fish("obidontiee"); //description
@@ -271,53 +269,40 @@ public interface ModItems
     RegistryObject<Item> VOIDBITER = fish("voidbiter");
 
 
-    private static RegistryObject<Item> fish(String name)
-    {
+    private static RegistryObject<Item> fish(String name) {
         //chat didn't force me to write this comment
-        RegistryObject<Item> item = ITEMS.register(name, () -> new FishItem(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
+        RegistryObject<Item> item = REGISTRY.register(name, () -> new FishItem(new Item.Properties().food(ModFoodProperties.BASIC_RAW_FISH)));
         fishes.add(item);
         return item;
     }
 
-    private static RegistryObject<Item> trash(String name)
-    {
-        RegistryObject<Item> item = ITEMS.register(name, () -> new Item(new Item.Properties()));
+    private static RegistryObject<Item> trash(String name) {
+        RegistryObject<Item> item = REGISTRY.register(name, () -> new Item(new Item.Properties()));
         trash.add(item);
         return item;
     }
 
-    private static RegistryObject<Item> fireResistantFish(String name)
-    {
-        RegistryObject<Item> item = ITEMS.register(name, () -> new FishItem(new Item.Properties().fireResistant()));
+    private static RegistryObject<Item> fireResistantFish(String name) {
+        RegistryObject<Item> item = REGISTRY.register(name, () -> new FishItem(new Item.Properties().fireResistant()));
         fishes.add(item);
         return item;
     }
 
-    private static RegistryObject<Item> fireResistantTrash(String name)
-    {
-        RegistryObject<Item> item = ITEMS.register(name, () -> new FishItem(new Item.Properties().fireResistant()));
+    private static RegistryObject<Item> fireResistantTrash(String name) {
+        RegistryObject<Item> item = REGISTRY.register(name, () -> new FishItem(new Item.Properties().fireResistant()));
         trash.add(item);
         return item;
     }
 
-    static RegistryObject<Item> singleStackItem(String name)
-    {
-        return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(1)));
+    private static RegistryObject<Item> singleStackItem(String name) {
+        return REGISTRY.register(name, () -> new Item(new Item.Properties().stacksTo(1)));
     }
 
-    static RegistryObject<Item> singleStackItemFireResistant(String name)
-    {
-        return ITEMS.register(name, () -> new Item(new Item.Properties().stacksTo(1).fireResistant()));
+    private static RegistryObject<Item> singleStackItemFireResistant(String name) {
+        return REGISTRY.register(name, () -> new Item(new Item.Properties().stacksTo(1).fireResistant()));
     }
 
-    static RegistryObject<Item> basicItem(String name)
-    {
-        return ITEMS.register(name, () -> new Item(new Item.Properties()));
-    }
-
-
-    static void register(IEventBus eventBus)
-    {
-        ITEMS.register(eventBus);
+    private static RegistryObject<Item> basicItem(String name) {
+        return REGISTRY.register(name, () -> new Item(new Item.Properties()));
     }
 }

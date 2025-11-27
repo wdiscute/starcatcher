@@ -14,16 +14,14 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class FishingGuideItem extends Item
-{
+public class FishingGuideItem extends Item {
     public FishingGuideItem()
     {
         super(new Properties().stacksTo(1).rarity(Rarity.EPIC));
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
-    {
+    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand) {
         if(level.isClientSide) openScreen();
         level.playSound(null, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS);
         return InteractionResultHolder.success(player.getItemInHand(usedHand));

@@ -1,9 +1,9 @@
 package com.wdiscute.starcatcher.rod;
 
-import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.ModMenuTypes;
+import com.wdiscute.starcatcher.registry.ModItems;
+import com.wdiscute.starcatcher.registry.ModMenuTypes;
 import com.wdiscute.starcatcher.StarcatcherTags;
-import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
+import com.wdiscute.starcatcher.io.DataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -14,8 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.items.ItemStackHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class FishingRodMenu extends AbstractContainerMenu
-{
+public class FishingRodMenu extends AbstractContainerMenu {
     public final ItemStackHandler inventory = new ItemStackHandler(3)
     {
         @Override
@@ -28,28 +27,23 @@ public class FishingRodMenu extends AbstractContainerMenu
 
     public final ItemStack is;
 
-    public FishingRodMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
-    {
+    public FishingRodMenu(int containerId, Inventory inv, FriendlyByteBuf extraData) {
         this(containerId, inv, inv.player.getMainHandItem());
     }
 
-    public FishingRodMenu(int containerId, Inventory inv, ItemStack itemStack)
-    {
+    public FishingRodMenu(int containerId, Inventory inv, ItemStack itemStack) {
         super(ModMenuTypes.FISHING_ROD_MENU.get(), containerId);
 
         is = itemStack;
 
         //player inventory
-        for (int i = 0; i < 3; ++i)
-        {
-            for (int l = 0; l < 9; ++l)
-            {
+        for (int i = 0; i < 3; ++i) {
+            for (int l = 0; l < 9; ++l) {
                 this.addSlot(new Slot(inv, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
             }
         }
         //player hotbar
-        for (int i = 0; i < 9; ++i)
-        {
+        for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
         }
 
@@ -57,24 +51,20 @@ public class FishingRodMenu extends AbstractContainerMenu
         inventory.setStackInSlot(1, DataComponents.getItemInSlot(is, DataComponents.Slots.BAIT).copy());
         inventory.setStackInSlot(2, DataComponents.getItemInSlot(is, DataComponents.Slots.HOOK).copy());
 
-        this.addSlot(new SlotItemHandler(inventory, 0, 50, 35)
-        {
+        this.addSlot(new SlotItemHandler(inventory, 0, 50, 35) {
             @Override
             public boolean mayPlace(ItemStack stack)
             {
                 return stack.is(StarcatcherTags.BOBBERS);
             }
         });
-        this.addSlot(new SlotItemHandler(inventory, 1, 80, 35)
-        {
+        this.addSlot(new SlotItemHandler(inventory, 1, 80, 35) {
             @Override
-            public boolean mayPlace(ItemStack stack)
-            {
+            public boolean mayPlace(ItemStack stack) {
                 return !stack.is(StarcatcherTags.HOOKS) && !stack.is(StarcatcherTags.BOBBERS);
             }
         });
-        this.addSlot(new SlotItemHandler(inventory, 2, 110, 35)
-        {
+        this.addSlot(new SlotItemHandler(inventory, 2, 110, 35) {
             @Override
             public boolean mayPlace(ItemStack stack)
             {
@@ -84,41 +74,32 @@ public class FishingRodMenu extends AbstractContainerMenu
     }
 
     @Override
-    protected boolean moveItemStackTo(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection)
-    {
+    protected boolean moveItemStackTo(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection) {
         return super.moveItemStackTo(stack, startIndex, endIndex, reverseDirection);
     }
 
     @Override
-    public void clicked(int slotId, int button, ClickType clickType, Player player)
-    {
+    public void clicked(int slotId, int button, ClickType clickType, Player player) {
         if(slotId >= 0 && this.getSlot(slotId).getItem().equals(is)) return;
 
-        if (clickType == ClickType.SWAP)
-        {
+        if (clickType == ClickType.SWAP) {
             // When clickType is SWAP, the action is the hotbar number to swap it to.
             int hotbarSlotId = 2 + 3 * 9 + button;
             if (slotId == hotbarSlotId)
-            {
                 return;
-            }
         }
-
         super.clicked(slotId, button, clickType, player);
     }
 
     @Override
-    public void removed(Player player)
-    {
+    public void removed(Player player) {
         super.removed(player);
 
-        if (!player.level().isClientSide)
-        {
+        if (!player.level().isClientSide) {
             DataComponents.setItemInSlot(is, DataComponents.Slots.BOBBER, inventory.getStackInSlot(0));
             DataComponents.setItemInSlot(is, DataComponents.Slots.BAIT, inventory.getStackInSlot(1));
             DataComponents.setItemInSlot(is, DataComponents.Slots.HOOK, inventory.getStackInSlot(2));
         }
-
     }
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
@@ -140,45 +121,36 @@ public class FishingRodMenu extends AbstractContainerMenu
     private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
 
 
-    public ItemStack quickMoveStack(Player playerIn, int pIndex)
-    {
+    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
         if (!sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
         // Check if the slot clicked is one of the vanilla container slots
-        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT)
-        {
+        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
             // This is a vanilla container slot so merge the stack into the tile inventory
             if (!moveItemStackTo(
                     sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
                             + TE_INVENTORY_SLOT_COUNT, false))
-            {
                 return ItemStack.EMPTY;  // EMPTY_ITEM
-            }
+
         }
-        else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT)
-        {
+        else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
             // This is a TE slot so merge the stack into the players inventory
             if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false))
-            {
                 return ItemStack.EMPTY;
-            }
+
         }
         else
-        {
             return ItemStack.EMPTY;
-        }
+
         // If stack size == 0 (the entire stack was moved) set slot contents to null
         if (sourceStack.getCount() == 0)
-        {
             sourceSlot.set(ItemStack.EMPTY);
-        }
         else
-        {
             sourceSlot.setChanged();
-        }
+
         sourceSlot.onTake(playerIn, sourceStack);
         return copyOfSourceStack;
     }

@@ -1,8 +1,7 @@
-package com.wdiscute.starcatcher.networkandcodecs;
+package com.wdiscute.starcatcher.io;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.ModItems;
 import net.minecraft.util.StringRepresentable;
 
 import java.util.List;

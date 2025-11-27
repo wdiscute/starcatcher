@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.items;
 
-import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
+import com.wdiscute.starcatcher.io.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.server.level.ServerPlayer;

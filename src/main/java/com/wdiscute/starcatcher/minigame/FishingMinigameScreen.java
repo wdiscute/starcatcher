@@ -4,12 +4,12 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.Config;
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.Tooltips;
-import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.Payloads;
+import com.wdiscute.starcatcher.io.DataComponents;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.network.ModPayloads;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -121,8 +121,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     ResourceLocation tankTexture = SURFACE;
 
-    public FishingMinigameScreen(FishProperties fp, ItemStack rod)
-    {
+    public FishingMinigameScreen(FishProperties fp, ItemStack rod) {
         super(Component.empty());
 
         previousGuiScale = Minecraft.getInstance().options.guiScale().get();
@@ -180,15 +179,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         posThin2 = difficulty.markers().secondThin() ? getRandomFreePosition() : Integer.MIN_VALUE;
 
         //assign moving speed
-        if (isMoving)
-        {
-            if (commonUncommonRareFish)
-            {
+        if (isMoving) {
+            if (commonUncommonRareFish) {
                 moveRate = 1;
                 if(hook.is(ModItems.MOSSY_HOOK.get())) moveRate = 3;
             }
-            else
-            {
+            else {
                 if (fp.rarity().equals(FishProperties.Rarity.EPIC))
                     moveRate = 6;
                 if (fp.rarity().equals(FishProperties.Rarity.LEGENDARY))
@@ -198,8 +194,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         //assign vanishing speed
-        if (isVanishing)
-        {
+        if (isVanishing) {
             if (commonUncommonRareFish) vanishingRate = 0.03f;
             if (fp.rarity().equals(FishProperties.Rarity.EPIC)) vanishingRate = 0.06f;
             if (fp.rarity().equals(FishProperties.Rarity.LEGENDARY)) vanishingRate = 0.1f;
@@ -208,8 +203,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         //make sweet spots fatter if difficulty bobber is being used
-        if (bobber.is(ModItems.STEADY_BOBBER.get()))
-        {
+        if (bobber.is(ModItems.STEADY_BOBBER.get())) {
             bigForgiving = SIZE_4;
             thinForgiving = SIZE_2;
             treasureForgiving = SIZE_2;
@@ -219,10 +213,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD.get()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
 
-    private int getRandomFreePosition()
-    {
-        for (int i = 0; i < 100; i++)
-        {
+    private int getRandomFreePosition() {
+        for (int i = 0; i < 100; i++) {
             int posBeingChecked = r.nextInt(360);
 
             if ((Math.abs(pos1 - posBeingChecked) < 50 || Math.abs(pos1 - posBeingChecked) > 310) && pos1 != Integer.MIN_VALUE)
@@ -243,14 +235,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float FRACTION_OF_A_TICK_THAT_HAPPENED_SINCE_THE_LAST_FRAME_NOT_TO_BE_CONFUSED_TO_WHAT_A_PARTIAL_TICK_IS_IN_ONE_DOT_TWENTY_ONE_WHERE_A_PARTIAL_TICK_IS_THE_FRACTION_OF_A_TICK_SINCE_THE_LAST_TICK_NOT_THE_LAST_FRAME_WOW_THATS_SO_COOL_IM_SO_HAPPY_THIS_WAS_CHANGED_AND_THEY_KEPT_THE_SAME_NAME_SO_IT_TOOK_AGES_TO_DEBUG_AND_FIND_OUT_WHAT_WAS_CAUSING_IT)
-    {
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float FRACTION_OF_A_TICK_THAT_HAPPENED_SINCE_THE_LAST_FRAME_NOT_TO_BE_CONFUSED_TO_WHAT_A_PARTIAL_TICK_IS_IN_ONE_DOT_TWENTY_ONE_WHERE_A_PARTIAL_TICK_IS_THE_FRACTION_OF_A_TICK_SINCE_THE_LAST_TICK_NOT_THE_LAST_FRAME_WOW_THATS_SO_COOL_IM_SO_HAPPY_THIS_WAS_CHANGED_AND_THEY_KEPT_THE_SAME_NAME_SO_IT_TOOK_AGES_TO_DEBUG_AND_FIND_OUT_WHAT_WAS_CAUSING_IT) {
         super.renderBackground(guiGraphics);
 
         partialTick += FRACTION_OF_A_TICK_THAT_HAPPENED_SINCE_THE_LAST_FRAME_NOT_TO_BE_CONFUSED_TO_WHAT_A_PARTIAL_TICK_IS_IN_ONE_DOT_TWENTY_ONE_WHERE_A_PARTIAL_TICK_IS_THE_FRACTION_OF_A_TICK_SINCE_THE_LAST_TICK_NOT_THE_LAST_FRAME_WOW_THATS_SO_COOL_IM_SO_HAPPY_THIS_WAS_CHANGED_AND_THEY_KEPT_THE_SAME_NAME_SO_IT_TOOK_AGES_TO_DEBUG_AND_FIND_OUT_WHAT_WAS_CAUSING_IT;
 
-        if (this.tickCount != lastTick)
-        {
+        if (this.tickCount != lastTick) {
             partialTick = FRACTION_OF_A_TICK_THAT_HAPPENED_SINCE_THE_LAST_FRAME_NOT_TO_BE_CONFUSED_TO_WHAT_A_PARTIAL_TICK_IS_IN_ONE_DOT_TWENTY_ONE_WHERE_A_PARTIAL_TICK_IS_THE_FRACTION_OF_A_TICK_SINCE_THE_LAST_TICK_NOT_THE_LAST_FRAME_WOW_THATS_SO_COOL_IM_SO_HAPPY_THIS_WAS_CHANGED_AND_THEY_KEPT_THE_SAME_NAME_SO_IT_TOOK_AGES_TO_DEBUG_AND_FIND_OUT_WHAT_WAS_CAUSING_IT;
             lastTick = this.tickCount;
         }
@@ -258,8 +248,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, TEXTURE);
 
-        if (treasureActive)
-        {
+        if (treasureActive) {
             //treasure bar
             guiGraphics.blit(
                     TEXTURE, width / 2 - 158, height / 2 - 42 + (int) (64 - (64f * treasureProgressSmooth) / 100),
@@ -310,8 +299,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
 
         //pos 1
-        if (pos1 != Integer.MIN_VALUE)
-        {
+        if (pos1 != Integer.MIN_VALUE) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -336,8 +324,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
 
         //pos 2
-        if (pos2 != Integer.MIN_VALUE)
-        {
+        if (pos2 != Integer.MIN_VALUE) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -360,8 +347,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         //pos thin 1
-        if (posThin1 != Integer.MIN_VALUE)
-        {
+        if (posThin1 != Integer.MIN_VALUE) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -384,8 +370,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         //pos thin 2
-        if (posThin2 != Integer.MIN_VALUE)
-        {
+        if (posThin2 != Integer.MIN_VALUE) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -408,8 +393,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         //pos treasure
-        if (posTreasure != Integer.MIN_VALUE)
-        {
+        if (posTreasure != Integer.MIN_VALUE) {
             PoseStack poseStack = guiGraphics.pose();
             poseStack.pushPose();
 
@@ -506,8 +490,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
 
         //particles
-        for (HitFakeParticle instance : hitParticles)
-        {
+        for (HitFakeParticle instance : hitParticles) {
             guiGraphics.pose().pushPose();
             guiGraphics.pose().translate(instance.pos.x, instance.pos.y, 0);
             RenderSystem.setShaderColor(instance.r, instance.g, instance.b, instance.a);
@@ -519,25 +502,20 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             RenderSystem.setShaderColor(1, 1, 1, 1);
             guiGraphics.pose().popPose();
         }
-
-
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
-    {
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 
         //closes when pressing E
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
-        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
-        {
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey)) {
             this.onClose();
             return true;
         }
 
         //spacebar input
-        if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue())
-        {
+        if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue()) {
 
             if (gracePeriod > 0) gracePeriod = 0;
 
@@ -555,8 +533,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             lastHitMarkerPos = pointerPosPrecise;
 
             //pos 1
-            if ((Math.abs(pos1 - pointerPosPrecise) < bigForgiving || Math.abs(pos1 - pointerPosPrecise) > 360 - bigForgiving) && pos1 != Integer.MIN_VALUE)
-            {
+            if ((Math.abs(pos1 - pointerPosPrecise) < bigForgiving || Math.abs(pos1 - pointerPosPrecise) > 360 - bigForgiving) && pos1 != Integer.MIN_VALUE) {
                 addParticles(pos1, 15);
                 pos1 = getRandomFreePosition();
                 completion += reward;
@@ -565,8 +542,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos2
-            if ((Math.abs(pos2 - pointerPosPrecise) < bigForgiving || Math.abs(pos2 - pointerPosPrecise) > 360 - bigForgiving) && pos2 != Integer.MIN_VALUE)
-            {
+            if ((Math.abs(pos2 - pointerPosPrecise) < bigForgiving || Math.abs(pos2 - pointerPosPrecise) > 360 - bigForgiving) && pos2 != Integer.MIN_VALUE) {
                 addParticles(pos2, 15);
                 pos2 = getRandomFreePosition();
                 completion += reward;
@@ -575,8 +551,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos thin 1
-            if ((Math.abs(posThin1 - pointerPosPrecise) < thinForgiving || Math.abs(posThin1 - pointerPosPrecise) > 360 - thinForgiving) && posThin1 != Integer.MIN_VALUE)
-            {
+            if ((Math.abs(posThin1 - pointerPosPrecise) < thinForgiving || Math.abs(posThin1 - pointerPosPrecise) > 360 - thinForgiving) && posThin1 != Integer.MIN_VALUE) {
                 addParticles(posThin1, 30);
                 posThin1 = getRandomFreePosition();
                 completion += rewardThin;
@@ -585,8 +560,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos thin 2
-            if ((Math.abs(posThin2 - pointerPosPrecise) < thinForgiving || Math.abs(posThin2 - pointerPosPrecise) > 360 - thinForgiving) && posThin2 != Integer.MIN_VALUE)
-            {
+            if ((Math.abs(posThin2 - pointerPosPrecise) < thinForgiving || Math.abs(posThin2 - pointerPosPrecise) > 360 - thinForgiving) && posThin2 != Integer.MIN_VALUE) {
                 addParticles(posThin2, 30);
                 posThin2 = getRandomFreePosition();
                 completion += rewardThin;
@@ -595,8 +569,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //if hit sweet spot treasure
-            if ((Math.abs(posTreasure - pointerPosPrecise) < treasureForgiving || Math.abs(posTreasure - pointerPosPrecise) > 360 - treasureForgiving) && posTreasure != Integer.MIN_VALUE)
-            {
+            if ((Math.abs(posTreasure - pointerPosPrecise) < treasureForgiving || Math.abs(posTreasure - pointerPosPrecise) > 360 - treasureForgiving) && posTreasure != Integer.MIN_VALUE) {
                 addParticles(posTreasure, 30, true);
                 posTreasure = getRandomFreePosition();
                 treasureProgress += treasureReward;
@@ -606,13 +579,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
 
-            if (hitSomething)
-            {
+            if (hitSomething) {
                 consecutiveHits++;
                 if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
                         ||
-                        (consecutiveHits == 3 && treasureProgress == Integer.MIN_VALUE && hook.is(ModItems.SHINY_HOOK.get())))
-                {
+                        (consecutiveHits == 3 && treasureProgress == Integer.MIN_VALUE && hook.is(ModItems.SHINY_HOOK.get()))) {
                     treasureActive = true;
                     posTreasure = getRandomFreePosition();
                     treasureProgress = 0;
@@ -620,19 +591,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 }
 
                 if (hook.is(ModItems.STONE_HOOK.get()))
-                {
-                    if (fp.rarity() == FishProperties.Rarity.COMMON) gracePeriod = 40;
-                    if (fp.rarity() == FishProperties.Rarity.UNCOMMON) gracePeriod = 20;
-                    if (fp.rarity() == FishProperties.Rarity.RARE) gracePeriod = 15;
-                    if (fp.rarity() == FishProperties.Rarity.EPIC) gracePeriod = 10;
-                    if (fp.rarity() == FishProperties.Rarity.LEGENDARY) gracePeriod = 5;
-                }
+                    gracePeriod = fp.rarity().getGracePeriod();
 
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
                 if (changeRotation) currentRotation *= -1;
             }
-            else
-            {
+            else {
                 pos1Vanishing = 1;
                 pos2Vanishing = 1;
                 posThin1Vanishing = 1;
@@ -646,28 +610,23 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 completion -= penalty;
                 perfectCatch = false;
             }
-
         }
-
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
-    public void tick()
-    {
+    public void tick() {
         pointerPos += (int) (speed * currentRotation);
 
         kimbeColor -= 0.1f;
-        if (isVanishing)
-        {
+        if (isVanishing) {
             pos1Vanishing -= vanishingRate;
             pos2Vanishing -= vanishingRate;
             posThin1Vanishing -= vanishingRate;
             posThin2Vanishing -= vanishingRate;
         }
 
-        if (isMoving)
-        {
+        if (isMoving) {
             if (pos1 != Integer.MIN_VALUE) pos1 -= moveRate * currentRotation;
             if (pos2 != Integer.MIN_VALUE) pos2 -= moveRate * currentRotation;
             if (posThin1 != Integer.MIN_VALUE) posThin1 -= moveRate * currentRotation;
@@ -691,24 +650,21 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         treasureProgressSmooth += (int) Math.signum(treasureProgress - treasureProgressSmooth);
 
-        if (tickCount % 5 == 0 && gracePeriod < 0)
-        {
+        if (tickCount % 5 == 0 && gracePeriod < 0) {
             completion -= decay;
         }
 
-        if (completionSmooth < 0)
-        {
+        if (completionSmooth < 0) {
             this.onClose();
         }
 
-        if (completionSmooth > 75)
-        {
+        if (completionSmooth > 75) {
             //if completed treasure minigame, or is a perfect catch with the mossy hook
             boolean awardTreasure = treasureProgressSmooth > 100 || (perfectCatch && hook.is(ModItems.MOSSY_HOOK.get()));
 
-            Payloads.CHANNEL.send(
+            ModPayloads.CHANNEL.send(
                     PacketDistributor.SERVER.with(null),
-                    new Payloads.FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits)
+                    new ModPayloads.FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits)
             );
             this.onClose();
         }
@@ -717,14 +673,13 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public void onClose()
-    {
+    public void onClose() {
         Minecraft.getInstance().options.guiScale().set(previousGuiScale);
         Minecraft.getInstance().resizeDisplay();
 
-        Payloads.CHANNEL.send(
+        ModPayloads.CHANNEL.send(
                 PacketDistributor.SERVER.with(null),
-                new Payloads.FishingCompletedPayload(-1, false, false, consecutiveHits)
+                new ModPayloads.FishingCompletedPayload(-1, false, false, consecutiveHits)
         );
 
         this.minecraft.popGuiLayer();
@@ -735,15 +690,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         addParticles(posInDegrees, count, false);
     }
 
-    private void addParticles(int posInDegrees, int count, boolean treasure)
-    {
+    private void addParticles(int posInDegrees, int count, boolean treasure) {
         int xPos = (int) (30 * Math.cos(Math.toRadians(posInDegrees - 90)));
         int yPos = (int) (30 * Math.sin(Math.toRadians(posInDegrees - 90)));
 
-        for (int i = 0; i < count; i++)
-        {
-            if (bobber.is(ModItems.GLITTER_BOBBER.get()))
-            {
+        for (int i = 0; i < count; i++) {
+            if (bobber.is(ModItems.GLITTER_BOBBER.get())) {
                 hitParticles.add(new HitFakeParticle(
                         xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
                         r.nextFloat(),
@@ -754,8 +706,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 continue;
             }
 
-            if (bobber.is(ModItems.COLORFUL_BOBBER.get()))
-            {
+            if (bobber.is(ModItems.COLORFUL_BOBBER.get())) {
                 hitParticles.add(new HitFakeParticle(
                         xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
                         DataComponents.getBobberColor(bobber).r(),
@@ -766,19 +717,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 continue;
             }
 
-            if (treasure)
-            {
+            if (treasure) {
                 //red particles if treasure sweet spot was hit
                 hitParticles.add(new HitFakeParticle(
                         xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
                         0.7f + r.nextFloat() / 3, 0.5f, 0.5f, 1
                 ));
             }
-            else
-            {
+            else {
                 hitParticles.add(new HitFakeParticle(xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1)));
             }
-
         }
     }
 
@@ -787,5 +735,4 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         return false;
     }
-
 }

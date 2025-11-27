@@ -1,8 +1,9 @@
-package com.wdiscute.starcatcher.networkandcodecs;
+package com.wdiscute.starcatcher.io;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.io.network.ModPayloads;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.network.PacketDistributor;
@@ -47,7 +48,7 @@ public record FishCaughtCounter(
 
     }
 
-    public static boolean AwardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks, int size, int weight)
+    public static boolean awardFishCaughtCounter(FishProperties fpCaught, Player player, int ticks, int size, int weight)
     {
         List<FishCaughtCounter> listFishCaughtCounter = DataAttachments.get(player).fishesCaught();
         List<FishCaughtCounter> newlist = new ArrayList<>();
@@ -84,9 +85,9 @@ public record FishCaughtCounter(
         if (newFish) newlist.add(new FishCaughtCounter(fpCaught, 1, ticks, ticks, size, weight, false));
 
         //display message above exp bar
-        Payloads.CHANNEL.send(
+        ModPayloads.CHANNEL.send(
                 PacketDistributor.PLAYER.with(() -> ((ServerPlayer) player)),
-                new Payloads.FishCaughtPayload(fpCaught, newFish, size, weight)
+                new ModPayloads.FishCaughtPayload(fpCaught, newFish, size, weight)
         );
 
         DataAttachments.get(player).setFishesCaught(newlist);

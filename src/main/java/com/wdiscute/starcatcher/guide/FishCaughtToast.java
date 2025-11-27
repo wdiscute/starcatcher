@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
@@ -20,7 +20,7 @@ public class FishCaughtToast implements Toast
     private static final ResourceLocation BACKGROUND_SPRITE = Starcatcher.rl("textures/gui/toast/fish_caught.png");
     private final Component title;
     private final String description;
-    private static final String gibberish = "§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+    private static final String GIBBERISH = "§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     private int old;
     private static final Random r = new Random();
     private final ItemStack is;
@@ -50,7 +50,7 @@ public class FishCaughtToast implements Toast
         }
 
         Component comp = Component.literal(description.substring(0, lettersRevealed))
-                .append(Component.literal(gibberish.substring(0, description.length() - lettersRevealed + 2)));
+                .append(Component.literal(GIBBERISH.substring(0, description.length() - lettersRevealed + 2)));
 
         guiGraphics.drawString(toastComponent.getMinecraft().font, comp, 30, 18, 0, false);
 

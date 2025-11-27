@@ -20,7 +20,6 @@ public class ModBrushItem extends Item
         super(new Item.Properties().durability(12));
     }
 
-
     private static final Map<Block, Block> Registro = Map.of(
             Blocks.OAK_PLANKS, ModBlocks.TROPHY_GOLD.get(),
             Blocks.BIRCH_PLANKS, ModBlocks.TROPHY_GOLD.get(),

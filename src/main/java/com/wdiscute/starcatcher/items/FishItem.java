@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.items;
 
-import com.wdiscute.starcatcher.ModEntities;
+import com.wdiscute.starcatcher.registry.ModEntities;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;

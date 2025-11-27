@@ -12,25 +12,21 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemDisplayContext;
 
-public class FishRenderer extends EntityRenderer<FishEntity>
-{
+public class FishRenderer extends EntityRenderer<FishEntity> {
 
     ItemRenderer itemRenderer;
-    public FishRenderer(EntityRendererProvider.Context context)
-    {
+    public FishRenderer(EntityRendererProvider.Context context) {
         super(context);
         itemRenderer = context.getItemRenderer();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FishEntity fish)
-    {
+    public ResourceLocation getTextureLocation(FishEntity fish) {
         return Starcatcher.rl("textures/entity/fishing/fish.png");
     }
 
     @Override
-    public void render(FishEntity fish, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
-    {
+    public void render(FishEntity fish, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
 
         poseStack.translate(0, 0.25f, 0);

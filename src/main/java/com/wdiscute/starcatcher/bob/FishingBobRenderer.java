@@ -2,9 +2,9 @@ package com.wdiscute.starcatcher.bob;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
+import com.wdiscute.starcatcher.io.DataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -19,32 +19,29 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
-{
+public class FishingBobRenderer extends EntityRenderer<FishingBobEntity> {
+    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/entity/fishing/bob.png");
+
     protected FishingBobModel<FishingBobEntity> model;
 
-    public FishingBobRenderer(EntityRendererProvider.Context context)
-    {
+    public FishingBobRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.model = new FishingBobModel<>(context.bakeLayer(FishingBobModel.LAYER_LOCATION));
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FishingBobEntity fishingBobEntity)
-    {
-        return Starcatcher.rl("textures/entity/fishing/bob.png");
+    public ResourceLocation getTextureLocation(FishingBobEntity fishingBobEntity) {
+        return TEXTURE;
     }
 
     @Override
-    public void render(FishingBobEntity fishingBobEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
-    {
+    public void render(FishingBobEntity fishingBobEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         poseStack.pushPose();
         poseStack.translate(0.0F, 1.5F, 0.0F);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
         int color = 0xffff9999;
         ItemStack bobber = fishingBobEntity.bobber.copy();
-        if (bobber.is(ModItems.COLORFUL_BOBBER.get()))
-        {
+        if (bobber.is(ModItems.COLORFUL_BOBBER.get())) {
             color = DataComponents.getBobberColor(bobber).getColorAsInt();
         }
 
@@ -58,8 +55,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
                 1);
         poseStack.popPose();
 
-        if (fishingBobEntity.getOwner() instanceof Player player)
-        {
+        if (fishingBobEntity.getOwner() instanceof Player player) {
             poseStack.pushPose();
             float f = player.getAttackAnim(partialTicks);
             float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
@@ -79,8 +75,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
         }
     }
 
-    private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction)
-    {
+    private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction) {
         if (color == 0xffff9999) color = -16777216;
 
         float f = x * stringFraction;
@@ -101,14 +96,12 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
         return (float) numerator / (float) denominator;
     }
 
-    private Vec3 getPlayerHandPos(Player player, float p_340872_, float partialTick)
-    {
+    private Vec3 getPlayerHandPos(Player player, float p_340872_, float partialTick) {
         int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
         ItemStack itemstack = player.getMainHandItem();
         if (!itemstack.is(ModItems.ROD.get())) i = -i;
 
-        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player)
-        {
+        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player) {
             double d4 = 960.0 / (double) this.entityRenderDispatcher.options.fov().get().intValue();
             Vec3 vec3 = this.entityRenderDispatcher
                     .camera
@@ -119,11 +112,10 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
                     .xRot(-p_340872_ * 0.7F);
             return player.getEyePosition(partialTick).add(vec3);
         }
-        else
-        {
+        else {
             float f = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot) * (float) (Math.PI / 180.0);
-            double d0 = (double) Mth.sin(f);
-            double d1 = (double) Mth.cos(f);
+            double d0 = Mth.sin(f);
+            double d1 = Mth.cos(f);
             float f1 = player.getScale();
             double d2 = (double) i * 0.35 * (double) f1;
             double d3 = 0.8 * (double) f1;
@@ -131,5 +123,4 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
             return player.getEyePosition(partialTick).add(-d1 * d2 - d0 * d3, (double) f2 - 0.45 * (double) f1, -d0 * d2 + d1 * d3);
         }
     }
-
 }

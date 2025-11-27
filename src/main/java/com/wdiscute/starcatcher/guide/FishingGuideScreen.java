@@ -8,8 +8,10 @@ import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
 import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
-import com.wdiscute.starcatcher.networkandcodecs.*;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
+import com.wdiscute.starcatcher.io.*;
+import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.Seasons;
+import com.wdiscute.starcatcher.io.network.ModPayloads;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
 import com.wdiscute.starcatcher.secretnotes.SecretNoteScreen;
 import net.minecraft.ChatFormatting;
@@ -34,13 +36,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class FishingGuideScreen extends Screen
-{
+public class FishingGuideScreen extends Screen {
     private static final ResourceLocation BACKGROUND_INDEX_FIRST = Starcatcher.rl("textures/gui/guide/background_index_first.png");
     private static final ResourceLocation BACKGROUND_INDEX_SECOND = Starcatcher.rl("textures/gui/guide/background_index_second.png");
     private static final ResourceLocation BACKGROUND_ENTRY = Starcatcher.rl("textures/gui/guide/background_entry.png");
@@ -120,8 +122,8 @@ public class FishingGuideScreen extends Screen
 
     private final ItemStack settings;
 
-    int uiX;
-    int uiY;
+    int leftPos;
+    int topPos;
 
     int imageWidth;
     int imageHeight;
@@ -156,8 +158,7 @@ public class FishingGuideScreen extends Screen
     TrophyProperties.RarityProgress legendary = TrophyProperties.RarityProgress.DEFAULT;
 
 
-    public enum Sort
-    {
+    public enum Sort {
         ALPHABETICAL_UP("gui.guide.sort.alphabetical_up"),
         ALPHABETICAL_DOWN("gui.guide.sort.alphabetical_down"),
         MOD_UP("gui.guide.sort.mod_up"),
@@ -203,13 +204,11 @@ public class FishingGuideScreen extends Screen
         }
     }
 
-    private void sortEntries()
-    {
+    private void sortEntries() {
         Sort sort = Config.SORT.get();
 
         //rarity
-        if (sort.equals(Sort.RARITY_DOWN) || sort.equals(Sort.RARITY_UP))
-        {
+        if (sort.equals(Sort.RARITY_DOWN) || sort.equals(Sort.RARITY_UP)) {
             List<FishProperties> entriesSorted = new ArrayList<>();
 
             entries.forEach(e -> {if (e.rarity().equals(FishProperties.Rarity.COMMON)) entriesSorted.add(e);});
@@ -223,15 +222,13 @@ public class FishingGuideScreen extends Screen
         }
 
         //alphabetical
-        if (sort.equals(Sort.ALPHABETICAL_DOWN) || sort.equals(Sort.ALPHABETICAL_UP))
-        {
+        if (sort.equals(Sort.ALPHABETICAL_DOWN) || sort.equals(Sort.ALPHABETICAL_UP)) {
             List<FishProperties> entriesSorted = new ArrayList<>();
             Map<String, FishProperties> map = new HashMap<>();
             List<String> entriesString = new ArrayList<>();
 
-            for (FishProperties fp : entries)
-            {
-                String path = fp.fish().unwrapKey().get().location().getPath();
+            for (FishProperties fp : entries) {
+                String path = ForgeRegistries.ITEMS.getKey(fp.fish()).getPath();
                 map.put(path, fp);
                 entriesString.add(path);
             }
@@ -245,8 +242,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //mod
-        if (sort.equals(Sort.MOD_DOWN) || sort.equals(Sort.MOD_UP))
-        {
+        if (sort.equals(Sort.MOD_DOWN) || sort.equals(Sort.MOD_UP)) {
             Config.SORT.set(Sort.ALPHABETICAL_UP);
             Config.SORT.save();
             sortEntries();
@@ -256,17 +252,15 @@ public class FishingGuideScreen extends Screen
             List<FishProperties> entriesSorted = new ArrayList<>();
             List<String> allNamespaces = new ArrayList<>();
 
-            for (FishProperties fp : entries)
-            {
-                String namespace = fp.fish().unwrapKey().get().location().getNamespace();
+            for (FishProperties fp : entries) {
+                String namespace = ForgeRegistries.ITEMS.getKey(fp.fish()).getNamespace();
                 if(!allNamespaces.contains(namespace)) allNamespaces.add(namespace);
             }
 
-            for (String s : allNamespaces)
-            {
+            for (String s : allNamespaces) {
                 for (FishProperties fp : entries)
                 {
-                    String namespace = fp.fish().unwrapKey().get().location().getNamespace();
+                    String namespace = ForgeRegistries.ITEMS.getKey(fp.fish()).getNamespace();
                     if(namespace.equals(s)) entriesSorted.add(fp);
                 }
 
@@ -277,8 +271,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //fluid
-        if (sort.equals(Sort.FLUID_DOWN) || sort.equals(Sort.FLUID_UP))
-        {
+        if (sort.equals(Sort.FLUID_DOWN) || sort.equals(Sort.FLUID_UP)) {
             Config.SORT.set(Sort.ALPHABETICAL_UP);
             Config.SORT.save();
             sortEntries();
@@ -287,14 +280,11 @@ public class FishingGuideScreen extends Screen
             List<FishProperties> entriesSorted = new ArrayList<>();
             List<FishProperties> entriesRemaining = new ArrayList<>(entries);
 
-            while (!entriesRemaining.isEmpty())
-            {
+            while (!entriesRemaining.isEmpty()) {
                 ResourceLocation rlBeingSorted = entriesRemaining.get(0).wr().fluids().get(0);
                 List<FishProperties> temp = new ArrayList<>(entriesRemaining);
-                temp.forEach(e ->
-                {
-                    if(e.wr().fluids().get(0).equals(rlBeingSorted))
-                    {
+                temp.forEach(e -> {
+                    if(e.wr().fluids().get(0).equals(rlBeingSorted)) {
                         entriesSorted.add(e);
                         entriesRemaining.remove(e);
                     }
@@ -306,8 +296,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //caught
-        if (sort.equals(Sort.CAUGHT_UP) || sort.equals(Sort.CAUGHT_DOWN))
-        {
+        if (sort.equals(Sort.CAUGHT_UP) || sort.equals(Sort.CAUGHT_DOWN)) {
             Config.SORT.set(Sort.ALPHABETICAL_UP);
             Config.SORT.save();
             sortEntries();
@@ -315,13 +304,10 @@ public class FishingGuideScreen extends Screen
             Config.SORT.save();
             List<FishProperties> entriesSorted = new ArrayList<>();
 
-            entries.forEach(fp ->
-            {
+            entries.forEach(fp -> {
                 FishCaughtCounter fcc = null;
-                for (FishCaughtCounter fccAll : fishCaughtCounterList)
-                {
-                    if (fp.equals(fccAll.fp()))
-                    {
+                for (FishCaughtCounter fccAll : fishCaughtCounterList) {
+                    if (fp.equals(fccAll.fp())) {
                         fcc = fccAll;
                         break;
                     }
@@ -331,13 +317,10 @@ public class FishingGuideScreen extends Screen
             });
 
 
-            entries.forEach(fp ->
-            {
+            entries.forEach(fp -> {
                 FishCaughtCounter fcc = null;
-                for (FishCaughtCounter fccAll : fishCaughtCounterList)
-                {
-                    if (fp.equals(fccAll.fp()))
-                    {
+                for (FishCaughtCounter fccAll : fishCaughtCounterList) {
+                    if (fp.equals(fccAll.fp())) {
                         fcc = fccAll;
                         break;
                     }
@@ -351,8 +334,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //SEASONS
-        if (sort.equals(Sort.SEASON_DOWN) || sort.equals(Sort.SEASON_UP))
-        {
+        if (sort.equals(Sort.SEASON_DOWN) || sort.equals(Sort.SEASON_UP)) {
             List<FishProperties> entriesSorted = new ArrayList<>();
             List<FishProperties> entriesUnsorted = new ArrayList<>(entries);
 
@@ -433,8 +415,7 @@ public class FishingGuideScreen extends Screen
     }
 
     @Override
-    protected void init()
-    {
+    protected void init() {
         super.init();
 
         entries = new ArrayList<>(999);
@@ -444,8 +425,8 @@ public class FishingGuideScreen extends Screen
         imageWidth = 420;
         imageHeight = 260;
 
-        uiX = (width - imageWidth) / 2;
-        uiY = (height - imageHeight) / 2;
+        leftPos = (width - imageWidth) / 2;
+        topPos = (height - imageHeight) / 2;
 
         level = Minecraft.getInstance().level;
         player = Minecraft.getInstance().player;
@@ -457,8 +438,7 @@ public class FishingGuideScreen extends Screen
             if (tp.trophyType() == TrophyProperties.TrophyType.TROPHY) trophiesTps.add(tp);
 
 
-        for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY))
-        {
+        for (TrophyProperties tp : level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY)) {
             if (tp.trophyType() == TrophyProperties.TrophyType.SECRET
                     && DataAttachments.get(player).trophiesCaught().contains(tp)) secretsTps.add(tp);
         }
@@ -474,8 +454,7 @@ public class FishingGuideScreen extends Screen
         epic = TrophyProperties.RarityProgress.DEFAULT;
         legendary = TrophyProperties.RarityProgress.DEFAULT;
 
-        for (FishCaughtCounter fcc : DataAttachments.get(player).fishesCaught())
-        {
+        for (FishCaughtCounter fcc : DataAttachments.get(player).fishesCaught()) {
             all = new TrophyProperties.RarityProgress(all.total() + fcc.count(), all.unique());
 
             if (fcc.fp().rarity() == FishProperties.Rarity.COMMON)
@@ -497,42 +476,35 @@ public class FishingGuideScreen extends Screen
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
-    {
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
         InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
-        if (this.minecraft.options.keyInventory.isActiveAndMatches(key))
-        {
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(key)) {
             this.onClose();
             return true;
         }
-
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button)
-    {
-        double x = mouseX - uiX;
-        double y = mouseY - uiY;
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        double x = mouseX - leftPos;
+        double y = mouseY - topPos;
 
         arrowIndexPressed = false;
         arrowNextPressed = false;
         arrowPreviousPressed = false;
 
         //previous arrow
-        if (x > 49 && x < 69 && y > 203 && y < 217)
-        {
+        if (x > 49 && x < 69 && y > 203 && y < 217) {
             //index <- previous page of index
-            if (menu == 0 && page != 0)
-            {
+            if (menu == 0 && page != 0) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 page--;
                 return true;
             }
 
             //help -> index
-            if (menu == 1 && page == 0)
-            {
+            if (menu == 1 && page == 0) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 menu = 0;
                 page = 0;
@@ -540,16 +512,14 @@ public class FishingGuideScreen extends Screen
             }
 
             //help -> previous help page
-            if (menu == 1)
-            {
+            if (menu == 1) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 page--;
                 return true;
             }
 
             //entries -> last page of help
-            if (menu == 2 && page == 0)
-            {
+            if (menu == 2 && page == 0) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 menu = 1;
                 page = MAX_HELP_PAGES;
@@ -557,8 +527,7 @@ public class FishingGuideScreen extends Screen
             }
 
             //entries -> previous entry
-            if (menu == 2)
-            {
+            if (menu == 2) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 page--;
                 return true;
@@ -567,19 +536,16 @@ public class FishingGuideScreen extends Screen
         }
 
         //next arrow
-        if (x > 336 && x < 356 && y > 202 && y < 216)
-        {
+        if (x > 336 && x < 356 && y > 202 && y < 216) {
             //index -> next page of index
-            if (menu == 0 && hasNextEntryPage)
-            {
+            if (menu == 0 && hasNextEntryPage) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 page++;
                 return true;
             }
 
             //index -> first page of help
-            if (menu == 0)
-            {
+            if (menu == 0) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 menu = 1;
                 page = 0;
@@ -587,16 +553,14 @@ public class FishingGuideScreen extends Screen
             }
 
             //help -> next page of help
-            if (menu == 1 && page != MAX_HELP_PAGES)
-            {
+            if (menu == 1 && page != MAX_HELP_PAGES) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 page++;
                 return true;
             }
 
             //index -> first page of help
-            if (menu == 1)
-            {
+            if (menu == 1) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 menu = 2;
                 page = 0;
@@ -604,16 +568,14 @@ public class FishingGuideScreen extends Screen
             }
 
             //entries -> next entry
-            if (menu == 2 && page <= entries.size() / 2 - 1)
-            {
+            if (menu == 2 && page <= entries.size() / 2 - 1) {
                 minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 page++;
                 return true;
             }
 
             //entries -> leaderboards??
-            if (menu == 2)
-            {
+            if (menu == 2) {
                 //minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
                 //currentMenu = 3;
                 //currentPage = 0;
@@ -622,28 +584,24 @@ public class FishingGuideScreen extends Screen
         }
 
         //index arrow
-        if (x > 174 && x < 196 && y > 202 && y < 216)
-        {
+        if (x > 174 && x < 196 && y > 202 && y < 216) {
             minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 0;
             page = 0;
             return true;
         }
 
-        if (button == 0)
-        {
+        if (button == 0) {
             clickedX = (int) mouseX;
             clickedY = (int) mouseY;
         }
-
         return super.mouseReleased(mouseX, mouseY, button);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
-    {
-        double x = mouseX - uiX;
-        double y = mouseY - uiY;
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        double x = mouseX - leftPos;
+        double y = mouseY - topPos;
 
         int numberOfRows = (fishInArea.size() - 1) / 7 + 1;
         //sort
@@ -651,8 +609,7 @@ public class FishingGuideScreen extends Screen
                 (x > 168 && x < 191 && y > 141 && y < 148 && numberOfRows == 2) ||
                 (x > 168 && x < 191 && y > 161 && y < 168 && numberOfRows == 3) ||
                 (x > 168 && x < 191 && y > 181 && y < 188 && numberOfRows == 4)
-        )
-        {
+        ) {
             if (button == 0) Config.SORT.set(Config.SORT.get().next());
             if (button == 1) Config.SORT.set(Config.SORT.get().previous());
             Config.SORT.save();
@@ -661,8 +618,7 @@ public class FishingGuideScreen extends Screen
 
 
         //previous arrow
-        if (x > 49 && x < 69 && y > 203 && y < 217)
-        {
+        if (x > 49 && x < 69 && y > 203 && y < 217) {
             if (!(menu == 0 && page == 0))
             {
                 arrowPreviousPressed = true;
@@ -670,8 +626,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //next arrow
-        if (x > 336 && x < 356 && y > 202 && y < 216)
-        {
+        if (x > 336 && x < 356 && y > 202 && y < 216) {
             if (page <= entries.size() / 2 - 1)
             {
                 arrowNextPressed = true;
@@ -679,8 +634,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //index arrow
-        if (x > 174 && x < 196 && y > 202 && y < 216)
-        {
+        if (x > 174 && x < 196 && y > 202 && y < 216) {
             arrowIndexPressed = true;
         }
 
@@ -688,16 +642,14 @@ public class FishingGuideScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
-    {
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
         //render settings screen
-        if (menu == -1)
-        {
+        if (menu == -1) {
             Minecraft.getInstance().setScreen(
                     new SettingsScreen(
-                            FishProperties.DEFAULT.withFish(ModItems.AURORA.getHolder().get()),
+                            FishProperties.DEFAULT.withFish(ModItems.AURORA.get()),
                             new ItemStack(ModItems.ROD.get()
                             )
                     ));
@@ -706,35 +658,31 @@ public class FishingGuideScreen extends Screen
 
 
         //render index
-        if (menu == 0)
-        {
+        if (menu == 0) {
             if (page == 0) renderImage(guiGraphics, BACKGROUND_INDEX_FIRST);
             else renderImage(guiGraphics, BACKGROUND_INDEX_SECOND);
             renderIndex(guiGraphics, mouseX, mouseY);
         }
 
         //render help page
-        if (menu == 1)
-        {
+        if (menu == 1) {
             renderImage(guiGraphics, BACKGROUND_BASICS);
             renderTheBasics(guiGraphics, mouseX, mouseY);
         }
 
         //render entries
-        if (menu == 2)
-        {
+        if (menu == 2) {
             renderImage(guiGraphics, BACKGROUND_ENTRY);
             renderEntry(guiGraphics, mouseX, mouseY, 52, page * 2);
             renderEntry(guiGraphics, mouseX, mouseY, 212, page * 2 + 1);
         }
 
 
-        double x = mouseX - uiX;
-        double y = mouseY - uiY;
+        double x = mouseX - leftPos;
+        double y = mouseY - topPos;
 
         //previous arrow and index should not render on first page of the book
-        if (!(menu == 0 && page == 0))
-        {
+        if (!(menu == 0 && page == 0)) {
             //previous arrow
             if (x > 49 && x < 69 && y > 203 && y < 217)
                 renderImage(guiGraphics, ARROW_PREVIOUS_HIGHLIGHT);
@@ -747,8 +695,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //next arrow
-        if (page <= entries.size() / 2 - 1)
-        {
+        if (page <= entries.size() / 2 - 1) {
             if (x > 336 && x < 356 && y > 202 && y < 216)
                 renderImage(guiGraphics, ARROW_NEXT_HIGHLIGHT);
             renderImage(guiGraphics, arrowNextPressed ? ARROW_NEXT_PRESSED : ARROW_NEXT);
@@ -758,37 +705,31 @@ public class FishingGuideScreen extends Screen
         clickedY = 0;
     }
 
-    private void renderHelpText(GuiGraphics guiGraphics)
-    {
-        for (int i = 0; i < 40; i++)
-        {
+    private void renderHelpText(GuiGraphics guiGraphics) {
+        for (int i = 0; i < 40; i++) {
             if (!I18n.exists("gui.guide.page" + page + ".left." + i)) break;
 
             Component comp = Tooltips.decodeTranslationKey("gui.guide.page" + page + ".left." + i).copy().withStyle(Style.EMPTY.withColor(0x635040));
-            guiGraphics.drawString(this.font, comp, uiX + 52, uiY + 10 * i + 13, 0xff000000, false);
+            guiGraphics.drawString(this.font, comp, leftPos + 52, topPos + 10 * i + 13, 0xff000000, false);
         }
 
-        for (int i = 0; i < 40; i++)
-        {
+        for (int i = 0; i < 40; i++) {
             if (!I18n.exists("gui.guide.page" + page + ".right." + i)) break;
             Component comp = Tooltips.decodeTranslationKey("gui.guide.page" + page + ".right." + i).copy().withStyle(Style.EMPTY.withColor(0x635040));
-            guiGraphics.drawString(this.font, comp, uiX + 213, uiY + 10 * i + 13, 0xff000000, false);
+            guiGraphics.drawString(this.font, comp, leftPos + 213, topPos + 10 * i + 13, 0xff000000, false);
         }
     }
 
-    private void renderItemWithOutlineAndHover(GuiGraphics guiGraphics, ItemStack is, int x, int y, int mouseX, int mouseY)
-    {
-        renderItem(is, uiX + x, uiY + y, 1);
+    private void renderItemWithOutlineAndHover(GuiGraphics guiGraphics, ItemStack is, int x, int y, int mouseX, int mouseY) {
+        renderItem(is, leftPos + x, topPos + y, 1);
         //0xffe4e0d8 : 0xffc6bdaf
-        guiGraphics.fill(uiX + x - 2, uiY + y - 2, uiX + x + 18, uiY + y + 18, 0xffb4a697);
-        if (mouseX > uiX + x - 2 && mouseX < uiX + x - 2 + 20 && mouseY > uiY + y - 2 - 2 && mouseY < uiY + y - 2 + 20)
+        guiGraphics.fill(leftPos + x - 2, topPos + y - 2, leftPos + x + 18, topPos + y + 18, 0xffb4a697);
+        if (mouseX > leftPos + x - 2 && mouseX < leftPos + x - 2 + 20 && mouseY > topPos + y - 2 - 2 && mouseY < topPos + y - 2 + 20)
             guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
     }
 
-    private void renderSecrets(GuiGraphics guiGraphics, int mouseX, int mouseY)
-    {
-        for (int i = 0; i < secretsTps.size(); i++)
-        {
+    private void renderSecrets(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        for (int i = 0; i < secretsTps.size(); i++) {
             int rowSize = Math.min(6, (secretsTps.size() - i / 6 * 6));
             int x = 70 - rowSize * 23 / 2;
 
@@ -796,8 +737,8 @@ public class FishingGuideScreen extends Screen
             int y = i / 6 * 25;
 
             //offset to page
-            xrender += uiX + 223;
-            y += uiY + 110;
+            xrender += leftPos + 223;
+            y += topPos + 110;
 
             TrophyProperties tp = secretsTps.get(i);
 
@@ -811,15 +752,12 @@ public class FishingGuideScreen extends Screen
             guiGraphics.renderOutline(xrender - 10, y - 2, 20, 20, 0xff000000);
             renderItem(is, xrender - 8, y, 1);
 
-            if (mouseX > xrender - 10 && mouseX < xrender + 10 && mouseY > y - 2 && mouseY < y + 18)
-            {
+            if (mouseX > xrender - 10 && mouseX < xrender + 10 && mouseY > y - 2 && mouseY < y + 18) {
                 guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
             }
 
-            if (clickedX > xrender - 10 && clickedX < xrender + 10 && clickedY > y - 2 && clickedY < y + 18)
-            {
-                if (is.getItem() instanceof NoteContainer nc)
-                {
+            if (clickedX > xrender - 10 && clickedX < xrender + 10 && clickedY > y - 2 && clickedY < y + 18) {
+                if (is.getItem() instanceof NoteContainer nc) {
                     Minecraft.getInstance().setScreen(new SecretNoteScreen(nc.note));
                 }
 
@@ -828,10 +766,8 @@ public class FishingGuideScreen extends Screen
         }
     }
 
-    private void renderTrophies(GuiGraphics guiGraphics, int mouseX, int mouseY)
-    {
-        for (int i = 0; i < trophiesTps.size(); i++)
-        {
+    private void renderTrophies(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        for (int i = 0; i < trophiesTps.size(); i++) {
             int rowSize = Math.min(6, (trophiesTps.size() - i / 6 * 6));
             int x = 60 - rowSize * 23 / 2;
 
@@ -839,27 +775,23 @@ public class FishingGuideScreen extends Screen
             int y = i / 6 * 25;
 
             //offset to page
-            xrender += uiX + 73;
-            y += uiY + 120;
+            xrender += leftPos + 73;
+            y += topPos + 120;
 
             TrophyProperties tp = trophiesTps.get(i);
 
             ItemStack is;
             boolean isMouseOnTop = mouseX > xrender - 10 && mouseX < xrender + 10 && mouseY > y - 2 && mouseY < y + 18;
-            if (DataAttachments.get(player).trophiesCaught().contains(tp))
-            {
+            if (DataAttachments.get(player).trophiesCaught().contains(tp)) {
                 is = new ItemStack(tp.fp().fish());
                 is.setHoverName(Component.literal(tp.customName()));
                 DataComponents.setTrophyProperties(is, tp);
-                if (isMouseOnTop)
-                {
+                if (isMouseOnTop) {
                     guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
                 }
             }
-            else
-            {
-                if (isMouseOnTop)
-                {
+            else {
+                if (isMouseOnTop) {
                     List<Component> list = new ArrayList<>(List.of(Component.literal("Requirements:")));
 
                     if (tp.all().total() != 0)
@@ -900,35 +832,30 @@ public class FishingGuideScreen extends Screen
             guiGraphics.renderOutline(xrender - 10, y - 2, 20, 20, 0xff000000);
             renderItem(is, xrender - 8, y, 1);
 
-
         }
     }
 
-    private void renderTheBasics(GuiGraphics guiGraphics, int mouseX, int mouseY)
-    {
+    private void renderTheBasics(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         renderHelpText(guiGraphics);
 
-        if (page == 0)
-        {
+        if (page == 0) {
             renderImage(guiGraphics, HELP_PAGE_1);
-            renderItem(basics, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.basics"), uiX + 80, uiY + 45, 0xff000000, false);
+            renderItem(basics, leftPos + 166, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.basics"), leftPos + 80, topPos + 45, 0xff000000, false);
         }
 
-        if (page == 1)
-        {
+        if (page == 1) {
             renderImage(guiGraphics, HELP_PAGE_2);
-            renderItem(treasures, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.treasures"), uiX + 80, uiY + 45, 0xff000000, false);
+            renderItem(treasures, leftPos + 166, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.treasures"), leftPos + 80, topPos + 45, 0xff000000, false);
         }
 
-        if (page == 2)
-        {
+        if (page == 2) {
             renderImage(guiGraphics, HELP_PAGE_3);
 
             //hooks
-            renderItem(ironHook, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.hooks"), uiX + 80, uiY + 45, 0xff000000, false);
+            renderItem(ironHook, leftPos + 166, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.hooks"), leftPos + 80, topPos + 45, 0xff000000, false);
 
             renderItemWithOutlineAndHover(guiGraphics, ironHook, 56, 157, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, goldHook, 84, 157, mouseX, mouseY);
@@ -942,8 +869,8 @@ public class FishingGuideScreen extends Screen
             renderItemWithOutlineAndHover(guiGraphics, stabHook, 163, 182, mouseX, mouseY);
 
             //bobbers
-            renderItem(frugalBobber, uiX + 321, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.bobbers"), uiX + 228, uiY + 45, 0xff000000, false);
+            renderItem(frugalBobber, leftPos + 321, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.bobbers"), leftPos + 228, topPos + 45, 0xff000000, false);
 
             renderItemWithOutlineAndHover(guiGraphics, creeperBobber, 220, 157, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, glitterBobber, 248, 157, mouseX, mouseY);
@@ -957,13 +884,12 @@ public class FishingGuideScreen extends Screen
             renderItemWithOutlineAndHover(guiGraphics, kimbeBobber, 329, 182, mouseX, mouseY);
         }
 
-        if (page == 3)
-        {
+        if (page == 3) {
             renderImage(guiGraphics, HELP_PAGE_4);
 
             //bait
-            renderItem(cherryBait, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.baits"), uiX + 80, uiY + 45, 0xff000000, false);
+            renderItem(cherryBait, leftPos + 166, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.baits"), leftPos + 80, topPos + 45, 0xff000000, false);
 
             renderItemWithOutlineAndHover(guiGraphics, cherryBait, 56, 157, mouseX, mouseY);
             renderItemWithOutlineAndHover(guiGraphics, lushBait, 94, 157, mouseX, mouseY);
@@ -976,36 +902,32 @@ public class FishingGuideScreen extends Screen
 
 
             //gadgets
-            renderItem(fishSpotter, uiX + 321, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.gadgets"), uiX + 228, uiY + 45, 0xff000000, false);
+            renderItem(fishSpotter, leftPos + 321, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.gadgets"), leftPos + 228, topPos + 45, 0xff000000, false);
             renderItemWithOutlineAndHover(guiGraphics, fishSpotter, 276, 170, mouseX, mouseY);
         }
 
-        if (page == 4)
-        {
+        if (page == 4) {
             renderImage(guiGraphics, HELP_PAGE_5);
 
             //trophies
-            renderItem(trophies, uiX + 166, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.trophies"), uiX + 80, uiY + 45, 0xff000000, false);
+            renderItem(trophies, leftPos + 166, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.trophies"), leftPos + 80, topPos + 45, 0xff000000, false);
             renderTrophies(guiGraphics, mouseX, mouseY);
 
-            renderItem(secrets, uiX + 321, uiY + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.secrets"), uiX + 228, uiY + 45, 0xff000000, false);
+            renderItem(secrets, leftPos + 321, topPos + 39, 1);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.secrets"), leftPos + 228, topPos + 45, 0xff000000, false);
             renderSecrets(guiGraphics, mouseX, mouseY);
         }
     }
 
 
-    private void renderTheBasicsIndex(GuiGraphics guiGraphics, ItemStack is, int x, int y, int mouseX, int mouseY, String translationKey, int pageNr)
-    {
+    private void renderTheBasicsIndex(GuiGraphics guiGraphics, ItemStack is, int x, int y, int mouseX, int mouseY, String translationKey, int pageNr) {
         renderItem(is, x, y, 1);
-        if (mouseX > x - 2 && mouseX < x + 17 && mouseY > y - 2 && mouseY < y + 17)
-        {
+        if (mouseX > x - 2 && mouseX < x + 17 && mouseY > y - 2 && mouseY < y + 17) {
             guiGraphics.renderTooltip(this.font, Component.translatable(translationKey), mouseX, mouseY);
         }
-        if (clickedX > x - 2 && clickedX < x + 17 && clickedY > y - 2 && clickedY < y + 17)
-        {
+        if (clickedX > x - 2 && clickedX < x + 17 && clickedY > y - 2 && clickedY < y + 17) {
             minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 1;
             page = pageNr;
@@ -1013,10 +935,9 @@ public class FishingGuideScreen extends Screen
         }
     }
 
-    private void renderIndex(GuiGraphics guiGraphics, int mouseX, int mouseY)
-    {
-        int topLeftCorner = uiX + 53;
-        int y = uiY + 47;
+    private void renderIndex(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        int topLeftCorner = leftPos + 53;
+        int y = topPos + 47;
 
         int columnNumber = -1;
         int rowNumber = -1;
@@ -1024,8 +945,7 @@ public class FishingGuideScreen extends Screen
 
         hasNextEntryPage = false;
 
-        if (page == 0)
-        {
+        if (page == 0) {
             int auxX = topLeftCorner + 2;
 
             //all about fishing
@@ -1061,8 +981,7 @@ public class FishingGuideScreen extends Screen
         //render fishes in area
         rowNumber = 2;
 
-        for (FishProperties fp : fishInArea)
-        {
+        for (FishProperties fp : fishInArea) {
             columnNumber++;
             if (columnNumber > 6)
             {
@@ -1084,21 +1003,19 @@ public class FishingGuideScreen extends Screen
         }
 
         //render decorations and stuff
-        if (page == 0)
-        {
+        if (page == 0) {
             if (fishInArea.size() > 6) renderImage(guiGraphics, FISHES_IN_AREA_TOP_RIGHT_DECORATION);
 
             int numberOfRows = (fishInArea.size() - 1) / 7 + 1;
 
-            int x = mouseX - uiX;
-            int y2 = mouseY - uiY;
+            int x = mouseX - leftPos;
+            int y2 = mouseY - topPos;
 
             if ((x > 168 && x < 191 && y2 > 121 && y2 < 128 && numberOfRows == 1) ||
                     (x > 168 && x < 191 && y2 > 141 && y2 < 148 && numberOfRows == 2) ||
                     (x > 168 && x < 191 && y2 > 161 && y2 < 168 && numberOfRows == 3) ||
                     (x > 168 && x < 191 && y2 > 181 && y2 < 188 && numberOfRows == 4)
-            )
-            {
+            ) {
                 guiGraphics.renderTooltip(this.font, Component.translatable(Config.SORT.get().getTranslationKey()), mouseX, mouseY);
             }
 
@@ -1116,8 +1033,7 @@ public class FishingGuideScreen extends Screen
         columnNumber = -1;
         rowNumber++;
 
-        if (rowNumber > 6)
-        {
+        if (rowNumber > 6) {
             rowNumber = 0;
             semiPageNumber++;
         }
@@ -1125,8 +1041,7 @@ public class FishingGuideScreen extends Screen
         //render all fishes
         rowNumber++;
 
-        for (FishProperties fp : entries)
-        {
+        for (FishProperties fp : entries) {
             columnNumber++;
             if (columnNumber > 6)
             {
@@ -1150,25 +1065,21 @@ public class FishingGuideScreen extends Screen
         if (semiPageNumber > 1) hasNextEntryPage = true;
     }
 
-    private void renderFishIndex(GuiGraphics guiGraphics, int xOffset, int yOffset, int mouseX, int mouseY, FishProperties fp, int backgroundFillColor)
-    {
+    private void renderFishIndex(GuiGraphics guiGraphics, int xOffset, int yOffset, int mouseX, int mouseY, FishProperties fp, int backgroundFillColor) {
         List<FishCaughtCounter> fishCounterList = DataAttachments.get(player).fishesCaught();
         ItemStack is = new ItemStack(fp.fish());
 
         //calculate caught counter
         int caught = 0;
-        for (FishCaughtCounter f : fishCounterList)
-        {
-            if (fp.equals(f.fp()))
-            {
+        for (FishCaughtCounter f : fishCounterList) {
+            if (fp.equals(f.fp())) {
                 caught = f.count();
                 break;
             }
         }
 
         //handle click
-        if (clickedX > xOffset - 3 && clickedX < xOffset + 21 - 3 && clickedY > yOffset - 3 && clickedY < yOffset + 21 - 3)
-        {
+        if (clickedX > xOffset - 3 && clickedX < xOffset + 21 - 3 && clickedY > yOffset - 3 && clickedY < yOffset + 21 - 3) {
             minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = 2;
             page = entries.indexOf(fp) / 2;
@@ -1178,14 +1089,12 @@ public class FishingGuideScreen extends Screen
         guiGraphics.fill(xOffset - 1, yOffset - 1, xOffset + 17, yOffset + 17, backgroundFillColor);
 
         //glow color
-        switch (fp.rarity())
-        {
+        switch (fp.rarity()) {
             case COMMON -> guiGraphics.setColor(1, 1, 1, 0);
             case UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
             case RARE -> guiGraphics.setColor(0.2f, 0.4f, 0.7f, 0.7f);
             case EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
-            case LEGENDARY ->
-            {
+            case LEGENDARY -> {
                 Color color = Color.getHSBColor(Tooltips.hue * 2, 1, 1);
                 float r = (float) color.getRed() / 255;
                 float g = (float) color.getGreen() / 255;
@@ -1210,27 +1119,23 @@ public class FishingGuideScreen extends Screen
             renderItem(new ItemStack(ModItems.MISSINGNO.get()), xOffset, yOffset, 1);
 
         //render fish notification icon
-        for (FishProperties fpNotif : DataAttachments.get(player).fishNotifications())
-        {
+        for (FishProperties fpNotif : DataAttachments.get(player).fishNotifications()) {
             if (fp.equals(fpNotif))
                 guiGraphics.blit(STAR, xOffset + 10, yOffset + 7, 0, 0, 10, 10, 10, 10);
         }
 
         //render tooltip
-        if (mouseX > xOffset - 3 && mouseX < xOffset + 21 - 3 && mouseY > yOffset - 3 && mouseY < yOffset + 21 - 3)
-        {
+        if (mouseX > xOffset - 3 && mouseX < xOffset + 21 - 3 && mouseY > yOffset - 3 && mouseY < yOffset + 21 - 3) {
             List<Component> components = new ArrayList<>();
 
-            if (caught == 0)
-            {
+            if (caught == 0) {
                 components.add(Component.translatable("gui.guide.not_caught_fish_name"));
                 components.add(Tooltips.decodeTranslationKey("gui.guide.rarity." + fp.rarity().getSerializedName()));
                 components.add(Component.translatable("gui.guide.not_caught_yet").withStyle(Style.EMPTY.withColor(0xa34536)));
             }
-            else
-            {
+            else {
                 if (fp.customName().isEmpty())
-                    components.add(Component.translatable(fp.fish().value().getDescriptionId()));
+                    components.add(Component.translatable(fp.fish().getDescriptionId()));
                 else
                     components.add(Component.translatable("item.starcatcher." + fp.customName()));
 
@@ -1238,43 +1143,30 @@ public class FishingGuideScreen extends Screen
                 components.add(Component.translatable("gui.guide.caught").append(Component.literal(" [" + caught + "]")).withStyle(Style.EMPTY.withColor(0x40752c)));
             }
 
-            if(ModList.get().isLoaded("sereneseasons"))
-            {
+            if(ModList.get().isLoaded("sereneseasons")) {
                 if(SereneSeasonsCompat.canCatch(fp, level))
-                {
                     components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
-                }
                 else
-                {
                     components.add(Component.translatable("gui.guide.seasons.not_in_season").withStyle(Style.EMPTY.withColor(0xa34536)));
-                }
             }
 
-            if(ModList.get().isLoaded("eclipticseasons"))
-            {
+            if(ModList.get().isLoaded("eclipticseasons")) {
                 if(EclipticSeasonsCompat.canCatch(fp, level))
-                {
                     components.add(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(0x40752c)));
-                }
                 else
-                {
                     components.add(Component.translatable("gui.guide.seasons.not_in_season").withStyle(Style.EMPTY.withColor(0xa34536)));
-                }
             }
-
 
             guiGraphics.renderTooltip(this.font, components, Optional.empty(), mouseX, mouseY);
         }
-
     }
 
-    private void renderEntry(GuiGraphics guiGraphics, int mouseX, int mouseY, int xOffset, int entry)
-    {
+    private void renderEntry(GuiGraphics guiGraphics, int mouseX, int mouseY, int xOffset, int entry) {
 
         if (level == null) level = getMinecraft().level;
 
-        double x = mouseX - uiX;
-        double y = mouseY - uiY;
+        double x = mouseX - leftPos;
+        double y = mouseY - topPos;
 
         if (entries.size() <= entry) return;
 
@@ -1285,10 +1177,8 @@ public class FishingGuideScreen extends Screen
 
         //get fishCaughtCount
         FishCaughtCounter fcc = null;
-        for (FishCaughtCounter fccAll : fishCaughtCounterList)
-        {
-            if (fp.equals(fccAll.fp()))
-            {
+        for (FishCaughtCounter fccAll : fishCaughtCounterList) {
+            if (fp.equals(fccAll.fp())) {
                 fcc = fccAll;
                 break;
             }
@@ -1298,38 +1188,34 @@ public class FishingGuideScreen extends Screen
         //caught:
         guiGraphics.drawString(
                 this.font, Component.translatable("gui.guide.caught"),
-                uiX + xOffset + 73, uiY + 68, 0x9c897c, false);
+                leftPos + xOffset + 73, topPos + 68, 0x9c897c, false);
 
         //render caught count
-        if (fcc == null)
-        {
+        if (fcc == null) {
             //------
             guiGraphics.drawString(
                     this.font, Component.translatable("gui.guide.not_caught"),
-                    uiX + xOffset + 73, uiY + 78, 0x9c897c, false);
+                    leftPos + xOffset + 73, topPos + 78, 0x9c897c, false);
         }
-        else
-        {
+        else {
             //[324]
             Component c = Component.literal("[" + fcc.count() + "]").withStyle(Style.EMPTY.withColor(0x635040));
-            guiGraphics.drawString(this.font, Component.empty().append(c), uiX + xOffset + 73, uiY + 78, 0, false);
+            guiGraphics.drawString(this.font, Component.empty().append(c), leftPos + xOffset + 73, topPos + 78, 0, false);
         }
 
         //render rarity (always shown)
         //rarity:
         guiGraphics.drawString(
                 this.font, Component.translatable("gui.guide.rarity"),
-                uiX + xOffset + 73, uiY + 90, 0x9c897c, false);
+                leftPos + xOffset + 73, topPos + 90, 0x9c897c, false);
         //common
         guiGraphics.drawString(
                 this.font, Tooltips.decodeTranslationKey("gui.guide.rarity." + fp.rarity().getSerializedName()),
-                uiX + xOffset + 73, uiY + 100, 0, false);
+                leftPos + xOffset + 73, topPos + 100, 0, false);
 
 
         //render seasons
-        if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"))
-        {
-
+        if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) {
             int seasonX = 79;
             int seasonY = 48;
             int spacing = 15;
@@ -1338,78 +1224,68 @@ public class FishingGuideScreen extends Screen
 
             //spring
             if (U.containsAny(seasons, Seasons.ALL, Seasons.SPRING, Seasons.EARLY_SPRING, Seasons.MID_SPRING, Seasons.LATE_SPRING))
-                guiGraphics.blit(SEASONS, uiX + xOffset + seasonX, uiY + seasonY, 8, 8, 0, 0, 8, 8, 32, 8);
+                guiGraphics.blit(SEASONS, leftPos + xOffset + seasonX, topPos + seasonY, 8, 8, 0, 0, 8, 8, 32, 8);
 
             //summer
             if (U.containsAny(seasons, Seasons.ALL, Seasons.SUMMER, Seasons.EARLY_SUMMER, Seasons.MID_SUMMER, Seasons.LATE_SUMMER))
-                guiGraphics.blit(SEASONS, uiX + xOffset + seasonX + spacing * 1, uiY + seasonY, 8, 8, 8, 0, 8, 8, 32, 8);
+                guiGraphics.blit(SEASONS, leftPos + xOffset + seasonX + spacing * 1, topPos + seasonY, 8, 8, 8, 0, 8, 8, 32, 8);
 
             //autumn
             if (U.containsAny(seasons, Seasons.ALL, Seasons.AUTUMN, Seasons.EARLY_AUTUMN, Seasons.MID_AUTUMN, Seasons.LATE_AUTUMN))
-                guiGraphics.blit(SEASONS, uiX + xOffset + seasonX + spacing * 2, uiY + seasonY, 8, 8, 16, 0, 8, 8, 32, 8);
+                guiGraphics.blit(SEASONS, leftPos + xOffset + seasonX + spacing * 2, topPos + seasonY, 8, 8, 16, 0, 8, 8, 32, 8);
 
             //winter
             if (U.containsAny(seasons, Seasons.ALL, Seasons.WINTER, Seasons.EARLY_WINTER, Seasons.MID_WINTER, Seasons.LATE_WINTER))
-                guiGraphics.blit(SEASONS, uiX + xOffset + seasonX + spacing * 3, uiY + seasonY, 8, 8, 24, 0, 8, 8, 32, 8);
+                guiGraphics.blit(SEASONS, leftPos + xOffset + seasonX + spacing * 3, topPos + seasonY, 8, 8, 24, 0, 8, 8, 32, 8);
 
 
-            if (x > xOffset + 70 && x < xOffset + 140 && y > 46 && y < 57)
-            {
+            if (x > xOffset + 70 && x < xOffset + 140 && y > 46 && y < 57) {
                 List<Component> seasonsComp = new ArrayList<>();
                 seasonsComp.add(Component.translatable("gui.guide.seasons"));
 
-                if(fp.wr().seasons().contains(Seasons.ALL))
-                {
+                if(fp.wr().seasons().contains(Seasons.ALL)) {
                     seasonsComp.add(Component.translatable("gui.guide.seasons.all"));
                 }
-                else
-                {
+                else {
                     for (Seasons s : seasons) seasonsComp.add(Component.translatable("desc.sereneseasons." + s.getSerializedName()));
 
                 }
                 guiGraphics.renderTooltip(this.font, seasonsComp, Optional.empty(),  mouseX, mouseY);
             }
-
         }
-
 
         guiGraphics.drawString(
                 this.font, Component.translatable("gui.guide.rarity"),
-                uiX + xOffset + 73, uiY + 90, 0x9c897c, false);
-
+                leftPos + xOffset + 73, topPos + 90, 0x9c897c, false);
 
         //render fish name
-        if (fcc == null)
-        {
+        if (fcc == null) {
             guiGraphics.drawString(
                     this.font, Component.translatable("gui.guide.not_caught_fish_name"),
-                    uiX + xOffset + 30, uiY + 36, 0x635040, false);
+                    leftPos + xOffset + 30, topPos + 36, 0x635040, false);
         }
-        else
-        {
+        else {
             MutableComponent compName;
             if (fp.customName().isEmpty())
-                compName = Component.translatable(fp.fish().value().getDescriptionId());
+                compName = Component.translatable(fp.fish().getDescriptionId());
             else
                 compName = Component.translatable("item.starcatcher." + fp.customName());
 
             //todo fix this holy shit this has to be the worse hard coded offset possible omg wd why did you code it like this
             if (xOffset > 200)
-                guiGraphics.drawString(this.font, compName, uiX + xOffset + 15, uiY + 36, 0x635040, false);
+                guiGraphics.drawString(this.font, compName, leftPos + xOffset + 15, topPos + 36, 0x635040, false);
             else
-                guiGraphics.drawString(this.font, compName, uiX + xOffset + 30, uiY + 36, 0x635040, false);
+                guiGraphics.drawString(this.font, compName, leftPos + xOffset + 30, topPos + 36, 0x635040, false);
         }
 
         //render fish
-        if (fcc != null) renderItem(is, uiX + xOffset + 26, uiY + 70);
-        switch (fp.rarity())
-        {
+        if (fcc != null) renderItem(is, leftPos + xOffset + 26, topPos + 70);
+        switch (fp.rarity()) {
             case COMMON -> guiGraphics.setColor(1, 1, 1, 1);
             case UNCOMMON -> guiGraphics.setColor(0.7f, 1, 0.7f, 1);
             case RARE -> guiGraphics.setColor(0.2f, 0.4f, 0.7f, 0.7f);
             case EPIC -> guiGraphics.setColor(1f, 0, 1f, 0.5f);
-            case LEGENDARY ->
-            {
+            case LEGENDARY -> {
 
                 Color color = Color.getHSBColor(Tooltips.hue, 1, 1);
                 float r = (float) color.getRed() / 255;
@@ -1423,7 +1299,7 @@ public class FishingGuideScreen extends Screen
         //render glow
         RenderSystem.enableBlend();
         if (fcc != null) guiGraphics.blit(
-                GLOW, uiX + xOffset + 10, uiY + 55,
+                GLOW, leftPos + xOffset + 10, topPos + 55,
                 0, 0, 48, 48, 48, 48);
         RenderSystem.disableBlend();
         guiGraphics.setColor(1, 1, 1, 1);
@@ -1433,14 +1309,12 @@ public class FishingGuideScreen extends Screen
             renderImage(guiGraphics, NEW_FISH, xOffset - 52, 0);
 
         //render fish tooltip
-        if (mouseX > uiX + xOffset + 0 && mouseX < uiX + xOffset + 65 && mouseY > uiY + 45 && mouseY < uiY + 110 && fcc != null)
-        {
+        if (mouseX > leftPos + xOffset + 0 && mouseX < leftPos + xOffset + 65 && mouseY > topPos + 45 && mouseY < topPos + 110 && fcc != null) {
             guiGraphics.renderTooltip(this.font, is, mouseX, mouseY);
         }
 
         //render stats tooltip
-        if (mouseX > uiX + xOffset + 66 && mouseX < uiX + xOffset + 140 && mouseY > uiY + 57 && mouseY < uiY + 110 && fcc != null)
-        {
+        if (mouseX > leftPos + xOffset + 66 && mouseX < leftPos + xOffset + 140 && mouseY > topPos + 57 && mouseY < topPos + 110 && fcc != null) {
             List<Component> components = new ArrayList<>();
             float averageTicks = (int) ((fcc.averageTicks() / 20) * 100) / 100.0f;
 
@@ -1463,30 +1337,24 @@ public class FishingGuideScreen extends Screen
         {
             Component comp;
 
-            if (fp.wr().dims().isEmpty())
-            {
+            if (fp.wr().dims().isEmpty()) {
                 comp = Component.translatable("gui.guide.no_restriction");
             }
-            else
-            {
-                //if theres only one dimension
-                if (fp.wr().dims().size() == 1)
-                {
+            else {
+                //if there's only one dimension
+                if (fp.wr().dims().size() == 1) {
                     comp = Component.translatable("dimension." + fp.wr().dims().get(0).toLanguageKey());
                 }
-                else
-                {
+                else {
                     comp = Component.translatable("gui.guide.hover");
 
                     //show tooltip while hovering
-                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
-                    {
+                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10) {
                         List<Component> c = new ArrayList<>();
 
                         c.add(Component.translatable("gui.guide.dimensions"));
 
-                        for (int i = 0; i < fp.wr().dims().size(); i++)
-                        {
+                        for (int i = 0; i < fp.wr().dims().size(); i++) {
                             c.add(Component.translatable("dimension." + fp.wr().dims().get(i).toLanguageKey()));
                         }
                         guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
@@ -1494,43 +1362,34 @@ public class FishingGuideScreen extends Screen
                 }
             }
 
-            if (fp.wr().dims().isEmpty())
-            {
+            if (fp.wr().dims().isEmpty()) {
                 comp = comp.copy().withStyle(Style.EMPTY.withColor(0x40752c));
             }
-            else
-            {
+            else {
                 if (fp.wr().dims().contains(level.dimension().location()))
-                {
                     comp = comp.copy().withStyle(Style.EMPTY.withColor(0x40752c));
-                }
                 else
-                {
                     comp = comp.copy().withStyle(Style.EMPTY.withColor(0xa34536));
-                }
             }
 
 
             Component start = Component.translatable("gui.guide.dimension");
 
-            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0x635040, false);
+            guiGraphics.drawString(this.font, start.copy().append(comp), leftPos + xOffset, topPos + yOffset, 0x635040, false);
         }
 
         //dimension blacklist
         {
-            if (!fp.wr().dimsBlacklist().isEmpty())
-            {
-                guiGraphics.drawString(this.font, Component.literal("[!]").withStyle(Style.EMPTY.withColor(0xa34536)), uiX + xOffset + 160, uiY + yOffset, 0, false);
+            if (!fp.wr().dimsBlacklist().isEmpty()) {
+                guiGraphics.drawString(this.font, Component.literal("[!]").withStyle(Style.EMPTY.withColor(0xa34536)), leftPos + xOffset + 160, topPos + yOffset, 0, false);
 
                 //show tooltip while hovering
-                if (x > xOffset + 155 && x < xOffset + 175 && y > yOffset - 4 && y < yOffset + 12)
-                {
+                if (x > xOffset + 155 && x < xOffset + 175 && y > yOffset - 4 && y < yOffset + 12) {
                     List<Component> c = new ArrayList<>();
 
                     c.add(Component.translatable("gui.guide.blacklisted_dimensions"));
 
-                    for (int i = 0; i < fp.wr().dimsBlacklist().size(); i++)
-                    {
+                    for (int i = 0; i < fp.wr().dimsBlacklist().size(); i++) {
                         c.add(Component.literal(fp.wr().dimsBlacklist().get(i).toString()));
                     }
                     guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
@@ -1545,35 +1404,28 @@ public class FishingGuideScreen extends Screen
         //biome:
         {
             MutableComponent comp;
-            if (biomes.isEmpty())
-            {
+            if (biomes.isEmpty()) {
                 comp = Component.translatable("gui.guide.no_restriction");
             }
-            else
-            {
-                //if theres only one biome
-                if (biomes.size() == 1)
-                {
+            else {
+                //if there's only one biome
+                if (biomes.size() == 1) {
                     comp = Component.translatable("biome." + biomes.get(0).toLanguageKey());
                 }
-                else if (fp.wr().biomesTags().size() == 1)
-                {
+                else if (fp.wr().biomesTags().size() == 1) {
                     comp = Component.translatable("tag." + fp.wr().biomesTags().get(0).toLanguageKey());
 
                     //show tooltip while hovering
-                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
-                    {
+                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10) {
                         List<Component> c = new ArrayList<>();
 
-                        if (!fp.wr().biomesTags().isEmpty())
-                        {
+                        if (!fp.wr().biomesTags().isEmpty()) {
                             c.add(Component.translatable("gui.guide.biome_tags").withStyle(Style.EMPTY.withBold(true)));
 
                             for (ResourceLocation rl : fp.wr().biomesTags())
                                 c.add(Component.translatable("tag." + rl.toLanguageKey()));
                             c.add(Component.empty());
                         }
-
 
                         c.add(Component.translatable("gui.guide.biomes").withStyle(Style.EMPTY.withBold(true)));
 
@@ -1583,18 +1435,15 @@ public class FishingGuideScreen extends Screen
                         guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
                     }
                 }
-                else
-                {
+                else {
                     comp = Component.translatable("gui.guide.hover");
 
                     //show tooltip while hovering
-                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
-                    {
+                    if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10) {
                         List<Component> c = new ArrayList<>();
                         c.add(Component.translatable("gui.guide.biome"));
 
-                        for (ResourceLocation rl : biomes)
-                        {
+                        for (ResourceLocation rl : biomes) {
                             c.add(Component.translatable("biome." + rl.toLanguageKey()));
                         }
 
@@ -1603,39 +1452,33 @@ public class FishingGuideScreen extends Screen
                 }
             }
 
-
             ResourceLocation rl = ResourceLocation.parse(level.getBiome(Minecraft.getInstance().player.blockPosition()).unwrapKey().get().location().toString());
 
             comp = comp.copy().withStyle(Style.EMPTY.withColor(0x40752c));
 
-            if (!biomes.contains(rl) && !biomes.isEmpty())
-            {
+            if (!biomes.contains(rl) && !biomes.isEmpty()) {
                 comp = comp.copy().withStyle(Style.EMPTY.withColor(0xa34536));
             }
 
-            if (biomesBL.contains(rl))
-            {
+            if (biomesBL.contains(rl)) {
                 comp = comp.copy().withStyle(Style.EMPTY.withColor(0xa34536));
             }
 
             Component start = Component.translatable("gui.guide.biome");
 
-            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0x635040, false);
+            guiGraphics.drawString(this.font, start.copy().append(comp), leftPos + xOffset, topPos + yOffset, 0x635040, false);
         }
 
         //biome blacklist
         {
-            if (!biomesBL.isEmpty())
-            {
-                guiGraphics.drawString(this.font, Component.literal("[!]").withStyle(Style.EMPTY.withColor(0xa34536)), uiX + xOffset + 130, uiY + yOffset - 1, 0, false);
+            if (!biomesBL.isEmpty()) {
+                guiGraphics.drawString(this.font, Component.literal("[!]").withStyle(Style.EMPTY.withColor(0xa34536)), leftPos + xOffset + 130, topPos + yOffset - 1, 0, false);
 
                 //show tooltip while hovering
-                if (x > xOffset + 129 && x < xOffset + 140 && y > yOffset - 3 && y < yOffset + 8)
-                {
+                if (x > xOffset + 129 && x < xOffset + 140 && y > yOffset - 3 && y < yOffset + 8) {
                     List<Component> c = new ArrayList<>();
 
-                    if (!fp.wr().biomesBlacklistTags().isEmpty())
-                    {
+                    if (!fp.wr().biomesBlacklistTags().isEmpty()) {
                         c.add(Component.translatable("gui.guide.blacklisted_biome_tags").withStyle(Style.EMPTY.withBold(true)));
 
                         for (ResourceLocation rl : fp.wr().biomesBlacklistTags())
@@ -1655,41 +1498,36 @@ public class FishingGuideScreen extends Screen
 
         yOffset += 12;
 
-        if (fp.br().correctBait().isEmpty())
-        {
+        if (fp.br().correctBait().isEmpty()) {
             guiGraphics.drawString(
                     this.font,
                     Component.translatable("gui.guide.bait").append(Component.translatable("gui.guide.no_restriction")),
-                    uiX + xOffset, uiY + yOffset, 0x635040, false);
+                    leftPos + xOffset, topPos + yOffset, 0x635040, false);
         }
-        else
-        {
+        else {
             ItemStack bait = new ItemStack(BuiltInRegistries.ITEM.get(fp.br().correctBait().get(0)));
             int bonus = fp.br().correctBaitChanceAdded() / fp.baseChance() * 100;
             Component extra = Component.literal(" (+" + bonus + "%)");
 
-            if (bait.is(ModItems.LEGENDARY_BAIT.get()))
-            {
+            if (bait.is(ModItems.LEGENDARY_BAIT.get())) {
                 guiGraphics.drawString(
                         this.font,
                         Component.translatable("gui.guide.bait")
                                 .append(Tooltips.RGBEachLetter(I18n.get(bait.getDescriptionId())))
                                 .append(extra),
-                        uiX + xOffset, uiY + yOffset, 0x635040, false);
+                        leftPos + xOffset, topPos + yOffset, 0x635040, false);
             }
-            else
-            {
+            else {
                 guiGraphics.drawString(
                         this.font,
                         Component.translatable("gui.guide.bait")
                                 .append(Component.translatable(bait.getDescriptionId()))
                                 .append(extra),
-                        uiX + xOffset, uiY + yOffset, 0x635040, false);
+                        leftPos + xOffset, topPos + yOffset, 0x635040, false);
             }
 
 
-            if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
-            {
+            if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10) {
                 guiGraphics.renderTooltip(this.font, bait, mouseX, mouseY);
             }
         }
@@ -1701,31 +1539,26 @@ public class FishingGuideScreen extends Screen
         {
             Component comp;
 
-            if (fp.weather() == FishProperties.Weather.ALL)
-            {
+            if (fp.weather() == FishProperties.Weather.ALL) {
                 comp = Component.translatable("gui.guide.no_restriction").withStyle(Style.EMPTY.withColor(0x635040));
             }
-            else
-            {
+            else {
                 comp = Component.translatable("gui.guide.no_restriction");
-                if (fp.weather() == FishProperties.Weather.RAIN)
-                {
+                if (fp.weather() == FishProperties.Weather.RAIN) {
                     if (level.getRainLevel(0) > 0.5)
                         comp = Component.translatable("gui.guide.raining").withStyle(Style.EMPTY.withColor(0x40752c));
                     else
                         comp = Component.translatable("gui.guide.raining").withStyle(Style.EMPTY.withColor(0xa34536));
                 }
 
-                if (fp.weather() == FishProperties.Weather.THUNDER)
-                {
+                if (fp.weather() == FishProperties.Weather.THUNDER) {
                     if (level.getThunderLevel(0) > 0.5)
                         comp = Component.translatable("gui.guide.thundering").withStyle(Style.EMPTY.withColor(0x40752c));
                     else
                         comp = Component.translatable("gui.guide.thundering").withStyle(Style.EMPTY.withColor(0xa34536));
                 }
 
-                if (fp.weather() == FishProperties.Weather.CLEAR)
-                {
+                if (fp.weather() == FishProperties.Weather.CLEAR) {
                     if (level.getRainLevel(0) > 0.5 || level.getThunderLevel(0) > 0.5)
                         comp = Component.translatable("gui.guide.clear").withStyle(Style.EMPTY.withColor(0xa34536));
                     else
@@ -1735,62 +1568,51 @@ public class FishingGuideScreen extends Screen
 
             Component start = Component.translatable("gui.guide.weather");
 
-            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0x635040, false);
+            guiGraphics.drawString(this.font, start.copy().append(comp), leftPos + xOffset, topPos + yOffset, 0x635040, false);
 
         }
 
-
         yOffset += 12;
-
 
         //daytime
         {
             Component comp;
 
-            if (fp.daytime() == FishProperties.Daytime.ALL)
-            {
+            if (fp.daytime() == FishProperties.Daytime.ALL) {
                 comp = Component.translatable("gui.guide.no_restriction").withStyle(Style.EMPTY.withColor(0x635040));
             }
-            else
-            {
+            else {
                 long time = level.getDayTime() % 24000;
 
-                comp = switch (fp.daytime())
-                {
+                comp = switch (fp.daytime()) {
                     case DAY:
                         if (!(time > 23000 || time < 12700))
                             yield Component.translatable("gui.guide.day").withStyle(Style.EMPTY.withColor(0xa34536));
                         else
                             yield Component.translatable("gui.guide.day").withStyle(Style.EMPTY.withColor(0x40752c));
-
                     case NOON:
                         if (!(time > 3500 && time < 8500))
                             yield Component.translatable("gui.guide.noon").withStyle(Style.EMPTY.withColor(0xa34536));
                         else
                             yield Component.translatable("gui.guide.noon").withStyle(Style.EMPTY.withColor(0x40752c));
-
                     case NIGHT:
                         if (!(time < 23000 && time > 12700))
                             yield Component.translatable("gui.guide.night").withStyle(Style.EMPTY.withColor(0xa34536));
                         else
                             yield Component.translatable("gui.guide.night").withStyle(Style.EMPTY.withColor(0x40752c));
-
                     case MIDNIGHT:
                         if (!(time > 16500 && time < 19500))
                             yield Component.translatable("gui.guide.midnight").withStyle(Style.EMPTY.withColor(0xa34536));
                         else
                             yield Component.translatable("gui.guide.midnight").withStyle(Style.EMPTY.withColor(0x40752c));
-
                     default:
                         yield Component.empty();
                 };
-
-
             }
 
             Component start = Component.translatable("gui.guide.daytime");
 
-            guiGraphics.drawString(this.font, start.copy().append(comp), uiX + xOffset, uiY + yOffset, 0x635040, false);
+            guiGraphics.drawString(this.font, start.copy().append(comp), leftPos + xOffset, topPos + yOffset, 0x635040, false);
         }
 
         yOffset += 12;
@@ -1803,8 +1625,7 @@ public class FishingGuideScreen extends Screen
             String aboveBelow = above + ", " + below;
 
             //aboveBelow = "50, 100";
-            MutableComponent hardCodedTranslations = switch (aboveBelow)
-            {
+            MutableComponent hardCodedTranslations = switch (aboveBelow) {
                 case "100, 2147483647" -> Component.translatable("gui.guide.mountain");
                 case "50, 100", "50, 2147483647" -> Component.translatable("gui.guide.surface");
                 case "-2147483648, 50" -> Component.translatable("gui.guide.underground");
@@ -1832,7 +1653,7 @@ public class FishingGuideScreen extends Screen
             if (x > xOffset && x < xOffset + 140 && y > yOffset - 2 && y < yOffset + 10)
                 guiGraphics.renderTooltip(this.font, hoverTooltip, Optional.empty(), mouseX, mouseY);
 
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.elevation").append(hardCodedTranslations), uiX + xOffset, uiY + yOffset, 0x635040, false);
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.elevation").append(hardCodedTranslations), leftPos + xOffset, topPos + yOffset, 0x635040, false);
         }
 
         yOffset += 12;
@@ -1842,43 +1663,34 @@ public class FishingGuideScreen extends Screen
         //if (!)
         {
             MutableComponent comp;
-            if (fluids.size() == 1)
-            {
+            if (fluids.size() == 1) {
                 comp = Component.translatable("block." + fluids.get(0).toLanguageKey());
             }
-            else
-            {
+            else {
                 comp = Component.translatable("gui.guide.hover");
 
                 //show tooltip while hovering
-                if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10)
-                {
+                if (x > xOffset && x < xOffset + 100 && y > yOffset - 2 && y < yOffset + 10) {
                     List<Component> c = new ArrayList<>();
                     c.add(Component.translatable("gui.guide.fluid"));
 
-                    for (ResourceLocation rl : fluids)
-                    {
+                    for (ResourceLocation rl : fluids) {
                         c.add(Component.translatable("block." + rl.toLanguageKey()));
                     }
 
                     guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
                 }
             }
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.fluid").append(comp), uiX + xOffset, uiY + yOffset, 0x635040, false);
-
+            guiGraphics.drawString(this.font, Component.translatable("gui.guide.fluid").append(comp), leftPos + xOffset, topPos + yOffset, 0x635040, false);
         }
-
-
     }
 
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
-    {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, 420, 260, 420, 260);
+    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl) {
+        guiGraphics.blit(rl, leftPos, topPos, 0, 0, 420, 260, 420, 260);
     }
 
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl, int xOffset, int yOffset)
-    {
-        guiGraphics.blit(rl, uiX + xOffset, uiY + yOffset, 0, 0, 420, 260, 420, 260);
+    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl, int xOffset, int yOffset) {
+        guiGraphics.blit(rl, leftPos + xOffset, topPos + yOffset, 0, 0, 420, 260, 420, 260);
     }
 
     private void renderItem(ItemStack stack, int x, int y)
@@ -1886,21 +1698,18 @@ public class FishingGuideScreen extends Screen
         renderItem(stack, x, y, 3);
     }
 
-    private void renderItem(ItemStack stack, int x, int y, float scale)
-    {
+    private void renderItem(ItemStack stack, int x, int y, float scale) {
 
         Level level = Minecraft.getInstance().level;
         LivingEntity entity = Minecraft.getInstance().player;
 
-        if (!stack.isEmpty())
-        {
+        if (!stack.isEmpty()) {
             BakedModel bakedmodel = this.minecraft.getItemRenderer().getModel(stack, level, entity, 234234);
 
             PoseStack pose = new PoseStack();
 
             pose.pushPose();
             pose.translate((float) (x + 8), (float) (y + 8), (float) (150));
-
 
             pose.scale(16F * scale, -16F * scale, 16F * scale);
             boolean usesBlockLight = !bakedmodel.usesBlockLight();
@@ -1918,19 +1727,16 @@ public class FishingGuideScreen extends Screen
             Minecraft.getInstance().renderBuffers().bufferSource().endBatch();
             RenderSystem.enableDepthTest();
 
-            if (usesBlockLight)
-            {
+            if (usesBlockLight) {
                 Lighting.setupFor3DItems();
             }
 
             pose.popPose();
         }
-
     }
 
     @Override
-    public void onClose()
-    {
+    public void onClose() {
         Minecraft.getInstance().options.advancedItemTooltips = advancedTooltips;
         //todo send packet of fishes seen to remove notification
         //PacketDistributor.sendToServer(new Payloads.FPsSeen(fpsSeen));
@@ -1939,8 +1745,7 @@ public class FishingGuideScreen extends Screen
 
         Registry<FishProperties> fishProperties = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY);
 
-        for (FishProperties fp : fpsSeen)
-        {
+        for (FishProperties fp : fpsSeen) {
             ResourceLocation rl = fishProperties.getKey(fp);
 
             if (rl == null) rl = Starcatcher.rl("missingno");
@@ -1948,9 +1753,9 @@ public class FishingGuideScreen extends Screen
             notifRLs.add(rl);
         }
 
-        Payloads.CHANNEL.send(
+        ModPayloads.CHANNEL.send(
                 PacketDistributor.SERVER.with(null),
-                new Payloads.FishesSeenPayload(notifRLs)
+                new ModPayloads.FishesSeenPayload(notifRLs)
         );
 
         super.onClose();
@@ -1968,8 +1773,7 @@ public class FishingGuideScreen extends Screen
         return false;
     }
 
-    public FishingGuideScreen()
-    {
+    public FishingGuideScreen() {
         super(Component.empty());
 
         basics = new ItemStack(ModItems.ROD.get());

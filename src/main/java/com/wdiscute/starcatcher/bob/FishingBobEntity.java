@@ -1,7 +1,11 @@
 package com.wdiscute.starcatcher.bob;
 
 import com.wdiscute.starcatcher.*;
-import com.wdiscute.starcatcher.networkandcodecs.*;
+import com.wdiscute.starcatcher.io.*;
+import com.wdiscute.starcatcher.io.network.ModPayloads;
+import com.wdiscute.starcatcher.registry.ModEntities;
+import com.wdiscute.starcatcher.registry.ModItems;
+import com.wdiscute.starcatcher.registry.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -110,7 +114,7 @@ public class FishingBobEntity extends Projectile
         }
 
         if (!level.isClientSide)
-            DataAttachments.get(player).setFishing(this.uuid.toString());
+            DataAttachments.get(player).setFishing(this.uuid);
 
         currentState = FishHookState.FLYING;
     }
@@ -193,7 +197,7 @@ public class FishingBobEntity extends Projectile
                 trophiesCaught.add(tp);
 
                 DataAttachments.get(player).setTrophiesCaught(trophiesCaught);
-                DataAttachments.get(player).setFishing("");
+                DataAttachments.get(player).setFishing(null);
                 kill();
                 return;
             }
@@ -213,7 +217,7 @@ public class FishingBobEntity extends Projectile
 
         if (available.isEmpty())
         {
-            DataAttachments.get(player).setFishing("");
+            DataAttachments.get(player).setFishing(null);
             this.discard();
         }
 
@@ -235,7 +239,7 @@ public class FishingBobEntity extends Projectile
                 int size = FishCaughtCounter.getRandomSize(fpToFish);
                 int weight = FishCaughtCounter.getRandomWeight(fpToFish);
                 DataComponents.setSizeAndWeight(is, new SizeAndWeight(size, weight));
-                FishCaughtCounter.AwardFishCaughtCounter(fpToFish, player, 0, size, weight);
+                FishCaughtCounter.awardFishCaughtCounter(fpToFish, player, 0, size, weight);
             }
 
             Entity itemFished = new ItemEntity(
@@ -272,7 +276,7 @@ public class FishingBobEntity extends Projectile
             itemFished.setDeltaMovement(vec3);
             level().addFreshEntity(itemFished);
 
-            DataAttachments.get(player).setFishing("");
+            DataAttachments.get(player).setFishing(null);
             kill();
         }
         else
@@ -280,9 +284,9 @@ public class FishingBobEntity extends Projectile
 
             if (player instanceof ServerPlayer sp)
             {
-                Payloads.CHANNEL.send(
+                ModPayloads.CHANNEL.send(
                         PacketDistributor.PLAYER.with(() -> sp),
-                        new Payloads.FishingPayload(fpToFish, rod)
+                        new ModPayloads.FishingPayload(fpToFish, rod)
                 );
             }
 //            PacketDistributor.sendToPlayer(
@@ -327,7 +331,7 @@ public class FishingBobEntity extends Projectile
         }
         else
         {
-            DataAttachments.get(player).setFishing("");
+            DataAttachments.get(player).setFishing(null);
             this.discard();
             return true;
         }
@@ -345,7 +349,7 @@ public class FishingBobEntity extends Projectile
         super.lavaHurt();
         if (!hook.is(StarcatcherTags.HOOKS_SURVIVE_FIRE) && !level().isClientSide)
         {
-            DataAttachments.get(player).setFishing("");
+            DataAttachments.get(player).setFishing(null);
             kill();
         }
     }
@@ -411,7 +415,7 @@ public class FishingBobEntity extends Projectile
 
             if (timeBiting > 80)
             {
-                DataAttachments.get(player).setFishing("");
+                DataAttachments.get(player).setFishing(null);
                 kill();
             }
         }

@@ -1,6 +1,7 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.registry;
 
-import com.wdiscute.starcatcher.networkandcodecs.DataAttachments;
+import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.io.DataAttachments;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
@@ -11,8 +12,7 @@ public class ModItemProperties
 
     private static final Logger log = LoggerFactory.getLogger(ModItemProperties.class);
 
-    public static void addCustomItemProperties()
-    {
+    public static void addCustomItemProperties() {
         ItemProperties.register(
                 ModItems.ROD.get(),
                 Starcatcher.rl("cast"),
@@ -23,7 +23,7 @@ public class ModItemProperties
 
                     if (entity instanceof Player player)
                     {
-                        return !DataAttachments.get(player).fishing().isEmpty() && (entity.getMainHandItem() == stack || (entity.getOffhandItem() == stack)) ? 1.0f : 0.0f;
+                        return DataAttachments.get(player).fishing() != null && (entity.getMainHandItem() == stack || (entity.getOffhandItem() == stack)) ? 1.0f : 0.0f;
                     }
 
                     return 1.0f;

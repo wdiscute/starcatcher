@@ -1,8 +1,9 @@
-package com.wdiscute.starcatcher.networkandcodecs;
+package com.wdiscute.starcatcher.io.network;
 
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;
+import com.wdiscute.starcatcher.io.*;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
@@ -36,7 +37,7 @@ import java.util.UUID;
 import java.util.function.Supplier;
 
 
-public class Payloads
+public class ModPayloads
 {
 
     private static final String PROTOCOL_VERSION = "1";
@@ -56,7 +57,6 @@ public class Payloads
 
     public static void register()
     {
-
         CHANNEL.registerMessage(
                 id(), FishingBobUUIDPayload.class,
                 FishingBobUUIDPayload::encode,
@@ -175,16 +175,15 @@ public class Payloads
     //send fishing uuid to players around player who started fishing
     public static class FishingBobUUIDPayload
     {
-        private final String playerUUID;
-        private final String bobUUID;
+        private final UUID playerUUID, bobUUID;
 
-        public FishingBobUUIDPayload(Player player, String uuid)
+        public FishingBobUUIDPayload(Player player, UUID uuid)
         {
-            this.playerUUID = player.getStringUUID();
+            this.playerUUID = player.getUUID();
             this.bobUUID = uuid;
         }
 
-        public FishingBobUUIDPayload(String player, String uuid)
+        public FishingBobUUIDPayload(UUID player, UUID uuid)
         {
             this.playerUUID = player;
             this.bobUUID = uuid;
@@ -192,23 +191,20 @@ public class Payloads
 
         public static void encode(FishingBobUUIDPayload fishesCaughtPayload, FriendlyByteBuf buf)
         {
-            buf.writeUtf(fishesCaughtPayload.playerUUID);
-            buf.writeUtf(fishesCaughtPayload.bobUUID);
+            buf.writeUUID(fishesCaughtPayload.playerUUID);
+            buf.writeUUID(fishesCaughtPayload.bobUUID);
         }
 
-        public static FishingBobUUIDPayload decode(FriendlyByteBuf buf)
-        {
-            String playerUUID = buf.readUtf();
-            String bobUUID = buf.readUtf();
+        public static FishingBobUUIDPayload decode(FriendlyByteBuf buf) {
 
-            return new FishingBobUUIDPayload(playerUUID, bobUUID);
+            return new FishingBobUUIDPayload(buf.readUUID(), buf.readUUID());
         }
 
         public static void handle(FishingBobUUIDPayload fishingBobUUIDPayload, Supplier<NetworkEvent.Context> context)
         {
             context.get().enqueueWork(() ->
             {
-                Player player = Minecraft.getInstance().level.getPlayerByUUID(UUID.fromString(fishingBobUUIDPayload.playerUUID));
+                Player player = Minecraft.getInstance().level.getPlayerByUUID(fishingBobUUIDPayload.playerUUID);
                 if (player != null)
                     DataAttachments.get(player).setFishing(fishingBobUUIDPayload.bobUUID);
             });
@@ -217,22 +213,18 @@ public class Payloads
     }
 
     //send fishes caught to client
-    public static class FishesCaughtPayload
-    {
+    public static class FishesCaughtPayload {
         private final List<FishCaughtNetwork> fishesCaught;
 
-        public FishesCaughtPayload(List<FishCaughtCounter> fishCaught, Player player)
-        {
+        public FishesCaughtPayload(List<FishCaughtCounter> fishCaught, Player player) {
             List<FishCaughtNetwork> fishCaughtNetworks = new ArrayList<>();
 
             Registry<FishProperties> fishProperties = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY);
 
-            for (FishCaughtCounter fcc : fishCaught)
-            {
+            for (FishCaughtCounter fcc : fishCaught) {
                 ResourceLocation rl = null;
 
-                for (FishProperties fp : fishProperties)
-                {
+                for (FishProperties fp : fishProperties) {
                     if (fp.equals(fcc.fp())) rl = fishProperties.getKey(fp);
                 }
 
@@ -505,7 +497,7 @@ public class Payloads
                                 DataComponents.setSizeAndWeight(is, new SizeAndWeight(size, weight));
 
                                 //award fish counter
-                                FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time, size, weight);
+                                FishCaughtCounter.awardFishCaughtCounter(fbe.fpToFish, player, data.time, size, weight);
 
                                 //split hook double drops
                                 if (data.perfectCatch && fbe.hook.is(ModItems.SPLIT_HOOK.get())) is.setCount(2);
@@ -559,7 +551,7 @@ public class Payloads
 
                 }
 
-                DataAttachments.get(player).setFishing("");
+                DataAttachments.get(player).setFishing(null);
 
                 context.get().setPacketHandled(true);
             });

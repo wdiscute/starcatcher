@@ -1,10 +1,10 @@
 package com.wdiscute.starcatcher.compat;
 
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.DataComponents;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
+import com.wdiscute.starcatcher.io.DataComponents;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.TrophyProperties;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.render.EmiTexture;
@@ -18,8 +18,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.List;
 
-public class StarcatcherEmiRecipe implements EmiRecipe
-{
+public class StarcatcherEmiRecipe implements EmiRecipe {
 
     private final ResourceLocation id;
     private final List<EmiStack> output;
@@ -31,9 +30,8 @@ public class StarcatcherEmiRecipe implements EmiRecipe
 
     private final ItemStack is;
 
-    public StarcatcherEmiRecipe(ResourceLocation id, FishProperties fp)
-    {
-        this.output = List.of(EmiStack.of(fp.fish().value()));
+    public StarcatcherEmiRecipe(ResourceLocation id, FishProperties fp) {
+        this.output = List.of(EmiStack.of(fp.fish()));
         this.id = id;
         this.fp = fp;
         this.tp = null;
@@ -42,9 +40,8 @@ public class StarcatcherEmiRecipe implements EmiRecipe
             is.setHoverName(Component.translatable(fp.customName()));
     }
 
-    public StarcatcherEmiRecipe(ResourceLocation id, TrophyProperties tp)
-    {
-        this.output = List.of(EmiStack.of(tp.fp().fish().value()));
+    public StarcatcherEmiRecipe(ResourceLocation id, TrophyProperties tp) {
+        this.output = List.of(EmiStack.of(tp.fp().fish()));
         this.id = id;
         this.fp = tp.fp();
         this.tp = tp;
@@ -102,8 +99,7 @@ public class StarcatcherEmiRecipe implements EmiRecipe
 
 
     @Override
-    public void addWidgets(WidgetHolder widgets)
-    {
+    public void addWidgets(WidgetHolder widgets) {
         widgets.addSlot(input.get(0), 5, 2);
         widgets.addSlot(input.get(1), 23, 2);
 

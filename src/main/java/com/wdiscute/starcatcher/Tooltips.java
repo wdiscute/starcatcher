@@ -22,21 +22,18 @@ import java.util.logging.Level;
 
 @OnlyIn(Dist.CLIENT)
 @Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
-public class Tooltips
-{
+public class Tooltips {
     public static float hue;
 
     @OnlyIn(Dist.CLIENT)
     @SubscribeEvent
-    public static void renderFrame(TickEvent.LevelTickEvent event)
-    {
+    public static void renderFrame(TickEvent.LevelTickEvent event) {
         if(event.level.isClientSide)
             Tooltips.hue += 0.001f * 2f;
     }
 
     @SubscribeEvent
-    public static void modifyItemTooltip(ItemTooltipEvent event)
-    {
+    public static void modifyItemTooltip(ItemTooltipEvent event) {
         List<Component> tooltipComponents = event.getToolTip();
         ItemStack stack = event.getItemStack();
 
@@ -45,30 +42,24 @@ public class Tooltips
         String path = rl.getPath();
         String baseTooltip = "tooltip." + namespace + "." + path;
 
-        if (I18n.exists(baseTooltip + ".name"))
-        {
+        if (I18n.exists(baseTooltip + ".name")) {
             tooltipComponents.remove(0);
             tooltipComponents.add(0, decodeTranslationKey(baseTooltip + ".name"));
         }
 
-        if (I18n.exists(baseTooltip + ".0"))
-        {
-            if (Screen.hasShiftDown())
-            {
+        if (I18n.exists(baseTooltip + ".0")) {
+            if (Screen.hasShiftDown()) {
                 tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.shift_down"));
                 tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.empty"));
 
-                for (int i = 0; i < 100; i++)
-                {
+                for (int i = 0; i < 100; i++) {
                     if (!I18n.exists(baseTooltip + "." + i))
                         break;
                     tooltipComponents.add(decodeTranslationKey(baseTooltip + "." + i));
                 }
             }
             else
-            {
                 tooltipComponents.add(Component.translatable("tooltip.libtooltips.generic.shift_up"));
-            }
         }
     }
 
@@ -78,17 +69,13 @@ public class Tooltips
         return decodeString(I18n.get(s));
     }
 
-    public static Component decodeString(String s)
-    {
+    public static Component decodeString(String s) {
         MutableComponent component = Component.empty();
 
         //transform all <rgb> and <gradient> into it's corresponding things
-        for (int i = 0; i < 100; i++)
-        {
-            if (s.indexOf("<rgb>") < s.indexOf("<gradient-"))
-            {
-                if (s.contains("<rgb>") && s.contains("</rgb>"))
-                {
+        for (int i = 0; i < 100; i++) {
+            if (s.indexOf("<rgb>") < s.indexOf("<gradient-")) {
+                if (s.contains("<rgb>") && s.contains("</rgb>")) {
                     component.append(Component.literal(s.substring(0, s.indexOf("<rgb>"))));
                     component.append(Tooltips.RGBEachLetter(s.substring(s.indexOf("<rgb>") + 5, s.indexOf("</rgb>"))));
                     s = s.substring(s.indexOf("</rgb>") + 6);
@@ -96,10 +83,8 @@ public class Tooltips
                 }
             }
 
-            if (s.indexOf("<gradient-") < s.indexOf("<rgb>"))
-            {
-                if (s.contains("<gradient-") && s.contains("</gradient-"))
-                {
+            if (s.indexOf("<gradient-") < s.indexOf("<rgb>")) {
+                if (s.contains("<gradient-") && s.contains("</gradient-")) {
                     float min = Float.parseFloat("0." + s.substring(s.indexOf("<gradient") + 10, s.indexOf("<gradient") + 12));
                     float max = Float.parseFloat("0." + s.substring(s.indexOf("</gradient") + 11, s.indexOf("</gradient") + 13));
 
@@ -110,16 +95,14 @@ public class Tooltips
                 }
             }
 
-            if (s.contains("<rgb>") && s.contains("</rgb>"))
-            {
+            if (s.contains("<rgb>") && s.contains("</rgb>")) {
                 component.append(Component.literal(s.substring(0, s.indexOf("<rgb>"))));
                 component.append(Tooltips.RGBEachLetter(s.substring(s.indexOf("<rgb>") + 5, s.indexOf("</rgb>"))));
                 s = s.substring(s.indexOf("</rgb>") + 6);
                 continue;
             }
 
-            if (s.contains("<gradient-") && s.contains("</gradient-"))
-            {
+            if (s.contains("<gradient-") && s.contains("</gradient-")) {
                 float min = Float.parseFloat("0." + s.substring(s.indexOf("<gradient") + 10, s.indexOf("<gradient") + 12));
                 float max = Float.parseFloat("0." + s.substring(s.indexOf("</gradient") + 11, s.indexOf("</gradient") + 13));
 

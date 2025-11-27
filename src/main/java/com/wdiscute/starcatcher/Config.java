@@ -4,8 +4,7 @@ import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.SettingsScreen;
 import net.minecraftforge.common.ForgeConfigSpec;
 
-public class Config
-{
+public class Config {
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
     public static final ForgeConfigSpec.IntValue MINIGAME_GUI_SCALE = BUILDER

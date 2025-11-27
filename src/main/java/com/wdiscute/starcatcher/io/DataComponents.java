@@ -1,4 +1,4 @@
-package com.wdiscute.starcatcher.networkandcodecs;
+package com.wdiscute.starcatcher.io;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.DataResult;
@@ -32,7 +32,6 @@ public class DataComponents
             return this.key;
         }
     }
-
 
     //secret note data component
     public static void setSecretNote(ItemStack is, SecretNote.Note note)

@@ -12,8 +12,7 @@ import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class FishEntity extends AbstractFish
-{
+public class FishEntity extends AbstractFish {
     public FishEntity(EntityType<? extends FishEntity> entityType, Level level)
     {
         super(entityType, level);
@@ -43,8 +42,7 @@ public class FishEntity extends AbstractFish
         return SoundEvents.TROPICAL_FISH_FLOP;
     }
 
-    public static AttributeSupplier.Builder createAttributes()
-    {
+    public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 3.0F);
     }
 

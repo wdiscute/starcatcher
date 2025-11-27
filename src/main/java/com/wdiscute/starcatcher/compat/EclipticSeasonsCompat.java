@@ -3,27 +3,22 @@ package com.wdiscute.starcatcher.compat;
 import com.teamtea.eclipticseasons.api.constant.solar.Season;
 import com.teamtea.eclipticseasons.api.constant.solar.SolarTerm;
 import com.teamtea.eclipticseasons.api.util.EclipticUtil;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.Seasons;
 import net.minecraft.world.level.Level;
 
-public class EclipticSeasonsCompat
-{
+public class EclipticSeasonsCompat {
 
-    public static boolean canCatch(FishProperties fp, Level level)
-    {
-        if (!fp.wr().seasons().contains(Seasons.ALL))
-        {
+    public static boolean canCatch(FishProperties fp, Level level) {
+        if (!fp.wr().seasons().contains(Seasons.ALL)) {
             return fp.wr().seasons().contains(getSeason(level)) || fp.wr().seasons().contains(getSubSeason(level));
         }
         return true;
     }
 
-    public static Seasons getSeason(Level level)
-    {
+    public static Seasons getSeason(Level level) {
         Season season =  EclipticUtil.getNowSolarTerm(level).getSeason();
-        return switch (season)
-        {
+        return switch (season) {
             case NONE -> Seasons.ALL;
 
             case SPRING -> Seasons.SPRING;
@@ -34,11 +29,9 @@ public class EclipticSeasonsCompat
     }
 
 
-    public static Seasons getSubSeason(Level level)
-    {
+    public static Seasons getSubSeason(Level level) {
         SolarTerm season = EclipticUtil.getNowSolarTerm(level);
-        return switch (season)
-        {
+        return switch (season) {
             case NONE -> Seasons.ALL;
 
             case BEGINNING_OF_SPRING, RAIN_WATER -> Seasons.EARLY_SPRING;
