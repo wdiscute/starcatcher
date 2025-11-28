@@ -111,7 +111,7 @@ public class FishingHitZone {
 
             if (bobber.is(ModItems.CLEAR_BOBBER)) vanishRate /= 2;
 
-            setVanishing(true, vanishRate, true);
+            setVanishing(true, vanishRate, false);
         }
 
         if (hook.is(ModItems.STONE_HOOK)) {
