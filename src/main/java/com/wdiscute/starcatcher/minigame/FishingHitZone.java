@@ -20,13 +20,22 @@ public class FishingHitZone {
     private static final int SIZE_3 = 12;
     private static final int SIZE_4 = 17;
 
-    public static final FishingHitZone EXTRA_LARGE = new FishingHitZone().setForgiving(SIZE_4).setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 0, 0));
-    public static final FishingHitZone LARGE = new FishingHitZone().setForgiving(SIZE_3).setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 16, 0));
-    public static final FishingHitZone MEDIUM = new FishingHitZone().setForgiving(SIZE_2).setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 32, 0));
-    public static final FishingHitZone THIN = new FishingHitZone().setForgiving(SIZE_1).setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 48, 0));
+    public static final FishingHitZone EXTRA_LARGE = new FishingHitZone().setForgiving(SIZE_4)
+            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 0, 0));
+    public static final FishingHitZone LARGE = new FishingHitZone().setForgiving(SIZE_3)
+            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 16, 0));
+
+    public static final FishingHitZone MEDIUM = new FishingHitZone().setForgiving(SIZE_2)
+            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 32, 0))
+            .setType(HitZoneType.THIN);
+    public static final FishingHitZone THIN = new FishingHitZone().setForgiving(SIZE_1)
+            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 48, 0))
+            .setType(HitZoneType.THIN);
+
     public static final FishingHitZone TREASURE = new FishingHitZone().setForgiving(SIZE_2)
             .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 64, 0))
-            .setTreasure(10);
+            .setTreasure(10)
+            .setType(HitZoneType.TREASURE);
 
     //Custom hit zones
     public static final FishingHitZone TNT = new FishingHitZone().setForgiving(SIZE_3)
@@ -35,14 +44,25 @@ public class FishingHitZone {
             .setPenaltyAndReward(0, -20)
             .setRecycling(false)
             .setMoving(false, 0)
-            .setPlaceOver(true);
+            .setPlaceOver(true)
+            .setType(HitZoneType.TNT);
+
+    public static final FishingHitZone FREEZE = new FishingHitZone().setForgiving(SIZE_3)
+            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 16, -16))
+            .setPlaceOver(true)
+            .setPenaltyAndReward(0, -5)
+            .setRecycling(false)
+            .setType(HitZoneType.FREEZE);
+
+
+    HitZoneType type = HitZoneType.NORMAL;
 
     int pos;
     int forgiving = SIZE_2;
 
     int treasureProgress = 0;
 
-    int penalty = 0; //TODO: Add miss penalty
+    int penalty = 0; //TODO: Add miss penalty, currently does nothing
     int reward = 10;
     public int gracePeriod = 0;
 
@@ -65,6 +85,7 @@ public class FishingHitZone {
     Consumer<FishingHitZone> onTickConsumer;
     Consumer<FishingHitZone> onHitConsumer;
 
+    // A builder made to mimic the old system
     public FishingHitZone setFromProperties(FishProperties properties, FishProperties.Difficulty difficulty, ItemStack hook, ItemStack bobber) {
         FishProperties.Rarity rarity = properties.rarity();
 
@@ -90,7 +111,7 @@ public class FishingHitZone {
 
             if (bobber.is(ModItems.CLEAR_BOBBER)) vanishRate /= 2;
 
-            setVanishing(true, vanishRate, false);
+            setVanishing(true, vanishRate, true);
         }
 
         if (hook.is(ModItems.STONE_HOOK)) {
@@ -102,7 +123,7 @@ public class FishingHitZone {
         }
 
         // A funny way to check if the TREASURE constant was used
-        if (treasureProgress == 10) {
+        if (type == HitZoneType.TREASURE) {
             setTreasure(difficulty.treasure().hitReward());
         }
 
@@ -167,7 +188,7 @@ public class FishingHitZone {
     }
 
     public boolean isTreasure() {
-        return treasureProgress > 0;
+        return type == HitZoneType.TREASURE;
     }
 
     public FishingHitZone setVanishing(boolean isVanishing, float vanishingRate, boolean removeOnVanish) {
@@ -234,6 +255,13 @@ public class FishingHitZone {
         return this;
     }
 
+    public FishingHitZone setType(HitZoneType type) {
+        this.type = type;
+
+        return this;
+    }
+
+
     public FishingHitZone setRendering(TriConsumer<GuiGraphics, Integer, Integer> guiGraphicsConsumer) {
         this.guiGraphicsConsumer = guiGraphicsConsumer;
 
@@ -244,6 +272,8 @@ public class FishingHitZone {
     public FishingHitZone copy() {
         FishingHitZone copy = new FishingHitZone();
         FishingHitZone original = this;
+
+        copy.type = original.type;
         copy.forgiving = original.forgiving;
 
         copy.treasureProgress = original.treasureProgress;
