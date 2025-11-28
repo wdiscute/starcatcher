@@ -1265,28 +1265,24 @@ public record FishProperties(
 
     public enum Rarity implements StringRepresentable
     {
-        COMMON("common", 0),
-        UNCOMMON("uncommon", 1),
-        RARE("rare", 2),
-        EPIC("epic", 3),
-        LEGENDARY("legendary", 4);
+        COMMON("common"),
+        UNCOMMON("uncommon"),
+        RARE("rare"),
+        EPIC("epic"),
+        LEGENDARY("legendary");
 
         public static final Codec<Rarity> CODEC = StringRepresentable.fromEnum(Rarity::values);
         public static final StreamCodec<FriendlyByteBuf, Rarity> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Rarity.class);
         private final String key;
-        private final int id;
 
-        Rarity(String key, int id) {
+        Rarity(String key)
+        {
             this.key = key;
-            this.id = id;
         }
 
-        public String getSerializedName() {
+        public String getSerializedName()
+        {
             return this.key;
-        }
-
-        public int getId() {
-            return this.id;
         }
     }
 
