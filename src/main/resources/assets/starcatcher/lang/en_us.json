@@ -783,8 +783,7 @@
 
   "item.starcatcher.sandtail" : "Sandtail",
   "tooltip.starcatcher.sandtail.0" : "A long sand-covered fish, which although mostly",
-  "tooltip.starcatcher.sandtail.1" : "found in warm climates, it prefers the cold so",
-  "tooltip.starcatcher.sandtail.2" : "it's only active during nighttime.",
+  "tooltip.starcatcher.sandtail.1" : "found in warm climates, prefers the cold of the night",
 
   "item.starcatcher.mirage_carp" : "Mirage Carp",
   "tooltip.starcatcher.mirage_carp.0" : "A carp species found during warm sunny days on warm climates.",
