@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -20,12 +21,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.function.Predicate;
 
 public class StandMenu extends AbstractContainerMenu
 {
@@ -42,6 +45,7 @@ public class StandMenu extends AbstractContainerMenu
         }
 
     };
+
     public StandMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
         this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
@@ -65,15 +69,15 @@ public class StandMenu extends AbstractContainerMenu
         {
             for (int l = 0; l < 3; ++l)
             {
-                this.addSlot(new SlotItemHandler(inventory, i * 3 + l, 135 + l * 18, 67 + i * 18)
-                {
-                    @Override
-                    public boolean mayPickup(Player playerIn)
-                    {
-                        return false;
-                    }
-                });
-                inventory.setStackInSlot(i * 3 + l, new ItemStack(Items.DIAMOND));
+//                this.addSlot(new SlotItemHandler(inventory, i * 3 + l, 135 + l * 18, 67 + i * 18)
+//                {
+//                    @Override
+//                    public boolean mayPickup(Player playerIn)
+//                    {
+//                        return false;
+//                    }
+//                });
+//                inventory.setStackInSlot(i * 3 + l, new ItemStack(Items.DIAMOND));
             }
         }
 
@@ -86,16 +90,51 @@ public class StandMenu extends AbstractContainerMenu
         //¯\_(ツ)¯\_
         //
         //_/¯(ツ)_/¯
-        if(id == 67)
+        if (id == 67)
         {
             //if player has the items to signup and is not already signed up
-            if(sbe.tournament.settings.canSignUp(player) && !sbe.tournament.playerScores.containsKey(player.getUUID()))
+            if (sbe.tournament.settings.canSignUp(player) && !sbe.tournament.playerScores.containsKey(player.getUUID()))
             {
+
                 System.out.println("signed up " + player.getName());
                 //sign up player with empty score
                 sbe.tournament.playerScores.put(player.getUUID(), TournamentPlayerScore.empty());
+
+                List<SingleStackContainer> entryCost = sbe.tournament.settings.entryCost;
+
+                if (!entryCost.isEmpty())
+                {
+                    for (SingleStackContainer ssc : entryCost)
+                    {
+                        Predicate<ItemStack> predicate = (is) -> is.is(ssc.stack().getItem()) && is.getCount() >= ssc.stack().getCount();
+
+                        for (int i = 0; i < player.getInventory().getContainerSize(); ++i)
+                        {
+                            ItemStack is = player.getInventory().getItem(i);
+                            if (predicate.test(is))
+                            {
+                                is.shrink(ssc.stack().getCount());
+                                break;
+                            }
+                        }
+
+                    }
+                }
+
+
             }
         }
+
+        //start/cancel tournament
+        if(id == 69)
+        {
+            if(sbe.tournament.settings.duration > 0)
+            {
+                TournamentHandler.addTournament(sbe.tournament);
+            }
+        }
+
+
         return super.clickMenuButton(player, id);
     }
 
@@ -172,7 +211,8 @@ public class StandMenu extends AbstractContainerMenu
     @Override
     public boolean stillValid(Player player)
     {
-        return stillValid(ContainerLevelAccess.create(level, sbe.getBlockPos()),
+        return stillValid(
+                ContainerLevelAccess.create(level, sbe.getBlockPos()),
                 player, ModBlocks.STAND.get());
     }
 }

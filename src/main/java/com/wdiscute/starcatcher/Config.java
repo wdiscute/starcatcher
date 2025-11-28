@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.SettingsScreen;
+import com.wdiscute.starcatcher.tournament.StandScreen;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class Config
@@ -22,6 +23,9 @@ public class Config
 
     public static final ModConfigSpec.EnumValue<FishingGuideScreen.Sort> SORT = BUILDER
             .defineEnum("sort", FishingGuideScreen.Sort.ALPHABETICAL_DOWN);
+
+    public static final ModConfigSpec.EnumValue<StandScreen.DurationDisplay> DURATION = BUILDER
+            .defineEnum("duration_display", StandScreen.DurationDisplay.MINUTES);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 

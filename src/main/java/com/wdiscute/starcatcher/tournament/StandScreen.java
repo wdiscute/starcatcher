@@ -1,14 +1,15 @@
 package com.wdiscute.starcatcher.tournament;
 
-import com.mojang.authlib.GameProfile;
+import com.wdiscute.starcatcher.Config;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import org.lwjgl.system.windows.TOUCHINPUT;
+import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 
@@ -17,6 +18,8 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     public static Tournament tournamentCache;
     public static Map<UUID, String> gameProfilesCache;
     private final StandMenu standMenu;
+
+    private static String durationCache = "waiting...";
 
     private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/tournament/background.png");
 
@@ -64,13 +67,25 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         guiGraphics.drawString(this.font, Component.translatable(tournamentCache.status.getSerializedName()), uiX + 55, uiY + 88, 0x635040, false);
         guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.status"), uiX + 55, uiY + 100, 0x9c897c, false);
 
+        //duration
+        guiGraphics.drawString(this.font, Component.literal(durationCache), uiX + 130, uiY + 88, 0x635040, false);
+        guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.duration"), uiX + 130, uiY + 100, 0x9c897c, false);
+
         //signup button
-        int color = tournamentCache.settings.canSignUp(minecraft.player) ? 0x40752c : 0xa34536;
-        guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.sign_up"), uiX + 51, uiY + 120, color, false);
+        if (tournamentCache.playerScores.containsKey(Minecraft.getInstance().player.getUUID()))
+        {
+            guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.signed_up"), uiX + 51, uiY + 120, 0x40752c, false);
+        }
+        else
+        {
+            int color = tournamentCache.settings.canSignUp(minecraft.player) ? 0x40752c : 0xa34536;
+            guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.sign_up"), uiX + 51, uiY + 120, color, false);
+        }
 
         if (x > 48 && x < 98 && y > 117 && y < 127 && !tournamentCache.settings.entryCost.isEmpty())
         {
             List<Component> signUpCostList = new ArrayList<>();
+
             signUpCostList.add(Component.literal("Sign Up Fee:"));
 
             for (SingleStackContainer ssc : tournamentCache.settings.entryCost)
@@ -117,7 +132,76 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
                         Optional.empty(), mouseX, mouseY);
         }
 
+
+        //
+        //                  ,--.     ,--.   ,--.
+        // ,---.   ,---.  ,-'  '-. ,-'  '-. `--' ,--,--,   ,---.   ,---.
+        //(  .-'  | .-. : '-.  .-' '-.  .-' ,--. |      \ | .-. | (  .-'
+        //.-'  `) \   --.   |  |     |  |   |  | |  ||  | ' '-' ' .-'  `)
+        //`----'   `----'   `--'     `--'   `--' `--''--' .`-  /  `----'
+        //                                                `---'
+
+
+        //start
+        guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.start"), uiX + 215, uiY + 50, 0x635040, false);
+        if(x > 209 && x < 317 && y > 44 && y < 60)
+        {
+            List<Component> list = new ArrayList<>();
+
+            list.add(Component.literal("This will start the tournament which will"));
+            list.add(Component.literal("automatically end once the duration has"));
+            list.add(Component.literal("ended. Settings can not be changed"));
+            list.add(Component.literal("once the tournament has started."));
+            list.add(Component.literal("Items can still be added to the prize pool."));
+
+            guiGraphics.renderTooltip(this.font, list, Optional.empty(), mouseX, mouseY);
+        }
+
         renderTooltip(guiGraphics, mouseX, mouseY);
+    }
+
+    public static void getTournamentCache(Tournament tournament)
+    {
+        tournamentCache = tournament;
+        updateDurationCache();
+    }
+
+    private static void updateDurationCache()
+    {
+        if(Config.DURATION.get().equals(DurationDisplay.MINUTES))
+        {
+            String s = "";
+            int totalSeconds = tournamentCache.settings.duration / 20;
+            int hours = totalSeconds / 3600;
+
+            if(hours > 0)
+            {
+                totalSeconds -= 3600 * hours;
+                s = hours + "h ";
+            }
+
+            int minutes = totalSeconds / 60;
+
+            if(minutes > 0)
+            {
+                totalSeconds -= 60 * minutes;
+                s += minutes + "m ";
+            }
+
+            s += totalSeconds + "s ";
+
+            durationCache = s;
+        }
+
+        if(Config.DURATION.get().equals(DurationDisplay.MINECRAFT_DAYS))
+        {
+            durationCache = tournamentCache.settings.duration / 24000 + " days";
+        }
+
+        if(Config.DURATION.get().equals(DurationDisplay.TICKS))
+        {
+            durationCache = tournamentCache.settings.duration + " ticks";
+        }
     }
 
     @Override
@@ -130,9 +214,25 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         System.out.println("clicked relative x:" + x);
         System.out.println("clicked relative y:" + y);
 
+        //sign up
         if (x > 48 && x < 98 && y > 117 && y < 127)
         {
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 67);
+        }
+
+        //start
+        if (x > 123 && x < 189 && y > 84 && y < 108)
+        {
+            minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 69);
+        }
+
+        //duration cycling
+        if (x > 123 && x < 189 && y > 84 && y < 108)
+        {
+            if (button == 0) Config.DURATION.set(Config.DURATION.get().next());
+            if (button == 1) Config.DURATION.set(Config.DURATION.get().previous());
+            Config.SORT.save();
+            updateDurationCache();
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
@@ -163,6 +263,26 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl, int xOffset, int yOffset)
     {
         guiGraphics.blit(rl, uiX + xOffset, uiY + yOffset, 0, 0, 420, 260, 420, 260);
+    }
+
+    public enum DurationDisplay
+    {
+        TICKS,
+        MINUTES,
+        MINECRAFT_DAYS;
+
+        private static final DurationDisplay[] vals = values();
+
+        public DurationDisplay previous()
+        {
+            if (this.ordinal() == 0) return vals[vals.length - 1];
+            return vals[(this.ordinal() - 1) % vals.length];
+        }
+
+        public DurationDisplay next()
+        {
+            return vals[(this.ordinal() + 1) % vals.length];
+        }
     }
 
     public StandScreen(StandMenu menu, Inventory playerInventory, Component title)

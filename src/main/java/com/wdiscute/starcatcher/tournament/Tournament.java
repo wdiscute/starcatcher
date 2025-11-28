@@ -106,9 +106,10 @@ public class Tournament
 
     public enum Status implements StringRepresentable
     {
-        SETUP("setup"),
-        ACTIVE("active"),
-        FINISHED("finished");
+        SETUP("gui.starcatcher.tournament.status.setup"),
+        ACTIVE("gui.starcatcher.tournament.status.active"),
+        CANCELLED("gui.starcatcher.tournament.status.cancelled"),
+        FINISHED("gui.starcatcher.tournament.status.finished");
 
         Status(String name)
         {

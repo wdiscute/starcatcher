@@ -90,6 +90,7 @@ public class StandBlock extends Block implements EntityBlock
                                     }},
                                     new TournamentSettings(
                                             TournamentSettings.Type.SIMPLE,
+                                            110660,
                                             0,
                                             0,
                                             listSSC),

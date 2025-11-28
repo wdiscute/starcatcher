@@ -157,7 +157,8 @@ public class PayloadReceiver
     @OnlyIn(Dist.CLIENT)
     public static void clientReceiveTournamentData(final Payloads.TournamentDataToClient data, final IPayloadContext context)
     {
-        StandScreen.tournamentCache = data.tour();
+
+        StandScreen.getTournamentCache(data.tour());
         StandScreen.gameProfilesCache = new HashMap<>();
         data.listSignups().forEach(e -> StandScreen.gameProfilesCache.put(e.getId(), e.getName()));
     }

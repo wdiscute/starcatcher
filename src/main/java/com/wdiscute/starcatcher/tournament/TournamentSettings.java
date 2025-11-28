@@ -15,6 +15,7 @@ import java.util.List;
 public class TournamentSettings
 {
     public Type type;
+    public int duration;
     public float perfectCatchMultiplier;
     public int missPenalty;
     public List<SingleStackContainer> entryCost;
@@ -53,6 +54,11 @@ public class TournamentSettings
         return entryCost;
     }
 
+    public int getDuration()
+    {
+        return duration;
+    }
+
     public enum Type implements StringRepresentable
     {
         SIMPLE("simple"),
@@ -79,9 +85,10 @@ public class TournamentSettings
         }
     }
 
-    public TournamentSettings(Type type, float perfectCatchMultiplier, int missPenalty, List<SingleStackContainer> entryCost)
+    public TournamentSettings(Type type, int duration, float perfectCatchMultiplier, int missPenalty, List<SingleStackContainer> entryCost)
     {
         this.type = type;
+        this.duration = duration;
         this.perfectCatchMultiplier = perfectCatchMultiplier;
         this.missPenalty = missPenalty;
         this.entryCost = entryCost;
@@ -90,6 +97,7 @@ public class TournamentSettings
     public static final Codec<TournamentSettings> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Type.CODEC.optionalFieldOf("type", Type.SIMPLE).forGetter(TournamentSettings::getType),
+                    Codec.INT.optionalFieldOf("duration", 0).forGetter(TournamentSettings::getDuration),
                     Codec.FLOAT.optionalFieldOf("perfect_catch_multiplier", 0.0f).forGetter(TournamentSettings::getPerfectCatchMultiplier),
                     Codec.INT.optionalFieldOf("miss_penalty", 0).forGetter(TournamentSettings::getMissPenalty),
                     SingleStackContainer.LIST_CODEC.optionalFieldOf("", List.of()).forGetter(TournamentSettings::getEntryCost)
@@ -98,6 +106,7 @@ public class TournamentSettings
 
     public static final StreamCodec<RegistryFriendlyByteBuf, TournamentSettings> STREAM_CODEC = StreamCodec.composite(
             Type.STREAM_CODEC, TournamentSettings::getType,
+            ByteBufCodecs.INT, TournamentSettings::getDuration,
             ByteBufCodecs.FLOAT, TournamentSettings::getPerfectCatchMultiplier,
             ByteBufCodecs.VAR_INT, TournamentSettings::getMissPenalty,
             SingleStackContainer.STREAM_CODEC_LIST, TournamentSettings::getEntryCost,
