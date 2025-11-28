@@ -9,7 +9,6 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
@@ -20,9 +19,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.ArrayList;
@@ -74,7 +70,7 @@ public class PayloadReceiver
                         is.set(ModDataComponents.SIZE_AND_WEIGHT, new SizeAndWeight(size, weight));
 
                         //award fish counter
-                        FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time(), size, weight, data.perfectCatch());
+                        FishCaughtCounter.awardFishCaughtCounter(fbe.fpToFish, player, data.time(), size, weight, data.perfectCatch(), true);
 
                         //split hook double drops
                         if(data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);

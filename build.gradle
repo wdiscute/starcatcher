@@ -68,6 +68,14 @@ dependencies {
     compileOnly files(".libs/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
     //runtimeOnly files(".libs/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
 
+    //ftb teams
+    compileOnly files(".libs/ftb-teams-neoforge-2101.1.7.jar")
+    compileOnly files(".libs/ftb-library-neoforge-2101.1.28.jar")
+    compileOnly files(".libs/architectury-13.0.8-neoforge.jar")
+
+    runtimeOnly files(".libs/ftb-teams-neoforge-2101.1.7.jar")
+    runtimeOnly files(".libs/ftb-library-neoforge-2101.1.28.jar")
+    runtimeOnly files(".libs/architectury-13.0.8-neoforge.jar")
 
 }
 

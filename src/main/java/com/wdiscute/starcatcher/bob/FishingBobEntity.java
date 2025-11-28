@@ -32,7 +32,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class FishingBobEntity extends Projectile
 {
@@ -231,7 +230,7 @@ public class FishingBobEntity extends Projectile
                 int size = FishCaughtCounter.getRandomSize(fpToFish);
                 int weight = FishCaughtCounter.getRandomWeight(fpToFish);
                 is.set(ModDataComponents.SIZE_AND_WEIGHT, new SizeAndWeight(size, weight));
-                FishCaughtCounter.AwardFishCaughtCounter(fpToFish, player, 0, size, weight, false);
+                FishCaughtCounter.awardFishCaughtCounter(fpToFish, player, 0, size, weight, false, true);
             }
 
             Entity itemFished = new ItemEntity(
