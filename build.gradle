@@ -17,7 +17,6 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
-
 dependencies {
     //emi
     compileOnly "dev.emi:emi-forge:${emi_version}:api"

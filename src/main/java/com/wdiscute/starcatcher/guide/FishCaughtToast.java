@@ -25,16 +25,14 @@ public class FishCaughtToast implements Toast
     private static final Random r = new Random();
     private final ItemStack is;
 
-    public FishCaughtToast(FishProperties fp)
-    {
+    public FishCaughtToast(FishProperties fp) {
 
         this.is = new ItemStack(fp.fish());
         this.title = Component.translatable("gui.starcatcher.toast.fish_caught");
         this.description =  is.getHoverName().getString();
     }
 
-    public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)
-    {
+    public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible) {
         guiGraphics.blit(BACKGROUND_SPRITE, 0, 0, 0, 0, 160, 30, 160, 30);
 
         guiGraphics.renderItem(is, 8, 8);
@@ -43,8 +41,7 @@ public class FishCaughtToast implements Toast
 
         int lettersRevealed = Math.clamp(0, description.length(), ((int) ((timeSinceLastVisible - 500) / 150)));
 
-        if(old != lettersRevealed)
-        {
+        if(old != lettersRevealed) {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.4f, r.nextFloat(0.2f) + 1.3f);
             old = lettersRevealed;
         }
@@ -54,14 +51,10 @@ public class FishCaughtToast implements Toast
 
         guiGraphics.drawString(toastComponent.getMinecraft().font, comp, 30, 18, 0, false);
 
-        if (timeSinceLastVisible < 10000)
-        {
+        if (timeSinceLastVisible < 10000) {
             return Visibility.SHOW;
-        }
-        else
-        {
+        } else {
             return Visibility.HIDE;
         }
     }
-
 }

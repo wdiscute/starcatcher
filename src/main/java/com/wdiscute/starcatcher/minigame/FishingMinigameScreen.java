@@ -124,9 +124,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     public FishingMinigameScreen(FishProperties fp, ItemStack rod) {
         super(Component.empty());
 
-        previousGuiScale = Minecraft.getInstance().options.guiScale().get();
-        Minecraft.getInstance().options.guiScale().set(Config.MINIGAME_GUI_SCALE.get());
-        Minecraft.getInstance().resizeDisplay();
+
+        Minecraft mc = this.minecraft;
+        previousGuiScale = mc.options.guiScale().get();
+        mc.options.guiScale().set(Config.MINIGAME_GUI_SCALE.get());
+        mc.resizeDisplay();
 
         hitDelay = Config.HIT_DELAY.get().floatValue();
 
@@ -141,8 +143,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         treasureIS = new ItemStack(BuiltInRegistries.ITEM.get(fp.dif().treasure().loot()));
         
         //tank texture change
-        ResourceKey<Level> dim = Minecraft.getInstance().level.dimension();
-        Player player = Minecraft.getInstance().player;
+        ResourceKey<Level> dim = mc.level.dimension();
+        Player player = mc.player;
         if (player.getY() < 50 && dim.equals(Level.OVERWORLD))
             tankTexture = CAVE;
 
@@ -210,7 +212,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             difficultyBobberOffset = 16;
         }
 
-        hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD.get()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        hand = mc.player.getMainHandItem().is(ModItems.ROD.get()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
 
     private int getRandomFreePosition() {
@@ -453,8 +455,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             RenderSystem.enableBlend();
 
             //16 offset on y for texture centering
-            if (!bobber.is(ModItems.KIMBE_BOBBER.get()))
-            {
+            if (!bobber.is(ModItems.KIMBE_BOBBER.get())) {
                 guiGraphics.blit(
                         TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
                         64, 64, 128, 128, 64, 64, 256, 256);

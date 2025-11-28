@@ -88,24 +88,10 @@ public class FishingGuideScreen extends Screen {
     private final ItemStack treasures;
 
     private final ItemStack ironHook;
-    private final ItemStack shinyHook;
-    private final ItemStack goldHook;
-    private final ItemStack mossyHook;
-    private final ItemStack crystalHook;
-    private final ItemStack heavyHook;
-    private final ItemStack stoneHook;
-    private final ItemStack splitHook;
-    private final ItemStack stabHook;
+    private final ItemStack[] hooks;
 
     private final ItemStack frugalBobber;
-    private final ItemStack creeperBobber;
-    private final ItemStack glitterBobber;
-    private final ItemStack colorfulBobber;
-    private final ItemStack steadyBobber;
-    private final ItemStack impatientBobber;
-    private final ItemStack frogBobber;
-    private final ItemStack kimbeBobber;
-    private final ItemStack clearBobber;
+    private final ItemStack[] bobbers;
 
     private final ItemStack cherryBait;
     private final ItemStack lushBait;
@@ -496,90 +482,81 @@ public class FishingGuideScreen extends Screen {
 
         //previous arrow
         if (x > 49 && x < 69 && y > 203 && y < 217) {
-            //index <- previous page of index
-            if (menu == 0 && page != 0) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                page--;
-                return true;
+            switch (menu) {
+                case 0 -> {
+                    if (page != 0) {
+                        //index <- previous page of index
+                        minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                        page--;
+                        return true;
+                    }
+                }
+                case 1 -> {
+                    minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                    if (page == 0) {
+                        //help -> index
+                        menu = 0;
+                        page = 0;
+                        return true;
+                    }
+                    //help -> previous help page
+                    page--;
+                    return true;
+                }
+                case 2 -> {
+                    minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                    if (page == 0) {
+                        //entries -> last page of help
+                        menu = 1;
+                        page = MAX_HELP_PAGES;
+                        return true;
+                    }
+                    //entries -> previous entry
+                    page--;
+                    return true;
+                }
             }
-
-            //help -> index
-            if (menu == 1 && page == 0) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                menu = 0;
-                page = 0;
-                return true;
-            }
-
-            //help -> previous help page
-            if (menu == 1) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                page--;
-                return true;
-            }
-
-            //entries -> last page of help
-            if (menu == 2 && page == 0) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                menu = 1;
-                page = MAX_HELP_PAGES;
-                return true;
-            }
-
-            //entries -> previous entry
-            if (menu == 2) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                page--;
-                return true;
-            }
-
         }
 
         //next arrow
         if (x > 336 && x < 356 && y > 202 && y < 216) {
-            //index -> next page of index
-            if (menu == 0 && hasNextEntryPage) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                page++;
-                return true;
-            }
-
-            //index -> first page of help
-            if (menu == 0) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                menu = 1;
-                page = 0;
-                return true;
-            }
-
-            //help -> next page of help
-            if (menu == 1 && page != MAX_HELP_PAGES) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                page++;
-                return true;
-            }
-
-            //index -> first page of help
-            if (menu == 1) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                menu = 2;
-                page = 0;
-                return true;
-            }
-
-            //entries -> next entry
-            if (menu == 2 && page <= entries.size() / 2 - 1) {
-                minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                page++;
-                return true;
-            }
-
-            //entries -> leaderboards??
-            if (menu == 2) {
-                //minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                //currentMenu = 3;
-                //currentPage = 0;
-                return true;
+            switch (menu) {
+                case 0 -> {
+                    //index -> next page of index
+                    minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                    if (hasNextEntryPage) {
+                        page++;
+                        return true;
+                    }
+                    menu = 1;
+                    page = 0;
+                    return true;
+                }
+                case 1 -> {
+                    //help -> next page of help
+                    minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                    if (page != MAX_HELP_PAGES) {
+                        page++;
+                        return true;
+                    }
+                    //index -> first page of help
+                    menu = 2;
+                    page = 0;
+                    return true;
+                }
+                case 2 -> {
+                    //entries -> next entry
+                    if (page <= entries.size() / 2 - 1) {
+                        minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                        page++;
+                        return true;
+                    }
+                    //entries -> leaderboards??
+                    //minecraft.player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                    //currentMenu = 3;
+                    //currentPage = 0;
+                    return true;
+                }
             }
         }
 
@@ -605,17 +582,12 @@ public class FishingGuideScreen extends Screen {
 
         int numberOfRows = (fishInArea.size() - 1) / 7 + 1;
         //sort
-        if ((x > 168 && x < 191 && y > 121 && y < 128 && numberOfRows == 1) ||
-                (x > 168 && x < 191 && y > 141 && y < 148 && numberOfRows == 2) ||
-                (x > 168 && x < 191 && y > 161 && y < 168 && numberOfRows == 3) ||
-                (x > 168 && x < 191 && y > 181 && y < 188 && numberOfRows == 4)
-        ) {
+        if (x > 168 && x < 191 && y > 101 + numberOfRows * 20 && y < 108 + numberOfRows * 20 && numberOfRows < 5) {
             if (button == 0) Config.SORT.set(Config.SORT.get().next());
             if (button == 1) Config.SORT.set(Config.SORT.get().previous());
             Config.SORT.save();
             sortEntries();
         }
-
 
         //previous arrow
         if (x > 49 && x < 69 && y > 203 && y < 217) {
@@ -657,26 +629,26 @@ public class FishingGuideScreen extends Screen {
         }
 
 
-        //render index
-        if (menu == 0) {
-            if (page == 0) renderImage(guiGraphics, BACKGROUND_INDEX_FIRST);
-            else renderImage(guiGraphics, BACKGROUND_INDEX_SECOND);
-            renderIndex(guiGraphics, mouseX, mouseY);
-        }
+        switch (menu) {
+            case 0 -> {
+                //render index
+                if (page == 0) renderImage(guiGraphics, BACKGROUND_INDEX_FIRST);
+                else renderImage(guiGraphics, BACKGROUND_INDEX_SECOND);
+                renderIndex(guiGraphics, mouseX, mouseY);
+            }
+            case 1 -> {
+                //render help page
+                renderImage(guiGraphics, BACKGROUND_BASICS);
+                renderTheBasics(guiGraphics, mouseX, mouseY);
+            }
+            case 2 -> {
+                //render entries
+                renderImage(guiGraphics, BACKGROUND_ENTRY);
+                renderEntry(guiGraphics, mouseX, mouseY, 52, page * 2);
+                renderEntry(guiGraphics, mouseX, mouseY, 212, page * 2 + 1);
 
-        //render help page
-        if (menu == 1) {
-            renderImage(guiGraphics, BACKGROUND_BASICS);
-            renderTheBasics(guiGraphics, mouseX, mouseY);
+            }
         }
-
-        //render entries
-        if (menu == 2) {
-            renderImage(guiGraphics, BACKGROUND_ENTRY);
-            renderEntry(guiGraphics, mouseX, mouseY, 52, page * 2);
-            renderEntry(guiGraphics, mouseX, mouseY, 212, page * 2 + 1);
-        }
-
 
         double x = mouseX - leftPos;
         double y = mouseY - topPos;
@@ -838,86 +810,71 @@ public class FishingGuideScreen extends Screen {
     private void renderTheBasics(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         renderHelpText(guiGraphics);
 
-        if (page == 0) {
-            renderImage(guiGraphics, HELP_PAGE_1);
-            renderItem(basics, leftPos + 166, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.basics"), leftPos + 80, topPos + 45, 0xff000000, false);
-        }
+        switch (page) {
+            case 0 -> {
+                renderImage(guiGraphics, HELP_PAGE_1);
+                renderItem(basics, leftPos + 166, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.basics"), leftPos + 80, topPos + 45, 0xff000000, false);
+            }
+            case 1 -> {
+                renderImage(guiGraphics, HELP_PAGE_2);
+                renderItem(treasures, leftPos + 166, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.treasures"), leftPos + 80, topPos + 45, 0xff000000, false);
+            }
+            case 2 -> {
+                renderImage(guiGraphics, HELP_PAGE_3);
 
-        if (page == 1) {
-            renderImage(guiGraphics, HELP_PAGE_2);
-            renderItem(treasures, leftPos + 166, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.treasures"), leftPos + 80, topPos + 45, 0xff000000, false);
-        }
-
-        if (page == 2) {
-            renderImage(guiGraphics, HELP_PAGE_3);
-
-            //hooks
-            renderItem(ironHook, leftPos + 166, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.hooks"), leftPos + 80, topPos + 45, 0xff000000, false);
-
-            renderItemWithOutlineAndHover(guiGraphics, ironHook, 56, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, goldHook, 84, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, shinyHook, 112, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, crystalHook, 140, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, heavyHook, 168, 157, mouseX, mouseY);
-
-            renderItemWithOutlineAndHover(guiGraphics, mossyHook, 67, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, splitHook, 99, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, stoneHook, 131, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, stabHook, 163, 182, mouseX, mouseY);
-
-            //bobbers
-            renderItem(frugalBobber, leftPos + 321, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.bobbers"), leftPos + 228, topPos + 45, 0xff000000, false);
-
-            renderItemWithOutlineAndHover(guiGraphics, creeperBobber, 220, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, glitterBobber, 248, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, colorfulBobber, 276, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, frugalBobber, 304, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, clearBobber, 332, 157, mouseX, mouseY);
-
-            renderItemWithOutlineAndHover(guiGraphics, steadyBobber, 233, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, impatientBobber, 265, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, frogBobber, 297, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, kimbeBobber, 329, 182, mouseX, mouseY);
-        }
-
-        if (page == 3) {
-            renderImage(guiGraphics, HELP_PAGE_4);
-
-            //bait
-            renderItem(cherryBait, leftPos + 166, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.baits"), leftPos + 80, topPos + 45, 0xff000000, false);
-
-            renderItemWithOutlineAndHover(guiGraphics, cherryBait, 56, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, lushBait, 94, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, dripstoneBait, 132, 157, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, murkwaterBait, 170, 157, mouseX, mouseY);
-
-            renderItemWithOutlineAndHover(guiGraphics, sculkBait, 76, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, legendaryBait, 113, 182, mouseX, mouseY);
-            renderItemWithOutlineAndHover(guiGraphics, meteorologicalBait, 150, 182, mouseX, mouseY);
+                //hooks
+                renderItem(ironHook, leftPos + 166, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.hooks"), leftPos + 80, topPos + 45, 0xff000000, false);
 
 
-            //gadgets
-            renderItem(fishSpotter, leftPos + 321, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.gadgets"), leftPos + 228, topPos + 45, 0xff000000, false);
-            renderItemWithOutlineAndHover(guiGraphics, fishSpotter, 276, 170, mouseX, mouseY);
-        }
+                for (int i = 0; i < hooks.length; i++) {
+                    renderItemWithOutlineAndHover(guiGraphics, hooks[i], 56 + i * 28, 157, mouseX, mouseY);
+                }
 
-        if (page == 4) {
-            renderImage(guiGraphics, HELP_PAGE_5);
+                //bobbers
+                renderItem(frugalBobber, leftPos + 321, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.bobbers"), leftPos + 228, topPos + 45, 0xff000000, false);
 
-            //trophies
-            renderItem(trophies, leftPos + 166, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.trophies"), leftPos + 80, topPos + 45, 0xff000000, false);
-            renderTrophies(guiGraphics, mouseX, mouseY);
+                for (int i = 0; i < bobbers.length; i++) {
+                    renderItemWithOutlineAndHover(guiGraphics, bobbers[i], 220 + i * 28, 157, mouseX, mouseY);
+                }
+            }
+            case 3 -> {
+                renderImage(guiGraphics, HELP_PAGE_4);
 
-            renderItem(secrets, leftPos + 321, topPos + 39, 1);
-            guiGraphics.drawString(this.font, Component.translatable("gui.guide.secrets"), leftPos + 228, topPos + 45, 0xff000000, false);
-            renderSecrets(guiGraphics, mouseX, mouseY);
+                //bait
+                renderItem(cherryBait, leftPos + 166, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.baits"), leftPos + 80, topPos + 45, 0xff000000, false);
+
+                renderItemWithOutlineAndHover(guiGraphics, cherryBait, 56, 157, mouseX, mouseY);
+                renderItemWithOutlineAndHover(guiGraphics, lushBait, 94, 157, mouseX, mouseY);
+                renderItemWithOutlineAndHover(guiGraphics, dripstoneBait, 132, 157, mouseX, mouseY);
+                renderItemWithOutlineAndHover(guiGraphics, murkwaterBait, 170, 157, mouseX, mouseY);
+
+                renderItemWithOutlineAndHover(guiGraphics, sculkBait, 76, 182, mouseX, mouseY);
+                renderItemWithOutlineAndHover(guiGraphics, legendaryBait, 113, 182, mouseX, mouseY);
+                renderItemWithOutlineAndHover(guiGraphics, meteorologicalBait, 150, 182, mouseX, mouseY);
+
+
+                //gadgets
+                renderItem(fishSpotter, leftPos + 321, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.gadgets"), leftPos + 228, topPos + 45, 0xff000000, false);
+                renderItemWithOutlineAndHover(guiGraphics, fishSpotter, 276, 170, mouseX, mouseY);
+            }
+            case 4 -> {
+                renderImage(guiGraphics, HELP_PAGE_5);
+
+                //trophies
+                renderItem(trophies, leftPos + 166, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.trophies"), leftPos + 80, topPos + 45, 0xff000000, false);
+                renderTrophies(guiGraphics, mouseX, mouseY);
+
+                renderItem(secrets, leftPos + 321, topPos + 39, 1);
+                guiGraphics.drawString(this.font, Component.translatable("gui.guide.secrets"), leftPos + 228, topPos + 45, 0xff000000, false);
+                renderSecrets(guiGraphics, mouseX, mouseY);
+            }
         }
     }
 
@@ -1339,13 +1296,11 @@ public class FishingGuideScreen extends Screen {
 
             if (fp.wr().dims().isEmpty()) {
                 comp = Component.translatable("gui.guide.no_restriction");
-            }
-            else {
+            } else {
                 //if there's only one dimension
                 if (fp.wr().dims().size() == 1) {
                     comp = Component.translatable("dimension." + fp.wr().dims().get(0).toLanguageKey());
-                }
-                else {
+                } else {
                     comp = Component.translatable("gui.guide.hover");
 
                     //show tooltip while hovering
@@ -1364,8 +1319,7 @@ public class FishingGuideScreen extends Screen {
 
             if (fp.wr().dims().isEmpty()) {
                 comp = comp.copy().withStyle(Style.EMPTY.withColor(0x40752c));
-            }
-            else {
+            } else {
                 if (fp.wr().dims().contains(level.dimension().location()))
                     comp = comp.copy().withStyle(Style.EMPTY.withColor(0x40752c));
                 else
@@ -1406,8 +1360,7 @@ public class FishingGuideScreen extends Screen {
             MutableComponent comp;
             if (biomes.isEmpty()) {
                 comp = Component.translatable("gui.guide.no_restriction");
-            }
-            else {
+            } else {
                 //if there's only one biome
                 if (biomes.size() == 1) {
                     comp = Component.translatable("biome." + biomes.get(0).toLanguageKey());
@@ -1434,8 +1387,7 @@ public class FishingGuideScreen extends Screen {
 
                         guiGraphics.renderTooltip(this.font, c, Optional.empty(), mouseX, mouseY);
                     }
-                }
-                else {
+                } else {
                     comp = Component.translatable("gui.guide.hover");
 
                     //show tooltip while hovering
@@ -1503,8 +1455,7 @@ public class FishingGuideScreen extends Screen {
                     this.font,
                     Component.translatable("gui.guide.bait").append(Component.translatable("gui.guide.no_restriction")),
                     leftPos + xOffset, topPos + yOffset, 0x635040, false);
-        }
-        else {
+        } else {
             ItemStack bait = new ItemStack(BuiltInRegistries.ITEM.get(fp.br().correctBait().get(0)));
             int bonus = fp.br().correctBaitChanceAdded() / fp.baseChance() * 100;
             Component extra = Component.literal(" (+" + bonus + "%)");
@@ -1516,8 +1467,7 @@ public class FishingGuideScreen extends Screen {
                                 .append(Tooltips.RGBEachLetter(I18n.get(bait.getDescriptionId())))
                                 .append(extra),
                         leftPos + xOffset, topPos + yOffset, 0x635040, false);
-            }
-            else {
+            } else {
                 guiGraphics.drawString(
                         this.font,
                         Component.translatable("gui.guide.bait")
@@ -1541,8 +1491,7 @@ public class FishingGuideScreen extends Screen {
 
             if (fp.weather() == FishProperties.Weather.ALL) {
                 comp = Component.translatable("gui.guide.no_restriction").withStyle(Style.EMPTY.withColor(0x635040));
-            }
-            else {
+            } else {
                 comp = Component.translatable("gui.guide.no_restriction");
                 if (fp.weather() == FishProperties.Weather.RAIN) {
                     if (level.getRainLevel(0) > 0.5)
@@ -1580,8 +1529,7 @@ public class FishingGuideScreen extends Screen {
 
             if (fp.daytime() == FishProperties.Daytime.ALL) {
                 comp = Component.translatable("gui.guide.no_restriction").withStyle(Style.EMPTY.withColor(0x635040));
-            }
-            else {
+            } else {
                 long time = level.getDayTime() % 24000;
 
                 comp = switch (fp.daytime()) {
@@ -1713,8 +1661,7 @@ public class FishingGuideScreen extends Screen {
 
             pose.scale(16F * scale, -16F * scale, 16F * scale);
             boolean usesBlockLight = !bakedmodel.usesBlockLight();
-            if (usesBlockLight)
-            {
+            if (usesBlockLight) {
                 Lighting.setupForFlatItems();
             }
 
@@ -1780,24 +1727,28 @@ public class FishingGuideScreen extends Screen {
         treasures = new ItemStack(ModItems.WATERLOGGED_SATCHEL.get());
 
         ironHook = new ItemStack(ModItems.HOOK.get());
-        shinyHook = new ItemStack(ModItems.SHINY_HOOK.get());
-        goldHook = new ItemStack(ModItems.GOLD_HOOK.get());
-        mossyHook = new ItemStack(ModItems.MOSSY_HOOK.get());
-        crystalHook = new ItemStack(ModItems.CRYSTAL_HOOK.get());
-        heavyHook = new ItemStack(ModItems.HEAVY_HOOK.get());
-        stoneHook = new ItemStack(ModItems.STONE_HOOK.get());
-        splitHook = new ItemStack(ModItems.SPLIT_HOOK.get());
-        stabHook = new ItemStack(ModItems.STABILIZING_HOOK.get());
+        hooks = new ItemStack[9];
+        hooks[0] = ironHook;
+        hooks[1] = new ItemStack(ModItems.SHINY_HOOK.get());
+        hooks[2] = new ItemStack(ModItems.GOLD_HOOK.get());
+        hooks[3] = new ItemStack(ModItems.MOSSY_HOOK.get());
+        hooks[4] = new ItemStack(ModItems.CRYSTAL_HOOK.get());
+        hooks[5] = new ItemStack(ModItems.HEAVY_HOOK.get());
+        hooks[6] = new ItemStack(ModItems.STONE_HOOK.get());
+        hooks[7] = new ItemStack(ModItems.SPLIT_HOOK.get());
+        hooks[8] = new ItemStack(ModItems.STABILIZING_HOOK.get());
 
         frugalBobber = new ItemStack(ModItems.FRUGAL_BOBBER.get());
-        creeperBobber = new ItemStack(ModItems.CREEPER_BOBBER.get());
-        glitterBobber = new ItemStack(ModItems.GLITTER_BOBBER.get());
-        colorfulBobber = new ItemStack(ModItems.COLORFUL_BOBBER.get());
-        steadyBobber = new ItemStack(ModItems.STEADY_BOBBER.get());
-        impatientBobber = new ItemStack(ModItems.IMPATIENT_BOBBER.get());
-        frogBobber = new ItemStack(ModItems.FROG_BOBBER.get());
-        kimbeBobber = new ItemStack(ModItems.KIMBE_BOBBER.get());
-        clearBobber = new ItemStack(ModItems.CLEAR_BOBBER.get());
+        bobbers = new ItemStack[9];
+        bobbers[0] = frugalBobber;
+        bobbers[1] = new ItemStack(ModItems.CREEPER_BOBBER.get());
+        bobbers[2] = new ItemStack(ModItems.GLITTER_BOBBER.get());
+        bobbers[3] = new ItemStack(ModItems.COLORFUL_BOBBER.get());
+        bobbers[4] = new ItemStack(ModItems.STEADY_BOBBER.get());
+        bobbers[5] = new ItemStack(ModItems.IMPATIENT_BOBBER.get());
+        bobbers[6] = new ItemStack(ModItems.FROG_BOBBER.get());
+        bobbers[7] = new ItemStack(ModItems.KIMBE_BOBBER.get());
+        bobbers[8] = new ItemStack(ModItems.CLEAR_BOBBER.get());
 
         cherryBait = new ItemStack(ModItems.CHERRY_BAIT.get());
         lushBait = new ItemStack(ModItems.LUSH_BAIT.get());
