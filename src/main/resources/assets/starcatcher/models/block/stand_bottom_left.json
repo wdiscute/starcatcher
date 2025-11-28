@@ -2,6 +2,7 @@
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
 	"texture_size": [32, 32],
+	"render_type" : "cutout",
 	"textures": {
 		"1": "starcatcher:block/stand",
 		"3": "starcatcher:block/bucket",

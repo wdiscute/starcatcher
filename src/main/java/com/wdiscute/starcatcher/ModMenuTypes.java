@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.starcatcher.rod.FishingRodMenu;
+import com.wdiscute.starcatcher.tournament.StandMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
@@ -19,6 +20,9 @@ public class ModMenuTypes
 
     public static final Supplier<MenuType<FishingRodMenu>> FISHING_ROD_MENU =
             registerMenuType("fishing_rod_menu", FishingRodMenu::new);
+
+    public static final Supplier<MenuType<StandMenu>> STAND_MENU =
+            registerMenuType("stand_menu", StandMenu::new);
 
 
     private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,

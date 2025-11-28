@@ -1,13 +1,24 @@
 package com.wdiscute.starcatcher.networkandcodecs;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.tournament.Tournament;
+import com.wdiscute.starcatcher.tournament.TournamentPlayerScore;
+import com.wdiscute.starcatcher.tournament.TournamentSettings;
 import io.netty.buffer.ByteBuf;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.core.UUIDUtil;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.players.GameProfileCache;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
+import java.util.UUID;
 
 
 public class Payloads
@@ -88,6 +99,32 @@ public class Payloads
                 ByteBufCodecs.fromCodec(FishProperties.LIST_CODEC),
                 FPsSeen::fps,
                 FPsSeen::new
+        );
+
+        @Override
+        public Type<? extends CustomPacketPayload> type() {
+            return TYPE;
+        }
+    }
+
+    public record TournamentDataToClient(List<GameProfile> listSignups, Tournament tour) implements CustomPacketPayload
+    {
+
+        public static final StreamCodec<ByteBuf, GameProfile> GAME_PROFILE_STREAM_CODEC = StreamCodec.composite(
+                UUIDUtil.STREAM_CODEC, GameProfile::getId,
+                ByteBufCodecs.STRING_UTF8, GameProfile::getName,
+                GameProfile::new
+        );
+
+        public static final StreamCodec<ByteBuf, List<GameProfile>> GAME_PROFILE_STREAM_CODEC_LIST = GAME_PROFILE_STREAM_CODEC.apply(ByteBufCodecs.list());
+
+
+        public static final Type<TournamentDataToClient> TYPE = new Type<>(Starcatcher.rl("tour"));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, TournamentDataToClient> STREAM_CODEC = StreamCodec.composite(
+                GAME_PROFILE_STREAM_CODEC_LIST, TournamentDataToClient::listSignups,
+                Tournament.STREAM_CODEC, TournamentDataToClient::tour,
+                TournamentDataToClient::new
         );
 
         @Override

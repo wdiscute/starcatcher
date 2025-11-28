@@ -4,6 +4,9 @@ import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
+import com.wdiscute.starcatcher.tournament.StandScreen;
+import com.wdiscute.starcatcher.tournament.Tournament;
+import com.wdiscute.starcatcher.tournament.TournamentHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -25,8 +28,7 @@ import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class PayloadReceiver
 {
@@ -76,8 +78,10 @@ public class PayloadReceiver
                         //award fish counter
                         FishCaughtCounter.AwardFishCaughtCounter(fbe.fpToFish, player, data.time(), size, weight, data.perfectCatch());
 
+                        TournamentHandler.addScore(player, fp, data.perfectCatch());
+
                         //split hook double drops
-                        if(data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);
+                        if (data.perfectCatch() && fbe.hook.is(ModItems.SPLIT_HOOK)) is.setCount(2);
 
                         //make ItemEntities for fish and treasure
                         ItemEntity itemFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, is);
@@ -93,7 +97,7 @@ public class PayloadReceiver
 
                         //add itemEntities to level
                         level.addFreshEntity(itemFished);
-                        if(data.completedTreasure()) level.addFreshEntity(treasureFished);
+                        if (data.completedTreasure()) level.addFreshEntity(treasureFished);
 
                         //play sound
                         Vec3 p = player.position();
@@ -106,11 +110,12 @@ public class PayloadReceiver
 
                         //award exp
                         int exp = 4;
-                        if(fp.rarity() == FishProperties.Rarity.UNCOMMON) exp = 8;
-                        if(fp.rarity() == FishProperties.Rarity.RARE) exp = 12;
-                        if(fp.rarity() == FishProperties.Rarity.EPIC) exp = 20;
-                        if(fp.rarity() == FishProperties.Rarity.LEGENDARY) exp = 35;
-                        if(fbe.hook.is(ModItems.GOLD_HOOK)) exp *= (int) ((double) data.hits() / 3) + 1; //extra exp if gold hook is used
+                        if (fp.rarity() == FishProperties.Rarity.UNCOMMON) exp = 8;
+                        if (fp.rarity() == FishProperties.Rarity.RARE) exp = 12;
+                        if (fp.rarity() == FishProperties.Rarity.EPIC) exp = 20;
+                        if (fp.rarity() == FishProperties.Rarity.LEGENDARY) exp = 35;
+                        if (fbe.hook.is(ModItems.GOLD_HOOK))
+                            exp *= (int) ((double) data.hits() / 3) + 1; //extra exp if gold hook is used
                         player.giveExperiencePoints(exp);
 
                     }
@@ -135,13 +140,26 @@ public class PayloadReceiver
         List<FishProperties> list = context.player().getData(ModDataAttachments.FISHES_NOTIFICATION);
         List<FishProperties> newList = new ArrayList<>();
 
-        for(FishProperties fp : list)
+        for (FishProperties fp : list)
         {
-            if(!data.fps().contains(fp))
+            if (!data.fps().contains(fp))
                 newList.add(fp);
         }
 
         context.player().setData(ModDataAttachments.FISHES_NOTIFICATION, newList);
+    }
+
+    public static void receiveTournamentData(final Payloads.TournamentDataToClient data, final IPayloadContext context)
+    {
+        clientReceiveTournamentData(data, context);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    public static void clientReceiveTournamentData(final Payloads.TournamentDataToClient data, final IPayloadContext context)
+    {
+        StandScreen.tournamentCache = data.tour();
+        StandScreen.gameProfilesCache = new HashMap<>();
+        data.listSignups().forEach(e -> StandScreen.gameProfilesCache.put(e.getId(), e.getName()));
     }
 
     public static void receiveFishCaught(final Payloads.FishCaughtPayload data, final IPayloadContext context)

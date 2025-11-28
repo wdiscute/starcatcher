@@ -16,6 +16,7 @@ import com.wdiscute.starcatcher.particles.FishingBitingLavaParticles;
 import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.rod.FishingRodScreen;
+import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.Tournament;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
 import net.minecraft.client.Minecraft;
@@ -36,6 +37,7 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.*;
@@ -123,11 +125,11 @@ public class Starcatcher
     public static class ModEvents
     {
 
-        public static void levelTick(LevelTickEvent.Post event)
+        @SubscribeEvent
+        public static void levelTick(ServerTickEvent.Post event)
         {
             TournamentHandler.tick(event);
         }
-
 
         @SubscribeEvent
         public static void addRegistry(DataPackRegistryEvent.NewRegistry event)
@@ -173,6 +175,12 @@ public class Starcatcher
                     Payloads.FPsSeen.TYPE,
                     Payloads.FPsSeen.STREAM_CODEC,
                     PayloadReceiver::receiveFPsSeen
+            );
+
+            registrar.playToClient(
+                    Payloads.TournamentDataToClient.TYPE,
+                    Payloads.TournamentDataToClient.STREAM_CODEC,
+                    PayloadReceiver::receiveTournamentData
             );
 
         }
@@ -331,6 +339,7 @@ public class Starcatcher
         public static void registerScreens(RegisterMenuScreensEvent event)
         {
             event.register(ModMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
+            event.register(ModMenuTypes.STAND_MENU.get(), StandScreen::new);
         }
 
         @SubscribeEvent

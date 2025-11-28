@@ -1,13 +1,24 @@
 package com.wdiscute.starcatcher.blocks;
 
+import com.mojang.authlib.GameProfile;
+import com.wdiscute.starcatcher.ModMenuTypes;
+import com.wdiscute.starcatcher.networkandcodecs.Payloads;
+import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
+import com.wdiscute.starcatcher.tournament.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.players.GameProfileCache;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -28,7 +39,14 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.Nullable;
+
+import javax.swing.plaf.synth.SynthUI;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 
 public class StandBlock extends Block implements EntityBlock
 {
@@ -38,7 +56,110 @@ public class StandBlock extends Block implements EntityBlock
 
     public StandBlock()
     {
-        super(BlockBehaviour.Properties.of().noOcclusion());
+        super(Properties.of().noOcclusion());
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    {
+
+
+        ItemStack diamonds3 = new ItemStack(Items.DIAMOND);
+        diamonds3.setCount(3);
+
+        ItemStack gold2 = new ItemStack(Items.GOLD_INGOT);
+        diamonds3.setCount(2);
+
+        List<SingleStackContainer> listSSC = List.of(new SingleStackContainer(diamonds3), new SingleStackContainer(gold2));
+
+        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (state.getValue(PART) == StandPart.BOTTOM_RIGHT)
+        {
+            if (level.getBlockEntity(pos) instanceof StandBlockEntity sbe)
+            {
+                if (sbe.tournament == null)
+                {
+                    sbe.tournament =
+                            new Tournament(
+                                    "Unnamed Tourney" + level.getGameTime() % 100,
+                                    Tournament.Status.SETUP,
+                                    player.getUUID(),
+                                    new HashMap<>()
+                                    {{
+                                        put(player.getUUID(), TournamentPlayerScore.empty());
+                                    }},
+                                    new TournamentSettings(
+                                            TournamentSettings.Type.SIMPLE,
+                                            0,
+                                            0,
+                                            listSSC),
+                                    SingleStackContainer.EMPTY_LIST,
+                                    level.getServer().getTickCount() + 200
+                            );
+                }
+
+                player.openMenu(new SimpleMenuProvider(sbe, Component.empty()), pos);
+
+                List<GameProfile> list = new ArrayList<>();
+
+                for (var entry : sbe.tournament.getPlayerScores().entrySet())
+                {
+                    GameProfileCache profileCache = level.getServer().getProfileCache();
+                    if(profileCache != null)
+                    {
+                        Optional<GameProfile> gameProfile = profileCache.get(entry.getKey());
+                        gameProfile.ifPresent(list::add);
+                    }
+                }
+
+                PacketDistributor.sendToPlayer(
+                        ((ServerPlayer) player),
+                        new Payloads.TournamentDataToClient(list, sbe.tournament));
+            }
+        }
+
+        if (state.getValue(PART) == StandPart.BOTTOM_RIGHT)
+        {
+            Direction direction = level.getBlockState(pos).getValue(FACING);
+
+//            level.setBlock(
+//                    pos.above(), state
+//                            .setValue(PART, StandPart.TOP_LEFT)
+//                            .setValue(FACING, direction), 3);
+//
+//            level.setBlock(
+//                    pos.relative(direction.getCounterClockWise()), state
+//                            .setValue(PART, StandPart.BOTTOM_RIGHT)
+//                            .setValue(FACING, direction), 3);
+//
+//            level.setBlock(
+//                    pos.above().relative(direction.getCounterClockWise()), state
+//                            .setValue(PART, StandPart.TOP_RIGHT)
+//                            .setValue(FACING, direction), 3);
+        }
+
+        return InteractionResult.SUCCESS;
+
+
+//        TournamentHandler.addTournament(
+//                new Tournament("wd's tourney",
+//                        Tournament.Status.ACTIVE,
+//                        player.getUUID(),
+//                        new HashMap<>(){{
+//                            put(player.getUUID(), TournamentPlayerScore.empty());
+//                        }},
+//                        new TournamentSettings(TournamentSettings.Type.SIMPLE, 0, 0),
+//                        SingleStackContainer.EMPTY_LIST,
+//                        level.getServer().getTickCount() + 200
+//                        )
+//        );
+
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    {
+        return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -48,28 +169,28 @@ public class StandBlock extends Block implements EntityBlock
 
         Direction direction = state.getValue(FACING);
 
-        if(state.getValue(PART) == StandPart.BOTTOM_LEFT)
+        if (state.getValue(PART) == StandPart.BOTTOM_LEFT)
         {
             level.destroyBlock(pos.above(), false);
             level.destroyBlock(pos.relative(direction.getCounterClockWise()), false);
             level.destroyBlock(pos.relative(direction.getCounterClockWise()).above(), false);
         }
 
-        if(state.getValue(PART) == StandPart.BOTTOM_RIGHT)
+        if (state.getValue(PART) == StandPart.BOTTOM_RIGHT)
         {
             level.destroyBlock(pos.above(), false);
             level.destroyBlock(pos.relative(direction.getClockWise()), false);
             level.destroyBlock(pos.relative(direction.getClockWise()).above(), false);
         }
 
-        if(state.getValue(PART) == StandPart.TOP_LEFT)
+        if (state.getValue(PART) == StandPart.TOP_LEFT)
         {
             level.destroyBlock(pos.below(), false);
             level.destroyBlock(pos.relative(direction.getCounterClockWise()), false);
             level.destroyBlock(pos.relative(direction.getCounterClockWise()).below(), false);
         }
 
-        if(state.getValue(PART) == StandPart.TOP_RIGHT)
+        if (state.getValue(PART) == StandPart.TOP_RIGHT)
         {
             level.destroyBlock(pos.above(), false);
             level.destroyBlock(pos.relative(direction.getClockWise()), false);
@@ -109,15 +230,18 @@ public class StandBlock extends Block implements EntityBlock
         {
             Direction direction = level.getBlockState(pos).getValue(FACING);
 
-            level.setBlock(pos.above(), state
+            level.setBlock(
+                    pos.above(), state
                             .setValue(PART, StandPart.TOP_LEFT)
                             .setValue(FACING, direction), 3);
 
-            level.setBlock(pos.relative(direction.getCounterClockWise()), state
+            level.setBlock(
+                    pos.relative(direction.getCounterClockWise()), state
                             .setValue(PART, StandPart.BOTTOM_RIGHT)
                             .setValue(FACING, direction), 3);
 
-            level.setBlock(pos.above().relative(direction.getCounterClockWise()), state
+            level.setBlock(
+                    pos.above().relative(direction.getCounterClockWise()), state
                             .setValue(PART, StandPart.TOP_RIGHT)
                             .setValue(FACING, direction), 3);
         }

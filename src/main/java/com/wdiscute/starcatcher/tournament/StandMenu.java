@@ -1,23 +1,39 @@
-package com.wdiscute.starcatcher.rod;
+package com.wdiscute.starcatcher.tournament;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
 import com.wdiscute.starcatcher.ModMenuTypes;
-import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.StarcatcherTags;
+import com.wdiscute.starcatcher.blocks.ModBlocks;
+import com.wdiscute.starcatcher.blocks.StandBlock;
+import com.wdiscute.starcatcher.blocks.StandBlockEntity;
 import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ClickType;
+import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.inventory.Slot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.items.ItemStackHandler;
 import net.neoforged.neoforge.items.SlotItemHandler;
+import org.jetbrains.annotations.Nullable;
 
-public class FishingRodMenu extends AbstractContainerMenu
+import java.util.List;
+import java.util.UUID;
+
+public class StandMenu extends AbstractContainerMenu
 {
-    public final ItemStackHandler inventory = new ItemStackHandler(3)
+
+    public final StandBlockEntity sbe;
+    public final Level level;
+
+    public final ItemStackHandler inventory = new ItemStackHandler(99)
     {
         @Override
         protected int getStackLimit(int slot, ItemStack stack)
@@ -26,102 +42,70 @@ public class FishingRodMenu extends AbstractContainerMenu
         }
 
     };
-
-    public final ItemStack is;
-
-    public FishingRodMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
+    public StandMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
-        this(containerId, inv, inv.player.getMainHandItem());
-        System.out.println(extraData);
-    }
+        this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
 
-    public FishingRodMenu(int containerId, Inventory inv, ItemStack itemStack)
-    {
-        super(ModMenuTypes.FISHING_ROD_MENU.get(), containerId);
+//        //uuid inventory
+//        for (int i = 0; i < 3; ++i)
+//        {
+//            for (int l = 0; l < 9; ++l)
+//            {
+//                this.addSlot(new Slot(inv, l + i * 9 + 9, 80 + l * 18, 10 + i * 18));
+//            }
+//        }
+//
+//        //uuid hotbar
+//        for (int i = 0; i < 9; ++i)
+//        {
+//            this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
+//        }
 
-        is = itemStack;
-
-        //uuid inventory
         for (int i = 0; i < 3; ++i)
         {
-            for (int l = 0; l < 9; ++l)
+            for (int l = 0; l < 3; ++l)
             {
-                this.addSlot(new Slot(inv, l + i * 9 + 9, 8 + l * 18, 84 + i * 18));
+                this.addSlot(new SlotItemHandler(inventory, i * 3 + l, 135 + l * 18, 67 + i * 18)
+                {
+                    @Override
+                    public boolean mayPickup(Player playerIn)
+                    {
+                        return false;
+                    }
+                });
+                inventory.setStackInSlot(i * 3 + l, new ItemStack(Items.DIAMOND));
             }
         }
-        //uuid hotbar
-        for (int i = 0; i < 9; ++i)
-        {
-            this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
-        }
 
-        inventory.setStackInSlot(0, is.get(ModDataComponents.BOBBER.get()).stack().copy());
-        inventory.setStackInSlot(1, is.get(ModDataComponents.BAIT.get()).stack().copy());
-        inventory.setStackInSlot(2, is.get(ModDataComponents.HOOK.get()).stack().copy());
-
-        this.addSlot(new SlotItemHandler(inventory, 0, 50, 35)
-        {
-            @Override
-            public boolean mayPlace(ItemStack stack)
-            {
-                return stack.is(StarcatcherTags.BOBBERS);
-            }
-        });
-        this.addSlot(new SlotItemHandler(inventory, 1, 80, 35)
-        {
-            @Override
-            public boolean mayPlace(ItemStack stack)
-            {
-                return !stack.is(StarcatcherTags.HOOKS) && !stack.is(StarcatcherTags.BOBBERS);
-            }
-        });
-        this.addSlot(new SlotItemHandler(inventory, 2, 110, 35)
-        {
-            @Override
-            public boolean mayPlace(ItemStack stack)
-            {
-                return stack.is(StarcatcherTags.HOOKS);
-            }
-        });
     }
 
     @Override
-    protected boolean moveItemStackTo(ItemStack stack, int startIndex, int endIndex, boolean reverseDirection)
+    public boolean clickMenuButton(Player player, int id)
     {
-        return super.moveItemStackTo(stack, startIndex, endIndex, reverseDirection);
-    }
-
-    @Override
-    public void clicked(int slotId, int button, ClickType clickType, Player player)
-    {
-        if(slotId >= 0 && this.getSlot(slotId).getItem().equals(is)) return;
-
-        if (clickType == ClickType.SWAP)
+        //six seven
+        //¯\_(ツ)¯\_
+        //
+        //_/¯(ツ)_/¯
+        if(id == 67)
         {
-            // When clickType is SWAP, the action is the hotbar number to swap it to.
-            int hotbarSlotId = 2 + 3 * 9 + button;
-            if (slotId == hotbarSlotId)
+            //if player has the items to signup and is not already signed up
+            if(sbe.tournament.settings.canSignUp(player) && !sbe.tournament.playerScores.containsKey(player.getUUID()))
             {
-                return;
+                System.out.println("signed up " + player.getName());
+                //sign up player with empty score
+                sbe.tournament.playerScores.put(player.getUUID(), TournamentPlayerScore.empty());
             }
         }
-
-        super.clicked(slotId, button, clickType, player);
+        return super.clickMenuButton(player, id);
     }
 
-    @Override
-    public void removed(Player player)
+    public StandMenu(int containerId, Inventory inv, BlockEntity blockEntity)
     {
-        super.removed(player);
-
-        if (!player.level().isClientSide)
-        {
-            is.set(ModDataComponents.BOBBER.get(), new SingleStackContainer(inventory.getStackInSlot(0)));
-            is.set(ModDataComponents.BAIT.get(), new SingleStackContainer(inventory.getStackInSlot(1)));
-            is.set(ModDataComponents.HOOK.get(), new SingleStackContainer(inventory.getStackInSlot(2)));
-        }
-
+        super(ModMenuTypes.STAND_MENU.get(), containerId);
+        sbe = ((StandBlockEntity) blockEntity);
+        level = inv.player.level();
     }
+
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
@@ -139,7 +123,7 @@ public class FishingRodMenu extends AbstractContainerMenu
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 3;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
 
 
     public ItemStack quickMoveStack(Player playerIn, int pIndex)
@@ -188,6 +172,7 @@ public class FishingRodMenu extends AbstractContainerMenu
     @Override
     public boolean stillValid(Player player)
     {
-        return player.getMainHandItem().is(ModItems.ROD.get());
+        return stillValid(ContainerLevelAccess.create(level, sbe.getBlockPos()),
+                player, ModBlocks.STAND.get());
     }
 }

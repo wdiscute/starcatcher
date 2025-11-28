@@ -2,20 +2,57 @@ package com.wdiscute.starcatcher.tournament;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
+import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
 
-public record TournamentSettings
-        (
-                Type type,
-                float perfectCatchMultiplier,
-                int missPenalty
+import java.util.List;
 
-        )
+public class TournamentSettings
 {
+    public Type type;
+    public float perfectCatchMultiplier;
+    public int missPenalty;
+    public List<SingleStackContainer> entryCost;
+
+    public boolean canSignUp(Player player)
+    {
+        boolean canSignup = true;
+        if(!entryCost.isEmpty())
+        {
+            for (SingleStackContainer ssc : entryCost)
+            {
+                if(!player.getInventory().hasAnyMatching(is -> is.is(ssc.stack().getItem()) && is.getCount() >= ssc.stack().getCount()))
+                    canSignup = false;
+            }
+        }
+        return canSignup;
+    }
+
+    public float getPerfectCatchMultiplier()
+    {
+        return perfectCatchMultiplier;
+    }
+
+    public int getMissPenalty()
+    {
+        return missPenalty;
+    }
+
+    public Type getType()
+    {
+        return type;
+    }
+
+    public List<SingleStackContainer> getEntryCost()
+    {
+        return entryCost;
+    }
+
     public enum Type implements StringRepresentable
     {
         SIMPLE("simple"),
@@ -40,20 +77,30 @@ public record TournamentSettings
         {
             return this.key;
         }
-        }
+    }
+
+    public TournamentSettings(Type type, float perfectCatchMultiplier, int missPenalty, List<SingleStackContainer> entryCost)
+    {
+        this.type = type;
+        this.perfectCatchMultiplier = perfectCatchMultiplier;
+        this.missPenalty = missPenalty;
+        this.entryCost = entryCost;
+    }
 
     public static final Codec<TournamentSettings> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Type.CODEC.optionalFieldOf("type", Type.SIMPLE).forGetter(TournamentSettings::type),
-                    Codec.FLOAT.optionalFieldOf("perfect_catch_multiplier", 0.0f).forGetter(TournamentSettings::perfectCatchMultiplier),
-                    Codec.INT.optionalFieldOf("miss_penalty", 0).forGetter(TournamentSettings::missPenalty)
+                    Type.CODEC.optionalFieldOf("type", Type.SIMPLE).forGetter(TournamentSettings::getType),
+                    Codec.FLOAT.optionalFieldOf("perfect_catch_multiplier", 0.0f).forGetter(TournamentSettings::getPerfectCatchMultiplier),
+                    Codec.INT.optionalFieldOf("miss_penalty", 0).forGetter(TournamentSettings::getMissPenalty),
+                    SingleStackContainer.LIST_CODEC.optionalFieldOf("", List.of()).forGetter(TournamentSettings::getEntryCost)
             ).apply(instance, TournamentSettings::new)
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, TournamentSettings> STREAM_CODEC = StreamCodec.composite(
-            Type.STREAM_CODEC, TournamentSettings::type,
-            ByteBufCodecs.FLOAT, TournamentSettings::perfectCatchMultiplier,
-            ByteBufCodecs.VAR_INT, TournamentSettings::missPenalty,
+            Type.STREAM_CODEC, TournamentSettings::getType,
+            ByteBufCodecs.FLOAT, TournamentSettings::getPerfectCatchMultiplier,
+            ByteBufCodecs.VAR_INT, TournamentSettings::getMissPenalty,
+            SingleStackContainer.STREAM_CODEC_LIST, TournamentSettings::getEntryCost,
             TournamentSettings::new
     );
 }
