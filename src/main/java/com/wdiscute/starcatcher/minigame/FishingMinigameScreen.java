@@ -78,6 +78,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
     boolean perfectCatch = true;
     int consecutiveHits = 0;
+    int removedZones = 0;
+    int succeededZones = 0;
 
     boolean treasureActive;
     int treasureProgress = 0;
@@ -129,7 +131,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
                 (commonUncommonRareFish) ? FishProperties.Difficulty.MEDIUM_VANISHING_MOVING : fp.dif();
 
         //base - a lot of these are now hitZone-based
-        this.pointerSpeed = difficulty.speed();
+        this.pointerSpeed = 20;
         this.penalty = difficulty.penalty();
         this.decay = difficulty.decay();
         this.hasTreasure = difficulty.treasure().hasTreasure();
@@ -152,6 +154,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         FishProperties.Difficulty.Markers markers = difficulty.markers();
 
         //TODO: This isn't hardcoded anymore, the jsons should reflect that
+/*
         if (markers.first())
             large.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.reward()).buildAndAdd(getRandomFreePosition(), fishingHitZones);
         if (markers.second())
@@ -160,6 +163,18 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             thin.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.rewardThin()).buildAndAdd(getRandomFreePosition(), fishingHitZones);
         if (markers.secondThin())
             thin.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.rewardThin()).buildAndAdd(getRandomFreePosition(), fishingHitZones);
+*/
+
+        FishingHitZone.OBESE.copy().buildAndAdd(getRandomFreePosition(), fishingHitZones);
+
+        Supplier<Boolean> zoneSpawner = () -> {
+            if (tickCount % 8 == 0){
+                FishingHitZone.OBESE.copy().buildAndAdd(getRandomFreePosition(), fishingHitZones);
+            }
+            return getTotalMisses() >= 3;
+        };
+
+        modifiers.add(zoneSpawner);
 
         hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
@@ -487,6 +502,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
     private void onSuccessfulHit(FishingHitZone zone) {
         addParticles(zone.pos, zone.type == HitZoneType.THIN ? 30 : 15, zone.isTreasure());
 
+        succeededZones++;
         completion += zone.reward;
         gracePeriod += zone.gracePeriod;
         treasureProgress += zone.treasureProgress;
@@ -528,9 +544,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
         fishingHitZones.removeIf(fishingHitZone -> {
             boolean forRemoval = fishingHitZone.forRemoval;
+            if (forRemoval) removedZones++;
+
             if (fishingHitZone.shouldRecycle && forRemoval) {
                 fishingHitZone.copy().buildAndAdd(getRandomFreePosition(), toAdd);
             }
+
             return forRemoval;
         });
 
@@ -621,6 +640,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             }
 
         }
+    }
+
+    public int getTotalMisses(){
+        return removedZones - succeededZones;
     }
 
     @Override

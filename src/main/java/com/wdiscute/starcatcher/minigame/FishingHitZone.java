@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.minigame;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.ModItems;
 import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
 import net.minecraft.client.gui.GuiGraphics;
@@ -54,6 +55,14 @@ public class FishingHitZone {
             .setRecycling(false)
             .setType(HitZoneType.FREEZE);
 
+    public static final FishingHitZone OBESE = new FishingHitZone().setForgiving(30)
+            .setRendering(makeObeseRenderConsumer(FishingMinigameScreen.TEXTURE, 0, -64))
+            .setPlaceOver(false)
+            .setPenaltyAndReward(0, 8)
+            .setRecycling(false)
+            .setVanishing(true, 0.03f, true)
+            .setType(HitZoneType.OBESE);
+
 
     HitZoneType type = HitZoneType.NORMAL;
 
@@ -80,6 +89,8 @@ public class FishingHitZone {
     boolean isMoving = false;
     float moveRate = 0;
     int moveDirection = 1; //changes moving direction (-1 or 1)
+
+    int tickCount = 0;
 
     TriConsumer<GuiGraphics, Integer, Integer> guiGraphicsConsumer;
     Consumer<FishingHitZone> onTickConsumer;
@@ -111,7 +122,7 @@ public class FishingHitZone {
 
             if (bobber.is(ModItems.CLEAR_BOBBER)) vanishRate /= 2;
 
-            setVanishing(true, vanishRate, false);
+            setVanishing(true, vanishRate, removeOnVanish);
         }
 
         if (hook.is(ModItems.STONE_HOOK)) {
@@ -142,9 +153,9 @@ public class FishingHitZone {
         float green = FastColor.ARGB32.green(color) / 255f;
         float blue = FastColor.ARGB32.blue(color) / 255f;
         float alpha = FastColor.ARGB32.alpha(color) / 255f;
-
+        
         poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos - partialTick * moveDirection * moveRate)));
+        poseStack.mulPose(Axis.ZP.rotationDegrees((float) pos - partialTick * moveDirection * moveRate));
         poseStack.translate(-centerX, -centerY, 0);
 
         RenderSystem.setShaderColor(red, green, blue, alpha * vanishValue);
@@ -155,6 +166,18 @@ public class FishingHitZone {
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1, 1, 1, 1);
         poseStack.popPose();
+    }
+
+    public static TriConsumer<GuiGraphics, Integer, Integer> makeDefaultRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
+        return (guiGraphics, width, height) -> guiGraphics.blit(
+                texture, width / 2 - 8, height / 2 - 8 - 25,
+                16, 16, uOffset, 160 + vOffset, 16, 16, 256, 256);
+    }
+
+    public static TriConsumer<GuiGraphics, Integer, Integer> makeObeseRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
+        return (guiGraphics, width, height) -> guiGraphics.blit(
+                texture, width / 2 - 8, height / 2 - 8 - 25,
+                32, 16, uOffset, 160 + vOffset, 32, 16, 256, 256);
     }
 
     public void tick() {
@@ -169,6 +192,8 @@ public class FishingHitZone {
             if (pos < 0) pos += 360;
         };
 
+        tickCount++;
+
         if (onTickConsumer != null) onTickConsumer.accept(this);
     }
 
@@ -179,12 +204,6 @@ public class FishingHitZone {
             return true;
         }
         return false;
-    }
-
-    public static TriConsumer<GuiGraphics, Integer, Integer> makeDefaultRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
-        return (guiGraphics, width, height) -> guiGraphics.blit(
-                texture, width / 2 - 8, height / 2 - 8 - 25,
-                16, 16, uOffset, 160 + vOffset, 16, 16, 256, 256);
     }
 
     public boolean isTreasure() {
