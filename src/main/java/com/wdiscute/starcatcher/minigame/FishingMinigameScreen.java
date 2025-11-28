@@ -105,8 +105,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
     int consecutiveHits = 0;
 
     boolean treasureActive;
-    int treasureProgress = Integer.MIN_VALUE;
-    int treasureProgressSmooth = Integer.MIN_VALUE;
+    int treasureProgress = 0;
+    int treasureProgressSmooth = 0;
 
     int difficultyBobberOffset = 0;
     int bigForgiving = SIZE_3;
@@ -219,7 +219,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             if (list.stream().anyMatch(zone -> !zone.canPlaceOver && (Math.abs(zone.pos - posBeingChecked) < 50 || Math.abs(zone.pos - posBeingChecked) > 310))) {
                 continue;
             }
-
+            
             return posBeingChecked;
         }
 
@@ -494,47 +494,47 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
             lastHitMarkerPos = pointerPosPrecise;
 
+            //This could be better but idk how to avoid concurrent modification
             AtomicInteger completionToAdd = new AtomicInteger(0);
             AtomicInteger gracePeriodToAdd = new AtomicInteger(0);
+            AtomicInteger treasureProgressToAdd = new AtomicInteger(0);
 
             fishingHitZones.forEach(zone -> {
                 if (zone.isHitSuccess(lastHitMarkerPos)) {
-                    addParticles(zone.pos, 15);
+                    addParticles(zone.pos, 15, zone.isTreasure());
+
                     completionToAdd.getAndAdd(zone.reward);
                     gracePeriodToAdd.getAndAdd(zone.gracePeriod);
+                    treasureProgressToAdd.getAndAdd(zone.treasureProgress);
+
+                    if (treasureProgress > 100 && zone.isTreasure()) zone.setRecycling(false);
+
                     hitSomething.set(true);
                 }
             });
 
             completion += completionToAdd.get();
             gracePeriod += gracePeriodToAdd.get();
-
-            //if hit sweet spot treasure
-            if (isHitSuccesful(pointerPosPrecise, posTreasure, treasureForgiving)) {
-                addParticles(posTreasure, 30, true);
-                posTreasure = getRandomFreePosition();
-                treasureProgress += treasureReward;
-                hitSomething.set(true);
-                //prevents spot from showing for a bit after completion
-                if (treasureProgress > 100) posTreasure = Integer.MIN_VALUE;
-            }
+            treasureProgress += treasureProgressToAdd.get();
 
 
             if (hitSomething.get()) {
                 consecutiveHits++;
-                if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive && treasureProgress == Integer.MIN_VALUE)
+                if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive)
                         ||
-                        (consecutiveHits == 3 && treasureProgress == Integer.MIN_VALUE && hook.is(ModItems.SHINY_HOOK))) {
+                        (consecutiveHits == 3 && !treasureActive && hook.is(ModItems.SHINY_HOOK))) {
                     treasureActive = true;
-                    posTreasure = getRandomFreePosition();
+
+                    FishingHitZone.TREASURE.copy().setFromProperties(fp, fp.dif(), hook, bobber).buildAndAdd(getRandomFreePosition(), fishingHitZones);
+
                     treasureProgress = 0;
                     treasureProgressSmooth = 0;
                 }
 
                 level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
                 if (changeRotation) currentRotation *= -1;
-            } else {
 
+            } else {
                 if (bobber.is(ModItems.KIMBE_BOBBER))
                     Minecraft.getInstance().player.playSound(SoundEvents.VILLAGER_NO, 1, 1);
                 kimbeColor = 1;
@@ -571,9 +571,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             return forRemoval;
         });
 
+/*
         if (tickCount % 5 == 0 && r.nextFloat() < 0.15){
             FishingHitZone.TNT.copy().buildAndAdd(getRandomFreePosition(), toAdd);
         }
+        */
 
         fishingHitZones.forEach(FishingHitZone::tick);
 
