@@ -15,6 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -27,6 +28,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.event.ScreenEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Random;
@@ -118,9 +120,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     int previousGuiScale;
 
     ResourceLocation tankTexture = SURFACE;
-
-    // Nikdo53 values, these are mine dont steal them
-    boolean isHoldingSpace = false;
 
     public FishingMinigameScreen(FishProperties fp, ItemStack rod)
     {
@@ -248,118 +247,47 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         super.renderBackground(guiGraphics, mouseX, mouseY, partialTick);
 
-        PoseStack poseStack = guiGraphics.pose();
         partial = partialTick;
 
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
+        RenderSystem.setShaderTexture(0, TEXTURE);
+
         if (treasureActive)
-            renderTreasure(guiGraphics);
+        {
+            //treasure bar
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 158, height / 2 - 42 + (int) (64 - (64f * treasureProgressSmooth) / 100),
+                    5, 64 * treasureProgressSmooth / 100,
+                    141, 6 + 64 - (float) (64 * treasureProgressSmooth) / 100,
+                    5, 64 * treasureProgressSmooth / 100,
+                    256, 256);
 
-        renderMainElements(guiGraphics, width, height, isHoldingSpace, tankTexture);
+            //treasure chest?
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
+                    32, 96, 96, 0, 32, 96, 256, 256);
 
-        //pos 1
-        if (pos1 != Integer.MIN_VALUE)
-            renderHitPos(guiGraphics, partialTick, poseStack, pos1, pos1Vanishing, false);
-
-
-        //pos 2
-        if (pos2 != Integer.MIN_VALUE)
-            renderHitPos(guiGraphics, partialTick, poseStack, pos2, pos2Vanishing, false);
-
-
-        //pos thin 1
-        if (posThin1 != Integer.MIN_VALUE)
-            renderHitPos(guiGraphics, partialTick, poseStack, posThin1, posThin1Vanishing, true);
-
-
-        //pos thin 2
-        if (posThin2 != Integer.MIN_VALUE)
-            renderHitPos(guiGraphics, partialTick, poseStack, posThin2, posThin2Vanishing, true);
+            //render treasure on top of bar
+            guiGraphics.renderItem(treasureIS, width / 2 - 163, ((int) ((float) height / 2 - (64f * treasureProgressSmooth) / 100) + 15));
 
 
 
-        //pos treasure
-        if (posTreasure != Integer.MIN_VALUE)
-            renderPosTreasure(guiGraphics, poseStack, width, height, posTreasure);
+            int color = Tooltips.hueToRGBInt(Tooltips.hue);
+            if(bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
+            if(bobber.is(ModItems.COLORFUL_BOBBER)) color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
+            if(bobber.is(ModItems.COLORFUL_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
 
+            //outline when treasure complete
+            if(treasureProgress > 99)
+                guiGraphics.blit(
+                    TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
+                    32, 96, 64, 0, 32, 96, 256, 256);
 
-        //wheel second layer
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 32, height / 2 - 32,
-                64, 64, 64, 192, 64, 64, 256, 256);
+            if(bobber.is(ModItems.COLORFUL_BOBBER) || bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor(1, 1, 1, 1);
 
-        //POINTER
-        renderPointer(guiGraphics, partialTick, poseStack);
-
-        //KIMBE MARKER
-        renderKimbeMarker(guiGraphics, poseStack);
-
-        renderDecor(guiGraphics, width, height, completionSmooth, itemBeingFished);
-
-        //particles
-        for (HitFakeParticle instance : hitParticles) {
-            renderParticle(guiGraphics, instance, poseStack, width, height);
         }
 
-
-    }
-
-    public static void renderParticle(GuiGraphics guiGraphics, HitFakeParticle instance, PoseStack poseStack, int width, int height) {
-        poseStack.pushPose();
-        poseStack.translate(instance.pos.x, instance.pos.y, 0);
-        RenderSystem.setShaderColor(instance.r, instance.g, instance.b, instance.a);
-
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 8, height / 2 - 8,
-                16, 16, 80, 160, 16, 16, 256, 256);
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        poseStack.popPose();
-    }
-
-    public static void renderPosTreasure(GuiGraphics guiGraphics, PoseStack poseStack, int width, int height, int posTreasure) {
-        poseStack.pushPose();
-
-        float centerX = width / 2f;
-        float centerY = height / 2f;
-
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posTreasure)));
-        poseStack.translate(-centerX, -centerY, 0);
-
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
-                16, 16, 64, 160, 16, 16, 256, 256);
-
-        poseStack.popPose();
-    }
-
-    public void renderHitPos(GuiGraphics guiGraphics, float partialTick, PoseStack poseStack, float hitPos, float hitPosVanishing, boolean isThin){
-        renderHitPos(guiGraphics, partialTick, poseStack, width, height, currentRotation, moveRate, difficultyBobberOffset, hitPos, hitPosVanishing, isThin);
-    }
-
-    public static void renderHitPos(GuiGraphics guiGraphics, float partialTick, PoseStack poseStack, int width, int height, int currentRotation, int moveRate, int difficultyBobberOffset ,float hitPos, float hitPosVanishing, boolean isThin) {
-        poseStack.pushPose();
-
-        float centerX = width / 2f;
-        float centerY = height / 2f;
-
-
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(hitPos - partialTick * currentRotation * moveRate)));
-        poseStack.translate(-centerX, -centerY, 0);
-        RenderSystem.setShaderColor(1, 1, 1, hitPosVanishing);
-        RenderSystem.enableBlend();
-
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
-                16, 16, (isThin ? 48 : 16) - difficultyBobberOffset, 160, 16, 16, 256, 256);
-
-        RenderSystem.disableBlend();
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        poseStack.popPose();
-    }
-
-    public static void renderMainElements(GuiGraphics guiGraphics, int width, int height, boolean isHoldingSpace, ResourceLocation tankTexture) {
         //tank background
         guiGraphics.blit(
                 tankTexture, width / 2 - 42 - 100, height / 2 - 48,
@@ -373,46 +301,182 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //spacebar
         guiGraphics.blit(
                 TEXTURE, width / 2 - 16, height / 2 + 40,
-                32, 16, isHoldingSpace ? 48 : 0, 112, 32, 16, 256, 256);
-    }
-
-    public void renderTreasure(GuiGraphics guiGraphics){
-        renderTreasure(guiGraphics, width, height, treasureProgress, treasureProgressSmooth, treasureIS, bobber);
-    }
-
-    public static void renderTreasure(GuiGraphics guiGraphics, int width, int height, float treasureProgress, int treasureProgressSmooth, ItemStack treasureIS, ItemStack bobber) {
-        //treasure bar
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 158, height / 2 - 42 + (int) (64 - (64f * treasureProgressSmooth) / 100),
-                5, 64 * treasureProgressSmooth / 100,
-                141, 6 + 64 - (float) (64 * treasureProgressSmooth) / 100,
-                5, 64 * treasureProgressSmooth / 100,
-                256, 256);
-
-        //treasure chest?
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
-                32, 96, 96, 0, 32, 96, 256, 256);
-
-        //render treasure on top of bar
-        guiGraphics.renderItem(treasureIS, width / 2 - 163, ((int) ((float) height / 2 - (64f * treasureProgressSmooth) / 100) + 15));
+                32, 16, 0, 112, 32, 16, 256, 256);
 
 
-        int color = Tooltips.hueToRGBInt(Tooltips.hue);
-        if(bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
-        if(bobber.is(ModItems.COLORFUL_BOBBER)) color = bobber.get(ModDataComponents.BOBBER_COLOR).getColorAsInt();
-        if(bobber.is(ModItems.COLORFUL_BOBBER)) RenderSystem.setShaderColor((float) FastColor.ARGB32.red(color) / 255, (float) FastColor.ARGB32.green(color) / 255, (float) FastColor.ARGB32.blue(color) / 255, 1);
+        //pos 1
+        if (pos1 != Integer.MIN_VALUE)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
 
-        //outline when treasure complete
-        if(treasureProgress > 99)
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos1 - partialTick * currentRotation * moveRate)));
+            poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, pos1Vanishing);
+            RenderSystem.enableBlend();
+
             guiGraphics.blit(
-                TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
-                32, 96, 64, 0, 32, 96, 256, 256);
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 16 - difficultyBobberOffset, 160, 16, 16, 256, 256);
 
-        if(bobber.is(ModItems.COLORFUL_BOBBER) || bobber.is(ModItems.GLITTER_BOBBER)) RenderSystem.setShaderColor(1, 1, 1, 1);
-    }
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            poseStack.popPose();
+        }
 
-    public static void renderDecor(GuiGraphics guiGraphics, int width, int height, int completionSmooth, ItemStack itemBeingFished) {
+
+        //pos 2
+        if (pos2 != Integer.MIN_VALUE)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pos2 - partialTick * currentRotation * moveRate)));
+            poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, pos2Vanishing);
+            RenderSystem.enableBlend();
+
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 16 - difficultyBobberOffset, 160, 16, 16, 256, 256);
+
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            poseStack.popPose();
+        }
+
+        //pos thin 1
+        if (posThin1 != Integer.MIN_VALUE)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin1 - partialTick * currentRotation * moveRate)));
+            poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, posThin1Vanishing);
+            RenderSystem.enableBlend();
+
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 48 - difficultyBobberOffset, 160, 16, 16, 256, 256);
+
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            poseStack.popPose();
+        }
+
+        //pos thin 2
+        if (posThin2 != Integer.MIN_VALUE)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posThin2 - partialTick * currentRotation * moveRate)));
+            poseStack.translate(-centerX, -centerY, 0);
+            RenderSystem.setShaderColor(1, 1, 1, posThin2Vanishing);
+            RenderSystem.enableBlend();
+
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 48 - difficultyBobberOffset, 160, 16, 16, 256, 256);
+
+            RenderSystem.disableBlend();
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            poseStack.popPose();
+        }
+
+        //pos treasure
+        if (posTreasure != Integer.MIN_VALUE)
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(posTreasure)));
+            poseStack.translate(-centerX, -centerY, 0);
+
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 8, height / 2 - 8 - 25,
+                    16, 16, 64, 160, 16, 16, 256, 256);
+
+            poseStack.popPose();
+        }
+
+        //wheel second layer
+        guiGraphics.blit(
+                TEXTURE, width / 2 - 32, height / 2 - 32,
+                64, 64, 64, 192, 64, 64, 256, 256);
+
+        //POINTER
+        {
+            //TODO make it not use the partial ticks from rendering thread of whatever honestly its just nerd stuff that no one will care about
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pointerPos + ((speed * partialTick) * currentRotation))));
+            poseStack.translate(-centerX, -centerY, 0);
+
+            //16 offset on y for texture centering
+            guiGraphics.blit(
+                    TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
+                    64, 64, 128, 192, 64, 64, 256, 256);
+
+            poseStack.popPose();
+        }
+
+        //KIMBE MARKER
+        {
+            PoseStack poseStack = guiGraphics.pose();
+            poseStack.pushPose();
+
+            float centerX = width / 2f;
+            float centerY = height / 2f;
+
+            poseStack.translate(centerX, centerY, 0);
+            poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(lastHitMarkerPos)));
+            poseStack.translate(-centerX, -centerY, 0);
+
+            RenderSystem.setShaderColor(1, 0, 0, kimbeColor);
+            RenderSystem.enableBlend();
+
+            //16 offset on y for texture centering
+            if (!bobber.is(ModItems.KIMBE_BOBBER))
+            {
+                guiGraphics.blit(
+                        TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
+                        64, 64, 128, 128, 64, 64, 256, 256);
+            }
+
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            RenderSystem.disableBlend();
+
+            poseStack.popPose();
+        }
+
         //silver thing on top
         guiGraphics.blit(
                 TEXTURE, width / 2 - 16, height / 2 - 16,
@@ -435,69 +499,23 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //Lies, kuko010 force me to write said comment
         //FISH
         guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - completionSmooth);
-    }
-    public void renderKimbeMarker(GuiGraphics guiGraphics, PoseStack poseStack){
-        renderKimbeMarker(guiGraphics, poseStack, width, height, kimbeColor, lastHitMarkerPos, bobber);
-    }
 
-    public static void renderKimbeMarker(GuiGraphics guiGraphics, PoseStack poseStack, int width, int height, float kimbeColor, float lastHitMarkerPos, ItemStack bobber) {
-        poseStack.pushPose();
-
-        float centerX = width / 2f;
-        float centerY = height / 2f;
-
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(lastHitMarkerPos)));
-        poseStack.translate(-centerX, -centerY, 0);
-
-        RenderSystem.setShaderColor(1, 0, 0, kimbeColor);
-        RenderSystem.enableBlend();
-
-        //16 offset on y for texture centering
-        if (!bobber.is(ModItems.KIMBE_BOBBER))
+        //particles
+        for (HitFakeParticle instance : hitParticles)
         {
+            guiGraphics.pose().pushPose();
+            guiGraphics.pose().translate(instance.pos.x, instance.pos.y, 0);
+            RenderSystem.setShaderColor(instance.r, instance.g, instance.b, instance.a);
+
             guiGraphics.blit(
-                    TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
-                    64, 64, 128, 128, 64, 64, 256, 256);
+                    TEXTURE, width / 2 - 8, height / 2 - 8,
+                    16, 16, 80, 160, 16, 16, 256, 256);
+
+            RenderSystem.setShaderColor(1, 1, 1, 1);
+            guiGraphics.pose().popPose();
         }
 
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.disableBlend();
 
-        poseStack.popPose();
-    }
-    public void renderPointer(GuiGraphics guiGraphics, float partialTick, PoseStack poseStack){
-        renderPointer(guiGraphics, partialTick, poseStack, width, height, isHoldingSpace, pointerPos, speed, currentRotation);
-    }
-
-    public static void renderPointer(GuiGraphics guiGraphics, float partialTick, PoseStack poseStack, int width, int height, boolean isHoldingSpace, int pointerPos, float speed, int currentRotation) {
-        //TODO make it not use the partial ticks from rendering thread of whatever honestly its just nerd stuff that no one will care about
-        poseStack.pushPose();
-
-        float centerX = width / 2f;
-        float centerY = height / 2f;
-
-        poseStack.translate(centerX, centerY, 0);
-       // if (isHoldingSpace) poseStack.scale(0.8f, 1f, 1f);
-
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(pointerPos + ((speed * partialTick) * currentRotation))));
-        poseStack.translate(-centerX, -centerY, 0);
-
-
-        //16 offset on y for texture centering
-        guiGraphics.blit(
-                TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
-                64, 64, 128, 192, 64, 64, 256, 256);
-
-        poseStack.popPose();
-    }
-
-    @Override
-    public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
-        if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue()){
-            isHoldingSpace = false;
-        }
-        return super.keyReleased(keyCode, scanCode, modifiers);
     }
 
     @Override
@@ -515,7 +533,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //spacebar input
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue())
         {
-            isHoldingSpace = true;
 
             if (gracePeriod > 0) gracePeriod = 0;
 
@@ -533,16 +550,17 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             lastHitMarkerPos = pointerPosPrecise;
 
             //pos 1
-            if (isHitSuccesful(pointerPosPrecise, pos1, bigForgiving)){
+            if ((Math.abs(pos1 - pointerPosPrecise) < bigForgiving || Math.abs(pos1 - pointerPosPrecise) > 360 - bigForgiving) && pos1 != Integer.MIN_VALUE)
+            {
                 addParticles(pos1, 15);
                 pos1 = getRandomFreePosition();
                 completion += reward;
                 hitSomething = true;
                 pos1Vanishing = 1;
-            };
+            }
 
             //pos2
-            if (isHitSuccesful(pointerPosPrecise, pos2, bigForgiving))
+            if ((Math.abs(pos2 - pointerPosPrecise) < bigForgiving || Math.abs(pos2 - pointerPosPrecise) > 360 - bigForgiving) && pos2 != Integer.MIN_VALUE)
             {
                 addParticles(pos2, 15);
                 pos2 = getRandomFreePosition();
@@ -552,7 +570,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos thin 1
-            if (isHitSuccesful(pointerPosPrecise, posThin1, thinForgiving))
+            if ((Math.abs(posThin1 - pointerPosPrecise) < thinForgiving || Math.abs(posThin1 - pointerPosPrecise) > 360 - thinForgiving) && posThin1 != Integer.MIN_VALUE)
             {
                 addParticles(posThin1, 30);
                 posThin1 = getRandomFreePosition();
@@ -562,7 +580,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //pos thin 2
-            if (isHitSuccesful(pointerPosPrecise, posThin2, thinForgiving))
+            if ((Math.abs(posThin2 - pointerPosPrecise) < thinForgiving || Math.abs(posThin2 - pointerPosPrecise) > 360 - thinForgiving) && posThin2 != Integer.MIN_VALUE)
             {
                 addParticles(posThin2, 30);
                 posThin2 = getRandomFreePosition();
@@ -572,7 +590,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             }
 
             //if hit sweet spot treasure
-            if (isHitSuccesful(pointerPosPrecise, posTreasure, treasureForgiving))
+            if ((Math.abs(posTreasure - pointerPosPrecise) < treasureForgiving || Math.abs(posTreasure - pointerPosPrecise) > 360 - treasureForgiving) && posTreasure != Integer.MIN_VALUE)
             {
                 addParticles(posTreasure, 30, true);
                 posTreasure = getRandomFreePosition();
@@ -627,12 +645,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
 
         return super.keyPressed(keyCode, scanCode, modifiers);
-    }
-
-    public static boolean isHitSuccesful(float pointerPosPrecise, int hitPos, int forgiving) {
-        if (hitPos == Integer.MIN_VALUE) return false;
-
-        return Math.abs(hitPos - pointerPosPrecise) < forgiving || Math.abs(hitPos - pointerPosPrecise) > 360 - forgiving;
     }
 
     @Override
