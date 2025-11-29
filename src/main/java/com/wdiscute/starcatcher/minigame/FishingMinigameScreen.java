@@ -9,6 +9,8 @@ import com.wdiscute.starcatcher.io.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.network.FishingCompletedPayload;
 import com.wdiscute.starcatcher.items.ColorfulBobber;
+import com.wdiscute.starcatcher.minigame.modifiers.AbstractFishingModifier;
+import com.wdiscute.starcatcher.minigame.modifiers.TntRainModifier;
 import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.client.Minecraft;
@@ -36,67 +38,66 @@ import org.joml.Vector2d;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.function.Supplier;
 
 public class FishingMinigameScreen extends Screen implements GuiEventListener {
-    private static final Random r = new Random();
+    public static final Random r = new Random();
 
     public static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
     private static final ResourceLocation NETHER = Starcatcher.rl("textures/gui/minigame/nether.png");
     private static final ResourceLocation CAVE = Starcatcher.rl("textures/gui/minigame/cave.png");
     private static final ResourceLocation SURFACE = Starcatcher.rl("textures/gui/minigame/surface.png");
 
-    final FishProperties fp;
-    final ItemStack itemBeingFished;
-    final ItemStack bobber;
-    final ItemStack bait;
-    final ItemStack hook;
-    final ItemStack treasureIS;
+    public final FishProperties fp;
+    public final ItemStack itemBeingFished;
+    public final ItemStack bobber;
+    public final ItemStack bait;
+    public final ItemStack hook;
+    public final ItemStack treasureIS;
 
-    final int penalty;
-    final int decay;
-    final boolean hasTreasure;
-    final boolean changeRotation;
-    final boolean isFlip;
-    final boolean isVanishing;
-    final boolean isMoving;
+    public final int penalty;
+    public final int decay;
+    public final boolean hasTreasure;
+    public final boolean changeRotation;
+    public final boolean isFlip;
+    public final boolean isVanishing;
+    public final boolean isMoving;
 
-    float lastHitMarkerPos = 0;
-    float kimbeColor = 0;
+    public float lastHitMarkerPos = 0;
+    public float kimbeColor = 0;
 
-    int gracePeriod = 80;
+    public int gracePeriod = 80;
 
-    final InteractionHand hand;
+    public final InteractionHand hand;
 
-    float pointerSpeed;
-    int pointerPos = 0;
-    int currentRotation = 1;
-    float partial;
-    float hitDelay;
+    public float pointerSpeed;
+    public int pointerPos = 0;
+    public int currentRotation = 1;
+    public float partial;
+    public float hitDelay;
 
-    int completion = 20;
-    int completionSmooth = 20;
+    public int completion = 20;
+    public int completionSmooth = 20;
 
-    boolean perfectCatch = true;
-    int consecutiveHits = 0;
-    int removedZones = 0;
-    int succeededZones = 0;
+    public boolean perfectCatch = true;
+    public int consecutiveHits = 0;
+    public int removedZones = 0;
+    public int succeededZones = 0;
 
-    boolean treasureActive;
-    int treasureProgress = 0;
-    int treasureProgressSmooth = 0;
+    public boolean treasureActive;
+    public int treasureProgress = 0;
+    public int treasureProgressSmooth = 0;
 
-    int tickCount = 0;
+    public int tickCount = 0;
     List<HitFakeParticle> hitParticles = new ArrayList<>();
 
-    int previousGuiScale;
+    public int previousGuiScale;
 
-    ResourceLocation tankTexture = SURFACE;
+    public ResourceLocation tankTexture = SURFACE;
 
     // Nikdo53 values, these are mine dont steal them
-    boolean isHoldingSpace = false;
-    List<FishingHitZone> fishingHitZones = new ArrayList<>();
-    List<Supplier<Boolean>> modifiers = new ArrayList<>(); // for making temporary modifiers
+    public boolean isHoldingSpace = false;
+    public List<FishingHitZone> fishingHitZones = new ArrayList<>();
+    public List<AbstractFishingModifier> modifiers = new ArrayList<>();
 
     public FishingMinigameScreen(FishProperties fp, ItemStack rod) {
         super(Component.empty());
@@ -124,15 +125,13 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             tankTexture = NETHER;
 
         //assign difficulty, if using mossy_hook it should make common, uncommon and rare into a harder difficulty
-        boolean commonUncommonRareFish = fp.rarity() == FishProperties.Rarity.COMMON ||
-                fp.rarity() == FishProperties.Rarity.UNCOMMON ||
-                fp.rarity() == FishProperties.Rarity.RARE;
+        boolean commonUncommonRareFish = fp.rarity().getId() < 3;
 
         FishProperties.Difficulty difficulty = hook.is(ModItems.MOSSY_HOOK) &&
                 (commonUncommonRareFish) ? FishProperties.Difficulty.MEDIUM_VANISHING_MOVING : fp.dif();
 
         //base - a lot of these are now hitZone-based
-        this.pointerSpeed = 20;
+        this.pointerSpeed = difficulty.speed();
         this.penalty = difficulty.penalty();
         this.decay = difficulty.decay();
         this.hasTreasure = difficulty.treasure().hasTreasure();
@@ -143,44 +142,38 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         this.isVanishing = difficulty.extras().isVanishing();
         this.isMoving = difficulty.extras().isMoving();
 
-        FishingHitZone large = FishingHitZone.LARGE;
-        FishingHitZone thin = FishingHitZone.THIN;
+        FishingHitZone largeZone = HitZoneType.Presets.LARGE;
+        FishingHitZone thinZone = HitZoneType.Presets.THIN;
 
         //make sweet spots fatter if difficulty bobber is being used
         if (bobber.is(ModItems.STEADY_BOBBER)) {
-            large = FishingHitZone.EXTRA_LARGE;
-            thin = FishingHitZone.MEDIUM;
+            largeZone = HitZoneType.Presets.EXTRA_LARGE;
+            thinZone = HitZoneType.Presets.MEDIUM;
+        }
+
+        if (bobber.is(ModItems.CREEPER_BOBBER)){
+            new TntRainModifier(this, -1).addModifier();
         }
 
         FishProperties.Difficulty.Markers markers = difficulty.markers();
 
         //TODO: This isn't hardcoded anymore, the jsons should reflect that
-/*
+
         if (markers.first())
-            large.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.reward()).buildAndAdd(getRandomFreePosition(), fishingHitZones);
+            largeZone.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.reward()).buildAndAdd(this);
         if (markers.second())
-            large.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.reward()).buildAndAdd(getRandomFreePosition(), fishingHitZones);
+            largeZone.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.reward()).buildAndAdd(this);
         if (markers.firstThin())
-            thin.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.rewardThin()).buildAndAdd(getRandomFreePosition(), fishingHitZones);
+            thinZone.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.rewardThin()).buildAndAdd(this);
         if (markers.secondThin())
-            thin.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.rewardThin()).buildAndAdd(getRandomFreePosition(), fishingHitZones);
-*/
+            thinZone.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.rewardThin()).buildAndAdd(this);
 
-        FishingHitZone.OBESE.copy().buildAndAdd(getRandomFreePosition(), fishingHitZones);
-
-        Supplier<Boolean> zoneSpawner = () -> {
-            if (tickCount % 8 == 0){
-                FishingHitZone.OBESE.copy().buildAndAdd(getRandomFreePosition(), fishingHitZones);
-            }
-            return getTotalMisses() >= 3;
-        };
-
-        modifiers.add(zoneSpawner);
+        HitZoneType.Presets.FREEZE.copy().setRecycling(true).buildAndAdd(this);
 
         hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
 
-    private int getRandomFreePosition() {
+    public int getRandomFreePosition() {
         for (int i = 0; i < 100; i++) {
             int posBeingChecked = r.nextInt(360);
 
@@ -192,7 +185,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             return posBeingChecked;
         }
 
-        return 0;
+        return r.nextInt(360);
     }
 
     //region render
@@ -204,8 +197,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         PoseStack poseStack = guiGraphics.pose();
         partial = partialTick;
 
-        if (treasureActive)
-            renderTreasure(guiGraphics);
+        if (treasureActive) renderTreasure(guiGraphics);
 
         renderMainElements(guiGraphics, width, height, isHoldingSpace, tankTexture);
 
@@ -226,11 +218,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
         renderDecor(guiGraphics, width, height, completionSmooth, itemBeingFished);
 
+        modifiers.forEach(modifier -> modifier.render(guiGraphics, partialTick, poseStack));
+
         //particles
         for (HitFakeParticle instance : hitParticles) {
             renderParticle(guiGraphics, instance, poseStack, width, height);
         }
-
 
     }
 
@@ -403,6 +396,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
     public static void renderPointer(GuiGraphics guiGraphics, float partialTick, PoseStack poseStack, int width, int height, boolean isHoldingSpace, int pointerPos, float speed, int currentRotation) {
         //TODO make it not use the partial ticks from rendering thread of whatever honestly its just nerd stuff that no one will care about
+        //What other partial ticks would it use??
+
         poseStack.pushPose();
 
         float centerX = width / 2f;
@@ -451,41 +446,36 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
             Minecraft.getInstance().player.swing(hand, true);
 
-            AtomicBoolean hitSomething = new AtomicBoolean(false);
+            boolean hitSomething = false;
 
             Vec3 pos = Minecraft.getInstance().player.position();
             ClientLevel level = Minecraft.getInstance().level;
 
-            float pointerPosPrecise = (pointerPos + ((pointerSpeed * partial) * currentRotation));
-
-            pointerPosPrecise += hitDelay * pointerSpeed * currentRotation;
-
-            lastHitMarkerPos = pointerPosPrecise;
+            lastHitMarkerPos = getPointerPosPrecise();
 
 
             for (FishingHitZone zone : fishingHitZones){
                 if (zone.isHitSuccess(lastHitMarkerPos)) {
                     onSuccessfulHit(zone);
 
-                    hitSomething.set(true);
+                    hitSomething = true;
                 }
             }
 
 
-            if (hitSomething.get()) {
+            if (hitSomething) {
                 consecutiveHits++;
                 if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive)
                         ||
                         (consecutiveHits == 3 && !treasureActive && hook.is(ModItems.SHINY_HOOK))) {
                     treasureActive = true;
 
-                    FishingHitZone.TREASURE.copy().setFromProperties(fp, fp.dif(), hook, bobber).buildAndAdd(getRandomFreePosition(), fishingHitZones);
+                    HitZoneType.Presets.TREASURE.copy().setFromProperties(fp, fp.dif(), hook, bobber).buildAndAdd(this);
 
                     treasureProgress = 0;
                     treasureProgressSmooth = 0;
                 }
 
-                level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.EXPERIENCE_ORB_PICKUP, SoundSource.BLOCKS, 1, 1, false);
                 if (changeRotation) currentRotation *= -1;
 
             } else {
@@ -503,32 +493,21 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
+    public float getPointerPosPrecise() {
+        float pointerPosPrecise = (pointerPos + ((pointerSpeed * partial) * currentRotation));
+
+        pointerPosPrecise += hitDelay * pointerSpeed * currentRotation;
+        return pointerPosPrecise;
+    }
+
     private void onSuccessfulHit(FishingHitZone zone) {
         addParticles(zone.pos, zone.type == HitZoneType.THIN ? 30 : 15, zone.isTreasure());
 
         succeededZones++;
-        completion += zone.reward;
+        completion += zone.hitReward;
         gracePeriod += zone.gracePeriod;
         treasureProgress += zone.treasureProgress;
 
-        if (treasureProgress > 100 && zone.isTreasure()) zone.setRecycling(false);
-
-        if (zone.type == HitZoneType.FREEZE){
-            final float previousPointerSpeed = pointerSpeed;
-            final int currentTickCount = tickCount;
-
-            pointerSpeed = 0;
-
-            Supplier<Boolean> unfreeze = () -> {
-                if (tickCount >= currentTickCount + 20){
-                    this.pointerSpeed = previousPointerSpeed;
-                    return true;
-                }
-                return false;
-            };
-
-            modifiers.add(unfreeze);
-        }
     }
 
 
@@ -551,21 +530,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             if (forRemoval) removedZones++;
 
             if (fishingHitZone.shouldRecycle && forRemoval) {
-                fishingHitZone.copy().buildAndAdd(getRandomFreePosition(), toAdd);
+                fishingHitZone.copy().buildAndAdd(this, getRandomFreePosition(), toAdd);
             }
 
             return forRemoval;
         });
 
         fishingHitZones.forEach(FishingHitZone::tick);
-
-/*        if (tickCount % 40 == 0){
-            FishingHitZone.FREEZE.copy().buildAndAdd(getRandomFreePosition(), toAdd);
-        }*/
-
         fishingHitZones.addAll(toAdd);
 
-        modifiers.removeIf(Supplier::get);
+        modifiers.removeIf(AbstractFishingModifier::tick);
 
         if (pointerPos > 360) pointerPos -= 360;
         if (pointerPos < 0) pointerPos += 360;

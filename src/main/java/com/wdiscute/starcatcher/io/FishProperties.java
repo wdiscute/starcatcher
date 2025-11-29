@@ -1168,9 +1168,9 @@ public record FishProperties(
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
                         Codec.INT.optionalFieldOf("speed", DEFAULT.speed).forGetter(Difficulty::speed),
-                        Codec.INT.optionalFieldOf("reward", DEFAULT.reward).forGetter(Difficulty::reward),
+                        Codec.INT.optionalFieldOf("hitReward", DEFAULT.reward).forGetter(Difficulty::reward),
                         Codec.INT.optionalFieldOf("reward_thin", DEFAULT.rewardThin).forGetter(Difficulty::rewardThin),
-                        Codec.INT.optionalFieldOf("penalty", DEFAULT.penalty).forGetter(Difficulty::penalty),
+                        Codec.INT.optionalFieldOf("missPenalty", DEFAULT.penalty).forGetter(Difficulty::penalty),
                         Codec.INT.optionalFieldOf("decay", DEFAULT.decay).forGetter(Difficulty::decay),
                         Markers.CODEC.optionalFieldOf("markers", DEFAULT.markers).forGetter(Difficulty::markers),
                         Treasure.CODEC.optionalFieldOf("treasure", DEFAULT.treasure).forGetter(Difficulty::treasure),
