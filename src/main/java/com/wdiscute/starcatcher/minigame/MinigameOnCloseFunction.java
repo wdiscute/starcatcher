@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.minigame;
 
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.world.item.Item;
 
 public interface MinigameOnCloseFunction

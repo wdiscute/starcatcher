@@ -1,8 +1,8 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
+import com.wdiscute.starcatcher.io.ModDataAttachments;
+import com.wdiscute.starcatcher.io.TrophyProperties;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

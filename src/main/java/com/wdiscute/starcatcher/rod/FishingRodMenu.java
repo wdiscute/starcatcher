@@ -1,10 +1,10 @@
 package com.wdiscute.starcatcher.rod;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import com.wdiscute.starcatcher.ModMenuTypes;
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.io.ModDataComponents;
+import com.wdiscute.starcatcher.registry.ModMenuTypes;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.StarcatcherTags;
-import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
+import com.wdiscute.starcatcher.io.SingleStackContainer;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;

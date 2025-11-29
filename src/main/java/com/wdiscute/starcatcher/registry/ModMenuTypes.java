@@ -1,5 +1,6 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.registry;
 
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.rod.FishingRodMenu;
 import com.wdiscute.starcatcher.tournament.StandMenu;
 import net.minecraft.core.registries.Registries;

@@ -5,11 +5,12 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Config;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
+import com.wdiscute.starcatcher.io.ModDataComponents;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.Payloads;
+import com.wdiscute.starcatcher.io.network.FishingCompletedPayload;
+import com.wdiscute.starcatcher.items.ColorfulBobber;
+import com.wdiscute.starcatcher.registry.ModItems;
+import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -194,6 +195,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         return 0;
     }
 
+    //region render
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
@@ -421,6 +423,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         poseStack.popPose();
     }
 
+    //endregion
+
     @Override
     public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue()) {
@@ -587,7 +591,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             //if completed treasure minigame, or is a perfect catch with the mossy hook
             boolean awardTreasure = treasureProgress > 100 || (perfectCatch && hook.is(ModItems.MOSSY_HOOK));
 
-            PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits));
+            PacketDistributor.sendToServer(new FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits));
             this.onClose();
         }
 
@@ -598,7 +602,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
     public void onClose() {
         Minecraft.getInstance().options.guiScale().set(previousGuiScale);
 
-        PacketDistributor.sendToServer(new Payloads.FishingCompletedPayload(-1, false, false, consecutiveHits));
+        PacketDistributor.sendToServer(new FishingCompletedPayload(-1, false, false, consecutiveHits));
         this.minecraft.popGuiLayer();
     }
 
@@ -619,11 +623,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             }
 
             if (bobber.is(ModItems.COLORFUL_BOBBER)) {
+                ColorfulBobber.BobberColor color = bobber.get(ModDataComponents.BOBBER_COLOR);
                 hitParticles.add(new HitFakeParticle(
                         xPos, yPos, new Vector2d(r.nextFloat() * 2 - 1, r.nextFloat() * 2 - 1),
-                        bobber.get(ModDataComponents.BOBBER_COLOR).r(),
-                        bobber.get(ModDataComponents.BOBBER_COLOR).g(),
-                        bobber.get(ModDataComponents.BOBBER_COLOR).b(),
+                        color.r(),
+                        color.g(),
+                        color.b(),
                         1
                 ));
                 continue;

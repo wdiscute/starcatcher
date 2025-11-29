@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.tournament;
 
 import com.mojang.authlib.GameProfile;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.server.players.GameProfileCache;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;

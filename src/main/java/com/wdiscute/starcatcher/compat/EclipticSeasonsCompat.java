@@ -3,8 +3,8 @@ package com.wdiscute.starcatcher.compat;
 import com.teamtea.eclipticseasons.api.constant.solar.Season;
 import com.teamtea.eclipticseasons.api.constant.solar.SolarTerm;
 import com.teamtea.eclipticseasons.api.util.EclipticUtil;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.Seasons;
 import net.minecraft.world.level.Level;
 
 public class EclipticSeasonsCompat

@@ -1195,5 +1195,7 @@
   "tooltip.starcatcher.voidbiter.0" : "A <rgb>legendary</rgb> fish found in outer islands of The End.",
   "tooltip.starcatcher.voidbiter.1" : "So few anglers have seen it that it's only rumored to exist.",
   "tooltip.starcatcher.voidbiter.2" : "It's said only <gradient-30>Older Anglers</gradient-50> have successfully",
-  "tooltip.starcatcher.voidbiter.3" : "caught it before."
+  "tooltip.starcatcher.voidbiter.3" : "caught it before.",
+  "advancements.husbandry.starcatcher.fisherman.title": "Fisherman",
+  "advancements.husbandry.starcatcher.fisherman.description": "Catch a Fish without missing once"
 }

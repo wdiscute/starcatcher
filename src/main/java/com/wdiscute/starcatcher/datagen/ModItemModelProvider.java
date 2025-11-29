@@ -1,10 +1,9 @@
 package com.wdiscute.starcatcher.datagen;
 
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
@@ -22,7 +21,7 @@ public class ModItemModelProvider extends ItemModelProvider
     @Override
     protected void registerModels()
     {
-        for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS.getEntries())
+        for (DeferredHolder<Item, ? extends Item> item : ModItems.REGISTRY.getEntries())
             if(!item.equals(ModItems.ROD) && !item.get().equals(ModBlocks.STAND.asItem()))
                 simpleItem((DeferredItem<? extends Item>) item);
     }

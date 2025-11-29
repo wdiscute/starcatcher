@@ -1,7 +1,11 @@
 package com.wdiscute.starcatcher.bob;
 
 import com.wdiscute.starcatcher.*;
-import com.wdiscute.starcatcher.networkandcodecs.*;
+import com.wdiscute.starcatcher.io.*;
+import com.wdiscute.starcatcher.io.network.FishingPayload;
+import com.wdiscute.starcatcher.registry.ModEntities;
+import com.wdiscute.starcatcher.registry.ModItems;
+import com.wdiscute.starcatcher.registry.ModParticles;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -32,7 +36,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class FishingBobEntity extends Projectile
 {
@@ -278,7 +281,7 @@ public class FishingBobEntity extends Projectile
         {
             PacketDistributor.sendToPlayer(
                     ((ServerPlayer) player),
-                    new Payloads.FishingPayload(fpToFish, rod)
+                    new FishingPayload(fpToFish, rod)
             );
         }
 

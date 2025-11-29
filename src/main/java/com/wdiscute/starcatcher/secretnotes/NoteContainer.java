@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.secretnotes;
 
-import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
+import com.wdiscute.starcatcher.registry.ModItems;
+import com.wdiscute.starcatcher.io.ModDataComponents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

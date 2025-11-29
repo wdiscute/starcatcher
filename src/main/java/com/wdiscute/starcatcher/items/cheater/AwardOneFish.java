@@ -1,10 +1,10 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.FishCaughtCounter;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
-import com.wdiscute.starcatcher.networkandcodecs.Payloads;
+import com.wdiscute.starcatcher.io.FishCaughtCounter;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.ModDataAttachments;
+import com.wdiscute.starcatcher.io.network.FishCaughtPayload;
 import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
@@ -47,7 +47,7 @@ public class AwardOneFish extends Item
 
             if(player instanceof ServerPlayer sp)
             {
-                PacketDistributor.sendToPlayer(sp, new Payloads.FishCaughtPayload(fp, false, 0, 0));
+                PacketDistributor.sendToPlayer(sp, new FishCaughtPayload(fp, false, 0, 0));
             }
         }
 

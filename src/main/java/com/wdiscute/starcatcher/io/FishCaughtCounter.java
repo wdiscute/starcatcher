@@ -1,8 +1,9 @@
-package com.wdiscute.starcatcher.networkandcodecs;
+package com.wdiscute.starcatcher.io;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.io.network.FishCaughtPayload;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -112,7 +113,7 @@ public record FishCaughtCounter(
         if (newFish) newlist.add(new FishCaughtCounter(fpCaught, 1, ticks, ticks, size, weight, false, perfectCatch));
 
         //display message above exp bar
-        PacketDistributor.sendToPlayer(((ServerPlayer) player), new Payloads.FishCaughtPayload(fpCaught, newFish, size, weight));
+        PacketDistributor.sendToPlayer(((ServerPlayer) player), new FishCaughtPayload(fpCaught, newFish, size, weight));
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, newlist);
     }

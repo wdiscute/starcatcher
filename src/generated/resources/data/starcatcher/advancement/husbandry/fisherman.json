@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:husbandry/fishy_business",
+  "criteria": {
+    "perfect_catch": {
+      "conditions": {
+        "perfect": true
+      },
+      "trigger": "starcatcher:minigame_completed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancements.husbandry.starcatcher.fisherman.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "count": 1,
+      "id": "starcatcher:aurora"
+    },
+    "title": {
+      "translate": "advancements.husbandry.starcatcher.fisherman.title"
+    }
+  },
+  "requirements": [
+    [
+      "perfect_catch"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

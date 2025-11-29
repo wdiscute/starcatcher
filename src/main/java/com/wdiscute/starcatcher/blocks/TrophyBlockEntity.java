@@ -2,8 +2,8 @@ package com.wdiscute.starcatcher.blocks;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.DataResult;
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
+import com.wdiscute.starcatcher.io.ModDataComponents;
+import com.wdiscute.starcatcher.io.TrophyProperties;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;

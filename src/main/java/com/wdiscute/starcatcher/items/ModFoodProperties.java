@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.items;
 
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import net.minecraft.world.food.FoodProperties;
 
 public class ModFoodProperties

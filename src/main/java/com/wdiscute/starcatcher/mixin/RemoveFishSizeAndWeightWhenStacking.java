@@ -1,8 +1,6 @@
 package com.wdiscute.starcatcher.mixin;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataComponents;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.world.entity.SlotAccess;
+import com.wdiscute.starcatcher.io.ModDataComponents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ClickAction;
 import net.minecraft.world.inventory.Slot;

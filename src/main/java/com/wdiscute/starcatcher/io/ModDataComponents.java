@@ -1,6 +1,5 @@
-package com.wdiscute.starcatcher.networkandcodecs;
+package com.wdiscute.starcatcher.io;
 
-import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.items.ColorfulBobber;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;

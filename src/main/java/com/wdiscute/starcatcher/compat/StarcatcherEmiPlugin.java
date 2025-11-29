@@ -1,9 +1,9 @@
 package com.wdiscute.starcatcher.compat;
 
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.TrophyProperties;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;

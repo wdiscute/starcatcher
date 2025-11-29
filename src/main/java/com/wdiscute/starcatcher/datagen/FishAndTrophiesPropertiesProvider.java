@@ -1,11 +1,11 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
-import com.wdiscute.starcatcher.networkandcodecs.TrophyProperties;
+import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.TrophyProperties;
 import net.minecraft.core.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -21,7 +21,7 @@ import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.*;
+import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.*;
 
 import java.util.ArrayList;
 import java.util.List;

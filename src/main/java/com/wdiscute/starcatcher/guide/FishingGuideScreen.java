@@ -9,8 +9,10 @@ import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
 import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
-import com.wdiscute.starcatcher.networkandcodecs.*;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties.WorldRestrictions.Seasons;
+import com.wdiscute.starcatcher.io.*;
+import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.Seasons;
+import com.wdiscute.starcatcher.io.network.FPsSeenPayload;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.secretnotes.NoteContainer;
 import com.wdiscute.starcatcher.secretnotes.SecretNoteScreen;
 import net.minecraft.ChatFormatting;
@@ -1953,7 +1955,7 @@ public class FishingGuideScreen extends Screen
     public void onClose()
     {
         Minecraft.getInstance().options.advancedItemTooltips = advancedTooltips;
-        PacketDistributor.sendToServer(new Payloads.FPsSeen(fpsSeen));
+        PacketDistributor.sendToServer(new FPsSeenPayload(fpsSeen));
         super.onClose();
     }
 

@@ -1,6 +1,7 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.registry;
 
-import com.wdiscute.starcatcher.networkandcodecs.ModDataAttachments;
+import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.io.ModDataAttachments;
 import net.minecraft.client.renderer.item.ItemProperties;
 
 public class ModItemProperties

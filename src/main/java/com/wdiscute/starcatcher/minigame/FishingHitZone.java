@@ -3,14 +3,13 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.wdiscute.starcatcher.ModItems;
-import com.wdiscute.starcatcher.networkandcodecs.FishProperties;
+import com.wdiscute.starcatcher.registry.ModItems;
+import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.item.ItemStack;
 import org.apache.logging.log4j.util.TriConsumer;
-import org.joml.Quaternionf;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -23,6 +22,7 @@ public class FishingHitZone {
 
     public static final FishingHitZone EXTRA_LARGE = new FishingHitZone().setForgiving(SIZE_4)
             .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 0, 0));
+
     public static final FishingHitZone LARGE = new FishingHitZone().setForgiving(SIZE_3)
             .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 16, 0));
 
@@ -75,7 +75,7 @@ public class FishingHitZone {
     int reward = 10;
     public int gracePeriod = 0;
 
-    int color = FastColor.ARGB32.color(255, 255, 255, 255);
+    int color = -1;
 
     boolean isVanishing = false;
     float vanishValue = 1;

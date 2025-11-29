@@ -1,5 +1,6 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.registry;
 
+import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,5 +1,6 @@
-package com.wdiscute.starcatcher;
+package com.wdiscute.starcatcher.registry;
 
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.brokenbottle.BottleEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;

@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.blocks;
 
-import com.wdiscute.starcatcher.ModItems;
+import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -33,18 +33,18 @@ public interface ModBlocks
     {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
 
-        ModItems.ITEMS.register(name, () -> new StandBlockItem(toReturn.get()));
+        ModItems.REGISTRY.register(name, () -> new StandBlockItem(toReturn.get()));
         return toReturn;
     }
 
     private static <T extends Block> void registerStandBlockItem(String name, DeferredBlock<T> block)
     {
-        ModItems.ITEMS.register(name, () -> new StandBlockItem(block.get()));
+        ModItems.REGISTRY.register(name, () -> new StandBlockItem(block.get()));
     }
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block)
     {
-        ModItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+        ModItems.REGISTRY.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
     }
 
     static void register(IEventBus eventBus)

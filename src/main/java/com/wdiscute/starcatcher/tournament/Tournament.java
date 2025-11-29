@@ -2,12 +2,10 @@ package com.wdiscute.starcatcher.tournament;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.networkandcodecs.ExtraComposites;
-import com.wdiscute.starcatcher.networkandcodecs.SingleStackContainer;
-import io.netty.buffer.ByteBuf;
+import com.wdiscute.starcatcher.io.ExtraComposites;
+import com.wdiscute.starcatcher.io.SingleStackContainer;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
