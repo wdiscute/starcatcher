@@ -8,14 +8,15 @@ import com.wdiscute.starcatcher.io.FishProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FastColor;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class FishingHitZone {
@@ -45,6 +46,9 @@ public class FishingHitZone {
     public boolean shouldRecycle = true; // copies the zone to a different pos on remove
     public boolean canPlaceOver = false; // makes zone get ignored when checking for empty space
 
+    public int removeDelay = 0;
+    public int ticksAfterRemoved = 0;
+
     public boolean isMoving = false;
     public float moveRate = 0;
     public int moveDirection = 1; //changes moving direction (-1 or 1)
@@ -52,10 +56,12 @@ public class FishingHitZone {
     public int tickCount = 0;
     public boolean isBeingHoveredOver = false;
 
-    TriConsumer<GuiGraphics, Integer, Integer> guiGraphicsConsumer;
+    BiConsumer<GuiGraphics, FishingHitZone> guiGraphicsConsumer;
     Consumer<FishingHitZone> onTickConsumer;
     Consumer<FishingHitZone> onHitConsumer;
     Consumer<FishingHitZone> onMissConsumer;
+    Consumer<FishingHitZone> onRemoveConsumer;
+
 
     // A builder made to mimic the old system
     public FishingHitZone setFromProperties(FishProperties properties, FishProperties.Difficulty difficulty, ItemStack hook, ItemStack bobber) {
@@ -126,33 +132,18 @@ public class FishingHitZone {
         RenderSystem.setShaderColor(red, green, blue, alpha * vanishValue);
         RenderSystem.enableBlend();
 
-        guiGraphicsConsumer.accept(guiGraphics, width, height);
+        guiGraphicsConsumer.accept(guiGraphics, this);
 
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1, 1, 1, 1);
         poseStack.popPose();
     }
 
-    public static TriConsumer<GuiGraphics, Integer, Integer> makeDefaultRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
-        final int spriteWidth = 16;
-        final int spriteHeight = 16;
-
-        return (guiGraphics, width, height) -> guiGraphics.blit(
-                texture, -spriteWidth / 2, -spriteHeight / 2,
-                spriteWidth, spriteHeight, uOffset, 160 + vOffset, spriteWidth, spriteHeight, 256, 256);
-    }
-
-    public static TriConsumer<GuiGraphics, Integer, Integer> makeObeseRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
-        final int spriteWidth = 32;
-        final int spriteHeight = 16;
-
-        return (guiGraphics, width, height) -> guiGraphics.blit(
-                texture, -spriteWidth / 2,  -spriteHeight / 2,
-                spriteWidth, spriteHeight, uOffset, 160 + vOffset, spriteWidth, spriteHeight, 256, 256);
-    }
-
     public void tick() {
-        if (forRemoval) return;
+        if (forRemoval) {
+            ticksAfterRemoved++;
+            return;
+        };
         if (isVanishing) vanishValue -= vanishingRate;
         if (removeOnVanish && vanishValue <= 0) forRemoval = true;
 
@@ -181,7 +172,21 @@ public class FishingHitZone {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null && missSound != null) player.playSound(missSound);
 
+        screen.modifiers.forEach(modifier -> modifier.onMiss(this));
+
         if (onMissConsumer != null) onMissConsumer.accept(this);
+    }
+
+    public Optional<FishingHitZone> onRemove(){
+        screen.removedZones++;
+
+        if (onRemoveConsumer != null) onRemoveConsumer.accept(this);
+
+        if (shouldRecycle) {
+           return Optional.of(this.copy());
+        }
+
+        return Optional.empty();
     }
 
     public boolean isHitSuccess(float pointerPosPrecise) {
@@ -192,6 +197,8 @@ public class FishingHitZone {
             LocalPlayer player = Minecraft.getInstance().player;
             if (player != null) player.playSound(hitSound);
 
+            screen.modifiers.forEach(modifier -> modifier.onHit(this));
+
             return true;
         }
         return false;
@@ -201,6 +208,24 @@ public class FishingHitZone {
         return type == HitZoneType.TREASURE;
     }
 
+    public int getPos() {
+        if (pos > 360)  pos -= 360;
+        if (pos < 0)  pos += 360;
+
+        return pos;
+    }
+
+    public float getDistanceFromPointer(){
+        float ret = Mth.abs(getPos() - screen.getPointerPosPrecise());
+        if (ret > 360)  ret -= 360;
+        if (ret < 0)  ret += 360;
+
+        return ret;
+    }
+
+    public boolean shouldRemove(){
+        return forRemoval && removeDelay <= ticksAfterRemoved;
+    }
 
     public FishingHitZone setRemoved(boolean removed) {
         forRemoval = removed;
@@ -289,7 +314,13 @@ public class FishingHitZone {
         return this;
     }
 
-    public FishingHitZone setRendering(TriConsumer<GuiGraphics, Integer, Integer> guiGraphicsConsumer) {
+    public FishingHitZone setRemoveDelay(int delay) {
+        this.removeDelay = delay;
+
+        return this;
+    }
+
+    public FishingHitZone setRendering(BiConsumer<GuiGraphics, FishingHitZone> guiGraphicsConsumer) {
         this.guiGraphicsConsumer = guiGraphicsConsumer;
 
         return this;
@@ -307,6 +338,11 @@ public class FishingHitZone {
 
     public FishingHitZone setOnMissConsumer(Consumer<FishingHitZone> onMissConsumer) {
         this.onMissConsumer = onMissConsumer;
+        return this;
+    }
+
+    public FishingHitZone setOnRemoveConsumer(Consumer<FishingHitZone> onRemoveConsumer) {
+        this.onRemoveConsumer = onRemoveConsumer;
         return this;
     }
 
@@ -334,6 +370,7 @@ public class FishingHitZone {
         copy.removeOnVanish = original.removeOnVanish;
         copy.shouldRecycle = original.shouldRecycle;
         copy.canPlaceOver = original.canPlaceOver;
+        copy.removeDelay = original.removeDelay;
 
         copy.isMoving = original.isMoving;
         copy.moveRate = original.moveRate;
@@ -343,6 +380,7 @@ public class FishingHitZone {
         copy.onTickConsumer = original.onTickConsumer;
         copy.onHitConsumer = original.onHitConsumer;
         copy.onMissConsumer = original.onMissConsumer;
+        copy.onRemoveConsumer = original.onRemoveConsumer;
 
         return copy;
     }

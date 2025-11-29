@@ -3,9 +3,9 @@ package com.wdiscute.starcatcher.minigame.modifiers;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.minigame.HitZoneType;
 
-public class TntRainModifier extends AbstractFishingModifier{
-    public TntRainModifier(FishingMinigameScreen screen, int length) {
-        super(screen, length);
+public class TntRainModifier extends PermanentFishingModifier{
+    public TntRainModifier(FishingMinigameScreen screen) {
+        super(screen);
     }
 
     @Override

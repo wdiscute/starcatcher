@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.minigame.modifiers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.wdiscute.starcatcher.minigame.FishingHitZone;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.gui.GuiGraphics;
 
@@ -31,6 +32,19 @@ public abstract class AbstractFishingModifier {
     public int getRemainingTicks(){
         if (length == -1) return 99;
         return length - tickCount;
+    }
+
+    // when you let a zone pass and it has a missPenalty
+    public void onMiss(FishingHitZone zone){
+
+    }
+
+    public void onHit(FishingHitZone zone){
+
+    }
+
+    public void onMissClick(){
+
     }
 
     protected void onRemove(){

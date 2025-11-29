@@ -1,7 +1,12 @@
 package com.wdiscute.starcatcher.minigame;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.starcatcher.minigame.modifiers.FreezeModifier;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+
+import java.util.function.BiConsumer;
 
 import static com.wdiscute.starcatcher.minigame.FishingHitZone.*;
 
@@ -52,12 +57,13 @@ public enum HitZoneType{
                 .setHitSound(SoundEvents.GENERIC_EXPLODE.value());
 
         public static final FishingHitZone FREEZE = new FishingHitZone().setForgiving(SIZE_3)
-                .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 16, -16))
+                .setRendering(makeDisappearingRenderConsumer(FishingMinigameScreen.TEXTURE,  0, 0,16, -16, 100))
                 .setPlaceOver(true)
                 .setPenaltyAndReward(0, -5)
                 .setRecycling(false)
                 .setType(HitZoneType.FREEZE)
                 .setHitSound(SoundEvents.PLAYER_HURT_FREEZE)
+                .setRemoveDelay(20)
                 .setOnHitConsumer(zone -> new FreezeModifier(zone.screen, 20).addModifier());
 
         public static final FishingHitZone OBESE = new FishingHitZone().setForgiving(30)
@@ -67,6 +73,47 @@ public enum HitZoneType{
                 .setRecycling(false)
                 .setVanishing(true, 0.03f, true)
                 .setType(HitZoneType.OBESE);
+
+        public static BiConsumer<GuiGraphics, FishingHitZone> makeDefaultRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
+            final int spriteWidth = 16;
+            final int spriteHeight = 16;
+
+            return (guiGraphics, zone) -> guiGraphics.blit(
+                    texture, -spriteWidth / 2, -spriteHeight / 2,
+                    spriteWidth, spriteHeight, uOffset, 160 + vOffset, spriteWidth, spriteHeight, 256, 256);
+        }
+
+        public static BiConsumer<GuiGraphics, FishingHitZone> makeObeseRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
+            final int spriteWidth = 32;
+            final int spriteHeight = 16;
+
+            return (guiGraphics, zone) -> guiGraphics.blit(
+                    texture, -spriteWidth / 2,  -spriteHeight / 2,
+                    spriteWidth, spriteHeight, uOffset, 160 + vOffset, spriteWidth, spriteHeight, 256, 256);
+        }
+
+        public static BiConsumer<GuiGraphics, FishingHitZone> makeDisappearingRenderConsumer(
+                ResourceLocation texture, int uOffsetOver, int vOffsetOver, int uOffsetUnder, int vOffsetUnder, int appearDistance
+        ) {
+            final int spriteWidth = 16;
+            final int spriteHeight = 16;
+
+            return (guiGraphics, zone) -> {
+                float distance = zone.getDistanceFromPointer();
+                float alpha = Math.clamp(distance / appearDistance, 0, 1);
+
+                guiGraphics.blit(
+                        texture, -spriteWidth / 2, -spriteHeight / 2,
+                        spriteWidth, spriteHeight, uOffsetUnder, 160 + vOffsetUnder, spriteWidth, spriteHeight, 256, 256);
+
+                RenderSystem.setShaderColor(1, 1, 1, alpha);
+
+                guiGraphics.blit(
+                        texture, -spriteWidth / 2, -spriteHeight / 2,
+                        spriteWidth, spriteHeight, uOffsetOver, 160 + vOffsetOver, spriteWidth, spriteHeight, 256, 256);
+
+            };
+        }
 
     }
 }
