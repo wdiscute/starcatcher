@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.network.FishingCompletedPayload;
 import com.wdiscute.starcatcher.items.ColorfulBobber;
 import com.wdiscute.starcatcher.minigame.modifiers.AbstractFishingModifier;
+import com.wdiscute.starcatcher.minigame.modifiers.FrogModifier;
 import com.wdiscute.starcatcher.minigame.modifiers.TntRainModifier;
 import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.io.FishProperties;
@@ -37,7 +38,6 @@ import org.joml.Vector2d;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class FishingMinigameScreen extends Screen implements GuiEventListener {
     public static final Random r = new Random();
@@ -152,7 +152,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         }
 
         if (bobber.is(ModItems.CREEPER_BOBBER)){
-            new TntRainModifier(this, -1).addModifier();
+            new TntRainModifier(this).addModifier();
+        }
+
+        if (bobber.is(ModItems.FROG_BOBBER)){
+            new FrogModifier(this).addModifier();
         }
 
         FishProperties.Difficulty.Markers markers = difficulty.markers();
@@ -429,6 +433,18 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
     }
 
     @Override
+    public boolean mouseReleased(double mouseX, double mouseY, int button) {
+        isHoldingSpace = false;
+        return super.mouseReleased(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        inputPressed();
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
     public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
 
         //closes when pressing E
@@ -440,57 +456,62 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
         //spacebar input
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue()) {
-            isHoldingSpace = true;
-
-            if (gracePeriod > 0) gracePeriod = 0;
-
-            Minecraft.getInstance().player.swing(hand, true);
-
-            boolean hitSomething = false;
-
-            Vec3 pos = Minecraft.getInstance().player.position();
-            ClientLevel level = Minecraft.getInstance().level;
-
-            lastHitMarkerPos = getPointerPosPrecise();
-
-
-            for (FishingHitZone zone : fishingHitZones){
-                if (zone.isHitSuccess(lastHitMarkerPos)) {
-                    onSuccessfulHit(zone);
-
-                    hitSomething = true;
-                }
-            }
-
-
-            if (hitSomething) {
-                consecutiveHits++;
-                if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive)
-                        ||
-                        (consecutiveHits == 3 && !treasureActive && hook.is(ModItems.SHINY_HOOK))) {
-                    treasureActive = true;
-
-                    HitZoneType.Presets.TREASURE.copy().setFromProperties(fp, fp.dif(), hook, bobber).buildAndAdd(this);
-
-                    treasureProgress = 0;
-                    treasureProgressSmooth = 0;
-                }
-
-                if (changeRotation) currentRotation *= -1;
-
-            } else {
-                if (bobber.is(ModItems.KIMBE_BOBBER))
-                    Minecraft.getInstance().player.playSound(SoundEvents.VILLAGER_NO, 1, 1);
-                kimbeColor = 1;
-                consecutiveHits = 0;
-                level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 1, 1, false);
-                completion -= penalty;
-                perfectCatch = false;
-            }
-
+            inputPressed();
         }
 
         return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    private void inputPressed() {
+        isHoldingSpace = true;
+
+        if (gracePeriod > 0) gracePeriod = 0;
+
+        Minecraft.getInstance().player.swing(hand, true);
+
+        boolean hitSomething = false;
+
+        Vec3 pos = Minecraft.getInstance().player.position();
+        ClientLevel level = Minecraft.getInstance().level;
+
+        lastHitMarkerPos = getPointerPosPrecise();
+
+
+        for (FishingHitZone zone : fishingHitZones){
+            if (zone.isHitSuccess(lastHitMarkerPos)) {
+                onSuccessfulHit(zone);
+
+                hitSomething = true;
+            }
+        }
+
+
+        if (hitSomething) {
+            consecutiveHits++;
+            if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive)
+                    ||
+                    (consecutiveHits == 3 && !treasureActive && hook.is(ModItems.SHINY_HOOK))) {
+                treasureActive = true;
+
+                HitZoneType.Presets.TREASURE.copy().setFromProperties(fp, fp.dif(), hook, bobber).buildAndAdd(this);
+
+                treasureProgress = 0;
+                treasureProgressSmooth = 0;
+            }
+
+            if (changeRotation) currentRotation *= -1;
+
+        } else {
+            this.modifiers.forEach(AbstractFishingModifier::onMissClick);
+
+            if (bobber.is(ModItems.KIMBE_BOBBER))
+                Minecraft.getInstance().player.playSound(SoundEvents.VILLAGER_NO, 1, 1);
+            kimbeColor = 1;
+            consecutiveHits = 0;
+            level.playLocalSound(pos.x, pos.y, pos.z, SoundEvents.COMPARATOR_CLICK, SoundSource.BLOCKS, 1, 1, false);
+            completion -= penalty;
+            perfectCatch = false;
+        }
     }
 
     public float getPointerPosPrecise() {
@@ -526,14 +547,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         List<FishingHitZone> toAdd = new ArrayList<>();
 
         fishingHitZones.removeIf(fishingHitZone -> {
-            boolean forRemoval = fishingHitZone.forRemoval;
-            if (forRemoval) removedZones++;
+            boolean shouldRemove = fishingHitZone.shouldRemove();
 
-            if (fishingHitZone.shouldRecycle && forRemoval) {
-                fishingHitZone.copy().buildAndAdd(this, getRandomFreePosition(), toAdd);
-            }
+            if (shouldRemove)
+                fishingHitZone.onRemove().ifPresent(zone -> zone.buildAndAdd(this, getRandomFreePosition(), toAdd));
 
-            return forRemoval;
+            return shouldRemove;
         });
 
         fishingHitZones.forEach(FishingHitZone::tick);
