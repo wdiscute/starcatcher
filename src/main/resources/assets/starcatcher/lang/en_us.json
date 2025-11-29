@@ -787,6 +787,8 @@
 
   "item.starcatcher.mirage_carp" : "Mirage Carp",
   "tooltip.starcatcher.mirage_carp.0" : "A carp species found during warm sunny days on warm climates.",
+  "tooltip.starcatcher.mirage_carp.1" : "Its said it got it's name from desert villagers,",
+  "tooltip.starcatcher.mirage_carp.2" : "as spotting one was often just a mirage.",
 
   "item.starcatcher.scorchfish" : "Scorchfish",
   "tooltip.starcatcher.scorchfish.0" : "A fish species which hates the rain,",
