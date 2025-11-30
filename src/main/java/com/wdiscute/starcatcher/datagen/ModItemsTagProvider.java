@@ -33,5 +33,6 @@ public class ModItemsTagProvider extends ItemTagsProvider
             tag(ItemTags.CAT_FOOD).add(item.get());
             tag(Tags.Items.FOODS_RAW_FISH).add(item.get());
         }
+        tag(Tags.Items.TOOLS_FISHING_ROD).add(ModItems.ROD.value());
     }
 }
