@@ -27,13 +27,9 @@ public class FTBTeamsCompat
         {
             Set<UUID> members = teamByID.get().getMembers();
 
-            //System.out.println("team " + teamByID.get() + " has " + members.size() + " members");
-
-            System.out.println(members);
-
             for (UUID uuid : members)
             {
-                Player playerByUUID = player.level().getPlayerByUUID(uuid);
+                Player playerByUUID = player.getServer().getPlayerList().getPlayer(uuid);
                 if (playerByUUID != null)
                 {
                     FishCaughtCounter.awardFishCaughtCounter(fp, playerByUUID, 0, 0, 0, false, false);

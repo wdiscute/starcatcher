@@ -20,7 +20,7 @@ issueTrackerURL="https://discord.gg/WsuFsGSegD" #optional
 [[mods]] #mandatory
 
 modId="starcatcher"
-version="1.3.4.1-CRAFTORIA-FTBTEAMS-1.21.1"
+version="1.3.4.2-CRAFTORIA-FTBTEAMS-1.21.1"
 displayName="Starcatcher"
 displayURL="http://curseforge.com/minecraft/mc-mods/starcatcher"
 logoFile="starcatcher 256x256.png" #optional
