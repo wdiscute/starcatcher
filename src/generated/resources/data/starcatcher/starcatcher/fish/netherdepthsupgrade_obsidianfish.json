@@ -10,7 +10,7 @@
     "extras": {
       "flips_rotation_every_hit": false
     },
-    "reward": 1,
+    "hitReward": 1,
     "speed": 10,
     "treasure": {
       "has_treasure": true,

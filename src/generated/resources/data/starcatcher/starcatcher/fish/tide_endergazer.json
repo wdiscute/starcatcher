@@ -11,12 +11,12 @@
     "extras": {
       "has_moving_markers": true
     },
+    "hitReward": 15,
     "markers": {
       "has_first_thin_marker": true,
       "has_second_marker": false
     },
-    "penalty": 25,
-    "reward": 15,
+    "missPenalty": 25,
     "reward_thin": 35,
     "speed": 12,
     "treasure": {

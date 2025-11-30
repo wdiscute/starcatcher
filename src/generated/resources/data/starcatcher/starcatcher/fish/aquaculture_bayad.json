@@ -7,12 +7,12 @@
   ],
   "daytime": "night",
   "difficulty": {
+    "hitReward": 15,
     "markers": {
       "has_first_thin_marker": true,
       "has_second_marker": false
     },
-    "penalty": 15,
-    "reward": 15,
+    "missPenalty": 15,
     "reward_thin": 35,
     "speed": 10,
     "treasure": {

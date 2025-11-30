@@ -6,12 +6,12 @@
     }
   ],
   "difficulty": {
+    "hitReward": 15,
     "markers": {
       "has_first_thin_marker": true,
       "has_second_marker": false
     },
-    "penalty": 15,
-    "reward": 15,
+    "missPenalty": 15,
     "reward_thin": 35,
     "speed": 10,
     "treasure": {
@@ -34,7 +34,7 @@
     "above_y": 50,
     "below_y": 100,
     "biomes_tags": [
-      "starcatcher:is_warm_river"
+      "starcatcher:is_warm_ocean"
     ],
     "dimensions": [
       "minecraft:overworld"

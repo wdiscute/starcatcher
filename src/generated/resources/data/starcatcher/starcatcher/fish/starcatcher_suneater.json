@@ -5,11 +5,11 @@
       "flips_rotation_every_hit": false,
       "has_moving_markers": true
     },
+    "hitReward": 5,
     "markers": {
       "has_second_marker": false
     },
-    "penalty": 15,
-    "reward": 5,
+    "missPenalty": 15,
     "speed": 15,
     "treasure": {
       "has_treasure": true,

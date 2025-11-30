@@ -11,8 +11,8 @@
       "flips_rotation_every_hit": false,
       "has_vanishing_markers": true
     },
-    "penalty": 12,
-    "reward": 10,
+    "hitReward": 10,
+    "missPenalty": 12,
     "speed": 13
   },
   "fish": "fishofthieves:wrecker",

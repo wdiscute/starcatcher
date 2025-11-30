@@ -7,14 +7,14 @@
   },
   "difficulty": {
     "decay": 0,
+    "hitReward": 0,
     "markers": {
       "has_first_marker": false,
       "has_first_thin_marker": true,
       "has_second_marker": false,
       "has_second_thin_marker": true
     },
-    "penalty": 30,
-    "reward": 0,
+    "missPenalty": 30,
     "reward_thin": 15,
     "treasure": {
       "has_treasure": true,

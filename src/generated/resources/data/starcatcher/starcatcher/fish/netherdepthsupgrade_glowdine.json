@@ -10,11 +10,11 @@
       "has_moving_markers": true,
       "has_vanishing_markers": true
     },
+    "hitReward": 15,
     "markers": {
       "has_first_thin_marker": true
     },
-    "penalty": 15,
-    "reward": 15,
+    "missPenalty": 15,
     "reward_thin": 35,
     "speed": 10,
     "treasure": {

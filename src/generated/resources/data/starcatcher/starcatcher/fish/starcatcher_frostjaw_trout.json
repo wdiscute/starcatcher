@@ -5,12 +5,12 @@
       "flips_rotation_every_hit": false,
       "has_vanishing_markers": true
     },
+    "hitReward": 15,
     "markers": {
       "has_first_thin_marker": true,
       "has_second_thin_marker": true
     },
-    "penalty": 15,
-    "reward": 15,
+    "missPenalty": 15,
     "reward_thin": 30,
     "speed": 12,
     "treasure": {

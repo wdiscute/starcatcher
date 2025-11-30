@@ -1,12 +1,15 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.StarcatcherTags;
 import com.wdiscute.starcatcher.blocks.ModBlocks;
 import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.Seasons;
 import com.wdiscute.starcatcher.io.TrophyProperties;
-import net.minecraft.core.*;
+import com.wdiscute.starcatcher.registry.ModItems;
+import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -21,7 +24,6 @@ import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import com.wdiscute.starcatcher.io.FishProperties.WorldRestrictions.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,18 +31,14 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesProvider
-{
+public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesProvider {
 
-    public FishAndTrophiesPropertiesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
-    {
+    public FishAndTrophiesPropertiesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries, REGISTRY, FishAndTrophiesPropertiesProvider::addConditions, Set.of(Starcatcher.MOD_ID));
     }
 
-    private static void addConditions(final BiConsumer<ResourceKey<?>, ICondition> consumer)
-    {
-        for (FishPropertiesWithModRestriction restricted : RESTRICTED_FPS)
-        {
+    private static void addConditions(final BiConsumer<ResourceKey<?>, ICondition> consumer) {
+        for (FishPropertiesWithModRestriction restricted : RESTRICTED_FPS) {
             consumer.accept(createKey(restricted.fp()), new ModLoadedCondition(restricted.modid()));
         }
     }
@@ -1605,10 +1603,7 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     .withMod("sullysmod")
 
 
-
             //endregion Sullys Mod
-
-
 
 
     );
@@ -1758,256 +1753,213 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
                     });
 
 
-    public static FishProperties fish(Holder<Item> fish)
-    {
+    public static FishProperties fish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish);
     }
 
-    public static FishProperties overworldFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD);
     }
 
-    public static FishProperties endFish(Holder<Item> fish)
-    {
+    public static FishProperties endFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.END);
     }
 
-    public static FishProperties endOuterIslandsFish(Holder<Item> fish)
-    {
+    public static FishProperties endOuterIslandsFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.END_OUTER_ISLANDS);
     }
 
-    public static FishProperties netherLavaFish(Holder<Item> fish)
-    {
+    public static FishProperties netherLavaFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA);
     }
 
-    public static FishProperties netherLavaCrimsonForestFish(Holder<Item> fish)
-    {
+    public static FishProperties netherLavaCrimsonForestFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_CRIMSON_FOREST);
     }
 
-    public static FishProperties netherLavaWarpedForestFish(Holder<Item> fish)
-    {
+    public static FishProperties netherLavaWarpedForestFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_WARPED_FOREST);
     }
 
-    public static FishProperties netherLavaSoulSandValleyFish(Holder<Item> fish)
-    {
+    public static FishProperties netherLavaSoulSandValleyFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_SOUL_SAND_VALLEY);
     }
 
-    public static FishProperties netherLavaBasaltDeltasFish(Holder<Item> fish)
-    {
+    public static FishProperties netherLavaBasaltDeltasFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.NETHER_LAVA_BASALT_DELTAS);
     }
 
-    public static FishProperties overworldLushCavesFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldLushCavesFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LUSH_CAVES)
                 .withBaitRestrictions(FishProperties.BaitRestrictions.LUSH_BAIT);
     }
 
-    public static FishProperties overworldDeepDarkFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldDeepDarkFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DEEP_DARK)
                 .withBaitRestrictions(FishProperties.BaitRestrictions.SCULK_BAIT);
     }
 
-    public static FishProperties overworldSurfaceLava(Holder<Item> fish)
-    {
+    public static FishProperties overworldSurfaceLava(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAVA_SURFACE);
     }
 
-    public static FishProperties overworldCavesFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldCavesFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_CAVES);
     }
 
-    public static FishProperties overworldDripstoneCavesFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldDripstoneCavesFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DRIPSTONE_CAVES)
                 .withBaitRestrictions(FishProperties.BaitRestrictions.DRIPSTONE_BAIT);
     }
 
-    public static FishProperties overworldUndergroundFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldUndergroundFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_UNDERGROUND);
     }
 
-    public static FishProperties overworldUndergroundLava(Holder<Item> fish)
-    {
+    public static FishProperties overworldUndergroundLava(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAVA_UNDERGROUND);
     }
 
-    public static FishProperties overworldMountainFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldMountainFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAKE.withMustBeCaughtAboveY(100));
     }
 
-    public static FishProperties overworldDeepslateFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldDeepslateFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DEEPSLATE);
     }
 
-    public static FishProperties overworldDeepslateLava(Holder<Item> fish)
-    {
+    public static FishProperties overworldDeepslateLava(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAVA_DEEPSLATE);
     }
 
-    public static FishProperties overworldColdLakeFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldColdLakeFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_COLD_LAKE);
     }
 
-    public static FishProperties overworldWarmLakeFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldWarmLakeFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_LAKE);
     }
 
-    public static FishProperties overworldWarmMountainFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldWarmMountainFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_LAKE);
     }
 
-    public static FishProperties overworldColdMountainFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldColdMountainFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_COLD_MOUNTAIN);
     }
 
-    public static FishProperties overworldColdOceanFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldColdOceanFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_COLD_OCEAN);
     }
 
-    public static FishProperties overworldColdRiverFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldColdRiverFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_COLD_RIVER);
     }
 
-    public static FishProperties overworldLakeFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldLakeFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LAKE);
     }
 
-    public static FishProperties overworldOceanFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldOceanFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_OCEAN);
     }
 
-    public static FishProperties overworldWarmOceanFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldWarmOceanFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_WARM_OCEAN);
     }
 
-    public static FishProperties overworldDeepOceanFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldDeepOceanFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DEEP_OCEAN);
     }
 
-    public static FishProperties overworldRiverFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldRiverFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_RIVER);
     }
 
-    public static FishProperties overworldBeachFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldBeachFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_BEACH);
     }
 
 
-    public static FishProperties overworldMushroomFieldsFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldMushroomFieldsFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_MUSHROOM_FIELDS);
     }
 
-    public static FishProperties overworldJungleFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldJungleFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_JUNGLE);
     }
 
-    public static FishProperties overworldTaigaFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldTaigaFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_TAIGA);
     }
 
-    public static FishProperties overworldCherryGroveFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldCherryGroveFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_CHERRY_GROVE)
                 .withBaitRestrictions(FishProperties.BaitRestrictions.CHERRY_BAIT);
     }
 
-    public static FishProperties overworldSwampFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldSwampFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_SWAMP)
                 .withBaitRestrictions(FishProperties.BaitRestrictions.MURKWATER_BAIT);
     }
 
-    public static FishProperties overworldDarkForestFish(Holder<Item> fish)
-    {
+    public static FishProperties overworldDarkForestFish(Holder<Item> fish) {
         return FishProperties.DEFAULT.withFish(fish)
                 .withWorldRestrictions(FishProperties.WorldRestrictions.OVERWORLD_DARK_FOREST);
     }
 
 
-    public static ResourceLocation rl(String namespace, String path)
-    {
+    public static ResourceLocation rl(String namespace, String path) {
         return ResourceLocation.fromNamespaceAndPath(namespace, path);
     }
 
-    public static Holder<Item> fromRL(String ns, String path)
-    {
+    public static Holder<Item> fromRL(String ns, String path) {
         return TrustedHolder.createStandAlone(BuiltInRegistries.ITEM.holderOwner(), ResourceKey.create(Registries.ITEM, rl(ns, path)));
     }
 
-    public static ResourceKey<FishProperties> createKey(FishProperties fp)
-    {
+    public static ResourceKey<FishProperties> createKey(FishProperties fp) {
         if (fp.customName()
-                .isEmpty())
-        {
+                .isEmpty()) {
             return ResourceKey.create(
                     Starcatcher.FISH_REGISTRY, Starcatcher.rl(fp.fish()
                             .getRegisteredName()
                             .replace(":", "_")));
-        }
-        else
-        {
+        } else {
             customFishCount++;
             return ResourceKey.create(
                     Starcatcher.FISH_REGISTRY, Starcatcher.rl(fp.fish()
@@ -2016,13 +1968,11 @@ public class FishAndTrophiesPropertiesProvider extends DatapackBuiltinEntriesPro
         }
     }
 
-    public static Holder.Reference<TrophyProperties> register(BootstrapContext<TrophyProperties> bootstrap, TrophyProperties tp)
-    {
+    public static Holder.Reference<TrophyProperties> register(BootstrapContext<TrophyProperties> bootstrap, TrophyProperties tp) {
         return bootstrap.register(createKey(tp), tp);
     }
 
-    public static ResourceKey<TrophyProperties> createKey(TrophyProperties tp)
-    {
+    public static ResourceKey<TrophyProperties> createKey(TrophyProperties tp) {
         customTrophyCount++;
         return ResourceKey.create(
                 Starcatcher.TROPHY_REGISTRY, Starcatcher.rl(tp.trophyType()

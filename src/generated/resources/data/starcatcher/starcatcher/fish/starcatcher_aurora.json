@@ -12,8 +12,8 @@
       "flips_rotation_every_hit": false,
       "has_vanishing_markers": true
     },
-    "penalty": 0,
-    "reward": 18,
+    "hitReward": 18,
+    "missPenalty": 0,
     "reward_thin": 30,
     "speed": 15,
     "treasure": {
