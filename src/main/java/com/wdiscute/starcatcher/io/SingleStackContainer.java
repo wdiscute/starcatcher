@@ -5,7 +5,9 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.items.ItemStackHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public record SingleStackContainer(ItemStack stack)
@@ -21,6 +23,18 @@ public record SingleStackContainer(ItemStack stack)
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, List<SingleStackContainer>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
+
+    public static List<SingleStackContainer> fromItemStackHandler(ItemStackHandler prizePool)
+    {
+        List<SingleStackContainer> list = new ArrayList<>();
+
+        for (int i = 0; i < prizePool.getSlots(); i++)
+        {
+            list.add(new SingleStackContainer(prizePool.getStackInSlot(i)));
+        }
+
+        return list;
+    }
 
     @Override
     public boolean equals(Object o)

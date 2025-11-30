@@ -568,6 +568,8 @@
 
   "gui.starcatcher.tournament.organizer" : "Organizer",
   "gui.starcatcher.tournament.prize_pool" : "Prize Pool",
+  "gui.starcatcher.tournament.entry_fee" : "Entry Fee",
+  "gui.starcatcher.tournament.inventory" : "Inventory",
   "gui.starcatcher.tournament.sign_up" : "[Sign Up]",
   "gui.starcatcher.tournament.signed_up" : "[Signed Up!]",
   "gui.starcatcher.tournament.other" : "Others:",

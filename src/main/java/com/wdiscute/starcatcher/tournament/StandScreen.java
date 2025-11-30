@@ -61,7 +61,6 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         //prize pool
         guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.prize_pool"), uiX + 130, uiY + 53, 0x9c897c, false);
 
-
         //status
         guiGraphics.drawString(this.font, Component.translatable(tournamentCache.status.getSerializedName()), uiX + 55, uiY + 88, 0x635040, false);
         guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.status"), uiX + 55, uiY + 100, 0x9c897c, false);
@@ -87,9 +86,12 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
 
             signUpCostList.add(Component.literal("Sign Up Fee:"));
 
+            System.out.println(menu.sbe.entryCost);
+
+
             for (SingleStackContainer ssc : tournamentCache.settings.entryCost)
             {
-                signUpCostList.add(Component.literal(ssc.stack().getCount() + "x ").append(Component.translatable(ssc.stack().getItem().getDescriptionId())));
+                if(!ssc.stack().isEmpty()) signUpCostList.add(Component.literal(ssc.stack().getCount() + "x ").append(Component.translatable(ssc.stack().getItem().getDescriptionId())));
             }
 
             guiGraphics.renderTooltip(this.font, signUpCostList, Optional.empty(), mouseX, mouseY);
@@ -140,6 +142,12 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         //`----'   `----'   `--'     `--'   `--' `--''--' .`-  /  `----'
         //                                                `---'
 
+
+        //entry fee
+        guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.entry_fee"), uiX + 212, uiY + 89, 0x9c897c, false);
+
+        //inventory
+        guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.inventory"), uiX + 212, uiY + 102, 0x9c897c, false);
 
         //start
         guiGraphics.drawString(this.font, Component.translatable("gui.starcatcher.tournament.start"), uiX + 215, uiY + 50, 0x635040, false);
@@ -210,8 +218,8 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
-        System.out.println("clicked relative x:" + x);
-        System.out.println("clicked relative y:" + y);
+        //System.out.println("clicked relative x:" + x);
+        //System.out.println("clicked relative y:" + y);
 
         //sign up
         if (x > 48 && x < 98 && y > 117 && y < 127)
@@ -220,7 +228,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         }
 
         //start
-        if (x > 123 && x < 189 && y > 84 && y < 108)
+        if(x > 209 && x < 317 && y > 44 && y < 60)
         {
             minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 69);
         }
