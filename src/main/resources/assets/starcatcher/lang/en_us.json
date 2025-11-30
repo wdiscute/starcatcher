@@ -568,6 +568,8 @@
 
   "gui.starcatcher.tournament.organizer" : "Organizer",
   "gui.starcatcher.tournament.prize_pool" : "Prize Pool",
+  "gui.starcatcher.tournament.entry_fee" : "Entry Fee",
+  "gui.starcatcher.tournament.inventory" : "Inventory",
   "gui.starcatcher.tournament.sign_up" : "[Sign Up]",
   "gui.starcatcher.tournament.signed_up" : "[Signed Up!]",
   "gui.starcatcher.tournament.other" : "Others:",
@@ -739,7 +741,7 @@
   "tooltip.starcatcher.obidontiee.0" : "A small devious fish. Said to often mispronounce words.",
 
   "item.starcatcher.silverveil_perch" : "Silverveil Perch",
-  "tooltip.starcatcher.silverveil_perch.0" : "A small perch with scaled resembling silver.",
+  "tooltip.starcatcher.silverveil_perch.0" : "A small perch with scales resembling silver.",
   "tooltip.starcatcher.silverveil_perch.1" : "Most commonly found during rainy days.",
 
   "item.starcatcher.elderscale" : "Elderscale",
@@ -796,11 +798,12 @@
 
   "item.starcatcher.sandtail" : "Sandtail",
   "tooltip.starcatcher.sandtail.0" : "A long sand-covered fish, which although mostly",
-  "tooltip.starcatcher.sandtail.1" : "found in warm climates, it prefers the cold so",
-  "tooltip.starcatcher.sandtail.2" : "it's only active during nighttime.",
+  "tooltip.starcatcher.sandtail.1" : "found in warm climates, prefers the cold of the night",
 
   "item.starcatcher.mirage_carp" : "Mirage Carp",
   "tooltip.starcatcher.mirage_carp.0" : "A carp species found during warm sunny days on warm climates.",
+  "tooltip.starcatcher.mirage_carp.1" : "Its said it got it's name from desert villagers,",
+  "tooltip.starcatcher.mirage_carp.2" : "as spotting one was often just a mirage.",
 
   "item.starcatcher.scorchfish" : "Scorchfish",
   "tooltip.starcatcher.scorchfish.0" : "A fish species which hates the rain,",

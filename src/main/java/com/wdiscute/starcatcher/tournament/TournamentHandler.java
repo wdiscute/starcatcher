@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.tournament;
 
 import com.mojang.authlib.GameProfile;
 import com.wdiscute.starcatcher.io.FishProperties;
+import com.wdiscute.starcatcher.io.SingleStackContainer;
 import net.minecraft.server.players.GameProfileCache;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
@@ -11,26 +12,55 @@ import java.util.*;
 
 public class TournamentHandler
 {
-
+    private static final List<Tournament> finishedTournaments = new ArrayList<>();
     private static final List<Tournament> activeTournaments = new ArrayList<>();
+    private static final List<Tournament> setupTournaments = new ArrayList<>();
 
-    public static List<Tournament> getAllTournaments()
+    public static Tournament getTournament(UUID uuid)
     {
-        return activeTournaments;
+        for (Tournament t : setupTournaments)
+        {
+            if (t.tournamentUUID.equals(uuid)) return t;
+        }
+
+        for (Tournament t : activeTournaments)
+        {
+            if (t.tournamentUUID.equals(uuid)) return t;
+        }
+
+        for (Tournament t : finishedTournaments)
+        {
+            if (t.tournamentUUID.equals(uuid)) return t;
+        }
+
+        Tournament tournament = new Tournament(
+                uuid,
+                "Unnamed Tourney " + uuid.toString().substring(0, 5),
+                Tournament.Status.SETUP,
+                null,
+                new HashMap<>(),
+                new TournamentSettings(
+                        TournamentSettings.Type.SIMPLE,
+                        110660,
+                        0,
+                        0,
+                        SingleStackContainer.EMPTY_LIST),
+                SingleStackContainer.EMPTY_LIST,
+                200
+        );
+
+        setupTournaments.add(tournament);
+        return tournament;
     }
 
-    public static Tournament getTournament(int id)
-    {
-        if (id > activeTournaments.size()) return null;
-        return activeTournaments.get(id);
-    }
-
-    public static int addTournament(Tournament tournament)
+    public static void startTournament(Tournament tournament)
     {
         activeTournaments.add(tournament);
+        setupTournaments.remove(tournament);
+        tournament.status = Tournament.Status.ACTIVE;
         System.out.println("tournament: " + tournament.name + " has started");
-        return activeTournaments.size();
     }
+
 
     public static void addScore(Player player, FishProperties fp, boolean perfectCatch)
     {

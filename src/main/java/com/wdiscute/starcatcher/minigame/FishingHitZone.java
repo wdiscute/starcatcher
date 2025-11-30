@@ -5,96 +5,63 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.io.FishProperties;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.FastColor;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import org.apache.logging.log4j.util.TriConsumer;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class FishingHitZone {
-    private static final int SIZE_1 = 5;
-    private static final int SIZE_2 = 7;
-    private static final int SIZE_3 = 12;
-    private static final int SIZE_4 = 17;
+    public FishingMinigameScreen screen;
 
-    public static final FishingHitZone EXTRA_LARGE = new FishingHitZone().setForgiving(SIZE_4)
-            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 0, 0));
+    public HitZoneType type = HitZoneType.NORMAL;
+    public SoundEvent hitSound = SoundEvents.EXPERIENCE_ORB_PICKUP;
+    public SoundEvent missSound = SoundEvents.VILLAGER_NO;
 
-    public static final FishingHitZone LARGE = new FishingHitZone().setForgiving(SIZE_3)
-            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 16, 0));
+    public int pos;
+    public int forgiving = 7;
 
-    public static final FishingHitZone MEDIUM = new FishingHitZone().setForgiving(SIZE_2)
-            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 32, 0))
-            .setType(HitZoneType.THIN);
-    public static final FishingHitZone THIN = new FishingHitZone().setForgiving(SIZE_1)
-            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 48, 0))
-            .setType(HitZoneType.THIN);
+    public int treasureProgress = 0;
 
-    public static final FishingHitZone TREASURE = new FishingHitZone().setForgiving(SIZE_2)
-            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 64, 0))
-            .setTreasure(10)
-            .setType(HitZoneType.TREASURE);
-
-    //Custom hit zones
-    public static final FishingHitZone TNT = new FishingHitZone().setForgiving(SIZE_3)
-            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 0, -16))
-            .setVanishing(false, 1, false)
-            .setPenaltyAndReward(0, -20)
-            .setRecycling(false)
-            .setMoving(false, 0)
-            .setPlaceOver(true)
-            .setType(HitZoneType.TNT);
-
-    public static final FishingHitZone FREEZE = new FishingHitZone().setForgiving(SIZE_3)
-            .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 16, -16))
-            .setPlaceOver(true)
-            .setPenaltyAndReward(0, -5)
-            .setRecycling(false)
-            .setType(HitZoneType.FREEZE);
-
-    public static final FishingHitZone OBESE = new FishingHitZone().setForgiving(30)
-            .setRendering(makeObeseRenderConsumer(FishingMinigameScreen.TEXTURE, 0, -64))
-            .setPlaceOver(false)
-            .setPenaltyAndReward(0, 8)
-            .setRecycling(false)
-            .setVanishing(true, 0.03f, true)
-            .setType(HitZoneType.OBESE);
-
-
-    HitZoneType type = HitZoneType.NORMAL;
-
-    int pos;
-    int forgiving = SIZE_2;
-
-    int treasureProgress = 0;
-
-    int penalty = 0; //TODO: Add miss penalty, currently does nothing
-    int reward = 10;
+    public int missPenalty = 0;
+    public int hitReward = 10;
     public int gracePeriod = 0;
 
-    int color = -1;
+    public int color = -1;
 
-    boolean isVanishing = false;
-    float vanishValue = 1;
-    float vanishingRate = 0;
+    public boolean isVanishing = false;
+    public float vanishValue = 1;
+    public float vanishingRate = 0;
 
-    boolean removeOnVanish = false;
-    boolean forRemoval = false;
-    boolean shouldRecycle = true; // copies the zone to a different pos on remove
-    boolean canPlaceOver = false; // makes zone get ignored when checking for empty space
+    public boolean removeOnVanish = false;
+    public boolean forRemoval = false;
+    public boolean shouldRecycle = true; // copies the zone to a different pos on remove
+    public boolean canPlaceOver = false; // makes zone get ignored when checking for empty space
 
-    boolean isMoving = false;
-    float moveRate = 0;
-    int moveDirection = 1; //changes moving direction (-1 or 1)
+    public int removeDelay = 0;
+    public int ticksAfterRemoved = 0;
 
-    int tickCount = 0;
+    public boolean isMoving = false;
+    public float moveRate = 0;
+    public int moveDirection = 1; //changes moving direction (-1 or 1)
 
-    TriConsumer<GuiGraphics, Integer, Integer> guiGraphicsConsumer;
+    public int tickCount = 0;
+    public boolean isBeingHoveredOver = false;
+
+    BiConsumer<GuiGraphics, FishingHitZone> guiGraphicsConsumer;
     Consumer<FishingHitZone> onTickConsumer;
     Consumer<FishingHitZone> onHitConsumer;
+    Consumer<FishingHitZone> onMissConsumer;
+    Consumer<FishingHitZone> onRemoveConsumer;
+
 
     // A builder made to mimic the old system
     public FishingHitZone setFromProperties(FishProperties properties, FishProperties.Difficulty difficulty, ItemStack hook, ItemStack bobber) {
@@ -144,6 +111,9 @@ public class FishingHitZone {
     public void render(GuiGraphics guiGraphics, float partialTick, PoseStack poseStack, int width, int height) {
         if (vanishValue <= 0) return;
 
+        final int wheelRadius = 32;
+        final int wheelInset = 6;
+
         poseStack.pushPose();
 
         float centerX = width / 2f;
@@ -153,35 +123,27 @@ public class FishingHitZone {
         float green = FastColor.ARGB32.green(color) / 255f;
         float blue = FastColor.ARGB32.blue(color) / 255f;
         float alpha = FastColor.ARGB32.alpha(color) / 255f;
-        
+
         poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(Axis.ZP.rotationDegrees((float) pos - partialTick * moveDirection * moveRate));
-        poseStack.translate(-centerX, -centerY, 0);
+        poseStack.translate(0, wheelInset - wheelRadius, 0);
+
+        poseStack.rotateAround(Axis.ZP.rotationDegrees((float) pos - partialTick * moveDirection * moveRate), 0, -(wheelInset - wheelRadius), 0);
 
         RenderSystem.setShaderColor(red, green, blue, alpha * vanishValue);
         RenderSystem.enableBlend();
 
-        guiGraphicsConsumer.accept(guiGraphics, width, height);
+        guiGraphicsConsumer.accept(guiGraphics, this);
 
         RenderSystem.disableBlend();
         RenderSystem.setShaderColor(1, 1, 1, 1);
         poseStack.popPose();
     }
 
-    public static TriConsumer<GuiGraphics, Integer, Integer> makeDefaultRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
-        return (guiGraphics, width, height) -> guiGraphics.blit(
-                texture, width / 2 - 8, height / 2 - 8 - 25,
-                16, 16, uOffset, 160 + vOffset, 16, 16, 256, 256);
-    }
-
-    public static TriConsumer<GuiGraphics, Integer, Integer> makeObeseRenderConsumer(ResourceLocation texture, int uOffset, int vOffset) {
-        return (guiGraphics, width, height) -> guiGraphics.blit(
-                texture, width / 2 - 8, height / 2 - 8 - 25,
-                32, 16, uOffset, 160 + vOffset, 32, 16, 256, 256);
-    }
-
     public void tick() {
-        if (forRemoval) return;
+        if (forRemoval) {
+            ticksAfterRemoved++;
+            return;
+        };
         if (isVanishing) vanishValue -= vanishingRate;
         if (removeOnVanish && vanishValue <= 0) forRemoval = true;
 
@@ -192,15 +154,51 @@ public class FishingHitZone {
             if (pos < 0) pos += 360;
         };
 
+        final boolean wasHovering = isBeingHoveredOver;
+        isBeingHoveredOver = FishingMinigameScreen.isHitSuccesful(screen.getPointerPosPrecise(), pos, forgiving);
+
+        if (wasHovering && !isBeingHoveredOver && missPenalty != 0) {
+            onMiss();
+        }
+
         tickCount++;
 
         if (onTickConsumer != null) onTickConsumer.accept(this);
     }
 
+    public void onMiss(){
+        screen.completion -= missPenalty;
+
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player != null && missSound != null) player.playSound(missSound);
+
+        screen.modifiers.forEach(modifier -> modifier.onMiss(this));
+
+        if (onMissConsumer != null) onMissConsumer.accept(this);
+    }
+
+    public Optional<FishingHitZone> onRemove(){
+        screen.removedZones++;
+
+        if (onRemoveConsumer != null) onRemoveConsumer.accept(this);
+
+        if (shouldRecycle) {
+           return Optional.of(this.copy());
+        }
+
+        return Optional.empty();
+    }
+
     public boolean isHitSuccess(float pointerPosPrecise) {
         if (!forRemoval && FishingMinigameScreen.isHitSuccesful(pointerPosPrecise, pos, forgiving)) {
             forRemoval = true;
-            if (onTickConsumer != null) onHitConsumer.accept(this);
+            if (onHitConsumer != null) onHitConsumer.accept(this);
+
+            LocalPlayer player = Minecraft.getInstance().player;
+            if (player != null) player.playSound(hitSound);
+
+            screen.modifiers.forEach(modifier -> modifier.onHit(this));
+
             return true;
         }
         return false;
@@ -208,6 +206,30 @@ public class FishingHitZone {
 
     public boolean isTreasure() {
         return type == HitZoneType.TREASURE;
+    }
+
+    public int getPos() {
+        if (pos > 360)  pos -= 360;
+        if (pos < 0)  pos += 360;
+
+        return pos;
+    }
+
+    public float getDistanceFromPointer(){
+        float ret = Mth.abs(getPos() - screen.getPointerPosPrecise());
+        if (ret > 360)  ret -= 360;
+        if (ret < 0)  ret += 360;
+
+        return ret;
+    }
+
+    public boolean shouldRemove(){
+        return forRemoval && removeDelay <= ticksAfterRemoved;
+    }
+
+    public FishingHitZone setRemoved(boolean removed) {
+        forRemoval = removed;
+        return this;
     }
 
     public FishingHitZone setVanishing(boolean isVanishing, float vanishingRate, boolean removeOnVanish) {
@@ -250,8 +272,8 @@ public class FishingHitZone {
     }
 
     public FishingHitZone setPenaltyAndReward(int penalty, int reward) {
-        this.penalty = penalty;
-        this.reward = reward;
+        this.missPenalty = penalty;
+        this.hitReward = reward;
 
         return this;
     }
@@ -280,10 +302,47 @@ public class FishingHitZone {
         return this;
     }
 
+    public FishingHitZone setHitSound(SoundEvent sound) {
+        this.hitSound = sound;
 
-    public FishingHitZone setRendering(TriConsumer<GuiGraphics, Integer, Integer> guiGraphicsConsumer) {
+        return this;
+    }
+
+    public FishingHitZone setMissSound(SoundEvent sound) {
+        this.missSound = sound;
+
+        return this;
+    }
+
+    public FishingHitZone setRemoveDelay(int delay) {
+        this.removeDelay = delay;
+
+        return this;
+    }
+
+    public FishingHitZone setRendering(BiConsumer<GuiGraphics, FishingHitZone> guiGraphicsConsumer) {
         this.guiGraphicsConsumer = guiGraphicsConsumer;
 
+        return this;
+    }
+
+    public FishingHitZone setOnHitConsumer(Consumer<FishingHitZone> onHitConsumer) {
+        this.onHitConsumer = onHitConsumer;
+        return this;
+    }
+
+    public FishingHitZone setOnTickConsumer(Consumer<FishingHitZone> onTickConsumer) {
+        this.onTickConsumer = onTickConsumer;
+        return this;
+    }
+
+    public FishingHitZone setOnMissConsumer(Consumer<FishingHitZone> onMissConsumer) {
+        this.onMissConsumer = onMissConsumer;
+        return this;
+    }
+
+    public FishingHitZone setOnRemoveConsumer(Consumer<FishingHitZone> onRemoveConsumer) {
+        this.onRemoveConsumer = onRemoveConsumer;
         return this;
     }
 
@@ -293,14 +352,16 @@ public class FishingHitZone {
         FishingHitZone original = this;
 
         copy.type = original.type;
+        copy.hitSound = original.hitSound;
+        copy.missSound = original.missSound;
         copy.forgiving = original.forgiving;
 
         copy.treasureProgress = original.treasureProgress;
 
         copy.color = original.color;
 
-        copy.penalty = original.penalty;
-        copy.reward = original.reward;
+        copy.missPenalty = original.missPenalty;
+        copy.hitReward = original.hitReward;
         copy.gracePeriod = original.gracePeriod;
 
         copy.isVanishing = original.isVanishing;
@@ -309,6 +370,7 @@ public class FishingHitZone {
         copy.removeOnVanish = original.removeOnVanish;
         copy.shouldRecycle = original.shouldRecycle;
         copy.canPlaceOver = original.canPlaceOver;
+        copy.removeDelay = original.removeDelay;
 
         copy.isMoving = original.isMoving;
         copy.moveRate = original.moveRate;
@@ -317,12 +379,21 @@ public class FishingHitZone {
         copy.guiGraphicsConsumer = original.guiGraphicsConsumer;
         copy.onTickConsumer = original.onTickConsumer;
         copy.onHitConsumer = original.onHitConsumer;
+        copy.onMissConsumer = original.onMissConsumer;
+        copy.onRemoveConsumer = original.onRemoveConsumer;
 
         return copy;
     }
 
-    public void buildAndAdd(int pos, List<FishingHitZone> listToAdd) {
+    public void buildAndAdd(FishingMinigameScreen screen, int pos, List<FishingHitZone> listToAdd) {
+        this.screen = screen;
         this.pos = pos;
         listToAdd.add(this);
+    }
+
+    public void buildAndAdd(FishingMinigameScreen screen){
+        this.screen = screen;
+        this.pos = screen.getRandomFreePosition();
+        screen.fishingHitZones.add(this);
     }
 }

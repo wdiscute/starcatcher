@@ -13,62 +13,86 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.SlotItemHandler;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 public class StandMenu extends AbstractContainerMenu
 {
-
     public final StandBlockEntity sbe;
     public final Level level;
 
-    public final ItemStackHandler inventory = new ItemStackHandler(99)
+    public StandMenu(int containerId, Inventory inv, BlockEntity blockEntity)
     {
-        @Override
-        protected int getStackLimit(int slot, ItemStack stack)
+        super(ModMenuTypes.STAND_MENU.get(), containerId);
+        sbe = ((StandBlockEntity) blockEntity);
+        level = inv.player.level();
+
+        //player inventory
+        for (int i = 0; i < 3; ++i)
         {
-            return 64;
+            for (int l = 0; l < 9; ++l)
+            {
+                this.addSlot(new Slot(inv, l + i * 9 + 9, 210 + l * 16, 131 + i * 16));
+            }
         }
 
-    };
+        //player hotbar
+        for (int i = 0; i < 9; ++i)
+        {
+            this.addSlot(new Slot(inv, i, 210 + i * 16, 185));
+        }
+
+        if(!level.isClientSide)
+        {
+            Tournament tournament = TournamentHandler.getTournament(sbe.uuid);
+            for (int i = 0; i < tournament.settings.entryCost.size(); i++)
+            {
+                sbe.entryCost.setStackInSlot(i, tournament.settings.entryCost.get(i).stack().copy());
+            }
+        }
+
+//        if(!level.isClientSide)
+//        {
+//            for (int i = 0; i < sbe.tournament.settings.entryCost.size(); i++)
+//            {
+//                sbe.entryCost.insertItem(i, sbe.tournament.settings.entryCost.get(i).stack().copy(), false);
+//            }
+//        }
+
+        for (int i = 0; i < 9; i++)
+        {
+            int slotid = i;
+            this.addSlot(new SlotItemHandler(sbe.entryCost, slotid, 210 + slotid * 16, 99)
+            {
+                @Override
+                public boolean mayPickup(Player playerIn)
+                {
+                    if(level.isClientSide) return false;
+
+                    sbe.entryCost.setStackInSlot(slotid, ItemStack.EMPTY);
+                    sbe.tournament.settings.entryCost = SingleStackContainer.fromItemStackHandler(sbe.entryCost);
+                    return false;
+                }
+
+                @Override
+                public boolean mayPlace(ItemStack stack)
+                {
+                    if(level.isClientSide) return false;
+
+                    sbe.entryCost.setStackInSlot(slotid, stack.copy());
+                    sbe.tournament.settings.entryCost = SingleStackContainer.fromItemStackHandler(sbe.entryCost);
+                    return false;
+                }
+            });
+        }
+    }
 
     public StandMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
     {
         this(containerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()));
-
-//        //uuid inventory
-//        for (int i = 0; i < 3; ++i)
-//        {
-//            for (int l = 0; l < 9; ++l)
-//            {
-//                this.addSlot(new Slot(inv, l + i * 9 + 9, 80 + l * 18, 10 + i * 18));
-//            }
-//        }
-//
-//        //uuid hotbar
-//        for (int i = 0; i < 9; ++i)
-//        {
-//            this.addSlot(new Slot(inv, i, 8 + i * 18, 142));
-//        }
-
-        for (int i = 0; i < 3; ++i)
-        {
-            for (int l = 0; l < 3; ++l)
-            {
-//                this.addSlot(new SlotItemHandler(inventory, i * 3 + l, 135 + l * 18, 67 + i * 18)
-//                {
-//                    @Override
-//                    public boolean mayPickup(Player playerIn)
-//                    {
-//                        return false;
-//                    }
-//                });
-//                inventory.setStackInSlot(i * 3 + l, new ItemStack(Items.DIAMOND));
-            }
-        }
-
     }
 
     @Override
@@ -114,25 +138,17 @@ public class StandMenu extends AbstractContainerMenu
         }
 
         //start/cancel tournament
-        if(id == 69)
+        if (id == 69)
         {
-            if(sbe.tournament.settings.duration > 0)
+            if (sbe.tournament.settings.duration > 0)
             {
-                TournamentHandler.addTournament(sbe.tournament);
+                TournamentHandler.startTournament(sbe.tournament);
             }
         }
 
 
         return super.clickMenuButton(player, id);
     }
-
-    public StandMenu(int containerId, Inventory inv, BlockEntity blockEntity)
-    {
-        super(ModMenuTypes.STAND_MENU.get(), containerId);
-        sbe = ((StandBlockEntity) blockEntity);
-        level = inv.player.level();
-    }
-
 
     // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
     // must assign a slot number to each of the slots used by the GUI.
@@ -150,7 +166,7 @@ public class StandMenu extends AbstractContainerMenu
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
     // THIS YOU HAVE TO DEFINE!
-    private static final int TE_INVENTORY_SLOT_COUNT = 1;  // must be the number of slots you have!
+    private static final int TE_INVENTORY_SLOT_COUNT = 0;  // must be the number of slots you have!
 
 
     public ItemStack quickMoveStack(Player playerIn, int pIndex)
