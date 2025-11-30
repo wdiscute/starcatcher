@@ -19,6 +19,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -95,8 +96,14 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
     public ResourceLocation tankTexture = SURFACE;
 
     // Nikdo53 values, these are mine dont steal them
-    public boolean isHoldingSpace = false;
+    public final int holdingDelay = 6;
+    public int holdingTicks = 0;
+    private boolean isHoldingSpace = false;
+    private boolean isHoldingMouse = false;
+
     public List<FishingHitZone> fishingHitZones = new ArrayList<>();
+    public List<FishingHitZone> zonesToAdd = new ArrayList<>();
+
     public List<AbstractFishingModifier> modifiers = new ArrayList<>();
 
     public FishingMinigameScreen(FishProperties fp, ItemStack rod) {
@@ -173,6 +180,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
             thinZone.copy().setFromProperties(fp, difficulty, hook, bobber).setPenaltyAndReward(0, difficulty.rewardThin()).buildAndAdd(this);
 
         HitZoneType.Presets.FREEZE.copy().setRecycling(true).buildAndAdd(this);
+        HitZoneType.Presets.SLIDER.copy().buildAndAdd(this);
 
         hand = Minecraft.getInstance().player.getMainHandItem().is(ModItems.ROD) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
     }
@@ -428,19 +436,24 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
     public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue()) {
             isHoldingSpace = false;
+            holdingTicks = 0;
         }
         return super.keyReleased(keyCode, scanCode, modifiers);
     }
 
     @Override
     public boolean mouseReleased(double mouseX, double mouseY, int button) {
-        isHoldingSpace = false;
+        isHoldingMouse = false;
+        holdingTicks = 0;
         return super.mouseReleased(mouseX, mouseY, button);
     }
+
+
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         inputPressed();
+        isHoldingMouse = true;
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
@@ -456,15 +469,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
         //spacebar input
         if (keyCode == Minecraft.getInstance().options.keyJump.getKey().getValue()) {
-            inputPressed();
+            if (!isHoldingSpace) inputPressed();
+
+            isHoldingSpace = true;
         }
 
         return super.keyPressed(keyCode, scanCode, modifiers);
     }
 
     private void inputPressed() {
-        isHoldingSpace = true;
-
         if (gracePeriod > 0) gracePeriod = 0;
 
         Minecraft.getInstance().player.swing(hand, true);
@@ -479,29 +492,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
         for (FishingHitZone zone : fishingHitZones){
             if (zone.isHitSuccess(lastHitMarkerPos)) {
-                onSuccessfulHit(zone);
+                onSuccessfulHit(zone, !hitSomething);
 
                 hitSomething = true;
             }
         }
 
 
-        if (hitSomething) {
-            consecutiveHits++;
-            if ((hasTreasure && r.nextFloat() > 0.9 /*0.9*/ && completion < 60 && !treasureActive)
-                    ||
-                    (consecutiveHits == 3 && !treasureActive && hook.is(ModItems.SHINY_HOOK))) {
-                treasureActive = true;
+        if (!hitSomething) {
+            if (fishingHitZones.stream().anyMatch(FishingHitZone::isBeingHoveredOver)) return;
 
-                HitZoneType.Presets.TREASURE.copy().setFromProperties(fp, fp.dif(), hook, bobber).buildAndAdd(this);
-
-                treasureProgress = 0;
-                treasureProgressSmooth = 0;
-            }
-
-            if (changeRotation) currentRotation *= -1;
-
-        } else {
             this.modifiers.forEach(AbstractFishingModifier::onMissClick);
 
             if (bobber.is(ModItems.KIMBE_BOBBER))
@@ -521,7 +521,27 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
         return pointerPosPrecise;
     }
 
-    private void onSuccessfulHit(FishingHitZone zone) {
+    private void onSuccessfulHit(FishingHitZone zone, boolean isFirstHit) {
+        modifiers.forEach(modifier -> modifier.onHit(zone, isFirstHit));
+
+        if (isFirstHit){
+            consecutiveHits++;
+
+            if ((hasTreasure && r.nextFloat() < 0.1 && completion < 60 && !treasureActive)
+                    ||
+                    (consecutiveHits == 3 && !treasureActive && hook.is(ModItems.SHINY_HOOK))) {
+                treasureActive = true;
+
+                HitZoneType.Presets.TREASURE.copy().setFromProperties(fp, fp.dif(), hook, bobber).buildAndAdd(this, getRandomFreePosition(), zonesToAdd);
+
+                treasureProgress = 0;
+                treasureProgressSmooth = 0;
+            }
+
+            if (changeRotation && zone.type != HitZoneType.SLIDER) currentRotation *= -1;
+
+        }
+
         addParticles(zone.pos, zone.type == HitZoneType.THIN ? 30 : 15, zone.isTreasure());
 
         succeededZones++;
@@ -540,23 +560,36 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
     @Override
     public void tick() {
+        if (isHoldingInput()) { //mimics the keyboard behaviour
+            holdingTicks++;
+           if (holdingTicks > holdingDelay)inputPressed();
+        }
+
         pointerPos += (int) (pointerSpeed * currentRotation);
 
         kimbeColor -= 0.1f;
 
-        List<FishingHitZone> toAdd = new ArrayList<>();
-
         fishingHitZones.removeIf(fishingHitZone -> {
             boolean shouldRemove = fishingHitZone.shouldRemove();
 
-            if (shouldRemove)
-                fishingHitZone.onRemove().ifPresent(zone -> zone.buildAndAdd(this, getRandomFreePosition(), toAdd));
+            if (shouldRemove) {
+                FishingHitZone nullableZone = fishingHitZone.onRemove();
+                for (AbstractFishingModifier modifier : modifiers) {
+                    nullableZone = modifier.preZoneAdd(nullableZone);
+                }
+
+                if (nullableZone != null) {
+                    nullableZone.buildAndAdd(this, getRandomFreePosition(), zonesToAdd);
+                }
+
+            }
 
             return shouldRemove;
         });
 
         fishingHitZones.forEach(FishingHitZone::tick);
-        fishingHitZones.addAll(toAdd);
+        fishingHitZones.addAll(zonesToAdd);
+        zonesToAdd.clear();
 
         modifiers.removeIf(AbstractFishingModifier::tick);
 
@@ -642,6 +675,18 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
     public int getTotalMisses(){
         return removedZones - succeededZones;
+    }
+
+    public boolean isHoldingInput(){
+        return isHoldingMouse || isHoldingSpace;
+    }
+
+    public static int normalizePos(int pos){
+        int ret = pos % 360;
+
+        if (ret < 0) ret += 360;
+
+        return ret;
     }
 
     @Override

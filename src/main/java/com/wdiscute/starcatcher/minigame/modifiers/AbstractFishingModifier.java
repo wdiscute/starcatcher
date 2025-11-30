@@ -5,6 +5,9 @@ import com.wdiscute.starcatcher.minigame.FishingHitZone;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.gui.GuiGraphics;
 
+import javax.annotation.Nullable;
+import java.util.Optional;
+
 public abstract class AbstractFishingModifier {
     FishingMinigameScreen screen;
     int length; //-1 for infinite
@@ -39,7 +42,7 @@ public abstract class AbstractFishingModifier {
 
     }
 
-    public void onHit(FishingHitZone zone){
+    public void onHit(FishingHitZone zone, boolean isFirstHit){
 
     }
 
@@ -53,6 +56,10 @@ public abstract class AbstractFishingModifier {
 
     protected void onAdd(){
 
+    }
+
+    public @Nullable FishingHitZone preZoneAdd(@Nullable FishingHitZone zone){
+        return zone;
     }
 
     public void addModifier(){

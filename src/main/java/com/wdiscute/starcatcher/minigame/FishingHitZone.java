@@ -14,10 +14,11 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class FishingHitZone {
     public FishingMinigameScreen screen;
@@ -54,13 +55,13 @@ public class FishingHitZone {
     public int moveDirection = 1; //changes moving direction (-1 or 1)
 
     public int tickCount = 0;
-    public boolean isBeingHoveredOver = false;
+    private boolean isBeingHoveredOver = false;
 
     BiConsumer<GuiGraphics, FishingHitZone> guiGraphicsConsumer;
     Consumer<FishingHitZone> onTickConsumer;
     Consumer<FishingHitZone> onHitConsumer;
     Consumer<FishingHitZone> onMissConsumer;
-    Consumer<FishingHitZone> onRemoveConsumer;
+    Function<FishingHitZone, Boolean> preRemoveFunction; // cancels the return when false
 
 
     // A builder made to mimic the old system
@@ -140,33 +141,34 @@ public class FishingHitZone {
     }
 
     public void tick() {
+        final boolean wasHovering = isBeingHoveredOver;
+        isBeingHoveredOver = isBeingHoveredOver();
+
+        if (onTickConsumer != null) onTickConsumer.accept(this);
+        tickCount++;
+
         if (forRemoval) {
             ticksAfterRemoved++;
             return;
         };
+
         if (isVanishing) vanishValue -= vanishingRate;
         if (removeOnVanish && vanishValue <= 0) forRemoval = true;
 
         if (isMoving) {
             pos -= (int) (moveRate * moveDirection);
 
-            if (pos > 360) pos -= 360;
-            if (pos < 0) pos += 360;
+            pos = getPos(); // normalize the value
         };
-
-        final boolean wasHovering = isBeingHoveredOver;
-        isBeingHoveredOver = FishingMinigameScreen.isHitSuccesful(screen.getPointerPosPrecise(), pos, forgiving);
 
         if (wasHovering && !isBeingHoveredOver && missPenalty != 0) {
             onMiss();
         }
-
-        tickCount++;
-
-        if (onTickConsumer != null) onTickConsumer.accept(this);
     }
 
     public void onMiss(){
+        if (screen.gracePeriod > 0) return;
+
         screen.completion -= missPenalty;
 
         LocalPlayer player = Minecraft.getInstance().player;
@@ -177,27 +179,29 @@ public class FishingHitZone {
         if (onMissConsumer != null) onMissConsumer.accept(this);
     }
 
-    public Optional<FishingHitZone> onRemove(){
+    public boolean preRemove() {
+        if (preRemoveFunction != null) return preRemoveFunction.apply(this);
+
+        return true;
+    }
+
+    public @Nullable FishingHitZone onRemove(){
         screen.removedZones++;
 
-        if (onRemoveConsumer != null) onRemoveConsumer.accept(this);
-
         if (shouldRecycle) {
-           return Optional.of(this.copy());
+           return this.copy();
         }
 
-        return Optional.empty();
+        return null;
     }
 
     public boolean isHitSuccess(float pointerPosPrecise) {
-        if (!forRemoval && FishingMinigameScreen.isHitSuccesful(pointerPosPrecise, pos, forgiving)) {
+        if (!screen.isHoldingInput() && !forRemoval && FishingMinigameScreen.isHitSuccesful(pointerPosPrecise, pos, forgiving)) {
             forRemoval = true;
             if (onHitConsumer != null) onHitConsumer.accept(this);
 
             LocalPlayer player = Minecraft.getInstance().player;
             if (player != null) player.playSound(hitSound);
-
-            screen.modifiers.forEach(modifier -> modifier.onHit(this));
 
             return true;
         }
@@ -208,11 +212,16 @@ public class FishingHitZone {
         return type == HitZoneType.TREASURE;
     }
 
-    public int getPos() {
-        if (pos > 360)  pos -= 360;
-        if (pos < 0)  pos += 360;
+    public boolean isBeingHoveredOver() {
+        return isBeingHoveredOver(forgiving);
+    }
 
-        return pos;
+    public boolean isBeingHoveredOver(int forgiving){
+        return FishingMinigameScreen.isHitSuccesful(screen.getPointerPosPrecise(), getPos(), forgiving);
+    }
+
+    public int getPos() {
+        return FishingMinigameScreen.normalizePos(pos);
     }
 
     public float getDistanceFromPointer(){
@@ -224,7 +233,11 @@ public class FishingHitZone {
     }
 
     public boolean shouldRemove(){
-        return forRemoval && removeDelay <= ticksAfterRemoved;
+        boolean shouldRemove = forRemoval && removeDelay <= ticksAfterRemoved;
+        if (shouldRemove) {
+            return preRemove();
+        }
+        return false;
     }
 
     public FishingHitZone setRemoved(boolean removed) {
@@ -259,6 +272,13 @@ public class FishingHitZone {
         return this;
     }
 
+    public FishingHitZone setColor(int hex) {
+        this.color = FastColor.ARGB32.color(255 , hex);
+
+        return this;
+    }
+
+
     public FishingHitZone setColor(int red, int green, int blue, int alpha) {
         this.color = FastColor.ARGB32.color(alpha, red, green, blue);
 
@@ -271,9 +291,9 @@ public class FishingHitZone {
         return this;
     }
 
-    public FishingHitZone setPenaltyAndReward(int penalty, int reward) {
-        this.missPenalty = penalty;
-        this.hitReward = reward;
+    public FishingHitZone setPenaltyAndReward(int missPenalty, int hitReward) {
+        this.missPenalty = missPenalty;
+        this.hitReward = hitReward;
 
         return this;
     }
@@ -341,8 +361,8 @@ public class FishingHitZone {
         return this;
     }
 
-    public FishingHitZone setOnRemoveConsumer(Consumer<FishingHitZone> onRemoveConsumer) {
-        this.onRemoveConsumer = onRemoveConsumer;
+    public FishingHitZone setPreRemoveFunction(Function<FishingHitZone, Boolean> preRemoveFunction) {
+        this.preRemoveFunction = preRemoveFunction;
         return this;
     }
 
@@ -380,7 +400,7 @@ public class FishingHitZone {
         copy.onTickConsumer = original.onTickConsumer;
         copy.onHitConsumer = original.onHitConsumer;
         copy.onMissConsumer = original.onMissConsumer;
-        copy.onRemoveConsumer = original.onRemoveConsumer;
+        copy.preRemoveFunction = original.preRemoveFunction;
 
         return copy;
     }
