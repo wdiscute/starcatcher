@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import com.wdiscute.starcatcher.io.FishProperties;
 import com.wdiscute.starcatcher.io.ModDataAttachments;
@@ -34,7 +35,7 @@ public class AwardAllFishes extends Item
         for (FishProperties fp : level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
         {
             if(fp.hasGuideEntry())
-                fishCounter.add(new FishCaughtCounter(fp, 999999, 0, 0, 0, 0, false, false));
+                fishCounter.add(new FishCaughtCounter(U.getRlFromFp(level, fp), 999999, 0, 0, 0, 0, false, false));
         }
 
 
@@ -45,7 +46,7 @@ public class AwardAllFishes extends Item
             fishes.add(fp);
         }
 
-        player.setData(ModDataAttachments.FISHES_NOTIFICATION, fishes);
+        player.setData(ModDataAttachments.FISHES_NOTIFICATION, U.getRlsFromFps(level, fishes));
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }

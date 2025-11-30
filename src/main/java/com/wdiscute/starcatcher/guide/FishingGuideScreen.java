@@ -83,8 +83,6 @@ public class FishingGuideScreen extends Screen
 
     private static final int MAX_HELP_PAGES = 4;
 
-    final boolean advancedTooltips;
-
     private final ItemStack basics;
     private final ItemStack treasures;
 
@@ -488,19 +486,19 @@ public class FishingGuideScreen extends Screen
         {
             all = new TrophyProperties.RarityProgress(all.total() + fcc.count(), all.unique());
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.COMMON)
+            if (U.getFpFromRl(level, fcc.fp()).rarity() == FishProperties.Rarity.COMMON)
                 common = new TrophyProperties.RarityProgress(common.total() + fcc.count(), common.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.UNCOMMON)
+            if (U.getFpFromRl(level, fcc.fp()).rarity() == FishProperties.Rarity.UNCOMMON)
                 uncommon = new TrophyProperties.RarityProgress(uncommon.total() + fcc.count(), uncommon.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.RARE)
+            if (U.getFpFromRl(level, fcc.fp()).rarity() == FishProperties.Rarity.RARE)
                 rare = new TrophyProperties.RarityProgress(rare.total() + fcc.count(), rare.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.EPIC)
+            if (U.getFpFromRl(level, fcc.fp()).rarity() == FishProperties.Rarity.EPIC)
                 epic = new TrophyProperties.RarityProgress(epic.total() + fcc.count(), epic.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.LEGENDARY)
+            if (U.getFpFromRl(level, fcc.fp()).rarity() == FishProperties.Rarity.LEGENDARY)
                 legendary = new TrophyProperties.RarityProgress(legendary.total() + fcc.count(), legendary.unique() + 1);
         }
 
@@ -1169,7 +1167,7 @@ public class FishingGuideScreen extends Screen
         int caught = 0;
         for (FishCaughtCounter f : fishCounterList)
         {
-            if (fp.equals(f.fp()))
+            if (fp.equals(U.getFpFromRl(level, f.fp())))
             {
                 caught = f.count();
                 break;
@@ -1220,7 +1218,7 @@ public class FishingGuideScreen extends Screen
             renderItem(new ItemStack(ModItems.MISSINGNO.get()), xOffset, yOffset, 1);
 
         //render fish notification icon
-        for (FishProperties fpNotif : player.getData(ModDataAttachments.FISHES_NOTIFICATION))
+        for (FishProperties fpNotif : U.getFpsFromRls(level, player.getData(ModDataAttachments.FISHES_NOTIFICATION)))
         {
             if (fp.equals(fpNotif))
                 guiGraphics.blit(STAR, xOffset + 10, yOffset + 7, 0, 0, 10, 10, 10, 10);
@@ -1299,7 +1297,7 @@ public class FishingGuideScreen extends Screen
         FishCaughtCounter fcc = null;
         for (FishCaughtCounter fccAll : fishCaughtCounterList)
         {
-            if (fp.equals(fccAll.fp()))
+            if (fp.equals(U.getFpFromRl(level, fccAll.fp())))
             {
                 fcc = fccAll;
                 break;
@@ -1954,7 +1952,6 @@ public class FishingGuideScreen extends Screen
     @Override
     public void onClose()
     {
-        Minecraft.getInstance().options.advancedItemTooltips = advancedTooltips;
         PacketDistributor.sendToServer(new FPsSeenPayload(fpsSeen));
         super.onClose();
     }
@@ -2012,8 +2009,5 @@ public class FishingGuideScreen extends Screen
         secrets = new ItemStack(ModItems.WATERLOGGED_BOTTLE.get());
 
         settings = new ItemStack(ModItems.SETTINGS.get());
-
-        advancedTooltips = Minecraft.getInstance().options.advancedItemTooltips;
-        Minecraft.getInstance().options.advancedItemTooltips = Minecraft.getInstance().player.isCreative() && advancedTooltips;
     }
 }

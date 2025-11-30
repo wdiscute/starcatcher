@@ -28,18 +28,18 @@ public class ModDataAttachments
 
     public static final Supplier<AttachmentType<List<FishCaughtCounter>>> FISHES_CAUGHT = ATTACHMENT_TYPES.register(
             "fishes_caught", () ->
-                    AttachmentType.builder(() -> List.of(new FishCaughtCounter(FishProperties.DEFAULT, 0, 0, 0, 0, 0, false, false)))
+                    AttachmentType.builder(() -> List.of(new FishCaughtCounter(Starcatcher.rl("missingno_rl"), 0, 0, 0, 0, 0, false, false)))
                             .serialize(FishCaughtCounter.LIST_CODEC)
                             .sync(FishCaughtCounter.LIST_STREAM_CODEC)
                             .copyOnDeath()
                             .build()
     );
 
-    public static final Supplier<AttachmentType<List<TrophyProperties>>> TROPHIES_CAUGHT = ATTACHMENT_TYPES.register(
+    public static final Supplier<AttachmentType<List<ResourceLocation>>> TROPHIES_CAUGHT = ATTACHMENT_TYPES.register(
             "trophies_caught", () ->
-                    AttachmentType.builder(() -> List.of(TrophyProperties.DEFAULT))
-                            .serialize(TrophyProperties.LIST_CODEC)
-                            .sync(TrophyProperties.LIST_STREAM_CODEC)
+                    AttachmentType.builder(() -> List.of(Starcatcher.rl("missingno_rl")))
+                            .serialize(ResourceLocation.CODEC.listOf())
+                            .sync(ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()))
                             .copyOnDeath()
                             .build()
     );
@@ -53,11 +53,11 @@ public class ModDataAttachments
                             .build()
     );
 
-    public static final Supplier<AttachmentType<List<FishProperties>>> FISHES_NOTIFICATION = ATTACHMENT_TYPES.register(
+    public static final Supplier<AttachmentType<List<ResourceLocation>>> FISHES_NOTIFICATION = ATTACHMENT_TYPES.register(
             "fishes_notification", () ->
-                    AttachmentType.builder(() -> List.of(FishProperties.DEFAULT))
-                            .serialize(FishProperties.LIST_CODEC)
-                            .sync(FishProperties.STREAM_CODEC_LIST)
+                    AttachmentType.builder(() -> List.of(Starcatcher.rl("missingno_rl")))
+                            .serialize(ResourceLocation.CODEC.listOf())
+                            .sync(ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()))
                             .copyOnDeath()
                             .build()
     );

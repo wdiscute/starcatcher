@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.io.network;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.bob.FishingBobEntity;
 import com.wdiscute.starcatcher.io.*;
 import com.wdiscute.starcatcher.registry.ModCriterionTriggers;
@@ -116,9 +117,9 @@ public record FishingCompletedPayload(int time, boolean completedTreasure, boole
                         level.playSound(null, p.x, p.y, p.z, SoundEvents.VILLAGER_CELEBRATE, SoundSource.AMBIENT);
 
                         //award fish counter
-                        List<FishProperties> list = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
+                        List<FishProperties> list = new ArrayList<>(U.getFpsFromRls(level, player.getData(ModDataAttachments.FISHES_NOTIFICATION)));
                         list.add(fbe.fpToFish);
-                        player.setData(ModDataAttachments.FISHES_NOTIFICATION, list);
+                        player.setData(ModDataAttachments.FISHES_NOTIFICATION, U.getRlsFromFps(level, list));
 
                         //award exp
                         int exp = fp.rarity().getXp();

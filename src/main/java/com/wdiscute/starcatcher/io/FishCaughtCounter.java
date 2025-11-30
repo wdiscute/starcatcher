@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.io.network.FishCaughtPayload;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public record FishCaughtCounter(
-        FishProperties fp,
+        ResourceLocation fp,
         int count,
         int fastestTicks,
         float averageTicks,
@@ -28,7 +29,7 @@ public record FishCaughtCounter(
 
     public static final Codec<FishCaughtCounter> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    FishProperties.CODEC.fieldOf("fps").forGetter(FishCaughtCounter::fp),
+                    ResourceLocation.CODEC.fieldOf("fps").forGetter(FishCaughtCounter::fp),
                     Codec.INT.optionalFieldOf("count", 0).forGetter(FishCaughtCounter::count),
                     Codec.INT.optionalFieldOf("fastest_ticks", 0).forGetter(FishCaughtCounter::fastestTicks),
                     Codec.FLOAT.optionalFieldOf("average_ticks", 0.0f).forGetter(FishCaughtCounter::averageTicks),
@@ -40,7 +41,7 @@ public record FishCaughtCounter(
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FishCaughtCounter> STREAM_CODEC = ExtraComposites.composite(
-            FishProperties.STREAM_CODEC, FishCaughtCounter::fp,
+            ResourceLocation.STREAM_CODEC, FishCaughtCounter::fp,
             ByteBufCodecs.VAR_INT, FishCaughtCounter::count,
             ByteBufCodecs.VAR_INT, FishCaughtCounter::fastestTicks,
             ByteBufCodecs.FLOAT, FishCaughtCounter::averageTicks,
@@ -94,7 +95,7 @@ public record FishCaughtCounter(
                 int weightToSave = Math.max(weight, fcc.weight);
 
                 newlist.add(new FishCaughtCounter(
-                        fpCaught,
+                        player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY).getKey(fpCaught),
                         countToSave + 1,
                         fastestToSave,
                         averageToSave, sizeToSave, weightToSave,
@@ -110,7 +111,7 @@ public record FishCaughtCounter(
             }
         }
 
-        if (newFish) newlist.add(new FishCaughtCounter(fpCaught, 1, ticks, ticks, size, weight, false, perfectCatch));
+        if (newFish) newlist.add(new FishCaughtCounter(player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY).getKey(fpCaught), 1, ticks, ticks, size, weight, false, perfectCatch));
 
         //display message above exp bar
         PacketDistributor.sendToPlayer(((ServerPlayer) player), new FishCaughtPayload(fpCaught, newFish, size, weight));

@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import com.wdiscute.starcatcher.io.FishProperties;
 import com.wdiscute.starcatcher.io.ModDataAttachments;
@@ -32,7 +33,7 @@ public class AwardOneFish extends Item
         if(!player.isCreative())
             return InteractionResultHolder.pass(player.getItemInHand(usedHand));List<FishCaughtCounter> fishCounter;
 
-        List<FishProperties> fishes = new ArrayList<>(player.getData(ModDataAttachments.FISHES_NOTIFICATION));
+        List<FishProperties> fishes = new ArrayList<>(U.getFpsFromRls(level, player.getData(ModDataAttachments.FISHES_NOTIFICATION)));
 
         fishCounter = new ArrayList<>(player.getData(ModDataAttachments.FISHES_CAUGHT));
 
@@ -42,7 +43,7 @@ public class AwardOneFish extends Item
         {
             FishProperties fp = optional.get().value();
 
-            fishCounter.add(new FishCaughtCounter(fp, 999999, 0, 0, 0, 0, false, false));
+            fishCounter.add(new FishCaughtCounter(U.getRlFromFp(level, fp), 999999, 0, 0, 0, 0, false, false));
             fishes.add(fp);
 
             if(player instanceof ServerPlayer sp)
@@ -52,7 +53,7 @@ public class AwardOneFish extends Item
         }
 
         player.setData(ModDataAttachments.FISHES_CAUGHT, fishCounter);
-        player.setData(ModDataAttachments.FISHES_NOTIFICATION, fishes);
+        player.setData(ModDataAttachments.FISHES_NOTIFICATION, U.getRlsFromFps(level, fishes));
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }

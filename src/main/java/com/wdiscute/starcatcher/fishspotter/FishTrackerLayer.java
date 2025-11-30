@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.fishspotter;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.registry.ModItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
@@ -47,7 +48,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
     {
         fpsInArea = FishProperties.getFpsWithGuideEntryForArea(player);
         fishesCaught = new ArrayList<>();
-        for (FishCaughtCounter fishes : player.getData(ModDataAttachments.FISHES_CAUGHT)) fishesCaught.add(fishes.fp());
+        for (FishCaughtCounter fishes : player.getData(ModDataAttachments.FISHES_CAUGHT)) fishesCaught.add(U.getFpFromRl(level, fishes.fp()));
     }
 
     @Override

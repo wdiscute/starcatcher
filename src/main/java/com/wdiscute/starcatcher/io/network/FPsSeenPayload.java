@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.io.network;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.io.FishProperties;
 import com.wdiscute.starcatcher.io.ModDataAttachments;
 import io.netty.buffer.ByteBuf;
@@ -28,7 +29,7 @@ public record FPsSeenPayload(List<FishProperties> fps) implements CustomPacketPa
     }
 
     public void handle(IPayloadContext context) {
-        List<FishProperties> list = context.player().getData(ModDataAttachments.FISHES_NOTIFICATION);
+        List<FishProperties> list = U.getFpsFromRls(context.player().level(), context.player().getData(ModDataAttachments.FISHES_NOTIFICATION));
         List<FishProperties> newList = new ArrayList<>();
 
         for (FishProperties fp : list) {
@@ -36,6 +37,6 @@ public record FPsSeenPayload(List<FishProperties> fps) implements CustomPacketPa
                 newList.add(fp);
         }
 
-        context.player().setData(ModDataAttachments.FISHES_NOTIFICATION, newList);
+        context.player().setData(ModDataAttachments.FISHES_NOTIFICATION, U.getRlsFromFps(context.player().level(), newList));
     }
 }

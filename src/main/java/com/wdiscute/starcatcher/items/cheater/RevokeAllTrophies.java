@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.items.cheater;
 
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.io.ModDataAttachments;
 import com.wdiscute.starcatcher.io.TrophyProperties;
 import net.minecraft.world.InteractionHand;
@@ -23,14 +24,14 @@ public class RevokeAllTrophies extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
         //revoke all trophies
-        List<TrophyProperties> list = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
+        List<TrophyProperties> list = new ArrayList<>(U.getTpsFromRls(level, player.getData(ModDataAttachments.TROPHIES_CAUGHT)));
 
         player.getData(ModDataAttachments.TROPHIES_CAUGHT).forEach(tp ->
         {
-            if(tp.trophyType() == TrophyProperties.TrophyType.TROPHY) list.remove(tp);
+            if(U.getTpFromRl(level, tp).trophyType() == TrophyProperties.TrophyType.TROPHY) list.remove(tp);
         });
 
-        player.setData(ModDataAttachments.TROPHIES_CAUGHT, list);
+        player.setData(ModDataAttachments.TROPHIES_CAUGHT, U.getRlsFromTps(level, list));
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
 

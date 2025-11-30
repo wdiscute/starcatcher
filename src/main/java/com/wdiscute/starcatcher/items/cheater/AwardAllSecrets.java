@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.items.cheater;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.io.ModDataAttachments;
 import com.wdiscute.starcatcher.io.TrophyProperties;
 import net.minecraft.world.InteractionHand;
@@ -24,7 +25,7 @@ public class AwardAllSecrets extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
         //awards all secrets
-        List<TrophyProperties> trophies = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
+        List<TrophyProperties> trophies = new ArrayList<>(U.getTpsFromRls(level, player.getData(ModDataAttachments.TROPHIES_CAUGHT)));
 
         level.registryAccess().registryOrThrow(Starcatcher.TROPHY_REGISTRY).forEach(
                 tp ->
@@ -33,7 +34,7 @@ public class AwardAllSecrets extends Item
                         trophies.add(tp);
                 });
 
-        player.setData(ModDataAttachments.TROPHIES_CAUGHT, trophies);
+        player.setData(ModDataAttachments.TROPHIES_CAUGHT, U.getRlsFromTps(level, trophies));
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }
 

@@ -13,6 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -126,7 +127,9 @@ public class FishingBobEntity extends Projectile
         //server only
         List<FishProperties> available = new ArrayList<>(List.of());
 
-        List<TrophyProperties> trophiesCaught = new ArrayList<>(player.getData(ModDataAttachments.TROPHIES_CAUGHT));
+        List<ResourceLocation> data = player.getData(ModDataAttachments.TROPHIES_CAUGHT);
+
+        List<TrophyProperties> trophiesCaught = new ArrayList<>(U.getTpsFromRls(level(), data));
 
         //-1 on the common to account for the default "fish" unfortunately, theres probably a way to fix this
         TrophyProperties.RarityProgress all = new TrophyProperties.RarityProgress(0, player.getData(ModDataAttachments.FISHES_CAUGHT).size() - 1); //-1 to remove the default
@@ -140,19 +143,19 @@ public class FishingBobEntity extends Projectile
         {
             all = new TrophyProperties.RarityProgress(all.total() + fcc.count(), all.unique());
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.COMMON)
+            if (U.getFpFromRl(level(), fcc.fp()).rarity() == FishProperties.Rarity.COMMON)
                 common = new TrophyProperties.RarityProgress(common.total() + fcc.count(), common.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.UNCOMMON)
+            if (U.getFpFromRl(level(), fcc.fp()).rarity() == FishProperties.Rarity.UNCOMMON)
                 uncommon = new TrophyProperties.RarityProgress(uncommon.total() + fcc.count(), uncommon.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.RARE)
+            if (U.getFpFromRl(level(), fcc.fp()).rarity() == FishProperties.Rarity.RARE)
                 rare = new TrophyProperties.RarityProgress(rare.total() + fcc.count(), rare.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.EPIC)
+            if (U.getFpFromRl(level(), fcc.fp()).rarity() == FishProperties.Rarity.EPIC)
                 epic = new TrophyProperties.RarityProgress(epic.total() + fcc.count(), epic.unique() + 1);
 
-            if (fcc.fp().rarity() == FishProperties.Rarity.LEGENDARY)
+            if (U.getFpFromRl(level(), fcc.fp()).rarity() == FishProperties.Rarity.LEGENDARY)
                 legendary = new TrophyProperties.RarityProgress(legendary.total() + fcc.count(), legendary.unique() + 1);
 
         }
@@ -191,7 +194,7 @@ public class FishingBobEntity extends Projectile
 
                 trophiesCaught.add(tp);
 
-                player.setData(ModDataAttachments.TROPHIES_CAUGHT, trophiesCaught);
+                player.setData(ModDataAttachments.TROPHIES_CAUGHT, U.getRlsFromTps(level(), trophiesCaught));
                 player.setData(ModDataAttachments.FISHING, "");
                 kill();
                 return;
