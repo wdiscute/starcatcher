@@ -1,2 +1,6 @@
 For instructions on how to add fishes please visit https://github.com/wdiscute/starcatcher/wiki
 or message me on discord https://discord.gg/tCs89QTuzn and I'll be more than happy to help!
+
+Refer to the built-in fishes under
+generated/resources/data/starcatcher/starcatcher/fish/XXXXX.json
+for examples of fish jsons

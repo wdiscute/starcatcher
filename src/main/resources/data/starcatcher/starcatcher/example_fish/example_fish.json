@@ -1,0 +1,81 @@
+{
+  "bait_restrictions": {
+    "consumes_bait": false,
+    "correct_bait_chance_added": 9,
+    "correct_baits": [
+      "starcatcher:cherry_bait"
+    ],
+    "correct_bobbers": [
+      "starcatcher:clear_bobber"
+    ],
+    "incorrect_baits": [
+      "starcatcher:lush_bait"
+    ],
+    "must_have_correct_bait": true
+  },
+  "base_chance": 2,
+  "custom_name": "Super Cool Pufferfish",
+  "daytime": "midnight",
+  "difficulty": {
+    "decay": 2,
+    "extras": {
+      "flips_rotation_every_hit": false,
+      "has_moving_markers": true,
+      "has_vanishing_markers": true
+    },
+    "hitReward": 21,
+    "markers": {
+      "has_first_marker": true,
+      "has_first_thin_marker": true,
+      "has_second_marker": false,
+      "has_second_thin_marker": false
+    },
+    "missPenalty": 7,
+    "reward_thin": 2,
+    "speed": 10,
+    "treasure": {
+      "has_treasure": true,
+      "hit_reward": 13,
+      "loot": "starcatcher:cool_item"
+    }
+  },
+  "fish": "minecraft:pufferfish",
+  "has_guide_entry": false,
+  "rarity": "legendary",
+  "size_and_weight": {
+    "average_size_cm": 100.0,
+    "average_weight_grams": 1000.0,
+    "deviation_size_cm": 10.0,
+    "deviation_weight_grams": 100.0,
+    "golden_chance_percentage": 10,
+    "golden_state_increase": 20
+  },
+  "skips_minigame": true,
+  "weather": "thunder",
+  "world_restrictions": {
+    "above_y": 40,
+    "below_y": 70,
+    "biomes": [
+      "minecraft:badlands"
+    ],
+    "biomes_blacklist": [
+      "minecraft:is_beach"
+    ],
+    "biomes_blacklist_tags": [],
+    "biomes_tags": [
+      "minecraft:is_jungle"
+    ],
+    "dimensions": [
+      "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [
+      "minecraft:the_nether"
+    ],
+    "fluids": [
+      "minecraft:lava"
+    ],
+    "seasons": [
+      "all"
+    ]
+  }
+}
