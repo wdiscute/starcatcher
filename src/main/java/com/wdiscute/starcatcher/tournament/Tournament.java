@@ -16,7 +16,7 @@ import java.util.*;
 
 public class Tournament
 {
-
+    public UUID tournamentUUID;
     public String name;
     public Status status;
     public UUID owner;
@@ -27,6 +27,7 @@ public class Tournament
 
     public static final Codec<Tournament> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
+                    UUIDUtil.CODEC.fieldOf("tournament_uuid").forGetter(Tournament::getOwner),
                     Codec.STRING.optionalFieldOf("name", "Unnamed Tournament").forGetter(Tournament::getName),
                     Status.CODEC.fieldOf("status").forGetter(Tournament::getStatus),
                     UUIDUtil.CODEC.fieldOf("owner").forGetter(Tournament::getOwner),
@@ -38,6 +39,7 @@ public class Tournament
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, Tournament> STREAM_CODEC = ExtraComposites.composite(
+            UUIDUtil.STREAM_CODEC, Tournament::getTournamentUUID,
             ByteBufCodecs.STRING_UTF8, Tournament::getName,
             Status.STREAM_CODEC, Tournament::getStatus,
             UUIDUtil.STREAM_CODEC, Tournament::getOwner,
@@ -48,7 +50,8 @@ public class Tournament
             Tournament::new
     );
 
-    public Tournament(String name,
+    public Tournament(UUID tournamentUUID,
+                      String name,
                       Status status,
                       UUID owner,
                       Map<UUID, TournamentPlayerScore> playerScore,
@@ -57,6 +60,7 @@ public class Tournament
                       long lastsUntil
     )
     {
+        this.tournamentUUID = tournamentUUID;
         this.name = name;
         this.status = status;
         this.owner = owner;
@@ -66,6 +70,10 @@ public class Tournament
         this.lastsUntil = lastsUntil;
     }
 
+    public UUID getTournamentUUID()
+    {
+        return tournamentUUID;
+    }
 
     public String getName()
     {
