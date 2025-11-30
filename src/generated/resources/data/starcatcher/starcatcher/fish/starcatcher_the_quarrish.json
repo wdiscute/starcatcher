@@ -1,17 +1,33 @@
 {
   "bait_restrictions": {
+    "consumes_bait": true,
     "correct_bait_chance_added": 15,
     "correct_baits": [
       "starcatcher:lush_bait"
-    ]
+    ],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
   },
+  "base_chance": 5,
+  "custom_name": "",
+  "daytime": "all",
   "difficulty": {
     "decay": 0,
     "extras": {
-      "flips_rotation_every_hit": false
+      "flips_rotation_every_hit": false,
+      "has_moving_markers": false,
+      "has_vanishing_markers": false
     },
     "hitReward": 1,
+    "markers": {
+      "has_first_marker": true,
+      "has_first_thin_marker": false,
+      "has_second_marker": true,
+      "has_second_thin_marker": false
+    },
     "missPenalty": 5,
+    "reward_thin": 0,
     "speed": 12,
     "treasure": {
       "has_treasure": true,
@@ -20,6 +36,7 @@
     }
   },
   "fish": "starcatcher:the_quarrish",
+  "has_guide_entry": true,
   "rarity": "epic",
   "size_and_weight": {
     "average_size_cm": 620.0,
@@ -29,15 +46,28 @@
     "golden_chance_percentage": 10,
     "golden_state_increase": 20
   },
+  "skips_minigame": false,
+  "weather": "all",
   "world_restrictions": {
+    "above_y": -2147483648,
+    "below_y": 2147483647,
     "biomes": [
       "minecraft:lush_caves"
     ],
+    "biomes_blacklist": [],
+    "biomes_blacklist_tags": [],
     "biomes_tags": [
       "minecraft:is_jungle"
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }

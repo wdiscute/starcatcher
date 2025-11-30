@@ -16,6 +16,7 @@ import java.util.List;
 public record TrophyProperties
         (
                 FishProperties fp,
+                boolean alwaysShow,
                 TrophyType trophyType,
                 String customName,
                 RarityProgress all,
@@ -30,6 +31,7 @@ public record TrophyProperties
 
     public static final TrophyProperties DEFAULT = new TrophyProperties(
             FishProperties.DEFAULT.withFish(ModItems.MISSINGNO),
+            false,
             TrophyType.EXTRA,
             "Missingno Trophy",
             RarityProgress.DEFAULT,
@@ -43,21 +45,23 @@ public record TrophyProperties
 
     public static final Codec<TrophyProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    FishProperties.CODEC.optionalFieldOf("fish_properties", DEFAULT.fp).forGetter(TrophyProperties::fp),
-                    TrophyType.CODEC.optionalFieldOf("trophy_type", DEFAULT.trophyType).forGetter(TrophyProperties::trophyType),
-                    Codec.STRING.optionalFieldOf("custom_name", DEFAULT.customName).forGetter(TrophyProperties::customName),
-                    RarityProgress.CODEC.optionalFieldOf("all", DEFAULT.common).forGetter(TrophyProperties::all),
-                    RarityProgress.CODEC.optionalFieldOf("common", DEFAULT.common).forGetter(TrophyProperties::common),
-                    RarityProgress.CODEC.optionalFieldOf("uncommon", DEFAULT.common).forGetter(TrophyProperties::uncommon),
-                    RarityProgress.CODEC.optionalFieldOf("rare", DEFAULT.common).forGetter(TrophyProperties::rare),
-                    RarityProgress.CODEC.optionalFieldOf("epic", DEFAULT.common).forGetter(TrophyProperties::epic),
-                    RarityProgress.CODEC.optionalFieldOf("legendary", DEFAULT.common).forGetter(TrophyProperties::legendary),
-                    Codec.INT.optionalFieldOf("chance_to_catch", DEFAULT.chanceToCatch).forGetter(TrophyProperties::chanceToCatch)
+                    FishProperties.CODEC.fieldOf("fish_properties").forGetter(TrophyProperties::fp),
+                    Codec.BOOL.fieldOf("always_show").forGetter(TrophyProperties::alwaysShow),
+                    TrophyType.CODEC.fieldOf("trophy_type").forGetter(TrophyProperties::trophyType),
+                    Codec.STRING.fieldOf("custom_name").forGetter(TrophyProperties::customName),
+                    RarityProgress.CODEC.fieldOf("all").forGetter(TrophyProperties::all),
+                    RarityProgress.CODEC.fieldOf("common").forGetter(TrophyProperties::common),
+                    RarityProgress.CODEC.fieldOf("uncommon").forGetter(TrophyProperties::uncommon),
+                    RarityProgress.CODEC.fieldOf("rare").forGetter(TrophyProperties::rare),
+                    RarityProgress.CODEC.fieldOf("epic").forGetter(TrophyProperties::epic),
+                    RarityProgress.CODEC.fieldOf("legendary").forGetter(TrophyProperties::legendary),
+                    Codec.INT.fieldOf("chance_to_catch").forGetter(TrophyProperties::chanceToCatch)
             ).apply(instance, TrophyProperties::new)
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, TrophyProperties> STREAM_CODEC = ExtraComposites.composite(
             FishProperties.STREAM_CODEC, TrophyProperties::fp,
+            ByteBufCodecs.BOOL, TrophyProperties::alwaysShow,
             TrophyType.STREAM_CODEC, TrophyProperties::trophyType,
             ByteBufCodecs.STRING_UTF8, TrophyProperties::customName,
             RarityProgress.STREAM_CODEC, TrophyProperties::all,
@@ -78,8 +82,8 @@ public record TrophyProperties
     {
         public static final Codec<RarityProgress> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                                Codec.INT.optionalFieldOf("total", 0).forGetter(RarityProgress::total),
-                                Codec.INT.optionalFieldOf("unique", 0).forGetter(RarityProgress::unique)
+                                Codec.INT.fieldOf("total").forGetter(RarityProgress::total),
+                                Codec.INT.fieldOf("unique").forGetter(RarityProgress::unique)
                         ).apply(instance, RarityProgress::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, RarityProgress> STREAM_CODEC = StreamCodec.composite(

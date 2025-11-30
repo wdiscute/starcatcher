@@ -1,17 +1,70 @@
 {
+  "bait_restrictions": {
+    "consumes_bait": true,
+    "correct_bait_chance_added": 0,
+    "correct_baits": [],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
+  },
   "base_chance": 1,
+  "custom_name": "",
+  "daytime": "all",
+  "difficulty": {
+    "decay": 1,
+    "extras": {
+      "flips_rotation_every_hit": true,
+      "has_moving_markers": false,
+      "has_vanishing_markers": false
+    },
+    "hitReward": 20,
+    "markers": {
+      "has_first_marker": true,
+      "has_first_thin_marker": false,
+      "has_second_marker": true,
+      "has_second_thin_marker": false
+    },
+    "missPenalty": 6,
+    "reward_thin": 0,
+    "speed": 9,
+    "treasure": {
+      "has_treasure": false,
+      "hit_reward": 15,
+      "loot": "starcatcher:waterlogged_satchel"
+    }
+  },
   "fish": "starcatcher:boot",
   "has_guide_entry": false,
+  "rarity": "common",
+  "size_and_weight": {
+    "average_size_cm": 41.0,
+    "average_weight_grams": 2001.0,
+    "deviation_size_cm": 21.0,
+    "deviation_weight_grams": 701.0,
+    "golden_chance_percentage": 11,
+    "golden_state_increase": 21
+  },
   "skips_minigame": true,
+  "weather": "all",
   "world_restrictions": {
     "above_y": 50,
     "below_y": 100,
+    "biomes": [],
+    "biomes_blacklist": [],
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"
     ],
+    "biomes_tags": [],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }

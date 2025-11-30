@@ -6,20 +6,30 @@
     }
   ],
   "bait_restrictions": {
+    "consumes_bait": true,
     "correct_bait_chance_added": 15,
     "correct_baits": [
       "starcatcher:legendary_bait"
-    ]
+    ],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
   },
   "base_chance": 1,
+  "custom_name": "",
+  "daytime": "all",
   "difficulty": {
     "decay": 3,
     "extras": {
-      "has_moving_markers": true
+      "flips_rotation_every_hit": true,
+      "has_moving_markers": true,
+      "has_vanishing_markers": false
     },
     "hitReward": 15,
     "markers": {
+      "has_first_marker": true,
       "has_first_thin_marker": true,
+      "has_second_marker": true,
       "has_second_thin_marker": true
     },
     "missPenalty": 15,
@@ -32,6 +42,7 @@
     }
   },
   "fish": "tide:midas_fish",
+  "has_guide_entry": true,
   "rarity": "legendary",
   "size_and_weight": {
     "average_size_cm": 800.0,
@@ -41,15 +52,27 @@
     "golden_chance_percentage": 10,
     "golden_state_increase": 20
   },
+  "skips_minigame": false,
+  "weather": "all",
   "world_restrictions": {
     "above_y": 50,
     "below_y": 100,
+    "biomes": [],
+    "biomes_blacklist": [],
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"
     ],
+    "biomes_tags": [],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }

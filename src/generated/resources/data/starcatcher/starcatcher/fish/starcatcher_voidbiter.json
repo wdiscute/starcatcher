@@ -1,13 +1,21 @@
 {
   "bait_restrictions": {
+    "consumes_bait": true,
     "correct_bait_chance_added": 50,
     "correct_baits": [
       "starcatcher:legendary_bait"
-    ]
+    ],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
   },
+  "base_chance": 5,
+  "custom_name": "",
+  "daytime": "all",
   "difficulty": {
     "decay": 2,
     "extras": {
+      "flips_rotation_every_hit": true,
       "has_moving_markers": true,
       "has_vanishing_markers": true
     },
@@ -28,6 +36,7 @@
     }
   },
   "fish": "starcatcher:voidbiter",
+  "has_guide_entry": true,
   "rarity": "epic",
   "size_and_weight": {
     "average_size_cm": 50.0,
@@ -37,15 +46,28 @@
     "golden_chance_percentage": 10,
     "golden_state_increase": 20
   },
+  "skips_minigame": false,
+  "weather": "all",
   "world_restrictions": {
+    "above_y": -2147483648,
+    "below_y": 2147483647,
+    "biomes": [],
     "biomes_blacklist": [
       "minecraft:the_end"
     ],
+    "biomes_blacklist_tags": [],
     "biomes_tags": [
       "minecraft:is_end"
     ],
     "dimensions": [
       "minecraft:the_end"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }

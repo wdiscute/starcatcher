@@ -1,19 +1,29 @@
 {
   "bait_restrictions": {
+    "consumes_bait": true,
     "correct_bait_chance_added": 15,
     "correct_baits": [
       "starcatcher:legendary_bait"
-    ]
+    ],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
   },
   "base_chance": 1,
+  "custom_name": "",
+  "daytime": "all",
   "difficulty": {
     "decay": 3,
     "extras": {
-      "flips_rotation_every_hit": false
+      "flips_rotation_every_hit": false,
+      "has_moving_markers": false,
+      "has_vanishing_markers": false
     },
     "hitReward": 15,
     "markers": {
+      "has_first_marker": true,
       "has_first_thin_marker": true,
+      "has_second_marker": true,
       "has_second_thin_marker": true
     },
     "missPenalty": 15,
@@ -26,6 +36,7 @@
     }
   },
   "fish": "starcatcher:joel",
+  "has_guide_entry": true,
   "rarity": "legendary",
   "size_and_weight": {
     "average_size_cm": 69.0,
@@ -35,14 +46,23 @@
     "golden_chance_percentage": 10,
     "golden_state_increase": 0
   },
+  "skips_minigame": false,
+  "weather": "all",
   "world_restrictions": {
     "above_y": 50,
     "below_y": 100,
+    "biomes": [],
+    "biomes_blacklist": [],
+    "biomes_blacklist_tags": [],
     "biomes_tags": [
       "starcatcher:is_ocean"
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
     ],
     "seasons": [
       "summer"

@@ -58,20 +58,18 @@ public record FishProperties(
 ) {
     public static final Codec<FishProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    //mandatory
                     BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("fish").forGetter(FishProperties::fish),
-                    //optional
-                    Codec.INT.optionalFieldOf("base_chance", 5).forGetter(FishProperties::baseChance),
-                    Codec.STRING.optionalFieldOf("custom_name", "").forGetter(FishProperties::customName),
-                    SizeAndWeight.CODEC.optionalFieldOf("size_and_weight", SizeAndWeight.DEFAULT).forGetter(FishProperties::sw),
-                    Rarity.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(FishProperties::rarity),
-                    WorldRestrictions.CODEC.optionalFieldOf("world_restrictions", WorldRestrictions.DEFAULT).forGetter(FishProperties::wr),
-                    BaitRestrictions.CODEC.optionalFieldOf("bait_restrictions", BaitRestrictions.DEFAULT).forGetter(FishProperties::br),
-                    Difficulty.CODEC.optionalFieldOf("difficulty", Difficulty.DEFAULT).forGetter(FishProperties::dif),
-                    Daytime.CODEC.optionalFieldOf("daytime", Daytime.ALL).forGetter(FishProperties::daytime),
-                    Weather.CODEC.optionalFieldOf("weather", Weather.ALL).forGetter(FishProperties::weather),
-                    Codec.BOOL.optionalFieldOf("skips_minigame", false).forGetter(FishProperties::skipMinigame),
-                    Codec.BOOL.optionalFieldOf("has_guide_entry", true).forGetter(FishProperties::hasGuideEntry)
+                    Codec.INT.fieldOf("base_chance").forGetter(FishProperties::baseChance),
+                    Codec.STRING.fieldOf("custom_name").forGetter(FishProperties::customName),
+                    SizeAndWeight.CODEC.fieldOf("size_and_weight").forGetter(FishProperties::sw),
+                    Rarity.CODEC.fieldOf("rarity").forGetter(FishProperties::rarity),
+                    WorldRestrictions.CODEC.fieldOf("world_restrictions").forGetter(FishProperties::wr),
+                    BaitRestrictions.CODEC.fieldOf("bait_restrictions").forGetter(FishProperties::br),
+                    Difficulty.CODEC.fieldOf("difficulty").forGetter(FishProperties::dif),
+                    Daytime.CODEC.fieldOf("daytime").forGetter(FishProperties::daytime),
+                    Weather.CODEC.fieldOf("weather").forGetter(FishProperties::weather),
+                    Codec.BOOL.fieldOf("skips_minigame").forGetter(FishProperties::skipMinigame),
+                    Codec.BOOL.fieldOf("has_guide_entry").forGetter(FishProperties::hasGuideEntry)
 
             ).apply(instance, FishProperties::new)
     );
@@ -184,12 +182,12 @@ public record FishProperties(
             boolean mustHaveCorrectBait) {
         public static final Codec<BaitRestrictions> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_bobbers", List.of()).forGetter(BaitRestrictions::correctBobber),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("correct_baits", List.of()).forGetter(BaitRestrictions::correctBait),
-                        Codec.BOOL.optionalFieldOf("consumes_bait", true).forGetter(BaitRestrictions::consumesBait),
-                        Codec.INT.optionalFieldOf("correct_bait_chance_added", 0).forGetter(BaitRestrictions::correctBaitChanceAdded),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("incorrect_baits", List.of()).forGetter(BaitRestrictions::incorrectBaits),
-                        Codec.BOOL.optionalFieldOf("must_have_correct_bait", false).forGetter(BaitRestrictions::mustHaveCorrectBait)
+                        Codec.list(ResourceLocation.CODEC).fieldOf("correct_bobbers").forGetter(BaitRestrictions::correctBobber),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("correct_baits").forGetter(BaitRestrictions::correctBait),
+                        Codec.BOOL.fieldOf("consumes_bait").forGetter(BaitRestrictions::consumesBait),
+                        Codec.INT.fieldOf("correct_bait_chance_added").forGetter(BaitRestrictions::correctBaitChanceAdded),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("incorrect_baits").forGetter(BaitRestrictions::incorrectBaits),
+                        Codec.BOOL.fieldOf("must_have_correct_bait").forGetter(BaitRestrictions::mustHaveCorrectBait)
                 ).apply(instance, BaitRestrictions::new));
 
 
@@ -362,16 +360,16 @@ public record FishProperties(
 
         public static final Codec<WorldRestrictions> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions", DEFAULT.dims).forGetter(WorldRestrictions::dims),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("dimensions_blacklist", DEFAULT.dimsBlacklist).forGetter(WorldRestrictions::dimsBlacklist),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes", DEFAULT.biomes).forGetter(WorldRestrictions::biomes),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_tags", DEFAULT.biomesTags).forGetter(WorldRestrictions::biomesTags),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist", DEFAULT.biomesBlacklist).forGetter(WorldRestrictions::biomesBlacklist),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("biomes_blacklist_tags", DEFAULT.biomesBlacklistTags).forGetter(WorldRestrictions::biomesBlacklistTags),
-                        Codec.list(ResourceLocation.CODEC).optionalFieldOf("fluids", DEFAULT.fluids).forGetter(WorldRestrictions::fluids),
-                        Seasons.LIST_CODEC.optionalFieldOf("seasons", DEFAULT.seasons).forGetter(WorldRestrictions::seasons),
-                        Codec.INT.optionalFieldOf("below_y", DEFAULT.mustBeCaughtBelowY).forGetter(WorldRestrictions::mustBeCaughtBelowY),
-                        Codec.INT.optionalFieldOf("above_y", DEFAULT.mustBeCaughtAboveY).forGetter(WorldRestrictions::mustBeCaughtAboveY)
+                        Codec.list(ResourceLocation.CODEC).fieldOf("dimensions").forGetter(WorldRestrictions::dims),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("dimensions_blacklist").forGetter(WorldRestrictions::dimsBlacklist),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("biomes").forGetter(WorldRestrictions::biomes),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("biomes_tags").forGetter(WorldRestrictions::biomesTags),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("biomes_blacklist").forGetter(WorldRestrictions::biomesBlacklist),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("biomes_blacklist_tags").forGetter(WorldRestrictions::biomesBlacklistTags),
+                        Codec.list(ResourceLocation.CODEC).fieldOf("fluids").forGetter(WorldRestrictions::fluids),
+                        Seasons.LIST_CODEC.fieldOf("seasons").forGetter(WorldRestrictions::seasons),
+                        Codec.INT.fieldOf("below_y").forGetter(WorldRestrictions::mustBeCaughtBelowY),
+                        Codec.INT.fieldOf("above_y").forGetter(WorldRestrictions::mustBeCaughtAboveY)
                 ).apply(instance, WorldRestrictions::new));
 
         public static final StreamCodec<RegistryFriendlyByteBuf, WorldRestrictions> STREAM_CODEC = ExtraComposites.composite(
@@ -669,9 +667,9 @@ public record FishProperties(
 
         public static final Codec<Treasure> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.BOOL.optionalFieldOf("has_treasure", false).forGetter(Treasure::hasTreasure),
-                        ResourceLocation.CODEC.optionalFieldOf("loot", Starcatcher.rl("none")).forGetter(Treasure::loot),
-                        Codec.INT.optionalFieldOf("hit_reward", 0).forGetter(Treasure::hitReward)
+                        Codec.BOOL.fieldOf("has_treasure").forGetter(Treasure::hasTreasure),
+                        ResourceLocation.CODEC.fieldOf("loot").forGetter(Treasure::loot),
+                        Codec.INT.fieldOf("hit_reward").forGetter(Treasure::hitReward)
                 ).apply(instance, Treasure::new));
 
         public static final StreamCodec<ByteBuf, Treasure> STREAM_CODEC = StreamCodec.composite(
@@ -734,10 +732,10 @@ public record FishProperties(
 
             public static final Codec<Markers> CODEC = RecordCodecBuilder.create(instance ->
                     instance.group(
-                            Codec.BOOL.optionalFieldOf("has_first_marker", DEFAULT.first).forGetter(Markers::first),
-                            Codec.BOOL.optionalFieldOf("has_second_marker", DEFAULT.second).forGetter(Markers::second),
-                            Codec.BOOL.optionalFieldOf("has_first_thin_marker", DEFAULT.firstThin).forGetter(Markers::firstThin),
-                            Codec.BOOL.optionalFieldOf("has_second_thin_marker", DEFAULT.secondThin).forGetter(Markers::secondThin)
+                            Codec.BOOL.fieldOf("has_first_marker").forGetter(Markers::first),
+                            Codec.BOOL.fieldOf("has_second_marker").forGetter(Markers::second),
+                            Codec.BOOL.fieldOf("has_first_thin_marker").forGetter(Markers::firstThin),
+                            Codec.BOOL.fieldOf("has_second_thin_marker").forGetter(Markers::secondThin)
                     ).apply(instance, Markers::new));
 
             public static final StreamCodec<ByteBuf, Markers> STREAM_CODEC = StreamCodec.composite(
@@ -763,9 +761,9 @@ public record FishProperties(
 
             public static final Codec<Extras> CODEC = RecordCodecBuilder.create(instance ->
                     instance.group(
-                            Codec.BOOL.optionalFieldOf("flips_rotation_every_hit", DEFAULT.isFlip).forGetter(Extras::isFlip),
-                            Codec.BOOL.optionalFieldOf("has_vanishing_markers", DEFAULT.isVanishing).forGetter(Extras::isVanishing),
-                            Codec.BOOL.optionalFieldOf("has_moving_markers", DEFAULT.isMoving).forGetter(Extras::isMoving)
+                            Codec.BOOL.fieldOf("flips_rotation_every_hit").forGetter(Extras::isFlip),
+                            Codec.BOOL.fieldOf("has_vanishing_markers").forGetter(Extras::isVanishing),
+                            Codec.BOOL.fieldOf("has_moving_markers").forGetter(Extras::isMoving)
                     ).apply(instance, Extras::new));
 
             public static final StreamCodec<ByteBuf, Extras> STREAM_CODEC = StreamCodec.composite(
@@ -1168,14 +1166,14 @@ public record FishProperties(
 
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.INT.optionalFieldOf("speed", DEFAULT.speed).forGetter(Difficulty::speed),
-                        Codec.INT.optionalFieldOf("hitReward", DEFAULT.reward).forGetter(Difficulty::reward),
-                        Codec.INT.optionalFieldOf("reward_thin", DEFAULT.rewardThin).forGetter(Difficulty::rewardThin),
-                        Codec.INT.optionalFieldOf("missPenalty", DEFAULT.penalty).forGetter(Difficulty::penalty),
-                        Codec.INT.optionalFieldOf("decay", DEFAULT.decay).forGetter(Difficulty::decay),
-                        Markers.CODEC.optionalFieldOf("markers", DEFAULT.markers).forGetter(Difficulty::markers),
-                        Treasure.CODEC.optionalFieldOf("treasure", DEFAULT.treasure).forGetter(Difficulty::treasure),
-                        Extras.CODEC.optionalFieldOf("extras", DEFAULT.extras).forGetter(Difficulty::extras)
+                        Codec.INT.fieldOf("speed").forGetter(Difficulty::speed),
+                        Codec.INT.fieldOf("hitReward").forGetter(Difficulty::reward),
+                        Codec.INT.fieldOf("reward_thin").forGetter(Difficulty::rewardThin),
+                        Codec.INT.fieldOf("missPenalty").forGetter(Difficulty::penalty),
+                        Codec.INT.fieldOf("decay").forGetter(Difficulty::decay),
+                        Markers.CODEC.fieldOf("markers").forGetter(Difficulty::markers),
+                        Treasure.CODEC.fieldOf("treasure").forGetter(Difficulty::treasure),
+                        Extras.CODEC.fieldOf("extras").forGetter(Difficulty::extras)
                 ).apply(instance, Difficulty::new));
 
 
@@ -1200,12 +1198,12 @@ public record FishProperties(
 
         public static final Codec<SizeAndWeight> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        Codec.FLOAT.optionalFieldOf("average_size_cm", DEFAULT.sizeAverage).forGetter(SizeAndWeight::sizeAverage),
-                        Codec.FLOAT.optionalFieldOf("deviation_size_cm", DEFAULT.sizeDeviation).forGetter(SizeAndWeight::sizeDeviation),
-                        Codec.FLOAT.optionalFieldOf("average_weight_grams", DEFAULT.weightAverage).forGetter(SizeAndWeight::weightAverage),
-                        Codec.FLOAT.optionalFieldOf("deviation_weight_grams", DEFAULT.weightDeviation).forGetter(SizeAndWeight::weightDeviation),
-                        Codec.INT.optionalFieldOf("golden_chance_percentage", DEFAULT.goldenChance).forGetter(SizeAndWeight::goldenChance),
-                        Codec.INT.optionalFieldOf("golden_state_increase", DEFAULT.goldenIncrease).forGetter(SizeAndWeight::goldenIncrease)
+                        Codec.FLOAT.fieldOf("average_size_cm").forGetter(SizeAndWeight::sizeAverage),
+                        Codec.FLOAT.fieldOf("deviation_size_cm").forGetter(SizeAndWeight::sizeDeviation),
+                        Codec.FLOAT.fieldOf("average_weight_grams").forGetter(SizeAndWeight::weightAverage),
+                        Codec.FLOAT.fieldOf("deviation_weight_grams").forGetter(SizeAndWeight::weightDeviation),
+                        Codec.INT.fieldOf("golden_chance_percentage").forGetter(SizeAndWeight::goldenChance),
+                        Codec.INT.fieldOf("golden_state_increase").forGetter(SizeAndWeight::goldenIncrease)
                 ).apply(instance, SizeAndWeight::new));
 
         public static final StreamCodec<ByteBuf, SizeAndWeight> STREAM_CODEC = StreamCodec.composite(

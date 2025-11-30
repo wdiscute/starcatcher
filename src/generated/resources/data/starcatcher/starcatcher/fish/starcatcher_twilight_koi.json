@@ -1,9 +1,21 @@
 {
+  "bait_restrictions": {
+    "consumes_bait": true,
+    "correct_bait_chance_added": 0,
+    "correct_baits": [],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
+  },
+  "base_chance": 5,
+  "custom_name": "",
   "daytime": "midnight",
   "difficulty": {
     "decay": 2,
     "extras": {
-      "has_moving_markers": true
+      "flips_rotation_every_hit": true,
+      "has_moving_markers": true,
+      "has_vanishing_markers": false
     },
     "hitReward": 15,
     "markers": {
@@ -14,6 +26,7 @@
     },
     "missPenalty": 25,
     "reward_thin": 20,
+    "speed": 9,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,
@@ -21,6 +34,7 @@
     }
   },
   "fish": "starcatcher:twilight_koi",
+  "has_guide_entry": true,
   "rarity": "epic",
   "size_and_weight": {
     "average_size_cm": 60.0,
@@ -30,16 +44,27 @@
     "golden_chance_percentage": 20,
     "golden_state_increase": 10
   },
+  "skips_minigame": false,
   "weather": "rain",
   "world_restrictions": {
     "above_y": 50,
     "below_y": 100,
+    "biomes": [],
+    "biomes_blacklist": [],
     "biomes_blacklist_tags": [
       "starcatcher:is_ocean",
       "starcatcher:is_river"
     ],
+    "biomes_tags": [],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }

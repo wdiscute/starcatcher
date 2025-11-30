@@ -1,18 +1,31 @@
 {
   "bait_restrictions": {
+    "consumes_bait": true,
     "correct_bait_chance_added": 15,
     "correct_baits": [
       "starcatcher:legendary_bait"
-    ]
+    ],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
   },
   "base_chance": 1,
+  "custom_name": "",
   "daytime": "midnight",
   "difficulty": {
     "decay": 10,
     "extras": {
-      "flips_rotation_every_hit": false
+      "flips_rotation_every_hit": false,
+      "has_moving_markers": false,
+      "has_vanishing_markers": false
     },
     "hitReward": 18,
+    "markers": {
+      "has_first_marker": true,
+      "has_first_thin_marker": false,
+      "has_second_marker": true,
+      "has_second_thin_marker": false
+    },
     "missPenalty": 0,
     "reward_thin": 30,
     "speed": 15,
@@ -23,6 +36,7 @@
     }
   },
   "fish": "starcatcher:azure_crystalback_minnow",
+  "has_guide_entry": true,
   "rarity": "legendary",
   "size_and_weight": {
     "average_size_cm": 6.0,
@@ -32,14 +46,26 @@
     "golden_chance_percentage": 10,
     "golden_state_increase": 10
   },
+  "skips_minigame": false,
+  "weather": "all",
   "world_restrictions": {
     "above_y": 50,
     "below_y": 100,
+    "biomes": [],
+    "biomes_blacklist": [],
+    "biomes_blacklist_tags": [],
     "biomes_tags": [
       "starcatcher:is_cold_river"
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }

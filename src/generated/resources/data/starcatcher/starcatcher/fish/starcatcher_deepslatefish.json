@@ -1,10 +1,28 @@
 {
+  "bait_restrictions": {
+    "consumes_bait": true,
+    "correct_bait_chance_added": 0,
+    "correct_baits": [],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
+  },
+  "base_chance": 5,
+  "custom_name": "",
+  "daytime": "all",
   "difficulty": {
     "decay": 2,
+    "extras": {
+      "flips_rotation_every_hit": true,
+      "has_moving_markers": false,
+      "has_vanishing_markers": false
+    },
     "hitReward": 15,
     "markers": {
+      "has_first_marker": true,
       "has_first_thin_marker": true,
-      "has_second_marker": false
+      "has_second_marker": false,
+      "has_second_thin_marker": false
     },
     "missPenalty": 25,
     "reward_thin": 35,
@@ -16,6 +34,8 @@
     }
   },
   "fish": "starcatcher:deepslatefish",
+  "has_guide_entry": true,
+  "rarity": "common",
   "size_and_weight": {
     "average_size_cm": 420.0,
     "average_weight_grams": 70000.0,
@@ -24,10 +44,24 @@
     "golden_chance_percentage": 10,
     "golden_state_increase": 20
   },
+  "skips_minigame": false,
+  "weather": "all",
   "world_restrictions": {
+    "above_y": -2147483648,
     "below_y": 0,
+    "biomes": [],
+    "biomes_blacklist": [],
+    "biomes_blacklist_tags": [],
+    "biomes_tags": [],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }

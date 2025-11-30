@@ -1,9 +1,21 @@
 {
+  "bait_restrictions": {
+    "consumes_bait": true,
+    "correct_bait_chance_added": 0,
+    "correct_baits": [],
+    "correct_bobbers": [],
+    "incorrect_baits": [],
+    "must_have_correct_bait": false
+  },
   "base_chance": 2,
+  "custom_name": "",
+  "daytime": "all",
   "difficulty": {
     "decay": 0,
     "extras": {
-      "has_moving_markers": true
+      "flips_rotation_every_hit": true,
+      "has_moving_markers": true,
+      "has_vanishing_markers": false
     },
     "hitReward": 0,
     "markers": {
@@ -14,6 +26,7 @@
     },
     "missPenalty": 30,
     "reward_thin": 15,
+    "speed": 9,
     "treasure": {
       "has_treasure": true,
       "hit_reward": 15,
@@ -21,6 +34,7 @@
     }
   },
   "fish": "starcatcher:ironjaw_herring",
+  "has_guide_entry": true,
   "rarity": "uncommon",
   "size_and_weight": {
     "average_size_cm": 30.0,
@@ -30,14 +44,26 @@
     "golden_chance_percentage": 10,
     "golden_state_increase": 20
   },
+  "skips_minigame": false,
+  "weather": "all",
   "world_restrictions": {
     "above_y": 50,
     "below_y": 100,
+    "biomes": [],
+    "biomes_blacklist": [],
+    "biomes_blacklist_tags": [],
     "biomes_tags": [
       "starcatcher:is_ocean"
     ],
     "dimensions": [
       "minecraft:overworld"
+    ],
+    "dimensions_blacklist": [],
+    "fluids": [
+      "minecraft:water"
+    ],
+    "seasons": [
+      "all"
     ]
   }
 }
