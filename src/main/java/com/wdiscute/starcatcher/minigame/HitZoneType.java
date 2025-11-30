@@ -37,6 +37,7 @@ public enum HitZoneType{
         private static final int SIZE_4 = 17;
 
         public static final int GREEN_COLOR = 0x8bff6b;
+        public static final int RED_COLOR = 0xf36770;
 
         public static final FishingHitZone EXTRA_LARGE = new FishingHitZone().setForgiving(SIZE_4)
                 .setRendering(makeDefaultRenderConsumer(FishingMinigameScreen.TEXTURE, 0, 0))
@@ -107,7 +108,7 @@ public enum HitZoneType{
 
                     if (!zone.screen.isHoldingInput() && zone.screen.gracePeriod <= 0){
                         zone.screen.completion -= zone.missPenalty;
-                        zone.setColor(0xf36770);
+                        zone.setColor(RED_COLOR);
                     }
 
                     if (zone.screen.isHoldingInput()){

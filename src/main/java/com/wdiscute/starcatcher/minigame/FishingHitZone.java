@@ -50,6 +50,11 @@ public class FishingHitZone {
     public int removeDelay = 0;
     public int ticksAfterRemoved = 0;
 
+    public boolean wasMissed = false;
+    public int ticksAfterMissed = 0;
+    public int redMissFlashLength = 10;
+    public int lastColor = -1;
+
     public boolean isMoving = false;
     public float moveRate = 0;
     public int moveDirection = 1; //changes moving direction (-1 or 1)
@@ -161,6 +166,13 @@ public class FishingHitZone {
             pos = getPos(); // normalize the value
         };
 
+        if (wasMissed){
+            ticksAfterMissed++;
+            if (ticksAfterMissed > redMissFlashLength) {
+                setColor(lastColor);
+            }
+        }
+
         if (wasHovering && !isBeingHoveredOver && missPenalty != 0) {
             onMiss();
         }
@@ -168,6 +180,11 @@ public class FishingHitZone {
 
     public void onMiss(){
         if (screen.gracePeriod > 0) return;
+
+        wasMissed = true;
+        ticksAfterMissed = 0;
+        lastColor = color;
+        setColor(HitZoneType.Presets.RED_COLOR);
 
         screen.completion -= missPenalty;
 
@@ -380,6 +397,9 @@ public class FishingHitZone {
 
         copy.color = original.color;
 
+        if (original.lastColor != -1) copy.color = original.lastColor;
+
+
         copy.missPenalty = original.missPenalty;
         copy.hitReward = original.hitReward;
         copy.gracePeriod = original.gracePeriod;
@@ -391,6 +411,8 @@ public class FishingHitZone {
         copy.shouldRecycle = original.shouldRecycle;
         copy.canPlaceOver = original.canPlaceOver;
         copy.removeDelay = original.removeDelay;
+
+        copy.redMissFlashLength = original.redMissFlashLength;
 
         copy.isMoving = original.isMoving;
         copy.moveRate = original.moveRate;

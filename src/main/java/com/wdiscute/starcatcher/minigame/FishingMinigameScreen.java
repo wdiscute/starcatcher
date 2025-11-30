@@ -626,6 +626,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener {
 
     @Override
     public void onClose() {
+        modifiers.forEach(AbstractFishingModifier::onRemove);
         Minecraft.getInstance().options.guiScale().set(previousGuiScale);
 
         PacketDistributor.sendToServer(new FishingCompletedPayload(-1, false, false, consecutiveHits));

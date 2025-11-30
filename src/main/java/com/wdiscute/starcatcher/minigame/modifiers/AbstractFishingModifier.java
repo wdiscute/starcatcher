@@ -50,7 +50,7 @@ public abstract class AbstractFishingModifier {
 
     }
 
-    protected void onRemove(){
+    public void onRemove(){
 
     }
 

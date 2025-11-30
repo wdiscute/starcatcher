@@ -3,10 +3,13 @@ package com.wdiscute.starcatcher.minigame.modifiers;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.player.LocalPlayer;
 
 public class FreezeModifier extends AbstractFishingModifier{
     public float lastPointerSpeed;
+    public int lastTicksFrozen;
 
     public FreezeModifier(FishingMinigameScreen screen, int length) {
         super(screen, length);
@@ -28,16 +31,32 @@ public class FreezeModifier extends AbstractFishingModifier{
     }
 
     @Override
-    protected void onRemove() {
+    public void onRemove() {
         super.onRemove();
         screen.pointerSpeed = lastPointerSpeed;
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player != null) {
+            player.setTicksFrozen(lastTicksFrozen);
+        }
+
     }
 
+    @Override
+    public boolean tick() {
+        return super.tick();
+    }
 
     @Override
     protected void onAdd() {
         super.onAdd();
         lastPointerSpeed = screen.pointerSpeed;
         screen.pointerSpeed = 0;
+
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player != null) {
+            lastTicksFrozen = player.getTicksFrozen();
+            player.setTicksFrozen(100);
+        }
+
     }
 }
