@@ -32,11 +32,19 @@ public class ModCreativeModeTabs
 
                         output.accept(ModItems.ROD);
 
-                        //adds all entries because im lazy
-                        for (DeferredHolder<Item, ? extends Item> item : ModItems.REGISTRY.getEntries())
+                        //adds all normal items, skips missingno and settings item
+                        for (DeferredHolder<Item, ? extends Item> item : ModItems.ITEMS_REGISTRY.getEntries())
                             if (item != ModItems.MISSINGNO && item != ModItems.SETTINGS)
                                 output.accept(item.get());
 
+                        //adds all rods besides main rod which is first in list
+                        for (DeferredHolder<Item, ? extends Item> item : ModItems.RODS_REGISTRY.getEntries())
+                            if (item != ModItems.ROD)
+                                output.accept(item.get());
+
+                        //adds blocks and stuff
+                        for (DeferredHolder<Item, ? extends Item> item : ModItems.OTHERS_REGISTRY.getEntries())
+                                output.accept(item.get());
 
                     })
                     .build()
