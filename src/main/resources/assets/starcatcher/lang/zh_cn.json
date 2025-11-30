@@ -1,0 +1,1180 @@
+{
+  "creativetab.starcatcher.starcatcher": "捕星者",
+
+  "emi.category.starcatcher.fishing" : "捕星者垂钓",
+
+  "tag.starcatcher.is_beach" : "沙滩",
+  "tag.starcatcher.is_birch_forest" : "白桦树林",
+  "tag.starcatcher.is_cherry_grove" : "樱花树林",
+  "tag.starcatcher.is_cold_lake" : "冷水湖泊",
+  "tag.starcatcher.is_cold_ocean" : "冷水海洋",
+  "tag.starcatcher.is_cold_river" : "冷水河流",
+  "tag.starcatcher.is_dark_forest" : "黑森林",
+  "tag.starcatcher.is_deep_ocean" : "深海",
+  "tag.starcatcher.is_mushroom_fields" : "蘑菇岛",
+  "tag.starcatcher.is_ocean" : "海洋",
+  "tag.starcatcher.is_river" : "河流",
+  "tag.starcatcher.is_swamp" : "沼泽",
+  "tag.starcatcher.is_warm" : "温暖气候",
+  "tag.starcatcher.is_warm_ocean" : "暖水海洋",
+  "tag.starcatcher.is_warm_river" : "暖水河流",
+
+  "tag.minecraft.is_badlands" : "恶地",
+  "tag.minecraft.is_beach" : "沙滩",
+  "tag.minecraft.is_deep_ocean" : "深海",
+  "tag.minecraft.is_end" : "末地",
+  "tag.minecraft.is_forest" : "森林",
+  "tag.minecraft.is_hill" : "丘陵",
+  "tag.minecraft.is_jungle" : "丛林",
+  "tag.minecraft.is_mountain" : "山地",
+  "tag.minecraft.is_nether" : "下界",
+  "tag.minecraft.is_ocean" : "海洋",
+  "tag.minecraft.is_overworld" : "主世界",
+  "tag.minecraft.is_river" : "河流",
+  "tag.minecraft.is_savanna" : "热带草原",
+  "tag.minecraft.is_taiga" : "针叶林",
+
+  "tag.starcatcher.hooks" : "鱼钩",
+  "tag.starcatcher.bobbers" : "浮标",
+  "tag.starcatcher.hooks_survive_fire" : "耐火鱼钩",
+
+  "tooltip.minecraft.fishing_rod.0": "一根简易钓竿，用来",
+  "tooltip.minecraft.fishing_rod.1": "捕捉最基础的鱼类",
+  "tooltip.minecraft.fishing_rod.2": "人们只能梦想着将其",
+  "tooltip.minecraft.fishing_rod.3": "升级为<gradient-67>捕星者钓竿</gradient-90>",
+
+  "item.starcatcher.starcatcher_rod": "捕星者钓竿",
+  "tooltip.starcatcher.starcatcher_rod.0": "一种特殊的钓竿，可以",
+  "tooltip.starcatcher.starcatcher_rod.1": "使用浮漂、鱼饵和鱼钩！",
+  "tooltip.starcatcher.starcatcher_rod.2": "只要满足了合适的条件，",
+  "tooltip.starcatcher.starcatcher_rod.3": "谁知道你会钓到什么呢！",
+  "tooltip.starcatcher.starcatcher_rod.4": "",
+  "tooltip.starcatcher.starcatcher_rod.5": "潜行时使用以打开",
+  "tooltip.starcatcher.starcatcher_rod.6": "浮漂、鱼饵和鱼钩选择界面",
+
+  "item.starcatcher.starcatcher_guide": "捕星者指南",
+  "tooltip.starcatcher.starcatcher_guide.0": "钓鱼佬最好的伙伴，记录了",
+  "tooltip.starcatcher.starcatcher_guide.1": "所有你捕获过鱼，以及",
+  "tooltip.starcatcher.starcatcher_guide.2": "你还没有钓起过的鱼！",
+
+  "item.starcatcher.starcatcher_twine": "捕星者钓线",
+  "tooltip.starcatcher.starcatcher_twine.0": "缠绕在木棍上的精致钓线",
+  "tooltip.starcatcher.starcatcher_twine.1": "Vansire曾经用这些线当作乐器",
+
+  "item.starcatcher.hook": "铁鱼钩",
+  "tooltip.starcatcher.hook.0": "用于钓竿的基础铁钩",
+  "tooltip.starcatcher.hook.1": "万事开头难",
+
+  "item.starcatcher.shiny_hook": "闪亮鱼钩",
+  "tooltip.starcatcher.shiny_hook.0": "一个非常闪亮的鱼钩！",
+  "tooltip.starcatcher.shiny_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.shiny_hook.2": "对于少见鱼类，连续命中3次完美点位",
+  "tooltip.starcatcher.shiny_hook.3": "将会生成一个宝藏！",
+
+  "item.starcatcher.gold_hook": "金鱼钩",
+  "tooltip.starcatcher.gold_hook.0": "一个闪闪发光的金鱼钩！",
+  "tooltip.starcatcher.gold_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.gold_hook.2": "它会根据你的表现增加",
+  "tooltip.starcatcher.gold_hook.3": "钓鱼获得的经验值",
+
+  "item.starcatcher.mossy_hook": "生苔鱼钩",
+  "tooltip.starcatcher.mossy_hook.0": "一个覆盖着苔藓的生锈鱼钩！",
+  "tooltip.starcatcher.mossy_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.mossy_hook.2": "它会增加捕鱼的难度，但如果",
+  "tooltip.starcatcher.mossy_hook.3": "完美捕获，将奖励你一个宝藏",
+
+  "item.starcatcher.crystal_hook": "水晶鱼钩",
+  "tooltip.starcatcher.crystal_hook.0": "极其耐用，非常适合熔岩钓鱼！",
+  "tooltip.starcatcher.crystal_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.crystal_hook.2": "允许你在熔岩中钓鱼，燃起来了",
+
+  "item.starcatcher.stone_hook": "石鱼钩",
+  "tooltip.starcatcher.stone_hook.0": "一个非常坚固的鱼钩！",
+  "tooltip.starcatcher.stone_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.stone_hook.2": "命中完美点位会将鱼锁定在",
+  "tooltip.starcatcher.stone_hook.3": "原地片刻，防止其逃脱",
+
+  "item.starcatcher.split_hook": "分叉鱼钩",
+  "tooltip.starcatcher.split_hook.0": "一个设计优雅的分叉鱼钩！",
+  "tooltip.starcatcher.split_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.split_hook.2": "达成完美捕获可获得2条鱼",
+
+  "item.starcatcher.stabilizing_hook": "稳定鱼钩",
+  "tooltip.starcatcher.stabilizing_hook.0": "一个纤细的自平衡鱼钩！",
+  "tooltip.starcatcher.stabilizing_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.stabilizing_hook.2": "钓鱼收线不会改变方向",
+
+  "item.starcatcher.heavy_hook": "沉重鱼钩",
+  "tooltip.starcatcher.heavy_hook.0": "一个相当重的鱼钩",
+  "tooltip.starcatcher.heavy_hook.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.heavy_hook.2": "完美点位的移动速度会变慢",
+
+
+
+
+  "item.starcatcher.creeper_bobber": "苦力怕浮漂",
+  "tooltip.starcatcher.creeper_bobber.0": "一个苦力怕形状的浮漂",
+  "tooltip.starcatcher.creeper_bobber.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时……",
+  "tooltip.starcatcher.creeper_bobber.2": "会发生什么呢？",
+
+  "item.starcatcher.glitter_bobber": "闪烁浮漂",
+  "tooltip.starcatcher.glitter_bobber.0": "一个非常闪耀的浮漂！",
+  "tooltip.starcatcher.glitter_bobber.1": "感受闪烁的力量",
+
+  "item.starcatcher.colorful_bobber": "彩色浮漂",
+  "tooltip.starcatcher.colorful_bobber.0": "一个非常多彩的浮漂！",
+  "tooltip.starcatcher.colorful_bobber.999": "它闪耀着，仿佛在说[点我]",
+
+  "item.starcatcher.frugal_bobber": "节俭浮漂",
+  "tooltip.starcatcher.frugal_bobber.0": "一个带有独特省饵机制的浮漂",
+  "tooltip.starcatcher.frugal_bobber.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.frugal_bobber.2": "钓鱼有几率不消耗你的鱼饵",
+
+  "item.starcatcher.steady_bobber": "稳定浮漂",
+  "tooltip.starcatcher.steady_bobber.0": "一个僵硬沉重的浮漂",
+  "tooltip.starcatcher.steady_bobber.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.steady_bobber.2": "它会让钓鱼变得容易很多",
+
+  "item.starcatcher.impatient_bobber": "急躁浮漂",
+  "tooltip.starcatcher.impatient_bobber.0": "一个专门设计用于更快吸引鱼儿的浮漂",
+  "tooltip.starcatcher.impatient_bobber.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.impatient_bobber.2": "鱼儿更有可能冲过来咬钩",
+
+  "item.starcatcher.frog_bobber": "青蛙浮漂",
+  "tooltip.starcatcher.frog_bobber.0": "一个看起来像青蛙的浮漂",
+  "tooltip.starcatcher.frog_bobber.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.frog_bobber.2": "它会表现得像青蛙一样，大概吧",
+
+  "item.starcatcher.kimbe_bobber": "压力浮漂",
+  "tooltip.starcatcher.kimbe_bobber.0": "一个样子奇怪的浮漂",
+  "tooltip.starcatcher.kimbe_bobber.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.kimbe_bobber.2": "它会在你每次错过完美点位时批评你,",
+  "tooltip.starcatcher.kimbe_bobber.3": "而不提供任何帮助或解释你为何会错过",
+
+  "item.starcatcher.clear_bobber": "透明浮漂",
+  "tooltip.starcatcher.clear_bobber.0": "一个水晶般透明的浮漂",
+  "tooltip.starcatcher.clear_bobber.1": "当装备在你的<gradient-67>捕星者钓竿</gradient-90>上时",
+  "tooltip.starcatcher.clear_bobber.2": "它会让消失的完美点位更容易被看见",
+
+
+
+  "item.starcatcher.cherry_bait": "樱花鱼饵",
+  "tooltip.starcatcher.cherry_bait.0": "一种由粉红色花簇制成的鱼饵",
+  "tooltip.starcatcher.cherry_bait.1": "樱花树林的常见鱼类很喜欢",
+
+  "item.starcatcher.lush_bait": "繁茂鱼饵",
+  "tooltip.starcatcher.lush_bait.0": "一种主要由苔藓制成的鱼饵",
+  "tooltip.starcatcher.lush_bait.1": "经常吸引生活在繁茂洞穴的鱼类",
+
+  "item.starcatcher.sculk_bait": "幽匿鱼饵",
+  "tooltip.starcatcher.sculk_bait.0": "一种由幽匿残骸制成的无声鱼饵",
+  "tooltip.starcatcher.sculk_bait.1": "因能够吸引那些潜伏在深暗之域",
+  "tooltip.starcatcher.sculk_bait.2": "中最安静的鱼而闻名",
+
+  "item.starcatcher.dripstone_bait": "滴水石鱼饵",
+  "tooltip.starcatcher.dripstone_bait.0": "一种由滴水石制成的坚硬鱼饵",
+  "tooltip.starcatcher.dripstone_bait.1": "肯定能吸引最僵硬的鱼类",
+
+  "item.starcatcher.murkwater_bait": "浊水鱼饵",
+  "tooltip.starcatcher.murkwater_bait.0": "一种适合沼泽钓鱼的浑浊鱼饵",
+
+  "item.starcatcher.meteorological_bait": "气象鱼饵",
+  "tooltip.starcatcher.meteorological_bait.0": "这种略带魔法的鱼饵能吸引",
+  "tooltip.starcatcher.meteorological_bait.1": "那些通常只在特定天气才",
+  "tooltip.starcatcher.meteorological_bait.2": "会出现的鱼类！非常方便",
+
+  "item.starcatcher.legendary_bait": "传奇鱼饵",
+  "tooltip.starcatcher.legendary_bait.name": "<rgb>传奇鱼饵</rgb>",
+  "tooltip.starcatcher.legendary_bait.0": "一种闪亮的金色鱼饵，<rgb>传奇</rgb>",
+  "tooltip.starcatcher.legendary_bait.1": "鱼类都抵挡不住它的诱惑",
+
+
+
+
+  "item.starcatcher.missingno": "？？？",
+
+  "item.starcatcher.fish_spotter": "鱼类探测仪",
+  "tooltip.starcatcher.fish_spotter.0": "对钓鱼佬来说很方便的工具",
+  "tooltip.starcatcher.fish_spotter.1": "可以显示区域周围的鱼类",
+
+  "item.starcatcher.fish_bones" : "鱼骨",
+  "item.starcatcher.fish_bones.0" : "一些鱼骨。它曾经",
+  "item.starcatcher.fish_bones.1" : "是一条快乐的小鱼",
+
+  "item.starcatcher.waterlogged_satchel" : "浸水的袋子",
+  "tooltip.starcatcher.waterlogged_satchel.0" : "一个装着许多水下",
+  "tooltip.starcatcher.waterlogged_satchel.1" : "秘密的袋子",
+
+  "item.starcatcher.treasure" : "宝藏",
+  "tooltip.starcatcher.treasure.0" : "技艺精湛的钓鱼者钓上的闪亮",
+  "tooltip.starcatcher.treasure.1" : "宝藏，里面会藏着什么呢？",
+
+  "item.starcatcher.scalding_treasure" : "灼热宝藏",
+  "tooltip.starcatcher.scalding_treasure.0" : "直接从下界灼热之地钓上的",
+  "tooltip.starcatcher.scalding_treasure.1" : "宝藏。里面是什么？",
+
+  "block.starcatcher.trophy_gold" : "金奖杯",
+  "block.starcatcher.trophy_silver" : "银奖杯",
+  "block.starcatcher.trophy_bronze" : "铜奖杯",
+
+  "item.starcatcher.award_all_fishes" : "授予所有鱼",
+  "item.starcatcher.award_one_fish" : "授予一条鱼",
+  "item.starcatcher.revoke_all_fishes" : "撤销所有鱼",
+
+  "item.starcatcher.award_all_trophies" : "授予所有奖杯",
+  "item.starcatcher.revoke_all_trophies" : "撤销所有奖杯",
+
+  "item.starcatcher.award_all_secrets" : "授予所有秘密",
+  "item.starcatcher.revoke_all_secrets" : "撤销所有秘密",
+
+  "item.starcatcher.revoke_all_extras" : "撤销所有额外物品",
+
+
+  "tooltip.starcatcher.trophy.0" : "证明某人技能的奖杯",
+  "tooltip.starcatcher.trophy.1" : "据说只要捕获了以下数量的鱼",
+  "tooltip.starcatcher.trophy.2" : "它就会出现在钓鱼线上：",
+  "tooltip.starcatcher.trophy.once" : "当捕获了",
+  "tooltip.starcatcher.trophy.have_been_caught" : "时出现",
+
+  "tooltip.starcatcher.trophy.unique" : "<rgb>[&]</rgb>种$鱼类",
+  "tooltip.starcatcher.trophy.total" : "<rgb>[&]</rgb>条$鱼",
+
+  "tooltip.starcatcher.trophy.all" : "",
+  "tooltip.starcatcher.trophy.common" : "普通",
+  "tooltip.starcatcher.trophy.uncommon" : "<gradient-37>少见</gradient-43>",
+  "tooltip.starcatcher.trophy.rare" : "<gradient-57>稀有</gradient-63>",
+  "tooltip.starcatcher.trophy.epic" : "<gradient-80>史诗</gradient-90>",
+  "tooltip.starcatcher.trophy.legendary" : "<rgb>传奇</rgb>",
+
+
+  "tooltip.starcatcher.trophy.both.0" : "当捕获了<rgb>[&]</rgb>种不同的鱼",
+  "tooltip.starcatcher.trophy.both.1" : "且总计捕获<rgb>[&]</rgb>条鱼时！",
+
+
+  "gui.starcatcher.toast.fish_caught" : "钓到新鱼种！",
+
+
+  "gui.guide.seasons" : "季节：",
+
+  "gui.guide.seasons.all" : "全部",
+
+  "gui.guide.seasons.spring" : "春季",
+  "gui.guide.seasons.early_spring" : "初春",
+  "gui.guide.seasons.mid_spring" : "仲春",
+  "gui.guide.seasons.late_spring" : "晚春",
+
+  "gui.guide.seasons.summer" : "夏季",
+  "gui.guide.seasons.early_summer" : "初夏",
+  "gui.guide.seasons.mid_summer" : "仲夏",
+  "gui.guide.seasons.late_summer" : "晚夏",
+
+  "gui.guide.seasons.autumn" : "秋季",
+  "gui.guide.seasons.early_autumn" : "初秋",
+  "gui.guide.seasons.mid_autumn" : "仲秋",
+  "gui.guide.seasons.late_autumn" : "晚秋",
+
+  "gui.guide.seasons.winter" : "冬季",
+  "gui.guide.seasons.early_winter" : "初冬",
+  "gui.guide.seasons.mid_winter" : "仲冬",
+  "gui.guide.seasons.late_winter" : "晚冬",
+
+
+  "gui.guide.seasons.in_season" : "正值季节！",
+  "gui.guide.seasons.not_in_season" : "不在季节",
+
+  "gui.guide.sort.alphabetical_up" : "⏬字母顺序",
+  "gui.guide.sort.alphabetical_down" : "⏫字母顺序",
+  "gui.guide.sort.mod_up" : "⏬模组名",
+  "gui.guide.sort.mod_down" : "⏫模组名",
+  "gui.guide.sort.rarity_up" : "⏬稀有度",
+  "gui.guide.sort.rarity_down" : "⏫稀有度",
+  "gui.guide.sort.caught_up" : "⏬捕获时间",
+  "gui.guide.sort.caught_down" : "⏫捕获时间",
+  "gui.guide.sort.fluid_up" : "⏬流体",
+  "gui.guide.sort.fluid_down" : "⏫流体",
+  "gui.guide.sort.season_up" : "⏬季节",
+  "gui.guide.sort.season_down" : "⏫季节",
+
+  "gui.guide.units.metric" : "公制（厘米&千克）",
+  "gui.guide.units.imperial" : "英制（英寸&磅）",
+
+  "gui.guide.units.cheeseburger" : "芝士汉堡",
+  "gui.guide.units.cheeseburger.size" : "芝士汉堡",
+  "gui.guide.units.cheeseburger.weight" : "芝士汉堡",
+
+  "gui.guide.units.football" : "足球",
+  "gui.guide.units.football.size" : "足球",
+  "gui.guide.units.football.weight" : "足球",
+
+  "gui.guide.units.developer" : "开发者",
+  "gui.guide.units.developer.size" : "wds",
+  "gui.guide.units.developer.weight" : "wds",
+
+  "gui.guide.units.banana" : "香蕉",
+  "gui.guide.units.banana.size" : "香蕉",
+  "gui.guide.units.banana.weight" : "香蕉",
+
+  "gui.guide.units.duck" : "普通鸭子",
+  "gui.guide.units.duck.size" : "鸭子",
+  "gui.guide.units.duck.weight" : "鸭子",
+
+  "gui.guide.units.space_whale" : "太空鲸鱼",
+  "gui.guide.units.scientific" : "科学计数法",
+
+
+
+
+  "gui.guide.not_caught_yet_fish_name" : "-------",
+  "gui.guide.not_caught_fish_name" : "？？？",
+  "gui.guide.caught" : "已捕获：",
+  "gui.guide.not_caught" : "------",
+  "gui.guide.not_caught_yet" : "尚未捕获！",
+  "gui.guide.rarity" : "稀有度：",
+
+  "gui.guide.fishing" : "关于钓鱼的一切：",
+  "gui.guide.index.basics" : "基础知识",
+  "gui.guide.index.treasures" : "宝藏",
+  "gui.guide.index.hooks" : "鱼钩",
+  "gui.guide.index.bobbers" : "浮漂",
+  "gui.guide.index.baits" : "鱼饵",
+  "gui.guide.index.gadgets" : "小工具",
+  "gui.guide.index.trophies" : "奖杯",
+  "gui.guide.index.secrets" : "秘密",
+  "gui.guide.index.settings" : "设置",
+
+  "gui.guide.basics" : "    基础知识",
+  "gui.guide.treasures" : "      宝藏",
+  "gui.guide.hooks" : "      鱼钩",
+  "gui.guide.bobbers" : "      浮漂",
+  "gui.guide.baits" : "      鱼饵",
+  "gui.guide.gadgets" : "     小工具",
+  "gui.guide.trophies" : "      奖杯",
+  "gui.guide.secrets" : "      秘密",
+
+
+  "gui.guide.page0.left.0" : "",
+  "gui.guide.page0.left.1" : "",
+  "gui.guide.page0.left.2" : "",
+  "gui.guide.page0.left.3" : "",
+  "gui.guide.page0.left.4" : "",
+  "gui.guide.page0.left.5" : "如果你希望捕获的不仅仅是",
+  "gui.guide.page0.left.6" : "微不足道的鲑鱼或鳕鱼，",
+  "gui.guide.page0.left.7" : "那么你需要一根<gradient-67>捕星者钓竿</gradient-90>！",
+  "gui.guide.page0.left.8" : "",
+  "gui.guide.page0.left.9" : " 一旦你入手了一根，",
+  "gui.guide.page0.left.10" : "那么是时候抛竿了！ ",
+  "gui.guide.page0.left.11" : "盯紧你的浮漂，耐心",
+  "gui.guide.page0.left.12" : "等待提竿的时机。",
+  "gui.guide.page0.left.13" : "",
+
+
+  "gui.guide.page0.right.0" : "",
+  "gui.guide.page0.right.1" : "",
+  "gui.guide.page0.right.2" : "",
+  "gui.guide.page0.right.3" : "这些鱼是不会轻易屈服的，",
+  "gui.guide.page0.right.4" : "确保命中它们的所有弱点，",
+  "gui.guide.page0.right.5" : "直到你把它们钓出水面！",
+  "gui.guide.page0.right.6" : "",
+  "gui.guide.page0.right.7" : "",
+  "gui.guide.page0.right.8" : "",
+  "gui.guide.page0.right.9" : "",
+  "gui.guide.page0.right.10" : "",
+  "gui.guide.page0.right.11" : "",
+  "gui.guide.page0.right.12" : "",
+  "gui.guide.page0.right.13" : "",
+  "gui.guide.page0.right.14" : "并非每条鱼都会以同样的",
+  "gui.guide.page0.right.15" : "方式挣扎，所以要做好应对",
+  "gui.guide.page0.right.16" : "任何情况的准备！特别是",
+  "gui.guide.page0.right.17" : "那些你也许听说过的<rgb>传奇</rgb>鱼类！",
+  "gui.guide.page0.right.18" : "",
+
+  "gui.guide.page1.left.0" : "",
+  "gui.guide.page1.left.1" : "",
+  "gui.guide.page1.left.2" : "",
+  "gui.guide.page1.left.3" : "",
+  "gui.guide.page1.left.4" : "",
+  "gui.guide.page1.left.5" : "在钓更倔的鱼时，你可能",
+  "gui.guide.page1.left.6" : "会感觉到有其他的东西在",
+  "gui.guide.page1.left.7" : "拉扯你的鱼钩！",
+  "gui.guide.page1.left.8" : "",
+  "gui.guide.page1.left.9" : "",
+  "gui.guide.page1.left.10" : "你发现了一个<gradient-08>宝藏</gradient-15>！",
+
+
+  "gui.guide.page1.right.0" : "",
+  "gui.guide.page1.right.1" : "",
+  "gui.guide.page1.right.2" : "",
+  "gui.guide.page1.right.3" : "",
+  "gui.guide.page1.right.4" : "但你有足够的技术在鱼溜走",
+  "gui.guide.page1.right.5" : "之前把它一起抓住吗？",
+  "gui.guide.page1.right.6" : "",
+  "gui.guide.page1.right.7" : "",
+  "gui.guide.page1.right.8" : "更强壮的鱼可能藏着更好的",
+  "gui.guide.page1.right.9" : "战利品！如果你想要捕获",
+  "gui.guide.page1.right.10" : "最好的宝藏，就要做好",
+  "gui.guide.page1.right.11" : "打一场硬仗的准备。",
+  "gui.guide.page1.right.12" : "",
+  "gui.guide.page1.right.13" : "",
+  "gui.guide.page1.right.14" : "宝藏是为<gradient-67>捕星者钓竿</gradient-90>寻找",
+  "gui.guide.page1.right.15" : "特殊鱼钩和浮漂的最佳途径。",
+  "gui.guide.page1.right.16" : "所以尽量抓住机会获取它们！",
+  "gui.guide.page1.right.17" : "",
+  "gui.guide.page1.right.18" : "",
+
+
+  "gui.guide.page2.left.0" : "",
+  "gui.guide.page2.left.1" : "",
+  "gui.guide.page2.left.2" : "",
+  "gui.guide.page2.left.3" : "",
+  "gui.guide.page2.left.4" : "",
+  "gui.guide.page2.left.5" : "不同的鱼钩可以通过各种",
+  "gui.guide.page2.left.6" : "方式获得，但通常作为",
+  "gui.guide.page2.left.7" : "战利品出现在钓鱼宝藏中！",
+  "gui.guide.page2.left.8" : "",
+  "gui.guide.page2.left.9" : "",
+  "gui.guide.page2.left.10" : "它们提供不同的特性和",
+  "gui.guide.page2.left.11" : "加成，所以请根据目标",
+  "gui.guide.page2.left.12" : "来选择最合适的鱼钩。",
+  "gui.guide.page2.left.13" : "",
+
+  "gui.guide.page2.right.0" : "",
+  "gui.guide.page2.right.1" : "",
+  "gui.guide.page2.right.2" : "",
+  "gui.guide.page2.right.3" : "",
+  "gui.guide.page2.right.4" : "",
+  "gui.guide.page2.right.5" : "",
+  "gui.guide.page2.right.6" : "和鱼钩类似，浮漂也主要",
+  "gui.guide.page2.right.7" : "出现在钓鱼宝藏中。",
+  "gui.guide.page2.right.8" : "",
+  "gui.guide.page2.right.9" : "",
+  "gui.guide.page2.right.10" : "浮漂可以为你的钓鱼体验",
+  "gui.guide.page2.right.11" : "提供多种不同的效果。",
+  "gui.guide.page2.right.12" : "",
+
+  "gui.guide.page3.left.0" : "",
+  "gui.guide.page3.left.1" : "",
+  "gui.guide.page3.left.2" : "",
+  "gui.guide.page3.left.3" : "",
+  "gui.guide.page3.left.4" : "",
+  "gui.guide.page3.left.5" : "任何身经百战的钓鱼佬",
+  "gui.guide.page3.left.6" : "都会告诉你鱼饵的重要性。",
+  "gui.guide.page3.left.7" : "",
+  "gui.guide.page3.left.8" : "虽然它们不能让鱼更快咬钩，",
+  "gui.guide.page3.left.9" : "但特定的鱼饵可以吸引到特",
+  "gui.guide.page3.left.10" : "定的鱼类，这让寻找它们变",
+  "gui.guide.page3.left.11" : "得容易得多！",
+  "gui.guide.page3.left.12" : "",
+  "gui.guide.page3.left.13" : "特别是那些<rgb>传奇</rgb>鱼类。",
+
+  "gui.guide.page3.right.0" : "",
+  "gui.guide.page3.right.1" : "",
+  "gui.guide.page3.right.2" : "",
+  "gui.guide.page3.right.3" : "",
+  "gui.guide.page3.right.4" : "",
+  "gui.guide.page3.right.5" : "在宝藏中寻找战利品时，",
+  "gui.guide.page3.right.6" : "你可能会发现一些旧的",
+  "gui.guide.page3.right.7" : "小工具！",
+  "gui.guide.page3.right.8" : "",
+  "gui.guide.page3.right.9" : "",
+  "gui.guide.page3.right.10" : "这些小工具通常也可以被",
+  "gui.guide.page3.right.11" : "合成，并且在多种与鱼",
+  "gui.guide.page3.right.12" : "相关的活动中很有帮助。",
+  "gui.guide.page3.right.13" : "",
+
+  "gui.guide.page4.left.0" : "",
+  "gui.guide.page4.left.1" : "",
+  "gui.guide.page4.left.2" : "",
+  "gui.guide.page4.left.3" : "",
+  "gui.guide.page4.left.4" : "",
+  "gui.guide.page4.left.5" : "奖杯可以用来展示某人",
+  "gui.guide.page4.left.6" : "精湛的钓鱼技能。",
+  "gui.guide.page4.left.7" : "",
+  "gui.guide.page4.left.8" : "绝对能让其他那些没有",
+  "gui.guide.page4.left.9" : "奖杯的人感到自愧不如。",
+
+  "gui.guide.page4.right.0" : "",
+  "gui.guide.page4.right.1" : "",
+  "gui.guide.page4.right.2" : "",
+  "gui.guide.page4.right.3" : "",
+  "gui.guide.page4.right.4" : "",
+  "gui.guide.page4.right.5" : "谁知道你会在那些随波逐流",
+  "gui.guide.page4.right.6" : "的瓶子里发现什么被遗忘的",
+  "gui.guide.page4.right.7" : "故事呢？",
+  "gui.guide.page4.right.8" : "",
+
+  "gui.guide.trophy.all.total" : "鱼总数：",
+  "gui.guide.trophy.all.unique" : "鱼种类：",
+
+  "gui.guide.trophy.common.total" : "普通鱼总数",
+  "gui.guide.trophy.common.unique" : "普通鱼种类：",
+
+  "gui.guide.trophy.uncommon.total" : "<gradient-37>少见</gradient-43>鱼总数：",
+  "gui.guide.trophy.uncommon.unique" : "<gradient-37>少见</gradient-43>鱼种类：",
+
+  "gui.guide.trophy.rare.total" : "<gradient-57>稀有</gradient-63>鱼总数：",
+  "gui.guide.trophy.rare.unique" : "<gradient-57>稀有</gradient-63>鱼种类：",
+
+  "gui.guide.trophy.epic.total" : "<gradient-80>史诗</gradient-90>鱼总数：",
+  "gui.guide.trophy.epic.unique" : "<gradient-80>史诗</gradient-90>鱼种类：",
+
+  "gui.guide.trophy.legendary.total" : "<rgb>传奇</rgb>鱼总数：",
+  "gui.guide.trophy.legendary.unique" : "<rgb>传奇</rgb>鱼种类：",
+
+
+  "gui.guide.available" : "区域内的鱼类：",
+  "gui.guide.all" : "所有鱼类：",
+
+  "gui.guide.lakes" : "湖泊",
+  "gui.guide.lakes.hover" : "除河流和海洋以外的地表生物群系",
+
+  "gui.guide.dimension" : "维度：",
+  "gui.guide.dimensions" : "维度：",
+  "gui.guide.biome" : "生物群系：",
+  "gui.guide.biome_tags" : "生物群系标签：",
+  "gui.guide.biomes" : "生物群系：",
+  "gui.guide.blacklisted_biomes" : "黑名单生物群系：",
+  "gui.guide.blacklisted_biome_tags" : "黑名单生物群系标签：",
+  "gui.guide.blacklisted_dimensions" : "黑名单维度：",
+  "gui.guide.bait" : "鱼饵：",
+  "gui.guide.weather" : "天气：",
+  "gui.guide.raining" : "雨天",
+  "gui.guide.thundering" : "雷暴",
+  "gui.guide.clear" : "晴朗",
+  "gui.guide.daytime" : "昼夜：",
+  "gui.guide.day" : "白天",
+  "gui.guide.noon" : "中午",
+  "gui.guide.night" : "夜晚",
+  "gui.guide.midnight" : "午夜",
+  "gui.guide.elevation" : "高度：",
+  "gui.guide.below" : "低于",
+  "gui.guide.above" : "高于",
+  "gui.guide.mountain" : "山地",
+  "gui.guide.surface" : "地表",
+  "gui.guide.underground" : "地下",
+  "gui.guide.caves" : "洞穴",
+  "gui.guide.deepslate" : "深板岩层",
+  "gui.guide.fluid" : "流体：",
+  "gui.guide.no_restriction" : "-------",
+  "gui.guide.hover" : "[悬停]",
+
+
+  "gui.guide.rarity.common" : "普通",
+  "gui.guide.rarity.uncommon" : "<gradient-37>少见</gradient-43>",
+  "gui.guide.rarity.rare" : "<gradient-57>稀有</gradient-63>",
+  "gui.guide.rarity.epic" : "<gradient-80>史诗</gradient-90>",
+  "gui.guide.rarity.legendary" : "<rgb>传奇</rgb>",
+
+
+
+
+
+  "gui.secret_note.sample_note.0" : "嘿，你怎么弄到这张纸条的？？",
+  "gui.secret_note.sample_note.1" : "你开创造了吗？？",
+  "gui.secret_note.sample_note.2" : "",
+  "gui.secret_note.sample_note.3" : "这些纸条应该只能通过瓶子获得",
+  "gui.secret_note.sample_note.4" : "否则它们不会有正确的数据",
+  "gui.secret_note.sample_note.5" : "并可能导致游戏崩溃！小心！",
+
+  "gui.secret_note.crystal_hook.0" : "第34天",
+  "gui.secret_note.crystal_hook.1" : "",
+  "gui.secret_note.crystal_hook.2" : "经过昨天的麻烦，我决定最好还是弄些钻石工具来。",
+  "gui.secret_note.crystal_hook.3" : "",
+  "gui.secret_note.crystal_hook.4" : "",
+  "gui.secret_note.crystal_hook.5" : "至少过去的我是这么想的。",
+  "gui.secret_note.crystal_hook.6" : "如果早知道我会不小心把水晶鱼钩掉进深层水湖里，",
+  "gui.secret_note.crystal_hook.7" : "我是绝对不会去那里的。",
+  "gui.secret_note.crystal_hook.8" : "",
+  "gui.secret_note.crystal_hook.9" : "",
+  "gui.secret_note.crystal_hook.10" : "如果有谁发现了这封在海洋中漂流的信，请收下我",
+  "gui.secret_note.crystal_hook.11" : "珍贵的水晶鱼钩吧。如果你至少钓上过一条传奇鱼，",
+  "gui.secret_note.crystal_hook.12" : "<gradient-30>老渔翁</gradient-50>就会赐你祝福，将我的水晶鱼钩挂在你的鱼钩上。",
+  "gui.secret_note.crystal_hook.13" : "",
+  "gui.secret_note.crystal_hook.14" : "",
+  "gui.secret_note.crystal_hook.15" : "",
+  "gui.secret_note.crystal_hook.16" : "——Roguy",
+
+  "gui.secret_note.lava_proof_bottle_1.0" : "“卖瓶子！卖瓶子！”",
+  "gui.secret_note.lava_proof_bottle_1.1" : "“<gradient-00>防熔岩™</gradient-14>瓶！！”",
+  "gui.secret_note.lava_proof_bottle_1.2" : "“百分百绝对<gradient-00>防熔岩™</gradient-14>！”",
+  "gui.secret_note.lava_proof_bottle_1.3" : "",
+  "gui.secret_note.lava_proof_bottle_1.4" : "",
+  "gui.secret_note.lava_proof_bottle_1.5" : "我真受够了这些骗子承诺的<gradient-00>防熔岩™</gradient-14>瓶，",
+  "gui.secret_note.lava_proof_bottle_1.6" : "怎么可能有东西能防熔岩？",
+  "gui.secret_note.lava_proof_bottle_1.7" : "",
+  "gui.secret_note.lava_proof_bottle_1.8" : "",
+  "gui.secret_note.lava_proof_bottle_1.9" : "你问我对你们愚蠢的<gradient-00>防熔岩™</gradient-14>瓶有什么看法？",
+  "gui.secret_note.lava_proof_bottle_1.10" : "",
+  "gui.secret_note.lava_proof_bottle_1.11" : "",
+  "gui.secret_note.lava_proof_bottle_1.12" : "现在我就要把这封信放进这个所谓的“<gradient-00>防熔岩™</gradient-14>瓶”里，",
+  "gui.secret_note.lava_proof_bottle_1.13" : "然后直接丢进熔岩湖！哈，你们等着瞧吧！",
+  "gui.secret_note.lava_proof_bottle_1.14" : "",
+  "gui.secret_note.lava_proof_bottle_1.15" : "",
+  "gui.secret_note.lava_proof_bottle_1.16" : "——怀疑者Arnwulf",
+
+  "gui.secret_note.lava_proof_bottle_2.0" : "",
+  "gui.secret_note.lava_proof_bottle_2.1" : "如果有人发现这封信，我想为我之前的信道歉。",
+  "gui.secret_note.lava_proof_bottle_2.2" : "",
+  "gui.secret_note.lava_proof_bottle_2.3" : "",
+  "gui.secret_note.lava_proof_bottle_2.4" : "这些<gradient-00>防熔岩™</gradient-14>瓶真的有用。",
+  "gui.secret_note.lava_proof_bottle_2.5" : "",
+  "gui.secret_note.lava_proof_bottle_2.6" : "我必须承认，在经历了许多骗局和这些<gradient-00>防熔岩™</gradient-14>瓶的承诺后，",
+  "gui.secret_note.lava_proof_bottle_2.7" : "我持怀疑态度，甚至从未给过它们机会。",
+  "gui.secret_note.lava_proof_bottle_2.8" : "",
+  "gui.secret_note.lava_proof_bottle_2.9" : "",
+  "gui.secret_note.lava_proof_bottle_2.10" : "我能说什么呢，活到老学到老。",
+  "gui.secret_note.lava_proof_bottle_2.11" : "",
+  "gui.secret_note.lava_proof_bottle_2.12" : "",
+  "gui.secret_note.lava_proof_bottle_2.13" : "我得走了，听说有个新的叫“防熔岩”附魔的，好像。",
+  "gui.secret_note.lava_proof_bottle_2.14" : "",
+  "gui.secret_note.lava_proof_bottle_2.15" : "",
+  "gui.secret_note.lava_proof_bottle_2.16" : "——怀疑者Arnwulf",
+
+  "gui.secret_note.hopeful_note.0" : "",
+  "gui.secret_note.hopeful_note.1" : "",
+  "gui.secret_note.hopeful_note.2" : "",
+  "gui.secret_note.hopeful_note.3" : "第201天",
+  "gui.secret_note.hopeful_note.4" : "",
+  "gui.secret_note.hopeful_note.5" : "",
+  "gui.secret_note.hopeful_note.6" : "自从我踏上寻找<gradient-55>海洋之心</gradient-65>的旅途以来，",
+  "gui.secret_note.hopeful_note.7" : "已经过去半年多了。虽然我的希望日渐渺茫，",
+  "gui.secret_note.hopeful_note.8" : "但是我依然会寻找它，直到生命的尽头。",
+  "gui.secret_note.hopeful_note.9" : "",
+  "gui.secret_note.hopeful_note.10" : "",
+  "gui.secret_note.hopeful_note.11" : "",
+  "gui.secret_note.hopeful_note.12" : "",
+  "gui.secret_note.hopeful_note.13" : "",
+  "gui.secret_note.hopeful_note.14" : "",
+  "gui.secret_note.hopeful_note.15" : "",
+  "gui.secret_note.hopeful_note.16" : "——Gauward",
+
+  "gui.secret_note.hopeless_note.0" : "",
+  "gui.secret_note.hopeless_note.1" : "",
+  "gui.secret_note.hopeless_note.2" : "",
+  "gui.secret_note.hopeless_note.3" : "第202天",
+  "gui.secret_note.hopeless_note.4" : "",
+  "gui.secret_note.hopeless_note.5" : "",
+  "gui.secret_note.hopeless_note.6" : "根本没有，根本就没有什么<gradient-55>海洋之心</gradient-65>，那些混蛋骗了我。",
+  "gui.secret_note.hopeless_note.7" : "我再也回不去了。我的小吉米会永远认为他的爸爸为了",
+  "gui.secret_note.hopeless_note.8" : "一个万能的幻想之物而离开了他。",
+  "gui.secret_note.hopeless_note.9" : "",
+  "gui.secret_note.hopeless_note.10" : "",
+  "gui.secret_note.hopeless_note.11" : "一切都是我的错。我怎么会傻到相信",
+  "gui.secret_note.hopeless_note.12" : "一件物品能让你在水下呼吸？难以置信。",
+  "gui.secret_note.hopeless_note.13" : "",
+  "gui.secret_note.hopeless_note.14" : "",
+  "gui.secret_note.hopeless_note.15" : "",
+  "gui.secret_note.hopeless_note.16" : "——Gauward",
+
+  "gui.secret_note.true_blue.0"  : "   有物被置入，",
+  "gui.secret_note.true_blue.1"  : "   或被取出，或被检视。",
+  "gui.secret_note.true_blue.2"  : "",
+  "gui.secret_note.true_blue.3"  : "               有物静伏其中，",
+  "gui.secret_note.true_blue.4"  : "               始终未曾离去。",
+  "gui.secret_note.true_blue.5"  : "",
+  "gui.secret_note.true_blue.6"  : "   或许你已将其吞饮，",
+  "gui.secret_note.true_blue.7"  : "   或许你已将其倾吐。",
+  "gui.secret_note.true_blue.8"  : "",
+  "gui.secret_note.true_blue.9"  : "               十年之前，亦或十息之间，",
+  "gui.secret_note.true_blue.10" : "               映于我眼，底",
+  "gui.secret_note.true_blue.11" : "               或浮于你瞳眸。",
+  "gui.secret_note.true_blue.12" : "",
+  "gui.secret_note.true_blue.13" : "   存于你母系之源，",
+  "gui.secret_note.true_blue.14" : "   或于你子代之延，",
+  "gui.secret_note.true_blue.15" : "   或梦中或醒来。",
+
+
+  "item.starcatcher.secret_note" : "秘密纸条",
+  "tooltip.starcatcher.secret_note.0" : "一张几乎被时间遗忘的旧秘密纸条",
+  "tooltip.starcatcher.secret_note.1" : "里面除了那些可能早已不在人世",
+  "tooltip.starcatcher.secret_note.2" : "之人的思绪以外，别无他物",
+
+  "item.starcatcher.broken_bottle" : "破碎的瓶子",
+  "tooltip.starcatcher.broken_bottle.0" : "一个曾经完好的瓶子的残骸",
+
+  "item.starcatcher.settings" : "设置",
+
+  "item.starcatcher.drifting_waterlogged_bottle" : "浸水的漂流瓶",
+  "tooltip.starcatcher.drifting_waterlogged_bottle.0" : "一个在海洋中漂流的瓶子",
+
+  "item.starcatcher.scalding_bottle" : "炽热的瓶子",
+  "tooltip.starcatcher.scalding_bottle.0" : "一个滚烫的瓶子。没什么特别的",
+  "tooltip.starcatcher.scalding_bottle.1" : "等等……这好像真的是一个<gradient-00>防熔岩™</gradient-14>瓶!?",
+  "tooltip.starcatcher.scalding_bottle.2" : "我从没想过它是真的！",
+  "tooltip.starcatcher.scalding_bottle.3" : "不幸的是，似乎取出里面信息的",
+  "tooltip.starcatcher.scalding_bottle.4" : "唯一方法是把它打破……",
+
+  "item.starcatcher.burning_bottle" : "燃烧的瓶子",
+  "tooltip.starcatcher.burning_bottle.0" : "一个燃烧的瓶子。这",
+  "tooltip.starcatcher.burning_bottle.1" : "一定是个<gradient-00>防熔岩™</gradient-14>瓶！",
+
+  "item.starcatcher.hopeless_bottle" : "绝望的瓶子",
+  "tooltip.starcatcher.hopeless_bottle.0" : "一个绝望的瓶子，或者说，里面的信是绝望的",
+
+  "item.starcatcher.hopeful_bottle" : "希望的瓶子",
+  "tooltip.starcatcher.hopeful_bottle.0" : "不知为何，光看着这个瓶子",
+  "tooltip.starcatcher.hopeful_bottle.1" : "就让你对未来充满了希望",
+
+  "item.starcatcher.true_blue_bottle" : "真蓝之瓶",
+  "tooltip.starcatcher.true_blue_bottle.0" : "一个闪烁着淡蓝色微光的瓶子",
+  "tooltip.starcatcher.true_blue_bottle.1" : "里面闪耀着你最纯净的自我",
+  "tooltip.starcatcher.true_blue_bottle.2" : "",
+  "tooltip.starcatcher.true_blue_bottle.3" : "不羁，不待，不凡",
+  "tooltip.starcatcher.true_blue_bottle.4" : "于忆，于镜，于膜",
+
+
+  "item.starcatcher.obidontiee" : "奥秘顿鳀",
+  "tooltip.starcatcher.obidontiee.0" : "一种狡猾的小鱼。据说经常念错字。",
+
+  "item.starcatcher.silverveil_perch" : "银纱鲈",
+  "tooltip.starcatcher.silverveil_perch.0" : "一种鳞片似银子的小鲈鱼。",
+  "tooltip.starcatcher.silverveil_perch.1" : "最常见于雨天。",
+
+  "item.starcatcher.elderscale" : "祖鳞鱼",
+  "tooltip.starcatcher.elderscale.0" : "一种常在湖泊出现的具有欺骗性的鱼。",
+  "tooltip.starcatcher.elderscale.1" : "祖鳞鱼可以活几十年，幼年时期",
+  "tooltip.starcatcher.elderscale.2" : "常常终日躲藏，因此能钓到一条",
+  "tooltip.starcatcher.elderscale.3" : "幼鱼几乎只是传闻，故得此名。",
+
+  "item.starcatcher.driftfin" : "漂鳍鱼",
+  "tooltip.starcatcher.driftfin.0" : "一种喜欢在晴朗天气",
+  "tooltip.starcatcher.driftfin.1" : "靠近水面漂流的小鱼。",
+
+  "item.starcatcher.twilight_koi" : "暮色锦鲤",
+  "tooltip.starcatcher.twilight_koi.0" : "一种相当稀有的锦鲤，据说",
+  "tooltip.starcatcher.twilight_koi.1" : "只在午夜时分在湖泊现身。",
+
+  "item.starcatcher.thunder_bass" : "雷鸣鲈",
+  "tooltip.starcatcher.thunder_bass.0" : "一种独特的鲈鱼，似乎被",
+  "tooltip.starcatcher.thunder_bass.1" : "暴风雨中的雷声所吸引。",
+  "tooltip.starcatcher.thunder_bass.2" : "常被见到与电闪鲈一起游动。",
+
+  "item.starcatcher.lightning_bass" : "电闪鲈",
+  "tooltip.starcatcher.lightning_bass.0" : "一种独特的鲈鱼，似乎被",
+  "tooltip.starcatcher.lightning_bass.1" : "暴风雨中的闪电所吸引。",
+  "tooltip.starcatcher.lightning_bass.2" : "常被见到与雷鸣鲈一起游动。",
+
+  "item.starcatcher.boot" : "靴子",
+  "tooltip.starcatcher.boot.0" : "从湖里钓上来的一只极其高质量的靴子。",
+  "tooltip.starcatcher.boot.1" : "每个钓鱼佬的梦想。",
+
+
+
+
+
+  "item.starcatcher.frostjaw_trout" : "霜颚鳟",
+  "tooltip.starcatcher.frostjaw_trout.0" : "一种以其由石化冰晶构成的",
+  "tooltip.starcatcher.frostjaw_trout.1" : "锋利下颚而闻名的鳟鱼种类。",
+
+  "item.starcatcher.crystalback_trout" : "晶背鳟",
+  "tooltip.starcatcher.crystalback_trout.0" : "一种坚韧的鳟鱼，受到攻击",
+  "tooltip.starcatcher.crystalback_trout.1" : "时会利用其背部保护自己。",
+
+  "item.starcatcher.aurora" : "极光鱼",
+  "tooltip.starcatcher.aurora.0" : "一种美丽的<rgb>传奇</rgb>鱼类。它的体型令其",
+  "tooltip.starcatcher.aurora.1" : "难以捉摸，想要捕获它极其困难。如果钓鱼者想把",
+  "tooltip.starcatcher.aurora.2" : "它钓回家来证明自己的技术，那就别想好好休息了。",
+
+  "item.starcatcher.wintery_pike" : "凛冬狗鱼",
+  "tooltip.starcatcher.wintery_pike.0" : "一种掠食性鱼类。这些独特种群喜爱",
+  "tooltip.starcatcher.wintery_pike.1" : "寒冷气候，常见于结冰的湖泊中。",
+
+
+
+
+  "item.starcatcher.sandtail" : "沙尾鱼",
+  "tooltip.starcatcher.sandtail.0" : "一种沙子覆身的长鱼,虽然大多",
+  "tooltip.starcatcher.sandtail.1" : "出现在温暖群系，但它偏爱寒冷，",
+  "tooltip.starcatcher.sandtail.2" : "所以只在夜间活动。",
+
+  "item.starcatcher.mirage_carp" : "幻景鲤",
+  "tooltip.starcatcher.mirage_carp.0" : "一种在温暖气候下晴朗温和的日子里出现的鲤鱼种类。",
+
+  "item.starcatcher.scorchfish" : "焦灼鱼",
+  "tooltip.starcatcher.scorchfish.0" : "一种讨厌下雨的鱼类，因此更",
+  "tooltip.starcatcher.scorchfish.1" : "喜欢待在较温暖的气候附近。",
+
+  "item.starcatcher.cactifish" : "仙人鱼",
+  "tooltip.starcatcher.cactifish.0" : "虽然名字可能暗示了这种鱼",
+  "tooltip.starcatcher.cactifish.1" : "在某种程度上与仙人掌有关，",
+  "tooltip.starcatcher.cactifish.2" : "但这只是恰好因为它有绿色鳞片。",
+
+  "item.starcatcher.agave_bream" : "龙舌兰鳊",
+  "tooltip.starcatcher.agave_bream.0" : "一种稀有的鳊鱼，只在晴朗天气的",
+  "tooltip.starcatcher.agave_bream.1" : "夜晚出现。它长长的鳍有助于在",
+  "tooltip.starcatcher.agave_bream.2" : "沙漠的浑浊湖泊中导航。",
+
+
+
+
+  "item.starcatcher.sunny_sturgeon" : "日光鲟",
+  "tooltip.starcatcher.sunny_sturgeon.0" : "一种稀有的鲟鱼，常见于晴朗天气的高海拔山地。",
+  "tooltip.starcatcher.sunny_sturgeon.1" : "由于其体型，想要捕获它们相当困难，",
+  "tooltip.starcatcher.sunny_sturgeon.2" : "需要强大的握力和对钓竿的精准把控。",
+
+  "item.starcatcher.peakdweller" : "峰栖鱼",
+  "tooltip.starcatcher.peakdweller.0" : "一种常见于山地的金色鱼。",
+  "tooltip.starcatcher.peakdweller.1" : "对钓鱼新手来说不容易捕获。",
+
+  "item.starcatcher.rockgill" : "石鳃鱼",
+  "tooltip.starcatcher.rockgill.0" : "一种常见于高山的坚硬如石的鱼。",
+  "tooltip.starcatcher.rockgill.1" : "据说可以做成很美味的炖菜，至少对",
+  "tooltip.starcatcher.rockgill.2" : "那些咬得动的人来说是这样。",
+
+  "item.starcatcher.sun_seeking_carp" : "逐日鲤",
+  "tooltip.starcatcher.sun_seeking_carp.0" : "一种稀有的喜爱阳光的鲤鱼，",
+  "tooltip.starcatcher.sun_seeking_carp.1" : "只能在太阳正当头时被发现。",
+
+
+
+
+  "item.starcatcher.sludge_catfish" : "污泥鲶",
+  "tooltip.starcatcher.sludge_catfish.0" : "一种常见的肮脏鲶鱼种类，生活在浑浊的沼泽",
+  "tooltip.starcatcher.sludge_catfish.1" : "水域。据说如果清洗得当可以做成一道好菜。",
+
+  "item.starcatcher.lily_snapper" : "睡莲雀鳝",
+  "tooltip.starcatcher.lily_snapper.0" : "一种细长的稀有雀鳝种类，常见于沼泽。",
+  "tooltip.starcatcher.lily_snapper.1" : "它用尖嘴捕食其他鱼类。",
+
+  "item.starcatcher.sage_catfish" : "鼠尾草鲶",
+  "tooltip.starcatcher.sage_catfish.0" : "一种在沼泽中出现的鼠尾草色美丽鲶鱼。",
+  "tooltip.starcatcher.sage_catfish.1" : "它只在晴朗的夜晚出来欣赏",
+  "tooltip.starcatcher.sage_catfish.2" : "夜间沼泽的宁静。",
+
+  "item.starcatcher.mossy_boot" : "生苔的靴子",
+  "tooltips.starcatcher.mossy_boot.0" : "一只靴子，但这次是生苔的！",
+
+
+
+
+  "item.starcatcher.pale_pinfish" : "苍白兔牙鲷",
+  "tooltip.starcatcher.pale_pinfish.0" : "一种微小苍白的鲷鱼，只在午夜时分",
+  "tooltip.starcatcher.pale_pinfish.1" : "出现在黑森林中。它希望存在于一个",
+  "tooltip.starcatcher.pale_pinfish.2" : "有苍白花园的版本中。",
+
+  "item.starcatcher.pinfish" : "兔牙鲷",
+  "tooltip.starcatcher.pinfish.0" : "一种微小苍白的鲷鱼，只在午夜时分出现",
+
+  "item.starcatcher.pale_carp" : "苍白鲤",
+  "tooltip.starcatcher.pale_carp.0" : "一种常见于[已编辑]的鲤鱼种类。",
+  "tooltip.starcatcher.pale_carp.1" : "它们的栖息地在这个宇宙中仍在建设，",
+  "tooltip.starcatcher.pale_carp.2" : "所以它们转而待在黑森林里。",
+
+
+
+
+  "item.starcatcher.blossomfish" : "鲜花鱼",
+  "tooltip.starcatcher.blossomfish.0" : "一种美丽的鱼，形似樱花树林的粉红色花簇。",
+  "tooltip.starcatcher.blossomfish.1" : "它喜欢在温暖的阳光下游泳。",
+
+  "item.starcatcher.petaldrift_carp" : "落英鲤",
+  "tooltip.starcatcher.petaldrift_carp.0" : "一种常见于樱花树林的粉色鲤鱼，",
+  "tooltip.starcatcher.petaldrift_carp.1" : "更喜欢在下雨时出来。",
+
+  "item.starcatcher.pink_koi" : "粉红锦鲤",
+  "tooltip.starcatcher.pink_koi.0" : "一种最常见于樱花树林的粉红色锦鲤。",
+  "tooltip.starcatcher.pink_koi.1" : "它在雨天出来觅食。",
+
+  "item.starcatcher.morganite" : "摩根鱼",
+  "tooltip.starcatcher.morganite.0" : "一种形似摩根石宝石的鱼。",
+
+  "item.starcatcher.rose_siamese_fish" : "玫瑰暹罗鱼",
+  "tooltip.starcatcher.rose_siamese_fish.0" : "一种在雨天发现的稀有华丽鱼。",
+  "tooltip.starcatcher.rose_siamese_fish.1" : "即使是老钓手想要捕获它也相当有挑战性。",
+
+
+
+
+  "item.starcatcher.crystalback_sturgeon" : "晶背鲟",
+  "tooltip.starcatcher.crystalback_sturgeon.0" : "一种常见于高海拔的鲟鱼，",
+  "tooltip.starcatcher.crystalback_sturgeon.1" : "以其晶化的背部闻名，有助于",
+  "tooltip.starcatcher.crystalback_sturgeon.2" : "抵御攻击，同时进行捕猎。",
+
+  "item.starcatcher.icetooth_sturgeon" : "冰牙鲟",
+  "tooltip.starcatcher.icetooth_sturgeon.0" : "发现于高山上，这种鲟鱼",
+  "tooltip.starcatcher.icetooth_sturgeon.1" : "用其锋利的石化冰牙咬住猎物。",
+
+  "item.starcatcher.boreal" : "北风鱼",
+  "tooltip.starcatcher.boreal.0" : "一种在冰封的山地中发现的<rgb>传奇</rgb>鱼类",
+  "tooltip.starcatcher.boreal.1" : "即使对钓鱼高手而言也是真正的挑战，",
+  "tooltip.starcatcher.boreal.2" : "它们以融入冰水而闻名，令人难以",
+  "tooltip.starcatcher.boreal.3" : "跟上其迅捷的动作。",
+
+  "item.starcatcher.crystalback_boreal" : "晶背北风鱼",
+  "tooltip.starcatcher.crystalback_boreal.0" : "虽然冠以<rgb>传奇</rgb>鱼类<rgb>北风鱼</rgb>之名，但这种",
+  "tooltip.starcatcher.crystalback_boreal.1" : "鱼远没有那么难钓。它闪亮的背部使其更易于",
+  "tooltip.starcatcher.crystalback_boreal.2" : "追踪，背部的结晶也减慢了它的游动速度。",
+
+
+
+
+  "item.starcatcher.silverfin_pike" : "银鳍狗鱼",
+  "tooltip.starcatcher.silverfin_pike.0" : "一种常见于河流的大型狗鱼。",
+
+  "item.starcatcher.willow_bream" : "柳叶鳊",
+  "tooltip.starcatcher.willow_bream.0" : "一种非常狡猾难钓的鱼，",
+  "tooltip.starcatcher.willow_bream.1" : "只在夜间现身。",
+
+  "item.starcatcher.drifting_bream" : "漂游鳊",
+  "tooltip.starcatcher.drifting_bream.0" : "一种已知会在夜间河流表面",
+  "tooltip.starcatcher.drifting_bream.1" : "缓慢漂游的鳊鱼种类。",
+
+  "item.starcatcher.downfall_bream" : "倾盆鳊",
+  "tooltip.starcatcher.downfall_bream.0" : "一种难以发现但容易捕获的鳊鱼，",
+  "tooltip.starcatcher.downfall_bream.1" : "只在雨夜出现。",
+
+  "item.starcatcher.hollowbelly_darter" : "空腹镖鲈",
+  "tooltip.starcatcher.hollowbelly_darter.0" : "一种非常小的、容易捕获的河鱼。",
+
+  "item.starcatcher.mistback_chub" : "雾背鲢",
+  "tooltip.starcatcher.mistback_chub.0" : "一种以其银色鳞片闻名的河鱼。",
+
+  "item.starcatcher.dried_seaweed" : "干海藻",
+  "tooltip.starcatcher.dried_seaweed.0" : "一片缠在鱼钩",
+  "tooltip.starcatcher.dried_seaweed.1" : "上的死海藻。",
+
+
+
+
+  "item.starcatcher.frostgill_chub" : "霜鳃鲢",
+  "tooltip.starcatcher.frostgill_chub.0" : "钓鱼者中很流行的一种鱼，",
+  "tooltip.starcatcher.frostgill_chub.1" : "常在河流出现。",
+
+  "item.starcatcher.crystalback_minnow" : "晶背米诺鱼",
+  "tooltip.starcatcher.crystalback_minnow.0" : "一种非常小的鱼，常被用作鱼饵。",
+  "tooltip.starcatcher.crystalback_minnow.1" : "此特定种类最常在夜间出现。",
+
+  "item.starcatcher.azure_crystalback_minnow" : "蓝晶背米诺鱼",
+  "tooltip.starcatcher.azure_crystalback_minnow.0" : "晶背米诺鱼的稀有变异品种",
+  "tooltip.starcatcher.azure_crystalback_minnow.1" : "在午夜时分会发出柔和的蓝色光芒。",
+  "tooltip.starcatcher.azure_crystalback_minnow.2" : "因其体型微小，捕获它很有挑战性。",
+
+  "item.starcatcher.blue_crystal_fin" : "蓝晶鳍",
+  "tooltip.starcatcher.blue_crystal_fin.0" : "一种少见的鱼，常在白天出现。",
+
+
+
+  "item.starcatcher.ironjaw_herring" : "铁颚鲱",
+  "tooltip.starcatcher.ironjaw_herring.0" : "这种常见于海洋的鲱鱼通常拥有",
+  "tooltip.starcatcher.ironjaw_herring.1" : "一个类似铁质的银色石化颚。",
+
+  "item.starcatcher.deepjaw_herring" : "深颚鲱",
+  "tooltip.starcatcher.deepjaw_herring.0" : "一种常见于海洋的鱼，通常被认为有很高的交易价值。",
+
+  "item.starcatcher.dusktail_snapper" : "暮尾鲷",
+  "tooltip.starcatcher.dusktail_snapper.0" : "一种相对于其体型而言很重的鱼，常用于菜肴。",
+
+  "item.starcatcher.joel" : "约珥鱼",
+  "tooltip.starcatcher.joel.0" : "一种在海洋中发现的稀有<rgb>传奇</rgb>鱼类。",
+  "tooltip.starcatcher.joel.1" : "有一个非常<rgb>nice</rgb>的尺寸",
+
+  "item.starcatcher.redscaled_tuna" : "红鳞金枪鱼",
+  "tooltip.starcatcher.redscaled_tuna.0" : "一种鳞片呈红色的大型金枪鱼。",
+  "tooltip.starcatcher.redscaled_tuna.1" : "这样的鱼常常一条就能喂饱整个村庄。",
+
+  "item.starcatcher.sea_bass" : "海鲈鱼",
+  "tooltip.starcatcher.sea_bass.0" : "一种常见的鲈鱼类型，常见于海洋。",
+  "tooltip.starcatcher.sea_bass.1" : "由于缺乏勇气，它在夜间会躲起来。",
+
+  "item.starcatcher.waterlogged_bottle" : "浸水的瓶子",
+  "tooltip.starcatcher.waterlogged_bottle.0" : "一个很久以前被扔进海里的瓶子。",
+  "tooltip.starcatcher.waterlogged_bottle.1" : "不管曾经装过什么，现在早已空空如也。",
+
+  "item.starcatcher.bigeye_tuna" : "大眼金枪鱼",
+  "tooltip.starcatcher.bigeye_tuna.0" : "一种因其大眼睛而闻名的又大又重的鱼。",
+  "tooltip.starcatcher.bigeye_tuna.1" : "此种类仅在深海水域中发现。",
+
+  "item.starcatcher.conch" : "海螺",
+  "tooltip.starcatcher.conch.0" : "一种带有螺旋贝壳的软体动物残骸，常被用作装饰品。",
+
+  "item.starcatcher.clam" : "蛤蜊",
+  "tooltip.starcatcher.clam.0" : "曾经是生活在沙滩的双壳类软体动物，现在只是一个壳。",
+
+  "item.starcatcher.shroomfish" : "蘑菇鱼",
+  "tooltip.starcatcher.shroomfish.0" : "一种古老的<rgb>传奇</rgb>鱼类，被蘑菇岛的孢子寄生",
+  "tooltip.starcatcher.shroomfish.1" : "对于蘑菇爱好者来说是一道美味佳肴。",
+
+  "item.starcatcher.sporefish" : "孢子鱼",
+  "tooltip.starcatcher.sporefish.0" : "一种在蘑菇岛发现的稀有鱼类，",
+  "tooltip.starcatcher.sporefish.1" : "对新手钓鱼者来说很难捕获。",
+
+
+
+
+  "item.starcatcher.gold_fan" : "金扇鱼",
+  "tooltip.starcatcher.gold_fan.0" : "一种地下鱼类，尾巴形似风扇叶。",
+  "tooltip.starcatcher.gold_fan.1" : "尽管很有趣，但它并不靠旋转尾巴来前进。",
+
+  "item.starcatcher.geode_eel" : "晶洞鳗",
+  "tooltip.starcatcher.geode_eel.0" : "一种闪亮、沉重、细长的鳗鱼。",
+  "tooltip.starcatcher.geode_eel.1" : "它们的颜色和纹理来自于紫水晶的渗透，",
+  "tooltip.starcatcher.geode_eel.2" : "因为它们的卵是在紫水晶晶洞内孵化的。",
+
+
+
+  "item.starcatcher.whiteveil" : "白纱鱼",
+  "tooltip.starcatcher.whiteveil.0" : "一种常见于地下的苍白长鳍鱼。",
+  "tooltip.starcatcher.whiteveil.1" : "看似幽灵一般，却出乎意料地沉重",
+
+  "item.starcatcher.black_eel" : "黑鳗",
+  "tooltip.starcatcher.black_eel.0" : "一种常见于地下的肉食性黑鳗鱼。",
+
+  "item.starcatcher.amethystback" : "紫晶背",
+  "tooltip.starcatcher.amethystback.0" : "一种稀有且难以捕获的鱼，常见于紫水晶晶洞附近。",
+
+  "item.starcatcher.stonefish" : "石鱼",
+  "tooltip.starcatcher.stonefish.0" : "一种由石头组成的巨大沉重的鱼，",
+  "tooltip.starcatcher.stonefish.1" : "常常能让矿工饱餐好几天。",
+
+
+
+  "item.starcatcher.fossilized_angelfish" : "化石神仙鱼",
+  "tooltip.starcatcher.fossilized_angelfish.0" : "一种形似化石的神仙鱼。",
+  "tooltip.starcatcher.fossilized_angelfish.1" : "实际上并不是化石，经常",
+  "tooltip.starcatcher.fossilized_angelfish.2" : "因其营养价值低、重量大",
+  "tooltip.starcatcher.fossilized_angelfish.3" : "且难以捕获而被忽视。",
+
+  "item.starcatcher.dripfin" : "滴水鳍",
+  "tooltip.starcatcher.dripfin.0" : "一种栖息在溶洞水坑",
+  "tooltip.starcatcher.dripfin.1" : "中的基本鱼类。",
+
+  "item.starcatcher.yellowstone_fish" : "黄石鱼",
+  "tooltip.starcatcher.yellowstone_fish.0" : "一种美丽的金色鱼，",
+  "tooltip.starcatcher.yellowstone_fish.1" : "常见于溶洞中。",
+
+
+
+
+
+  "item.starcatcher.lush_pike" : "繁茂狗鱼",
+  "tooltip.starcatcher.lush_pike.0" : "一种苔藓覆盖的<rgb>传奇</rgb>狗鱼，只在",
+  "tooltip.starcatcher.lush_pike.1" : "繁茂洞穴中偶尔现身，即使是",
+  "tooltip.starcatcher.lush_pike.2" : "老钓手想要捕获它也非常艰难",
+
+  "item.starcatcher.vivid_moss" : "活苔鱼",
+  "tooltip.starcatcher.vivid_moss.0" : "一片在繁茂洞穴中的鱼形苔藓。",
+  "tooltip.starcatcher.vivid_moss.1" : "也可能是一条被苔藓吞噬的鱼？",
+  "tooltip.starcatcher.vivid_moss.2" : "无论如何，由于身体滑溜，很难捕获。",
+
+  "item.starcatcher.the_quarrish" : "采石鱼",
+  "tooltip.starcatcher.the_quarrish.0" : "一种在丰茂的繁茂洞穴常见的鱼。",
+  "tooltip.starcatcher.the_quarrish.1" : "其沉重的体型使得捕获非常繁琐。",
+
+
+
+  "item.starcatcher.ghostly_pike" : "幽灵狗鱼",
+  "tooltip.starcatcher.ghostly_pike.0" : "一种形似幽灵的狗鱼，在地下深处偶尔现身。",
+
+  "item.starcatcher.aquamarine_pike" : "海蓝宝石狗鱼",
+  "tooltip.starcatcher.aquamarine_pike.0" : "一种在地下深处出没的掠食性鱼类。",
+
+  "item.starcatcher.garnet_mackerel" : "石榴石鲭鱼",
+  "tooltip.starcatcher.garnet_mackerel.0" : "一种难以捕获的鲭鱼种类，常见于洞穴深处。",
+
+  "item.starcatcher.bright_amethyst_snapper" : "明紫晶鲷",
+  "tooltip.starcatcher.bright_amethyst_snapper.0" : "一种在深板岩层出现的华丽粉色鱼。",
+  "tooltip.starcatcher.bright_amethyst_snapper.1" : "据说它会与暗紫晶鲷成对地游动。",
+
+  "item.starcatcher.dark_amethyst_snapper" : "暗紫晶鲷",
+  "tooltip.starcatcher.dark_amethyst_snapper.0" : "一种在深板岩层出现的华丽深蓝色鱼。",
+  "tooltip.starcatcher.dark_amethyst_snapper.1" : "据说它会与明紫晶鲷成对地游动。",
+
+  "item.starcatcher.deepslatefish" : "深板岩鱼",
+  "tooltip.starcatcher.deepslatefish.0" : "一种难以捕获的鱼，常见于高山上。",
+  "tooltip.starcatcher.deepslatefish.1" : "开个玩笑。它是在深板岩层出现的。",
+
+
+
+
+  "item.starcatcher.sculkfish" : "幽匿鱼",
+  "tooltip.starcatcher.sculkfish.0" : "一种被幽匿侵蚀的麻烦鱼类。",
+
+  "item.starcatcher.ward" : "监守鱼",
+  "tooltip.starcatcher.ward.0" : "一种<rgb>传奇</rgb>鱼类，据说是监守者的好朋友",
+  "tooltip.starcatcher.ward.1" : "这种鱼没有抗拒幽匿，而是拥抱了它并因此变得更强。",
+
+  "item.starcatcher.glowing_dark" : "荧暗鱼",
+  "tooltip.starcatcher.glowing_dark.0" : "一种只在深暗之域出没的迅捷鱼类。",
+  "tooltip.starcatcher.glowing_dark.1" : "一种只在深暗之域出没的迅捷鱼类。",
+
+
+
+  "item.starcatcher.suneater" : "噬日鱼",
+  "tooltip.starcatcher.suneater.0" : "一种在主世界熔岩湖中出没的稀有鱼类。",
+
+  "item.starcatcher.pyrotrout" : "火鳟",
+  "tooltip.starcatcher.pyrotrout.0" : "一种适应主世界地表熔岩的鳟鱼。",
+
+  "item.starcatcher.obsidian_eel" : "黑曜鳗",
+  "tooltip.starcatcher.obsidian_eel.0" : "一种由黑曜石组成的<rgb>传奇</rgb>鱼类。",
+  "tooltip.starcatcher.obsidian_eel.1" : "在主世界雨天的熔岩湖中出现。",
+  "tooltip.starcatcher.obsidian_eel.2" : "通常需要好几个人一起才能",
+  "tooltip.starcatcher.obsidian_eel.3" : "把它抬回村庄。",
+
+
+
+
+  "item.starcatcher.molten_shrimp" : "熔融虾",
+  "tooltip.starcatcher.molten_shrimp.0" : "一种在地下熔岩河流中出没的小虾。",
+
+  "item.starcatcher.obsidian_crab" : "黑曜蟹",
+  "tooltip.starcatcher.obsidian_crab.0" : "一种难以捉摸的蟹，常见于地下熔岩池附近。",
+
+
+
+
+  "item.starcatcher.scorched_bloodsucker" : "焦灼吸血鱼",
+  "tooltip.starcatcher.scorched_bloodsucker.0" : "一种在深板岩熔岩湖中出没的寄生生物，难以捕获。",
+
+  "item.starcatcher.molten_deepslate_crab" : "熔融深板岩蟹",
+  "tooltip.starcatcher.molten_deepslate_crab.0" : "一种在深板岩层靠近熔岩河流处出没的金色螃蟹。",
+
+
+
+
+  "item.starcatcher.embergill" : "烬鳃鱼",
+  "tooltip.starcatcher.embergill.0" : "一种在下界广阔熔岩海洋中出没的鱼。",
+
+  "item.starcatcher.scalding_pike" : "炽热狗鱼",
+  "tooltip.starcatcher.scalding_pike.0" : "一种仅出现在下界的掠食性鱼类。",
+
+  "item.starcatcher.cinder_squid" : "灰烬乌贼",
+  "tooltip.starcatcher.cinder_squid.0" : "一种在下界出没的滑溜乌贼。",
+
+  "item.starcatcher.lava_crab" : "熔岩蟹",
+  "tooltip.starcatcher.lava_crab.0" : "这种特殊的蟹类不知何故进入了下界",
+  "tooltip.starcatcher.lava_crab.1" : "并进化出由下界岩构成的保护壳。",
+
+  "item.starcatcher.magma_fish" : "岩浆鱼",
+  "tooltip.starcatcher.magma_fish.0" : "一种常见的下界鱼，以其发红光的鳍而闻名。",
+
+  "item.starcatcher.glowstone_seeker" : "寻荧鱼",
+  "tooltip.starcatcher.glowstone_seeker.0" : "一种似乎对荧石有着奇特的",
+  "tooltip.starcatcher.glowstone_seeker.1" : "趋近性的鱼，常在其下方游动。",
+
+  "item.starcatcher.glowstone_pufferfish" : "荧石河豚",
+  "tooltip.starcatcher.glowstone_pufferfish.0" : "一种像荧石一样闪烁的河豚。",
+
+  "item.starcatcher.lava_crab_claw" : "熔岩蟹钳",
+  "tooltip.starcatcher.lava_crab_claw.0" : "从熔岩蟹身上扯下的钳子。",
+  "tooltip.starcatcher.lava_crab_claw.1" : "由于熔岩蟹的攻击性，",
+  "tooltip.starcatcher.lava_crab_claw.2" : "这在下界相当常见。",
+
+
+
+  "item.starcatcher.charfish" : "炭鱼",
+  "tooltip.starcatcher.charfish.0" : "一种仅在末地出现的紫色鱼。",
+
+  "item.starcatcher.chorus_crab" : "紫颂蟹",
+  "tooltip.starcatcher.chorus_crab.0" : "这种蟹类以紫颂果为主要食物来源。",
+  "tooltip.starcatcher.chorus_crab.1" : "据说它在进食后可以随意传送。",
+
+  "item.starcatcher.end_glow" : "末荧鱼",
+  "tooltip.starcatcher.end_glow.0" : "一种仅在末地出没的狡猾鱼类。",
+  "tooltip.starcatcher.end_glow.1" : "末影人似乎不在意它。",
+
+  "item.starcatcher.voidbiter" : "虚空噬鱼",
+  "tooltip.starcatcher.voidbiter.0" : "一种在末地外岛出没的<rgb>传奇</rgb>鱼类。",
+  "tooltip.starcatcher.voidbiter.1" : "见过它的人寥寥无几，仅在传闻之中。",
+  "tooltip.starcatcher.voidbiter.2" : "据说只有一些<gradient-30>老渔翁</gradient-50>才成功捕获过它。",
+  "tooltip.starcatcher.voidbiter.3" : ""
+}
