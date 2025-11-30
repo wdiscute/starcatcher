@@ -101,6 +101,7 @@ public class Starcatcher {
     public Starcatcher(IEventBus modEventBus, ModContainer modContainer) {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.REGISTRY.register(modEventBus);
+        ModItems.REGISTRY_NO_DATAGEN.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
         ModDataComponents.register(modEventBus);

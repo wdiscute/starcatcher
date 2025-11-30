@@ -22,8 +22,9 @@ public class ModItemModelProvider extends ItemModelProvider
     protected void registerModels()
     {
         for (DeferredHolder<Item, ? extends Item> item : ModItems.REGISTRY.getEntries())
-            if(!item.equals(ModItems.ROD) && !item.get().equals(ModBlocks.STAND.asItem()))
-                simpleItem((DeferredItem<? extends Item>) item);
+        {
+            simpleItem((DeferredItem<? extends Item>) item);
+        }
     }
 
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item) {

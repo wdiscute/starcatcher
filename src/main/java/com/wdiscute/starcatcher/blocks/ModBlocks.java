@@ -17,29 +17,26 @@ public interface ModBlocks
 
     DeferredBlock<Block> TROPHY_GOLD = registerBlock("trophy_gold", TrophyBlock::new);
     DeferredBlock<Block> TROPHY_SILVER = registerBlock("trophy_silver", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_BRONZE = registerStand("trophy_bronze", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_BRONZE = registerBlock("trophy_bronze", TrophyBlock::new);
 
-    DeferredBlock<Block> STAND = registerBlock("tournament_stand", StandBlock::new);
+    DeferredBlock<Block> STAND = registerStand("tournament_stand", StandBlock::new);
 
+
+
+
+    private static <T extends Block> DeferredBlock<T> registerStand(String name, Supplier<T> block)
+    {
+        DeferredBlock<T> toReturn = BLOCKS.register(name, block);
+
+        ModItems.REGISTRY_NO_DATAGEN.register(name, () -> new StandBlockItem(toReturn.get()));
+        return toReturn;
+    }
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block)
     {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         registerBlockItem(name, toReturn);
         return toReturn;
-    }
-
-    private static <T extends Block> DeferredBlock<T> registerStand(String name, Supplier<T> block)
-    {
-        DeferredBlock<T> toReturn = BLOCKS.register(name, block);
-
-        ModItems.REGISTRY.register(name, () -> new StandBlockItem(toReturn.get()));
-        return toReturn;
-    }
-
-    private static <T extends Block> void registerStandBlockItem(String name, DeferredBlock<T> block)
-    {
-        ModItems.REGISTRY.register(name, () -> new StandBlockItem(block.get()));
     }
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block)

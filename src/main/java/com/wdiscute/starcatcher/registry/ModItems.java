@@ -21,6 +21,7 @@ public interface ModItems
     List<DeferredItem<Item>> trash = new ArrayList<>();
 
     DeferredRegister.Items REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
+    DeferredRegister.Items REGISTRY_NO_DATAGEN = DeferredRegister.createItems(Starcatcher.MOD_ID);
 
     DeferredItem<Item> GUIDE = REGISTRY.register("starcatcher_guide", FishingGuideItem::new);
 
@@ -59,7 +60,15 @@ public interface ModItems
     DeferredItem<Item> LEGENDARY_BAIT = basicItem("legendary_bait");
     DeferredItem<Item> METEOROLOGICAL_BAIT = basicItem("meteorological_bait");
 
-    DeferredItem<Item> ROD = REGISTRY.register("starcatcher_rod", StarcatcherFishingRod::new); //missing better tooltip
+
+    //rods
+    DeferredItem<Item> ROD = REGISTRY_NO_DATAGEN.register("starcatcher_rod", StarcatcherFishingRod::new);
+
+    //fishing rod skins
+    DeferredItem<Item> NATURALIST_ROD = REGISTRY_NO_DATAGEN.register("naturalist_rod", StarcatcherFishingRod::new);
+
+
+
 
     DeferredItem<Item> SETTINGS = REGISTRY.register("settings", () -> new Item(new Item.Properties()));
 
@@ -92,6 +101,9 @@ public interface ModItems
     DeferredItem<Item> TRUE_BLUE_BOTTLE = REGISTRY.register(
             "true_blue_bottle", () ->
                     new NoteContainer(SecretNote.Note.TRUE_BLUE));
+
+
+
 
 
     //cheater items
