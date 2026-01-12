@@ -13,12 +13,19 @@ import net.minecraft.world.phys.Vec3;
 
 public class KingTackleSkin extends AbstractTackleSkin
 {
-    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("base"), "main");
+    /* Not working with Arclight
+    java.lang.NoClassDefFoundError: net/minecraft/client/model/geom/ModelLayerLocation
+	at TRANSFORMER/starcatcher@2.1-NEOFORGE-1.21.1/com.wdiscute.starcatcher.registry.custom.tackleskin.KingTackleSkin.<clinit>(KingTackleSkin.java:16) ~[starcatcher-2.1-NEOFORGE-1.21.1.jar%23310!/:?] {re:classloading}
+	at TRANSFORMER/starcatcher@2.1-NEOFORGE-1.21.1/com.wdiscute.starcatcher.registry.custom.tackleskin.ModTackleSkins.get(ModTackleSkins.java:61) ~[starcatcher-2.1-NEOFORGE-1.21.1.jar%23310!/:?] {re:classloading}
+	at TRANSFORMER/starcatcher@2.1-NEOFORGE-1.21.1/com.wdiscute.starcatcher.rod.StarcatcherFishingRodItem.use(StarcatcherFishingRodItem.java:66) ~[starcatcher-2.1-NEOFORGE-1.21.1.jar%23310!/:?] {re:classloading}
+    */
+    //public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("base"), "main");
 
     @Override
     public ModelLayerLocation getLayerLocation()
     {
-        return LAYER_LOCATION;
+        return new ModelLayerLocation(Starcatcher.rl("base"), "main");
+        //return LAYER_LOCATION;
     }
 
     @Override
