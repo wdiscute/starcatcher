@@ -1,5 +1,9 @@
 **Starcatcher** improves on vanilla's fishing by adding lots of new fishes to be caught through a new mini-game, using your **Starcatcher's Fishing Rod**! 🎣
 
+### Laguage
+[![EN](https://img.shields.io/badge/lang-en-green)](https://github.com/wdiscute/starcatcher/blob/Last-Published-Version-(neo)/README.md)
+[![RU](https://img.shields.io/badge/lang-ru-red)](https://github.com/wdiscute/starcatcher/blob/Last-Published-Version-(neo)/README.ru.md)
+
 ![minigame](https://github.com/user-attachments/assets/ac789d8e-dd2b-4620-8659-7fdb30ad09fd)
 
 The 90+ new fishes added are restricted by a number of conditions, such as Dimension, Biome, Elevation, Daytime, Weather, Fluid, and more! 🐟 🐠
