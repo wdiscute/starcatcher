@@ -8,7 +8,6 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
 import com.wdiscute.starcatcher.compat.QualityFoodCompat;
-import com.wdiscute.starcatcher.compat.ReliquifiedArtifactsCompat;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.io.*;
 import com.wdiscute.starcatcher.registry.catchmodifiers.AbstractCatchModifier;
@@ -1971,14 +1970,6 @@ public record FishProperties(
                 int exp = fp.rarity().getXp();
                 player.giveExperiencePoints(exp);
 
-                //award relic xp to angler's hat
-                if (ModList.get().isLoaded("reliquified_artifacts") && SCConfig.ENABLE_ANGLERS_HAT_COMPAT.get())
-                {
-                    boolean gotTreasure = completedTreasure
-                            || fbe.modifiers.stream().anyMatch(acm -> acm.forceAwardTreasure(fbe, time, completedTreasure, perfectCatch, hits));
-                    ReliquifiedArtifactsCompat.awardRelicXP(player, gotTreasure);
-                }
-
                 List<ItemStack> items = new ArrayList<>();
 
                 //if should spawn entity
@@ -2033,17 +2024,9 @@ public record FishProperties(
                     items.addAll(acm.addToFishedItems(time, perfectCatch, hits, completedTreasure, player));
 
                 //add treasure
-                if (completedTreasure
-                        || fbe.modifiers.stream().anyMatch(acm -> acm.forceAwardTreasure(fbe, time, completedTreasure, perfectCatch, hits))
-                        || (ModList.get().isLoaded("reliquified_artifacts") && SCConfig.ENABLE_ANGLERS_HAT_COMPAT.get() && ReliquifiedArtifactsCompat.shouldAwardBonusTreasure(player)))
+                if (completedTreasure || fbe.modifiers.stream().anyMatch(acm -> acm.forceAwardTreasure(fbe, time, completedTreasure, perfectCatch, hits)))
                 {
                     items.add(fp.loadTreasure(player).catchInfo.treasureIs);
-                }
-
-                //angler's hat bonus catch
-                if (ModList.get().isLoaded("reliquified_artifacts") && SCConfig.ENABLE_ANGLERS_HAT_COMPAT.get())
-                {
-                    ReliquifiedArtifactsCompat.attemptBonusCatch(player, fbe, fp);
                 }
 
                 //spawn items from list

@@ -1,5 +1,8 @@
 {
   "values": {
+    "artifacts:anglers_hat": [
+      "starcatcher:anglers_hat"
+    ],
     "starcatcher:almighty_worm": [
       "starcatcher:decrease_lure_time",
       "starcatcher:fish_entity"

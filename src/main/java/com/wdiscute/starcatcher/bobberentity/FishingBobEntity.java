@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.bobberentity;
 
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.compat.ArtifactsCompat;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.io.*;
@@ -40,7 +39,6 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,17 +123,6 @@ public class FishingBobEntity extends Projectile
             minTicksToFish = acm.adjustMinTicksToFish(minTicksToFish);
             maxTicksToFish = acm.adjustMaxTicksToFish(maxTicksToFish);
             chanceToFishEachTick = acm.adjustChanceToFishEachTick(chanceToFishEachTick);
-        }
-
-        //angler's hat compat (base artifacts only - lure time reduction for dead Lure enchant)
-        if (!ModList.get().isLoaded("reliquified_artifacts") && ModList.get().isLoaded("artifacts") && SCConfig.ENABLE_ANGLERS_HAT_COMPAT.get())
-        {
-            if (ArtifactsCompat.isWearingAnglersHat(player))
-            {
-                minTicksToFish = ArtifactsCompat.adjustLureMin(minTicksToFish);
-                maxTicksToFish = ArtifactsCompat.adjustLureMax(maxTicksToFish);
-                chanceToFishEachTick = ArtifactsCompat.adjustLureChance(chanceToFishEachTick);
-            }
         }
 
         minTicksToFish = Math.max(1, minTicksToFish);

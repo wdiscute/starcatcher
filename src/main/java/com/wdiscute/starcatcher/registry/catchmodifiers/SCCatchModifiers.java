@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.compat.curios.CuriosCompat;
 import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.registry.SCDataMaps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -79,6 +80,9 @@ public interface SCCatchModifiers
     //hide catch
     Pair<ResourceLocation, Supplier<AbstractCatchModifier>> HIDE_CATCH = registerCatchModifier("hide_catch", HideCatchModifier::new);
 
+    //angler's hat (artifacts / reliquified artifacts compat)
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> ANGLERS_HAT = registerCatchModifier("anglers_hat", AnglersHatModifier::new);
+
     static Pair<ResourceLocation, Supplier<AbstractCatchModifier>> registerCatchModifier(String name, Supplier<AbstractCatchModifier> sup)
     {
         REGISTRY.register(name, () -> sup);
@@ -131,8 +135,13 @@ public interface SCCatchModifiers
     static List<ResourceLocation> getCatchModifiersRLs(ItemStack itemStack)
     {
         List<ResourceLocation> resourceLocations = SCDataComponents.get(itemStack, SCDataComponents.CATCH_MODIFIERS);
-        if (resourceLocations == null) return List.of();
-        return resourceLocations;
+        if (resourceLocations != null) return resourceLocations;
+
+        //fallback to DataMap for items that don't go through ItemAttributeModifierEvent (e.g. curio slots)
+        List<ResourceLocation> fromDataMap = SCDataMaps.getOrDefault(itemStack, SCDataMaps.CATCH_MODIFIERS, null);
+        if (fromDataMap != null) return fromDataMap;
+
+        return List.of();
     }
 }
 

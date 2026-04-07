@@ -160,11 +160,12 @@ public class SCEvents
             //guide
             FishingGuideAttachment fishingGuideAttachment = SCDataAttachments.get(sp, SCDataAttachments.FISHING_GUIDE);
 
-            if (FishingGuideAttachment.hasLegacyData(sp))
-            {
-                fishingGuideAttachment.loadFromLegacy(sp);
-                FishingGuideAttachment.sync(sp);
-            }
+            //todo: legacy data migration methods missing on this branch
+            //if (FishingGuideAttachment.hasLegacyData(sp))
+            //{
+            //    fishingGuideAttachment.loadFromLegacy(sp);
+            //    FishingGuideAttachment.sync(sp);
+            //}
 
             if (SCConfig.GIVE_GUIDE.get() && !fishingGuideAttachment.receivedGuide)
             {

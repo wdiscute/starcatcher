@@ -12,7 +12,9 @@ import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.sellingbin.FishProcessor;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
@@ -138,6 +140,8 @@ public class DGSCDataMapsProvider extends DataMapProvider
         catchModifiers.add(SCItems.LEGENDARY_BAIT, List.of(SCCatchModifiers.DECREASES_LURE_TIME.getFirst()), false);
         catchModifiers.add(SCItems.METEOROLOGICAL_BAIT, List.of(SCCatchModifiers.DECREASES_LURE_TIME.getFirst(), SCCatchModifiers.IGNORE_DAYTIME_AND_WEATHER_RESTRICTIONS.getFirst()), false);
 
+        //angler's hat (artifacts / reliquified artifacts compat)
+        catchModifiers.add(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("artifacts", "anglers_hat")), List.of(SCCatchModifiers.ANGLERS_HAT.getFirst()), false);
 
     }
 }
