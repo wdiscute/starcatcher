@@ -124,6 +124,11 @@ dependencies {
     
    // implementation "curse.maven:carry-on-274259:7393892"
 
+    //Reliquified Artifacts (Angler's Hat compat)
+    compileOnly files(".compatmods/curios-neoforge-9.5.1+1.21.1.jar")
+    compileOnly files(".compatmods/relics-1.21.1-0.11.13.jar")
+    compileOnly files(".compatmods/artifacts-neoforge-13.2.1.jar")
+    compileOnly files(".compatmods/reliquified_artifacts-1.21.1-1.0.4.jar")
 
 }
 

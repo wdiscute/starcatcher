@@ -97,6 +97,13 @@ public class SCConfig
             .translation("starcatcher.configuration.enable_seasons")
             .define("enable_seasons", true);
 
+    public static final ModConfigSpec.BooleanValue ENABLE_ANGLERS_HAT_COMPAT = BUILDER_SERVER
+            .comment("Enables/disables Angler's Hat (Artifacts/Reliquified Artifacts) bonuses during Starcatcher fishing.")
+            .comment("With Reliquified Artifacts: reads hat stats, awards relic XP, bonus catches scale with level.")
+            .comment("With base Artifacts only: provides lure time reduction to compensate for dead Lure enchant.")
+            .translation("starcatcher.configuration.enable_anglers_hat_compat")
+            .define("enable_anglers_hat_compat", true);
+
     public static final ModConfigSpec.DoubleValue VANISHING_RATE_MULTIPLIER = BUILDER_SERVER
             .comment("Adjusts the vanishing rate multiplier, useful if you want to adjust the fishes' difficulty globally.")
             .translation("starcatcher.configuration.vanishing_rate_multiplier")
