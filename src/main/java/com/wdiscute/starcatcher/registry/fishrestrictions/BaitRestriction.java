@@ -34,7 +34,7 @@ public class BaitRestriction extends AbstractFishRestriction
     public static final MapCodec<BaitRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     ExtraCodecs.strictUnboundedMap(ResourceLocation.CODEC, Codec.INT).fieldOf("baits").forGetter(BaitRestriction::getBaits),
-                    Codec.STRING.fieldOf("translation_override").forGetter(BaitRestriction::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(BaitRestriction::getTranslationOverride)
             ).apply(instance, BaitRestriction::new));
 
     public BaitRestriction()

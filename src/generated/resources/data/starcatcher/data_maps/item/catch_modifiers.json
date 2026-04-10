@@ -7,11 +7,11 @@
       "starcatcher:decrease_lure_time",
       "starcatcher:fish_entity"
     ],
+    "starcatcher:amethyst_hook": [
+      "starcatcher:survives_lava"
+    ],
     "starcatcher:cherry_bait": [
       "starcatcher:decrease_lure_time"
-    ],
-    "starcatcher:crystal_hook": [
-      "starcatcher:survives_lava"
     ],
     "starcatcher:dripstone_bait": [
       "starcatcher:decrease_lure_time"

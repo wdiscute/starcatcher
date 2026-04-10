@@ -5,8 +5,6 @@ import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
@@ -14,13 +12,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.SmithingRecipe;
-import net.minecraft.world.item.crafting.SmithingTransformRecipe;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 public class DGRecipeProvider extends RecipeProvider
@@ -260,14 +255,58 @@ public class DGRecipeProvider extends RecipeProvider
                 .save(output);
 
         //crystal hook
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.CRYSTAL_HOOK)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.AMETHYST_HOOK)
                 .define('H', SCItems.HOOK)
-                .define('G', Items.GLASS)
+                .define('A', Items.AMETHYST_SHARD)
                 .define('D', Items.DIAMOND)
                 .pattern("D  ")
-                .pattern("GHG")
-                .pattern(" G ")
+                .pattern("AHA")
+                .pattern(" A ")
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
+
+        //copper hook
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.COPPER_HOOK)
+                .define('H', SCItems.HOOK)
+                .define('C', Items.COPPER_INGOT)
+                .define('B', Items.COPPER_BLOCK)
+                .pattern("B  ")
+                .pattern("CHC")
+                .pattern(" C ")
+                .unlockedBy("has_copper", has(Items.COPPER_INGOT))
+                .save(output);
+
+        //exposed copper hook
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.EXPOSED_COPPER_HOOK)
+                .define('H', SCItems.HOOK)
+                .define('C', Items.COPPER_INGOT)
+                .define('B', Items.EXPOSED_COPPER)
+                .pattern("B  ")
+                .pattern("CHC")
+                .pattern(" C ")
+                .unlockedBy("has_exposed_copper", has(Items.EXPOSED_COPPER))
+                .save(output);
+
+        //weathered copper hook
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.WEATHERED_COPPER_HOOK)
+                .define('H', SCItems.HOOK)
+                .define('C', Items.COPPER_INGOT)
+                .define('B', Items.WEATHERED_COPPER)
+                .pattern("B  ")
+                .pattern("CHC")
+                .pattern(" C ")
+                .unlockedBy("has_weathered_copper_block", has(Items.WEATHERED_COPPER))
+                .save(output);
+
+        //weathered copper hook
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.OXIDISED_COPPER_HOOK)
+                .define('H', SCItems.HOOK)
+                .define('C', Items.COPPER_INGOT)
+                .define('B', Items.OXIDIZED_COPPER)
+                .pattern("B  ")
+                .pattern("CHC")
+                .pattern(" C ")
+                .unlockedBy("has_oxidised_copper_block", has(Items.OXIDIZED_COPPER))
                 .save(output);
 
         //shiny hook
@@ -591,6 +630,27 @@ public class DGRecipeProvider extends RecipeProvider
                 );
 
 
+        //sharktooth
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE, 2)
+                .define('T', SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE)
+                .define('D', Items.DIAMOND)
+                .define('C', SCItems.JOEL)
+                .pattern("DTD")
+                .pattern("DCD")
+                .pattern("DDD")
+                .unlockedBy("has_template_sharktooth", has(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE))
+                .save(output);
+
+        SmithingTransformRecipeBuilder.smithing(
+                        Ingredient.of(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE),
+                        Ingredient.of(SCTags.RODS),
+                        Ingredient.of(Items.BAMBOO),
+                        RecipeCategory.TOOLS,
+                        SCItems.SHARKTOOTH_ROD.get()
+                )
+                .unlocks("has_template_sharktooth", has(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE))
+                .save(output, Starcatcher.rl("sharktooth_rod")
+                );
 
         //obsidian
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE, 2)

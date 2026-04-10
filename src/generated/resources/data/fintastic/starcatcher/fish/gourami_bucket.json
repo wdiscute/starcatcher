@@ -14,6 +14,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 20,
     "modifiers": [],
     "speed": 10,
@@ -48,8 +49,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:biome",
@@ -58,9 +58,7 @@
       "biomes_blacklist_tags": [],
       "biomes_tags": [
         "starcatcher:is_swamp"
-      ],
-      "hover_translation": "",
-      "translation_override": ""
+      ]
     },
     {
       "type": "starcatcher:elevation_restriction",

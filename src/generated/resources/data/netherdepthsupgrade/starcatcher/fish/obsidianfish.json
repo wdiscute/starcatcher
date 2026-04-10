@@ -13,6 +13,7 @@
   },
   "difficulty": {
     "decay": 0.0,
+    "hp": 100,
     "missPenalty": 20,
     "modifiers": [
       {
@@ -26,7 +27,7 @@
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -36,7 +37,7 @@
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -46,7 +47,7 @@
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -56,7 +57,7 @@
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -71,8 +72,7 @@
       "dimensions": [
         "minecraft:the_nether"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:biome",
@@ -81,16 +81,13 @@
       "biomes_blacklist_tags": [],
       "biomes_tags": [
         "starcatcher:is_basalt_deltas"
-      ],
-      "hover_translation": "",
-      "translation_override": ""
+      ]
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ],
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

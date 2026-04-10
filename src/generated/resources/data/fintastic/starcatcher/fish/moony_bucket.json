@@ -14,6 +14,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 5,
     "modifiers": [],
     "speed": 13,
@@ -23,7 +24,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 8,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -38,8 +39,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -58,9 +58,7 @@
       "biomes_tags": [
         "starcatcher:is_lukewarm_ocean",
         "starcatcher:is_warm_ocean"
-      ],
-      "hover_translation": "",
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

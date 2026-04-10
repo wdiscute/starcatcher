@@ -25,50 +25,81 @@ public interface SCMinigameModifiers
             DeferredRegister.create(Starcatcher.MINIGAME_MODIFIERS_REGISTRY, Starcatcher.MOD_ID);
 
     //ice fishes
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FREEZE_ON_MISS = registerMinigameModifier("freeze_on_miss", FreezeOnMissModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FREEZE_ON_MISS =
+            registerMinigameModifier("freeze_on_miss", FreezeOnMissModifier::new);
 
     //hot fishes
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> BURN_ON_MISS = registerMinigameModifier("burn_on_miss", BurnOnMissModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> BURN_ON_MISS =
+            registerMinigameModifier("burn_on_miss", BurnOnMissModifier::new);
 
     //end fishes
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> TELEPORT = registerMinigameModifier("teleport", TeleportModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> TELEPORT =
+            registerMinigameModifier("teleport", TeleportModifier::new);
 
     //base modifier
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> LOW_CHANCE_TREASURE_SPAWN = registerMinigameModifier("low_chance_treasure_spawn", LowChanceTreasureSpawnModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> LOW_CHANCE_TREASURE_SPAWN =
+            registerMinigameModifier("low_chance_treasure_spawn", LowChanceTreasureSpawnModifier::new);
 
     //shiny hook
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SPAWN_TREASURE_ON_THREE_HITS = registerMinigameModifier("spawn_treasure_on_three_hits", ShinyHookModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SPAWN_TREASURE_ON_THREE_HITS =
+            registerMinigameModifier("spawn_treasure_on_three_hits", ShinyHookModifier::new);
 
     //heavy hook
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SLOWER_MOVING_SWEET_SPOTS = registerMinigameModifier("slower_moving_sweet_spots", () -> new HeavyHookModifier(2));
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SLOWER_MOVING_SWEET_SPOTS =
+            registerMinigameModifier("slower_moving_sweet_spots", () -> new HeavyHookModifier(2));
 
     //stone hook
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> STOP_DECAY_ON_HIT = registerMinigameModifier("stop_decay_on_hit", StoneHookModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> STOP_DECAY_ON_HIT =
+            registerMinigameModifier("stop_decay_on_hit", StoneHookModifier::new);
 
     //mossy hook
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> HARDER_WITH_TREASURE_ON_PERFECT = registerMinigameModifier("harder_with_treasure_on_perfect", MossyHookModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> HARDER_WITH_TREASURE_ON_PERFECT =
+            registerMinigameModifier("harder_with_treasure_on_perfect", MossyHookModifier::new);
 
     //steady bobber
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> BIGGER_GREEN_SWEET_SPOTS = registerMinigameModifier("bigger_green_sweet_spots", SteadyBobberModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> BIGGER_GREEN_SWEET_SPOTS =
+            registerMinigameModifier("bigger_green_sweet_spots", SteadyBobberModifier::new);
 
     //clear bobber
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SLOWER_VANISHING = registerMinigameModifier("slower_vanishing", ClearBobberModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SLOWER_VANISHING =
+            registerMinigameModifier("slower_vanishing", ClearBobberModifier::new);
 
     //aqua bobber
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> ADD_AQUA_SWEET_SPOT = registerMinigameModifier("add_aqua_sweet_spot", () -> new AquaBobberModifier(-1, 1));
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> ADD_AQUA_SWEET_SPOT =
+            registerMinigameModifier("add_aqua_sweet_spot", () -> new AquaBobberModifier(-1, 1));
 
     //MultiLayer
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> NIKDO53_MODIFIER = registerMinigameModifier("nikdo53_modifier", Nikdo53Modifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> NIKDO53_MODIFIER =
+            registerMinigameModifier("nikdo53_modifier", Nikdo53Modifier::new);
 
     //base
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> BASE = registerMinigameModifier("base", BaseMinigameModifier::new);
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> BASE =
+            registerMinigameModifier("base", BaseMinigameModifier::new);
 
     //flip on every hit
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FLIP_EVERY_HIT = registerMinigameModifier("flip_every_hit", () -> new FlipEveryHitModifier(-1));
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FLIP_EVERY_HIT =
+            registerMinigameModifier("flip_every_hit", () -> new FlipEveryHitModifier(-1));
 
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FROZEN_POINTER = registerMinigameModifier("frozen_pointer", () -> new FrozenPointerWhileActiveModifier(20, 10));
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FROZEN_POINTER =
+            registerMinigameModifier("frozen_pointer", () -> new FrozenPointerWhileActiveModifier(20, 10));
 
-    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SPAWN_SWEET_SPOTS = registerMinigameModifier("spawn_sweet_spots", () -> new SpawnSweetSpotsModifier(SpawnSweetSpotsModifier.legacyFreeze()));
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SPAWN_SWEET_SPOTS =
+            registerMinigameModifier("spawn_sweet_spots", () -> new SpawnSweetSpotsModifier(SpawnSweetSpotsModifier.legacyFreeze()));
+
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FASTER_POINTER_SPEED =
+            registerMinigameModifier("faster_handle_speed", () -> new ModifyBasePointerSpeedModifier(1.5F));
+
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SLIGHTLY_FASTER_POINTER_SPEED =
+            registerMinigameModifier("slightly_faster_handle_speed", () -> new ModifyBasePointerSpeedModifier(1.25f));
+
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SLIGHTLY_SLOWER_POINTER_SPEED =
+            registerMinigameModifier("slightly_slower_handle_speed", () -> new ModifyBasePointerSpeedModifier(0.75f));
+
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> SLOWER_POINTER_SPEED =
+            registerMinigameModifier("slower_handle_speed", () -> new ModifyBasePointerSpeedModifier(0.5f));
+
+    DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> ADD_LEAF_MODIFIER =
+            registerMinigameModifier("add_leaves_spots", () -> new AddLeavesSweetspotsModifier(0.025f));
 
     static DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> registerMinigameModifier(String name, Supplier<AbstractMinigameModifier> sup)
     {

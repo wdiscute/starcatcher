@@ -22,6 +22,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -48,8 +49,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.material.FlowingFluid;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -123,7 +122,7 @@ public record FishProperties(
     public FishProperties loadTreasure(ServerPlayer player)
     {
         //if treasure itemstack already exists, dont do anything
-        if(!catchInfo.treasureIs.isEmpty()) return this;
+        if (!catchInfo.treasureIs.isEmpty()) return this;
 
         //otherwise create itemstack from loot pool
         LootParams lootparams = new LootParams.Builder((ServerLevel) player.level())
@@ -138,8 +137,6 @@ public record FishProperties(
         );
 
         ObjectArrayList<ItemStack> randomItems = table.getRandomItems(lootparams);
-
-        System.out.println(randomItems);
 
         return new FishProperties(
                 new CatchInfo(catchInfo.fish, catchInfo.bucketedFish, catchInfo.entityToSpawn, catchInfo.alwaysSpawnEntity,
@@ -163,7 +160,7 @@ public record FishProperties(
     /**
      * @deprecated use Builder instead
      */
-    @Deprecated(forRemoval = true)
+    @Deprecated
     public static final FishProperties DEFAULT = new FishProperties(
             CatchInfo.DEFAULT,
             Star.DEFAULT,
@@ -220,6 +217,24 @@ public record FishProperties(
         public Builder withFish(Holder<Item> fish)
         {
             this.catchInfo.withFish(fish);
+            return this;
+        }
+
+        public Builder trophy()
+        {
+            this.catchInfo.trophy();
+            return this;
+        }
+
+        public Builder secret()
+        {
+            this.catchInfo.secret();
+            return this;
+        }
+
+        public Builder extra()
+        {
+            this.catchInfo.extra();
             return this;
         }
 
@@ -295,15 +310,38 @@ public record FishProperties(
             return this;
         }
 
+        public Builder withMaxLimit(int limit, String s)
+        {
+            this.restrictions.add(new CaughtLimitRestriction(limit, s));
+            return this;
+        }
+
+        public Builder withMaxLimit(int limit)
+        {
+            return withMaxLimit(limit, "");
+        }
+
         public Builder addRestrictions(AbstractFishRestriction... restriction)
         {
             this.restrictions.addAll(Arrays.stream(restriction).toList());
             return this;
         }
 
+        public Builder addRarityRestriction(RarityCountRestriction.RarityCount... restriction)
+        {
+            this.restrictions.add(new RarityCountRestriction(restriction));
+            return this;
+        }
+
         public Builder addRestrictions(List<AbstractFishRestriction> restriction)
         {
             this.restrictions.addAll(restriction);
+            return this;
+        }
+
+        public Builder withPercentageChance(float restriction)
+        {
+            this.restrictions.add(new ChancePercentageRestriction(0.05f));
             return this;
         }
 
@@ -383,7 +421,7 @@ public record FishProperties(
             FISH("fish"),
             TROPHY("trophy"),
             SECRET("secret"),
-            OTHER("secret");
+            EXTRA("extra");
 
             public static final Codec<FishEntryType> CODEC = StringRepresentable.fromEnum(FishEntryType::values);
             public static final StreamCodec<RegistryFriendlyByteBuf, FishEntryType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(FishEntryType.class);
@@ -466,6 +504,24 @@ public record FishProperties(
             public Builder withFish(Holder<Item> fish)
             {
                 this.fish = fish;
+                return this;
+            }
+
+            public Builder trophy()
+            {
+                this.fishEntryType = FishEntryType.TROPHY;
+                return this;
+            }
+
+            public Builder secret()
+            {
+                this.fishEntryType = FishEntryType.SECRET;
+                return this;
+            }
+
+            public Builder extra()
+            {
+                this.fishEntryType = FishEntryType.EXTRA;
                 return this;
             }
 
@@ -930,6 +986,7 @@ public record FishProperties(
 
     //region dif
     public record Difficulty(
+            int hp,
             int speed,
             int penalty,
             float decay,
@@ -937,10 +994,14 @@ public record FishProperties(
             List<SweetSpot> sweetSpots
     )
     {
+        public Difficulty(int hp, int speed, int penalty, float decay, List<Supplier<Supplier<AbstractMinigameModifier>>> modifiers, SweetSpot... sweetSpots)
+        {
+            this(hp, speed, penalty, decay, modifiers, Arrays.stream(sweetSpots).toList());
+        }
 
         public Difficulty(int speed, int penalty, float decay, List<Supplier<Supplier<AbstractMinigameModifier>>> modifiers, SweetSpot... sweetSpots)
         {
-            this(speed, penalty, decay, modifiers, Arrays.stream(sweetSpots).toList());
+            this(100, speed, penalty, decay, modifiers, Arrays.stream(sweetSpots).toList());
         }
 
         public Difficulty addModifiers(List<Supplier<Supplier<AbstractMinigameModifier>>> newModifier)
@@ -948,42 +1009,42 @@ public record FishProperties(
             List<Supplier<Supplier<AbstractMinigameModifier>>> list = new ArrayList<>();
             list.addAll(newModifier);
             list.addAll(this.modifiers);
-            return new Difficulty(this.speed, this.penalty, this.decay, list, this.sweetSpots);
+            return new Difficulty(this.hp, this.speed, this.penalty, this.decay, list, this.sweetSpots);
         }
 
         public Difficulty vanishing(float vanishingRate)
         {
             List<SweetSpot> sss = new ArrayList<>();
             sweetSpots.forEach(s -> sss.add(s.vanishing(vanishingRate)));
-            return new Difficulty(speed, penalty, decay, modifiers, sss);
+            return new Difficulty(hp, speed, penalty, decay, modifiers, sss);
         }
 
         public Difficulty vanishing()
         {
             List<SweetSpot> sss = new ArrayList<>();
             sweetSpots.forEach(s -> sss.add(s.vanishing(0.1f)));
-            return new Difficulty(speed, penalty, decay, modifiers, sss);
+            return new Difficulty(hp, speed, penalty, decay, modifiers, sss);
         }
 
         public Difficulty moving(float movingRate)
         {
             List<SweetSpot> sss = new ArrayList<>();
             sweetSpots.forEach(s -> sss.add(s.moving(movingRate)));
-            return new Difficulty(speed, penalty, decay, modifiers, sss);
+            return new Difficulty(hp, speed, penalty, decay, modifiers, sss);
         }
 
         public Difficulty moving()
         {
             List<SweetSpot> sss = new ArrayList<>();
             sweetSpots.forEach(s -> sss.add(s.moving(1)));
-            return new Difficulty(speed, penalty, decay, modifiers, sss);
+            return new Difficulty(hp, speed, penalty, decay, modifiers, sss);
         }
 
         public Difficulty flip()
         {
             List<SweetSpot> sss = new ArrayList<>();
             sweetSpots.forEach(s -> sss.add(s.flip()));
-            return new Difficulty(speed, penalty, decay, modifiers, sss);
+            return new Difficulty(hp, speed, penalty, decay, modifiers, sss);
         }
 
 
@@ -1040,15 +1101,17 @@ public record FishProperties(
         public static Difficulty FOUR_BIG_MOVING = FOUR_BIG.moving();
 
         public static Difficulty HEAVY_EIGHT_AQUA = new Difficulty(
+                1000,
                 12, 20, 0,
                 List.of(),
-                SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1
+                SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA
         );
 
         public static Difficulty HEAVY_EIGHT_AQUA_MOVING = new Difficulty(
+                1000,
                 12, 20, 0,
                 List.of(),
-                SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1
+                SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA
         ).moving();
 
         public static Difficulty TWO_AQUA_ONE_THIN = new Difficulty(
@@ -1164,9 +1227,24 @@ public record FishProperties(
         );
 
         public static Difficulty NON_STOP_ACTION_AQUA = new Difficulty(
-                14, 2, 0.2f,
+                300,
+                14, 20, 2f,
                 List.of(),
-                SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1, SweetSpot.AQUA_1
+                SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA
+        );
+
+        public static Difficulty AURORA = new Difficulty(
+                300,
+                14, 5, 1f,
+                List.of(),
+                SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA, SweetSpot.AQUA
+        );
+
+        public static Difficulty STONEFISH = new Difficulty(
+                3000,
+                14, 30, 0f,
+                List.of(),
+                SweetSpot.STONE, SweetSpot.STONE, SweetSpot.STONE, SweetSpot.STONE
         );
 
         public static Difficulty WITHER = new Difficulty(
@@ -1181,6 +1259,7 @@ public record FishProperties(
                 SweetSpot.CREEPER, SweetSpot.CREEPER
         );
 
+        public static Difficulty NO_SWEET_SPOTS = new Difficulty(10, 20, 1, List.of());
 
         public static Difficulty DEEPSLATE_CRAB = new Difficulty(
                 14, 10, 1,
@@ -1216,14 +1295,15 @@ public record FishProperties(
                 SweetSpot.AQUA, SweetSpot.THIN, SweetSpot.THIN);
 
         public static Difficulty JOEL = new Difficulty(
+                200,
                 14, 5, 1,
                 List.of(),
-                SweetSpot.AQUA_1, SweetSpot.AQUA_1
+                SweetSpot.AQUA, SweetSpot.AQUA
         );
 
         public static Difficulty CERBERAY = new Difficulty(
                 16, 10, 1.5f,
-                List.of(new SpawnSweetSpotsModifier(-1, 4, 0.50f, SweetSpot.TNT, true).toDoubleSup(), SCMinigameModifiers.NIKDO53_MODIFIER),
+                List.of(SCMinigameModifiers.NIKDO53_MODIFIER),
                 SweetSpot.THIN, SweetSpot.THIN, SweetSpot.THIN
         );
 
@@ -1232,6 +1312,7 @@ public record FishProperties(
 
         public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
+                        Codec.INT.fieldOf("hp").forGetter(Difficulty::hp),
                         Codec.INT.fieldOf("speed").forGetter(Difficulty::speed),
                         Codec.INT.fieldOf("missPenalty").forGetter(Difficulty::penalty),
                         Codec.FLOAT.fieldOf("decay").forGetter(Difficulty::decay),
@@ -1241,6 +1322,7 @@ public record FishProperties(
 
 
         public static final StreamCodec<FriendlyByteBuf, Difficulty> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.INT, Difficulty::hp,
                 ByteBufCodecs.INT, Difficulty::speed,
                 ByteBufCodecs.INT, Difficulty::penalty,
                 ByteBufCodecs.FLOAT, Difficulty::decay,
@@ -1290,6 +1372,7 @@ public record FishProperties(
         private static final ResourceLocation RL_TNT = Starcatcher.rl("textures/gui/minigame/spots/tnt.png");
         private static final ResourceLocation RL_STONE = Starcatcher.rl("textures/gui/minigame/spots/stone.png");
         private static final ResourceLocation RL_AQUA = Starcatcher.rl("textures/gui/minigame/spots/aqua.png");
+        private static final ResourceLocation RL_LEAF = Starcatcher.rl("textures/gui/minigame/spots/leaf.png");
 
         private static final ResourceLocation RL_NETHER_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/nether_crab_claw.png");
         private static final ResourceLocation RL_NETHER_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/nether_crab_leg.png");
@@ -1449,7 +1532,7 @@ public record FishProperties(
                 SCSweetSpotsBehaviour.NORMAL,
                 RL_STONE,
                 33,
-                1,
+                10,
                 0x494949
         );
 
@@ -1457,23 +1540,16 @@ public record FishProperties(
                 SCSweetSpotsBehaviour.AQUA,
                 RL_AQUA,
                 22,
-                8,
+                10,
                 0x387982
         );
 
-        public static SweetSpot AQUA_1 = new SweetSpot(
-                SCSweetSpotsBehaviour.AQUA,
-                RL_AQUA, 22, 1, 0x387982
-        );
-
-        public static SweetSpot AQUA_5 = new SweetSpot(
-                SCSweetSpotsBehaviour.AQUA,
-                RL_AQUA, 22, 1, 0x387982
-        );
-
-        public static SweetSpot AQUA_10 = new SweetSpot(
-                SCSweetSpotsBehaviour.AQUA,
-                RL_AQUA, 22, 10, 0x387982
+        public static SweetSpot LEAF = new SweetSpot(
+                SCSweetSpotsBehaviour.LEAF,
+                RL_LEAF,
+                15,
+                15,
+                0x00ff00
         );
 
         public static SweetSpot DEEPSLATE_CRAB_CLAW = new SweetSpot(
@@ -1707,6 +1783,7 @@ public record FishProperties(
 
     public enum Rarity implements StringRepresentable
     {
+        NONE("none", 0, Style.EMPTY.applyFormat(ChatFormatting.WHITE), 99),
         TRASH("trash", 0, Style.EMPTY.applyFormat(ChatFormatting.WHITE), 99),
         COMMON("common", 4, Style.EMPTY.applyFormat(ChatFormatting.WHITE), 40),
         UNCOMMON("uncommon", 8, Style.EMPTY.applyFormat(ChatFormatting.GREEN), 40),
@@ -1728,6 +1805,13 @@ public record FishProperties(
             this.xp = xp;
             this.style = style;
             this.stoneHookGraceTicks = stoneHookGraceTicks;
+        }
+
+        @Override
+        public String toString()
+        {
+            return super.toString();
+            //return key;
         }
 
         public Component wrapWithRarityMarkdown(String s)
@@ -1775,6 +1859,7 @@ public record FishProperties(
             return false;
         }
     }
+
 
     public static List<ResourceLocation> getBiomesAsListFromTags(List<ResourceLocation> biomes, List<ResourceLocation> tags, Level level)
     {
@@ -1840,16 +1925,6 @@ public record FishProperties(
         return rls;
     }
 
-    public static List<FishProperties> getFPs(Level level)
-    {
-        return getFPs(level.registryAccess());
-    }
-
-    public static List<FishProperties> getFPs(RegistryAccess registryAccess)
-    {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY).stream().toList();
-    }
-
     public int calculateChance(Entity entity, Level level, ItemStack rod, AbstractFishRestriction.Context context)
     {
         //if dev worm return base chance
@@ -1859,21 +1934,9 @@ public record FishProperties(
         int chance = baseChance;
 
         for (var restriction : restrictions)
-        {
             chance += restriction.getFishChance(chance, level, this, entity, rod, context);
-        }
 
         return chance;
-    }
-
-    public static Fluid getSource(Fluid fluid1)
-    {
-        if (fluid1 instanceof FlowingFluid fluid)
-        {
-            return fluid.getSource();
-        }
-
-        return fluid1;
     }
 
     public static SizeAndWeight sizeWeight(float sizeAvg, float sizeDev, float weightAvg, float weightDev)
@@ -1881,17 +1944,11 @@ public record FishProperties(
         return new SizeAndWeight(sizeAvg, sizeDev, weightAvg, weightDev);
     }
 
-    public static ResourceLocation rl(String ns, String path)
-    {
-        return ResourceLocation.fromNamespaceAndPath(ns, path);
-    }
-
     public static ItemStack makeItemStack(ItemStack rod, FishProperties fp, int size, int weight, float percentile, boolean golden, Player player, boolean perfectCatch)
     {
         ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
         boolean isStarcaught = fp.catchInfo().bucketedFish().is(SCItems.STARCAUGHT_BUCKET.getKey()) && bait.is(Items.BUCKET);
         boolean isBucketed = !fp.catchInfo().bucketedFish().is(SCItems.MISSINGNO.getKey()) && !isStarcaught && bait.is(Items.BUCKET);
-
 
         //starcaught bucketed fish
         if (isStarcaught)
@@ -1961,7 +2018,7 @@ public record FishProperties(
                 if (fbe.modifiers.stream().anyMatch(AbstractCatchModifier::cancelGolden)) golden = false;
 
                 //award fish counter
-                FishCaughtCounter.awardFishCaughtCounter(fp, player, time, size, weight, percentile, perfectCatch, true, golden);
+                FishCaughtCounter.awardFishCaughtCounter(fbe.fpToFish, fbe.rlToFish, player, time, size, weight, percentile, perfectCatch, true, golden);
 
                 //add score to tournaments
                 TournamentHandler.addScore(player, fp, perfectCatch, size, weight, percentile);
@@ -2084,4 +2141,77 @@ public record FishProperties(
         return is;
     }
 
+    public static ResourceLocation getKey(Level level, FishProperties fp)
+    {
+        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp);
+    }
+
+    public static List<FishProperties> getFishes(RegistryAccess registryAccess)
+    {
+        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
+                .filter(o -> o.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)).toList();
+    }
+
+    public static List<FishProperties> getFishes(Level level)
+    {
+        return getFishes(level.registryAccess());
+    }
+
+    public static Registry<FishProperties> getRegistry(Level level)
+    {
+        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+    }
+
+    public static FishProperties getFP(RegistryAccess registryAccess, ResourceLocation rl)
+    {
+        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).get(rl);
+    }
+
+    public static FishProperties getFP(Level level, ResourceLocation rl)
+    {
+        return getFP(level.registryAccess(), rl);
+    }
+
+
+    public static List<FishProperties> getNonFishes(RegistryAccess registryAccess)
+    {
+        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
+                .filter(o -> !o.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)).toList();
+    }
+
+    public static List<FishProperties> getNonFishes(Level level)
+    {
+        return getNonFishes(level.registryAccess());
+    }
+
+
+    public static List<FishProperties> getAllFPs(Level level)
+    {
+        return getAllFPs(level.registryAccess());
+    }
+
+    public static List<FishProperties> getAllFPs(RegistryAccess registryAccess)
+    {
+        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().toList();
+    }
+
+    public static List<FishProperties> getTrophies(Level level)
+    {
+        return getTrophies(level.registryAccess());
+    }
+
+    public static List<FishProperties> getTrophies(RegistryAccess registryAccess)
+    {
+        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.TROPHY)).toList();
+    }
+
+    public static List<FishProperties> getSecrets(Level level)
+    {
+        return getSecrets(level.registryAccess());
+    }
+
+    public static List<FishProperties> getSecrets(RegistryAccess registryAccess)
+    {
+        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.SECRET)).toList();
+    }
 }

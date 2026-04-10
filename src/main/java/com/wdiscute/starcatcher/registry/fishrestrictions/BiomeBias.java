@@ -33,7 +33,7 @@ public class BiomeBias extends AbstractFishRestriction
                     ResourceLocation.CODEC.listOf().fieldOf("biomes").forGetter(BiomeBias::getBiomes),
                     ResourceLocation.CODEC.listOf().fieldOf("biomes_tags").forGetter(BiomeBias::getBiomesTags),
                     Codec.INT.fieldOf("extra_chance").forGetter(BiomeBias::getExtraChance),
-                    Codec.STRING.fieldOf("translation_override").forGetter(BiomeBias::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(BiomeBias::getTranslationOverride)
             ).apply(instance, BiomeBias::new));
 
     public BiomeBias()

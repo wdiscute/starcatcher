@@ -50,7 +50,14 @@ public interface SCFishRestrictions
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> SEASON =
             registerFishRestriction("season", SeasonRestriction::new);
 
+    DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> MAX_CATCH_LIMIT =
+            registerFishRestriction("caught_limit", CaughtLimitRestriction::new);
 
+    DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> RARITY_COUNT_RESTRICTION =
+            registerFishRestriction("rarity_count", RarityCountRestriction::new);
+
+    DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> CHANCE_RESTRICTION =
+            registerFishRestriction("percentage_chance", ChancePercentageRestriction::new);
 
     class Extra
     {

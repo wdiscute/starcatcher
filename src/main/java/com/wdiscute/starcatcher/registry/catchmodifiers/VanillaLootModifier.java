@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.registry.catchmodifiers;
 
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,6 +23,7 @@ public class VanillaLootModifier extends AbstractCatchModifier
     public void afterChoosingTheCatch(List<FishProperties> immutableAvailable)
     {
         this.instance.fpToFish = FishProperties.VANILLA_FISH;
+        this.instance.rlToFish = Starcatcher.rl("missingno");
     }
 
     @Override

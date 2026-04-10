@@ -5,6 +5,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 10,
     "modifiers": [
       {
@@ -103,8 +104,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -116,8 +116,7 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ],
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.BaitRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.DimensionRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.ElevationRestriction;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.fishrestrictions.RarityCountRestriction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
 
@@ -18,208 +19,294 @@ public class DGTrophies
 {
     public static void bootstrap()
     {
+//        register(fish(Items.BARRIER.asItem().builtInRegistryHolder())
+//                .withMaxLimit(1)
+//                .withDifficulty(FishProperties.Difficulty.TRASH)
+//                .withHasGuideEntry(false)
+//                .addRarityRestriction(
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.COMMON, 5, RarityCountRestriction.RarityCount.CountType.TOTAL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.UNCOMMON, 5, RarityCountRestriction.RarityCount.CountType.TOTAL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.RARE, 5, RarityCountRestriction.RarityCount.CountType.TOTAL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.EPIC, 5, RarityCountRestriction.RarityCount.CountType.TOTAL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 5, RarityCountRestriction.RarityCount.CountType.TOTAL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 5, RarityCountRestriction.RarityCount.CountType.TOTAL),
+//
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.COMMON, 5, RarityCountRestriction.RarityCount.CountType.UNIQUE),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.UNCOMMON, 5, RarityCountRestriction.RarityCount.CountType.UNIQUE),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.RARE, 5, RarityCountRestriction.RarityCount.CountType.UNIQUE),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.EPIC, 5, RarityCountRestriction.RarityCount.CountType.UNIQUE),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 5, RarityCountRestriction.RarityCount.CountType.UNIQUE),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 5, RarityCountRestriction.RarityCount.CountType.UNIQUE),
+//
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.COMMON, 5, RarityCountRestriction.RarityCount.CountType.ALL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.UNCOMMON, 5, RarityCountRestriction.RarityCount.CountType.ALL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.RARE, 5, RarityCountRestriction.RarityCount.CountType.ALL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.EPIC, 5, RarityCountRestriction.RarityCount.CountType.ALL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 5, RarityCountRestriction.RarityCount.CountType.ALL),
+//                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 5, RarityCountRestriction.RarityCount.CountType.ALL)
+//                        )
+//                .trophy()
+//        );
+
+        register(fish(SCBlocks.TROPHY_COPPER.asItem().builtInRegistryHolder())
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.COMMON, 25, RarityCountRestriction.RarityCount.CountType.TOTAL)
+                )
+                .trophy()
+        );
+
+        register(fish(SCBlocks.TROPHY_IRON.asItem().builtInRegistryHolder())
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 35, RarityCountRestriction.RarityCount.CountType.UNIQUE)
+                )
+                .trophy()
+        );
+
+        register(fish(SCBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder())
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 100, RarityCountRestriction.RarityCount.CountType.TOTAL),
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 2, RarityCountRestriction.RarityCount.CountType.UNIQUE),
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 2, RarityCountRestriction.RarityCount.CountType.UNIQUE)
+                )
+                .trophy()
+        );
+
+        register(fish(SCBlocks.TROPHY_EMERALD.asItem().builtInRegistryHolder())
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 200, RarityCountRestriction.RarityCount.CountType.TOTAL),
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 10, RarityCountRestriction.RarityCount.CountType.UNIQUE)
+                )
+                .trophy()
+        );
+
+        register(fish(SCBlocks.TROPHY_DIAMOND.asItem().builtInRegistryHolder())
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 500, RarityCountRestriction.RarityCount.CountType.TOTAL),
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.COMMON, 0, RarityCountRestriction.RarityCount.CountType.ALL)
+                )
+                .trophy()
+        );
+
+        register(fish(SCBlocks.TROPHY_OF_THE_OLDER_ANGLER.asItem().builtInRegistryHolder())
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 0, RarityCountRestriction.RarityCount.CountType.ALL),
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 0, RarityCountRestriction.RarityCount.CountType.ALL)
+                )
+                .trophy()
+        );
 
 
-//        registerTrophy(TrophyProperties.builder()
-//                .setFish(SCBlocks.TROPHY_BRONZE.asItem().builtInRegistryHolder())
-//                .hideUntilCaught()
-//                .setTrophyType(TrophyProperties.TrophyType.TROPHY)
-//                .setAllProgress(new TrophyProperties.RarityProgress(50, 20))
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .setFish(SCBlocks.TROPHY_SILVER.asItem().builtInRegistryHolder())
-//                .hideUntilCaught()
-//                .setTrophyType(TrophyProperties.TrophyType.TROPHY)
-//                .setAllProgress(new TrophyProperties.RarityProgress(100, 50))
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .setFish(SCBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder())
-//                .hideUntilCaught()
-//                .setTrophyType(TrophyProperties.TrophyType.TROPHY)
-//                .setAllProgress(new TrophyProperties.RarityProgress(200, 0))
-//                .withProgress(FishProperties.Rarity.COMMON, new TrophyProperties.RarityProgress(0, 44))
-//                .withProgress(FishProperties.Rarity.UNCOMMON, new TrophyProperties.RarityProgress(0, 23))
-//                .withProgress(FishProperties.Rarity.RARE, new TrophyProperties.RarityProgress(0, 15))
-//                .withProgress(FishProperties.Rarity.EPIC, new TrophyProperties.RarityProgress(0, 16))
-//                .withProgress(FishProperties.Rarity.LEGENDARY, new TrophyProperties.RarityProgress(0, 10))
-//        );
-//        //                                         ,--.
-//        // ,---.   ,---.   ,---. ,--.--.  ,---.  ,-'  '-.  ,---.
-//        //(  .-'  | .-. : | .--' |  .--' | .-. : '-.  .-' (  .-'
-//        //.-'  `) \   --. \ `--. |  |    \   --.   |  |   .-'  `)
-//        //`----'   `----'  `---' `--'     `----'   `--'   `----'
-//        //
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(overworldFish(SCItems.DRIFTING_WATERLOGGED_BOTTLE))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//                .setAllProgress(new TrophyProperties.RarityProgress(6, 15))
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(overworldSurfaceLava(SCItems.SCALDING_BOTTLE))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//                .setAllProgress(new TrophyProperties.RarityProgress(0, 27))
-//                .withChanceToCatch(33)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(overworldSurfaceLava(SCItems.BURNING_BOTTLE))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//                .setAllProgress(new TrophyProperties.RarityProgress(0, 42))
-//                .withChanceToCatch(33)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(overworldDeepOceanFish(SCItems.HOPEFUL_BOTTLE))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//                .withProgress(FishProperties.Rarity.EPIC, new TrophyProperties.RarityProgress(5, 0))
-//                .withChanceToCatch(33)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(overworldDeepOceanFish(SCItems.HOPELESS_BOTTLE))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//                .withProgress(FishProperties.Rarity.EPIC, new TrophyProperties.RarityProgress(5, 0))
-//                .withChanceToCatch(33)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(overworldRiverFish(SCItems.TRUE_BLUE_BOTTLE))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//                .withProgress(FishProperties.Rarity.LEGENDARY, new TrophyProperties.RarityProgress(1, 0))
-//                .withChanceToCatch(1)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(
-//                        fish(SCItems.WITHERED_BOTTLE)
-//                                .withBaseChance(0)
-//                                .addRestrictions(new BaitRestriction(Map.of(U.rl("wither_skeleton_skull"), 200), "200")))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder()
-//                .withFP(overworldDeepslateFish(SCItems.CRYSTAL_HOOK))
-//                .setTrophyType(TrophyProperties.TrophyType.SECRET)
-//                .withProgress(FishProperties.Rarity.EPIC, new TrophyProperties.RarityProgress(1, 0))
-//        );
-//
-//        //
-//        //          ,--.   ,--.
-//        // ,---.  ,-'  '-. |  ,---.   ,---.  ,--.--.  ,---.
-//        //| .-. | '-.  .-' |  .-.  | | .-. : |  .--' (  .-'
-//        //' '-' '   |  |   |  | |  | \   --. |  |    .-'  `)
-//        // `---'    `--'   `--' `--'  `----' `--'    `----'
-//        //
-//
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldDeepslateFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.DIAMOND)))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withProgress(FishProperties.Rarity.RARE, new TrophyProperties.RarityProgress(1, 4))
-//        );
-//
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.GOLD_BLOCK)))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withProgress(FishProperties.Rarity.LEGENDARY, new TrophyProperties.RarityProgress(3, 0))
-//                .withChanceToCatch(33)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP)))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withProgress(FishProperties.Rarity.LEGENDARY, new TrophyProperties.RarityProgress(0, 10))
-//                .withChanceToCatch(5)
-//                .withRepeatable(true)
-//        );
-//
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE)))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//
-//        //naturalist
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldForestFish(SCItems.NATURALIST_ROD))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //magma forged
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        netherLavaBasaltDeltasFish(SCItems.MAGMAFORGED_ROD))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //bamboo rod
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldFish(SCItems.BAMBOO_ROD)
-//                                .addRestrictions(FishProperties.WorldRestrictions.OVERWORLD_BAMBOO_JUNGLE))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //bamboo rod
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldSurfaceLava(SCItems.OBSIDIAN_ROD))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //boner rod
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        netherLavaSoulSandValleyFish(SCItems.BONER_ROD))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //sky rod
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldFish(SCItems.SKY_ROD)
-//                                .addRestrictions(
-//                                        DimensionRestriction.OVERWORLD,
-//                                        ElevationRestriction.ABOVE_TWO_HUNDRED))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //lush glowberry
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldLushCavesFish(SCItems.LUSH_GLOWBERRY_ROD))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //humble rod
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldRiverFish(SCItems.HUMBLE_ROD))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(1)
-//                .withRepeatable(true)
-//        );
-//
-//        //neptunium ingot
-//        registerTrophy(TrophyProperties.builder().withFP(
-//                        overworldOceanFish(U.holderItem("aquaculture", "neptunium_ingot")))
-//                .setTrophyType(TrophyProperties.TrophyType.EXTRA)
-//                .withChanceToCatch(2)
-//                .withRepeatable(true)
-//        );
-//
-//
+        //                                         ,--.
+        // ,---.   ,---.   ,---. ,--.--.  ,---.  ,-'  '-.  ,---.
+        //(  .-'  | .-. : | .--' |  .--' | .-. : '-.  .-' (  .-'
+        //.-'  `) \   --. \ `--. |  |    \   --.   |  |   .-'  `)
+        //`----'   `----'  `---' `--'     `----'   `--'   `----'
+        //
+
+        register(overworldSurfaceFish(SCItems.DRIFTING_WATERLOGGED_BOTTLE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .secret()
+        );
+
+        register(overworldSurfaceLava(SCItems.SCALDING_BOTTLE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .secret()
+        );
+
+        register(overworldSurfaceLava(SCItems.BURNING_BOTTLE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .secret()
+        );
+
+        register(overworldSurfaceFish(SCItems.HOPEFUL_BOTTLE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .secret()
+        );
+
+        register(overworldSurfaceFish(SCItems.HOPELESS_BOTTLE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .secret()
+        );
+
+        register(overworldSurfaceFish(SCItems.TRUE_BLUE_BOTTLE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .secret()
+        );
+
+        register(fish(SCItems.WITHERED_BOTTLE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .secret()
+                .withBaseChance(0)
+                .addRestrictions(new BaitRestriction(Map.of(U.rl("wither_skeleton_skull"), 200), "200"))
+        );
+
+        //
+        //          ,--.   ,--.
+        // ,---.  ,-'  '-. |  ,---.   ,---.  ,--.--.  ,---.
+        //| .-. | '-.  .-' |  .-.  | | .-. : |  .--' (  .-'
+        //' '-' '   |  |   |  | |  | \   --. |  |    .-'  `)
+        // `---'    `--'   `--' `--'  `----' `--'    `----'
+        //
+
+        register(overworldDeepslateFish(SCItems.AMETHYST_HOOK)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.EPIC, 1, RarityCountRestriction.RarityCount.CountType.TOTAL))
+                .extra()
+        );
+
+        register(overworldDeepslateFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.DIAMOND))
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 1, RarityCountRestriction.RarityCount.CountType.TOTAL))
+                .extra()
+        );
+
+        register(netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_SCRAP))
+                .withMaxLimit(3)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 1, RarityCountRestriction.RarityCount.CountType.TOTAL))
+                .withHasGuideEntry(false)
+                .extra()
+        );
+
+        register(netherLavaFish(BuiltInRegistries.ITEM.wrapAsHolder(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 1, RarityCountRestriction.RarityCount.CountType.TOTAL))
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 5, RarityCountRestriction.RarityCount.CountType.TOTAL))
+                .extra()
+        );
+
+        //neptunium ingot
+        register(overworldOceanFish(U.holderItem("aquaculture", "neptunium_ingot"))
+                .withMaxLimit(5)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.GOLDEN, 1, RarityCountRestriction.RarityCount.CountType.TOTAL))
+                .withPercentageChance(0.05f)
+                .extra()
+        );
+
+        //naturalist
+        register(overworldForestFish(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //magma forged
+        register(netherLavaBasaltDeltasFish(SCItems.MAGMAFORGED_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //bamboo rod
+        register(overworldBambooJungleFish(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //obsidian rod
+        register(overworldSurfaceLava(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //boner rod
+        register(netherLavaSoulSandValleyFish(SCItems.BONER_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //sky rod
+        register(overworldFish(SCItems.SKY_ROD)
+                .addRestrictions(
+                        DimensionRestriction.OVERWORLD,
+                        ElevationRestriction.ABOVE_TWO_HUNDRED)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //lush glowberry
+        register(overworldLushCavesFish(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //humble rod
+        register(overworldRiverFish(SCItems.HUMBLE_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+        //shark rod
+        register(overworldRiverFish(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
+
     }
 }

@@ -4,7 +4,7 @@
 	"render_type": "cutout_mipped",
 	"texture_size": [64, 64],
 	"textures": {
-		"0": "starcatcher:block/trophy_gold",
+		"0": "starcatcher:block/trophy_iron",
 		"particle": "block/gold_block"
 	},
 	"elements": [

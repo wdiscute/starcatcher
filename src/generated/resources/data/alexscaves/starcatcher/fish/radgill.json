@@ -13,6 +13,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 5,
     "modifiers": [],
     "speed": 9,
@@ -47,8 +48,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:biome",
@@ -57,16 +57,13 @@
       ],
       "biomes_blacklist": [],
       "biomes_blacklist_tags": [],
-      "biomes_tags": [],
-      "hover_translation": "",
-      "translation_override": ""
+      "biomes_tags": []
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "alexscaves:acid"
-      ],
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

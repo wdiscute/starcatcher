@@ -13,6 +13,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 20,
     "modifiers": [
       {
@@ -51,15 +52,13 @@
       "dimensions": [
         "minecraft:the_nether"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ],
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

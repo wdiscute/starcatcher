@@ -27,7 +27,7 @@ public class ElevationRestriction extends AbstractFishRestriction
             instance.group(
                     Codec.INT.fieldOf("min_y").forGetter(ElevationRestriction::getMinY),
                     Codec.INT.fieldOf("max_y").forGetter(ElevationRestriction::getMaxY),
-                    Codec.STRING.fieldOf("translation_override").forGetter(ElevationRestriction::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(ElevationRestriction::getTranslationOverride)
             ).apply(instance, ElevationRestriction::new));
 
     public ElevationRestriction()

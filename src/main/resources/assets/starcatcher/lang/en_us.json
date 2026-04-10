@@ -86,13 +86,13 @@
 
   "starcatcher.configuration.minigame_scale" : "Minigame Scale",
   "starcatcher.configuration.hit_delay" : "Minigame Hit Delay",
-  "starcatcher.configuration.units" : "Minigame Units",
+  "starcatcher.configuration.units" : "Measurement Units",
   "starcatcher.configuration.sort" : "Guide Sort order",
   "starcatcher.configuration.enable_villager_sound" : "Minigame Villager Sound",
   "starcatcher.configuration.enable_hit_sound" : "Minigame Hit Sound",
   "starcatcher.configuration.enable_miss_sound" : "Minigame Miss Sound",
   "starcatcher.configuration.vanilla_partial_ticks" : "Vanilla Partial Ticks",
-
+  "starcatcher.configuration.remove_notif_on_hover" : "Remove New Fish Notif on Hover",
 
   "starcatcher.configuration.give_guide" : "Give Guide",
   "starcatcher.configuration.show_exclamation_mark_particle" : "Show [!] particle on bite",
@@ -104,6 +104,7 @@
   "starcatcher.configuration.moving_speed_multiplier" : "Global Moving Speed Multiplier",
   "starcatcher.configuration.penalty_multiplier" : "Global Penalty Multiplier",
   "starcatcher.configuration.decay_multiplier" : "Global Decay Multiplier",
+  "starcatcher.configuration.hp_multiplier" : "Global HP Multiplier",
   "starcatcher.configuration.pointer_speed_multiplier" : "Global Pointer Speed Multiplier",
   "starcatcher.configuration.hide_entries_until_found" : "Hide Guide Entries Until Found",
   "starcatcher.configuration.fish_player_messages_chance" : "Player Messages Chance To Fish",
@@ -135,7 +136,7 @@
 
   "entity.starcatcher.fish" : "Starcaught Fish",
 
-  "gui.starcatcher.reel_no_fish" : "There are no fishes available for this area...",
+  "gui.starcatcher.reel_no_fish" : "There are no fishes here...",
 
 
   "tooltip.minecraft.fishing_rod.0": "A simple fishing rod used for catching",
@@ -212,6 +213,9 @@
   "tooltip.starcatcher.starcatcher_guide.1": "of all the fishes you've caught, and",
   "tooltip.starcatcher.starcatcher_guide.2": "those you have yet to reel in!",
 
+  "tooltip.starcatcher.starcatcher_guide.signed": "This Book Belongs To: %s",
+  "tooltip.starcatcher.starcatcher_guide.signed_shift": "Signed By: %s",
+
   "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
   "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine wrapped around a stick.",
   "tooltip.starcatcher.starcatcher_twine.1": "Vansire used these for string instruments once upon a time.",
@@ -260,6 +264,8 @@
 
   "tooltip.modifier.starcatcher.bigger_green_sweet_spots.0": "Green sweet-spots will be slightly bigger",
 
+  "tooltip.modifier.starcatcher.add_leaves_spots.0": "Leaf sweetspots will appear at random",
+
   "tooltip.modifier.starcatcher.add_aqua_sweet_spot.0": "An extra aqua sweet-spot is added",
 
   "tooltip.modifier.starcatcher.add_three_aqua_sweet_spot.0": "Three extra aqua sweet-spot are added",
@@ -275,6 +281,10 @@
   "tooltip.modifier.starcatcher.increase_lure_time.0": "Increases lure time",
 
 
+  "tooltip.modifier.starcatcher.faster_handle_speed.0": "Increases the handle's rotation speed",
+  "tooltip.modifier.starcatcher.slightly_faster_handle_speed.0": "Slightly increases the handle's rotation speed",
+  "tooltip.modifier.starcatcher.slightly_slower_handle_speed.0": "Slightly decreases the handle's rotation speed",
+  "tooltip.modifier.starcatcher.slower_handle_speed.0": "decreases the handle's rotation speed",
 
 
   "tooltip.modifier.starcatcher.vanilla_loot.0": "Restores vanilla fishing loot",
@@ -312,12 +322,16 @@
   "item.starcatcher.shiny_hook": "Shiny Hook",
   "item.starcatcher.gold_hook": "Gold Hook",
   "item.starcatcher.mossy_hook": "Mossy Hook",
-  "item.starcatcher.crystal_hook": "Crystal Hook",
+  "item.starcatcher.amethyst_hook": "Amethyst Hook",
   "item.starcatcher.stone_hook": "Stone Hook",
   "item.starcatcher.split_hook": "Split Hook",
   "item.starcatcher.stabilizing_hook": "Stabilizing Hook",
   "item.starcatcher.heavy_hook": "Heavy Hook",
   "item.starcatcher.vanilla_hook": "Vanilla-flavoured Hook",
+  "item.starcatcher.copper_hook": "Copper Hook",
+  "item.starcatcher.exposed_copper_hook": "Exposed Copper Hook",
+  "item.starcatcher.weathered_copper_hook": "Weathered Copper Hook",
+  "item.starcatcher.oxidised_copper_hook": "Oxidised Copper Hook",
 
 
 
@@ -326,6 +340,7 @@
   "tooltip.starcatcher.bobber.1": "Hook's best friend.",
 
   "item.starcatcher.steady_bobber": "Steady Bobber",
+  "item.starcatcher.leaf_bobber": "Leafy Bobber",
   "item.starcatcher.clear_bobber": "Clear Bobber",
   "item.starcatcher.aqua_bobber": "Aqua Bobber",
   "item.starcatcher.vanilla_bobber": "Vanilla-flavoured Bobber",
@@ -480,9 +495,12 @@
   "tooltip.starcatcher.scalding_treasure.0" : "A treasure fished directly from the scalding",
   "tooltip.starcatcher.scalding_treasure.1" : "lands of The Nether. What's inside?",
 
+  "block.starcatcher.trophy_copper" : "Copper Trophy",
+  "block.starcatcher.trophy_iron" : "Iron Trophy",
   "block.starcatcher.trophy_gold" : "Gold Trophy",
-  "block.starcatcher.trophy_silver" : "Silver Trophy",
-  "block.starcatcher.trophy_bronze" : "Bronze Trophy",
+  "block.starcatcher.trophy_emerald" : "Emerald Trophy",
+  "block.starcatcher.trophy_diamond" : "Diamond Trophy",
+  "block.starcatcher.trophy_of_the_older_angler" : "Trophy Of The Older Angler",
 
   "block.starcatcher.display" : "Starcatcher's Display",
   "tooltip.starcatcher.display.0" : "wip",
@@ -525,7 +543,7 @@
 
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
-
+  "gui.guide.sign" : "Sign",
   "gui.guide.season" : "Season: ",
   "gui.guide.seasons" : "Seasons: ",
 
@@ -647,6 +665,7 @@
   "gui.guide.average" : "Average: ",
   "gui.guide.biggest" : "Biggest: ",
   "gui.guide.heaviest" : "Heaviest: ",
+  "gui.guide.percentile" : "Best: top ",
 
   "gui.guide.bucketable" : "Can be caught in a bucket when using one as a bait!",
   "gui.guide.entity" : "Can be caught alive when using an Almighty Worm as a bait!",
@@ -1067,26 +1086,36 @@
 
 
 
-  "gui.guide.page.trophies.left.0" : "",
-  "gui.guide.page.trophies.left.1" : "",
-  "gui.guide.page.trophies.left.2" : "",
-  "gui.guide.page.trophies.left.3" : "",
-  "gui.guide.page.trophies.left.4" : "",
-  "gui.guide.page.trophies.left.5" : "  Trophies are a display",
-  "gui.guide.page.trophies.left.6" : "of one's skill in angling",
-  "gui.guide.page.trophies.left.7" : "and are sure to put",
-  "gui.guide.page.trophies.left.8" : "others to shame for their",
-  "gui.guide.page.trophies.left.9" : "lack of trophyfulness.",
+  "gui.guide.page.12.left.title" : "Trophies",
+  "gui.guide.page.12.left.0" : "",
+  "gui.guide.page.12.left.1" : "",
+  "gui.guide.page.12.left.2" : "",
+  "gui.guide.page.12.left.3" : "",
+  "gui.guide.page.12.left.4" : "",
+  "gui.guide.page.12.left.5" : "  Trophies are a display",
+  "gui.guide.page.12.left.6" : "of one's skill in angling",
+  "gui.guide.page.12.left.7" : "and are sure to put",
+  "gui.guide.page.12.left.8" : "others to shame for their",
+  "gui.guide.page.12.left.9" : "lack of trophyfulness.",
+  "gui.guide.page.12.left.10" : "",
+  "gui.guide.page.12.left.11" : "  Trophies will instantly",
+  "gui.guide.page.12.left.12" : "bite your hook once all",
+  "gui.guide.page.12.left.13" : "the conditions are met.",
 
-  "gui.guide.page.trophies.right.0" : "",
-  "gui.guide.page.trophies.right.1" : "",
-  "gui.guide.page.trophies.right.2" : "",
-  "gui.guide.page.trophies.right.3" : "",
-  "gui.guide.page.trophies.right.4" : "",
-  "gui.guide.page.trophies.right.5" : "  Who knows what forgotten",
-  "gui.guide.page.trophies.right.6" : "stories you might find",
-  "gui.guide.page.trophies.right.7" : "encapsulated in bottles",
-  "gui.guide.page.trophies.right.8" : "adrift the waves.",
+  "gui.guide.page.12.right.title" : "Secrets",
+  "gui.guide.page.12.right.0" : "",
+  "gui.guide.page.12.right.1" : "",
+  "gui.guide.page.12.right.2" : "",
+  "gui.guide.page.12.right.3" : "",
+  "gui.guide.page.12.right.4" : "",
+  "gui.guide.page.12.right.5" : "  Who knows what forgotten",
+  "gui.guide.page.12.right.6" : "stories you might find",
+  "gui.guide.page.12.right.7" : "encapsulated in bottles",
+  "gui.guide.page.12.right.8" : "adrift the waves.",
+  "gui.guide.page.12.right.9" : "",
+  "gui.guide.page.12.right.10" : "  Keep an eye out for",
+  "gui.guide.page.12.right.11" : "hints of treasures left",
+  "gui.guide.page.12.right.12" : "behind by other anglers!",
 
   "gui.guide.trophy.all.total" : "Total fishes: ",
   "gui.guide.trophy.all.unique" : "Unique fishes: ",
@@ -1123,6 +1152,7 @@
   "gui.guide.hover.weather.incorrect" : "❌ Weather",
   "gui.guide.hover.elevation.correct" : "✅ Elevation",
   "gui.guide.hover.elevation.incorrect" : "❌ Elevation",
+  "gui.guide.hover.caught_limit" : "Caught Limit: %s",
 
   "gui.guide.dimension" : "Dimension: ",
   "gui.guide.dimensions" : "Dimensions: ",
@@ -1155,11 +1185,17 @@
   "gui.guide.no_restriction" : "-------",
   "gui.guide.bait_required" : "The correct bait is required for this catch!",
   "gui.guide.bait_chance_added" : "Chance added by bait:",
+  "gui.guide.caught_limit" : "Caught Limit: ",
+  "gui.guide.rarity_count.single" : "%s fishes",
+  "gui.guide.rarity_count.all" : "All %s fishes",
+  "gui.guide.chance" : "%s chance",
+
   "gui.guide.hover" : "[hover]",
 
 
   "gui.guide.rarity.golden" : "Golden",
 
+  "gui.guide.rarity.trash" : "Trash",
   "gui.guide.rarity.common" : "Common",
   "gui.guide.rarity.uncommon" : "<scuncommon>Uncommon</scuncommon>",
   "gui.guide.rarity.rare" : "<scrare>Rare</scrare>",
@@ -1210,23 +1246,23 @@
   "gui.secret_note.sample_note.4" : "bottles otherwise they won't have the correct",
   "gui.secret_note.sample_note.5" : "data and might crash the game! Be careful.",
 
-  "gui.secret_note.crystal_hook.0" : "Day 34",
-  "gui.secret_note.crystal_hook.1" : "",
-  "gui.secret_note.crystal_hook.2" : "After yesterday's trouble I decided it's best",
-  "gui.secret_note.crystal_hook.3" : "I finally get my hands on some diamond tools.",
-  "gui.secret_note.crystal_hook.4" : "",
-  "gui.secret_note.crystal_hook.5" : "That's what past me thought anyways,",
-  "gui.secret_note.crystal_hook.6" : "if I knew I would accidentally drop my crystal",
-  "gui.secret_note.crystal_hook.7" : "hook down by the deepslate water lakes",
-  "gui.secret_note.crystal_hook.8" : "I would have never went down there.",
-  "gui.secret_note.crystal_hook.9" : "",
-  "gui.secret_note.crystal_hook.10" : "If anyone finds this letter drifting amid the",
-  "gui.secret_note.crystal_hook.11" : "oceans, you are welcome to take my precious",
-  "gui.secret_note.crystal_hook.12" : "Crystal Hook. Once you've caught at least",
-  "gui.secret_note.crystal_hook.13" : "one epic fish, the <scuncommon>Older Anglers</scuncommon>",
-  "gui.secret_note.crystal_hook.14" : "will shine their blessing upon you and",
-  "gui.secret_note.crystal_hook.15" : "my crystal hook will bite your hook.",
-  "gui.secret_note.crystal_hook.16" : "-Roguy",
+  "gui.secret_note.amethyst_hook.0" : "Day 34",
+  "gui.secret_note.amethyst_hook.1" : "",
+  "gui.secret_note.amethyst_hook.2" : "After yesterday's trouble I decided it's best",
+  "gui.secret_note.amethyst_hook.3" : "I finally get my hands on some diamond tools.",
+  "gui.secret_note.amethyst_hook.4" : "",
+  "gui.secret_note.amethyst_hook.5" : "That's what past me thought anyways,",
+  "gui.secret_note.amethyst_hook.6" : "if I knew I would accidentally drop my amethyst",
+  "gui.secret_note.amethyst_hook.7" : "hook down by the deepslate water lakes,",
+  "gui.secret_note.amethyst_hook.8" : "I would have never went down there.",
+  "gui.secret_note.amethyst_hook.9" : "",
+  "gui.secret_note.amethyst_hook.10" : "If anyone finds this letter drifting amid the",
+  "gui.secret_note.amethyst_hook.11" : "oceans, you are welcome to take my precious",
+  "gui.secret_note.amethyst_hook.12" : "Amethyst Hook. Once you've caught at least",
+  "gui.secret_note.amethyst_hook.13" : "one epic fish, the <scuncommon>Older Anglers</scuncommon>",
+  "gui.secret_note.amethyst_hook.14" : "will shine their blessing upon you and",
+  "gui.secret_note.amethyst_hook.15" : "my crystal hook will bite your hook.",
+  "gui.secret_note.amethyst_hook.16" : "-Roguy",
 
   "gui.secret_note.lava_proof_bottle_1.0" : "'Buy my bottles! Buy my bottles!'",
   "gui.secret_note.lava_proof_bottle_1.1" : "'They are <sclava>Lava-Proof™</sclava4>!!'",

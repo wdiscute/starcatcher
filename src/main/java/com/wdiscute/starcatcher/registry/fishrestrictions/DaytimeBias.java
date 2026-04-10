@@ -26,7 +26,7 @@ public class DaytimeBias extends AbstractFishRestriction
                     Codec.INT.fieldOf("best_daytime").forGetter(DaytimeBias::getBestDaytime),
                     Codec.INT.fieldOf("range").forGetter(DaytimeBias::getRange),
                     Codec.INT.fieldOf("extra_chance_at_best").forGetter(DaytimeBias::getExtraChance),
-                    Codec.STRING.fieldOf("translation_override").forGetter(DaytimeBias::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(DaytimeBias::getTranslationOverride)
             ).apply(instance, DaytimeBias::new));
 
     public DaytimeBias()

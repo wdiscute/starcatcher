@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-05T20:29:37.9242456	Tags for minecraft:item mod id starcatcher
+// 1.21.1	2026-04-10T10:46:11.0420995	Tags for minecraft:item mod id starcatcher
 b195e9281f019846d0fdd273d7704e37b0594c01 data/c/tags/item/foods/raw_fish.json
 cd76b40635f273884aec7b0f26a351a83f76fed5 data/c/tags/item/tools/fishing_rod.json
 b195e9281f019846d0fdd273d7704e37b0594c01 data/minecraft/tags/item/cat_food.json
@@ -6,15 +6,15 @@ fa81a3ee2877e8a2361adfc9df22c7dca7f237f3 data/minecraft/tags/item/enchantable/eq
 b195e9281f019846d0fdd273d7704e37b0594c01 data/minecraft/tags/item/fishes.json
 1f37b386a46a7e08f5b077bdf3c8ab83366a8cbe data/starcatcher/tags/item/aquarium_guide_display.json
 6938367f174378645270a3f9c81ebfb696006d21 data/starcatcher/tags/item/baits.json
-afda5aa678adf37b89c8ba7412779d97403a0fde data/starcatcher/tags/item/bobbers.json
+25aaef25bcf04eb8357a97d9c177b6034994cd79 data/starcatcher/tags/item/bobbers.json
 b195e9281f019846d0fdd273d7704e37b0594c01 data/starcatcher/tags/item/bucketable_fishes.json
-f8fe8e503c13993593a8beb6a7ce404e6b810dc5 data/starcatcher/tags/item/common_fishes.json
+02aa730388dd8b539c9602fd5d8eaeeee21cd0c6 data/starcatcher/tags/item/common_fishes.json
 1dbdca1e4c2aa92c844034ceb7ae4d25b37fce55 data/starcatcher/tags/item/epic_fishes.json
 cd76b40635f273884aec7b0f26a351a83f76fed5 data/starcatcher/tags/item/equipments.json
 de6377a3a15fcc745a25e8d8e40184200ee10c90 data/starcatcher/tags/item/gadgets.json
 834e2f963f8e58a4755ff26aebd7bc4ce94530de data/starcatcher/tags/item/hats.json
-5979def5001d616d5cc8586a083852d21aabde63 data/starcatcher/tags/item/hooks.json
-56d5aefb41fb83c377c43871edd215afe1f8efac data/starcatcher/tags/item/legendary_fishes.json
+6ec4314d5de26ab3f998eac0f4d8b254ef7b5170 data/starcatcher/tags/item/hooks.json
+86d8aa886c218102824e5e08dfa3b928677b04df data/starcatcher/tags/item/legendary_fishes.json
 4d3ea7106ba0c65788160a2dff5d344147143b6f data/starcatcher/tags/item/placeable_in_display.json
 d3bb48a5bbe98c2c06f8d0fec3ed288f3d964232 data/starcatcher/tags/item/placeable_in_tacle_box.json
 622429aee9cadab96e53e6e67115b57725fabab0 data/starcatcher/tags/item/rare_fishes.json

@@ -32,7 +32,7 @@ public class SeasonRestriction extends AbstractFishRestriction
     public static final MapCodec<SeasonRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.unboundedMap(Seasons.CODEC, Codec.INT).fieldOf("season_extra_chance").forGetter(SeasonRestriction::getSeasons),
-                    Codec.STRING.fieldOf("translation_override").forGetter(SeasonRestriction::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(SeasonRestriction::getTranslationOverride)
             ).apply(instance, SeasonRestriction::new));
 
     public SeasonRestriction()

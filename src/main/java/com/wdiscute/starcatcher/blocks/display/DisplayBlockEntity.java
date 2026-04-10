@@ -6,6 +6,10 @@ import com.wdiscute.starcatcher.blocks.SCBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -13,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
 public class DisplayBlockEntity extends BlockEntity
 {
@@ -114,11 +119,28 @@ public class DisplayBlockEntity extends BlockEntity
         this.setChanged();
     }
 
+
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket()
+    {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
+    {
+        super.getUpdateTag(registries);
+        CompoundTag tag = new CompoundTag();
+        saveAdditional(tag, registries);
+        return tag;
+    }
+
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
-        if (tag.contains("Book", 10))
+        if(level.isClientSide) System.out.println("RAN ON CLIENT!!!");
+        if (tag.contains("Book"))
         {
             this.item = ItemStack.parse(registries, tag.getCompound("Book")).orElse(ItemStack.EMPTY);
         }
@@ -129,25 +151,16 @@ public class DisplayBlockEntity extends BlockEntity
     }
 
     @Override
-    public void setRemoved()
-    {
-        ItemStack itemstack = getItem().copy();
-        ItemEntity itementity = new ItemEntity(
-                level, (double) getBlockPos().getX() + 0.5, getBlockPos().getY() + 1, (double) getBlockPos().getZ() + 0.5, itemstack
-        );
-        itementity.setDefaultPickUpDelay();
-        level.addFreshEntity(itementity);
-        clearContent();
-        super.setRemoved();
-    }
-
-    @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
         if (!this.getItem().isEmpty())
         {
             tag.put("Book", this.getItem().save(registries));
+        }else
+        {
+            //need to put a tag otherwise its not sent to client since the tag is empty
+            tag.putBoolean("empty", true);
         }
     }
 
@@ -157,5 +170,17 @@ public class DisplayBlockEntity extends BlockEntity
         BlockState blockState = level.getBlockState(getBlockPos());
         if (blockState.is(SCBlocks.DISPLAY))
             level.setBlockAndUpdate(getBlockPos(), blockState.setValue(DisplayBlock.HAS_ITEM, false));
+
+        sync();
+    }
+
+    public void sync()
+    {
+        setChanged();
+
+        if (level instanceof ServerLevel serverLevel)
+        {
+            serverLevel.sendBlockUpdated(getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+        }
     }
 }

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:oxidized_copper"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "H": {
+      "item": "starcatcher:hook"
+    }
+  },
+  "pattern": [
+    "B  ",
+    "CHC",
+    " C "
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:oxidised_copper_hook"
+  }
+}

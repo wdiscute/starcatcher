@@ -5,6 +5,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 20,
     "modifiers": [
       {
@@ -43,8 +44,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -56,20 +56,17 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ],
-      "translation_override": ""
+      ]
     },
     {
       "type": "starcatcher:weather_restriction",
-      "translation_override": "",
       "weather": "rain"
     },
     {
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:legendary_bait": 50
-      },
-      "translation_override": ""
+      }
     }
   ],
   "size_and_weight": {

@@ -22,6 +22,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements SimpleWat
     {
         super(BlockBehaviour.Properties.of()
                 .noOcclusion()
+                .destroyTime(2)
                 .lightLevel((state) -> 5)
                 .sound(SoundType.AMETHYST)
         );

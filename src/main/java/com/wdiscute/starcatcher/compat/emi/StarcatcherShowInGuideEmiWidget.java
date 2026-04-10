@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.compat.emi;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.guide.IsolatedFPScreen;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.widget.Bounds;

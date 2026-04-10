@@ -6,26 +6,11 @@
   },
   "difficulty": {
     "decay": 1.5,
+    "hp": 100,
     "missPenalty": 10,
     "modifiers": [
       {
         "type": "starcatcher:burn_on_miss"
-      },
-      {
-        "type": "starcatcher:spawn_sweet_spots",
-        "chance": 0.5,
-        "cooldown": 4,
-        "sudoku_vanish": true,
-        "sweet_spot": {
-          "color_as_int": 16711680,
-          "hitbox_size_in_pixels": 33,
-          "is_flip": false,
-          "moving_rate": 0.0,
-          "reward": 30,
-          "sweet_spot_type": "starcatcher:tnt",
-          "texture_path": "starcatcher:textures/gui/minigame/spots/tnt.png",
-          "vanishing_rate": 0.0
-        }
       },
       {
         "type": "starcatcher:nikdo53_modifier"
@@ -73,22 +58,19 @@
       "dimensions": [
         "minecraft:the_nether"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ],
-      "translation_override": ""
+      ]
     },
     {
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:legendary_bait": 50
-      },
-      "translation_override": ""
+      }
     }
   ],
   "size_and_weight": {

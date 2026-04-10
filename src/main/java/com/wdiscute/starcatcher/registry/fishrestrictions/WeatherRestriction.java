@@ -26,7 +26,7 @@ public class WeatherRestriction extends AbstractFishRestriction
     public static final MapCodec<WeatherRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Weather.CODEC.fieldOf("weather").forGetter(WeatherRestriction::getWeather),
-                    Codec.STRING.fieldOf("translation_override").forGetter(WeatherRestriction::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(WeatherRestriction::getTranslationOverride)
             ).apply(instance, WeatherRestriction::new));
 
     public enum Weather implements StringRepresentable

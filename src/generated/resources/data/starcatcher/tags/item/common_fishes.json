@@ -121,10 +121,6 @@
       "required": false
     },
     {
-      "id": "starcatcher:stonefish",
-      "required": false
-    },
-    {
       "id": "starcatcher:dripfin",
       "required": false
     },
@@ -528,7 +524,6 @@
     "starcatcher:dusktail_snapper",
     "starcatcher:gold_fan",
     "starcatcher:whiteveil",
-    "starcatcher:stonefish",
     "starcatcher:dripfin",
     "starcatcher:deepslatefish",
     "starcatcher:aquamarine_pike",

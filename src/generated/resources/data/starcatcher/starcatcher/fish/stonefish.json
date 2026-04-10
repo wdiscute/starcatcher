@@ -6,16 +6,17 @@
   },
   "difficulty": {
     "decay": 0.0,
-    "missPenalty": 20,
+    "hp": 3000,
+    "missPenalty": 30,
     "modifiers": [],
-    "speed": 12,
+    "speed": 14,
     "sweetspots": [
       {
         "color_as_int": 4802889,
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -25,7 +26,7 @@
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -35,7 +36,7 @@
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -45,7 +46,7 @@
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
         "vanishing_rate": 0.0
@@ -53,15 +54,14 @@
     ]
   },
   "has_guide_entry": true,
-  "rarity": "common",
+  "rarity": "legendary",
   "restrictions": [
     {
       "type": "starcatcher:dimension",
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",

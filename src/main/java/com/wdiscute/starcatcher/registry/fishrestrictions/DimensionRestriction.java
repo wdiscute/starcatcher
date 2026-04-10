@@ -31,7 +31,7 @@ public class DimensionRestriction extends AbstractFishRestriction
             instance.group(
                     ResourceLocation.CODEC.listOf().fieldOf("dimensions").forGetter(DimensionRestriction::getDimensions),
                     ResourceLocation.CODEC.listOf().fieldOf("dimensions_blacklist").forGetter(DimensionRestriction::getDimensionsBlacklist),
-                    Codec.STRING.fieldOf("translation_override").forGetter(DimensionRestriction::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(DimensionRestriction::getTranslationOverride)
             ).apply(instance, DimensionRestriction::new));
 
     public DimensionRestriction()

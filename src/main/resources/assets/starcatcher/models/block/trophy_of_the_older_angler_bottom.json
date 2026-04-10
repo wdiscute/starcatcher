@@ -1,0 +1,124 @@
+{
+	"format_version": "1.9.0",
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"2": "starcatcher:block/trophy_of_the_older_angler_bottom",
+		"particle": "starcatcher:block/trophy_of_the_older_angler_bottom"
+	},
+	"elements": [
+		{
+			"name": "platform",
+			"from": [0, 0, 0],
+			"to": [16, 2, 16],
+			"faces": {
+				"north": {"uv": [4.5, 8, 12.5, 9], "texture": "#2"},
+				"east": {"uv": [4.5, 8, 12.5, 9], "texture": "#2"},
+				"south": {"uv": [4.5, 8, 12.5, 9], "texture": "#2"},
+				"west": {"uv": [4.5, 8, 12.5, 9], "texture": "#2"},
+				"up": {"uv": [8, 8, 0, 0], "texture": "#2"},
+				"down": {"uv": [0, 0, 8, 8], "texture": "#2"}
+			}
+		},
+		{
+			"name": "leg",
+			"from": [2, 2, 2],
+			"to": [5, 16, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 2, 2]},
+			"faces": {
+				"north": {"uv": [0, 8, 1.5, 15], "texture": "#2"},
+				"east": {"uv": [8, 0, 9.5, 7], "texture": "#2"},
+				"south": {"uv": [1.5, 8, 3, 15], "texture": "#2"},
+				"west": {"uv": [3, 8, 4.5, 15], "texture": "#2"},
+				"up": {"uv": [11, 3.5, 9.5, 2], "texture": "#2"},
+				"down": {"uv": [11, 3.5, 9.5, 5], "texture": "#2"}
+			}
+		},
+		{
+			"name": "leg",
+			"from": [11, 2, 2],
+			"to": [14, 16, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 2, 2]},
+			"faces": {
+				"north": {"uv": [0, 8, 1.5, 15], "texture": "#2"},
+				"east": {"uv": [8, 0, 9.5, 7], "texture": "#2"},
+				"south": {"uv": [1.5, 8, 3, 15], "texture": "#2"},
+				"west": {"uv": [3, 8, 4.5, 15], "texture": "#2"},
+				"up": {"uv": [9.5, 2, 11, 3.5], "texture": "#2"},
+				"down": {"uv": [9.5, 3.5, 11, 5], "texture": "#2"}
+			}
+		},
+		{
+			"name": "leg",
+			"from": [11, 2, 11],
+			"to": [14, 16, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [11, 2, 11]},
+			"faces": {
+				"north": {"uv": [0, 8, 1.5, 15], "texture": "#2"},
+				"east": {"uv": [8, 0, 9.5, 7], "texture": "#2"},
+				"south": {"uv": [1.5, 8, 3, 15], "texture": "#2"},
+				"west": {"uv": [3, 8, 4.5, 15], "texture": "#2"},
+				"up": {"uv": [9.5, 2, 11, 3.5], "texture": "#2"},
+				"down": {"uv": [9.5, 3.5, 11, 5], "texture": "#2"}
+			}
+		},
+		{
+			"name": "leg",
+			"from": [2, 2, 11],
+			"to": [5, 16, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [2, 2, 11]},
+			"faces": {
+				"north": {"uv": [0, 8, 1.5, 15], "texture": "#2"},
+				"east": {"uv": [8, 0, 9.5, 7], "texture": "#2"},
+				"south": {"uv": [1.5, 8, 3, 15], "texture": "#2"},
+				"west": {"uv": [3, 8, 4.5, 15], "texture": "#2"},
+				"up": {"uv": [9.5, 2, 11, 3.5], "texture": "#2"},
+				"down": {"uv": [9.5, 3.5, 11, 5], "texture": "#2"}
+			}
+		},
+		{
+			"name": "number base",
+			"from": [6, 2, 6],
+			"to": [10, 4, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 2, 7]},
+			"faces": {
+				"north": {"uv": [8, 7, 10, 8], "texture": "#2"},
+				"east": {"uv": [9.5, 5, 11.5, 6], "texture": "#2"},
+				"south": {"uv": [9.5, 6, 11.5, 7], "texture": "#2"},
+				"west": {"uv": [10, 7, 12, 8], "texture": "#2"},
+				"up": {"uv": [6.5, 11, 4.5, 9], "texture": "#2"},
+				"down": {"uv": [8.5, 9, 6.5, 11], "texture": "#2"}
+			}
+		},
+		{
+			"name": "number",
+			"from": [6.5, 4, 8],
+			"to": [9.5, 8, 8],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6.5, 4, 6]},
+			"faces": {
+				"north": {"uv": [8.5, 9, 10, 11], "texture": "#2"},
+				"east": {"uv": [0, 0, 0, 2], "texture": "#2"},
+				"south": {"uv": [9.5, 0, 11, 2], "texture": "#2"},
+				"west": {"uv": [0, 0, 0, 2], "texture": "#2"},
+				"up": {"uv": [1.5, 0, 0, 0], "texture": "#2"},
+				"down": {"uv": [0, 0, 1.5, 0], "texture": "#2"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Trophy Bottom",
+			"origin": [0, 0, 0],
+			"scope": 0,
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6]
+		},
+		{
+			"name": "Trophy Top",
+			"origin": [8, 8, 8],
+			"scope": 0,
+			"color": 0,
+			"children": []
+		}
+	]
+}

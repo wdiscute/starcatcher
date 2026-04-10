@@ -13,6 +13,7 @@
   },
   "difficulty": {
     "decay": 0.0,
+    "hp": 1000,
     "missPenalty": 20,
     "modifiers": [],
     "speed": 12,
@@ -22,7 +23,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -32,7 +33,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -42,7 +43,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -52,7 +53,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -62,7 +63,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -72,7 +73,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -82,7 +83,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -92,7 +93,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -107,8 +108,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -120,8 +120,7 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:empty"
-      ],
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

@@ -21,7 +21,7 @@ public class DGFishingPropertiesProvider extends DatapackBuiltinEntriesProvider
         FishingPropertiesRegistry.register(); //register all entries before anything else
     }
 
-    public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder().add(Starcatcher.FISH_REGISTRY, FishingPropertiesRegistry::bootstrap);
+    public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder().add(Starcatcher.FISH_REGISTRY_KEY, FishingPropertiesRegistry::bootstrap);
 
     public DGFishingPropertiesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
     {

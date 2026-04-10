@@ -79,7 +79,7 @@ public class FishEntity extends AbstractFish
             shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();
 
-            for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
+            for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             {
                 if (fp.calculateChance(this, level(), SCItems.ROD.toStack(), AbstractFishRestriction.Context.FISH_ENTITY) > 0 && fp.catchInfo().fish().is(SCTags.BUCKETABLE_FISHES))
                     available.add(fp);
@@ -125,7 +125,7 @@ public class FishEntity extends AbstractFish
     public static boolean validSpawnPlacement(EntityType<FishEntity> entity, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource)
     {
         //todo fix this shit
-        for (FishProperties fp : serverLevelAccessor.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY))
+        for (FishProperties fp : serverLevelAccessor.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             if (fp.calculateChance(entity.create(serverLevelAccessor.getLevel()), serverLevelAccessor.getLevel(), ItemStack.EMPTY, AbstractFishRestriction.Context.FISH_ENTITY) > 0)
                 return true;
 

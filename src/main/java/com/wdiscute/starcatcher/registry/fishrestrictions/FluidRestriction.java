@@ -31,7 +31,7 @@ public class FluidRestriction extends AbstractFishRestriction
     public static final MapCodec<FluidRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     ResourceLocation.CODEC.listOf().fieldOf("fluids").forGetter(FluidRestriction::getFluids),
-                    Codec.STRING.fieldOf("translation_override").forGetter(FluidRestriction::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(FluidRestriction::getTranslationOverride)
             ).apply(instance, FluidRestriction::new));
 
     public FluidRestriction()

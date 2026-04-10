@@ -17,6 +17,7 @@ public interface SCSweetSpotsBehaviour
     ResourceLocation TREASURE = registerSweetspot("treasure", () -> TreasureSweetSpotBehaviour::new);
     ResourceLocation TNT = registerSweetspot("tnt", () -> TntSweetSpotBehaviour::new);
     ResourceLocation AQUA = registerSweetspot("aqua", () -> AquaSweetSpot::new);
+    ResourceLocation LEAF = registerSweetspot("leaf", () -> LeafSweetSpot::new);
 
 
     static ResourceLocation registerSweetspot(String name, Supplier<Supplier<? extends AbstractSweetSpotBehaviour>> supplier)

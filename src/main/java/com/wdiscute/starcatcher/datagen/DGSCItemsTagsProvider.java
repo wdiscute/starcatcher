@@ -51,8 +51,9 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         //rarity tags
         FishingPropertiesRegistry.PROPERTIES.forEach(p ->
         {
+            //return if not a fish or alwaysSpawnEntity
             FishProperties fp = p.getSecond();
-
+            if (!fp.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)) return;
             if (fp.catchInfo().alwaysSpawnEntity()) return;
 
             switch (p.getSecond().rarity())
@@ -64,8 +65,6 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(fp.catchInfo().fish().getKey().location());
                 case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(fp.catchInfo().fish().getKey().location());
             }
-
-
         });
 
         for (FishProperties fp : DGStarcatcherFishes.STARCATCHER_FISHES)

@@ -33,7 +33,7 @@ public class MossyHookModifier extends AbstractMinigameModifier
             instance.penalty = 25;
 
             instance.addSweetSpot(new ActiveSweetSpot(instance, FishProperties.SweetSpot.THIN_STEADY_MOSSY));
-            instance.addSweetSpot(new ActiveSweetSpot(instance, FishProperties.SweetSpot.AQUA_10));
+            instance.addSweetSpot(new ActiveSweetSpot(instance, FishProperties.SweetSpot.AQUA));
         }
     }
 

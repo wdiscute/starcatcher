@@ -1,0 +1,36 @@
+{
+  "variants": {
+    "facing=east,center=false": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_top",
+      "y": 90
+    },
+    "facing=north,center=false": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_top"
+    },
+    "facing=south,center=false": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_top",
+      "y": 180
+    },
+    "facing=west,center=false": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_top",
+      "y": 270
+    },
+
+
+    "facing=east,center=true": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_bottom",
+      "y": 90
+    },
+    "facing=north,center=true": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_bottom"
+    },
+    "facing=south,center=true": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_bottom",
+      "y": 180
+    },
+    "facing=west,center=true": {
+      "model": "starcatcher:block/trophy_of_the_older_angler_bottom",
+      "y": 270
+    }
+  }
+}

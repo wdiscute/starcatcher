@@ -5,6 +5,7 @@
   },
   "difficulty": {
     "decay": 0.0,
+    "hp": 100,
     "missPenalty": 0,
     "modifiers": [],
     "speed": 10,
@@ -39,8 +40,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:biome",
@@ -52,7 +52,7 @@
         "starcatcher:is_mushroom_fields"
       ],
       "biomes_tags": [],
-      "hover_translation": "gui.guide.lakes",
+      "hover_translation": "gui.guide.lakes.hover",
       "translation_override": "gui.guide.lakes"
     },
     {

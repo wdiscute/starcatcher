@@ -27,9 +27,9 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
 
         dropSelf(AQUARIUM.get());
 
-        dropSelf(TROPHY_BRONZE.get());
-        dropSelf(TROPHY_SILVER.get());
-        dropSelf(TROPHY_GOLD.get());
+        dropSelf(TROPHY_COPPER.get());
+        dropSelf(TROPHY_IRON.get());
+        dropSelf(TROPHY_EMERALD.get());
 
         dropSelf(CLAM.get());
         dropSelf(CONCH.get());
@@ -42,9 +42,9 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
         list.addAll(HATS.getEntries().stream().map(Holder::value).toList());
         list.addAll(TACKLE_BOXES.getEntries().stream().map(Holder::value).toList());
 
-        list.add(TROPHY_BRONZE.get());
-        list.add(TROPHY_SILVER.get());
-        list.add(TROPHY_GOLD.get());
+        list.add(TROPHY_COPPER.get());
+        list.add(TROPHY_IRON.get());
+        list.add(TROPHY_EMERALD.get());
 
         list.add(AQUARIUM.get());
 

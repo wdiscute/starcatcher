@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.io.network;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import io.netty.buffer.ByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -14,8 +15,8 @@ public record FishCaughtPayload(FishProperties fp, boolean newFish, int size, in
 
     public static final Type<FishCaughtPayload> TYPE = new Type<>(Starcatcher.rl("fish_caught"));
 
-    public static final StreamCodec<ByteBuf, FishCaughtPayload> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.fromCodec(FishProperties.CODEC),
+    public static final StreamCodec<RegistryFriendlyByteBuf, FishCaughtPayload> STREAM_CODEC = StreamCodec.composite(
+            FishProperties.STREAM_CODEC,
             FishCaughtPayload::fp,
             ByteBufCodecs.BOOL,
             FishCaughtPayload::newFish,

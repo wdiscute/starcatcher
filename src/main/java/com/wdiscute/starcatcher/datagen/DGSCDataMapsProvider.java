@@ -118,9 +118,14 @@ public class DGSCDataMapsProvider extends DataMapProvider
         minigameModifiers.add(SCItems.STEADY_BOBBER, List.of(SCMinigameModifiers.BIGGER_GREEN_SWEET_SPOTS.getId()), false);
         minigameModifiers.add(SCItems.CLEAR_BOBBER, List.of(SCMinigameModifiers.SLOWER_VANISHING.getId()), false);
         minigameModifiers.add(SCItems.AQUA_BOBBER, List.of(SCMinigameModifiers.ADD_AQUA_SWEET_SPOT.getId()), false);
+        minigameModifiers.add(SCItems.COPPER_HOOK, List.of(SCMinigameModifiers.FASTER_POINTER_SPEED.getId()), false);
+        minigameModifiers.add(SCItems.EXPOSED_COPPER_HOOK, List.of(SCMinigameModifiers.SLIGHTLY_FASTER_POINTER_SPEED.getId()), false);
+        minigameModifiers.add(SCItems.WEATHERED_COPPER_HOOK, List.of(SCMinigameModifiers.SLIGHTLY_SLOWER_POINTER_SPEED.getId()), false);
+        minigameModifiers.add(SCItems.OXIDISED_COPPER_HOOK, List.of(SCMinigameModifiers.SLOWER_POINTER_SPEED.getId()), false);
+        minigameModifiers.add(SCItems.LEAF_BOBBER, List.of(SCMinigameModifiers.ADD_LEAF_MODIFIER.getId()), false);
 
         //catch modifiers
-        catchModifiers.add(SCItems.CRYSTAL_HOOK, List.of(SCCatchModifiers.SURVIVES_LAVA.getFirst()), false);
+        catchModifiers.add(SCItems.AMETHYST_HOOK, List.of(SCCatchModifiers.SURVIVES_LAVA.getFirst()), false);
         catchModifiers.add(SCItems.GOLD_HOOK, List.of(SCCatchModifiers.EXTRA_EXP_BASED_ON_PERFORMANCE.getFirst()), false);
         catchModifiers.add(SCItems.STONE_HOOK, List.of(SCCatchModifiers.INCREASE_LURE_TIME.getFirst()), false);
         catchModifiers.add(SCItems.SPLIT_HOOK, List.of(SCCatchModifiers.EXTRA_ITEM.getFirst()), false);

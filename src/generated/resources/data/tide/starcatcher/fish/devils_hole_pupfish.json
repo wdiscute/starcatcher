@@ -13,6 +13,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 10,
     "modifiers": [],
     "speed": 14,
@@ -37,8 +38,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -50,22 +50,19 @@
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:legendary_bait": 50
-      },
-      "translation_override": ""
+      }
     },
     {
       "type": "starcatcher:dimension",
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
       "max_y": 30,
-      "min_y": 20,
-      "translation_override": ""
+      "min_y": 20
     }
   ],
   "size_and_weight": {

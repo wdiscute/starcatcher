@@ -45,7 +45,7 @@ public class TelescopeScreen extends Screen
         offsetX = 2700;
         offsetY = 900;
 
-        stars.addAll(Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY)
+        stars.addAll(Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY)
                 .stream().filter(o -> !o.star().equals(FishProperties.Star.DEFAULT)).toList());
 
 

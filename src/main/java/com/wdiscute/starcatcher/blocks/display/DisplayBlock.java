@@ -4,9 +4,15 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.guide.FishingGuideScreen;
+import com.wdiscute.starcatcher.guide.FishingSignedGuideScreen;
+import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.starcatcher.registry.SignedGuide;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -28,12 +34,17 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.storage.loot.LootParams;
+import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
@@ -149,20 +160,39 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        if(level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
+        {
+            dbe.setChanged();
+        }
+    }
+
+    @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         //if has book, open screen
         if (state.getValue(HAS_ITEM) && !player.isCrouching())
         {
-            //TODO open screen
+            if (level.isClientSide && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
+            {
+                SignedGuide signed = SCDataComponents.get(dbe.getItem(), SCDataComponents.SIGNED_GUIDE);
+                if (signed != null)
+                    openSignedGuide(signed);
+                else
+                    openPersonalGuide();
+            }
             return ItemInteractionResult.SUCCESS;
         }
 
         //remove item if crouching
         if (state.getValue(HAS_ITEM) && player.isCrouching() && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
+            if(level.isClientSide) return ItemInteractionResult.SUCCESS;
             player.addItem(dbe.getItem().copy());
             dbe.clearContent();
+            dbe.sync();
             level.setBlockAndUpdate(pos, state.setValue(HAS_ITEM, false));
             return ItemInteractionResult.SUCCESS;
         }
@@ -170,13 +200,43 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         //place book
         if (stack.is(SCTags.PLACEABLE_IN_DISPLAY) && !state.getValue(HAS_ITEM) && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
+            if(level.isClientSide) return ItemInteractionResult.SUCCESS;
             dbe.setItem(stack.copy());
             stack.shrink(1);
-            level.setBlockAndUpdate(pos, state.setValue(HAS_ITEM, true));
+            level.setBlock(pos, state.setValue(HAS_ITEM, true), 0);
+            dbe.sync();
             return ItemInteractionResult.SUCCESS;
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    @Override
+    protected List<ItemStack> getDrops(BlockState state, LootParams.Builder params)
+    {
+        BlockEntity blockentity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
+
+        if (blockentity instanceof DisplayBlockEntity displayBlockEntity)
+        {
+            params = params.withDynamicDrop(ResourceLocation.withDefaultNamespace("contents"), (itemstack) ->
+            {
+                itemstack.accept(displayBlockEntity.getItem());
+            });
+        }
+
+        return super.getDrops(state, params);
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void openPersonalGuide()
+    {
+        Minecraft.getInstance().setScreen(new FishingGuideScreen());
+    }
+
+    @OnlyIn(Dist.CLIENT)
+    private void openSignedGuide(SignedGuide signedGuide)
+    {
+        Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));
     }
 
 

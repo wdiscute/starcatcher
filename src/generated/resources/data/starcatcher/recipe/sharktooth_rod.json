@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": {
+    "item": "minecraft:bamboo"
+  },
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "result": {
+    "count": 1,
+    "id": "starcatcher:sharktooth_rod"
+  },
+  "template": {
+    "item": "starcatcher:bamboo_skin_smithing_template"
+  }
+}

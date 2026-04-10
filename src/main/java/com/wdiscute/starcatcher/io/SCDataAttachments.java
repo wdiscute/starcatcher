@@ -37,45 +37,6 @@ public class SCDataAttachments
     );
 
 
-    @Deprecated // use FISHING_GUIDE attachment!!!
-    public static final Supplier<AttachmentType<Boolean>> RECEIVED_GUIDE = ATTACHMENT_TYPES.register(
-            "received_guide", () -> AttachmentType.builder(() -> false)
-                    .serialize(Codec.BOOL)
-                    .sync(ByteBufCodecs.BOOL)
-                    .build()
-    );
-
-    @Deprecated // use FISHING_GUIDE attachment!!!
-    public static final Supplier<AttachmentType<List<LegacyFishCaughtCounter>>> FISHES_CAUGHT = ATTACHMENT_TYPES.register(
-            "fishes_caught", () ->
-                    AttachmentType.builder(() -> List.<LegacyFishCaughtCounter>of())
-                            .serialize(LegacyFishCaughtCounter.LIST_CODEC)
-                            .sync(LegacyFishCaughtCounter.LIST_STREAM_CODEC)
-                            .copyOnDeath()
-                            .build()
-    );
-
-    @Deprecated  // use FISHING_GUIDE attachment!!!
-    public static final Supplier<AttachmentType<List<ResourceLocation>>> TROPHIES_CAUGHT = ATTACHMENT_TYPES.register(
-            "trophies_caught", () ->
-                    AttachmentType.builder(() -> List.<ResourceLocation>of())
-                            .serialize(ResourceLocation.CODEC.listOf())
-                            .sync(ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()))
-                            .copyOnDeath()
-                            .build()
-    );
-
-    @Deprecated // use FISHING_GUIDE attachment!!!
-    public static final Supplier<AttachmentType<List<ResourceLocation>>> FISHES_NOTIFICATION = ATTACHMENT_TYPES.register(
-            "fishes_notification", () ->
-                    AttachmentType.builder(() -> List.<ResourceLocation>of())
-                            .serialize(ResourceLocation.CODEC.listOf())
-                            .sync(ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()))
-                            .copyOnDeath()
-                            .build()
-    );
-
-
     public static final Supplier<AttachmentType<ResourceLocation>> TACKLE_SKIN = ATTACHMENT_TYPES.register(
             "tackle_skin", () ->
                     AttachmentType.builder(() -> Starcatcher.rl("base"))

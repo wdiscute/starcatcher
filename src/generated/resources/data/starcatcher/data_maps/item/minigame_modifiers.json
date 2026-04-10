@@ -6,11 +6,23 @@
     "starcatcher:clear_bobber": [
       "starcatcher:slower_vanishing"
     ],
+    "starcatcher:copper_hook": [
+      "starcatcher:faster_handle_speed"
+    ],
+    "starcatcher:exposed_copper_hook": [
+      "starcatcher:slightly_faster_handle_speed"
+    ],
     "starcatcher:heavy_hook": [
       "starcatcher:slower_moving_sweet_spots"
     ],
+    "starcatcher:leaf_bobber": [
+      "starcatcher:add_leaves_spots"
+    ],
     "starcatcher:mossy_hook": [
       "starcatcher:harder_with_treasure_on_perfect"
+    ],
+    "starcatcher:oxidised_copper_hook": [
+      "starcatcher:slower_handle_speed"
     ],
     "starcatcher:shiny_hook": [
       "starcatcher:spawn_treasure_on_three_hits"
@@ -20,6 +32,9 @@
     ],
     "starcatcher:stone_hook": [
       "starcatcher:stop_decay_on_hit"
+    ],
+    "starcatcher:weathered_copper_hook": [
+      "starcatcher:slightly_slower_handle_speed"
     ]
   }
 }

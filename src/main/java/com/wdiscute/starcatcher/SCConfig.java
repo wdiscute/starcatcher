@@ -11,9 +11,6 @@ public class SCConfig
 
     public static final ModConfigSpec.DoubleValue MINIGAME_RENDER_SCALE = BUILDER_CLIENT
             .push("minigame_window")
-            .comment("ALL THESE SETTINGS CAN ALSO BE ACCESSED")
-            .comment("THROUGH THE IN-GAME SETTING TAB INSIDE")
-            .comment("THE STARCATCHER'S GUIDE")
             .translation("starcatcher.configuration.minigame_scale")
             .defineInRange("minigame_scale", 1.5, 0.1, 6);
 
@@ -25,11 +22,15 @@ public class SCConfig
             .translation("starcatcher.configuration.y_offset")
             .defineInRange("minigame_y_offset", 0, -10000, 10000);
 
-
     public static final ModConfigSpec.DoubleValue HIT_DELAY = BUILDER_CLIENT
             .pop()
             .translation("starcatcher.configuration.hit_delay")
             .defineInRange("hit_delay", 0.0d, -20, 20);
+
+    public static final ModConfigSpec.BooleanValue REMOVE_NOTIFICATION_ON_HOVER = BUILDER_CLIENT
+            .translation("starcatcher.configuration.remove_notif_on_hover")
+            .comment("If enabled the new fish notifications will be removed when hovering on the index, instead of only when visiting the specific fish entry")
+            .define("remove_notif_on_hover", true);
 
     public static final ModConfigSpec.EnumValue<FishProperties.SizeAndWeight.Units> UNIT = BUILDER_CLIENT
             .translation("starcatcher.configuration.units")
@@ -50,10 +51,6 @@ public class SCConfig
     public static final ModConfigSpec.BooleanValue ENABLE_MISS_SOUND = BUILDER_CLIENT
             .translation("starcatcher.configuration.enable_miss_sound")
             .define("enable_miss_sound", true);
-
-    public static final ModConfigSpec.BooleanValue ENABLE_ROD_MENU = BUILDER_CLIENT
-            .translation("starcatcher.configuration.enable_rod_menu")
-            .define("enable_rod_menu", false);
 
     public static final ModConfigSpec.BooleanValue VANILLA_PARTIAL_TICK = BUILDER_CLIENT
             .comment("Whether to use the vanilla partial ticks for minigame smoothing or a custom implementation from 1.20")
@@ -98,27 +95,32 @@ public class SCConfig
             .define("enable_seasons", true);
 
     public static final ModConfigSpec.DoubleValue VANISHING_RATE_MULTIPLIER = BUILDER_SERVER
-            .comment("Adjusts the vanishing rate multiplier, useful if you want to adjust the fishes' difficulty globally.")
+            .comment("Adjusts the vanishing rate, useful if you want to adjust the fishes' difficulty globally.")
             .translation("starcatcher.configuration.vanishing_rate_multiplier")
             .defineInRange("vanishing_rate_multiplier", 1d, 0d, 100d);
 
     public static final ModConfigSpec.DoubleValue MOVING_SPEED_MULTIPLIER = BUILDER_SERVER
-            .comment("Adjusts the moving sweet-spots speed multiplier, useful if you want to adjust the fishes' difficulty globally.")
+            .comment("Adjusts the moving sweet-spots speed, useful if you want to adjust the fishes' difficulty globally.")
             .translation("starcatcher.configuration.moving_speed_multiplier")
             .defineInRange("moving_speed_multiplier", 1d, 0d, 100d);
 
     public static final ModConfigSpec.DoubleValue PENALTY_MULTIPLIER = BUILDER_SERVER
-            .comment("Adjusts the penalty for missing rate multiplier, useful if you want to adjust the fishes' difficulty globally.")
+            .comment("Adjusts the penalty for missing rate, useful if you want to adjust the fishes' difficulty globally.")
             .translation("starcatcher.configuration.penalty_multiplier")
             .defineInRange("penalty_multiplier", 1d, 0d, 100d);
 
     public static final ModConfigSpec.DoubleValue DECAY_RATE_MULTIPLIER = BUILDER_SERVER
-            .comment("Adjusts the fish decay rate multiplier, useful if you want to adjust the fishes' difficulty globally.")
+            .comment("Adjusts the fish decay rate, useful if you want to adjust the fishes' difficulty globally.")
             .translation("starcatcher.configuration.decay_multiplier")
             .defineInRange("decay_multiplier", 1d, 0d, 100d);
 
+    public static final ModConfigSpec.DoubleValue HP_RATE_MULTIPLIER = BUILDER_SERVER
+            .comment("Adjusts the fish's HP, useful if you want to adjust the fishes' difficulty globally.")
+            .translation("starcatcher.configuration.hp_multiplier")
+            .defineInRange("hp_multiplier", 1d, 0d, 100d);
+
     public static final ModConfigSpec.DoubleValue POINTER_SPEED_MULTIPLIER = BUILDER_SERVER
-            .comment("Adjusts the fish decay rate multiplier, useful if you want to adjust the fishes' difficulty globally.")
+            .comment("Adjusts the pointer speed rate, useful if you want to adjust the fishes' difficulty globally.")
             .translation("starcatcher.configuration.pointer_speed_multiplier")
             .defineInRange("pointer_speed_multiplier", 1d, 0d, 100d);
 
@@ -128,7 +130,7 @@ public class SCConfig
             .define("hide_entries_until_found", true);
 
     public static final ModConfigSpec.DoubleValue FISH_PLAYER_MESSAGES_CHANCE = BUILDER_SERVER
-            .comment("Controls the chance of fishing up messages-in-a-bottle left by other players of the server")
+            .comment("Controls the chance of fishing up messages-in-a-bottle left by other players of the server. Does not affect built-in Secrets")
             .translation("starcatcher.configuration.fish_player_messages_chance")
             .defineInRange("fish_player_messages_chance", 0.05d, 0d, 1d);
 
@@ -156,6 +158,10 @@ public class SCConfig
             .comment("Restricts items placeable inside the tackle box to #starcatcher:placeable_in_tacle_box")
             .translation("starcatcher.configuration.restrict_tackle_box_to_tag")
             .define("restrict_tackle_box_to_tag", true);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_ROD_MENU = BUILDER_SERVER
+            .translation("starcatcher.configuration.enable_rod_menu")
+            .define("enable_rod_menu", false);
 
     public static final ModConfigSpec.DoubleValue FISH_MAX_SCALE = BUILDER_SERVER
             .comment("Controls the maximum scale of the fish model based on the size and weight percentile")

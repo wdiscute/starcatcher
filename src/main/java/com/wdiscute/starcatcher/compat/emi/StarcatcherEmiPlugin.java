@@ -15,12 +15,9 @@ import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.stack.EmiIngredient;
 import dev.emi.emi.api.stack.EmiStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -67,7 +64,7 @@ public class StarcatcherEmiPlugin implements EmiPlugin
                 ),
                 SellingBin.rl("/pearls")));
 
-        Registry<FishProperties> fps = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY);
+        Registry<FishProperties> fps = FishProperties.getRegistry(Minecraft.getInstance().level);
 
         for (FishProperties fp : fps)
             registry.addRecipe(new StarcatcherEmiFPRecipe(fps.getKey(fp), fp));

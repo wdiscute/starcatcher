@@ -2,14 +2,11 @@ package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
-import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.items.*;
 import com.wdiscute.starcatcher.registry.items.helper.BasicItem;
 import com.wdiscute.starcatcher.registry.items.helper.FireResistantBasicItem;
 import com.wdiscute.starcatcher.registry.items.helper.SingleStackBasicItem;
 import com.wdiscute.starcatcher.registry.items.TackleSkinItem;
-import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
-import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.registry.items.rod.StarcatcherFishingRodItem;
 import com.wdiscute.starcatcher.secretnotes.*;
@@ -19,8 +16,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.List;
 
 public interface SCItems
 {
@@ -54,7 +49,7 @@ public interface SCItems
 
     //hooks
     DeferredItem<Item> HOOK = HOOKS_REGISTRY.register("hook", SingleStackBasicItem::new);
-    DeferredItem<Item> CRYSTAL_HOOK = HOOKS_REGISTRY.register("crystal_hook", SingleStackBasicItem::new);
+    DeferredItem<Item> AMETHYST_HOOK = HOOKS_REGISTRY.register("amethyst_hook", SingleStackBasicItem::new);
     DeferredItem<Item> SHINY_HOOK = HOOKS_REGISTRY.register("shiny_hook", SingleStackBasicItem::new);
     DeferredItem<Item> GOLD_HOOK = HOOKS_REGISTRY.register("gold_hook", SingleStackBasicItem::new);
     DeferredItem<Item> MOSSY_HOOK = HOOKS_REGISTRY.register("mossy_hook", SingleStackBasicItem::new);
@@ -62,6 +57,10 @@ public interface SCItems
     DeferredItem<Item> SPLIT_HOOK = HOOKS_REGISTRY.register("split_hook", SingleStackBasicItem::new);
     DeferredItem<Item> HEAVY_HOOK = HOOKS_REGISTRY.register("heavy_hook", SingleStackBasicItem::new);
     DeferredItem<Item> VANILLA_HOOK = HOOKS_REGISTRY.register("vanilla_hook", SingleStackBasicItem::new);
+    DeferredItem<Item> COPPER_HOOK = HOOKS_REGISTRY.register("copper_hook", SingleStackBasicItem::new);
+    DeferredItem<Item> EXPOSED_COPPER_HOOK = HOOKS_REGISTRY.register("exposed_copper_hook", SingleStackBasicItem::new);
+    DeferredItem<Item> WEATHERED_COPPER_HOOK = HOOKS_REGISTRY.register("weathered_copper_hook", SingleStackBasicItem::new);
+    DeferredItem<Item> OXIDISED_COPPER_HOOK = HOOKS_REGISTRY.register("oxidised_copper_hook", SingleStackBasicItem::new);
 
     //bobbers
     DeferredItem<Item> BOBBER = BOBBERS_REGISTRY.register("bobber", SingleStackBasicItem::new);
@@ -69,6 +68,7 @@ public interface SCItems
     DeferredItem<Item> CLEAR_BOBBER = BOBBERS_REGISTRY.register("clear_bobber", SingleStackBasicItem::new);
     DeferredItem<Item> AQUA_BOBBER = BOBBERS_REGISTRY.register("aqua_bobber", SingleStackBasicItem::new);
     DeferredItem<Item> VANILLA_BOBBER = BOBBERS_REGISTRY.register("vanilla_bobber", SingleStackBasicItem::new);
+    DeferredItem<Item> LEAF_BOBBER = BOBBERS_REGISTRY.register("leaf_bobber", SingleStackBasicItem::new);
 
     //baits
     DeferredItem<Item> WORM = ITEMS.register("worm", BasicItem::new);
@@ -140,7 +140,7 @@ public interface SCItems
     //built-in secret notes
     DeferredItem<Item> SECRET_NOTE = ITEMS.register("secret_note", SecretNote::new);
 
-    DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () -> new NoteContainer(SecretNote.Note.CRYSTAL_HOOK));
+    DeferredItem<Item> DRIFTING_WATERLOGGED_BOTTLE = ITEMS.register("drifting_waterlogged_bottle", () -> new NoteContainer(SecretNote.Note.AMETHYST_HOOK));
     DeferredItem<Item> SCALDING_BOTTLE = ITEMS.register("scalding_bottle", () -> new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_1));
     DeferredItem<Item> BURNING_BOTTLE = ITEMS.register("burning_bottle", () -> new NoteContainer(new Item.Properties().stacksTo(1).fireResistant(), SecretNote.Note.ARNWULF_2));
     DeferredItem<Item> HOPEFUL_BOTTLE = ITEMS.register("hopeful_bottle", () -> new NoteContainer(SecretNote.Note.HOPEFUL_NOTE));

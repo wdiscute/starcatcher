@@ -12,8 +12,9 @@
     "item": "tide:voidseeker"
   },
   "difficulty": {
-    "decay": 0.2,
-    "missPenalty": 2,
+    "decay": 2.0,
+    "hp": 300,
+    "missPenalty": 20,
     "modifiers": [],
     "speed": 14,
     "sweetspots": [
@@ -22,7 +23,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -32,7 +33,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -42,7 +43,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -52,7 +53,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -67,22 +68,19 @@
       "dimensions": [
         "minecraft:the_end"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:empty"
-      ],
-      "translation_override": ""
+      ]
     },
     {
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:legendary_bait": 50
-      },
-      "translation_override": ""
+      }
     }
   ],
   "size_and_weight": {

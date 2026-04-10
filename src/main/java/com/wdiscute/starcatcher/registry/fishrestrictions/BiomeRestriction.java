@@ -33,17 +33,17 @@ public class BiomeRestriction extends AbstractFishRestriction
     private final List<ResourceLocation> biomesTags;
     private final List<ResourceLocation> biomesBlacklist;
     private final List<ResourceLocation> biomesBlacklistTags;
-    private final String translationOverride;
     private final String hover;
+    private final String translationOverride;
 
     public static final MapCodec<BiomeRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes").forGetter(BiomeRestriction::getBiomes),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_tags").forGetter(BiomeRestriction::getBiomesTags),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_blacklist").forGetter(BiomeRestriction::getBiomesBlacklist),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_blacklist_tags").forGetter(BiomeRestriction::getBiomesBlacklistTags),
-                    Codec.STRING.fieldOf("hover_translation").forGetter(BiomeRestriction::getTranslationOverride),
-                    Codec.STRING.fieldOf("translation_override").forGetter(BiomeRestriction::getTranslationOverride)
+                    ResourceLocation.CODEC.listOf().fieldOf("biomes").forGetter(o -> o.biomes),
+                    ResourceLocation.CODEC.listOf().fieldOf("biomes_tags").forGetter(o -> o.biomesTags),
+                    ResourceLocation.CODEC.listOf().fieldOf("biomes_blacklist").forGetter(o -> o.biomesBlacklist),
+                    ResourceLocation.CODEC.listOf().fieldOf("biomes_blacklist_tags").forGetter(o -> o.biomesBlacklistTags),
+                    Codec.STRING.optionalFieldOf("hover_translation", "").forGetter(o -> o.hover),
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, BiomeRestriction::new));
 
     public BiomeRestriction()
@@ -84,31 +84,6 @@ public class BiomeRestriction extends AbstractFishRestriction
         this.biomesBlacklistTags = biomesBlacklistTags;
         this.translationOverride = translationOverride;
         this.hover = hover;
-    }
-
-    public List<ResourceLocation> getBiomes()
-    {
-        return biomes;
-    }
-
-    public List<ResourceLocation> getBiomesTags()
-    {
-        return biomesTags;
-    }
-
-    public List<ResourceLocation> getBiomesBlacklist()
-    {
-        return biomesBlacklist;
-    }
-
-    public List<ResourceLocation> getBiomesBlacklistTags()
-    {
-        return biomesBlacklistTags;
-    }
-
-    public String getTranslationOverride()
-    {
-        return translationOverride;
     }
 
     @Override

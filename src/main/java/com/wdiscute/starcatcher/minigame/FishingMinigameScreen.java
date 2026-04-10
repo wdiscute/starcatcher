@@ -63,6 +63,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     public final InteractionHand handToSwing;
 
+    public int hp;
     public int penalty;
     public float decay;
 
@@ -168,6 +169,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         this.pointerBaseSpeed = (float) (difficulty.speed() * SCConfig.POINTER_SPEED_MULTIPLIER.get());
         this.penalty = (int) (difficulty.penalty() * SCConfig.PENALTY_MULTIPLIER.get());
         this.decay = (float) (difficulty.decay() * SCConfig.DECAY_RATE_MULTIPLIER.get());
+        this.hp = (int) (difficulty.hp() * SCConfig.HP_RATE_MULTIPLIER.get());
 
         //add base modifier for kimbe before other modifiers so they can override kimbe if needed
         addModifier(new BaseMinigameModifier());
@@ -299,16 +301,18 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //fishing rod
         guiGraphics.blit(TEXTURE, width / 2 - 32 - 70, height / 2 - 24 - 57, 64, 48, 192, 0, 64, 48, 256, 256);
 
+        int yoffset = progressSmooth == 0 ? 0 : (int) ((float) progressSmooth / (float) hp * 77);
+
         //fishing line
         guiGraphics.blit(
                 TEXTURE, width / 2 - 6 - 102, height / 2 - 56 - 18,
-                16, 112 - progressSmooth,
-                176, progressSmooth,
-                16, 112 - progressSmooth,
+                16, 112 - yoffset,
+                176, (float) yoffset,
+                16, 112 - yoffset,
                 256, 256);
 
         //item being fished
-        guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - progressSmooth);
+        guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35 - yoffset);
 
         //render sweet spots foreground
         activeSweetSpots.forEach(sweetspot -> sweetspot.behaviour.renderForeground(guiGraphics, partialTick, width, height));
@@ -616,7 +620,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 this.onClose();
             }
 
-            if (progressSmooth > 75)
+            if (progressSmooth > hp)
             {
                 //if completed treasure minigame, or is a perfect catch with the mossy hook
                 boolean awardTreasure = treasureProgress > 100 || modifiers.stream().anyMatch(AbstractMinigameModifier::forceAwardTreasure);

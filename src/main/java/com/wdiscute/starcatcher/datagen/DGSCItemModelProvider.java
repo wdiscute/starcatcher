@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.SCBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
@@ -78,7 +77,7 @@ public class DGSCItemModelProvider extends ItemModelProvider
 
         //hooks
         simpleItem(HOOK);
-        simpleItem(CRYSTAL_HOOK);
+        simpleItem(AMETHYST_HOOK);
         simpleItem(SHINY_HOOK);
         simpleItem(GOLD_HOOK);
         simpleItem(MOSSY_HOOK);
@@ -86,6 +85,10 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(SPLIT_HOOK);
         simpleItem(HEAVY_HOOK);
         simpleItem(VANILLA_HOOK);
+        simpleItem(COPPER_HOOK);
+        simpleItem(EXPOSED_COPPER_HOOK);
+        simpleItem(WEATHERED_COPPER_HOOK);
+        simpleItem(OXIDISED_COPPER_HOOK);
 
         //bobbers
         simpleItem(BOBBER);
@@ -93,6 +96,7 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(CLEAR_BOBBER);
         simpleItem(AQUA_BOBBER);
         simpleItem(VANILLA_BOBBER);
+        simpleItem(LEAF_BOBBER);
 
         //baits
         simpleItem(WORM);
@@ -117,9 +121,12 @@ public class DGSCItemModelProvider extends ItemModelProvider
 
 
         //trophies block item
-        simpleBlockItem(SCBlocks.TROPHY_BRONZE.get());
-        simpleBlockItem(SCBlocks.TROPHY_SILVER.get());
-        simpleBlockItem(SCBlocks.TROPHY_GOLD.get());
+        simpleBlockItem(TROPHY_COPPER.get());
+        simpleBlockItem(TROPHY_IRON.get());
+        simpleBlockItem(TROPHY_GOLD.get());
+        simpleBlockItem(TROPHY_EMERALD.get());
+        simpleBlockItem(TROPHY_DIAMOND.get());
+        simpleBlockItem(TROPHY_OF_THE_OLDER_ANGLER.get());
 
         simpleItem(DeferredItem.createItem(Starcatcher.rl("clam")));
         simpleItem(DeferredItem.createItem(Starcatcher.rl("conch")));

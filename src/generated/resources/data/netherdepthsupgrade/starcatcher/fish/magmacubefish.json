@@ -13,6 +13,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 100,
     "missPenalty": 5,
     "modifiers": [
       {
@@ -51,8 +52,7 @@
       "dimensions": [
         "minecraft:the_nether"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:biome",
@@ -61,16 +61,13 @@
       "biomes_blacklist_tags": [],
       "biomes_tags": [
         "starcatcher:is_basalt_deltas"
-      ],
-      "hover_translation": "",
-      "translation_override": ""
+      ]
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ],
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

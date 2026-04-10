@@ -44,7 +44,7 @@ public class AquaBobberModifier extends AbstractTimedModifier
 
         for (int i = 0; i < numberOfSweetSpotsToAdd; i++)
         {
-            instance.addSweetSpot(new ActiveSweetSpot(instance, FishProperties.SweetSpot.AQUA_10));
+            instance.addSweetSpot(new ActiveSweetSpot(instance, FishProperties.SweetSpot.AQUA));
         }
     }
 }

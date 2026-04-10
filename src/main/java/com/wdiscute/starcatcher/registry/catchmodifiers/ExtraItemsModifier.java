@@ -21,6 +21,7 @@ public class ExtraItemsModifier extends AbstractCatchModifier
     @Override
     public List<ItemStack> addToFishedItems(int time, boolean perfectCatch, int hits, boolean completedTreasure, Player player)
     {
+        if(!instance.fpToFish.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)) return List.of();
         if (instance.fpToFish.catchInfo().alwaysSpawnEntity() ||
                 ModList.get().isLoaded("fishingreal") ||
                 instance.modifiers.stream().anyMatch(AbstractCatchModifier::forceSpawnEntity) ||

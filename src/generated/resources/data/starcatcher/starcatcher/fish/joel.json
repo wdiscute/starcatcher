@@ -6,6 +6,7 @@
   },
   "difficulty": {
     "decay": 1.0,
+    "hp": 200,
     "missPenalty": 5,
     "modifiers": [],
     "speed": 14,
@@ -15,7 +16,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -25,7 +26,7 @@
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
+        "reward": 10,
         "sweet_spot_type": "starcatcher:aqua",
         "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
         "vanishing_rate": 0.0
@@ -40,8 +41,7 @@
       "dimensions": [
         "minecraft:overworld"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:biome",
@@ -50,9 +50,7 @@
       "biomes_blacklist_tags": [],
       "biomes_tags": [
         "starcatcher:is_ocean"
-      ],
-      "hover_translation": "",
-      "translation_override": ""
+      ]
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -73,8 +71,7 @@
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:legendary_bait": 50
-      },
-      "translation_override": ""
+      }
     }
   ],
   "size_and_weight": {

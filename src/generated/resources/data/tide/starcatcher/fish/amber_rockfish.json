@@ -13,6 +13,7 @@
   },
   "difficulty": {
     "decay": 0.0,
+    "hp": 100,
     "missPenalty": 20,
     "modifiers": [],
     "speed": 12,
@@ -67,15 +68,13 @@
       "dimensions": [
         "minecraft:the_end"
       ],
-      "dimensions_blacklist": [],
-      "translation_override": ""
+      "dimensions_blacklist": []
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:empty"
-      ],
-      "translation_override": ""
+      ]
     }
   ],
   "size_and_weight": {

@@ -44,7 +44,7 @@ public class Starcatcher
     public static final Logger LOGGER = LogUtils.getLogger();
 
     //resource keys
-    public static final ResourceKey<Registry<FishProperties>> FISH_REGISTRY =
+    public static final ResourceKey<Registry<FishProperties>> FISH_REGISTRY_KEY =
             ResourceKey.createRegistryKey(Starcatcher.rl("fish"));
 
     public static final ResourceKey<Registry<AbstractFishRestriction>> FISH_RESTRICTIONS =

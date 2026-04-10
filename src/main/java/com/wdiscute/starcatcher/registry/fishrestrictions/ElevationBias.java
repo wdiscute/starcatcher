@@ -26,7 +26,7 @@ public class ElevationBias extends AbstractFishRestriction
                     Codec.INT.fieldOf("best_y").forGetter(ElevationBias::getBestY),
                     Codec.INT.fieldOf("range").forGetter(ElevationBias::getRange),
                     Codec.INT.fieldOf("extra_chance_at_best").forGetter(ElevationBias::getExtraChance),
-                    Codec.STRING.fieldOf("translation_override").forGetter(ElevationBias::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(ElevationBias::getTranslationOverride)
             ).apply(instance, ElevationBias::new));
 
     public ElevationBias()

@@ -25,7 +25,7 @@ public class DaytimeRestriction extends AbstractFishRestriction
     public static final MapCodec<DaytimeRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Duo.CODEC.listOf().fieldOf("ranges").forGetter(DaytimeRestriction::getRanges),
-                    Codec.STRING.fieldOf("translation_override").forGetter(DaytimeRestriction::getTranslationOverride)
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(DaytimeRestriction::getTranslationOverride)
             ).apply(instance, DaytimeRestriction::new));
 
     public record Duo(int first, int second)
