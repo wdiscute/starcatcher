@@ -465,8 +465,7 @@ public record FishProperties(
         public static final CatchInfo DEFAULT = new CatchInfo(
                 SCItems.MISSINGNO,
                 SCItems.MISSINGNO,
-                //cant use entity reference as its not registered for the psf
-                U.holderEntity("starcatcher", "fish"),
+                SCEntities.FISH,
                 false,
                 SCItems.MISSINGNO,
                 U.rl("gameplay/fishing/treasure"),
@@ -477,7 +476,7 @@ public record FishProperties(
         public static final CatchInfo VANILLA = new CatchInfo(
                 SCItems.MISSINGNO,
                 SCItems.MISSINGNO,
-                U.holderEntity("starcatcher", "fish"),
+                SCEntities.FISH,
                 false,
                 SCItems.UNKNOWN_FISH,
                 U.rl("gameplay/fishing/treasure"),
@@ -494,7 +493,7 @@ public record FishProperties(
         {
             private Holder<Item> fish = SCItems.MISSINGNO;
             private Holder<Item> bucketedFish = SCItems.MISSINGNO;
-            private Holder<EntityType<?>> entityToSpawn = U.holderEntity("starcatcher", "fish");
+            private Holder<EntityType<?>> entityToSpawn = SCEntities.FISH;
             private boolean alwaysSpawnEntity = false;
             private Holder<Item> itemToOverrideWith = SCItems.MISSINGNO;
             private ResourceLocation treasure = U.rl("gameplay/fishing/treasure");

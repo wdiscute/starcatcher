@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
+import java.util.Optional;
 
 public class VanillaLootModifier extends AbstractCatchModifier
 {
@@ -24,6 +25,12 @@ public class VanillaLootModifier extends AbstractCatchModifier
     {
         this.instance.fpToFish = FishProperties.VANILLA_FISH;
         this.instance.rlToFish = Starcatcher.rl("missingno");
+    }
+
+    @Override
+    public boolean shouldCancelBeforeSkipsMinigameCheck()
+    {
+        return false;
     }
 
     @Override
@@ -47,6 +54,7 @@ public class VanillaLootModifier extends AbstractCatchModifier
 
         LootTable table = level.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
 
-        return table.getRandomItems(lootparams);
+        Optional<ItemStack> any = table.getRandomItems(lootparams).stream().findAny();
+        return any.isPresent() ? List.of(any.get()) : List.of();
     }
 }

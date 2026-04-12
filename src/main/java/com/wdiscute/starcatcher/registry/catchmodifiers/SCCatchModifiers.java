@@ -41,18 +41,24 @@ public interface SCCatchModifiers
             () -> new AdjustLureTimeModifier(1.5f, 1.6f, 1));
 
     //vanilla bobber
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> VANILLA_LOOT = registerCatchModifier("vanilla_loot", VanillaLootModifier::new);
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> SKIP_MINIGAME_IF_VANILLA_LOOT = registerCatchModifier("skip_minigame_if_vanilla_loot", SkipMinigameIfVanillaLoot::new);
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> VANILLA_LOOT =
+            registerCatchModifier("vanilla_loot", VanillaLootModifier::new);
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> SKIP_MINIGAME_IF_VANILLA_LOOT =
+            registerCatchModifier("skip_minigame_if_vanilla_loot", SkipMinigameIfVanillaLoot::new);
 
     //almighty worm
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> FISH_ENTITY = registerCatchModifier("fish_entity", ForceFishEntityModifier::new);
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> FISH_ENTITY =
+            registerCatchModifier("fish_entity", ForceFishEntityModifier::new);
 
     //seeking worm
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_ALWAYS = registerCatchModifier("guarantee_new_fish_always", () -> new GuaranteeNewFishModifier(101));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_HALF = registerCatchModifier("guarantee_new_fish_half", () -> new GuaranteeNewFishModifier(50));
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_ALWAYS =
+            registerCatchModifier("guarantee_new_fish_always", () -> new GuaranteeNewFishModifier(101));
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_HALF =
+            registerCatchModifier("guarantee_new_fish_half", () -> new GuaranteeNewFishModifier(50));
 
     //gold hook
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_EXP_BASED_ON_PERFORMANCE = registerCatchModifier("extra_exp_based_on_performance", ExtraExpBasedOnPerformanceModifier::new);
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_EXP_BASED_ON_PERFORMANCE =
+            registerCatchModifier("extra_exp_based_on_performance", ExtraExpBasedOnPerformanceModifier::new);
 
     //split hook
     Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_ITEM = registerCatchModifier("extra_item", () -> new ExtraItemsModifier(1));
@@ -107,19 +113,17 @@ public interface SCCatchModifiers
         if (main.is(SCTags.RODS))
         {
             rls.addAll(getCatchModifiersRLs(main));
-            SCDataComponents.getSlotsInRod(main).forEach(o -> rls.addAll(getCatchModifiersRLs(o)));
         }
         else if (player.getOffhandItem().is(SCTags.RODS))
         {
             rls.addAll(getCatchModifiersRLs(off));
-            SCDataComponents.getSlotsInRod(off).forEach(o -> rls.addAll(getCatchModifiersRLs(o)));
         }
 
         //armor
         player.getInventory().armor.forEach(o -> rls.addAll(getCatchModifiersRLs(o)));
 
         //curios
-        if(ModList.get().isLoaded("curios"))
+        if (ModList.get().isLoaded("curios"))
         {
             CuriosCompat.getItems(player).forEach(o -> rls.addAll(getCatchModifiersRLs(o)));
         }
