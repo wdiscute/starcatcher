@@ -1,21 +1,49 @@
 {
+  "block.minecraft.empty": "Vazio",
+
+  "advancements.husbandry.starcatcher.fisherman.title": "Pescador",
+  "advancements.husbandry.starcatcher.fisherman.description": "Pegue um Peixe sem errar nenhuma vez",
+
+  "key.category.starcatcher.starcatcher": "Starcatcher",
+  "key.starcatcher.minigame_hit": "Acerto no Minigame",
+  "key.starcatcher.expand_tournament": "Alternar Interface do Torneio",
+
   "creativetab.starcatcher.starcatcher": "Starcatcher",
 
+  "emi.starcatcher.open_as_guide_entry": "Abrir como entrada do guia",
+  "emi.starcatcher.entity_entry": "Esta entrada sempre irá gerar um %s",
+
   "emi.category.starcatcher.fishing": "Pescaria do Starcatcher",
+
+  "emi.info.starcatcher.worms.0": "Minhocas têm diferentes modificadores de pesca quando usadas como isca.",
+  "emi.info.starcatcher.worms.1": "Obtível ao usar farinha de osso em terra arada.",
+  "emi.info.starcatcher.worms.2": "Compostável.",
+
+  "emi.info.starcatcher.pearls.0": "Ostras colocadas na areia criarão pérolas lentamente.",
+  "emi.info.starcatcher.pearls.1": "Assim que a ostra se abrir, você pode clicar nela para colher uma pérola.",
+
+  "emi.info.starcatcher.attachments.0": "Anzóis, Boias e Iscas podem ser anexados à sua vara usando uma Caixa de Pesca.",
+  "emi.info.starcatcher.attachments.1": "Eles fornecem vários 'modificadores' diferentes que o ajudarão de várias maneiras, desde diminuir o tempo de atração até efeitos positivos que reduzem a dificuldade.",
+
+  "emi.info.starcatcher.fish_bones.0": "Espinhas de Peixe são obtidas após comer um Peixe do Starcatcher.",
+
 
   "tag.starcatcher.is_beach": "Praias",
   "tag.starcatcher.is_birch_forest": "Florestas de Bétulas",
   "tag.starcatcher.is_cherry_grove": "Bosques de Cerejeiras",
   "tag.starcatcher.is_cold_lake": "Lagos Frios",
   "tag.starcatcher.is_cold_ocean": "Oceanos Frios",
+  "tag.starcatcher.is_frozen_ocean": "Oceanos Congelados",
   "tag.starcatcher.is_cold_river": "Rios Frios",
   "tag.starcatcher.is_dark_forest": "Florestas Escuras",
   "tag.starcatcher.is_deep_ocean": "Oceanos Profundos",
   "tag.starcatcher.is_mushroom_fields": "Campos de Cogumelos",
-  "tag.starcatcher.is_ocean": "Oceanos",
+  "tag.starcatcher.is_ocean": "Todos os Oceanos",
+  "tag.starcatcher.is_normal_ocean": "Oceano",
   "tag.starcatcher.is_river": "Rios",
   "tag.starcatcher.is_swamp": "Pântanos",
-  "tag.starcatcher.is_warm": "Clima Quente",
+  "tag.starcatcher.is_warm_lake": "Clima Quente",
+  "tag.starcatcher.is_lukewarm_ocean": "Oceanos Mornos",
   "tag.starcatcher.is_warm_ocean": "Oceanos Mornos",
   "tag.starcatcher.is_warm_river": "Rios Mornos",
 
@@ -28,49 +56,118 @@
   "tag.minecraft.is_jungle": "Selvas",
   "tag.minecraft.is_mountain": "Montanhas",
   "tag.minecraft.is_nether": "Biomas do Nether",
-  "tag.minecraft.is_ocean": "Oceano",
+  "tag.minecraft.is_ocean": "Todos os Oceanos",
   "tag.minecraft.is_overworld": "Biomas do Mundo Superior",
   "tag.minecraft.is_river": "Rios",
   "tag.minecraft.is_savanna": "Savanas",
   "tag.minecraft.is_taiga": "Taigas",
 
+  "tag.starcatcher.baits": "Iscas de Pesca",
   "tag.starcatcher.hooks": "Anzóis de Pesca",
-  "tag.starcatcher.bobbers": "Boias",
-  "tag.starcatcher.hooks_survive_fire": "Anzóis que sobrevivem ao Fogo",
+  "tag.starcatcher.bobbers": "Boias de Pesca",
+  "tag.starcatcher.equipments": "Equipamento de Pesca",
+  "tag.starcatcher.gadgets": "Acessórios de Pesca",
+  "tag.starcatcher.rods": "Varas do Starcatcher",
+  "tag.starcatcher.templates": "Moldes de Vara de Pescar",
+  "tag.starcatcher.bucketable_fishes": "Peixes em Balde do Starcatcher",
+  "tag.starcatcher.starcaught_fishes": "Peixes em Balde do Starcatcher",
+  "tag.starcatcher.hats": "Chapéus",
 
+  "tag.starcatcher.common_fishes": "Peixes Comuns",
+  "tag.starcatcher.uncommon_fishes": "Peixes Incomuns",
+  "tag.starcatcher.rare_fishes": "Peixes Raros",
+  "tag.starcatcher.epic_fishes": "Peixes Épicos",
+  "tag.starcatcher.legendary_fishes": "Peixes Lendários",
+
+  "tag.starcatcher.aquarium_guide_display": "Interações de Aquário Para o Guia",
+  "tag.starcatcher.placeable_in_display": "Colocável no Bloco de Exibição",
+  "tag.starcatcher.placeable_in_tackle_box": "Colocável na Caixa de Pesca",
+  "tag.starcatcher.tackle_boxes": "Caixas de Pesca",
+  "tag.starcatcher.tackle_skins": "Visuais de Equipamento",
+  "tag.starcatcher.trash": "Lixo",
+  "tag.starcatcher.worms": "Minhocas",
+
+
+
+
+
+  "sounds.starcatcher.king_cry": "Sons de choro",
+  "sounds.starcatcher.king_grr": "Sons de raiva",
+  "sounds.starcatcher.king_heheha": "Sons de HEHEHEHA",
 
   "commands.starcatcher.fish_entry_not_found": "Entrada de Peixe %s não encontrada",
   "commands.starcatcher.modifier_not_found": "Modificador %s não encontrado",
   "commands.starcatcher.rod_not_found": "Você deve ter uma vara compatível com Starcatcher™ na mão",
+  "commands.starcatcher.nothing_there": "Não há peixes disponíveis no local atual. Certifique-se de estar dentro do fluido correto.",
   "commands.starcatcher.item_empty": "Você deve ter um item na sua mão para aplicar o modificador",
 
 
+  "starcatcher.configuration.minigame_scale": "Escala do Minigame",
+  "starcatcher.configuration.hit_delay": "Atraso de Acerto do Minigame",
+  "starcatcher.configuration.units": "Unidades de Medida",
+  "starcatcher.configuration.sort": "Ordem de Classificação do Guia",
+  "starcatcher.configuration.enable_villager_sound": "Som de Aldeão no Minigame",
+  "starcatcher.configuration.enable_hit_sound": "Som de Acerto no Minigame",
+  "starcatcher.configuration.enable_miss_sound": "Som de Erro no Minigame",
+  "starcatcher.configuration.vanilla_partial_ticks": "Partial Ticks do Vanilla",
+  "starcatcher.configuration.remove_notif_on_hover": "Remover Notificação de Novo Peixe ao Passar o Mouse",
+
+  "starcatcher.configuration.give_guide": "Dar Guia",
+  "starcatcher.configuration.show_exclamation_mark_particle": "Mostrar partícula [!] ao morder",
+  "starcatcher.configuration.enable_worms": "Minhocas ao Usar Farinha de Osso em Terra Arada",
+  "starcatcher.configuration.enable_minigame": "Ativar Minigame de Pesca",
+  "starcatcher.configuration.enable_ftb_team_sharing": "Ativar Compartilhamento FTBTeams",
+  "starcatcher.configuration.enable_seasons": "Ativar Compatibilidade com Estações",
+  "starcatcher.configuration.vanishing_rate_multiplier": "Multiplicador Global de Taxa de Desaparecimento",
+  "starcatcher.configuration.moving_speed_multiplier": "Multiplicador Global de Velocidade de Movimento",
+  "starcatcher.configuration.penalty_multiplier": "Multiplicador Global de Penalidade",
+  "starcatcher.configuration.decay_multiplier": "Multiplicador Global de Decaimento",
+  "starcatcher.configuration.hp_multiplier": "Multiplicador Global de HP",
+  "starcatcher.configuration.pointer_speed_multiplier": "Multiplicador Global de Velocidade do Ponteiro",
+  "starcatcher.configuration.hide_entries_until_found": "Ocultar Entradas do Guia Até Serem Encontradas",
+  "starcatcher.configuration.fish_player_messages_chance": "Chance de Pescar Mensagens de Jogadores",
+  "starcatcher.configuration.save_data_to_items": "Salvar NBT de Tamanho, Peso, Raridade e Dourado",
+  "starcatcher.configuration.base_min_ticks": "Mínimo de Ticks Para Pescar",
+  "starcatcher.configuration.base_max_ticks": "Máximo de Ticks Para Pescar",
+  "starcatcher.configuration.base_chance": "Chance Base de Pescar Por Tick",
+  "starcatcher.configuration.restrict_tackle_box_to_tag": "Restringir Caixa de Pesca à Tag",
+  "starcatcher.configuration.fish_percentile_size_max_scale": "Escala Máxima do Modelo de Peixe",
+  "starcatcher.configuration.fish_percentile_size_min_scale": "Escala Mínima do Modelo de Peixe",
+  "starcatcher.configuration.enable_rod_menu": "Ativar Menu da Vara",
 
 
-  "tooltip.starcatcher.tournament_stand.0": "ainda em desenvolvimento desculpe :( não consegui terminar a tempo para este lançamento!",
-  "tooltip.starcatcher.tournament_stand.1": "meio que funciona mas nem tanto, eu não recomendaria usar em",
-  "tooltip.starcatcher.tournament_stand.2": "um mundo com o qual você se importa...",
 
+  "gui.starcatcher.processor.fishes_processor.percentile": "- O preço aumenta em +%s%% com base nos 50%% melhores",
+  "gui.starcatcher.processor.fishes_processor.golden": "- O preço é multiplicado por %sx se for dourado.",
+
+  "starcatcher.configuration.y_offset": "Deslocamento Y",
+  "starcatcher.configuration.x_offset": "Deslocamento X",
+  "starcatcher.configuration.minigame_window": "Configurações da Janela do Minigame",
+
+
+
+
+
+
+
+
+
+  "entity.starcatcher.fish": "Peixe do Starcatcher",
+
+  "gui.starcatcher.reel_no_fish": "Não há peixes aqui...",
+  "gui.starcatcher.no_hook_or_bobber": "Uma vara de pescar não funcionará sem um anzol e uma boia...",
 
 
   "tooltip.minecraft.fishing_rod.0": "Uma vara de pesca simples usada para pegar",
   "tooltip.minecraft.fishing_rod.1": "o mais básico dos peixes.",
   "tooltip.minecraft.fishing_rod.2": "Alguém pode apenas sonhar em melhorá-la",
-  "tooltip.minecraft.fishing_rod.3": "para uma <gradient-67>Vara do Starcatcher</gradient-90>.",
+  "tooltip.minecraft.fishing_rod.3": "para uma <sclegendary>Vara do Starcatcher</sclegendary>.",
 
 
 
-
-  "tooltip.starcatcher.rod.netherite": "<rgb>Aprimorada com Netherita</rgb>",
+  "tooltip.starcatcher.rod.netherite": "<sclegendary>Melhoria de Netherite</sclegendary>",
 
   "item.starcatcher.starcatcher_rod": "Vara do Starcatcher",
-  "tooltip.starcatcher.starcatcher_rod.0": "Uma vara de pesca especial que permite",
-  "tooltip.starcatcher.starcatcher_rod.1": "o uso de boias, iscas e anzóis!",
-  "tooltip.starcatcher.starcatcher_rod.2": "Quem sabe o que você pode pescar",
-  "tooltip.starcatcher.starcatcher_rod.3": "se as condições certas forem atendidas!",
-  "tooltip.starcatcher.starcatcher_rod.4": "",
-  "tooltip.starcatcher.starcatcher_rod.5": "use enquanto agacha para abrir a",
-  "tooltip.starcatcher.starcatcher_rod.6": "seleção de boia, isca e anzol",
 
   "item.starcatcher.naturalist_rod": "Vara Naturalista",
   "tooltip.starcatcher.naturalist_rod.0": "Uma vara perdida encontrada muito raramente em florestas.",
@@ -83,8 +180,7 @@
 
   "item.starcatcher.magmaforged_rod": "Vara Forjada em Magma",
   "tooltip.starcatcher.magmaforged_rod.0": "Uma vara forjada a partir de magma.",
-  "tooltip.starcatcher.magmaforged_rod.1": "Encontrada muito raramente nas profundezas",
-  "tooltip.starcatcher.magmaforged_rod.2": "dos oceanos de lava do Nether.",
+  "tooltip.starcatcher.magmaforged_rod.1": "Encontrada muito raramente em Deltas de Basalto.",
 
   "item.starcatcher.slimed_rod": "Vara de Slime",
   "tooltip.starcatcher.slimed_rod.0": "Uma vara viscosa encontrada raramente em",
@@ -95,9 +191,9 @@
   "tooltip.starcatcher.sharktooth_rod.1": "Deixada para trás dentro de uma sacola por quem quer que a possuía.",
 
   "item.starcatcher.azure_crystal_rod": "Vara de Cristal Lazúli",
-  "tooltip.starcatcher.azure_crystal_rod.0": "Uma vara <rgb>Lendária</rgb> feita de puro cristal lazúli.",
-  "tooltip.starcatcher.azure_crystal_rod.1": "Dizem que os <gradient-30>Pescadores Mais Velhos</gradient-50> presenteiam esta vara",
-  "tooltip.starcatcher.azure_crystal_rod.2": "para aqueles que conseguem cobiçar um tesouro enquanto capturam um <rgb>Aurora</rgb>",
+  "tooltip.starcatcher.azure_crystal_rod.0": "Uma vara <sclegendary>Lendária</sclegendary> feita de puros cristais lazúli.",
+  "tooltip.starcatcher.azure_crystal_rod.1": "Diz-se que os <scuncommon>Pescadores Anciões</scuncommon> presenteiam esta vara",
+  "tooltip.starcatcher.azure_crystal_rod.2": "àqueles que cobiçam um tesouro enquanto pescam um <sclegendary>Peixinho Dorso-de-Cristal Lazúli</sclegendary>",
 
   "item.starcatcher.good_old_rod": "A boa e velha vara",
   "tooltip.starcatcher.good_old_rod.0": "Uma vara simples, agora com suporte para boias, anzóis e iscas.",
@@ -136,76 +232,101 @@
   "tooltip.starcatcher.starcatcher_guide.1": "todos os peixes que você pescou, e",
   "tooltip.starcatcher.starcatcher_guide.2": "aqueles que você ainda precisa puxar!",
 
+  "tooltip.starcatcher.starcatcher_guide.signed": "Este Livro Pertence A: %s",
+  "tooltip.starcatcher.starcatcher_guide.signed_shift": "Assinado Por: %s",
+
   "item.starcatcher.starcatcher_twine": "Fio do Starcatcher",
   "tooltip.starcatcher.starcatcher_twine.0": "Um fio delicado enrolado em um graveto.",
   "tooltip.starcatcher.starcatcher_twine.1": "Vansire usou estes para instrumentos de corda antigamente.",
 
-
+  "block.starcatcher.tournament_stand": "Estande de Torneio",
+  "tooltip.starcatcher.tournament_stand.0": "Um estande usado para sediar torneios de pesca.",
 
 
   "tooltip.starcatcher.modifiers": "Modificadores de Pesca:",
 
-  "tooltip.modifier.starcatcher.freeze_on_miss.0": "Errar um ponto ideal fará com que seu",
-  "tooltip.modifier.starcatcher.freeze_on_miss.1": "molinete congele por um curto período",
+  "tooltip.modifier.starcatcher.prevent_frozen": "Impede que sua manivela congele",
 
-  "tooltip.modifier.starcatcher.spawn_frozen_sweet_spots.0": "De vez em quando um ponto ideal congelado",
-  "tooltip.modifier.starcatcher.spawn_frozen_sweet_spots.1": "pode aparecer, o que congela seu molinete ao ser atingido",
+  "tooltip.modifier.starcatcher.never_lose": "[dev] nunca perca o minigame",
 
-  "tooltip.modifier.starcatcher.low_chance_treasure_spawn.0": "Existe uma pequena chance de um baú de tesouro",
-  "tooltip.modifier.starcatcher.low_chance_treasure_spawn.1": "aparecer ao atingir um ponto ideal",
+  "tooltip.modifier.starcatcher.bounce_back": "Impede que o peixe nade para longe uma vez, fazendo-o quicar de volta",
 
-  "tooltip.modifier.starcatcher.spawn_tnt_sweet_spots.0": "Pontos ideais explosivos podem aparecer",
+  "tooltip.modifier.starcatcher.survives_lava": "Permite pescar na lava",
 
-  "tooltip.modifier.starcatcher.spawn_treasure_on_three_hits.0": "Atingir com sucesso 3 pontos ideais seguidos",
-  "tooltip.modifier.starcatcher.spawn_treasure_on_three_hits.1": "invocará um baú de tesouro",
+  "tooltip.modifier.starcatcher.add_creeper": "Um amigo mal-humorado pode aparecer",
 
-  "tooltip.modifier.starcatcher.slower_moving_sweet_spots.0": "Desacelera pontos ideais em movimento",
+  "tooltip.modifier.starcatcher.guarantee_golden": "Um peixe dourado será pescado, se possível",
+  "tooltip.modifier.starcatcher.add_5_golden_chance": "Aumenta ligeiramente as chances de pescar um peixe dourado",
+  "tooltip.modifier.starcatcher.add_50_golden_chance": "Aumenta tremendamente as chances de pescar um peixe dourado",
+  "tooltip.modifier.starcatcher.cancel_golden": "Você não pode mais pescar peixes dourados",
 
-  "tooltip.modifier.starcatcher.stop_decay_on_hit.0": "Impede que sua captura nade para longe",
-  "tooltip.modifier.starcatcher.stop_decay_on_hit.1": "por um curto período após atingir um ponto ideal",
+  "tooltip.modifier.starcatcher.hide_catch": "Você não pode mais ver sua captura enquanto pesca",
 
-  "tooltip.modifier.starcatcher.harder_with_treasure_on_perfect.0": "A captura será mais difícil que o normal,",
-  "tooltip.modifier.starcatcher.harder_with_treasure_on_perfect.1": "mas uma captura perfeita premia com um tesouro",
+  "tooltip.modifier.starcatcher.freeze_on_miss": "Errar um ponto ideal fará com que sua manivela congele por um curto período",
 
-  "tooltip.modifier.starcatcher.no_flip.0": "Pontos ideais não vão mais inverter ao serem atingidos",
+  "tooltip.modifier.starcatcher.spawn_frozen_sweet_spots": "De vez em quando, um ponto ideal congelado pode aparecer",
 
-  "tooltip.modifier.starcatcher.slower_vanishing.0": "Pontos ideais que desaparecem levarão mais tempo para sumir",
+  "tooltip.modifier.starcatcher.spawn_tnt_sweet_spots": "Pontos ideais explosivos podem aparecer",
 
-  "tooltip.modifier.starcatcher.bigger_green_sweet_spots.0": "Pontos ideais verdes serão ligeiramente maiores",
+  "tooltip.modifier.starcatcher.spawn_treasure_on_three_hits": "Acertar 3 pontos ideais seguidos com sucesso invocará um baú de tesouro",
 
-  "tooltip.modifier.starcatcher.add_aqua_sweet_spot.0": "Um ponto ideal aqua extra é adicionado",
+  "tooltip.modifier.starcatcher.slower_moving_sweet_spots": "Desacelera pontos ideais em movimento",
 
-  "tooltip.modifier.starcatcher.add_three_aqua_sweet_spot.0": "Três pontos ideais aqua extras são adicionados",
+  "tooltip.modifier.starcatcher.stop_decay_on_hit": "Impede que o peixe nade para longe por um curto período após um acerto",
 
+  "tooltip.modifier.starcatcher.harder_with_treasure_on_perfect": "A captura será mais difícil do que o normal, mas uma captura perfeita concede um tesouro",
 
+  "tooltip.modifier.starcatcher.no_flip": "Os pontos ideais não irão mais virar quando atingidos",
 
+  "tooltip.modifier.starcatcher.slower_vanishing": "Pontos ideais que desaparecem levarão mais tempo para desaparecer",
+
+  "tooltip.modifier.starcatcher.bigger_green_sweet_spots": "Pontos ideais verdes serão ligeiramente maiores",
+
+  "tooltip.modifier.starcatcher.add_leaves_spots": "Pontos ideais de folhas aparecerão aleatoriamente",
+
+  "tooltip.modifier.starcatcher.add_aqua_sweet_spot": "Um ponto ideal aquático extra é adicionado",
+
+  "tooltip.modifier.starcatcher.add_three_aqua_sweet_spot": "Três pontos ideais aquáticos extras são adicionados",
+
+  "tooltip.modifier.starcatcher.flip_every_hit": "Vira toda vez que você acerta um ponto ideal",
 
   "tooltip.modifier.starcatcher.ignore_daytime_and_weather_restrictions.0": "Ignora restrições de horário e clima dos peixes",
 
-  "tooltip.modifier.starcatcher.decrease_lure_time.0": "Diminui o tempo de atração",
-  "tooltip.modifier.starcatcher.big_decrease_lure_time.0": "Diminui muito o tempo de atração",
-  "tooltip.modifier.starcatcher.increase_lure_time.0": "Aumenta o tempo de atração",
+  "tooltip.modifier.starcatcher.decrease_lure_time": "Diminui o tempo de atração",
+  "tooltip.modifier.starcatcher.big_decrease_lure_time": "Diminui muito o tempo de atração",
+  "tooltip.modifier.starcatcher.increase_lure_time": "Aumenta o tempo de atração",
+
+  "tooltip.modifier.starcatcher.faster_handle_speed": "Aumenta a velocidade de rotação da manivela",
+  "tooltip.modifier.starcatcher.slightly_faster_handle_speed": "Aumenta ligeiramente a velocidade de rotação da manivela",
+  "tooltip.modifier.starcatcher.slightly_slower_handle_speed": "Diminui ligeiramente a velocidade de rotação da manivela",
+  "tooltip.modifier.starcatcher.slower_handle_speed": "Diminui a velocidade de rotação da manivela",
+
+  "tooltip.modifier.starcatcher.vanilla_loot": "Restaura o loot de pesca do Vanilla",
+  
+  "tooltip.modifier.starcatcher.skip_minigame_if_vanilla_loot": "Pula o minigame quando usado junto com a boia sabor Vanilla",
+  
+  "tooltip.modifier.starcatcher.extra_exp_based_on_performance": "Experiência extra é concedida com base no seu desempenho",
+  
+  "tooltip.modifier.starcatcher.fish_entity": "Se disponível, pescará o peixe vivo em vez disso",
+  
+  "tooltip.modifier.starcatcher.guarantee_new_fish_always": "Se disponível, um peixe não descoberto morderá a isca",
+  "tooltip.modifier.starcatcher.guarantee_new_fish_half": "Um peixe não descoberto tem mais probabilidade de morder a isca",
+
+  "tooltip.modifier.starcatcher.extra_item": "Um peixe extra virá junto com sua captura",
+  "tooltip.modifier.starcatcher.extra_two_item": "Dois peixes extras virão junto com sua captura",
+  "tooltip.modifier.starcatcher.extra_three_item": "Três peixes extras virão junto com sua captura",
+  "tooltip.modifier.starcatcher.extra_five_item": "Cinco peixes extras virão junto com sua captura",
+  "tooltip.modifier.starcatcher.extra_ten_item": "Um monte de peixes extras virá junto com sua captura",
+  "tooltip.modifier.starcatcher.extra_thirty_two_item": "Um cardume inteiro virá junto com sua captura",
 
 
-
-
-  "tooltip.modifier.starcatcher.vanilla_loot.0": "Restaura o comportamento e saque de pesca do Vanilla",
-
-  "tooltip.modifier.starcatcher.extra_exp_based_on_performance.0": "XP extra é concedido com base no seu desempenho",
-
-  "tooltip.modifier.starcatcher.fish_entity.0": "Se disponível, capturará o peixe vivo em vez disso",
-
-  "tooltip.modifier.starcatcher.guarantee_new_fish_always.0": "Se disponível, um peixe não descoberto morderá",
-  "tooltip.modifier.starcatcher.guarantee_new_fish_half.0": "Um peixe não descoberto é mais propenso a morder",
-
-  "tooltip.modifier.starcatcher.extra_item.0": "Um peixe extra virá junto com sua captura",
-  "tooltip.modifier.starcatcher.extra_two_item.0": "Dois peixes extras virão junto com sua captura",
-  "tooltip.modifier.starcatcher.extra_three_item.0": "Três peixes extras virão junto com sua captura",
-  "tooltip.modifier.starcatcher.extra_five_item.0": "Cinco peixes extras virão junto com sua captura",
-  "tooltip.modifier.starcatcher.extra_ten_item.0": "Um monte de peixes extras virá junto com sua captura",
-  "tooltip.modifier.starcatcher.extra_thirty_two_item.0": "Um cardume inteiro virá junto com sua captura",
-
-
+  "tooltip.tackle.starcatcher.kimbe": "Kimbe",
+  "tooltip.tackle.starcatcher.clear": "Transparente",
+  "tooltip.tackle.starcatcher.colorful": "Colorido",
+  "tooltip.tackle.starcatcher.pearl": "Pérola",
+  "tooltip.tackle.starcatcher.base": "Simples",
+  "tooltip.tackle.starcatcher.frog": "Sapo",
+  "tooltip.tackle.starcatcher.king": "Rei",
 
 
   "item.starcatcher.hook": "Anzol de Ferro",
@@ -215,11 +336,18 @@
   "item.starcatcher.shiny_hook": "Anzol Brilhante",
   "item.starcatcher.gold_hook": "Anzol de Ouro",
   "item.starcatcher.mossy_hook": "Anzol Musgoso",
-  "item.starcatcher.crystal_hook": "Anzol de Cristal",
+  "item.starcatcher.amethyst_hook": "Anzol de Ametista",
   "item.starcatcher.stone_hook": "Anzol de Pedra",
   "item.starcatcher.split_hook": "Anzol Dividido",
   "item.starcatcher.stabilizing_hook": "Anzol Estabilizador",
   "item.starcatcher.heavy_hook": "Anzol Pesado",
+  "item.starcatcher.vanilla_hook": "Anzol Sabor Vanilla",
+  "item.starcatcher.copper_hook": "Anzol de Cobre",
+  "item.starcatcher.exposed_copper_hook": "Anzol de Cobre Exposto",
+  "item.starcatcher.weathered_copper_hook": "Anzol de Cobre Desgastado",
+  "item.starcatcher.oxidised_copper_hook": "Anzol de Cobre Oxidado",
+  "item.starcatcher.echoing_hook": "Anzol Ecoante",
+  "item.starcatcher.frozen_hook": "Anzol Congelado",
 
 
 
@@ -228,9 +356,11 @@
   "tooltip.starcatcher.bobber.1": "Melhor amiga do Anzol.",
 
   "item.starcatcher.steady_bobber": "Boia Estável",
+  "item.starcatcher.leaf_bobber": "Boia de Folha",
   "item.starcatcher.clear_bobber": "Boia Transparente",
   "item.starcatcher.aqua_bobber": "Boia Aqua",
   "item.starcatcher.vanilla_bobber": "Boia Sabor Vanilla",
+  "item.starcatcher.slimey_bobber": "Boia de Slime",
 
 
 
@@ -238,10 +368,13 @@
   "tooltip.starcatcher.worm.0": "Uma minhoca comum encontrada ao aplicar farinha de osso em terra arada.",
 
   "item.starcatcher.seeking_worm": "Minhoca Buscadora",
-  "tooltip.starcatcher.seeking_worm.0": "Uma minhoca rara encontrada ao aplicar farinha de osso em terra arada.",
+  "tooltip.starcatcher.seeking_worm.0": "Uma minhoca muito rara encontrada ao usar farinha de osso em terra arada.",
 
   "item.starcatcher.almighty_worm": "Minhoca Toda-Poderosa",
   "tooltip.starcatcher.almighty_worm.0": "Uma minhoca rara encontrada ao aplicar farinha de osso em terra arada.",
+
+  "item.starcatcher.dev_worm": "Minhoca Dev",
+  "tooltip.starcatcher.dev_worm.0": "Uma minhoca que ignora todas as restrições de peixes. Para uso de desenvolvedores.",
 
 
   "item.starcatcher.gunpowder_bait": "Isca de Pólvora",
@@ -275,30 +408,35 @@
   "tooltip.starcatcher.meteorological_bait.2": "climas específicos! Muito útil.",
 
   "item.starcatcher.legendary_bait": "Isca Lendária",
-  "tooltip.starcatcher.legendary_bait.name": "<rgb>Isca Lendária</rgb>",
-  "tooltip.starcatcher.legendary_bait.0": "Uma isca dourada brilhante que peixes <rgb>lendários</rgb>",
+  "tooltip.starcatcher.legendary_bait.name": "<sclegendary>Isca Lendária</sclegendary>",
+  "tooltip.starcatcher.legendary_bait.0": "Uma isca dourada brilhante pela qual os peixes",
   "tooltip.starcatcher.legendary_bait.1": "não conseguem simplesmente ignorar.",
 
 
   "tooltip.starcatcher.templates": "Modelo Cosmético:",
+  "tooltip.starcatcher.tackle": "Visual de Equipamento:",
 
-  "item.starcatcher.kimbe_bobber_smithing_template": "Modelo de Ferraria de Boia Kimbe",
-  "tooltip.starcatcher.kimbe_bobber_smithing_template.0": "Um modelo para sua vara que pode ser aplicado em uma",
-  "tooltip.starcatcher.kimbe_bobber_smithing_template.1": "Mesa de Ferraria para mudar a aparência da sua boia.",
+  "item.starcatcher.kimbe_smithing_template": "Molde de Ferraria de Equipamento Kimbe",
+  "item.starcatcher.king_smithing_template": "Molde de Ferraria de Equipamento Rei",
+  "item.starcatcher.frog_smithing_template": "Molde de Ferraria de Equipamento Sapo",
+  "item.starcatcher.clear_smithing_template": "Molde de Ferraria de Equipamento Transparente",
+  "item.starcatcher.pearl_smithing_template": "Molde de Ferraria de Equipamento Pérola",
+  "item.starcatcher.colorful_smithing_template": "Molde de Ferraria de Equipamento Colorido",
 
-  "item.starcatcher.pearl_bobber_smithing_template": "Modelo de Ferraria de Boia Pérola",
-  "tooltip.starcatcher.pearl_bobber_smithing_template.0": "Um modelo para sua vara que pode ser aplicado em uma",
-  "tooltip.starcatcher.pearl_bobber_smithing_template.1": "Mesa de Ferraria para mudar a aparência da sua boia.",
-
-  "item.starcatcher.colorful_bobber_smithing_template": "Modelo de Ferraria de Boia Colorida",
-  "tooltip.starcatcher.colorful_bobber_smithing_template.0": "Um modelo para sua vara que pode ser aplicado em uma",
-  "tooltip.starcatcher.colorful_bobber_smithing_template.1": "Mesa de Ferraria para mudar a aparência da sua boia.",
-  "tooltip.starcatcher.colorful_bobber_smithing_template.shines": "O Modelo de Ferraria brilha diferente...",
-  "tooltip.starcatcher.colorful_bobber_smithing_template.click_me": "Ele brilha como se dissesse [clique em mim]",
-
-
-
-
+  "item.starcatcher.naturalist_skin_smithing_template": "Molde de Ferraria de Visual Naturalista",
+  "item.starcatcher.iceborn_skin_smithing_template": "Molde de Ferraria de Visual Nascido do Gelo",
+  "item.starcatcher.magmaforged_skin_smithing_template": "Molde de Ferraria de Visual Forjado em Magma",
+  "item.starcatcher.slimed_skin_smithing_template": "Molde de Ferraria de Visual de Slime",
+  "item.starcatcher.sharktooth_skin_smithing_template": "Molde de Ferraria de Visual Dente-de-Tubarão",
+  "item.starcatcher.azure_crystal_skin_smithing_template": "Molde de Ferraria de Visual de Cristal Lazúli",
+  "item.starcatcher.bamboo_skin_smithing_template": "Molde de Ferraria de Visual de Bambu",
+  "item.starcatcher.obsidian_skin_smithing_template": "Molde de Ferraria de Visual de Obsidiana",
+  "item.starcatcher.alpha_skin_smithing_template": "Molde de Ferraria de Visual Alpha",
+  "item.starcatcher.good_old_skin_smithing_template": "Molde de Ferraria de Visual Boa e Velha",
+  "item.starcatcher.boner_skin_smithing_template": "Molde de Ferraria de Visual de Osso",
+  "item.starcatcher.sky_skin_smithing_template": "Molde de Ferraria de Visual do Céu",
+  "item.starcatcher.lush_glowberry_skin_smithing_template": "Molde de Ferraria de Visual de Baga Brilhante Exuberante",
+  "item.starcatcher.humble_skin_smithing_template": "Molde de Ferraria de Visual Humilde",
 
 
 
@@ -306,13 +444,61 @@
   "item.starcatcher.unknown_fish": "Peixe Desconhecido",
   "tooltips.starcatcher.unknown_fish.0": "peixe modelo usado no minigame para entradas que escondem o item sendo pescado",
 
+
+
+
+
+  "container.starcatcher.tackle_box.itemCount": "%s x%s",
+  "container.starcatcher.tackle_box.unknownContents": "%s x%s",
+  "container.starcatcher.tackle_box.more": "e mais %s...",
+
+  "block.starcatcher.tackle_box": "Caixa de Pesca",
+  "block.starcatcher.tackle_box_white": "Caixa de Pesca Branca",
+  "block.starcatcher.tackle_box_lime": "Caixa de Pesca Verde-Limão",
+  "block.starcatcher.tackle_box_orange": "Caixa de Pesca Laranja",
+  "block.starcatcher.tackle_box_red": "Caixa de Pesca Vermelha",
+  "block.starcatcher.tackle_box_gray": "Caixa de Pesca Cinza",
+  "block.starcatcher.tackle_box_light_gray": "Caixa de Pesca Cinza-Clara",
+  "block.starcatcher.tackle_box_black": "Caixa de Pesca Preta",
+  "block.starcatcher.tackle_box_brown": "Caixa de Pesca Marrom",
+  "block.starcatcher.tackle_box_yellow": "Caixa de Pesca Amarela",
+  "block.starcatcher.tackle_box_pink": "Caixa de Pesca Rosa",
+  "block.starcatcher.tackle_box_magenta": "Caixa de Pesca Magenta",
+  "block.starcatcher.tackle_box_purple": "Caixa de Pesca Lilás",
+  "block.starcatcher.tackle_box_blue": "Caixa de Pesca Azul",
+  "block.starcatcher.tackle_box_light_blue": "Caixa de Pesca Azul-Clara",
+  "block.starcatcher.tackle_box_cyan": "Caixa de Pesca Ciano",
+  "block.starcatcher.tackle_box_green": "Caixa de Pesca Verde",
+
+  "block.starcatcher.aquarium": "Aquário",
+
+  "block.starcatcher.fisherman_hat_black": "Chapéu de Pescador Preto",
+  "block.starcatcher.fisherman_hat_blue": "Chapéu de Pescador Azul",
+  "block.starcatcher.fisherman_hat_brown": "Chapéu de Pescador Marrom",
+  "block.starcatcher.fisherman_hat_cyan": "Chapéu de Pescador Ciano",
+  "block.starcatcher.fisherman_hat_gray": "Chapéu de Pescador Cinza",
+  "block.starcatcher.fisherman_hat_green": "Chapéu de Pescador Verde",
+  "block.starcatcher.fisherman_hat_light_blue": "Chapéu de Pescador Azul-Claro",
+  "block.starcatcher.fisherman_hat_light_gray": "Chapéu de Pescador Cinza-Claro",
+  "block.starcatcher.fisherman_hat_lime": "Chapéu de Pescador Verde-Limão",
+  "block.starcatcher.fisherman_hat_magenta": "Chapéu de Pescador Magenta",
+  "block.starcatcher.fisherman_hat_orange": "Chapéu de Pescador Laranja",
+  "block.starcatcher.fisherman_hat_pink": "Chapéu de Pescador Rosa",
+  "block.starcatcher.fisherman_hat_purple": "Chapéu de Pescador Lilás",
+  "block.starcatcher.fisherman_hat_red": "Chapéu de Pescador Vermelho",
+  "block.starcatcher.fisherman_hat_white": "Chapéu de Pescador Branco",
+  "block.starcatcher.fisherman_hat_yellow": "Chapéu de Pescador Amarelo",
+
   "item.starcatcher.fish_radar": "Radar de Peixes",
   "tooltip.starcatcher.fish_radar.0": "Um radar prático que exibe os peixes",
   "tooltip.starcatcher.fish_radar.1": "ao redor da área de uma forma totalmente futurista.",
 
+  "item.starcatcher.pearl": "Pérola",
+  "tooltip.starcatcher.pearl.0": "Uma bela pérola obtida de uma ostra.",
+
   "item.starcatcher.fish_bones": "Espinhas de Peixe",
-  "item.starcatcher.fish_bones.0": "Algumas espinhas de peixe. Tudo o que",
-  "item.starcatcher.fish_bones.1": "resta de um peixe outrora feliz.",
+  "tooltip.starcatcher.fish_bones.0": "Algumas espinhas de peixe. Tudo o que",
+  "tooltip.starcatcher.fish_bones.1": "resta de um peixe outrora feliz.",
 
   "item.starcatcher.waterlogged_satchel": "Bolsa Encharcada",
   "tooltip.starcatcher.waterlogged_satchel.0": "Uma bolsa contendo muitos segredos",
@@ -326,9 +512,17 @@
   "tooltip.starcatcher.scalding_treasure.0": "Um tesouro pescado diretamente das terras escaldantes",
   "tooltip.starcatcher.scalding_treasure.1": "do Nether. O que tem dentro?",
 
+  "block.starcatcher.trophy_copper": "Troféu de Cobre",
+  "block.starcatcher.trophy_iron": "Troféu de Ferro",
   "block.starcatcher.trophy_gold": "Troféu de Ouro",
-  "block.starcatcher.trophy_silver": "Troféu de Prata",
-  "block.starcatcher.trophy_bronze": "Troféu de Bronze",
+  "block.starcatcher.trophy_emerald": "Troféu de Esmeralda",
+  "block.starcatcher.trophy_diamond": "Troféu de Diamante",
+  "block.starcatcher.trophy_of_the_older_angler": "Troféu do Pescador Ancião",
+
+  "block.starcatcher.display": "Mostruário do Starcatcher",
+  "tooltip.starcatcher.display.0": "wip",
+  "block.starcatcher.telescope": "Telescópio",
+  "tooltip.starcatcher.telescope.0": "wip",
 
   "item.starcatcher.award_all_fishes": "Conceder todos os peixes",
   "item.starcatcher.award_one_fish": "Conceder um peixe",
@@ -349,51 +543,90 @@
   "tooltip.starcatcher.trophy.once": "uma vez ",
   "tooltip.starcatcher.trophy.have_been_caught": " tenham sido capturados.",
 
-  "tooltip.starcatcher.trophy.unique": "<rgb>[&]</rgb> peixes únicos",
-  "tooltip.starcatcher.trophy.total": "<rgb>[&]</rgb> peixes no total",
+  "tooltip.starcatcher.trophy.unique": "<sclegendary>[&]</sclegendary> $fishes únicos",
+  "tooltip.starcatcher.trophy.total": "<sclegendary>[&]</sclegendary> $fishes no total",
 
   "tooltip.starcatcher.trophy.all": " ",
   "tooltip.starcatcher.trophy.common": " comuns ",
-  "tooltip.starcatcher.trophy.uncommon": " <gradient-37>incomuns</gradient-43> ",
-  "tooltip.starcatcher.trophy.rare": " <gradient-57>raros</gradient-63> ",
-  "tooltip.starcatcher.trophy.epic": " <gradient-80>épicos</gradient-90> ",
-  "tooltip.starcatcher.trophy.legendary": " <rgb>lendários</rgb> ",
+  "tooltip.starcatcher.trophy.uncommon": " <scuncommon>incomuns</scuncommon> ",
+  "tooltip.starcatcher.trophy.rare": " <scrare>raros</scrare> ",
+  "tooltip.starcatcher.trophy.epic": " <scepic>épicos</scepic> ",
+  "tooltip.starcatcher.trophy.legendary": " <sclegendary>lendários</sclegendary> ",
 
 
-  "tooltip.starcatcher.trophy.both.0": "uma vez que ambos <rgb>[&]</rgb> peixes únicos,",
-  "tooltip.starcatcher.trophy.both.1": "e <rgb>[&]</rgb> peixes totais tenham sido capturados!",
+  "tooltip.starcatcher.trophy.both.0": "assim que tanto <sclegendary>[&]</sclegendary> peixes únicos,",
+  "tooltip.starcatcher.trophy.both.1": "quanto <sclegendary>[&]</sclegendary> peixes no total tiverem sido pescados!",
 
 
-  "gui.starcatcher.toast.fish_caught": "Novo Peixe Pescado!",
+  "gui.starcatcher.toast.fish_caught": "Novo Peixe Fisgado!",
 
-
-  "gui.guide.seasons": "Estações:",
+  "gui.guide.sign": "Assinar",
+  "gui.guide.season": "Estação: ",
+  "gui.guide.seasons": "Estações: ",
 
   "gui.guide.seasons.all": "Todos",
 
   "gui.guide.seasons.spring": "Primavera",
+  "gui.guide.seasons.summer": "Verão",
+  "gui.guide.seasons.autumn": "Outono",
+  "gui.guide.seasons.winter": "Inverno",
+
+  "gui.guide.seasons.not_spring": "Não Primavera",
+  "gui.guide.seasons.not_summer": "Não Verão",
+  "gui.guide.seasons.not_autumn": "Não Outono",
+  "gui.guide.seasons.not_winter": "Não Inverno",
+
+  "gui.guide.seasons.spring_summer": "Primavera e Verão",
+  "gui.guide.seasons.spring_autumn": "Primavera e Outono",
+  "gui.guide.seasons.spring_winter": "Primavera e Inverno",
+
+  "gui.guide.seasons.summer_autumn": "Verão e Outono",
+  "gui.guide.seasons.summer_winter": "Verão e Inverno",
+  "gui.guide.seasons.autumn_winter": "Outono e Inverno",
+  "gui.guide.seasons.around_spring": "Perto da Primavera",
+  "gui.guide.seasons.around_summer": "Perto do Verão",
+  "gui.guide.seasons.around_autumn": "Perto do Outono",
+  "gui.guide.seasons.around_winter": "Perto do Inverno",
+
   "gui.guide.seasons.early_spring": "Início da Primavera",
   "gui.guide.seasons.mid_spring": "Meada da Primavera",
   "gui.guide.seasons.late_spring": "Fim da Primavera",
 
-  "gui.guide.seasons.summer": "Verão",
   "gui.guide.seasons.early_summer": "Início do Verão",
   "gui.guide.seasons.mid_summer": "Meado do Verão",
   "gui.guide.seasons.late_summer": "Fim do Verão",
 
-  "gui.guide.seasons.autumn": "Outono",
   "gui.guide.seasons.early_autumn": "Início do Outono",
   "gui.guide.seasons.mid_autumn": "Meado do Outono",
   "gui.guide.seasons.late_autumn": "Fim do Outono",
 
-  "gui.guide.seasons.winter": "Inverno",
   "gui.guide.seasons.early_winter": "Início do Inverno",
   "gui.guide.seasons.mid_winter": "Meado do Inverno",
   "gui.guide.seasons.late_winter": "Fim do Inverno",
 
 
-  "gui.guide.seasons.in_season": "Na temporada!",
-  "gui.guide.seasons.not_in_season": "Fora de temporada",
+  "gui.guide.seasons.in_season": "✅ Na estação!",
+  "gui.guide.seasons.not_in_season": "❌ Fora de estação",
+
+  "gui.guide.weather.clear": "Céus Limpos",
+  "gui.guide.weather.rain": "Chovendo",
+  "gui.guide.weather.thunder": "Trovejando",
+  "gui.guide.weather.clear_or_rain": "Limpo ou Chovendo",
+  "gui.guide.weather.clear_or_thunder": "Limpo ou Trovejando",
+  "gui.guide.weather.rain_or_thunder": "Chovendo ou Trovejando",
+
+
+  "gui.guide.elevation.between": "Entre %s e %s",
+
+  "gui.guide.elevation.surface": "Superfície",
+  "gui.guide.elevation.mountains": "Montanhas",
+  "gui.guide.elevation.skies": "Céus",
+  "gui.guide.elevation.deepslate": "Ardosiabissal",
+  "gui.guide.elevation.void": "Vazio",
+  "gui.guide.elevation.stone_caves": "Cavernas de Pedra",
+  "gui.guide.elevation.underground": "Subterrâneo",
+
+  "gui.guide.sort": "[ordenar]",
 
   "gui.guide.sort.alphabetical_up": "⏬ Alfabético",
   "gui.guide.sort.alphabetical_down": "⏫ Alfabético",
@@ -415,9 +648,9 @@
   "gui.guide.units.cheeseburger.size": "X-Burgueres",
   "gui.guide.units.cheeseburger.weight": "X-Burgueres",
 
-  "gui.guide.units.football": "Bola de Futebol",
-  "gui.guide.units.football.size": "Bolas de Futebol",
-  "gui.guide.units.football.weight": "Bolas de Futebol",
+  "gui.guide.units.football": "Futebol",
+  "gui.guide.units.football.size": "Futebol",
+  "gui.guide.units.football.weight": "Futebol",
 
   "gui.guide.units.developer": "Desenvolvedor",
   "gui.guide.units.developer.size": "wds",
@@ -444,154 +677,470 @@
   "gui.guide.not_caught_yet": "Ainda Não Pescado!",
   "gui.guide.rarity": "Raridade:",
 
+  "gui.guide.first": "Primeira Captura:",
+  "gui.guide.fastest": "Mais Rápido: ",
+  "gui.guide.average": "Média: ",
+  "gui.guide.biggest": "Maior: ",
+  "gui.guide.heaviest": "Mais Pesado: ",
+  "gui.guide.percentile": "Melhor: top ",
+
+  "gui.guide.bucketable": "Pode ser pego em um balde ao usar um como isca!",
+  "gui.guide.entity": "Pode ser pego vivo ao usar uma Minhoca Todo-Poderosa como isca!",
+  "gui.guide.always_entity": "Este peixe é mais animado que o normal!",
+
   "gui.guide.fishing": "Tudo sobre pescaria:",
   "gui.guide.index.basics": "O Básico",
+  "gui.guide.index.sweetspots": "Tipos de Pontos Ideais",
   "gui.guide.index.treasures": "Tesouros",
-  "gui.guide.index.hooks": "Anzóis",
-  "gui.guide.index.bobbers": "Boias",
-  "gui.guide.index.baits": "Iscas",
-  "gui.guide.index.gadgets": "Engenhocas",
-  "gui.guide.index.trophies": "Troféus",
-  "gui.guide.index.secrets": "Segredos",
-  "gui.guide.index.settings": "Configurações",
+  "gui.guide.index.upgrades": "Melhorias",
+  "gui.guide.index.tackle_box": "Caixas de Pesca e Acessórios de Vara",
+  "gui.guide.index.hooks_bobbers_baits": "Anzóis, Boias e Iscas",
+  "gui.guide.index.settings": "Configurações do Minigame e Teste",
 
-  "gui.guide.basics": "   O Básico",
-  "gui.guide.treasures": "  Tesouros",
-  "gui.guide.hooks": "      Anzóis",
-  "gui.guide.bobbers": "      Boias",
-  "gui.guide.baits": "      Iscas",
-  "gui.guide.gadgets": "      Engenhocas",
-  "gui.guide.trophies": "    Troféus",
-  "gui.guide.secrets": "      Segredos",
+  "gui.guide.index.cosmetics": "Cosméticos",
+  "gui.guide.index.tournaments": "Torneios de Pesca",
+  "gui.guide.index.messages": "Cartas e Mensagens na Garrafa",
+  "gui.guide.index.selling_bin": "Vendendo Seus Peixes!",
+  "gui.guide.index.aquarium": "Aquários",
+  "gui.guide.index.display": "Mostruário",
+  "gui.guide.index.trophies_and_secrets": "Troféus e Segredos",
 
 
-  "gui.guide.page0.left.0": "",
-  "gui.guide.page0.left.1": "",
-  "gui.guide.page0.left.2": "",
-  "gui.guide.page0.left.3": "",
-  "gui.guide.page0.left.4": "",
-  "gui.guide.page0.left.5": "  Se você deseja pegar mais",
-  "gui.guide.page0.left.6": "do que salmão ou bacalhau mixuruca",
-  "gui.guide.page0.left.7": "você precisará primeiro de uma",
-  "gui.guide.page0.left.8": "<gradient-67>Vara do Starcatcher</gradient-90>!",
-  "gui.guide.page0.left.9": "  Assim que colocar as mãos",
-  "gui.guide.page0.left.10": "em uma, é hora de lançar! ",
-  "gui.guide.page0.left.11": "  Mantenha seus olhos na",
-  "gui.guide.page0.left.12": "boia e espere pacientemente",
-  "gui.guide.page0.left.13": "sua hora de atacar.",
+
+  "gui.guide.page.0.left.title": "O Básico",
+  "gui.guide.page.0.left.0": "",
+  "gui.guide.page.0.left.1": "",
+  "gui.guide.page.0.left.2": "",
+  "gui.guide.page.0.left.3": "",
+  "gui.guide.page.0.left.4": "",
+  "gui.guide.page.0.left.5": "  Se você deseja pescar mais",
+  "gui.guide.page.0.left.6": "do que míseros salmões ou",
+  "gui.guide.page.0.left.7": "bacalhaus, primeiro precisará",
+  "gui.guide.page.0.left.8": "de uma <sclegendary>Vara do Starcatcher</sclegendary>!",
+  "gui.guide.page.0.left.9": "",
+  "gui.guide.page.0.left.10": "  Mantenha os olhos na",
+  "gui.guide.page.0.left.11": "boia e espere pacientemente",
+  "gui.guide.page.0.left.12": "pela sua hora de atacar.",
+
+  "gui.guide.page.0.right.0": "",
+  "gui.guide.page.0.right.1": "",
+  "gui.guide.page.0.right.2": "",
+  "gui.guide.page.0.right.3": "  Esses peixes não cederão",
+  "gui.guide.page.0.right.4": "tão facilmente, certifique-se",
+  "gui.guide.page.0.right.5": "de acertar todos os pontos",
+  "gui.guide.page.0.right.6": "ideais até fisgá-los!",
+  "gui.guide.page.0.right.7": "",
+  "gui.guide.page.0.right.8": "",
+  "gui.guide.page.0.right.9": "",
+  "gui.guide.page.0.right.10": "",
+  "gui.guide.page.0.right.11": "",
+  "gui.guide.page.0.right.12": "",
+  "gui.guide.page.0.right.13": "",
+  "gui.guide.page.0.right.14": "  Com prática suficiente,",
+  "gui.guide.page.0.right.15": "um dia você pode até",
+  "gui.guide.page.0.right.16": "ser capaz de pescar um",
+  "gui.guide.page.0.right.17": "precioso peixe <sclegendary>Lendário</sclegendary>",
 
 
-  "gui.guide.page0.right.0": "",
-  "gui.guide.page0.right.1": "",
-  "gui.guide.page0.right.2": "",
-  "gui.guide.page0.right.3": "  Esses peixes não vão ceder tão",
-  "gui.guide.page0.right.4": "facilmente, certifique-se de acertar",
-  "gui.guide.page0.right.5": "todos os seus pontos fracos até que você",
-  "gui.guide.page0.right.6": "os recolha!",
-  "gui.guide.page0.right.7": "",
-  "gui.guide.page0.right.8": "",
-  "gui.guide.page0.right.9": "",
-  "gui.guide.page0.right.10": "",
-  "gui.guide.page0.right.11": "",
-  "gui.guide.page0.right.12": "",
-  "gui.guide.page0.right.13": "",
-  "gui.guide.page0.right.14": "  Nem todo peixe lutará",
-  "gui.guide.page0.right.15": "da mesma maneira, então esteja pronto",
-  "gui.guide.page0.right.16": "para qualquer coisa! Especialmente",
-  "gui.guide.page0.right.17": "aqueles peixes <rgb>lendários</rgb> que",
-  "gui.guide.page0.right.18": "você pode ter ouvido falar!",
+  "gui.guide.page.1.left.title": "Pontos Ideais",
+  "gui.guide.page.1.left.0": "",
+  "gui.guide.page.1.left.1": "",
+  "gui.guide.page.1.left.2": "",
+  "gui.guide.page.1.left.3": "",
+  "gui.guide.page.1.left.4": "",
+  "gui.guide.page.1.left.5": "  Peixes diferentes",
+  "gui.guide.page.1.left.6": "lutarão de forma diferente",
+  "gui.guide.page.1.left.7": "ao serem fisgados!",
+  "gui.guide.page.1.left.8": "",
+  "gui.guide.page.1.left.9": "  Conhecer os traços do seu",
+  "gui.guide.page.1.left.10": "peixe é metade da batalha!",
+  "gui.guide.page.1.left.11": "",
+  "gui.guide.page.1.left.12": "",
+  "gui.guide.page.1.left.13": "",
 
-  "gui.guide.page1.left.0": "",
-  "gui.guide.page1.left.1": "",
-  "gui.guide.page1.left.2": "",
-  "gui.guide.page1.left.3": "",
-  "gui.guide.page1.left.4": "",
-  "gui.guide.page1.left.5": "  Enquanto pesca por um dos",
-  "gui.guide.page1.left.6": "peixes mais difíceis você",
-  "gui.guide.page1.left.7": "pode sentir algo extra ",
-  "gui.guide.page1.left.8": "puxando seu anzol para baixo!",
-  "gui.guide.page1.left.9": "",
-  "gui.guide.page1.left.10": "Você encontrou um <gradient-08>tesouro</gradient-15>!",
-
-
-  "gui.guide.page1.right.0": "",
-  "gui.guide.page1.right.1": "",
-  "gui.guide.page1.right.2": "",
-  "gui.guide.page1.right.3": "  Mas você tem a habilidade",
-  "gui.guide.page1.right.4": "para pegá-lo sem deixar",
-  "gui.guide.page1.right.5": "o peixe nadar para longe?",
-  "gui.guide.page1.right.6": "",
-  "gui.guide.page1.right.7": "",
-  "gui.guide.page1.right.8": "  Peixes mais fortes podem esconder",
-  "gui.guide.page1.right.9": "saques melhores! Esteja pronto para",
-  "gui.guide.page1.right.10": "uma luta difícil se desejar",
-  "gui.guide.page1.right.11": "pegar os melhores tesouros.",
-  "gui.guide.page1.right.12": "",
-  "gui.guide.page1.right.13": "",
-  "gui.guide.page1.right.14": "  Tesouros são a melhor",
-  "gui.guide.page1.right.15": "maneira de encontrar anzóis e",
-  "gui.guide.page1.right.16": "boias especiais para sua",
-  "gui.guide.page1.right.17": "<gradient-67>Vara do Starcatcher</gradient-90>, então tente",
-  "gui.guide.page1.right.18": "agarrá-los quando puder!",
+  "gui.guide.page.1.right.0": "",
+  "gui.guide.page.1.right.1": "",
+  "gui.guide.page.1.right.2": "",
+  "gui.guide.page.1.right.3": "    O ponto ideal básico.",
+  "gui.guide.page.1.right.4": "    Não há muito segredo.",
+  "gui.guide.page.1.right.5": "",
+  "gui.guide.page.1.right.6": "    Um ponto ideal congelado.",
+  "gui.guide.page.1.right.7": "    Melhor evitá-lo.",
+  "gui.guide.page.1.right.8": "",
+  "gui.guide.page.1.right.9": "    Pontos ideais aquáticos",
+  "gui.guide.page.1.right.10": "    somem ao desaparecer.",
+  "gui.guide.page.1.right.11": "",
+  "gui.guide.page.1.right.12": "    Pontos ideais de pedra",
+  "gui.guide.page.1.right.13": "    quase não dão progresso.",
+  "gui.guide.page.1.right.14": "",
+  "gui.guide.page.1.right.15": "    Pontos ideais de ouro",
+  "gui.guide.page.1.right.16": "    dão progresso de tesouro.",
 
 
-  "gui.guide.page2.left.0": "",
-  "gui.guide.page2.left.1": "",
-  "gui.guide.page2.left.2": "",
-  "gui.guide.page2.left.3": "",
-  "gui.guide.page2.left.4": "",
-  "gui.guide.page2.left.5": "  Anzóis têm vantagens especiais",
-  "gui.guide.page2.left.6": "para te ajudar a capturar até",
-  "gui.guide.page2.left.7": "os peixes mais desafiadores!",
+  "gui.guide.page.2.left.title": "Tesouros",
+  "gui.guide.page.2.left.0": "",
+  "gui.guide.page.2.left.1": "",
+  "gui.guide.page.2.left.2": "",
+  "gui.guide.page.2.left.3": "",
+  "gui.guide.page.2.left.4": "",
+  "gui.guide.page.2.left.5": "  Enquanto pesca, você pode",
+  "gui.guide.page.2.left.6": "sentir algo extra pesado",
+  "gui.guide.page.2.left.7": "puxando seu anzol para baixo!",
+  "gui.guide.page.2.left.8": "",
+  "gui.guide.page.2.left.9": "Você encontrou um <scgolden>tesouro</scgolden>!",
 
-  "gui.guide.page2.right.0": "",
-  "gui.guide.page2.right.1": "",
-  "gui.guide.page2.right.2": "",
-  "gui.guide.page2.right.3": "",
-  "gui.guide.page2.right.4": "",
-  "gui.guide.page2.right.5": "  Assim como os anzóis, boias",
-  "gui.guide.page2.right.6": "fornecem vantagens diferentes.",
+  "gui.guide.page.2.right.0": "",
+  "gui.guide.page.2.right.1": "",
+  "gui.guide.page.2.right.2": "",
+  "gui.guide.page.2.right.3": "",
+  "gui.guide.page.2.right.4": "  Agora, você tem a habilidade",
+  "gui.guide.page.2.right.5": "para pegar o tesouro sem",
+  "gui.guide.page.2.right.6": "perder sua captura?",
+  "gui.guide.page.2.right.7": "",
+  "gui.guide.page.2.right.8": "",
+  "gui.guide.page.2.right.9": "  Peixes mais fortes podem",
+  "gui.guide.page.2.right.10": "conceder loots melhores!",
+  "gui.guide.page.2.right.11": "",
+  "gui.guide.page.2.right.12": "",
+  "gui.guide.page.2.right.13": "  Esteja pronto para uma",
+  "gui.guide.page.2.right.14": "luta difícil se desejar o",
+  "gui.guide.page.2.right.15": "melhor loot, e até mesmo",
+  "gui.guide.page.2.right.16": "alguns cosméticos únicos.",
 
-  "gui.guide.page3.left.0": "",
-  "gui.guide.page3.left.1": "",
-  "gui.guide.page3.left.2": "",
-  "gui.guide.page3.left.3": "",
-  "gui.guide.page3.left.4": "",
-  "gui.guide.page3.left.5": "  Iscas atraem peixes mais rápido,",
-  "gui.guide.page3.left.6": "reduzindo o tempo de mordida.",
-  "gui.guide.page3.left.7": "Algumas iscas também podem atrair",
-  "gui.guide.page3.left.8": "espécies específicas.",
 
-  "gui.guide.page3.right.0": "",
-  "gui.guide.page3.right.1": "",
-  "gui.guide.page3.right.2": "",
-  "gui.guide.page3.right.3": "",
-  "gui.guide.page3.right.4": "",
-  "gui.guide.page3.right.5": "  Enquanto procura por saque",
-  "gui.guide.page3.right.6": "dentro de tesouros você",
-  "gui.guide.page3.right.7": "pode encontrar algumas",
-  "gui.guide.page3.right.8": "engenhocas antigas!",
 
-  "gui.guide.page4.left.0": "",
-  "gui.guide.page4.left.1": "",
-  "gui.guide.page4.left.2": "",
-  "gui.guide.page4.left.3": "",
-  "gui.guide.page4.left.4": "",
-  "gui.guide.page4.left.5": "  Troféus são uma exibição",
-  "gui.guide.page4.left.6": "da habilidade de alguém na pescaria",
-  "gui.guide.page4.left.7": "e com certeza deixarão",
-  "gui.guide.page4.left.8": "os outros envergonhados por sua",
-  "gui.guide.page4.left.9": "falta de trofeuzice.",
+  "gui.guide.page.3.left.title": "Melhorias",
+  "gui.guide.page.3.left.0": "",
+  "gui.guide.page.3.left.1": "",
+  "gui.guide.page.3.left.2": "",
+  "gui.guide.page.3.left.3": "",
+  "gui.guide.page.3.left.4": "",
+  "gui.guide.page.3.left.5": "  Melhorar sua vara",
+  "gui.guide.page.3.left.6": "será uma parte essencial",
+  "gui.guide.page.3.left.7": "da sua jornada de pesca.",
+  "gui.guide.page.3.left.8": "",
+  "gui.guide.page.3.left.9": "O melhor que um pescador",
+  "gui.guide.page.3.left.10": "pode desejar é uma vara com",
+  "gui.guide.page.3.left.11": "<sclegendary>Melhoria de Netherite<sclegendary>,",
+  "gui.guide.page.3.left.12": "aumentando seus atributos e",
+  "gui.guide.page.3.left.13": "desbloqueando a pesca na",
+  "gui.guide.page.3.left.14": "lava, mas isso levará um",
+  "gui.guide.page.3.left.15": "",
+  "gui.guide.page.3.left.16": "Até lá, um <scrare>Anzol de Cristal</scrare>",
+  "gui.guide.page.3.left.17": "servirá para pescar na lava.",
 
-  "gui.guide.page4.right.0": "",
-  "gui.guide.page4.right.1": "",
-  "gui.guide.page4.right.2": "",
-  "gui.guide.page4.right.3": "",
-  "gui.guide.page4.right.4": "",
-  "gui.guide.page4.right.5": "  Quem sabe que histórias",
-  "gui.guide.page4.right.6": "esquecidas você pode encontrar",
-  "gui.guide.page4.right.7": "encapsuladas em garrafas",
-  "gui.guide.page4.right.8": "à deriva nas ondas.",
+  "gui.guide.page.3.right.0": "",
+  "gui.guide.page.3.right.1": "",
+  "gui.guide.page.3.right.2": "",
+  "gui.guide.page.3.right.3": "",
+  "gui.guide.page.3.right.4": "  A melhor maneira de melhorar",
+  "gui.guide.page.3.right.5": "sua experiência de pesca é",
+  "gui.guide.page.3.right.6": "usando diferentes Anzóis,",
+  "gui.guide.page.3.right.7": "Boias e Iscas.",
+  "gui.guide.page.3.right.8": "",
+  "gui.guide.page.3.right.9": "  Eles fornecem diferentes",
+  "gui.guide.page.3.right.10": "modificadores que variam desde",
+  "gui.guide.page.3.right.11": "diminuir o tempo de atração,",
+  "gui.guide.page.3.right.12": "até mudar completamente",
+  "gui.guide.page.3.right.13": "o comportamento do peixe!",
+  "gui.guide.page.3.right.14": "",
+  "gui.guide.page.3.right.15": "  Cosméticos como chapéus",
+  "gui.guide.page.3.right.16": "de pesca também podem",
+  "gui.guide.page.3.right.17": "conter modificadores!",
+
+
+
+  "gui.guide.page.4.left.title": "Caixas de Pesca",
+  "gui.guide.page.4.left.0": "",
+  "gui.guide.page.4.left.1": "",
+  "gui.guide.page.4.left.2": "",
+  "gui.guide.page.4.left.3": "",
+  "gui.guide.page.4.left.4": "",
+  "gui.guide.page.4.left.5": "  As Caixas de Pesca serão",
+  "gui.guide.page.4.left.6": "suas melhores amigas na pesca!",
+  "gui.guide.page.4.left.7": "",
+  "gui.guide.page.4.left.8": "  Elas servem como",
+  "gui.guide.page.4.left.9": "armazenamento para seus",
+  "gui.guide.page.4.left.10": "peixes, além de outros itens",
+  "gui.guide.page.4.left.11": "relacionados à pesca, como",
+  "gui.guide.page.4.left.12": "Anzóis, Boias e Iscas.",
+  "gui.guide.page.4.left.13": "",
+  "gui.guide.page.4.left.14": "",
+
+  "gui.guide.page.4.right.0": "",
+  "gui.guide.page.4.right.1": "",
+  "gui.guide.page.4.right.2": "",
+  "gui.guide.page.4.right.3": "",
+  "gui.guide.page.4.right.4": "  Além de armazenar suas",
+  "gui.guide.page.4.right.5": "coisas, a caixa de pesca",
+  "gui.guide.page.4.right.6": "também permite que você",
+  "gui.guide.page.4.right.7": "troque os acessórios da vara!",
+  "gui.guide.page.4.right.8": "",
+  "gui.guide.page.4.right.9": "  Realmente um item essencial",
+  "gui.guide.page.4.right.10": "se você planeja pescar por",
+  "gui.guide.page.4.right.11": "todo o Mundo Superior.",
+
+
+
+  "gui.guide.page.5.left.title": "Anzóis e Boias",
+  "gui.guide.page.5.left.0": "",
+  "gui.guide.page.5.left.1": "",
+  "gui.guide.page.5.left.2": "",
+  "gui.guide.page.5.left.3": "",
+  "gui.guide.page.5.left.4": "",
+  "gui.guide.page.5.left.5": "  Anzóis e Boias fornecem",
+  "gui.guide.page.5.left.6": "uma ampla gama de",
+  "gui.guide.page.5.left.7": "modificadores para escolher.",
+  "gui.guide.page.5.left.8": "",
+  "gui.guide.page.5.left.9": "  É importante escolher a",
+  "gui.guide.page.5.left.10": "combinação correta para",
+  "gui.guide.page.5.left.11": "a tarefa em questão!",
+  "gui.guide.page.5.left.12": "",
+  "gui.guide.page.5.left.13": "Troque-os em uma Caixa de Pesca.",
+
+  "gui.guide.page.5.right.title": "Iscas",
+  "gui.guide.page.5.right.0": "",
+  "gui.guide.page.5.right.1": "",
+  "gui.guide.page.5.right.2": "",
+  "gui.guide.page.5.right.3": "",
+  "gui.guide.page.5.right.4": "",
+  "gui.guide.page.5.right.5": "  A maioria das iscas reduzirá",
+  "gui.guide.page.5.right.6": "seu tempo de atração, mas elas",
+  "gui.guide.page.5.right.7": "também podem ter modificadores únicos!",
+  "gui.guide.page.5.right.8": "",
+  "gui.guide.page.5.right.9": "  Alguns peixes são atraídos",
+  "gui.guide.page.5.right.10": "por iscas específicas, e usar",
+  "gui.guide.page.5.right.11": "baldes permitirá que você",
+  "gui.guide.page.5.right.12": "pesque a versão em balde",
+  "gui.guide.page.5.right.13": "da sua captura!",
+
+
+  "gui.guide.page.6.left.title": "Cosméticos",
+  "gui.guide.page.6.left.0": "",
+  "gui.guide.page.6.left.1": "",
+  "gui.guide.page.6.left.2": "",
+  "gui.guide.page.6.left.3": "",
+  "gui.guide.page.6.left.4": "",
+  "gui.guide.page.6.left.5": "  Existem vários itens",
+  "gui.guide.page.6.left.6": "cosméticos diferentes para",
+  "gui.guide.page.6.left.7": "coletar, variando de",
+  "gui.guide.page.6.left.8": "armaduras até visuais novos",
+  "gui.guide.page.6.left.9": "e chiques para sua vara.",
+  "gui.guide.page.6.left.10": "",
+  "gui.guide.page.6.left.11": "  Coletar todos os cosméticos",
+  "gui.guide.page.6.left.12": "é um desafio que apenas os",
+  "gui.guide.page.6.left.13": "pescadores mais estilosos",
+  "gui.guide.page.6.left.14": "ousariam tentar!",
+
+  "gui.guide.page.6.right.title": "Visuais de Equipamento",
+  "gui.guide.page.6.right.0": "",
+  "gui.guide.page.6.right.1": "",
+  "gui.guide.page.6.right.2": "",
+  "gui.guide.page.6.right.3": "",
+  "gui.guide.page.6.right.4": "",
+  "gui.guide.page.6.right.5": "  Cansado do seu equipamento",
+  "gui.guide.page.6.right.6": "com aparência chata? Se tiver",
+  "gui.guide.page.6.right.7": "sorte, você pode encontrar um",
+  "gui.guide.page.6.right.8": "Molde de Ferraria de",
+  "gui.guide.page.6.right.9": "Visual de Equipamento!",
+  "gui.guide.page.6.right.10": "",
+  "gui.guide.page.6.right.11": "  Assim como outros moldes,",
+  "gui.guide.page.6.right.12": "basta combiná-lo em uma",
+  "gui.guide.page.6.right.13": "bancada de ferraria e curtir",
+  "gui.guide.page.6.right.14": "o novo visual do seu equipamento.",
+
+
+  "gui.guide.page.7.left.title": "Torneios",
+  "gui.guide.page.7.left.0": "",
+  "gui.guide.page.7.left.1": "",
+  "gui.guide.page.7.left.2": "",
+  "gui.guide.page.7.left.3": "",
+  "gui.guide.page.7.left.4": "",
+  "gui.guide.page.7.left.5": "  Os torneios de pesca",
+  "gui.guide.page.7.left.6": "permitem que você teste",
+  "gui.guide.page.7.left.7": "suas habilidades competindo",
+  "gui.guide.page.7.left.8": "contra outros pescadores!",
+  "gui.guide.page.7.left.9": "",
+  "gui.guide.page.7.left.10": "",
+  "gui.guide.page.7.left.11": "  Configure as opções do",
+  "gui.guide.page.7.left.12": "torneio como quiser e",
+  "gui.guide.page.7.left.13": "convide seus amigos para",
+  "gui.guide.page.7.left.14": "uma competição amigável",
+  "gui.guide.page.7.left.15": "de pesca.",
+
+  "gui.guide.page.7.right.0": "",
+  "gui.guide.page.7.right.1": "",
+  "gui.guide.page.7.right.2": "",
+  "gui.guide.page.7.right.3": "",
+  "gui.guide.page.7.right.4": "  Pode até haver",
+  "gui.guide.page.7.right.5": "recompensas especiais por",
+  "gui.guide.page.7.right.6": "vencer um torneio!",
+  "gui.guide.page.7.right.7": "",
+  "gui.guide.page.7.right.8": "  Para começar, você só",
+  "gui.guide.page.7.right.9": "precisará de um Estande de Torneio.",
+
+
+
+  "gui.guide.page.8.left.title": "Mensagens",
+  "gui.guide.page.8.left.0": "",
+  "gui.guide.page.8.left.1": "",
+  "gui.guide.page.8.left.2": "",
+  "gui.guide.page.8.left.3": "",
+  "gui.guide.page.8.left.4": "",
+  "gui.guide.page.8.left.5": "  De vez em quando, você",
+  "gui.guide.page.8.left.6": "pode se deparar com algumas",
+  "gui.guide.page.8.left.7": "histórias há muito esquecidas",
+  "gui.guide.page.8.left.8": "presas dentro de uma garrafa",
+  "gui.guide.page.8.left.9": "à deriva entre as ondas.",
+
+  "gui.guide.page.8.right.0": "",
+  "gui.guide.page.8.right.1": "",
+  "gui.guide.page.8.right.2": "",
+  "gui.guide.page.8.right.3": "",
+  "gui.guide.page.8.right.4": "",
+  "gui.guide.page.8.right.5": "  Quem quer que as tenha deixado",
+  "gui.guide.page.8.right.6": "provavelmente já se foi,",
+  "gui.guide.page.8.right.7": "no entanto, você também pode",
+  "gui.guide.page.8.right.8": "escrever suas histórias",
+  "gui.guide.page.8.right.9": "em uma <sclegendary>carta</sclegendary>, colocá-la",
+  "gui.guide.page.8.right.10": "em uma garrafa e jogá-la",
+  "gui.guide.page.8.right.11": "no oceano!",
+  "gui.guide.page.8.right.12": "",
+  "gui.guide.page.8.right.13": "",
+  "gui.guide.page.8.right.14": "",
+  "gui.guide.page.8.right.15": "  Algum pescador solitário",
+  "gui.guide.page.8.right.16": "certamente a encontrará em algum momento...",
+
+  "gui.guide.page.9.left.title": "Caixa de Vendas",
+  "gui.guide.page.9.left.0": "",
+  "gui.guide.page.9.left.1": "",
+  "gui.guide.page.9.left.2": "",
+  "gui.guide.page.9.left.3": "",
+  "gui.guide.page.9.left.4": "",
+  "gui.guide.page.9.left.5": "  Você já pescou tanto",
+  "gui.guide.page.9.left.6": "que não sabe o que fazer",
+  "gui.guide.page.9.left.7": "com todos os peixes que",
+  "gui.guide.page.9.left.8": "você pegou?",
+  "gui.guide.page.9.left.9": "",
+  "gui.guide.page.9.left.10": "  Hora de enviá-los para",
+  "gui.guide.page.9.left.11": "a Caixa de Vendas!",
+
+
+  "gui.guide.page.9.right.0": "",
+  "gui.guide.page.9.right.1": "",
+  "gui.guide.page.9.right.2": "",
+  "gui.guide.page.9.right.3": "",
+  "gui.guide.page.9.right.4": "  Ao vender seus peixes,",
+  "gui.guide.page.9.right.5": "você pode obter algumas",
+  "gui.guide.page.9.right.6": "boas recompensas em troca.",
+  "gui.guide.page.9.right.7": "",
+  "gui.guide.page.9.right.8": "  Os peixes são avaliados",
+  "gui.guide.page.9.right.9": "de forma diferente com base",
+  "gui.guide.page.9.right.10": "em sua raridade, tamanho e",
+  "gui.guide.page.9.right.11": "até recebem um bônus extra",
+  "gui.guide.page.9.right.12": "pelas variantes douradas super raras!",
+  "gui.guide.page.9.right.13": "",
+  "gui.guide.page.9.right.14": "  Crie o monopólio definitivo",
+  "gui.guide.page.9.right.15": "de peixes e controle o",
+  "gui.guide.page.9.right.16": "mercado com o poder dos peixes",
+
+  "gui.guide.page.10.left.title": "Aquários",
+  "gui.guide.page.10.left.0": "",
+  "gui.guide.page.10.left.1": "",
+  "gui.guide.page.10.left.2": "",
+  "gui.guide.page.10.left.3": "",
+  "gui.guide.page.10.left.4": "",
+  "gui.guide.page.10.left.5": "  Aquários são uma ótima",
+  "gui.guide.page.10.left.6": "adição a qualquer casa e",
+  "gui.guide.page.10.left.7": "certamente farão seu",
+  "gui.guide.page.10.left.8": "espaço de convivência ganhar vida!",
+  "gui.guide.page.10.left.9": "",
+  "gui.guide.page.10.left.10": "  Eles podem ser personalizados",
+  "gui.guide.page.10.left.11": "com várias decorações",
+  "gui.guide.page.10.left.12": "diferentes para se adequar",
+  "gui.guide.page.10.left.13": "a qualquer ambiente e estilo.",
+
+  "gui.guide.page.10.right.0": "",
+  "gui.guide.page.10.right.1": "",
+  "gui.guide.page.10.right.2": "",
+  "gui.guide.page.10.right.3": "",
+  "gui.guide.page.10.right.4": "  Use um balde enquanto",
+  "gui.guide.page.10.right.5": "pesca para pegar um balde",
+  "gui.guide.page.10.right.6": "de peixe. Tenho certeza de que",
+  "gui.guide.page.10.right.7": "eles vão adorar sua nova casa!",
+  "gui.guide.page.10.right.8": "  ",
+
+  "gui.guide.page.11.left.title": "Mostruário de Livro",
+  "gui.guide.page.11.left.0": "",
+  "gui.guide.page.11.left.1": "",
+  "gui.guide.page.11.left.2": "",
+  "gui.guide.page.11.left.3": "",
+  "gui.guide.page.11.left.4": "",
+  "gui.guide.page.11.left.5": "  Se você quiser deixar",
+  "gui.guide.page.11.left.6": "seus amigos com inveja",
+  "gui.guide.page.11.left.7": "das suas incríveis habilidades",
+  "gui.guide.page.11.left.8": "de pesca, não há maneira",
+  "gui.guide.page.11.left.9": "melhor do que exibir sua",
+  "gui.guide.page.11.left.10": "coleção usando um Mostruário!",
+  "gui.guide.page.11.left.11": "",
+  "gui.guide.page.11.left.12": "  Blocos de mostruário podem",
+  "gui.guide.page.11.left.13": "exibir este livro, bem como",
+  "gui.guide.page.11.left.14": "peixes do starcatcher!",
+
+
+  "gui.guide.page.11.right.title": "Assinatura de Livro",
+  "gui.guide.page.11.right.0": "",
+  "gui.guide.page.11.right.1": "",
+  "gui.guide.page.11.right.2": "",
+  "gui.guide.page.11.right.3": "",
+  "gui.guide.page.11.right.4": "",
+  "gui.guide.page.11.right.5": "  Ao exibir seu livro,",
+  "gui.guide.page.11.right.6": "certifique-se de assiná-lo",
+  "gui.guide.page.11.right.7": "primeiro para vincular sua",
+  "gui.guide.page.11.right.8": "coleção ao livro! Caso contrário,",
+  "gui.guide.page.11.right.9": "o livro mostrará ao jogador",
+  "gui.guide.page.11.right.10": "a própria coleção dele",
+  "gui.guide.page.11.right.11": "em vez da sua.",
+  "gui.guide.page.11.right.12": "",
+  "gui.guide.page.11.right.13": "  Basta ir ao início",
+  "gui.guide.page.11.right.14": "do livro para assinar",
+  "gui.guide.page.11.right.15": "e você poderá compartilhar",
+  "gui.guide.page.11.right.16": "o livro com seus amigos!",
+
+
+
+
+
+  "gui.guide.page.12.left.title": "Troféus",
+  "gui.guide.page.12.left.0": "",
+  "gui.guide.page.12.left.1": "",
+  "gui.guide.page.12.left.2": "",
+  "gui.guide.page.12.left.3": "",
+  "gui.guide.page.12.left.4": "",
+  "gui.guide.page.12.left.5": "  Troféus são uma exibição",
+  "gui.guide.page.12.left.6": "da habilidade de alguém na pesca",
+  "gui.guide.page.12.left.7": "e certamente envergonharão",
+  "gui.guide.page.12.left.8": "os outros por sua falta",
+  "gui.guide.page.12.left.9": "de trofeuzidade.",
+  "gui.guide.page.12.left.10": "",
+  "gui.guide.page.12.left.11": "  Troféus morderão",
+  "gui.guide.page.12.left.12": "instantaneamente seu anzol assim",
+  "gui.guide.page.12.left.13": "que todas as condições forem atendidas.",
+
+  "gui.guide.page.12.right.title": "Segredos",
+  "gui.guide.page.12.right.0": "",
+  "gui.guide.page.12.right.1": "",
+  "gui.guide.page.12.right.2": "",
+  "gui.guide.page.12.right.3": "",
+  "gui.guide.page.12.right.4": "",
+  "gui.guide.page.12.right.5": "  Quem sabe quais histórias",
+  "gui.guide.page.12.right.6": "esquecidas você pode encontrar",
+  "gui.guide.page.12.right.7": "encapsuladas em garrafas",
+  "gui.guide.page.12.right.8": "à deriva nas ondas.",
+  "gui.guide.page.12.right.9": "",
+  "gui.guide.page.12.right.10": "  Fique de olho em",
+  "gui.guide.page.12.right.11": "dicas de tesouros deixados",
+  "gui.guide.page.12.right.12": "para trás por outros pescadores!",
 
   "gui.guide.trophy.all.total": "Total de peixes: ",
   "gui.guide.trophy.all.unique": "Peixes únicos: ",
@@ -599,17 +1148,17 @@
   "gui.guide.trophy.common.total": "Total de peixes comuns: ",
   "gui.guide.trophy.common.unique": "Peixes comuns únicos: ",
 
-  "gui.guide.trophy.uncommon.total": "Total de peixes <gradient-37>Incomuns</gradient-43>: ",
-  "gui.guide.trophy.uncommon.unique": "Peixes <gradient-37>Incomuns</gradient-43> únicos: ",
+  "gui.guide.trophy.uncommon.total": "Total de peixes <scuncommon>Incomuns<scuncommon>: ",
+  "gui.guide.trophy.uncommon.unique": "Peixes <scuncommon>Incomuns</scuncommon> únicos: ",
 
-  "gui.guide.trophy.rare.total": "Total de peixes <gradient-57>Raros</gradient-63>: ",
-  "gui.guide.trophy.rare.unique": "Peixes <gradient-57>Raros</gradient-63> únicos: ",
+  "gui.guide.trophy.rare.total": "Total de peixes <scrare>Raros</scrare>: ",
+  "gui.guide.trophy.rare.unique": "Peixes <scrare>Raros</scrare> únicos: ",
 
-  "gui.guide.trophy.epic.total": "Total de peixes <gradient-80>Épicos</gradient-90>: ",
-  "gui.guide.trophy.epic.unique": "Peixes <gradient-80>Épicos</gradient-90> únicos: ",
+  "gui.guide.trophy.epic.total": "Total de peixes <scepic>Épicos</scepic>: ",
+  "gui.guide.trophy.epic.unique": "Peixes <scepic>Épicos</scepic> únicos: ",
 
-  "gui.guide.trophy.legendary.total": "Total de peixes <rgb>Lendários</rgb>: ",
-  "gui.guide.trophy.legendary.unique": "Peixes <rgb>Lendários</rgb> únicos: ",
+  "gui.guide.trophy.legendary.total": "Total de peixes <sclegendary>Lendários</sclegendary>: ",
+  "gui.guide.trophy.legendary.unique": "Peixes <sclegendary>Lendários</sclegendary> únicos: ",
 
 
   "gui.guide.available": "Peixes na área:",
@@ -618,42 +1167,66 @@
   "gui.guide.lakes": "Lagos",
   "gui.guide.lakes.hover": "Biomas de superfície além de Rios e Oceanos",
 
+  "gui.guide.hover.dimension.correct": "✅ Dimensão",
+  "gui.guide.hover.dimension.incorrect": "❌ Dimensão",
+  "gui.guide.hover.biome.correct": "✅ Bioma",
+  "gui.guide.hover.biome.incorrect": "❌ Bioma",
+  "gui.guide.hover.daytime.correct": "✅ Horário",
+  "gui.guide.hover.daytime.incorrect": "❌ Horário",
+  "gui.guide.hover.weather.correct": "✅ Clima",
+  "gui.guide.hover.weather.incorrect": "❌ Clima",
+  "gui.guide.hover.elevation.correct": "✅ Elevação",
+  "gui.guide.hover.elevation.incorrect": "❌ Elevação",
+  "gui.guide.hover.caught_limit": "Limite de Captura: %s",
+
   "gui.guide.dimension": "Dimensão: ",
   "gui.guide.dimensions": "Dimensões: ",
   "gui.guide.biome": "Bioma: ",
   "gui.guide.biome_tags": "Tags de Bioma: ",
   "gui.guide.biomes": "Biomas: ",
+  "gui.guide.biomes.empty": "[Sem Biomas]",
   "gui.guide.blacklisted_biomes": "Biomas na Lista Negra: ",
   "gui.guide.blacklisted_biome_tags": "Tags de Bioma na Lista Negra: ",
   "gui.guide.blacklisted_dimensions": "Dimensões na Lista Negra: ",
-  "gui.guide.bait": "Isca: ",
+  "gui.guide.bait": "Prefere: ",
   "gui.guide.weather": "Clima: ",
   "gui.guide.raining": "Chovendo",
   "gui.guide.thundering": "Trovejando",
-  "gui.guide.clear": "Limpo",
+  "gui.guide.clear_chance": "Chance de clima limpo adicionada: %s",
+  "gui.guide.rain_chance": "Chance de chuva adicionada: %s",
+  "gui.guide.thunder_chance": "Chance de tempestade adicionada: %s",
   "gui.guide.daytime": "Horário: ",
   "gui.guide.day": "Dia",
   "gui.guide.noon": "Meio-dia",
   "gui.guide.night": "Noite",
   "gui.guide.midnight": "Meia-noite",
   "gui.guide.elevation": "Elevação: ",
-  "gui.guide.below": "Abaixo ",
-  "gui.guide.above": "Acima ",
-  "gui.guide.mountain": "Montanhas",
-  "gui.guide.surface": "Superfície",
-  "gui.guide.underground": "Subterrâneo",
-  "gui.guide.caves": "Cavernas",
-  "gui.guide.deepslate": "Ardosiabissal",
+  "gui.guide.below": "Abaixo de %s",
+  "gui.guide.above": "Acima de %s",
+  "gui.guide.around": "Em torno de %s",
+  "gui.guide.extra_chance": "Chance extra em %s: %s",
+  "gui.guide.range": "Alcance da Chance Extra: %s",
   "gui.guide.fluid": "Fluido: ",
   "gui.guide.no_restriction": "-------",
+  "gui.guide.bait_required": "A isca correta é necessária para esta captura!",
+  "gui.guide.bait_chance_added": "Chance adicionada pela isca:",
+  "gui.guide.caught_limit": "Limite de Captura: ",
+  "gui.guide.rarity_count.caught": "Pescados: ",
+  "gui.guide.rarity_count.single": "%s peixes",
+  "gui.guide.rarity_count.all": "Todos os %s peixes",
+  "gui.guide.chance": "%s de chance",
+
   "gui.guide.hover": "[passe o mouse]",
 
 
+  "gui.guide.rarity.golden": "Dourado",
+
+  "gui.guide.rarity.trash": "Lixo",
   "gui.guide.rarity.common": "Comum",
-  "gui.guide.rarity.uncommon": "<gradient-37>Incomum</gradient-43>",
-  "gui.guide.rarity.rare": "<gradient-57>Raro</gradient-63>",
-  "gui.guide.rarity.epic": "<gradient-80>Épico</gradient-90>",
-  "gui.guide.rarity.legendary": "<rgb>Lendário</rgb>",
+  "gui.guide.rarity.uncommon": "<scuncommon>Incomum</scuncommon>",
+  "gui.guide.rarity.rare": "<scrare>Raro</scrare>",
+  "gui.guide.rarity.epic": "<scepic>Épico</scepic>",
+  "gui.guide.rarity.legendary": "<sclegendary>Lendário</sclegendary>",
 
 
 
@@ -661,21 +1234,28 @@
   "gui.starcatcher.tournament.prize_pool": "Premiação",
   "gui.starcatcher.tournament.entry_fee": "Taxa de Entrada",
   "gui.starcatcher.tournament.inventory": "Inventário",
-  "gui.starcatcher.tournament.sign_up": "[Inscrever-se]",
-  "gui.starcatcher.tournament.signed_up": "[Inscrito!]",
+  "gui.starcatcher.tournament.sign_up": "[Clique para se Inscrever]",
+  "gui.starcatcher.tournament.signed_up": "Inscrito",
   "gui.starcatcher.tournament.other": "Outros:",
   "gui.starcatcher.tournament.status": "Status",
   "gui.starcatcher.tournament.scoring": "Pontuação",
+  "gui.starcatcher.tournament.scoring.later": "Mais sistemas de pontuação em breve!",
   "gui.starcatcher.tournament.duration": "Duração",
   "gui.starcatcher.tournament.start": "[Iniciar Torneio]",
   "gui.starcatcher.tournament.cancel": "[Cancelar Torneio]",
+  "gui.starcatcher.tournament.new": "[Novo Torneio]",
+  "gui.starcatcher.tournament.undone": "Isso não pode ser desfeito!",
   "gui.starcatcher.tournament.waiting": "Aguardando",
+
+  "gui.starcatcher.tournament.started": " começou!",
+  "gui.starcatcher.tournament.press_tab": "Pressione [Tab] para alternar o placar do torneio.",
 
   "gui.starcatcher.tournament.duration.days": "dias do Minecraft",
 
 
   "gui.starcatcher.tournament.status.setup": "Preparando",
   "gui.starcatcher.tournament.status.active": "Em andamento",
+  "gui.starcatcher.tournament.status.cancelled": "Cancelado",
   "gui.starcatcher.tournament.status.finished": "Completo",
 
   "gui.starcatcher.tournament.scoring.simple": "Simples",
@@ -692,37 +1272,37 @@
   "gui.secret_note.sample_note.4": "de garrafas, caso contrário elas não terão os dados",
   "gui.secret_note.sample_note.5": "corretos e podem travar o jogo! Tenha cuidado.",
 
-  "gui.secret_note.crystal_hook.0": "Dia 34",
-  "gui.secret_note.crystal_hook.1": "",
-  "gui.secret_note.crystal_hook.2": "Depois do problema de ontem eu decidi que é melhor",
-  "gui.secret_note.crystal_hook.3": "eu finalmente conseguir algumas ferramentas de diamante.",
-  "gui.secret_note.crystal_hook.4": "",
-  "gui.secret_note.crystal_hook.5": "Foi o que o meu eu do passado pensou de qualquer forma,",
-  "gui.secret_note.crystal_hook.6": "se eu soubesse que acidentalmente deixaria cair meu anzol",
-  "gui.secret_note.crystal_hook.7": "de cristal nos lagos de água de ardosiabissal",
-  "gui.secret_note.crystal_hook.8": "eu nunca teria descido lá.",
-  "gui.secret_note.crystal_hook.9": "",
-  "gui.secret_note.crystal_hook.10": "Se alguém encontrar esta carta flutuando entre os",
-  "gui.secret_note.crystal_hook.11": "oceanos, você é bem-vindo a pegar meu precioso",
-  "gui.secret_note.crystal_hook.12": "Anzol de Cristal. Uma vez que você tenha pescado pelo menos",
-  "gui.secret_note.crystal_hook.13": "um peixe lendário, os <gradient-30>Pescadores Anciões</gradient-50>",
-  "gui.secret_note.crystal_hook.14": "brilharão sua bênção sobre você e",
-  "gui.secret_note.crystal_hook.15": "meu anzol de cristal morderá seu anzol.",
-  "gui.secret_note.crystal_hook.16": "-Roguy",
+  "gui.secret_note.amethyst_hook.0": "Dia 34",
+  "gui.secret_note.amethyst_hook.1": "",
+  "gui.secret_note.amethyst_hook.2": "Depois do problema de ontem, decidi que é melhor",
+  "gui.secret_note.amethyst_hook.3": "eu finalmente colocar as mãos em algumas ferramentas de diamante.",
+  "gui.secret_note.amethyst_hook.4": "",
+  "gui.secret_note.amethyst_hook.5": "Pelo menos era isso que o meu eu do passado pensava,",
+  "gui.secret_note.amethyst_hook.6": "se eu soubesse que deixaria cair acidentalmente meu anzol",
+  "gui.secret_note.amethyst_hook.7": "de ametista nos lagos de água de ardosiabissal,",
+  "gui.secret_note.amethyst_hook.8": "eu nunca teria descido lá.",
+  "gui.secret_note.amethyst_hook.9": "",
+  "gui.secret_note.amethyst_hook.10": "Se alguém encontrar esta carta à deriva nos",
+  "gui.secret_note.amethyst_hook.11": "oceanos, sinta-se à vontade para pegar meu precioso",
+  "gui.secret_note.amethyst_hook.12": "Anzol de Ametista. Assim que você tiver pescado pelo menos",
+  "gui.secret_note.amethyst_hook.13": "um peixe épico, os <scuncommon>Pescadores Anciões</scuncommon>",
+  "gui.secret_note.amethyst_hook.14": "brilharão sua bênção sobre você e",
+  "gui.secret_note.amethyst_hook.15": "meu anzol de cristal morderá seu anzol.",
+  "gui.secret_note.amethyst_hook.16": "-Roguy",
 
   "gui.secret_note.lava_proof_bottle_1.0": "'Compre minhas garrafas! Compre minhas garrafas!'",
-  "gui.secret_note.lava_proof_bottle_1.1": "'Elas são <gradient-00>À Prova de Lava™</gradient-14>!!'",
+  "gui.secret_note.lava_proof_bottle_1.1": "'Elas são <sclava>À Prova de Lava™</sclava4>!!'",
   "gui.secret_note.lava_proof_bottle_1.2": "",
-  "gui.secret_note.lava_proof_bottle_1.3": "'Eu prometo que elas realmente são <gradient-00>À Prova de Lava™</gradient-14>!!'",
+  "gui.secret_note.lava_proof_bottle_1.3": "'Eu prometo que elas realmente são <sclava>À Prova de Lava™</sclava>™!'",
   "gui.secret_note.lava_proof_bottle_1.4": "",
   "gui.secret_note.lava_proof_bottle_1.5": "Estou tão cansado desses GOLPISTAS prometendo",
-  "gui.secret_note.lava_proof_bottle_1.6": "garrafas <gradient-00>À Prova de Lava™</gradient-14>, como se algo pudesse",
+  "gui.secret_note.lava_proof_bottle_1.6": "garrafas <sclava>À Prova de Lava™</sclava>, como se algo pudesse",
   "gui.secret_note.lava_proof_bottle_1.7": "sobreviver sendo submerso na lava! Quer ver",
-  "gui.secret_note.lava_proof_bottle_1.8": "o que eu acho das suas garrafas estúpidas <gradient-00>À Prova de Lava™</gradient-14>",
+  "gui.secret_note.lava_proof_bottle_1.8": "o que eu acho das suas estúpidas garrafas",
   "gui.secret_note.lava_proof_bottle_1.9": "??",
   "gui.secret_note.lava_proof_bottle_1.10": "",
   "gui.secret_note.lava_proof_bottle_1.11": "Esta carta vai direto para dentro desta tal",
-  "gui.secret_note.lava_proof_bottle_1.12": "'Garrafa <gradient-00>À Prova de Lava™</gradient-14>' e direto para a",
+  "gui.secret_note.lava_proof_bottle_1.12": "'Garrafa <sclava>À Prova de Lava™</sclava>' e direto para a",
   "gui.secret_note.lava_proof_bottle_1.13": "piscina de lava mais próxima que eu encontrar! Heh isso vai",
   "gui.secret_note.lava_proof_bottle_1.14": "mostrá-los.",
   "gui.secret_note.lava_proof_bottle_1.15": "",
@@ -732,10 +1312,10 @@
   "gui.secret_note.lava_proof_bottle_2.1": "Se alguém encontrar esta carta, eu gostaria",
   "gui.secret_note.lava_proof_bottle_2.2": "de pedir desculpas pela minha carta anterior.",
   "gui.secret_note.lava_proof_bottle_2.3": "",
-  "gui.secret_note.lava_proof_bottle_2.4": "Essas garrafas <gradient-00>À Prova de Lava™</gradient-14> realmente funcionam.",
+  "gui.secret_note.lava_proof_bottle_2.4": "Essas garrafas <sclava>À Prova de Lava™</sclava> realmente funcionam.",
   "gui.secret_note.lava_proof_bottle_2.5": "",
   "gui.secret_note.lava_proof_bottle_2.6": "Devo admitir que depois de tantos golpes e",
-  "gui.secret_note.lava_proof_bottle_2.7": "promessas de garrafas <gradient-00>À Prova de Lava™</gradient-14> eu estava",
+  "gui.secret_note.lava_proof_bottle_2.7": "promessas de garrafas <sclava>À Prova de Lava™</sclava> eu estava",
   "gui.secret_note.lava_proof_bottle_2.8": "cético e nunca sequer dei uma chance a elas.",
   "gui.secret_note.lava_proof_bottle_2.9": "",
   "gui.secret_note.lava_proof_bottle_2.10": "O que posso dizer, vivendo e aprendendo.",
@@ -753,7 +1333,7 @@
   "gui.secret_note.hopeful_note.4": "",
   "gui.secret_note.hopeful_note.5": "Já se passou mais de meio ano desde que eu",
   "gui.secret_note.hopeful_note.6": "embarquei nesta jornada para encontrar um",
-  "gui.secret_note.hopeful_note.7": "<gradient-55>Coração do Mar</gradient-65>. Minha esperança diminui mas",
+  "gui.secret_note.hopeful_note.7": "<scrare>Coração do Mar</scrare>. Minha esperança diminui, mas",
   "gui.secret_note.hopeful_note.8": "eu buscarei por ele até o fim dos meus dias.",
   "gui.secret_note.hopeful_note.9": "",
   "gui.secret_note.hopeful_note.10": "",
@@ -769,8 +1349,8 @@
   "gui.secret_note.hopeless_note.2": "",
   "gui.secret_note.hopeless_note.3": "Dia 202",
   "gui.secret_note.hopeless_note.4": "",
-  "gui.secret_note.hopeless_note.5": "Isto é inútil. Não existe <gradient-55>Coração do</gradient-65>",
-  "gui.secret_note.hopeless_note.6": "<gradient-55>Mar</gradient-65>. Aqueles BASTARDOS mentiram para mim. Eu",
+  "gui.secret_note.hopeless_note.5": "Isso é inútil. Não existe <scrare>Coração do</scrare>",
+  "gui.secret_note.hopeless_note.6": "<scrare>Mar</scrare>. Aqueles BASTARDOS mentiram para mim. Eu",
   "gui.secret_note.hopeless_note.7": "nunca voltarei para casa. O pequeno Jimmy viverá para sempre",
   "gui.secret_note.hopeless_note.8": "com o pensamento de que seu pai foi atrás de um",
   "gui.secret_note.hopeless_note.9": "item todo-poderoso imaginário.",
@@ -817,14 +1397,31 @@
   "gui.secret_note.wither_note.15": "",
 
 
+  "item.starcatcher.letter": "Carta",
+  "tooltip.starcatcher.letter.0": "Uma carta esperando para ser escrita e enviada.",
+
+  "item.starcatcher.bottled_letter": "Carta Engarrafada",
+  "tooltip.starcatcher.bottled_letter.0": "Uma carta aprisionada em uma garrafa.",
+  "tooltip.starcatcher.bottled_letter.1": "A única coisa que resta a fazer agora é jogá-la no",
+  "tooltip.starcatcher.bottled_letter.2": "oceano e deixá-la começar sua jornada.",
+
+  "item.starcatcher.bottled_letter.thrown": "Sua carta engarrafada começa sua jornada...",
+
+  "item.starcatcher.message_in_a_bottle": "Mensagem na Garrafa",
+  "tooltip.starcatcher.message_in_a_bottle.0": "Uma garrafa contendo uma mensagem escrita há muitas luas.",
+  "tooltip.starcatcher.message_in_a_bottle.1": "Parece que a única maneira de tirá-la é quebrando-a.",
+
+  "item.starcatcher.message": "Mensagem",
+  "tooltip.starcatcher.message.0": "A metade da mensagem de uma mensagem na garrafa.",
+  "tooltip.starcatcher.message.1": "Quem sabe há quanto tempo ela está à deriva nas ondas para chegar até você.",
+
+  "item.starcatcher.broken_bottle": "Garrafa quebrada",
+  "tooltip.starcatcher.broken_bottle.0": "Os restos de uma garrafa outrora intacta.",
 
   "item.starcatcher.secret_note": "Nota secreta",
   "tooltip.starcatcher.secret_note.0": "Uma velha nota secreta quase perdida no tempo.",
   "tooltip.starcatcher.secret_note.1": "Segurando nada mais do que os pensamentos de",
   "tooltip.starcatcher.secret_note.2": "aqueles provavelmente não mais entre nós.",
-
-  "item.starcatcher.broken_bottle": "Garrafa quebrada",
-  "tooltip.starcatcher.broken_bottle.0": "Os restos de uma garrafa outrora intacta.",
 
   "item.starcatcher.settings": "Configurações",
 
@@ -833,14 +1430,14 @@
 
   "item.starcatcher.scalding_bottle": "Garrafa escaldante",
   "tooltip.starcatcher.scalding_bottle.0": "Uma Garrafa quente escaldante. Nada notável sobre ela.",
-  "tooltip.starcatcher.scalding_bottle.1": "Espere... Poderia esta realmente ser uma garrafa <gradient-00>À Prova de Lava™</gradient-14>!?",
+  "tooltip.starcatcher.scalding_bottle.1": "Espere... Isso poderia realmente ser uma garrafa <sclava>À Prova de Lava™</sclava>!?",
   "tooltip.starcatcher.scalding_bottle.2": "Eu nunca pensei que elas fossem reais!",
   "tooltip.starcatcher.scalding_bottle.3": "Infelizmente parece que quebrá-la é a",
   "tooltip.starcatcher.scalding_bottle.4": "única maneira de tirar a mensagem...",
 
   "item.starcatcher.burning_bottle": "Garrafa em chamas",
   "tooltip.starcatcher.burning_bottle.0": "Uma garrafa em chamas. Não há como esconder, esta",
-  "tooltip.starcatcher.burning_bottle.1": "deve ser uma garrafa <gradient-00>À Prova de Lava™</gradient-14>!",
+  "tooltip.starcatcher.burning_bottle.1": "deve ser uma garrafa <sclava>À Prova de Lava™</sclava>!",
 
   "item.starcatcher.hopeless_bottle": "Garrafa sem esperança",
   "tooltip.starcatcher.hopeless_bottle.0": "Uma Garrafa sem esperança. Ou melhor, a mensagem dentro é.",
@@ -856,10 +1453,9 @@
   "item.starcatcher.withered_bottle": "Garrafa decomposta",
   "tooltip.starcatcher.withered_bottle.0": "Uma garrafa escura e sinistra.",
 
-
+  "item.starcatcher.cooked_starcaught_fish": "Peixe Cozido",
   "item.starcatcher.starcaught_bucket": "Balde Starcaught",
-  "tooltip.starcatcher.starcaught_bucket.before": "Balde de ",
-  "tooltip.starcatcher.starcaught_bucket.after": "",
+  "tooltip.starcatcher.starcaught_bucket.name": "Balde de %s",
   "tooltip.starcatcher.starcaught_bucket.creative.0": "[MODO CRIATIVO] Este balde sempre gerará uma Aurora. Para obter o [Balde de X] correspondente, você deve pegá-lo através de meios normais usando um balde como isca.",
   "tooltip.starcatcher.starcaught_bucket.creative.1": "Se você deseja invocar a entidade do peixe, pode clicar com o botão direito no chão com o item de peixe no modo criativo.",
 
@@ -900,7 +1496,7 @@
   "item.starcatcher.boot": "Bota",
   "tooltip.starcatcher.boot.0": "Uma bota de qualidade incrivelmente alta pescada em um lago.",
   "tooltip.starcatcher.boot.1": "O sonho de todo pescador.",
-  
+
 
 
 
@@ -914,8 +1510,7 @@
   "tooltip.starcatcher.crystalback_trout.1": "costas como forma de se proteger quando atacada.",
 
   "item.starcatcher.aurora": "Aurora",
-  "tooltip.starcatcher.aurora.name": "<rgb>Aurora</rgb>",
-  "tooltip.starcatcher.aurora.0": "Um lindo peixe <rgb>lendário</rgb>. Seu tamanho o torna uma captura",
+  "tooltip.starcatcher.aurora.0": "Um belo peixe <sclegendary>lendário</sclegendary>. Seu tamanho o torna uma",
   "tooltip.starcatcher.aurora.1": "incrivelmente difícil e evasiva, não deixando o pescador",
   "tooltip.starcatcher.aurora.2": "descansar se quiser levá-lo para casa como prova de suas habilidades.",
 
@@ -976,7 +1571,7 @@
 
   "item.starcatcher.sludge_catfish": "Bagre de Lodo",
   "tooltip.starcatcher.sludge_catfish.0": "Uma espécie de bagre sujo comum em águas turvas",
-  "tooltip.starcatcher.sludge_catfish.1": "de pântano. Dizem que faz um ótimo prato se lavado corretamente.",
+  "tooltip.starcatcher.sludge_catfish.1": "de pântano. Diz-se que dá um ótimo prato se lavado corretamente.",
 
   "item.starcatcher.lily_snapper": "Caranha de Lírio",
   "tooltip.starcatcher.lily_snapper.0": "Uma espécie de caranha longa e fina rara comum em pântanos.",
@@ -1033,7 +1628,7 @@
 
 
 
-
+  
   "item.starcatcher.crystalback_sturgeon": "Esturjão Dorso de Cristal",
   "tooltip.starcatcher.crystalback_sturgeon.0": "Um esturjão frequentemente encontrado em grandes altitudes,",
   "tooltip.starcatcher.crystalback_sturgeon.1": "conhecido por seu dorso de cristal que o ajuda a se defender",
@@ -1044,55 +1639,59 @@
   "tooltip.starcatcher.icetooth_sturgeon.1": "usa seus dentes afiados de gelo petrificado para morder a presa.",
 
   "item.starcatcher.boreal": "Boreal",
-  "tooltip.starcatcher.boreal.0": "Um peixe <rgb>lendário</rgb> encontrado em montanhas geladas.",
+  "tooltip.starcatcher.boreal.0": "Um peixe <sclegendary>lendário</sclegendary> encontrado em montanhas geladas.",
   "tooltip.starcatcher.boreal.1": "Um desafio real até para pescadores habilidosos, eles são",
   "tooltip.starcatcher.boreal.2": "conhecidos por se misturarem nas águas geladas tornando difícil",
   "tooltip.starcatcher.boreal.3": "seguir seus movimentos rápidos.",
+
   "item.starcatcher.crystalback_boreal": "Boreal Dorso de Cristal",
-  "tooltip.starcatcher.crystalback_boreal.0": "Embora nomeado após o peixe <rgb>lendário</rgb> <rgb>Boreal</rgb>, este",
+  "tooltip.starcatcher.crystalback_boreal.0": "Embora nomeado após o peixe <sclegendary>lendário</sclegendary> <sclegendary>Boreal</sclegendary>, este",
   "tooltip.starcatcher.crystalback_boreal.1": "peixe não é nem de longe tão difícil de capturar. Seu dorso brilhante o torna",
   "tooltip.starcatcher.crystalback_boreal.2": "fácil de rastrear e o dorso cristalizado diminui sua velocidade de nado.",
 
 
 
-
-
+  
   "item.starcatcher.silverfin_pike": "Lúcio de Barbatana Prateada",
   "tooltip.starcatcher.silverfin_pike.0": "Um grande lúcio comum em rios.",
 
+  "item.starcatcher.carpenjoe": "Carpenjoe",
+  "tooltip.starcatcher.carpenjoe.0": "Uma carpa majestosa brilhando em conhecimento de modding.",
+  "tooltip.starcatcher.carpenjoe.1": "Diz-se que os pescadores a comem para dar sorte antes de depurar.",
+  
   "item.starcatcher.willow_bream": "Sargo de Salgueiro",
-  "tooltip.starcatcher.willow_bream.0": "Um peixe realmente complicado de capturar que",
+  "tooltip.starcatcher.willow_bream.0": "Um peixe realmente difícil de pescar que",
   "tooltip.starcatcher.willow_bream.1": "só se revela durante a noite.",
-
+  
   "item.starcatcher.drifting_bream": "Sargo Derivante",
   "tooltip.starcatcher.drifting_bream.0": "Uma espécie de sargo conhecida por ficar vagarosamente",
   "tooltip.starcatcher.drifting_bream.1": "à deriva no topo dos rios durante a noite",
-
+  
   "item.starcatcher.downfall_bream": "Sargo do Aguaceiro",
   "tooltip.starcatcher.downfall_bream.0": "Um sargo difícil de avistar, mas fácil de capturar,",
   "tooltip.starcatcher.downfall_bream.1": "saindo apenas durante noites chuvosas.",
-
+  
   "item.starcatcher.hollowbelly_darter": "Dardo de Barriga Oca",
   "tooltip.starcatcher.hollowbelly_darter.0": "Um peixe de rio realmente pequeno e fácil de capturar.",
-
+  
   "item.starcatcher.mistback_chub": "Chub de Dorso Nebuloso",
   "tooltip.starcatcher.mistback_chub.0": "Um peixe de rio conhecido por suas escamas de cor prateada",
-
+  
   "item.starcatcher.bluegigi": "Bluegigi",
   "tooltip.starcatcher.bluegigi.0": "Não confunda com um bluegill,",
   "tooltip.starcatcher.bluegigi.1": "este pequeno peixe é bastante comum perto de rios.",
-
+  
   "item.starcatcher.dried_seaweed": "Alga Seca",
   "tooltip.starcatcher.dried_seaweed.0": "Um pedaço de alga morta que ficou",
   "tooltip.starcatcher.dried_seaweed.1": "preso no seu anzol.",
-
+  
 
 
 
   "item.starcatcher.frostgill_chub": "Chub de Guelra Gélida",
   "tooltip.starcatcher.frostgill_chub.0": "Um peixe popular entre pescadores",
   "tooltip.starcatcher.frostgill_chub.1": "comumente encontrado em rios",
-
+  
   "item.starcatcher.crystalback_minnow": "Lambari Dorso de Cristal",
   "tooltip.starcatcher.crystalback_minnow.0": "Um peixe realmente pequeno frequentemente usado como isca.",
   "tooltip.starcatcher.crystalback_minnow.1": "Esta espécie específica é mais comum à noite.",
@@ -1108,8 +1707,12 @@
 
 
   "item.starcatcher.ironjaw_herring": "Arenque de Mandíbula de Ferro",
-  "tooltip.starcatcher.ironjaw_herring.0": "Este tipo de arenque comum ao oceano frequentemente",
+  "tooltip.starcatcher.ironjaw_herring.0": "Este tipo de arenque é comum no oceano e frequentemente",
   "tooltip.starcatcher.ironjaw_herring.1": "tem uma mandíbula prateada petrificada que lembra ferro.",
+
+  "item.starcatcher.blue_herring": "Arenque Azul",
+  "tooltip.starcatcher.blue_herring.0": "Um peixe muito ilusório, sempre procurando pelo 46º oceano.",
+  "tooltip.starcatcher.blue_herring.1": "Os pescadores o usam para direções, pois ele sempre volta para onde tudo começou.",
 
   "item.starcatcher.deepjaw_herring": "Arenque de Mandíbula Profunda",
   "tooltip.starcatcher.deepjaw_herring.0": "Um peixe comum aos oceanos, frequentemente muito valorizado para trocas.",
@@ -1118,35 +1721,34 @@
   "tooltip.starcatcher.dusktail_snapper.0": "Um peixe pesado para seu tamanho frequentemente usado em pratos.",
 
   "item.starcatcher.joel": "Joel",
-  "tooltip.starcatcher.joel.0": "Um raro peixe <rgb>lendário</rgb> encontrado em oceanos.",
-  "tooltip.starcatcher.joel.1": "Ele tem um tamanho <rgb>legal</rgb>.",
+  "tooltip.starcatcher.joel.0": "Um peixe <sclegendary>lendário</sclegendary> raro encontrado nos oceanos.",
+  "tooltip.starcatcher.joel.1": "Ele tem um tamanho <sclegendary>legal</sclegendary>.",
 
   "item.starcatcher.redscaled_tuna": "Atum de Escamas Vermelhas",
   "tooltip.starcatcher.redscaled_tuna.0": "Um grande atum com escamas de cor vermelha.",
   "tooltip.starcatcher.redscaled_tuna.1": "Um único destes muitas vezes alimenta uma vila inteira.",
 
   "item.starcatcher.sea_bass": "Robalo",
-  "tooltip.starcatcher.sea_bass.0": "Um tipo popular de robalo comum ao oceano.",
-  "tooltip.starcatcher.sea_bass.1": "Ele se esconde durante a noite devido à sua falta de bravura.",
+  "tooltip.starcatcher.sea_bass.0": "Um robalo!",
+  "tooltip.starcatcher.sea_bass.1": "Não, espere—é pelo menos um C+!",
 
   "item.starcatcher.waterlogged_bottle": "Garrafa Encharcada",
   "tooltip.starcatcher.waterlogged_bottle.0": "Uma garrafa jogada no oceano muitas luas atrás.",
   "tooltip.starcatcher.waterlogged_bottle.1": "O que quer que ela contivesse uma vez, já se foi há muito tempo.",
 
   "item.starcatcher.bigeye_tuna": "Atum Olhudo",
-  "tooltip.starcatcher.bigeye_tuna.name": "<gradient-37>Atum Patudo</gradient-43>",
   "tooltip.starcatcher.bigeye_tuna.0": "Um peixe grande e pesado conhecido por seu olho grande.",
   "tooltip.starcatcher.bigeye_tuna.1": "Esta espécie é encontrada apenas em águas profundas do oceano.",
   "tooltip.starcatcher.bigeye_tuna.2": "Diz-se que anda perto de outros peixes Kaupen.",
 
-  "item.starcatcher.conch": "Búzio",
+  "block.starcatcher.conch": "Búzio",
   "tooltip.starcatcher.conch.0": "Os restos de um molusco com uma concha espiral frequentemente usada como ornamento.",
 
-  "item.starcatcher.clam": "Marisco",
+  "block.starcatcher.clam": "Ostra",
   "tooltip.starcatcher.clam.0": "Outrora um molusco bivalve vivendo nas areias da praia, agora apenas uma concha.",
 
   "item.starcatcher.shroomfish": "Peixe de Cogumelo",
-  "tooltip.starcatcher.shroomfish.0": "Uma antiga espécie de peixe <rgb>lendário</rgb> dominada pelos esporos",
+  "tooltip.starcatcher.shroomfish.0": "Uma antiga espécie de peixe <sclegendary>lendário</sclegendary> tomada pelos esporos",
   "tooltip.starcatcher.shroomfish.1": "das Ilhas de Cogumelos. Um prato realmente saboroso para apreciadores de cogumelos.",
 
   "item.starcatcher.sporefish": "Peixe de Esporo",
@@ -1159,7 +1761,7 @@
   "item.starcatcher.gold_fan": "Ventilador de Ouro",
   "tooltip.starcatcher.gold_fan.0": "Um peixe subterrâneo com uma cauda que lembra um leque.",
   "tooltip.starcatcher.gold_fan.1": "Por mais engraçado que fosse, ele não gira sua cauda como um ventilador para se mover.",
-
+  
   "item.starcatcher.geode_eel": "Enguia de Geodo",
   "tooltip.starcatcher.geode_eel.0": "Uma enguia brilhante, pesada e longa.",
   "tooltip.starcatcher.geode_eel.1": "Sua cor e textura vêm de ametista infundida",
@@ -1202,7 +1804,7 @@
 
 
   "item.starcatcher.lush_pike": "Lúcio Exuberante",
-  "tooltip.starcatcher.lush_pike.0": "Um lúcio <rgb>lendário</rgb> musgoso raramente",
+  "tooltip.starcatcher.lush_pike.0": "Um lúcio <sclegendary>lendário</sclegendary> musgoso raramente",
   "tooltip.starcatcher.lush_pike.1": "encontrado nas Cavernas Exuberantes. Uma captura realmente",
   "tooltip.starcatcher.lush_pike.2": "difícil até para pescadores experientes.",
 
@@ -1229,122 +1831,117 @@
   "item.starcatcher.bright_amethyst_snapper": "Caranha de Ametista Brilhante",
   "tooltip.starcatcher.bright_amethyst_snapper.0": "Um deslumbrante peixe de cor rosa encontrado no nível da ardosiabissal.",
   "tooltip.starcatcher.bright_amethyst_snapper.1": "Diz-se que nada em pares com uma Caranha de Ametista Escura.",
-
+  
   "item.starcatcher.dark_amethyst_snapper": "Caranha de Ametista Escura",
   "tooltip.starcatcher.dark_amethyst_snapper.0": "Um deslumbrante peixe de cor azul escura encontrado no nível da ardosiabissal.",
   "tooltip.starcatcher.dark_amethyst_snapper.1": "Diz-se que nada em pares com uma Caranha de Ametista Escura.",
-
+  
   "item.starcatcher.deepslatefish": "Peixe de Ardosiabissal",
   "tooltip.starcatcher.deepslatefish.0": "Um peixe difícil de capturar encontrado no alto das montanhas.",
   "tooltip.starcatcher.deepslatefish.1": "Brincadeira. É encontrado na ardosiabissal.",
-
+  
 
 
 
   "item.starcatcher.sculkfish": "Peixe de Sculk",
   "tooltip.starcatcher.sculkfish.0": "Um peixe traiçoeiro corrompido por Sculk.",
-
+  
   "item.starcatcher.ward": "Ward",
-  "tooltip.starcatcher.ward.0": "Um peixe <rgb>lendário</rgb> que dizem ser melhor amigo do Warden.",
-
+  "tooltip.starcatcher.ward.0": "Um peixe <sclegendary>lendário</sclegendary> que dizem ser o melhor amigo do warden.",
   "tooltip.starcatcher.ward.1": "Em vez de resistir ao Sculk, este peixe o abraçou e tornou-se mais forte por isso.",
+  
   "item.starcatcher.glowing_dark": "Escuridão Brilhante",
   "tooltip.starcatcher.glowing_dark.0": "Um peixe rápido encontrado apenas na escuridão profunda.",
-
+  
 
 
   "item.starcatcher.suneater": "Devorador do Sol",
   "tooltip.starcatcher.suneater.0": "Um peixe raro encontrado nos lagos de lava do Mundo Superior.",
   "tooltip.starcatcher.suneater.1": "Ele caça peixes-lua para comer.",
-
+  
   "item.starcatcher.pyrotrout": "Pirotruta",
   "tooltip.starcatcher.pyrotrout.0": "Uma truta adaptada para viver na lava da superfície do Mundo Superior.",
-
+  
   "item.starcatcher.obsidian_eel": "Enguia de Obsidiana",
-  "tooltip.starcatcher.obsidian_eel.0": "Uma espécie <rgb>lendária</rgb> de enguia feita de obsidiana, encontrada",
+  "tooltip.starcatcher.obsidian_eel.0": "Uma espécie <sclegendary>lendária</sclegendary> de enguia feita de obsidiana, encontrada",
   "tooltip.starcatcher.obsidian_eel.1": "durante dias chuvosos dentro dos lagos de lava do Mundo Superior.",
   "tooltip.starcatcher.obsidian_eel.2": "Muitas vezes requer vários pescadores para carregá-la",
   "tooltip.starcatcher.obsidian_eel.3": "de volta para a vila.",
-
+  
 
 
 
   "item.starcatcher.molten_shrimp": "Camarão Derretido",
   "tooltip.starcatcher.molten_shrimp.0": "Um pequeno camarão encontrado em rios de lava subterrâneos.",
-
+  
   "item.starcatcher.obsidian_crab": "Caranguejo de Obsidiana",
   "tooltip.starcatcher.obsidian_crab.0": "Um caranguejo ilusório encontrado perto de piscinas de lava subterrâneas.",
-
+  
 
 
 
   "item.starcatcher.scorched_bloodsucker": "Sanguessuga Chamuscada",
   "tooltip.starcatcher.scorched_bloodsucker.0": "Um parasita difícil de capturar encontrado em lagos de lava de ardosiabissal.",
-
+  
   "item.starcatcher.molten_deepslate_crab": "Caranguejo de Ardosiabissal Derretida",
   "tooltip.starcatcher.molten_deepslate_crab.0": "Um caranguejo de cor dourada encontrado em níveis de ardosiabissal perto de rios de lava.",
-
+  
 
 
   "item.starcatcher.cerberay": "Cerberarraia",
   "tooltip.starcatcher.cerberay.0": "Um peixe picante com 3 cabeças.",
   "tooltip.starcatcher.cerberay.1": "As 2 menores compartilham apenas 1 cérebro",
-
+  
   "item.starcatcher.embergill": "Guelra de Brasa",
   "tooltip.starcatcher.embergill.0": "Um peixe encontrado nos vastos oceanos de lava do Nether.",
-
+  
   "item.starcatcher.scalding_pike": "Lúcio Escaldante",
   "tooltip.starcatcher.scalding_pike.0": "Um peixe predador encontrado apenas no Nether.",
-
+  
   "item.starcatcher.cinder_squid": "Lula de Cinzas",
   "tooltip.starcatcher.cinder_squid.0": "Uma lula escorregadia encontrada no Nether.",
-
+  
   "item.starcatcher.lava_crab": "Caranguejo de Lava",
   "tooltip.starcatcher.lava_crab.0": "Esta espécie particular de caranguejo de alguma forma entrou no Nether",
   "tooltip.starcatcher.lava_crab.1": "e evoluiu uma carapaça protetora feita de rocha do nether.",
-
+  
   "item.starcatcher.magma_fish": "Peixe de Magma",
   "tooltip.starcatcher.magma_fish.0": "Um peixe comum do Nether conhecido por suas barbatanas vermelhas brilhantes.",
-
+  
   "item.starcatcher.glowstone_seeker": "Buscador de Pedra Luminosa",
   "tooltip.starcatcher.glowstone_seeker.0": "Um peixe que parece ser estranhamente atraído",
   "tooltip.starcatcher.glowstone_seeker.1": "por pedra luminosa, geralmente nadando sob ela.",
-
+  
   "item.starcatcher.glowstone_pufferfish": "Baiacu de Pedra Luminosa",
   "tooltip.starcatcher.glowstone_pufferfish.0": "Um baiacu cintilando exatamente como pedra luminosa.",
-
+  
   "item.starcatcher.willish": "Willish",
   "tooltip.starcatcher.willish.0": "Um peixe comumente conhecido por enganar",
   "tooltip.starcatcher.willish.1": "outros peixes para roubar sua comida.",
   "tooltip.starcatcher.willish.2": "Ele é incrivelmente feio e deve ser",
   "tooltip.starcatcher.willish.3": "descartado de volta para o Nether, onde pertence.",
-
+  
   "item.starcatcher.lava_crab_claw": "Garra de Caranguejo de Lava",
   "tooltip.starcatcher.lava_crab_claw.0": "Uma garra arrancada de um Caranguejo de Lava.",
   "tooltip.starcatcher.lava_crab_claw.1": "Devido à natureza agressiva dos Caranguejos de Lava,",
   "tooltip.starcatcher.lava_crab_claw.2": "é um achado bastante comum no Nether.",
-
+  
 
 
   "item.starcatcher.charfish": "Peixe-Carvão",
   "tooltip.starcatcher.charfish.0": "Um peixe roxo encontrado apenas no End.",
-
+  
   "item.starcatcher.chorus_crab": "Caranguejo do Coro",
   "tooltip.starcatcher.chorus_crab.0": "Esta espécie de caranguejo usa fruta do coro como sua principal fonte de alimento.",
   "tooltip.starcatcher.chorus_crab.1": "Diz-se que ele pode se teletransportar à vontade após se alimentar.",
-
+  
   "item.starcatcher.end_glow": "Brilho do End",
   "tooltip.starcatcher.end_glow.0": "Um peixe traiçoeiro encontrado apenas no End.",
   "tooltip.starcatcher.end_glow.1": "Endermen não parecem se importar com ele.",
-
+  
   "item.starcatcher.voidbiter": "Mordedor do Vazio",
-  "tooltip.starcatcher.voidbiter.0": "Um peixe <rgb>lendário</rgb> encontrado nas ilhas externas do End.",
+  "tooltip.starcatcher.voidbiter.0": "Um peixe <sclegendary>lendário</sclegendary> encontrado nas ilhas externas de O End.",
   "tooltip.starcatcher.voidbiter.1": "Tão poucos pescadores o viram que há rumores de que nem exista.",
-  "tooltip.starcatcher.voidbiter.2": "Diz-se que apenas <gradient-30>Pescadores Anciões</gradient-50> o capturaram",
-  "tooltip.starcatcher.voidbiter.3": "com sucesso antes.",
-  "advancements.husbandry.starcatcher.fisherman.title": "Pescador",
-  "advancements.husbandry.starcatcher.fisherman.description": "Pegue um Peixe sem errar nenhuma vez",
-  "fishing.combo": "COMBO DE %1$s",
-  "key.category.starcatcher.minigame": "Minigame do Starcatcher",
-  "key.starcatcher.minigame_hit": "Acerto no Minigame"
+  "tooltip.starcatcher.voidbiter.2": "Diz-se que apenas os <scuncommon>Pescadores Anciões</scuncommon> o pescaram",
+  "tooltip.starcatcher.voidbiter.3": "com sucesso antes."
 }
