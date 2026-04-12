@@ -8,7 +8,7 @@ import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -16,7 +16,8 @@ import java.util.function.Supplier;
 public abstract class AbstractMinigameModifier
 {
     public static final Codec<AbstractMinigameModifier> MINIGAME_MODIFIER_CODEC = ResourceLocation.CODEC
-            .dispatch(mod -> mod.getRegistryHolderOrThrow().getId(), loc -> Starcatcher.MINIGAME_MODIFIERS_REGISTRY.get(loc).get().getCodecOrThrow());
+            .dispatch(mod -> mod.getRegistryHolderOrThrow().getId(),
+                    loc ->  Starcatcher.MINIGAME_MODIFIERS_REGISTRY.get(loc).get().getCodecOrThrow().codec());
 
     public static final Codec<List<Supplier<Supplier<AbstractMinigameModifier>>>> DOUBLE_SUP_LIST_CODEC =
             AbstractMinigameModifier.MINIGAME_MODIFIER_CODEC.xmap(AbstractMinigameModifier::toDoubleSup, dSup -> dSup.get().get()).listOf();

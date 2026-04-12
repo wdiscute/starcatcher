@@ -16,7 +16,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -40,8 +39,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.nikdo53.neobackports.utils.ItemInteractionResult;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -55,12 +55,6 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     private static final VoxelShape SHAPE_TOP_PLATE = Block.box(0.0, 10.0, 0.0, 16.0, 14.0, 16.0);
     private static final VoxelShape SHAPE = Shapes.or(SHAPE_BASE, SHAPE_POST, SHAPE_TOP_PLATE);
 
-    @Override
-    public MapCodec<DisplayBlock> codec()
-    {
-        return null;
-    }
-
     public DisplayBlock()
     {
         super(BlockBehaviour.Properties.of().destroyTime(2));
@@ -70,19 +64,19 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected FluidState getFluidState(BlockState state)
+    public FluidState getFluidState(BlockState state)
     {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state)
+    public RenderShape getRenderShape(BlockState state)
     {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected boolean useShapeForLightOcclusion(BlockState state)
+    public boolean useShapeForLightOcclusion(BlockState state)
     {
         return true;
     }
@@ -94,7 +88,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         return SHAPE;
     }
@@ -112,31 +106,31 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected boolean isSignalSource(BlockState state)
+    public boolean isSignalSource(BlockState state)
     {
         return true;
     }
 
     @Override
-    protected int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side)
+    public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side)
     {
         return blockState.getValue(POWERED) ? 15 : 0;
     }
 
     @Override
-    protected int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side)
+    public int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side)
     {
         return side == Direction.UP && blockState.getValue(POWERED) ? 15 : 0;
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState state)
+    public boolean hasAnalogOutputSignal(BlockState state)
     {
         return true;
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos)
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos)
     {
         if (blockState.getValue(HAS_ITEM))
         {
@@ -151,7 +145,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
     {
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
         if (level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
@@ -161,7 +155,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    public ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         //if has book, open screen
         if (state.getValue(HAS_ITEM) && !player.isCrouching())
@@ -213,7 +207,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
     {
         if (!state.is(newState.getBlock()))
         {
@@ -258,7 +252,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
     @Nullable
     @Override
-    protected MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos)
+    public MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos)
     {
         return !state.getValue(HAS_ITEM) ? null : super.getMenuProvider(state, level, pos);
     }
@@ -270,8 +264,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType)
-    {
+    public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
         return false;
     }
 }

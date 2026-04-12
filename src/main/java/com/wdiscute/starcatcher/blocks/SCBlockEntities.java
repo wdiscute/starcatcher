@@ -8,15 +8,16 @@ import com.wdiscute.starcatcher.blocks.stand.StandBlockEntity;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public class SCBlockEntities
 {
-    public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-            DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped<BlockEntityType<?>> BLOCK_ENTITIES =
+            DeferredRegisterTyped.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Starcatcher.MOD_ID);
 
     public static final Supplier<BlockEntityType<StandBlockEntity>> STAND = BLOCK_ENTITIES.register("stand",
             () -> BlockEntityType.Builder.of(StandBlockEntity::new,

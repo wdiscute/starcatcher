@@ -1,8 +1,8 @@
 plugins {
+    id 'idea'
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.121'
-    id 'idea'
+    id 'net.neoforged.moddev.legacyforge' version '2.0.115'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -17,165 +17,92 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
-java {
-    withSourcesJar()
-}
-
 repositories
-{
-    //emi
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
+        {
+            mavenLocal()
 
-    //jei
-    maven {
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
+            //emi
+            maven {
+                name = "TerraformersMC"
+                url = "https://maven.terraformersmc.com/"
+            }
 
-    //jei
-    maven {
-        url = "https://modmaven.dev"
-    }
+            //favouriteless
+            maven {
+                url = "https://maven.favouriteless.net/releases"
+            }
 
-    //favouriteless
-    maven {
-        url = "https://maven.favouriteless.net/releases"
-    }
+            //modrinth
+            maven {
+                url = "https://api.modrinth.com/maven"
+            }
 
-    //curios
-    maven {
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
-    }
-
-    //modrinth
-    maven {
-        url = "https://api.modrinth.com/maven"
-    }
-
-    //tyson the ember
-    repositories {
-        maven { url = 'https://maven.tysontheember.dev' }
-    }
-
-    repositories {
-        exclusiveContent {
-            forRepository {
-                maven {
-                    url "https://cursemaven.com"
+            repositories {
+                exclusiveContent {
+                    forRepository {
+                        maven {
+                            url = "https://cursemaven.com"
+                        }
+                    }
+                    filter {
+                        includeGroup "curse.maven"
+                    }
                 }
             }
-            filter {
-                includeGroup "curse.maven"
-            }
         }
-    }
-}
 
 dependencies {
-    //libtooltips
-    jarJar(implementation("maven.modrinth:libtooltips:5J15zxaI"))
-
-    //selling bin
-    jarJar(implementation("curse.maven:project-1483881:7858252"))
 
     //tiny multiblock lib
-    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-1.21.1-${tiny_multiblock_lib_version}"))
+    jarJar(modImplementation("maven.modrinth:tiny-multiblock-lib:forge-1.20.1-${tiny_multiblock_lib_version}"))
+
+    //NeoBackports
+    jarJar(modImplementation("net.nikdo53.neobackports:NeoBackports:${neobackports_version}"))
+    interfaceInjectionData("net.nikdo53.neobackports:NeoBackports:${neobackports_version}")
 
     //EMI
-    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
-
-    //JEI
-    compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
-    //runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
-
-    //curios
-    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
-    //runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    modCompileOnly("dev.emi:emi-forge:${emi_version}:api")
+    modRuntimeOnly("dev.emi:emi-forge:${emi_version}")
 
     //Serene Seasons
-    compileOnly files(".compatmods/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
-    compileOnly files(".compatmods/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
-    //runtimeOnly files(".compatmods/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
-    //runtimeOnly files(".compatmods/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
+    modCompileOnly("maven.modrinth:serene-seasons:9.1.0.2")
+    modCompileOnly("maven.modrinth:glitchcore:0.0.1.1")
+
+    //mixin
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    implementation("io.github.llamalad7:mixinextras-forge:[0.5.0,)")
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.5.0"))
+
+
+    //runtimeOnly "maven.modrinth:serene-seasons:9.1.0.2"
+    //runtimeOnly "maven.modrinth:glitchcore:0.0.1.1"
+
+    //modImplementation("maven.modrinth:serene-seasons:9.1.0.2")
+    //modImplementation("maven.modrinth:glitchcore:0.0.1.1")
+
+    modCompileOnly ("curse.maven:terrafirmacraft-302973:6990923")
+
+    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:forge-1.20.1-${tiny_multiblock_lib_version}"))
 
     //Ecliptic Seasons
-    compileOnly files(".compatmods/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
-    //runtimeOnly files(".compatmods/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
+    modCompileOnly("curse.maven:ecliptic-seasons-1118306:7304569")
 
-    //terrafirmacraft for seasons
-    //compileOnly files(".compatmods/Patchouli-1.21.1-92-NEOFORGE.jar")
-    compileOnly files(".compatmods/TerraFirmaCraft-NeoForge-1.21.1-4.0.13-beta.jar")
-    //runtimeOnly files(".compatmods/Patchouli-1.21.1-92-NEOFORGE.jar")
-    //runtimeOnly files(".compatmods/TerraFirmaCraft-NeoForge-1.21.1-4.0.13-beta.jar")
-
-    //distant horizons
-    //compileOnly files(".compatmods/DistantHorizons-2.3.6-b-1.21.1-fabric-neoforge.jar")
-    //runtimeOnly files(".compatmods/DistantHorizons-2.3.6-b-1.21.1-fabric-neoforge.jar")
-
-    //ftb teams
-    compileOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
-    compileOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
-    compileOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
-
-    //runtimeOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
-    //runtimeOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
-    //runtimeOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
-
-    //quality foods compat
-    compileOnly("maven.modrinth:quality-food:vLFBpk1n")
-    runtimeOnly("maven.modrinth:quality-food:vLFBpk1n")
-
-    //shaders
-    compileOnly "curse.maven:irisshaders-455508:6661598"
-
-    // runtimeOnly "curse.maven:sodium-394468:6382651"
-    // runtimeOnly "curse.maven:irisshaders-455508:6661598"
-
-    
-   // implementation "curse.maven:carry-on-274259:7393892"
+    modCompileOnly("curse.maven:ftb-teams-forge-404468:6130786")
 
 
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifactId = base.archivesName.get()
-            from components.java
-        }
-    }
-
-    repositories {
-        if (System.getenv("MAVEN_USER") == null || System.getenv("MAVEN_PASS") == null) {
-            mavenLocal()
-        } else maven {
-            name = "wdReleases"
-            url = "https://maven.favouriteless.net/releases"
-
-            credentials {
-                username = System.getenv("MAVEN_USER")
-                password = System.getenv("MAVEN_PASS")
-            }
-        }
-    }
-}
 
 base {
     archivesName = mod_id
 }
 
-java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
-    withSourcesJar()
-}
+// Mojang ships Java 17 to end users in 1.20.1, so mods should target Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
-neoForge {
-    // Specify the version of NeoForge to use.
-    version = project.neo_version
+legacyForge {
+    // Specify the version of MinecraftForge to use.
+    version = project.minecraft_version + '-' + project.forge_version
 
     parchment {
         mappingsVersion = project.parchment_mappings_version
@@ -183,7 +110,9 @@ neoForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+
+    // interfaceInjectionData.from "src/main/resources/starcatcher.interfaces.json"
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -192,13 +121,14 @@ neoForge {
             client()
 
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
-        }
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
 
+
+        }
         server {
             server()
             programArgument '--nogui'
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
         // This run config launches GameTestServer and runs all registered gametests, then exits.
@@ -206,7 +136,7 @@ neoForge {
         // The gametest system is also enabled by default for other run configs under the /test command.
         gameTestServer {
             type = "gameTestServer"
-            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+            systemProperty 'forge.enabledGameTestNamespaces', project.mod_id
         }
 
         data {
@@ -231,14 +161,15 @@ neoForge {
             // Recommended logging level for the console
             // You can set various levels here.
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            logLevel = org.slf4j.event.Level.WARN
+            logLevel = org.slf4j.event.Level.DEBUG
         }
     }
 
     mods {
         // define mod <-> source bindings
         // these are used to tell the game which sources are for which mod
-        // multi mod projects should define one per mod
+        // mostly optional in a single mod project
+        // but multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
         }
@@ -248,29 +179,41 @@ neoForge {
 // Include resources generated by data generators.
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-// Sets up a dependency configuration called 'localRuntime'.
-// This configuration should be used instead of 'runtimeOnly' to declare
+// Sets up a dependency configuration called 'localRuntime' and a deobfuscating one called 'modLocalRuntime'
+// These configurations should be used instead of 'runtimeOnly' to declare
 // a dependency that will be present for runtime testing but that is
 // "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
+obfuscation {
+    createRemappingConfiguration(configurations.localRuntime)
+}
+
+// Uncomment the lines below if you wish to configure mixin. The mixin file should be named modid.mixins.json.
+mixin {
+    add sourceSets.main, "${mod_id}.mixins.refmap.json"
+    config "${mod_id}.mixins.json"
+}
 
 
-// This block of code expands all declared replace properties in the specified resource targets.
+// This block of code expands all declared replace properties
+// in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
-            neo_version            : neo_version,
+            forge_version          : forge_version,
+            forge_version_range    : forge_version_range,
             loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
             mod_version            : mod_version,
             mod_authors            : mod_authors,
-            neo_version_range      : neo_version_range
+            mod_description        : mod_description,
+            MixinConfigs           : "${mod_id}.mixins.json",
     ]
     inputs.properties replaceProperties
     expand replaceProperties
@@ -281,8 +224,21 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
 // this works with both building through Gradle and the IDE.
 sourceSets.main.resources.srcDir generateModMetadata
 // To avoid having to run "generateModMetadata" manually, make it run on every project reload
-neoForge.ideSyncTask generateModMetadata
+legacyForge.ideSyncTask generateModMetadata
 
+// Example configuration to allow publishing using the maven-publish plugin
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/repo"
+        }
+    }
+}
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation

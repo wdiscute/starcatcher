@@ -39,17 +39,17 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.network.PacketDistributor;
+import org.antlr.v4.codegen.model.Sync;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FishingBobEntity extends Projectile
-{
+public class FishingBobEntity extends Projectile {
     private static final Logger log = LoggerFactory.getLogger(FishingBobEntity.class);
     public static final EntityDataAccessor<Integer> STATE = SynchedEntityData.defineId(FishingBobEntity.class, EntityDataSerializers.INT);
     public static final EntityDataAccessor<Boolean> VOID = SynchedEntityData.defineId(FishingBobEntity.class, EntityDataSerializers.BOOLEAN);
@@ -116,9 +116,9 @@ public class FishingBobEntity extends Projectile
 
         survivesLava = SCDataComponents.getOrDefault(rod, SCDataComponents.NETHERITE_UPGRADE, false) || modifiers.stream().anyMatch(AbstractCatchModifier::survivesLava);
 
-        minTicksToFish = SCConfig.BASE_MIN_TICKS_TO_FISH.getAsInt();
-        maxTicksToFish = SCConfig.BASE_MAX_TICKS_TO_FISH.getAsInt();
-        chanceToFishEachTick = (float) SCConfig.BASE_CHANCE_TO_FISH.getAsDouble();
+        minTicksToFish = SCConfig.BASE_MIN_TICKS_TO_FISH.get();
+        maxTicksToFish = SCConfig.BASE_MAX_TICKS_TO_FISH.get();
+        chanceToFishEachTick = SCConfig.BASE_CHANCE_TO_FISH.get().floatValue();
 
         //modify base chances
         for (AbstractCatchModifier acm : modifiers)
@@ -481,9 +481,9 @@ public class FishingBobEntity extends Projectile
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder)
-    {
-        builder.define(STATE, 0);
-        builder.define(VOID, false);
+    protected void defineSynchedData() {
+        entityData.define(STATE, 0);
+        entityData.define(VOID, false);
+
     }
 }

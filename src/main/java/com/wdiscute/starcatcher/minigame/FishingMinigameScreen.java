@@ -32,8 +32,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.network.PacketDistributor;
 import org.joml.Quaternionf;
 import org.joml.Vector2d;
 
@@ -104,8 +104,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     protected boolean isHoldingMouse = false;
 
     public float renderScale;
-    public int xOffset = SCConfig.MINIGAME_X_OFFSET.getAsInt();
-    public int yOffset = SCConfig.MINIGAME_Y_OFFSET.getAsInt();
+    public int xOffset = SCConfig.MINIGAME_X_OFFSET.get();
+    public int yOffset = SCConfig.MINIGAME_Y_OFFSET.get();
 
 
     protected final List<ActiveSweetSpot> activeSweetSpots = new ArrayList<>();
@@ -242,9 +242,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTickNeo)
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTickNeo)
     {
-        super.renderBackground(guiGraphics, mouseX, mouseY, partialTickNeo);
+        super.render(guiGraphics, mouseX, mouseY, partialTickNeo);
+        renderBackground(guiGraphics);
 
         final float partialTick = SCConfig.VANILLA_PARTIAL_TICK.get() ? partialTickNeo : PartialTickHelper.INSTANCE.getPartialTicks(minecraft.level);
 

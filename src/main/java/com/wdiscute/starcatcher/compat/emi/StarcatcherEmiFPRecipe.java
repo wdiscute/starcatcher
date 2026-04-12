@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.compat.emi;
 
-import com.wdiscute.sellingbin.SellingBin;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;

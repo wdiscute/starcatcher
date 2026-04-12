@@ -15,17 +15,18 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredBlock;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public interface SCBlocks
 {
-    DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Starcatcher.MOD_ID);
-    DeferredRegister.Blocks HATS = DeferredRegister.createBlocks(Starcatcher.MOD_ID);
-    DeferredRegister.Blocks TACKLE_BOXES = DeferredRegister.createBlocks(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Blocks BLOCKS = DeferredRegisterTyped.createBlocks(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Blocks HATS = DeferredRegisterTyped.createBlocks(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Blocks TACKLE_BOXES = DeferredRegisterTyped.createBlocks(Starcatcher.MOD_ID);
 
     DeferredBlock<Block> TROPHY_OF_THE_OLDER_ANGLER = registerBlock("trophy_of_the_older_angler", TrophyOfTheOlderAngler::new);
     DeferredBlock<Block> TROPHY_DIAMOND = registerBlock("trophy_diamond", TrophyBlock::new);

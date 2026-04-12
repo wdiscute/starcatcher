@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.compat.emi;
 
-import com.wdiscute.sellingbin.SellingBin;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.recipe.FishingRodSkinSmithingRecipe;
 import com.wdiscute.starcatcher.recipe.NetheriteUpgradeSmithingRecipe;

@@ -9,6 +9,8 @@ import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -16,15 +18,15 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
 public class TooltipEvents
 {
 
@@ -38,7 +40,7 @@ public class TooltipEvents
     {
         List<Component> comp = new ArrayList<>();
         ItemStack stack = event.getItemStack();
-        boolean hasShiftDown = event.getFlags().hasShiftDown();
+        boolean hasShiftDown = Screen.hasShiftDown();
 
         //cache check
         if (stack == cachedItem && cachedTimer > 0 && hasShiftDown == cachedShift)

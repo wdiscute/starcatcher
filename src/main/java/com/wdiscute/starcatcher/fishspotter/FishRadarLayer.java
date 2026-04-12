@@ -6,16 +6,15 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.nikdo53.neobackports.screen.LayeredDraw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +64,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker)
+    public void render(GuiGraphics guiGraphics, float deltaTracker)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -81,14 +80,14 @@ public class FishRadarLayer implements LayeredDraw.Layer
         //smoothly moves ui in and out of screen
         if (!shouldShow)
             if (offScreen > -150)
-                offScreen -= 15 * deltaTracker.getGameTimeDeltaTicks();
+                offScreen -= 15 * deltaTracker;
             else
             {
                 offScreen = -150;
                 return;
             }
         else if (offScreen < 0)
-            offScreen += 15 * deltaTracker.getGameTimeDeltaTicks();
+            offScreen += 15 * deltaTracker;
         else
             offScreen = 0;
 
@@ -126,7 +125,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
         renderImage(guiGraphics, Starcatcher.rl("textures/gui/fish_radar/radar_animation" + animationFrame + ".png"));
 
         //recalculate every 100 ticks?
-        counterSinceLastRefresh += 1 * deltaTracker.getGameTimeDeltaTicks();
+        counterSinceLastRefresh += 1 * deltaTracker;
         if (counterSinceLastRefresh > 100) recalculate();
 
         for (int i = 0; i < fpsInArea.size(); i++)

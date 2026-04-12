@@ -6,12 +6,10 @@ import com.wdiscute.starcatcher.io.ExtraComposites;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 
 import java.util.*;
 
@@ -49,11 +47,11 @@ public class Tournament
             ).apply(instance, Tournament::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, Tournament> STREAM_CODEC = ExtraComposites.composite(
-            UUIDUtil.STREAM_CODEC, t -> t.tournamentUUID,
-            ByteBufCodecs.STRING_UTF8, t -> t.name,
+    public static final StreamCodec<Tournament> STREAM_CODEC = ExtraComposites.composite(
+            ByteBufCodecs.UUID, t -> t.tournamentUUID,
+            ByteBufCodecs.STRING, t -> t.name,
             Status.STREAM_CODEC, t -> t.status,
-            UUIDUtil.STREAM_CODEC, t -> t.owner,
+            ByteBufCodecs.UUID, t -> t.owner,
             TournamentPlayerScore.STREAM_CODEC.apply(ByteBufCodecs.list()), t -> t.playerScores,
             TournamentSettings.STREAM_CODEC, t -> t.settings,
             SingleStackContainer.STREAM_CODEC_LIST, t -> t.lootPool,
@@ -126,7 +124,7 @@ public class Tournament
         }
 
         public static final Codec<Status> CODEC = StringRepresentable.fromEnum(Status::values);
-        public static final StreamCodec<RegistryFriendlyByteBuf, Status> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Status.class);
+        public static final StreamCodec<Status> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Status.class);
         private final String key;
 
         @Override

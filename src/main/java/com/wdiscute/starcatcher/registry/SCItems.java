@@ -12,10 +12,11 @@ import com.wdiscute.starcatcher.registry.items.rod.StarcatcherFishingRodItem;
 import com.wdiscute.starcatcher.secretnotes.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredItem;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 public interface SCItems
 {
@@ -29,12 +30,12 @@ public interface SCItems
         }
     }
 
-    DeferredRegister.Items ITEMS = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items BUCKETABLE_FISHES_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items TEMPLATES_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items RODS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items HOOKS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items BOBBERS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items ITEMS = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items BUCKETABLE_FISHES_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items TEMPLATES_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items RODS_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items HOOKS_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items BOBBERS_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
 
 
     DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", BasicItem::new);

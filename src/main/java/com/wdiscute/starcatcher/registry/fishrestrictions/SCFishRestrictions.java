@@ -1,10 +1,10 @@
 package com.wdiscute.starcatcher.registry.fishrestrictions;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 
 import java.util.function.Supplier;
 

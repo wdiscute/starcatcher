@@ -25,7 +25,7 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import net.nikdo53.tinymultiblocklib.blockentities.AbstractMultiBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -99,9 +99,9 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void saveAdditional(CompoundTag tag)
     {
-        super.saveAdditional(tag, registries);
+        super.saveAdditional(tag);
 
         if (!isCenter()) return;
 
@@ -143,9 +143,9 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void load(CompoundTag tag)
     {
-        super.loadAdditional(tag, registries);
+        super.load(tag);
 
         if (!isCenter()) return;
 

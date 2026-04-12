@@ -1,8 +1,5 @@
 package com.wdiscute.starcatcher.datagen;
 
-import com.wdiscute.sellingbin.processors.AbstractProcessor;
-import com.wdiscute.sellingbin.processors.QualityFoodsProcessor;
-import com.wdiscute.sellingbin.registry.SBDataMaps;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -17,10 +14,9 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.neoforged.neoforge.common.data.DataMapProvider;
-import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
-import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import net.nikdo53.neobackports.datagen.DataMapProvider;
 
+import javax.annotation.processing.AbstractProcessor;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;

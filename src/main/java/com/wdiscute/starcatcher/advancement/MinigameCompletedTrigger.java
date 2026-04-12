@@ -1,54 +1,52 @@
 package com.wdiscute.starcatcher.advancement;
 
-import com.mojang.serialization.Codec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.advancements.Criterion;
+import com.google.gson.JsonObject;
+import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.advancements.critereon.*;
-import net.minecraft.core.Holder;
-import net.minecraft.core.HolderSet;
-import net.minecraft.core.RegistryCodecs;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.item.Item;
+import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Optional;
 
 public class MinigameCompletedTrigger extends SimpleCriterionTrigger<MinigameCompletedTrigger.Instance> {
 
+    public static final ResourceLocation ID = Starcatcher.rl("minigame_completed");
+
     @Override
-    public @NotNull Codec<Instance> codec() {
-        return Instance.CODEC;
+    public @NotNull ResourceLocation getId() {
+        return ID;
     }
 
-    public void trigger(ServerPlayer player, int hits, boolean perfect, boolean completedTreasure, int time, Holder<Item> caught) {
+    @Override
+    protected @NotNull Instance createInstance(JsonObject json, ContextAwarePredicate predicate, DeserializationContext deserializationContext) {
+        boolean perfect = GsonHelper.getAsBoolean(json, "perfect", false);
+        boolean treasure = GsonHelper.getAsBoolean(json, "treasure", false);
+
+        ItemPredicate items = ItemPredicate.fromJson(json.get("item"));
+        MinMaxBounds.Ints time = MinMaxBounds.Ints.fromJson(json.get("time"));
+        MinMaxBounds.Ints hits = MinMaxBounds.Ints.fromJson(json.get("hits"));
+        return new Instance(predicate, perfect, treasure, items, time, hits);
+    }
+
+    public void trigger(ServerPlayer player, int hits, boolean perfect, boolean completedTreasure, int time, ItemStack caught) {
         this.trigger(player, p -> p.test(hits, perfect, completedTreasure, time, caught));
     }
 
-    public Builder builder() {
+    public static Builder builder() {
         return new Builder();
     }
 
-    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
-    public static class Instance implements SimpleInstance {
-        private static final Codec<Instance> CODEC = RecordCodecBuilder.create(i -> i.group(
-                EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(in -> in.player),
-                Codec.BOOL.optionalFieldOf("perfect", false).forGetter(in -> in.perfect),
-                Codec.BOOL.optionalFieldOf("treasure", false).forGetter(in -> in.completedTreasure),
-                RegistryCodecs.homogeneousList(Registries.ITEM).optionalFieldOf("caught").forGetter(in -> in.caught),
-                MinMaxBounds.Ints.CODEC.optionalFieldOf("time").forGetter(in -> in.time),
-                MinMaxBounds.Ints.CODEC.optionalFieldOf("hits").forGetter(in -> in.hits)
-        ).apply(i, Instance::new));
+    public static class Instance extends AbstractCriterionTriggerInstance {
 
-        private final Optional<ContextAwarePredicate> player;
         private final boolean perfect;
         private final boolean completedTreasure;
-        private final Optional<HolderSet<Item>> caught;
-        private final Optional<MinMaxBounds.Ints> time;
-        private final Optional<MinMaxBounds.Ints> hits;
+        private final ItemPredicate caught;
+        private final MinMaxBounds.Ints time;
+        private final MinMaxBounds.Ints hits;
 
-        public Instance(Optional<ContextAwarePredicate> player, boolean perfect, boolean completedTreasure, Optional<HolderSet<Item>> caught, Optional<MinMaxBounds.Ints> time, Optional<MinMaxBounds.Ints> hits) {
-            this.player = player;
+        public Instance(ContextAwarePredicate player, boolean perfect, boolean completedTreasure, ItemPredicate caught, MinMaxBounds.Ints time, MinMaxBounds.Ints hits) {
+            super(ID, player);
             this.perfect = perfect;
             this.completedTreasure = completedTreasure;
             this.caught = caught;
@@ -56,26 +54,36 @@ public class MinigameCompletedTrigger extends SimpleCriterionTrigger<MinigameCom
             this.hits = hits;
         }
 
-        @Override
-        public @NotNull Optional<ContextAwarePredicate> player() {
-            return player;
-        }
-
-        public boolean test(int hits, boolean perfect, boolean completedTreasure, int time, Holder<Item> caught) {
+        public boolean test(int hits, boolean perfect, boolean completedTreasure, int time, ItemStack caught) {
             return !this.perfect || perfect &&
                     !this.completedTreasure || completedTreasure &&
-                    this.caught.map(s -> s.contains(caught)).orElse(true) &&
-                    this.time.map(i -> i.matches(time)).orElse(true) &&
-                    this.hits.map(i -> i.matches(hits)).orElse(true);
+                    this.caught.matches(caught) &&
+                    this.time.matches(time) &&
+                    this.hits.matches(hits);
+        }
+
+        @Override
+        public JsonObject serializeToJson(SerializationContext conditions) {
+            JsonObject value = super.serializeToJson(conditions);
+            if (perfect) value.addProperty("perfect", true);
+            if (completedTreasure) value.addProperty("treasure", true);
+            if (this.caught != ItemPredicate.ANY) {
+                value.add("item", this.caught.serializeToJson());
+            }
+            if (this.time != MinMaxBounds.Ints.ANY)
+                value.add("time", this.time.serializeToJson());
+            if (this.hits != MinMaxBounds.Ints.ANY)
+                value.add("hits", this.hits.serializeToJson());
+            return value;
         }
     }
 
-    public class Builder {
-        private ContextAwarePredicate player;
+    public static class Builder {
+        private ContextAwarePredicate player = ContextAwarePredicate.ANY;
         private boolean perfect = false,
-        treasure = false;
-        private HolderSet<Item> caught;
-        private MinMaxBounds.Ints time, hits;
+                treasure = false;
+        private ItemPredicate caught = ItemPredicate.ANY;
+        private MinMaxBounds.Ints time = MinMaxBounds.Ints.ANY, hits = MinMaxBounds.Ints.ANY;
 
 
         public Builder setPlayer(ContextAwarePredicate player) {
@@ -93,7 +101,7 @@ public class MinigameCompletedTrigger extends SimpleCriterionTrigger<MinigameCom
             return this;
         }
 
-        public Builder caught(HolderSet<Item> caught) {
+        public Builder caught(ItemPredicate caught) {
             this.caught = caught;
             return this;
         }
@@ -108,15 +116,15 @@ public class MinigameCompletedTrigger extends SimpleCriterionTrigger<MinigameCom
             return this;
         }
 
-        public Criterion<Instance> build() {
-            return MinigameCompletedTrigger.this.createCriterion(new Instance(
-                    Optional.ofNullable(this.player),
+        public Instance build() {
+            return new Instance(
+                    this.player,
                     perfect,
                     treasure,
-                    Optional.ofNullable(this.caught),
-                    Optional.ofNullable(this.time),
-                    Optional.ofNullable(this.hits)
-            ));
+                    this.caught,
+                    this.time,
+                    this.hits
+            );
         }
     }
 }

@@ -1,44 +1,45 @@
 package com.wdiscute.starcatcher.io;
 
 import com.mojang.datafixers.util.*;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.FriendlyByteBuf;
+import net.nikdo53.neobackports.io.StreamCodec;
 
 import java.util.function.Function;
 
 public class ExtraComposites
 {
-    public static <B, C, T1, T2, T3, T4, T5, T6> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static <C, T1, T2, T3, T4, T5, T6> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
             final Function6<T1, T2, T3, T4, T5, T6, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec<C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf buf)
             {
-                T1 t1 = codec1.decode(decode);
-                T2 t2 = codec2.decode(decode);
-                T3 t3 = codec3.decode(decode);
-                T4 t4 = codec4.decode(decode);
-                T5 t5 = codec5.decode(decode);
-                T6 t6 = codec6.decode(decode);
+                T1 t1 = codec1.decode(buf);
+                T2 t2 = codec2.decode(buf);
+                T3 t3 = codec3.decode(buf);
+                T4 t4 = codec4.decode(buf);
+                T5 t5 = codec5.decode(buf);
+                T6 t6 = codec6.decode(buf);
                 return factory.apply(t1, t2, t3, t4, t5, t6);
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));
@@ -50,28 +51,28 @@ public class ExtraComposites
         };
     }
 
-    public static <B, C, T1, T2, T3, T4, T5, T6, T7> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static < C, T1, T2, T3, T4, T5, T6, T7> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
+            final StreamCodec< T7> codec7,
             final Function<C, T7> getter7,
             final Function7<T1, T2, T3, T4, T5, T6, T7, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec< C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf decode)
             {
                 T1 t1 = codec1.decode(decode);
                 T2 t2 = codec2.decode(decode);
@@ -84,7 +85,7 @@ public class ExtraComposites
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));
@@ -97,30 +98,30 @@ public class ExtraComposites
         };
     }
 
-    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static < C, T1, T2, T3, T4, T5, T6, T7, T8> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
+            final StreamCodec< T7> codec7,
             final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
+            final StreamCodec< T8> codec8,
             final Function<C, T8> getter8,
             final Function8<T1, T2, T3, T4, T5, T6, T7, T8, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec< C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf decode)
             {
                 T1 t1 = codec1.decode(decode);
                 T2 t2 = codec2.decode(decode);
@@ -134,7 +135,7 @@ public class ExtraComposites
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));
@@ -148,32 +149,32 @@ public class ExtraComposites
         };
     }
 
-    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static < C, T1, T2, T3, T4, T5, T6, T7, T8, T9> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
+            final StreamCodec< T7> codec7,
             final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
+            final StreamCodec< T8> codec8,
             final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
+            final StreamCodec< T9> codec9,
             final Function<C, T9> getter9,
             final Function9<T1, T2, T3, T4, T5, T6, T7, T8, T9, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec< C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf decode)
             {
                 T1 t1 = codec1.decode(decode);
                 T2 t2 = codec2.decode(decode);
@@ -188,7 +189,7 @@ public class ExtraComposites
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));
@@ -203,34 +204,34 @@ public class ExtraComposites
         };
     }
 
-    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static < C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
+            final StreamCodec< T7> codec7,
             final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
+            final StreamCodec< T8> codec8,
             final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
+            final StreamCodec< T9> codec9,
             final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
+            final StreamCodec< T10> codec10,
             final Function<C, T10> getter10,
             final Function10<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec< C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf decode)
             {
                 T1 t1 = codec1.decode(decode);
                 T2 t2 = codec2.decode(decode);
@@ -246,7 +247,7 @@ public class ExtraComposites
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));
@@ -262,36 +263,36 @@ public class ExtraComposites
         };
     }
 
-    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static < C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
+            final StreamCodec< T7> codec7,
             final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
+            final StreamCodec< T8> codec8,
             final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
+            final StreamCodec< T9> codec9,
             final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
+            final StreamCodec< T10> codec10,
             final Function<C, T10> getter10,
-            final StreamCodec<? super B, T11> codec11,
+            final StreamCodec< T11> codec11,
             final Function<C, T11> getter11,
             final Function11<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec< C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf decode)
             {
                 T1 t1 = codec1.decode(decode);
                 T2 t2 = codec2.decode(decode);
@@ -308,7 +309,7 @@ public class ExtraComposites
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));
@@ -326,38 +327,38 @@ public class ExtraComposites
     }
 
 
-    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static < C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
+            final StreamCodec< T7> codec7,
             final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
+            final StreamCodec< T8> codec8,
             final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
+            final StreamCodec< T9> codec9,
             final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
+            final StreamCodec< T10> codec10,
             final Function<C, T10> getter10,
-            final StreamCodec<? super B, T11> codec11,
+            final StreamCodec< T11> codec11,
             final Function<C, T11> getter11,
-            final StreamCodec<? super B, T12> codec12,
+            final StreamCodec< T12> codec12,
             final Function<C, T12> getter12,
             final Function12<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec< C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf decode)
             {
                 T1 t1 = codec1.decode(decode);
                 T2 t2 = codec2.decode(decode);
@@ -375,7 +376,7 @@ public class ExtraComposites
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));
@@ -393,40 +394,40 @@ public class ExtraComposites
         };
     }
 
-    public static <B, C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> StreamCodec<B, C> composite(
-            final StreamCodec<? super B, T1> codec1,
+    public static < C, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> StreamCodec< C> composite(
+            final StreamCodec< T1> codec1,
             final Function<C, T1> getter1,
-            final StreamCodec<? super B, T2> codec2,
+            final StreamCodec< T2> codec2,
             final Function<C, T2> getter2,
-            final StreamCodec<? super B, T3> codec3,
+            final StreamCodec< T3> codec3,
             final Function<C, T3> getter3,
-            final StreamCodec<? super B, T4> codec4,
+            final StreamCodec< T4> codec4,
             final Function<C, T4> getter4,
-            final StreamCodec<? super B, T5> codec5,
+            final StreamCodec< T5> codec5,
             final Function<C, T5> getter5,
-            final StreamCodec<? super B, T6> codec6,
+            final StreamCodec< T6> codec6,
             final Function<C, T6> getter6,
-            final StreamCodec<? super B, T7> codec7,
+            final StreamCodec< T7> codec7,
             final Function<C, T7> getter7,
-            final StreamCodec<? super B, T8> codec8,
+            final StreamCodec< T8> codec8,
             final Function<C, T8> getter8,
-            final StreamCodec<? super B, T9> codec9,
+            final StreamCodec< T9> codec9,
             final Function<C, T9> getter9,
-            final StreamCodec<? super B, T10> codec10,
+            final StreamCodec< T10> codec10,
             final Function<C, T10> getter10,
-            final StreamCodec<? super B, T11> codec11,
+            final StreamCodec< T11> codec11,
             final Function<C, T11> getter11,
-            final StreamCodec<? super B, T12> codec12,
+            final StreamCodec< T12> codec12,
             final Function<C, T12> getter12,
-            final StreamCodec<? super B, T13> codec13,
+            final StreamCodec< T13> codec13,
             final Function<C, T13> getter13,
             final Function13<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, C> factory
     )
     {
-        return new StreamCodec<B, C>()
+        return new StreamCodec< C>()
         {
             @Override
-            public C decode(B decode)
+            public C decode(FriendlyByteBuf decode)
             {
                 T1 t1 = codec1.decode(decode);
                 T2 t2 = codec2.decode(decode);
@@ -445,7 +446,7 @@ public class ExtraComposites
             }
 
             @Override
-            public void encode(B encode, C apply)
+            public void encode(FriendlyByteBuf encode, C apply)
             {
                 codec1.encode(encode, getter1.apply(apply));
                 codec2.encode(encode, getter2.apply(apply));

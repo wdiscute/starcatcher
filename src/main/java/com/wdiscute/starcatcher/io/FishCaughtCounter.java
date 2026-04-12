@@ -9,14 +9,13 @@ import com.wdiscute.starcatcher.compat.FTBTeamsCompat;
 import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.io.network.FishCaughtPayload;
 import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import javax.annotation.Nonnull;
 import java.util.Map;
@@ -51,7 +50,7 @@ public record FishCaughtCounter(
             ).apply(instance, FishCaughtCounter::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, FishCaughtCounter> STREAM_CODEC = ExtraComposites.composite(
+    public static final StreamCodec<FishCaughtCounter> STREAM_CODEC = ExtraComposites.composite(
             ByteBufCodecs.VAR_INT, FishCaughtCounter::count,
             ByteBufCodecs.VAR_INT, FishCaughtCounter::fastestTicks,
             ByteBufCodecs.FLOAT, FishCaughtCounter::averageTicks,
@@ -85,7 +84,7 @@ public record FishCaughtCounter(
     {
         //returns false if player has already caught the golden fish of that fp
         Map<ResourceLocation, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
-        ResourceLocation loc = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKeyOrNull(fp);
+        ResourceLocation loc = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp);
         if (!fishesCaught.containsKey(loc)) return true;
         return !fishesCaught.get(loc).caughtGolden;
     }

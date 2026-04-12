@@ -1,11 +1,10 @@
 package com.wdiscute.starcatcher.io;
 
 import com.mojang.serialization.Codec;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.minecraftforge.items.ItemStackHandler;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +13,12 @@ import java.util.List;
 public record SingleStackContainer(@Deprecated ItemStack stackDoNotUse)
 {
 
-    public static final Codec<SingleStackContainer> CODEC = ItemStack.OPTIONAL_CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stackDoNotUse);
+    public static final Codec<SingleStackContainer> CODEC = ItemStack.CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stackDoNotUse);
 
     public static final Codec<List<SingleStackContainer>> LIST_CODEC = SingleStackContainer.CODEC.listOf();
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SingleStackContainer> STREAM_CODEC = StreamCodec.composite(
-            ItemStack.OPTIONAL_STREAM_CODEC, SingleStackContainer::stackDoNotUse,
+    public static final StreamCodec<SingleStackContainer> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.ITEM_STACK, SingleStackContainer::stackDoNotUse,
             SingleStackContainer::new
     );
 
@@ -28,7 +27,7 @@ public record SingleStackContainer(@Deprecated ItemStack stackDoNotUse)
         return new SingleStackContainer(itemStack.copy());
     }
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, List<SingleStackContainer>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
+    public static final StreamCodec<List<SingleStackContainer>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
 
     public static List<SingleStackContainer> fromItemStackHandler(ItemStackHandler prizePool)
     {

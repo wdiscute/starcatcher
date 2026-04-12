@@ -26,15 +26,13 @@ import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.registries.RegistryBuilder;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.slf4j.Logger;
 
 import java.util.function.Supplier;
@@ -65,34 +63,19 @@ public class Starcatcher
             ResourceKey.createRegistryKey(Starcatcher.rl("bobber_skin"));
 
     //registry
-    public static final Registry<AbstractFishRestriction> FISH_RESTRICTIONS_REGISTRY = new RegistryBuilder<>(FISH_RESTRICTIONS)
-            .sync(true)
-            .defaultKey(Starcatcher.rl("empty"))
-            .create();
+    public static IForgeRegistry<AbstractFishRestriction> FISH_RESTRICTIONS_REGISTRY;
 
-    public static final Registry<Supplier<AbstractMinigameModifier>> MINIGAME_MODIFIERS_REGISTRY = new RegistryBuilder<>(MINIGAME_MODIFIERS)
-            .sync(true)
-            .defaultKey(Starcatcher.rl("slower_vanishing"))
-            .create();
+    public static IForgeRegistry<Supplier<AbstractMinigameModifier>> MINIGAME_MODIFIERS_REGISTRY;
 
-    public static final Registry<Supplier<? extends AbstractSweetSpotBehaviour>> SWEET_SPOT_BEHAVIOUR_REGISTRY = new RegistryBuilder<>(SWEET_SPOT_BEHAVIOUR)
-            .sync(true)
-            .defaultKey(Starcatcher.rl("normal"))
-            .create();
+    public static IForgeRegistry<Supplier<? extends AbstractSweetSpotBehaviour>> SWEET_SPOT_BEHAVIOUR_REGISTRY;
 
-    public static final Registry<Supplier<AbstractCatchModifier>> CATCH_MODIFIERS_REGISTRY = new RegistryBuilder<>(CATCH_MODIFIERS)
-            .sync(true)
-            .defaultKey(Starcatcher.rl("decrease_lure_time"))
-            .create();
+    public static IForgeRegistry<Supplier<AbstractCatchModifier>> CATCH_MODIFIERS_REGISTRY;
 
-    public static final Registry<Supplier<AbstractTackleSkin>> TACKLE_SKIN_REGISTRY = new RegistryBuilder<>(TACKLE_SKIN)
-            .sync(true)
-            .defaultKey(Starcatcher.rl("pearl"))
-            .create();
+    public static IForgeRegistry<Supplier<AbstractTackleSkin>> TACKLE_SKIN_REGISTRY;
 
     public static ResourceLocation rl(String s)
     {
-        return ResourceLocation.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
+        return new ResourceLocation(Starcatcher.MOD_ID, s);
     }
 
     @OnlyIn(Dist.CLIENT)

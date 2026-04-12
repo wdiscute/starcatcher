@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.event;
 
-import com.wdiscute.sellingbin.event.SBvents;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.SCDataComponents;
@@ -27,7 +26,7 @@ import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.SpawnPlacementTypes;
+import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -35,37 +34,36 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.AddPackFindersEvent;
-import net.neoforged.neoforge.event.ItemAttributeModifierEvent;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.event.server.ServerStoppingEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
-import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
+import net.minecraftforge.event.AddPackFindersEvent;
+import net.minecraftforge.event.ItemAttributeModifierEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.DataPackRegistryEvent;
+import net.minecraftforge.registries.NewRegistryEvent;
+import net.nikdo53.neobackports.event.RegisterDataMapTypesEvent;
+import net.nikdo53.neobackports.registry.ForgeRegistryHelper;
 
 import java.util.List;
 
-@EventBusSubscriber(modid = Starcatcher.MOD_ID)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID)
 public class SCEvents
 {
     @SubscribeEvent
-    public static void serverStarted(RegisterSpawnPlacementsEvent event)
+    public static void serverStarted(SpawnPlacementRegisterEvent event)
     {
         event.register(
-                SCEntities.FISH.get(), SpawnPlacementTypes.IN_WATER,
+                SCEntities.FISH.get(), SpawnPlacements.Type.IN_WATER,
                 Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
                 FishEntity::validSpawnPlacement,
-                RegisterSpawnPlacementsEvent.Operation.REPLACE);
+                SpawnPlacementRegisterEvent.Operation.REPLACE);
     }
 
     @SubscribeEvent
@@ -141,9 +139,11 @@ public class SCEvents
     }
 
     @SubscribeEvent
-    public static void levelTick(ServerTickEvent.Post event)
+    public static void levelTick(TickEvent.ServerTickEvent event)
     {
-        TournamentHandler.tick(event);
+        if (event.phase == TickEvent.Phase.END) {
+            TournamentHandler.tick(event);
+        }
     }
 
     @SubscribeEvent
@@ -179,19 +179,28 @@ public class SCEvents
     @SubscribeEvent
     public static void addRegistry(NewRegistryEvent event)
     {
-        event.register(Starcatcher.SWEET_SPOT_BEHAVIOUR_REGISTRY);
-        event.register(Starcatcher.MINIGAME_MODIFIERS_REGISTRY);
-        event.register(Starcatcher.CATCH_MODIFIERS_REGISTRY);
-        event.register(Starcatcher.TACKLE_SKIN_REGISTRY);
-        event.register(Starcatcher.FISH_RESTRICTIONS_REGISTRY);
+        ForgeRegistryHelper.getInstance(Starcatcher.SWEET_SPOT_BEHAVIOUR)
+                .create(event, reg -> Starcatcher.SWEET_SPOT_BEHAVIOUR_REGISTRY = reg);
+
+        ForgeRegistryHelper.getInstance(Starcatcher.MINIGAME_MODIFIERS)
+                .create(event, reg -> Starcatcher.MINIGAME_MODIFIERS_REGISTRY = reg);
+
+        ForgeRegistryHelper.getInstance(Starcatcher.CATCH_MODIFIERS)
+                .create(event, reg -> Starcatcher.CATCH_MODIFIERS_REGISTRY = reg);
+
+        ForgeRegistryHelper.getInstance(Starcatcher.TACKLE_SKIN)
+                .create(event, reg -> Starcatcher.TACKLE_SKIN_REGISTRY = reg);
+
+        ForgeRegistryHelper.getInstance(Starcatcher.FISH_RESTRICTIONS)
+                .create(event, reg -> Starcatcher.FISH_RESTRICTIONS_REGISTRY = reg);
+
     }
 
     @SubscribeEvent
     public static void addDatapackRegistry(DataPackRegistryEvent.NewRegistry event)
     {
         event.dataPackRegistry(
-                Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC,
-                builder -> builder.maxId(512));
+                Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC);
     }
 
     @SubscribeEvent
@@ -202,7 +211,7 @@ public class SCEvents
 
         if (event.getItemStack().is(Items.BONE_MEAL) && level.getBlockState(event.getPos()).getBlock() instanceof FarmBlock)
         {
-            if (!level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
+            if (!level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.get())
             {
                 ItemStack is;
                 float i = level.getRandom().nextFloat();
@@ -223,7 +232,7 @@ public class SCEvents
                 if (event.getEntity() instanceof ServerPlayer player)
                 {
                     player.swing(event.getHand(), true);
-                    if (!player.hasInfiniteMaterials())
+                    if (!player.isCreative())
                         event.getItemStack().shrink(1);
                 }
             }

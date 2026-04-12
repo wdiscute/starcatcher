@@ -27,11 +27,8 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -54,8 +51,10 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
+import net.minecraftforge.fml.ModList;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -89,7 +88,7 @@ public record FishProperties(
             ).apply(instance, FishProperties::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, FishProperties> STREAM_CODEC = ExtraComposites.composite(
+    public static final StreamCodec<FishProperties> STREAM_CODEC = ExtraComposites.composite(
             CatchInfo.STREAM_CODEC, FishProperties::catchInfo,
             Star.STREAM_CODEC, FishProperties::star,
             ByteBufCodecs.VAR_INT, FishProperties::baseChance,
@@ -424,7 +423,7 @@ public record FishProperties(
             EXTRA("extra");
 
             public static final Codec<FishEntryType> CODEC = StringRepresentable.fromEnum(FishEntryType::values);
-            public static final StreamCodec<RegistryFriendlyByteBuf, FishEntryType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(FishEntryType.class);
+            public static final StreamCodec<FishEntryType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(FishEntryType.class);
             private final String name;
 
             FishEntryType(String key)
@@ -446,18 +445,18 @@ public record FishProperties(
                         Codec.BOOL.optionalFieldOf("always_spawn_entity", false).forGetter(CatchInfo::alwaysSpawnEntity),
                         BuiltInRegistries.ITEM.holderByNameCodec().optionalFieldOf("override_minigame_item", SCItems.MISSINGNO).forGetter(CatchInfo::overrideMinigameWith),
                         ResourceLocation.CODEC.optionalFieldOf("treasure_loot_table", U.rl("gameplay/fishing/treasure")).forGetter(CatchInfo::treasure),
-                        ItemStack.OPTIONAL_CODEC.optionalFieldOf("treasure_item", ItemStack.EMPTY).forGetter(CatchInfo::treasureIs),
+                        ItemStack.CODEC.optionalFieldOf("treasure_item", ItemStack.EMPTY).forGetter(CatchInfo::treasureIs),
                         FishEntryType.CODEC.optionalFieldOf("type", FishEntryType.FISH).forGetter(CatchInfo::fishEntryType)
                 ).apply(instance, CatchInfo::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, CatchInfo> STREAM_CODEC = ExtraComposites.composite(
+        public static final StreamCodec< CatchInfo> STREAM_CODEC = ExtraComposites.composite(
                 ByteBufCodecs.holderRegistry(Registries.ITEM), CatchInfo::fish,
                 ByteBufCodecs.holderRegistry(Registries.ITEM), CatchInfo::bucketedFish,
                 ByteBufCodecs.holderRegistry(Registries.ENTITY_TYPE), CatchInfo::entityToSpawn,
                 ByteBufCodecs.BOOL, CatchInfo::alwaysSpawnEntity,
                 ByteBufCodecs.holderRegistry(Registries.ITEM), CatchInfo::overrideMinigameWith,
-                ResourceLocation.STREAM_CODEC, CatchInfo::treasure,
-                ItemStack.OPTIONAL_STREAM_CODEC, CatchInfo::treasureIs,
+                ByteBufCodecs.RESOURCE_LOCATION, CatchInfo::treasure,
+                ByteBufCodecs.ITEM_STACK, CatchInfo::treasureIs,
                 FishEntryType.STREAM_CODEC, CatchInfo::fishEntryType,
                 CatchInfo::new
         );
@@ -633,11 +632,11 @@ public record FishProperties(
                         Codec.INT.fieldOf("debug_color").forGetter(Star::debugColor)
                 ).apply(instance, Star::new));
 
-        public static final StreamCodec<ByteBuf, Star> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.STRING_UTF8, Star::name,
+        public static final StreamCodec<Star> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING, Star::name,
                 ByteBufCodecs.INT, Star::x,
                 ByteBufCodecs.INT, Star::y,
-                ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), Star::connections,
+                ByteBufCodecs.STRING.apply(ByteBufCodecs.list()), Star::connections,
                 ByteBufCodecs.INT, Star::debugColor,
                 Star::new
         );
@@ -1321,7 +1320,7 @@ public record FishProperties(
                 ).apply(instance, Difficulty::new));
 
 
-        public static final StreamCodec<FriendlyByteBuf, Difficulty> STREAM_CODEC = StreamCodec.composite(
+        public static final StreamCodec<Difficulty> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.INT, Difficulty::hp,
                 ByteBufCodecs.INT, Difficulty::speed,
                 ByteBufCodecs.INT, Difficulty::penalty,
@@ -1608,7 +1607,7 @@ public record FishProperties(
 
         public static final Codec<List<SweetSpot>> LIST_CODEC = CODEC.listOf();
 
-        public static final StreamCodec<FriendlyByteBuf, SweetSpot> STREAM_CODEC = ExtraComposites.composite(
+        public static final StreamCodec<SweetSpot> STREAM_CODEC = ExtraComposites.composite(
                 ResourceLocation.STREAM_CODEC, SweetSpot::sweetSpotType,
                 ResourceLocation.STREAM_CODEC, SweetSpot::texturePath,
                 ByteBufCodecs.INT, SweetSpot::size,
@@ -1621,7 +1620,7 @@ public record FishProperties(
                 SweetSpot::new
         );
 
-        public static final StreamCodec<FriendlyByteBuf, List<SweetSpot>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+        public static final StreamCodec<List<SweetSpot>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
     }
 
     //endregion dif
@@ -1748,7 +1747,7 @@ public record FishProperties(
                         Codec.FLOAT.fieldOf("golden_chance").forGetter(SizeAndWeight::goldenChance)
                 ).apply(instance, SizeAndWeight::new));
 
-        public static final StreamCodec<ByteBuf, SizeAndWeight> STREAM_CODEC = StreamCodec.composite(
+        public static final StreamCodec<SizeAndWeight> STREAM_CODEC = StreamCodec.composite(
                 ByteBufCodecs.FLOAT, SizeAndWeight::sizeAverage,
                 ByteBufCodecs.FLOAT, SizeAndWeight::sizeDeviation,
                 ByteBufCodecs.FLOAT, SizeAndWeight::weightAverage,
@@ -1793,7 +1792,7 @@ public record FishProperties(
         GOLDEN("golden", 0, Style.EMPTY.applyFormat(ChatFormatting.GOLD), 0);
 
         public static final Codec<Rarity> CODEC = StringRepresentable.fromEnum(Rarity::values);
-        public static final StreamCodec<FriendlyByteBuf, Rarity> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Rarity.class);
+        public static final StreamCodec<Rarity> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Rarity.class);
         private final String key;
         private final int xp;
         private final Style style;

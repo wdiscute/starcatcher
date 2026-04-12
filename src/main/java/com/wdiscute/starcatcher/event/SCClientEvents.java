@@ -26,14 +26,14 @@ import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentOverlay;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.*;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.*;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-@EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
 public class SCClientEvents
 {
     @SubscribeEvent
@@ -69,10 +69,10 @@ public class SCClientEvents
     }
 
     @SubscribeEvent
-    public static void registerGuiLayers(RegisterGuiLayersEvent event)
+    public static void registerGuiLayers(RegisterGuiOverlaysEvent event)
     {
-        event.registerAboveAll(Starcatcher.rl("fish_tracker"), new FishRadarLayer());
-        event.registerAboveAll(Starcatcher.rl("tournament"), new TournamentOverlay());
+        event.registerAboveAll("fish_tracker", new FishRadarLayer());
+        event.registerAboveAll("tournament", new TournamentOverlay());
     }
 
     @SubscribeEvent

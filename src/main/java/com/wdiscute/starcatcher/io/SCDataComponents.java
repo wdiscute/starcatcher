@@ -6,13 +6,14 @@ import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.registry.SignedGuide;
 import com.wdiscute.starcatcher.secretnotes.LetterItem;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.io.components.DataComponentType;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -23,8 +24,8 @@ import java.util.function.UnaryOperator;
 
 public class SCDataComponents
 {
-    public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
-            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped.DataComponents DATA_COMPONENT_TYPES =
+            DeferredRegisterTyped.createDataComponents(Starcatcher.MOD_ID);
 
     //bucketed fish
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<SingleStackContainer>> BUCKETED_FISH = register(
@@ -77,7 +78,7 @@ public class SCDataComponents
 
     public static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {
-        stack.set(component, data);
+        stack.set(component.get(), data);
     }
 
     public static List<ItemStack> getSlotsInRod(ItemStack itemStack)
@@ -92,29 +93,29 @@ public class SCDataComponents
     @Nullable
     public static <T> T get(ItemStack stack, Supplier<DataComponentType<T>> component)
     {
-        return stack.get(component);
+        return stack.get(component.get());
     }
 
     public static <T> boolean has(ItemStack stack, Supplier<DataComponentType<T>> component)
     {
-        return stack.has(component);
+        return stack.has(component.get());
     }
 
     public static <T> void remove(ItemStack stack, Supplier<DataComponentType<T>> component)
     {
-        stack.remove(component);
+        stack.remove(component.get());
     }
 
     @Nonnull
     public static <T> T getOrDefault(ItemStack stack, Supplier<DataComponentType<T>> component, T defaultValue)
     {
-        return stack.getOrDefault(component, defaultValue);
+        return stack.getOrDefault(component.get(), defaultValue);
     }
 
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator)
     {
-        return DATA_COMPONENT_TYPES.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());
+        return DATA_COMPONENT_TYPES.registerComponentType(name, builderOperator);
     }
 
     public static void register(IEventBus eventBus)

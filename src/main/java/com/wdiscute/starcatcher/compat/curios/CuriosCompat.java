@@ -5,9 +5,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.items.IItemHandlerModifiable;
-import top.theillusivec4.curios.api.CuriosApi;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
 import java.util.ArrayList;
 import java.util.List;

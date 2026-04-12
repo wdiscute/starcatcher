@@ -36,23 +36,22 @@ Thank you everyone who stopped by my streams as I developed the mod and followed
 [[mixins]]
 config="starcatcher.mixins.json"
 
-# In neoforge.mods.toml:
 [[accessTransformers]]
 file="META-INF/accesstransformer.cfg"
 
 [[dependencies.starcatcher]] #optional
-modId="neoforge" #mandatory
-type="required" #mandatory
-versionRange="${neo_version_range}" #mandatory
-ordering="AFTER"
-side="BOTH"
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="${forge_version_range}" #mandatory
+    ordering="NONE"
+    side="BOTH"
 
 [[dependencies.starcatcher]]
-modId="minecraft"
-type="required"
-versionRange="${minecraft_version_range}"
-ordering="AFTER"
-side="BOTH"
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
 
 [[dependencies.starcatcher]]
 modId="libtooltips"
@@ -60,3 +59,4 @@ type="required"
 versionRange="[1.6, 1.9)"
 ordering="AFTER"
 side="CLIENT"
+

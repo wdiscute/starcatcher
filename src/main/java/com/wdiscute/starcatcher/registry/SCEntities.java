@@ -9,17 +9,17 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public class SCEntities
 {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
-            DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped<EntityType<?>> ENTITY_TYPES =
+            DeferredRegisterTyped.create(BuiltInRegistries.ENTITY_TYPE, Starcatcher.MOD_ID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<FishingBobEntity>> FISHING_BOB =
             register("fishing_bob", FishingBobEntity::new, MobCategory.MISC,

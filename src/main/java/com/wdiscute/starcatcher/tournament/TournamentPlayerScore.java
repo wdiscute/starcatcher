@@ -5,8 +5,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.io.ExtraComposites;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.List;
 import java.util.UUID;
@@ -35,8 +35,8 @@ public class TournamentPlayerScore
             ).apply(instance, TournamentPlayerScore::new)
     );
 
-    public static final StreamCodec<ByteBuf, TournamentPlayerScore> STREAM_CODEC = ExtraComposites.composite(
-            UUIDUtil.STREAM_CODEC, t -> t.playerUUID,
+    public static final StreamCodec<TournamentPlayerScore> STREAM_CODEC = ExtraComposites.composite(
+            ByteBufCodecs.UUID, t -> t.playerUUID,
             ByteBufCodecs.INT, TournamentPlayerScore::getScore,
             ByteBufCodecs.INT, TournamentPlayerScore::getMisses,
             ByteBufCodecs.INT, TournamentPlayerScore::getCommon,
