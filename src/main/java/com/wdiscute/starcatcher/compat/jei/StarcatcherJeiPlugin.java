@@ -6,20 +6,33 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.SCItems;
+import dev.emi.emi.api.EmiApi;
+import dev.emi.emi.api.stack.EmiIngredient;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.ingredients.ITypedIngredient;
+import mezz.jei.api.recipe.IFocus;
+import mezz.jei.api.recipe.IFocusFactory;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.runtime.IIngredientManager;
+import mezz.jei.api.runtime.IJeiRuntime;
+import mezz.jei.api.runtime.IRecipesGui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 @JeiPlugin
 public class StarcatcherJeiPlugin implements IModPlugin
@@ -28,6 +41,24 @@ public class StarcatcherJeiPlugin implements IModPlugin
     public static final ResourceLocation SLOT_BACKGROUND = SellingBin.rl("textures/gui/slot_background.png");
 
     public static List<StarcatcherJeiFPRecipe.Recipe> listRecipes = new ArrayList<>();
+
+    public static IRecipesGui iRecipesGui = null;
+    public static IFocusFactory iFocusFactory = null;
+    public static IIngredientManager iIngredientManager = null;
+
+    public static void displayRecipes(ItemStack is)
+    {
+        IFocus<ItemStack> focus = iFocusFactory.createFocus(RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, is);
+        iRecipesGui.show(focus);
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
+    {
+        iRecipesGui = jeiRuntime.getRecipesGui();
+        iFocusFactory = jeiRuntime.getJeiHelpers().getFocusFactory();
+        iIngredientManager = jeiRuntime.getIngredientManager();
+    }
 
     @Override
     public void registerCategories(IRecipeCategoryRegistration registration)
@@ -59,7 +90,7 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
         //clams info
         registration.addItemStackInfo(List.of(SCItems.PEARL.get().getDefaultInstance(),
-                SCBlocks.CLAM.get().asItem().getDefaultInstance()),
+                        SCBlocks.CLAM.get().asItem().getDefaultInstance()),
                 Component.translatable("emi.info.starcatcher.pearls.0"),
                 Component.translatable("emi.info.starcatcher.pearls.1")
         );
@@ -76,8 +107,8 @@ public class StarcatcherJeiPlugin implements IModPlugin
                 .stream().map(o -> o.value().getDefaultInstance()).toList());
 
         registration.addItemStackInfo(attachments,
-                        Component.translatable("emi.info.starcatcher.attachments.0"),
-                        Component.translatable("emi.info.starcatcher.attachments.1")
+                Component.translatable("emi.info.starcatcher.attachments.0"),
+                Component.translatable("emi.info.starcatcher.attachments.1")
         );
 
         //fine bones info

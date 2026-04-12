@@ -213,7 +213,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         {
             if (state.getValue(HAS_ITEM))
             {
-                this.popItem(state, level, pos);
+                this.popItem(level, pos);
             }
 
             super.onRemove(state, level, pos, newState, isMoving);
@@ -224,7 +224,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         }
     }
 
-    private void popItem(BlockState state, Level level, BlockPos pos)
+    private void popItem(Level level, BlockPos pos)
     {
         if (level.getBlockEntity(pos) instanceof DisplayBlockEntity displayBlockEntity)
         {
@@ -234,7 +234,6 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
             level.addFreshEntity(itementity);
             displayBlockEntity.clearContent();
         }
-
     }
 
     @OnlyIn(Dist.CLIENT)

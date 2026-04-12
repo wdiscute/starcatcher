@@ -9,6 +9,7 @@ import com.mojang.math.Axis;
 import com.wdiscute.sellingbin.registry.SBBlocks;
 import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.compat.emi.StarcatcherEmiPlugin;
+import com.wdiscute.starcatcher.compat.jei.StarcatcherJeiPlugin;
 import com.wdiscute.starcatcher.io.CaughtFishInfo;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import com.wdiscute.starcatcher.io.SCDataComponents;
@@ -2062,8 +2063,8 @@ public class FishingGuideScreen extends Screen
         if (ModList.get().isLoaded("emi"))
             StarcatcherEmiPlugin.displayRecipes(stack);
 
-        //if(ModList.get().isLoaded("jei"))
-        //StarcatcherJeiPlugin.displayRecipes(stack);
+        if (ModList.get().isLoaded("jei"))
+            StarcatcherJeiPlugin.displayRecipes(stack);
     }
 
     public void renderCenteredString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, int color)

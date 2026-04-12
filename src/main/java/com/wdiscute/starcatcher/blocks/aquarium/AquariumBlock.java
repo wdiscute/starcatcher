@@ -2,13 +2,17 @@ package com.wdiscute.starcatcher.blocks.aquarium;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.U;
+import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
+import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
+import com.wdiscute.starcatcher.registry.SCEntities;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -16,6 +20,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
@@ -75,6 +80,47 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     public VoxelShape getVisualShape(BlockState p_309057_, BlockGetter p_308936_, BlockPos p_308956_, CollisionContext p_309006_)
     {
         return Shapes.empty();
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    {
+        if (!state.is(newState.getBlock()))
+        {
+            this.popItem(level, pos);
+            super.onRemove(state, level, pos, newState, isMoving);
+        }
+    }
+
+    private void popItem(Level level, BlockPos pos)
+    {
+        if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe && !level.isClientSide)
+        {
+            if(abe.getFish().is(SCTags.BUCKETABLE_FISHES))
+            {
+                ItemStack itemstack = abe.getFish().copy();
+                FishEntity entity = SCEntities.FISH.get().create(level);
+
+                entity.setFish(itemstack);
+
+                entity.setPos(
+                        abe.getBlockPos().getX() + abe.fishTarget.x + 0.5F,
+                        abe.getBlockPos().getY() + abe.fishTarget.y + 0.5F,
+                        abe.getBlockPos().getZ() + abe.fishTarget.z + 0.5F
+                );
+
+                level.addFreshEntity(entity);
+
+            }
+            else
+            {
+                ItemStack itemstack = abe.getFish().copy();
+                ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
+                itementity.setDefaultPickUpDelay();
+                level.addFreshEntity(itementity);
+                abe.setFish(ItemStack.EMPTY);
+            }
+        }
     }
 
     @Override
