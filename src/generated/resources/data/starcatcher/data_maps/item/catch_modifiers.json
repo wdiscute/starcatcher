@@ -26,6 +26,26 @@
     "starcatcher:echoing_hook": [
       "starcatcher:guarantee_new_fish_always"
     ],
+    "starcatcher:fisherman_hat_black": [
+      "starcatcher:extra_item",
+      "starcatcher:hide_catch"
+    ],
+    "starcatcher:fisherman_hat_blue": [
+      "starcatcher:decrease_lure_time"
+    ],
+    "starcatcher:fisherman_hat_green": [
+      "starcatcher:big_decrease_lure_time"
+    ],
+    "starcatcher:fisherman_hat_light_blue": [
+      "starcatcher:increase_lure_time"
+    ],
+    "starcatcher:fisherman_hat_lime": [
+      "starcatcher:add_creeper",
+      "starcatcher:big_decrease_lure_time"
+    ],
+    "starcatcher:fisherman_hat_yellow": [
+      "starcatcher:extra_exp_based_on_performance"
+    ],
     "starcatcher:gold_hook": [
       "starcatcher:add_5_golden_chance"
     ],

@@ -15,6 +15,10 @@
     "starcatcher:exposed_copper_hook": [
       "starcatcher:slightly_faster_handle_speed"
     ],
+    "starcatcher:fisherman_hat_light_blue": [
+      "starcatcher:add_aqua_sweet_spot",
+      "starcatcher:freeze_on_miss"
+    ],
     "starcatcher:frozen_hook": [
       "starcatcher:prevent_frozen"
     ],
