@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-13T18:29:59.5477688	Recipes
+// 1.21.1	2026-04-13T18:30:35.6087364	Recipes
 f968cb2b961d2ef7a8e382e361521a5f59e6191b data/minecraft/advancement/recipes/building_blocks/dye_fisherman_hat_black.json
 5b83047db71b5f423bb95dffeac1e4ccd86a5157 data/minecraft/advancement/recipes/building_blocks/dye_fisherman_hat_blue.json
 07486a70ea2e97be89b71e86a795248417414a77 data/minecraft/advancement/recipes/building_blocks/dye_fisherman_hat_brown.json
@@ -227,7 +227,7 @@ cb5d7ef7995922881be324966f4f685ebdac8580 data/starcatcher/recipe/sky_rod.json
 db150761c4ed8b6b6fe54dc906d27d2f292aa5f3 data/starcatcher/recipe/sky_skin_smithing_template.json
 195cded9bbd1896bdad62596081c7a9a782ee22d data/starcatcher/recipe/slimed_rod.json
 c5db044947de2e5365168eb9f57c83bca15e6461 data/starcatcher/recipe/slimed_skin_smithing_template.json
-2655d9a7b8d8775fb5af3e84844ef1d01f9319f7 data/starcatcher/recipe/slimey_bobber.json
+03beee225c97ef2c48b86de27ab0738c0720e22a data/starcatcher/recipe/slimey_bobber.json
 a01eec17680fc163f4a09728e90f0a1597aeb129 data/starcatcher/recipe/split_hook.json
 819f1ee6fca68ff86f288b86b4a72813b165fcd5 data/starcatcher/recipe/starcatcher_guide.json
 4b06bedd3e622044ccd4865cfb6b6124e23e3d9c data/starcatcher/recipe/starcatcher_rod.json

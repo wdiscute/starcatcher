@@ -222,7 +222,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.SLIMEY_BOBBER)
                 .define('B', SCItems.BOBBER)
                 .define('S', Items.STICK)
-                .define('R', Items.SLIME_BLOCK)
+                .define('R', Items.SLIME_BALL)
                 .pattern(" RS")
                 .pattern("RBR")
                 .pattern("SR ")
