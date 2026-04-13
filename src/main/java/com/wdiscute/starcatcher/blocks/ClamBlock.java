@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.blocks;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -70,7 +71,8 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
             level.playSound(null, pos, SoundEvents.BONE_BLOCK_PLACE, SoundSource.BLOCKS, 0.6f, 0.6f);
             level.setBlockAndUpdate(pos, state.setValue(HAS_PEARL, false));
             Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 0.4, 0.5F).offsetRandom(level.random, 0.7F);
-            ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), new ItemStack(SCItems.PEARL.get()));
+            ItemStack stack = U.r.nextFloat() > 0.01f ? SCItems.PEARL.value().getDefaultInstance() : SCItems.PEARL_SMITHING_TEMPLATE.value().getDefaultInstance();
+            ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), stack);
             itementity.setDefaultPickUpDelay();
             level.addFreshEntity(itementity);
             return InteractionResult.SUCCESS;
