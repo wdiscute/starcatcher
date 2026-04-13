@@ -27,6 +27,8 @@
 
   "emi.info.starcatcher.fish_bones.0" : "Fish Bones are obtained after eating Starcaught Fish.",
 
+  "emi.info.starcatcher.pearl_template.0" : "This template may be found rarely when collecting pearls from clams.",
+
 
   "tag.starcatcher.is_beach" : "Beaches",
   "tag.starcatcher.is_birch_forest" : "Birch Forests",
@@ -154,6 +156,7 @@
 
   "entity.starcatcher.fish" : "Starcaught Fish",
 
+  "gui.starcatcher.bait_running_low" : "Your bait is running low...",
   "gui.starcatcher.reel_no_fish" : "There are no fishes here...",
   "gui.starcatcher.no_hook_or_bobber" : "A fishing rod won't work without a hook and a bobber...",
 

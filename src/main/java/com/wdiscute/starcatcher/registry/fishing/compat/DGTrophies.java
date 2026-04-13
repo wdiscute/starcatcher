@@ -122,12 +122,14 @@ public class DGTrophies
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 10, RarityCountRestriction.RarityCount.CountType.TOTAL))
                 .secret()
         );
 
         register(overworldSurfaceLava(SCItems.SCALDING_BOTTLE)
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 1, RarityCountRestriction.RarityCount.CountType.TOTAL))
                 .withHasGuideEntry(false)
                 .secret()
         );
@@ -135,6 +137,7 @@ public class DGTrophies
         register(overworldSurfaceLava(SCItems.BURNING_BOTTLE)
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.LEGENDARY, 2, RarityCountRestriction.RarityCount.CountType.TOTAL))
                 .withHasGuideEntry(false)
                 .secret()
         );
@@ -142,6 +145,7 @@ public class DGTrophies
         register(overworldSurfaceFish(SCItems.HOPEFUL_BOTTLE)
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.RARE, 10, RarityCountRestriction.RarityCount.CountType.TOTAL))
                 .withHasGuideEntry(false)
                 .secret()
         );
@@ -149,6 +153,7 @@ public class DGTrophies
         register(overworldSurfaceFish(SCItems.HOPELESS_BOTTLE)
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.RARE, 15, RarityCountRestriction.RarityCount.CountType.TOTAL))
                 .withHasGuideEntry(false)
                 .secret()
         );
@@ -156,6 +161,7 @@ public class DGTrophies
         register(overworldSurfaceFish(SCItems.TRUE_BLUE_BOTTLE)
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .addRarityRestriction(new RarityCountRestriction.RarityCount(FishProperties.Rarity.EPIC, 10, RarityCountRestriction.RarityCount.CountType.TOTAL))
                 .withHasGuideEntry(false)
                 .secret()
         );
@@ -222,7 +228,6 @@ public class DGTrophies
 
         //frog
         register(overworldSwampFish(SCItems.FROG_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -231,7 +236,6 @@ public class DGTrophies
 
         //naturalist
         register(overworldForestFish(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -240,7 +244,6 @@ public class DGTrophies
 
         //magma forged
         register(netherLavaBasaltDeltasFish(SCItems.MAGMAFORGED_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -249,7 +252,6 @@ public class DGTrophies
 
         //magma forged
         register(overworldSwampFish(SCItems.SLIMED_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -258,7 +260,6 @@ public class DGTrophies
 
         //bamboo rod
         register(overworldBambooJungleFish(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -268,7 +269,6 @@ public class DGTrophies
         //obsidian rod
         register(overworldSurfaceLava(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE)
                 .withWeather(WeatherRestriction.RAIN)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -277,7 +277,6 @@ public class DGTrophies
 
         //boner rod
         register(netherLavaSoulSandValleyFish(SCItems.BONER_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -289,7 +288,6 @@ public class DGTrophies
                 .addRestrictions(
                         DimensionRestriction.OVERWORLD,
                         ElevationRestriction.ABOVE_TWO_HUNDRED)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -298,7 +296,6 @@ public class DGTrophies
 
         //lush glowberry
         register(overworldLushCavesFish(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -307,7 +304,6 @@ public class DGTrophies
 
         //humble rod
         register(overworldRiverFish(SCItems.HUMBLE_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)
@@ -316,7 +312,6 @@ public class DGTrophies
 
         //shark rod
         register(overworldRiverFish(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE)
-                .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
                 .withPercentageChance(0.01f)

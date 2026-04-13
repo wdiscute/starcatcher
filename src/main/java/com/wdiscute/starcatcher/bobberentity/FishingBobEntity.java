@@ -375,6 +375,10 @@ public class FishingBobEntity extends Projectile {
                 if (!bait.is(Items.BUCKET))
                 {
                     bait.shrink(1);
+                    if(bait.getCount() < 5)
+                    {
+                        player.displayClientMessage(Component.translatable("gui.starcatcher.bait_running_low"), true);
+                    }
                     SCDataComponents.set(rod, SCDataComponents.BAIT, new SingleStackContainer(bait));
                 }
 

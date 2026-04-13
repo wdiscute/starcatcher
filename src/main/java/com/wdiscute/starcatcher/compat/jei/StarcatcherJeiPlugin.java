@@ -116,6 +116,12 @@ public class StarcatcherJeiPlugin implements IModPlugin
                 Component.translatable("emi.info.starcatcher.fish_bones.0")
         );
 
+        //fine bones info
+        registration.addItemStackInfo(SCItems.PEARL_SMITHING_TEMPLATE.get().getDefaultInstance(),
+                Component.translatable("emi.info.starcatcher.pearl_template.0")
+        );
+
+
     }
 
     @Override

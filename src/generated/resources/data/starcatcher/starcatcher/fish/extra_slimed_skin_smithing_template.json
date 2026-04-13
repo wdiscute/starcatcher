@@ -65,10 +65,6 @@
       }
     },
     {
-      "type": "starcatcher:caught_limit",
-      "limit": 1
-    },
-    {
       "type": "starcatcher:percentage_chance",
       "chance": 0.01
     }

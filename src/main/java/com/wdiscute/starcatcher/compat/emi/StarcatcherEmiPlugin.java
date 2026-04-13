@@ -86,7 +86,12 @@ public class StarcatcherEmiPlugin implements EmiPlugin
                 ),
                 SellingBin.rl("/fish_bones")));
 
-
+        //pearl template info
+        registry.addRecipe(new EmiInfoRecipe(List.of(EmiIngredient.of(Ingredient.of(SCItems.PEARL_SMITHING_TEMPLATE))),
+                List.of(
+                        Component.translatable("emi.info.starcatcher.pearl_template.0")
+                ),
+                SellingBin.rl("/pearl_template")));
 
         Registry<FishProperties> fps = FishProperties.getRegistry(Minecraft.getInstance().level);
 
