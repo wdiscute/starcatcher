@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "starcatcher:bobber"
+    },
+    "R": {
+      "item": "minecraft:slime_block"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " RS",
+    "RBR",
+    "SR "
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:slimey_bobber"
+  }
+}

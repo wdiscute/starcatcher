@@ -1102,8 +1102,13 @@
       "location": "minecraft:gameplay/fishing"
     },
     "starcatcher:willish": {
-      "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "is_loot_table": false,
+      "items": [
+        {
+          "count": 1,
+          "id": "starcatcher:kimbe_smithing_template"
+        }
+      ]
     },
     "starcatcher:willow_bream": {
       "is_loot_table": true,

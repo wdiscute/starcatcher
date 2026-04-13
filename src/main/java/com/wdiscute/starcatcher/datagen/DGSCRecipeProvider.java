@@ -222,10 +222,10 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.SLIMEY_BOBBER)
                 .define('B', SCItems.BOBBER)
                 .define('S', Items.STICK)
-                .define('B', Items.SLIME_BLOCK)
-                .pattern(" BS")
-                .pattern("BBB")
-                .pattern("SB ")
+                .define('R', Items.SLIME_BLOCK)
+                .pattern(" RS")
+                .pattern("RBR")
+                .pattern("SR ")
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
