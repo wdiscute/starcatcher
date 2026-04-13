@@ -3,11 +3,8 @@ package com.wdiscute.starcatcher.registry.fishing.compat;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.registry.fishrestrictions.BaitRestriction;
-import com.wdiscute.starcatcher.registry.fishrestrictions.DimensionRestriction;
-import com.wdiscute.starcatcher.registry.fishrestrictions.ElevationRestriction;
+import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.starcatcher.registry.FishProperties;
-import com.wdiscute.starcatcher.registry.fishrestrictions.RarityCountRestriction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
 
@@ -223,6 +220,15 @@ public class DGTrophies
                 .extra()
         );
 
+        //frog
+        register(overworldSwampFish(SCItems.FROG_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
         //naturalist
         register(overworldForestFish(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE)
                 .withMaxLimit(1)
@@ -241,6 +247,15 @@ public class DGTrophies
                 .extra()
         );
 
+        //magma forged
+        register(overworldSwampFish(SCItems.SLIMED_SKIN_SMITHING_TEMPLATE)
+                .withMaxLimit(1)
+                .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withHasGuideEntry(false)
+                .withPercentageChance(0.01f)
+                .extra()
+        );
+
         //bamboo rod
         register(overworldBambooJungleFish(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE)
                 .withMaxLimit(1)
@@ -252,6 +267,7 @@ public class DGTrophies
 
         //obsidian rod
         register(overworldSurfaceLava(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE)
+                .withWeather(WeatherRestriction.RAIN)
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
@@ -269,7 +285,7 @@ public class DGTrophies
         );
 
         //sky rod
-        register(overworldFish(SCItems.SKY_ROD)
+        register(overworldFish(SCItems.SKY_SKIN_SMITHING_TEMPLATE)
                 .addRestrictions(
                         DimensionRestriction.OVERWORLD,
                         ElevationRestriction.ABOVE_TWO_HUNDRED)

@@ -2,8 +2,7 @@
   "base_chance": 5,
   "catch_info": {
     "type": "extra",
-    "entity": "starcatcher:fish",
-    "item": "starcatcher:sky_rod"
+    "item": "starcatcher:slimed_skin_smithing_template"
   },
   "difficulty": {
     "decay": 0.0,
@@ -45,17 +44,25 @@
       "dimensions_blacklist": []
     },
     {
-      "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": [
+        "starcatcher:is_swamp"
+      ]
     },
     {
       "type": "starcatcher:elevation_restriction",
       "max_y": 2147483647,
-      "min_y": 100,
-      "translation_override": "gui.guide.elevation.skies"
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:murkwater_bait": 50
+      }
     },
     {
       "type": "starcatcher:caught_limit",
@@ -63,7 +70,7 @@
     },
     {
       "type": "starcatcher:percentage_chance",
-      "chance": 0.05
+      "chance": 0.01
     }
   ],
   "size_and_weight": {

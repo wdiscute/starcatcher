@@ -332,7 +332,7 @@ public record FishProperties(
 
         public Builder withPercentageChance(float restriction)
         {
-            this.restrictions.add(new ChancePercentageRestriction(0.05f));
+            this.restrictions.add(new ChancePercentageRestriction(restriction));
             return this;
         }
 

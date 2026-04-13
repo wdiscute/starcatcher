@@ -613,8 +613,13 @@
       "location": "minecraft:gameplay/fishing"
     },
     "starcatcher:aurora": {
-      "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "is_loot_table": false,
+      "items": [
+        {
+          "count": 1,
+          "id": "starcatcher:iceborn_skin_smithing_template"
+        }
+      ]
     },
     "starcatcher:azure_crystalback_minnow": {
       "is_loot_table": false,
@@ -654,8 +659,13 @@
       "location": "minecraft:gameplay/fishing"
     },
     "starcatcher:boreal": {
-      "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "is_loot_table": false,
+      "items": [
+        {
+          "count": 1,
+          "id": "starcatcher:clear_smithing_template"
+        }
+      ]
     },
     "starcatcher:bright_amethyst_snapper": {
       "is_loot_table": true,
@@ -670,8 +680,13 @@
       "location": "minecraft:gameplay/fishing"
     },
     "starcatcher:cerberay": {
-      "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "is_loot_table": false,
+      "items": [
+        {
+          "count": 1,
+          "id": "starcatcher:king_smithing_template"
+        }
+      ]
     },
     "starcatcher:charfish": {
       "is_loot_table": true,
@@ -769,6 +784,10 @@
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing"
     },
+    "starcatcher:extra_frog_smithing_template": {
+      "is_loot_table": true,
+      "location": "minecraft:gameplay/fishing"
+    },
     "starcatcher:extra_humble_skin_smithing_template": {
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing"
@@ -793,7 +812,11 @@
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing"
     },
-    "starcatcher:extra_sky_rod": {
+    "starcatcher:extra_sky_skin_smithing_template": {
+      "is_loot_table": true,
+      "location": "minecraft:gameplay/fishing"
+    },
+    "starcatcher:extra_slimed_skin_smithing_template": {
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing"
     },
@@ -1082,8 +1105,13 @@
       "location": "minecraft:gameplay/fishing"
     },
     "starcatcher:vesani": {
-      "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "is_loot_table": false,
+      "items": [
+        {
+          "count": 1,
+          "id": "starcatcher:colorful_smithing_template"
+        }
+      ]
     },
     "starcatcher:vivid_moss": {
       "is_loot_table": true,

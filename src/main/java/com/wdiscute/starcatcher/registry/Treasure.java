@@ -27,6 +27,10 @@ public class Treasure
     public static final TreasureInstance VANILLA_FISHING_LOOT_TABLE = new LootTableTreasureInstance(BuiltInLootTables.FISHING.location());
     public static final TreasureInstance AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
     public static final TreasureInstance KIMBE_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KIMBE_SMITHING_TEMPLATE.value().getDefaultInstance());
+    public static final TreasureInstance COLORFUL_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.COLORFUL_SMITHING_TEMPLATE.value().getDefaultInstance());
+    public static final TreasureInstance CLEAR_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.CLEAR_SMITHING_TEMPLATE.value().getDefaultInstance());
+    public static final TreasureInstance KING_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KING_SMITHING_TEMPLATE.value().getDefaultInstance());
+    public static final TreasureInstance ICEBORN_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
 
     public abstract static class TreasureInstance
     {
