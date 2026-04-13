@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:piranha",
     "fish_bucket": "aquaculture:piranha_bucket",
-    "item": "aquaculture:piranha",
-    "treasure_loot_table": "aquaculture:treasure_chest"
+    "item": "aquaculture:piranha"
   },
   "difficulty": {
     "decay": 0.0,

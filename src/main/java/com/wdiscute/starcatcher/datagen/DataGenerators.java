@@ -49,6 +49,9 @@ public class DataGenerators
         ItemTagsProvider itp = new DGSCItemsTagsProvider(output, lookupProvider, btp.contentsGetter(), existingFileHelper);
         gen.addProvider(event.includeServer(), itp);
 
+        //fp tags
+        gen.addProvider(event.includeServer(), new DGSCFPTagsProvider(output, lookupProvider, existingFileHelper));
+
         //advancements
         gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 

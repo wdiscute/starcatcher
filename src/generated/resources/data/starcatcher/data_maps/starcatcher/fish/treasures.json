@@ -1,0 +1,13 @@
+{
+  "values": {
+    "#starcatcher:common_fishes": {
+      "type": "items",
+      "items": [
+        {
+          "count": 1,
+          "id": "starcatcher:agave_bream"
+        }
+      ]
+    }
+  }
+}

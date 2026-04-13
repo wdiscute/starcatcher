@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:pollock",
     "fish_bucket": "aquaculture:pollock_bucket",
-    "item": "aquaculture:pollock",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:pollock"
   },
   "difficulty": {
     "decay": 1.0,

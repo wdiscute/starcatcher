@@ -1,9 +1,13 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
   "base_chance": 5,
   "catch_info": {
-    "entity": "starcatcher:fish",
-    "item": "aquaculture:leech",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:leech"
   },
   "difficulty": {
     "decay": 1.0,
@@ -34,12 +38,6 @@
       }
     ]
   },
-  "forge:conditions": [
-    {
-      "type": "forge:mod_loaded",
-      "modid": "aquaculture"
-    }
-  ],
   "has_guide_entry": true,
   "rarity": "rare",
   "restrictions": [

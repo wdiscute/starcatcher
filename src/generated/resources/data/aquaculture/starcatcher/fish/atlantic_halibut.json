@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:atlantic_halibut",
     "fish_bucket": "aquaculture:atlantic_halibut_bucket",
-    "item": "aquaculture:atlantic_halibut",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:atlantic_halibut"
   },
   "difficulty": {
     "decay": 1.0,

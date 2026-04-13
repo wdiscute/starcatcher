@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:gar",
     "fish_bucket": "aquaculture:gar_bucket",
-    "item": "aquaculture:gar",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:gar"
   },
   "difficulty": {
     "decay": 1.0,

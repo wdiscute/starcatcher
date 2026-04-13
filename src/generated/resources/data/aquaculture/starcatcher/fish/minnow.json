@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:minnow",
     "fish_bucket": "aquaculture:minnow_bucket",
-    "item": "aquaculture:minnow",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:minnow"
   },
   "difficulty": {
     "decay": 1.0,

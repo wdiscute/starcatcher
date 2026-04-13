@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:brown_trout",
     "fish_bucket": "aquaculture:brown_trout_bucket",
-    "item": "aquaculture:brown_trout",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:brown_trout"
   },
   "difficulty": {
     "decay": 1.0,

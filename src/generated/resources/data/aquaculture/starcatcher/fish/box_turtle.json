@@ -2,8 +2,7 @@
   "base_chance": 5,
   "catch_info": {
     "entity": "aquaculture:box_turtle",
-    "item": "aquaculture:box_turtle",
-    "treasure_loot_table": "aquaculture:treasure_chest"
+    "item": "aquaculture:box_turtle"
   },
   "difficulty": {
     "decay": 1.0,

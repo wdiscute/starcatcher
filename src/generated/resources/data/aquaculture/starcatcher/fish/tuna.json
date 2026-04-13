@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:tuna",
     "fish_bucket": "aquaculture:tuna_bucket",
-    "item": "aquaculture:tuna",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:tuna"
   },
   "difficulty": {
     "decay": 1.0,

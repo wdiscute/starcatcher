@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:boulti",
     "fish_bucket": "aquaculture:boulti_bucket",
-    "item": "aquaculture:boulti",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:boulti"
   },
   "difficulty": {
     "decay": 1.0,

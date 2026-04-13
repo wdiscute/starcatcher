@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:smallmouth_bass",
     "fish_bucket": "aquaculture:smallmouth_bass_bucket",
-    "item": "aquaculture:smallmouth_bass",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:smallmouth_bass"
   },
   "difficulty": {
     "decay": 1.0,

@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:perch",
     "fish_bucket": "aquaculture:perch_bucket",
-    "item": "aquaculture:perch",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:perch"
   },
   "difficulty": {
     "decay": 1.0,

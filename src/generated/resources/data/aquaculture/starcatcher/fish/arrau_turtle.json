@@ -2,8 +2,7 @@
   "base_chance": 5,
   "catch_info": {
     "entity": "aquaculture:arrau_turtle",
-    "item": "aquaculture:arrau_turtle",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:arrau_turtle"
   },
   "difficulty": {
     "decay": 1.0,

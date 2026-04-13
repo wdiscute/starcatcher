@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:arapaima",
     "fish_bucket": "aquaculture:arapaima_bucket",
-    "item": "aquaculture:arapaima",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:arapaima"
   },
   "difficulty": {
     "decay": 1.0,

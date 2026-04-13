@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:capitaine",
     "fish_bucket": "aquaculture:capitaine_bucket",
-    "item": "aquaculture:capitaine",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:capitaine"
   },
   "difficulty": {
     "decay": 1.0,

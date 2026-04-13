@@ -4,10 +4,12 @@ import com.wdiscute.sellingbin.processors.AbstractProcessor;
 import com.wdiscute.sellingbin.processors.QualityFoodsProcessor;
 import com.wdiscute.sellingbin.registry.SBDataMaps;
 import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
+import com.wdiscute.starcatcher.registry.Treasure;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
@@ -187,6 +189,31 @@ public class DGSCDataMapsProvider extends DataMapProvider
         tackleSkin.add(SCItems.FROG_SMITHING_TEMPLATE, SCTackleSkins.FROG_TACKLE_SKIN, false);
         tackleSkin.add(SCItems.KIMBE_SMITHING_TEMPLATE, SCTackleSkins.KIMBE_TACKLE_SKIN, false);
 
+        Builder<Treasure.TreasureInstance, FishProperties> treasures = this.builder(SCDataMaps.TREASURE);
+
+        treasures.add(
+                SCTags.COMMON_FISHES_FP,
+                new Treasure.ItemStackListTreasureInstance(
+                        SCItems.AGAVE_BREAM.value().getDefaultInstance()
+                ),
+                false
+        );
+
+        treasures.add(
+                SCTags.COMMON_FISHES_FP,
+                new Treasure.ItemStackListTreasureInstance(
+                        SCItems.AGAVE_BREAM.value().getDefaultInstance()
+                ),
+                false
+        );
+
+        treasures.add(
+                SCTags.COMMON_FISHES_FP,
+                new Treasure.ItemStackListTreasureInstance(
+                        SCItems.AGAVE_BREAM.value().getDefaultInstance()
+                ),
+                false
+        );
 
     }
 

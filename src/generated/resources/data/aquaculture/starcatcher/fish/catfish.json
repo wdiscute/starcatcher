@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:catfish",
     "fish_bucket": "aquaculture:catfish_bucket",
-    "item": "aquaculture:catfish",
-    "treasure_loot_table": "aquaculture:treasure_chest"
+    "item": "aquaculture:catfish"
   },
   "difficulty": {
     "decay": 0.0,

@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:smallmouth_bass",
     "fish_bucket": "aquaculture:smallmouth_bass_bucket",
-    "item": "aquaculture:bluegill",
-    "treasure_loot_table": "aquaculture:box"
+    "item": "aquaculture:bluegill"
   },
   "difficulty": {
     "decay": 1.0,

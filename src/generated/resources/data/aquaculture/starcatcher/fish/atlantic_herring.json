@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:atlantic_herring",
     "fish_bucket": "aquaculture:atlantic_herring_bucket",
-    "item": "aquaculture:atlantic_herring",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:atlantic_herring"
   },
   "difficulty": {
     "decay": 1.0,

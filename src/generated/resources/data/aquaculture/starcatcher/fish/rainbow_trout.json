@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:rainbow_trout",
     "fish_bucket": "aquaculture:rainbow_trout_bucket",
-    "item": "aquaculture:rainbow_trout",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:rainbow_trout"
   },
   "difficulty": {
     "decay": 1.0,

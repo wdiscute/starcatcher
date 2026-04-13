@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:blackfish",
     "fish_bucket": "aquaculture:blackfish_bucket",
-    "item": "aquaculture:blackfish",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:blackfish"
   },
   "difficulty": {
     "decay": 1.0,

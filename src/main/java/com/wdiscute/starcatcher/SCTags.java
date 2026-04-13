@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -62,4 +63,13 @@ public class SCTags
     public static final TagKey<Item> RARE_FISHES = ItemTags.create(Starcatcher.rl("rare_fishes"));
     public static final TagKey<Item> EPIC_FISHES = ItemTags.create(Starcatcher.rl("epic_fishes"));
     public static final TagKey<Item> LEGENDARY_FISHES = ItemTags.create(Starcatcher.rl("legendary_fishes"));
+
+    public static final TagKey<FishProperties> TRASH_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("trash_fishes"));
+    public static final TagKey<FishProperties> COMMON_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("common_fishes"));
+    public static final TagKey<FishProperties> UNCOMMON_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("uncommon_fishes"));
+    public static final TagKey<FishProperties> RARE_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("rare_fishes"));
+    public static final TagKey<FishProperties> EPIC_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("epic_fishes"));
+    public static final TagKey<FishProperties> LEGENDARY_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("legendary_fishes"));
+
+
 }

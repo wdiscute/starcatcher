@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:jellyfish",
     "fish_bucket": "aquaculture:jellyfish_bucket",
-    "item": "aquaculture:jellyfish",
-    "treasure_loot_table": "aquaculture:lockbox"
+    "item": "aquaculture:jellyfish"
   },
   "difficulty": {
     "decay": 1.0,

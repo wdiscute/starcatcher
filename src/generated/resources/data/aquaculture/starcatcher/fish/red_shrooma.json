@@ -3,8 +3,7 @@
   "catch_info": {
     "entity": "aquaculture:brown_shrooma",
     "fish_bucket": "aquaculture:brown_shrooma_bucket",
-    "item": "aquaculture:red_shrooma",
-    "treasure_loot_table": "aquaculture:treasure_chest"
+    "item": "aquaculture:red_shrooma"
   },
   "difficulty": {
     "decay": 0.0,
