@@ -536,28 +536,6 @@
 
   "item.starcatcher.revoke_all_extras" : "Revoke All Extras",
 
-
-  "tooltip.starcatcher.trophy.0" : "A trophy proving of one's skill.",
-  "tooltip.starcatcher.trophy.1" : "It is said to appear in an angler's fishing line",
-  "tooltip.starcatcher.trophy.2" : "once they have caught:",
-  "tooltip.starcatcher.trophy.once" : "once ",
-  "tooltip.starcatcher.trophy.have_been_caught" : " have been caught.",
-
-  "tooltip.starcatcher.trophy.unique" : "<sclegendary>[&]</sclegendary> unique$fishes",
-  "tooltip.starcatcher.trophy.total" : "<sclegendary>[&]</sclegendary> total$fishes",
-
-  "tooltip.starcatcher.trophy.all" : " ",
-  "tooltip.starcatcher.trophy.common" : " common ",
-  "tooltip.starcatcher.trophy.uncommon" : " <scuncommon>uncommon</scuncommon> ",
-  "tooltip.starcatcher.trophy.rare" : " <scrare>rare</scrare> ",
-  "tooltip.starcatcher.trophy.epic" : " <scepic>epic</scepic> ",
-  "tooltip.starcatcher.trophy.legendary" : " <sclegendary>legendary</sclegendary> ",
-
-
-  "tooltip.starcatcher.trophy.both.0" : "once both <sclegendary>[&]</sclegendary> unique fishes,",
-  "tooltip.starcatcher.trophy.both.1" : "and <sclegendary>[&]</sclegendary> total fishes have been caught!",
-
-
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
   "gui.guide.sign" : "Sign",
@@ -1142,27 +1120,6 @@
   "gui.guide.page.12.right.11" : "hints of treasures left",
   "gui.guide.page.12.right.12" : "behind by other anglers!",
 
-  "gui.guide.trophy.all.total" : "Total fishes: ",
-  "gui.guide.trophy.all.unique" : "Unique fishes: ",
-
-  "gui.guide.trophy.common.total" : "Total common fishes: ",
-  "gui.guide.trophy.common.unique" : "Unique common fishes: ",
-
-  "gui.guide.trophy.uncommon.total" : "Total <scuncommon>Uncommon<scuncommon> fishes: ",
-  "gui.guide.trophy.uncommon.unique" : "Unique <scuncommon>Uncommon</scuncommon> fishes: ",
-
-  "gui.guide.trophy.rare.total" : "Total <scrare>Rare</scrare> fishes: ",
-  "gui.guide.trophy.rare.unique" : "Unique <scrare>Rare</scrare> fishes: ",
-
-  "gui.guide.trophy.epic.total" : "Total <scepic>Epic</scepic> fishes: ",
-  "gui.guide.trophy.epic.unique" : "Unique <scepic>Epic</scepic> fishes: ",
-
-  "gui.guide.trophy.legendary.total" : "Total <sclegendary>Legendary</sclegendary> fishes: ",
-  "gui.guide.trophy.legendary.unique" : "Unique <sclegendary>Legendary</sclegendary> fishes: ",
-
-
-  "gui.guide.available" : "Fishes in the area:",
-  "gui.guide.all" : "All Fishes:",
 
   "gui.guide.lakes" : "Lakes",
   "gui.guide.lakes.hover" : "Surface biomes besides Rivers and Oceans",
