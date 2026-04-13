@@ -67,7 +67,6 @@ public class FishRenderer extends EntityRenderer<FishEntity>
         map.put(SCItems.SILVERVEIL_PERCH.get(), new SilverveilPerch<>(modelSet.bakeLayer(SilverveilPerch.LAYER_LOCATION)));
         map.put(SCItems.SLUDGE_CATFISH.get(), new SludgeCatfish<>(modelSet.bakeLayer(SludgeCatfish.LAYER_LOCATION)));
         map.put(SCItems.WHITEVEIL.get(), new Whiteveil<>(modelSet.bakeLayer(Whiteveil.LAYER_LOCATION)));
-        map.put(SCItems.WILLOW_BREAM.get(), new WillowBream<>(modelSet.bakeLayer(WillowBream.LAYER_LOCATION)));
         map.put(SCItems.WINTERY_PIKE.get(), new WinteryPike<>(modelSet.bakeLayer(WinteryPike.LAYER_LOCATION)));
         map.put(SCItems.CRYSTALBACK_TROUT.get(), new CrystalbackTrout<>(modelSet.bakeLayer(CrystalbackTrout.LAYER_LOCATION)));
         map.put(SCItems.EMBERGILL.get(), new Embergill<>(modelSet.bakeLayer(Embergill.LAYER_LOCATION)));
@@ -97,6 +96,15 @@ public class FishRenderer extends EntityRenderer<FishEntity>
         map.put(SCItems.WILLISH.get(), new Willish<>(modelSet.bakeLayer(Willish.LAYER_LOCATION)));
         map.put(SCItems.YELLOWSTONE_FISH.get(), new YellowstoneFish<>(modelSet.bakeLayer(YellowstoneFish.LAYER_LOCATION)));
         map.put(SCItems.VOIDBITER.get(), new Voidbiter<>(modelSet.bakeLayer(Voidbiter.LAYER_LOCATION)));
+        map.put(SCItems.OBIDONTIEE.get(), new Obidontiee<>(modelSet.bakeLayer(Obidontiee.LAYER_LOCATION)));
+        map.put(SCItems.REDSCALED_TUNA.get(), new RedscaledTuna<>(modelSet.bakeLayer(RedscaledTuna.LAYER_LOCATION)));
+        map.put(SCItems.SUN_SEEKING_CARP.get(), new SunSeekingCarp<>(modelSet.bakeLayer(SunSeekingCarp.LAYER_LOCATION)));
+        map.put(SCItems.SUNEATER.get(), new Suneater<>(modelSet.bakeLayer(Suneater.LAYER_LOCATION)));
+        map.put(SCItems.SUNNY_STURGEON.get(), new SunnySturgeon<>(modelSet.bakeLayer(SunnySturgeon.LAYER_LOCATION)));
+        map.put(SCItems.THE_QUARRISH.get(), new TheQuarrish<>(modelSet.bakeLayer(TheQuarrish.LAYER_LOCATION)));
+        map.put(SCItems.THUNDER_BASS.get(), new ThunderBass<>(modelSet.bakeLayer(ThunderBass.LAYER_LOCATION)));
+        map.put(SCItems.TWILIGHT_KOI.get(), new TwilightKoi<>(modelSet.bakeLayer(TwilightKoi.LAYER_LOCATION)));
+        map.put(SCItems.WILLOW_BREAM.get(), new WillowBream<>(modelSet.bakeLayer(WillowBream.LAYER_LOCATION)));
     }
 
     @Override

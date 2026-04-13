@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -24,21 +25,25 @@ public class DGSCFPTagsProvider extends TagsProvider<FishProperties>
     @Override
     protected void addTags(HolderLookup.Provider provider)
     {
+        tag(TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("whatever_tag")))
+                .addOptional(Starcatcher.rl("aurora"));
 
-        FishingPropertiesRegistry.PROPERTIES.forEach(o ->
-        {
-            FishProperties fp = o.getSecond();
-            ResourceLocation location = o.getFirst().location();
-            if(fp.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH))
-            {
-                if(fp.rarity().equals(FishProperties.Rarity.TRASH)) tag(SCTags.TRASH_FISHES_FP).addOptional(location);
-                if(fp.rarity().equals(FishProperties.Rarity.COMMON)) tag(SCTags.COMMON_FISHES_FP).addOptional(location);
-                if(fp.rarity().equals(FishProperties.Rarity.UNCOMMON)) tag(SCTags.UNCOMMON_FISHES_FP).addOptional(location);
-                if(fp.rarity().equals(FishProperties.Rarity.RARE)) tag(SCTags.RARE_FISHES_FP).addOptional(location);
-                if(fp.rarity().equals(FishProperties.Rarity.EPIC)) tag(SCTags.EPIC_FISHES_FP).addOptional(location);
-                if(fp.rarity().equals(FishProperties.Rarity.LEGENDARY)) tag(SCTags.LEGENDARY_FISHES_FP).addOptional(location);
-            }
-        });
+
+
+//        FishingPropertiesRegistry.PROPERTIES.forEach(o ->
+//        {
+//            FishProperties fp = o.getSecond();
+//            ResourceLocation location = o.getFirst().location();
+//            if(fp.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH))
+//            {
+//                if(fp.rarity().equals(FishProperties.Rarity.TRASH)) tag(SCTags.TRASH_FISHES_FP).addOptional(location);
+//                if(fp.rarity().equals(FishProperties.Rarity.COMMON)) tag(SCTags.COMMON_FISHES_FP).addOptional(location);
+//                if(fp.rarity().equals(FishProperties.Rarity.UNCOMMON)) tag(SCTags.UNCOMMON_FISHES_FP).addOptional(location);
+//                if(fp.rarity().equals(FishProperties.Rarity.RARE)) tag(SCTags.RARE_FISHES_FP).addOptional(location);
+//                if(fp.rarity().equals(FishProperties.Rarity.EPIC)) tag(SCTags.EPIC_FISHES_FP).addOptional(location);
+//                if(fp.rarity().equals(FishProperties.Rarity.LEGENDARY)) tag(SCTags.LEGENDARY_FISHES_FP).addOptional(location);
+//            }
+//        });
 
 
     }

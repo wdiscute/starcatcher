@@ -32,10 +32,10 @@ public class DataGenerators
         //fish properties
         gen.addProvider(
                 event.includeServer(),
-                new DGFishingPropertiesProvider(output, lookupProvider)
+                new DGSCFishingPropertiesProvider(output, lookupProvider)
         );
 
-        gen.addProvider(event.includeServer(), new DGBiomeModifierProvider(output, lookupProvider));
+        gen.addProvider(event.includeServer(), new DGSCBiomeModifierProvider(output, lookupProvider));
 
         //fish models
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
@@ -56,7 +56,7 @@ public class DataGenerators
         gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 
         //biome tags
-        gen.addProvider(event.includeServer(), new DGBiomeTagsProvider(output, lookupProvider, existingFileHelper));
+        gen.addProvider(event.includeServer(), new DGSCBiomeTagsProvider(output, lookupProvider, existingFileHelper));
 
         //loot table
         gen.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(),

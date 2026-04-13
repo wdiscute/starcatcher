@@ -18,9 +18,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DGBiomeTagsProvider extends BiomeTagsProvider
+public class DGSCBiomeTagsProvider extends BiomeTagsProvider
 {
-    public DGBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper)
+    public DGSCBiomeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper)
     {
         super(output, lookupProvider, Starcatcher.MOD_ID, existingFileHelper);
     }

@@ -119,7 +119,6 @@ public class SCClientEvents
         event.registerLayerDefinition(SilverveilPerch.LAYER_LOCATION, SilverveilPerch::createBodyLayer);
         event.registerLayerDefinition(SludgeCatfish.LAYER_LOCATION, SludgeCatfish::createBodyLayer);
         event.registerLayerDefinition(Whiteveil.LAYER_LOCATION, Whiteveil::createBodyLayer);
-        event.registerLayerDefinition(WillowBream.LAYER_LOCATION, WillowBream::createBodyLayer);
         event.registerLayerDefinition(WinteryPike.LAYER_LOCATION, WinteryPike::createBodyLayer);
         event.registerLayerDefinition(CrystalbackTrout.LAYER_LOCATION, CrystalbackTrout::createBodyLayer);
         event.registerLayerDefinition(Embergill.LAYER_LOCATION, Embergill::createBodyLayer);
@@ -149,6 +148,15 @@ public class SCClientEvents
         event.registerLayerDefinition(Willish.LAYER_LOCATION, Willish::createBodyLayer);
         event.registerLayerDefinition(YellowstoneFish.LAYER_LOCATION, YellowstoneFish::createBodyLayer);
         event.registerLayerDefinition(Voidbiter.LAYER_LOCATION, Voidbiter::createBodyLayer);
+        event.registerLayerDefinition(Obidontiee.LAYER_LOCATION, Obidontiee::createBodyLayer);
+        event.registerLayerDefinition(RedscaledTuna.LAYER_LOCATION, RedscaledTuna::createBodyLayer);
+        event.registerLayerDefinition(SunSeekingCarp.LAYER_LOCATION, SunSeekingCarp::createBodyLayer);
+        event.registerLayerDefinition(Suneater.LAYER_LOCATION, Suneater::createBodyLayer);
+        event.registerLayerDefinition(SunnySturgeon.LAYER_LOCATION, SunnySturgeon::createBodyLayer);
+        event.registerLayerDefinition(TheQuarrish.LAYER_LOCATION, TheQuarrish::createBodyLayer);
+        event.registerLayerDefinition(ThunderBass.LAYER_LOCATION, ThunderBass::createBodyLayer);
+        event.registerLayerDefinition(TwilightKoi.LAYER_LOCATION, TwilightKoi::createBodyLayer);
+        event.registerLayerDefinition(WillowBream.LAYER_LOCATION, WillowBream::createBodyLayer);
     }
 
     @SubscribeEvent
