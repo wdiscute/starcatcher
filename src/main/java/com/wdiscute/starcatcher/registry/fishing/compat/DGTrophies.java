@@ -49,6 +49,7 @@ public class DGTrophies
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
                 .withHasGuideEntry(false)
+                .withRarity(FishProperties.Rarity.COMMON)
                 .addRarityRestriction(
                         new RarityCountRestriction.RarityCount(FishProperties.Rarity.COMMON, 25, RarityCountRestriction.RarityCount.CountType.TOTAL)
                 )
@@ -58,6 +59,7 @@ public class DGTrophies
         register(fish(SCBlocks.TROPHY_IRON.asItem().builtInRegistryHolder())
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withRarity(FishProperties.Rarity.UNCOMMON)
                 .withHasGuideEntry(false)
                 .addRarityRestriction(
                         new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 35, RarityCountRestriction.RarityCount.CountType.UNIQUE)
@@ -68,6 +70,7 @@ public class DGTrophies
         register(fish(SCBlocks.TROPHY_GOLD.asItem().builtInRegistryHolder())
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withRarity(FishProperties.Rarity.RARE)
                 .withHasGuideEntry(false)
                 .addRarityRestriction(
                         new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 100, RarityCountRestriction.RarityCount.CountType.TOTAL),
@@ -80,6 +83,7 @@ public class DGTrophies
         register(fish(SCBlocks.TROPHY_EMERALD.asItem().builtInRegistryHolder())
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withRarity(FishProperties.Rarity.EPIC)
                 .withHasGuideEntry(false)
                 .addRarityRestriction(
                         new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 200, RarityCountRestriction.RarityCount.CountType.TOTAL),
@@ -91,6 +95,7 @@ public class DGTrophies
         register(fish(SCBlocks.TROPHY_DIAMOND.asItem().builtInRegistryHolder())
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withRarity(FishProperties.Rarity.LEGENDARY)
                 .withHasGuideEntry(false)
                 .addRarityRestriction(
                         new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 500, RarityCountRestriction.RarityCount.CountType.TOTAL),
@@ -102,6 +107,7 @@ public class DGTrophies
         register(fish(SCBlocks.TROPHY_OF_THE_OLDER_ANGLER.asItem().builtInRegistryHolder())
                 .withMaxLimit(1)
                 .withDifficulty(FishProperties.Difficulty.TRASH)
+                .withRarity(FishProperties.Rarity.LEGENDARY)
                 .withHasGuideEntry(false)
                 .addRarityRestriction(
                         new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 0, RarityCountRestriction.RarityCount.CountType.ALL),
