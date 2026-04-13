@@ -80,7 +80,11 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
 
         level.playSound(null, pos, SoundEvents.BONE_BLOCK_BREAK, SoundSource.BLOCKS);
         playerDestroy(level, player, pos, state, null, player.getItemBySlot(EquipmentSlot.MAINHAND));
-        level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        if (state.getValue(BlockStateProperties.WATERLOGGED)) {
+            level.setBlockAndUpdate(pos, Blocks.WATER.defaultBlockState());
+        } else {
+            level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        }
         return InteractionResult.SUCCESS;
     }
 
