@@ -207,6 +207,28 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
+        //leaf bobber
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.LEAF_BOBBER)
+                .define('B', SCItems.BOBBER)
+                .define('S', Items.STICK)
+                .define('L', ItemTags.LEAVES)
+                .pattern(" LS")
+                .pattern("LBL")
+                .pattern("SL ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
+
+        //leaf bobber
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.SLIMEY_BOBBER)
+                .define('B', SCItems.BOBBER)
+                .define('S', Items.STICK)
+                .define('B', Items.SLIME_BLOCK)
+                .pattern(" BS")
+                .pattern("BBB")
+                .pattern("SB ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
+
         //clear bobber
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.CLEAR_BOBBER)
                 .define('B', SCItems.BOBBER)
@@ -246,6 +268,15 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .requires(Items.FISHING_ROD)
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output, Starcatcher.rl("vanilla_bobber_from_vanilla_fishing_rod"));
+
+        //vanilla hook bobber from rod
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.VANILLA_HOOK)
+                .define('R', Items.FISHING_ROD)
+                .define('N', Items.IRON_NUGGET)
+                .pattern(" N ")
+                .pattern(" R ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
 
         //hook
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.HOOK)

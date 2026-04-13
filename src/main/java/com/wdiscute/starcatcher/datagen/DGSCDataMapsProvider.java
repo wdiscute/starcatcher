@@ -4,6 +4,7 @@ import com.wdiscute.sellingbin.processors.AbstractProcessor;
 import com.wdiscute.sellingbin.processors.QualityFoodsProcessor;
 import com.wdiscute.sellingbin.registry.SBDataMaps;
 import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -11,6 +12,7 @@ import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
 import com.wdiscute.starcatcher.registry.Treasure;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
+import com.wdiscute.starcatcher.registry.fishing.FishingPropertiesRegistry;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.sellingbin.FishProcessor;
@@ -18,6 +20,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.nikdo53.neobackports.datagen.DataMapProvider;
 import net.nikdo53.neobackports.datamaps.NeoForgeDataMaps;
@@ -188,34 +191,31 @@ public class DGSCDataMapsProvider extends DataMapProvider
         tackleSkin.add(SCItems.CLEAR_SMITHING_TEMPLATE, SCTackleSkins.CLEAR_TACKLE_SKIN, false);
         tackleSkin.add(SCItems.FROG_SMITHING_TEMPLATE, SCTackleSkins.FROG_TACKLE_SKIN, false);
         tackleSkin.add(SCItems.KIMBE_SMITHING_TEMPLATE, SCTackleSkins.KIMBE_TACKLE_SKIN, false);
+        tackleSkin.add(SCItems.KIMBE_SMITHING_TEMPLATE, SCTackleSkins.KIMBE_TACKLE_SKIN, false);
 
         Builder<Treasure.TreasureInstance, FishProperties> treasures = this.builder(SCDataMaps.TREASURE);
 
-        treasures.add(
-                SCTags.COMMON_FISHES_FP,
-                new Treasure.ItemStackListTreasureInstance(
-                        SCItems.AGAVE_BREAM.value().getDefaultInstance()
-                ),
-                false
-        );
+        //todo fix tags datagen to use tags instead of hard coding every entry
+        //treasures.add(SCTags.COMMON_FISHES_FP, new Treasure.ItemStackListTreasureInstance(SCItems.AGAVE_BREAM.value().getDefaultInstance()), false);
+        //treasures.add(SCTags.COMMON_FISHES_FP, new Treasure.ItemStackListTreasureInstance(SCItems.AGAVE_BREAM.value().getDefaultInstance()), false);
+        //treasures.add(SCTags.COMMON_FISHES_FP, new Treasure.ItemStackListTreasureInstance(SCItems.AGAVE_BREAM.value().getDefaultInstance()), false);
 
-        treasures.add(
-                SCTags.COMMON_FISHES_FP,
-                new Treasure.ItemStackListTreasureInstance(
-                        SCItems.AGAVE_BREAM.value().getDefaultInstance()
-                ),
-                false
-        );
+        FishingPropertiesRegistry.PROPERTIES.forEach(o ->
+        {
+            treasures.add(o.getFirst(), Treasure.VANILLA_FISHING_LOOT_TABLE, false);
+        });
 
-        treasures.add(
-                SCTags.COMMON_FISHES_FP,
-                new Treasure.ItemStackListTreasureInstance(
-                        SCItems.AGAVE_BREAM.value().getDefaultInstance()
-                ),
-                false
-        );
+        treasures.add(Starcatcher.rl("azure_crystalback_minnow"), Treasure.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE, false);
+        treasures.add(Starcatcher.rl("willish"), Treasure.KIMBE_SMITHING_TEMPLATE, false);
+
+
+
+
 
     }
 
-
+    public static TagKey<FishProperties> fp(String s)
+    {
+        return TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl(s));
+    }
 }

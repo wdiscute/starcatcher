@@ -121,7 +121,11 @@ public record FishProperties(
     //returns a new instance of FishProperties with the treasure itemstack set
     public FishProperties loadTreasure(ServerPlayer player)
     {
-        var data = Holder.direct(this).getData(SCDataMaps.TREASURE);
+        if(!catchInfo.treasureIs.isEmpty()) return this;
+
+        Registry<FishProperties> fishProperties = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+
+        Treasure.TreasureInstance data = fishProperties.wrapAsHolder(this).getData(SCDataMaps.TREASURE);
 
         if(data == null) return this;
 
@@ -231,7 +235,7 @@ public record FishProperties(
             return this;
         }
 
-        public Builder withTreasure(ItemStack itemStack)
+        public Builder withTreasureHardCoded(ItemStack itemStack)
         {
             this.catchInfo.treasureIs = itemStack;
             return this;
@@ -1930,6 +1934,7 @@ public record FishProperties(
         ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
         boolean isStarcaught = fp.catchInfo().bucketedFish().is(SCItems.STARCAUGHT_BUCKET.getKey()) && bait.is(Items.BUCKET);
         boolean isBucketed = !fp.catchInfo().bucketedFish().is(SCItems.MISSINGNO.getKey()) && !isStarcaught && bait.is(Items.BUCKET);
+        CaughtFishInfo caughtFishInfo = new CaughtFishInfo(size, weight, percentile, fp.rarity(), golden);
 
         //starcaught bucketed fish
         if (isStarcaught)
@@ -1939,6 +1944,7 @@ public record FishProperties(
             if (ModList.get().isLoaded("quality_food"))
                 QualityFoodCompat.addQuality(fish, player, player.level(), golden, perfectCatch, percentile);
             ItemStack bucket = new ItemStack(SCItems.STARCAUGHT_BUCKET.get());
+            SCDataComponents.set(fish, SCDataComponents.CAUGHT_FISH_INFO, caughtFishInfo);
             SCDataComponents.set(bucket, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(fish));
             return bucket;
         }
@@ -1952,7 +1958,7 @@ public record FishProperties(
 
         //store caught fish info data component
         if (fp.hasGuideEntry() && SCConfig.SAVE_DATA_TO_ITEMS.get())
-            SCDataComponents.set(fish, SCDataComponents.CAUGHT_FISH_INFO, new CaughtFishInfo(size, weight, percentile, fp.rarity(), golden));
+            SCDataComponents.set(fish, SCDataComponents.CAUGHT_FISH_INFO, caughtFishInfo);
 
         //quality food compat
         if (ModList.get().isLoaded("quality_food"))

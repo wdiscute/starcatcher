@@ -5,7 +5,9 @@ import com.wdiscute.sellingbin.jei.SellingBinJeiPlugin;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.starcatcher.registry.Treasure;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -16,6 +18,7 @@ import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -87,7 +90,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
         guiGraphics.blit(StarcatcherJeiPlugin.ARROW, 25, 2, 16, 16, 0, 0, 16, 16, 16, 16);
         guiGraphics.blit(SellingBinJeiPlugin.SLOT_BACKGROUND, 43, 1, 18, 18, 0, 0, 18, 18, 18, 18);
 
-        if (!recipe.fp.catchInfo().treasureIs().isEmpty())
+        if (!recipe.treasure.isEmpty())
             guiGraphics.blit(SellingBinJeiPlugin.SLOT_BACKGROUND, 63, 1, 18, 18, 0, 0, 18, 18, 18, 18);
 
         bookIcon(guiGraphics, 83, 0, (int) mouseX, (int) mouseY);
@@ -118,11 +121,26 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
         return Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(recipe.fp);
     }
 
-    public record Recipe(FishProperties fp, List<Component> components)
+    public record Recipe(FishProperties fp, List<Component> components, ItemStack treasure)
     {
         public static Recipe of(FishProperties fp)
         {
             List<Component> restrictions = new ArrayList<>();
+
+            ItemStack tre;
+
+            Treasure.TreasureInstance data = Holder.direct(fp).getData(SCDataMaps.TREASURE);
+            if(fp.catchInfo().treasureIs().isEmpty())
+            {
+                if (data == null)
+                    tre = ItemStack.EMPTY;
+                else
+                    tre = data.unpack(Minecraft.getInstance().player);
+            }
+            else
+            {
+                tre = fp.catchInfo().treasureIs();
+            }
 
             //aurora
             restrictions.add(fp.getDisplayName());
@@ -139,7 +157,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
                     )
             );
 
-            return new Recipe(fp, restrictions);
+            return new Recipe(fp, restrictions, tre);
         }
 
         public static final RecipeType<Recipe> TYPE = new RecipeType<>(Starcatcher.rl("fishing"), Recipe.class);

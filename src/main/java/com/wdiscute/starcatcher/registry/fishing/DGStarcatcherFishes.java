@@ -366,7 +366,6 @@ public class DGStarcatcherFishes
                 .withDaytimeRestriction(DaytimeRestriction.MIDNIGHT)
                 .withRarity(FishProperties.Rarity.LEGENDARY)
                 .addRestrictions(BaitRestriction.LEGENDARY_BAIT)
-                .withTreasure(new ItemStack(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.get()))
                 .withDifficulty(FishProperties.Difficulty.NON_STOP_ACTION_THREE_BIG));
 
         registerStarcatcherBucketAndEntity(overworldColdRiverFish(SCItems.BLUE_CRYSTAL_FIN)

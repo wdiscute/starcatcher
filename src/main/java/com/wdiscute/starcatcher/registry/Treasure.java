@@ -10,7 +10,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
@@ -22,11 +24,15 @@ import java.util.List;
 
 public class Treasure
 {
+    public static final TreasureInstance VANILLA_FISHING_LOOT_TABLE = new LootTableTreasureInstance(BuiltInLootTables.FISHING.location());
+    public static final TreasureInstance AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
+    public static final TreasureInstance KIMBE_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KIMBE_SMITHING_TEMPLATE.value().getDefaultInstance());
+
     public abstract static class TreasureInstance
     {
         public abstract boolean isLootTable();
 
-        public abstract ItemStack unpack(ServerPlayer player);
+        public abstract ItemStack unpack(Player player);
     }
 
     public static final Codec<TreasureInstance> TREASURE_CODEC = Codec.BOOL
@@ -54,24 +60,32 @@ public class Treasure
         }
 
         @Override
-        public ItemStack unpack(ServerPlayer player)
+        public ItemStack unpack(Player player)
         {
-            LootParams lootparams = new LootParams.Builder((ServerLevel) player.level())
-                    .withParameter(LootContextParams.ORIGIN, player.position())
-                    .withParameter(LootContextParams.TOOL, player.getMainHandItem().is(Tags.Items.RODS) ? player.getMainHandItem() : player.getOffhandItem())
-                    .withParameter(LootContextParams.THIS_ENTITY, player)
-                    .withLuck(player.getLuck())
-                    .create(LootContextParamSets.FISHING);
+            if(player instanceof ServerPlayer)
+            {
+                LootParams lootparams = new LootParams.Builder((ServerLevel) player.level())
+                        .withParameter(LootContextParams.ORIGIN, player.position())
+                        .withParameter(LootContextParams.TOOL, player.getMainHandItem().is(Tags.Items.RODS) ? player.getMainHandItem() : player.getOffhandItem())
+                        .withParameter(LootContextParams.THIS_ENTITY, player)
+                        .withLuck(player.getLuck())
+                        .create(LootContextParamSets.FISHING);
 
-            LootTable table = player.level().getServer().reloadableRegistries().getLootTable(
-                    ResourceKey.create(Registries.LOOT_TABLE, rl)
-            );
+                LootTable table = player.level().getServer().reloadableRegistries().getLootTable(
+                        ResourceKey.create(Registries.LOOT_TABLE, rl)
+                );
 
-            ObjectArrayList<ItemStack> randomItems = table.getRandomItems(lootparams);
+                ObjectArrayList<ItemStack> randomItems = table.getRandomItems(lootparams);
 
-            if(randomItems.isEmpty()) return ItemStack.EMPTY;
+                if(randomItems.isEmpty()) return ItemStack.EMPTY;
 
-            return randomItems.get(U.r.nextInt(randomItems.size()));
+                return randomItems.get(U.r.nextInt(randomItems.size()));
+            }
+            else
+            {
+                return ItemStack.EMPTY;
+            }
+
         }
 
 
@@ -103,7 +117,7 @@ public class Treasure
         }
 
         @Override
-        public ItemStack unpack(ServerPlayer player)
+        public ItemStack unpack(Player player)
         {
             if(items.isEmpty()) return ItemStack.EMPTY;
             return items.get(U.r.nextInt(items.size()));

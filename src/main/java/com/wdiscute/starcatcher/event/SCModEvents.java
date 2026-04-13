@@ -44,7 +44,12 @@ public class SCModEvents {
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event)
     {
-        PackSource packSource = new SBevents.DefaultPackSource();
+        PackSource packSource = new SBevents.DefaultPackSource(){
+            @Override
+            public boolean shouldAddAutomatically() {
+                return true;
+            }
+        };
 
         event.addPackFinders(
                 Starcatcher.rl("built_in_datapacks/selling_bin_starcatcher_emeralds"),
@@ -157,6 +162,7 @@ public class SCModEvents {
         event.register(SCDataMaps.CATCH_MODIFIERS);
         event.register(SCDataMaps.MINIGAME_MODIFIERS);
         event.register(SCDataMaps.TACKLE_SKIN);
+        event.register(SCDataMaps.TREASURE);
     }
 
     @SubscribeEvent

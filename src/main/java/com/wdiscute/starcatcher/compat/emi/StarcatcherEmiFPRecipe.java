@@ -3,7 +3,9 @@ package com.wdiscute.starcatcher.compat.emi;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.starcatcher.registry.Treasure;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
@@ -13,6 +15,7 @@ import dev.emi.emi.api.stack.EmiStack;
 import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
@@ -41,7 +44,19 @@ public class StarcatcherEmiFPRecipe implements EmiRecipe
     {
         this.id = id;
         this.is = new ItemStack(fp.catchInfo().fish());
-        this.treasure = EmiIngredient.of(Ingredient.of(fp.catchInfo().treasureIs()));
+        Treasure.TreasureInstance data = Holder.direct(fp).getData(SCDataMaps.TREASURE);
+        if(fp.catchInfo().treasureIs().isEmpty())
+        {
+            if (data == null)
+                this.treasure = EmiIngredient.of(Ingredient.of(ItemStack.EMPTY));
+            else
+                this.treasure = EmiIngredient.of(Ingredient.of(data.unpack(Minecraft.getInstance().player)));
+        }
+        else
+        {
+            this.treasure = EmiIngredient.of(Ingredient.of(fp.catchInfo().treasureIs()));
+        }
+
         this.fp = fp;
         this.output = EmiIngredient.of(List.of(
                 EmiIngredient.of(Ingredient.of(fp.catchInfo().fish().value())),

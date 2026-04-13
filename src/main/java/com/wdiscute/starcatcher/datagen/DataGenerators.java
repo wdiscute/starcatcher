@@ -1,7 +1,9 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.registry.fishing.FishingPropertiesRegistry;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -24,6 +26,11 @@ public class DataGenerators
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {
+        event.createDatapackRegistryObjects(
+                new RegistrySetBuilder()
+                        .add(Starcatcher.FISH_REGISTRY_KEY, FishingPropertiesRegistry::bootstrap)
+        );
+
         DataGenerator gen = event.getGenerator();
 
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
@@ -50,6 +57,7 @@ public class DataGenerators
         gen.addProvider(event.includeServer(), itp);
 
         //fp tags
+        //todo figure this out
         gen.addProvider(event.includeServer(), new DGSCFPTagsProvider(output, lookupProvider, existingFileHelper));
 
         //advancements

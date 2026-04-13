@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.io;
 
-import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.attachments.FishingBobAttachment;
 import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
@@ -18,7 +17,6 @@ import net.nikdo53.neobackports.io.attachment.DataAttachmentRegistry;
 import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 import net.nikdo53.neobackports.registry.NeoForgeRegistries;
 
-import java.util.List;
 import java.util.function.Supplier;
 
 public class SCDataAttachments

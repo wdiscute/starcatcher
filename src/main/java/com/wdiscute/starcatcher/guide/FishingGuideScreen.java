@@ -1917,10 +1917,11 @@ public class FishingGuideScreen extends Screen
                 guiGraphics.renderTooltip(font, Component.translatable("gui.guide.always_entity"), absoluteMouseX, absoluteMouseY);
         }
 
+        //render name
         if (fishToDisplay != ItemStack.EMPTY)
         {
             renderItem(fishToDisplay, x + 26, y + 70);
-            guiGraphics.drawString(font, fp.getDisplayName(), x + 30, y + 36, 0x635040, false);
+            renderScrollingString(guiGraphics, font, fp.getDisplayName(), 20, x + 28, y + 36, x + 141, y + 46, true);
         }
 
         int color = switch (fp.rarity())
@@ -1971,6 +1972,9 @@ public class FishingGuideScreen extends Screen
             List<Component> hover = restriction.getHover(level, fp, Minecraft.getInstance().player, AbstractFishRestriction.Context.GUIDE_ENTRY);
             List<Component> blacklist = restriction.getBlacklist(level, fp, Minecraft.getInstance().player, AbstractFishRestriction.Context.GUIDE_ENTRY);
 
+            System.out.println(x);
+            System.out.println(y);
+            System.out.println(yOffset);
             renderScrollingString(guiGraphics, font, description, x, x, yOffset - 2, x + 128, yOffset + 10, hoveringMain);
 
             //if has hover and cursor is hovering
