@@ -116,7 +116,7 @@ public record FishCaughtCounter(
 
         int sizeToSave = Math.max(size, this.size);
         int weightToSave = Math.max(weight, this.weight);
-        float percentileToSave = Math.max(percentile, this.percentile);
+        float percentileToSave = Math.min(percentile, this.percentile);
 
         return new FishCaughtCounter(
                 countToSave + 1,

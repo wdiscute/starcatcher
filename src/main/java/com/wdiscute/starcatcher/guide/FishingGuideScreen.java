@@ -1972,9 +1972,6 @@ public class FishingGuideScreen extends Screen
             List<Component> hover = restriction.getHover(level, fp, Minecraft.getInstance().player, AbstractFishRestriction.Context.GUIDE_ENTRY);
             List<Component> blacklist = restriction.getBlacklist(level, fp, Minecraft.getInstance().player, AbstractFishRestriction.Context.GUIDE_ENTRY);
 
-            System.out.println(x);
-            System.out.println(y);
-            System.out.println(yOffset);
             renderScrollingString(guiGraphics, font, description, x, x, yOffset - 2, x + 128, yOffset + 10, hoveringMain);
 
             //if has hover and cursor is hovering
