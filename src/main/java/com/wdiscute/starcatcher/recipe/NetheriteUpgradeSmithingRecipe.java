@@ -31,7 +31,7 @@ public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient bas
         boolean b = this.template.test(input.template())
                 && this.base.test(input.base())
                 && this.addition.test(input.addition())
-                && SCDataComponents.getOrDefault(input.base(), SCDataComponents.NETHERITE_UPGRADE, false);
+                && !SCDataComponents.getOrDefault(input.base(), SCDataComponents.NETHERITE_UPGRADE, false);
         return b;
     }
 
