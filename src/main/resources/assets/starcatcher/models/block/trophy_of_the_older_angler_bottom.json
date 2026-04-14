@@ -1,6 +1,7 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
+	"render_type": "cutout_mipped",
 	"texture_size": [32, 32],
 	"textures": {
 		"2": "starcatcher:block/trophy_of_the_older_angler_bottom",

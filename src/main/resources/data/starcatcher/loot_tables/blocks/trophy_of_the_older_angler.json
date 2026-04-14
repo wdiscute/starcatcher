@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "conditions": [
+            {
+              "block": "starcatcher:trophy_of_the_older_angler",
+              "condition": "minecraft:block_state_property",
+              "properties": {
+                "center": "true"
+              }
+            }
+          ],
+          "name": "starcatcher:trophy_of_the_older_angler"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "starcatcher:blocks/trophy_of_the_older_angler"
+}

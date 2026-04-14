@@ -31,7 +31,7 @@ public class SCCreativeModeTabs
 
     public static final LetterItem.Message MESSAGE = new LetterItem.Message(
             UUID.randomUUID(),
-            "<rgb>-dev (wd)</rgb>",
+            "<sclegendary>-dev (wd)</sclegendary>",
             Level.OVERWORLD.location(),
             List.of(
                     "",
@@ -43,7 +43,7 @@ public class SCCreativeModeTabs
                     "others to fish later.",
                     "(5% chance if there is any available)",
                     "",
-                    "<rgb>also did you know it supports rgb?</rgb>",
+                    "<scgolden>Also did you know it supports markdown?</scgolden>",
                     "learn more about it in the LibTooltips wiki"
             ),
             true

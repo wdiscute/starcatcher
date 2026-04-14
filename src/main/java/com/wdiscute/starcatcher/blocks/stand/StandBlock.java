@@ -41,7 +41,7 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
 
     public StandBlock()
     {
-        super(Properties.of().noOcclusion());
+        super(Properties.of().noOcclusion().destroyTime(2));
         registerDefaultState(defaultBlockState().setValue(PART, StandPart.BOTTOM_LEFT));
     }
 

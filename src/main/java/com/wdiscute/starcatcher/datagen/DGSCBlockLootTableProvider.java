@@ -31,7 +31,9 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
 
         dropSelf(TROPHY_COPPER.get());
         dropSelf(TROPHY_IRON.get());
+        dropSelf(TROPHY_GOLD.get());
         dropSelf(TROPHY_EMERALD.get());
+        dropSelf(TROPHY_DIAMOND.get());
 
         dropSelf(CLAM.get());
         dropSelf(CONCH.get());
@@ -46,7 +48,9 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
 
         list.add(TROPHY_COPPER.get());
         list.add(TROPHY_IRON.get());
+        list.add(TROPHY_GOLD.get());
         list.add(TROPHY_EMERALD.get());
+        list.add(TROPHY_DIAMOND.get());
 
         list.add(AQUARIUM.get());
         list.add(DISPLAY.get());
