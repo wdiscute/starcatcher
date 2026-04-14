@@ -34,7 +34,7 @@
       "starcatcher:decrease_lure_time"
     ],
     "starcatcher:fisherman_hat_green": [
-      "starcatcher:big_decrease_lure_time"
+      "starcatcher:increase_lure_time"
     ],
     "starcatcher:fisherman_hat_light_blue": [
       "starcatcher:increase_lure_time"

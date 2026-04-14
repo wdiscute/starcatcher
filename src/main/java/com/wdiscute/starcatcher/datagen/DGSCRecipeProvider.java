@@ -1002,6 +1002,7 @@ public class DGSCRecipeProvider extends RecipeProvider
             ShapelessRecipeBuilder.shapeless(
                     RecipeCategory.BUILDING_BLOCKS, item1)
                     .requires(item)
+                    .requires(SCItems.PEARL)
                     .requires(Ingredient.of(dyeableItems.stream().filter((p_288265_) -> !p_288265_.equals(item1)).map(ItemStack::new))).group(group).unlockedBy("has_needed_dye", has(item)).save(recipeOutput, "dye_" + getItemName(item1));
         }
 
