@@ -46,6 +46,10 @@
       "starcatcher:add_creeper",
       "starcatcher:big_decrease_lure_time"
     ],
+    "starcatcher:fisherman_hat_red": [
+      "starcatcher:extra_two_item",
+      "starcatcher:cancel_golden"
+    ],
     "starcatcher:fisherman_hat_yellow": [
       "starcatcher:extra_exp_based_on_performance"
     ],

@@ -181,6 +181,34 @@ public class DGSCDataMapsProvider extends DataMapProvider
         catchModifiers.add(SCBlocks.FISHERMAN_HAT_YELLOW.asItem().builtInRegistryHolder(),
                 List.of(SCCatchModifiers.EXTRA_EXP_BASED_ON_PERFORMANCE.getFirst()), false);
 
+        catchModifiers.add(SCBlocks.FISHERMAN_HAT_RED.asItem().builtInRegistryHolder(),
+                List.of(
+                        SCCatchModifiers.INCREASE_LURE_TIME.getFirst(),
+                        SCCatchModifiers.ADD_5_GOLDEN_CHANCE.getFirst()
+                ), false);
+
+        minigameModifiers.add(SCBlocks.FISHERMAN_HAT_RED.asItem().builtInRegistryHolder(),
+                List.of(
+                        SCMinigameModifiers.FLIP_EVERY_HIT.getId()
+                ), false);
+
+
+        minigameModifiers.add(SCBlocks.FISHERMAN_HAT_PINK.asItem().builtInRegistryHolder(),
+                List.of(
+                        SCMinigameModifiers.SLIGHTLY_SLOWER_POINTER_SPEED.getId()
+                ), false);
+
+        minigameModifiers.add(SCBlocks.FISHERMAN_HAT_ORANGE.asItem().builtInRegistryHolder(),
+                List.of(
+                        SCMinigameModifiers.SLIGHTLY_FASTER_POINTER_SPEED.getId()
+                ), false);
+
+        catchModifiers.add(SCBlocks.FISHERMAN_HAT_RED.asItem().builtInRegistryHolder(),
+                List.of(
+                        SCCatchModifiers.EXTRA_TWO_ITEMS.getFirst(),
+                        SCCatchModifiers.CANCEL_GOLDEN.getFirst()
+                ), false);
+
         catchModifiers.add(SCBlocks.FISHERMAN_HAT_BLUE.asItem().builtInRegistryHolder(),
                 List.of(SCCatchModifiers.DECREASES_LURE_TIME.getFirst()), false);
 

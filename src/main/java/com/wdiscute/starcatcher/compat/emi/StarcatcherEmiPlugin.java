@@ -93,6 +93,13 @@ public class StarcatcherEmiPlugin implements EmiPlugin
                 ),
                 SellingBin.rl("/pearl_template")));
 
+        //fisherman's hat
+        registry.addRecipe(new EmiInfoRecipe(List.of(EmiIngredient.of(Ingredient.of(SCTags.HATS))),
+                List.of(
+                        Component.translatable("emi.info.starcatcher.hat.0")
+                ),
+                SellingBin.rl("/hats")));
+
         Registry<FishProperties> fps = FishProperties.getRegistry(Minecraft.getInstance().level);
 
         for (FishProperties fp : fps)

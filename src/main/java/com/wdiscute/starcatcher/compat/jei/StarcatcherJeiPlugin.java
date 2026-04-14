@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.SCItems;
 import dev.emi.emi.api.EmiApi;
+import dev.emi.emi.api.recipe.EmiInfoRecipe;
 import dev.emi.emi.api.stack.EmiIngredient;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
@@ -121,7 +122,13 @@ public class StarcatcherJeiPlugin implements IModPlugin
                 Component.translatable("emi.info.starcatcher.pearl_template.0")
         );
 
-
+        //fisherman's hat
+        SCBlocks.HATS.getEntries().forEach(o ->
+        {
+            registration.addItemStackInfo(o.get().asItem().getDefaultInstance(),
+                    Component.translatable("emi.info.starcatcher.hat.0")
+            );
+        });
     }
 
     @Override

@@ -19,6 +19,15 @@
       "starcatcher:add_aqua_sweet_spot",
       "starcatcher:freeze_on_miss"
     ],
+    "starcatcher:fisherman_hat_orange": [
+      "starcatcher:slightly_faster_handle_speed"
+    ],
+    "starcatcher:fisherman_hat_pink": [
+      "starcatcher:slightly_slower_handle_speed"
+    ],
+    "starcatcher:fisherman_hat_red": [
+      "starcatcher:flip_every_hit"
+    ],
     "starcatcher:frozen_hook": [
       "starcatcher:prevent_frozen"
     ],
