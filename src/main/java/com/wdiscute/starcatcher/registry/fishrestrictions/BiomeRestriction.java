@@ -217,7 +217,6 @@ public class BiomeRestriction extends AbstractFishRestriction
                 blacklist.add(Component.translatable("biome." + rl.toLanguageKey()));
         }
 
-
         return blacklist;
     }
 

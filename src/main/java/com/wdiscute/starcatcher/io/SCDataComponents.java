@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.registry.SignedGuide;
+import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
+import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.secretnotes.LetterItem;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;
 import net.minecraft.core.registries.Registries;
@@ -79,15 +81,6 @@ public class SCDataComponents
     public static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {
         stack.set(component.get(), data);
-    }
-
-    public static List<ItemStack> getSlotsInRod(ItemStack itemStack)
-    {
-        List<ItemStack> list = new ArrayList<>();
-        list.add(SCDataComponents.getOrDefault(itemStack, SCDataComponents.HOOK, SingleStackContainer.empty()).stack());
-        list.add(SCDataComponents.getOrDefault(itemStack, SCDataComponents.BAIT, SingleStackContainer.empty()).stack());
-        list.add(SCDataComponents.getOrDefault(itemStack, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack());
-        return list;
     }
 
     @Nullable

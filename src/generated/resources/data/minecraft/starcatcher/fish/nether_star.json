@@ -8,7 +8,7 @@
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
+    "hp": 300,
     "missPenalty": 30,
     "modifiers": [],
     "speed": 10,
@@ -37,7 +37,7 @@
         "color_as_int": 2039583,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
-        "moving_rate": 3.0,
+        "moving_rate": -3.0,
         "reward": 15,
         "sweet_spot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/wither.png",

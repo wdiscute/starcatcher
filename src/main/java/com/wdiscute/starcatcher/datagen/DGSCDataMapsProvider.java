@@ -131,10 +131,6 @@ public class DGSCDataMapsProvider extends DataMapProvider
         minigameModifiers.add(SCItems.LEAF_BOBBER, List.of(SCMinigameModifiers.ADD_LEAVES.getId()), false);
         minigameModifiers.add(SCItems.SLIMEY_BOBBER, List.of(SCMinigameModifiers.BOUNCE_BACK.getId()), false);
         minigameModifiers.add(SCItems.DEV_WORM, List.of(SCMinigameModifiers.NEVER_LOSE.getId()), false);
-
-        minigameModifiers.add(SCBlocks.FISHERMAN_HAT_LIGHT_BLUE.asItem().builtInRegistryHolder(),
-                List.of(SCMinigameModifiers.ADD_AQUA_SWEET_SPOT.getId(), SCMinigameModifiers.FREEZE_ON_MISS.getId()), false);
-
         //catch modifiers
         catchModifiers.add(SCItems.SHINY_HOOK, List.of(SCCatchModifiers.HIDE_CATCH.getFirst()), false);
         catchModifiers.add(SCItems.ECHOING_HOOK, List.of(SCCatchModifiers.GUARANTEE_NEW_FISH_ALWAYS.getFirst()), false);
@@ -166,11 +162,13 @@ public class DGSCDataMapsProvider extends DataMapProvider
                 SCCatchModifiers.BIG_DECREASES_LURE_TIME.getFirst(),
                 SCCatchModifiers.BIG_DECREASES_LURE_TIME.getFirst()), false);
 
+
+        //hats
         catchModifiers.add(SCBlocks.FISHERMAN_HAT_BLACK.asItem().builtInRegistryHolder(),
                 List.of(SCCatchModifiers.EXTRA_ITEM.getFirst(), SCCatchModifiers.HIDE_CATCH.getFirst()), false);
 
         catchModifiers.add(SCBlocks.FISHERMAN_HAT_GREEN.asItem().builtInRegistryHolder(),
-                List.of(SCCatchModifiers.BIG_DECREASES_LURE_TIME.getFirst()), false);
+                List.of(SCCatchModifiers.INCREASE_LURE_TIME.getFirst()), false);
 
         catchModifiers.add(SCBlocks.FISHERMAN_HAT_LIME.asItem().builtInRegistryHolder(),
                 List.of(SCCatchModifiers.ADD_CREEPER.getFirst(), SCCatchModifiers.BIG_DECREASES_LURE_TIME.getFirst()), false);
@@ -183,6 +181,10 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
         catchModifiers.add(SCBlocks.FISHERMAN_HAT_LIGHT_BLUE.asItem().builtInRegistryHolder(),
                 List.of(SCCatchModifiers.INCREASE_LURE_TIME.getFirst()), false);
+
+        minigameModifiers.add(SCBlocks.FISHERMAN_HAT_LIGHT_BLUE.asItem().builtInRegistryHolder(),
+                List.of(SCMinigameModifiers.ADD_AQUA_SWEET_SPOT.getId(), SCMinigameModifiers.FREEZE_ON_MISS.getId()), false);
+
 
         //tackle skins
         tackleSkin.add(SCItems.PEARL_SMITHING_TEMPLATE, SCTackleSkins.PEARL_TACKLE_SKIN, false);
@@ -214,6 +216,8 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
 
 
+        minigameModifiers.add(SCItems.PEARL_SMITHING_TEMPLATE, List.of(SCMinigameModifiers.ADD_AQUA_SWEET_SPOT.getId()), false);
+        catchModifiers.add(SCItems.PEARL_SMITHING_TEMPLATE, List.of(SCCatchModifiers.GUARANTEE_GOLDEN.getFirst()), false);
 
 
     }

@@ -65,6 +65,9 @@
     "starcatcher:murkwater_bait": [
       "starcatcher:decrease_lure_time"
     ],
+    "starcatcher:pearl_smithing_template": [
+      "starcatcher:guarantee_golden"
+    ],
     "starcatcher:sculk_bait": [
       "starcatcher:decrease_lure_time"
     ],

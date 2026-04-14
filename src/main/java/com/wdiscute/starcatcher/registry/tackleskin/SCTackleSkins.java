@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.registry.tackleskin;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.registry.SCDataMaps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -37,6 +38,16 @@ public interface SCTackleSkins
 
     //king
     ResourceLocation KING_TACKLE_SKIN = registerCatchModifier("king", KingTackleSkin::new);
+
+    static ResourceLocation getTackleSkin(ItemStack stack)
+    {
+        //if skin on tackle not default, return that
+        ResourceLocation onStack = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.rl("base"));
+        if (!onStack.equals(Starcatcher.rl("base"))) return onStack;
+
+        //return whatever is in the datamap or default
+        return SCDataMaps.getOrDefault(stack, SCDataMaps.TACKLE_SKIN, Starcatcher.rl("base"));
+    }
 
     static ResourceLocation registerCatchModifier(String name, Supplier<AbstractTackleSkin> sup)
     {

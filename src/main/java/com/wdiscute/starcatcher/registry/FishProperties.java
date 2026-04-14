@@ -1232,10 +1232,10 @@ public record FishProperties(
                 SweetSpot.STONE, SweetSpot.STONE, SweetSpot.STONE, SweetSpot.STONE
         );
 
-        public static Difficulty WITHER = new Difficulty(
+        public static Difficulty WITHER = new Difficulty(300,
                 10, 30, 1,
                 List.of(),
-                SweetSpot.WITHER_BIG, SweetSpot.WITHER, SweetSpot.WITHER
+                SweetSpot.WITHER_BIG, SweetSpot.WITHER, SweetSpot.WITHER_REVERSED
         );
 
         public static Difficulty CREEPER = new Difficulty(
@@ -1479,6 +1479,18 @@ public record FishProperties(
                 3,
                 0x1f1f1f
         );
+
+        public static SweetSpot WITHER_REVERSED = new SweetSpot(
+                SCSweetSpotsBehaviour.NORMAL,
+                RL_WITHER,
+                22,
+                15,
+                false,
+                0,
+                -3,
+                0x1f1f1f
+        );
+
 
         public static SweetSpot WITHER_BIG = new SweetSpot(
                 SCSweetSpotsBehaviour.NORMAL,

@@ -8,6 +8,7 @@ import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
+import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.screens.Screen;
@@ -67,9 +68,9 @@ public class TooltipEvents
         }
 
         //tackle skin
-        if (SCDataComponents.has(stack, SCDataComponents.TACKLE_SKIN))
+        ResourceLocation rl = SCTackleSkins.getTackleSkin(stack);
+        if (!rl.equals(SCTackleSkins.BASE_TACKLE_SKIN))
         {
-            ResourceLocation rl = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.rl("missingno"));
             comp.add(Component.translatable("tooltip.starcatcher.tackle").withStyle(ChatFormatting.GRAY));
             comp.add(Component.literal(" -").append(Component.translatable("tooltip.tackle." + rl.toLanguageKey()))
                     .withStyle(Style.EMPTY.withColor(SCColors.TOOLTIP_GRAY)));

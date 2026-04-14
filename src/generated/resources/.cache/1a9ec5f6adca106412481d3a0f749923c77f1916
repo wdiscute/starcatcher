@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-13T19:20:19.1111598	FishingProperties
+// 1.21.1	2026-04-14T10:56:15.8552133	FishingProperties
 d906f7c35e4bad70f029d9721253c319610c746f data/alexscaves/starcatcher/fish/lanternfish.json
 22429242b921538f1922252a4710b2f25c89381a data/alexscaves/starcatcher/fish/radgill.json
 6a422b39f42820ae64755a233f566be285632a2d data/alexscaves/starcatcher/fish/sweetish_fish_blue.json
@@ -127,7 +127,7 @@ e1c4cbd1ec51a052b77cdc5c9d30e4e3cff5c443 data/hybrid-aquatic/starcatcher/fish/st
 e29927e26b5c6b2b1bcdb9f38dce14313e746134 data/minecraft/starcatcher/fish/extra_diamond.json
 21bb7e39104a3f8bfbc4eec83c79969de3abcfdc data/minecraft/starcatcher/fish/extra_netherite_scrap.json
 da6d8ceb170d6fb2b8b72652d78d865ecf468313 data/minecraft/starcatcher/fish/extra_netherite_upgrade_smithing_template.json
-6d4d336982bb98163af91154539d7f97c01ddd97 data/minecraft/starcatcher/fish/nether_star.json
+cbac9231817bfa40dc9d3b4838c86cc14cf6e5e5 data/minecraft/starcatcher/fish/nether_star.json
 a93658cf662641086e8234380163792f6b7e4c6d data/minecraft/starcatcher/fish/pufferfish.json
 8f855b43b4d328aed3bc22780d62b376980ba712 data/minecraft/starcatcher/fish/rotten_flesh.json
 0da800981e4c3e5598d45efc4465776ae6bfcb82 data/minecraft/starcatcher/fish/salmon.json
@@ -326,7 +326,7 @@ b65e3d5af75c4485f23c10d48e253c132cf4f3fd data/tide/starcatcher/fish/darkness_eat
 f74cdeb07d7f0c3477577455d9602d6b55b9834f data/tide/starcatcher/fish/deep_blue.json
 36f5eb4a4509a603c947a3360678e8063d7627ba data/tide/starcatcher/fish/deep_grouper.json
 a8d2f65700f7179e7bb8bf788c61be96ed8bdc90 data/tide/starcatcher/fish/devils_hole_pupfish.json
-ca70658516309d68a3b2b708cd4fe352753d23f0 data/tide/starcatcher/fish/dragon_fish.json
+a428224315026e033e81c27db739404073ade997 data/tide/starcatcher/fish/dragon_fish.json
 5e6d655e02ae692e781bcd9aaaa58ac923b86383 data/tide/starcatcher/fish/dripstone_darter.json
 aef201366d0c0a6eb874fe016889e45f836f11e1 data/tide/starcatcher/fish/dutchman_sock.json
 f20526fe796939400d2501f210f44a55c8d4dc57 data/tide/starcatcher/fish/echo_snapper.json

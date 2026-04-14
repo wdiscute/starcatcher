@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.compat.curios.CuriosCompat;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
+import com.wdiscute.starcatcher.registry.SCDataMaps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -137,9 +138,18 @@ public interface SCCatchModifiers
     {
         List<ResourceLocation> rls = new ArrayList<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.CATCH_MODIFIERS, List.of()));
 
+        rls.addAll(SCDataMaps.getOrDefault(itemStack, SCDataMaps.CATCH_MODIFIERS, List.of()));
+
+        if(!itemStack.is(SCTags.RODS)) return rls;
+
+        //if not a rod, add hook bobber and bait slot modifiers too
         var hook = SCDataComponents.getOrDefault(itemStack, SCDataComponents.HOOK, SingleStackContainer.empty()).stack();
         var bait = SCDataComponents.getOrDefault(itemStack, SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
         var bobber = SCDataComponents.getOrDefault(itemStack, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack();
+
+        rls.addAll(SCDataMaps.getOrDefault(hook, SCDataMaps.CATCH_MODIFIERS, List.of()));
+        rls.addAll(SCDataMaps.getOrDefault(bait, SCDataMaps.CATCH_MODIFIERS, List.of()));
+        rls.addAll(SCDataMaps.getOrDefault(bobber, SCDataMaps.CATCH_MODIFIERS, List.of()));
 
         rls.addAll(SCDataComponents.getOrDefault(hook, SCDataComponents.CATCH_MODIFIERS, List.of()));
         rls.addAll(SCDataComponents.getOrDefault(bait, SCDataComponents.CATCH_MODIFIERS, List.of()));
