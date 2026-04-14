@@ -87,6 +87,10 @@ public interface SCCatchModifiers
     //hide catch
     Pair<ResourceLocation, Supplier<AbstractCatchModifier>> HIDE_CATCH = registerCatchModifier("hide_catch", HideCatchModifier::new);
 
+    //angler's hat (artifacts / reliquified artifacts compat)
+    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> ANGLERS_HAT = registerCatchModifier("anglers_hat", AnglersHatModifier::new);
+
+
     static Pair<ResourceLocation, Supplier<AbstractCatchModifier>> registerCatchModifier(String name, Supplier<AbstractCatchModifier> sup)
     {
         REGISTRY.register(name, () -> sup);

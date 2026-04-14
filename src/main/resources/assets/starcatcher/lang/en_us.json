@@ -263,6 +263,8 @@
   "tooltip.modifier.starcatcher.add_50_golden_chance": "Tremendously increases the chances of catching a golden fish",
   "tooltip.modifier.starcatcher.cancel_golden": "You can no longer catch golden fishes",
 
+  "tooltip.modifier.starcatcher.anglers_hat": "",
+
   "tooltip.modifier.starcatcher.hide_catch": "You can no longer see your catch whilst fishing",
 
   "tooltip.modifier.starcatcher.freeze_on_miss": "Missing a sweet-spot will cause your handle to freeze up for a short period",

@@ -72,8 +72,10 @@ public class TooltipEvents
         if (!rl.equals(SCTackleSkins.BASE_TACKLE_SKIN))
         {
             comp.add(Component.translatable("tooltip.starcatcher.tackle").withStyle(ChatFormatting.GRAY));
-            comp.add(Component.literal(" -").append(Component.translatable("tooltip.tackle." + rl.toLanguageKey()))
-                    .withStyle(Style.EMPTY.withColor(SCColors.TOOLTIP_GRAY)));
+            String s = I18n.get("tooltip.tackle." + rl.toLanguageKey());
+            if (!s.isEmpty())
+                comp.add(Component.literal(" -").append(Component.literal(s))
+                        .withStyle(Style.EMPTY.withColor(SCColors.TOOLTIP_GRAY)));
         }
 
         //modifiers
@@ -91,8 +93,10 @@ public class TooltipEvents
                 {
                     if (entity.level().registryAccess().registryOrThrow(Starcatcher.CATCH_MODIFIERS).get(o) != null)
                     {
-                        modComp.add(Component.literal(" -").append(Component.translatable("tooltip.modifier." + o.toLanguageKey()))
-                                .withStyle(Style.EMPTY.withColor(SCColors.TOOLTIP_GRAY)));
+                        String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
+                        if (!s.isEmpty())
+                            modComp.add(Component.literal(" -").append(Component.literal(s))
+                                    .withStyle(Style.EMPTY.withColor(SCColors.TOOLTIP_GRAY)));
                     }
                 });
 
@@ -101,8 +105,10 @@ public class TooltipEvents
                 {
                     if (entity.level().registryAccess().registryOrThrow(Starcatcher.CATCH_MODIFIERS).get(o) != null)
                     {
-                        modComp.add(Component.literal(" -").append(Component.translatable("tooltip.modifier." + o.toLanguageKey()))
-                                .withStyle(Style.EMPTY.withColor(SCColors.TOOLTIP_GRAY)));
+                        String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
+                        if (!s.isEmpty())
+                            modComp.add(Component.literal(" -").append(Component.literal(s))
+                                    .withStyle(Style.EMPTY.withColor(SCColors.TOOLTIP_GRAY)));
                     }
                 });
 

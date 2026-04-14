@@ -17,7 +17,9 @@ import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.sellingbin.FishProcessor;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -162,6 +164,9 @@ public class DGSCDataMapsProvider extends DataMapProvider
                 SCCatchModifiers.BIG_DECREASES_LURE_TIME.getFirst(),
                 SCCatchModifiers.BIG_DECREASES_LURE_TIME.getFirst()), false);
 
+        //angler's hat (artifacts / reliquified artifacts compat)
+        catchModifiers.add(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("artifacts", "anglers_hat")), List.of(SCCatchModifiers.ANGLERS_HAT.getFirst()), false);
+
 
         //hats
         catchModifiers.add(SCBlocks.FISHERMAN_HAT_BLACK.asItem().builtInRegistryHolder(),
@@ -213,11 +218,6 @@ public class DGSCDataMapsProvider extends DataMapProvider
         treasures.add(Starcatcher.rl("boreal"), Treasure.CLEAR_SMITHING_TEMPLATE, false);
         treasures.add(Starcatcher.rl("cerberay"), Treasure.KING_SMITHING_TEMPLATE, false);
         treasures.add(Starcatcher.rl("aurora"), Treasure.ICEBORN_SKIN_SMITHING_TEMPLATE, false);
-
-
-
-        minigameModifiers.add(SCItems.PEARL_SMITHING_TEMPLATE, List.of(SCMinigameModifiers.ADD_AQUA_SWEET_SPOT.getId()), false);
-        catchModifiers.add(SCItems.PEARL_SMITHING_TEMPLATE, List.of(SCCatchModifiers.GUARANTEE_GOLDEN.getFirst()), false);
 
 
     }

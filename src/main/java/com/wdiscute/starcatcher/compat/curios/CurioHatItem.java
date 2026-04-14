@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher.compat.curios;
 
 import com.wdiscute.starcatcher.registry.items.HatItem;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import top.theillusivec4.curios.api.SlotContext;

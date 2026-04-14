@@ -1,5 +1,8 @@
 {
   "values": {
+    "artifacts:anglers_hat": [
+      "starcatcher:anglers_hat"
+    ],
     "minecraft:netherite_upgrade_smithing_template": [
       "starcatcher:survives_lava"
     ],
@@ -64,9 +67,6 @@
     ],
     "starcatcher:murkwater_bait": [
       "starcatcher:decrease_lure_time"
-    ],
-    "starcatcher:pearl_smithing_template": [
-      "starcatcher:guarantee_golden"
     ],
     "starcatcher:sculk_bait": [
       "starcatcher:decrease_lure_time"
