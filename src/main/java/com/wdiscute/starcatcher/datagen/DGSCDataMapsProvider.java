@@ -15,6 +15,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.nikdo53.neobackports.datagen.DataMapProvider;
+import net.nikdo53.neobackports.datamaps.NeoForgeDataMaps;
+import net.nikdo53.neobackports.datamaps.builtin.Compostable;
 
 import javax.annotation.processing.AbstractProcessor;
 import java.util.List;
@@ -72,9 +74,9 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
             //selling sellable fishes
             Map<ResourceLocation, Float> qualities = Map.of(
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "diamond"), 2f,
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "gold"), 1.5f,
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "iron"), 1.25f
+                    new ResourceLocation("quality_food", "diamond"), 2f,
+                    new ResourceLocation("quality_food", "gold"), 1.5f,
+                    new ResourceLocation("quality_food", "iron"), 1.25f
             );
 
             sellable.add(SCTags.COMMON_FISHES, new SBDataMaps.ItemValue(25, List.of(

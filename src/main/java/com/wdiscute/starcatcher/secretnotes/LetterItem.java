@@ -7,11 +7,8 @@ import com.wdiscute.starcatcher.io.SCDataComponents;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
@@ -21,8 +18,11 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,18 +32,18 @@ public class LetterItem extends Item
 {
     public LetterItem()
     {
-        super(new Properties().stacksTo(1).component(SCDataComponents.MESSAGE, Message.empty()));
+        super(new Properties().stacksTo(1).component(SCDataComponents.MESSAGE.get(), Message.empty()));
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, Level level, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
     {
         if(SCDataComponents.has(stack, SCDataComponents.MESSAGE) && tooltipFlag.isAdvanced())
         {
             Message wd = SCDataComponents.get(stack, SCDataComponents.MESSAGE);
             tooltipComponents.add(Component.literal("written by uuid: " + wd.sender).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
         }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
+        super.appendHoverText(stack, level, tooltipComponents, tooltipFlag);
     }
 
     @Override
@@ -96,11 +96,11 @@ public class LetterItem extends Item
                         Codec.BOOL.fieldOf("locked").forGetter(Message::locked)
                 ).apply(instance, Message::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, Message> STREAM_CODEC = StreamCodec.composite(
-                UUIDUtil.STREAM_CODEC, Message::sender,
-                ByteBufCodecs.STRING_UTF8, Message::senderDisplayName,
-                ResourceLocation.STREAM_CODEC, Message::dimension,
-                ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), Message::text,
+        public static final StreamCodec<Message> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.UUID, Message::sender,
+                ByteBufCodecs.STRING, Message::senderDisplayName,
+                ByteBufCodecs.RESOURCE_LOCATION, Message::dimension,
+                ByteBufCodecs.STRING.apply(ByteBufCodecs.list()), Message::text,
                 ByteBufCodecs.BOOL, Message::locked,
                 Message::new
         );

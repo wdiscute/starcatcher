@@ -43,7 +43,7 @@ public class MessagesSavedData extends SavedData
 
     public static MessagesSavedData get(ServerLevel level)
     {
-        return level.getDataStorage().computeIfAbsent(factory(), NAME);
+        return level.getDataStorage().computeIfAbsent(MessagesSavedData::load, MessagesSavedData::new, NAME);
     }
 
     public List<LetterItem.Message> getMessages()
@@ -51,13 +51,8 @@ public class MessagesSavedData extends SavedData
         return messages;
     }
 
-    public static Factory<MessagesSavedData> factory()
-    {
-        return new Factory<>(MessagesSavedData::new, MessagesSavedData::load);
-    }
-
     @Override
-    public CompoundTag save(CompoundTag compoundTag, HolderLookup.Provider registries)
+    public CompoundTag save(CompoundTag compoundTag)
     {
         CODEC.encodeStart(NbtOps.INSTANCE, messages)
                 .resultOrPartial(Starcatcher.LOGGER::error)
@@ -66,7 +61,7 @@ public class MessagesSavedData extends SavedData
         return compoundTag;
     }
 
-    public static MessagesSavedData load(CompoundTag compoundTag, HolderLookup.Provider registries)
+    public static MessagesSavedData load(CompoundTag compoundTag)
     {
         Tag tag = compoundTag.get(NAME);
 

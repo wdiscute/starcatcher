@@ -35,7 +35,7 @@ public class TournamentSavedData extends SavedData
 
     public static TournamentSavedData get(ServerLevel level)
     {
-        return level.getDataStorage().computeIfAbsent(factory(), NAME);
+        return level.getDataStorage().computeIfAbsent(TournamentSavedData::load, TournamentSavedData::new, NAME);
     }
 
     public List<Tournament> getTournaments()
@@ -49,13 +49,8 @@ public class TournamentSavedData extends SavedData
         setDirty();
     }
 
-    public static SavedData.Factory<TournamentSavedData> factory()
-    {
-        return new SavedData.Factory<>(TournamentSavedData::new, TournamentSavedData::load);
-    }
-
     @Override
-    public CompoundTag save(CompoundTag compoundTag, HolderLookup.Provider registries)
+    public CompoundTag save(CompoundTag compoundTag)
     {
         CODEC.encodeStart(NbtOps.INSTANCE, tournaments)
                 .resultOrPartial(Starcatcher.LOGGER::error)
@@ -64,7 +59,7 @@ public class TournamentSavedData extends SavedData
         return compoundTag;
     }
 
-    public static TournamentSavedData load(CompoundTag compoundTag, HolderLookup.Provider registries)
+    public static TournamentSavedData load(CompoundTag compoundTag)
     {
         Tag tag = compoundTag.get(NAME);
 

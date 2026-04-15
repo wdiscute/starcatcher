@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -12,9 +11,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 import org.jetbrains.annotations.NotNull;
 
 public class SecretNote extends Item
@@ -54,7 +54,7 @@ public class SecretNote extends Item
         TRUE_BLUE("true_blue", "message_overworld");
 
         public static final Codec<Note> CODEC = StringRepresentable.fromEnum(Note::values);
-        public static final StreamCodec<FriendlyByteBuf, Note> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Note.class);
+        public static final StreamCodec<Note> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Note.class);
         private final String key;
         private final String texture;
 

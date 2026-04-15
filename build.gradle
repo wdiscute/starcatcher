@@ -17,39 +17,59 @@ tasks.named('wrapper', Wrapper).configure {
 version = mod_version
 group = mod_group_id
 
-repositories
-        {
-            mavenLocal()
+repositories{
+    mavenLocal()
 
-            //emi
-            maven {
-                name = "TerraformersMC"
-                url = "https://maven.terraformersmc.com/"
-            }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
 
-            //favouriteless
-            maven {
-                url = "https://maven.favouriteless.net/releases"
-            }
+    //jei
+    maven {
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
 
-            //modrinth
-            maven {
-                url = "https://api.modrinth.com/maven"
-            }
+    //jei
+    maven {
+        url = "https://modmaven.dev"
+    }
 
-            repositories {
-                exclusiveContent {
-                    forRepository {
-                        maven {
-                            url = "https://cursemaven.com"
-                        }
-                    }
-                    filter {
-                        includeGroup "curse.maven"
-                    }
+    //favouriteless
+    maven {
+        url = "https://maven.favouriteless.net/releases"
+    }
+
+    //curios
+    maven {
+        name = "Illusive Soulworks maven"
+        url = "https://maven.theillusivec4.top/"
+    }
+
+    //modrinth
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
+
+    //tyson the ember
+    repositories {
+        maven { url = 'https://maven.tysontheember.dev' }
+    }
+
+    repositories {
+        exclusiveContent {
+            forRepository {
+                maven {
+                    url "https://cursemaven.com"
                 }
             }
+            filter {
+                includeGroup "curse.maven"
+            }
         }
+    }
+
+}
 
 dependencies {
 
@@ -60,9 +80,14 @@ dependencies {
     jarJar(modImplementation("net.nikdo53.neobackports:NeoBackports:${neobackports_version}"))
     interfaceInjectionData("net.nikdo53.neobackports:NeoBackports:${neobackports_version}")
 
+    modImplementation("com.wdiscute:Selling-Bin:1.4.1-FORGE-1.20.1")
+
     //EMI
     modCompileOnly("dev.emi:emi-forge:${emi_version}:api")
     modRuntimeOnly("dev.emi:emi-forge:${emi_version}")
+
+    //JEI
+    modCompileOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
 
     //Serene Seasons
     modCompileOnly("maven.modrinth:serene-seasons:9.1.0.2")
@@ -90,7 +115,13 @@ dependencies {
     modCompileOnly("curse.maven:ftb-teams-forge-404468:6130786")
 
 
+    modCompileOnly("maven.modrinth:quality-food:2.3.0-1.20.1")
+    modCompileOnly("maven.modrinth:relics-mod:0.8.0.13")
+    modCompileOnly( "top.theillusivec4.curios:curios-forge:${curios_version}:api")
+
+    modCompileOnly("curse.maven:oculus-581495:6020952")
 }
+
 
 
 base {

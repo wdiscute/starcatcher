@@ -3,17 +3,17 @@ package com.wdiscute.starcatcher.io.network;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.SignedGuide;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.networking.CustomPacketPayload;
+import net.nikdo53.neobackports.io.networking.IPayloadContext;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 public record SignGuidePayload(String signature) implements CustomPacketPayload
 {
-    public static final Type<SignGuidePayload> TYPE = new Type<>(Starcatcher.rl("sign_guide"));
+    public static final Type<SignGuidePayload> TYPE = new Type<>(Starcatcher.rl("sign_guide"), SignGuidePayload.class);
 
-    public static final StreamCodec<ByteBuf, SignGuidePayload> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.STRING_UTF8,
+    public static final StreamCodec<SignGuidePayload> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.STRING,
             SignGuidePayload::signature,
             SignGuidePayload::new
     );

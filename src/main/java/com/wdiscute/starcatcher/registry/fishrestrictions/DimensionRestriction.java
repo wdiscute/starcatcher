@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -107,7 +107,7 @@ public class DimensionRestriction extends AbstractFishRestriction
         //if there's only one dimension
         if (dimensions.size() == 1)
         {
-            comp = Component.translatable("dimension." + dimensions.getFirst().toLanguageKey());
+            comp = Component.translatable("dimension." + dimensions.get(0).toLanguageKey());
         }
         else
         {

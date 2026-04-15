@@ -15,7 +15,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.registries.DeferredItem;
+import net.nikdo53.neobackports.registry.DeferredItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -182,12 +182,12 @@ public class U
 
     public static ResourceLocation rl(String ns, String path)
     {
-        return ResourceLocation.fromNamespaceAndPath(ns, path);
+        return new ResourceLocation(ns, path);
     }
 
     public static ResourceLocation rl(String path)
     {
-        return ResourceLocation.fromNamespaceAndPath("minecraft", path);
+        return new ResourceLocation("minecraft", path);
     }
 
     public static Holder<Item> holderItem(String ns, String path)

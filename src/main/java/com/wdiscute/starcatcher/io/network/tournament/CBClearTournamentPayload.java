@@ -2,19 +2,18 @@ package com.wdiscute.starcatcher.io.network.tournament;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.tournament.TournamentOverlay;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.networking.CustomPacketPayload;
+import net.nikdo53.neobackports.io.networking.IPayloadContext;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 
 public record CBClearTournamentPayload(String text) implements CustomPacketPayload
 {
-    public static final CustomPacketPayload.Type<CBClearTournamentPayload> TYPE = new CustomPacketPayload.Type<>(Starcatcher.rl("cb_active_tournament_update"));
+    public static final CustomPacketPayload.Type<CBClearTournamentPayload> TYPE = new CustomPacketPayload.Type<>(Starcatcher.rl("cb_active_tournament_update"), CBClearTournamentPayload.class);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CBClearTournamentPayload> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.STRING_UTF8, CBClearTournamentPayload::text,
+    public static final StreamCodec< CBClearTournamentPayload> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.STRING, CBClearTournamentPayload::text,
             CBClearTournamentPayload::new
     );
 

@@ -2039,9 +2039,9 @@ public record FishProperties(
                     double y = objPos.y / 20;
                     double z = objPos.z / 25;
 
-                    x = Math.clamp(x, -1, 1);
-                    y = Math.clamp(y, -1, 1);
-                    z = Math.clamp(z, -1, 1);
+                    x = Mth.clamp(x, -1, 1);
+                    y = Mth.clamp(y, -1, 1);
+                    z = Mth.clamp(z, -1, 1);
 
                     x *= 2.5;
                     y *= 2;
@@ -2092,9 +2092,9 @@ public record FishProperties(
                     ItemEntity itemFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, itemStackToSpawn);
 
                     //assign delta movement so fish flies towards player
-                    double x = Math.clamp((player.position().x - fbe.position().x) / 25, -1, 1);
-                    double y = Math.clamp((player.position().y - fbe.position().y) / 20, -1, 1);
-                    double z = Math.clamp((player.position().z - fbe.position().z) / 25, -1, 1);
+                    double x = Mth.clamp((player.position().x - fbe.position().x) / 25, -1, 1);
+                    double y = Mth.clamp((player.position().y - fbe.position().y) / 20, -1, 1);
+                    double z = Mth.clamp((player.position().z - fbe.position().z) / 25, -1, 1);
                     Vec3 vec3 = new Vec3(x, 0.7 + y, z);
                     itemFished.setDeltaMovement(vec3);
 

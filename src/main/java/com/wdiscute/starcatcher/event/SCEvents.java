@@ -49,6 +49,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.DataPackRegistryEvent;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.nikdo53.neobackports.event.RegisterDataMapTypesEvent;
+import net.nikdo53.neobackports.event.RegisterPayloadHandlersEvent;
 import net.nikdo53.neobackports.registry.ForgeRegistryHelper;
 
 import java.util.List;
@@ -257,7 +258,7 @@ public class SCEvents
     @SubscribeEvent
     public static void registerPayloads(final RegisterPayloadHandlersEvent event)
     {
-        final PayloadRegistrar registrar = event.registrar("1");
+        final RegisterPayloadHandlersEvent.PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(
                 FishingStartedPayload.TYPE,
                 FishingStartedPayload.STREAM_CODEC,

@@ -18,7 +18,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.io.utils.BackportCodecs;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +34,7 @@ public class BaitRestriction extends AbstractFishRestriction
 
     public static final MapCodec<BaitRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ExtraCodecs.strictUnboundedMap(ResourceLocation.CODEC, Codec.INT).fieldOf("baits").forGetter(BaitRestriction::getBaits),
+                    BackportCodecs.strictUnboundedMap(ResourceLocation.CODEC, Codec.INT).fieldOf("baits").forGetter(BaitRestriction::getBaits),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(BaitRestriction::getTranslationOverride)
             ).apply(instance, BaitRestriction::new));
 
