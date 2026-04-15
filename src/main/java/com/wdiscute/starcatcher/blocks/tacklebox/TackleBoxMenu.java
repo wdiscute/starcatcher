@@ -13,26 +13,32 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class TackleBoxMenu extends AbstractContainerMenu
 {
     private final Container container;
+    public final TackleBoxBlockEntity be;
     public static final int ROD_SLOT = 0;
     public static final int BOBBER_SLOT = 1;
     public static final int BAIT_SLOT = 2;
     public static final int HOOK_SLOT = 3;
+    public static final int FISH_SLOT = 4;
+    public static final int CONTAINER_SIZE = 19;
 
     public TackleBoxMenu(int containerId, Inventory playerInventory, FriendlyByteBuf extraData)
     {
-        this(containerId, playerInventory, new SimpleContainer(27));
+        this(containerId, playerInventory, new SimpleContainer(CONTAINER_SIZE), playerInventory.player.level().getBlockEntity(extraData.readBlockPos()));
     }
 
-    public TackleBoxMenu(int containerId, Inventory playerInventory, Container container)
+    public TackleBoxMenu(int containerId, Inventory playerInventory, Container container, BlockEntity blockEntity)
     {
         super(SCMenuTypes.TACKLE_BOX.get(), containerId);
-        checkContainerSize(container, 27);
+        checkContainerSize(container, CONTAINER_SIZE);
         this.container = container;
+        this.be = ((TackleBoxBlockEntity) blockEntity);
         container.startOpen(playerInventory.player);
+
 
         this.addSlot(new TackleBoxRodSlot(this, container, ROD_SLOT, 134, 37));
 
@@ -40,10 +46,11 @@ public class TackleBoxMenu extends AbstractContainerMenu
         this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BAITS, container, BAIT_SLOT, 158, 31, Starcatcher.rl("item/background/bait_white")));
         this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.HOOKS, container, HOOK_SLOT, 158, 51, Starcatcher.rl("item/background/hook_white")));
 
+        this.addSlot(new TackleBoxInfiniteStorageSlot(this, container, FISH_SLOT, 134, 55));
 
         for (int k = 0; k < 2; ++k)
             for (int l = 0; l < 7; ++l)
-                this.addSlot(new TackleBoxStorageSlot(container, 4 + l + k * 7, l * 18 + 4, 37 + k * 18));
+                this.addSlot(new TackleBoxStorageSlot(container, 5 + l + k * 7, l * 18 + 4, 37 + k * 18, be));
 
 
         for (int i1 = 0; i1 < 3; ++i1)
@@ -62,6 +69,8 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
     public ItemStack quickMoveStack(Player player, int index)
     {
+        if (index == FISH_SLOT) be.updateFishSlot();
+
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.slots.get(index);
         if (slot.hasItem())

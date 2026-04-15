@@ -174,6 +174,13 @@ public class SCConfig
             .translation("starcatcher.configuration.fish_percentile_size_min_scale")
             .defineInRange("fish_percentile_size_min_scale", 0.5d, 0, 100);
 
+
+    public static final ModConfigSpec.IntValue MAX_TACKLE_BOX_FISH_STORAGE = BUILDER_SERVER
+            .comment("Sets the maximum number of fishes the tackle box can store in it's 'infinite slot'")
+            .translation("starcatcher.configuration.max_tackle_box_fish_storage")
+            .defineInRange("max_tackle_box_fish_storage", 900, 0, 999);
+
+
     //todo add base modifiers config
 //    public static final ForgeConfigSpec.ListValueSpec BASE_MODIFIERS = BUILDER_SERVER
 //            .comment("Adjusts the fish decay rate multiplier, useful if you want to adjust the fishes' difficulty globally.")

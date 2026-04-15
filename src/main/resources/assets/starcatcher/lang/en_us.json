@@ -86,6 +86,7 @@
   "tag.starcatcher.aquarium_guide_display" : "Aquarium Interactions For The Guide",
   "tag.starcatcher.placeable_in_display" : "Placeable In The Display Block",
   "tag.starcatcher.placeable_in_tackle_box" : "Placeable In Tackle Box",
+  "tag.starcatcher.placeable_in_tackle_box_fish_slot" : "Placeable In Tackle Box Fish Slot",
   "tag.starcatcher.tackle_boxes" : "Tackle Boxes",
   "tag.starcatcher.tackle_skins" : "Tackle Skins",
   "tag.starcatcher.trash" : "Trash",
@@ -138,6 +139,7 @@
   "starcatcher.configuration.fish_percentile_size_max_scale" : "Fish Model Max Scale",
   "starcatcher.configuration.fish_percentile_size_min_scale" : "Fish Model Min Scale",
   "starcatcher.configuration.enable_rod_menu" : "Enable Rod Menu",
+  "starcatcher.configuration.max_tackle_box_fish_storage" : "max_tackle_box_fish_storage",
 
 
 

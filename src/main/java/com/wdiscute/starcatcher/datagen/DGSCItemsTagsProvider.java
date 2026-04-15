@@ -182,6 +182,11 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .addTag(SCTags.LEGENDARY_FISHES)
         ;
 
+        tag(SCTags.PLACEABLE_IN_TACKLE_BOX_FISH_SLOT)
+                .addTag(ItemTags.FISHES)
+        ;
+
+
         //tackle boxes
         tag(SCTags.TACKLE_BOXES)
                 .add(TACKLE_BOX.asItem())

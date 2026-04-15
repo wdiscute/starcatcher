@@ -49,6 +49,7 @@ public class SCTags
 
     public static final TagKey<Item> PLACEABLE_IN_DISPLAY = ItemTags.create(Starcatcher.rl("placeable_in_display"));
     public static final TagKey<Item> PLACEABLE_IN_TACKLE_BOX = ItemTags.create(Starcatcher.rl("placeable_in_tackle_box"));
+    public static final TagKey<Item> PLACEABLE_IN_TACKLE_BOX_FISH_SLOT = ItemTags.create(Starcatcher.rl("placeable_in_tackle_box_fish_slot"));
     public static final TagKey<Item> WORMS = ItemTags.create(Starcatcher.rl("worms"));
 
     public static final TagKey<Item> RODS = ItemTags.create(Starcatcher.rl("rods"));

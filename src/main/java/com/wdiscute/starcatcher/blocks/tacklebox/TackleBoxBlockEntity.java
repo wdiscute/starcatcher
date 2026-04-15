@@ -1,15 +1,24 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
+import com.wdiscute.sellingbin.bin.Currency;
+import com.wdiscute.starcatcher.SCConfig;
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
+import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
+import com.wdiscute.starcatcher.io.SCDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.WorldlyContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -17,38 +26,150 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.IntStream;
 
-public class TackleBoxBlockEntity extends RandomizableContainerBlockEntity implements WorldlyContainer
+public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContainer, TickableBlockEntity, MenuProvider
 {
-    private static final int[] SLOTS = IntStream.range(0, 27).toArray();
     private NonNullList<ItemStack> itemStacks;
-    private int openCount;
+    private List<ItemStack> fishes;
+    public int openCount;
     @Nullable
     private final DyeColor color;
 
-    public TackleBoxBlockEntity(@Nullable DyeColor color, BlockPos pos, BlockState blockState)
+    @Override
+    public void tick()
     {
-        super(SCBlockEntities.TACKLE_BOX.get(), pos, blockState);
-        this.itemStacks = NonNullList.withSize(27, ItemStack.EMPTY);
-        this.color = color;
+        if (getItem(TackleBoxMenu.FISH_SLOT).isEmpty() && !fishes.isEmpty()) updateFishSlot();
     }
 
-    public TackleBoxBlockEntity(BlockPos pos, BlockState blockState)
+    public void updateFishSlot()
     {
-        super(SCBlockEntities.TACKLE_BOX.get(), pos, blockState);
-        this.itemStacks = NonNullList.withSize(27, ItemStack.EMPTY);
-        this.color = TackleBoxBlock.getColorFromBlock(blockState.getBlock());
+        if (level.isClientSide) return;
+
+        //store & remove fish placed
+        ItemStack itemInFishSlot = getItem(TackleBoxMenu.FISH_SLOT);
+        //only runs if fishes stored is less than the max set by config
+        for (int i = 5; SCConfig.MAX_TACKLE_BOX_FISH_STORAGE.get() - 1 > fishes.size() && i < itemStacks.size(); i++)
+        {
+            ItemStack item = itemStacks.get(i).copy();
+            if (item.is(SCTags.STARCAUGHT_FISHES))
+            {
+                //if slot is not empty, add the fish previously there to stored fishes
+                if(!itemInFishSlot.isEmpty())
+                    fishes.add(itemInFishSlot.copy());
+                //remove the fish item found and put it on the fish slot
+                itemStacks.get(i).setCount(0);
+                itemStacks.set(i, ItemStack.EMPTY);
+                setItem(i, ItemStack.EMPTY);
+                setItem(TackleBoxMenu.FISH_SLOT, item);
+                break;
+            }
+        }
+
+        //refill fish slot from fishes stored
+        if (itemInFishSlot.isEmpty() && !fishes.isEmpty())
+        {
+            setItem(TackleBoxMenu.FISH_SLOT, fishes.getLast());
+            fishes.removeLast();
+        }
+
+        //todo re-stack fishes stored for better hopper and stuff interaction
+
+        setChanged();
+        if (level instanceof ServerLevel serverLevel)
+        {
+            serverLevel.sendBlockUpdated(getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
+        }
     }
 
     public int getContainerSize()
     {
         return this.itemStacks.size();
+    }
+
+    @Override
+    public boolean isEmpty()
+    {
+        for (ItemStack itemstack : this.getItems())
+        {
+            if (!itemstack.isEmpty())
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public ItemStack getItem(int i)
+    {
+        return this.getItems().get(i);
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount)
+    {
+        ItemStack itemstack = ContainerHelper.removeItem(this.getItems(), slot, amount);
+        if (!itemstack.isEmpty())
+        {
+            this.setChanged();
+        }
+
+        return itemstack;
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot)
+    {
+        return ContainerHelper.takeItem(this.getItems(), slot);
+    }
+
+    @Override
+    public void setItem(int slot, ItemStack stack)
+    {
+        this.getItems().set(slot, stack);
+        stack.limitSize(this.getMaxStackSize(stack));
+        this.setChanged();
+    }
+
+    @Override
+    public boolean stillValid(Player player)
+    {
+        return Container.stillValidBlockEntity(this, player);
+    }
+
+    @Override
+    public int[] getSlotsForFace(Direction side)
+    {
+        return new int[]{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+    }
+
+    @Override
+    public boolean canPlaceItemThroughFace(int slot, ItemStack itemStack, Direction direction)
+    {
+        updateFishSlot();
+        return slot >= 5 && direction != Direction.DOWN;
+    }
+
+    @Override
+    public boolean canTakeItemThroughFace(int slot, ItemStack itemStack, Direction direction)
+    {
+        updateFishSlot();
+        return direction == Direction.DOWN && slot > 4;
+    }
+
+    @Override
+    public boolean canPlaceItem(int slot, ItemStack stack)
+    {
+        return WorldlyContainer.super.canPlaceItem(slot, stack);
     }
 
     public boolean triggerEvent(int id, int type)
@@ -103,13 +224,7 @@ public class TackleBoxBlockEntity extends RandomizableContainerBlockEntity imple
 
     }
 
-    protected Component getDefaultName()
-    {
-        return Component.translatable("block.starcatcher.tackle_box");
-    }
-
-    @Override
-    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
         this.loadFromTag(tag, registries);
@@ -119,47 +234,62 @@ public class TackleBoxBlockEntity extends RandomizableContainerBlockEntity imple
     public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
-        if (!this.trySaveLootTable(tag))
+        //save normal slots
+        ContainerHelper.saveAllItems(tag, this.itemStacks, false, registries);
+
+        //save fishes
+        saveAllFishes(tag, fishes, false, registries);
+    }
+
+    public static void saveAllFishes(CompoundTag tag, List<ItemStack> items, boolean alwaysPutTag, HolderLookup.Provider levelRegistry)
+    {
+        ListTag listtag = new ListTag();
+
+        for (int i = 0; i < items.size(); i++)
         {
-            ContainerHelper.saveAllItems(tag, this.itemStacks, false);
+            ItemStack itemstack = items.get(i);
+            if (!itemstack.isEmpty())
+            {
+                CompoundTag compoundtag = new CompoundTag();
+                compoundtag.putByte("Slot", (byte) i);
+                listtag.add(itemstack.save(levelRegistry, compoundtag));
+            }
         }
+
+        if (!listtag.isEmpty() || alwaysPutTag) tag.put("Fishes", listtag);
+
     }
 
     public void loadFromTag(CompoundTag tag, HolderLookup.Provider levelRegistry)
     {
+        //load normal slots
         this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (!this.tryLoadLootTable(tag) && tag.contains("Items", 9))
-        {
-            ContainerHelper.loadAllItems(tag, this.itemStacks);
-        }
+        if (tag.contains("Items", 9))
+            ContainerHelper.loadAllItems(tag, this.itemStacks, levelRegistry);
+
+        //load fishes
+        this.fishes = new ArrayList<>();
+        if (tag.contains("Fishes", 9))
+            loadAllFishes(tag, this.fishes, levelRegistry);
 
     }
+
+    public static void loadAllFishes(CompoundTag tag, List<ItemStack> items, HolderLookup.Provider levelRegistry)
+    {
+        ListTag listtag = tag.getList("Fishes", 10);
+
+        for (int i = 0; i < listtag.size(); i++)
+        {
+            CompoundTag compoundtag = listtag.getCompound(i);
+            items.add(ItemStack.parse(levelRegistry, compoundtag).orElse(ItemStack.EMPTY));
+        }
+    }
+
 
     protected NonNullList<ItemStack> getItems()
     {
         return this.itemStacks;
     }
-
-    protected void setItems(NonNullList<ItemStack> items)
-    {
-        this.itemStacks = items;
-    }
-
-    public int[] getSlotsForFace(Direction side)
-    {
-        return SLOTS;
-    }
-
-    public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction)
-    {
-        return !(Block.byItem(itemStack.getItem()) instanceof TackleBoxBlock) && itemStack.getItem().canFitInsideContainerItems();
-    }
-
-    public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction)
-    {
-        return true;
-    }
-
 
     @Nullable
     public DyeColor getColor()
@@ -167,8 +297,40 @@ public class TackleBoxBlockEntity extends RandomizableContainerBlockEntity imple
         return this.color;
     }
 
-    protected AbstractContainerMenu createMenu(int id, Inventory player)
+    public TackleBoxBlockEntity(@Nullable DyeColor color, BlockPos pos, BlockState blockState)
     {
-        return new TackleBoxMenu(id, player, this);
+        super(SCBlockEntities.TACKLE_BOX.get(), pos, blockState);
+        this.itemStacks = NonNullList.withSize(TackleBoxMenu.CONTAINER_SIZE, ItemStack.EMPTY);
+        this.fishes = new ArrayList<>();
+        this.color = color;
+    }
+
+    public TackleBoxBlockEntity(BlockPos pos, BlockState blockState)
+    {
+        super(SCBlockEntities.TACKLE_BOX.get(), pos, blockState);
+        this.itemStacks = NonNullList.withSize(TackleBoxMenu.CONTAINER_SIZE, ItemStack.EMPTY);
+        this.fishes = new ArrayList<>();
+        this.color = TackleBoxBlock.getColorFromBlock(blockState.getBlock());
+    }
+
+    @Override
+    public void clearContent()
+    {
+        this.getItems().clear();
+    }
+
+    @Override
+    public Component getDisplayName()
+    {
+        return Component.translatable("block.starcatcher.tackle_box");
+    }
+
+    @Override
+    public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player)
+    {
+        if (!player.isSpectator())
+            return new TackleBoxMenu(containerId, playerInventory, this, this);
+        else
+            return null;
     }
 }

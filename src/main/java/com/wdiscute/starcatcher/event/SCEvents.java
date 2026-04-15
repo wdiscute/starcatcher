@@ -1,8 +1,12 @@
 package com.wdiscute.starcatcher.event;
 
+import com.wdiscute.sellingbin.bin.SellingBinBlockEntity;
 import com.wdiscute.sellingbin.event.SBevents;
+import com.wdiscute.sellingbin.registry.SBBlockEntities;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.SCBlockEntities;
+import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCCommands;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
@@ -33,6 +37,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FarmBlock;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.AddPackFindersEvent;
@@ -87,6 +92,29 @@ public class SCEvents
             SCDataComponents.set(itemStack, SCDataComponents.TACKLE_SKIN, tackleSkin);
         }
 
+    }
+
+    @SubscribeEvent
+    public static void addCapabilities(RegisterCapabilitiesEvent event)
+    {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
+                (container, side) ->
+                {
+                    if (container instanceof TackleBoxBlockEntity be)
+                    {
+                        return new SidedInvWrapper(container, side)
+                        {
+                            @Override
+                            public void setStackInSlot(int slot, ItemStack stack)
+                            {
+                                super.setStackInSlot(slot, stack);
+                                be.updateFishSlot();
+                            }
+                        };
+                    }
+                    return null;
+                }
+        );
     }
 
     @SubscribeEvent

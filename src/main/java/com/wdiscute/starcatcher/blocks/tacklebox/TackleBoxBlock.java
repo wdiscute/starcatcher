@@ -4,6 +4,8 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
+import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,7 +24,10 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -98,29 +103,16 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     @Override
     public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
-        if (level.isClientSide)
-        {
-            return InteractionResult.SUCCESS;
-        }
-        else if (player.isSpectator())
-        {
-            return InteractionResult.CONSUME;
-        }
-        else
+        if (!level.isClientSide)
         {
             if (level.getBlockEntity(pos) instanceof TackleBoxBlockEntity tbbe)
             {
-                player.openMenu(tbbe);
                 //todo?
                 //player.awardStat(Stats.OPEN_SHULKER_BOX);
-
-                return InteractionResult.CONSUME;
-            }
-            else
-            {
-                return InteractionResult.PASS;
+                player.openMenu(tbbe, pos);
             }
         }
+        return InteractionResult.SUCCESS;
     }
 
     @Override
@@ -154,10 +146,6 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
                 ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (double) pos.getY() + (double) 0.5F, (double) pos.getZ() + (double) 0.5F, itemstack);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
-            }
-            else
-            {
-                tbbe.unpackLootTable(player);
             }
         }
 
@@ -225,7 +213,6 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         {
             tooltipComponents.add(Component.translatable("container.starcatcher.tackle_box.more", j - i).withStyle(ChatFormatting.ITALIC));
         }
-
     }
 
     @Override
@@ -311,5 +298,14 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     public BlockState mirror(BlockState state, Mirror mirror)
     {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    public @org.jetbrains.annotations.Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
+    {
+        return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) ->
+        {
+            if(blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
+        };
     }
 }
