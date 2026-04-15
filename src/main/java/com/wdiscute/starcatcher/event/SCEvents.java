@@ -40,6 +40,7 @@ import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -53,6 +54,7 @@ import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.event.server.ServerStoppingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
 import net.minecraftforge.registries.DataPackRegistryEvent;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.nikdo53.neobackports.event.RegisterDataMapTypesEvent;
@@ -92,6 +94,29 @@ public class SCEvents
             SCDataComponents.set(itemStack, SCDataComponents.TACKLE_SKIN, tackleSkin);
         }
 
+    }
+
+    @SubscribeEvent
+    public static void addCapabilities(RegisterCapabilitiesEvent event)
+    {
+        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
+                (container, side) ->
+                {
+                    if (container instanceof TackleBoxBlockEntity be)
+                    {
+                        return new SidedInvWrapper(container, side)
+                        {
+                            @Override
+                            public void setStackInSlot(int slot, ItemStack stack)
+                            {
+                                super.setStackInSlot(slot, stack);
+                                be.updateFishSlot();
+                            }
+                        };
+                    }
+                    return null;
+                }
+        );
     }
 
     @SubscribeEvent
