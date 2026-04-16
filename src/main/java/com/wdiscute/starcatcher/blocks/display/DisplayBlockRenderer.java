@@ -45,10 +45,10 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             poseStack.pushPose();
 
             float ticks = (float) be.time + partialTick;
-            float openPartial = Math.clamp(be.open + (partialTick * (0.1f * Math.signum(be.open - be.oOpen))), 0, 1);
+            float openPartial = Mth.clamp(be.open + (partialTick * (0.1f * Math.signum(be.open - be.oOpen))), 0, 1);
 
             //move up slightly when open
-            poseStack.translate(0.5F, 0.95F + 0.2f * (Math.clamp(openPartial * 4, 0, 1)), 0.5F);
+            poseStack.translate(0.5F, 0.95F + 0.2f * (Mth.clamp(openPartial * 4, 0, 1)), 0.5F);
 
             //float up and down
             poseStack.translate(0.0F, (0.1F + Mth.sin(ticks / 10 * 0.6F) * 0.03F) * openPartial, 0.0F);
@@ -74,8 +74,8 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             poseStack.mulPose(Axis.YP.rotation(-f2));
 
             //rotate to lay down when closed
-            poseStack.mulPose(Axis.ZP.rotationDegrees(30.0F * (Math.clamp(openPartial * 2, 0, 1))));
-            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F * (1 - Math.clamp(openPartial * 2, 0, 1))));
+            poseStack.mulPose(Axis.ZP.rotationDegrees(30.0F * (Mth.clamp(openPartial * 2, 0, 1))));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F * (1 - Mth.clamp(openPartial * 2, 0, 1))));
 
             float f3 = Mth.lerp(partialTick, be.oFlip, be.flip);
             float f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
@@ -97,7 +97,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             poseStack.pushPose();
 
             //block centering
-            Vec3 offsetCenter = new Vec3(0.5f, be.getLevel().getBlockState(be.getBlockPos().above()).isEmpty() ? 0.2f : 0.5f, 0.5f);
+            Vec3 offsetCenter = new Vec3(0.5f, be.getLevel().getBlockState(be.getBlockPos().above()).isAir() ? 0.2f : 0.5f, 0.5f);
             poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
 
             float scale = SCDataComponents.getOrDefault(
@@ -110,7 +110,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             poseStack.scale(scale, -scale, scale);
             poseStack.translate(0, -1, 0);
 
-            poseStack.translate(0, (-scale / 10) * (SCConfig.FISH_MAX_SCALE.getAsDouble() / 15), 0);
+            poseStack.translate(0, (-scale / 10) * (SCConfig.FISH_MAX_SCALE.get() / 15), 0);
 
             if (be.fishRotating)
                 poseStack.rotateAround(Axis.YN.rotation((float) ((float) Util.getMillis() / 10000 + Math.PI / 2)), 0, 0, 0);

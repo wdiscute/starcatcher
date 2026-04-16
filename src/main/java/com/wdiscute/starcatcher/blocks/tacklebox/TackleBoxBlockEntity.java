@@ -108,18 +108,20 @@ public class TackleBoxBlockEntity extends RandomizableContainerBlockEntity imple
         return Component.translatable("block.starcatcher.tackle_box");
     }
 
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    @Override
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
         this.loadFromTag(tag, registries);
     }
 
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    @Override
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
         if (!this.trySaveLootTable(tag))
         {
-            ContainerHelper.saveAllItems(tag, this.itemStacks, false, registries);
+            ContainerHelper.saveAllItems(tag, this.itemStacks, false);
         }
     }
 
@@ -128,7 +130,7 @@ public class TackleBoxBlockEntity extends RandomizableContainerBlockEntity imple
         this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if (!this.tryLoadLootTable(tag) && tag.contains("Items", 9))
         {
-            ContainerHelper.loadAllItems(tag, this.itemStacks, levelRegistry);
+            ContainerHelper.loadAllItems(tag, this.itemStacks);
         }
 
     }
@@ -150,7 +152,7 @@ public class TackleBoxBlockEntity extends RandomizableContainerBlockEntity imple
 
     public boolean canPlaceItemThroughFace(int index, ItemStack itemStack, @Nullable Direction direction)
     {
-        return !(Block.byItem(itemStack.getItem()) instanceof TackleBoxBlock) && itemStack.canFitInsideContainerItems();
+        return !(Block.byItem(itemStack.getItem()) instanceof TackleBoxBlock) && itemStack.getItem().canFitInsideContainerItems();
     }
 
     public boolean canTakeItemThroughFace(int index, ItemStack stack, Direction direction)

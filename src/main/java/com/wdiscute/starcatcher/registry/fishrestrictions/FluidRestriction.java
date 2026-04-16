@@ -16,7 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -102,7 +102,7 @@ public class FluidRestriction extends AbstractFishRestriction
 
         //Fluid name / [hover]
         if (fluids.size() == 1)
-            return start.append(Component.translatable("block." + fluids.getFirst().toLanguageKey()));
+            return start.append(Component.translatable("block." + fluids.get(0).toLanguageKey()));
         else
             return start.append(Component.translatable("gui.guide.hover"));
     }
@@ -128,9 +128,9 @@ public class FluidRestriction extends AbstractFishRestriction
         return fluid;
     }
 
-    public static final FluidRestriction LAVA = new FluidRestriction(ResourceLocation.withDefaultNamespace("lava"), "");
-    public static final FluidRestriction WATER = new FluidRestriction(ResourceLocation.withDefaultNamespace("water"), "");
-    public static final FluidRestriction VOID = new FluidRestriction(ResourceLocation.withDefaultNamespace("empty"), "");
+    public static final FluidRestriction LAVA = new FluidRestriction(new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE, "lava"), "");
+    public static final FluidRestriction WATER = new FluidRestriction(new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE,"water"), "");
+    public static final FluidRestriction VOID = new FluidRestriction(new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE,"empty"), "");
     public static final FluidRestriction ACID = new FluidRestriction(U.rl("alexscaves", "acid"), "");
     public static final FluidRestriction PURPLE_SODA = new FluidRestriction(U.rl("alexscaves", "purple_soda"), "");
 }

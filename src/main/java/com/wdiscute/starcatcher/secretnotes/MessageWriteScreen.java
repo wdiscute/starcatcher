@@ -9,7 +9,8 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,7 +118,7 @@ public class MessageWriteScreen extends Screen
     {
         List<String> list = new ArrayList<>();
         boxes.forEach(b -> list.add(b.getValue()));
-        PacketDistributor.sendToServer(new SetMessagePayload(list, name.getValue()));
+        PacketDistributorNeo.sendToServer(new SetMessagePayload(list, name.getValue()));
         super.onClose();
     }
 

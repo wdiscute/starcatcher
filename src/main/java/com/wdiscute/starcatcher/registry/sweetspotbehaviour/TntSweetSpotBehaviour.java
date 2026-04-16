@@ -27,6 +27,6 @@ public class TntSweetSpotBehaviour extends AbstractSweetSpotBehaviour
         super.onHit();
         ass.removed = true;
         instance.progress -= ass.reward;
-        Minecraft.getInstance().player.playSound(SoundEvents.GENERIC_EXPLODE.value(), 0.2f, 1f);
+        Minecraft.getInstance().player.playSound(SoundEvents.GENERIC_EXPLODE, 0.2f, 1f);
     }
 }

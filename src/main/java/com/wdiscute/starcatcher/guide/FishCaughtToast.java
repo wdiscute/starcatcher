@@ -39,7 +39,7 @@ public class FishCaughtToast implements Toast
 
     public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)
     {
-        guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, width(), height());
+        guiGraphics.blit(BACKGROUND_SPRITE, 0, 0, 0, 0, width(), height());
 
         guiGraphics.renderItem(is, 6, 29);
 

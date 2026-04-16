@@ -2,8 +2,7 @@ package com.wdiscute.starcatcher.compat;
 
 import com.wdiscute.starcatcher.U;
 import de.cadentem.quality_food.core.Modification;
-import de.cadentem.quality_food.core.codecs.QualityType;
-import de.cadentem.quality_food.registry.QFComponents;
+import de.cadentem.quality_food.core.Quality;
 import de.cadentem.quality_food.util.QualityUtils;
 import net.minecraft.core.Holder;
 import net.minecraft.world.entity.player.Player;
@@ -15,11 +14,11 @@ public class QualityFoodCompat
     public static void addQuality(ItemStack itemStack, Player player, Level level, boolean golden, boolean perfectCatch, float percentile)
     {
         percentile = percentile / 100;
-        Holder<QualityType> selected = null;
+        Quality selected = null;
 
-        for (Holder<QualityType> type : level.registryAccess().registryOrThrow(QFComponents.QUALITY_TYPE_REGISTRY).holders().toList())
+        for (Quality type : Quality.values())
         {
-            if (selected == null || type.value().level() > selected.value().level())
+            if (selected == null || type.level() > selected.level())
             {
                 double chance = U.r.nextDouble();
                 chance = Modification.luck(player).apply(chance);
@@ -38,8 +37,9 @@ public class QualityFoodCompat
                     chance = Math.max(U.r.nextDouble(), chance);
                 }
 
-                if (chance >= (double) 1.0F - type.value().chance())
-                    selected = type;
+                //Todo: fix this
+              //  if (chance >= (double) 1.0F - type.chance())
+              //      selected = type;
             }
         }
 

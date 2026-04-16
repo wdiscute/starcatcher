@@ -14,9 +14,9 @@ import static com.wdiscute.starcatcher.blocks.SCBlocks.*;
 
 public class DGSCBlockLootTableProvider extends BlockLootSubProvider
 {
-    protected DGSCBlockLootTableProvider(HolderLookup.Provider registries)
+    protected DGSCBlockLootTableProvider()
     {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
     @Override

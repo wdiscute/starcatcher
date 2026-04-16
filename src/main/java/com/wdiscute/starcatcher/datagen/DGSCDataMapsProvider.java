@@ -1,5 +1,8 @@
 package com.wdiscute.starcatcher.datagen;
 
+import com.wdiscute.sellingbin.processors.AbstractProcessor;
+import com.wdiscute.sellingbin.processors.QualityFoodsProcessor;
+import com.wdiscute.sellingbin.registry.SBDataMaps;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -18,7 +21,6 @@ import net.nikdo53.neobackports.datagen.DataMapProvider;
 import net.nikdo53.neobackports.datamaps.NeoForgeDataMaps;
 import net.nikdo53.neobackports.datamaps.builtin.Compostable;
 
-import javax.annotation.processing.AbstractProcessor;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -73,10 +75,10 @@ public class DGSCDataMapsProvider extends DataMapProvider
             currencies.add(Items.EMERALD_BLOCK.builtInRegistryHolder(), 900, false);
 
             //selling sellable fishes
-            Map<ResourceLocation, Float> qualities = Map.of(
-                    new ResourceLocation("quality_food", "diamond"), 2f,
-                    new ResourceLocation("quality_food", "gold"), 1.5f,
-                    new ResourceLocation("quality_food", "iron"), 1.25f
+            Map<String, Float> qualities = Map.of(
+                    "diamond", 2f,
+                    "gold", 1.5f,
+                    "iron", 1.25f
             );
 
             sellable.add(SCTags.COMMON_FISHES, new SBDataMaps.ItemValue(25, List.of(

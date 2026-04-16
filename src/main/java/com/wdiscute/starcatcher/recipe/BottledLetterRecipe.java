@@ -8,13 +8,19 @@ import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.RecipeMatcher;
+import net.nikdo53.neobackports.extensions.IngredientExtension;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.utils.recipe.CraftingRecipeNeo;
+import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
+import net.nikdo53.neobackports.utils.recipe.input.CraftingInput;
 
-public class BottledLetterRecipe implements CraftingRecipe
+public class BottledLetterRecipe implements CraftingRecipeNeo
 {
     final String group;
     final CraftingBookCategory category;
@@ -41,6 +47,11 @@ public class BottledLetterRecipe implements CraftingRecipe
     public String getGroup()
     {
         return this.group;
+    }
+
+    @Override
+    public ResourceLocation getId() {
+        return null;
     }
 
     @Override
@@ -73,12 +84,12 @@ public class BottledLetterRecipe implements CraftingRecipe
             for (var item : input.items())
                 if (!item.isEmpty())
                     nonEmptyItems.add(item);
-            return net.neoforged.neoforge.common.util.RecipeMatcher.findMatches(nonEmptyItems, this.ingredients) != null;
+            return RecipeMatcher.findMatches(nonEmptyItems, this.ingredients) != null;
         }
         else
         {
             return input.size() == 1 && this.ingredients.size() == 1
-                    ? this.ingredients.getFirst().test(input.getItem(0))
+                    ? this.ingredients.get(0).test(input.getItem(0))
                     : input.stackedContents().canCraft(this, null);
         }
     }
@@ -106,14 +117,14 @@ public class BottledLetterRecipe implements CraftingRecipe
         return width * height >= this.ingredients.size();
     }
 
-    public static class Serializer implements RecipeSerializer<BottledLetterRecipe>
+    public static class Serializer implements RecipeSerializerNeo<BottledLetterRecipe>
     {
         private static final MapCodec<BottledLetterRecipe> CODEC = RecordCodecBuilder.mapCodec(
                 p_340779_ -> p_340779_.group(
                                 Codec.STRING.optionalFieldOf("group", "").forGetter(p_301127_ -> p_301127_.group),
                                 CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.MISC).forGetter(p_301133_ -> p_301133_.category),
-                                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
-                                Ingredient.CODEC_NONEMPTY
+                                ItemStack.CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
+                                IngredientExtension.CODEC_NONEMPTY
                                         .listOf()
                                         .fieldOf("ingredients")
                                         .flatXmap(
@@ -137,8 +148,8 @@ public class BottledLetterRecipe implements CraftingRecipe
                         )
                         .apply(p_340779_, BottledLetterRecipe::new)
         );
-        public static final StreamCodec<RegistryFriendlyByteBuf, BottledLetterRecipe> STREAM_CODEC = StreamCodec.of(
-                BottledLetterRecipe.Serializer::toNetwork, BottledLetterRecipe.Serializer::fromNetwork
+        public static final StreamCodec< BottledLetterRecipe> STREAM_CODEC = StreamCodec.of(
+                BottledLetterRecipe.Serializer::toNetwork1, BottledLetterRecipe.Serializer::fromNetwork1
         );
 
         @Override
@@ -148,23 +159,23 @@ public class BottledLetterRecipe implements CraftingRecipe
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, BottledLetterRecipe> streamCodec()
+        public StreamCodec< BottledLetterRecipe> streamCodec()
         {
             return STREAM_CODEC;
         }
 
-        private static BottledLetterRecipe fromNetwork(RegistryFriendlyByteBuf buffer)
+        private static BottledLetterRecipe fromNetwork1(FriendlyByteBuf buffer)
         {
             String s = buffer.readUtf();
             CraftingBookCategory craftingbookcategory = buffer.readEnum(CraftingBookCategory.class);
             int i = buffer.readVarInt();
             NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
-            nonnulllist.replaceAll(p_319735_ -> Ingredient.CONTENTS_STREAM_CODEC.decode(buffer));
+            nonnulllist.replaceAll(p_319735_ -> IngredientExtension.CONTENTS_STREAM_CODEC.decode(buffer));
             ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buffer);
             return new BottledLetterRecipe(s, craftingbookcategory, itemstack, nonnulllist);
         }
 
-        private static void toNetwork(RegistryFriendlyByteBuf buffer, BottledLetterRecipe recipe)
+        private static void toNetwork1(FriendlyByteBuf buffer, BottledLetterRecipe recipe)
         {
             buffer.writeUtf(recipe.group);
             buffer.writeEnum(recipe.category);
@@ -172,7 +183,7 @@ public class BottledLetterRecipe implements CraftingRecipe
 
             for (Ingredient ingredient : recipe.ingredients)
             {
-                Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
+                IngredientExtension.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
             }
 
             ItemStack.STREAM_CODEC.encode(buffer, recipe.result);

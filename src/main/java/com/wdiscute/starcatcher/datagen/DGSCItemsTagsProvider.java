@@ -40,8 +40,8 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         for (var item : BUCKETABLE_FISHES_REGISTRY.getEntries())
         {
             tag(ItemTags.FISHES).add(item.get());
-            tag(ItemTags.CAT_FOOD).add(item.get());
-            tag(Tags.Items.FOODS_RAW_FISH).add(item.get());
+         //   tag(ItemTags.CAT_FOOD).add(item.get());
+         //   tag(Tags.Items.FOODS_RAW_FISH).add(item.get());
             tag(SCTags.BUCKETABLE_FISHES).add(item.get());
             tag(SCTags.STARCAUGHT_FISHES).add(item.get());
         }
@@ -141,7 +141,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
         //rods and tools/fishing_rod
         RODS_REGISTRY.getEntries().forEach(o -> tag(SCTags.RODS).add(o.get()));
-        RODS_REGISTRY.getEntries().forEach(o -> tag(Tags.Items.TOOLS_FISHING_ROD).add(o.get()));
+      //  RODS_REGISTRY.getEntries().forEach(o -> tag(Tags.Items.TOOLS_FISHING_ROD).add(o.get()));
 
         tag(SCTags.AQUARIUM_INTERACTIONS)
                 .add(Items.DIAMOND_PICKAXE)
@@ -162,8 +162,8 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         HATS.getEntries().forEach(o -> tag(SCTags.HATS).add(((DeferredBlock<?>) o).asItem()));
 
         //equippable hats
-        tag(ItemTags.EQUIPPABLE_ENCHANTABLE)
-                .addTag(SCTags.HATS);
+      // tag(ItemTags.EQUIPPABLE_ENCHANTABLE)
+      //         .addTag(SCTags.HATS);
 
         tag(SCTags.PLACEABLE_IN_DISPLAY)
                 .addTag(SCTags.BUCKETABLE_FISHES)
@@ -208,6 +208,6 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
     public static ResourceLocation rl(String ns, String path)
     {
-        return ResourceLocation.fromNamespaceAndPath(ns, path);
+        return new ResourceLocation(ns, path);
     }
 }

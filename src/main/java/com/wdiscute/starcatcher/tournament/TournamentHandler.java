@@ -10,9 +10,9 @@ import net.minecraft.util.CommonColors;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
-import org.apache.logging.log4j.core.jmx.Server;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
+import net.nikdo53.neobackports.utils.CommonColorsNeo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,13 +43,13 @@ public class TournamentHandler
     public static void sendActiveTournamentUpdateToClient(ServerPlayer sp, Tournament tournament)
     {
         if (sp == null || tournament == null) return;
-        PacketDistributor.sendToPlayer(sp, CBActiveTournamentUpdatePayload.helper(sp, tournament));
+        PacketDistributorNeo.sendToPlayer(sp, CBActiveTournamentUpdatePayload.helper(sp, tournament));
     }
 
     public static void clearTournamentToClient(ServerPlayer sp)
     {
         if (sp == null) return;
-        PacketDistributor.sendToPlayer(sp, new CBClearTournamentPayload(":)"));
+        PacketDistributorNeo.sendToPlayer(sp, new CBClearTournamentPayload(":)"));
     }
 
     public static void startTournament(Player playerWhoStartedTheTournament, Tournament tournament)
@@ -67,7 +67,7 @@ public class TournamentHandler
             if (player != null)
             {
                 player.sendSystemMessage(Component.literal(tournament.name).append(Component.translatable("gui.starcatcher.tournament.started")));
-                player.sendSystemMessage(Component.translatable("gui.starcatcher.tournament.press_tab").withColor(CommonColors.LIGHT_GRAY));
+                player.sendSystemMessage(Component.translatable("gui.starcatcher.tournament.press_tab").withColor(CommonColorsNeo.LIGHT_GRAY));
             }
         }
     }

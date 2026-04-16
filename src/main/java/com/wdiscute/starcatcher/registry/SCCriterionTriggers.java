@@ -2,22 +2,29 @@ package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.advancement.MinigameCompletedTrigger;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 public interface SCCriterionTriggers
 {
-    DeferredRegister<CriterionTrigger<?>> REGISTRY = DeferredRegister.create(BuiltInRegistries.TRIGGER_TYPES, Starcatcher.MOD_ID);
-
-    Supplier<MinigameCompletedTrigger> MINIGAME_COMPLETED = REGISTRY.register("minigame_completed", MinigameCompletedTrigger::new);
+    Supplier<MinigameCompletedTrigger> MINIGAME_COMPLETED = MinigameCompletedTrigger::new;
 
 
     static void register(IEventBus eventBus)
     {
-        REGISTRY.register(eventBus);
+        eventBus.addListener(SCCriterionTriggers::event);
+    }
+
+    static void event (FMLCommonSetupEvent event) {
+        CriteriaTriggers.register(MINIGAME_COMPLETED.get());
     }
 }

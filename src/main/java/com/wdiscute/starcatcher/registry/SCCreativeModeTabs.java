@@ -9,9 +9,10 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,8 +21,8 @@ import java.util.function.Supplier;
 
 public class SCCreativeModeTabs
 {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped<CreativeModeTab> CREATIVE_MODE_TABS =
+            DeferredRegisterTyped.create(Registries.CREATIVE_MODE_TAB, Starcatcher.MOD_ID);
 
     public static void register(IEventBus eventBus)
     {

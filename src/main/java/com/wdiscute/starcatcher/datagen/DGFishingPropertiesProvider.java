@@ -25,7 +25,7 @@ public class DGFishingPropertiesProvider extends DatapackBuiltinEntriesProvider
 
     public DGFishingPropertiesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
     {
-        super(output, registries, REGISTRY, DGFishingPropertiesProvider::addConditions, Set.of(
+        super(output, registries, REGISTRY, Set.of(
                 Starcatcher.MOD_ID,
                 "minecraft",
                 "tide",
@@ -51,8 +51,8 @@ public class DGFishingPropertiesProvider extends DatapackBuiltinEntriesProvider
         ));
     }
 
-    private static void addConditions(final BiConsumer<ResourceKey<?>, ICondition> consumer)
-    {
+    @Override
+    public void registerConditions(BiConsumer<ResourceKey<?>, ICondition> consumer) {
         FishingPropertiesRegistry.registerConditions(consumer);
     }
 

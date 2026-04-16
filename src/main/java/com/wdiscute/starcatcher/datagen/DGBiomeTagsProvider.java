@@ -12,8 +12,8 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -31,7 +31,6 @@ public class DGBiomeTagsProvider extends BiomeTagsProvider
     {
         this.tag(create(SCTags.IS_BEACH))
                 .addOptional(BiomeTags.IS_BEACH.location())
-                .addOptionalTag(Tags.Biomes.IS_BEACH)
         ;
 
         this.tag(create(SCTags.IS_WARPED_FOREST))
@@ -53,7 +52,6 @@ public class DGBiomeTagsProvider extends BiomeTagsProvider
         this.tag(create(SCTags.IS_BIRCH_FOREST))
                 .addOptional(Biomes.BIRCH_FOREST.location())
                 .addOptional(Biomes.OLD_GROWTH_BIRCH_FOREST.location())
-                .addOptionalTag(Tags.Biomes.IS_BIRCH_FOREST)
         ;
 
         this.tag(create(SCTags.IS_CHERRY_GROVE))
@@ -90,7 +88,6 @@ public class DGBiomeTagsProvider extends BiomeTagsProvider
                 .addOptional(Biomes.DEEP_FROZEN_OCEAN.location())
                 .addOptional(Biomes.DEEP_LUKEWARM_OCEAN.location())
                 .addOptional(Biomes.DEEP_OCEAN.location())
-                .addOptionalTag(Tags.Biomes.IS_DEEP_OCEAN)
         ;
 
         this.tag(create(SCTags.IS_LUKEWARM_OCEAN))
@@ -131,7 +128,6 @@ public class DGBiomeTagsProvider extends BiomeTagsProvider
                 .addOptionalTag(BiomeTags.IS_SAVANNA)
                 .addOptionalTag(BiomeTags.HAS_DESERT_PYRAMID)
                 .addOptionalTag(Tags.Biomes.IS_DESERT)
-                .addOptionalTag(Tags.Biomes.IS_BADLANDS)
         ;
 
         this.tag(create(SCTags.IS_WARM_OCEAN))

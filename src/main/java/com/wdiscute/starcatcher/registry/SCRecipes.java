@@ -4,15 +4,15 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.recipe.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public class SCRecipes
 {
-    public static final DeferredRegister<RecipeSerializer<?>> REGISTRY =
-            DeferredRegister.create(Registries.RECIPE_SERIALIZER, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped<RecipeSerializer<?>> REGISTRY =
+            DeferredRegisterTyped.create(Registries.RECIPE_SERIALIZER, Starcatcher.MOD_ID);
 
     public static final  Supplier<RecipeSerializer<NetheriteUpgradeSmithingRecipe>> FISHING_ROD_SMITHING =
             REGISTRY.register("smithing_netherite_upgraded", NetheriteUpgradeSmithingRecipe.Serializer::new);

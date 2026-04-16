@@ -50,7 +50,7 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
         //open reset screen
         //if (level.isClientSide) screen();

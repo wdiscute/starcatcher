@@ -26,9 +26,8 @@ public class WaterloggedSatchel extends Item
     {
         if (level.isClientSide) return InteractionResultHolder.success(player.getItemInHand(usedHand));
 
-        ResourceKey<LootTable> lootTable = ResourceKey.create(Registries.LOOT_TABLE, Starcatcher.rl("waterlogged_satchel/waterlogged_satchel"));
         LootParams params = new LootParams.Builder((ServerLevel) level).create(LootContextParamSets.EMPTY);
-        ObjectArrayList<ItemStack> arrayOfItemStacks = level.getServer().reloadableRegistries().getLootTable(lootTable).getRandomItems(params);
+        ObjectArrayList<ItemStack> arrayOfItemStacks = level.getServer().getLootData().getLootTable(Starcatcher.rl("waterlogged_satchel/waterlogged_satchel")).getRandomItems(params);
         player.setItemInHand(usedHand, arrayOfItemStacks.get(level.random.nextIntBetweenInclusive(0, arrayOfItemStacks.size() - 1)));
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }

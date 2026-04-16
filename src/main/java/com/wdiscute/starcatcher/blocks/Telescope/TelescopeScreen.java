@@ -170,11 +170,11 @@ public class TelescopeScreen extends Screen
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollY)
     {
         zoomScale += (float) (scrollY / 20);
-        zoomScale = Math.clamp(zoomScale, 0.01f, 4);
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        zoomScale = Mth.clamp(zoomScale, 0.01f, 4);
+        return super.mouseScrolled(mouseX, mouseY, scrollY);
     }
 
     private void lockCursor()

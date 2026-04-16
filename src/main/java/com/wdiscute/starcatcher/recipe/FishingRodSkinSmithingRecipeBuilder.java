@@ -1,16 +1,15 @@
 package com.wdiscute.starcatcher.recipe;
 
 import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.nikdo53.neobackports.utils.recipe.RecipeOutput;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class FishingRodSkinSmithingRecipeBuilder
     private final Ingredient addition;
     private final RecipeCategory category;
     private final Item result;
-    private final Map<String, Criterion<?>> criteria = new LinkedHashMap<>();
+    private final Map<String, Criterion> criteria = new LinkedHashMap<>();
 
     public FishingRodSkinSmithingRecipeBuilder(Ingredient template, Ingredient base, Ingredient addition, RecipeCategory category, Item result)
     {
@@ -40,7 +39,7 @@ public class FishingRodSkinSmithingRecipeBuilder
         return new FishingRodSkinSmithingRecipeBuilder(template, base, addition, category, result);
     }
 
-    public FishingRodSkinSmithingRecipeBuilder unlocks(String key, Criterion<?> criterion)
+    public FishingRodSkinSmithingRecipeBuilder unlocks(String key, Criterion criterion)
     {
         this.criteria.put(key, criterion);
         return this;
@@ -48,7 +47,7 @@ public class FishingRodSkinSmithingRecipeBuilder
 
     public void save(RecipeOutput recipeOutput, String recipeId)
     {
-        this.save(recipeOutput, ResourceLocation.parse(recipeId));
+        this.save(recipeOutput, ResourceLocation.tryParse(recipeId));
     }
 
     public void save(RecipeOutput recipeOutput, ResourceLocation recipeId)

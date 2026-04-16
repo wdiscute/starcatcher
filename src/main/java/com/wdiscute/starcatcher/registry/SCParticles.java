@@ -4,15 +4,16 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public class SCParticles
 {
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
-            DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped<ParticleType<?>> PARTICLE_TYPES =
+            DeferredRegisterTyped.create(BuiltInRegistries.PARTICLE_TYPE, Starcatcher.MOD_ID);
 
 
     public static final Supplier<SimpleParticleType> FISHING_NOTIFICATION =

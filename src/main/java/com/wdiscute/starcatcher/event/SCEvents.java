@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.event;
 
+import com.wdiscute.sellingbin.event.SBevents;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.SCDataComponents;
@@ -50,6 +51,7 @@ import net.minecraftforge.registries.DataPackRegistryEvent;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.nikdo53.neobackports.event.RegisterDataMapTypesEvent;
 import net.nikdo53.neobackports.event.RegisterPayloadHandlersEvent;
+import net.nikdo53.neobackports.io.networking.PayloadRegistrar;
 import net.nikdo53.neobackports.registry.ForgeRegistryHelper;
 
 import java.util.List;
@@ -99,14 +101,7 @@ public class SCEvents
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event)
     {
-        PackSource packSource = new SBvents.DefaultPackSource()
-        {
-            @Override
-            public boolean shouldAddAutomatically()
-            {
-                return true;
-            }
-        };
+        PackSource packSource = new SBevents.DefaultPackSource();
 
         event.addPackFinders(
                 Starcatcher.rl("built_in_datapacks/selling_bin_starcatcher_emeralds"),
@@ -258,7 +253,7 @@ public class SCEvents
     @SubscribeEvent
     public static void registerPayloads(final RegisterPayloadHandlersEvent event)
     {
-        final RegisterPayloadHandlersEvent.PayloadRegistrar registrar = event.registrar("1");
+        final PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(
                 FishingStartedPayload.TYPE,
                 FishingStartedPayload.STREAM_CODEC,

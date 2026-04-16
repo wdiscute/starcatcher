@@ -33,13 +33,13 @@ public class ConchBlock extends HorizontalDirectionalBlock implements SimpleWate
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         return Block.box(3, 0, 3, 13, 3, 13);
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
         playerDestroy(level, player, pos, state, null, player.getItemBySlot(EquipmentSlot.MAINHAND));
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
@@ -47,15 +47,9 @@ public class ConchBlock extends HorizontalDirectionalBlock implements SimpleWate
     }
 
     @Override
-    protected FluidState getFluidState(BlockState state)
+    public FluidState getFluidState(BlockState state)
     {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
-    {
-        return null;
     }
 
     @Override

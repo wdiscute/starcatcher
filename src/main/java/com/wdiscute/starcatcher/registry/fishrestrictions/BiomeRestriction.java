@@ -20,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -154,9 +155,9 @@ public class BiomeRestriction extends AbstractFishRestriction
 
         //single biome name / biome tag name / [hover]
         if (biomesList.size() == 1)
-            comp = Component.translatable("biome." + biomesList.getFirst().toLanguageKey());
+            comp = Component.translatable("biome." + biomesList.get(0).toLanguageKey());
         else if (biomesTags.size() == 1)
-            comp = Component.translatable("tag." + biomesTags.getFirst().toLanguageKey());
+            comp = Component.translatable("tag." + biomesTags.get(0).toLanguageKey());
         else
             comp = Component.translatable("gui.guide.hover");
 

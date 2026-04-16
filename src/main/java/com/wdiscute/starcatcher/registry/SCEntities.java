@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.secretnotes.BottledLetterEntity;
 import com.wdiscute.starcatcher.secretnotes.BrokenBottleEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -25,7 +26,7 @@ public class SCEntities
             register("fishing_bob", FishingBobEntity::new, MobCategory.MISC,
                     b -> b.noSummon().noSave().sized(0.3f, 0.3f));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<FishEntity>> FISH =
+    public static final Holder<EntityType<FishEntity>> FISH =
             register("fish", FishEntity::new, MobCategory.WATER_AMBIENT,
                     b -> b.sized(0.5f, 0.5f));
 

@@ -46,8 +46,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
+import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
@@ -55,6 +57,7 @@ import net.minecraftforge.fml.ModList;
 import net.nikdo53.neobackports.io.StreamCodec;
 import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -131,9 +134,7 @@ public record FishProperties(
                 .withLuck(player.getLuck())
                 .create(LootContextParamSets.FISHING);
 
-        LootTable table = player.level().getServer().reloadableRegistries().getLootTable(
-                ResourceKey.create(Registries.LOOT_TABLE, catchInfo.treasure)
-        );
+        LootTable table = player.level().getServer().getLootData().getLootTable(catchInfo.treasure);
 
         ObjectArrayList<ItemStack> randomItems = table.getRandomItems(lootparams);
 
@@ -441,7 +442,7 @@ public record FishProperties(
                 instance.group(
                         BuiltInRegistries.ITEM.holderByNameCodec().fieldOf("item").forGetter(CatchInfo::fish),
                         BuiltInRegistries.ITEM.holderByNameCodec().optionalFieldOf("fish_bucket", SCItems.MISSINGNO).forGetter(CatchInfo::bucketedFish),
-                        BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().optionalFieldOf("entity", SCEntities.FISH).forGetter(CatchInfo::entityToSpawn),
+                        BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().optionalFieldOf("entity", (Holder<EntityType<?>>) (Object) SCEntities.FISH).forGetter(CatchInfo::entityToSpawn),
                         Codec.BOOL.optionalFieldOf("always_spawn_entity", false).forGetter(CatchInfo::alwaysSpawnEntity),
                         BuiltInRegistries.ITEM.holderByNameCodec().optionalFieldOf("override_minigame_item", SCItems.MISSINGNO).forGetter(CatchInfo::overrideMinigameWith),
                         ResourceLocation.CODEC.optionalFieldOf("treasure_loot_table", U.rl("gameplay/fishing/treasure")).forGetter(CatchInfo::treasure),
@@ -1608,8 +1609,8 @@ public record FishProperties(
         public static final Codec<List<SweetSpot>> LIST_CODEC = CODEC.listOf();
 
         public static final StreamCodec<SweetSpot> STREAM_CODEC = ExtraComposites.composite(
-                ResourceLocation.STREAM_CODEC, SweetSpot::sweetSpotType,
-                ResourceLocation.STREAM_CODEC, SweetSpot::texturePath,
+                ByteBufCodecs.RESOURCE_LOCATION, SweetSpot::sweetSpotType,
+                ByteBufCodecs.RESOURCE_LOCATION, SweetSpot::texturePath,
                 ByteBufCodecs.INT, SweetSpot::size,
                 ByteBufCodecs.INT, SweetSpot::reward,
                 ByteBufCodecs.BOOL, SweetSpot::isFlip,
@@ -1850,9 +1851,9 @@ public record FishProperties(
 
         public static boolean isGolden(ItemStack stack)
         {
-            if (stack.has(SCDataComponents.CAUGHT_FISH_INFO))
+            if (stack.has(SCDataComponents.CAUGHT_FISH_INFO.value()))
             {
-                CaughtFishInfo caughtFishInfo = stack.get(SCDataComponents.CAUGHT_FISH_INFO);
+                CaughtFishInfo caughtFishInfo = stack.get(SCDataComponents.CAUGHT_FISH_INFO.value());
                 return caughtFishInfo != null && caughtFishInfo.golden();
             }
             return false;
@@ -1878,7 +1879,7 @@ public record FishProperties(
                 {
                     String biomeString = biomeHolder.getRegisteredName();
 
-                    rls.add(ResourceLocation.parse(biomeString));
+                    rls.add(ResourceLocation.tryParse(biomeString));
                 }
             }
         }
@@ -1910,7 +1911,7 @@ public record FishProperties(
                 {
                     String biomeString = biomeHolder.getRegisteredName();
 
-                    rls.add(ResourceLocation.parse(biomeString));
+                    rls.add(new ResourceLocation(biomeString));
                 }
             }
         }
@@ -1992,7 +1993,7 @@ public record FishProperties(
             {
                 FishProperties fp = fbe.fpToFish;
 
-                SCCriterionTriggers.MINIGAME_COMPLETED.get().trigger(player, hits, perfectCatch, completedTreasure, time, fp.catchInfo().fish());
+                SCCriterionTriggers.MINIGAME_COMPLETED.get().trigger(player, hits, perfectCatch, completedTreasure, time, fp.catchInfo().fish().get().getDefaultInstance());
 
                 //trigger modifiers
                 fbe.modifiers.forEach(m -> m.onSuccessfulMinigameCompletion(player, time, completedTreasure, perfectCatch, hits));

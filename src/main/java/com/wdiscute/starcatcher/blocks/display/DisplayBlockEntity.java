@@ -141,7 +141,7 @@ public class DisplayBlockEntity extends BlockEntity
         if(SCDataComponents.has(item, SCDataComponents.CAUGHT_FISH_INFO))
         {
             double percentile = SCDataComponents.get(item, SCDataComponents.CAUGHT_FISH_INFO).percentile();
-            percentile = Math.clamp(percentile, 0, 100);
+            percentile = Mth.clamp(percentile, 0, 100);
             double scaledValue = (percentile / 100.0) * 14 + 1;
             return (16 - (int) scaledValue);
         }
@@ -159,12 +159,17 @@ public class DisplayBlockEntity extends BlockEntity
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
         if (tag.contains("Book"))
         {
-            this.item = ItemStack.parse(registries, tag.getCompound("Book")).orElse(ItemStack.EMPTY);
+
+            try {
+                this.item = ItemStack.of(tag.getCompound("Book"));
+            } catch (Exception e) {
+                this.item = ItemStack.EMPTY;
+            }
         }
         else
         {
@@ -173,12 +178,12 @@ public class DisplayBlockEntity extends BlockEntity
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
         if (!this.getItem().isEmpty())
         {
-            tag.put("Book", this.getItem().save(registries));
+            tag.put("Book", this.getItem().save(tag));
         }
         else
         {

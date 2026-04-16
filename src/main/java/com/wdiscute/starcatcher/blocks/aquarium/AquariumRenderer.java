@@ -40,7 +40,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         long now = System.nanoTime();
         if (be.partialHelper == 0) be.partialHelper = now;
         double partial = (now - be.partialHelper) / 1000000000;
-        partial = Math.clamp(partial, 0, 0.2);
+        partial = Mth.clamp(partial, 0, 0.2);
         be.partialHelper = now;
 
         //move fish vertically right away
@@ -59,7 +59,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
                 Math.cos(be.fishRotation - targetAngle)));
 
         double closenessAngle = 1.0 - delta2 / Math.PI * 3;
-        closenessAngle = Math.clamp(closenessAngle, 0, 1);
+        closenessAngle = Mth.clamp(closenessAngle, 0, 1);
 
         double closenessDistance = 1 - 1.0 / Math.abs((be.fishTarget.x + be.fishTarget.z) - (be.x + be.z)) / 10;
         closenessDistance = Mth.clamp(closenessDistance, 0, 1);

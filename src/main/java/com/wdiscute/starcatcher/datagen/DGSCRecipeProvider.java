@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -961,7 +962,7 @@ public class DGSCRecipeProvider extends RecipeProvider
 
     }
 
-    protected static void colorBlockWithDye(RecipeOutput recipeOutput, List<Item> dyes, List<Item> dyeableItems, String group)
+    protected static void colorBlockWithDye(Consumer<FinishedRecipe> recipeOutput, List<Item> dyes, List<Item> dyeableItems, String group)
     {
         for (int i = 0; i < dyes.size(); ++i)
         {

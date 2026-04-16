@@ -28,8 +28,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.server.command.EnumArgument;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.server.command.EnumArgument;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,23 +40,23 @@ import java.util.function.Supplier;
 public class SCCommands
 {
     private static final DynamicCommandExceptionType ERROR_ROD = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.rod_not_found", o)
+            o -> Component.translatable("commands.starcatcher.rod_not_found", o)
     );
 
     private static final DynamicCommandExceptionType NOTHING_THERE = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.nothing_there")
+            o -> Component.translatable("commands.starcatcher.nothing_there")
     );
 
     private static final DynamicCommandExceptionType ERROR_EMPTY = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.item_empty", o)
+            o -> Component.translatable("commands.starcatcher.item_empty", o)
     );
 
     private static final DynamicCommandExceptionType ERROR_FISH_ENTRY_INVALID = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.fish_entry_not_found", o)
+            o -> Component.translatable("commands.starcatcher.fish_entry_not_found", o)
     );
 
     private static final DynamicCommandExceptionType ERROR_MODIFIER_INVALID = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.modifier_not_found", o)
+            o -> Component.translatable("commands.starcatcher.modifier_not_found", o)
     );
 
 
@@ -365,7 +366,7 @@ public class SCCommands
         if (!available.isEmpty())
         {
             FishProperties fpToFish = available.get(U.r.nextInt(available.size()));
-            PacketDistributor.sendToPlayer(player, new FishingStartedPayload(fpToFish, player.getMainHandItem()));
+            PacketDistributorNeo.sendToPlayer(player, new FishingStartedPayload(fpToFish, player.getMainHandItem()));
         }
         else
         {
@@ -382,7 +383,7 @@ public class SCCommands
 
         if (optional.isPresent())
         {
-            PacketDistributor.sendToPlayer(player, new FishingStartedPayload(optional.get().loadTreasure(player), player.getMainHandItem()));
+            PacketDistributorNeo.sendToPlayer(player, new FishingStartedPayload(optional.get().loadTreasure(player), player.getMainHandItem()));
             return 1;
         }
         else

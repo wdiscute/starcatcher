@@ -12,7 +12,10 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
+import net.nikdo53.neobackports.screen.BlurShaderLoader;
+import net.nikdo53.neobackports.screen.OptionsScreenBackports;
 
 import java.util.*;
 
@@ -56,9 +59,9 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     }
 
     @Override
-    protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1)
-    {
-        this.renderBlurredBackground(i);
+    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
+        OptionsScreenBackports.renderBlurOrPanorama(guiGraphics, 0, 0, this.width, this.height);
+        this.renderBackground(guiGraphics);
     }
 
     private void onFocusNameEditBox()
@@ -70,7 +73,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     private void onUnfocusNameEditBox()
     {
         //send packet
-        PacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(tournament.tournamentUUID, nameEditBox.getValue()));
+        PacketDistributorNeo.sendToServer(new SBStandTournamentNameChangePayload(tournament.tournamentUUID, nameEditBox.getValue()));
         tournament.name = nameEditBox.getValue();
         nameEditBox.setValue("");
     }
@@ -250,7 +253,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollY)
     {
         double x = mouseX - uiX;
         double y = mouseY - uiY;
@@ -273,7 +276,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
                 minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 104);
         }
 
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        return super.mouseScrolled(mouseX, mouseY, scrollY);
     }
 
     @Override
@@ -382,7 +385,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     {
         super.onClose();
         if (!nameEditBox.getValue().isEmpty())
-            PacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(tournament.tournamentUUID, nameEditBox.getValue()));
+            PacketDistributorNeo.sendToServer(new SBStandTournamentNameChangePayload(tournament.tournamentUUID, nameEditBox.getValue()));
     }
 
     public StandScreen(StandMenu menu, Inventory playerInventory, Component title)

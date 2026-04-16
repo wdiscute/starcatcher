@@ -41,11 +41,11 @@ public class VanillaLootModifier extends AbstractCatchModifier
                 .withParameter(LootContextParams.ORIGIN, instance.position())
                 .withParameter(LootContextParams.TOOL, instance.rod)
                 .withParameter(LootContextParams.THIS_ENTITY, instance)
-                .withParameter(LootContextParams.ATTACKING_ENTITY, instance.getOwner())
+                .withParameter(LootContextParams.DIRECT_KILLER_ENTITY, instance.getOwner())
                 .withLuck(player.getLuck())
                 .create(LootContextParamSets.FISHING);
 
-        LootTable table = level.getServer().reloadableRegistries().getLootTable(BuiltInLootTables.FISHING);
+        LootTable table = level.getServer().getLootData().getLootTable(BuiltInLootTables.FISHING);
 
         return table.getRandomItems(lootparams);
     }

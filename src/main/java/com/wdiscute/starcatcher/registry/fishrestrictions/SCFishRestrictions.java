@@ -5,13 +5,14 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public interface SCFishRestrictions
 {
-    DeferredRegister<AbstractFishRestriction> REGISTRY =
-            DeferredRegister.create(Starcatcher.FISH_RESTRICTIONS_REGISTRY, Starcatcher.MOD_ID);
+    DeferredRegisterTyped<AbstractFishRestriction> REGISTRY =
+            DeferredRegisterTyped.create(Starcatcher.FISH_RESTRICTIONS, Starcatcher.MOD_ID);
 
 
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> EMPTY =

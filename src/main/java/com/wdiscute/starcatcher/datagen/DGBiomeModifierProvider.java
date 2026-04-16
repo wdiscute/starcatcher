@@ -6,26 +6,27 @@ import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
-import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.common.world.BiomeModifier;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.nikdo53.neobackports.registry.NeoForgeRegistries;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class DGBiomeModifierProvider extends DatapackBuiltinEntriesProvider
 {
-    public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder().add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, DGBiomeModifierProvider::bootstrap);
+    public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder().add(ForgeRegistries.Keys.BIOME_MODIFIERS, DGBiomeModifierProvider::bootstrap);
 
     public DGBiomeModifierProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
     {
         super(output, registries, REGISTRY, Set.of(Starcatcher.MOD_ID));
     }
 
-    public static void bootstrap(BootstrapContext<BiomeModifier> context)
+    public static void bootstrap(BootstapContext<BiomeModifier> context)
     {
         HolderSet.Named<Biome> isOverworld = context.lookup(Registries.BIOME).getOrThrow(BiomeTags.IS_OVERWORLD);
         HolderSet.Named<Biome> isNether = context.lookup(Registries.BIOME).getOrThrow(BiomeTags.IS_NETHER);

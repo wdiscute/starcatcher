@@ -25,7 +25,7 @@ public record SBStandTournamentNameChangePayload(UUID uuid, String name) impleme
 
     public static final StreamCodec<List<GameProfile>> GAME_PROFILE_STREAM_CODEC_LIST = GAME_PROFILE_STREAM_CODEC.apply(ByteBufCodecs.list());
 
-    public static final Type<SBStandTournamentNameChangePayload> TYPE = new Type<>(Starcatcher.rl("sb_stand_tournament_name"));
+    public static final Type<SBStandTournamentNameChangePayload> TYPE = new Type<>(Starcatcher.rl("sb_stand_tournament_name"), SBStandTournamentNameChangePayload.class);
 
     public static final StreamCodec<SBStandTournamentNameChangePayload> STREAM_CODEC = StreamCodec.composite(
             StreamCodec.UUID, SBStandTournamentNameChangePayload::uuid,

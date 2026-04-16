@@ -11,10 +11,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 
-public class BottledLetterItem extends Item implements ProjectileItem
+public class BottledLetterItem extends Item
 {
     public BottledLetterItem()
     {
@@ -59,7 +58,7 @@ public class BottledLetterItem extends Item implements ProjectileItem
         itemstack.consume(1, player);
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }
-
+/*
     @Override
     public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction)
     {
@@ -67,4 +66,5 @@ public class BottledLetterItem extends Item implements ProjectileItem
         bottleEntity.setItem(stack);
         return bottleEntity;
     }
+    */
 }

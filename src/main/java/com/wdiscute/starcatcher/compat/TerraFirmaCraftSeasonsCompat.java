@@ -12,9 +12,9 @@ public class TerraFirmaCraftSeasonsCompat
     {
         Month month;
         if (level.isClientSide)
-            month = Calendars.CLIENT.getAbsoluteCalendarMonthOfYear();
+            month = Calendars.CLIENT.getCalendarMonthOfYear();
         else
-            month = Calendars.SERVER.getAbsoluteCalendarMonthOfYear();
+            month = Calendars.SERVER.getCalendarMonthOfYear();
 
         return switch (month)
         {

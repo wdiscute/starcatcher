@@ -6,17 +6,23 @@ import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.BackportCodecs;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
+import net.nikdo53.neobackports.utils.recipe.SmithingRecipeNeo;
+import net.nikdo53.neobackports.utils.recipe.input.SmithingRecipeInput;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient base, Ingredient addition) implements SmithingRecipe
+public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient base, Ingredient addition) implements SmithingRecipeNeo
 {
     public boolean matches(SmithingRecipeInput input, Level level)
     {
@@ -69,6 +75,11 @@ public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient bas
     }
 
     @Override
+    public ResourceLocation getId() {
+        return null;
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer()
     {
         return SCRecipes.FISHING_ROD_SMITHING.get();
@@ -86,16 +97,16 @@ public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient bas
         return Stream.of(this.template, this.base, this.addition).anyMatch(Ingredient::hasNoItems);
     }
 
-    public static class Serializer implements RecipeSerializer<NetheriteUpgradeSmithingRecipe>
+    public static class Serializer implements RecipeSerializerNeo<NetheriteUpgradeSmithingRecipe>
     {
         private static final MapCodec<NetheriteUpgradeSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                Ingredient.CODEC.fieldOf("template").forGetter((o) -> o.template),
-                Ingredient.CODEC.fieldOf("base").forGetter((o) -> o.base),
-                Ingredient.CODEC.fieldOf("addition").forGetter((o) -> o.addition)
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("template").forGetter((o) -> o.template),
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("base").forGetter((o) -> o.base),
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("addition").forGetter((o) -> o.addition)
         ).apply(instance, NetheriteUpgradeSmithingRecipe::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, NetheriteUpgradeSmithingRecipe> STREAM_CODEC = StreamCodec.of(
-                Serializer::toNetwork, Serializer::fromNetwork
+        public static final StreamCodec<NetheriteUpgradeSmithingRecipe> STREAM_CODEC = StreamCodec.of(
+                Serializer::toNetwork1, Serializer::fromNetwork
         );
 
         @Override
@@ -105,24 +116,24 @@ public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient bas
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, NetheriteUpgradeSmithingRecipe> streamCodec()
+        public StreamCodec<NetheriteUpgradeSmithingRecipe> streamCodec()
         {
             return STREAM_CODEC;
         }
 
-        private static NetheriteUpgradeSmithingRecipe fromNetwork(RegistryFriendlyByteBuf buffer)
+        private static NetheriteUpgradeSmithingRecipe fromNetwork(FriendlyByteBuf buffer)
         {
-            Ingredient template = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient base = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient addition = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
+            Ingredient template = ByteBufCodecs.INGREDIENT.decode(buffer);
+            Ingredient base = ByteBufCodecs.INGREDIENT.decode(buffer);
+            Ingredient addition = ByteBufCodecs.INGREDIENT.decode(buffer);
             return new NetheriteUpgradeSmithingRecipe(template, base, addition);
         }
 
-        private static void toNetwork(RegistryFriendlyByteBuf buffer, NetheriteUpgradeSmithingRecipe recipe)
+        private static void toNetwork1(FriendlyByteBuf buffer, NetheriteUpgradeSmithingRecipe recipe)
         {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.template);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.base);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.addition);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.template);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.base);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.addition);
         }
     }
 }

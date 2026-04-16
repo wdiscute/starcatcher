@@ -5,16 +5,17 @@ import com.wdiscute.starcatcher.io.SCDataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.Optional;
 import java.util.function.Supplier;
 
 public interface SCTackleSkins
 {
-    DeferredRegister<Supplier<AbstractTackleSkin>> REGISTRY =
-            DeferredRegister.create(Starcatcher.TACKLE_SKIN_REGISTRY, Starcatcher.MOD_ID);
+    DeferredRegisterTyped<Supplier<AbstractTackleSkin>> REGISTRY =
+            DeferredRegisterTyped.create(Starcatcher.TACKLE_SKIN_REGISTRY, Starcatcher.MOD_ID);
 
     //base
     ResourceLocation BASE_TACKLE_SKIN = registerCatchModifier("base", BaseTackleSkin::new);

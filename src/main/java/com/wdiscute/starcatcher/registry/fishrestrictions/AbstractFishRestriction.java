@@ -22,15 +22,15 @@ public abstract class AbstractFishRestriction
     public static final Codec<AbstractFishRestriction> ABSTRACT_PROCESSOR_CODEC = ResourceLocation.CODEC
             .dispatch(processor -> processor.getRegistryHolderOrThrow().getId(),
                     loc -> {
-                        AbstractFishRestriction fr = Starcatcher.FISH_RESTRICTIONS_REGISTRY.get(loc);
+                        AbstractFishRestriction fr = Starcatcher.FISH_RESTRICTIONS_REGISTRY.getValue(loc);
                         if (fr == null)
                         {
                             LogUtils.getLogger().error("Fish Restriction {} is not registered! " +
                                     "Make sure it's not dependent on another mod, and that you spelt the name correctly. " +
                                     "Using empty restriction instead.", loc);
-                            return EmptyRestriction.CODEC;
+                            return EmptyRestriction.CODEC.codec();
                         }
-                        return fr.getCodecOrThrow();
+                        return fr.getCodecOrThrow().codec();
                     });
 
     public abstract MapCodec<? extends AbstractFishRestriction> codec();

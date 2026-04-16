@@ -7,18 +7,19 @@ import com.wdiscute.starcatcher.tournament.StandMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
-import net.neoforged.neoforge.network.IContainerFactory;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.network.IContainerFactory;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
+import net.nikdo53.neobackports.utils.IMenuTypeExtension;
 
 import java.util.function.Supplier;
 
 public class SCMenuTypes
 {
-    public static final DeferredRegister<MenuType<?>> MENUS =
-            DeferredRegister.create(Registries.MENU, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped<MenuType<?>> MENUS =
+            DeferredRegisterTyped.create(Registries.MENU, Starcatcher.MOD_ID);
 
     public static final Supplier<MenuType<FishingRodMenu>> FISHING_ROD_MENU =
             registerMenuType("fishing_rod_menu", FishingRodMenu::new);
@@ -29,8 +30,8 @@ public class SCMenuTypes
     public static final Supplier<MenuType<TackleBoxMenu>> TACKLE_BOX =
             registerMenuType("tackle_box.png", TackleBoxMenu::new);
 
-    private static <T extends AbstractContainerMenu>DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,
-                                                                                                              IContainerFactory<T> factory) {
+    private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,
+                                                                                                               IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
     }
 

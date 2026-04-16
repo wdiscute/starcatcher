@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.fishing.compat.*;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.core.Holder;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -333,9 +334,9 @@ public class FishingPropertiesRegistry
     static ResourceKey<FishProperties> createKey(FishProperties fp)
     {
         if (fp.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH))
-            return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, ResourceLocation.parse(fp.catchInfo().fish().getRegisteredName()));
+            return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, ResourceLocation.tryParse(fp.catchInfo().fish().getRegisteredName()));
 
-        return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, ResourceLocation.parse(
+        return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, ResourceLocation.tryParse(
                 fp.catchInfo().fish().getKey().location().getNamespace() + ":" +
                         fp.catchInfo().fishEntryType().name().toLowerCase(Locale.ROOT) + "_" +
                         fp.catchInfo().fish().getKey().location().getPath()
@@ -381,7 +382,7 @@ public class FishingPropertiesRegistry
         }
     }
 
-    public static void bootstrap(BootstrapContext<FishProperties> context)
+    public static void bootstrap(BootstapContext<FishProperties> context)
     {
         PROPERTIES.forEach(p -> context.register(p.getFirst(), p.getSecond()));
     }

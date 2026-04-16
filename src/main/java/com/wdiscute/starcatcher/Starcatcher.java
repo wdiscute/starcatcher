@@ -30,8 +30,12 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.javafmlmod.FMLModContainer;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.slf4j.Logger;
 
@@ -98,8 +102,11 @@ public class Starcatcher
     }
 
 
-    public Starcatcher(IEventBus modEventBus, ModContainer modContainer)
+    public Starcatcher()
     {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModLoadingContext modContainer = ModLoadingContext.get();
+
         SCCreativeModeTabs.register(modEventBus);
 
         SCItems.register(modEventBus);
@@ -124,14 +131,5 @@ public class Starcatcher
         modContainer.registerConfig(ModConfig.Type.SERVER, SCConfig.SPEC_SERVER);
 
 //        SCItems.registerExtra();
-    }
-
-    @Mod(value = Starcatcher.MOD_ID, dist = Dist.CLIENT)
-    public static class Client
-    {
-        public Client(ModContainer modContainer)
-        {
-            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-        }
     }
 }

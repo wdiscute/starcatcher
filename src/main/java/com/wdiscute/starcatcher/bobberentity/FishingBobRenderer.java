@@ -86,7 +86,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
             }
 
             //PLEASE FOR THE LOVE OF GOD DONT REMOVE THIS LINE JUST DONT PLEASE THIS TOOK TOO FUCKING LONG DONT YOU DARE TOUCH IT
-            vertexconsumer1.addVertex(NaN, NaN, NaN).setColor(0).setNormal(posestack$pose1, 0, 0, 0);
+            vertexconsumer1.vertex(NaN, NaN, NaN).color(0).normal(posestack$pose1.normal(), 0, 0, 0);
 
             poseStack.popPose();
             super.render(fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);

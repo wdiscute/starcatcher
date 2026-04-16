@@ -91,7 +91,7 @@ public class StarcatcherEmiSmithingRecipe implements EmiRecipe
     @Override
     public ResourceLocation getId()
     {
-        return Starcatcher.rl("/" + BuiltInRegistries.ITEM.getKey(template.getEmiStacks().getFirst().getItemStack().getItem()).getPath());
+        return Starcatcher.rl("/" + BuiltInRegistries.ITEM.getKey(template.getEmiStacks().get(0).getItemStack().getItem()).getPath());
     }
 
     @Override

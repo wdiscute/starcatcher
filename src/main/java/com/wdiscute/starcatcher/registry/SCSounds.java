@@ -4,15 +4,16 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public class SCSounds
 {
-    public static final DeferredRegister<SoundEvent> SOUND_EVENTS =
-            DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, Starcatcher.MOD_ID);
+    public static final DeferredRegisterTyped<SoundEvent> SOUND_EVENTS =
+            DeferredRegisterTyped.create(BuiltInRegistries.SOUND_EVENT, Starcatcher.MOD_ID);
 
 
     public static final Supplier<SoundEvent> KING_HEHEHA = registerSoundEvent("king_heheha");

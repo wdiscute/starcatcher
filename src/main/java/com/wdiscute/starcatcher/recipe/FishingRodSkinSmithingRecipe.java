@@ -5,17 +5,23 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.BackportCodecs;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
+import net.nikdo53.neobackports.utils.recipe.SmithingRecipeNeo;
+import net.nikdo53.neobackports.utils.recipe.input.SmithingRecipeInput;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class FishingRodSkinSmithingRecipe implements SmithingRecipe
+public class FishingRodSkinSmithingRecipe implements SmithingRecipeNeo
 {
 
     public final Ingredient template;
@@ -39,7 +45,6 @@ public class FishingRodSkinSmithingRecipe implements SmithingRecipe
     public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider registries)
     {
         ItemStack resultRod = input.base().transmuteCopy(this.result.getItem(), this.result.getCount());
-        resultRod.applyComponents(this.result.getComponentsPatch());
 
         List<ResourceLocation> catchModifiers = new ArrayList<>(SCDataComponents.getOrDefault(input.base(), SCDataComponents.MINIGAME_MODIFIERS, List.of()));
         catchModifiers.addAll(SCDataComponents.getOrDefault(input.template(), SCDataComponents.MINIGAME_MODIFIERS, List.of()));
@@ -82,6 +87,11 @@ public class FishingRodSkinSmithingRecipe implements SmithingRecipe
     }
 
     @Override
+    public ResourceLocation getId() {
+        return null;
+    }
+
+    @Override
     public RecipeSerializer<?> getSerializer()
     {
         return SCRecipes.FISHING_ROD_SKIN_SMITHING.get();
@@ -99,17 +109,17 @@ public class FishingRodSkinSmithingRecipe implements SmithingRecipe
         return Stream.of(this.template, this.base, this.addition).anyMatch(Ingredient::hasNoItems);
     }
 
-    public static class Serializer implements RecipeSerializer<FishingRodSkinSmithingRecipe>
+    public static class Serializer implements RecipeSerializerNeo<FishingRodSkinSmithingRecipe>
     {
         private static final MapCodec<FishingRodSkinSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                Ingredient.CODEC.fieldOf("template").forGetter((o) -> o.template),
-                Ingredient.CODEC.fieldOf("base").forGetter((o) -> o.base),
-                Ingredient.CODEC.fieldOf("addition").forGetter((o) -> o.addition),
-                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(o -> o.result)
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("template").forGetter((o) -> o.template),
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("base").forGetter((o) -> o.base),
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("addition").forGetter((o) -> o.addition),
+                ItemStack.CODEC.fieldOf("result").forGetter(o -> o.result)
         ).apply(instance, FishingRodSkinSmithingRecipe::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, FishingRodSkinSmithingRecipe> STREAM_CODEC = StreamCodec.of(
-                FishingRodSkinSmithingRecipe.Serializer::toNetwork, FishingRodSkinSmithingRecipe.Serializer::fromNetwork
+        public static final StreamCodec<FishingRodSkinSmithingRecipe> STREAM_CODEC = StreamCodec.of(
+                FishingRodSkinSmithingRecipe.Serializer::toNetworkA, FishingRodSkinSmithingRecipe.Serializer::fromNetwork
         );
 
         @Override
@@ -119,26 +129,26 @@ public class FishingRodSkinSmithingRecipe implements SmithingRecipe
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, FishingRodSkinSmithingRecipe> streamCodec()
+        public StreamCodec<FishingRodSkinSmithingRecipe> streamCodec()
         {
             return STREAM_CODEC;
         }
 
-        private static FishingRodSkinSmithingRecipe fromNetwork(RegistryFriendlyByteBuf buffer)
+        private static FishingRodSkinSmithingRecipe fromNetwork(FriendlyByteBuf buffer)
         {
-            Ingredient template = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient base = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient addition = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
+            Ingredient template = ByteBufCodecs.INGREDIENT.decode(buffer);
+            Ingredient base = ByteBufCodecs.INGREDIENT.decode(buffer);
+            Ingredient addition = ByteBufCodecs.INGREDIENT.decode(buffer);
+            ItemStack result = ByteBufCodecs.ITEM_STACK.decode(buffer);
             return new FishingRodSkinSmithingRecipe(template, base, addition, result);
         }
 
-        private static void toNetwork(RegistryFriendlyByteBuf buffer, FishingRodSkinSmithingRecipe recipe)
+        private static void toNetworkA(FriendlyByteBuf buffer, FishingRodSkinSmithingRecipe recipe)
         {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.template);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.base);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.addition);
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.template);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.base);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.addition);
+            ByteBufCodecs.ITEM_STACK.encode(buffer, recipe.result);
         }
     }
 }

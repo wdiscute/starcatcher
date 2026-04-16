@@ -34,6 +34,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 import org.joml.Quaternionf;
 import org.joml.Vector2d;
 
@@ -640,7 +641,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 )
                     Minecraft.getInstance().player.playSound(SoundEvents.VILLAGER_CELEBRATE);
 
-                PacketDistributor.sendToServer(new FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits));
+                PacketDistributorNeo.sendToServer(new FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits));
                 this.onClose();
             }
         }
@@ -653,7 +654,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         modifiers.forEach(AbstractMinigameModifier::onRemove);
 
-        PacketDistributor.sendToServer(new FishingCompletedPayload(-1, false, false, consecutiveHits));
+        PacketDistributorNeo.sendToServer(new FishingCompletedPayload(-1, false, false, consecutiveHits));
         this.minecraft.popGuiLayer();
     }
 

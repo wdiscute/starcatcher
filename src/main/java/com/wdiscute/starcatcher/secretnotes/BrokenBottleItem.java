@@ -11,10 +11,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 
-public class BrokenBottleItem extends Item implements ProjectileItem
+public class BrokenBottleItem extends Item
 {
 
     public BrokenBottleItem()
@@ -58,6 +57,7 @@ public class BrokenBottleItem extends Item implements ProjectileItem
         itemstack.consume(1, player);
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
     }
+/*
 
     @Override
     public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
@@ -65,5 +65,6 @@ public class BrokenBottleItem extends Item implements ProjectileItem
         bottleEntity.setItem(stack);
         return bottleEntity;
     }
+*/
 
 }
