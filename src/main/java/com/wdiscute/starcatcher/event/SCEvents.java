@@ -56,19 +56,9 @@ import net.nikdo53.neobackports.registry.ForgeRegistryHelper;
 
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SCEvents
 {
-    @SubscribeEvent
-    public static void serverStarted(SpawnPlacementRegisterEvent event)
-    {
-        event.register(
-                SCEntities.FISH.get(), SpawnPlacements.Type.IN_WATER,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                FishEntity::validSpawnPlacement,
-                SpawnPlacementRegisterEvent.Operation.REPLACE);
-    }
-
     @SubscribeEvent
     public static void modifyItemAttribute(ItemAttributeModifierEvent event)
     {
@@ -95,31 +85,6 @@ public class SCEvents
             SCDataComponents.set(itemStack, SCDataComponents.TACKLE_SKIN, tackleSkin);
         }
 
-    }
-
-
-    @SubscribeEvent
-    public static void addPackFinders(AddPackFindersEvent event)
-    {
-        PackSource packSource = new SBevents.DefaultPackSource();
-
-        event.addPackFinders(
-                Starcatcher.rl("built_in_datapacks/selling_bin_starcatcher_emeralds"),
-                PackType.SERVER_DATA,
-                Component.literal("Starcatcher - Emeralds"),
-                packSource,
-                false,
-                Pack.Position.TOP
-        );
-
-        event.addPackFinders(
-                Starcatcher.rl("built_in_datapacks/selling_bin_fishes"),
-                PackType.SERVER_DATA,
-                Component.literal("Selling Bin - Fishes"),
-                packSource,
-                false,
-                Pack.Position.TOP
-        );
     }
 
     @SubscribeEvent
@@ -173,33 +138,6 @@ public class SCEvents
 
 
     @SubscribeEvent
-    public static void addRegistry(NewRegistryEvent event)
-    {
-        ForgeRegistryHelper.getInstance(Starcatcher.SWEET_SPOT_BEHAVIOUR)
-                .create(event, reg -> Starcatcher.SWEET_SPOT_BEHAVIOUR_REGISTRY = reg);
-
-        ForgeRegistryHelper.getInstance(Starcatcher.MINIGAME_MODIFIERS)
-                .create(event, reg -> Starcatcher.MINIGAME_MODIFIERS_REGISTRY = reg);
-
-        ForgeRegistryHelper.getInstance(Starcatcher.CATCH_MODIFIERS)
-                .create(event, reg -> Starcatcher.CATCH_MODIFIERS_REGISTRY = reg);
-
-        ForgeRegistryHelper.getInstance(Starcatcher.TACKLE_SKIN)
-                .create(event, reg -> Starcatcher.TACKLE_SKIN_REGISTRY = reg);
-
-        ForgeRegistryHelper.getInstance(Starcatcher.FISH_RESTRICTIONS)
-                .create(event, reg -> Starcatcher.FISH_RESTRICTIONS_REGISTRY = reg);
-
-    }
-
-    @SubscribeEvent
-    public static void addDatapackRegistry(DataPackRegistryEvent.NewRegistry event)
-    {
-        event.dataPackRegistry(
-                Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC);
-    }
-
-    @SubscribeEvent
     public static void dropWormsWhenBonemealing(PlayerInteractEvent.RightClickBlock event)
     {
         Level level = event.getLevel();
@@ -235,77 +173,5 @@ public class SCEvents
         }
     }
 
-    @SubscribeEvent
-    public static void registerAttributed(EntityAttributeCreationEvent event)
-    {
-        event.put(SCEntities.FISH.get(), FishEntity.createAttributes().build());
-    }
 
-    @SubscribeEvent
-    public static void registerAttributed(RegisterDataMapTypesEvent event)
-    {
-        event.register(SCDataMaps.AQUARIUM_INTERACTION);
-        event.register(SCDataMaps.CATCH_MODIFIERS);
-        event.register(SCDataMaps.MINIGAME_MODIFIERS);
-        event.register(SCDataMaps.TACKLE_SKIN);
-    }
-
-    @SubscribeEvent
-    public static void registerPayloads(final RegisterPayloadHandlersEvent event)
-    {
-        final PayloadRegistrar registrar = event.registrar("1");
-        registrar.playToClient(
-                FishingStartedPayload.TYPE,
-                FishingStartedPayload.STREAM_CODEC,
-                FishingStartedPayload::handle
-        );
-
-        registrar.playToServer(
-                FishingCompletedPayload.TYPE,
-                FishingCompletedPayload.STREAM_CODEC,
-                FishingCompletedPayload::handle
-        );
-
-        registrar.playToClient(
-                FishCaughtPayload.TYPE,
-                FishCaughtPayload.STREAM_CODEC,
-                FishCaughtPayload::handle
-        );
-
-        registrar.playToServer(
-                FPsSeenPayload.TYPE,
-                FPsSeenPayload.STREAM_CODEC,
-                FPsSeenPayload::handle
-        );
-
-        registrar.playToServer(
-                SBStandTournamentNameChangePayload.TYPE,
-                SBStandTournamentNameChangePayload.STREAM_CODEC,
-                SBStandTournamentNameChangePayload::handle
-        );
-
-        registrar.playToClient(
-                CBActiveTournamentUpdatePayload.TYPE,
-                CBActiveTournamentUpdatePayload.STREAM_CODEC,
-                CBActiveTournamentUpdatePayload::handle
-        );
-
-        registrar.playToClient(
-                CBClearTournamentPayload.TYPE,
-                CBClearTournamentPayload.STREAM_CODEC,
-                CBClearTournamentPayload::handle
-        );
-
-        registrar.playToServer(
-                SetMessagePayload.TYPE,
-                SetMessagePayload.STREAM_CODEC,
-                SetMessagePayload::handle
-        );
-
-        registrar.playToServer(
-                SignGuidePayload.TYPE,
-                SignGuidePayload.STREAM_CODEC,
-                SignGuidePayload::handle
-        );
-    }
 }

@@ -104,7 +104,7 @@ public record TackleSkinSmithingRecipe(Ingredient template, Ingredient base, Ing
 
     public static class Serializer implements RecipeSerializerNeo<TackleSkinSmithingRecipe>
     {
-        private static final MapCodec<TackleSkinSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+        public static final MapCodec<TackleSkinSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("template").forGetter((o) -> o.template),
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("base").forGetter((o) -> o.base),
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("addition").forGetter((o) -> o.addition)

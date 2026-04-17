@@ -42,7 +42,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.FastColor;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
@@ -52,6 +51,8 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.network.PacketDistributor;
 import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
+import net.nikdo53.neobackports.utils.FastColorNeo;
+import net.nikdo53.neobackports.utils.ListReverser;
 
 import java.awt.*;
 import java.time.Instant;
@@ -1293,19 +1294,19 @@ public class FishingGuideScreen extends Screen
         //glow color
         int color = switch (fp.rarity())
         {
-            case TRASH, NONE -> FastColor.ARGB32.color(0, -1);
-            case FishProperties.Rarity.COMMON -> FastColor.ARGB32.color(0, -1);
-            case FishProperties.Rarity.UNCOMMON -> FastColor.ARGB32.color(255, 0x92f28d);
-            case FishProperties.Rarity.RARE -> FastColor.ARGB32.color(255, 0x78c8ff);
-            case FishProperties.Rarity.EPIC -> FastColor.ARGB32.color(255, 0xc060ff);
-            case FishProperties.Rarity.LEGENDARY, FishProperties.Rarity.GOLDEN ->
-                    FastColor.ARGB32.color(175, Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1));
+            case TRASH, NONE -> FastColorNeo.ARGB32.color(0, -1);
+            case COMMON -> FastColorNeo.ARGB32.color(0, -1);
+            case UNCOMMON -> FastColorNeo.ARGB32.color(255, 0x92f28d);
+            case RARE -> FastColorNeo.ARGB32.color(255, 0x78c8ff);
+            case EPIC -> FastColorNeo.ARGB32.color(255, 0xc060ff);
+            case LEGENDARY, GOLDEN ->
+                    FastColorNeo.ARGB32.color(175, Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1));
         };
 
-        float red = FastColor.ARGB32.red(color) / 255f;
-        float green = FastColor.ARGB32.green(color) / 255f;
-        float blue = FastColor.ARGB32.blue(color) / 255f;
-        float alpha = FastColor.ARGB32.alpha(color) / 255f;
+        float red = FastColorNeo.ARGB32.red(color) / 255f;
+        float green = FastColorNeo.ARGB32.green(color) / 255f;
+        float blue = FastColorNeo.ARGB32.blue(color) / 255f;
+        float alpha = FastColorNeo.ARGB32.alpha(color) / 255f;
 
         guiGraphics.setColor(red, green, blue, alpha);
 
@@ -1361,7 +1362,7 @@ public class FishingGuideScreen extends Screen
         }
         else
         {
-            if (fp.catchInfo().alwaysSpawnEntity() && !fp.catchInfo().entityToSpawn().is(U.holderEntity(SCEntities.FISH)))
+            if (fp.catchInfo().alwaysSpawnEntity() && !fp.catchInfo().entityToSpawn().is(U.holderEntity(SCEntities.FISH).getKey()))
                 components.add(Component.translatable("entity." + fp.catchInfo().entityToSpawn().getRegisteredName().replace(":", ".")));
             else
                 components.add(Component.translatable(fp.catchInfo().fish().value().getDescriptionId()));
@@ -1386,7 +1387,7 @@ public class FishingGuideScreen extends Screen
             components.addAll(indexHover);
         }
 
-        if (components.getLast().equals(Component.empty())) components.removeLast();
+        if (components.get(components.size() - 1).equals(Component.empty())) components.remove(components.size() - 1);
 
         cachedHoverList = components;
         return components;
@@ -1507,7 +1508,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public void onClose()
     {
-        PacketDistributor.sendToServer(new FPsSeenPayload(fpsSeen));
+        PacketDistributorNeo.sendToServer(new FPsSeenPayload(fpsSeen));
         super.onClose();
     }
 
@@ -1602,14 +1603,14 @@ public class FishingGuideScreen extends Screen
                 if (e.rarity().equals(FishProperties.Rarity.LEGENDARY)) entriesSorted.add(e);
             });
 
-            return sort.equals(Sort.RARITY_UP) ? entriesSorted : entriesSorted.reversed();
+            return sort.equals(Sort.RARITY_UP) ? entriesSorted : ListReverser.reverse(entriesSorted);
         }
 
         //alphabetical
         if (sort.equals(Sort.ALPHABETICAL_DOWN) || sort.equals(Sort.ALPHABETICAL_UP))
         {
             List<FishProperties> entriesSorted = entriesToSort.stream().sorted(Comparator.comparing(o -> o.catchInfo().fish().unwrapKey().get().location().getPath())).toList();
-            return sort.equals(Sort.ALPHABETICAL_UP) ? entriesSorted : entriesSorted.reversed();
+            return sort.equals(Sort.ALPHABETICAL_UP) ? entriesSorted : ListReverser.reverse(entriesSorted);
         }
 
         //mod
@@ -1636,7 +1637,7 @@ public class FishingGuideScreen extends Screen
                 }
             }
 
-            entriesToSort = sort.equals(Sort.MOD_UP) ? entriesSorted : entriesSorted.reversed();
+            entriesToSort = sort.equals(Sort.MOD_UP) ? entriesSorted : ListReverser.reverse(entriesSorted);
         }
 
         //fluid
@@ -1890,7 +1891,7 @@ public class FishingGuideScreen extends Screen
                 x + 73, y + 93, 0, false);
 
         //render bucketable
-        if (!fp.catchInfo().bucketedFish().is(SCItems.MISSINGNO))
+        if (!fp.catchInfo().bucketedFish().is(SCItems.MISSINGNO.getKey()))
         {
             guiGraphics.blit(BUCKET, x + 77, y + 103, 0, 0, 14, 14, 14, 14);
             if (mouseX > 75 && mouseX < 93 && mouseY > 105 && mouseY < 115)
@@ -1922,19 +1923,19 @@ public class FishingGuideScreen extends Screen
 
         int color = switch (fp.rarity())
         {
-            case FishProperties.Rarity.TRASH, FishProperties.Rarity.COMMON, FishProperties.Rarity.NONE ->
-                    FastColor.ARGB32.color(0, -1);
-            case FishProperties.Rarity.UNCOMMON -> FastColor.ARGB32.color(200, 0x92f28d);
-            case FishProperties.Rarity.RARE -> FastColor.ARGB32.color(200, 0x78c8ff);
-            case FishProperties.Rarity.EPIC -> FastColor.ARGB32.color(200, 0xc060ff);
-            case FishProperties.Rarity.LEGENDARY, GOLDEN ->
-                    FastColor.ARGB32.color(175, Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1));
+            case TRASH, COMMON, NONE ->
+                    FastColorNeo.ARGB32.color(0, -1);
+            case UNCOMMON -> FastColorNeo.ARGB32.color(200, 0x92f28d);
+            case RARE -> FastColorNeo.ARGB32.color(200, 0x78c8ff);
+            case EPIC -> FastColorNeo.ARGB32.color(200, 0xc060ff);
+            case LEGENDARY, GOLDEN ->
+                    FastColorNeo.ARGB32.color(175, Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1));
         };
 
-        float red = FastColor.ARGB32.red(color) / 255f;
-        float green = FastColor.ARGB32.green(color) / 255f;
-        float blue = FastColor.ARGB32.blue(color) / 255f;
-        float alpha = FastColor.ARGB32.alpha(color) / 255f;
+        float red = FastColorNeo.ARGB32.red(color) / 255f;
+        float green = FastColorNeo.ARGB32.green(color) / 255f;
+        float blue = FastColorNeo.ARGB32.blue(color) / 255f;
+        float alpha = FastColorNeo.ARGB32.alpha(color) / 255f;
 
         guiGraphics.setColor(red, green, blue, alpha);
 

@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 public interface SCTackleSkins
 {
     DeferredRegisterTyped<Supplier<AbstractTackleSkin>> REGISTRY =
-            DeferredRegisterTyped.create(Starcatcher.TACKLE_SKIN_REGISTRY, Starcatcher.MOD_ID);
+            DeferredRegisterTyped.create(Starcatcher.TACKLE_SKIN, Starcatcher.MOD_ID);
 
     //base
     ResourceLocation BASE_TACKLE_SKIN = registerCatchModifier("base", BaseTackleSkin::new);

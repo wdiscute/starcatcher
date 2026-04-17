@@ -1,16 +1,28 @@
 package com.wdiscute.starcatcher.recipe;
 
+import com.google.gson.JsonObject;
+import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
+import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.recipes.SmithingTransformRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.nikdo53.neobackports.utils.recipe.RecipeOutput;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 public class TackleSkinSmithingRecipeBuilder
 {
@@ -18,7 +30,9 @@ public class TackleSkinSmithingRecipeBuilder
     private final Ingredient base;
     private final Ingredient addition;
     private final RecipeCategory category;
-    private final Map<String, Criterion> criteria = new LinkedHashMap<>();
+    private final Map<String, InventoryChangeTrigger.TriggerInstance> criteria = new LinkedHashMap<>();
+    private final Advancement.Builder advancement = Advancement.Builder.recipeAdvancement();
+    private final RecipeSerializer<?> type = SCRecipes.TACKLE_SKIN_SMITHING.get();
 
     public TackleSkinSmithingRecipeBuilder(Ingredient template, Ingredient base, Ingredient addition, RecipeCategory category)
     {
@@ -35,34 +49,55 @@ public class TackleSkinSmithingRecipeBuilder
         return new TackleSkinSmithingRecipeBuilder(template, base, addition, category);
     }
 
-    public TackleSkinSmithingRecipeBuilder unlocks(String key, Criterion criterion)
+    public TackleSkinSmithingRecipeBuilder unlocks(String key, InventoryChangeTrigger.TriggerInstance criterion)
     {
         this.criteria.put(key, criterion);
         return this;
     }
 
-    public void save(RecipeOutput recipeOutput, String recipeId)
-    {
-        this.save(recipeOutput, ResourceLocation.tryParse(recipeId));
+
+    public void save(Consumer<FinishedRecipe> recipeConsumer, String location) {
+        this.save(recipeConsumer, new ResourceLocation(location));
     }
 
-    public void save(RecipeOutput recipeOutput, ResourceLocation recipeId)
-    {
-        this.ensureValid(recipeId);
-        Advancement.Builder advancement$builder = recipeOutput.advancement()
-                .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(recipeId))
-                .rewards(AdvancementRewards.Builder.recipe(recipeId))
-                .requirements(AdvancementRequirements.Strategy.OR);
-        this.criteria.forEach(advancement$builder::addCriterion);
-        TackleSkinSmithingRecipe tackleSkinSmithingRecipe = new TackleSkinSmithingRecipe(this.template, this.base, this.addition);
-        recipeOutput.accept(recipeId, tackleSkinSmithingRecipe, advancement$builder.build(recipeId.withPrefix("recipes/" + this.category.getFolderName() + "/")));
+    public void save(Consumer<FinishedRecipe> recipeConsumer, ResourceLocation location) {
+        this.ensureValid(location);
+        this.advancement.parent(RecipeBuilder.ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(location)).rewards(AdvancementRewards.Builder.recipe(location)).requirements(RequirementsStrategy.OR);
+        recipeConsumer.accept(new Result(location, this.type, this.template, this.base, this.addition, this.advancement, location.withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
+
 
     private void ensureValid(ResourceLocation location)
     {
         if (this.criteria.isEmpty())
         {
             throw new IllegalStateException("No way of obtaining recipe " + location);
+        }
+    }
+
+    public static record Result(ResourceLocation id, RecipeSerializer<?> type, Ingredient template, Ingredient base, Ingredient addition, Advancement.Builder advancement, ResourceLocation advancementId) implements FinishedRecipe {
+        public void serializeRecipeData(JsonObject p_266713_) {
+            p_266713_.add("template", this.template.toJson());
+            p_266713_.add("base", this.base.toJson());
+            p_266713_.add("addition", this.addition.toJson());
+        }
+
+        public ResourceLocation getId() {
+            return this.id;
+        }
+
+        public RecipeSerializer<?> getType() {
+            return this.type;
+        }
+
+        @Nullable
+        public JsonObject serializeAdvancement() {
+            return this.advancement.serializeToJson();
+        }
+
+        @Nullable
+        public ResourceLocation getAdvancementId() {
+            return this.advancementId;
         }
     }
 }

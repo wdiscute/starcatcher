@@ -9,6 +9,9 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
+import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -28,6 +31,8 @@ import java.util.List;
 
 public class FishEntity extends AbstractFish
 {
+    private static final EntityDataAccessor<ItemStack> FISH_STACK = SynchedEntityData.defineId(FishEntity.class, EntityDataSerializers.ITEM_STACK);
+
     public FishEntity(EntityType<? extends FishEntity> entityType, Level level)
     {
         super(entityType, level);
@@ -56,7 +61,7 @@ public class FishEntity extends AbstractFish
     @Override
     public @Nullable ItemStack getPickResult()
     {
-        return getBodyArmorItem();
+        return getEntityData().get(FISH_STACK);
     }
 
     @Override
@@ -74,7 +79,7 @@ public class FishEntity extends AbstractFish
     public void tick()
     {
         super.tick();
-        if (getBodyArmorItem().isEmpty() && !level().isClientSide)
+        if (getEntityData().get(FISH_STACK).isEmpty() && !level().isClientSide)
         {
             shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();
@@ -91,34 +96,34 @@ public class FishEntity extends AbstractFish
             {
                 FishProperties fp = available.get(U.r.nextInt(available.size()));
                 ItemStack is = new ItemStack(fp.catchInfo().fish());
-                setBodyArmorItem(is);
+                getEntityData().set(FISH_STACK,is);
             }
         }
     }
 
     @Override
-    protected void dropAllDeathLoot(ServerLevel p_level, DamageSource damageSource)
+    protected void dropAllDeathLoot(DamageSource damageSource)
     {
         if (shouldDropItem)
-            super.dropAllDeathLoot(p_level, damageSource);
+            super.dropAllDeathLoot(damageSource);
     }
 
     public void setFish(ItemStack is)
     {
-        setBodyArmorItem(is);
+        getEntityData().set(FISH_STACK, is);
         shouldDropItem = true;
     }
 
     public ItemStack getFish()
     {
-        return getBodyArmorItem();
+        return getEntityData().get(FISH_STACK);
     }
 
     @Override
     public ItemStack getBucketItemStack()
     {
         ItemStack is = new ItemStack(SCItems.STARCAUGHT_BUCKET.get());
-        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(getBodyArmorItem().copy()));
+        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(getEntityData().get(FISH_STACK).copy()));
         return is;
     }
 
@@ -130,5 +135,11 @@ public class FishEntity extends AbstractFish
                 return true;
 
         return false;
+    }
+
+    @Override
+    protected void defineSynchedData() {
+        super.defineSynchedData();
+        this.entityData.define(FISH_STACK, ItemStack.EMPTY);
     }
 }

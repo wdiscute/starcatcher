@@ -22,7 +22,7 @@ import java.util.function.Supplier;
 public interface SCCatchModifiers
 {
     DeferredRegister<Supplier<AbstractCatchModifier>> REGISTRY =
-            DeferredRegister.create(Starcatcher.CATCH_MODIFIERS_REGISTRY, Starcatcher.MOD_ID);
+            DeferredRegister.create(Starcatcher.CATCH_MODIFIERS, Starcatcher.MOD_ID);
 
     //todo built-in modifiers to skip minigame for low rarity or something, using AbstractCatchModifier#forceSkipMinigame
 

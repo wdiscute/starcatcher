@@ -80,7 +80,7 @@ dependencies {
     jarJar(modImplementation("net.nikdo53.neobackports:NeoBackports:${neobackports_version}"))
     interfaceInjectionData("net.nikdo53.neobackports:NeoBackports:${neobackports_version}")
 
-    modImplementation("com.wdiscute:Selling-Bin:1.4.1-FORGE-1.20.1")
+    jarJar(modImplementation("com.wdiscute:Selling-Bin:1.4.1-FORGE-1.20.1"))
 
     //EMI
     modCompileOnly("dev.emi:emi-forge:${emi_version}:api")
@@ -223,8 +223,16 @@ obfuscation {
 
 // Uncomment the lines below if you wish to configure mixin. The mixin file should be named modid.mixins.json.
 mixin {
-    add sourceSets.main, "${mod_id}.mixins.refmap.json"
-    config "${mod_id}.mixins.json"
+    add sourceSets.main, "starcatcher.mixins.refmap.json"
+    config "starcatcher.mixins.json"
+}
+
+jar {
+    manifest.attributes([
+            "MixinConfigs": "${mod_id}.mixins.json"
+    ])
+
+    finalizedBy('reobfJar')
 }
 
 
@@ -244,7 +252,6 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_version            : mod_version,
             mod_authors            : mod_authors,
             mod_description        : mod_description,
-            MixinConfigs           : "${mod_id}.mixins.json",
     ]
     inputs.properties replaceProperties
     expand replaceProperties

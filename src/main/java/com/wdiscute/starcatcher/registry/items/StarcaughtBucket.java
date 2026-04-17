@@ -21,21 +21,23 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
+import net.nikdo53.neobackports.io.components.DataComponents;
 import net.nikdo53.neobackports.utils.TooltipContext;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class StarcaughtBucket extends BucketItem
 {
-    EntityType<FishEntity> entity;
+    Supplier<EntityType<FishEntity>> entity;
 
     public StarcaughtBucket(Fluid fluid)
     {
         super(fluid, new Item.Properties().stacksTo(16));
 
-        entity = SCEntities.FISH.get();
+        entity = SCEntities.FISH;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class StarcaughtBucket extends BucketItem
 
     private void spawn(ServerLevel serverLevel, ItemStack bucketedMobStack, BlockPos pos)
     {
-        FishEntity fishEntity = this.entity.spawn(serverLevel, bucketedMobStack, null, pos, MobSpawnType.BUCKET, true, false);
+        FishEntity fishEntity = this.entity.get().spawn(serverLevel, bucketedMobStack, null, pos, MobSpawnType.BUCKET, true, false);
         if (SCDataComponents.has(bucketedMobStack, SCDataComponents.BUCKETED_FISH))
             fishEntity.setFish(getFish(bucketedMobStack));
         else
@@ -84,8 +86,8 @@ public class StarcaughtBucket extends BucketItem
         else
         {
             Component baseName;
-            Component customName = ssc.stack().get(DataComponents.CUSTOM_NAME);
-            Component itemName = ssc.stack().get(DataComponents.ITEM_NAME);
+            Component customName = ssc.stack().get(DataComponents.CUSTOM_NAME.get());
+            Component itemName = ssc.stack().get(DataComponents.ITEM_NAME.get());
 
             if (customName != null)
             {

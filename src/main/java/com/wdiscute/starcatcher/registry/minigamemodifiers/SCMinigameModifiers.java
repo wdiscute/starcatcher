@@ -24,7 +24,7 @@ import java.util.function.Supplier;
 public interface SCMinigameModifiers
 {
     DeferredRegisterTyped<Supplier<AbstractMinigameModifier>> REGISTRY =
-            DeferredRegisterTyped.create(Starcatcher.MINIGAME_MODIFIERS_REGISTRY, Starcatcher.MOD_ID);
+            DeferredRegisterTyped.create(Starcatcher.MINIGAME_MODIFIERS, Starcatcher.MOD_ID);
 
     //ice fishes
     DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> FREEZE_ON_MISS =
