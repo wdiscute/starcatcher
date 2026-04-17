@@ -1,10 +1,4 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "aquaculture"
-    }
-  ],
   "base_chance": 5,
   "catch_info": {
     "entity": "aquaculture:rainbow_trout",
@@ -45,6 +39,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
   "has_guide_entry": true,
   "rarity": "uncommon",
   "restrictions": [

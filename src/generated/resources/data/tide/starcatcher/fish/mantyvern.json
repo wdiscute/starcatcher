@@ -1,10 +1,4 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "tide"
-    }
-  ],
   "base_chance": 10,
   "catch_info": {
     "entity": "tide:mantyvern",
@@ -30,6 +24,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
   "has_guide_entry": true,
   "rarity": "epic",
   "restrictions": [

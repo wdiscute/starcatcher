@@ -1,12 +1,7 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "tfc"
-    }
-  ],
   "base_chance": 1,
   "catch_info": {
+    "entity": "starcatcher:fish",
     "item": "tfc:food/fresh_seaweed"
   },
   "difficulty": {
@@ -38,6 +33,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tfc"
+    }
+  ],
   "has_guide_entry": false,
   "rarity": "common",
   "restrictions": [

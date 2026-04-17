@@ -1,12 +1,7 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "aquaculture"
-    }
-  ],
   "base_chance": 1,
   "catch_info": {
+    "entity": "starcatcher:fish",
     "item": "aquaculture:goldfish",
     "treasure_loot_table": "aquaculture:box"
   },
@@ -39,6 +34,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
   "has_guide_entry": true,
   "rarity": "common",
   "restrictions": [

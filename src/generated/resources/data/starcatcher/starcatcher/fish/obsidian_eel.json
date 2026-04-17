@@ -1,6 +1,7 @@
 {
   "base_chance": 8,
   "catch_info": {
+    "entity": "starcatcher:fish",
     "item": "starcatcher:obsidian_eel"
   },
   "difficulty": {

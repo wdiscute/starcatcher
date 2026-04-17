@@ -1,6 +1,7 @@
 {
   "base_chance": 5,
   "catch_info": {
+    "entity": "starcatcher:fish",
     "item": "starcatcher:black_eel"
   },
   "difficulty": {

@@ -34,18 +34,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.nikdo53.neobackports.event.RegisterMenuScreensEvent;
 
-@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SCClientEvents
 {
-    @SubscribeEvent
-    public static void keyPressed(InputEvent.Key event)
-    {
-        if(event.getAction() == 0 && event.getKey() == SCKeymappings.EXPAND_TOURNAMENT.getKey().getValue())
-        {
-            TournamentOverlay.expandedType = TournamentOverlay.expandedType.next();
-        }
-    }
-
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event)
     {

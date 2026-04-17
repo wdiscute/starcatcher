@@ -5,7 +5,7 @@
       "required": false
     },
     {
-      "id": "#c:is_mushroom",
+      "id": "#forge:is_mushroom",
       "required": false
     }
   ]

@@ -1,0 +1,12 @@
+{
+  "type": "starcatcher:smithing_tackle_skin",
+  "addition": {
+    "tag": "forge:dyes"
+  },
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "template": {
+    "item": "starcatcher:colorful_smithing_template"
+  }
+}

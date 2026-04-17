@@ -9,11 +9,7 @@
       "required": false
     },
     {
-      "id": "#c:is_desert",
-      "required": false
-    },
-    {
-      "id": "#c:is_badlands",
+      "id": "#forge:is_desert",
       "required": false
     }
   ]

@@ -1,6 +1,7 @@
 {
   "base_chance": 1,
   "catch_info": {
+    "entity": "starcatcher:fish",
     "item": "starcatcher:conch"
   },
   "difficulty": {

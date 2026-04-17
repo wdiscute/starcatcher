@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "H": {
+      "item": "starcatcher:hook"
+    },
+    "N": {
+      "item": "minecraft:gold_nugget"
+    }
+  },
+  "pattern": [
+    "N  ",
+    "GHG",
+    " G "
+  ],
+  "result": {
+    "item": "starcatcher:gold_hook"
+  },
+  "show_notification": true
+}

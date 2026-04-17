@@ -1,10 +1,4 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "hybrid_aquatic"
-    }
-  ],
   "base_chance": 5,
   "catch_info": {
     "entity": "hybrid-aquatic:pleco",
@@ -39,6 +33,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "hybrid_aquatic"
+    }
+  ],
   "has_guide_entry": true,
   "rarity": "common",
   "restrictions": [

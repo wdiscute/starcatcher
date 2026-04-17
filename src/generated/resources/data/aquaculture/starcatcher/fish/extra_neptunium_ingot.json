@@ -1,13 +1,8 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "aquaculture"
-    }
-  ],
   "base_chance": 5,
   "catch_info": {
     "type": "extra",
+    "entity": "starcatcher:fish",
     "item": "aquaculture:neptunium_ingot"
   },
   "difficulty": {
@@ -39,6 +34,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
   "has_guide_entry": false,
   "rarity": "common",
   "restrictions": [

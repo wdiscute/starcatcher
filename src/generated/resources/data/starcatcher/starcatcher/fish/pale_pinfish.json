@@ -1,6 +1,7 @@
 {
   "base_chance": 15,
   "catch_info": {
+    "entity": "starcatcher:fish",
     "fish_bucket": "starcatcher:starcaught_bucket",
     "item": "starcatcher:pale_pinfish"
   },

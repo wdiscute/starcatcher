@@ -9,7 +9,7 @@
       "required": false
     },
     {
-      "id": "#c:is_swamp",
+      "id": "#forge:is_swamp",
       "required": false
     }
   ]

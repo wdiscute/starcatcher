@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "minecraft:packed_ice"
+    },
+    "H": {
+      "item": "starcatcher:hook"
+    },
+    "I": {
+      "item": "minecraft:blue_ice"
+    }
+  },
+  "pattern": [
+    "I  ",
+    "DHD",
+    " D "
+  ],
+  "result": {
+    "item": "starcatcher:frozen_hook"
+  },
+  "show_notification": true
+}

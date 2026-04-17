@@ -1,12 +1,7 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "crittersandcompanions"
-    }
-  ],
   "base_chance": 5,
   "catch_info": {
+    "entity": "starcatcher:fish",
     "item": "crittersandcompanions:clam"
   },
   "difficulty": {
@@ -38,6 +33,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "crittersandcompanions"
+    }
+  ],
   "has_guide_entry": true,
   "rarity": "common",
   "restrictions": [
