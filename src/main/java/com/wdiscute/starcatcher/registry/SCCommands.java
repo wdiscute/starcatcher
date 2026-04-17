@@ -165,7 +165,7 @@ public class SCCommands
                 .then(Commands.literal("award_fish")
                         .executes(c -> awardAllFish(c.getSource().getPlayerOrException()))
                         // -> /starcatcher award_fish all
-                        .then(Commands.literal("all")
+                        .then(Commands.literal("_all")
                                 // -> /starcatcher award_fish all
                                 .executes(c -> awardAllFish(c.getSource().getPlayerOrException()))
                                 // -> /starcatcher award_fish all 0 0 0
@@ -189,6 +189,37 @@ public class SCCommands
                                         )
                                 )
                         )
+
+                        // -> /starcatcher award_fish random
+                        .then(Commands.literal("_random")
+                                // -> /starcatcher award_fish all
+                                .executes(c -> awardRandomFish(c.getSource().getPlayerOrException()))
+
+                                .then(Commands.argument("ticks", IntegerArgumentType.integer())
+                                        .then(Commands.argument("size", IntegerArgumentType.integer())
+                                                .then(Commands.argument("weight", IntegerArgumentType.integer())
+                                                        .then(Commands.argument("percentile", FloatArgumentType.floatArg())
+                                                                .then(Commands.argument("golden", BoolArgumentType.bool())
+                                                                        .then(Commands.argument("perfect_catch", BoolArgumentType.bool())
+                                                                                .executes(c -> awardRandomFish(
+                                                                                                c.getSource().getPlayerOrException(),
+                                                                                                IntegerArgumentType.getInteger(c, "ticks"),
+                                                                                                IntegerArgumentType.getInteger(c, "size"),
+                                                                                                IntegerArgumentType.getInteger(c, "weight"),
+                                                                                                FloatArgumentType.getFloat(c, "percentile"),
+                                                                                                BoolArgumentType.getBool(c, "perfect_catch"),
+                                                                                                BoolArgumentType.getBool(c, "golden")
+                                                                                        )
+                                                                                )
+                                                                        )
+                                                                )
+                                                        )
+                                                )
+                                        )
+
+                                )
+                        )
+
                         // -> starcatcher award_fish starcatcher:aurora
                         .then(Commands.argument("fish", ResourceArgument.resource(context, Starcatcher.FISH_REGISTRY_KEY))
                                 .executes(c -> awardFish(
@@ -267,6 +298,26 @@ public class SCCommands
         for (FishProperties fp : player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             FishCaughtCounter.awardFishCaughtCounter(fp, player, 0, 0, 0, 0, false, false, false);
 
+        return 0;
+    }
+
+    private static int awardRandomFish(ServerPlayer player)
+    {
+        awardRandomFish(player, 0, 0, 0, 0, false, false);
+        return 0;
+    }
+
+    private static int awardRandomFish(ServerPlayer player, int ticks, int size, int weight, float percentile, boolean perfectCatch, boolean golden)
+    {
+
+        List<FishProperties> list = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().toList();
+
+        if (list.isEmpty()) return 0;
+
+        FishProperties fp = list.get(U.r.nextInt(list.size()));
+
+        FishCaughtCounter.awardFishCaughtCounter(fp, player,
+                ticks, size, weight, percentile, perfectCatch, false, golden);
         return 0;
     }
 
