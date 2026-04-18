@@ -144,7 +144,7 @@ public class FishRenderer extends EntityRenderer<FishEntity>
     @Override
     public ResourceLocation getTextureLocation(FishEntity fish)
     {
-        return null;
+        return Starcatcher.rl("missingno");
     }
 
     public static void renderFishFromItem(ItemRenderer itemRenderer, Map<Item, EntityModel<FishEntity>> map, ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, Level level)
