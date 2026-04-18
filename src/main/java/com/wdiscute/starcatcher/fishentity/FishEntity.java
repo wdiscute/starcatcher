@@ -17,7 +17,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.fish.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
@@ -74,19 +74,19 @@ public class FishEntity extends AbstractFish
     public void tick()
     {
         super.tick();
-        if (getBodyArmorItem().isEmpty() && !level().isClientSide)
+        if (getBodyArmorItem().isEmpty() && !level().isClientSide())
         {
             shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();
 
-            for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
+            for (FishProperties fp : level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value())
             {
                 if (fp.calculateChance(this, level(), SCItems.ROD.toStack(), AbstractFishRestriction.Context.FISH_ENTITY) > 0 && fp.catchInfo().fish().is(SCTags.BUCKETABLE_FISHES))
                     available.add(fp);
             }
 
             if (available.isEmpty())
-                kill();
+                kill((ServerLevel) level());
             else
             {
                 FishProperties fp = available.get(U.r.nextInt(available.size()));
@@ -120,15 +120,5 @@ public class FishEntity extends AbstractFish
         ItemStack is = new ItemStack(SCItems.STARCAUGHT_BUCKET.get());
         SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(getBodyArmorItem().copy()));
         return is;
-    }
-
-    public static boolean validSpawnPlacement(EntityType<FishEntity> entity, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource)
-    {
-        //todo fix this shit
-        for (FishProperties fp : serverLevelAccessor.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
-            if (fp.calculateChance(entity.create(serverLevelAccessor.getLevel()), serverLevelAccessor.getLevel(), ItemStack.EMPTY, AbstractFishRestriction.Context.FISH_ENTITY) > 0)
-                return true;
-
-        return false;
     }
 }

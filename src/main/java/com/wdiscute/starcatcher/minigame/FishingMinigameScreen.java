@@ -18,13 +18,14 @@ import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.starcatcher.registry.tackleskin.BaseTackleSkin;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -44,11 +45,11 @@ import java.util.function.Supplier;
 
 public class FishingMinigameScreen extends Screen implements GuiEventListener
 {
-    public static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
-    private static final ResourceLocation NETHER = Starcatcher.rl("textures/gui/minigame/nether.png");
-    private static final ResourceLocation CAVE = Starcatcher.rl("textures/gui/minigame/cave.png");
-    private static final ResourceLocation SURFACE = Starcatcher.rl("textures/gui/minigame/surface.png");
-    public ResourceLocation tankTexture = SURFACE;
+    public static final Identifier TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
+    private static final Identifier NETHER = Starcatcher.rl("textures/gui/minigame/nether.png");
+    private static final Identifier CAVE = Starcatcher.rl("textures/gui/minigame/cave.png");
+    private static final Identifier SURFACE = Starcatcher.rl("textures/gui/minigame/surface.png");
+    public Identifier tankTexture = SURFACE;
 
     public FishProperties.Difficulty difficulty;
     public FishProperties.Rarity rarity;
@@ -140,9 +141,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         if (SCDataComponents.has(rod, SCDataComponents.TACKLE_SKIN))
         {
-            ResourceLocation rl = SCDataComponents.get(rod, SCDataComponents.TACKLE_SKIN);
+            Identifier rl = SCDataComponents.get(rod, SCDataComponents.TACKLE_SKIN);
 
-            Optional<Supplier<AbstractTackleSkin>> optional = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.TACKLE_SKIN).getOptional(rl);
+            Optional<Supplier<AbstractTackleSkin>> optional = Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getOptional(rl);
             if (optional.isPresent())
                 this.tackleSkin = optional.get().get();
             else
@@ -242,7 +243,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTickNeo)
+    public void renderBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTickNeo)
     {
         super.renderBackground(guiGraphics, mouseX, mouseY, partialTickNeo);
 
@@ -287,7 +288,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         activeSweetSpots.forEach(ass -> renderSweetSpot(ass, guiGraphics, partialTick, poseStack));
 
         //render wheel second layer
-        guiGraphics.blit(TEXTURE, width / 2 - 32, height / 2 - 32, 64, 64, 64, 192, 64, 64, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 32, height / 2 - 32, 64, 64, 64, 192, 64, 64, 256, 256);
 
         //render pointer
         renderPointer(guiGraphics, poseStack, partialTick);
@@ -296,15 +297,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         renderKimbeMarker(guiGraphics);
 
         //silver thing on top
-        guiGraphics.blit(TEXTURE, width / 2 - 16, height / 2 - 16, 32, 32, 208, 208, 32, 32, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 16, height / 2 - 16, 32, 32, 208, 208, 32, 32, 256, 256);
 
         //fishing rod
-        guiGraphics.blit(TEXTURE, width / 2 - 32 - 70, height / 2 - 24 - 57, 64, 48, 192, 0, 64, 48, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 32 - 70, height / 2 - 24 - 57, 64, 48, 192, 0, 64, 48, 256, 256);
 
         float yoffset = progressSmooth == 0 ? 0 : (progressSmooth / (float) hp * 77);
 
         //fishing line
-        guiGraphics.blit(
+        guiGraphics.blit(RenderPipelines.GUI,
                 TEXTURE, width / 2 - 6 - 102, height / 2 - 56 - 18,
                 16, (int) (112 - yoffset),
                 176F, yoffset,
@@ -314,7 +315,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //item being fished
         poseStack.pushPose();
         poseStack.translate(0, -yoffset, 0);
-        guiGraphics.renderItem(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35);
+        guiGraphics.item(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35);
         poseStack.popPose();
 
         //render sweet spots foreground
@@ -329,7 +330,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         poseStack.popPose();
     }
 
-    public void renderSweetSpot(ActiveSweetSpot ass, GuiGraphics guiGraphics, float partialTick, PoseStack poseStack)
+    public void renderSweetSpot(ActiveSweetSpot ass, GuiGraphicsExtractor guiGraphics, float partialTick, PoseStack poseStack)
     {
         float centerX = width / 2f;
         float centerY = height / 2f;
@@ -349,7 +350,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         poseStack.popPose();
     }
 
-    public void renderTreasure(GuiGraphics guiGraphics)
+    public void renderTreasure(GuiGraphicsExtractor guiGraphics)
     {
         //treasure bar
         guiGraphics.blit(
@@ -376,7 +377,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 //            RenderSystem.setShaderColor(1, 1, 1, 1);
     }
 
-    public void renderKimbeMarker(GuiGraphics guiGraphics)
+    public void renderKimbeMarker(GuiGraphicsExtractor guiGraphics)
     {
         if (modifiers.stream().anyMatch(AbstractMinigameModifier::skipRenderingKimbeMarker)) return;
         PoseStack poseStack = guiGraphics.pose();
@@ -406,7 +407,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         poseStack.popPose();
     }
 
-    public void renderPointer(GuiGraphics guiGraphics, PoseStack poseStack, float partialTick)
+    public void renderPointer(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick)
     {
         poseStack.pushPose();
 
@@ -679,14 +680,14 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     /**
      * Renders a texture centered to the top left corner, to be moved with poseStack
      */
-    public static void renderPoseCentered(GuiGraphics guiGraphics, ResourceLocation texture, int spriteSize)
+    public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteSize)
     {
         guiGraphics.blit(
                 texture, -spriteSize >> 1, -spriteSize >> 1,
                 spriteSize, spriteSize, 0, 0, spriteSize, spriteSize, spriteSize, spriteSize);
     }
 
-    public static void renderPoseCentered(GuiGraphics guiGraphics, ResourceLocation texture, int spriteWidth, int spriteHeight, int uOffset, int vOffset, int textureSize)
+    public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteWidth, int spriteHeight, int uOffset, int vOffset, int textureSize)
     {
         guiGraphics.blit(
                 texture, -spriteWidth >> 1, -spriteHeight >> 1,

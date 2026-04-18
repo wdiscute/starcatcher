@@ -8,30 +8,32 @@ import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
-public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity>
+public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity, AquariumRenderState>
 {
 
-    ItemRenderer itemRenderer;
+    ItemModelResolver itemRenderer;
 
     public AquariumRenderer(BlockEntityRendererProvider.Context context)
     {
-        itemRenderer = context.getItemRenderer();
-        FishRenderer.createMap(context.getModelSet());
+        itemRenderer = context.itemModelResolver();
+        FishRenderer.createMap(context.entityModelSet());
     }
 
-    private void moveFish(AquariumBlockEntity be)
+    private void moveFish(AquariumRenderState be)
     {
         //speed in blocks per second
         double fishSpeed = 1f;
@@ -71,9 +73,23 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
     }
 
     @Override
-    public void render(AquariumBlockEntity be, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay)
+    public AABB getRenderBoundingBox(AquariumBlockEntity blockEntity)
     {
-        ItemStack fish = be.getFish();
+        BlockPos pos = blockEntity.getBlockPos();
+        return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0F, pos.getY() + 1.5F, pos.getZ() + 1.0F);
+    }
+
+    @Override
+    public AquariumRenderState createRenderState()
+    {
+        return new AquariumRenderState();
+    }
+
+    @Override
+    public void submit(AquariumRenderState be, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
+    {
+
+        ItemStack fish = be.fish;
 
         if (!fish.isEmpty()) moveFish(be);
 
@@ -110,18 +126,20 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
 
         poseStack.rotateAround(Axis.YN.rotation((float) ((float) be.fishRotation + Math.PI / 2)), 0, 0, 0);
 
-        // Render model here
-
-        if (!be.getFish().isEmpty())
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, be.getLevel());
+        // Render model
+        if (!fish.isEmpty())
+            FishRenderer.renderFishFromItem(be, fish, submitNodeCollector, poseStack);
 
         poseStack.popPose();
+
     }
 
     @Override
-    public AABB getRenderBoundingBox(AquariumBlockEntity aquariumBlockEntity)
+    public void extractRenderState(AquariumBlockEntity be, AquariumRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress)
     {
-        BlockPos pos = aquariumBlockEntity.getBlockPos();
-        return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0F, pos.getY() + 1.5F, pos.getZ() + 1.0F);
+        BlockEntityRenderer.super.extractRenderState(be, state, partialTicks, cameraPosition, breakProgress);
+        state.fishTargetBP = be.fishTargetBP;
+        state.fishRotation = be.fishRotation;
+        state.fish = be.fish;
     }
 }

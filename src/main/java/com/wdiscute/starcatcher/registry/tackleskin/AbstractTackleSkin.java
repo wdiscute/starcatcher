@@ -2,13 +2,13 @@ package com.wdiscute.starcatcher.registry.tackleskin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
-import com.wdiscute.starcatcher.bobberentity.FishingBobModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +17,7 @@ public abstract class AbstractTackleSkin
 {
     public abstract ModelLayerLocation getLayerLocation();
 
-    public abstract ResourceLocation getTexture();
+    public abstract Identifier getTexture();
 
     RenderType renderType = null;
     protected FishingBobModel<FishingBobEntity> model;
@@ -26,8 +26,8 @@ public abstract class AbstractTackleSkin
     {
         if (renderType == null)
         {
-            this.model = new FishingBobModel<>(context.bakeLayer(getLayerLocation()));
-            this.renderType = RenderType.entityCutoutNoCull(getTexture());
+            this.model = new BaseTackleSkin();
+            this.renderType = RenderTypes.entityCutout(getTexture());
         }
         this.model.renderToBuffer(poseStack, buffer.getBuffer(renderType), packedLight, OverlayTexture.NO_OVERLAY, -1);
     }

@@ -17,6 +17,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
 
 public class AquariumBlockEntity extends BlockEntity implements TickableBlockEntity
@@ -59,7 +61,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
         if (!(cooldown < 0)) return;
 
         cooldown = 150 + U.r.nextInt(100);
-        Direction dir = Direction.getRandom(level.random);
+        Direction dir = Direction.getRandom(level.getRandom());
         BlockPos bp = getBlockPos();
         if (fishTargetBP == BlockPos.ZERO) fishTargetBP = bp;
         BlockPos bpToMoveTo = fishTargetBP;
@@ -67,10 +69,11 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
         for (int i = 0; i < 5; i++)
         {
             BlockState bsToMoveTo = level.getBlockState(bpToMoveTo.relative(dir));
-            if (bsToMoveTo.is(SCBlocks.AQUARIUM) && level.random.nextFloat() > 0.5f)
+            if (bsToMoveTo.is(SCBlocks.AQUARIUM) && level.getRandom().nextFloat() > 0.5f)
             {
                 //only move if decoration allows swimming inside
-                if(bsToMoveTo.getValue(AquariumBlock.DECORATION).canFishSwimInside) bpToMoveTo = bpToMoveTo.relative(dir);
+                if (bsToMoveTo.getValue(AquariumBlock.DECORATION).canFishSwimInside)
+                    bpToMoveTo = bpToMoveTo.relative(dir);
             }
         }
 
@@ -97,46 +100,35 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void saveAdditional(ValueOutput output)
     {
-        super.saveAdditional(tag, registries);
+        super.saveAdditional(output);
 
-        NBTCodecHelper.encode(SingleStackContainer.CODEC, new SingleStackContainer(getFish().copy()), tag, "fish");
+        output.store("fish", SingleStackContainer.CODEC, new SingleStackContainer(getFish().copy()));
 
-        tag.putDouble("fish_target_x", fishTarget.x);
-        tag.putDouble("fish_target_y", fishTarget.y);
-        tag.putDouble("fish_target_z", fishTarget.z);
+        output.putDouble("fish_target_x", fishTarget.x);
+        output.putDouble("fish_target_y", fishTarget.y);
+        output.putDouble("fish_target_z", fishTarget.z);
     }
 
+
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void loadAdditional(ValueInput input)
     {
-        super.loadAdditional(tag, registries);
+        super.loadAdditional(input);
 
-        double x = 0;
-        double y = 0;
-        double z = 0;
-
-        if (tag.contains("fish_target_x")) x = tag.getDouble("fish_target_x");
-        if (tag.contains("fish_target_y")) y = tag.getDouble("fish_target_y");
-        if (tag.contains("fish_target_z")) z = tag.getDouble("fish_target_z");
+        double x = input.getDoubleOr("fish_target_x", 0);
+        double y = input.getDoubleOr("fish_target_y", 0);
+        double z = input.getDoubleOr("fish_target_z", 0);
 
         fishTarget = new Vec3(x, y, z);
 
-        fish = NBTCodecHelper.decode(SingleStackContainer.CODEC, tag, "fish").stack();
+        fish = NBTCodecHelper.decode(SingleStackContainer.CODEC, input, "fish", SingleStackContainer::empty).stack();
     }
 
     @Override
     public Packet<ClientGamePacketListener> getUpdatePacket()
     {
         return ClientboundBlockEntityDataPacket.create(this);
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
-    {
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
-        return tag;
     }
 }

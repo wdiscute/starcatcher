@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.io;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.attachments.FishingBobAttachment;
 import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.IEventBus;
@@ -34,11 +35,11 @@ public class SCDataAttachments
     );
 
 
-    public static final Supplier<AttachmentType<ResourceLocation>> TACKLE_SKIN = ATTACHMENT_TYPES.register(
+    public static final Supplier<AttachmentType<Identifier>> TACKLE_SKIN = ATTACHMENT_TYPES.register(
             "tackle_skin", () ->
                     AttachmentType.builder(() -> Starcatcher.rl("base"))
-                            .serialize(ResourceLocation.CODEC)
-                            .sync(ResourceLocation.STREAM_CODEC)
+                            .serialize(Identifier.CODEC)
+                            .sync(Identifier.STREAM_CODEC)
                             .build()
     );
 

@@ -32,8 +32,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.TagKey;
@@ -41,6 +41,7 @@ import net.minecraft.util.ExtraCodecs;
 import net.minecraft.util.Mth;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -49,10 +50,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
-import net.minecraft.world.level.storage.loot.LootParams;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
@@ -121,7 +118,7 @@ public record FishProperties(
     {
         if(!catchInfo.treasureIs.isEmpty()) return this;
 
-        Registry<FishProperties> fishProperties = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+        Registry<FishProperties> fishProperties = player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value();
 
         Treasure.TreasureInstance data = fishProperties.wrapAsHolder(this).getData(SCDataMaps.TREASURE);
 
@@ -141,7 +138,7 @@ public record FishProperties(
         );
     }
 
-    public ResourceLocation toLoc(Level level)
+    public Identifier toLoc(Level level)
     {
         return U.getRlFromFp(level, this);
     }
@@ -227,7 +224,7 @@ public record FishProperties(
             return this;
         }
 
-        public Builder withTreasure(ResourceLocation treasure)
+        public Builder withTreasure(Identifier treasure)
         {
             this.catchInfo.treasure = treasure;
             return this;
@@ -480,7 +477,7 @@ public record FishProperties(
             private Holder<EntityType<?>> entityToSpawn = SCEntities.FISH;
             private boolean alwaysSpawnEntity = false;
             private Holder<Item> itemToOverrideWith = SCItems.MISSINGNO;
-            private ResourceLocation treasure = U.rl("gameplay/fishing/treasure");
+            private Identifier treasure = U.rl("gameplay/fishing/treasure");
             private ItemStack treasureIs = ItemStack.EMPTY;
             private FishEntryType fishEntryType = FishEntryType.FISH;
 
@@ -538,7 +535,7 @@ public record FishProperties(
                 return this;
             }
 
-            public Builder withTreasure(ResourceLocation rl)
+            public Builder withTreasure(Identifier rl)
             {
                 treasure = rl;
                 return this;
@@ -1316,8 +1313,8 @@ public record FishProperties(
     }
 
     public record SweetSpot(
-            ResourceLocation sweetSpotType,
-            ResourceLocation texturePath,
+            Identifier sweetSpotType,
+            Identifier texturePath,
             int size,
             int reward,
             boolean isFlip,
@@ -1327,49 +1324,49 @@ public record FishProperties(
             List<Supplier<Supplier<AbstractMinigameModifier>>> onHitModifiers
     )
     {
-        public SweetSpot(ResourceLocation sweetSpotType, ResourceLocation texturePath, int size, int reward, int particleColor, List<Supplier<Supplier<AbstractMinigameModifier>>> onHitModifiers)
+        public SweetSpot(Identifier sweetSpotType, Identifier texturePath, int size, int reward, int particleColor, List<Supplier<Supplier<AbstractMinigameModifier>>> onHitModifiers)
         {
             this(sweetSpotType, texturePath, size, reward, false, 0, 0, particleColor, onHitModifiers);
         }
 
-        public SweetSpot(ResourceLocation sweetSpotType, ResourceLocation texturePath, int size, int reward, int particleColor)
+        public SweetSpot(Identifier sweetSpotType, Identifier texturePath, int size, int reward, int particleColor)
         {
             this(sweetSpotType, texturePath, size, reward, false, 0, 0, particleColor, List.of());
         }
 
-        public SweetSpot(ResourceLocation sweetSpotType, ResourceLocation texturePath, int size, int reward, boolean isFlip, float vanishingRate, float movingRate, int particleColor)
+        public SweetSpot(Identifier sweetSpotType, Identifier texturePath, int size, int reward, boolean isFlip, float vanishingRate, float movingRate, int particleColor)
         {
             this(sweetSpotType, texturePath, size, reward, isFlip, vanishingRate, movingRate, particleColor, List.of());
         }
 
 
-        private static final ResourceLocation RL_NORMAL = Starcatcher.rl("textures/gui/minigame/spots/normal.png");
-        private static final ResourceLocation RL_NORMAL_STEADY = Starcatcher.rl("textures/gui/minigame/spots/normal_steady.png");
-        private static final ResourceLocation RL_THIN = Starcatcher.rl("textures/gui/minigame/spots/thin.png");
-        private static final ResourceLocation RL_THIN_STEADY = Starcatcher.rl("textures/gui/minigame/spots/thin_steady.png");
-        private static final ResourceLocation RL_FREEZE = Starcatcher.rl("textures/gui/minigame/spots/frozen.png");
-        private static final ResourceLocation RL_TREASURE = Starcatcher.rl("textures/gui/minigame/spots/treasure.png");
-        private static final ResourceLocation RL_WITHER = Starcatcher.rl("textures/gui/minigame/spots/wither.png");
-        private static final ResourceLocation RL_WITHER_BIG = Starcatcher.rl("textures/gui/minigame/spots/wither_big.png");
-        private static final ResourceLocation RL_CREEPER = Starcatcher.rl("textures/gui/minigame/spots/creeper.png");
-        private static final ResourceLocation RL_TNT = Starcatcher.rl("textures/gui/minigame/spots/tnt.png");
-        private static final ResourceLocation RL_STONE = Starcatcher.rl("textures/gui/minigame/spots/stone.png");
-        private static final ResourceLocation RL_AQUA = Starcatcher.rl("textures/gui/minigame/spots/aqua.png");
-        private static final ResourceLocation RL_LEAF = Starcatcher.rl("textures/gui/minigame/spots/leaf.png");
+        private static final Identifier RL_NORMAL = Starcatcher.rl("textures/gui/minigame/spots/normal.png");
+        private static final Identifier RL_NORMAL_STEADY = Starcatcher.rl("textures/gui/minigame/spots/normal_steady.png");
+        private static final Identifier RL_THIN = Starcatcher.rl("textures/gui/minigame/spots/thin.png");
+        private static final Identifier RL_THIN_STEADY = Starcatcher.rl("textures/gui/minigame/spots/thin_steady.png");
+        private static final Identifier RL_FREEZE = Starcatcher.rl("textures/gui/minigame/spots/frozen.png");
+        private static final Identifier RL_TREASURE = Starcatcher.rl("textures/gui/minigame/spots/treasure.png");
+        private static final Identifier RL_WITHER = Starcatcher.rl("textures/gui/minigame/spots/wither.png");
+        private static final Identifier RL_WITHER_BIG = Starcatcher.rl("textures/gui/minigame/spots/wither_big.png");
+        private static final Identifier RL_CREEPER = Starcatcher.rl("textures/gui/minigame/spots/creeper.png");
+        private static final Identifier RL_TNT = Starcatcher.rl("textures/gui/minigame/spots/tnt.png");
+        private static final Identifier RL_STONE = Starcatcher.rl("textures/gui/minigame/spots/stone.png");
+        private static final Identifier RL_AQUA = Starcatcher.rl("textures/gui/minigame/spots/aqua.png");
+        private static final Identifier RL_LEAF = Starcatcher.rl("textures/gui/minigame/spots/leaf.png");
 
-        private static final ResourceLocation RL_NETHER_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/nether_crab_claw.png");
-        private static final ResourceLocation RL_NETHER_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/nether_crab_leg.png");
+        private static final Identifier RL_NETHER_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/nether_crab_claw.png");
+        private static final Identifier RL_NETHER_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/nether_crab_leg.png");
 
-        private static final ResourceLocation RL_END_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/end_crab_leg.png");
-        private static final ResourceLocation RL_END_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/end_crab_claw.png");
+        private static final Identifier RL_END_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/end_crab_leg.png");
+        private static final Identifier RL_END_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/end_crab_claw.png");
 
-        private static final ResourceLocation RL_DEEPSLATE_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_leg.png");
-        private static final ResourceLocation RL_DEEPSLATE_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_claw.png");
+        private static final Identifier RL_DEEPSLATE_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_leg.png");
+        private static final Identifier RL_DEEPSLATE_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_claw.png");
 
-        private static final ResourceLocation RL_OBSIDIAN_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_leg.png");
-        private static final ResourceLocation RL_OBSIDIAN_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_claw.png");
+        private static final Identifier RL_OBSIDIAN_CRAB_LEG = Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_leg.png");
+        private static final Identifier RL_OBSIDIAN_CRAB_CLAW = Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_claw.png");
 
-        private static final ResourceLocation RL_THIN_STEADY_MOSSY = Starcatcher.rl("textures/gui/minigame/spots/thin_mossy.png");
+        private static final Identifier RL_THIN_STEADY_MOSSY = Starcatcher.rl("textures/gui/minigame/spots/thin_mossy.png");
 
 
         public SweetSpot flip()
@@ -1590,8 +1587,8 @@ public record FishProperties(
 
         public static final Codec<SweetSpot> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        ResourceLocation.CODEC.fieldOf("sweet_spot_type").forGetter(SweetSpot::sweetSpotType),
-                        ResourceLocation.CODEC.fieldOf("texture_path").forGetter(SweetSpot::texturePath),
+                        Identifier.CODEC.fieldOf("sweet_spot_type").forGetter(SweetSpot::sweetSpotType),
+                        Identifier.CODEC.fieldOf("texture_path").forGetter(SweetSpot::texturePath),
                         Codec.INT.fieldOf("hitbox_size_in_pixels").forGetter(SweetSpot::size),
                         Codec.INT.fieldOf("reward").forGetter(SweetSpot::reward),
                         Codec.BOOL.fieldOf("is_flip").forGetter(SweetSpot::isFlip),
@@ -1604,8 +1601,8 @@ public record FishProperties(
         public static final Codec<List<SweetSpot>> LIST_CODEC = CODEC.listOf();
 
         public static final StreamCodec<FriendlyByteBuf, SweetSpot> STREAM_CODEC = ExtraComposites.composite(
-                ResourceLocation.STREAM_CODEC, SweetSpot::sweetSpotType,
-                ResourceLocation.STREAM_CODEC, SweetSpot::texturePath,
+                Identifier.STREAM_CODEC, SweetSpot::sweetSpotType,
+                Identifier.STREAM_CODEC, SweetSpot::texturePath,
                 ByteBufCodecs.INT, SweetSpot::size,
                 ByteBufCodecs.INT, SweetSpot::reward,
                 ByteBufCodecs.BOOL, SweetSpot::isFlip,
@@ -1856,13 +1853,13 @@ public record FishProperties(
     }
 
 
-    public static List<ResourceLocation> getBiomesAsListFromTags(List<ResourceLocation> biomes, List<ResourceLocation> tags, Level level)
+    public static List<Identifier> getBiomesAsListFromTags(List<Identifier> biomes, List<Identifier> tags, Level level)
     {
         level.registryAccess().registry(Registries.BIOME);
 
-        List<ResourceLocation> rls = new ArrayList<>();
+        List<Identifier> rls = new ArrayList<>();
 
-        for (ResourceLocation rl : tags)
+        for (Identifier rl : tags)
         {
             TagKey<Biome> biomeBeingChecked = TagKey.create(Registries.BIOME, rl);
 
@@ -1874,12 +1871,12 @@ public record FishProperties(
                 {
                     String biomeString = biomeHolder.getRegisteredName();
 
-                    rls.add(ResourceLocation.parse(biomeString));
+                    rls.add(Identifier.parse(biomeString));
                 }
             }
         }
 
-        for (ResourceLocation rl : biomes)
+        for (Identifier rl : biomes)
         {
             Optional<Holder.Reference<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(ResourceKey.create(Registries.BIOME, rl));
             if (optional.isPresent()) if (!rls.contains(rl)) rls.add(rl);
@@ -1888,13 +1885,13 @@ public record FishProperties(
         return rls;
     }
 
-    public static List<ResourceLocation> getBiomesBlacklistAsList(List<ResourceLocation> biomesBlacklist, List<ResourceLocation> biomesBlacklistTags, Level level)
+    public static List<Identifier> getBiomesBlacklistAsList(List<Identifier> biomesBlacklist, List<Identifier> biomesBlacklistTags, Level level)
     {
-        level.registryAccess().registry(Registries.BIOME);
+        level.registryAccess().getOrThrow(Registries.BIOME);
 
-        List<ResourceLocation> rls = new ArrayList<>();
+        List<Identifier> rls = new ArrayList<>();
 
-        for (ResourceLocation rl : biomesBlacklistTags)
+        for (Identifier rl : biomesBlacklistTags)
         {
             TagKey<Biome> biomeBeingChecked = TagKey.create(Registries.BIOME, rl);
 
@@ -1906,12 +1903,12 @@ public record FishProperties(
                 {
                     String biomeString = biomeHolder.getRegisteredName();
 
-                    rls.add(ResourceLocation.parse(biomeString));
+                    rls.add(Identifier.parse(biomeString));
                 }
             }
         }
 
-        for (ResourceLocation rl : biomesBlacklist)
+        for (Identifier rl : biomesBlacklist)
         {
             Optional<Holder.Reference<Biome>> optional = level.registryAccess().lookupOrThrow(Registries.BIOME).get(ResourceKey.create(Registries.BIOME, rl));
             if (optional.isPresent()) if (!rls.contains(rl)) rls.add(rl);
@@ -1990,8 +1987,6 @@ public record FishProperties(
             {
                 FishProperties fp = fbe.fpToFish;
 
-                SCCriterionTriggers.MINIGAME_COMPLETED.get().trigger(player, hits, perfectCatch, completedTreasure, time, fp.catchInfo().fish());
-
                 //trigger modifiers
                 fbe.modifiers.forEach(m -> m.onSuccessfulMinigameCompletion(player, time, completedTreasure, perfectCatch, hits));
 
@@ -2045,7 +2040,7 @@ public record FishProperties(
                     y *= 2;
                     z *= 2.5;
 
-                    Entity entity = fp.catchInfo().entityToSpawn().value().create(level);
+                    Entity entity = fp.catchInfo().entityToSpawn().value().create(level, EntitySpawnReason.SPAWN_ITEM_USE);
 
                     if (entity == null)
                     {
@@ -2138,14 +2133,14 @@ public record FishProperties(
         return is;
     }
 
-    public static ResourceLocation getKey(Level level, FishProperties fp)
+    public static Identifier getKey(Level level, FishProperties fp)
     {
-        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp);
+        return level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKey(fp);
     }
 
     public static List<FishProperties> getFishes(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
+        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream()
                 .filter(o -> o.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)).toList();
     }
 
@@ -2156,15 +2151,15 @@ public record FishProperties(
 
     public static Registry<FishProperties> getRegistry(Level level)
     {
-        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+        return level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value();
     }
 
-    public static FishProperties getFP(RegistryAccess registryAccess, ResourceLocation rl)
+    public static FishProperties getFP(RegistryAccess registryAccess, Identifier rl)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).get(rl);
+        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getValue(rl);
     }
 
-    public static FishProperties getFP(Level level, ResourceLocation rl)
+    public static FishProperties getFP(Level level, Identifier rl)
     {
         return getFP(level.registryAccess(), rl);
     }
@@ -2172,7 +2167,7 @@ public record FishProperties(
 
     public static List<FishProperties> getNonFishes(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
+        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream()
                 .filter(o -> !o.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)).toList();
     }
 
@@ -2189,7 +2184,7 @@ public record FishProperties(
 
     public static List<FishProperties> getAllFPs(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().toList();
+        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream().toList();
     }
 
     public static List<FishProperties> getTrophies(Level level)
@@ -2199,7 +2194,7 @@ public record FishProperties(
 
     public static List<FishProperties> getTrophies(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.TROPHY)).toList();
+        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.TROPHY)).toList();
     }
 
     public static List<FishProperties> getSecrets(Level level)
@@ -2209,6 +2204,6 @@ public record FishProperties(
 
     public static List<FishProperties> getSecrets(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.SECRET)).toList();
+        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.SECRET)).toList();
     }
 }

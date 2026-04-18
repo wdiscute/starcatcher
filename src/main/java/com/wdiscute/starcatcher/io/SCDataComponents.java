@@ -2,15 +2,12 @@ package com.wdiscute.starcatcher.io;
 
 import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.registry.SignedGuide;
-import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
-import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.secretnotes.LetterItem;
 import com.wdiscute.starcatcher.secretnotes.SecretNote;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -18,7 +15,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
@@ -61,17 +57,17 @@ public class SCDataComponents
 
 
     //modifiers
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ResourceLocation>>> MINIGAME_MODIFIERS = register(
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Identifier>>> MINIGAME_MODIFIERS = register(
             "minigame_modifiers",
-            builder -> builder.persistent(ResourceLocation.CODEC.listOf()));
+            builder -> builder.persistent(Identifier.CODEC.listOf()));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ResourceLocation>>> CATCH_MODIFIERS = register(
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Identifier>>> CATCH_MODIFIERS = register(
             "catch_modifiers",
-            builder -> builder.persistent(ResourceLocation.CODEC.listOf()));
+            builder -> builder.persistent(Identifier.CODEC.listOf()));
 
-    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> TACKLE_SKIN = register(
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<Identifier>> TACKLE_SKIN = register(
             "tackle_skin",
-            builder -> builder.persistent(ResourceLocation.CODEC));
+            builder -> builder.persistent(Identifier.CODEC));
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> NETHERITE_UPGRADE = register(
             "netherite_upgraded",

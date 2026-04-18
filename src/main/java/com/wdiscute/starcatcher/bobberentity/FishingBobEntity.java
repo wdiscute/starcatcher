@@ -23,7 +23,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -57,7 +57,7 @@ public class FishingBobEntity extends Projectile
     public final Player player;
     private FishHookState currentState;
     public FishProperties fpToFish;
-    public ResourceLocation rlToFish;
+    public Identifier rlToFish;
     public ItemStack rod = ItemStack.EMPTY;
     public final List<AbstractCatchModifier> modifiers;
 
@@ -143,7 +143,7 @@ public class FishingBobEntity extends Projectile
         double d0 = player.getX() - (double) f3 * 0.3;
         double d1 = player.getEyeY();
         double d2 = player.getZ() - (double) f2 * 0.3;
-        this.moveTo(d0, d1, d2, playerYRot, playerXRot);
+        this.snapTo(d0, d1, d2, playerYRot, playerXRot);
         Vec3 vec3 = new Vec3(-f3, Mth.clamp(-(f5 / f4), -5.0F, 5.0F), -f2);
         double d3 = vec3.length();
         vec3 = vec3.multiply(0.6 / d3 + this.random.triangle(0.5F, 0.0103365), 0.6 / d3 + this.random.triangle(0.5F, 0.0103365), 0.6 / d3 + this.random.triangle(0.5F, 0.0103365));
@@ -153,7 +153,7 @@ public class FishingBobEntity extends Projectile
         this.yRotO = this.getYRot();
         this.xRotO = this.getXRot();
 
-        if (!level.isClientSide)
+        if (!level.isClientSide())
             SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB).setUuid(player, this.uuid);
 
         currentState = FishHookState.FLYING;
@@ -162,8 +162,6 @@ public class FishingBobEntity extends Projectile
     public void reel()
     {
         //server only
-        //todo rework this to use a map of <FishProperties, int> for chance calculation without populating a huge list lol
-        //todo probably doesnt matter performance wise though since its the same fp reference
         List<FishProperties> available = new ArrayList<>();
 
         modifiers.forEach(AbstractCatchModifier::onReelStart);
@@ -195,8 +193,8 @@ public class FishingBobEntity extends Projectile
         //if no fish is available and no non-fish was selected, reset player fishing data and award nothing
         if (available.isEmpty() && fpToFish == null)
         {
-            player.displayClientMessage(Component.translatable("gui.starcatcher.reel_no_fish"), true);
-            this.kill();
+            player.sendOverlayMessage(Component.translatable("gui.starcatcher.reel_no_fish"));
+            this.kill((ServerLevel) level());
         }
 
         //get random fish from available pool
@@ -213,7 +211,7 @@ public class FishingBobEntity extends Projectile
         //should cancel to prevent normal minigame/item fished (vanilla bobber & messages)
         if (modifiers.stream().anyMatch(AbstractCatchModifier::shouldCancelBeforeSkipsMinigameCheck))
         {
-            this.kill();
+            this.kill((ServerLevel) level());
             return;
         }
 
@@ -240,7 +238,7 @@ public class FishingBobEntity extends Projectile
 
     private boolean shouldStopFishing(Player player)
     {
-        if (level().isClientSide) return false;
+        if (level().isClientSide()) return false;
 
         //if any modifier wants to stop fishing
         if (modifiers.stream().anyMatch(AbstractCatchModifier::shouldStopFishing)) return true;
@@ -254,7 +252,7 @@ public class FishingBobEntity extends Projectile
         }
         else
         {
-            this.kill();
+            this.kill((ServerLevel) level());
             return true;
         }
     }
@@ -269,17 +267,17 @@ public class FishingBobEntity extends Projectile
     public void lavaHurt()
     {
         super.lavaHurt();
-        if (!survivesLava && !level().isClientSide)
+        if (!survivesLava && !level().isClientSide())
         {
-            kill();
+            kill((ServerLevel) level());
         }
     }
 
     @Override
-    public void kill()
+    public void kill(ServerLevel sl)
     {
         SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB);
-        super.kill();
+        super.kill(sl);
     }
 
     @Override
@@ -289,7 +287,7 @@ public class FishingBobEntity extends Projectile
 
         voidHook = entityData.get(VOID);
 
-        if (!level().isClientSide)
+        if (!level().isClientSide())
         {
             if (currentState == FishHookState.FLYING) entityData.set(STATE, 1);
             if (currentState == FishHookState.BOBBING) entityData.set(STATE, 2);
@@ -318,18 +316,18 @@ public class FishingBobEntity extends Projectile
         if (this.currentState == FishHookState.FLYING)
         {
             //set voidhook fishing for overworld/nether/end negative offset (based on tide) and always for any other dimension
-            ResourceLocation dim = level().dimension().location();
-            if (voidHook && position().y < -71 && dim.equals(Level.OVERWORLD.location()))
-                if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
+            Identifier dim = level().dimension().identifier();
+            if (voidHook && position().y < -71 && dim.equals(Level.OVERWORLD.identifier()))
+                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
 
-            if (voidHook && position().y < -5 && dim.equals(Level.NETHER.location()))
-                if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
+            if (voidHook && position().y < -5 && dim.equals(Level.NETHER.identifier()))
+                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
 
-            if (voidHook && position().y < 50 && dim.equals(Level.END.location()))
-                if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
+            if (voidHook && position().y < 50 && dim.equals(Level.END.identifier()))
+                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
 
-            if (!dim.equals(Level.OVERWORLD.location()) && !dim.equals(Level.NETHER.location()) && !dim.equals(Level.END.location()))
-                if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
+            if (!dim.equals(Level.OVERWORLD.identifier()) && !dim.equals(Level.NETHER.identifier()) && !dim.equals(Level.END.identifier()))
+                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
 
 
             if (getDeltaMovement().y < 1.2f)
@@ -338,7 +336,7 @@ public class FishingBobEntity extends Projectile
             if (!fluid.isEmpty())
             {
                 this.setDeltaMovement(this.getDeltaMovement().multiply(0.3, 0.3, 0.3));
-                if (!level().isClientSide) this.currentState = FishHookState.BOBBING;
+                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
                 return;
             }
         }
@@ -374,14 +372,15 @@ public class FishingBobEntity extends Projectile
                 if (!bait.is(Items.BUCKET))
                 {
                     bait.shrink(1);
-                    if(bait.getCount() < 5)
+                    if (bait.getCount() < 5)
                     {
-                        player.displayClientMessage(Component.translatable("gui.starcatcher.bait_running_low"), true);
+                        player.sendOverlayMessage(Component.translatable("gui.starcatcher.bait_running_low"));
                     }
                     SCDataComponents.set(rod, SCDataComponents.BAIT, new SingleStackContainer(bait));
                 }
 
-                kill();
+                if (!level().isClientSide())
+                    kill((ServerLevel) level());
             }
         }
         else
@@ -392,10 +391,10 @@ public class FishingBobEntity extends Projectile
         //if theres no fluid on block or under, changes to FLYING
         if (fluid.isEmpty() && fluidBellow.isEmpty() && !voidHook)
         {
-            if (!level().isClientSide) currentState = FishHookState.FLYING;
+            if (!level().isClientSide()) currentState = FishHookState.FLYING;
         }
 
-        if(this.currentState == FishHookState.FISHING)
+        if (this.currentState == FishHookState.FISHING)
             setDeltaMovement(Vec3.ZERO);
 
         //TODO check for water level instead of just blockstate to make the entity sit better in water
@@ -456,7 +455,7 @@ public class FishingBobEntity extends Projectile
 
     private void checkForFish()
     {
-        if (!level().isClientSide && currentState == FishHookState.BOBBING)
+        if (!level().isClientSide() && currentState == FishHookState.BOBBING)
         {
             ticksInFluid++;
             boolean fish = U.r.nextFloat() < chanceToFishEachTick;
@@ -469,7 +468,7 @@ public class FishingBobEntity extends Projectile
                             1, 0, 0, 0, 0);
 
                 this.setPos(position().x, position().y - 0.5f, position().z);
-                if (!level().isClientSide) currentState = FishHookState.BITING;
+                if (!level().isClientSide()) currentState = FishHookState.BITING;
                 this.playSound(SoundEvents.FISHING_BOBBER_SPLASH, 0.25F, 1.0F + (this.random.nextFloat() - this.random.nextFloat()) * 0.4F);
             }
         }
@@ -478,7 +477,7 @@ public class FishingBobEntity extends Projectile
     }
 
     @Override
-    public AABB getBoundingBoxForCulling()
+    protected AABB makeBoundingBox(Vec3 position)
     {
         AABB box = new AABB(-10, -10, -10, 10, 10, 10);
         return box.move(position());

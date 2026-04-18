@@ -12,7 +12,7 @@ import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.ModList;
@@ -71,7 +71,7 @@ public record FishCaughtCounter(
         return get(player, U.getRlFromFp(player.level(), loc));
     }
 
-    public static FishCaughtCounter get(Player player, ResourceLocation loc)
+    public static FishCaughtCounter get(Player player, Identifier loc)
     {
         return FishingGuideAttachment.getFishesCaught(player).get(loc);
     }
@@ -84,8 +84,8 @@ public record FishCaughtCounter(
     public static boolean canCatchGolden(FishProperties fp, ServerPlayer player)
     {
         //returns false if player has already caught the golden fish of that fp
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
-        ResourceLocation loc = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKeyOrNull(fp);
+        Map<Identifier, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
+        Identifier loc = player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKeyOrNull(fp);
         if (!fishesCaught.containsKey(loc)) return true;
         return !fishesCaught.get(loc).caughtGolden;
     }
@@ -137,7 +137,7 @@ public record FishCaughtCounter(
         awardFishCaughtCounter(fpCaught, null, player, ticks, size, weight, percentile, perfectCatch, awardToTeam, golden);
     }
 
-    public static void awardFishCaughtCounter(FishProperties fpCaught, ResourceLocation rl, Player player, int ticks, int size, int weight, float percentile, boolean perfectCatch, boolean awardToTeam, boolean golden)
+    public static void awardFishCaughtCounter(FishProperties fpCaught, Identifier rl, Player player, int ticks, int size, int weight, float percentile, boolean perfectCatch, boolean awardToTeam, boolean golden)
     {
         //ftb teams compat to share fishes caught to team, does not share size and weight
         if (ModList.get().isLoaded("ftbteams") && awardToTeam && SCConfig.ENABLE_FTB_TEAM_SHARING.get())
@@ -146,9 +146,9 @@ public record FishCaughtCounter(
             return;
         }
 
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
+        Map<Identifier, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
 
-        ResourceLocation loc = rl == null ? player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKeyOrNull(fpCaught) : rl;
+        Identifier loc = rl == null ? player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKeyOrNull(fpCaught) : rl;
         if (loc != null)
         {
             FishCaughtCounter fishCaughtCounter = fishesCaught.get(loc);

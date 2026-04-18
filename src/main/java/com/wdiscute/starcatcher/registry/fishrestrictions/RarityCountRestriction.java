@@ -13,7 +13,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -125,7 +125,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
     {
         Entity entity = entity1 instanceof FishingBobEntity fbe ? fbe.player : entity1;
 
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = SCDataAttachments.get(entity, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+        Map<Identifier, FishCaughtCounter> fishesCaught = SCDataAttachments.get(entity, SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
         for (RarityCount rarityCount : rarityCount)
         {
@@ -139,7 +139,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
     {
         Level level = entity.level();
 
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = SCDataAttachments.get(entity, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+        Map<Identifier, FishCaughtCounter> fishesCaught = SCDataAttachments.get(entity, SCDataAttachments.FISHING_GUIDE).fishesCaught;
         var registry = FishProperties.getRegistry(level);
         List<FishProperties> allFishes = FishProperties.getFishes(level);
         Map<FishProperties.Rarity, Pair<Integer, Integer>> map = new HashMap<>();
@@ -175,7 +175,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
         return map;
     }
 
-    public boolean isRarityCountRequirementMet(RarityCount rarityCount, Entity entity, Map<ResourceLocation, FishCaughtCounter> fishesCaught)
+    public boolean isRarityCountRequirementMet(RarityCount rarityCount, Entity entity, Map<Identifier, FishCaughtCounter> fishesCaught)
     {
         Level level = entity.level();
 
@@ -235,7 +235,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
     {
         List<Component> hover = new ArrayList<>();
 
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+        Map<Identifier, FishCaughtCounter> fishesCaught = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
         rarityCount.forEach(o -> hover.add(getSingleEntryShortDescription(o, player)
                 .withColor(isRarityCountRequirementMet(o, player, fishesCaught) ? SCColors.GUIDE_GREEN : SCColors.GUIDE_RED)));
 
@@ -251,7 +251,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
             return Component.translatable(translationOverride).withStyle(Style.EMPTY.withColor(color));
 
 
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+        Map<Identifier, FishCaughtCounter> fishesCaught = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
         if (rarityCount.size() == 1)
         {

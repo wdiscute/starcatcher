@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.121'
+    id 'net.neoforged.moddev' version '2.0.141'
     id 'idea'
 }
 
@@ -18,89 +18,91 @@ version = mod_version
 group = mod_group_id
 
 repositories
-{
-    //emi
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
+        {
+            //emi
+            maven {
+                name = "TerraformersMC"
+                url = "https://maven.terraformersmc.com/"
+            }
 
-    //jei
-    maven {
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
+            //jei
+            maven {
+                url = "https://dvs1.progwml6.com/files/maven/"
+            }
 
-    //jei
-    maven {
-        url = "https://modmaven.dev"
-    }
+            //jei
+            maven {
+                url = "https://modmaven.dev"
+            }
 
-    //favouriteless
-    maven {
-        url = "https://maven.favouriteless.net/releases"
-    }
+            //favouriteless
+            maven {
+                url = "https://maven.favouriteless.net/releases"
+            }
 
-    //curios
-    maven {
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
-    }
+            //curios
+            maven {
+                name = "Illusive Soulworks maven"
+                url = "https://maven.theillusivec4.top/"
+            }
 
-    //modrinth
-    maven {
-        url = "https://api.modrinth.com/maven"
-    }
+            //modrinth
+            maven {
+                url = "https://api.modrinth.com/maven"
+            }
 
-    //tyson the ember
-    repositories {
-        maven { url = 'https://maven.tysontheember.dev' }
-    }
+            //tyson the ember
+            repositories {
+                maven { url = 'https://maven.tysontheember.dev' }
+            }
 
-    repositories {
-        exclusiveContent {
-            forRepository {
-                maven {
-                    url "https://cursemaven.com"
+            repositories {
+                exclusiveContent {
+                    forRepository {
+                        maven {
+                            url "https://cursemaven.com"
+                        }
+                    }
+                    filter {
+                        includeGroup "curse.maven"
+                    }
                 }
             }
-            filter {
-                includeGroup "curse.maven"
-            }
         }
-    }
-}
 
 dependencies {
     //libtooltips
-    jarJar(implementation("maven.modrinth:libtooltips:5J15zxaI"))
+    //jarJar(implementation("maven.modrinth:libtooltips:5J15zxaI"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:nrGOzmNu"))
+    jarJar(implementation("maven.modrinth:wds-selling-bin:WNjZsP2i"))
 
     //tiny multiblock lib
-    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-1.21.1-${tiny_multiblock_lib_version}"))
+    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-26.1-${tiny_multiblock_lib_version}"))
 
     //EMI
-    compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+    //compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
+    //runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 
     //JEI
     compileOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
     //runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 
     //Serene Seasons
-    compileOnly files(".compatmods/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
+    compileOnly "maven.modrinth:serene-seasons:ZwWxXUVt"
+    //compileOnly files(".compatmods/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
     //compileOnly files(".compatmods/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
     //runtimeOnly files(".compatmods/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
     //runtimeOnly files(".compatmods/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
 
     //Ecliptic Seasons
-    compileOnly files(".compatmods/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
+    compileOnly "maven.modrinth:serene-seasons:WMfCdhbF"
+    //compileOnly files(".compatmods/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
     //runtimeOnly files(".compatmods/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
 
     //terrafirmacraft for seasons
     //compileOnly files(".compatmods/Patchouli-1.21.1-92-NEOFORGE.jar")
-    compileOnly files(".compatmods/TerraFirmaCraft-NeoForge-1.21.1-4.0.13-beta.jar")
+    //compileOnly files(".compatmods/TerraFirmaCraft-NeoForge-1.21.1-4.0.13-beta.jar")
     //runtimeOnly files(".compatmods/Patchouli-1.21.1-92-NEOFORGE.jar")
     //runtimeOnly files(".compatmods/TerraFirmaCraft-NeoForge-1.21.1-4.0.13-beta.jar")
 
@@ -109,20 +111,20 @@ dependencies {
     //runtimeOnly files(".compatmods/DistantHorizons-2.3.6-b-1.21.1-fabric-neoforge.jar")
 
     //ftb teams
-    compileOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
-    compileOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
-    compileOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
+    //compileOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
+    //compileOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
+    //compileOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
 
     //runtimeOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
     //runtimeOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
     //runtimeOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
 
     //quality foods compat
-    compileOnly("maven.modrinth:quality-food:vLFBpk1n")
+    //compileOnly("maven.modrinth:quality-food:vLFBpk1n")
     //runtimeOnly("maven.modrinth:quality-food:vLFBpk1n")
 
     //shaders
-    compileOnly "curse.maven:irisshaders-455508:6661598"
+    compileOnly "maven.modrinth:iris:YEGDGnJM"
     //runtimeOnly "curse.maven:sodium-394468:6382651"
     //runtimeOnly "curse.maven:irisshaders-455508:6661598"
 
@@ -138,11 +140,11 @@ dependencies {
     //runtimeOnly "maven.modrinth:artifacts:rGPw090r"
 
     //relics (Angler's Hat compat)
-    compileOnly "maven.modrinth:relics-mod:QFPRw8EU"
+    //compileOnly "maven.modrinth:relics-mod:QFPRw8EU"
     //runtimeOnly "maven.modrinth:relics-mod:QFPRw8EU"
 
     //curios (check modifiers in curio slots)
-    compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
+    //compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
     //runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
     //octolib because jarinjar must be illegal or something
@@ -185,7 +187,7 @@ base {
 }
 
 java {
-    toolchain.languageVersion = JavaLanguageVersion.of(21)
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
     withSourcesJar()
     withJavadocJar()
 }
@@ -193,11 +195,6 @@ java {
 neoForge {
     // Specify the version of NeoForge to use.
     version = project.neo_version
-
-    parchment {
-        mappingsVersion = project.parchment_mappings_version
-        minecraftVersion = project.parchment_minecraft_version
-    }
 
     // This line is optional. Access Transformers are automatically detected
     // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
@@ -227,7 +224,7 @@ neoForge {
         }
 
         data {
-            data()
+            clientData()
 
             // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
             // gameDirectory = project.file('run-data')
@@ -281,7 +278,6 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
             neo_version            : neo_version,
-            loader_version_range   : loader_version_range,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,

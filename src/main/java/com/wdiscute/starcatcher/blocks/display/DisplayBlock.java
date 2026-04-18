@@ -12,11 +12,9 @@ import com.wdiscute.starcatcher.registry.SignedGuide;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -34,6 +32,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
@@ -136,24 +135,9 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos)
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @org.jspecify.annotations.Nullable Orientation orientation, boolean movedByPiston)
     {
-        if (blockState.getValue(HAS_ITEM))
-        {
-            BlockEntity blockentity = level.getBlockEntity(pos);
-            if (blockentity instanceof DisplayBlockEntity dbe)
-            {
-                return dbe.getRedstoneSignal();
-            }
-        }
-
-        return 0;
-    }
-
-    @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
-    {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
         if (level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
             dbe.setChanged();
@@ -161,14 +145,14 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         //if has book, open screen
         if (state.getValue(HAS_ITEM) && !player.isCrouching())
         {
-            if (level.isClientSide && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
+            if (level.isClientSide() && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
             {
-                if(dbe.getItem().is(SCItems.GUIDE))
+                if (dbe.getItem().is(SCItems.GUIDE))
                 {
                     SignedGuide signed = SCDataComponents.get(dbe.getItem(), SCDataComponents.SIGNED_GUIDE);
                     if (signed != null)
@@ -183,50 +167,46 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
 
             }
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         //remove item if crouching
         if (state.getValue(HAS_ITEM) && player.isCrouching() && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return InteractionResult.SUCCESS;
             player.addItem(dbe.getItem().copy());
             dbe.clearContent();
             dbe.sync();
             level.setBlockAndUpdate(pos, state.setValue(HAS_ITEM, false));
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         //place book
         if (stack.is(SCTags.PLACEABLE_IN_DISPLAY) && !state.getValue(HAS_ITEM) && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return InteractionResult.SUCCESS;
             dbe.setItem(stack.copy());
             stack.shrink(1);
             level.setBlock(pos, state.setValue(HAS_ITEM, true), 0);
             dbe.sync();
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return InteractionResult.PASS;
     }
 
-
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston)
     {
-        if (!state.is(newState.getBlock()))
+        if (state.getValue(HAS_ITEM))
         {
-            if (state.getValue(HAS_ITEM))
-            {
-                this.popItem(level, pos);
-            }
+            this.popItem(level, pos);
+        }
 
-            super.onRemove(state, level, pos, newState, isMoving);
-            if (state.getValue(POWERED))
-            {
-                level.updateNeighborsAt(pos.below(), this);
-            }
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        if (state.getValue(POWERED))
+        {
+            level.updateNeighborsAt(pos.below(), this);
         }
     }
 
@@ -265,7 +245,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        return level.isClientSide ? createTickerHelper(blockEntityType, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
+        return level.isClientSide() ? createTickerHelper(blockEntityType, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
     }
 
     @Override

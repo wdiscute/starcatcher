@@ -10,17 +10,15 @@ import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
-import java.util.Optional;
 import java.util.function.Supplier;
 
 import static java.lang.Float.NaN;
@@ -36,7 +34,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FishingBobEntity fishingBobEntity)
+    public Identifier getTextureLocation(FishingBobEntity fishingBobEntity)
     {
         return Starcatcher.rl("textures/entity/fishing/bob.png");
     }
@@ -53,15 +51,13 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 
         //render tackle based on tackle skin, defaults to BaseTackleSkin
         //data attachment returns starcatcher:base if there's no attachment
-        ResourceLocation tackleRl = SCDataAttachments.get(fishingBobEntity, SCDataAttachments.TACKLE_SKIN);
-        Supplier<AbstractTackleSkin> tackle = fishingBobEntity.level().registryAccess().registryOrThrow(Starcatcher.TACKLE_SKIN).get(tackleRl);
+        Identifier tackleRl = SCDataAttachments.get(fishingBobEntity, SCDataAttachments.TACKLE_SKIN);
+        Supplier<AbstractTackleSkin> tackle = fishingBobEntity.level().registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getValue(tackleRl);
 
         //still need to check for null to prevent addon mods that add to the registry from crashing... i guess... 🙄
         if (tackle == null)
-            fishingBobEntity.level().registryAccess().registryOrThrow(Starcatcher.TACKLE_SKIN).get(SCTackleSkins.BASE_TACKLE_SKIN).get().
+            fishingBobEntity.level().registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getValue(SCTackleSkins.BASE_TACKLE_SKIN).get().
                     renderTackle(context, fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
-        else
-            tackle.get().renderTackle(context, fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
 
         poseStack.popPose();
 

@@ -5,7 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModifier;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public abstract class AbstractSweetSpotBehaviour
 {
@@ -47,24 +47,15 @@ public abstract class AbstractSweetSpotBehaviour
     {
     }
 
-    public void renderForeground(GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
     }
 
-    public void render(GuiGraphics guiGraphics, PoseStack poseStack, float partialTick)
+    public void render(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick)
     {
         if (ass.removed) return;
 
-        // allows modifier to change color
-        float[] shaderColor = RenderSystem.getShaderColor();
-        RenderSystem.setShaderColor(shaderColor[0], shaderColor[1], shaderColor[2], shaderColor[3] * ass.alpha);
-
-        RenderSystem.enableBlend();
-
         // Renders the sprite centered to the top-left corner of the screen, to be moved with poseStack
         FishingMinigameScreen.renderPoseCentered(guiGraphics, ass.texture, 96);
-
-        RenderSystem.disableBlend();
-        RenderSystem.setShaderColor(1, 1, 1, 1);
     }
 }

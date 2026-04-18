@@ -7,7 +7,7 @@ import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModif
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.AbstractSweetSpotBehaviour;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
@@ -19,7 +19,7 @@ public class ActiveSweetSpot
     public final AbstractSweetSpotBehaviour behaviour;
     public final FishProperties.SweetSpot baseSS;
     public int thickness;
-    public ResourceLocation texture;
+    public Identifier texture;
     public int reward;
     public int particleColor;
     public List<Supplier<AbstractMinigameModifier>> onHitModifiers;
@@ -49,7 +49,7 @@ public class ActiveSweetSpot
     public ActiveSweetSpot(FishingMinigameScreen instance, FishProperties.SweetSpot ss, ItemStack bobber, ItemStack bait, ItemStack hook)
     {
         //get sweet spot type from rl
-        Optional<Supplier<? extends AbstractSweetSpotBehaviour>> behaviour = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.SWEET_SPOT_BEHAVIOUR).getOptional(ss.sweetSpotType());
+        Optional<Supplier<? extends AbstractSweetSpotBehaviour>> behaviour = Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.SWEET_SPOT_BEHAVIOUR).value().getOptional(ss.sweetSpotType());
 
         //if sweet spot type is registered then continue, otherwise set as removed
         if(behaviour.isPresent())

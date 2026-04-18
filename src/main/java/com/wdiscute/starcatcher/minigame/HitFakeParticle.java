@@ -1,18 +1,17 @@
 package com.wdiscute.starcatcher.minigame;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.Starcatcher;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FastColor;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
 import org.joml.Vector2d;
 
 import java.util.Random;
 
 public class HitFakeParticle
 {
-    public static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
+    public static final Identifier TEXTURE = Starcatcher.rl("textures/gui/minigame/minigame.png");
 
     private static final Random random = new Random();
 
@@ -26,20 +25,21 @@ public class HitFakeParticle
     public Vector2d vecDirection;
     public int lifetime;
     public int maxLifetime;
-    public ResourceLocation rl;
+    public Identifier rl;
 
-    public void render(GuiGraphics guiGraphics, int width, int height)
+    public void render(GuiGraphicsExtractor guiGraphics, int width, int height)
     {
         PoseStack poseStack = guiGraphics.pose();
         poseStack.pushPose();
         poseStack.translate(pos.x, pos.y, 0);
-        RenderSystem.setShaderColor(r, g, b, a);
+        //todo fix color
+        //RenderSystem.setShaderColor(r, g, b, a);
 
-        guiGraphics.blit(
+        guiGraphics.blit(RenderPipelines.GUI,
                 TEXTURE, width / 2 - 8, height / 2 - 8,
                 16, 16, 80, 160, 16, 16, 256, 256);
 
-        RenderSystem.setShaderColor(1, 1, 1, 1);
+        //RenderSystem.setShaderColor(1, 1, 1, 1);
         poseStack.popPose();
     }
 

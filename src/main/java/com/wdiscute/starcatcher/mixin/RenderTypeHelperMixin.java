@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.mixin;
 
-import com.wdiscute.starcatcher.registry.SCRenderTypes;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.BakedModel;

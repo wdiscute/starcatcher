@@ -6,8 +6,8 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.List;
@@ -15,8 +15,8 @@ import java.util.function.Supplier;
 
 public abstract class AbstractMinigameModifier
 {
-    public static final Codec<AbstractMinigameModifier> MINIGAME_MODIFIER_CODEC = ResourceLocation.CODEC
-            .dispatch(mod -> mod.getRegistryHolderOrThrow().getId(), loc -> Starcatcher.MINIGAME_MODIFIERS_REGISTRY.get(loc).get().getCodecOrThrow());
+    public static final Codec<AbstractMinigameModifier> MINIGAME_MODIFIER_CODEC = Identifier.CODEC
+            .dispatch(mod -> mod.getRegistryHolderOrThrow().getId(), loc -> Starcatcher.MINIGAME_MODIFIERS_REGISTRY.getValue(loc).get().getCodecOrThrow());
 
     public static final Codec<List<Supplier<Supplier<AbstractMinigameModifier>>>> DOUBLE_SUP_LIST_CODEC =
             AbstractMinigameModifier.MINIGAME_MODIFIER_CODEC.xmap(AbstractMinigameModifier::toDoubleSup, dSup -> dSup.get().get()).listOf();
@@ -90,14 +90,14 @@ public abstract class AbstractMinigameModifier
 
     public void onKeyReleased(int key, int scanCode, int keyModifiers){}
 
-    public void renderBackground(GuiGraphics guiGraphics, float partialTick, int width, int height){};
+    public void renderBackground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height){};
 
-    public void renderForeground(GuiGraphics guiGraphics, float partialTick, int width, int height){};
+    public void renderForeground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height){};
 
     /**
      * Disables rendering the included pointer
      * <p>
-     * Still renders {@link #renderOnPointer(GuiGraphics, PoseStack, float)}
+     * Still renders {@link #renderOnPointer(GuiGraphicsExtractor, PoseStack, float)}
      */
     public boolean disablePointerRendering(){
         return false;
@@ -106,13 +106,13 @@ public abstract class AbstractMinigameModifier
     /**
      * Has the correctly rotated poseStack already
      */
-    public void renderOnPointer(GuiGraphics guiGraphics, PoseStack poseStack, float partialTick){};
+    public void renderOnPointer(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick){};
 
     public boolean disableSweetSpotRendering(ActiveSweetSpot spot){
         return false;
     }
 
-    public void renderOnSweetSpot(GuiGraphics guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick){};
+    public void renderOnSweetSpot(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick){};
 
     public boolean forceAwardTreasure()
     {

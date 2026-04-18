@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher;
 
 import com.mojang.logging.LogUtils;
-import com.mojang.serialization.Lifecycle;
 import com.wdiscute.starcatcher.registry.FishProperties.SizeAndWeight.Units;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.SCFishRestrictions;
@@ -21,11 +20,10 @@ import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.sellingbin.SCProcessors;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
@@ -90,26 +88,25 @@ public class Starcatcher
             .defaultKey(Starcatcher.rl("pearl"))
             .create();
 
-    public static ResourceLocation rl(String s)
+    public static Identifier rl(String s)
     {
-        return ResourceLocation.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
+        return Identifier.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
     }
 
     @OnlyIn(Dist.CLIENT)
     public static void fishCaughtToast(FishProperties fp, boolean newFish, int sizeCM, int weightCM)
     {
-        if (newFish) Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(fp));
+        if (newFish) Minecraft.getInstance().getToastManager().addToast(new FishCaughtToast(fp));
 
         Units units = SCConfig.UNIT.get();
 
         String size = units.getSizeAsString(sizeCM);
         String weight = units.getWeightAsString(weightCM);
 
-        Minecraft.getInstance().player.displayClientMessage(
+        Minecraft.getInstance().player.sendOverlayMessage(
                 Component.literal("")
                         .append(Component.translatable(fp.catchInfo().fish().value().getDescriptionId()))
-                        .append(Component.literal(" - " + size + " - " + weight))
-                , true);
+                        .append(Component.literal(" - " + size + " - " + weight)));
 
         Minecraft.getInstance().gui.overlayMessageTime = 180;
     }

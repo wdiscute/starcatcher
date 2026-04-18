@@ -1,13 +1,10 @@
 package com.wdiscute.starcatcher.event;
 
-import com.wdiscute.sellingbin.bin.SellingBinBlockEntity;
-import com.wdiscute.sellingbin.event.SBevents;
-import com.wdiscute.sellingbin.registry.SBBlockEntities;
+import com.wdiscute.sellingbin.event.SBEvents;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
-import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCCommands;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.io.SCDataAttachments;
@@ -24,21 +21,16 @@ import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -65,17 +57,17 @@ public class SCEvents
     @SubscribeEvent
     public static void serverStarted(RegisterSpawnPlacementsEvent event)
     {
-        event.register(
-                SCEntities.FISH.get(), SpawnPlacementTypes.IN_WATER,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                FishEntity::validSpawnPlacement,
-                RegisterSpawnPlacementsEvent.Operation.REPLACE);
+//        event.register(
+//                SCEntities.FISH.get(), SpawnPlacementTypes.IN_WATER,
+//                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+//                FishEntity::validSpawnPlacement,
+//                RegisterSpawnPlacementsEvent.Operation.REPLACE);
     }
 
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event)
     {
-        PackSource packSource = new SBevents.DefaultPackSource()
+        PackSource packSource = new SBEvents.DefaultPackSource()
         {
             @Override
             public boolean shouldAddAutomatically()
