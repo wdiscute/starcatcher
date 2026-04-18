@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class BaitRestriction extends AbstractFishRestriction
 {
@@ -109,7 +110,13 @@ public class BaitRestriction extends AbstractFishRestriction
         //hover - Chance added by bait:
         hover.add(Component.translatable("gui.guide.bait_chance_added").withStyle(Style.EMPTY.withBold(true)));
         hover.add(Component.empty());
-        baits.forEach((item, value) -> hover.add(Component.literal(value + " - ").append(BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getName(null))));
+
+        baits.forEach((item, value) ->
+        {
+            Optional<Item> optional = BuiltInRegistries.ITEM.getOptional(item);
+            optional.ifPresent(o -> hover.add(Component.literal(value + " - ")
+                    .append(Component.translatable(o.getDescriptionId()))));
+        });
         return hover;
     }
 
