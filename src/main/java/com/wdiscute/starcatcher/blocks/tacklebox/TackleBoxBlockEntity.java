@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
-import com.wdiscute.sellingbin.bin.Currency;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
@@ -10,6 +9,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentMap;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -25,7 +26,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
@@ -33,7 +34,6 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContainer, TickableBlockEntity, MenuProvider
 {
@@ -42,6 +42,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     public int openCount;
     @Nullable
     private final DyeColor color;
+    private Component name;
 
     @Override
     public void tick()
@@ -224,10 +225,31 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
     }
 
+    @Override
+    protected void applyImplicitComponents(DataComponentInput componentInput)
+    {
+        super.applyImplicitComponents(componentInput);
+        componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
+        fishes = componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of());
+        this.name = (Component)componentInput.get(DataComponents.CUSTOM_NAME);
+    }
+
+    @Override
+    protected void collectImplicitComponents(DataComponentMap.Builder components)
+    {
+        super.collectImplicitComponents(components);
+        components.set(DataComponents.CUSTOM_NAME, this.name);
+        components.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
+        components.set(SCDataComponents.TACKLE_BOX_FISHES, fishes);
+    }
+
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
         this.loadFromTag(tag, registries);
+        if (tag.contains("CustomName", 8)) {
+            this.name = parseCustomNameSafe(tag.getString("CustomName"), registries);
+        }
     }
 
     @Override
@@ -239,6 +261,10 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
         //save fishes
         saveAllFishes(tag, fishes, false, registries);
+
+        if (this.name != null) {
+            tag.putString("CustomName", Component.Serializer.toJson(this.name, registries));
+        }
     }
 
     public static void saveAllFishes(CompoundTag tag, List<ItemStack> items, boolean alwaysPutTag, HolderLookup.Provider levelRegistry)

@@ -78,6 +78,10 @@ public class SCDataComponents
             "netherite_upgraded",
             builder -> builder.persistent(Codec.BOOL));
 
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> TACKLE_BOX_FISHES = register(
+            "tackle_box_fishes",
+            builder -> builder.persistent(ItemStack.OPTIONAL_CODEC.listOf()));
+
     public static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {
         stack.set(component.get(), data);

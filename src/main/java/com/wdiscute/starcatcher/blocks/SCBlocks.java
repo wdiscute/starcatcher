@@ -9,10 +9,12 @@ import com.wdiscute.starcatcher.blocks.stand.StandBlock;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlock;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.items.HatItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -104,7 +106,10 @@ public interface SCBlocks
     private static <T extends Block> DeferredBlock<T> registerTackleBox(String name, Supplier<T> block, ResourceLocation... modifiers)
     {
         DeferredBlock<T> toReturn = TACKLE_BOXES.register(name, block);
-        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties().stacksTo(1)));
+        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties()
+                .stacksTo(1)
+                .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
+        ));
         return toReturn;
     }
 

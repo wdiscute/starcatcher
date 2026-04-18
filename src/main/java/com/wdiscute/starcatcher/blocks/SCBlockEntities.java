@@ -39,7 +39,7 @@ public class SCBlockEntities
                     SCBlocks.AQUARIUM.get()
             ).build(null));
 
-    public static final Supplier<BlockEntityType<TackleBoxBlockEntity>> TACKLE_BOX = BLOCK_ENTITIES.register("tackle_box.png",
+    public static final Supplier<BlockEntityType<TackleBoxBlockEntity>> TACKLE_BOX = BLOCK_ENTITIES.register("tackle_box",
             () -> BlockEntityType.Builder.of(TackleBoxBlockEntity::new,
                     SCBlocks.TACKLE_BOX.get(),
                     SCBlocks.TACKLE_BOX_WHITE.get(),
