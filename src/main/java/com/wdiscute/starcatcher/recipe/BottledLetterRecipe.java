@@ -16,6 +16,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.nikdo53.neobackports.extensions.IngredientExtension;
 import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.BackportCodecs;
 import net.nikdo53.neobackports.utils.recipe.CraftingRecipeNeo;
 import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
 import net.nikdo53.neobackports.utils.recipe.input.CraftingInput;
@@ -49,10 +50,6 @@ public class BottledLetterRecipe implements CraftingRecipeNeo
         return this.group;
     }
 
-    @Override
-    public ResourceLocation getId() {
-        return null;
-    }
 
     @Override
     public CraftingBookCategory category()
@@ -123,7 +120,7 @@ public class BottledLetterRecipe implements CraftingRecipeNeo
                 p_340779_ -> p_340779_.group(
                                 Codec.STRING.optionalFieldOf("group", "").forGetter(p_301127_ -> p_301127_.group),
                                 CraftingBookCategory.CODEC.fieldOf("category").orElse(CraftingBookCategory.MISC).forGetter(p_301133_ -> p_301133_.category),
-                                ItemStack.CODEC.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
+                                BackportCodecs.ITEM_STACK_RECIPE.fieldOf("result").forGetter(p_301142_ -> p_301142_.result),
                                 IngredientExtension.CODEC_NONEMPTY
                                         .listOf()
                                         .fieldOf("ingredients")

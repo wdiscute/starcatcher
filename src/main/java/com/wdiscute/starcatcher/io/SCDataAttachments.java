@@ -11,6 +11,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.io.attachment.AdvancedCapabilityType;
 import net.nikdo53.neobackports.io.attachment.AttachmentType;
 import net.nikdo53.neobackports.io.attachment.DataAttachment;
 import net.nikdo53.neobackports.io.attachment.DataAttachmentRegistry;
@@ -32,6 +33,7 @@ public class SCDataAttachments
     public static final Supplier<AttachmentType<FishingBobAttachment>> FISHING_BOB = ATTACHMENT_TYPES.register(
             "fishing_bob", () -> AttachmentType.builder(FISHING_BOB_CAP, () -> new FishingBobAttachment(""))
                     .sync(FishingBobAttachment.STREAM_CODEC)
+                    .canAttachTo(AdvancedCapabilityType.NON_LIVING_ENTITY, AdvancedCapabilityType.PLAYER)
                     .build()
     );
 
@@ -43,6 +45,7 @@ public class SCDataAttachments
             "fishing_guide", () -> AttachmentType.builder(FISHING_GUIDE_CAP, FishingGuideAttachment::createDefault)
                     .serialize(FishingGuideAttachment.CODEC)
                     .sync(FishingGuideAttachment.STREAM_CODEC)
+                    .canAttachTo(AdvancedCapabilityType.PLAYER)
                     .copyOnDeath()
                     .build()
     );
@@ -54,6 +57,7 @@ public class SCDataAttachments
             "tackle_skin", () ->
                     AttachmentType.builder(TACKLE_SKIN_CAP, () -> Starcatcher.rl("base"))
                             .serialize(ResourceLocation.CODEC)
+                            .canAttachTo(AdvancedCapabilityType.NON_LIVING_ENTITY)
                             .sync(ByteBufCodecs.RESOURCE_LOCATION)
                             .build()
     );

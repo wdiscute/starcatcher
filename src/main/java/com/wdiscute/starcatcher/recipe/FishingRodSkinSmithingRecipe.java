@@ -87,11 +87,6 @@ public class FishingRodSkinSmithingRecipe implements SmithingRecipeNeo
     }
 
     @Override
-    public ResourceLocation getId() {
-        return null;
-    }
-
-    @Override
     public RecipeSerializer<?> getSerializer()
     {
         return SCRecipes.FISHING_ROD_SKIN_SMITHING.get();
@@ -111,11 +106,11 @@ public class FishingRodSkinSmithingRecipe implements SmithingRecipeNeo
 
     public static class Serializer implements RecipeSerializerNeo<FishingRodSkinSmithingRecipe>
     {
-        private static final MapCodec<FishingRodSkinSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+        public static final MapCodec<FishingRodSkinSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("template").forGetter((o) -> o.template),
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("base").forGetter((o) -> o.base),
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("addition").forGetter((o) -> o.addition),
-                ItemStack.CODEC.fieldOf("result").forGetter(o -> o.result)
+                BackportCodecs.ITEM_STACK_RECIPE.fieldOf("result").forGetter(o -> o.result)
         ).apply(instance, FishingRodSkinSmithingRecipe::new));
 
         public static final StreamCodec<FishingRodSkinSmithingRecipe> STREAM_CODEC = StreamCodec.of(

@@ -75,11 +75,6 @@ public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient bas
     }
 
     @Override
-    public ResourceLocation getId() {
-        return null;
-    }
-
-    @Override
     public RecipeSerializer<?> getSerializer()
     {
         return SCRecipes.FISHING_ROD_SMITHING.get();

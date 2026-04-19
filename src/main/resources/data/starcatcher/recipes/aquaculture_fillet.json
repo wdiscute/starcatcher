@@ -1,7 +1,7 @@
 {
-  "neoforge:conditions": [
+  "forge:conditions": [
     {
-      "type": "neoforge:mod_loaded",
+      "type": "forge:mod_loaded",
       "modid": "aquaculture"
     }
   ],
@@ -16,7 +16,7 @@
     }
   ],
   "result": {
-    "id": "aquaculture:fish_fillet_raw",
+    "item": "aquaculture:fish_fillet_raw",
     "count": 4
   }
 }

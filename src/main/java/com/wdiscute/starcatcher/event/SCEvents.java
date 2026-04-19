@@ -128,10 +128,10 @@ public class SCEvents
             //guide
             FishingGuideAttachment fishingGuideAttachment = SCDataAttachments.get(sp, SCDataAttachments.FISHING_GUIDE);
 
-            if (SCConfig.GIVE_GUIDE.get() && !fishingGuideAttachment.receivedGuide)
+            if (SCConfig.GIVE_GUIDE.get() && !FishingGuideAttachment.getReceivedGuide(sp))
             {
                 sp.addItem(new ItemStack(SCItems.GUIDE.get()));
-                fishingGuideAttachment.receivedGuide = true;
+                fishingGuideAttachment.setReceivedGuide(sp, true);
             }
         }
     }

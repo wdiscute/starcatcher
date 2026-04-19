@@ -1,5 +1,8 @@
 package com.wdiscute.starcatcher.recipe;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.mojang.serialization.JsonOps;
 import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -7,6 +10,7 @@ import net.minecraft.advancements.Criterion;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.data.recipes.RecipeCategory;
@@ -16,8 +20,10 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.nikdo53.neobackports.NeoBackports;
 import net.nikdo53.neobackports.utils.recipe.RecipeOutput;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -62,7 +68,7 @@ public class FishingRodSkinSmithingRecipeBuilder
     public void save(Consumer<FinishedRecipe> recipeConsumer, ResourceLocation location) {
         this.ensureValid(location);
         this.advancement.parent(RecipeBuilder.ROOT_RECIPE_ADVANCEMENT).addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(location)).rewards(AdvancementRewards.Builder.recipe(location)).requirements(RequirementsStrategy.OR);
-        recipeConsumer.accept(new SmithingTransformRecipeBuilder.Result(location, this.type, this.template, this.base, this.addition, this.result, this.advancement, location.withPrefix("recipes/" + this.category.getFolderName() + "/")));
+        recipeConsumer.accept(new Result(location, this.type, this.template, this.base, this.addition, this.result, this.advancement, location.withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 
 
@@ -73,4 +79,33 @@ public class FishingRodSkinSmithingRecipeBuilder
             throw new IllegalStateException("No way of obtaining recipe " + location);
         }
     }
+
+    public record Result(ResourceLocation id, RecipeSerializer<?> type, Ingredient template, Ingredient base, Ingredient addition, Item result, Advancement.Builder advancement, ResourceLocation advancementId) implements FinishedRecipe {
+        public void serializeRecipeData(JsonObject main) {
+            JsonElement encoded = FishingRodSkinSmithingRecipe.Serializer.CODEC.codec()
+                    .encodeStart(JsonOps.INSTANCE, new FishingRodSkinSmithingRecipe(template, base, addition, result.getDefaultInstance()))
+                    .getOrThrow(false, NeoBackports.LOGGER::error);
+
+            encoded.getAsJsonObject().entrySet().forEach(entry -> main.add(entry.getKey(), entry.getValue()));
+        }
+
+        public ResourceLocation getId() {
+            return this.id;
+        }
+
+        public RecipeSerializer<?> getType() {
+            return this.type;
+        }
+
+        @Nullable
+        public JsonObject serializeAdvancement() {
+            return this.advancement.serializeToJson();
+        }
+
+        @Nullable
+        public ResourceLocation getAdvancementId() {
+            return this.advancementId;
+        }
+    }
+
 }

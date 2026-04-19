@@ -33,11 +33,6 @@ public record TackleSkinSmithingRecipe(Ingredient template, Ingredient base, Ing
                 && this.addition.test(input.addition());
     }
 
-    @Override
-    public ResourceLocation getId() {
-        return null;
-    }
-
     public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider registries)
     {
         ItemStack resultRod = input.base().copy();

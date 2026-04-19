@@ -62,10 +62,6 @@
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:ominous_trial_key"
-        },
-        {
-          "type": "minecraft:item",
           "name": "minecraft:experience_bottle"
         },
         {

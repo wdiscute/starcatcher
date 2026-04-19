@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class FishingGuideAttachment {
     public Map<ResourceLocation, FishCaughtCounter> fishesCaught;
-    public boolean receivedGuide;
+    private boolean receivedGuide;
 
     public FishingGuideAttachment(Map<ResourceLocation, FishCaughtCounter> fishesCaught, boolean receivedGuide ) {
         this.fishesCaught = new HashMap<>(fishesCaught); //guarantees the map is mutable
@@ -48,17 +48,18 @@ public class FishingGuideAttachment {
     }
 
     public static void setFishesCaught(Player player, Map<ResourceLocation, FishCaughtCounter> fishesCaught) {
-        get(player).fishesCaught = fishesCaught;
-        sync(player);
+        FishingGuideAttachment fishingGuideAttachment = get(player);
+        fishingGuideAttachment.fishesCaught = fishesCaught;
+        player.setData(SCDataAttachments.FISHING_GUIDE, fishingGuideAttachment);
     }
 
     public static boolean getReceivedGuide(Player player) {
         return get(player).receivedGuide;
     }
 
-    public static void setReceivedGuide(Player player, boolean receivedGuide) {
-        get(player).receivedGuide = receivedGuide;
-        sync(player);
+    public void setReceivedGuide(Player player, boolean receivedGuide) {
+        this.receivedGuide = receivedGuide;
+        player.setData(SCDataAttachments.FISHING_GUIDE, this);;
     }
 
     public static FishingGuideAttachment get(Entity holder){
