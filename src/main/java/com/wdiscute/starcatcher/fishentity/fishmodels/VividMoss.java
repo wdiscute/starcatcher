@@ -7,9 +7,10 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.resources.Identifier;
 
-public class VividMoss extends EntityModel<FishEntityRenderState>
+public class VividMoss extends EntityModel<EntityRenderState>
 {
 	private static final String NAME = "vivid_moss";
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl(NAME), "main");

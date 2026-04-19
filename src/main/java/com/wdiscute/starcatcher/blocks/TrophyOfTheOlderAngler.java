@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.nikdo53.tinymultiblocklib.block.AbstractMultiBlock;
 import net.nikdo53.tinymultiblocklib.block.IPreviewableMultiblock;
@@ -19,13 +19,13 @@ import java.util.List;
 
 public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPreviewableMultiblock
 {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public TrophyOfTheOlderAngler()
     {
         super(Properties.of()
                 .destroyTime(2)
-                .lightLevel((state) -> 5)
+                .lightLevel((_) -> 5)
                 .noOcclusion()
         );
     }
@@ -44,7 +44,7 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
     }
 
     @Override
-    public @Nullable DirectionProperty getDirectionProperty()
+    public @Nullable EnumProperty<Direction> getDirectionProperty()
     {
         return FACING;
     }

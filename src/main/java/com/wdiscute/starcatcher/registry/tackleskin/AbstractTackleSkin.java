@@ -1,12 +1,14 @@
 package com.wdiscute.starcatcher.registry.tackleskin;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
+import com.wdiscute.starcatcher.bobberentity.FishingBobModel;
+import com.wdiscute.starcatcher.bobberentity.FishingBobRenderState;
 import net.minecraft.client.model.geom.ModelLayerLocation;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
@@ -20,16 +22,19 @@ public abstract class AbstractTackleSkin
     public abstract Identifier getTexture();
 
     RenderType renderType = null;
-    protected FishingBobModel<FishingBobEntity> model;
+    protected FishingBobModel model;
 
-    public void renderTackle(EntityRendererProvider.Context context, FishingBobEntity fishingBobEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    public void render(EntityRendererProvider.Context context, FishingBobRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
     {
         if (renderType == null)
         {
-            this.model = new BaseTackleSkin();
+            this.model = new FishingBobModel(context.bakeLayer(getLayerLocation()));
             this.renderType = RenderTypes.entityCutout(getTexture());
         }
-        this.model.renderToBuffer(poseStack, buffer.getBuffer(renderType), packedLight, OverlayTexture.NO_OVERLAY, -1);
+
+        submitNodeCollector.submitModel(model, state, poseStack, renderType,
+                state.lightCoords, OverlayTexture.NO_OVERLAY,
+                state.lightCoords, null, state.outlineColor, null);
     }
 
     public void onCast(Player player)
@@ -66,4 +71,5 @@ public abstract class AbstractTackleSkin
     {
         return false;
     }
+
 }

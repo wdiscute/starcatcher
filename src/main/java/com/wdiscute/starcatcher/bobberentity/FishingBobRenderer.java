@@ -7,11 +7,15 @@ import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
+import com.wdiscute.starcatcher.registry.tackleskin.BaseTackleSkin;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
@@ -19,11 +23,12 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static java.lang.Float.NaN;
 
-public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
+public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, FishingBobRenderState>
 {
     final EntityRendererProvider.Context context;
 
@@ -34,30 +39,33 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
     }
 
     @Override
-    public Identifier getTextureLocation(FishingBobEntity fishingBobEntity)
+    public FishingBobRenderState createRenderState()
     {
-        return Starcatcher.rl("textures/entity/fishing/bob.png");
+        return new FishingBobRenderState();
     }
 
     @Override
-    public void render(FishingBobEntity fishingBobEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    public void extractRenderState(FishingBobEntity entity, FishingBobRenderState state, float partialTicks)
+    {
+        super.extractRenderState(entity, state, partialTicks);
+        state.entityYaw = entity.yo;
+
+        Identifier id = SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN);
+        Starcatcher.TACKLE_SKIN_REGISTRY.get(id).ifPresent(o -> state.skin = o.value().get());
+    }
+
+
+    @Override
+    public void submit(FishingBobRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
     {
         poseStack.pushPose();
         poseStack.translate(0.0F, 1.5F, 0.0F);
         poseStack.scale(-1.0F, -1.0F, 1.0F);
 
         poseStack.mulPose(Axis.YP.rotationDegrees(180));
-        poseStack.mulPose(Axis.YP.rotationDegrees(entityYaw));
+        poseStack.mulPose(Axis.YP.rotationDegrees((float) state.entityYaw));
 
-        //render tackle based on tackle skin, defaults to BaseTackleSkin
-        //data attachment returns starcatcher:base if there's no attachment
-        Identifier tackleRl = SCDataAttachments.get(fishingBobEntity, SCDataAttachments.TACKLE_SKIN);
-        Supplier<AbstractTackleSkin> tackle = fishingBobEntity.level().registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getValue(tackleRl);
-
-        //still need to check for null to prevent addon mods that add to the registry from crashing... i guess... 🙄
-        if (tackle == null)
-            fishingBobEntity.level().registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getValue(SCTackleSkins.BASE_TACKLE_SKIN).get().
-                    renderTackle(context, fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+        state.skin.render(context, state, poseStack, submitNodeCollector, camera);
 
         poseStack.popPose();
 
@@ -85,14 +93,13 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
             vertexconsumer1.addVertex(NaN, NaN, NaN).setColor(0).setNormal(posestack$pose1, 0, 0, 0);
 
             poseStack.popPose();
-            super.render(fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
 
+            super.submit(state, poseStack, submitNodeCollector, camera);
         }
-
-
     }
 
-    private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction
+    private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose
+            pose, float stringFraction, float nextStringFraction
     )
     {
         if (color == 0xffff9999) color = -16777216;

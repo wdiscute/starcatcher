@@ -8,6 +8,7 @@ import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.tournament.StandMenu;
 import com.wdiscute.starcatcher.tournament.Tournament;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
+import mezz.jei.library.helpers.CodecHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.UUIDUtil;
@@ -17,15 +18,17 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.players.GameProfileCache;
+import net.minecraft.server.players.NameAndId;
+import net.minecraft.server.players.UserNameToIdResolver;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.nikdo53.tinymultiblocklib.blockentities.AbstractMultiBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,15 +40,7 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     public Map<UUID, String> profiles;
     private UUID uuid;
 
-    public final ItemStackHandler entryCost = new ItemStackHandler(9)
-    {
-        @Override
-        protected int getStackLimit(int slot, ItemStack stack)
-        {
-            return 64;
-        }
-
-    };
+    public final ItemStacksResourceHandler entryCost = new ItemStacksResourceHandler(9);
 
     public StandBlockEntity(BlockPos pos, BlockState blockState)
     {
@@ -99,18 +94,35 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void saveAdditional(ValueOutput output)
     {
-        super.saveAdditional(tag, registries);
+        super.saveAdditional(output);
+
 
         if (!isCenter()) return;
 
         if (uuid != null)
-            tag.putUUID("tournament_uuid", uuid);
+            NBTCodecHelper.encode(UUIDUtil.CODEC, uuid, output, "uuid");
 
-        NBTCodecHelper.encode(Tournament.CODEC, tournament, tag, "tournament");
+        NBTCodecHelper.encode(Tournament.CODEC, tournament, output, "tournament");
         StarcatcherGameProfileCache cache = gameProfilesHelper(level, tournament);
-        NBTCodecHelper.encode(StarcatcherGameProfileCache.GAME_PROFILES_CODEC, cache, tag, "profiles");
+        NBTCodecHelper.encode(StarcatcherGameProfileCache.GAME_PROFILES_CODEC, cache, output, "profiles");
+
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput input)
+    {
+        super.loadAdditional(input);
+
+        if (!isCenter()) return;
+
+        uuid = NBTCodecHelper.decode(UUIDUtil.CODEC, input, "uuid");
+
+        tournament = NBTCodecHelper.decode(Tournament.CODEC, input, "tournament");
+        var awd = NBTCodecHelper.decode(StarcatcherGameProfileCache.GAME_PROFILES_CODEC, input, "profiles");
+        if (awd != null)
+            profiles = awd.map;
     }
 
     public record StarcatcherGameProfileCache(Map<UUID, String> map)
@@ -125,47 +137,18 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
 
     public static StarcatcherGameProfileCache gameProfilesHelper(Level level, Tournament tournament)
     {
-        if (level.isClientSide) return new StarcatcherGameProfileCache(new HashMap<>());
+        if (level.isClientSide()) return new StarcatcherGameProfileCache(new HashMap<>());
         if (tournament == null) return new StarcatcherGameProfileCache(new HashMap<>());
 
         Map<UUID, String> map = new HashMap<>();
         tournament.playerScores.forEach(entry ->
         {
-            GameProfileCache profileCache = level.getServer().getProfileCache();
-            if (profileCache != null)
-            {
-                Optional<GameProfile> gameProfile = profileCache.get(entry.playerUUID);
-                gameProfile.ifPresent(i -> map.put(i.getId(), i.getName()));
-            }
+            UserNameToIdResolver profileCache = level.getServer().services().nameToIdCache();
+            Optional<NameAndId> gameProfile = profileCache.get(entry.playerUUID);
+            gameProfile.ifPresent(i -> map.put(i.id(), i.name()));
         });
 
         return new StarcatcherGameProfileCache(map);
-    }
-
-    @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
-    {
-        super.loadAdditional(tag, registries);
-
-        if (!isCenter()) return;
-
-        if (tag.contains("tournament_uuid"))
-            uuid = tag.getUUID("tournament_uuid");
-
-        tournament = NBTCodecHelper.decode(Tournament.CODEC, tag, "tournament");
-        var awd = NBTCodecHelper.decode(StarcatcherGameProfileCache.GAME_PROFILES_CODEC, tag, "profiles");
-        if (awd != null)
-            profiles = awd.map;
-    }
-
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
-    {
-
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
-        return tag;
     }
 
     @Override

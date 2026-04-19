@@ -1,7 +1,10 @@
 package com.wdiscute.starcatcher.blocks;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
@@ -18,12 +21,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class HatBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock
 {
-    public HatBlock()
+    public HatBlock(String name)
     {
         super(Properties.of()
                 .noOcclusion()
                 .sound(SoundType.WOOL)
                 .strength(1)
+                .setId(ResourceKey.create(Registries.BLOCK, Starcatcher.rl(name)))
         );
     }
 

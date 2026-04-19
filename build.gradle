@@ -96,7 +96,7 @@ dependencies {
     //runtimeOnly files(".compatmods/GlitchCore-neoforge-1.21.1-2.1.0.0.jar")
 
     //Ecliptic Seasons
-    compileOnly "maven.modrinth:serene-seasons:WMfCdhbF"
+    compileOnly "maven.modrinth:ecliptic-seasons:S7XmJvyQ"
     //compileOnly files(".compatmods/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
     //runtimeOnly files(".compatmods/EclipticSeasons-1.21.1-neoforge-0.12.5-all.jar")
 
@@ -111,7 +111,7 @@ dependencies {
     //runtimeOnly files(".compatmods/DistantHorizons-2.3.6-b-1.21.1-fabric-neoforge.jar")
 
     //ftb teams
-    //compileOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
+    compileOnly files(".compatmods/ftb-teams-neoforge-26.1.2.2.jar")
     //compileOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
     //compileOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
 

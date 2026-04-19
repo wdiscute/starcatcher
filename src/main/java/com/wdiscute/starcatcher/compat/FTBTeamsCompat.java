@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.data.TeamManagerImpl;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ public class FTBTeamsCompat
 
             for (UUID uuid : members)
             {
-                Player playerByUUID = player.getServer().getPlayerList().getPlayer(uuid);
+                Player playerByUUID = ((ServerPlayer) player).level().getServer().getPlayerList().getPlayer(uuid);
                 if (playerByUUID != null)
                 {
                     FishCaughtCounter.awardFishCaughtCounter(fp, playerByUUID, 0, 0, 0, 0, false, false, false);
