@@ -11,6 +11,7 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
@@ -128,7 +129,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
 
         // Render model
         if (!fish.isEmpty())
-            FishRenderer.renderFishFromItem(be, fish, submitNodeCollector, poseStack);
+            FishRenderer.renderFishFromItem(new EntityRenderState(), fish, submitNodeCollector, poseStack);
 
         poseStack.popPose();
 

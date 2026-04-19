@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.compat;
 
-import com.teamtea.eclipticseasons.api.constant.solar.Season;
 import com.teamtea.eclipticseasons.api.constant.solar.SolarTerm;
 import com.teamtea.eclipticseasons.api.util.EclipticUtil;
 import com.wdiscute.starcatcher.registry.fishrestrictions.SeasonRestriction;

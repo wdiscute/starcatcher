@@ -1,7 +1,5 @@
 package com.wdiscute.starcatcher.blocks.display;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -11,10 +9,10 @@ import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.util.Mth;
 
-public class DisplayBookModel extends Model
+public class DisplayBookModel extends Model<DisplayBlockRenderer.State>
 {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("book"), "main");
 
@@ -30,8 +28,9 @@ public class DisplayBookModel extends Model
     private final ModelPart flipPage1;
     private final ModelPart flipPage2;
 
-    public DisplayBookModel(ModelPart root) {
-        super(RenderType::entitySolid);
+    public DisplayBookModel(ModelPart root)
+    {
+        super(root, RenderTypes::entityCutout);
         this.root = root;
         this.leftLid = root.getChild("left_lid");
         this.rightLid = root.getChild("right_lid");
@@ -41,7 +40,8 @@ public class DisplayBookModel extends Model
         this.flipPage2 = root.getChild("flip_page2");
     }
 
-    public static LayerDefinition createBodyLayer() {
+    public static LayerDefinition createBodyLayer()
+    {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
         partdefinition.addOrReplaceChild(
@@ -63,21 +63,12 @@ public class DisplayBookModel extends Model
         return LayerDefinition.create(meshdefinition, 64, 32);
     }
 
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        this.render(poseStack, buffer, packedLight, packedOverlay, color);
-    }
-
-    public void render(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
-        this.root.render(poseStack, buffer, packedLight, packedOverlay, color);
-    }
-
-    public void setupAnim(float time, float rightPageFlipAmount, float leftPageFlipAmount, float bookOpenAmount) {
+    public void setupAnim(float time, float rightPageFlipAmount, float leftPageFlipAmount, float bookOpenAmount)
+    {
         float f = (Mth.sin(time * 0.02F) * 0.1F + 1.25F) * bookOpenAmount;
         this.leftLid.yRot = (float) Math.PI + f;
         this.rightLid.yRot = -f;
         this.leftPages.yRot = f;
-
 
         this.rightPages.yRot = -f;
         this.flipPage1.yRot = f - f * 2.0F * rightPageFlipAmount;

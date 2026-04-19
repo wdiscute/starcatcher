@@ -26,6 +26,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -38,8 +39,8 @@ import java.util.Optional;
 @JeiPlugin
 public class StarcatcherJeiPlugin implements IModPlugin
 {
-    public static final ResourceLocation ARROW = Starcatcher.rl("textures/gui/emi/arrow.png");
-    public static final ResourceLocation SLOT_BACKGROUND = SellingBin.rl("textures/gui/slot_background.png");
+    public static final Identifier ARROW = Starcatcher.rl("textures/gui/emi/arrow.png");
+    public static final Identifier SLOT_BACKGROUND = SellingBin.rl("textures/gui/slot_background.png");
 
     public static List<StarcatcherJeiFPRecipe.Recipe> listRecipes = new ArrayList<>();
 
@@ -67,7 +68,7 @@ public class StarcatcherJeiPlugin implements IModPlugin
         listRecipes.clear();
 
         //add all fps as a recipe to the list
-        Registry<FishProperties> fpRegistry = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+        Registry<FishProperties> fpRegistry = Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value();
         fpRegistry.stream().forEach(fp -> listRecipes.add(StarcatcherJeiFPRecipe.Recipe.of(fp)));
 
         //register categories
@@ -77,12 +78,12 @@ public class StarcatcherJeiPlugin implements IModPlugin
     @Override
     public void registerRecipes(IRecipeRegistration registration)
     {
-        //add sellables recipes
+        //add fps recipes
         registration.addRecipes(StarcatcherJeiFPRecipe.Recipe.TYPE, listRecipes);
 
         //worms info
         registration.addItemStackInfo(
-                BuiltInRegistries.ITEM.getTag(SCTags.WORMS).get()
+                BuiltInRegistries.ITEM.get(SCTags.WORMS).get()
                         .stream().map(o -> o.value().getDefaultInstance()).toList(),
                 Component.translatable("emi.info.starcatcher.worms.0"),
                 Component.translatable("emi.info.starcatcher.worms.1"),
@@ -98,13 +99,13 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
         //hooks, baits, bobbers
         List<ItemStack> attachments = new ArrayList<>();
-        attachments.addAll(BuiltInRegistries.ITEM.getTag(SCTags.HOOKS).get()
+        attachments.addAll(BuiltInRegistries.ITEM.get(SCTags.HOOKS).get()
                 .stream().map(o -> o.value().getDefaultInstance()).toList());
 
-        attachments.addAll(BuiltInRegistries.ITEM.getTag(SCTags.WORMS).get()
+        attachments.addAll(BuiltInRegistries.ITEM.get(SCTags.WORMS).get()
                 .stream().map(o -> o.value().getDefaultInstance()).toList());
 
-        attachments.addAll(BuiltInRegistries.ITEM.getTag(SCTags.BAITS).get()
+        attachments.addAll(BuiltInRegistries.ITEM.get(SCTags.BAITS).get()
                 .stream().map(o -> o.value().getDefaultInstance()).toList());
 
         registration.addItemStackInfo(attachments,
@@ -134,12 +135,11 @@ public class StarcatcherJeiPlugin implements IModPlugin
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
     {
-
-        registration.addRecipeCatalyst(SCItems.ROD.get(), StarcatcherJeiFPRecipe.Recipe.TYPE);
+        registration.addCraftingStation(StarcatcherJeiFPRecipe.Recipe.TYPE, SCItems.ROD.get());
     }
 
     @Override
-    public ResourceLocation getPluginUid()
+    public Identifier getPluginUid()
     {
         return SellingBin.rl("selling_bin_jei_plugin");
     }

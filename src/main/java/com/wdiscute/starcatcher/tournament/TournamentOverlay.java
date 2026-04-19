@@ -6,18 +6,21 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
-public class TournamentOverlay implements LayeredDraw.Layer
+public class TournamentOverlay implements GuiLayer
 {
     private static final Logger log = LoggerFactory.getLogger(TournamentOverlay.class);
     public static Tournament tournament;
@@ -32,11 +35,11 @@ public class TournamentOverlay implements LayeredDraw.Layer
     static int playerRank = 0;
 
 
-    private static final ResourceLocation BACKGROUND_TINY = Starcatcher.rl("textures/gui/tournament/overlay_tiny.png");
-    private static final ResourceLocation BACKGROUND_EXPANDED = Starcatcher.rl("textures/gui/tournament/overlay_expanded.png");
-    private static final ResourceLocation FIRST_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/first_place_fish.png");
-    private static final ResourceLocation SECOND_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/second_place_fish.png");
-    private static final ResourceLocation THIRD_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/third_place_fish.png");
+    private static final Identifier BACKGROUND_TINY = Starcatcher.rl("textures/gui/tournament/overlay_tiny.png");
+    private static final Identifier BACKGROUND_EXPANDED = Starcatcher.rl("textures/gui/tournament/overlay_expanded.png");
+    private static final Identifier FIRST_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/first_place_fish.png");
+    private static final Identifier SECOND_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/second_place_fish.png");
+    private static final Identifier THIRD_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/third_place_fish.png");
 
     int uiX;
     int uiY;
@@ -53,7 +56,7 @@ public class TournamentOverlay implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker)
+    public void render(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker)
     {
         if (tournament == null) return;
         if (Minecraft.getInstance().level == null) return;
@@ -66,8 +69,8 @@ public class TournamentOverlay implements LayeredDraw.Layer
         font = Minecraft.getInstance().font;
 
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0, 0, 0);
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(0, 0);
         //add scale with config like minigame
 
         //if small
@@ -75,12 +78,12 @@ public class TournamentOverlay implements LayeredDraw.Layer
         {
             renderImage(guiGraphics, BACKGROUND_TINY);
 
-            guiGraphics.drawString(this.font, tournament.name, 58, 35, 0x635040, false);
+            guiGraphics.text(this.font, tournament.name, 58, 35, 0x635040, false);
 
-            guiGraphics.drawString(this.font, playerPlace.getFirst(), 48, 70, -1, false);
-            guiGraphics.drawString(this.font, playerPlace.getSecond() + "", 160, 70, -1, false);
+            guiGraphics.text(this.font, playerPlace.getFirst(), 48, 70, -1, false);
+            guiGraphics.text(this.font, playerPlace.getSecond() + "", 160, 70, -1, false);
 
-            guiGraphics.drawString(this.font, getDisplayTimeLeft(tournament.lastsUntilEpoch - System.currentTimeMillis()), 21, 35, -1, false);
+            guiGraphics.text(this.font, getDisplayTimeLeft(tournament.lastsUntilEpoch - System.currentTimeMillis()), 21, 35, -1, false);
             switch (playerRank)
             {
                 case 1:
@@ -96,20 +99,20 @@ public class TournamentOverlay implements LayeredDraw.Layer
         {
             renderImage(guiGraphics, BACKGROUND_EXPANDED);
 
-            guiGraphics.drawString(this.font, tournament.name, 58, 16, 0x635040, false);
+            guiGraphics.text(this.font, tournament.name, 58, 16, 0x635040, false);
 
             //render first/second/third player + scores
-            if(firstPlace.getSecond() != 0)guiGraphics.drawString(this.font, firstPlace.getFirst(), 48, 71, -1, false);
-            if(firstPlace.getSecond() != 0)guiGraphics.drawString(this.font, firstPlace.getSecond() + "", 154, 71, -1, false);
-            if(secondPlace.getSecond() != 0)guiGraphics.drawString(this.font, secondPlace.getFirst(), 48, 92, -1, false);
-            if(secondPlace.getSecond() != 0)guiGraphics.drawString(this.font, secondPlace.getSecond() + "", 154, 92, -1, false);
-            if(thirdPlace.getSecond() != 0)guiGraphics.drawString(this.font, thirdPlace.getFirst(), 48, 113, -1, false);
-            if(thirdPlace.getSecond() != 0) guiGraphics.drawString(this.font, thirdPlace.getSecond() + "", 154, 113, -1, false);
+            if(firstPlace.getSecond() != 0)guiGraphics.text(this.font, firstPlace.getFirst(), 48, 71, -1, false);
+            if(firstPlace.getSecond() != 0)guiGraphics.text(this.font, firstPlace.getSecond() + "", 154, 71, -1, false);
+            if(secondPlace.getSecond() != 0)guiGraphics.text(this.font, secondPlace.getFirst(), 48, 92, -1, false);
+            if(secondPlace.getSecond() != 0)guiGraphics.text(this.font, secondPlace.getSecond() + "", 154, 92, -1, false);
+            if(thirdPlace.getSecond() != 0)guiGraphics.text(this.font, thirdPlace.getFirst(), 48, 113, -1, false);
+            if(thirdPlace.getSecond() != 0) guiGraphics.text(this.font, thirdPlace.getSecond() + "", 154, 113, -1, false);
 
-            guiGraphics.drawString(this.font, playerPlace.getFirst(), 48, 141, -1, false);
-            guiGraphics.drawString(this.font, playerPlace.getSecond() + "", 154, 141, -1, false);
+            guiGraphics.text(this.font, playerPlace.getFirst(), 48, 141, -1, false);
+            guiGraphics.text(this.font, playerPlace.getSecond() + "", 154, 141, -1, false);
 
-            guiGraphics.drawString(this.font, getDisplayTimeLeft(tournament.lastsUntilEpoch - System.currentTimeMillis()), 12, 31, -1, false);
+            guiGraphics.text(this.font, getDisplayTimeLeft(tournament.lastsUntilEpoch - System.currentTimeMillis()), 12, 31, -1, false);
 
             //render fish icon for first/second/third place
             if (playerRank != 0)
@@ -126,7 +129,7 @@ public class TournamentOverlay implements LayeredDraw.Layer
                         30, 142, 0, 0, 11, 6, 11, 6);
         }
 
-        guiGraphics.pose().popPose();
+        guiGraphics.pose().popMatrix();
     }
 
 
@@ -166,7 +169,7 @@ public class TournamentOverlay implements LayeredDraw.Layer
     public static void onTournamentReceived(Tournament t, List<GameProfile> list)
     {
         //add entries to cached game profile
-        list.forEach(e -> gameProfilesCache.put(e.getId(), e.getName()));
+        list.forEach(e -> gameProfilesCache.put(e.id(), e.name()));
 
         firstPlace = Pair.of(Component.literal(""), 0);
         secondPlace = Pair.of(Component.literal(""), 0);
@@ -220,9 +223,9 @@ public class TournamentOverlay implements LayeredDraw.Layer
         tournament = t;
     }
 
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
+    private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
-        guiGraphics.blit(rl, 0, 0, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
+        guiGraphics.blit(RenderPipelines.GUI, rl, 0, 0, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
     }
 
     public enum ExpandedType

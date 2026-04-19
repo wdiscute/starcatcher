@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -19,7 +20,7 @@ public class FrogTackleSkin extends AbstractTackleSkin
     }
 
     @Override
-    public ResourceLocation getTexture()
+    public Identifier getTexture()
     {
         return Starcatcher.rl("textures/entity/tackle/frog.png");
     }

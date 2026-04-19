@@ -4,14 +4,13 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
-import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -26,7 +25,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -50,8 +48,8 @@ import java.util.List;
 public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
     private static final Component UNKNOWN_CONTENTS = Component.translatable("container.starcatcher.tackle_box.unknownContents");
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    public static final ResourceLocation CONTENTS = U.rl("minecraft", "contents");
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
+    public static final Identifier CONTENTS = U.rl("minecraft", "contents");
     @javax.annotation.Nullable
     private final DyeColor color;
 
@@ -77,7 +75,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        if(state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) return NORTH_SOUTH;
+        if (state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) return NORTH_SOUTH;
         return EAST_WEST;
     }
 
@@ -102,7 +100,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
-        if (!level.isClientSide)
+        if (!level.isClientSide())
         {
             if (level.getBlockEntity(pos) instanceof TackleBoxBlockEntity tbbe)
             {
@@ -137,7 +135,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof TackleBoxBlockEntity tbbe)
         {
-            if (!level.isClientSide && player.isCreative() && !tbbe.isEmpty())
+            if (!level.isClientSide() && player.isCreative() && !tbbe.isEmpty())
             {
                 ItemStack itemstack = getColoredItemStack(this.getColor());
                 itemstack.applyComponents(blockentity.collectComponents());
@@ -170,47 +168,17 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston)
     {
-        if (!state.is(newState.getBlock()))
+        BlockEntity blockentity = level.getBlockEntity(pos);
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
+        if (blockentity instanceof TackleBoxBlockEntity)
         {
-            BlockEntity blockentity = level.getBlockEntity(pos);
-            super.onRemove(state, level, pos, newState, isMoving);
-            if (blockentity instanceof TackleBoxBlockEntity)
-            {
-                level.updateNeighbourForOutputSignal(pos, state.getBlock());
-            }
+            level.updateNeighbourForOutputSignal(pos, state.getBlock());
         }
-
     }
 
-    @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        if (stack.has(DataComponents.CONTAINER_LOOT))
-        {
-            tooltipComponents.add(UNKNOWN_CONTENTS);
-        }
 
-        int i = 0;
-        int j = 0;
-
-        for (ItemStack itemstack : stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).nonEmptyItems())
-        {
-            ++j;
-            if (i <= 4)
-            {
-                ++i;
-                tooltipComponents.add(Component.translatable("container.starcatcher.tackle_box.itemCount", itemstack.getHoverName(), itemstack.getCount()));
-            }
-        }
-
-        if (j - i > 0)
-        {
-            tooltipComponents.add(Component.translatable("container.starcatcher.tackle_box.more", j - i).withStyle(ChatFormatting.ITALIC));
-        }
-    }
 
     @Override
     protected boolean hasAnalogOutputSignal(BlockState state)
@@ -219,23 +187,9 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos)
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction)
     {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
-    }
-
-    @Override
-    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state)
-    {
-        ItemStack itemstack = super.getCloneItemStack(level, pos, state);
-        level.getBlockEntity(pos, SCBlockEntities.TACKLE_BOX.get()).ifPresent((ebbe) -> ebbe.saveToItem(itemstack, level.registryAccess()));
-        return itemstack;
-    }
-
-    @Nullable
-    public static DyeColor getColorFromItem(Item item)
-    {
-        return getColorFromBlock(Block.byItem(item));
     }
 
     @Nullable
@@ -256,7 +210,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             {
                 case WHITE -> SCBlocks.TACKLE_BOX_WHITE;
                 case ORANGE -> SCBlocks.TACKLE_BOX_ORANGE;
-                case MAGENTA ->  SCBlocks.TACKLE_BOX_MAGENTA;
+                case MAGENTA -> SCBlocks.TACKLE_BOX_MAGENTA;
                 case LIGHT_BLUE -> SCBlocks.TACKLE_BOX_LIGHT_BLUE;
                 case YELLOW -> SCBlocks.TACKLE_BOX_YELLOW;
                 case LIME -> SCBlocks.TACKLE_BOX_LIME;
@@ -300,9 +254,9 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     @Override
     public @org.jetbrains.annotations.Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) ->
+        return level.isClientSide() ? null : (_, _, _, blockEntity) ->
         {
-            if(blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
+            if (blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
         };
     }
 }

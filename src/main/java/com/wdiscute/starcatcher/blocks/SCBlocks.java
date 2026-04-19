@@ -7,9 +7,9 @@ import com.wdiscute.starcatcher.blocks.Telescope.TelescopeBlock;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
 import com.wdiscute.starcatcher.blocks.stand.StandBlock;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlock;
-import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.items.HatItem;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
@@ -66,41 +66,44 @@ public interface SCBlocks
     DeferredBlock<Block> TACKLE_BOX_GREEN = registerTackleBox("tackle_box_green", () -> new TackleBoxBlock(DyeColor.GREEN, MapColor.COLOR_GREEN));
 
     //hats
-    DeferredBlock<Block> FISHERMAN_HAT_WHITE = registerHat("fisherman_hat_white", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_LIME = registerHat("fisherman_hat_lime", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_ORANGE = registerHat("fisherman_hat_orange", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_RED = registerHat("fisherman_hat_red", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_GRAY = registerHat("fisherman_hat_gray", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_LIGHT_GRAY = registerHat("fisherman_hat_light_gray", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_BLACK = registerHat("fisherman_hat_black", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_BROWN = registerHat("fisherman_hat_brown", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_YELLOW = registerHat("fisherman_hat_yellow", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_PINK = registerHat("fisherman_hat_pink", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_MAGENTA = registerHat("fisherman_hat_magenta", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_PURPLE = registerHat("fisherman_hat_purple", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_BLUE = registerHat("fisherman_hat_blue", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_LIGHT_BLUE = registerHat("fisherman_hat_light_blue", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_CYAN = registerHat("fisherman_hat_cyan", HatBlock::new);
-    DeferredBlock<Block> FISHERMAN_HAT_GREEN = registerHat("fisherman_hat_green", HatBlock::new);
+    DeferredBlock<Block> FISHERMAN_HAT_WHITE = registerHat("fisherman_hat_white");
+    DeferredBlock<Block> FISHERMAN_HAT_LIME = registerHat("fisherman_hat_lime");
+    DeferredBlock<Block> FISHERMAN_HAT_ORANGE = registerHat("fisherman_hat_orange");
+    DeferredBlock<Block> FISHERMAN_HAT_RED = registerHat("fisherman_hat_red");
+    DeferredBlock<Block> FISHERMAN_HAT_GRAY = registerHat("fisherman_hat_gray");
+    DeferredBlock<Block> FISHERMAN_HAT_LIGHT_GRAY = registerHat("fisherman_hat_light_gray");
+    DeferredBlock<Block> FISHERMAN_HAT_BLACK = registerHat("fisherman_hat_black");
+    DeferredBlock<Block> FISHERMAN_HAT_BROWN = registerHat("fisherman_hat_brown");
+    DeferredBlock<Block> FISHERMAN_HAT_YELLOW = registerHat("fisherman_hat_yellow");
+    DeferredBlock<Block> FISHERMAN_HAT_PINK = registerHat("fisherman_hat_pink");
+    DeferredBlock<Block> FISHERMAN_HAT_MAGENTA = registerHat("fisherman_hat_magenta");
+    DeferredBlock<Block> FISHERMAN_HAT_PURPLE = registerHat("fisherman_hat_purple");
+    DeferredBlock<Block> FISHERMAN_HAT_BLUE = registerHat("fisherman_hat_blue");
+    DeferredBlock<Block> FISHERMAN_HAT_LIGHT_BLUE = registerHat("fisherman_hat_light_blue");
+    DeferredBlock<Block> FISHERMAN_HAT_CYAN = registerHat("fisherman_hat_cyan");
+    DeferredBlock<Block> FISHERMAN_HAT_GREEN = registerHat("fisherman_hat_green");
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block)
     {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
-        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties()));
+        SCItems.ITEMS.registerItem(name, (p) -> new BlockItem(toReturn.get(), p));
         return toReturn;
     }
 
-    private static <T extends Block> DeferredBlock<T> registerHat(String name, Supplier<T> block)
+    private static DeferredBlock<Block> registerHat(String name)
     {
-        DeferredBlock<T> toReturn = HATS.register(name, block);
-            SCItems.ITEMS.register(name, () -> new HatItem(toReturn.get()));
+        DeferredBlock<Block> toReturn = HATS.register(name, () -> new HatBlock(name));
+        SCItems.ITEMS.register(name, () -> new HatItem(toReturn.get(), name));
         return toReturn;
     }
 
     private static <T extends Block> DeferredBlock<T> registerTackleBox(String name, Supplier<T> block)
     {
         DeferredBlock<T> toReturn = TACKLE_BOXES.register(name, block);
-        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties().stacksTo(1)));
+        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties()
+                .stacksTo(1)
+                .setId(ResourceKey.create(Registries.ITEM, Starcatcher.rl(name)))
+        ));
         return toReturn;
     }
 

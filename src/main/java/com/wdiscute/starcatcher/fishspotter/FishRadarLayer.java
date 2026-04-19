@@ -9,26 +9,26 @@ import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FishRadarLayer implements LayeredDraw.Layer
+public class FishRadarLayer implements GuiLayer
 {
 
-    private static final ResourceLocation ONE_ROW = Starcatcher.rl("textures/gui/fish_radar/1_row.png");
-    private static final ResourceLocation TWO_ROWS = Starcatcher.rl("textures/gui/fish_radar/2_row.png");
-    private static final ResourceLocation THREE_ROWS = Starcatcher.rl("textures/gui/fish_radar/3_row.png");
-    private static final ResourceLocation FOUR_ROWS = Starcatcher.rl("textures/gui/fish_radar/4_row.png");
-    private static final ResourceLocation FIVE_ROWS = Starcatcher.rl("textures/gui/fish_radar/5_row.png");
-    private static final ResourceLocation SIX_ROWS = Starcatcher.rl("textures/gui/fish_radar/6_row.png");
+    private static final Identifier ONE_ROW = Starcatcher.rl("textures/gui/fish_radar/1_row.png");
+    private static final Identifier TWO_ROWS = Starcatcher.rl("textures/gui/fish_radar/2_row.png");
+    private static final Identifier THREE_ROWS = Starcatcher.rl("textures/gui/fish_radar/3_row.png");
+    private static final Identifier FOUR_ROWS = Starcatcher.rl("textures/gui/fish_radar/4_row.png");
+    private static final Identifier FIVE_ROWS = Starcatcher.rl("textures/gui/fish_radar/5_row.png");
+    private static final Identifier SIX_ROWS = Starcatcher.rl("textures/gui/fish_radar/6_row.png");
 
     int uiX;
     int uiY;
@@ -52,7 +52,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
     {
         fpsInArea.clear();
 
-        for (FishProperties fp : player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
+        for (FishProperties fp : player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value())
             if (fp.hasGuideEntry() && fp.calculateChance(player, player.level(), ItemStack.EMPTY, AbstractFishRestriction.Context.GUIDE_FISHES_HOVER) > 0)
                 fpsInArea.add(fp);
 
@@ -65,7 +65,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker)
+    public void render(GuiGraphicsExtractor guiGraphics, DeltaTracker deltaTracker)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -93,8 +93,8 @@ public class FishRadarLayer implements LayeredDraw.Layer
             offScreen = 0;
 
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(-offScreen, 0, 0);
+        guiGraphics.pose().pushMatrix();
+        guiGraphics.pose().translate(-offScreen, 0);
 
         switch (fpsInArea.size())
         {
@@ -138,24 +138,23 @@ public class FishRadarLayer implements LayeredDraw.Layer
                 is = new ItemStack(fpsInArea.get(i).catchInfo().fish());
             }
 
-            guiGraphics.renderItem(
+            guiGraphics.item(
                     is,
                     uiX + 9 + i * 18 % 90,
                     uiY + 48 + i / 5 * 18);
         }
 
 
-        guiGraphics.pose().popPose();
-
+        guiGraphics.pose().popMatrix();
     }
 
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
+    private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
         guiGraphics.blit(rl, uiX, uiY, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
     }
 
-    private void drawComp(GuiGraphics guiGraphics, Component comp, int xOffset, int yOffset)
+    private void drawComp(GuiGraphicsExtractor guiGraphics, Component comp, int xOffset, int yOffset)
     {
-        guiGraphics.drawString(font, comp, uiX + xOffset, uiY + yOffset, 0, false);
+        guiGraphics.text(font, comp, uiX + xOffset, uiY + yOffset, 0, false);
     }
 }

@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.neoforged.api.distmarker.Dist;
@@ -34,6 +33,7 @@ public class TelescopeBlock extends AbstractMultiBlock implements IPreviewableMu
     {
         super(BlockBehaviour.Properties.of().noOcclusion());
     }
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     @Override
     public List<BlockPos> makeFullBlockShape(Level level, BlockPos center, BlockState blockState, @Nullable BlockEntity blockEntity, @Nullable Direction direction)
@@ -49,7 +49,7 @@ public class TelescopeBlock extends AbstractMultiBlock implements IPreviewableMu
     }
 
     @Override
-    public @Nullable DirectionProperty getDirectionProperty()
+    public @Nullable EnumProperty<Direction> getDirectionProperty()
     {
         return FACING;
     }
@@ -67,7 +67,6 @@ public class TelescopeBlock extends AbstractMultiBlock implements IPreviewableMu
         return state;
     }
 
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
 
     //This probably doesn't need to be there since the center property does the same thing
     public static final EnumProperty<TelescopePart> TELESCOPE_PART = EnumProperty.create("part", TelescopePart.class);
@@ -82,7 +81,7 @@ public class TelescopeBlock extends AbstractMultiBlock implements IPreviewableMu
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
-        if (level.isClientSide) screen();
+        if (level.isClientSide()) screen();
 
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }

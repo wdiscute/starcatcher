@@ -13,6 +13,7 @@ import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
@@ -23,6 +24,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.client.renderstate.BaseRenderState;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,7 +32,7 @@ import java.util.Map;
 public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderState>
 {
     ItemModelResolver itemRenderer;
-    public static Map<Item, EntityModel<FishEntityRenderState>> map = new HashMap<>();
+    public static Map<Item, EntityModel<EntityRenderState>> map = new HashMap<>();
 
     public FishRenderer(EntityRendererProvider.Context context)
     {
@@ -133,7 +135,7 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
         poseStack.scale(scale, -scale, scale);
         poseStack.translate(0, -1, 0);
 
-        poseStack.mulPose(Axis.YN.rotationDegrees(entityYaw + 180));
+        poseStack.mulPose(Axis.YN.rotationDegrees(state.yRot + 180));
 
         // Render model here
         if (!fish.isEmpty())
@@ -142,12 +144,12 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
         poseStack.popPose();
     }
 
-    public static void renderFishFromItem(FishEntityRenderState ir, ItemStack itemStack, SubmitNodeCollector node, PoseStack poseStack)
+    public static void renderFishFromItem(EntityRenderState ir, ItemStack itemStack, SubmitNodeCollector node, PoseStack poseStack)
     {
         if (map.containsKey(itemStack.getItem()))
         {
             Item item = itemStack.getItem();
-            EntityModel<FishEntityRenderState> model = map.get(item);
+            EntityModel<EntityRenderState> model = map.get(item);
 
             Identifier rl = Starcatcher.rl("textures/entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath() + ".png");
 

@@ -9,7 +9,6 @@ import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.aquarium.AquariumRenderer;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockRenderer;
 import com.wdiscute.starcatcher.blocks.display.DisplayBookModel;
-import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxRenderer;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxScreen;
 import com.wdiscute.starcatcher.registry.items.BucketTooltipRenderer;
 import com.wdiscute.starcatcher.registry.items.RodSlotTooltipRenderer;
@@ -104,7 +103,7 @@ public class SCClientEvents
         event.registerLayerDefinition(new ClearTackleSkin().getLayerLocation(), ClearTackleSkin::createBodyLayer);
 
         //tackle box
-        event.registerLayerDefinition(TackleBoxRenderer.LAYER_LOCATION, TackleBoxRenderer::createBodyLayer);
+        //event.registerLayerDefinition(TackleBoxRenderer.LAYER_LOCATION, TackleBoxRenderer::createBodyLayer);
 
         //book model
         event.registerLayerDefinition(DisplayBookModel.LAYER_LOCATION, DisplayBookModel::createBodyLayer);

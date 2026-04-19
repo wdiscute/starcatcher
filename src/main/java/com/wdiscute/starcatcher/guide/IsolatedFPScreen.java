@@ -5,15 +5,16 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class IsolatedFPScreen extends Screen
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/emi/emi_entry.png");
+    private static final Identifier BACKGROUND = Starcatcher.rl("textures/gui/emi/emi_entry.png");
 
     protected final FishProperties fp;
     protected int uiX;
@@ -37,16 +38,15 @@ public class IsolatedFPScreen extends Screen
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    public boolean keyPressed(KeyEvent event)
     {
-        InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
+        InputConstants.Key key = InputConstants.getKey(event);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(key))
         {
             this.onClose();
             return true;
         }
-
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(event);
     }
 
     @Override
@@ -64,14 +64,14 @@ public class IsolatedFPScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(graphics, mouseX, mouseY, a);
 
-        guiGraphics.blit(BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
+        graphics.blit(BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
 
         FishingGuideScreen.renderFishEntryPage(
-                guiGraphics,
+                graphics,
                 fp,
                 new ItemStack(fp.catchInfo().fish().value()),
                 FishCaughtCounter.get(Minecraft.getInstance().player, fp),

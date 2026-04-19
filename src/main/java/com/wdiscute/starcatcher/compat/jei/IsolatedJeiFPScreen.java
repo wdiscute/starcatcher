@@ -5,13 +5,13 @@ import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.IsolatedFPScreen;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class IsolatedJeiFPScreen extends IsolatedFPScreen
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/emi/emi_entry.png");
+    private static final Identifier BACKGROUND = Starcatcher.rl("textures/gui/emi/emi_entry.png");
 
     private final StarcatcherJeiFPRecipe.Recipe recipe;
 
@@ -36,10 +36,9 @@ public class IsolatedJeiFPScreen extends IsolatedFPScreen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-
+        super.extractRenderState(guiGraphics, mouseX, mouseY, a);
         guiGraphics.blit(BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
 
         FishingGuideScreen.renderFishEntryPage(
