@@ -16,9 +16,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -31,12 +32,12 @@ public class BottledLetterEntity extends ThrowableItemProjectile
         super(entityType, level);
     }
 
-    public BottledLetterEntity(Level level, LivingEntity shooter) {
-        super(SCEntities.BOTTLED_LETTER.get(), shooter, level);
+    public BottledLetterEntity(Level level, LivingEntity shooter, ItemStack stack) {
+        super(SCEntities.BOTTLED_LETTER.get(), shooter, level, stack);
     }
 
-    public BottledLetterEntity(Level level, double x, double y, double z) {
-        super(SCEntities.BOTTLED_LETTER.get(), x, y, z, level);
+    public BottledLetterEntity(Level level, double x, double y, double z, ItemStack stack) {
+        super(SCEntities.BOTTLED_LETTER.get(), x, y, z, level, stack);
     }
 
     @Override
@@ -55,7 +56,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
             {
                 if(getOwner() instanceof ServerPlayer sp)
                 {
-                    sp.displayClientMessage(Component.translatable("item.starcatcher.bottled_letter.thrown"), true);
+                    sp.sendOverlayMessage(Component.translatable("item.starcatcher.bottled_letter.thrown"));
                     if(SCDataComponents.has(getItem(), SCDataComponents.MESSAGE))
                     {
                         MessagesSavedData.get(((ServerLevel) level())).addMessage(SCDataComponents.get(getItem(), SCDataComponents.MESSAGE));
@@ -75,7 +76,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
     private ParticleOptions getParticle()
     {
         ItemStack itemstack = this.getItem();
-        return new ItemParticleOption(ParticleTypes.ITEM, itemstack);
+        return new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromNonEmptyStack(itemstack));
     }
 
     @Override
@@ -116,7 +117,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
     protected void onHit(HitResult result)
     {
         super.onHit(result);
-        if (!this.level().isClientSide)
+        if (!this.level().isClientSide())
         {
             level().playSound(
                     null,

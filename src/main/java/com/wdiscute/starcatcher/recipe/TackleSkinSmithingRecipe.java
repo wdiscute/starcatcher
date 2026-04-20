@@ -4,43 +4,76 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
-import com.wdiscute.starcatcher.registry.SCItems;
-import com.wdiscute.starcatcher.registry.SCRecipes;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
-import net.minecraft.core.HolderLookup;
+import net.minecraft.core.Holder;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
-import net.minecraft.world.level.Level;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
+import net.minecraft.world.item.crafting.display.SmithingRecipeDisplay;
+import net.minecraft.world.item.equipment.trim.ArmorTrim;
+import net.minecraft.world.item.equipment.trim.TrimMaterial;
+import net.minecraft.world.item.equipment.trim.TrimPattern;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.Objects;
+import java.util.Optional;
 
-public record TackleSkinSmithingRecipe(Ingredient template, Ingredient base, Ingredient addition) implements SmithingRecipe
+public class TackleSkinSmithingRecipe extends SimpleSmithingRecipe
 {
-    public boolean matches(SmithingRecipeInput input, Level level)
+    public static final MapCodec<TackleSkinSmithingRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
+            i -> i.group(
+                            Recipe.CommonInfo.MAP_CODEC.forGetter(o -> o.commonInfo),
+                            Ingredient.CODEC.fieldOf("template").forGetter(o -> o.template),
+                            Ingredient.CODEC.fieldOf("base").forGetter(o -> o.base),
+                            Ingredient.CODEC.fieldOf("addition").forGetter(o -> o.addition)
+                    )
+                    .apply(i, TackleSkinSmithingRecipe::new)
+    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, TackleSkinSmithingRecipe> STREAM_CODEC = StreamCodec.composite(
+            Recipe.CommonInfo.STREAM_CODEC,
+            o -> o.commonInfo,
+            Ingredient.CONTENTS_STREAM_CODEC,
+            o -> o.template,
+            Ingredient.CONTENTS_STREAM_CODEC,
+            o -> o.base,
+            Ingredient.CONTENTS_STREAM_CODEC,
+            o -> o.addition,
+            TackleSkinSmithingRecipe::new
+    );
+    public static final RecipeSerializer<TackleSkinSmithingRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+    private final Ingredient template;
+    private final Ingredient base;
+    private final Ingredient addition;
+
+    public TackleSkinSmithingRecipe(Recipe.CommonInfo commonInfo, Ingredient template, Ingredient base, Ingredient addition)
     {
-        return this.template.test(input.template())
-                && this.base.test(input.base())
-                && this.addition.test(input.addition());
+        super(commonInfo);
+        this.template = template;
+        this.base = base;
+        this.addition = addition;
     }
 
-    public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider registries)
+    public ItemStack assemble(SmithingRecipeInput input)
     {
-        ItemStack resultRod = input.base().copy();
+        ItemStack resultRod = input.base().transmuteCopy(input.base().getItem(), input.base().getCount());
+        resultRod.applyComponents(input.base().getComponentsPatch());
 
-        List<ResourceLocation> catchModifiers = new ArrayList<>(SCDataComponents.getOrDefault(input.base(), SCDataComponents.CATCH_MODIFIERS, List.of()));
+        List<Identifier> catchModifiers = new ArrayList<>(SCDataComponents.getOrDefault(input.base(), SCDataComponents.CATCH_MODIFIERS, List.of()));
         catchModifiers.addAll(SCDataComponents.getOrDefault(input.template(), SCDataComponents.CATCH_MODIFIERS, List.of()));
         catchModifiers.addAll(SCDataMaps.getOrDefault(input.template(), SCDataMaps.CATCH_MODIFIERS, List.of()));
 
-        List<ResourceLocation> minigameModifiers = new ArrayList<>(SCDataComponents.getOrDefault(input.base(), SCDataComponents.MINIGAME_MODIFIERS, List.of()));
+        List<Identifier> minigameModifiers = new ArrayList<>(SCDataComponents.getOrDefault(input.base(), SCDataComponents.MINIGAME_MODIFIERS, List.of()));
         minigameModifiers.addAll(SCDataComponents.getOrDefault(input.template(), SCDataComponents.MINIGAME_MODIFIERS, List.of()));
         minigameModifiers.addAll(SCDataMaps.getOrDefault(input.template(), SCDataMaps.MINIGAME_MODIFIERS, List.of()));
 
-        ResourceLocation tackleSkin = SCTackleSkins.getTackleSkin(input.template());
+        Identifier tackleSkin = SCTackleSkins.getTackleSkin(input.template());
         if (!tackleSkin.equals(SCTackleSkins.BASE_TACKLE_SKIN))
             SCDataComponents.set(resultRod, SCDataComponents.TACKLE_SKIN, tackleSkin);
 
@@ -50,85 +83,46 @@ public record TackleSkinSmithingRecipe(Ingredient template, Ingredient base, Ing
     }
 
     @Override
-    public boolean isTemplateIngredient(ItemStack stack)
+    public Optional<Ingredient> templateIngredient()
     {
-        return this.template.test(stack);
+        return Optional.of(this.template);
     }
 
     @Override
-    public boolean isBaseIngredient(ItemStack stack)
+    public Ingredient baseIngredient()
     {
-        return this.base.test(stack);
+        return this.base;
     }
 
     @Override
-    public boolean isAdditionIngredient(ItemStack stack)
+    public Optional<Ingredient> additionIngredient()
     {
-        return this.addition.test(stack);
+        return Optional.of(this.addition);
     }
 
     @Override
-    public ItemStack getResultItem(HolderLookup.Provider registries)
+    public RecipeSerializer<TackleSkinSmithingRecipe> getSerializer()
     {
-        ItemStack itemstack = new ItemStack(SCItems.ROD.get());
-        return itemstack;
+        return SERIALIZER;
     }
 
     @Override
-    public RecipeSerializer<?> getSerializer()
+    protected PlacementInfo createPlacementInfo()
     {
-        return SCRecipes.TACKLE_SKIN_SMITHING.get();
+        return PlacementInfo.create(List.of(this.template, this.base, this.addition));
     }
 
     @Override
-    public RecipeType<?> getType()
+    public List<RecipeDisplay> display()
     {
-        return RecipeType.SMITHING;
-    }
-
-    @Override
-    public boolean isIncomplete()
-    {
-        return Stream.of(this.template, this.base, this.addition).anyMatch(Ingredient::hasNoItems);
-    }
-
-    public static class Serializer implements RecipeSerializer<TackleSkinSmithingRecipe>
-    {
-        private static final MapCodec<TackleSkinSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                Ingredient.CODEC.fieldOf("template").forGetter((o) -> o.template),
-                Ingredient.CODEC.fieldOf("base").forGetter((o) -> o.base),
-                Ingredient.CODEC.fieldOf("addition").forGetter((o) -> o.addition)
-        ).apply(instance, TackleSkinSmithingRecipe::new));
-
-        public static final StreamCodec<RegistryFriendlyByteBuf, TackleSkinSmithingRecipe> STREAM_CODEC = StreamCodec.of(
-                Serializer::toNetwork, Serializer::fromNetwork
+        return List.of(
+                new SmithingRecipeDisplay(
+                        this.template.display(),
+                        this.base.display(),
+                        this.addition.display(),
+                        this.base.display(),
+                        new SlotDisplay.ItemSlotDisplay(Items.SMITHING_TABLE)
+                )
         );
-
-        @Override
-        public MapCodec<TackleSkinSmithingRecipe> codec()
-        {
-            return CODEC;
-        }
-
-        @Override
-        public StreamCodec<RegistryFriendlyByteBuf, TackleSkinSmithingRecipe> streamCodec()
-        {
-            return STREAM_CODEC;
-        }
-
-        private static TackleSkinSmithingRecipe fromNetwork(RegistryFriendlyByteBuf buffer)
-        {
-            Ingredient template = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient base = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient addition = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            return new TackleSkinSmithingRecipe(template, base, addition);
-        }
-
-        private static void toNetwork(RegistryFriendlyByteBuf buffer, TackleSkinSmithingRecipe recipe)
-        {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.template);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.base);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.addition);
-        }
     }
 }

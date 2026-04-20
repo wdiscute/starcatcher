@@ -97,7 +97,7 @@ public class SeasonRestriction extends AbstractFishRestriction
         //TerraFirmaCraft Seasons check
         if (ModList.get().isLoaded("tfc") && SCConfig.ENABLE_SEASONS.get())
         {
-            currentSeason = TerraFirmaCraftSeasonsCompat.getSeason(level);
+            //currentSeason = TerraFirmaCraftSeasonsCompat.getSeason(level);
         }
 
         if (currentSeason.equals(Seasons.ALL)) return 0;

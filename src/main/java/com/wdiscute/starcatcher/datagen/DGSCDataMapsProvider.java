@@ -5,6 +5,7 @@ import com.wdiscute.sellingbin.processors.QualityFoodsProcessor;
 import com.wdiscute.sellingbin.registry.SBDataMaps;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -19,8 +20,8 @@ import com.wdiscute.starcatcher.sellingbin.FishProcessor;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
@@ -82,10 +83,10 @@ public class DGSCDataMapsProvider extends DataMapProvider
             currencies.add(Items.EMERALD_BLOCK.builtInRegistryHolder(), 900, false);
 
             //selling sellable fishes
-            Map<ResourceLocation, Float> qualities = Map.of(
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "diamond"), 2f,
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "gold"), 1.5f,
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "iron"), 1.25f
+            Map<Identifier, Float> qualities = Map.of(
+                    U.rl("quality_food", "diamond"), 2f,
+                    U.rl("quality_food", "gold"), 1.5f,
+                    U.rl("quality_food", "iron"), 1.25f
             );
 
             sellable.add(SCTags.COMMON_FISHES, new SBDataMaps.ItemValue(25, List.of(
@@ -165,7 +166,7 @@ public class DGSCDataMapsProvider extends DataMapProvider
                 SCCatchModifiers.BIG_DECREASES_LURE_TIME.getFirst()), false);
 
         //angler's hat (artifacts / reliquified artifacts compat)
-        catchModifiers.add(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("artifacts", "anglers_hat")), List.of(SCCatchModifiers.ANGLERS_HAT.getFirst()), false);
+        catchModifiers.add(ResourceKey.create(Registries.ITEM, U.rl("artifacts", "anglers_hat")), List.of(SCCatchModifiers.ANGLERS_HAT.getFirst()), false);
 
 
         //hats

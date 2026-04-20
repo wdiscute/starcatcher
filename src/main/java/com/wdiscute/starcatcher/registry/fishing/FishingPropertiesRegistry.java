@@ -10,8 +10,8 @@ import com.wdiscute.starcatcher.registry.fishing.compat.*;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.conditions.ICondition;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
@@ -334,12 +334,12 @@ public class FishingPropertiesRegistry
     static ResourceKey<FishProperties> createKey(FishProperties fp)
     {
         if (fp.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH))
-            return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, ResourceLocation.parse(fp.catchInfo().fish().getRegisteredName()));
+            return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Identifier.parse(fp.catchInfo().fish().getRegisteredName()));
 
-        return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, ResourceLocation.parse(
-                fp.catchInfo().fish().getKey().location().getNamespace() + ":" +
+        return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Identifier.parse(
+                fp.catchInfo().fish().getKey().identifier().getNamespace() + ":" +
                         fp.catchInfo().fishEntryType().name().toLowerCase(Locale.ROOT) + "_" +
-                        fp.catchInfo().fish().getKey().location().getPath()
+                        fp.catchInfo().fish().getKey().identifier().getPath()
                 ));
     }
 
@@ -363,7 +363,7 @@ public class FishingPropertiesRegistry
         FishProperties properties = builder.build();
         ResourceKey<FishProperties> key = FishingPropertiesRegistry.createKey(properties);
         PROPERTIES.add(Pair.of(key, properties));
-        String namespace = key.location().getNamespace();
+        String namespace = key.identifier().getNamespace();
         if (!namespace.equals("minecraft") && !namespace.equals("starcatcher"))
             COMPAT_KEYS.add(key);
     }
@@ -373,12 +373,12 @@ public class FishingPropertiesRegistry
         for (ResourceKey<FishProperties> compatKey : COMPAT_KEYS)
         {
             //fix for hybrid aquatic as their modid is hybrid_aquatic but items use hybrid-aquatic
-            if (compatKey.location().getNamespace().equals("hybrid-aquatic"))
+            if (compatKey.identifier().getNamespace().equals("hybrid-aquatic"))
             {
                 consumer.accept(compatKey, new ModLoadedCondition("hybrid_aquatic"));
                 continue;
             }
-            consumer.accept(compatKey, new ModLoadedCondition(compatKey.location().getNamespace()));
+            consumer.accept(compatKey, new ModLoadedCondition(compatKey.identifier().getNamespace()));
         }
     }
 

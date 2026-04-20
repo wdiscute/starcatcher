@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.registry.minigamemodifiers;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -9,6 +8,7 @@ import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.joml.Matrix3x2fStack;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -97,7 +97,7 @@ public abstract class AbstractMinigameModifier
     /**
      * Disables rendering the included pointer
      * <p>
-     * Still renders {@link #renderOnPointer(GuiGraphicsExtractor, PoseStack, float)}
+     * Still renders {@link #renderOnPointer(GuiGraphicsExtractor, Matrix3x2fStack, float)}
      */
     public boolean disablePointerRendering(){
         return false;
@@ -106,13 +106,13 @@ public abstract class AbstractMinigameModifier
     /**
      * Has the correctly rotated poseStack already
      */
-    public void renderOnPointer(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick){};
+    public void renderOnPointer(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, float partialTick){};
 
     public boolean disableSweetSpotRendering(ActiveSweetSpot spot){
         return false;
     }
 
-    public void renderOnSweetSpot(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick){};
+    public void renderOnSweetSpot(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, ActiveSweetSpot spot, float partialTick){};
 
     public boolean forceAwardTreasure()
     {

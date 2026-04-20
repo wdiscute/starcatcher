@@ -7,8 +7,10 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.function.Supplier;
@@ -30,12 +32,14 @@ public class FrozenPointerWhileActiveModifier extends AbstractTimedModifier
     }
 
     @Override
-    public MapCodec<? extends AbstractMinigameModifier> codec() {
+    public MapCodec<? extends AbstractMinigameModifier> codec()
+    {
         return CODEC;
     }
 
     @Override
-    public DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> getRegistryHolder() {
+    public DeferredHolder<Supplier<AbstractMinigameModifier>, Supplier<AbstractMinigameModifier>> getRegistryHolder()
+    {
         return SCMinigameModifiers.FROZEN_POINTER;
     }
 
@@ -44,7 +48,7 @@ public class FrozenPointerWhileActiveModifier extends AbstractTimedModifier
     {
         super.onAdd(instance);
         //cancel if any modifiers with the CancelFrozenEffect interface are active
-        if(instance.getModifiers().stream().anyMatch(o -> o instanceof CancelFrozenEffect))
+        if (instance.getModifiers().stream().anyMatch(o -> o instanceof CancelFrozenEffect))
             removed = true;
         onMiss();
     }
@@ -58,12 +62,12 @@ public class FrozenPointerWhileActiveModifier extends AbstractTimedModifier
         float decreaseTime = Math.abs(instance.pointerBaseSpeed) / rampTime;
 
         //who knows wtf is going on here tbh
-        if(tickCount <= rampTime)
+        if (tickCount <= rampTime)
         {
             instance.pointerSpeed = Math.abs(currentSpeed) < decreaseTime ? 0 : currentSpeed - Math.signum(currentSpeed) * decreaseTime;
         }
 
-        if(tickCount >= length - rampTime)
+        if (tickCount >= length - rampTime)
         {
             float newPointerSpeed = currentSpeed + U.sign(currentSpeed) * decreaseTime;
             instance.pointerSpeed = Math.abs(instance.pointerBaseSpeed) < newPointerSpeed ? instance.pointerBaseSpeed : newPointerSpeed;
@@ -86,13 +90,13 @@ public class FrozenPointerWhileActiveModifier extends AbstractTimedModifier
     }
 
     @Override
-    public void renderForeground(GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderForeground(guiGraphics, partialTick, width, height);
-        RenderSystem.setShaderColor(1, 1, 1, 1 - (instance.pointerSpeed - instance.pointerBaseSpeed / 2) / (instance.pointerBaseSpeed - instance.pointerBaseSpeed / 2));
-        RenderSystem.enableBlend();
-        guiGraphics.blit(FishingMinigameScreen.TEXTURE, width / 2 - 16, height / 2 - 16, 32, 32, 0, 0, 32, 32, 256, 256);
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.enableBlend();
+        float alpha = 1 - (instance.pointerSpeed - instance.pointerBaseSpeed / 2) / (instance.pointerBaseSpeed - instance.pointerBaseSpeed / 2);
+        guiGraphics.blit(RenderPipelines.GUI,
+                FishingMinigameScreen.TEXTURE,
+                width / 2 - 16, height / 2 - 16, 32, 32, 0, 0, 32,
+                32, 256, 256, ARGB.colorFromFloat(alpha, 1, 1, 1));
     }
 }

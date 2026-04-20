@@ -4,22 +4,17 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.SCDataComponents;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
@@ -36,28 +31,17 @@ public class LetterItem extends Item
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        if(SCDataComponents.has(stack, SCDataComponents.MESSAGE) && tooltipFlag.isAdvanced())
-        {
-            Message wd = SCDataComponents.get(stack, SCDataComponents.MESSAGE);
-            tooltipComponents.add(Component.literal("written by uuid: " + wd.sender).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-        }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand)
     {
         Message message = SCDataComponents.getOrDefault(player.getItemInHand(usedHand), SCDataComponents.MESSAGE, Message.empty());
-        if(level.isClientSide)
+        if(level.isClientSide())
         {
             if (message.locked)
                 openMessageScreen(message);
             else
                 openMessageWriteScreen(message);
         }
-        return InteractionResultHolder.success(player.getItemInHand(usedHand));
+        return InteractionResult.SUCCESS;
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -77,7 +61,7 @@ public class LetterItem extends Item
     public record Message(
             UUID sender,
             String senderDisplayName,
-            ResourceLocation dimension,
+            Identifier dimension,
             List<String> text,
             boolean locked
     )
@@ -91,7 +75,7 @@ public class LetterItem extends Item
                 instance.group(
                         UUIDUtil.CODEC.fieldOf("sender").forGetter(Message::sender),
                         Codec.STRING.fieldOf("sender_display_name").forGetter(Message::senderDisplayName),
-                        ResourceLocation.CODEC.fieldOf("dimension").forGetter(Message::dimension),
+                        Identifier.CODEC.fieldOf("dimension").forGetter(Message::dimension),
                         Codec.STRING.listOf().fieldOf("text").forGetter(Message::text),
                         Codec.BOOL.fieldOf("locked").forGetter(Message::locked)
                 ).apply(instance, Message::new));
@@ -99,7 +83,7 @@ public class LetterItem extends Item
         public static final StreamCodec<RegistryFriendlyByteBuf, Message> STREAM_CODEC = StreamCodec.composite(
                 UUIDUtil.STREAM_CODEC, Message::sender,
                 ByteBufCodecs.STRING_UTF8, Message::senderDisplayName,
-                ResourceLocation.STREAM_CODEC, Message::dimension,
+                Identifier.STREAM_CODEC, Message::dimension,
                 ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), Message::text,
                 ByteBufCodecs.BOOL, Message::locked,
                 Message::new

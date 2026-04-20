@@ -10,17 +10,21 @@ import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.joml.Matrix3x2fStack;
+import org.joml.Matrix3x2fc;
 import org.joml.Quaternionf;
 
 import java.util.function.Supplier;
 
 public class TeleportModifier extends AbstractTimedModifier
 {
-    public static final ResourceLocation OVERLAY = Starcatcher.rl("textures/gui/minigame/modifiers/teleport.png");
+    public static final Identifier OVERLAY = Starcatcher.rl("textures/gui/minigame/modifiers/teleport.png");
 
     private float kimbePosition = U.r.nextInt(359);
 
@@ -91,49 +95,45 @@ public class TeleportModifier extends AbstractTimedModifier
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderBackground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderBackground(guiGraphics, partialTick, width, height);
-        guiGraphics.blit(
+        guiGraphics.blit(RenderPipelines.GUI,
                 OVERLAY, width / 2 - 48, height / 2 - 48,
                 96, 96, 0, 0, 96, 96, 96, 96);
     }
 
 
     @Override
-    public void renderForeground(GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderForeground(guiGraphics, partialTick, width, height);
         renderKimbeMarker(guiGraphics, width, height);
     }
 
-    public void renderKimbeMarker(GuiGraphics guiGraphics, int width, int height)
+    public void renderKimbeMarker(GuiGraphicsExtractor guiGraphics, int width, int height)
     {
-        PoseStack poseStack = guiGraphics.pose();
-        poseStack.pushPose();
+        Matrix3x2fStack poseStack = guiGraphics.pose();
+        poseStack.pushMatrix();
 
         float centerX = width / 2f;
         float centerY = height / 2f;
 
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(kimbePosition)));
-        poseStack.translate(-centerX, -centerY, 0);
+        poseStack.translate(centerX, centerY);
+        poseStack.mul((Matrix3x2fc) new Quaternionf().rotateZ((float) Math.toRadians(kimbePosition)));
+        poseStack.translate(-centerX, -centerY);
 
-        RenderSystem.setShaderColor(
+        int color = ARGB.colorFromFloat(
                 (float) U.intToRed(0x653bea) / 255,
                 (float) U.intToGreen(0x653bea) / 255,
                 (float) U.intToBlue(0x653bea) / 255,
                 0.6f);
-        RenderSystem.enableBlend();
 
-        guiGraphics.blit(
+        guiGraphics.blit(RenderPipelines.GUI,
                 FishingMinigameScreen.TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
-                64, 64, 128, 128, 64, 64, 256, 256);
+                64, 64, 128, 128, 64, 64, 256, 256, color);
 
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.disableBlend();
-
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
 }

@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
@@ -22,7 +22,7 @@ public class BottledLetterItem extends Item implements ProjectileItem
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+    public InteractionResult use(Level level, Player player, InteractionHand hand)
     {
         ItemStack itemstack = player.getItemInHand(hand);
         level.playSound(
@@ -47,9 +47,9 @@ public class BottledLetterItem extends Item implements ProjectileItem
                 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F)
         );
 
-        if (!level.isClientSide)
+        if (!level.isClientSide())
         {
-            BottledLetterEntity bottleEntity = new BottledLetterEntity(level, player);
+            BottledLetterEntity bottleEntity = new BottledLetterEntity(level, player, player.getItemInHand(hand));
             bottleEntity.setItem(itemstack);
             bottleEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
             level.addFreshEntity(bottleEntity);
@@ -57,13 +57,13 @@ public class BottledLetterItem extends Item implements ProjectileItem
 
         player.awardStat(Stats.ITEM_USED.get(this));
         itemstack.consume(1, player);
-        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override
     public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction)
     {
-        BottledLetterEntity bottleEntity = new BottledLetterEntity(level, pos.x(), pos.y(), pos.z());
+        BottledLetterEntity bottleEntity = new BottledLetterEntity(level, pos.x(), pos.y(), pos.z(), stack);
         bottleEntity.setItem(stack);
         return bottleEntity;
     }

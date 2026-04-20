@@ -7,7 +7,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -25,15 +25,15 @@ public class SecretNote extends Item
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand)
     {
         ItemStack itemInHand = player.getItemInHand(usedHand);
-        if (!level.isClientSide) return InteractionResultHolder.success(itemInHand);
+        if (!level.isClientSide()) return InteractionResult.SUCCESS;
 
         //read note
         openNoteScreen(SCDataComponents.getOrDefault(itemInHand, SCDataComponents.SECRET_NOTE, Note.SAMPLE_NOTE));
 
-        return InteractionResultHolder.success(itemInHand);
+        return InteractionResult.SUCCESS;
     }
 
     @OnlyIn(Dist.CLIENT)

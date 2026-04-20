@@ -11,8 +11,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BucketItem;
@@ -39,39 +40,22 @@ public class StarcaughtBucket extends BucketItem
     }
 
     @Override
-    public void checkExtraContent(@Nullable Player player, Level level, ItemStack containerStack, BlockPos pos)
+    public void checkExtraContent(@org.jspecify.annotations.Nullable LivingEntity user, Level level, ItemStack itemStack, BlockPos pos)
     {
         if (level instanceof ServerLevel)
         {
-            this.spawn((ServerLevel) level, containerStack, pos);
-            level.gameEvent(player, GameEvent.ENTITY_PLACE, pos);
+            this.spawn((ServerLevel) level, itemStack, pos);
+            level.gameEvent(user, GameEvent.ENTITY_PLACE, pos);
         }
     }
 
     private void spawn(ServerLevel serverLevel, ItemStack bucketedMobStack, BlockPos pos)
     {
-        FishEntity fishEntity = this.entity.spawn(serverLevel, bucketedMobStack, null, pos, MobSpawnType.BUCKET, true, false);
+        FishEntity fishEntity = this.entity.spawn(serverLevel, bucketedMobStack, null, pos, EntitySpawnReason.BUCKET, true, false);
         if (SCDataComponents.has(bucketedMobStack, SCDataComponents.BUCKETED_FISH))
-            fishEntity.setFish(getFish(bucketedMobStack));
+            fishEntity.setFish(SCDataComponents.getOrDefault(bucketedMobStack, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(ItemStack.EMPTY)).stack());
         else
             fishEntity.setFish(SCItems.AURORA.toStack());
-    }
-
-    private static ItemStack getFish(ItemStack bucket)
-    {
-        return SCDataComponents.getOrDefault(bucket, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(ItemStack.EMPTY)).stack();
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        ItemStack fish = getFish(stack);
-        if (fish.isEmpty())
-        {
-            tooltipComponents.add(1, Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1").withColor(0x888888));
-            tooltipComponents.add(1, Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0").withColor(0x888888));
-        }
     }
 
     @Override
@@ -95,7 +79,7 @@ public class StarcaughtBucket extends BucketItem
             {
                 baseName = itemName;
             }
-            else baseName = Component.translatable(ssc.stack().getDescriptionId());
+            else baseName = Component.translatable(ssc.stack().getItem().getDescriptionId());
 
             CaughtFishInfo sw = SCDataComponents.get(ssc.stack(), SCDataComponents.CAUGHT_FISH_INFO);
             if (sw != null)
@@ -111,7 +95,7 @@ public class StarcaughtBucket extends BucketItem
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack)
     {
-        return Optional.of(new BucketTooltip(getFish(stack)));
+        return Optional.of(new BucketTooltip(SCDataComponents.getOrDefault(stack, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(ItemStack.EMPTY)).stack()));
     }
 
     public record BucketTooltip(ItemStack fish) implements TooltipComponent

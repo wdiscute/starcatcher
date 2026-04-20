@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModifier;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import org.joml.Matrix3x2fStack;
 
 public abstract class AbstractSweetSpotBehaviour
 {
@@ -51,11 +52,11 @@ public abstract class AbstractSweetSpotBehaviour
     {
     }
 
-    public void render(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick)
+    public void render(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, float partialTick, int color)
     {
         if (ass.removed) return;
 
         // Renders the sprite centered to the top-left corner of the screen, to be moved with poseStack
-        FishingMinigameScreen.renderPoseCentered(guiGraphics, ass.texture, 96);
+        FishingMinigameScreen.renderPoseCentered(guiGraphics, ass.texture, 96, color);
     }
 }

@@ -4,7 +4,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ColorfulTackleSkin extends AbstractTackleSkin
 {
@@ -15,7 +15,7 @@ public class ColorfulTackleSkin extends AbstractTackleSkin
     }
 
     @Override
-    public ResourceLocation getTexture()
+    public Identifier getTexture()
     {
         return Starcatcher.rl("textures/entity/tackle/colorful.png");
     }

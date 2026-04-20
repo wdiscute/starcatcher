@@ -8,7 +8,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -23,15 +23,15 @@ import java.util.List;
 
 public class BiomeBias extends AbstractFishRestriction
 {
-    private final List<ResourceLocation> biomes;
-    private final List<ResourceLocation> biomesTags;
+    private final List<Identifier> biomes;
+    private final List<Identifier> biomesTags;
     private final int extraChance;
     private final String translationOverride;
 
     public static final MapCodec<BiomeBias> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes").forGetter(BiomeBias::getBiomes),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_tags").forGetter(BiomeBias::getBiomesTags),
+                    Identifier.CODEC.listOf().fieldOf("biomes").forGetter(BiomeBias::getBiomes),
+                    Identifier.CODEC.listOf().fieldOf("biomes_tags").forGetter(BiomeBias::getBiomesTags),
                     Codec.INT.fieldOf("extra_chance").forGetter(BiomeBias::getExtraChance),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(BiomeBias::getTranslationOverride)
             ).apply(instance, BiomeBias::new));
@@ -44,7 +44,7 @@ public class BiomeBias extends AbstractFishRestriction
         this.translationOverride = "";
     }
 
-    public BiomeBias(List<ResourceLocation> biomes, List<ResourceLocation> biomesTags, int extraChance, String translationOverride)
+    public BiomeBias(List<Identifier> biomes, List<Identifier> biomesTags, int extraChance, String translationOverride)
     {
         this.biomes = biomes;
         this.biomesTags = biomesTags;
@@ -52,12 +52,12 @@ public class BiomeBias extends AbstractFishRestriction
         this.translationOverride = translationOverride;
     }
 
-    public List<ResourceLocation> getBiomes()
+    public List<Identifier> getBiomes()
     {
         return biomes;
     }
 
-    public List<ResourceLocation> getBiomesTags()
+    public List<Identifier> getBiomesTags()
     {
         return biomesTags;
     }
@@ -89,7 +89,7 @@ public class BiomeBias extends AbstractFishRestriction
     {
         Holder<Biome> biome = level.getBiome(entity.blockPosition());
 
-        if (biomes.contains(biome.getKey().location())) return extraChance;
+        if (biomes.contains(biome.getKey().identifier())) return extraChance;
 
         if (biomesTags.stream().anyMatch(rl -> biome.is(TagKey.create(Registries.BIOME, rl))))
             return extraChance;

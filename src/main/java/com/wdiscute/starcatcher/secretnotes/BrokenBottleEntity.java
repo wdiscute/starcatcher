@@ -10,9 +10,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -24,12 +25,12 @@ public class BrokenBottleEntity extends ThrowableItemProjectile
         super(entityType, level);
     }
 
-    public BrokenBottleEntity(Level level, LivingEntity shooter) {
-        super(SCEntities.BROKEN_BOTTLE.get(), shooter, level);
+    public BrokenBottleEntity(Level level, LivingEntity shooter, ItemStack stack) {
+        super(SCEntities.BROKEN_BOTTLE.get(), shooter, level, stack);
     }
 
-    public BrokenBottleEntity(Level level, double x, double y, double z) {
-        super(SCEntities.BROKEN_BOTTLE.get(), x, y, z, level);
+    public BrokenBottleEntity(Level level, double x, double y, double z, ItemStack stack) {
+        super(SCEntities.BROKEN_BOTTLE.get(), x, y, z, level, stack);
     }
 
     @Override
@@ -41,7 +42,7 @@ public class BrokenBottleEntity extends ThrowableItemProjectile
     private ParticleOptions getParticle()
     {
         ItemStack itemstack = this.getItem();
-        return new ItemParticleOption(ParticleTypes.ITEM, itemstack);
+        return new ItemParticleOption(ParticleTypes.ITEM, ItemStackTemplate.fromNonEmptyStack(itemstack));
     }
 
     public void handleEntityEvent(byte id)
@@ -77,7 +78,7 @@ public class BrokenBottleEntity extends ThrowableItemProjectile
     protected void onHit(HitResult result)
     {
         super.onHit(result);
-        if (!this.level().isClientSide)
+        if (!this.level().isClientSide())
         {
             level().playSound(
                     null,

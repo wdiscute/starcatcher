@@ -4,7 +4,7 @@ import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -18,7 +18,7 @@ public class MessageInABottleItem extends Item
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand)
     {
         ItemStack itemInHand = player.getItemInHand(usedHand);
         if(SCDataComponents.has(itemInHand, SCDataComponents.MESSAGE))
@@ -35,6 +35,6 @@ public class MessageInABottleItem extends Item
             player.setItemInHand(usedHand, new ItemStack(SCItems.BROKEN_BOTTLE.get()));
         }
 
-        return InteractionResultHolder.success(player.getItemInHand(usedHand));
+        return InteractionResult.SUCCESS;
     }
 }

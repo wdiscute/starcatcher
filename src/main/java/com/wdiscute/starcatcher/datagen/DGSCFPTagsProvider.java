@@ -5,21 +5,17 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.fishing.FishingPropertiesRegistry;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.resources.Identifier;
 
 import java.util.concurrent.CompletableFuture;
 
 public class DGSCFPTagsProvider extends TagsProvider<FishProperties>
 {
-    public DGSCFPTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper)
+    public DGSCFPTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider)
     {
-        super(output, Starcatcher.FISH_REGISTRY_KEY, lookupProvider, Starcatcher.MOD_ID, existingFileHelper);
+        super(output, Starcatcher.FISH_REGISTRY_KEY, lookupProvider, Starcatcher.MOD_ID);
     }
 
     @Override
@@ -30,7 +26,7 @@ public class DGSCFPTagsProvider extends TagsProvider<FishProperties>
         FishingPropertiesRegistry.PROPERTIES.forEach(o ->
         {
             FishProperties fp = o.getSecond();
-            ResourceLocation location = o.getFirst().location();
+            Identifier location = o.getFirst().identifier();
             if(fp.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH))
             {
                 if(fp.rarity().equals(FishProperties.Rarity.TRASH)) tag(SCTags.TRASH_FISHES_FP).addOptional(location);

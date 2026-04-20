@@ -8,7 +8,7 @@ import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,14 +23,14 @@ import java.util.List;
 public class DimensionRestriction extends AbstractFishRestriction
 {
 
-    private final List<ResourceLocation> dimensions;
-    private final List<ResourceLocation> dimensionsBlacklist;
+    private final List<Identifier> dimensions;
+    private final List<Identifier> dimensionsBlacklist;
     private final String translationOverride;
 
     public static final MapCodec<DimensionRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("dimensions").forGetter(DimensionRestriction::getDimensions),
-                    ResourceLocation.CODEC.listOf().fieldOf("dimensions_blacklist").forGetter(DimensionRestriction::getDimensionsBlacklist),
+                    Identifier.CODEC.listOf().fieldOf("dimensions").forGetter(DimensionRestriction::getDimensions),
+                    Identifier.CODEC.listOf().fieldOf("dimensions_blacklist").forGetter(DimensionRestriction::getDimensionsBlacklist),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(DimensionRestriction::getTranslationOverride)
             ).apply(instance, DimensionRestriction::new));
 
@@ -41,19 +41,19 @@ public class DimensionRestriction extends AbstractFishRestriction
         this.translationOverride = "";
     }
 
-    public DimensionRestriction(List<ResourceLocation> dimensions, List<ResourceLocation> dimensionsBlacklist, String translationOverride)
+    public DimensionRestriction(List<Identifier> dimensions, List<Identifier> dimensionsBlacklist, String translationOverride)
     {
         this.dimensions = dimensions;
         this.dimensionsBlacklist = dimensionsBlacklist;
         this.translationOverride = translationOverride;
     }
 
-    public List<ResourceLocation> getDimensions()
+    public List<Identifier> getDimensions()
     {
         return dimensions;
     }
 
-    public List<ResourceLocation> getDimensionsBlacklist()
+    public List<Identifier> getDimensionsBlacklist()
     {
         return dimensionsBlacklist;
     }
@@ -78,7 +78,7 @@ public class DimensionRestriction extends AbstractFishRestriction
     @Override
     public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        ResourceLocation dim = level.dimension().location();
+        Identifier dim = level.dimension().identifier();
         if (!dimensions.isEmpty() && !dimensions.contains(dim)) return -9999;
         if (dimensionsBlacklist.contains(dim)) return -9999;
         return 0;
@@ -118,11 +118,11 @@ public class DimensionRestriction extends AbstractFishRestriction
 
             c.add(Component.translatable("gui.guide.dimensions"));
 
-            for (ResourceLocation dimension : dimensions)
+            for (Identifier dimension : dimensions)
                 hover.add(Component.translatable("dimension." + dimension.toLanguageKey()));
         }
 
-        if (dimensions.contains(level.dimension().location()))
+        if (dimensions.contains(level.dimension().identifier()))
             comp.withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN));
         else
             comp.withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED));
@@ -140,14 +140,14 @@ public class DimensionRestriction extends AbstractFishRestriction
             //show tooltip while hovering
             blacklist.add(Component.translatable("gui.guide.blacklisted_dimensions"));
 
-            for (ResourceLocation resourceLocation : dimensionsBlacklist)
-                blacklist.add(Component.literal(resourceLocation.toString()));
+            for (Identifier Identifier : dimensionsBlacklist)
+                blacklist.add(Component.literal(Identifier.toString()));
         }
 
         return blacklist;
     }
 
-    public static final DimensionRestriction OVERWORLD = new DimensionRestriction(List.of(Level.OVERWORLD.location()), List.of(), "");
-    public static final DimensionRestriction NETHER = new DimensionRestriction(List.of(Level.NETHER.location()), List.of(), "");
-    public static final DimensionRestriction END = new DimensionRestriction(List.of(Level.END.location()), List.of(), "");
+    public static final DimensionRestriction OVERWORLD = new DimensionRestriction(List.of(Level.OVERWORLD.identifier()), List.of(), "");
+    public static final DimensionRestriction NETHER = new DimensionRestriction(List.of(Level.NETHER.identifier()), List.of(), "");
+    public static final DimensionRestriction END = new DimensionRestriction(List.of(Level.END.identifier()), List.of(), "");
 }

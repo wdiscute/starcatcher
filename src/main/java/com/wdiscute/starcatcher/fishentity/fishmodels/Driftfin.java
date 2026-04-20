@@ -1,9 +1,6 @@
 package com.wdiscute.starcatcher.fishentity.fishmodels;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.fishentity.FishEntityRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -11,8 +8,6 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
 
 public class Driftfin extends EntityModel<EntityRenderState>
 {

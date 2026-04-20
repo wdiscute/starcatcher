@@ -14,16 +14,19 @@ import net.minecraft.world.entity.player.Player;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FishingGuideAttachment {
+public class FishingGuideAttachment
+{
     public Map<Identifier, FishCaughtCounter> fishesCaught;
     public boolean receivedGuide;
 
-    public FishingGuideAttachment(Map<Identifier, FishCaughtCounter> fishesCaught, boolean receivedGuide ) {
+    public FishingGuideAttachment(Map<Identifier, FishCaughtCounter> fishesCaught, boolean receivedGuide)
+    {
         this.fishesCaught = new HashMap<>(fishesCaught); //guarantees the map is mutable
         this.receivedGuide = receivedGuide;
     }
 
-    public static FishingGuideAttachment createDefault() {
+    public static FishingGuideAttachment createDefault()
+    {
         return new FishingGuideAttachment(
                 new HashMap<>(),
                 false);
@@ -44,29 +47,35 @@ public class FishingGuideAttachment {
     );
 
 
-    public static Map<Identifier, FishCaughtCounter> getFishesCaught(Player player) {
+    public static Map<Identifier, FishCaughtCounter> getFishesCaught(Player player)
+    {
         return get(player).fishesCaught;
     }
 
-    public static void setFishesCaught(Player player, Map<Identifier, FishCaughtCounter> fishesCaught) {
+    public static void setFishesCaught(Player player, Map<Identifier, FishCaughtCounter> fishesCaught)
+    {
         get(player).fishesCaught = fishesCaught;
         sync(player);
     }
 
-    public static boolean getReceivedGuide(Player player) {
+    public static boolean getReceivedGuide(Player player)
+    {
         return get(player).receivedGuide;
     }
 
-    public static void setReceivedGuide(Player player, boolean receivedGuide) {
+    public static void setReceivedGuide(Player player, boolean receivedGuide)
+    {
         get(player).receivedGuide = receivedGuide;
         sync(player);
     }
 
-    public static FishingGuideAttachment get(Entity holder){
+    public static FishingGuideAttachment get(Entity holder)
+    {
         return holder.getData(SCDataAttachments.FISHING_GUIDE);
     }
 
-    public static void sync(Player player){
+    public static void sync(Player player)
+    {
         player.syncData(SCDataAttachments.FISHING_GUIDE);
     }
 

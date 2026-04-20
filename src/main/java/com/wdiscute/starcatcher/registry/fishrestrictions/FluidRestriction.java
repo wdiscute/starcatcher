@@ -9,7 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,12 +25,12 @@ import java.util.List;
 
 public class FluidRestriction extends AbstractFishRestriction
 {
-    private final List<ResourceLocation> fluids;
+    private final List<Identifier> fluids;
     private final String translationOverride;
 
     public static final MapCodec<FluidRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("fluids").forGetter(FluidRestriction::getFluids),
+                    Identifier.CODEC.listOf().fieldOf("fluids").forGetter(FluidRestriction::getFluids),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(FluidRestriction::getTranslationOverride)
             ).apply(instance, FluidRestriction::new));
 
@@ -40,19 +40,19 @@ public class FluidRestriction extends AbstractFishRestriction
         this.translationOverride = "";
     }
 
-    public FluidRestriction(List<ResourceLocation> fluids, String translationOverride)
+    public FluidRestriction(List<Identifier> fluids, String translationOverride)
     {
         this.fluids = fluids;
         this.translationOverride = translationOverride;
     }
 
-    public FluidRestriction(ResourceLocation fluids, String translationOverride)
+    public FluidRestriction(Identifier fluids, String translationOverride)
     {
         this.fluids = List.of(fluids);
         this.translationOverride = translationOverride;
     }
 
-    public List<ResourceLocation> getFluids()
+    public List<Identifier> getFluids()
     {
         return fluids;
     }
@@ -128,9 +128,9 @@ public class FluidRestriction extends AbstractFishRestriction
         return fluid;
     }
 
-    public static final FluidRestriction LAVA = new FluidRestriction(ResourceLocation.withDefaultNamespace("lava"), "");
-    public static final FluidRestriction WATER = new FluidRestriction(ResourceLocation.withDefaultNamespace("water"), "");
-    public static final FluidRestriction VOID = new FluidRestriction(ResourceLocation.withDefaultNamespace("empty"), "");
+    public static final FluidRestriction LAVA = new FluidRestriction(U.rl("lava"), "");
+    public static final FluidRestriction WATER = new FluidRestriction(U.rl("water"), "");
+    public static final FluidRestriction VOID = new FluidRestriction(U.rl("empty"), "");
     public static final FluidRestriction ACID = new FluidRestriction(U.rl("alexscaves", "acid"), "");
     public static final FluidRestriction PURPLE_SODA = new FluidRestriction(U.rl("alexscaves", "purple_soda"), "");
 }
