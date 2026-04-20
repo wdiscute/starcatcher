@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -22,7 +22,7 @@ public class SCSounds
 
 
     private static Supplier<SoundEvent> registerSoundEvent(String name) {
-        ResourceLocation id = Starcatcher.rl(name);
+        Identifier id = Starcatcher.rl(name);
         return SOUND_EVENTS.register(name, () -> SoundEvent.createVariableRangeEvent(id));
     }
 

@@ -21,6 +21,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
@@ -28,13 +30,17 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Matrix3x2fStack;
+import org.joml.Matrix3x2fc;
 import org.joml.Quaternionf;
 import org.joml.Vector2d;
 
@@ -243,23 +249,23 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public void renderBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTickNeo)
+    public void extractBackground(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTickNeo)
     {
-        super.renderBackground(guiGraphics, mouseX, mouseY, partialTickNeo);
+        super.extractBackground(guiGraphics, mouseX, mouseY, partialTickNeo);
 
         final float partialTick = SCConfig.VANILLA_PARTIAL_TICK.get() ? partialTickNeo : PartialTickHelper.INSTANCE.getPartialTicks(minecraft.level);
 
-        PoseStack poseStack = guiGraphics.pose();
+        Matrix3x2fStack poseStack = guiGraphics.pose();
         partial = partialTick;
 
-        poseStack.pushPose();
-        poseStack.translate(width >> 1, height >> 1, 0);
+        poseStack.pushMatrix();
+        poseStack.translate(width >> 1, height >> 1);
 
-        poseStack.translate(xOffset, yOffset, 0);
+        poseStack.translate(xOffset, yOffset);
 
-        poseStack.scale(renderScale, renderScale, 1);
+        poseStack.scale(renderScale, renderScale);
 
-        poseStack.translate(-width >> 1, -height >> 1, 0);
+        poseStack.translate(-width >> 1, -height >> 1);
 
         //render modifiers background
         modifiers.forEach(modifier -> modifier.renderBackground(guiGraphics, partialTick, width, height));
@@ -267,7 +273,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         if (treasureActive) renderTreasure(guiGraphics);
 
         //render tank background
-        guiGraphics.blit(tankTexture, width / 2 - 42 - 100, height / 2 - 48, 85, 97, 0, 0, 85, 97, 85, 97);
+        guiGraphics.blit(RenderPipelines.GUI, tankTexture, width / 2 - 42 - 100, height / 2 - 48, 85, 97, 0, 0, 85, 97, 85, 97);
 
         /*
         //test for the vignette shader
@@ -279,10 +285,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         );*/
 
         //render wheel background
-        guiGraphics.blit(TEXTURE, width / 2 - 32, height / 2 - 32, 64, 64, 0, 192, 64, 64, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 32, height / 2 - 32, 64, 64, 0, 192, 64, 64, 256, 256);
 
         //render spacebar
-        guiGraphics.blit(TEXTURE, width / 2 - 16, height / 2 + 40, 32, 16, isHoldingKey ? 48 : 0, 112, 32, 16, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 16, height / 2 + 40, 32, 16, isHoldingKey ? 48 : 0, 112, 32, 16, 256, 256);
 
         //render all sweet spots
         activeSweetSpots.forEach(ass -> renderSweetSpot(ass, guiGraphics, partialTick, poseStack));
@@ -307,16 +313,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //fishing line
         guiGraphics.blit(RenderPipelines.GUI,
                 TEXTURE, width / 2 - 6 - 102, height / 2 - 56 - 18,
-                16, (int) (112 - yoffset),
-                176F, yoffset,
+                16F, 112 - yoffset,
+                (int) 176F, (int) yoffset,
                 16, (int) (112 - yoffset),
                 256, 256);
 
         //item being fished
-        poseStack.pushPose();
-        poseStack.translate(0, -yoffset, 0);
+        poseStack.pushMatrix();
+        poseStack.translate(0, -yoffset);
         guiGraphics.item(itemBeingFished, width / 2 - 8 - 100, height / 2 - 8 + 35);
-        poseStack.popPose();
+        poseStack.popMatrix();
 
         //render sweet spots foreground
         activeSweetSpots.forEach(sweetspot -> sweetspot.behaviour.renderForeground(guiGraphics, partialTick, width, height));
@@ -327,48 +333,48 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //render particles
         hitParticles.forEach(p -> p.render(guiGraphics, width, height));
 
-        poseStack.popPose();
+        poseStack.popMatrix() ;
     }
 
-    public void renderSweetSpot(ActiveSweetSpot ass, GuiGraphicsExtractor guiGraphics, float partialTick, PoseStack poseStack)
+    public void renderSweetSpot(ActiveSweetSpot ass, GuiGraphicsExtractor guiGraphics, float partialTick, Matrix3x2fStack poseStack)
     {
         float centerX = width / 2f;
         float centerY = height / 2f;
 
-        poseStack.pushPose();
+        poseStack.pushMatrix();
 
-        poseStack.translate(centerX, centerY, 0);
+        poseStack.translate(centerX, centerY);
 
-        poseStack.rotateAround(Axis.ZP.rotationDegrees(ass.pos + (partialTick * ass.movingRate) * ass.currentRotation), 0, 0, 0);
+        poseStack.rotate(Axis.ZP.rotationDegrees(ass.pos + (partialTick * ass.movingRate) * ass.currentRotation).angle());
 
         boolean isDisabled = modifiers.stream().anyMatch(mod -> mod.disableSweetSpotRendering(ass));
         if (!isDisabled)
-            ass.behaviour.render(guiGraphics, poseStack, partialTick);
+            ass.behaviour.render(guiGraphics, poseStack, partialTick, 0xffffffff);
 
         modifiers.forEach(mod -> mod.renderOnSweetSpot(guiGraphics, poseStack, ass, partialTick));
 
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     public void renderTreasure(GuiGraphicsExtractor guiGraphics)
     {
         //treasure bar
-        guiGraphics.blit(
+        guiGraphics.blit(RenderPipelines.GUI,
                 TEXTURE, width / 2 - 158, height / 2 - 42 + (int) (64 - (64f * treasureProgressSmooth) / 100),
-                5, 64 * treasureProgressSmooth / 100,
-                141, 6 + 64 - (float) (64 * treasureProgressSmooth) / 100,
+                5F, (float) (64 * treasureProgressSmooth / 100),
+                141, (int) (6 + 64 - (float) (64 * treasureProgressSmooth) / 100),
                 5, 64 * treasureProgressSmooth / 100,
                 256, 256);
 
         //treasure chest
-        guiGraphics.blit(TEXTURE, width / 2 - 16 - 155, height / 2 - 48, 32, 96, 96, 0, 32, 96, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 16 - 155, height / 2 - 48, 32, 96, 96, 0, 32, 96, 256, 256);
 
         //render treasure on top of bar
-        guiGraphics.renderItem(treasureIS, width / 2 - 163, ((int) ((float) height / 2 - (64f * treasureProgressSmooth) / 100) + 15));
+        guiGraphics.item(treasureIS, width / 2 - 163, ((int) ((float) height / 2 - (64f * treasureProgressSmooth) / 100) + 15));
 
         //outline when treasure complete
         if (treasureProgress > 99)
-            guiGraphics.blit(
+            guiGraphics.blit(RenderPipelines.GUI,
                     TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
                     32, 96, 64, 0, 32, 96, 256, 256);
 
@@ -380,92 +386,89 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     public void renderKimbeMarker(GuiGraphicsExtractor guiGraphics)
     {
         if (modifiers.stream().anyMatch(AbstractMinigameModifier::skipRenderingKimbeMarker)) return;
-        PoseStack poseStack = guiGraphics.pose();
-        poseStack.pushPose();
+        Matrix3x2fStack poseStack = guiGraphics.pose();
+        poseStack.pushMatrix();
 
         float centerX = width / 2f;
         float centerY = height / 2f;
 
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(kimbeMarkerPos)));
-        poseStack.translate(-centerX, -centerY, 0);
+        poseStack.translate(centerX, centerY);
+        poseStack.mul((Matrix3x2fc) new Quaternionf().rotateZ((float) Math.toRadians(kimbeMarkerPos)));
+        poseStack.translate(-centerX, -centerY);
 
-        RenderSystem.setShaderColor(
+        int color = ARGB.colorFromFloat(
                 (float) U.intToRed(kimbeMarkerColor) / 255,
                 (float) U.intToGreen(kimbeMarkerColor) / 255,
                 (float) U.intToBlue(kimbeMarkerColor) / 255,
                 kimbeMarkerAlpha);
-        RenderSystem.enableBlend();
 
-        guiGraphics.blit(
+        guiGraphics.blit(RenderPipelines.GUI,
                 TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
-                64, 64, 128, 128, 64, 64, 256, 256);
+                64, 64, 128, 128, 64, 64, 256, 256, color);
 
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.disableBlend();
-
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
-    public void renderPointer(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick)
+    public void renderPointer(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, float partialTick)
     {
-        poseStack.pushPose();
+        poseStack.pushMatrix();
 
         float centerX = width / 2f;
         float centerY = height / 2f;
 
-        poseStack.translate(centerX, centerY, 0);
+        poseStack.translate(centerX, centerY);
 
-        poseStack.mulPose(Axis.ZP.rotationDegrees(pointerPos + ((pointerSpeed * partialTick) * currentRotation)));
+        poseStack.mul((Matrix3x2fc) Axis.ZP.rotationDegrees(pointerPos + ((pointerSpeed * partialTick) * currentRotation)));
 
-        poseStack.translate(0, -16, 0);
+        poseStack.translate(0, -16);
 
         boolean isDisabled = modifiers.stream().anyMatch(AbstractMinigameModifier::disablePointerRendering);
         if (!isDisabled)
             renderPoseCentered(guiGraphics, TEXTURE, 64, 64, 128, 192, 256);
 
-        poseStack.translate(0, 16, 0);
+        poseStack.translate(0, 16);
 
         modifiers.forEach(mod -> mod.renderOnPointer(guiGraphics, poseStack, partialTick));
 
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     @Override
-    public boolean keyReleased(int keyCode, int scanCode, int keyModifiers)
+    public boolean keyReleased(KeyEvent event)
     {
-        if (keyCode == SCKeymappings.MINIGAME_HIT.getKey().getValue())
+        if (event.key() == SCKeymappings.MINIGAME_HIT.getKey().getValue())
         {
             isHoldingKey = false;
             holdingTicks = 0;
         }
 
-        modifiers.forEach(mod -> mod.onKeyReleased(keyCode, scanCode, keyModifiers));
+        modifiers.forEach(mod -> mod.onKeyReleased(event.key(), event.scancode(), event.modifiers()));
 
-        return super.keyReleased(keyCode, scanCode, keyModifiers);
+        return super.keyReleased(event);
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button)
+    public boolean mouseReleased(MouseButtonEvent event)
     {
         isHoldingMouse = false;
         holdingTicks = 0;
-        return super.mouseReleased(mouseX, mouseY, button);
+        return super.mouseReleased(event);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
         inputPressed();
         isHoldingMouse = true;
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int keyModifiers)
+    public boolean keyPressed(KeyEvent event)
     {
+
         //closes when pressing E
-        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        InputConstants.Key mouseKey = InputConstants.getKey(event);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey))
         {
             if (SCConfig.ENABLE_VILLAGER_SOUND.get()
@@ -485,10 +488,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             isHoldingKey = true;
         }
 
-        this.modifiers.forEach(mod -> mod.onKeyPress(keyCode, scanCode, keyModifiers));
+        this.modifiers.forEach(mod -> mod.onKeyPress(event.key(), event.scancode(), event.modifiers()));
 
-        return super.keyPressed(keyCode, scanCode, keyModifiers);
+        return super.keyPressed(event);
     }
+
 
     public void inputPressed()
     {
@@ -640,7 +644,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 )
                     Minecraft.getInstance().player.playSound(SoundEvents.VILLAGER_CELEBRATE);
 
-                PacketDistributor.sendToServer(new FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits));
+                ClientPacketDistributor.sendToServer(new FishingCompletedPayload(tickCount, awardTreasure, perfectCatch, consecutiveHits));
                 this.onClose();
             }
         }
@@ -653,7 +657,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         modifiers.forEach(AbstractMinigameModifier::onRemove);
 
-        PacketDistributor.sendToServer(new FishingCompletedPayload(-1, false, false, consecutiveHits));
+        ClientPacketDistributor.sendToServer(new FishingCompletedPayload(-1, false, false, consecutiveHits));
         this.minecraft.popGuiLayer();
     }
 
@@ -680,18 +684,29 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     /**
      * Renders a texture centered to the top left corner, to be moved with poseStack
      */
+    public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteSize, int color)
+    {
+        guiGraphics.blit(RenderPipelines.GUI,
+                texture, -spriteSize >> 1, -spriteSize >> 1,
+                spriteSize, spriteSize, 0, 0, spriteSize, spriteSize, spriteSize, spriteSize, color);
+    }
+
     public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteSize)
     {
-        guiGraphics.blit(
-                texture, -spriteSize >> 1, -spriteSize >> 1,
-                spriteSize, spriteSize, 0, 0, spriteSize, spriteSize, spriteSize, spriteSize);
+        renderPoseCentered(guiGraphics, texture, spriteSize, 0xffffffff);
+    }
+
+
+    public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteWidth, int spriteHeight, int uOffset, int vOffset, int textureSize, int color)
+    {
+        guiGraphics.blit(RenderPipelines.GUI,
+                texture, -spriteWidth >> 1, -spriteHeight >> 1,
+                spriteWidth, spriteHeight, uOffset, vOffset, spriteWidth, spriteHeight, textureSize, textureSize, color);
     }
 
     public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteWidth, int spriteHeight, int uOffset, int vOffset, int textureSize)
     {
-        guiGraphics.blit(
-                texture, -spriteWidth >> 1, -spriteHeight >> 1,
-                spriteWidth, spriteHeight, uOffset, vOffset, spriteWidth, spriteHeight, textureSize, textureSize);
+        renderPoseCentered(guiGraphics, texture, spriteWidth, spriteHeight, uOffset, vOffset, textureSize);
     }
 
 

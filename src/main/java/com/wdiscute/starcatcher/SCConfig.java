@@ -159,10 +159,6 @@ public class SCConfig
             .translation("starcatcher.configuration.restrict_tackle_box_to_tag")
             .define("restrict_tackle_box_to_tag", true);
 
-    public static final ModConfigSpec.BooleanValue ENABLE_ROD_MENU = BUILDER_SERVER
-            .translation("starcatcher.configuration.enable_rod_menu")
-            .define("enable_rod_menu", false);
-
     public static final ModConfigSpec.DoubleValue FISH_MAX_SCALE = BUILDER_SERVER
             .comment("Controls the maximum scale of the fish model based on the size and weight percentile")
             .translation("starcatcher.configuration.fish_percentile_size_max_scale")

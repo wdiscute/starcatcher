@@ -11,7 +11,7 @@ import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -29,12 +29,12 @@ import java.util.Optional;
 
 public class BaitRestriction extends AbstractFishRestriction
 {
-    private final Map<ResourceLocation, Integer> baits;
+    private final Map<Identifier, Integer> baits;
     private final String translationOverride;
 
     public static final MapCodec<BaitRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ExtraCodecs.strictUnboundedMap(ResourceLocation.CODEC, Codec.INT).fieldOf("baits").forGetter(BaitRestriction::getBaits),
+                    ExtraCodecs.strictUnboundedMap(Identifier.CODEC, Codec.INT).fieldOf("baits").forGetter(BaitRestriction::getBaits),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(BaitRestriction::getTranslationOverride)
             ).apply(instance, BaitRestriction::new));
 
@@ -44,13 +44,13 @@ public class BaitRestriction extends AbstractFishRestriction
         this.translationOverride = "";
     }
 
-    public BaitRestriction(Map<ResourceLocation, Integer> baits, String translationOverride)
+    public BaitRestriction(Map<Identifier, Integer> baits, String translationOverride)
     {
         this.baits = baits;
         this.translationOverride = translationOverride;
     }
 
-    public Map<ResourceLocation, Integer> getBaits()
+    public Map<Identifier, Integer> getBaits()
     {
         return baits;
     }
@@ -92,7 +92,10 @@ public class BaitRestriction extends AbstractFishRestriction
 
         //bait name / [hover]
         if (baits.size() == 1)
-            comp = BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getDescription();
+        {
+            Item value = BuiltInRegistries.ITEM.getValue(baits.keySet().stream().findFirst().get());
+            comp = value.getName(value.getDefaultInstance());
+        }
         else
             comp = Component.translatable("gui.guide.hover");
 

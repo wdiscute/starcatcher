@@ -10,19 +10,20 @@ import com.wdiscute.starcatcher.io.attachments.FishingBobAttachment;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
+import net.minecraft.core.component.DataComponentPatch;
+import net.minecraft.core.component.DataComponentType;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -31,11 +32,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-public class StarcatcherFishingRodItem extends Item implements MenuProvider
+public class StarcatcherFishingRodItem extends Item
 {
     public StarcatcherFishingRodItem()
     {
-        super(new Item.Properties()
+        super(new Properties()
                 .rarity(Rarity.EPIC)
                 .fireResistant()
                 .stacksTo(1)
@@ -45,30 +46,25 @@ public class StarcatcherFishingRodItem extends Item implements MenuProvider
         );
     }
 
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+    public InteractionResult use(Level level, Player player, InteractionHand hand)
     {
         ItemStack is = player.getItemInHand(hand);
 
         if (!is.is(SCTags.RODS))
-            return InteractionResultHolder.pass(is);
+            return InteractionResult.PASS;
 
-        if(SCDataComponents.getOrDefault(is, SCDataComponents.HOOK, SingleStackContainer.empty()).stack().isEmpty()
+        if (SCDataComponents.getOrDefault(is, SCDataComponents.HOOK, SingleStackContainer.empty()).stack().isEmpty()
                 || SCDataComponents.getOrDefault(is, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack().isEmpty())
         {
-            player.displayClientMessage(Component.translatable("gui.starcatcher.no_hook_or_bobber") , true);
-            return InteractionResultHolder.fail(is);
+            player.sendOverlayMessage(Component.translatable("gui.starcatcher.no_hook_or_bobber"));
+            return InteractionResult.FAIL;
         }
+
+
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
+
 
         FishingBobAttachment fishingBobAttachment = SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB.get());
-        if (player.isCrouching() && fishingBobAttachment.isEmpty() && SCConfig.ENABLE_ROD_MENU.get())
-        {
-            player.openMenu(this);
-            return InteractionResultHolder.success(is);
-        }
-
-        if (level.isClientSide) return InteractionResultHolder.success(is);
-
-
         if (fishingBobAttachment.isEmpty())
         {
             SCTackleSkins.get(player.level(), player.getItemInHand(hand)).onCast(player);
@@ -82,7 +78,7 @@ public class StarcatcherFishingRodItem extends Item implements MenuProvider
                 entity.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(player.getX(), entity.getEyeY(), player.getZ()));
 
                 fishingBobAttachment.setUuid(player, entity.getUUID());
-                if(SCDataComponents.has(is, SCDataComponents.TACKLE_SKIN))
+                if (SCDataComponents.has(is, SCDataComponents.TACKLE_SKIN))
                     SCDataAttachments.set(entity, SCDataAttachments.TACKLE_SKIN.get(), SCDataComponents.get(is, SCDataComponents.TACKLE_SKIN));
             }
         }
@@ -99,52 +95,36 @@ public class StarcatcherFishingRodItem extends Item implements MenuProvider
                     {
                         SCTackleSkins.get(player.level(), player.getItemInHand(hand)).onRetrieve(player);
 
-                        fbe.kill();
+                        fbe.kill(((ServerLevel) level));
                         SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB.get());
                         break;
                     }
                 }
             }
-
         }
 
-
-        return InteractionResultHolder.success(is);
+        return InteractionResult.SUCCESS;
     }
 
-
     @Override
-    public boolean hasCraftingRemainingItem(ItemStack stack)
+    public @org.jspecify.annotations.Nullable ItemStackTemplate getCraftingRemainder(ItemInstance instance)
     {
-        return true;
+        return switch (instance)
+        {
+            case ItemStack stack -> new ItemStackTemplate(instance.typeHolder(), instance.count(), stack.getComponentsPatch());
+            case ItemStackTemplate template -> template;
+            default -> null;
+        };
     }
 
     @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack)
+    public Optional<TooltipComponent> getTooltipImage(ItemStack stack)
     {
-        return itemStack.copy();
-    }
-
-    @Override
-    public Component getDisplayName()
-    {
-        return Component.literal("");
-    }
-
-    @Override
-    public @Nullable AbstractContainerMenu createMenu(int i, Inventory inventory, Player player)
-    {
-        if (player.getMainHandItem().is(SCTags.RODS))
-            return new FishingRodMenu(i, inventory, player.getMainHandItem());
-        else
-            return new FishingRodMenu(i, inventory, player.getOffhandItem());
-    }
-
-    @Override
-    public Optional<TooltipComponent> getTooltipImage(ItemStack stack) {
         return Optional.of(new RodSlotTooltip(stack));
     }
 
-    public record RodSlotTooltip(ItemStack rod) implements TooltipComponent {}
+    public record RodSlotTooltip(ItemStack rod) implements TooltipComponent
+    {
+    }
 }
 

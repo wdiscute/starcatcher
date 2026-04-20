@@ -5,16 +5,18 @@ import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.CaughtFishInfo;
 import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
+import com.wdiscute.starcatcher.secretnotes.LetterItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -67,7 +69,7 @@ public class TooltipEvents
         }
 
         //tackle skin
-        ResourceLocation rl = SCTackleSkins.getTackleSkin(stack);
+        Identifier rl = SCTackleSkins.getTackleSkin(stack);
         if (!rl.equals(SCTackleSkins.BASE_TACKLE_SKIN))
         {
             comp.add(Component.translatable("tooltip.starcatcher.tackle").withStyle(ChatFormatting.GRAY));
@@ -78,8 +80,8 @@ public class TooltipEvents
         }
 
         //modifiers
-        List<ResourceLocation> minigameModifiersRLs = SCMinigameModifiers.getMinigameModifiersRLs(stack);
-        List<ResourceLocation> catchModifiersRLs = SCCatchModifiers.getCatchModifiersRLs(stack);
+        List<Identifier> minigameModifiersRLs = SCMinigameModifiers.getMinigameModifiersRLs(stack);
+        List<Identifier> catchModifiersRLs = SCCatchModifiers.getCatchModifiersRLs(stack);
         if (!minigameModifiersRLs.isEmpty() || !catchModifiersRLs.isEmpty() && !stack.is(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
         {
             List<Component> modComp = new ArrayList<>();
@@ -90,7 +92,7 @@ public class TooltipEvents
             {
                 minigameModifiersRLs.forEach(o ->
                 {
-                    if (entity.level().registryAccess().registryOrThrow(Starcatcher.CATCH_MODIFIERS).get(o) != null)
+                    if (entity.level().registryAccess().getOrThrow(Starcatcher.CATCH_MODIFIERS).value().get(o).isPresent())
                     {
                         String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
                         if (!s.isEmpty())
@@ -102,7 +104,7 @@ public class TooltipEvents
                 //add catch modifiers
                 catchModifiersRLs.forEach(o ->
                 {
-                    if (entity.level().registryAccess().registryOrThrow(Starcatcher.CATCH_MODIFIERS).get(o) != null)
+                    if (entity.level().registryAccess().getOrThrow(Starcatcher.CATCH_MODIFIERS).value().get(o).isPresent())
                     {
                         String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
                         if (!s.isEmpty())
@@ -117,6 +119,33 @@ public class TooltipEvents
                 comp.addAll(modComp);
             }
         }
+
+        //signed
+        if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))
+        {
+            var sign = SCDataComponents.get(stack, SCDataComponents.SIGNED_GUIDE);
+
+            if (event.getFlags().hasShiftDown())
+                comp.add(Component.translatable("tooltip.starcatcher.starcatcher_guide.signed_shift", sign.owner().toString()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            else
+                comp.add(Component.translatable("tooltip.starcatcher.starcatcher_guide.signed", sign.signature()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+        }
+
+        //bucket item creative
+        ItemStack fish = SCDataComponents.getOrDefault(stack, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(ItemStack.EMPTY)).stack();
+        if (fish.isEmpty())
+        {
+            comp.add(1, Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1").withColor(0x888888));
+            comp.add(1, Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0").withColor(0x888888));
+        }
+
+        //letter
+        if(SCDataComponents.has(stack, SCDataComponents.MESSAGE) && event.getFlags().isAdvanced())
+        {
+            LetterItem.Message wd = SCDataComponents.get(stack, SCDataComponents.MESSAGE);
+            comp.add(Component.literal("written by uuid: " + wd.sender()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+        }
+
 
         //caught fish info
         if (SCDataComponents.has(stack, SCDataComponents.CAUGHT_FISH_INFO))

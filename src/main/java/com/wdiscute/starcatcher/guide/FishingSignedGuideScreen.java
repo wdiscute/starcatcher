@@ -1,11 +1,9 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.registry.SignedGuide;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 
-import java.sql.Date;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -32,14 +30,14 @@ public class FishingSignedGuideScreen extends FishingGuideScreen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         editBox.setFocused(false);
     }
 
     @Override
-    public void renderCoverText(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    public void renderCoverText(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY)
     {
         Instant instant = Instant.ofEpochMilli(signedGuide.date());
         ZonedDateTime zdt = instant.atZone(ZoneId.systemDefault());
@@ -52,6 +50,5 @@ public class FishingSignedGuideScreen extends FishingGuideScreen
 
         renderCenteredString(guiGraphics, font, Component.literal(formatted), uiX + 284, uiY + 118, 0x937d70, false);
         renderCenteredString(guiGraphics, font, Component.literal(formatted2), uiX + 284, uiY + 128, 0x937d70, false);
-
     }
 }

@@ -4,15 +4,16 @@ import com.wdiscute.starcatcher.U;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
+import net.minecraft.util.RandomSource;
 import org.jetbrains.annotations.Nullable;
 
-public class FishingBitingLavaParticles extends TextureSheetParticle
+public class FishingBitingLavaParticles extends SingleQuadParticle
 {
     private final SpriteSet sprites;
 
     protected FishingBitingLavaParticles(ClientLevel level, double x, double y, double z, SpriteSet spriteSet)
     {
-        super(level, x, y, z);
+        super(level, x, y, z, spriteSet.first());
 
         this.xd = 0f + U.r.nextFloat(0.2f) - 0.1f;
         this.yd = 0f + U.r.nextFloat(0.2f) + 0.1f;
@@ -47,11 +48,10 @@ public class FishingBitingLavaParticles extends TextureSheetParticle
     }
 
     @Override
-    public ParticleRenderType getRenderType()
+    protected Layer getLayer()
     {
-        return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
+        return Layer.bySprite(sprite);
     }
-
 
     public static class Provider implements ParticleProvider<SimpleParticleType>
     {
@@ -62,11 +62,10 @@ public class FishingBitingLavaParticles extends TextureSheetParticle
             this.spriteSet = spriteSet;
         }
 
-        @Nullable
         @Override
-        public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double x, double y, double z, double xSpeed, double ySpeed, double zSpeed)
+        public @org.jspecify.annotations.Nullable Particle createParticle(SimpleParticleType options, ClientLevel level, double x, double y, double z, double xAux, double yAux, double zAux, RandomSource random)
         {
-            return new FishingBitingLavaParticles(clientLevel, x, y, z, this.spriteSet);
+            return new FishingBitingLavaParticles(level, x, y, z, this.spriteSet);
         }
     }
 

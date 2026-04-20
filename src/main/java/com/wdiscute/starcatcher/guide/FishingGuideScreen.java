@@ -57,6 +57,8 @@ import net.minecraft.world.level.Level;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Matrix3x2fStack;
+import org.joml.Matrix3x2fc;
 
 import java.awt.*;
 import java.time.Instant;
@@ -590,9 +592,7 @@ public class FishingGuideScreen extends Screen
         {
             case -1 ->
             {
-                RenderSystem.enableBlend();
                 renderImage(guiGraphics, BACKGROUND_COVER);
-                RenderSystem.disableBlend();
                 renderCoverText(guiGraphics, mouseX, mouseY);
                 renderCompass(guiGraphics);
             }
@@ -611,39 +611,31 @@ public class FishingGuideScreen extends Screen
             //render index
             case 0 ->
             {
-                RenderSystem.enableBlend();
                 if (page == 0) renderImage(guiGraphics, BACKGROUND_INDEX_FIRST);
                 else renderImage(guiGraphics, BACKGROUND_INDEX_SECOND);
-                RenderSystem.disableBlend();
                 renderIndex(guiGraphics, mouseX, mouseY);
                 renderCompass(guiGraphics);
             }
             //render help pages
             case 1 ->
             {
-                RenderSystem.enableBlend();
                 renderImage(guiGraphics, BACKGROUND_BASICS);
-                RenderSystem.disableBlend();
                 renderTheBasics(guiGraphics, mouseX, mouseY);
                 renderCompass(guiGraphics);
             }
             //render entries
             case 2 ->
             {
-                RenderSystem.enableBlend();
                 renderImage(guiGraphics, BACKGROUND_ENTRY);
-                RenderSystem.disableBlend();
                 renderEntry(guiGraphics, mouseX, mouseY, 52, page * 2);
                 renderEntry(guiGraphics, mouseX, mouseY, 212, page * 2 + 1);
                 renderCompass(guiGraphics);
-                guiGraphics.drawString(this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0x9c897c, false);
+                guiGraphics.text(this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0x9c897c, false);
             }
 
             case 3 ->
             {
-                RenderSystem.enableBlend();
                 renderImage(guiGraphics, BACKGROUND_LAST_PAGE);
-                RenderSystem.disableBlend();
                 renderCompass(guiGraphics);
             }
         }
@@ -687,18 +679,18 @@ public class FishingGuideScreen extends Screen
 
     int compassRotationOffset = U.r.nextInt(40) - 20;
 
-    private void renderCompass(GuiGraphics guiGraphics)
+    private void renderCompass(GuiGraphicsExtractor guiGraphics)
     {
         float yRot = Minecraft.getInstance().player.getYRot() + compassRotationOffset;
 
-        PoseStack pose = guiGraphics.pose();
+        Matrix3x2fStack pose = guiGraphics.pose();
 
-        pose.pushPose();
-        pose.translate(uiX + 16 + 16.5, uiY + 16 + 34.5, 0);
-        pose.mulPose(Axis.ZP.rotationDegrees(-yRot - 45 - 180));
-        pose.translate(-16, -16, 0);
+        pose.pushMatrix();
+        pose.translate((float) (uiX + 16 + 16.5), (float) (uiY + 16 + 34.5));
+        pose.mul((Matrix3x2fc) Axis.ZP.rotationDegrees(-yRot - 45 - 180));
+        pose.translate(-16, -16);
         guiGraphics.blit(COMPASS, 0, 0, 0, 0, 32, 32, 32, 32);
-        pose.popPose();
+        pose.popMatrix();
     }
 
     public void renderCoverText(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY)
@@ -1845,7 +1837,7 @@ public class FishingGuideScreen extends Screen
         {
             guiGraphics.blit(BUCKET, x + 77, y + 103, 0, 0, 14, 14, 14, 14);
             if (mouseX > 75 && mouseX < 93 && mouseY > 105 && mouseY < 115)
-                guiGraphics.renderTooltip(font, Component.translatable("gui.guide.bucketable"), absoluteMouseX, absoluteMouseY);
+                renderTooltip(guiGraphics, Component.translatable("gui.guide.bucketable"), absoluteMouseX, absoluteMouseY);
         }
 
         //render almighty wormable
@@ -1854,7 +1846,7 @@ public class FishingGuideScreen extends Screen
         {
             guiGraphics.blit(ENTITY, x + 93, y + 103, 0, 0, 14, 14, 14, 14);
             if (mouseX > 92 && mouseX < 107 && mouseY > 105 && mouseY < 115)
-                guiGraphics.renderTooltip(font, Component.translatable("gui.guide.entity"), absoluteMouseX, absoluteMouseY);
+                renderTooltip(guiGraphics,Component.translatable("gui.guide.entity"), absoluteMouseX, absoluteMouseY);
         }
 
         //render sword
@@ -1862,7 +1854,7 @@ public class FishingGuideScreen extends Screen
         {
             guiGraphics.blit(ALWAYS_ENTITY, x + 93, y + 103, 0, 0, 14, 14, 14, 14);
             if (mouseX > 92 && mouseX < 107 && mouseY > 105 && mouseY < 115)
-                guiGraphics.renderTooltip(font, Component.translatable("gui.guide.always_entity"), absoluteMouseX, absoluteMouseY);
+                renderTooltip(guiGraphics, Component.translatable("gui.guide.always_entity"), absoluteMouseX, absoluteMouseY);
         }
 
         //render name
@@ -1874,29 +1866,17 @@ public class FishingGuideScreen extends Screen
 
         int color = switch (fp.rarity())
         {
-            case FishProperties.Rarity.TRASH, FishProperties.Rarity.COMMON, FishProperties.Rarity.NONE ->
-                    FastColor.ARGB32.color(0, -1);
-            case FishProperties.Rarity.UNCOMMON -> FastColor.ARGB32.color(200, 0x92f28d);
-            case FishProperties.Rarity.RARE -> FastColor.ARGB32.color(200, 0x78c8ff);
-            case FishProperties.Rarity.EPIC -> FastColor.ARGB32.color(200, 0xc060ff);
-            case FishProperties.Rarity.LEGENDARY, GOLDEN ->
-                    FastColor.ARGB32.color(175, Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1));
+            case FishProperties.Rarity.TRASH, FishProperties.Rarity.COMMON, FishProperties.Rarity.NONE -> 0xffffffff;
+            case FishProperties.Rarity.UNCOMMON -> 0x92f28d;
+            case FishProperties.Rarity.RARE -> 0x78c8ff;
+            case FishProperties.Rarity.EPIC -> 0xc060ff;
+            case FishProperties.Rarity.LEGENDARY, GOLDEN -> Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1);
         };
 
-        float red = FastColor.ARGB32.red(color) / 255f;
-        float green = FastColor.ARGB32.green(color) / 255f;
-        float blue = FastColor.ARGB32.blue(color) / 255f;
-        float alpha = FastColor.ARGB32.alpha(color) / 255f;
-
-        guiGraphics.setColor(red, green, blue, alpha);
-
         //render glow
-        RenderSystem.enableBlend();
-        if (fcc != null) guiGraphics.blit(
+        if (fcc != null) guiGraphics.blit(RenderPipelines.GUI,
                 GLOW, x + 10, y + 55,
-                0, 0, 48, 48, 48, 48);
-        RenderSystem.disableBlend();
-        guiGraphics.setColor(1, 1, 1, 1);
+                0, 0, 48, 48, 48, 48, color);
 
         //render new fish icon
         if (fcc != null && fcc.hasGuideNotification())

@@ -7,16 +7,18 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 import java.util.function.Supplier;
 
 public class BurnPointerWhileActiveModifier extends AbstractTimedModifier
 {
-    public static final ResourceLocation TEXTURE = U.rl("minecraft", "textures/block/fire_0.png");
+    public static final Identifier TEXTURE = U.rl("minecraft", "textures/block/fire_0.png");
     private final int rampTime;
     private final float extraSpeed;
 
@@ -97,15 +99,16 @@ public class BurnPointerWhileActiveModifier extends AbstractTimedModifier
     }
 
     @Override
-    public void renderForeground(GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderForeground(guiGraphics, partialTick, width, height);
-        RenderSystem.setShaderColor(1, 1, 1, 1 - (instance.pointerBaseSpeed - instance.pointerSpeed / 2) / (instance.pointerSpeed - instance.pointerSpeed / 2));
-        RenderSystem.enableBlend();
+        float alpha = 1 - (instance.pointerBaseSpeed - instance.pointerSpeed / 2) / (instance.pointerSpeed - instance.pointerSpeed / 2);
         int yoffset = tickCount % 32;
-        guiGraphics.blit(TEXTURE, width / 2 - 8, height / 2 - 8 - 7, 16, 16, 0, yoffset * 16, 16, 16, 16, 512);
-        guiGraphics.blit(TEXTURE, width / 2 - 8, height / 2 - 8, 16, 16, 0, (yoffset + 8) * 16, 16, 16, 16, 512);
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.enableBlend();
+        guiGraphics.blit(RenderPipelines.GUI, TEXTURE,
+                width / 2 - 8, height / 2 - 8 - 7, 16, 16, 0, yoffset * 16, 16, 16,
+                16, 512, ARGB.colorFromFloat(alpha, 1, 1, 1));
+        guiGraphics.blit(RenderPipelines.GUI,TEXTURE,
+                width / 2 - 8, height / 2 - 8, 16, 16, 0, (yoffset + 8) * 16, 16, 16,
+                16, 512, ARGB.colorFromFloat(alpha, 1, 1, 1));
     }
 }

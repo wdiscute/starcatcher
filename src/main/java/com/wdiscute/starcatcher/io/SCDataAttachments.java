@@ -4,7 +4,6 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.attachments.FishingBobAttachment;
 import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -28,7 +27,7 @@ public class SCDataAttachments
 
     public static final Supplier<AttachmentType<FishingGuideAttachment>> FISHING_GUIDE = ATTACHMENT_TYPES.register(
             "fishing_guide", () -> AttachmentType.builder(FishingGuideAttachment::createDefault)
-                    .serialize(FishingGuideAttachment.CODEC)
+                    .serialize(FishingGuideAttachment.CODEC.fieldOf("fishing_guide"))
                     .sync(FishingGuideAttachment.STREAM_CODEC)
                     .copyOnDeath()
                     .build()
@@ -38,7 +37,7 @@ public class SCDataAttachments
     public static final Supplier<AttachmentType<Identifier>> TACKLE_SKIN = ATTACHMENT_TYPES.register(
             "tackle_skin", () ->
                     AttachmentType.builder(() -> Starcatcher.rl("base"))
-                            .serialize(Identifier.CODEC)
+                            .serialize(Identifier.CODEC.fieldOf("tackle_skin"))
                             .sync(Identifier.STREAM_CODEC)
                             .build()
     );

@@ -11,6 +11,10 @@ import com.wdiscute.starcatcher.registry.Treasure;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.inputs.IJeiGuiEventListener;
+import mezz.jei.api.gui.inputs.IJeiInputHandler;
+import mezz.jei.api.gui.inputs.IJeiUserInput;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
@@ -18,6 +22,8 @@ import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.components.events.GuiEventListener;
+import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.client.renderer.RenderPipelines;
@@ -50,6 +56,40 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     }
 
     @Override
+    public void createRecipeExtras(IRecipeExtrasBuilder builder, Recipe recipe, IFocusGroup focuses)
+    {
+        super.createRecipeExtras(builder, recipe, focuses);
+        builder.addInputHandler(new Input(recipe));
+    }
+
+    public static class Input implements IJeiInputHandler
+    {
+        Recipe recipe;
+
+        public Input(Recipe recipe)
+        {
+            this.recipe = recipe;
+        }
+
+        @Override
+        public boolean handleInput(double mouseX, double mouseY, IJeiUserInput input)
+        {
+            if (mouseX > 90 && mouseX < 90 + 19 && mouseY > 0 && mouseY < 19)
+            {
+                Minecraft.getInstance().setScreen(new IsolatedJeiFPScreen(recipe));
+                return true;
+            }
+            return IJeiInputHandler.super.handleInput(mouseX, mouseY, input);
+        }
+
+        @Override
+        public ScreenRectangle getArea()
+        {
+            return new ScreenRectangle(0, 0, 99999, 99999);
+        }
+    }
+
+    @Override
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses)
     {
         builder.addInputSlot(5, 2)
@@ -73,17 +113,6 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
         {
             renderTooltip(draw, Component.translatable("emi.starcatcher.open_as_guide_entry"), mouseX, mouseY);
         }
-    }
-
-    @Override
-    public boolean handleInput(Recipe recipe, double mouseX, double mouseY, InputConstants.Key input)
-    {
-        if (mouseX > 90 && mouseX < 90 + 19 && mouseY > 0 && mouseY < 19)
-        {
-            Minecraft.getInstance().setScreen(new IsolatedJeiFPScreen(recipe));
-            return true;
-        }
-        return false;
     }
 
     @Override

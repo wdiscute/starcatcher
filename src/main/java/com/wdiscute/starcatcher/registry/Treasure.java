@@ -6,8 +6,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.U;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class Treasure
 {
-    public static final TreasureInstance VANILLA_FISHING_LOOT_TABLE = new LootTableTreasureInstance(BuiltInLootTables.FISHING.location());
+    public static final TreasureInstance VANILLA_FISHING_LOOT_TABLE = new LootTableTreasureInstance(BuiltInLootTables.FISHING.identifier());
     public static final TreasureInstance AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
     public static final TreasureInstance KIMBE_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KIMBE_SMITHING_TEMPLATE.value().getDefaultInstance());
     public static final TreasureInstance COLORFUL_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.COLORFUL_SMITHING_TEMPLATE.value().getDefaultInstance());
@@ -45,14 +45,14 @@ public class Treasure
 
     public static class LootTableTreasureInstance extends TreasureInstance
     {
-        ResourceLocation rl;
+        Identifier rl;
 
         public static final MapCodec<LootTableTreasureInstance> CODEC = RecordCodecBuilder.mapCodec(instance ->
                 instance.group(
-                        ResourceLocation.CODEC.fieldOf("location").forGetter(o -> o.rl)
+                        Identifier.CODEC.fieldOf("location").forGetter(o -> o.rl)
                 ).apply(instance, LootTableTreasureInstance::new));
 
-        public LootTableTreasureInstance(ResourceLocation rl)
+        public LootTableTreasureInstance(Identifier rl)
         {
             this.rl = rl;
         }

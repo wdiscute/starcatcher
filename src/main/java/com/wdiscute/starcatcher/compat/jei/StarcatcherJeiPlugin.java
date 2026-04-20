@@ -6,13 +6,9 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.SCItems;
-import dev.emi.emi.api.EmiApi;
-import dev.emi.emi.api.recipe.EmiInfoRecipe;
-import dev.emi.emi.api.stack.EmiIngredient;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IFocusFactory;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -23,18 +19,15 @@ import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.runtime.IRecipesGui;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @JeiPlugin
 public class StarcatcherJeiPlugin implements IModPlugin

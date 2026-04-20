@@ -7,7 +7,7 @@ import com.wdiscute.starcatcher.compat.curios.CuriosCompat;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -113,15 +113,16 @@ public interface SCMinigameModifiers
         return REGISTRY.register(name, () -> sup);
     }
 
-    static Supplier<AbstractMinigameModifier> getMinigameModifierSupplier(Level level, ResourceLocation resourceLocation)
+    static Supplier<AbstractMinigameModifier> getMinigameModifierSupplier(Level level, Identifier resourceLocation)
     {
-        Optional<Supplier<AbstractMinigameModifier>> optional = level.registryAccess().registryOrThrow(Starcatcher.MINIGAME_MODIFIERS).getOptional(resourceLocation);
+        Optional<Supplier<AbstractMinigameModifier>> optional = level.registryAccess()
+                .getOrThrow(Starcatcher.MINIGAME_MODIFIERS).value().getOptional(resourceLocation);
         return optional.orElse(null);
     }
 
     static List<AbstractMinigameModifier> getMinigameModifiers(Player player)
     {
-        List<ResourceLocation> rls = new ArrayList<>();
+        List<Identifier> rls = new ArrayList<>();
 
         //rod
         ItemStack main = player.getMainHandItem();
@@ -136,7 +137,7 @@ public interface SCMinigameModifiers
         }
 
         //armor
-        player.getInventory().armor.forEach(o -> rls.addAll(getMinigameModifiersRLs(o)));
+        player.getInventory().getNonEquipmentItems().forEach(o -> rls.addAll(getMinigameModifiersRLs(o)));
 
         //curios
         if (ModList.get().isLoaded("curios"))
@@ -157,9 +158,9 @@ public interface SCMinigameModifiers
         return minigameModifiers;
     }
 
-    static List<ResourceLocation> getMinigameModifiersRLs(ItemStack itemStack)
+    static List<Identifier> getMinigameModifiersRLs(ItemStack itemStack)
     {
-        List<ResourceLocation> rls = new ArrayList<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.MINIGAME_MODIFIERS, List.of()));
+        List<Identifier> rls = new ArrayList<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.MINIGAME_MODIFIERS, List.of()));
 
         rls.addAll(SCDataMaps.getOrDefault(itemStack, SCDataMaps.MINIGAME_MODIFIERS, List.of()));
 

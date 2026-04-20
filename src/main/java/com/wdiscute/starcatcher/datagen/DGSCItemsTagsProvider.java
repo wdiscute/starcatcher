@@ -2,35 +2,29 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.registry.fishing.DGStarcatcherFishes;
 import com.wdiscute.starcatcher.registry.fishing.FishingPropertiesRegistry;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
 import static com.wdiscute.starcatcher.registry.SCItems.*;
 import static com.wdiscute.starcatcher.blocks.SCBlocks.*;
 
-public class DGSCItemsTagsProvider extends ItemTagsProvider
+public class DGSCItemsTagsProvider extends net.neoforged.neoforge.common.data.ItemTagsProvider
 {
 
-    public DGSCItemsTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider,
-                                 CompletableFuture<TagLookup<Block>> blockTags, @Nullable ExistingFileHelper existingFileHelper)
+    public DGSCItemsTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider)
     {
-        super(output, lookupProvider, blockTags, Starcatcher.MOD_ID, existingFileHelper);
+        super(output, lookupProvider, Starcatcher.MOD_ID);
     }
 
     @Override
@@ -58,12 +52,12 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
             switch (p.getSecond().rarity())
             {
-                case TRASH -> tag(SCTags.TRASH).addOptional(fp.catchInfo().fish().getKey().location());
-                case COMMON -> tag(SCTags.COMMON_FISHES).addOptional(fp.catchInfo().fish().getKey().location());
-                case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).addOptional(fp.catchInfo().fish().getKey().location());
-                case RARE -> tag(SCTags.RARE_FISHES).addOptional(fp.catchInfo().fish().getKey().location());
-                case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(fp.catchInfo().fish().getKey().location());
-                case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(fp.catchInfo().fish().getKey().location());
+                case TRASH -> tag(SCTags.TRASH).addOptional(fp.catchInfo().fish().value());
+                case COMMON -> tag(SCTags.COMMON_FISHES).addOptional(fp.catchInfo().fish().value());
+                case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).addOptional(fp.catchInfo().fish().value());
+                case RARE -> tag(SCTags.RARE_FISHES).addOptional(fp.catchInfo().fish().value());
+                case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(fp.catchInfo().fish().value());
+                case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(fp.catchInfo().fish().value());
             }
         });
 
@@ -102,7 +96,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .add(Items.WITHER_SKELETON_SKULL)
                 .add(Items.BUCKET)
 
-                .addOptional(rl("fishofthieves", "earthworms"))
+                .addOptional(U.holderItem("fishofthieves", "earthworms").value())
                 .addOptional(rl("fishofthieves", "grubs"))
                 .addOptional(rl("fishofthieves", "leeches"))
 
@@ -211,8 +205,8 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
     }
 
 
-    public static ResourceLocation rl(String ns, String path)
+    public static Identifier rl(String ns, String path)
     {
-        return ResourceLocation.fromNamespaceAndPath(ns, path);
+        return Identifier.fromNamespaceAndPath(ns, path);
     }
 }

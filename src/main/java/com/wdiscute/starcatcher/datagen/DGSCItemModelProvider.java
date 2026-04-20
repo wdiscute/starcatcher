@@ -1,27 +1,38 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import static com.wdiscute.starcatcher.registry.SCItems.*;
 import static com.wdiscute.starcatcher.blocks.SCBlocks.*;
 
-public class DGSCItemModelProvider extends ItemModelProvider
+public class DGSCItemModelProvider extends ModelProvider
 {
-    public DGSCItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper)
+    public DGSCItemModelProvider(PackOutput output)
     {
-        super(output, Starcatcher.MOD_ID, existingFileHelper);
+        super(output, Starcatcher.MOD_ID);
     }
 
+    private ItemModelGenerators itemModels = null;
+    private BlockModelGenerators blockModels = null;
+
     @Override
-    protected void registerModels()
+    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels)
     {
+        super.registerModels(blockModels, itemModels);
+
+        this.blockModels = blockModels;
+        this.itemModels = itemModels;
+
         //bucket fishes
         for (DeferredHolder<Item, ? extends Item> item : BUCKETABLE_FISHES_REGISTRY.getEntries())
             simpleItem((DeferredItem<? extends Item>) item);
@@ -172,14 +183,15 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleBlockItem(TACKLE_BOX_LIGHT_BLUE.get());
         simpleBlockItem(TACKLE_BOX_CYAN.get());
         simpleBlockItem(TACKLE_BOX_GREEN.get());
-
     }
 
-
-
-
-    private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item)
+    private void simpleItem(DeferredItem<? extends Item> item)
     {
-        return withExistingParent(item.getId().getPath(), mcLoc("item/generated")).texture("layer0", modLoc("item/" + item.getId().getPath()));
+        itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
+    }
+
+    private void simpleBlockItem(Block block)
+    {
+        blockModels.createNonTemplateModelBlock(block);
     }
 }

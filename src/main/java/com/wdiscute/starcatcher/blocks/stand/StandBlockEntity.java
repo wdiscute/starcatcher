@@ -144,8 +144,8 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
         tournament.playerScores.forEach(entry ->
         {
             UserNameToIdResolver profileCache = level.getServer().services().nameToIdCache();
-            Optional<NameAndId> gameProfile = profileCache.get(entry.playerUUID);
-            gameProfile.ifPresent(i -> map.put(i.id(), i.name()));
+            Optional<NameAndId> nameAndId = profileCache.get(entry.playerUUID);
+            nameAndId.ifPresent(i -> map.put(i.id(), i.name()));
         });
 
         return new StarcatcherGameProfileCache(map);

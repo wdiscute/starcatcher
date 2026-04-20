@@ -17,10 +17,9 @@ import com.wdiscute.starcatcher.particles.FishingBitingLavaParticles;
 import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.registry.*;
-import com.wdiscute.starcatcher.compat.curios.CuriosEvents;
+import com.wdiscute.starcatcher.registry.items.rod.IsCastItemProperty;
 import com.wdiscute.starcatcher.registry.items.rod.StarcatcherFishingRodItem;
 import com.wdiscute.starcatcher.registry.tackleskin.*;
-import com.wdiscute.starcatcher.registry.items.rod.FishingRodScreen;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentOverlay;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -38,10 +37,16 @@ public class SCClientEvents
     @SubscribeEvent
     public static void keyPressed(InputEvent.Key event)
     {
-        if(event.getAction() == 0 && event.getKey() == SCKeymappings.EXPAND_TOURNAMENT.getKey().getValue())
+        if (event.getAction() == 0 && event.getKey() == SCKeymappings.EXPAND_TOURNAMENT.getKey().getValue())
         {
             TournamentOverlay.expandedType = TournamentOverlay.expandedType.next();
         }
+    }
+
+    @SubscribeEvent
+    public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event)
+    {
+        SCItems.RODS_REGISTRY.getEntries().forEach(o -> event.register(o.getId(), new IsCastItemProperty().type()));
     }
 
     @SubscribeEvent
@@ -63,7 +68,7 @@ public class SCClientEvents
 
         if (ModList.get().isLoaded("curios"))
         {
-            CuriosEvents.registerRenderers();
+            //CuriosEvents.registerRenderers();
         }
     }
 
@@ -85,7 +90,6 @@ public class SCClientEvents
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event)
     {
-        event.register(SCMenuTypes.FISHING_ROD_MENU.get(), FishingRodScreen::new);
         event.register(SCMenuTypes.STAND_MENU.get(), StandScreen::new);
         event.register(SCMenuTypes.TACKLE_BOX.get(), TackleBoxScreen::new);
     }

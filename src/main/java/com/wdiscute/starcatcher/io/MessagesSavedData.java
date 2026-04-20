@@ -1,80 +1,60 @@
 package com.wdiscute.starcatcher.io;
 
-import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.secretnotes.LetterItem;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.NbtOps;
-import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.minecraft.world.level.saveddata.SavedDataType;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MessagesSavedData extends SavedData
 {
-    public static final Codec<List<LetterItem.Message>> CODEC = LetterItem.Message.CODEC.listOf();
-    public static final String NAME = "starcaught_messages";
+    public static final SavedDataType<MessagesSavedData> ID = new SavedDataType<>(
+            Starcatcher.rl("starcaught_messages"),
+            MessagesSavedData::new,
+            _ ->
+            RecordCodecBuilder.create(instance -> instance.group(
+                    LetterItem.Message.CODEC.listOf().fieldOf("messages").forGetter(o -> o.messages)
+            ).apply(instance, MessagesSavedData::new))
+    );
 
-    private List<LetterItem.Message> messages = new ArrayList<>();
+    public List<LetterItem.Message> messages;
 
-    public MessagesSavedData(List<LetterItem.Message> tournaments)
+    public MessagesSavedData(List<LetterItem.Message> messages)
     {
-        this.messages = tournaments;
+        this.messages = new ArrayList<>(messages);
+        setDirty();
     }
 
-    public MessagesSavedData()
+    public MessagesSavedData(ServerLevel sl)
     {
-
+        this.messages = new ArrayList<>();
+        setDirty();
     }
 
     public void addMessage(LetterItem.Message message)
     {
         messages.add(message);
+        setDirty();
     }
 
     public void removeMessage(LetterItem.Message message)
     {
         messages.remove(message);
+        setDirty();
     }
 
     public static MessagesSavedData get(ServerLevel level)
     {
-        return level.getDataStorage().computeIfAbsent(factory(), NAME);
+        return level.getDataStorage().computeIfAbsent(ID);
     }
 
     public List<LetterItem.Message> getMessages()
     {
         return messages;
-    }
-
-    public static Factory<MessagesSavedData> factory()
-    {
-        return new Factory<>(MessagesSavedData::new, MessagesSavedData::load);
-    }
-
-    @Override
-    public CompoundTag save(CompoundTag compoundTag, HolderLookup.Provider registries)
-    {
-        CODEC.encodeStart(NbtOps.INSTANCE, messages)
-                .resultOrPartial(Starcatcher.LOGGER::error)
-                .ifPresent(tag -> compoundTag.put(NAME, tag));
-
-        return compoundTag;
-    }
-
-    public static MessagesSavedData load(CompoundTag compoundTag, HolderLookup.Provider registries)
-    {
-        Tag tag = compoundTag.get(NAME);
-
-        List<LetterItem.Message> messagesNew = CODEC.decode(NbtOps.INSTANCE, tag)
-                .resultOrPartial(Starcatcher.LOGGER::error)
-                .map(Pair::getFirst)
-                .orElseGet(ArrayList::new);
-
-        return new MessagesSavedData(messagesNew);
     }
 }

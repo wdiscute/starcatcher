@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.tournament;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.DeltaTracker;
@@ -9,10 +8,9 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.client.renderer.rendertype.RenderType;
-import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.players.NameAndId;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 import org.slf4j.Logger;
@@ -24,7 +22,7 @@ public class TournamentOverlay implements GuiLayer
 {
     private static final Logger log = LoggerFactory.getLogger(TournamentOverlay.class);
     public static Tournament tournament;
-    public static Map<UUID, String> gameProfilesCache = new HashMap<>();
+    public static Map<UUID, String> nameAndIdCache = new HashMap<>();
 
     public static Pair<Component, Integer> firstPlace = Pair.of(Component.literal("[empty]"), 0);
     public static Pair<Component, Integer> secondPlace = Pair.of(Component.literal("[empty]"), 0);
@@ -166,10 +164,10 @@ public class TournamentOverlay implements GuiLayer
         return finalString;
     }
 
-    public static void onTournamentReceived(Tournament t, List<GameProfile> list)
+    public static void onTournamentReceived(Tournament t, List<NameAndId> list)
     {
         //add entries to cached game profile
-        list.forEach(e -> gameProfilesCache.put(e.id(), e.name()));
+        list.forEach(e -> nameAndIdCache.put(e.id(), e.name()));
 
         firstPlace = Pair.of(Component.literal(""), 0);
         secondPlace = Pair.of(Component.literal(""), 0);
@@ -182,7 +180,7 @@ public class TournamentOverlay implements GuiLayer
                 if (tps.score > thirdPlace.getSecond())
                 {
                     thirdPlace = Pair.of(
-                            Component.literal(gameProfilesCache.get(tps.playerUUID)),
+                            Component.literal(nameAndIdCache.get(tps.playerUUID)),
                             tps.score
                     );
                 }
@@ -191,7 +189,7 @@ public class TournamentOverlay implements GuiLayer
                 {
                     thirdPlace = secondPlace;
                     secondPlace = Pair.of(
-                            Component.literal(gameProfilesCache.get(tps.playerUUID)),
+                            Component.literal(nameAndIdCache.get(tps.playerUUID)),
                             tps.score
                     );
                 }
@@ -200,7 +198,7 @@ public class TournamentOverlay implements GuiLayer
                 {
                     secondPlace = firstPlace;
                     firstPlace = Pair.of(
-                            Component.literal(gameProfilesCache.get(tps.playerUUID)),
+                            Component.literal(nameAndIdCache.get(tps.playerUUID)),
                             tps.score
                     );
                 }

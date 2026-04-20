@@ -2,16 +2,19 @@ package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.gui.components.toasts.ToastManager;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 public class FishCaughtToast implements Toast
 {
-    private static final ResourceLocation BACKGROUND_SPRITE = Starcatcher.rl("toast/fish_caught");
+    private static final Identifier BACKGROUND_SPRITE = Starcatcher.rl("toast/fish_caught");
     private final Component title;
     private final String description;
     private final ItemStack is;
@@ -37,26 +40,35 @@ public class FishCaughtToast implements Toast
         return 51;
     }
 
-    public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)
+    Visibility v = Visibility.HIDE;
+
+    @Override
+    public Visibility getWantedVisibility()
     {
-        guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, width(), height());
+        return v;
+    }
 
-        guiGraphics.renderItem(is, 6, 29);
+    @Override
+    public void update(ToastManager manager, long fullyVisibleForMs)
+    {
+        if (fullyVisibleForMs < 10000)
+            v = Visibility.SHOW;
+        else
+            v = Visibility.HIDE;
+    }
 
-        guiGraphics.drawString(toastComponent.getMinecraft().font, this.title, 40, 13, 0x635040, false);
+    @Override
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, Font font, long fullyVisibleForMs)
+    {
+        guiGraphics.blitSprite(RenderPipelines.GUI_TEXTURED, BACKGROUND_SPRITE, 0, 0, width(), height());
+
+        guiGraphics.item(is, 6, 29);
+
+        guiGraphics.text(Minecraft.getInstance().font, this.title, 40, 13, 0x635040, false);
 
         Component comp = Component.literal("<sctoast>" + rarity.wrapWithRarityMarkdownAsString(description) + "</sctoast>");
 
-        guiGraphics.drawString(toastComponent.getMinecraft().font, comp, 40, 22, 0x635040, false);
-
-        if (timeSinceLastVisible < 10000)
-        {
-            return Visibility.SHOW;
-        }
-        else
-        {
-            return Visibility.HIDE;
-        }
+        guiGraphics.text(Minecraft.getInstance().font, comp, 40, 22, 0x635040, false);
     }
 
 }

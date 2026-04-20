@@ -192,7 +192,7 @@ public class U
 
     public static Holder<Item> holderItem(String ns, String path)
     {
-        return Holder.Reference.createStandAlone(BuiltInRegistries.ITEM.holderOwner(), ResourceKey.create(Registries.ITEM, rl(ns, path)));
+        return Holder.Reference.createStandAlone(BuiltInRegistries.ITEM.getOrThrow(), ResourceKey.create(Registries.ITEM, rl(ns, path)));
     }
 
     public static Holder<Item> holderItem(DeferredItem<Item> item)

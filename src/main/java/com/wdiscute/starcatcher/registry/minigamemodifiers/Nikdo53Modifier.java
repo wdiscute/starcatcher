@@ -10,17 +10,19 @@ import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.registries.DeferredHolder;
+import org.joml.Matrix3x2fStack;
 
 import java.util.function.Supplier;
 
 public class Nikdo53Modifier extends AbstractMinigameModifier
 {
-    public static final ResourceLocation POINTER_SMALL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_pointer_1.png");
-    public static final ResourceLocation POINTER_LARGE = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_pointer_2.png");
-    public static final ResourceLocation WHEEL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_wheel.png");
+    public static final Identifier POINTER_SMALL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_pointer_1.png");
+    public static final Identifier POINTER_LARGE = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_pointer_2.png");
+    public static final Identifier WHEEL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_wheel.png");
 
     public int pointerLayer = 0;
     public int maxPointerLayer;
@@ -108,7 +110,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderOnPointer(GuiGraphics guiGraphics, PoseStack poseStack, float partialTick) {
+    public void renderOnPointer(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick) {
         if (pointerLayer == 0) {
             FishingMinigameScreen.renderPoseCentered(guiGraphics, POINTER_SMALL, 128);
         } else {
@@ -118,7 +120,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
 
 
     @Override
-    public void renderOnSweetSpot(GuiGraphics guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick) {
+    public void renderOnSweetSpot(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick) {
         if (spot.behaviour == null) return;
 
         poseStack.pushPose();
@@ -128,42 +130,32 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         poseStack.translate(0, -9 * layer, 0);
 
         // Dim when not in use
-        if (pointerLayer != layer)
-            RenderSystem.setShaderColor(0.5f, 0.5f, 0.5f, 1);
-
-        spot.behaviour.render(guiGraphics, poseStack, partialTick);
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
+        spot.behaviour.render(guiGraphics, poseStack, partialTick, pointerLayer != layer ? 0xff7b7b7b : 0xffffffff);
 
         poseStack.popPose();
     }
 
     @Override
-    public void renderBackground(GuiGraphics guiGraphics, float partialTick, int width, int height) {
+    public void renderBackground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height) {
         super.renderBackground(guiGraphics, partialTick, width, height);
-        PoseStack poseStack = guiGraphics.pose();
+        Matrix3x2fStack poseStack = guiGraphics.pose();
 
         //render A
-        guiGraphics.blit(FishingMinigameScreen.TEXTURE, width / 2 - 40, height / 2 + 40, 32, 16, isHoldingLeft ? 32 : 0, 128, 32, 16, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, FishingMinigameScreen.TEXTURE, width / 2 - 40, height / 2 + 40, 32, 16, isHoldingLeft ? 32 : 0, 128, 32, 16, 256, 256);
 
         //render D
-        guiGraphics.blit(FishingMinigameScreen.TEXTURE, width / 2 + 8, height / 2 + 40, 32, 16, isHoldingRight ? 32 : 0, 144, 32, 16, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI, FishingMinigameScreen.TEXTURE, width / 2 + 8, height / 2 + 40, 32, 16, isHoldingRight ? 32 : 0, 144, 32, 16, 256, 256);
 
 
-        poseStack.pushPose();
+        poseStack.pushMatrix();
 
         // kapiten reference!1!1!1!1!!
-        poseStack.translate(width >> 1, height >> 1, 0);
+        poseStack.translate(width >> 1, height >> 1);
 
         // Dim when not in use
-        if (pointerLayer != 1)
-            RenderSystem.setShaderColor(0.5f, 0.5f, 0.5f, 1);
+        FishingMinigameScreen.renderPoseCentered(guiGraphics, WHEEL, 128, pointerLayer != 1 ? 0x7b7b7b : 0xffffffff);
 
-        FishingMinigameScreen.renderPoseCentered(guiGraphics, WHEEL, 128);
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     @Override

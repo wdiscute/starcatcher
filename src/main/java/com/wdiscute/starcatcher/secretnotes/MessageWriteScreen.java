@@ -4,11 +4,14 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.network.SetMessagePayload;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ import java.util.List;
 
 public class MessageWriteScreen extends Screen
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/message/message.png");
+    private static final Identifier BACKGROUND = Starcatcher.rl("textures/gui/message/message.png");
     private final LetterItem.Message message;
 
     private final List<String> text = new ArrayList<>();
@@ -70,44 +73,46 @@ public class MessageWriteScreen extends Screen
     }
 
     @Override
-    public void resize(Minecraft minecraft, int width, int height)
+    public void resize(int width, int height)
     {
         List<String> s = new ArrayList<>();
         for (int i = 0; i < 15; i++) s.add(this.name.getValue());
-        this.init(minecraft, width, height);
+        this.init(width, height);
         for (int i = 0; i < 15; i++) boxes.get(i).setValue(s.get(i));
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
         renderImage(guiGraphics, BACKGROUND);
-        boxes.forEach(b -> b.render(guiGraphics, mouseX, mouseY, partialTick));
-        if (name != null) name.render(guiGraphics, mouseX, mouseY, partialTick);
+        boxes.forEach(b -> b.extractRenderState(guiGraphics, mouseX, mouseY, partialTick));
+        if (name != null) name.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
     }
 
+
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    public boolean keyPressed(KeyEvent event)
     {
-        InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
+        InputConstants.Key key = InputConstants.getKey(event);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(key) && boxes.stream().noneMatch(EditBox::canConsumeInput) && !name.canConsumeInput())
         {
             this.onClose();
             return true;
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(event);
     }
 
+
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
         boxes.forEach(o -> o.setFocused(false));
         name.setFocused(false);
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
+    private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
         guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
@@ -117,7 +122,7 @@ public class MessageWriteScreen extends Screen
     {
         List<String> list = new ArrayList<>();
         boxes.forEach(b -> list.add(b.getValue()));
-        PacketDistributor.sendToServer(new SetMessagePayload(list, name.getValue()));
+        ClientPacketDistributor.sendToServer(new SetMessagePayload(list, name.getValue()));
         super.onClose();
     }
 

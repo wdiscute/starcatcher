@@ -7,7 +7,7 @@ import com.wdiscute.starcatcher.compat.curios.CuriosCompat;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -28,70 +28,70 @@ public interface SCCatchModifiers
     //todo built-in modifiers to skip minigame for low rarity or something, using AbstractCatchModifier#forceSkipMinigame
 
     //every bait
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> DECREASES_LURE_TIME = registerCatchModifier(
+    Pair<Identifier, Supplier<AbstractCatchModifier>> DECREASES_LURE_TIME = registerCatchModifier(
             "decrease_lure_time",
             () -> new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f));
 
     //every bait
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> BIG_DECREASES_LURE_TIME = registerCatchModifier(
+    Pair<Identifier, Supplier<AbstractCatchModifier>> BIG_DECREASES_LURE_TIME = registerCatchModifier(
             "big_decrease_lure_time",
             () -> new AdjustLureTimeModifier(0.4f, 0.6f, 1.3f));
 
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> INCREASE_LURE_TIME = registerCatchModifier(
+    Pair<Identifier, Supplier<AbstractCatchModifier>> INCREASE_LURE_TIME = registerCatchModifier(
             "increase_lure_time",
             () -> new AdjustLureTimeModifier(1.5f, 1.6f, 1));
 
     //vanilla bobber
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> VANILLA_LOOT =
+    Pair<Identifier, Supplier<AbstractCatchModifier>> VANILLA_LOOT =
             registerCatchModifier("vanilla_loot", VanillaLootModifier::new);
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> SKIP_MINIGAME_IF_VANILLA_LOOT =
+    Pair<Identifier, Supplier<AbstractCatchModifier>> SKIP_MINIGAME_IF_VANILLA_LOOT =
             registerCatchModifier("skip_minigame_if_vanilla_loot", SkipMinigameIfVanillaLoot::new);
 
     //almighty worm
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> FISH_ENTITY =
+    Pair<Identifier, Supplier<AbstractCatchModifier>> FISH_ENTITY =
             registerCatchModifier("fish_entity", ForceFishEntityModifier::new);
 
     //seeking worm
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_ALWAYS =
+    Pair<Identifier, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_ALWAYS =
             registerCatchModifier("guarantee_new_fish_always", () -> new GuaranteeNewFishModifier(101));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_HALF =
+    Pair<Identifier, Supplier<AbstractCatchModifier>> GUARANTEE_NEW_FISH_HALF =
             registerCatchModifier("guarantee_new_fish_half", () -> new GuaranteeNewFishModifier(50));
 
     //gold hook
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_EXP_BASED_ON_PERFORMANCE =
+    Pair<Identifier, Supplier<AbstractCatchModifier>> EXTRA_EXP_BASED_ON_PERFORMANCE =
             registerCatchModifier("extra_exp_based_on_performance", ExtraExpBasedOnPerformanceModifier::new);
 
     //split hook
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_ITEM = registerCatchModifier("extra_item", () -> new ExtraItemsModifier(1));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_TWO_ITEMS = registerCatchModifier("extra_two_item", () -> new ExtraItemsModifier(2));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_THREE_ITEMS = registerCatchModifier("extra_three_item", () -> new ExtraItemsModifier(3));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_FIVE_ITEMS = registerCatchModifier("extra_five_item", () -> new ExtraItemsModifier(5));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_TEN_ITEMS = registerCatchModifier("extra_ten_item", () -> new ExtraItemsModifier(10));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> EXTRA_THIRTY_TWO_ITEMS = registerCatchModifier("extra_thirty_two_item", () -> new ExtraItemsModifier(32));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> EXTRA_ITEM = registerCatchModifier("extra_item", () -> new ExtraItemsModifier(1));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> EXTRA_TWO_ITEMS = registerCatchModifier("extra_two_item", () -> new ExtraItemsModifier(2));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> EXTRA_THREE_ITEMS = registerCatchModifier("extra_three_item", () -> new ExtraItemsModifier(3));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> EXTRA_FIVE_ITEMS = registerCatchModifier("extra_five_item", () -> new ExtraItemsModifier(5));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> EXTRA_TEN_ITEMS = registerCatchModifier("extra_ten_item", () -> new ExtraItemsModifier(10));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> EXTRA_THIRTY_TWO_ITEMS = registerCatchModifier("extra_thirty_two_item", () -> new ExtraItemsModifier(32));
 
     //meteorological bait
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> IGNORE_DAYTIME_AND_WEATHER_RESTRICTIONS = registerCatchModifier("ignore_daytime_and_weather_restrictions", IgnoreDaytimeWeatherRestrictions::new);
+    Pair<Identifier, Supplier<AbstractCatchModifier>> IGNORE_DAYTIME_AND_WEATHER_RESTRICTIONS = registerCatchModifier("ignore_daytime_and_weather_restrictions", IgnoreDaytimeWeatherRestrictions::new);
 
     //survives lava - crystal hook
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> SURVIVES_LAVA = registerCatchModifier("survives_lava", SurvivesLavaModifier::new);
+    Pair<Identifier, Supplier<AbstractCatchModifier>> SURVIVES_LAVA = registerCatchModifier("survives_lava", SurvivesLavaModifier::new);
 
     //add creeper
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> ADD_CREEPER = registerCatchModifier("add_creeper", AddCreeperModifier::new);
+    Pair<Identifier, Supplier<AbstractCatchModifier>> ADD_CREEPER = registerCatchModifier("add_creeper", AddCreeperModifier::new);
 
     //golden
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> GUARANTEE_GOLDEN = registerCatchModifier("guarantee_golden", GuaranteeGolden::new);
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> ADD_5_GOLDEN_CHANCE = registerCatchModifier("add_5_golden_chance", () -> new IncreaseGoldenChance(0.05f));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> ADD_50_GOLDEN_CHANCE = registerCatchModifier("add_50_golden_chance", () -> new IncreaseGoldenChance(0.5f));
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> CANCEL_GOLDEN = registerCatchModifier("cancel_golden", CancelGolden::new);
+    Pair<Identifier, Supplier<AbstractCatchModifier>> GUARANTEE_GOLDEN = registerCatchModifier("guarantee_golden", GuaranteeGolden::new);
+    Pair<Identifier, Supplier<AbstractCatchModifier>> ADD_5_GOLDEN_CHANCE = registerCatchModifier("add_5_golden_chance", () -> new IncreaseGoldenChance(0.05f));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> ADD_50_GOLDEN_CHANCE = registerCatchModifier("add_50_golden_chance", () -> new IncreaseGoldenChance(0.5f));
+    Pair<Identifier, Supplier<AbstractCatchModifier>> CANCEL_GOLDEN = registerCatchModifier("cancel_golden", CancelGolden::new);
 
     //hide catch
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> HIDE_CATCH = registerCatchModifier("hide_catch", HideCatchModifier::new);
+    Pair<Identifier, Supplier<AbstractCatchModifier>> HIDE_CATCH = registerCatchModifier("hide_catch", HideCatchModifier::new);
 
     //angler's hat (artifacts / reliquified artifacts compat)
-    Pair<ResourceLocation, Supplier<AbstractCatchModifier>> ANGLERS_HAT = registerCatchModifier("anglers_hat", AnglersHatModifier::new);
+    Pair<Identifier, Supplier<AbstractCatchModifier>> ANGLERS_HAT = registerCatchModifier("anglers_hat", AnglersHatModifier::new);
 
 
-    static Pair<ResourceLocation, Supplier<AbstractCatchModifier>> registerCatchModifier(String name, Supplier<AbstractCatchModifier> sup)
+    static Pair<Identifier, Supplier<AbstractCatchModifier>> registerCatchModifier(String name, Supplier<AbstractCatchModifier> sup)
     {
         REGISTRY.register(name, () -> sup);
         return Pair.of(Starcatcher.rl(name), sup);
@@ -102,15 +102,15 @@ public interface SCCatchModifiers
         REGISTRY.register(eventBus);
     }
 
-    static Supplier<AbstractCatchModifier> getCatchModifierSupplier(Level level, ResourceLocation resourceLocation)
+    static Supplier<AbstractCatchModifier> getCatchModifierSupplier(Level level, Identifier resourceLocation)
     {
-        Optional<Supplier<AbstractCatchModifier>> optional = level.registryAccess().registryOrThrow(Starcatcher.CATCH_MODIFIERS).getOptional(resourceLocation);
+        Optional<Supplier<AbstractCatchModifier>> optional = level.registryAccess().getOrThrow(Starcatcher.CATCH_MODIFIERS).value().getOptional(resourceLocation);
         return optional.orElse(null);
     }
 
     static List<AbstractCatchModifier> getCatchModifiers(Player player)
     {
-        List<ResourceLocation> rls = new ArrayList<>();
+        List<Identifier> rls = new ArrayList<>();
 
         //rod
         ItemStack main = player.getMainHandItem();
@@ -125,7 +125,7 @@ public interface SCCatchModifiers
         }
 
         //armor
-        player.getInventory().armor.forEach(o -> rls.addAll(getCatchModifiersRLs(o)));
+        player.getInventory().getNonEquipmentItems().forEach(o -> rls.addAll(getCatchModifiersRLs(o)));
 
         //curios
         if (ModList.get().isLoaded("curios"))
@@ -138,9 +138,9 @@ public interface SCCatchModifiers
         return catchModifiers;
     }
 
-    static List<ResourceLocation> getCatchModifiersRLs(ItemStack itemStack)
+    static List<Identifier> getCatchModifiersRLs(ItemStack itemStack)
     {
-        List<ResourceLocation> rls = new ArrayList<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.CATCH_MODIFIERS, List.of()));
+        List<Identifier> rls = new ArrayList<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.CATCH_MODIFIERS, List.of()));
 
         rls.addAll(SCDataMaps.getOrDefault(itemStack, SCDataMaps.CATCH_MODIFIERS, List.of()));
 

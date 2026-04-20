@@ -7,12 +7,11 @@ import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Collections;
@@ -24,7 +23,7 @@ public class DataGenerators
 {
 
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event)
+    public static void gatherData(GatherDataEvent.Client event)
     {
         event.createDatapackRegistryObjects(
                 new RegistrySetBuilder()
@@ -37,48 +36,42 @@ public class DataGenerators
         PackOutput output = gen.getPackOutput();
 
         //fish properties
-        gen.addProvider(
-                event.includeServer(),
-                new DGSCFishingPropertiesProvider(output, lookupProvider)
-        );
+        event.createProvider(DGSCFishingPropertiesProvider::new);
 
-        gen.addProvider(event.includeServer(), new DGSCBiomeModifierProvider(output, lookupProvider));
+
+        event.createProvider(DGSCBiomeModifierProvider::new);
+        //gen.addProvider(event.includeServer(), new DGSCBiomeModifierProvider(output, lookupProvider));
 
         //fish models
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
-        gen.addProvider(event.includeServer(), new DGSCItemModelProvider(output, existingFileHelper));
+        event.createProvider(DGSCItemModelProvider::new);
 
         //block tags
-        BlockTagsProvider btp = new DGSCBlocksTagsProvider(output, lookupProvider, existingFileHelper);
-        gen.addProvider(event.includeServer(), btp);
+        event.createProvider(DGSCBlocksTagsProvider::new);
 
         //item tags
-        ItemTagsProvider itp = new DGSCItemsTagsProvider(output, lookupProvider, btp.contentsGetter(), existingFileHelper);
-        gen.addProvider(event.includeServer(), itp);
+        event.createProvider(DGSCItemsTagsProvider::new);
 
         //fp tags
-        //todo figure this out
-        gen.addProvider(event.includeServer(), new DGSCFPTagsProvider(output, lookupProvider, existingFileHelper));
+        event.createProvider(DGSCFPTagsProvider::new);
 
         //advancements
-        gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
+        //gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 
-        //advancements
-        gen.addProvider(event.includeServer(), new DGSCLootModifiers(output, lookupProvider));
-
+        //loot modifiers
+        event.createProvider(DGSCLootModifiers::new);
 
         //biome tags
-        gen.addProvider(event.includeServer(), new DGSCBiomeTagsProvider(output, lookupProvider, existingFileHelper));
+        event.createProvider(DGSCBiomeTagsProvider::new);
 
         //loot table
-        gen.addProvider(event.includeServer(), new LootTableProvider(output, Collections.emptySet(),
+        gen.addProvider(true, new LootTableProvider(output, Collections.emptySet(),
                 List.of(new LootTableProvider.SubProviderEntry(DGSCBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
 
         //recipes
-        gen.addProvider(event.includeServer(), new DGSCRecipeProvider(output, lookupProvider));
+        event.getGenerator().addProvider(true, new DGSCRecipeProvider.Runner(output, lookupProvider));
 
         //data maps
-        gen.addProvider(event.includeServer(), new DGSCDataMapsProvider(output, lookupProvider));
+        event.createProvider(DGSCDataMapsProvider::new);
 
     }
 }

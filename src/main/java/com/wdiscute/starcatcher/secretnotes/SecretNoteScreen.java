@@ -1,18 +1,18 @@
 package com.wdiscute.starcatcher.secretnotes;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class SecretNoteScreen extends Screen
 {
-    private final ResourceLocation background;
+    private final Identifier background;
 
     private final String translationKey;
     private final Screen screen;
@@ -29,9 +29,9 @@ public class SecretNoteScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(guiGraphics, mouseX, mouseY, partialTick);
 
         renderImage(guiGraphics, background);
 
@@ -40,7 +40,7 @@ public class SecretNoteScreen extends Screen
             String key = translationKey + i;
             if (I18n.exists(key))
             {
-                guiGraphics.drawString(this.font, Component.translatable(key), uiX + 140, uiY + 55 + 9 * i, 0x635040, false);
+                guiGraphics.text(this.font, Component.translatable(key), uiX + 140, uiY + 55 + 9 * i, 0x635040, false);
             }
             else
             {
@@ -50,15 +50,15 @@ public class SecretNoteScreen extends Screen
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    public boolean keyPressed(KeyEvent event)
     {
-        InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
+        InputConstants.Key key = InputConstants.getKey(event);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(key))
         {
             this.onClose();
             return true;
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(event);
     }
 
     @Override
@@ -77,7 +77,7 @@ public class SecretNoteScreen extends Screen
         this.background = Starcatcher.rl("textures/gui/message/" + note.getTexture() + ".png");
     }
 
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
+    private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
         guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }

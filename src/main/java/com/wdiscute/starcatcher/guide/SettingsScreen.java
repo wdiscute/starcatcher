@@ -7,14 +7,16 @@ import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModif
 import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.OptionInstance;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
+import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -22,8 +24,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.function.Supplier;
 
 public class SettingsScreen extends FishingMinigameScreen {
-    public static final ResourceLocation SETTINGS = Starcatcher.rl("textures/gui/minigame/settings.png");
-    public static final ResourceLocation GUI_SCALE = Starcatcher.rl("textures/gui/minigame/gui_scale.png");
+    public static final Identifier SETTINGS = Starcatcher.rl("textures/gui/minigame/settings.png");
+    public static final Identifier GUI_SCALE = Starcatcher.rl("textures/gui/minigame/gui_scale.png");
 
     FishProperties.SizeAndWeight.Units unitSelected;
 
@@ -160,7 +162,7 @@ public class SettingsScreen extends FishingMinigameScreen {
 
     public class LeftRightButtonWidget<T extends Comparable<T>> extends AbstractWidget {
         int uOffset, vOffset, textureWidth, textureHeight, buttonWidth;
-        ResourceLocation texture;
+        Identifier texture;
         Supplier<T> value;
         @Nullable T rightLimit, leftLimit;
         Runnable rightAction, leftAction;
@@ -168,7 +170,7 @@ public class SettingsScreen extends FishingMinigameScreen {
 
         // This is automatically centered
         public LeftRightButtonWidget(Supplier<T> value, Runnable leftAction, Runnable rightAction, @Nullable T leftLimit, @Nullable T rightLimit, MutableComponent name,
-                                     int x, int y, int width, int height, int uOffset, int vOffset, int textureWidth, int textureHeight, ResourceLocation texture, int buttonWidth) {
+                                     int x, int y, int width, int height, int uOffset, int vOffset, int textureWidth, int textureHeight, Identifier texture, int buttonWidth) {
 
             super(x - (width >> 1), y - (height >> 1), width, height, Component.empty());
 
@@ -189,28 +191,13 @@ public class SettingsScreen extends FishingMinigameScreen {
         }
 
         @Override
-        protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-            Object o = value.get();
-            if (o instanceof Float number){
-               number = Math.round(number * 10) / 10f;
-               o = number;
-            }
-
-            MutableComponent component = Component.empty().append(name).append(": ").append(String.valueOf(o));
-            guiGraphics.drawCenteredString(getMinecraft().font, component, getX() + (getWidth() / 2), getY() + (getHeight() / 4), 0x000000);
-
-            guiGraphics.blit(
-                    texture, getX(), getY(),
-                    getWidth(), getHeight(), uOffset, vOffset, getWidth(), getHeight(), textureWidth, textureHeight);
-
-        }
-
-
-        @Override
-        public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
+        {
+            double mouseX = event.x();
+            double mouseY = event.y();
             //confirm the mouse is on the element
             if (!(mouseX > getX() && mouseX < getRight() && mouseY > getY() && mouseY < getBottom()))
-                return super.mouseClicked(mouseX, mouseY, button);
+                return super.mouseClicked(event, doubleClick);
 
             //left button
             if (mouseX < getX() + buttonWidth){
@@ -228,6 +215,25 @@ public class SettingsScreen extends FishingMinigameScreen {
             }
 
             return true;
+
+        }
+
+        @Override
+        protected void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a)
+        {
+            Object o = value.get();
+            if (o instanceof Float number){
+                number = Math.round(number * 10) / 10f;
+                o = number;
+            }
+
+            MutableComponent component = Component.empty().append(name).append(": ").append(String.valueOf(o));
+            guiGraphics.centeredText(getMinecraft().font, component, getX() + (getWidth() / 2), getY() + (getHeight() / 4), 0x000000);
+
+            guiGraphics.blit(RenderPipelines.GUI,
+                    texture, getX(), getY(),
+                    getWidth(), getHeight(), uOffset, vOffset, getWidth(), getHeight(), textureWidth, textureHeight);
+
         }
 
         @Override
@@ -247,19 +253,14 @@ public class SettingsScreen extends FishingMinigameScreen {
         }
 
         @Override
-        protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-            //GUI SCALE
-            guiGraphics.blit(
-                    GUI_SCALE, getX(), getY(),
-                    getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), getWidth(), getHeight());
+        public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
+        {
+            double mouseX = event.x();
+            double mouseY = event.y();
 
-        }
-
-        @Override
-        public boolean mouseClicked(double mouseX, double mouseY, int button) {
             //confirm the mouse is on the element
             if (!(mouseX > getX() && mouseX < getRight() && mouseY > getY() && mouseY < getBottom()))
-                return super.mouseClicked(mouseX, mouseY, button);
+                return super.mouseClicked(event, doubleClick);
 
             int current = guiScale().get();
 
@@ -272,6 +273,16 @@ public class SettingsScreen extends FishingMinigameScreen {
                 guiScale().set(current + 1);
             }
             return true;
+        }
+
+        @Override
+        protected void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a)
+        {
+            //GUI SCALE
+            guiGraphics.blit(RenderPipelines.GUI,
+                    GUI_SCALE, getX(), getY(),
+                    getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), getWidth(), getHeight());
+
         }
 
         @Override
