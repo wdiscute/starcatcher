@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.blocks.display;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.compat.SableCompat;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.core.BlockPos;
@@ -36,7 +37,6 @@ public class DisplayBlockEntity extends BlockEntity
     public float tRot;
 
     public boolean fishRotating;
-
     public static void bookAnimationTick(Level level, BlockPos pos, BlockState state, DisplayBlockEntity enchantingTable)
     {
         enchantingTable.oOpen = enchantingTable.open;
@@ -44,8 +44,20 @@ public class DisplayBlockEntity extends BlockEntity
         Player player = level.getNearestPlayer((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 3.0, false);
         if (player != null)
         {
-            double d0 = player.getX() - ((double) pos.getX() + 0.5);
-            double d1 = player.getZ() - ((double) pos.getZ() + 0.5);
+            double d0;
+            double d1;
+
+            if (SableCompat.isLoaded()) {
+                d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
+            } else {
+                d0 = player.getX() - ((double) pos.getX() + 0.5);
+            }
+
+            if (SableCompat.isLoaded()) {
+                d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
+            } else {
+                d1 = player.getZ() - ((double) pos.getZ() + 0.5);
+            }
             enchantingTable.tRot = (float) Mth.atan2(d1, d0);
             enchantingTable.open += 0.1F;
             if (enchantingTable.open < 0.5F || U.r.nextInt(40) == 0)
