@@ -28,7 +28,7 @@ public class FishMessagesModifier extends AbstractCatchModifier
         List<LetterItem.Message> messages = MessagesSavedData.get(((ServerLevel) instance.level())).getMessages();
 
         //if there are any messages
-        List<LetterItem.Message> list = messages.stream().filter(o -> o.dimension().equals(instance.level().dimension().location()) && !o.sender().equals(instance.player.getUUID())).toList();
+        List<LetterItem.Message> list = messages.stream().filter(o -> o.dimension().equals(instance.level().dimension().identifier()) && !o.sender().equals(instance.player.getUUID())).toList();
 
         if (!list.isEmpty())
         {

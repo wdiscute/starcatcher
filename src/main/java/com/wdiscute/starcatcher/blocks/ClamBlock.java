@@ -18,6 +18,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -34,12 +35,12 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
 {
     public static final BooleanProperty HAS_PEARL = BooleanProperty.create("has_pearl");
 
-    public ClamBlock()
+    public ClamBlock(BlockBehaviour.Properties properties)
     {
-        super(Properties.of()
+        super(properties
                 .destroyTime(0.2f)
                 .noOcclusion()
-                .noCollission()
+                .noCollision()
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.BONE_BLOCK)
                 .randomTicks()
@@ -55,7 +56,7 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
-        if(!state.getValue(HAS_PEARL) && random.nextFloat() > 0.99f && !level.isClientSide && level.getBlockState(pos.below()).is(BlockTags.SAND))
+        if(!state.getValue(HAS_PEARL) && random.nextFloat() > 0.99f && !level.isClientSide() && level.getBlockState(pos.below()).is(BlockTags.SAND))
         {
             level.setBlockAndUpdate(pos, state.setValue(HAS_PEARL, true));
         }
@@ -70,7 +71,7 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
             level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
             level.playSound(null, pos, SoundEvents.BONE_BLOCK_PLACE, SoundSource.BLOCKS, 0.6f, 0.6f);
             level.setBlockAndUpdate(pos, state.setValue(HAS_PEARL, false));
-            Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 0.4, 0.5F).offsetRandom(level.random, 0.7F);
+            Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 0.4, 0.5F).offsetRandom(level.getRandom(), 0.7F);
             ItemStack stack = U.r.nextFloat() > 0.01f ? SCItems.PEARL.value().getDefaultInstance() : SCItems.PEARL_SMITHING_TEMPLATE.value().getDefaultInstance();
             ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), stack);
             itementity.setDefaultPickUpDelay();

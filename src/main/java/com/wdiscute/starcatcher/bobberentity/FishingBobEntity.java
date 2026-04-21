@@ -33,6 +33,7 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FluidState;
@@ -42,6 +43,7 @@ import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -90,10 +92,13 @@ public class FishingBobEntity extends Projectile
         modifiers.forEach(acm -> acm.onAdd(this));
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static Player getPlayer()
     {
         return Minecraft.getInstance().player;
+    }
+
+    public @Nullable Player getPlayerOwner() {
+        return this.getOwner() instanceof Player player ? player : null;
     }
 
     //server
@@ -110,7 +115,7 @@ public class FishingBobEntity extends Projectile
         modifiers.add(new FishMessagesModifier());
 
         SingleStackContainer ssc = SCDataComponents.getOrDefault(rod, SCDataComponents.HOOK, SingleStackContainer.empty());
-        voidHook = BuiltInRegistries.ITEM.getKey(ssc.stack().getItem()).equals(U.rl("tide", "void_fishing_hook"));
+        voidHook = BuiltInRegistries.ITEM.getKey(ssc.create().getItem()).equals(U.rl("tide", "void_fishing_hook"));
 
         entityData.set(VOID, voidHook);
 
@@ -368,7 +373,7 @@ public class FishingBobEntity extends Projectile
                 SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB);
                 SCTackleSkins.get(level(), rod).onMissed(player);
 
-                ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, new SingleStackContainer(ItemStack.EMPTY)).stack();
+                ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).create();
                 if (!bait.is(Items.BUCKET))
                 {
                     bait.shrink(1);
@@ -376,7 +381,7 @@ public class FishingBobEntity extends Projectile
                     {
                         player.sendOverlayMessage(Component.translatable("gui.starcatcher.bait_running_low"));
                     }
-                    SCDataComponents.set(rod, SCDataComponents.BAIT, new SingleStackContainer(bait));
+                    SCDataComponents.set(rod, SCDataComponents.BAIT, SingleStackContainer.empty());
                 }
 
                 if (!level().isClientSide())

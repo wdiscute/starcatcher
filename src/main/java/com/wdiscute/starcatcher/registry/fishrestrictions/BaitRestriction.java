@@ -77,7 +77,7 @@ public class BaitRestriction extends AbstractFishRestriction
     {
         if (context.equals(Context.GUIDE_FISHES_HOVER)) return fp.baseChance() == 0 ? -9999 : 0;
 
-        Item bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).stack().getItem();
+        Item bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).create().getItem();
 
         if (baits.containsKey(BuiltInRegistries.ITEM.getKey(bait)))
             return baits.get(BuiltInRegistries.ITEM.getKey(bait));

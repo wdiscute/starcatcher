@@ -94,8 +94,8 @@ public class DGFintasticFishes extends FishingPropertiesRegistry
                         ElevationRestriction.FIFTY_TO_HUNDRED,
                         new BiomeRestriction(
                                 List.of(
-                                        Biomes.BEACH.location(),
-                                        Biomes.MANGROVE_SWAMP.location()
+                                        Biomes.BEACH.identifier(),
+                                        Biomes.MANGROVE_SWAMP.identifier()
                                 ),
                                 List.of(
                                         SCTags.IS_LUKEWARM_OCEAN,

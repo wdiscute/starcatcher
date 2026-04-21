@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.U;
-import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
@@ -14,7 +13,6 @@ import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
 import com.wdiscute.starcatcher.registry.SCEntities;
 import com.wdiscute.starcatcher.registry.SCItems;
-import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -37,6 +35,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -64,9 +63,9 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     public static final EnumProperty<Decoration> DECORATION = EnumProperty.create("decoration", Decoration.class);
     public static final EnumProperty<Ground> GROUND = EnumProperty.create("ground", Ground.class);
 
-    public AquariumBlock()
+    public AquariumBlock(BlockBehaviour.Properties properties)
     {
-        super(Properties.of()
+        super(properties
                 .pushReaction(PushReaction.IGNORE)
                 .sound(SoundType.GLASS)
                 .strength(2.0F)
@@ -443,7 +442,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
                 if (!abe.getFish().isEmpty()) return false;
                 if (SCDataComponents.has(is, SCDataComponents.BUCKETED_FISH))
                 {
-                    abe.setFish(SCDataComponents.get(is, SCDataComponents.BUCKETED_FISH).stack());
+                    abe.setFish(SCDataComponents.get(is, SCDataComponents.BUCKETED_FISH).create());
                     if (is.getItem() instanceof BucketItem)
                     {
                         ItemStack emptySuccessItem = BucketItem.getEmptySuccessItem(is, p);

@@ -19,27 +19,19 @@ public class SCBlockEntities
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Starcatcher.MOD_ID);
 
     public static final Supplier<BlockEntityType<StandBlockEntity>> STAND = BLOCK_ENTITIES.register("stand",
-            () -> BlockEntityType.Builder.of(StandBlockEntity::new,
-                            SCBlocks.STAND.get()
-                    ).build(null));
+            () -> new BlockEntityType<>(StandBlockEntity::new, SCBlocks.STAND.get()));
 
     public static final Supplier<BlockEntityType<TelescopeBlockEntity>> TELESCOPE = BLOCK_ENTITIES.register("telescope",
-            () -> BlockEntityType.Builder.of(TelescopeBlockEntity::new,
-                    SCBlocks.TELESCOPE.get()
-            ).build(null));
+            () -> new BlockEntityType<>(TelescopeBlockEntity::new, SCBlocks.TELESCOPE.get()));
 
     public static final Supplier<BlockEntityType<DisplayBlockEntity>> DISPLAY = BLOCK_ENTITIES.register("display",
-            () -> BlockEntityType.Builder.of(DisplayBlockEntity::new,
-                    SCBlocks.DISPLAY.get()
-            ).build(null));
+            () -> new BlockEntityType<>(DisplayBlockEntity::new, SCBlocks.DISPLAY.get()));
 
     public static final Supplier<BlockEntityType<AquariumBlockEntity>> AQUARIUM = BLOCK_ENTITIES.register("aquarium",
-            () -> BlockEntityType.Builder.of(AquariumBlockEntity::new,
-                    SCBlocks.AQUARIUM.get()
-            ).build(null));
+            () -> new BlockEntityType<>(AquariumBlockEntity::new, SCBlocks.AQUARIUM.get()));
 
     public static final Supplier<BlockEntityType<TackleBoxBlockEntity>> TACKLE_BOX = BLOCK_ENTITIES.register("tackle_box.png",
-            () -> BlockEntityType.Builder.of(TackleBoxBlockEntity::new,
+            () -> new BlockEntityType<>(TackleBoxBlockEntity::new,
                     SCBlocks.TACKLE_BOX.get(),
                     SCBlocks.TACKLE_BOX_WHITE.get(),
                     SCBlocks.TACKLE_BOX_LIME.get(),
@@ -57,7 +49,7 @@ public class SCBlockEntities
                     SCBlocks.TACKLE_BOX_LIGHT_BLUE.get(),
                     SCBlocks.TACKLE_BOX_CYAN.get(),
                     SCBlocks.TACKLE_BOX_GREEN.get()
-            ).build(null));
+            ));
 
 
     public static void register(IEventBus eventBus) {

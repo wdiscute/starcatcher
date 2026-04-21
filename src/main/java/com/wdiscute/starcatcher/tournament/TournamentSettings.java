@@ -34,7 +34,7 @@ public class TournamentSettings
         {
             for (SingleStackContainer ssc : entryCost)
             {
-                if (!player.getInventory().hasAnyMatching(is -> is.is(ssc.stack().getItem()) && is.getCount() >= ssc.stack().getCount()))
+                if (!player.getInventory().hasAnyMatching(is -> is.is(ssc.create().getItem()) && is.getCount() >= ssc.create().getCount()))
                     canSignup = false;
             }
         }

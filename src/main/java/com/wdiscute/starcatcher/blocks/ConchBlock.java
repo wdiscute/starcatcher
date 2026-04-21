@@ -9,6 +9,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -21,12 +22,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ConchBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock
 {
-    public ConchBlock()
+    public ConchBlock(BlockBehaviour.Properties properties)
     {
-        super(Properties.of()
+        super(properties
                 .destroyTime(0.2f)
                 .noOcclusion()
-                .noCollission()
+                .noCollision()
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.BONE_BLOCK)
         );

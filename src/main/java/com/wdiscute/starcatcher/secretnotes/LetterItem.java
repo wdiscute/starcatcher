@@ -25,9 +25,9 @@ import java.util.UUID;
 
 public class LetterItem extends Item
 {
-    public LetterItem()
+    public LetterItem(Properties properties)
     {
-        super(new Properties().stacksTo(1).component(SCDataComponents.MESSAGE, Message.empty()));
+        super(properties.stacksTo(1).component(SCDataComponents.MESSAGE, Message.empty()));
     }
 
     @Override
@@ -44,14 +44,12 @@ public class LetterItem extends Item
         return InteractionResult.SUCCESS;
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void openMessageScreen(Message message)
     {
         Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
         Minecraft.getInstance().setScreen(new MessageScreen(message));
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void openMessageWriteScreen(Message message)
     {
         Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);

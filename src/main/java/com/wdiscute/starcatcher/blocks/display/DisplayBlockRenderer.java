@@ -161,7 +161,6 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
         return new DisplayBlockRenderState();
     }
 
-    @OnlyIn(Dist.CLIENT)
     public record State(float openness, float pageFlip1, float pageFlip2) {
         public static State forAnimation(float progress, float pageFlip1, float pageFlip2, float openness) {
             return new State((Mth.sin(progress * 0.02F) * 0.1F + 1.25F) * openness, pageFlip1, pageFlip2);

@@ -13,7 +13,6 @@ import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.items.SlotItemHandler;
 
 import java.util.List;
 import java.util.UUID;
@@ -29,34 +28,6 @@ public class StandMenu extends AbstractContainerMenu
         super(SCMenuTypes.STAND_MENU.get(), containerId);
         sbe = ((StandBlockEntity) blockEntity);
         level = inv.player.level();
-
-        for (int i = 0; i < 9; i++)
-        {
-            int slotid = i;
-            this.addSlot(new SlotItemHandler(sbe.entryCost, slotid, 210 + slotid * 16, 157)
-            {
-
-                @Override
-                public boolean mayPickup(Player playerIn)
-                {
-                    if (level.isClientSide) return false;
-
-                    sbe.entryCost.setStackInSlot(slotid, ItemStack.EMPTY);
-                    sbe.tournament.settings.entryCost = SingleStackContainer.fromItemStackHandler(sbe.entryCost);
-                    return false;
-                }
-
-                @Override
-                public boolean mayPlace(ItemStack stackInHand)
-                {
-                    if (level.isClientSide) return false;
-
-                    sbe.entryCost.setStackInSlot(slotid, stackInHand.copy());
-                    sbe.tournament.settings.entryCost = SingleStackContainer.fromItemStackHandler(sbe.entryCost);
-                    return false;
-                }
-            });
-        }
     }
 
     public StandMenu(int containerId, Inventory inv, FriendlyByteBuf extraData)
@@ -67,7 +38,7 @@ public class StandMenu extends AbstractContainerMenu
     @Override
     public boolean clickMenuButton(Player player, int id)
     {
-        if (level.isClientSide) return false;
+        if (level.isClientSide()) return false;
 
         //six seven
         //¯\_(ツ)¯\_
@@ -131,14 +102,14 @@ public class StandMenu extends AbstractContainerMenu
                     {
                         for (SingleStackContainer ssc : entryCost)
                         {
-                            Predicate<ItemStack> predicate = (is) -> is.is(ssc.stack().getItem()) && is.getCount() >= ssc.stack().getCount();
+                            Predicate<ItemStack> predicate = (is) -> is.is(ssc.create().getItem()) && is.getCount() >= ssc.create().getCount();
 
                             for (int i = 0; i < player.getInventory().getContainerSize(); ++i)
                             {
                                 ItemStack is = player.getInventory().getItem(i);
                                 if (predicate.test(is))
                                 {
-                                    is.shrink(ssc.stack().getCount());
+                                    is.shrink(ssc.create().getCount());
                                     break;
                                 }
                             }

@@ -14,7 +14,8 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record FishingStartedPayload(FishProperties fp, ItemStack rod) implements CustomPacketPayload {
+public record FishingStartedPayload(FishProperties fp, ItemStack rod) implements CustomPacketPayload
+{
 
     public static final Type<FishingStartedPayload> TYPE = new Type<>(Starcatcher.rl("fishing_started"));
 
@@ -25,17 +26,19 @@ public record FishingStartedPayload(FishProperties fp, ItemStack rod) implements
     );
 
     @Override
-    public Type<? extends CustomPacketPayload> type() {
+    public Type<? extends CustomPacketPayload> type()
+    {
         return TYPE;
     }
 
 
-    public void handle(IPayloadContext context) {
-        context.enqueueWork(()-> client(this, context));
+    public void handle(IPayloadContext context)
+    {
+        context.enqueueWork(() -> client(this, context));
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static void client(FishingStartedPayload data, IPayloadContext context) {
+    public static void client(FishingStartedPayload data, IPayloadContext context)
+    {
         Minecraft.getInstance().setScreen(new FishingMinigameScreen(data.fp(), data.rod()));
     }
 }

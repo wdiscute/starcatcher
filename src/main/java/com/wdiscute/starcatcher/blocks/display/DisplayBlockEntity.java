@@ -18,6 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 public class DisplayBlockEntity extends BlockEntity
@@ -150,40 +152,18 @@ public class DisplayBlockEntity extends BlockEntity
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
+    protected void loadAdditional(ValueInput input)
     {
-        super.getUpdateTag(registries);
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
-        return tag;
+        super.loadAdditional(input);
+        this.item = input.read("item", ItemStack.CODEC).orElse(ItemStack.EMPTY);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void saveAdditional(ValueOutput output)
     {
-        super.loadAdditional(tag, registries);
-        if (tag.contains("Book"))
-        {
-            this.item = ItemStack.parse(registries, tag.getCompound("Book")).orElse(ItemStack.EMPTY);
-        }
-        else
-        {
-            this.item = ItemStack.EMPTY;
-        }
-    }
-
-    @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
-    {
-        super.saveAdditional(tag, registries);
-        if (!this.getItem().isEmpty())
-        {
-            tag.put("Book", this.getItem().save(registries));
-        }
-        else
-        {
-            //need to put a tag otherwise its not sent to client since the tag is empty
-            tag.putBoolean("empty", true);
+        super.saveAdditional(output);
+        if (item.isEmpty()) {
+            output.store("item", ItemStack.CODEC, item);
         }
     }
 

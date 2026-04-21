@@ -147,9 +147,9 @@ public interface SCCatchModifiers
         if(!itemStack.is(SCTags.RODS)) return rls;
 
         //if not a rod, add hook bobber and bait slot modifiers too
-        var hook = SCDataComponents.getOrDefault(itemStack, SCDataComponents.HOOK, SingleStackContainer.empty()).stack();
-        var bait = SCDataComponents.getOrDefault(itemStack, SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
-        var bobber = SCDataComponents.getOrDefault(itemStack, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack();
+        var hook = SCDataComponents.getOrDefault(itemStack, SCDataComponents.HOOK, SingleStackContainer.empty()).create();
+        var bait = SCDataComponents.getOrDefault(itemStack, SCDataComponents.BAIT, SingleStackContainer.empty()).create();
+        var bobber = SCDataComponents.getOrDefault(itemStack, SCDataComponents.BOBBER, SingleStackContainer.empty()).create();
 
         rls.addAll(SCDataMaps.getOrDefault(hook, SCDataMaps.CATCH_MODIFIERS, List.of()));
         rls.addAll(SCDataMaps.getOrDefault(bait, SCDataMaps.CATCH_MODIFIERS, List.of()));

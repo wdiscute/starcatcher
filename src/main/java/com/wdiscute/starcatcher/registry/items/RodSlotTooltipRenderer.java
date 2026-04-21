@@ -29,9 +29,9 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
     {
         this.tooltip = tooltip;
         ItemStack rod = tooltip.rod();
-        bobber = SCDataComponents.getOrDefault(rod, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack();
-        bait = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
-        hook = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.HOOK, SingleStackContainer.empty()).stack();
+        bobber = SCDataComponents.getOrDefault(rod, SCDataComponents.BOBBER, SingleStackContainer.empty()).create();
+        bait = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.BAIT, SingleStackContainer.empty()).create();
+        hook = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.HOOK, SingleStackContainer.empty()).create();
     }
 
     @Override

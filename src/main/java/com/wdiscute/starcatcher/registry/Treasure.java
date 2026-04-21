@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.U;
+import com.wdiscute.starcatcher.io.SingleStackContainer;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
@@ -11,6 +12,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
@@ -19,18 +21,19 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.neoforged.neoforge.common.Tags;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Treasure
 {
     public static final TreasureInstance VANILLA_FISHING_LOOT_TABLE = new LootTableTreasureInstance(BuiltInLootTables.FISHING.identifier());
-    public static final TreasureInstance AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final TreasureInstance KIMBE_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KIMBE_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final TreasureInstance COLORFUL_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.COLORFUL_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final TreasureInstance CLEAR_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.CLEAR_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final TreasureInstance KING_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KING_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final TreasureInstance ICEBORN_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
+    public static final TreasureInstance AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.value());
+    public static final TreasureInstance KIMBE_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KIMBE_SMITHING_TEMPLATE.get());
+    public static final TreasureInstance COLORFUL_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.COLORFUL_SMITHING_TEMPLATE.value());
+    public static final TreasureInstance CLEAR_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.CLEAR_SMITHING_TEMPLATE.value());
+    public static final TreasureInstance KING_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KING_SMITHING_TEMPLATE.value());
+    public static final TreasureInstance ICEBORN_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE.value());
 
     public abstract static class TreasureInstance
     {
@@ -97,21 +100,23 @@ public class Treasure
 
     public static class ItemStackListTreasureInstance extends TreasureInstance
     {
-        List<ItemStack> items;
+        List<SingleStackContainer> items;
 
         public static final MapCodec<ItemStackListTreasureInstance> CODEC = RecordCodecBuilder.mapCodec(instance ->
                 instance.group(
-                        ItemStack.OPTIONAL_CODEC.listOf().fieldOf("items").forGetter(o -> o.items)
+                        SingleStackContainer.CODEC.listOf().fieldOf("items").forGetter(o -> o.items)
                 ).apply(instance, ItemStackListTreasureInstance::new));
 
-        public ItemStackListTreasureInstance(List<ItemStack> items)
+        public ItemStackListTreasureInstance(Item... items)
         {
-            this.items = items;
+            List<SingleStackContainer> list = new ArrayList<>();
+            Arrays.stream(items).forEach(o -> list.add(SingleStackContainer.from(o)));
+            this.items = list;
         }
 
-        public ItemStackListTreasureInstance(ItemStack... items)
+        public ItemStackListTreasureInstance(List<SingleStackContainer> items)
         {
-            this.items = Arrays.stream(items).toList();
+            this.items = items;
         }
 
         @Override
@@ -124,7 +129,7 @@ public class Treasure
         public ItemStack unpack(Player player)
         {
             if(items.isEmpty()) return ItemStack.EMPTY;
-            return items.get(U.r.nextInt(items.size()));
+            return items.get(U.r.nextInt(items.size())).create();
         }
     }
 }

@@ -1,66 +1,67 @@
 package com.wdiscute.starcatcher.io;
 
 import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.items.ItemStackHandler;
+import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 
-import java.util.ArrayList;
 import java.util.List;
 
 //use stack() when obtaining the stack from the container to prevent accidental mutation of the itemstack
-public record SingleStackContainer(@Deprecated ItemStack stackDoNotUse)
+public record SingleStackContainer(@Deprecated ItemStackTemplate stackDoNotUse)
 {
 
-    public static final Codec<SingleStackContainer> CODEC = ItemStack.OPTIONAL_CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stackDoNotUse);
+    public static final Codec<SingleStackContainer> CODEC = ItemStackTemplate.CODEC.xmap(SingleStackContainer::new, SingleStackContainer::stackDoNotUse);
 
     public static final Codec<List<SingleStackContainer>> LIST_CODEC = SingleStackContainer.CODEC.listOf();
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SingleStackContainer> STREAM_CODEC = StreamCodec.composite(
-            ItemStack.OPTIONAL_STREAM_CODEC, SingleStackContainer::stackDoNotUse,
+            ItemStackTemplate.STREAM_CODEC, SingleStackContainer::stackDoNotUse,
             SingleStackContainer::new
     );
 
     public static SingleStackContainer from(ItemStack itemStack)
     {
-        return new SingleStackContainer(itemStack.copy());
+        return new SingleStackContainer(ItemStackTemplate.fromNonEmptyStack(itemStack));
+    }
+
+    public static SingleStackContainer from(ItemStackTemplate template)
+    {
+        return new SingleStackContainer(template);
+    }
+
+    public static SingleStackContainer from(Holder<Item> itemHolder)
+    {
+        return new SingleStackContainer(new ItemStackTemplate(itemHolder));
+    }
+
+    public static SingleStackContainer from(Item item)
+    {
+        return new SingleStackContainer(new ItemStackTemplate(item));
     }
 
     public static final StreamCodec<RegistryFriendlyByteBuf, List<SingleStackContainer>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
 
-    public static List<SingleStackContainer> fromItemStackHandler(ItemStackHandler prizePool)
+    public ItemStack create()
     {
-        List<SingleStackContainer> list = new ArrayList<>();
-
-        for (int i = 0; i < prizePool.getSlots(); i++)
-        {
-            list.add(new SingleStackContainer(prizePool.getStackInSlot(i)));
-        }
-
-        return list;
+        return stackDoNotUse == null ? ItemStack.EMPTY : stackDoNotUse.create();
     }
 
-    @Override
-    public boolean equals(Object o)
+    public static SingleStackContainer empty()
     {
-        if (o == null || getClass() != o.getClass()) return false;
-        SingleStackContainer other = (SingleStackContainer) o;
-        return ItemStack.matches(this.stackDoNotUse, other.stackDoNotUse);
+        return new SingleStackContainer(null);
     }
-
-    public ItemStack stack()
-    {
-        return stackDoNotUse.copy();
-    }
-
-    public static SingleStackContainer empty(){return new SingleStackContainer(ItemStack.EMPTY.copy());}
 
     public static final List<SingleStackContainer> EMPTY_LIST = List.of();
 
     public boolean isEmpty()
     {
-        return stack().isEmpty();
+        return create().isEmpty();
     }
 }

@@ -27,9 +27,9 @@ public record IsCastItemProperty(boolean isCast) implements RangeSelectItemModel
     {
         if (owner instanceof Player player)
         {
-            if (SCDataComponents.getOrDefault(stack, SCDataComponents.BOBBER, SingleStackContainer.empty()).isEmpty())
+            if (SCDataComponents.getOrDefault(stack, SCDataComponents.BOBBER, SingleStackContainer.empty()).create().isEmpty())
                 return 1f;
-            if (SCDataComponents.getOrDefault(stack, SCDataComponents.HOOK, SingleStackContainer.empty()).isEmpty())
+            if (SCDataComponents.getOrDefault(stack, SCDataComponents.HOOK, SingleStackContainer.empty()).create().isEmpty())
                 return 1f;
             return !SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB).isEmpty() &&
                     (player.getMainHandItem() == stack || (player.getOffhandItem() == stack)) ? 1.0f : 0.0f;

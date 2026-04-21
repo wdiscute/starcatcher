@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.registry.FishProperties;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,6 +18,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -190,9 +192,14 @@ public class U
         return Identifier.fromNamespaceAndPath("minecraft", path);
     }
 
+    //public static Holder<Item> holderItem(HolderLookup.Provider registries, String ns, String path)
     public static Holder<Item> holderItem(String ns, String path)
     {
-        return Holder.Reference.createStandAlone(BuiltInRegistries.ITEM.getOrThrow(), ResourceKey.create(Registries.ITEM, rl(ns, path)));
+        return null;
+//        return Holder.Reference.createStandAlone(
+//                registries.lookupOrThrow(Registries.ITEM),
+//                ResourceKey.create(Registries.ITEM, rl(ns, path))
+//        );
     }
 
     public static Holder<Item> holderItem(DeferredItem<Item> item)
@@ -210,9 +217,14 @@ public class U
         return Holder.direct(entityType);
     }
 
+    //public static Holder<EntityType<?>> holderEntity(HolderLookup.Provider registries, String ns, String path)
     public static Holder<EntityType<?>> holderEntity(String ns, String path)
     {
-        return Holder.Reference.createStandAlone(BuiltInRegistries.ENTITY_TYPE.holderOwner(), ResourceKey.create(Registries.ENTITY_TYPE, rl(ns, path)));
+        return null;
+//        return Holder.Reference.createStandAlone(
+//                registries.lookupOrThrow(Registries.ENTITY_TYPE),
+//                ResourceKey.create(Registries.ENTITY_TYPE, rl(ns, path))
+//        );
     }
 
     public static Holder<EntityType<?>> holderEntity(Supplier<EntityType<FishEntity>> entity)

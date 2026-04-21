@@ -19,9 +19,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class SecretNote extends Item
 {
-    public SecretNote()
+    public SecretNote(Properties properties)
     {
-        super(new Properties().stacksTo(1).component(SCDataComponents.SECRET_NOTE, Note.SAMPLE_NOTE));
+        super(properties.stacksTo(1).component(SCDataComponents.SECRET_NOTE, Note.SAMPLE_NOTE));
     }
 
     @Override
@@ -36,7 +36,6 @@ public class SecretNote extends Item
         return InteractionResult.SUCCESS;
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void openNoteScreen(Note note)
     {
         Minecraft.getInstance().setScreen(new SecretNoteScreen(note, null));

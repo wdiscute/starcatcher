@@ -8,6 +8,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
@@ -21,9 +22,9 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
 {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    public TrophyOfTheOlderAngler()
+    public TrophyOfTheOlderAngler(BlockBehaviour.Properties properties)
     {
-        super(Properties.of()
+        super(properties
                 .destroyTime(2)
                 .lightLevel((_) -> 5)
                 .noOcclusion()

@@ -9,14 +9,14 @@ public class AquariumRenderState extends BlockEntityRenderState
 {
     ItemStack fish;
     public BlockPos fishTargetBP = BlockPos.ZERO;
+    public Vec3 fishTarget = Vec3.ZERO;
     double partialHelper = 0;
     public double fishRotation = 0;
     public double x = 0;
     public double y = 0;
     public double z = 0;
 
-    public AquariumRenderState(ItemStack fish)
+    public AquariumRenderState()
     {
-        this.fish = fish;
     }
 }

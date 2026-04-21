@@ -2,159 +2,163 @@ package com.wdiscute.starcatcher.bobberentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Axis;
-import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.io.SCDataAttachments;
-import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
-import com.wdiscute.starcatcher.registry.tackleskin.BaseTackleSkin;
-import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.minecraft.core.Holder;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.phys.Vec3;
-
-import java.util.Optional;
-import java.util.function.Supplier;
-
-import static java.lang.Float.NaN;
 
 public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, FishingBobRenderState>
 {
-    final EntityRendererProvider.Context context;
+    private static final Identifier TEXTURE_LOCATION = Identifier.withDefaultNamespace("textures/entity/fishing/fishing_hook.png");
+    private static final RenderType RENDER_TYPE = RenderTypes.entityCutoutCull(TEXTURE_LOCATION);
 
     public FishingBobRenderer(EntityRendererProvider.Context context)
     {
         super(context);
-        this.context = context;
     }
 
-    @Override
+    public boolean shouldRender(FishingBobEntity entity, Frustum culler, double camX, double camY, double camZ)
+    {
+        return super.shouldRender(entity, culler, camX, camY, camZ) && entity.getPlayerOwner() != null;
+    }
+
+    public void submit(FishingBobRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
+    {
+        poseStack.pushPose();
+        poseStack.pushPose();
+        poseStack.scale(0.5F, 0.5F, 0.5F);
+        poseStack.mulPose(camera.orientation);
+        submitNodeCollector.submitCustomGeometry(poseStack, RENDER_TYPE, (pose, buffer) ->
+        {
+            vertex(buffer, pose, state.lightCoords, 0.0F, 0, 0, 1);
+            vertex(buffer, pose, state.lightCoords, 1.0F, 0, 1, 1);
+            vertex(buffer, pose, state.lightCoords, 1.0F, 1, 1, 0);
+            vertex(buffer, pose, state.lightCoords, 0.0F, 1, 0, 0);
+        });
+        poseStack.popPose();
+        float xa = (float) state.lineOriginOffset.x;
+        float ya = (float) state.lineOriginOffset.y;
+        float za = (float) state.lineOriginOffset.z;
+        float width = Minecraft.getInstance().gameRenderer.getGameRenderState().windowRenderState.appropriateLineWidth;
+        submitNodeCollector.submitCustomGeometry(poseStack, RenderTypes.lines(), (pose, buffer) ->
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                float a0 = fraction(i, 16);
+                float a1 = fraction(i + 1, 16);
+                stringVertex(xa, ya, za, buffer, pose, a0, a1, width);
+                stringVertex(xa, ya, za, buffer, pose, a1, a0, width);
+            }
+        });
+        poseStack.popPose();
+        super.submit(state, poseStack, submitNodeCollector, camera);
+    }
+
+    public static HumanoidArm getHoldingArm(Player owner)
+    {
+        return owner.getMainHandItem().canPerformAction(net.neoforged.neoforge.common.ItemAbilities.FISHING_ROD_CAST) ? owner.getMainArm() : owner.getMainArm().getOpposite();
+    }
+
+    private Vec3 getPlayerHandPos(Player owner, float swing, float partialTicks)
+    {
+        int invert = getHoldingArm(owner) == HumanoidArm.RIGHT ? 1 : -1;
+        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && owner == Minecraft.getInstance().player)
+        {
+            float fov = this.entityRenderDispatcher.options.fov().get().intValue();
+            double viewBobbingScale = 960.0 / fov;
+            Vec3 viewVec = this.entityRenderDispatcher
+                    .camera
+                    .getNearPlane(fov)
+                    .getPointOnPlane(invert * 0.525F, -0.1F)
+                    .scale(viewBobbingScale)
+                    .yRot(swing * 0.5F)
+                    .xRot(-swing * 0.7F);
+            return owner.getEyePosition(partialTicks).add(viewVec);
+        }
+        else
+        {
+            float ownerYRot = Mth.lerp(partialTicks, owner.yBodyRotO, owner.yBodyRot) * (float) (Math.PI / 180.0);
+            double sin = Mth.sin(ownerYRot);
+            double cos = Mth.cos(ownerYRot);
+            float playerScale = owner.getScale();
+            double rightOffset = invert * 0.35 * playerScale;
+            double forwardOffset = 0.8 * playerScale;
+            float yOffset = owner.isCrouching() ? -0.1875F : 0.0F;
+            return owner.getEyePosition(partialTicks)
+                    .add(-cos * rightOffset - sin * forwardOffset, yOffset - 0.45 * playerScale, -sin * rightOffset + cos * forwardOffset);
+        }
+    }
+
+    private static float fraction(int i, int steps)
+    {
+        return (float) i / steps;
+    }
+
+    private static void vertex(VertexConsumer builder, PoseStack.Pose pose, int lightCoords, float x, int y, int u, int v)
+    {
+        builder.addVertex(pose, x - 0.5F, y - 0.5F, 0.0F)
+                .setColor(-1)
+                .setUv(u, v)
+                .setOverlay(OverlayTexture.NO_OVERLAY)
+                .setLight(lightCoords)
+                .setNormal(pose, 0.0F, 1.0F, 0.0F);
+    }
+
+    private static void stringVertex(float xa, float ya, float za, VertexConsumer stringBuffer, PoseStack.Pose stringPose, float aa, float nexta, float width)
+    {
+        float x = xa * aa;
+        float y = ya * (aa * aa + aa) * 0.5F + 0.25F;
+        float z = za * aa;
+        float nx = xa * nexta - x;
+        float ny = ya * (nexta * nexta + nexta) * 0.5F + 0.25F - y;
+        float nz = za * nexta - z;
+        float length = Mth.sqrt(nx * nx + ny * ny + nz * nz);
+        nx /= length;
+        ny /= length;
+        nz /= length;
+        stringBuffer.addVertex(stringPose, x, y, z).setColor(-16777216).setNormal(stringPose, nx, ny, nz).setLineWidth(width);
+    }
+
     public FishingBobRenderState createRenderState()
     {
         return new FishingBobRenderState();
     }
 
-    @Override
     public void extractRenderState(FishingBobEntity entity, FishingBobRenderState state, float partialTicks)
     {
         super.extractRenderState(entity, state, partialTicks);
-        state.entityYaw = entity.yo;
-
-        Identifier id = SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN);
-        Starcatcher.TACKLE_SKIN_REGISTRY.get(id).ifPresent(o -> state.skin = o.value().get());
-    }
-
-
-    @Override
-    public void submit(FishingBobRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
-    {
-        poseStack.pushPose();
-        poseStack.translate(0.0F, 1.5F, 0.0F);
-        poseStack.scale(-1.0F, -1.0F, 1.0F);
-
-        poseStack.mulPose(Axis.YP.rotationDegrees(180));
-        poseStack.mulPose(Axis.YP.rotationDegrees((float) state.entityYaw));
-
-        state.skin.render(context, state, poseStack, submitNodeCollector, camera);
-
-        poseStack.popPose();
-
-
-        //render fishing line from bobber to player
-        if (fishingBobEntity.getOwner() instanceof Player player)
+        Player owner = entity.getPlayerOwner();
+        if (owner == null)
         {
-            poseStack.pushPose();
-            float f = player.getAttackAnim(partialTicks);
-            float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
-            Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTicks);
-            Vec3 vec31 = fishingBobEntity.getPosition(partialTicks).add(0.0, 0.25, 0.0);
-            float f2 = (float) (vec3.x - vec31.x);
-            float f3 = (float) (vec3.y - vec31.y);
-            float f4 = (float) (vec3.z - vec31.z);
-            VertexConsumer vertexconsumer1 = buffer.getBuffer(RenderType.lineStrip());
-            PoseStack.Pose posestack$pose1 = poseStack.last();
-
-            for (int j = 0; j <= 16; j++)
-            {
-                stringVertex(0xff000000, f2, f3, f4, vertexconsumer1, posestack$pose1, fraction(j, 16), fraction(j + 1, 16));
-            }
-
-            //PLEASE FOR THE LOVE OF GOD DONT REMOVE THIS LINE JUST DONT PLEASE THIS TOOK TOO FUCKING LONG DONT YOU DARE TOUCH IT
-            vertexconsumer1.addVertex(NaN, NaN, NaN).setColor(0).setNormal(posestack$pose1, 0, 0, 0);
-
-            poseStack.popPose();
-
-            super.submit(state, poseStack, submitNodeCollector, camera);
-        }
-    }
-
-    private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose
-            pose, float stringFraction, float nextStringFraction
-    )
-    {
-        if (color == 0xffff9999) color = -16777216;
-
-        float f = x * stringFraction;
-        float f1 = y * (stringFraction * stringFraction + stringFraction) * 0.5F + 0.25F;
-        float f2 = z * stringFraction;
-        float f3 = x * nextStringFraction - f;
-        float f4 = y * (nextStringFraction * nextStringFraction + nextStringFraction) * 0.5F + 0.25F - f1;
-        float f5 = z * nextStringFraction - f2;
-        float f6 = Mth.sqrt(f3 * f3 + f4 * f4 + f5 * f5);
-        f3 /= f6;
-        f4 /= f6;
-        f5 /= f6;
-        consumer.addVertex(pose, f, f1, f2).setColor(color).setNormal(pose, f3, f4, f5);
-    }
-
-    private static float fraction(int numerator, int denominator)
-    {
-        return (float) numerator / (float) denominator;
-    }
-
-    private Vec3 getPlayerHandPos(Player player, float p_340872_, float partialTick)
-    {
-        int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
-        ItemStack itemstack = player.getMainHandItem();
-        if (!itemstack.is(SCTags.RODS))
-        {
-            i = -i;
-        }
-
-        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player)
-        {
-            double d4 = 960.0 / (double) this.entityRenderDispatcher.options.fov().get().intValue();
-            Vec3 vec3 = this.entityRenderDispatcher
-                    .camera
-                    .getNearPlane()
-                    .getPointOnPlane((float) i * 0.525F, -0.1F)
-                    .scale(d4)
-                    .yRot(p_340872_ * 0.5F)
-                    .xRot(-p_340872_ * 0.7F);
-            return player.getEyePosition(partialTick).add(vec3);
+            state.lineOriginOffset = Vec3.ZERO;
         }
         else
         {
-            float f = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot) * (float) (Math.PI / 180.0);
-            double d0 = (double) Mth.sin(f);
-            double d1 = (double) Mth.cos(f);
-            float f1 = player.getScale();
-            double d2 = (double) i * 0.35 * (double) f1;
-            double d3 = 0.8 * (double) f1;
-            float f2 = player.isCrouching() ? -0.1875F : 0.0F;
-            return player.getEyePosition(partialTick).add(-d1 * d2 - d0 * d3, (double) f2 - 0.45 * (double) f1, -d0 * d2 + d1 * d3);
+            float swing = owner.getAttackAnim(partialTicks);
+            float swing2 = Mth.sin(Mth.sqrt(swing) * (float) Math.PI);
+            Vec3 playerPos = this.getPlayerHandPos(owner, swing2, partialTicks);
+            Vec3 hookPos = entity.getPosition(partialTicks).add(0.0, 0.25, 0.0);
+            state.lineOriginOffset = playerPos.subtract(hookPos);
         }
+
+        state.skin = entity.level().registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getValue(SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN)).get();
     }
 
-
+    protected boolean affectedByCulling(FishingHook entity)
+    {
+        return false;
+    }
 }
