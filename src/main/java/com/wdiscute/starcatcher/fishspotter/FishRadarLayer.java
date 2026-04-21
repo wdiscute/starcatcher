@@ -52,7 +52,7 @@ public class FishRadarLayer implements GuiLayer
     {
         fpsInArea.clear();
 
-        for (FishProperties fp : player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value())
+        for (FishProperties fp : player.level().registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get())
             if (fp.hasGuideEntry() && fp.calculateChance(player, player.level(), ItemStack.EMPTY, AbstractFishRestriction.Context.GUIDE_FISHES_HOVER) > 0)
                 fpsInArea.add(fp);
 

@@ -85,7 +85,7 @@ public record FishCaughtCounter(
     {
         //returns false if player has already caught the golden fish of that fp
         Map<Identifier, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
-        Identifier loc = player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKeyOrNull(fp);
+        Identifier loc = player.level().registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().getKeyOrNull(fp);
         if (!fishesCaught.containsKey(loc)) return true;
         return !fishesCaught.get(loc).caughtGolden;
     }
@@ -148,7 +148,7 @@ public record FishCaughtCounter(
 
         Map<Identifier, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
 
-        Identifier loc = rl == null ? player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKeyOrNull(fpCaught) : rl;
+        Identifier loc = rl == null ? player.level().registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().getKeyOrNull(fpCaught) : rl;
         if (loc != null)
         {
             FishCaughtCounter fishCaughtCounter = fishesCaught.get(loc);

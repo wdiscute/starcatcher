@@ -146,7 +146,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         {
             Identifier rl = SCDataComponents.get(rod, SCDataComponents.TACKLE_SKIN);
 
-            Optional<Supplier<AbstractTackleSkin>> optional = Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getOptional(rl);
+            Optional<Supplier<AbstractTackleSkin>> optional = Minecraft.getInstance().level.registryAccess().lookup(Starcatcher.TACKLE_SKIN).get().getOptional(rl);
             if (optional.isPresent())
                 this.tackleSkin = optional.get().get();
             else

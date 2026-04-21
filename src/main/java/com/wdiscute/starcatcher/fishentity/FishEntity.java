@@ -79,7 +79,7 @@ public class FishEntity extends AbstractFish
             shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();
 
-            for (FishProperties fp : level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value())
+            for (FishProperties fp : level().registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get())
             {
                 if (fp.calculateChance(this, level(), SCItems.ROD.toStack(), AbstractFishRestriction.Context.FISH_ENTITY) > 0 && fp.catchInfo().fish().is(SCTags.BUCKETABLE_FISHES))
                     available.add(fp);

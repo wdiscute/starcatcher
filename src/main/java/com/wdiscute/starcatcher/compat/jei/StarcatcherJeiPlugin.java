@@ -61,7 +61,7 @@ public class StarcatcherJeiPlugin implements IModPlugin
         listRecipes.clear();
 
         //add all fps as a recipe to the list
-        Registry<FishProperties> fpRegistry = Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value();
+        Registry<FishProperties> fpRegistry = Minecraft.getInstance().level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get();
         fpRegistry.stream().forEach(fp -> listRecipes.add(StarcatcherJeiFPRecipe.Recipe.of(fp)));
 
         //register categories
