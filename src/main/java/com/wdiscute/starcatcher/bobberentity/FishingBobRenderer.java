@@ -154,7 +154,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
             state.lineOriginOffset = playerPos.subtract(hookPos);
         }
 
-        state.skin = entity.level().registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getValue(SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN)).get();
+        state.skin = entity.level().registryAccess().lookup(Starcatcher.TACKLE_SKIN).get().getValue(SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN)).get();
     }
 
     protected boolean affectedByCulling(FishingHook entity)

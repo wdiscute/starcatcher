@@ -172,7 +172,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     @Override
     public @Nullable Identifier getIdentifier(Recipe recipe)
     {
-        return Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKey(recipe.fp);
+        return Minecraft.getInstance().level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().getKey(recipe.fp);
     }
 
     public record Recipe(FishProperties fp, List<Component> components, ItemStack treasure)
@@ -184,7 +184,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
             ItemStack tre;
 
 
-            Holder<FishProperties> holder = Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().wrapAsHolder(fp);
+            Holder<FishProperties> holder = Minecraft.getInstance().level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().wrapAsHolder(fp);
             Treasure.TreasureInstance data = holder.getData(SCDataMaps.TREASURE);
             if(fp.catchInfo().treasureIs().isEmpty())
             {

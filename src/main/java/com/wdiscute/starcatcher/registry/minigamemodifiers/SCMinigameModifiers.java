@@ -116,7 +116,7 @@ public interface SCMinigameModifiers
     static Supplier<AbstractMinigameModifier> getMinigameModifierSupplier(Level level, Identifier resourceLocation)
     {
         Optional<Supplier<AbstractMinigameModifier>> optional = level.registryAccess()
-                .getOrThrow(Starcatcher.MINIGAME_MODIFIERS).value().getOptional(resourceLocation);
+                .lookup(Starcatcher.MINIGAME_MODIFIERS).get().getOptional(resourceLocation);
         return optional.orElse(null);
     }
 

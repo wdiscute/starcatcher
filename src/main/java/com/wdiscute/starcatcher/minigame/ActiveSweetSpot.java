@@ -49,7 +49,7 @@ public class ActiveSweetSpot
     public ActiveSweetSpot(FishingMinigameScreen instance, FishProperties.SweetSpot ss, ItemStack bobber, ItemStack bait, ItemStack hook)
     {
         //get sweet spot type from rl
-        Optional<Supplier<? extends AbstractSweetSpotBehaviour>> behaviour = Minecraft.getInstance().level.registryAccess().getOrThrow(Starcatcher.SWEET_SPOT_BEHAVIOUR).value().getOptional(ss.sweetSpotType());
+        Optional<Supplier<? extends AbstractSweetSpotBehaviour>> behaviour = Minecraft.getInstance().level.registryAccess().lookup(Starcatcher.SWEET_SPOT_BEHAVIOUR).get().getOptional(ss.sweetSpotType());
 
         //if sweet spot type is registered then continue, otherwise set as removed
         if(behaviour.isPresent())

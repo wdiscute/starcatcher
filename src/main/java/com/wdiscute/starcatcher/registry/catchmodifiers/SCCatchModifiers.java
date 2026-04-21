@@ -104,7 +104,7 @@ public interface SCCatchModifiers
 
     static Supplier<AbstractCatchModifier> getCatchModifierSupplier(Level level, Identifier resourceLocation)
     {
-        Optional<Supplier<AbstractCatchModifier>> optional = level.registryAccess().getOrThrow(Starcatcher.CATCH_MODIFIERS).value().getOptional(resourceLocation);
+        Optional<Supplier<AbstractCatchModifier>> optional = level.registryAccess().lookup(Starcatcher.CATCH_MODIFIERS).get().getOptional(resourceLocation);
         return optional.orElse(null);
     }
 

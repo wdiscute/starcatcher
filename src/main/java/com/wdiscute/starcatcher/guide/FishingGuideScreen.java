@@ -247,7 +247,7 @@ public class FishingGuideScreen extends Screen
         trophiesIS = new ArrayList<>();
         trophies.forEach(t ->
         {
-            if (!SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get() || fishCaughtCounterMap.containsKey(level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKey(t)))
+            if (!SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get() || fishCaughtCounterMap.containsKey(level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().getKey(t)))
                 trophiesIS.add(t.catchInfo().fish().value().getDefaultInstance());
             else
                 trophiesIS.add(SCItems.MISSINGNO.asItem().getDefaultInstance());
@@ -256,7 +256,7 @@ public class FishingGuideScreen extends Screen
         secretsIS = new ArrayList<>();
         secrets.forEach(t ->
         {
-            if (!SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get() || fishCaughtCounterMap.containsKey(level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKey(t)))
+            if (!SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get() || fishCaughtCounterMap.containsKey(level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().getKey(t)))
                 secretsIS.add(t.catchInfo().fish().value().getDefaultInstance());
             else
                 secretsIS.add(SCItems.MISSINGNO.asItem().getDefaultInstance());

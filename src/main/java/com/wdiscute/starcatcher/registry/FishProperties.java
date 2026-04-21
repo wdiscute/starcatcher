@@ -118,7 +118,7 @@ public record FishProperties(
     {
         if(!catchInfo.treasureIs.isEmpty()) return this;
 
-        Registry<FishProperties> fishProperties = player.level().registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value();
+        Registry<FishProperties> fishProperties = player.level().registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get();
 
         Treasure.TreasureInstance data = fishProperties.wrapAsHolder(this).getData(SCDataMaps.TREASURE);
 
@@ -2135,12 +2135,12 @@ public record FishProperties(
 
     public static Identifier getKey(Level level, FishProperties fp)
     {
-        return level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getKey(fp);
+        return level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().getKey(fp);
     }
 
     public static List<FishProperties> getFishes(RegistryAccess registryAccess)
     {
-        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream()
+        return registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get().stream()
                 .filter(o -> o.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)).toList();
     }
 
@@ -2151,12 +2151,12 @@ public record FishProperties(
 
     public static Registry<FishProperties> getRegistry(Level level)
     {
-        return level.registryAccess().getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value();
+        return level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get();
     }
 
     public static FishProperties getFP(RegistryAccess registryAccess, Identifier rl)
     {
-        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().getValue(rl);
+        return registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get().getValue(rl);
     }
 
     public static FishProperties getFP(Level level, Identifier rl)
@@ -2167,7 +2167,7 @@ public record FishProperties(
 
     public static List<FishProperties> getNonFishes(RegistryAccess registryAccess)
     {
-        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream()
+        return registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get().stream()
                 .filter(o -> !o.catchInfo().fishEntryType().equals(FishProperties.CatchInfo.FishEntryType.FISH)).toList();
     }
 
@@ -2184,7 +2184,7 @@ public record FishProperties(
 
     public static List<FishProperties> getAllFPs(RegistryAccess registryAccess)
     {
-        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream().toList();
+        return registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get().stream().toList();
     }
 
     public static List<FishProperties> getTrophies(Level level)
@@ -2194,7 +2194,7 @@ public record FishProperties(
 
     public static List<FishProperties> getTrophies(RegistryAccess registryAccess)
     {
-        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.TROPHY)).toList();
+        return registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get().stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.TROPHY)).toList();
     }
 
     public static List<FishProperties> getSecrets(Level level)
@@ -2204,6 +2204,6 @@ public record FishProperties(
 
     public static List<FishProperties> getSecrets(RegistryAccess registryAccess)
     {
-        return registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value().stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.SECRET)).toList();
+        return registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get().stream().filter(o -> o.catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.SECRET)).toList();
     }
 }

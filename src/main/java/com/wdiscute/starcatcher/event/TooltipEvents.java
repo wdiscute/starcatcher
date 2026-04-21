@@ -14,7 +14,6 @@ import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.secretnotes.LetterItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -94,7 +93,7 @@ public class TooltipEvents
             {
                 minigameModifiersRLs.forEach(o ->
                 {
-                    if (entity.level().registryAccess().getOrThrow(Starcatcher.CATCH_MODIFIERS).value().get(o).isPresent())
+                    if (entity.level().registryAccess().lookup(Starcatcher.CATCH_MODIFIERS).get().get(o).isPresent())
                     {
                         String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
                         if (!s.isEmpty())
@@ -106,8 +105,7 @@ public class TooltipEvents
                 //add catch modifiers
                 catchModifiersRLs.forEach(o ->
                 {
-                    RegistryAccess registryAccess = entity.level().registryAccess();
-                    if (registryAccess.getOrThrow(Starcatcher.CATCH_MODIFIERS).value().get(o).isPresent())
+                    if (entity.level().registryAccess().lookup(Starcatcher.CATCH_MODIFIERS).get().get(o).isPresent())
                     {
                         String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
                         if (!s.isEmpty())

@@ -43,7 +43,7 @@ public class U
 
     public static List<Identifier> getRlsFromFps(RegistryAccess registryAccess, List<FishProperties> fps)
     {
-        return getRlsFromFps(registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value(), fps);
+        return getRlsFromFps(registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get(), fps);
     }
 
     public static List<Identifier> getRlsFromFps(Level level, List<FishProperties> fps)
@@ -67,7 +67,7 @@ public class U
 
     public static List<FishProperties> getFpsFromRls(RegistryAccess registryAccess, List<Identifier> rls)
     {
-        return getFpsFromRls(registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value(), rls);
+        return getFpsFromRls(registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get(), rls);
     }
 
     public static List<FishProperties> getFpsFromRls(Level level, List<Identifier> rls)
@@ -85,7 +85,7 @@ public class U
 
     public static FishProperties getFpFromRl(RegistryAccess registryAccess, Identifier rl)
     {
-        return getFpFromRl(registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value(), rl);
+        return getFpFromRl(registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get(), rl);
     }
 
     public static FishProperties getFpFromRl(Level level, Identifier rl)
@@ -103,7 +103,7 @@ public class U
 
     public static Identifier getRlFromFp(RegistryAccess registryAccess, FishProperties tp)
     {
-        return getRlFromFp(registryAccess.getOrThrow(Starcatcher.FISH_REGISTRY_KEY).value(), tp);
+        return getRlFromFp(registryAccess.lookup(Starcatcher.FISH_REGISTRY_KEY).get(), tp);
     }
 
     public static Identifier getRlFromFp(Level level, FishProperties tp)

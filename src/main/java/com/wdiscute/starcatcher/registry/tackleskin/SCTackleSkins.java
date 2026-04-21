@@ -65,7 +65,7 @@ public interface SCTackleSkins
         {
             Identifier rl = SCDataComponents.get(itemInHand, SCDataComponents.TACKLE_SKIN);
 
-            Optional<Supplier<AbstractTackleSkin>> optional = level.registryAccess().getOrThrow(Starcatcher.TACKLE_SKIN).value().getOptional(rl);
+            Optional<Supplier<AbstractTackleSkin>> optional = level.registryAccess().lookup(Starcatcher.TACKLE_SKIN).get().getOptional(rl);
             if (optional.isPresent()) return optional.get().get();
         }
         return new BaseTackleSkin();
