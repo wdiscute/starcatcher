@@ -2,615 +2,615 @@
   "values": {
     "alexscaves:lanternfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:radgill": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_blue": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_green": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_pink": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_red": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_yellow": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:trilocaris_tail": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:tripodfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:arapaima": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:arrau_turtle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:atlantic_cod": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:atlantic_halibut": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:atlantic_herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:bayad": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:blackfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:bluegill": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:boulti": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:box_turtle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:brown_shrooma": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:brown_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:capitaine": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:catfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:extra_neptunium_ingot": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:gar": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:goldfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:jellyfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:leech": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:minnow": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:muskellunge": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:pacific_halibut": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:perch": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:pink_salmon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:piranha": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:pollock": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:rainbow_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:red_grouper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:red_shrooma": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:smallmouth_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:synodontis": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:tambaqui": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:tuna": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquamirae:spinefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "betterend:end_fish_raw": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "betterend:gelatine": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:chieftain_crab": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:clam": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:platinum_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:tiger_prawn": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:urchin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:clam": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:dumbo_octopus_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:koi_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:sea_bunny_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "environmental:koi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "environmental:slabfish_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:arapaima_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:artemia_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:coelacanth_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:daphnia_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:featherback_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:gourami_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:guppy_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:minnow_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:moony_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:pleco_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:ancientscale": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:battlegill": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:devilfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:islehopper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:plentifin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:pondie": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:splashtail": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:stormfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:wildsplash": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:wrecker": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:anglerfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:barreleye": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:betta": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:blowfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:blue_spotted_stingray": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:boxfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:clownfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:coelacanth": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:damselfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:danio": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:discus": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:dragonfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:flashlight_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:flying_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:golden_dorado": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:goldfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:gourami": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:john_dory": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:lionfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:mackerel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:mahi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:moray_eel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:needlefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:neon_tetra": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:oarfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:ocean_sunfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:opah": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:oscar": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:parrotfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:pearlfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:pleco": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:ratfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:rockfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:sea_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:seahorse": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:sheepshead_wrasse": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:snailfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:spotted_eagle_ray": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:squirrelfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:stonefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:surgeonfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:tiger_barb": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:triggerfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:tuna": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:cod": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:creeper_head": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:extra_diamond": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:extra_netherite_scrap": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:extra_netherite_upgrade_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:nether_star": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:pufferfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:rotten_flesh": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:salmon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "minecraft:tropical_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "miners_delight:glow_squid": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "miners_delight:squid": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:blazefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:bonefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:eyeball_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:glowdine": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:lava_pufferfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:magmacubefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:obsidianfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:searing_cod": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:soulsucker": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:wither_bonefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:angler_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:baby_sunfish_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:captured_octopus": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:tuna_egg_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:agave_bream": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:amethystback": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:aquamarine_pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:aurora": {
       "is_loot_table": false,
@@ -632,31 +632,31 @@
     },
     "starcatcher:bigeye_tuna": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:black_eel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:blossomfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:blue_crystal_fin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:blue_herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:bluegigi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:boot": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:boreal": {
       "is_loot_table": false,
@@ -669,15 +669,15 @@
     },
     "starcatcher:bright_amethyst_snapper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:cactifish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:carpenjoe": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:cerberay": {
       "is_loot_table": false,
@@ -690,419 +690,419 @@
     },
     "starcatcher:charfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:chorus_crab": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:cinder_squid": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:clam": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:conch": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:crystalback_boreal": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:crystalback_minnow": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:crystalback_sturgeon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:crystalback_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:dark_amethyst_snapper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:deepjaw_herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:deepslatefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:downfall_bream": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:dried_seaweed": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:driftfin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:drifting_bream": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:dripfin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:dusktail_snapper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:elderscale": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:embergill": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:end_glow": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_amethyst_hook": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_bamboo_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_boner_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_frog_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_humble_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_lush_glowberry_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_magmaforged_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_naturalist_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_obsidian_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_sharktooth_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_sky_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:extra_slimed_skin_smithing_template": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:fossilized_angelfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:frostgill_chub": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:frostjaw_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:garnet_mackerel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:geode_eel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:ghostly_pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:glowing_dark": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:glowstone_pufferfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:glowstone_seeker": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:gold_fan": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:hollowbelly_darter": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:icetooth_sturgeon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:ironjaw_herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:joel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:lava_crab": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:lava_crab_claw": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:lightning_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:lily_snapper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:lush_pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:magma_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:mirage_carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:mistback_chub": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:molten_deepslate_crab": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:molten_shrimp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:morganite": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:mossy_boot": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:obidontiee": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:obsidian_crab": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:obsidian_eel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:pale_carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:pale_pinfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:peakdweller": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:petaldrift_carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:pinfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:pink_koi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:pyrotrout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:redscaled_tuna": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:rockgill": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:rose_siamese_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sage_catfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sandtail": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:scalding_pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:scorched_bloodsucker": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:scorchfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sculkfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sea_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:secret_burning_bottle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:secret_drifting_waterlogged_bottle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:secret_hopeful_bottle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:secret_hopeless_bottle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:secret_scalding_bottle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:secret_true_blue_bottle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:secret_withered_bottle": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:shroomfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:silverfin_pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:silverveil_perch": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sludge_catfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sporefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:stonefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sun_seeking_carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:suneater": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:sunny_sturgeon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:the_quarrish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:thunder_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:trophy_trophy_copper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:trophy_trophy_diamond": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:trophy_trophy_emerald": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:trophy_trophy_gold": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:trophy_trophy_iron": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:trophy_trophy_of_the_older_angler": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:twilight_koi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:vesani": {
       "is_loot_table": false,
@@ -1115,19 +1115,19 @@
     },
     "starcatcher:vivid_moss": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:voidbiter": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:ward": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:whiteveil": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:willish": {
       "is_loot_table": false,
@@ -1140,699 +1140,699 @@
     },
     "starcatcher:willow_bream": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:wintery_pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "starcatcher:yellowstone_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "sullysmod:lanternfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "sullysmod:piranha": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:blubber": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/bluegill": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/cod": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/fresh_seaweed": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/lake_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/largemouth_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/rainbow_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/salmon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/shellfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/smallmouth_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:groundcover/clam": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:groundcover/driftwood": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:groundcover/sea_urchin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:abyss_angler": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:alpha_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:amber_rockfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:anchovy": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:angelfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:anglerfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:aquathorn": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:arapaima": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:ash_perch": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bedrock_bug": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bedrock_tetra": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:black_crappie": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:blazing_swordfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:blossom_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:blue_neonfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bluegill": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:brook_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bull_shark": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:catfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:cave_crawler": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:cave_eel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:chasm_eel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:chorus_cod": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:coelacanth": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:crimson_fangjaw": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:crystal_shrimp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:crystalline_carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:darkness_eater": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:deep_blue": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:deep_grouper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:devils_hole_pupfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:dragon_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:dripstone_darter": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:dutchman_sock": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:echo_snapper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:elytrout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:ember_koi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:ender_glider": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:enderfin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:endergazer": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:flounder": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:frostbite_flounder": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:gilded_minnow": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:glowfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:great_white_shark": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:guppy": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:incandescent_larva": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:inferno_guppy": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:iron_tetra": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:judgment_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:lapis_lanternfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:largemouth_bass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:luminescent_jellyfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mackerel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:magma_mackerel": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mahi_mahi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:manta_ray": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mantyvern": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:marstilus": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:midas_fish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mirage_catfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mooneye": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:nephrosilu": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:neptune_koi": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:obsidian_pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:pale_clubfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:pentapus": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:pluto_snail": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:rainbow_trout": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:red_40": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:red_snapper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sailfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sand_tiger_shark": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:saturn_cuttlefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:shadow_shark": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:shadow_snapper": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:shooting_starfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sleepy_carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:slimy_salmon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:snatcher_squid": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:snook": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:soulscale": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:spore_stalker": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sturgeon": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sun_emblem": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:swordfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:tuna": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:uranias_pisces": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:vengeance": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:violet_carp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:voidseeker": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:volcano_tuna": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:walleye": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:warped_guppy": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:white_crappie": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:windbass": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:witherfin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:yellow_perch": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:blackcap_snail_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:blizzardfin_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:brick_snail_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:celestial_fish_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:clownthorn_shark_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:coral_skrimp_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:crimsonshell_squid_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:deep_crawler_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:freshwater_mantis_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:gnasher_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:kalappa_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:lobed_skipper_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:mossthorn_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:muddytop_snail_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:picklefish_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:pinkfin_idol_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:porcupine_lobsta_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:prawn_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_aero_mono": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_amber_goby": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_bark_angelfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_beaked_herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_blind_sailfin": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_circus": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_copperflame_anthias": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_demon_herring": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_drooping_gourami": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_duality_damselfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_eyelash": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_forkfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_hatchetfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_sailor_barb": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_sneep_snorp": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_snowflake": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_spindlefish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_triple_twirl_pleco": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:rhino_tetra_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:ripper_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:roughback_guitarfish_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:sea_mosquito_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:sea_pancake_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:sea_spider_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:shockcat_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:spoon_shark_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:squoddle_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:stout_bichir_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:tiger_jungle_shark_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:tiger_puffer_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:tribble_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:trumpet_squid_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:volt_angler_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:wizard_jelly_bucket": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:zebra_cornetfish_spawn_egg": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:lionfish": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:perch": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:pike": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:thrasher_tooth": {
       "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing"
+      "location": "minecraft:gameplay/fishing/treasure"
     }
   }
 }
