@@ -35,7 +35,7 @@ public class DGSCLootModifiers extends GlobalLootModifierProvider
         //thank you kaupen my goat 🐐
         this.add("fishing_hat_from_shipwrecks",
                 new AddItemModifier(new LootItemCondition[]{
-                        new LootTableIdCondition.Builder(BuiltInLootTables.SHIPWRECK_MAP.location()).build(),
+                        new LootTableIdCondition.Builder(BuiltInLootTables.SHIPWRECK_MAP.identifier()).build(),
                         LootItemRandomChanceCondition.randomChance(0.1f).build()
                 }, SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem()).toList()
                 ));

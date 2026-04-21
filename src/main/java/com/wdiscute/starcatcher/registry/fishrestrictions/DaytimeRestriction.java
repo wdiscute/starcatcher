@@ -74,7 +74,7 @@ public class DaytimeRestriction extends AbstractFishRestriction
     @Override
     public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        float daytime = level.dayTime() % 24000;
+        float daytime = level.getGameTime() % 24000;
 
         if (ranges.stream().anyMatch(range -> daytime > range.first && daytime < range.second))
             return 0;

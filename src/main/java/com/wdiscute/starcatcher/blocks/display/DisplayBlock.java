@@ -60,9 +60,11 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         return null;
     }
 
-    public DisplayBlock()
+    public DisplayBlock(BlockBehaviour.Properties properties)
     {
-        super(BlockBehaviour.Properties.of().destroyTime(2));
+        super(properties
+                .destroyTime(2)
+        );
         this.registerDefaultState(
                 this.stateDefinition.any().setValue(POWERED, false).setValue(HAS_ITEM, false)
         );
@@ -222,13 +224,11 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         }
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void openPersonalGuide()
     {
         Minecraft.getInstance().setScreen(new FishingGuideScreen());
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void openSignedGuide(SignedGuide signedGuide)
     {
         Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));

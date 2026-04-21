@@ -46,7 +46,7 @@ public class SCClientEvents
     @SubscribeEvent
     public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event)
     {
-        SCItems.RODS_REGISTRY.getEntries().forEach(o -> event.register(o.getId(), new IsCastItemProperty().type()));
+        event.register(Starcatcher.rl("is_cast"), new IsCastItemProperty(false).type());
     }
 
     @SubscribeEvent
@@ -64,7 +64,6 @@ public class SCClientEvents
         EntityRenderers.register(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.FISH.get(), FishRenderer::new);
-        event.enqueueWork(SCItemProperties::addCustomItemProperties);
 
         if (ModList.get().isLoaded("curios"))
         {

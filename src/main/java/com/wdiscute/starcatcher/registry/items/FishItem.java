@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.registry.items;
 
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.registry.SCEntities;
+import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -9,9 +10,12 @@ import net.minecraft.world.item.context.UseOnContext;
 
 public class FishItem extends Item
 {
-    public FishItem()
+    public FishItem(Properties properties)
     {
-        super(new Item.Properties().food(SCFoodProperties.BASIC_RAW_FISH));
+        super(properties
+                .food(SCFoodProperties.BASIC_RAW_FISH)
+                .usingConvertsTo(SCItems.FISH_BONES.get())
+        );
     }
 
     @Override

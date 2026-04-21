@@ -38,12 +38,11 @@ public class DataGenerators
         //fish properties
         event.createProvider(DGSCFishingPropertiesProvider::new);
 
-
-        event.createProvider(DGSCBiomeModifierProvider::new);
-        //gen.addProvider(event.includeServer(), new DGSCBiomeModifierProvider(output, lookupProvider));
-
-        //fish models
+        //item models
         event.createProvider(DGSCItemModelProvider::new);
+
+        //biome modifiers
+        event.createProvider(DGSCBiomeModifierProvider::new);
 
         //block tags
         event.createProvider(DGSCBlocksTagsProvider::new);
@@ -54,14 +53,14 @@ public class DataGenerators
         //fp tags
         event.createProvider(DGSCFPTagsProvider::new);
 
+        //biome tags
+        event.createProvider(DGSCBiomeTagsProvider::new);
+
         //advancements
         //gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 
         //loot modifiers
         event.createProvider(DGSCLootModifiers::new);
-
-        //biome tags
-        event.createProvider(DGSCBiomeTagsProvider::new);
 
         //loot table
         gen.addProvider(true, new LootTableProvider(output, Collections.emptySet(),

@@ -7,12 +7,14 @@ import com.wdiscute.starcatcher.io.CaughtFishInfo;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.secretnotes.LetterItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -104,7 +106,8 @@ public class TooltipEvents
                 //add catch modifiers
                 catchModifiersRLs.forEach(o ->
                 {
-                    if (entity.level().registryAccess().getOrThrow(Starcatcher.CATCH_MODIFIERS).value().get(o).isPresent())
+                    RegistryAccess registryAccess = entity.level().registryAccess();
+                    if (registryAccess.getOrThrow(Starcatcher.CATCH_MODIFIERS).value().get(o).isPresent())
                     {
                         String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
                         if (!s.isEmpty())
@@ -132,11 +135,11 @@ public class TooltipEvents
         }
 
         //bucket item creative
-        ItemStack fish = SCDataComponents.getOrDefault(stack, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(ItemStack.EMPTY)).stack();
-        if (fish.isEmpty())
+        ItemStack fish = SCDataComponents.getOrDefault(stack, SCDataComponents.BUCKETED_FISH, SingleStackContainer.empty()).create();
+        if (stack.is(SCItems.STARCAUGHT_BUCKET) && fish.isEmpty())
         {
-            comp.add(1, Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1").withColor(0x888888));
-            comp.add(1, Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0").withColor(0x888888));
+            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1").withColor(0x888888));
+            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0").withColor(0x888888));
         }
 
         //letter

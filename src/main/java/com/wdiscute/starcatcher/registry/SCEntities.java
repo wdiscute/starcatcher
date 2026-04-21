@@ -6,6 +6,8 @@ import com.wdiscute.starcatcher.secretnotes.BrokenBottleEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -45,7 +47,9 @@ public class SCEntities
     }
 
     static <T extends Entity> DeferredHolder<EntityType<?>, EntityType<T>> register(String name, EntityType.EntityFactory<T> factory, MobCategory category, UnaryOperator<EntityType.Builder<T>> provider) {
-        return ENTITY_TYPES.register(name, () -> provider.apply(EntityType.Builder.of(factory, category)).build(name));
+        return ENTITY_TYPES.register(name, () -> provider.apply(EntityType.Builder.of(factory, category))
+                .build(ResourceKey.create(Registries.ENTITY_TYPE, Starcatcher.rl(name)))
+        );
     }
 
 }

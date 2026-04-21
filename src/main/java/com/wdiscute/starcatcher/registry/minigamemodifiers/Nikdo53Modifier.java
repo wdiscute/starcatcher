@@ -110,7 +110,8 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderOnPointer(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick) {
+    public void renderOnPointer(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, float partialTick)
+    {
         if (pointerLayer == 0) {
             FishingMinigameScreen.renderPoseCentered(guiGraphics, POINTER_SMALL, 128);
         } else {
@@ -118,21 +119,20 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         }
     }
 
-
     @Override
-    public void renderOnSweetSpot(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick) {
+    public void renderOnSweetSpot(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, ActiveSweetSpot spot, float partialTick) {
         if (spot.behaviour == null) return;
 
-        poseStack.pushPose();
+        poseStack.pushMatrix();
 
         int layer = getSpotLayer(spot);
 
-        poseStack.translate(0, -9 * layer, 0);
+        poseStack.translate(0, -9 * layer);
 
         // Dim when not in use
         spot.behaviour.render(guiGraphics, poseStack, partialTick, pointerLayer != layer ? 0xff7b7b7b : 0xffffffff);
 
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     @Override

@@ -54,9 +54,9 @@ versionRange="${minecraft_version_range}"
 ordering="AFTER"
 side="BOTH"
 
-[[dependencies.starcatcher]]
-modId="libtooltips"
-type="required"
-versionRange="[1.6, 1.9)"
-ordering="AFTER"
-side="CLIENT"
+#[[dependencies.starcatcher]]
+#modId="libtooltips"
+#type="required"
+#versionRange="[1.6, 1.9)"
+#ordering="AFTER"
+#side="CLIENT"

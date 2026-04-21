@@ -12,9 +12,9 @@ import net.minecraft.world.level.Level;
 
 public class MessageInABottleItem extends Item
 {
-    public MessageInABottleItem()
+    public MessageInABottleItem(Properties properties)
     {
-        super(new Properties().stacksTo(1));
+        super(properties.stacksTo(1));
     }
 
     @Override

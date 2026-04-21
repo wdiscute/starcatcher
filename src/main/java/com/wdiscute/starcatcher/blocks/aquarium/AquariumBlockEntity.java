@@ -8,13 +8,12 @@ import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
@@ -104,7 +103,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     {
         super.saveAdditional(output);
 
-        output.store("fish", SingleStackContainer.CODEC, new SingleStackContainer(getFish().copy()));
+        output.store("fish", SingleStackContainer.CODEC, SingleStackContainer.from(getFish().copy()));
 
         output.putDouble("fish_target_x", fishTarget.x);
         output.putDouble("fish_target_y", fishTarget.y);
@@ -123,7 +122,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
 
         fishTarget = new Vec3(x, y, z);
 
-        fish = NBTCodecHelper.decode(SingleStackContainer.CODEC, input, "fish", SingleStackContainer::empty).stack();
+        fish = NBTCodecHelper.decode(SingleStackContainer.CODEC, input, "fish", SingleStackContainer::empty).create();
     }
 
     @Override

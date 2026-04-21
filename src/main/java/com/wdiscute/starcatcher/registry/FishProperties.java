@@ -17,8 +17,8 @@ import com.wdiscute.starcatcher.registry.sweetspotbehaviour.SCSweetSpotsBehaviou
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
 import io.netty.buffer.ByteBuf;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.ChatFormatting;
+import net.minecraft.client.particle.SingleQuadParticle;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderSet;
@@ -1855,7 +1855,7 @@ public record FishProperties(
 
     public static List<Identifier> getBiomesAsListFromTags(List<Identifier> biomes, List<Identifier> tags, Level level)
     {
-        level.registryAccess().registry(Registries.BIOME);
+        level.registryAccess().getOrThrow(Registries.BIOME);
 
         List<Identifier> rls = new ArrayList<>();
 
@@ -1920,7 +1920,7 @@ public record FishProperties(
     public int calculateChance(Entity entity, Level level, ItemStack rod, AbstractFishRestriction.Context context)
     {
         //if dev worm return base chance
-        if (SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, new SingleStackContainer(ItemStack.EMPTY)).stack().is(SCItems.DEV_WORM) && catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.FISH))
+        if (SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).create().is(SCItems.DEV_WORM) && catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.FISH))
             return 1;
 
         int chance = baseChance;
@@ -1938,7 +1938,7 @@ public record FishProperties(
 
     public static ItemStack makeItemStack(ItemStack rod, FishProperties fp, int size, int weight, float percentile, boolean golden, Player player, boolean perfectCatch)
     {
-        ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
+        ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).create();
         boolean isStarcaught = fp.catchInfo().bucketedFish().is(SCItems.STARCAUGHT_BUCKET.getKey()) && bait.is(Items.BUCKET);
         boolean isBucketed = !fp.catchInfo().bucketedFish().is(SCItems.MISSINGNO.getKey()) && !isStarcaught && bait.is(Items.BUCKET);
         CaughtFishInfo caughtFishInfo = new CaughtFishInfo(size, weight, percentile, fp.rarity(), golden);
@@ -1952,7 +1952,7 @@ public record FishProperties(
                 QualityFoodCompat.addQuality(fish, player, player.level(), golden, perfectCatch, percentile);
             ItemStack bucket = new ItemStack(SCItems.STARCAUGHT_BUCKET.get());
             SCDataComponents.set(fish, SCDataComponents.CAUGHT_FISH_INFO, caughtFishInfo);
-            SCDataComponents.set(bucket, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(fish));
+            SCDataComponents.set(bucket, SCDataComponents.BUCKETED_FISH, SingleStackContainer.from(fish));
             return bucket;
         }
 
@@ -2106,20 +2106,20 @@ public record FishProperties(
             }
 
             //consume bait
-            ItemStack bait = SCDataComponents.getOrDefault(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
+            ItemStack bait = SCDataComponents.getOrDefault(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.empty()).create();
             if (!bait.is(Items.BUCKET))
             {
                 bait.shrink(1);
-                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, new SingleStackContainer(bait));
+                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.empty());
             }
 
             if (bait.is(Items.BUCKET) && !fbe.fpToFish.catchInfo().bucketedFish().is(SCItems.MISSINGNO.getKey()) && time != -1)
             {
                 bait.shrink(1);
-                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, new SingleStackContainer(bait));
+                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.empty());
             }
 
-            fbe.kill();
+            fbe.kill(level);
         }
 
         SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB.get());

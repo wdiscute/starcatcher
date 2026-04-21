@@ -93,7 +93,6 @@ public class Starcatcher
         return Identifier.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static void fishCaughtToast(FishProperties fp, boolean newFish, int sizeCM, int weightCM)
     {
         if (newFish) Minecraft.getInstance().getToastManager().addToast(new FishCaughtToast(fp));
@@ -116,10 +115,10 @@ public class Starcatcher
     {
         SCCreativeModeTabs.register(modEventBus);
 
+        SCDataComponents.register(modEventBus);
         SCItems.register(modEventBus);
         SCBlocks.register(modEventBus);
         SCBlockEntities.register(modEventBus);
-        SCDataComponents.register(modEventBus);
         SCSounds.register(modEventBus);
         SCEntities.register(modEventBus);
         SCParticles.register(modEventBus);
@@ -131,7 +130,6 @@ public class Starcatcher
         SCMinigameModifiers.register(modEventBus);
         SCCatchModifiers.register(modEventBus);
         SCTackleSkins.register(modEventBus);
-        SCCriterionTriggers.register(modEventBus);
         SCProcessors.register(modEventBus);
         SCLootModifiers.register(modEventBus);
 

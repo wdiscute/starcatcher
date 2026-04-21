@@ -16,6 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
@@ -39,9 +40,12 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     public static final EnumProperty<StandPart> PART = EnumProperty.create("stand_part", StandPart.class);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    public StandBlock()
+    public StandBlock(BlockBehaviour.Properties properties)
     {
-        super(Properties.of().noOcclusion().destroyTime(2));
+        super(properties
+                .noOcclusion()
+                .destroyTime(2)
+        );
         registerDefaultState(defaultBlockState().setValue(PART, StandPart.BOTTOM_LEFT));
     }
 

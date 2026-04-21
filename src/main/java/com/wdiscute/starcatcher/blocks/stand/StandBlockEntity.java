@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.blocks.stand;
 
-import com.mojang.authlib.GameProfile;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.io.NBTCodecHelper;
@@ -8,11 +7,8 @@ import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.tournament.StandMenu;
 import com.wdiscute.starcatcher.tournament.Tournament;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
-import mezz.jei.library.helpers.CodecHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -28,7 +24,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
-import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.nikdo53.tinymultiblocklib.blockentities.AbstractMultiBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,8 +34,6 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     public Tournament tournament;
     public Map<UUID, String> profiles;
     private UUID uuid;
-
-    public final ItemStacksResourceHandler entryCost = new ItemStacksResourceHandler(9);
 
     public StandBlockEntity(BlockPos pos, BlockState blockState)
     {

@@ -75,7 +75,7 @@ dependencies {
     //jarJar(implementation("maven.modrinth:libtooltips:5J15zxaI"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:WNjZsP2i"))
+    jarJar(implementation("maven.modrinth:wds-selling-bin:2j6qaguw"))
 
     //tiny multiblock lib
     jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-26.1-${tiny_multiblock_lib_version}"))

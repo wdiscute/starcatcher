@@ -1841,12 +1841,13 @@ public class FishingGuideScreen extends Screen
         }
 
         //render almighty wormable
-        if ((!fp.catchInfo().entityToSpawn().equals(U.holderEntity("starcatcher", "fish")) && !fp.catchInfo().alwaysSpawnEntity())
-                || (fp.catchInfo().entityToSpawn().equals(U.holderEntity("starcatcher", "fish")) && fp.catchInfo().fish().is(SCTags.BUCKETABLE_FISHES)))
+        boolean isSCFish = fp.catchInfo().entityToSpawn().equals(SCEntities.FISH);
+        if ((!isSCFish && !fp.catchInfo().alwaysSpawnEntity())
+                || (isSCFish && fp.catchInfo().fish().is(SCTags.BUCKETABLE_FISHES)))
         {
             guiGraphics.blit(ENTITY, x + 93, y + 103, 0, 0, 14, 14, 14, 14);
             if (mouseX > 92 && mouseX < 107 && mouseY > 105 && mouseY < 115)
-                renderTooltip(guiGraphics,Component.translatable("gui.guide.entity"), absoluteMouseX, absoluteMouseY);
+                renderTooltip(guiGraphics, Component.translatable("gui.guide.entity"), absoluteMouseX, absoluteMouseY);
         }
 
         //render sword

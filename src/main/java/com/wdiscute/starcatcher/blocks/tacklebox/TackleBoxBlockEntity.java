@@ -1,11 +1,9 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
-import com.wdiscute.sellingbin.bin.Currency;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
-import com.wdiscute.starcatcher.io.SCDataComponents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -16,24 +14,21 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
 public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContainer, TickableBlockEntity, MenuProvider
 {
@@ -51,7 +46,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
     public void updateFishSlot()
     {
-        if (level.isClientSide) return;
+        if (level.isClientSide()) return;
 
         //store & remove fish placed
         ItemStack itemInFishSlot = getItem(TackleBoxMenu.FISH_SLOT);
@@ -62,7 +57,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             if (item.is(SCTags.STARCAUGHT_FISHES))
             {
                 //if slot is not empty, add the fish previously there to stored fishes
-                if(!itemInFishSlot.isEmpty())
+                if (!itemInFishSlot.isEmpty())
                     fishes.add(itemInFishSlot.copy());
                 //remove the fish item found and put it on the fish slot
                 itemStacks.get(i).setCount(0);
@@ -199,9 +194,9 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             if (this.openCount == 1)
             {
                 this.level.gameEvent(player, GameEvent.CONTAINER_OPEN, this.worldPosition);
-                this.level.playSound(null, this.worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.9F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.9F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.4F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
             }
         }
 
@@ -216,74 +211,69 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             if (this.openCount <= 0)
             {
                 this.level.gameEvent(player, GameEvent.CONTAINER_CLOSE, this.worldPosition);
-                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.9F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.4F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.3F, this.level.random.nextFloat() * 0.1F + 0.4F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.3F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
             }
         }
 
     }
 
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    @Override
+    protected void loadAdditional(ValueInput input)
     {
-        super.loadAdditional(tag, registries);
-        this.loadFromTag(tag, registries);
-    }
+        super.loadAdditional(input);
 
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
-    {
-        super.saveAdditional(tag, registries);
-        //save normal slots
-        ContainerHelper.saveAllItems(tag, this.itemStacks, false, registries);
-
-        //save fishes
-        saveAllFishes(tag, fishes, false, registries);
-    }
-
-    public static void saveAllFishes(CompoundTag tag, List<ItemStack> items, boolean alwaysPutTag, HolderLookup.Provider levelRegistry)
-    {
-        ListTag listtag = new ListTag();
-
-        for (int i = 0; i < items.size(); i++)
-        {
-            ItemStack itemstack = items.get(i);
-            if (!itemstack.isEmpty())
-            {
-                CompoundTag compoundtag = new CompoundTag();
-                compoundtag.putByte("Slot", (byte) i);
-                listtag.add(itemstack.save(levelRegistry, compoundtag));
-            }
-        }
-
-        if (!listtag.isEmpty() || alwaysPutTag) tag.put("Fishes", listtag);
-
-    }
-
-    public void loadFromTag(CompoundTag tag, HolderLookup.Provider levelRegistry)
-    {
         //load normal slots
         this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (tag.contains("Items", 9))
-            ContainerHelper.loadAllItems(tag, this.itemStacks, levelRegistry);
+        ContainerHelper.loadAllItems(input, this.itemStacks);
 
         //load fishes
         this.fishes = new ArrayList<>();
-        if (tag.contains("Fishes", 9))
-            loadAllFishes(tag, this.fishes, levelRegistry);
-
+        loadAllFishes(input, this.fishes);
     }
 
-    public static void loadAllFishes(CompoundTag tag, List<ItemStack> items, HolderLookup.Provider levelRegistry)
+    //copied from ContainerHelper#LoadAllItems
+    public static void loadAllFishes(ValueInput input, List<ItemStack> itemStacks)
     {
-        ListTag listtag = tag.getList("Fishes", 10);
-
-        for (int i = 0; i < listtag.size(); i++)
+        for (ItemStackWithSlot item : input.listOrEmpty("Fishes", ItemStackWithSlot.CODEC))
         {
-            CompoundTag compoundtag = listtag.getCompound(i);
-            items.add(ItemStack.parse(levelRegistry, compoundtag).orElse(ItemStack.EMPTY));
+            if (item.isValidInContainer(itemStacks.size()))
+            {
+                itemStacks.set(item.slot(), item.stack());
+            }
         }
     }
 
+    @Override
+    protected void saveAdditional(ValueOutput output)
+    {
+        super.saveAdditional(output);
+        //save normal slots
+        ContainerHelper.saveAllItems(output, this.itemStacks, false);
+
+        //save fishes
+        saveAllFishes(output, fishes, false);
+    }
+
+    public static void saveAllFishes(ValueOutput output, List<ItemStack> itemStacks, boolean alsoWhenEmpty)
+    {
+        ValueOutput.TypedOutputList<ItemStackWithSlot> itemsOutput = output.list("Fishes", ItemStackWithSlot.CODEC);
+
+        for (int i = 0; i < itemStacks.size(); i++)
+        {
+            ItemStack itemStack = itemStacks.get(i);
+            if (!itemStack.isEmpty())
+            {
+                itemsOutput.add(new ItemStackWithSlot(i, itemStack));
+            }
+        }
+
+        if (itemsOutput.isEmpty() && !alsoWhenEmpty)
+        {
+            output.discard("Fishes");
+        }
+    }
 
     protected NonNullList<ItemStack> getItems()
     {
@@ -325,7 +315,8 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     }
 
     @Override
-    public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player)
+    public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory
+            playerInventory, Player player)
     {
         if (!player.isSpectator())
             return new TackleBoxMenu(containerId, playerInventory, this, this);

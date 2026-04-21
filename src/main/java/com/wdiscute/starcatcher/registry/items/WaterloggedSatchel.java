@@ -17,9 +17,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 public class WaterloggedSatchel extends Item
 {
-    public WaterloggedSatchel()
+    public WaterloggedSatchel(Properties properties)
     {
-        super(new Properties().stacksTo(1).fireResistant());
+        super(properties.stacksTo(1).fireResistant());
     }
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand usedHand)

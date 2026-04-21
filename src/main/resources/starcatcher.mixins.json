@@ -6,12 +6,10 @@
   "mixins": [
     "GetNameMixin",
     "LecternReturnMixin",
-    "RemoveFishSizeAndWeightWhenStacking"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
-    "RenderTypeHelperMixin"
   ]
 }

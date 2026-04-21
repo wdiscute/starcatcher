@@ -118,7 +118,7 @@ public class FishEntity extends AbstractFish
     public ItemStack getBucketItemStack()
     {
         ItemStack is = new ItemStack(SCItems.STARCAUGHT_BUCKET.get());
-        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(getBodyArmorItem().copy()));
+        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, SingleStackContainer.from(getBodyArmorItem().copy()));
         return is;
     }
 }

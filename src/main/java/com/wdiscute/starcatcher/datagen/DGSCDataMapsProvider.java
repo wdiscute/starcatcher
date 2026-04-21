@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.sellingbin.processors.AbstractProcessor;
-import com.wdiscute.sellingbin.processors.QualityFoodsProcessor;
 import com.wdiscute.sellingbin.registry.SBDataMaps;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -90,28 +89,28 @@ public class DGSCDataMapsProvider extends DataMapProvider
             );
 
             sellable.add(SCTags.COMMON_FISHES, new SBDataMaps.ItemValue(25, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
+                    new FishProcessor(2, 10f)
+                    //new QualityFoodsProcessor(qualities)
             )), false);
 
             sellable.add(SCTags.UNCOMMON_FISHES, new SBDataMaps.ItemValue(50, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
+                    new FishProcessor(2, 10f)
+                    //new QualityFoodsProcessor(qualities)
             )), false);
 
             sellable.add(SCTags.RARE_FISHES, new SBDataMaps.ItemValue(100, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
+                    new FishProcessor(2, 10f)
+                    //new QualityFoodsProcessor(qualities)
             )), false);
 
             sellable.add(SCTags.EPIC_FISHES, new SBDataMaps.ItemValue(150, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
+                    new FishProcessor(2, 10f)
+                    //new QualityFoodsProcessor(qualities)
             )), false);
 
             sellable.add(SCTags.LEGENDARY_FISHES, new SBDataMaps.ItemValue(200, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
+                    new FishProcessor(2, 10f)
+                    //new QualityFoodsProcessor(qualities)
             )), false);
 
             sellable.add(SCItems.PEARL.get().asItem().builtInRegistryHolder(), AbstractProcessor.createEmpty(50), false);

@@ -49,7 +49,7 @@ public record SetMessagePayload(List<String> text, String name) implements Custo
                 if(off.is(SCItems.LETTER)) is = off;
                 if(is == null) return;
 
-                LetterItem.Message message = new LetterItem.Message(player.getUUID(), name, level.dimension().location(), text(), false);
+                LetterItem.Message message = new LetterItem.Message(player.getUUID(), name, level.dimension().identifier(), text(), false);
                 SCDataComponents.set(is, SCDataComponents.MESSAGE, message);
             }
 

@@ -86,7 +86,7 @@ public class TournamentHandler
 
     public static void addScore(Player playerToAwardScoreTo, FishProperties fp, boolean perfectCatch, int size, int weight, float percentile)
     {
-        if (playerToAwardScoreTo.level().isClientSide) return;
+        if (playerToAwardScoreTo.level().isClientSide()) return;
         for (Tournament t : activeTournaments)
         {
             t.playerScores.forEach(p ->
@@ -139,7 +139,7 @@ public class TournamentHandler
                 String winnerString = "???";
 
                 if (winner != null)
-                    winnerString = server.getProfileCache().get(winner).get().getName();
+                    winnerString = server.services().nameToIdCache().get(winner).get().name();
 
                 for (var playerScore : t.playerScores)
                 {

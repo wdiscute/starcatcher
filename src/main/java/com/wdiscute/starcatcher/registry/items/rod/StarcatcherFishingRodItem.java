@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.registry.items.rod;
 
-import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
 import com.wdiscute.starcatcher.io.SCDataAttachments;
@@ -10,39 +9,32 @@ import com.wdiscute.starcatcher.io.attachments.FishingBobAttachment;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
-import net.minecraft.core.component.DataComponentPatch;
-import net.minecraft.core.component.DataComponentType;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
 
 public class StarcatcherFishingRodItem extends Item
 {
-    public StarcatcherFishingRodItem()
+    public StarcatcherFishingRodItem(Properties properties)
     {
-        super(new Properties()
+        super(properties
                 .rarity(Rarity.EPIC)
                 .fireResistant()
                 .stacksTo(1)
-                .component(SCDataComponents.BOBBER.get(), new SingleStackContainer(new ItemStack(SCItems.BOBBER.get())))
-                .component(SCDataComponents.BAIT.get(), SingleStackContainer.empty())
-                .component(SCDataComponents.HOOK.get(), new SingleStackContainer(new ItemStack(SCItems.HOOK.get())))
+                .component(SCDataComponents.BOBBER, SingleStackContainer.from(SCItems.BOBBER))
+                .component(SCDataComponents.BAIT, SingleStackContainer.empty())
+                .component(SCDataComponents.HOOK, SingleStackContainer.from(SCItems.HOOK))
         );
     }
 
@@ -53,8 +45,8 @@ public class StarcatcherFishingRodItem extends Item
         if (!is.is(SCTags.RODS))
             return InteractionResult.PASS;
 
-        if (SCDataComponents.getOrDefault(is, SCDataComponents.HOOK, SingleStackContainer.empty()).stack().isEmpty()
-                || SCDataComponents.getOrDefault(is, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack().isEmpty())
+        if (SCDataComponents.getOrDefault(is, SCDataComponents.HOOK, SingleStackContainer.empty()).create().isEmpty()
+                || SCDataComponents.getOrDefault(is, SCDataComponents.BOBBER, SingleStackContainer.empty()).create().isEmpty())
         {
             player.sendOverlayMessage(Component.translatable("gui.starcatcher.no_hook_or_bobber"));
             return InteractionResult.FAIL;

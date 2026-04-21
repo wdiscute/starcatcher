@@ -29,9 +29,11 @@ import java.util.function.Function;
 
 public class TelescopeBlock extends AbstractMultiBlock implements IPreviewableMultiblock
 {
-    public TelescopeBlock()
+    public TelescopeBlock(BlockBehaviour.Properties properties)
     {
-        super(BlockBehaviour.Properties.of().noOcclusion());
+        super(properties
+                .noOcclusion()
+        );
     }
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
@@ -86,7 +88,6 @@ public class TelescopeBlock extends AbstractMultiBlock implements IPreviewableMu
         return super.useWithoutItem(state, level, pos, player, hitResult);
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void screen()
     {
         Minecraft.getInstance().setScreen(new TelescopeScreen(Component.empty()));

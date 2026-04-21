@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
+import org.joml.Matrix3x2fStack;
 import org.joml.Vector2d;
 
 import java.util.Random;
@@ -29,9 +30,9 @@ public class HitFakeParticle
 
     public void render(GuiGraphicsExtractor guiGraphics, int width, int height)
     {
-        PoseStack poseStack = guiGraphics.pose();
-        poseStack.pushPose();
-        poseStack.translate(pos.x, pos.y, 0);
+        Matrix3x2fStack poseStack = guiGraphics.pose();
+        poseStack.pushMatrix();
+        poseStack.translate((float) pos.x, (float) pos.y);
         //todo fix color
         //RenderSystem.setShaderColor(r, g, b, a);
 
@@ -40,7 +41,7 @@ public class HitFakeParticle
                 16, 16, 80, 160, 16, 16, 256, 256);
 
         //RenderSystem.setShaderColor(1, 1, 1, 1);
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     public HitFakeParticle(int x, int y, Vector2d vec)

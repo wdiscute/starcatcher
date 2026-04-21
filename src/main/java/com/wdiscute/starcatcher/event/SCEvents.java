@@ -5,7 +5,7 @@ import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
-import com.wdiscute.starcatcher.registry.SCCommands;
+import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.io.SCDataAttachments;
 import com.wdiscute.starcatcher.io.TournamentSavedData;
@@ -14,11 +14,8 @@ import com.wdiscute.starcatcher.io.network.*;
 import com.wdiscute.starcatcher.io.network.tournament.CBActiveTournamentUpdatePayload;
 import com.wdiscute.starcatcher.io.network.tournament.CBClearTournamentPayload;
 import com.wdiscute.starcatcher.io.network.tournament.SBStandTournamentNameChangePayload;
-import com.wdiscute.starcatcher.registry.SCDataMaps;
-import com.wdiscute.starcatcher.registry.SCEntities;
-import com.wdiscute.starcatcher.registry.SCItems;
-import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,11 +28,13 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.FarmlandBlock;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
@@ -44,12 +43,14 @@ import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
+import net.neoforged.neoforge.transfer.item.ItemResource;
+import net.neoforged.neoforge.transfer.item.WorldlyContainerWrapper;
+import net.neoforged.neoforge.transfer.transaction.TransactionContext;
 
 @EventBusSubscriber(modid = Starcatcher.MOD_ID)
 public class SCEvents
@@ -98,18 +99,25 @@ public class SCEvents
     @SubscribeEvent
     public static void addCapabilities(RegisterCapabilitiesEvent event)
     {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
+        event.registerBlockEntity(Capabilities.Item.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
                 (container, side) ->
                 {
                     if (container instanceof TackleBoxBlockEntity be)
                     {
-                        return new SidedInvWrapper(container, side)
+                        return new WorldlyContainerWrapper(container, side)
                         {
                             @Override
-                            public void setStackInSlot(int slot, ItemStack stack)
+                            public int insert(ItemResource resource, int amount, TransactionContext transaction)
                             {
-                                super.setStackInSlot(slot, stack);
                                 be.updateFishSlot();
+                                return super.insert(resource, amount, transaction);
+                            }
+
+                            @Override
+                            public int insert(int index, ItemResource resource, int amount, TransactionContext transaction)
+                            {
+                                be.updateFishSlot();
+                                return super.insert(index, resource, amount, transaction);
                             }
                         };
                     }
@@ -128,6 +136,12 @@ public class SCEvents
     public static void serverStopping(ServerStoppingEvent event)
     {
         TournamentSavedData.get(event.getServer().overworld()).setTournaments(TournamentHandler.getAll());
+    }
+
+    @SubscribeEvent
+    public static void registerKeyMappings(RegisterKeyMappingsEvent event)
+    {
+        event.registerCategory(SCKeymappings.CATEGORY);
     }
 
     @SubscribeEvent
@@ -190,9 +204,9 @@ public class SCEvents
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
 
-        if (event.getItemStack().is(Items.BONE_MEAL) && level.getBlockState(event.getPos()).getBlock() instanceof FarmBlock)
+        if (event.getItemStack().is(Items.BONE_MEAL) && level.getBlockState(event.getPos()).getBlock() instanceof FarmlandBlock)
         {
-            if (!level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
+            if (!level.isClientSide() && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
             {
                 ItemStack is;
                 float i = level.getRandom().nextFloat();
@@ -203,7 +217,7 @@ public class SCEvents
                 else
                     is = new ItemStack(SCItems.SEEKING_WORM.get());
 
-                Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
+                Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.getRandom(), 0.7F);
                 ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), is);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
@@ -227,7 +241,7 @@ public class SCEvents
     }
 
     @SubscribeEvent
-    public static void registerAttributed(RegisterDataMapTypesEvent event)
+    public static void registerDataMaps(RegisterDataMapTypesEvent event)
     {
         event.register(SCDataMaps.AQUARIUM_INTERACTION);
         event.register(SCDataMaps.CATCH_MODIFIERS);

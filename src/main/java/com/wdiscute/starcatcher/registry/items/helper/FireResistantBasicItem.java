@@ -4,8 +4,8 @@ import net.minecraft.world.item.Item;
 
 public class FireResistantBasicItem extends Item
 {
-    public FireResistantBasicItem()
+    public FireResistantBasicItem(Properties properties)
     {
-        super(new Properties().fireResistant());
+        super(properties.fireResistant());
     }
 }

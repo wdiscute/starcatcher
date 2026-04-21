@@ -13,6 +13,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class TackleBoxMenu extends AbstractContainerMenu
@@ -106,13 +107,27 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
     public void update()
     {
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, new SingleStackContainer(container.getItem(BOBBER_SLOT).copy()));
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, new SingleStackContainer(container.getItem(BAIT_SLOT).copy()));
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, new SingleStackContainer(container.getItem(HOOK_SLOT).copy()));
+        ItemStack bobber = container.getItem(BOBBER_SLOT);
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, new SingleStackContainer(
+                new ItemStackTemplate(
+                        bobber.getItem(), bobber.getCount(), bobber.getComponentsPatch()
+                )));
 
-        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).stack());
-        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).stackDoNotUse());
-        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.empty()).stack());
+        ItemStack bait = container.getItem(BAIT_SLOT);
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, new SingleStackContainer(
+                new ItemStackTemplate(
+                        bait.getItem(), bait.getCount(), bait.getComponentsPatch()
+                )));
+
+        ItemStack hook = container.getItem(HOOK_SLOT);
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, new SingleStackContainer(
+                new ItemStackTemplate(
+                        hook.getItem(), hook.getCount(), hook.getComponentsPatch()
+                )));
+
+        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).create());
+        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).create());
+        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.empty()).create());
     }
 
     public ItemStack getRod()
@@ -122,8 +137,8 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
     public void onPlaceRod(ItemStack newStack)
     {
-        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack());
-        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BAIT, SingleStackContainer.empty()).stack());
-        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.HOOK, SingleStackContainer.empty()).stack());
+        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BOBBER, SingleStackContainer.empty()).create());
+        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BAIT, SingleStackContainer.empty()).create());
+        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.HOOK, SingleStackContainer.empty()).create());
     }
 }

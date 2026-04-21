@@ -33,9 +33,9 @@ import java.util.concurrent.CompletableFuture;
 
 public class FishingGuideItem extends Item
 {
-    public FishingGuideItem()
+    public FishingGuideItem(Properties properties)
     {
-        super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+        super(properties.stacksTo(1).rarity(Rarity.EPIC));
     }
 
     @Override
@@ -79,13 +79,11 @@ public class FishingGuideItem extends Item
         return InteractionResult.SUCCESS;
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void openPersonalGuide()
     {
         Minecraft.getInstance().setScreen(new FishingGuideScreen());
     }
 
-    @OnlyIn(Dist.CLIENT)
     private void openSignedGuide(SignedGuide signedGuide)
     {
         Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));

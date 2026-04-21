@@ -31,7 +31,7 @@ public class SCCreativeModeTabs
     public static final LetterItem.Message MESSAGE = new LetterItem.Message(
             UUID.randomUUID(),
             "<sclegendary>-dev (wd)</sclegendary>",
-            Level.OVERWORLD.location(),
+            Level.OVERWORLD.identifier(),
             List.of(
                     "",
                     "",
