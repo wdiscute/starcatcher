@@ -691,7 +691,7 @@ public class FishingGuideScreen extends Screen
 
         pose.pushMatrix();
         pose.translate((float) (uiX + 16 + 16.5), (float) (uiY + 16 + 34.5));
-        pose.rotate(-yRot - 45 - 180);
+        pose.rotate((float) Math.toRadians(-yRot - 45 - 180));
         pose.translate(-16, -16);
         guiGraphics.blit(RenderPipelines.GUI_TEXTURED, COMPASS, 0, 0, 0, 0, 32, 32, 32, 32);
         pose.popMatrix();
@@ -1306,10 +1306,10 @@ public class FishingGuideScreen extends Screen
         //glow color
         int color = switch (fp.rarity())
         {
-            case TRASH, NONE, FishProperties.Rarity.COMMON -> 0xffffffff;
-            case FishProperties.Rarity.UNCOMMON -> 0x92f28d;
-            case FishProperties.Rarity.RARE -> 0x78c8ff;
-            case FishProperties.Rarity.EPIC -> 0xc060ff;
+            case TRASH, NONE, FishProperties.Rarity.COMMON -> 0x00ffffff;
+            case FishProperties.Rarity.UNCOMMON -> 0xff92f28d;
+            case FishProperties.Rarity.RARE -> 0xff78c8ff;
+            case FishProperties.Rarity.EPIC -> 0xffc060ff;
             case FishProperties.Rarity.LEGENDARY, FishProperties.Rarity.GOLDEN ->
                     Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1);
         };
@@ -1418,10 +1418,10 @@ public class FishingGuideScreen extends Screen
 
         //white highlight on jumping to
         if (highlightRightAlpha > 0)
-            renderImage(guiGraphics, HIGHLIGHT_RIGHT, ARGB.colorFromFloat(1, 1, 1, highlightRightAlpha));
+            renderImage(guiGraphics, HIGHLIGHT_RIGHT, ARGB.colorFromFloat(highlightRightAlpha, 1, 1, 1));
 
         if (highlightLeftAlpha > 0)
-            renderImage(guiGraphics, HIGHLIGHT_LEFT, ARGB.colorFromFloat(1, 1, 1, highlightLeftAlpha));
+            renderImage(guiGraphics, HIGHLIGHT_LEFT, ARGB.colorFromFloat(highlightLeftAlpha, 1, 1, 1));
     }
 
     private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
@@ -1872,7 +1872,7 @@ public class FishingGuideScreen extends Screen
 
         int color = switch (fp.rarity())
         {
-            case FishProperties.Rarity.TRASH, FishProperties.Rarity.COMMON, FishProperties.Rarity.NONE -> 0xffffffff;
+            case FishProperties.Rarity.TRASH, FishProperties.Rarity.COMMON, FishProperties.Rarity.NONE -> 0x00ffffff;
             case FishProperties.Rarity.UNCOMMON -> 0xff92f28d;
             case FishProperties.Rarity.RARE -> 0xff78c8ff;
             case FishProperties.Rarity.EPIC -> 0xffc060ff;

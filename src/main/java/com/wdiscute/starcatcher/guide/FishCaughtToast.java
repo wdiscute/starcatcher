@@ -66,7 +66,8 @@ public class FishCaughtToast implements Toast
 
         guiGraphics.text(Minecraft.getInstance().font, this.title, 40, 13, 0xff635040, false);
 
-        Component comp = Component.literal("<sctoast>" + rarity.wrapWithRarityMarkdownAsString(description) + "</sctoast>");
+        //todo ember text api lib missing
+        Component comp = Component.literal(/*"<sctoast>" +*/ rarity.wrapWithRarityMarkdownAsString(description) /*+ "</sctoast>"*/);
 
         guiGraphics.text(Minecraft.getInstance().font, comp, 40, 22, 0xff635040, false);
     }

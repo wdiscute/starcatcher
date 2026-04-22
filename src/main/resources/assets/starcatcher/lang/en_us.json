@@ -1189,10 +1189,14 @@
 
   "gui.guide.rarity.trash" : "Trash",
   "gui.guide.rarity.common" : "Common",
-  "gui.guide.rarity.uncommon" : "<scuncommon>Uncommon</scuncommon>",
-  "gui.guide.rarity.rare" : "<scrare>Rare</scrare>",
-  "gui.guide.rarity.epic" : "<scepic>Epic</scepic>",
-  "gui.guide.rarity.legendary" : "<sclegendary>Legendary</sclegendary>",
+  "gui.guide.rarity.uncommon" : "Uncommon",
+  "gui.guide.rarity.uncommon.eta" : "<scuncommon>Uncommon</scuncommon>",
+  "gui.guide.rarity.rare" : "Rare",
+  "gui.guide.rarity.rare.eta" : "<scrare>Rare</scrare>",
+  "gui.guide.rarity.epic" : "Epic",
+  "gui.guide.rarity.epic.eta" : "<scepic>Epic</scepic>",
+  "gui.guide.rarity.legendary" : "Legendary",
+  "gui.guide.rarity.legendary.eta" : "<sclegendary>Legendary</sclegendary>",
 
 
 
