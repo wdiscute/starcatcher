@@ -112,9 +112,9 @@ public class TackleBoxMenu extends AbstractContainerMenu
         SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.from(container.getItem(BAIT_SLOT)));
         SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.from(container.getItem(HOOK_SLOT)));
 
-        //container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).create());
-        //container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).create());
-        //container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.empty()).create());
+        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).create());
+        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).create());
+        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.empty()).create());
     }
 
     public ItemStack getRod()
