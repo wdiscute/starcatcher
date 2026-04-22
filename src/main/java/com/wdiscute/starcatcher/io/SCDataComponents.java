@@ -55,6 +55,10 @@ public class SCDataComponents
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<CaughtFishInfo>> CAUGHT_FISH_INFO = register(
             "caught_fish_info", builder -> builder.persistent(CaughtFishInfo.CODEC));
 
+    //tackle box stored fishes
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<SingleStackContainer>>> TACKLE_BOX_FISHES = register(
+            "tackle_box_fishes",
+            builder -> builder.persistent(SingleStackContainer.CODEC.listOf()));
 
     //modifiers
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<Identifier>>> MINIGAME_MODIFIERS = register(

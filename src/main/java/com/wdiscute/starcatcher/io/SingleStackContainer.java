@@ -11,6 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //use create() when obtaining the stack from the container to prevent crashing with empty stacks
@@ -48,6 +49,20 @@ public record SingleStackContainer(@Deprecated ItemStackTemplate stackDoNotUse)
     }
 
     public static final StreamCodec<RegistryFriendlyByteBuf, List<SingleStackContainer>> STREAM_CODEC_LIST = STREAM_CODEC.apply(ByteBufCodecs.list());
+
+    public static List<ItemStack> toItemStackList(List<SingleStackContainer> list)
+    {
+        List<ItemStack> is = new ArrayList<>();
+        list.forEach(o -> is.add(o.create()));
+        return is;
+    }
+
+    public static List<SingleStackContainer> fromItemStackList(List<ItemStack> list)
+    {
+        List<SingleStackContainer> ssc = new ArrayList<>();
+        list.forEach(o -> ssc.add(from(o)));
+        return ssc;
+    }
 
     public ItemStack create()
     {
