@@ -23,7 +23,7 @@ public class TackleBoxAttachmentSlot extends Slot
         this.background = background;
         this.tackleMenu = tackleMenu;
         this.mayPlaceTag = mayPlaceTag;
-        tackleMenu.update();
+     //   tackleMenu.update();
     }
 
     @Override

@@ -37,7 +37,7 @@ public class FishingBobAttachment
     public void setUuid(ICapabilityProvider holder, UUID uuid) {
         this.uuid = uuid.toString();
         holder.setData(SCDataAttachments.FISHING_BOB, new FishingBobAttachment(this.uuid));
-        holder.syncData(SCDataAttachments.FISHING_BOB);
+    //    holder.syncData(SCDataAttachments.FISHING_BOB);
     }
 
     public UUID getUuid()

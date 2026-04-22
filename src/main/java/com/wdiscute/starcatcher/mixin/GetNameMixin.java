@@ -1,5 +1,7 @@
 package com.wdiscute.starcatcher.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapmethod.WrapMethod;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
 import com.wdiscute.starcatcher.io.CaughtFishInfo;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.FishProperties;
@@ -7,35 +9,20 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.nikdo53.neobackports.io.components.DataComponents;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ItemStack.class)
 public class GetNameMixin
 {
-    @Inject(method = "getHoverName", at = @At("HEAD"), cancellable = true)
-    public void getHoverNameMixin(CallbackInfoReturnable<Component> cir)
+    @WrapMethod(method = "getHoverName")
+    public Component getHoverNameMixin(Operation<Component> original)
     {
         ItemStack stack = (ItemStack) (Object) this;
 
         stack = stack.copy();
+        Component baseName = original.call();
 
         if (SCDataComponents.has(stack, SCDataComponents.CAUGHT_FISH_INFO))
         {
-            Component baseName;
-            Component customName = stack.get(DataComponents.CUSTOM_NAME.get());
-            Component itemName = stack.get(DataComponents.ITEM_NAME.get());
-
-            if (customName != null)
-            {
-                baseName = customName;
-            }
-            else if (itemName != null)
-            {
-                baseName = itemName;
-            }
-            else baseName = Component.translatable(stack.getDescriptionId());
 
             //get sw
             CaughtFishInfo sw = SCDataComponents.get(stack, SCDataComponents.CAUGHT_FISH_INFO);
@@ -44,8 +31,9 @@ public class GetNameMixin
             FishProperties.Rarity rarity = sw.golden() ? FishProperties.Rarity.GOLDEN : sw.rarity();
 
             //decode name string and return value
-            cir.setReturnValue(rarity.wrapWithRarityMarkdown(baseName.getString()));
-            cir.cancel();
+            return rarity.wrapWithRarityMarkdown(baseName.getString());
         }
+
+        return baseName;
     }
 }

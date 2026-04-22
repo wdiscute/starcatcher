@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class FishCaughtToast implements Toast
 {
-    private static final ResourceLocation BACKGROUND_SPRITE = Starcatcher.rl("toast/fish_caught");
+    private static final ResourceLocation BACKGROUND_SPRITE = Starcatcher.rl("textures/gui/sprites/toast/fish_caught.png");
     private final Component title;
     private final String description;
     private final ItemStack is;
@@ -39,7 +39,7 @@ public class FishCaughtToast implements Toast
 
     public Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)
     {
-        guiGraphics.blit(BACKGROUND_SPRITE, 0, 0, 0, 0, width(), height());
+        guiGraphics.blit(BACKGROUND_SPRITE, 0, 0, 0, 0, 0, width(), height(), 164, 51);
 
         guiGraphics.renderItem(is, 6, 29);
 

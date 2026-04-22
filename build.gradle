@@ -80,7 +80,11 @@ dependencies {
     jarJar(modImplementation("net.nikdo53.neobackports:NeoBackports:${neobackports_version}"))
     interfaceInjectionData("net.nikdo53.neobackports:NeoBackports:${neobackports_version}")
 
-    jarJar(modImplementation("com.wdiscute:Selling-Bin:1.4.1-FORGE-1.20.1"))
+    // jarJar(modImplementation(files(".libs/neobackports-${neobackports_version}.jar")))
+    // interfaceInjectionData(files(".libs/neobackports-${neobackports_version}-interfaceinjection.json"))
+
+    //selling bin
+    jarJar(modImplementation("maven.modrinth:wds-selling-bin:1.4.1-FORGE-1.20.1"))
 
     //EMI
     modCompileOnly("dev.emi:emi-forge:${emi_version}:api")

@@ -26,7 +26,9 @@ public class SCItemProperties
                             return 1f;
                         if (SCDataComponents.getOrDefault(stack, SCDataComponents.HOOK, SingleStackContainer.empty()).isEmpty())
                             return 1f;
-                        return !SCDataAttachments.get(entity, SCDataAttachments.FISHING_BOB).isEmpty() && (entity.getMainHandItem() == stack || (entity.getOffhandItem() == stack)) ? 1.0f : 0.0f;
+                        boolean b = entity.getMainHandItem() == stack || (entity.getOffhandItem() == stack);
+                        boolean b1 = !SCDataAttachments.get(entity, SCDataAttachments.FISHING_BOB).isEmpty();
+                        return b1 && b ? 1.0f : 0.0f;
                     }
             );
         }
