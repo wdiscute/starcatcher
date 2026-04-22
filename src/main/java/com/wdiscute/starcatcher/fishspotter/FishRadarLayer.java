@@ -75,7 +75,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
         if (Minecraft.getInstance().player == null) return;
         else player = Minecraft.getInstance().player;
 
-        boolean shouldShow = player.getMainHandItem().is(SCItems.FISH_RADAR) || player.getOffhandItem().is(SCItems.FISH_RADAR);
+        boolean shouldShow = player.getMainHandItem().is(SCItems.FISH_RADAR.get()) || player.getOffhandItem().is(SCItems.FISH_RADAR.get());
 
         //smoothly moves ui in and out of screen
         if (!shouldShow)

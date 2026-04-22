@@ -19,6 +19,7 @@ group = mod_group_id
 
 repositories{
     mavenLocal()
+    flatDir { dir '.libs' }
 
     maven {
         name = "TerraformersMC"
@@ -85,6 +86,9 @@ dependencies {
 
     //selling bin
     jarJar(modImplementation("maven.modrinth:wds-selling-bin:1.4.1-FORGE-1.20.1"))
+
+    //tooltips
+    jarJar(modImplementation("local:libtooltips:1.6"))
 
     //EMI
     modCompileOnly("dev.emi:emi-forge:${emi_version}:api")
