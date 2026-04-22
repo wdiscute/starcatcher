@@ -4,7 +4,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCColors;
+import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
+import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
@@ -74,6 +77,19 @@ public class DaytimeRestriction extends AbstractFishRestriction
     @Override
     public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
+        //skip if any modifiers have SkipsDaytimeRestriction interface
+        if (context.equals(Context.FISHING) && entity instanceof FishingBobEntity bob && bob.player != null)
+        {
+            if (SCCatchModifiers.getCatchModifiers(bob.player).stream().anyMatch(
+                    o -> o instanceof SkipsDaytimeRestriction sp && sp.shouldSkipDaytime(level)))
+                return 0;
+
+            if (SCMinigameModifiers.getMinigameModifiers(bob.player).stream().anyMatch(
+                    o -> o instanceof SkipsDaytimeRestriction sp && sp.shouldSkipDaytime(level)))
+                return 0;
+        }
+
+
         float daytime = level.dayTime() % 24000;
 
         if (ranges.stream().anyMatch(range -> daytime > range.first && daytime < range.second))
@@ -119,4 +135,8 @@ public class DaytimeRestriction extends AbstractFishRestriction
     public static final DaytimeRestriction MIDNIGHT = new DaytimeRestriction(List.of(new Duo(16500, 12700)), "gui.guide.midnight");
     public static final DaytimeRestriction NIGHT = new DaytimeRestriction(List.of(new Duo(12700, 23000)), "gui.guide.night");
 
+    public interface SkipsDaytimeRestriction
+    {
+        boolean shouldSkipDaytime(Level level);
+    }
 }

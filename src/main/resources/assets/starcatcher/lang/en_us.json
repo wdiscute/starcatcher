@@ -299,7 +299,7 @@
 
   "tooltip.modifier.starcatcher.flip_every_hit": "Flip every time you hit a sweet-spot",
 
-  "tooltip.modifier.starcatcher.ignore_daytime_and_weather_restrictions.0": "Ignores fish daytime & weather restrictions",
+  "tooltip.modifier.starcatcher.ignore_daytime_and_weather_restrictions": "Ignores fish daytime & weather restrictions",
 
   "tooltip.modifier.starcatcher.decrease_lure_time": "Decreases lure time",
   "tooltip.modifier.starcatcher.big_decrease_lure_time": "Decreases lure time greatly",
