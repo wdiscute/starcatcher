@@ -43,9 +43,9 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
         this.addSlot(new TackleBoxRodSlot(this, container, ROD_SLOT, 134, 37));
 
-        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BOBBERS, container, BOBBER_SLOT, 158, 11, Starcatcher.rl("item/background/bobber_white")));
-        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BAITS, container, BAIT_SLOT, 158, 31, Starcatcher.rl("item/background/bait_white")));
-        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.HOOKS, container, HOOK_SLOT, 158, 51, Starcatcher.rl("item/background/hook_white")));
+        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BOBBERS, container, BOBBER_SLOT, 158, 11, Starcatcher.rl("container/slot/bobber_white")));
+        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BAITS, container, BAIT_SLOT, 158, 31, Starcatcher.rl("container/slot/bait_white")));
+        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.HOOKS, container, HOOK_SLOT, 158, 51, Starcatcher.rl("container/slot/hook_white")));
 
         this.addSlot(new TackleBoxInfiniteStorageSlot(this, container, FISH_SLOT, 134, 55));
 
@@ -107,13 +107,14 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
     public void update()
     {
+        if(be.getLevel().isClientSide()) return;
         SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.from(container.getItem(BOBBER_SLOT)));
         SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.from(container.getItem(BAIT_SLOT)));
         SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.from(container.getItem(HOOK_SLOT)));
 
-        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).create());
-        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).create());
-        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.empty()).create());
+        //container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).create());
+        //container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).create());
+        //container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.empty()).create());
     }
 
     public ItemStack getRod()

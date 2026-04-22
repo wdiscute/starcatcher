@@ -14,9 +14,9 @@ import net.minecraft.world.item.ItemStack;
 public class RodSlotTooltipRenderer implements ClientTooltipComponent
 {
     public static final Identifier TEXTURE = Starcatcher.rl("textures/gui/rod_tooltip.png");
-    public static final Identifier BOBBER = Starcatcher.rl("textures/item/background/bobber_white.png");
-    public static final Identifier BAIT = Starcatcher.rl("textures/item/background/bait_white.png");
-    public static final Identifier HOOK = Starcatcher.rl("textures/item/background/hook_white.png");
+    public static final Identifier BOBBER = Starcatcher.rl("textures/gui/sprites/container/slot/bobber_white.png");
+    public static final Identifier BAIT = Starcatcher.rl("textures/gui/sprites/container/slot/bait_white.png");
+    public static final Identifier HOOK = Starcatcher.rl("textures/gui/sprites/container/slot/hook_white.png");
 
     ItemStack bobber;
     ItemStack bait;
@@ -57,17 +57,17 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
 
 
         if (bobber.isEmpty())
-            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BOBBER, x + 2, y + 1, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BOBBER, x + 2, y + 1, 0, 0, 16, 16, 16, 16, 16, 16);
         else
             guiGraphics.item(bobber, x + 2, y + 1);
 
         if (bait.isEmpty())
-            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BAIT, x + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BAIT, x + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16, 16, 16);
         else
             guiGraphics.item(bait, x + 18 + 2, y + 1);
 
         if (hook.isEmpty())
-            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, HOOK, x + 18 + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, HOOK, x + 18 + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16, 16, 16);
         else
             guiGraphics.item(hook, x + 18 + 18 + 2, y + 1);
     }

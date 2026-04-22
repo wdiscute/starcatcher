@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class TackleBoxRodSlot extends Slot
 {
-    private static final Identifier BACKGROUND = Starcatcher.rl("item/background/rod");
+    private static final Identifier BACKGROUND = Starcatcher.rl("container/slot/rod");
 
     TackleBoxMenu tackleMenu;
 

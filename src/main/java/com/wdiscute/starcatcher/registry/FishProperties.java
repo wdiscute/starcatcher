@@ -1808,11 +1808,13 @@ public record FishProperties(
 
         public Component wrapWithRarityMarkdown(String s)
         {
+            if(true) return Component.literal(s);
             return Component.literal("<sc" + getSerializedName() + ">" + s + "</sc" + getSerializedName() + ">");
         }
 
         public String wrapWithRarityMarkdownAsString(String s)
         {
+            if(true) return s;
             return "<sc" + getSerializedName() + ">" + s + "</sc" + getSerializedName() + ">";
         }
 

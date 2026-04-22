@@ -23,7 +23,7 @@ import java.util.stream.Stream;
 import static com.wdiscute.starcatcher.registry.SCItems.*;
 import static com.wdiscute.starcatcher.blocks.SCBlocks.*;
 
-public class DGSCModelProvider extends ModelProvider
+public class  DGSCModelProvider extends ModelProvider
 {
     public DGSCModelProvider(PackOutput output)
     {
