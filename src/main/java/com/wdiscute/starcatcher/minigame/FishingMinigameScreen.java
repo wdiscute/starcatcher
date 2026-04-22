@@ -299,7 +299,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 64, 192, 64, 64, 64, 64, 256, 256);
 
         //render pointer
-        System.out.println(partialTick);
+        //System.out.println(partialTick);
         renderPointer(guiGraphics, poseStack, partialTick);
 
         //render kimbe marker
