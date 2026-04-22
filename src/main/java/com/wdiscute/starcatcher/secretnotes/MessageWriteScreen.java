@@ -51,7 +51,7 @@ public class MessageWriteScreen extends Screen
         {
             EditBox box = new EditBox(this.font, uiX + 136, uiY + 55 + i * 10, 500, 12, Component.empty());
             box.setCanLoseFocus(true);
-            box.setTextColor(0x635040);
+            box.setTextColor(0xff635040);
             box.setBordered(false);
             box.setMaxLength(40);
             box.setTextShadow(false);
@@ -64,7 +64,7 @@ public class MessageWriteScreen extends Screen
         //name
         name = new EditBox(this.font, uiX + 255, uiY + 208, 500, 12, Component.empty());
         name.setCanLoseFocus(true);
-        name.setTextColor(0x635040);
+        name.setTextColor(0xff635040);
         name.setBordered(false);
         name.setMaxLength(17);
         name.setValue(message.senderDisplayName());

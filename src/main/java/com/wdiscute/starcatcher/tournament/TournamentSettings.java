@@ -24,8 +24,8 @@ public class TournamentSettings
             TournamentSettings.Scoring.SIMPLE,
             0,
             0,
-            0,
-            List.of());
+            0
+    );
 
     public boolean canSignUp(Player player)
     {
@@ -108,13 +108,12 @@ public class TournamentSettings
         }
     }
 
-    public TournamentSettings(Scoring type, long duration, float perfectCatchMultiplier, int missPenalty, List<SingleStackContainer> entryCost)
+    public TournamentSettings(Scoring type, long duration, float perfectCatchMultiplier, int missPenalty)
     {
         this.scoring = type;
         this.durationInTicks = duration;
         this.perfectCatchMultiplier = perfectCatchMultiplier;
         this.missPenalty = missPenalty;
-        this.entryCost = entryCost;
     }
 
     public static final Codec<TournamentSettings> CODEC = RecordCodecBuilder.create(instance ->
@@ -122,8 +121,7 @@ public class TournamentSettings
                     Scoring.CODEC.optionalFieldOf("type", Scoring.SIMPLE).forGetter(TournamentSettings::getScoring),
                     Codec.LONG.optionalFieldOf("duration", 0L).forGetter(TournamentSettings::getDurationInTicks),
                     Codec.FLOAT.optionalFieldOf("perfect_catch_multiplier", 0.0f).forGetter(TournamentSettings::getPerfectCatchMultiplier),
-                    Codec.INT.optionalFieldOf("miss_penalty", 0).forGetter(TournamentSettings::getMissPenalty),
-                    SingleStackContainer.LIST_CODEC.optionalFieldOf("entry_cost", List.of()).forGetter(TournamentSettings::getEntryCost)
+                    Codec.INT.optionalFieldOf("miss_penalty", 0).forGetter(TournamentSettings::getMissPenalty)
             ).apply(instance, TournamentSettings::new)
     );
 
@@ -132,7 +130,6 @@ public class TournamentSettings
             ByteBufCodecs.VAR_LONG, TournamentSettings::getDurationInTicks,
             ByteBufCodecs.FLOAT, TournamentSettings::getPerfectCatchMultiplier,
             ByteBufCodecs.VAR_INT, TournamentSettings::getMissPenalty,
-            SingleStackContainer.STREAM_CODEC_LIST, TournamentSettings::getEntryCost,
             TournamentSettings::new
     );
 }

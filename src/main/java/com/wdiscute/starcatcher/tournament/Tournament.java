@@ -33,7 +33,6 @@ public class Tournament
             UUID.randomUUID(),
             new ArrayList<>(),
             TournamentSettings.DEFAULT,
-            new ArrayList<>(),
             0);
 
     public static final Codec<Tournament> CODEC = RecordCodecBuilder.create(instance ->
@@ -44,7 +43,6 @@ public class Tournament
                     UUIDUtil.CODEC.fieldOf("owner").forGetter(t -> t.owner),
                     TournamentPlayerScore.CODEC.listOf().fieldOf("player_scores").forGetter(t -> t.playerScores),
                     TournamentSettings.CODEC.fieldOf("settings").forGetter(t -> t.settings),
-                    SingleStackContainer.LIST_CODEC.optionalFieldOf("loot_pool", SingleStackContainer.EMPTY_LIST).forGetter(t -> t.lootPool),
                     Codec.LONG.fieldOf("lastsUntil").forGetter(t -> t.lastsUntilEpoch)
             ).apply(instance, Tournament::new)
     );
@@ -56,7 +54,6 @@ public class Tournament
             UUIDUtil.STREAM_CODEC, t -> t.owner,
             TournamentPlayerScore.STREAM_CODEC.apply(ByteBufCodecs.list()), t -> t.playerScores,
             TournamentSettings.STREAM_CODEC, t -> t.settings,
-            SingleStackContainer.STREAM_CODEC_LIST, t -> t.lootPool,
             ByteBufCodecs.VAR_LONG, t -> t.lastsUntilEpoch,
             Tournament::new
     );
@@ -67,7 +64,6 @@ public class Tournament
                       UUID owner,
                       List<TournamentPlayerScore> playerScore,
                       TournamentSettings settings,
-                      List<SingleStackContainer> pool,
                       long lastsUntil
     )
     {
@@ -77,7 +73,6 @@ public class Tournament
         this.owner = owner;
         this.playerScores = playerScore;
         this.settings = settings;
-        this.lootPool = pool;
         this.lastsUntilEpoch = lastsUntil;
     }
 
@@ -93,9 +88,8 @@ public class Tournament
                         TournamentSettings.Scoring.SIMPLE,
                         48000,
                         0,
-                        0,
-                        SingleStackContainer.EMPTY_LIST),
-                SingleStackContainer.EMPTY_LIST,
+                        0
+                ),
                 200
         );
     }
