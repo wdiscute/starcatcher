@@ -37,7 +37,7 @@ public class DGSCLootModifiers extends GlobalLootModifierProvider
                 new AddItemModifier(new LootItemCondition[]{
                         new LootTableIdCondition.Builder(BuiltInLootTables.SHIPWRECK_MAP.identifier()).build(),
                         LootItemRandomChanceCondition.randomChance(0.1f).build()
-                }, SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem()).toList()
+                }, SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem()).toList(), 1
                 ));
     }
 
@@ -45,12 +45,13 @@ public class DGSCLootModifiers extends GlobalLootModifierProvider
     {
         public static final MapCodec<AddItemModifier> CODEC = RecordCodecBuilder.mapCodec(inst ->
                 LootModifier.codecStart(inst).and(
-                        BuiltInRegistries.ITEM.byNameCodec().listOf().fieldOf("items").forGetter(e -> e.items)).apply(inst, AddItemModifier::new));
+                                BuiltInRegistries.ITEM.byNameCodec().listOf().fieldOf("items").forGetter(e -> e.items))
+                        .apply(inst, (conditionsIn, priority, items) -> new AddItemModifier(conditionsIn, items, priority)));
         private final List<Item> items;
 
-        public AddItemModifier(LootItemCondition[] conditionsIn, List<Item> items)
+        public AddItemModifier(LootItemCondition[] conditionsIn, List<Item> items, int priority)
         {
-            super(conditionsIn);
+            super(conditionsIn, priority);
             this.items = items;
         }
 
