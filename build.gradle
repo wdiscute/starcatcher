@@ -86,7 +86,7 @@ dependencies {
 
     //JEI
     compileOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
-    //runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 
     //Serene Seasons
     compileOnly "maven.modrinth:serene-seasons:ZwWxXUVt"

@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
@@ -68,7 +69,7 @@ public class IsolatedFPScreen extends Screen
     {
         super.extractRenderState(graphics, mouseX, mouseY, a);
 
-        graphics.blit(BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
 
         FishingGuideScreen.renderFishEntryPage(
                 graphics,

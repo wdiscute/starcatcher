@@ -15,21 +15,22 @@ public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
 
     public TackleBoxScreen(TackleBoxMenu menu, Inventory playerInventory, Component title)
     {
-        super(menu, playerInventory, title);
+        super(menu, playerInventory, Component.empty());
+        inventoryLabelY = 2314234;
     }
 
     @Override
-    protected void extractMenuBackground(GuiGraphicsExtractor graphics)
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a)
     {
-        super.extractMenuBackground(graphics);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        graphics.blit(RenderPipelines.GUI, TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+        graphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
 
         if (!menu.getRod().isEmpty())
         {
-            graphics.blit(ICONS, x, y, 0, 0, this.imageWidth, this.imageHeight, this.imageWidth, this.imageHeight);
+            graphics.blit(RenderPipelines.GUI_TEXTURED, ICONS, x, y, 0, 0, this.imageWidth, this.imageHeight, 0, 0, this.imageWidth, this.imageHeight);
         }
+        super.extractRenderState(graphics, mouseX, mouseY, a);
     }
 }

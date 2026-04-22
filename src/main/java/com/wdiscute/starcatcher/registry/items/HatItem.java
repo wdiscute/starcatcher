@@ -19,6 +19,7 @@ public class HatItem extends BlockItem
     {
         super(block, new Properties()
                 .stacksTo(1)
+                .useBlockDescriptionPrefix()
                 .setId(ResourceKey.create(Registries.ITEM, Starcatcher.rl(name)))
         );
     }

@@ -4,7 +4,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.level.Level;
 
 
-public class PartialTickHelper {
+public class PartialTickHelper
+{
     public static final PartialTickHelper INSTANCE = new PartialTickHelper();
 
     private static final long TICK_NANOS = 50_000_000L; // 50 ms
@@ -14,12 +15,14 @@ public class PartialTickHelper {
 
 
     // pure ChatGPT code
-    public float getPartialTicks(Level level){
+    public float getPartialTicks(Level level)
+    {
         long gameTick = level.getGameTime();
         long now = System.nanoTime();
 
         // Detect a new game tick
-        if (gameTick != lastGameTick) {
+        if (gameTick != lastGameTick)
+        {
             lastGameTick = gameTick;
             lastTickTime = now;
             return 0.0f;

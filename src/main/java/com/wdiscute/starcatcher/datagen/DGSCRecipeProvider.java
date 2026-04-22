@@ -16,13 +16,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
@@ -46,7 +44,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         @Override
         protected RecipeProvider createRecipeProvider(HolderLookup.Provider provider, RecipeOutput recipeOutput)
         {
-            return new DGSBRecipeProvider(provider, recipeOutput);
+            return new DGSCRecipeProvider(provider, recipeOutput);
         }
 
         @Override
@@ -527,7 +525,7 @@ public class DGSCRecipeProvider extends RecipeProvider
                         tag(SCTags.STARCAUGHT_FISHES),
                         RecipeCategory.FOOD,
                         CookingBookCategory.FOOD,
-                        ItemStackTemplate.fromNonEmptyStack(SCItems.COOKED_STARCAUGHT_FISH.toStack()),
+                        new ItemStackTemplate(SCItems.COOKED_STARCAUGHT_FISH.get()),
                         0.35F, 200
                 )
                 .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHES))

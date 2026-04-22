@@ -23,6 +23,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
+import static net.minecraft.client.renderer.RenderPipelines.GUI_TEXTURED;
+
 public class SettingsScreen extends FishingMinigameScreen {
     public static final Identifier SETTINGS = Starcatcher.rl("textures/gui/minigame/settings.png");
     public static final Identifier GUI_SCALE = Starcatcher.rl("textures/gui/minigame/gui_scale.png");
@@ -230,7 +232,7 @@ public class SettingsScreen extends FishingMinigameScreen {
             MutableComponent component = Component.empty().append(name).append(": ").append(String.valueOf(o));
             guiGraphics.centeredText(getMinecraft().font, component, getX() + (getWidth() / 2), getY() + (getHeight() / 4), 0x000000);
 
-            guiGraphics.blit(RenderPipelines.GUI,
+            guiGraphics.blit(GUI_TEXTURED,
                     texture, getX(), getY(),
                     getWidth(), getHeight(), uOffset, vOffset, getWidth(), getHeight(), textureWidth, textureHeight);
 
@@ -279,7 +281,7 @@ public class SettingsScreen extends FishingMinigameScreen {
         protected void extractWidgetRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a)
         {
             //GUI SCALE
-            guiGraphics.blit(RenderPipelines.GUI,
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                     GUI_SCALE, getX(), getY(),
                     getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), getWidth(), getHeight());
 

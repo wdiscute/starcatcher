@@ -1855,8 +1855,6 @@ public record FishProperties(
 
     public static List<Identifier> getBiomesAsListFromTags(List<Identifier> biomes, List<Identifier> tags, Level level)
     {
-        level.registryAccess().getOrThrow(Registries.BIOME);
-
         List<Identifier> rls = new ArrayList<>();
 
         for (Identifier rl : tags)
@@ -1887,8 +1885,6 @@ public record FishProperties(
 
     public static List<Identifier> getBiomesBlacklistAsList(List<Identifier> biomesBlacklist, List<Identifier> biomesBlacklistTags, Level level)
     {
-        level.registryAccess().getOrThrow(Registries.BIOME);
-
         List<Identifier> rls = new ArrayList<>();
 
         for (Identifier rl : biomesBlacklistTags)

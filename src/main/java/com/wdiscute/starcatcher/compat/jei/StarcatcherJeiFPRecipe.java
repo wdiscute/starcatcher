@@ -108,7 +108,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
     public void bookIcon(GuiGraphicsExtractor draw, int x, int y, int mouseX, int mouseY)
     {
-        draw.blit(ICON, x, y, 0, 0, 20, 20, 20, 20);
+        draw.blit(RenderPipelines.GUI_TEXTURED, ICON, x, y, 0, 0, 20, 20, 20, 20);
         if (mouseX > x && mouseX < x + 19 && mouseY > y && mouseY < y + 19)
         {
             renderTooltip(draw, Component.translatable("emi.starcatcher.open_as_guide_entry"), mouseX, mouseY);
@@ -120,19 +120,19 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     {
         super.draw(recipe, recipeSlotsView, guiGraphics, mouseX, mouseY);
         Font font = Minecraft.getInstance().font;
-        guiGraphics.blit(RenderPipelines.GUI, StarcatcherJeiPlugin.SLOT_BACKGROUND, 4, 1, 18, 18, 0, 0, 18, 18, 18, 18);
-        guiGraphics.blit(RenderPipelines.GUI, StarcatcherJeiPlugin.ARROW, 25, 2, 16, 16, 0, 0, 16, 16, 16, 16);
-        guiGraphics.blit(RenderPipelines.GUI, SellingBinJeiPlugin.SLOT_BACKGROUND, 43, 1, 18, 18, 0, 0, 18, 18, 18, 18);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, StarcatcherJeiPlugin.SLOT_BACKGROUND, 4, 1, 18, 18, 0, 0, 18, 18, 18, 18);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, StarcatcherJeiPlugin.ARROW, 25, 2, 16, 16, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SellingBinJeiPlugin.SLOT_BACKGROUND, 43, 1, 18, 18, 0, 0, 18, 18, 18, 18);
 
         if (!recipe.treasure.isEmpty())
-            guiGraphics.blit(RenderPipelines.GUI, SellingBinJeiPlugin.SLOT_BACKGROUND, 63, 1, 18, 18, 0, 0, 18, 18, 18, 18);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, SellingBinJeiPlugin.SLOT_BACKGROUND, 63, 1, 18, 18, 0, 0, 18, 18, 18, 18);
 
         bookIcon(guiGraphics, 83, 0, (int) mouseX, (int) mouseY);
 
         //restrictions on arrow hover
         if (mouseX > 25 && mouseX < 25 + 16 && mouseY > 0 && mouseY < 16)
         {
-            renderTooltip(guiGraphics, recipe.components,((int) mouseX), ((int) mouseY));
+            renderTooltip(guiGraphics, recipe.components, ((int) mouseX), ((int) mouseY));
         }
 
         //[!] + hover
@@ -186,7 +186,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
             Holder<FishProperties> holder = Minecraft.getInstance().level.registryAccess().lookup(Starcatcher.FISH_REGISTRY_KEY).get().wrapAsHolder(fp);
             Treasure.TreasureInstance data = holder.getData(SCDataMaps.TREASURE);
-            if(fp.catchInfo().treasureIs().isEmpty())
+            if (fp.catchInfo().treasureIs().isEmpty())
             {
                 if (data == null)
                     tre = ItemStack.EMPTY;

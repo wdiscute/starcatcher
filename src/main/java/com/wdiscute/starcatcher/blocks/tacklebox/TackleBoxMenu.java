@@ -107,23 +107,9 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
     public void update()
     {
-        ItemStack bobber = container.getItem(BOBBER_SLOT);
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, new SingleStackContainer(
-                new ItemStackTemplate(
-                        bobber.getItem(), bobber.getCount(), bobber.getComponentsPatch()
-                )));
-
-        ItemStack bait = container.getItem(BAIT_SLOT);
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, new SingleStackContainer(
-                new ItemStackTemplate(
-                        bait.getItem(), bait.getCount(), bait.getComponentsPatch()
-                )));
-
-        ItemStack hook = container.getItem(HOOK_SLOT);
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, new SingleStackContainer(
-                new ItemStackTemplate(
-                        hook.getItem(), hook.getCount(), hook.getComponentsPatch()
-                )));
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.from(container.getItem(BOBBER_SLOT)));
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.from(container.getItem(BAIT_SLOT)));
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.from(container.getItem(HOOK_SLOT)));
 
         container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).create());
         container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).create());

@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -155,15 +156,15 @@ public class DisplayBlockEntity extends BlockEntity
     protected void loadAdditional(ValueInput input)
     {
         super.loadAdditional(input);
-        this.item = input.read("item", ItemStack.CODEC).orElse(ItemStack.EMPTY);
+        this.item = input.read("item", SingleStackContainer.CODEC).orElse(SingleStackContainer.empty()).create();
     }
 
     @Override
     protected void saveAdditional(ValueOutput output)
     {
         super.saveAdditional(output);
-        if (item.isEmpty()) {
-            output.store("item", ItemStack.CODEC, item);
+        if (!item.isEmpty()) {
+            output.store("item", SingleStackContainer.CODEC, SingleStackContainer.from(item));
         }
     }
 

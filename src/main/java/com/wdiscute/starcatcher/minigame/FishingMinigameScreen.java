@@ -29,6 +29,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ARGB;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -73,7 +74,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     public float kimbeMarkerPos = 0;
     public float kimbeMarkerAlpha = 0;
-    public int kimbeMarkerColor = 0x00ff00;
+    public int kimbeMarkerColor = 0xff00ff00;
 
     public int gracePeriod = 80;
     //todo do this smiley face :)
@@ -250,7 +251,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         super.extractBackground(guiGraphics, mouseX, mouseY, partialTickNeo);
 
-        final float partialTick = SCConfig.VANILLA_PARTIAL_TICK.get() ? partialTickNeo : PartialTickHelper.INSTANCE.getPartialTicks(minecraft.level);
+        final float partialTick = PartialTickHelper.INSTANCE.getPartialTicks(minecraft.level);
 
         Matrix3x2fStack poseStack = guiGraphics.pose();
         partial = partialTick;
@@ -270,7 +271,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         if (treasureActive) renderTreasure(guiGraphics);
 
         //render tank background
-        guiGraphics.blit(RenderPipelines.GUI, tankTexture, width / 2 - 42 - 100, height / 2 - 48, 85, 97, 0, 0, 85, 97, 85, 97);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, tankTexture, width / 2 - 42 - 100, height / 2 - 48, 85,
+                97, 85, 97, 85, 97, 85, 97);
 
         /*
         //test for the vignette shader
@@ -282,36 +284,42 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         );*/
 
         //render wheel background
-        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 32, height / 2 - 32, 64, 64, 0, 192, 64, 64, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, width / 2 - 32, height / 2 - 32,
+                0, 192, 64, 64, 64, 64, 256, 256);
 
         //render spacebar
-        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 16, height / 2 + 40, 32, 16, isHoldingKey ? 48 : 0, 112, 32, 16, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, width / 2 - 16, height / 2 + 40,
+                isHoldingKey ? 48 : 0, 112, 32, 16, 32, 16, 256, 256);
 
         //render all sweet spots
         activeSweetSpots.forEach(ass -> renderSweetSpot(ass, guiGraphics, partialTick, poseStack));
 
         //render wheel second layer
-        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 32, height / 2 - 32, 64, 64, 64, 192, 64, 64, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, width / 2 - 32, height / 2 - 32,
+                64, 192, 64, 64, 64, 64, 256, 256);
 
         //render pointer
+        System.out.println(partialTick);
         renderPointer(guiGraphics, poseStack, partialTick);
 
         //render kimbe marker
         renderKimbeMarker(guiGraphics);
 
         //silver thing on top
-        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 16, height / 2 - 16, 32, 32, 208, 208, 32, 32, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, width / 2 - 16, height / 2 - 16,
+                208, 208, 32, 32, 32, 32, 256, 256);
 
         //fishing rod
-        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 32 - 70, height / 2 - 24 - 57, 64, 48, 192, 0, 64, 48, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, width / 2 - 32 - 70, height / 2 - 24 - 57,
+                192, 0, 64, 48, 64, 48, 256, 256);
 
         float yoffset = progressSmooth == 0 ? 0 : (progressSmooth / (float) hp * 77);
 
         //fishing line
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 TEXTURE, width / 2 - 6 - 102, height / 2 - 56 - 18,
-                16F, 112 - yoffset,
-                (int) 176F, (int) yoffset,
+                176F, yoffset,
+                (int) 16F, (int) (112 - yoffset),
                 16, (int) (112 - yoffset),
                 256, 256);
 
@@ -330,7 +338,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         //render particles
         hitParticles.forEach(p -> p.render(guiGraphics, width, height));
 
-        poseStack.popMatrix() ;
+        poseStack.popMatrix();
     }
 
     public void renderSweetSpot(ActiveSweetSpot ass, GuiGraphicsExtractor guiGraphics, float partialTick, Matrix3x2fStack poseStack)
@@ -356,24 +364,24 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     public void renderTreasure(GuiGraphicsExtractor guiGraphics)
     {
         //treasure bar
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 TEXTURE, width / 2 - 158, height / 2 - 42 + (int) (64 - (64f * treasureProgressSmooth) / 100),
-                5F, (float) (64 * treasureProgressSmooth / 100),
-                141, (int) (6 + 64 - (float) (64 * treasureProgressSmooth) / 100),
+                141F, 6 + 64 - (float) (64 * treasureProgressSmooth) / 100,
+                (int) 5F, (64 * treasureProgressSmooth / 100),
                 5, 64 * treasureProgressSmooth / 100,
                 256, 256);
 
         //treasure chest
-        guiGraphics.blit(RenderPipelines.GUI, TEXTURE, width / 2 - 16 - 155, height / 2 - 48, 32, 96, 96, 0, 32, 96, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
+                96, 0, 32, 96, 32, 96, 256, 256);
 
         //render treasure on top of bar
         guiGraphics.item(treasureIS, width / 2 - 163, ((int) ((float) height / 2 - (64f * treasureProgressSmooth) / 100) + 15));
 
         //outline when treasure complete
         if (treasureProgress > 99)
-            guiGraphics.blit(RenderPipelines.GUI,
-                    TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
-                    32, 96, 64, 0, 32, 96, 256, 256);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, width / 2 - 16 - 155, height / 2 - 48,
+                    64, 0, 32, 96, 32, 96, 256, 256);
 
         //todo related to above
 //        if (tackleSkin.is(ModItems.COLORFUL_BOBBER_SMITHING_TEMPLATE) || tackleSkin.is(ModItems.PEARL_BOBBER_SMITHING_TEMPLATE))
@@ -390,18 +398,15 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         float centerY = height / 2f;
 
         poseStack.translate(centerX, centerY);
-        poseStack.mul((Matrix3x2fc) new Quaternionf().rotateZ((float) Math.toRadians(kimbeMarkerPos)));
+        poseStack.rotate((float) Math.toRadians(kimbeMarkerPos));
         poseStack.translate(-centerX, -centerY);
 
-        int color = ARGB.colorFromFloat(
-                (float) U.intToRed(kimbeMarkerColor) / 255,
-                (float) U.intToGreen(kimbeMarkerColor) / 255,
-                (float) U.intToBlue(kimbeMarkerColor) / 255,
-                kimbeMarkerAlpha);
+        int color = ARGB.color(Math.clamp(kimbeMarkerAlpha, 0, 1), kimbeMarkerColor);
 
-        guiGraphics.blit(RenderPipelines.GUI,
+        //kimbe marker
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
-                64, 64, 128, 128, 64, 64, 256, 256, color);
+                128, 128, 64, 64, 64, 64, 256, 256, color);
 
         poseStack.popMatrix();
     }
@@ -415,7 +420,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         poseStack.translate(centerX, centerY);
 
-        poseStack.mul((Matrix3x2fc) Axis.ZP.rotationDegrees(pointerPos + ((pointerSpeed * partialTick) * currentRotation)));
+        poseStack.rotate((float) Math.toRadians(pointerPos + ((pointerSpeed * partialTick) * currentRotation)));
 
         poseStack.translate(0, -16);
 
@@ -683,9 +688,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
      */
     public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteSize, int color)
     {
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 texture, -spriteSize >> 1, -spriteSize >> 1,
-                spriteSize, spriteSize, 0, 0, spriteSize, spriteSize, spriteSize, spriteSize, color);
+                0, 0, spriteSize, spriteSize, spriteSize, spriteSize, spriteSize, spriteSize, color);
     }
 
     public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteSize)
@@ -696,14 +701,14 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteWidth, int spriteHeight, int uOffset, int vOffset, int textureSize, int color)
     {
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 texture, -spriteWidth >> 1, -spriteHeight >> 1,
-                spriteWidth, spriteHeight, uOffset, vOffset, spriteWidth, spriteHeight, textureSize, textureSize, color);
+                uOffset, vOffset, spriteWidth, spriteHeight, spriteWidth, spriteHeight, textureSize, textureSize, color);
     }
 
     public static void renderPoseCentered(GuiGraphicsExtractor guiGraphics, Identifier texture, int spriteWidth, int spriteHeight, int uOffset, int vOffset, int textureSize)
     {
-        renderPoseCentered(guiGraphics, texture, spriteWidth, spriteHeight, uOffset, vOffset, textureSize);
+        renderPoseCentered(guiGraphics, texture, spriteWidth, spriteHeight, uOffset, vOffset, textureSize, 0xffffffff);
     }
 
 

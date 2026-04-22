@@ -97,7 +97,8 @@ public class FishingBobEntity extends Projectile
         return Minecraft.getInstance().player;
     }
 
-    public @Nullable Player getPlayerOwner() {
+    public @Nullable Player getPlayerOwner()
+    {
         return this.getOwner() instanceof Player player ? player : null;
     }
 
@@ -314,7 +315,7 @@ public class FishingBobEntity extends Projectile
             if (player != null) SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB);
         }
 
-        BlockPos blockpos = new BlockPos(new Vec3i((int) position().x, (int) (position().y + 0.175f), (int) position().z));
+        BlockPos blockpos = blockPosition();
         FluidState fluid = this.level().getFluidState(blockpos);
         FluidState fluidBellow = this.level().getFluidState(blockpos.below());
 
@@ -323,16 +324,16 @@ public class FishingBobEntity extends Projectile
             //set voidhook fishing for overworld/nether/end negative offset (based on tide) and always for any other dimension
             Identifier dim = level().dimension().identifier();
             if (voidHook && position().y < -71 && dim.equals(Level.OVERWORLD.identifier()))
-                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
+                this.currentState = FishHookState.BOBBING;
 
             if (voidHook && position().y < -5 && dim.equals(Level.NETHER.identifier()))
-                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
+                this.currentState = FishHookState.BOBBING;
 
             if (voidHook && position().y < 50 && dim.equals(Level.END.identifier()))
-                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
+                this.currentState = FishHookState.BOBBING;
 
             if (!dim.equals(Level.OVERWORLD.identifier()) && !dim.equals(Level.NETHER.identifier()) && !dim.equals(Level.END.identifier()))
-                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
+                this.currentState = FishHookState.BOBBING;
 
 
             if (getDeltaMovement().y < 1.2f)
@@ -341,7 +342,7 @@ public class FishingBobEntity extends Projectile
             if (!fluid.isEmpty())
             {
                 this.setDeltaMovement(this.getDeltaMovement().multiply(0.3, 0.3, 0.3));
-                if (!level().isClientSide()) this.currentState = FishHookState.BOBBING;
+                this.currentState = FishHookState.BOBBING;
                 return;
             }
         }
@@ -479,13 +480,6 @@ public class FishingBobEntity extends Projectile
         }
 
 
-    }
-
-    @Override
-    protected AABB makeBoundingBox(Vec3 position)
-    {
-        AABB box = new AABB(-10, -10, -10, 10, 10, 10);
-        return box.move(position());
     }
 
     @Override

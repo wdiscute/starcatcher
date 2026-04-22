@@ -9,6 +9,7 @@ import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
@@ -55,7 +56,7 @@ public class MessageWriteScreen extends Screen
             box.setMaxLength(40);
             box.setTextShadow(false);
             box.setEditable(true);
-            if(message.text().size() > i) box.setValue(message.text().get(i));
+            if (message.text().size() > i) box.setValue(message.text().get(i));
             addWidget(box);
             boxes.add(box);
         }
@@ -114,7 +115,7 @@ public class MessageWriteScreen extends Screen
 
     private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
 
     @Override

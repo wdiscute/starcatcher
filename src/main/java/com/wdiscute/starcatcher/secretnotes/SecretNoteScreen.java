@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -40,7 +41,7 @@ public class SecretNoteScreen extends Screen
             String key = translationKey + i;
             if (I18n.exists(key))
             {
-                guiGraphics.text(this.font, Component.translatable(key), uiX + 140, uiY + 55 + 9 * i, 0x635040, false);
+                guiGraphics.text(this.font, Component.translatable(key), uiX + 140, uiY + 55 + 9 * i, 0xff635040, false);
             }
             else
             {
@@ -79,7 +80,7 @@ public class SecretNoteScreen extends Screen
 
     private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
 
     @Override

@@ -98,7 +98,7 @@ public class TeleportModifier extends AbstractTimedModifier
     public void renderBackground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderBackground(guiGraphics, partialTick, width, height);
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 OVERLAY, width / 2 - 48, height / 2 - 48,
                 96, 96, 0, 0, 96, 96, 96, 96);
     }
@@ -129,7 +129,7 @@ public class TeleportModifier extends AbstractTimedModifier
                 (float) U.intToBlue(0x653bea) / 255,
                 0.6f);
 
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 FishingMinigameScreen.TEXTURE, width / 2 - 32, height / 2 - 32 - 16,
                 64, 64, 128, 128, 64, 64, 256, 256, color);
 

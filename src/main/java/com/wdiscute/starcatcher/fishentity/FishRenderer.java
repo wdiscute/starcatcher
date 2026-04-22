@@ -109,6 +109,13 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
     }
 
     @Override
+    public void extractRenderState(FishEntity entity, FishEntityRenderState state, float partialTicks)
+    {
+        super.extractRenderState(entity, state, partialTicks);
+        state.fishStack = entity.getFish() == null ? ItemStack.EMPTY : entity.getFish();
+    }
+
+    @Override
     public void submit(FishEntityRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
     {
         super.submit(state, poseStack, submitNodeCollector, camera);
