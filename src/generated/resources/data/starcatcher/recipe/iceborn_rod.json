@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "minecraft:packed_ice",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:iceborn_rod"
+  },
+  "template": "starcatcher:iceborn_skin_smithing_template"
+}

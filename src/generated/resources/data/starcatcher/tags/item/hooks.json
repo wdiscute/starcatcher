@@ -1,0 +1,23 @@
+{
+  "values": [
+    "starcatcher:hook",
+    "starcatcher:amethyst_hook",
+    "starcatcher:shiny_hook",
+    "starcatcher:gold_hook",
+    "starcatcher:mossy_hook",
+    "starcatcher:stone_hook",
+    "starcatcher:split_hook",
+    "starcatcher:heavy_hook",
+    "starcatcher:vanilla_hook",
+    "starcatcher:copper_hook",
+    "starcatcher:exposed_copper_hook",
+    "starcatcher:weathered_copper_hook",
+    "starcatcher:oxidised_copper_hook",
+    "starcatcher:echoing_hook",
+    "starcatcher:frozen_hook",
+    {
+      "id": "tide:void_fishing_hook",
+      "required": false
+    }
+  ]
+}

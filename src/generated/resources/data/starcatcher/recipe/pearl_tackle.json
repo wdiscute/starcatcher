@@ -1,0 +1,6 @@
+{
+  "type": "starcatcher:smithing_tackle_skin",
+  "addition": "starcatcher:pearl",
+  "base": "#starcatcher:rods",
+  "template": "starcatcher:pearl_smithing_template"
+}

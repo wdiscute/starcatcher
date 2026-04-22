@@ -1,0 +1,93 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "tide:blossom_bass",
+    "fish_bucket": "tide:blossom_bass_bucket",
+    "item": "tide:blossom_bass"
+  },
+  "difficulty": {
+    "decay": 0.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [],
+    "speed": 9,
+    "sweetspots": [
+      {
+        "color_as_int": 3701122,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweet_spot_type": "starcatcher:aqua",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 3701122,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweet_spot_type": "starcatcher:aqua",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "rare",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": [
+        "starcatcher:is_cherry_grove"
+      ]
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 2147483647,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:cherry_bait": 50
+      }
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 40.0,
+    "average_weight_grams": 1600.0,
+    "deviation_size_cm": 12.0,
+    "deviation_weight_grams": 1100.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

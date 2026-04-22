@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "minecraft:magma_cream",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:magmaforged_rod"
+  },
+  "template": "starcatcher:magmaforged_skin_smithing_template"
+}

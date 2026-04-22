@@ -1,0 +1,46 @@
+{
+  "values": [
+    "starcatcher:worm",
+    "starcatcher:almighty_worm",
+    "starcatcher:seeking_worm",
+    "starcatcher:dev_worm",
+    "starcatcher:gunpowder_bait",
+    "starcatcher:cherry_bait",
+    "starcatcher:lush_bait",
+    "starcatcher:sculk_bait",
+    "starcatcher:dripstone_bait",
+    "starcatcher:murkwater_bait",
+    "starcatcher:legendary_bait",
+    "starcatcher:meteorological_bait",
+    "minecraft:wither_skeleton_skull",
+    "minecraft:bucket",
+    {
+      "id": "fishofthieves:earthworms",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:grubs",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:leeches",
+      "required": false
+    },
+    {
+      "id": "tfc:food/bluegill",
+      "required": false
+    },
+    {
+      "id": "tfc:food/cod",
+      "required": false
+    },
+    {
+      "id": "tfc:food/salmon",
+      "required": false
+    },
+    {
+      "id": "tfc:food/tropical_fish",
+      "required": false
+    }
+  ]
+}

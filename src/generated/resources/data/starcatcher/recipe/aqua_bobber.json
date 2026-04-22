@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "starcatcher:bobber",
+    "D": "minecraft:diamond",
+    "H": "minecraft:heart_of_the_sea",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " HS",
+    "DBD",
+    "SD "
+  ],
+  "result": {
+    "id": "starcatcher:aqua_bobber"
+  }
+}

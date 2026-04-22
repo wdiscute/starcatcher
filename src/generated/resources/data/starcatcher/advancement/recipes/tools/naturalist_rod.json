@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_template_naturalist": {
+      "conditions": {
+        "items": [
+          {
+            "items": "starcatcher:naturalist_skin_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "starcatcher:naturalist_rod"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_template_naturalist"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "starcatcher:naturalist_rod"
+    ]
+  }
+}

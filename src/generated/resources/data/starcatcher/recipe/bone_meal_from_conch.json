@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "starcatcher:conch"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:bone_meal"
+  }
+}

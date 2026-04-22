@@ -1,0 +1,6 @@
+{
+  "type": "starcatcher:smithing_tackle_skin",
+  "addition": "#c:dyes",
+  "base": "#starcatcher:rods",
+  "template": "starcatcher:colorful_smithing_template"
+}

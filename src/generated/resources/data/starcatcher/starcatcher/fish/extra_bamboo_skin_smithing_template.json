@@ -1,0 +1,74 @@
+{
+  "base_chance": 5,
+  "catch_info": {
+    "type": "extra",
+    "item": "starcatcher:bamboo_skin_smithing_template"
+  },
+  "difficulty": {
+    "decay": 0.0,
+    "hp": 100,
+    "missPenalty": 0,
+    "modifiers": [],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 30,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 30,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": false,
+  "rarity": "common",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [
+        "minecraft:bamboo_jungle"
+      ],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": []
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 100,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:percentage_chance",
+      "chance": 0.01
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 41.0,
+    "average_weight_grams": 2001.0,
+    "deviation_size_cm": 21.0,
+    "deviation_weight_grams": 701.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

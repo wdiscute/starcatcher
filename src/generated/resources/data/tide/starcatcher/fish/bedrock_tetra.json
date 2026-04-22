@@ -1,0 +1,88 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "tide:bedrock_tetra",
+    "fish_bucket": "tide:bedrock_tetra_bucket",
+    "item": "tide:bedrock_tetra"
+  },
+  "difficulty": {
+    "decay": 0.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [],
+    "speed": 12,
+    "sweetspots": [
+      {
+        "color_as_int": 4802889,
+        "hitbox_size_in_pixels": 33,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 4802889,
+        "hitbox_size_in_pixels": 33,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 4802889,
+        "hitbox_size_in_pixels": 33,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 4802889,
+        "hitbox_size_in_pixels": 33,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/stone.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "rare",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 50,
+      "min_y": 0,
+      "translation_override": "gui.guide.elevation.stone_caves"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 60.0,
+    "average_weight_grams": 7000.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

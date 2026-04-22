@@ -1,0 +1,85 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "aquaculture:catfish",
+    "fish_bucket": "aquaculture:catfish_bucket",
+    "item": "aquaculture:catfish"
+  },
+  "difficulty": {
+    "decay": 0.0,
+    "hp": 100,
+    "missPenalty": 40,
+    "modifiers": [],
+    "speed": 11,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "epic",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [
+        "starcatcher:is_ocean",
+        "starcatcher:is_river",
+        "starcatcher:is_mushroom_fields"
+      ],
+      "biomes_tags": [],
+      "hover_translation": "gui.guide.lakes.hover",
+      "translation_override": "gui.guide.lakes"
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 2147483647,
+      "min_y": 100,
+      "translation_override": "gui.guide.elevation.mountains"
+    },
+    {
+      "type": "starcatcher:weather_restriction",
+      "weather": "rain"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 150.0,
+    "average_weight_grams": 100000.0,
+    "deviation_size_cm": 40.0,
+    "deviation_weight_grams": 25000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

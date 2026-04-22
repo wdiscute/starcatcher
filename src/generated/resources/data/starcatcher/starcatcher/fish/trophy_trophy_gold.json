@@ -1,0 +1,71 @@
+{
+  "base_chance": 5,
+  "catch_info": {
+    "type": "trophy",
+    "item": "starcatcher:trophy_gold"
+  },
+  "difficulty": {
+    "decay": 0.0,
+    "hp": 100,
+    "missPenalty": 0,
+    "modifiers": [],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 30,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 30,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": false,
+  "rarity": "rare",
+  "restrictions": [
+    {
+      "type": "starcatcher:caught_limit",
+      "limit": 1
+    },
+    {
+      "type": "starcatcher:rarity_count",
+      "rarities": [
+        {
+          "count": 100,
+          "count_type": "total"
+        },
+        {
+          "count": 2,
+          "count_type": "unique",
+          "rarity": "legendary"
+        },
+        {
+          "count": 2,
+          "count_type": "unique",
+          "rarity": "golden"
+        }
+      ]
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 41.0,
+    "average_weight_grams": 2001.0,
+    "deviation_size_cm": 21.0,
+    "deviation_weight_grams": 701.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

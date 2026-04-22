@@ -1,0 +1,62 @@
+{
+  "values": {
+    "starcatcher:aqua_bobber": [
+      "starcatcher:add_aqua_sweet_spot"
+    ],
+    "starcatcher:clear_bobber": [
+      "starcatcher:slower_vanishing"
+    ],
+    "starcatcher:copper_hook": [
+      "starcatcher:faster_handle_speed"
+    ],
+    "starcatcher:dev_worm": [
+      "starcatcher:never_lose"
+    ],
+    "starcatcher:exposed_copper_hook": [
+      "starcatcher:slightly_faster_handle_speed"
+    ],
+    "starcatcher:fisherman_hat_light_blue": [
+      "starcatcher:add_aqua_sweet_spot",
+      "starcatcher:freeze_on_miss"
+    ],
+    "starcatcher:fisherman_hat_orange": [
+      "starcatcher:slightly_faster_handle_speed"
+    ],
+    "starcatcher:fisherman_hat_pink": [
+      "starcatcher:slightly_slower_handle_speed"
+    ],
+    "starcatcher:fisherman_hat_red": [
+      "starcatcher:flip_every_hit"
+    ],
+    "starcatcher:frozen_hook": [
+      "starcatcher:prevent_frozen"
+    ],
+    "starcatcher:heavy_hook": [
+      "starcatcher:slower_moving_sweet_spots"
+    ],
+    "starcatcher:leaf_bobber": [
+      "starcatcher:add_leaves_spots"
+    ],
+    "starcatcher:mossy_hook": [
+      "starcatcher:harder_with_treasure_on_perfect"
+    ],
+    "starcatcher:oxidised_copper_hook": [
+      "starcatcher:slower_handle_speed"
+    ],
+    "starcatcher:shiny_hook": [
+      "starcatcher:spawn_treasure_on_three_hits"
+    ],
+    "starcatcher:slimey_bobber": [
+      "starcatcher:bounce_back"
+    ],
+    "starcatcher:steady_bobber": [
+      "starcatcher:bigger_green_sweet_spots"
+    ],
+    "starcatcher:stone_hook": [
+      "starcatcher:stop_decay_on_hit"
+    ],
+    "starcatcher:weathered_copper_hook": [
+      "starcatcher:slightly_slower_handle_speed"
+    ]
+  }
+}

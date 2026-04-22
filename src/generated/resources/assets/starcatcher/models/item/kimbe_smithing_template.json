@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "starcatcher:item/kimbe_smithing_template"
+  }
+}

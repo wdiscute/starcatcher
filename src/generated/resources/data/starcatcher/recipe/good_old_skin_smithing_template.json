@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:fishing_rod",
+    "D": "minecraft:diamond",
+    "T": "starcatcher:good_old_skin_smithing_template"
+  },
+  "pattern": [
+    "DTD",
+    "DCD",
+    "DDD"
+  ],
+  "result": {
+    "count": 2,
+    "id": "starcatcher:good_old_skin_smithing_template"
+  }
+}

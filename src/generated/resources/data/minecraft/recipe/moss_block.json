@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "starcatcher:mossy_boot"
+  ],
+  "result": {
+    "id": "minecraft:moss_block"
+  }
+}

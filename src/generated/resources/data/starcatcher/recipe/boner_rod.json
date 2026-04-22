@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "minecraft:bone_block",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:boner_rod"
+  },
+  "template": "starcatcher:boner_skin_smithing_template"
+}

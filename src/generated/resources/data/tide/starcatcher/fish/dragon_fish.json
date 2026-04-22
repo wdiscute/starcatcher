@@ -1,0 +1,84 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 3,
+  "catch_info": {
+    "entity": "tide:dragon_fish",
+    "fish_bucket": "tide:dragon_fish_bucket",
+    "item": "tide:dragon_fish"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 300,
+    "missPenalty": 30,
+    "modifiers": [],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": 2039583,
+        "hitbox_size_in_pixels": 33,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/wither_big.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 2039583,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 3.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/wither.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 2039583,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": -3.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/wither.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "legendary",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:the_end"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:empty"
+      ]
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:legendary_bait": 50
+      }
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 500.0,
+    "average_weight_grams": 700000.0,
+    "deviation_size_cm": 150.0,
+    "deviation_weight_grams": 130000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

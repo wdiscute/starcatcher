@@ -1,0 +1,103 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "fishofthieves"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "fishofthieves:wildsplash",
+    "fish_bucket": "fishofthieves:wildsplash_bucket",
+    "item": "fishofthieves:wildsplash"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "uncommon",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [
+        "minecraft:lush_caves"
+      ],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": []
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 50,
+      "min_y": -2147483648,
+      "translation_override": "gui.guide.elevation.underground"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:lush_bait": 50
+      }
+    },
+    {
+      "type": "starcatcher:season",
+      "season_extra_chance": {
+        "early_spring": 0,
+        "early_winter": 0,
+        "late_spring": 0,
+        "late_winter": 0,
+        "mid_spring": 0,
+        "mid_winter": 0
+      },
+      "translation_override": "gui.guide.seasons.spring_winter"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "fishofthieves:earthworms": 50,
+        "fishofthieves:grubs": 50,
+        "fishofthieves:leeches": 50
+      }
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 120.0,
+    "average_weight_grams": 8000.0,
+    "deviation_size_cm": 30.0,
+    "deviation_weight_grams": 2200.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "minecraft:grass_block",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:alpha_rod"
+  },
+  "template": "starcatcher:alpha_skin_smithing_template"
+}

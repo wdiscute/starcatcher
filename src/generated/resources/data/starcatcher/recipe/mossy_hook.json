@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "H": "starcatcher:hook",
+    "M": "minecraft:moss_block",
+    "N": "minecraft:iron_nugget"
+  },
+  "pattern": [
+    "N  ",
+    "MHM",
+    " M "
+  ],
+  "result": {
+    "id": "starcatcher:mossy_hook"
+  }
+}

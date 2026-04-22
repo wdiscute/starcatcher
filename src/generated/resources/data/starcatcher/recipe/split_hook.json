@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "#minecraft:chains",
+    "H": "starcatcher:hook",
+    "N": "minecraft:iron_nugget"
+  },
+  "pattern": [
+    "N  ",
+    "CHC",
+    " C "
+  ],
+  "result": {
+    "id": "starcatcher:split_hook"
+  }
+}

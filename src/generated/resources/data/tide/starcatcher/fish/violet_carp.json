@@ -1,0 +1,88 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 15,
+  "catch_info": {
+    "entity": "tide:violet_carp",
+    "fish_bucket": "tide:violet_carp_bucket",
+    "item": "tide:violet_carp"
+  },
+  "difficulty": {
+    "decay": 0.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [],
+    "speed": 9,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.1
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.1
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.1
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.1
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "uncommon",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:the_end"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:empty"
+      ]
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 60.0,
+    "average_weight_grams": 6000.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 4000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

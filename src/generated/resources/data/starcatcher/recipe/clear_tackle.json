@@ -1,0 +1,6 @@
+{
+  "type": "starcatcher:smithing_tackle_skin",
+  "addition": "minecraft:glass",
+  "base": "#starcatcher:rods",
+  "template": "starcatcher:clear_smithing_template"
+}

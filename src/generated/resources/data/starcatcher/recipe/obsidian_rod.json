@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "starcatcher:obsidian_eel",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:obsidian_rod"
+  },
+  "template": "starcatcher:obsidian_skin_smithing_template"
+}

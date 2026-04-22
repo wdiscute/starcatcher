@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_starcatcher_rod": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#starcatcher:rods"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "starcatcher:lust_bait_from_moss_carpet"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_starcatcher_rod"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "starcatcher:lust_bait_from_moss_carpet"
+    ]
+  }
+}
