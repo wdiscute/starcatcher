@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bone_meal",
+    "minecraft:pointed_dripstone"
+  ],
+  "result": {
+    "count": 4,
+    "id": "starcatcher:dripstone_bait"
+  }
+}

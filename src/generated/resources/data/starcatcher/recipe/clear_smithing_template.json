@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:glass",
+    "D": "minecraft:diamond",
+    "T": "starcatcher:clear_smithing_template"
+  },
+  "pattern": [
+    "DTD",
+    "DCD",
+    "DDD"
+  ],
+  "result": {
+    "count": 2,
+    "id": "starcatcher:clear_smithing_template"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "base_chance": 5,
+  "catch_info": {
+    "fish_bucket": "starcatcher:starcaught_bucket",
+    "item": "starcatcher:crystalback_trout"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [
+      {
+        "type": "starcatcher:freeze_on_miss"
+      }
+    ],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "common",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": [
+        "starcatcher:is_cold_lake"
+      ]
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 100,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:season",
+      "season_extra_chance": {
+        "early_autumn": 0,
+        "early_winter": 0,
+        "late_autumn": 0,
+        "late_winter": 0,
+        "mid_autumn": 0,
+        "mid_winter": 0
+      },
+      "translation_override": "gui.guide.seasons.autumn_winter"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 35.0,
+    "average_weight_grams": 1600.0,
+    "deviation_size_cm": 8.0,
+    "deviation_weight_grams": 1200.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false,
+  "star": {
+    "connections": [
+      "alioth"
+    ],
+    "debug_color": -7146903,
+    "name": "mizar",
+    "x": 2363,
+    "y": 770
+  }
+}

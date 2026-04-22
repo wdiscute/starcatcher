@@ -1,0 +1,6 @@
+{
+  "type": "starcatcher:smithing_tackle_skin",
+  "addition": "minecraft:tadpole_bucket",
+  "base": "#starcatcher:rods",
+  "template": "starcatcher:frog_smithing_template"
+}

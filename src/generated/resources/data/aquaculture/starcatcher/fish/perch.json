@@ -1,0 +1,93 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "aquaculture:perch",
+    "fish_bucket": "aquaculture:perch_bucket",
+    "item": "aquaculture:perch"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 5,
+    "modifiers": [],
+    "speed": 9,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "common",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [
+        "starcatcher:is_ocean",
+        "starcatcher:is_river",
+        "starcatcher:is_mushroom_fields"
+      ],
+      "biomes_tags": [],
+      "hover_translation": "gui.guide.lakes.hover",
+      "translation_override": "gui.guide.lakes"
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 100,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:season",
+      "season_extra_chance": {
+        "early_autumn": 0,
+        "early_summer": 0,
+        "late_autumn": 0,
+        "late_summer": 0,
+        "mid_autumn": 0,
+        "mid_summer": 0
+      },
+      "translation_override": "gui.guide.seasons.summer_autumn"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 20.0,
+    "average_weight_grams": 500.0,
+    "deviation_size_cm": 5.0,
+    "deviation_weight_grams": 200.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

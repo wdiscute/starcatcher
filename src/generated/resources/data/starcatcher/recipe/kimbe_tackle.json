@@ -1,0 +1,6 @@
+{
+  "type": "starcatcher:smithing_tackle_skin",
+  "addition": "starcatcher:willish",
+  "base": "#starcatcher:rods",
+  "template": "starcatcher:kimbe_smithing_template"
+}

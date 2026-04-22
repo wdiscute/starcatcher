@@ -1,0 +1,6 @@
+{
+  "type": "starcatcher:smithing_tackle_skin",
+  "addition": "minecraft:netherite_ingot",
+  "base": "#starcatcher:rods",
+  "template": "minecraft:netherite_upgrade_smithing_template"
+}

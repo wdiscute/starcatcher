@@ -1,0 +1,103 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "aquaculture"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "aquaculture:atlantic_herring",
+    "fish_bucket": "aquaculture:atlantic_herring_bucket",
+    "item": "aquaculture:atlantic_herring"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 10,
+    "modifiers": [
+      {
+        "type": "starcatcher:freeze_on_miss"
+      }
+    ],
+    "speed": 11,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "rare",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": [
+        "starcatcher:is_cold_ocean"
+      ]
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 100,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:season",
+      "season_extra_chance": {
+        "early_spring": 0,
+        "early_winter": 0,
+        "late_spring": 0,
+        "late_winter": 0,
+        "mid_spring": 0,
+        "mid_winter": 0
+      },
+      "translation_override": "gui.guide.seasons.spring_winter"
+    },
+    {
+      "type": "starcatcher:daytime_restriction",
+      "ranges": [
+        {
+          "first": 0,
+          "second": 12700
+        }
+      ],
+      "translation_override": "gui.guide.day"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 25.0,
+    "average_weight_grams": 200.0,
+    "deviation_size_cm": 5.0,
+    "deviation_weight_grams": 100.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

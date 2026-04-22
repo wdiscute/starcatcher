@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "starcatcher:bobber",
+    "L": "#minecraft:leaves",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " LS",
+    "LBL",
+    "SL "
+  ],
+  "result": {
+    "id": "starcatcher:leaf_bobber"
+  }
+}

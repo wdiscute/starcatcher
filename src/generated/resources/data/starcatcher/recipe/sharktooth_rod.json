@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "starcatcher:joel",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:sharktooth_rod"
+  },
+  "template": "starcatcher:sharktooth_skin_smithing_template"
+}

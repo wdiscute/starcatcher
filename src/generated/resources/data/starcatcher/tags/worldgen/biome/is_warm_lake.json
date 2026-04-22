@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "#minecraft:is_savanna",
+      "required": false
+    },
+    {
+      "id": "#minecraft:has_structure/desert_pyramid",
+      "required": false
+    },
+    {
+      "id": "#c:is_desert",
+      "required": false
+    },
+    {
+      "id": "#c:is_badlands",
+      "required": false
+    }
+  ]
+}

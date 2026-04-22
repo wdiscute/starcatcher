@@ -1,0 +1,96 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "fishofthieves"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "fishofthieves:stormfish",
+    "fish_bucket": "fishofthieves:stormfish_bucket",
+    "item": "fishofthieves:stormfish"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.1
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.1
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "rare",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": [
+        "starcatcher:is_ocean"
+      ]
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 100,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:season",
+      "season_extra_chance": {
+        "early_autumn": 0,
+        "early_summer": 0,
+        "early_winter": 0,
+        "late_autumn": 0,
+        "late_summer": 0,
+        "late_winter": 0,
+        "mid_autumn": 0,
+        "mid_summer": 0,
+        "mid_winter": 0
+      },
+      "translation_override": "gui.guide.seasons.not_spring"
+    },
+    {
+      "type": "starcatcher:weather_restriction",
+      "weather": "thunder"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 150.0,
+    "average_weight_grams": 14000.0,
+    "deviation_size_cm": 30.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

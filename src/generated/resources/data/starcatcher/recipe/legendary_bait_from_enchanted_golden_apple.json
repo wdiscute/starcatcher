@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bone_meal",
+    "minecraft:enchanted_golden_apple"
+  ],
+  "result": {
+    "count": 64,
+    "id": "starcatcher:legendary_bait"
+  }
+}

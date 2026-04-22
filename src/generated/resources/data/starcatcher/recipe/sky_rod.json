@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "minecraft:phantom_membrane",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:sky_rod"
+  },
+  "template": "starcatcher:sky_skin_smithing_template"
+}

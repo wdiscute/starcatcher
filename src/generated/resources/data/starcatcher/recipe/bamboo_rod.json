@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "minecraft:bamboo",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:bamboo_rod"
+  },
+  "template": "starcatcher:bamboo_skin_smithing_template"
+}

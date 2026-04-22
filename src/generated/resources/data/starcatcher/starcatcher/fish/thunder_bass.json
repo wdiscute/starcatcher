@@ -1,0 +1,97 @@
+{
+  "base_chance": 15,
+  "catch_info": {
+    "fish_bucket": "starcatcher:starcaught_bucket",
+    "item": "starcatcher:thunder_bass"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 10,
+    "modifiers": [],
+    "speed": 11,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "rare",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [
+        "starcatcher:is_ocean",
+        "starcatcher:is_river",
+        "starcatcher:is_mushroom_fields"
+      ],
+      "biomes_tags": [],
+      "hover_translation": "gui.guide.lakes.hover",
+      "translation_override": "gui.guide.lakes"
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 100,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:season",
+      "season_extra_chance": {
+        "early_autumn": 0,
+        "early_summer": 0,
+        "late_autumn": 0,
+        "late_summer": 0,
+        "mid_autumn": 0,
+        "mid_summer": 0
+      },
+      "translation_override": "gui.guide.seasons.summer_autumn"
+    },
+    {
+      "type": "starcatcher:weather_restriction",
+      "weather": "thunder"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 40.0,
+    "average_weight_grams": 1200.0,
+    "deviation_size_cm": 12.0,
+    "deviation_weight_grams": 800.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false,
+  "star": {
+    "connections": [],
+    "debug_color": -890519,
+    "name": "pherkad",
+    "x": 2577,
+    "y": 754
+  }
+}

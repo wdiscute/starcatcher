@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "starcatcher:item/alpha_skin_smithing_template"
+  }
+}

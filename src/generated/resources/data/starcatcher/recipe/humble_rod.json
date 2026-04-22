@@ -1,0 +1,9 @@
+{
+  "type": "starcatcher:smithing_rod_skin",
+  "addition": "minecraft:stick",
+  "base": "#starcatcher:rods",
+  "result": {
+    "id": "starcatcher:humble_rod"
+  },
+  "template": "starcatcher:humble_skin_smithing_template"
+}

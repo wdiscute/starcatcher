@@ -1,0 +1,320 @@
+{
+  "values": [
+    {
+      "id": "minecraft:tropical_fish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:thunder_bass",
+      "required": false
+    },
+    {
+      "id": "starcatcher:lightning_bass",
+      "required": false
+    },
+    {
+      "id": "starcatcher:agave_bream",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sunny_sturgeon",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sun_seeking_carp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:lily_snapper",
+      "required": false
+    },
+    {
+      "id": "starcatcher:pale_pinfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:blue_herring",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sporefish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:fossilized_angelfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:suneater",
+      "required": false
+    },
+    {
+      "id": "starcatcher:molten_shrimp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:cinder_squid",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowstone_pufferfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:charfish",
+      "required": false
+    },
+    {
+      "id": "tide:blossom_bass",
+      "required": false
+    },
+    {
+      "id": "tide:arapaima",
+      "required": false
+    },
+    {
+      "id": "tide:mirage_catfish",
+      "required": false
+    },
+    {
+      "id": "tide:frostbite_flounder",
+      "required": false
+    },
+    {
+      "id": "tide:sand_tiger_shark",
+      "required": false
+    },
+    {
+      "id": "tide:sturgeon",
+      "required": false
+    },
+    {
+      "id": "tide:slimy_salmon",
+      "required": false
+    },
+    {
+      "id": "tide:mahi_mahi",
+      "required": false
+    },
+    {
+      "id": "tide:sailfish",
+      "required": false
+    },
+    {
+      "id": "tide:swordfish",
+      "required": false
+    },
+    {
+      "id": "tide:manta_ray",
+      "required": false
+    },
+    {
+      "id": "tide:crystalline_carp",
+      "required": false
+    },
+    {
+      "id": "tide:luminescent_jellyfish",
+      "required": false
+    },
+    {
+      "id": "tide:gilded_minnow",
+      "required": false
+    },
+    {
+      "id": "tide:bedrock_tetra",
+      "required": false
+    },
+    {
+      "id": "tide:crimson_fangjaw",
+      "required": false
+    },
+    {
+      "id": "tide:warped_guppy",
+      "required": false
+    },
+    {
+      "id": "tide:soulscale",
+      "required": false
+    },
+    {
+      "id": "tide:witherfin",
+      "required": false
+    },
+    {
+      "id": "tide:inferno_guppy",
+      "required": false
+    },
+    {
+      "id": "tide:red_40",
+      "required": false
+    },
+    {
+      "id": "tide:dutchman_sock",
+      "required": false
+    },
+    {
+      "id": "tide:vengeance",
+      "required": false
+    },
+    {
+      "id": "tide:pentapus",
+      "required": false
+    },
+    {
+      "id": "tide:elytrout",
+      "required": false
+    },
+    {
+      "id": "aquaculture:carp",
+      "required": false
+    },
+    {
+      "id": "aquaculture:muskellunge",
+      "required": false
+    },
+    {
+      "id": "aquaculture:boulti",
+      "required": false
+    },
+    {
+      "id": "aquaculture:atlantic_herring",
+      "required": false
+    },
+    {
+      "id": "aquaculture:arapaima",
+      "required": false
+    },
+    {
+      "id": "aquaculture:leech",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:ancientscale",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:devilfish",
+      "required": false
+    },
+    {
+      "id": "fishofthieves:stormfish",
+      "required": false
+    },
+    {
+      "id": "netherdepthsupgrade:eyeball_fish",
+      "required": false
+    },
+    {
+      "id": "netherdepthsupgrade:glowdine",
+      "required": false
+    },
+    {
+      "id": "betterend:end_fish_raw",
+      "required": false
+    },
+    {
+      "id": "collectorsreap:tiger_prawn",
+      "required": false
+    },
+    {
+      "id": "alexscaves:lanternfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:tripodfish",
+      "required": false
+    },
+    {
+      "id": "alexscaves:trilocaris_tail",
+      "required": false
+    },
+    {
+      "id": "crittersandcompanions:sea_bunny_bucket",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:moray_eel",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:blue_spotted_stingray",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:spotted_eagle_ray",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:coelacanth",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:oarfish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:ocean_sunfish",
+      "required": false
+    },
+    {
+      "id": "hybrid-aquatic:golden_dorado",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:brick_snail_bucket",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:volt_angler_bucket",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:raw_circus",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:tiger_puffer_bucket",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:crimsonshell_squid_bucket",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:blackcap_snail_bucket",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:roughback_guitarfish_spawn_egg",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:freshwater_mantis_bucket",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:kalappa_spawn_egg",
+      "required": false
+    },
+    {
+      "id": "unusualfishmod:raw_blind_sailfin",
+      "required": false
+    },
+    {
+      "id": "spawn:angler_fish",
+      "required": false
+    },
+    {
+      "id": "spawn:captured_octopus",
+      "required": false
+    },
+    {
+      "id": "fintastic:arapaima_bucket",
+      "required": false
+    },
+    {
+      "id": "fintastic:coelacanth_spawn_egg",
+      "required": false
+    }
+  ]
+}

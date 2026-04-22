@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_template_azure": {
+      "conditions": {
+        "items": [
+          {
+            "items": "starcatcher:azure_crystal_skin_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "starcatcher:azure_rod"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_template_azure"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "starcatcher:azure_rod"
+    ]
+  }
+}

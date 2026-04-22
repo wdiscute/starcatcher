@@ -1,0 +1,78 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "betterend"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "always_spawn_entity": true,
+    "entity": "betterend:cubozoa",
+    "fish_bucket": "betterend:bucket_cubozoa",
+    "item": "betterend:gelatine"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 5,
+    "modifiers": [
+      {
+        "type": "starcatcher:teleport"
+      }
+    ],
+    "speed": 9,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "epic",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:the_end"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [
+        "minecraft:the_end"
+      ],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": [
+        "minecraft:is_end"
+      ]
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 70.0,
+    "average_weight_grams": 200.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 60.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bone_meal",
+    "starcatcher:sculkfish"
+  ],
+  "result": {
+    "count": 16,
+    "id": "starcatcher:sculk_bait"
+  }
+}

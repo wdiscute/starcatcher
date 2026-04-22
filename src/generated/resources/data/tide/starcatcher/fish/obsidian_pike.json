@@ -1,0 +1,78 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "tide:obsidian_pike",
+    "fish_bucket": "tide:obsidian_pike_bucket",
+    "item": "tide:obsidian_pike"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [
+      {
+        "type": "starcatcher:burn_on_miss"
+      }
+    ],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 15,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": 65280,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 20,
+        "sweet_spot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "common",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 50,
+      "min_y": -2147483648,
+      "translation_override": "gui.guide.elevation.underground"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:lava"
+      ]
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 75.0,
+    "average_weight_grams": 5000.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 3000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

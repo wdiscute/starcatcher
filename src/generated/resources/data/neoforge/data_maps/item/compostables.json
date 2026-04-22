@@ -1,0 +1,10 @@
+{
+  "values": {
+    "#starcatcher:bucketable_fishes": {
+      "chance": 0.9
+    },
+    "#starcatcher:worms": {
+      "chance": 0.65
+    }
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "tide:arapaima",
+    "fish_bucket": "tide:arapaima_bucket",
+    "item": "tide:arapaima"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 5,
+    "modifiers": [],
+    "speed": 13,
+    "sweetspots": [
+      {
+        "color_as_int": 3701122,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweet_spot_type": "starcatcher:aqua",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "rare",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimensions": [
+        "minecraft:overworld"
+      ],
+      "dimensions_blacklist": []
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [],
+      "biomes_blacklist": [],
+      "biomes_blacklist_tags": [],
+      "biomes_tags": [
+        "minecraft:is_jungle"
+      ]
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 2147483647,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 40.0,
+    "average_weight_grams": 1600.0,
+    "deviation_size_cm": 12.0,
+    "deviation_weight_grams": 1100.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false
+}

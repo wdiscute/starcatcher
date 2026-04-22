@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "starcatcher:bobber",
+    "S": "minecraft:stick",
+    "W": "minecraft:red_wool"
+  },
+  "pattern": [
+    " WS",
+    "WBW",
+    "SW "
+  ],
+  "result": {
+    "id": "starcatcher:vanilla_bobber"
+  }
+}

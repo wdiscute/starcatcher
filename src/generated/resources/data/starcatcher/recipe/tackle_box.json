@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:copper_ingot",
+    "H": "#minecraft:chains",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    "CCC",
+    "H H",
+    "III"
+  ],
+  "result": {
+    "id": "starcatcher:tackle_box"
+  }
+}
