@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.blocks.display;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.compat.SableCompat;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.core.BlockPos;
@@ -47,14 +46,14 @@ public class DisplayBlockEntity extends BlockEntity
             double d0;
             double d1;
 
-            if (SableCompat.isLoaded()) {
-                d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
+            if (false) {
+               // d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
             } else {
                 d0 = player.getX() - ((double) pos.getX() + 0.5);
             }
 
-            if (SableCompat.isLoaded()) {
-                d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
+            if (false) {
+               // d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
             } else {
                 d1 = player.getZ() - ((double) pos.getZ() + 0.5);
             }

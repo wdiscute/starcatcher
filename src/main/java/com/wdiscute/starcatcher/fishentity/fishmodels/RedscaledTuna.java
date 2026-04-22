@@ -52,4 +52,9 @@ public class RedscaledTuna<T extends Entity> extends EntityModel<T>
 	{
 
 	}
+
+	@Override
+	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
+		fish.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
+	}
 }

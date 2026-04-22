@@ -83,7 +83,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
     {
         if (!state.is(newState.getBlock()))
         {

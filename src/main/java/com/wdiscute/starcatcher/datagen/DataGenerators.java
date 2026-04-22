@@ -26,10 +26,11 @@ public class DataGenerators
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {
-        event.createDatapackRegistryObjects(
+        //Todo: idk what this is
+/*        event.createDatapackRegistryObjects(
                 new RegistrySetBuilder()
                         .add(Starcatcher.FISH_REGISTRY_KEY, FishingPropertiesRegistry::bootstrap)
-        );
+        );*/
 
         DataGenerator gen = event.getGenerator();
 
@@ -64,7 +65,7 @@ public class DataGenerators
         gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 
         //advancements
-        gen.addProvider(event.includeServer(), new DGSCLootModifiers(output, lookupProvider));
+        gen.addProvider(event.includeServer(), new DGSCLootModifiers(output));
 
 
         //biome tags

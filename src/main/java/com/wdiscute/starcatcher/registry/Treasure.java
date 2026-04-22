@@ -17,14 +17,14 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraftforge.common.Tags;
 
 import java.util.Arrays;
 import java.util.List;
 
 public class Treasure
 {
-    public static final TreasureInstance VANILLA_FISHING_LOOT_TABLE = new LootTableTreasureInstance(BuiltInLootTables.FISHING_TREASURE.location());
+    public static final TreasureInstance VANILLA_FISHING_LOOT_TABLE = new LootTableTreasureInstance(BuiltInLootTables.FISHING_TREASURE);
     public static final TreasureInstance AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
     public static final TreasureInstance KIMBE_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.KIMBE_SMITHING_TEMPLATE.value().getDefaultInstance());
     public static final TreasureInstance COLORFUL_SMITHING_TEMPLATE = new ItemStackListTreasureInstance(SCItems.COLORFUL_SMITHING_TEMPLATE.value().getDefaultInstance());
@@ -47,7 +47,7 @@ public class Treasure
     {
         ResourceLocation rl;
 
-        public static final MapCodec<LootTableTreasureInstance> CODEC = RecordCodecBuilder.mapCodec(instance ->
+        public static final Codec<LootTableTreasureInstance> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
                         ResourceLocation.CODEC.fieldOf("location").forGetter(o -> o.rl)
                 ).apply(instance, LootTableTreasureInstance::new));
@@ -75,8 +75,8 @@ public class Treasure
                         .withLuck(player.getLuck())
                         .create(LootContextParamSets.FISHING);
 
-                LootTable table = player.level().getServer().reloadableRegistries().getLootTable(
-                        ResourceKey.create(Registries.LOOT_TABLE, rl)
+                LootTable table = player.level().getServer().getLootData().getLootTable(
+                        rl
                 );
 
                 ObjectArrayList<ItemStack> randomItems = table.getRandomItems(lootparams);
@@ -99,9 +99,9 @@ public class Treasure
     {
         List<ItemStack> items;
 
-        public static final MapCodec<ItemStackListTreasureInstance> CODEC = RecordCodecBuilder.mapCodec(instance ->
+        public static final Codec<ItemStackListTreasureInstance> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        ItemStack.OPTIONAL_CODEC.listOf().fieldOf("items").forGetter(o -> o.items)
+                        ItemStack.CODEC.listOf().fieldOf("items").forGetter(o -> o.items)
                 ).apply(instance, ItemStackListTreasureInstance::new));
 
         public ItemStackListTreasureInstance(List<ItemStack> items)

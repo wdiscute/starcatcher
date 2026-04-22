@@ -435,7 +435,7 @@ public record FishProperties(
                         BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().optionalFieldOf("entity", (Holder<EntityType<?>>) (Object) SCEntities.FISH).forGetter(CatchInfo::entityToSpawn),
                         Codec.BOOL.optionalFieldOf("always_spawn_entity", false).forGetter(CatchInfo::alwaysSpawnEntity),
                         BuiltInRegistries.ITEM.holderByNameCodec().optionalFieldOf("override_minigame_item", SCItems.MISSINGNO).forGetter(CatchInfo::overrideMinigameWith),
-                        ItemStack.OPTIONAL_CODEC.optionalFieldOf("treasure_item", ItemStack.EMPTY).forGetter(CatchInfo::treasureIs),
+                        ItemStack.CODEC.optionalFieldOf("treasure_item", ItemStack.EMPTY).forGetter(CatchInfo::treasureIs),
                         FishEntryType.CODEC.optionalFieldOf("type", FishEntryType.FISH).forGetter(CatchInfo::fishEntryType)
                 ).apply(instance, CatchInfo::new));
 
@@ -453,7 +453,7 @@ public record FishProperties(
         public static final CatchInfo DEFAULT = new CatchInfo(
                 SCItems.MISSINGNO,
                 SCItems.MISSINGNO,
-                SCEntities.FISH,
+                (Holder<EntityType<?>>) (Object) SCEntities.FISH,
                 false,
                 SCItems.MISSINGNO,
                 ItemStack.EMPTY,
@@ -463,7 +463,7 @@ public record FishProperties(
         public static final CatchInfo VANILLA = new CatchInfo(
                 SCItems.MISSINGNO,
                 SCItems.MISSINGNO,
-                SCEntities.FISH,
+                (Holder<EntityType<?>>) (Object) SCEntities.FISH,
                 false,
                 SCItems.UNKNOWN_FISH,
                 ItemStack.EMPTY,
@@ -479,7 +479,7 @@ public record FishProperties(
         {
             private Holder<Item> fish = SCItems.MISSINGNO;
             private Holder<Item> bucketedFish = SCItems.MISSINGNO;
-            private Holder<EntityType<?>> entityToSpawn = SCEntities.FISH;
+            private Holder<EntityType<?>> entityToSpawn = (Holder<EntityType<?>>) (Object) SCEntities.FISH;
             private boolean alwaysSpawnEntity = false;
             private Holder<Item> itemToOverrideWith = SCItems.MISSINGNO;
             private ResourceLocation treasure = U.rl("gameplay/fishing/treasure");

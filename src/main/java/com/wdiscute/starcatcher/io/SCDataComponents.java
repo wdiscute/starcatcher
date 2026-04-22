@@ -80,7 +80,7 @@ public class SCDataComponents
 
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> TACKLE_BOX_FISHES = register(
             "tackle_box_fishes",
-            builder -> builder.persistent(ItemStack.OPTIONAL_CODEC.listOf()));
+            builder -> builder.persistent(ItemStack.CODEC.listOf()));
 
     public static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {

@@ -9,16 +9,16 @@ import com.wdiscute.starcatcher.blocks.stand.StandBlock;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlock;
 import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
 import com.wdiscute.starcatcher.registry.items.HatItem;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.io.components.DataComponents;
+import net.nikdo53.neobackports.io.components.ItemContainerContents;
 import net.nikdo53.neobackports.registry.DeferredBlock;
 import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 

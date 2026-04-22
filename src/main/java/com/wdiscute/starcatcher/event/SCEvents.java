@@ -96,51 +96,6 @@ public class SCEvents
 
     }
 
-    @SubscribeEvent
-    public static void addCapabilities(RegisterCapabilitiesEvent event)
-    {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
-                (container, side) ->
-                {
-                    if (container instanceof TackleBoxBlockEntity be)
-                    {
-                        return new SidedInvWrapper(container, side)
-                        {
-                            @Override
-                            public void setStackInSlot(int slot, ItemStack stack)
-                            {
-                                super.setStackInSlot(slot, stack);
-                                be.updateFishSlot();
-                            }
-                        };
-                    }
-                    return null;
-                }
-        );
-    }
-
-    @SubscribeEvent
-    public static void addCapabilities(RegisterCapabilitiesEvent event)
-    {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
-                (container, side) ->
-                {
-                    if (container instanceof TackleBoxBlockEntity be)
-                    {
-                        return new SidedInvWrapper(container, side)
-                        {
-                            @Override
-                            public void setStackInSlot(int slot, ItemStack stack)
-                            {
-                                super.setStackInSlot(slot, stack);
-                                be.updateFishSlot();
-                            }
-                        };
-                    }
-                    return null;
-                }
-        );
-    }
 
     @SubscribeEvent
     public static void serverStarted(ServerStartedEvent event)

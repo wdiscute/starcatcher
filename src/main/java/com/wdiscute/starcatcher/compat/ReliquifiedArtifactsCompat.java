@@ -4,11 +4,9 @@ import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import com.wdiscute.starcatcher.registry.FishProperties;
-import it.hurts.sskirillss.relics.api.relics.IRelicItem;
-import it.hurts.sskirillss.relics.api.relics.data.AbilityData;
-import it.hurts.sskirillss.relics.api.relics.data.RelicData;
-import it.hurts.sskirillss.relics.api.relics.data.RelicMetricData;
-import it.hurts.sskirillss.relics.api.relics.data.RelicStatisticData;
+import it.hurts.sskirillss.relics.items.relics.base.IRelicItem;
+import it.hurts.sskirillss.relics.items.relics.base.data.RelicData;
+import it.hurts.sskirillss.relics.items.relics.base.data.leveling.AbilityData;
 import it.hurts.sskirillss.relics.utils.EntityUtils;
 import it.hurts.sskirillss.relics.utils.MathUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,23 +34,25 @@ public class ReliquifiedArtifactsCompat
     private static AbilityData getCatchAbility(Player player, ItemStack stack)
     {
         IRelicItem relic = (IRelicItem) stack.getItem();
-        return relic.getRelicData(player, stack).getAbilitiesData().getAbilityData("catch");
+        return relic.getRelicData().getAbilities().getAbilities().get("catch");
     }
 
+    //todo: I have genuinely no clue how this works
     public static boolean shouldAwardBonusTreasure(Player player)
     {
-        ItemStack stack = getEquippedHatStack(player);
+/*        ItemStack stack = getEquippedHatStack(player);
         if (stack.isEmpty()) return false;
 
         AbilityData ability = getCatchAbility(player, stack);
         if (!ability.isRankModifierUnlocked("treasure")) return false;
-
-        double treasureChance = ability.getStatData("treasure_chance").getValue();
-        return U.r.nextFloat() < treasureChance;
+          double treasureChance = ability.getStatData("treasure_chance").getValue();*/
+        return true;
     }
 
+    //todo: I have genuinely no clue how this works
     public static List<ItemStack> getBonusCatchItems(Player player, FishingBobEntity fbe)
     {
+/*
         ItemStack stack = getEquippedHatStack(player);
         if (stack.isEmpty()) return List.of();
 
@@ -73,16 +73,19 @@ public class ReliquifiedArtifactsCompat
             items.add(is);
         }
 
+
         //award relic xp for bonus catches
         IRelicItem relic = (IRelicItem) stack.getItem();
         relic.getRelicData(player, stack).getLevelingData().addExperience("catch", "catch", bonusCount);
+*/
 
-        return items;
+
+        return List.of();
     }
 
     public static void awardRelicXP(Player player, boolean gotTreasure)
     {
-        ItemStack stack = getEquippedHatStack(player);
+/*        ItemStack stack = getEquippedHatStack(player);
         if (stack.isEmpty()) return;
 
         IRelicItem relic = (IRelicItem) stack.getItem();
@@ -99,6 +102,6 @@ public class ReliquifiedArtifactsCompat
                 relicData.getLevelingData().addExperience("catch", "treasure_catch", 1.0);
                 ability.getStatisticData().getMetricData("treasures_caught").addValue(1);
             }
-        }
+        }*/
     }
 }

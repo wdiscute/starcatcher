@@ -9,8 +9,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
-import net.minecraft.core.component.DataComponentMap;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
@@ -26,10 +24,19 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.items.ItemStackHandler;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
+import net.nikdo53.neobackports.io.components.DataComponents;
+import net.nikdo53.neobackports.io.components.ItemContainerContents;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -77,8 +84,8 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         //refill fish slot from fishes stored
         if (itemInFishSlot.isEmpty() && !fishes.isEmpty())
         {
-            setItem(TackleBoxMenu.FISH_SLOT, fishes.getLast());
-            fishes.removeLast();
+            setItem(TackleBoxMenu.FISH_SLOT, fishes.get(fishes.size() - 1));
+            fishes.remove(fishes.size() - 1);
         }
 
         //todo re-stack fishes stored for better hopper and stuff interaction
@@ -137,7 +144,10 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     public void setItem(int slot, ItemStack stack)
     {
         this.getItems().set(slot, stack);
-        stack.limitSize(this.getMaxStackSize(stack));
+        if (stack.getCount() > this.getMaxStackSize())
+        {
+            stack.setCount(this.getMaxStackSize());
+        };
         this.setChanged();
     }
 
@@ -225,30 +235,29 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
     }
 
-    @Override
+/*    @Override
     protected void applyImplicitComponents(DataComponentInput componentInput)
     {
         super.applyImplicitComponents(componentInput);
         componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
         fishes = componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of());
         this.name = (Component)componentInput.get(DataComponents.CUSTOM_NAME);
+    }*/
+    @Override
+    public void saveToItem(ItemStack stack) {
+        super.saveToItem(stack);
+        stack.set(DataComponents.CUSTOM_NAME, this.name);
+        stack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
+        stack.set(SCDataComponents.TACKLE_BOX_FISHES, fishes);
     }
 
     @Override
-    protected void collectImplicitComponents(DataComponentMap.Builder components)
-    {
-        super.collectImplicitComponents(components);
-        components.set(DataComponents.CUSTOM_NAME, this.name);
-        components.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
-        components.set(SCDataComponents.TACKLE_BOX_FISHES, fishes);
-    }
-
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
         this.loadFromTag(tag, registries);
         if (tag.contains("CustomName", 8)) {
-            this.name = parseCustomNameSafe(tag.getString("CustomName"), registries);
+            this.name = Component.Serializer.fromJson(tag.getString("CustomName"));
         }
     }
 
@@ -257,13 +266,13 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     {
         super.saveAdditional(tag, registries);
         //save normal slots
-        ContainerHelper.saveAllItems(tag, this.itemStacks, false, registries);
+        ContainerHelper.saveAllItems(tag, this.itemStacks, false);
 
         //save fishes
         saveAllFishes(tag, fishes, false, registries);
 
         if (this.name != null) {
-            tag.putString("CustomName", Component.Serializer.toJson(this.name, registries));
+            tag.putString("CustomName", Component.Serializer.toJson(this.name));
         }
     }
 
@@ -278,7 +287,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             {
                 CompoundTag compoundtag = new CompoundTag();
                 compoundtag.putByte("Slot", (byte) i);
-                listtag.add(itemstack.save(levelRegistry, compoundtag));
+                listtag.add(itemstack.save(compoundtag));
             }
         }
 
@@ -291,7 +300,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         //load normal slots
         this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
         if (tag.contains("Items", 9))
-            ContainerHelper.loadAllItems(tag, this.itemStacks, levelRegistry);
+            ContainerHelper.loadAllItems(tag, this.itemStacks);
 
         //load fishes
         this.fishes = new ArrayList<>();
@@ -307,7 +316,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         for (int i = 0; i < listtag.size(); i++)
         {
             CompoundTag compoundtag = listtag.getCompound(i);
-            items.add(ItemStack.parse(levelRegistry, compoundtag).orElse(ItemStack.EMPTY));
+            items.add(ItemStack.of(compoundtag));
         }
     }
 
@@ -358,5 +367,15 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             return new TackleBoxMenu(containerId, playerInventory, this, this);
         else
             return null;
+    }
+
+    public LazyOptional<ItemStackHandler> capability = LazyOptional.of(() -> new ItemStackHandler(getContainerSize()));
+
+    @Override
+    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @org.jetbrains.annotations.Nullable Direction side) {
+        if (cap == ForgeCapabilities.ITEM_HANDLER){
+            return capability.cast();
+        }
+        return super.getCapability(cap, side);
     }
 }
