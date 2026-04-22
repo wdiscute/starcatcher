@@ -55,7 +55,7 @@ public class SCConfig
 
     public static final ForgeConfigSpec.BooleanValue VANILLA_PARTIAL_TICK = BUILDER_CLIENT
             .comment("Whether to use the vanilla partial ticks for minigame smoothing or a custom implementation")
-            .comment("1.20 partial ticks look ugly so dont enable this")
+            .comment("1.20 partial ticks look ugly so its force enabled, this option does nothing")
             .translation("starcatcher.configuration.vanilla_partial_ticks")
             .define("vanilla_partial_ticks", false);
 
