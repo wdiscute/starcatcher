@@ -93,7 +93,7 @@ public class TooltipEvents
             {
                 minigameModifiersRLs.forEach(o ->
                 {
-                    if (entity.level().registryAccess().lookup(Starcatcher.CATCH_MODIFIERS).get().get(o).isPresent())
+                    if (entity.level().registryAccess().lookup(Starcatcher.MINIGAME_MODIFIERS).get().get(o).isPresent())
                     {
                         String s = I18n.get("tooltip.modifier." + o.toLanguageKey());
                         if (!s.isEmpty())
