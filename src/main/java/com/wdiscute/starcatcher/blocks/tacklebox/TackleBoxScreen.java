@@ -29,7 +29,7 @@ public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
 
         if (!menu.getRod().isEmpty())
         {
-            graphics.blit(RenderPipelines.GUI_TEXTURED, ICONS, x, y, 0, 0, this.imageWidth, this.imageHeight, 0, 0, this.imageWidth, this.imageHeight);
+            graphics.blit(RenderPipelines.GUI_TEXTURED, ICONS, x, y, 0.0F, 0.0F, this.imageWidth, this.imageHeight, 256, 256);
         }
         super.extractRenderState(graphics, mouseX, mouseY, a);
     }

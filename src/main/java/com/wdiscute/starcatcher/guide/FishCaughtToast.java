@@ -64,11 +64,11 @@ public class FishCaughtToast implements Toast
 
         guiGraphics.item(is, 6, 29);
 
-        guiGraphics.text(Minecraft.getInstance().font, this.title, 40, 13, 0x635040, false);
+        guiGraphics.text(Minecraft.getInstance().font, this.title, 40, 13, 0xff635040, false);
 
         Component comp = Component.literal("<sctoast>" + rarity.wrapWithRarityMarkdownAsString(description) + "</sctoast>");
 
-        guiGraphics.text(Minecraft.getInstance().font, comp, 40, 22, 0x635040, false);
+        guiGraphics.text(Minecraft.getInstance().font, comp, 40, 22, 0xff635040, false);
     }
 
 }

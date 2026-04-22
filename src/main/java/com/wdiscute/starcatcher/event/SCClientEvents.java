@@ -44,7 +44,7 @@ public class SCClientEvents
     }
 
     @SubscribeEvent
-    public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event)
+    public static void registerItemModelProperties(RegisterConditionalItemModelPropertyEvent event)
     {
         event.register(Starcatcher.rl("is_cast"), new IsCastItemProperty(false).type());
     }
