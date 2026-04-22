@@ -66,11 +66,11 @@ public class DGSCItemsTagsProvider extends KeyTagProvider<Item>
         //fishes, cat_food, foods/raw_fish
         for (DeferredHolder<Item, ? extends Item> item : BUCKETABLE_FISHES_REGISTRY.getEntries())
         {
-            tag(ItemTags.FISHES).add(rk(item.getId()));
-            tag(ItemTags.CAT_FOOD).add(rk(item.getId()));
-            tag(Tags.Items.FOODS_RAW_FISH).add(rk(item.getId()));
-            tag(SCTags.BUCKETABLE_FISHES).add(rk(item.getId()));
-            tag(SCTags.STARCAUGHT_FISHES).add(rk(item.getId()));
+            tag(ItemTags.FISHES).addOptional(rk(item.getId()));
+            tag(ItemTags.CAT_FOOD).addOptional(rk(item.getId()));
+            tag(Tags.Items.FOODS_RAW_FISH).addOptional(rk(item.getId()));
+            tag(SCTags.BUCKETABLE_FISHES).addOptional(rk(item.getId()));
+            tag(SCTags.STARCAUGHT_FISHES).addOptional(rk(item.getId()));
         }
 
         //todo figure out what to do with crabs/eels tags?
@@ -85,12 +85,12 @@ public class DGSCItemsTagsProvider extends KeyTagProvider<Item>
 
             switch (p.getSecond().rarity())
             {
-                case TRASH -> tag(SCTags.TRASH).addOptional(rk(fp.catchInfo().fish().value()));
-                case COMMON -> tag(SCTags.COMMON_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
-                case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
-                case RARE -> tag(SCTags.RARE_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
-                case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
-                case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
+                case TRASH -> tag(SCTags.TRASH).addOptional(fp.catchInfo().fish().unwrapKey().get());
+                case COMMON -> tag(SCTags.COMMON_FISHES).addOptional(fp.catchInfo().fish().unwrapKey().get());
+                case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).addOptional(fp.catchInfo().fish().unwrapKey().get());
+                case RARE -> tag(SCTags.RARE_FISHES).addOptional(fp.catchInfo().fish().unwrapKey().get());
+                case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(fp.catchInfo().fish().unwrapKey().get());
+                case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(fp.catchInfo().fish().unwrapKey().get());
             }
         });
 
@@ -98,11 +98,11 @@ public class DGSCItemsTagsProvider extends KeyTagProvider<Item>
         {
             switch (fp.rarity())
             {
-                case COMMON -> tag(SCTags.COMMON_FISHES).add(rk(fp.catchInfo().fish().value()));
-                case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).add(rk(fp.catchInfo().fish().value()));
-                case RARE -> tag(SCTags.RARE_FISHES).add(rk(fp.catchInfo().fish().value()));
-                case EPIC -> tag(SCTags.EPIC_FISHES).add(rk(fp.catchInfo().fish().value()));
-                case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).add(rk(fp.catchInfo().fish().value()));
+                case COMMON -> tag(SCTags.COMMON_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
+                case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
+                case RARE -> tag(SCTags.RARE_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
+                case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
+                case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(rk(fp.catchInfo().fish().value()));
             }
         }
 

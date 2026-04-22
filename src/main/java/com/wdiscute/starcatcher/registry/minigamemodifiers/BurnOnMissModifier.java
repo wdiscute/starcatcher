@@ -49,7 +49,7 @@ public class BurnOnMissModifier extends AbstractTimedModifier
     public void renderBackground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderBackground(guiGraphics, partialTick, width, height);
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 OVERLAY, width / 2 - 48, height / 2 - 48,
                 96, 96, 0, 0, 96, 96, 96, 96);
     }

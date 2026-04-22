@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.registry.items.rod.StarcatcherFishingRodItem;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
@@ -52,21 +53,21 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
         ClientTooltipComponent.super.extractImage(font, x, y, w, h, guiGraphics);
 
         //todo render modifiers if holding shift
-        guiGraphics.blit(TEXTURE, x, y, 0, 0, 56, 19, 56, 19);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE, x, y, 0, 0, 56, 19, 56, 19);
 
 
         if (bobber.isEmpty())
-            guiGraphics.blit(BOBBER, x + 2, y + 1, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BOBBER, x + 2, y + 1, 0, 0, 16, 16, 16, 16);
         else
             guiGraphics.item(bobber, x + 2, y + 1);
 
         if (bait.isEmpty())
-            guiGraphics.blit(BAIT, x + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BAIT, x + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
         else
             guiGraphics.item(bait, x + 18 + 2, y + 1);
 
         if (hook.isEmpty())
-            guiGraphics.blit(HOOK, x + 18 + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(RenderPipelines.GUI_TEXTURED, HOOK, x + 18 + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
         else
             guiGraphics.item(hook, x + 18 + 18 + 2, y + 1);
     }

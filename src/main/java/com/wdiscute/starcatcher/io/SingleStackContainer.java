@@ -13,7 +13,7 @@ import net.minecraft.world.item.Items;
 
 import java.util.List;
 
-//use stack() when obtaining the stack from the container to prevent accidental mutation of the itemstack
+//use create() when obtaining the stack from the container to prevent crashing with empty stacks
 public record SingleStackContainer(@Deprecated ItemStackTemplate stackDoNotUse)
 {
 
@@ -28,6 +28,7 @@ public record SingleStackContainer(@Deprecated ItemStackTemplate stackDoNotUse)
 
     public static SingleStackContainer from(ItemStack itemStack)
     {
+        if(itemStack.isEmpty()) return new SingleStackContainer(null);
         return new SingleStackContainer(ItemStackTemplate.fromNonEmptyStack(itemStack));
     }
 

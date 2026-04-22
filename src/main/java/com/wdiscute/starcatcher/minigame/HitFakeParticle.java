@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
+import net.minecraft.util.ARGB;
 import org.joml.Matrix3x2fStack;
 import org.joml.Vector2d;
 
@@ -36,9 +37,9 @@ public class HitFakeParticle
         //todo fix color
         //RenderSystem.setShaderColor(r, g, b, a);
 
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 TEXTURE, width / 2 - 8, height / 2 - 8,
-                16, 16, 80, 160, 16, 16, 256, 256);
+                80, 160, 16, 16, 16, 16, 256, 256, ARGB.colorFromFloat(a, r, g, b));
 
         //RenderSystem.setShaderColor(1, 1, 1, 1);
         poseStack.popMatrix();
@@ -46,7 +47,7 @@ public class HitFakeParticle
 
     public HitFakeParticle(int x, int y, Vector2d vec)
     {
-        this(x, y, vec,0.5f, 0.7f + random.nextFloat() / 3, 0.5f + random.nextFloat() / 5, 1);
+        this(x, y, vec, 0.5f, 0.7f + random.nextFloat() / 3, 0.5f + random.nextFloat() / 5, 1);
     }
 
     public HitFakeParticle(int x, int y, Vector2d vec, float r, float g, float b, float a)
@@ -61,7 +62,7 @@ public class HitFakeParticle
         this.speed = 0.2 + random.nextFloat() / 3;
         this.maxLifetime = (int) (5 + random.nextFloat() * 20);
 
-        if(random.nextFloat() > 0.9) this.maxLifetime += (int) (40 + random.nextFloat() * 30);
+        if (random.nextFloat() > 0.9) this.maxLifetime += (int) (40 + random.nextFloat() * 30);
 
         this.rl = Starcatcher.rl("textures/gui/minigame.png");
     }

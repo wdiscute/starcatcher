@@ -1,10 +1,13 @@
 package com.wdiscute.starcatcher.secretnotes;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.wdiscute.starcatcher.SCColors;
+import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
@@ -53,11 +56,11 @@ public class MessageScreen extends Screen
         List<String> text = message.text();
         for (int i = 0; i < text.size(); i++)
         {
-            guiGraphics.text(this.font, Component.translatable(text.get(i)), uiX + 140, uiY + 55 + 9 * i, 0x635040, false);
+            guiGraphics.text(this.font, Component.translatable(text.get(i)), uiX + 140, uiY + 55 + 9 * i, SCColors.GUIDE_TEXT_DARK, false);
         }
 
         //render name
-        guiGraphics.text(this.font, Component.translatable(message.senderDisplayName()), uiX + 255, uiY + 208, 0x635040, false);
+        guiGraphics.text(this.font, Component.translatable(message.senderDisplayName()), uiX + 255, uiY + 208, SCColors.GUIDE_TEXT_DARK, false);
 
     }
 
@@ -75,7 +78,7 @@ public class MessageScreen extends Screen
 
     private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
 
     @Override

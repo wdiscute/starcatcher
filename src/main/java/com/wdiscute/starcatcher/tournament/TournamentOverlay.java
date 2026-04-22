@@ -85,11 +85,11 @@ public class TournamentOverlay implements GuiLayer
             switch (playerRank)
             {
                 case 1:
-                    guiGraphics.blit(FIRST_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
+                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED,FIRST_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
                 case 2:
-                    guiGraphics.blit(SECOND_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
+                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED,SECOND_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
                 case 3:
-                    guiGraphics.blit(THIRD_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
+                    guiGraphics.blit(RenderPipelines.GUI_TEXTURED,THIRD_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
             }
         }
         //if big
@@ -223,7 +223,7 @@ public class TournamentOverlay implements GuiLayer
 
     private void renderImage(GuiGraphicsExtractor guiGraphics, Identifier rl)
     {
-        guiGraphics.blit(RenderPipelines.GUI, rl, 0, 0, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, rl, 0, 0, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
     }
 
     public enum ExpandedType

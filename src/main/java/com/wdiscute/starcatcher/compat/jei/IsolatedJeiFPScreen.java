@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.guide.IsolatedFPScreen;
 import com.wdiscute.starcatcher.io.FishCaughtCounter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
@@ -39,7 +40,7 @@ public class IsolatedJeiFPScreen extends IsolatedFPScreen
     public void extractRenderState(GuiGraphicsExtractor guiGraphics, int mouseX, int mouseY, float a)
     {
         super.extractRenderState(guiGraphics, mouseX, mouseY, a);
-        guiGraphics.blit(BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
 
         FishingGuideScreen.renderFishEntryPage(
                 guiGraphics,

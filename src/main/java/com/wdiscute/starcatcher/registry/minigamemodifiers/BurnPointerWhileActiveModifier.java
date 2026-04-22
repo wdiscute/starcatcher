@@ -104,10 +104,10 @@ public class BurnPointerWhileActiveModifier extends AbstractTimedModifier
         super.renderForeground(guiGraphics, partialTick, width, height);
         float alpha = 1 - (instance.pointerBaseSpeed - instance.pointerSpeed / 2) / (instance.pointerSpeed - instance.pointerSpeed / 2);
         int yoffset = tickCount % 32;
-        guiGraphics.blit(RenderPipelines.GUI, TEXTURE,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE,
                 width / 2 - 8, height / 2 - 8 - 7, 16, 16, 0, yoffset * 16, 16, 16,
                 16, 512, ARGB.colorFromFloat(alpha, 1, 1, 1));
-        guiGraphics.blit(RenderPipelines.GUI,TEXTURE,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, TEXTURE,
                 width / 2 - 8, height / 2 - 8, 16, 16, 0, (yoffset + 8) * 16, 16, 16,
                 16, 512, ARGB.colorFromFloat(alpha, 1, 1, 1));
     }

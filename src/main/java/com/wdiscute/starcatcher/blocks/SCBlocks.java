@@ -89,6 +89,7 @@ public interface SCBlocks
     {
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, block);
         SCItems.ITEMS.registerItem(name, (p) -> new BlockItem(toReturn.get(), p
+                .useBlockDescriptionPrefix()
                 .setId(ResourceKey.create(Registries.ITEM, Starcatcher.rl(name)))));
         return toReturn;
     }
@@ -104,6 +105,7 @@ public interface SCBlocks
     {
         DeferredBlock<T> toReturn = TACKLE_BOXES.registerBlock(name, block);
         SCItems.ITEMS.registerItem(name, (p) -> new BlockItem(toReturn.get(), p
+                .useBlockDescriptionPrefix()
                 .setId(ResourceKey.create(Registries.ITEM, Starcatcher.rl(name)))));
         return toReturn;
     }

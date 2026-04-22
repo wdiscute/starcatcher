@@ -65,7 +65,7 @@ public class FishingRodSkinSmithingRecipeBuilder
                 .requirements(AdvancementRequirements.Strategy.OR);
         this.criteria.forEach(advancement$builder::addCriterion);
         FishingRodSkinSmithingRecipe fishingRodSkinSmithingRecipe = new FishingRodSkinSmithingRecipe(new Recipe.CommonInfo(true),
-                Optional.of(this.template), this.base, Optional.of(this.addition), ItemStackTemplate.fromNonEmptyStack(new ItemStack(this.result)));
+                Optional.of(this.template), this.base, Optional.of(this.addition), new ItemStackTemplate(this.result));
         recipeOutput.accept(ResourceKey.create(Registries.RECIPE, recipeId), fishingRodSkinSmithingRecipe, advancement$builder.build(recipeId.withPrefix("recipes/" + this.category.getFolderName() + "/")));
     }
 

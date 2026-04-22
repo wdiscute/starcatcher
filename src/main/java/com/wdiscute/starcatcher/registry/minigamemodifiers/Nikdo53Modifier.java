@@ -141,10 +141,10 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         Matrix3x2fStack poseStack = guiGraphics.pose();
 
         //render A
-        guiGraphics.blit(RenderPipelines.GUI, FishingMinigameScreen.TEXTURE, width / 2 - 40, height / 2 + 40, 32, 16, isHoldingLeft ? 32 : 0, 128, 32, 16, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, FishingMinigameScreen.TEXTURE, width / 2 - 40, height / 2 + 40, 32, 16, isHoldingLeft ? 32 : 0, 128, 32, 16, 256, 256);
 
         //render D
-        guiGraphics.blit(RenderPipelines.GUI, FishingMinigameScreen.TEXTURE, width / 2 + 8, height / 2 + 40, 32, 16, isHoldingRight ? 32 : 0, 144, 32, 16, 256, 256);
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED, FishingMinigameScreen.TEXTURE, width / 2 + 8, height / 2 + 40, 32, 16, isHoldingRight ? 32 : 0, 144, 32, 16, 256, 256);
 
 
         poseStack.pushMatrix();

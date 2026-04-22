@@ -103,7 +103,8 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     {
         super.saveAdditional(output);
 
-        output.store("fish", SingleStackContainer.CODEC, SingleStackContainer.from(getFish().copy()));
+        if (!getFish().isEmpty())
+            output.store("fish", SingleStackContainer.CODEC, SingleStackContainer.from(getFish().copy()));
 
         output.putDouble("fish_target_x", fishTarget.x);
         output.putDouble("fish_target_y", fishTarget.y);

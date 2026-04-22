@@ -1,7 +1,9 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.starcatcher.datagen.DGSCFishingPropertiesProvider;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.fishing.FishingPropertiesRegistry;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.Holder;
@@ -22,6 +24,7 @@ import javax.print.DocFlavor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
 public class U
@@ -195,11 +198,10 @@ public class U
     //public static Holder<Item> holderItem(HolderLookup.Provider registries, String ns, String path)
     public static Holder<Item> holderItem(String ns, String path)
     {
-        return null;
-//        return Holder.Reference.createStandAlone(
-//                registries.lookupOrThrow(Registries.ITEM),
-//                ResourceKey.create(Registries.ITEM, rl(ns, path))
-//        );
+        return Holder.Reference.createStandAlone(
+                DGSCFishingPropertiesProvider.lookup.join().lookupOrThrow(Registries.ITEM),
+                ResourceKey.create(Registries.ITEM, rl(ns, path))
+        );
     }
 
     public static Holder<Item> holderItem(DeferredItem<Item> item)
@@ -220,11 +222,10 @@ public class U
     //public static Holder<EntityType<?>> holderEntity(HolderLookup.Provider registries, String ns, String path)
     public static Holder<EntityType<?>> holderEntity(String ns, String path)
     {
-        return null;
-//        return Holder.Reference.createStandAlone(
-//                registries.lookupOrThrow(Registries.ENTITY_TYPE),
-//                ResourceKey.create(Registries.ENTITY_TYPE, rl(ns, path))
-//        );
+        return Holder.Reference.createStandAlone(
+                DGSCFishingPropertiesProvider.lookup.join().lookupOrThrow(Registries.ENTITY_TYPE),
+                ResourceKey.create(Registries.ENTITY_TYPE, rl(ns, path))
+        );
     }
 
     public static Holder<EntityType<?>> holderEntity(Supplier<EntityType<FishEntity>> entity)

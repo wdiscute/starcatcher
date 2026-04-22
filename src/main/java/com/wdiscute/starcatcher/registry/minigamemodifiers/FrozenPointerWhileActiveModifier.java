@@ -94,7 +94,7 @@ public class FrozenPointerWhileActiveModifier extends AbstractTimedModifier
     {
         super.renderForeground(guiGraphics, partialTick, width, height);
         float alpha = 1 - (instance.pointerSpeed - instance.pointerBaseSpeed / 2) / (instance.pointerBaseSpeed - instance.pointerBaseSpeed / 2);
-        guiGraphics.blit(RenderPipelines.GUI,
+        guiGraphics.blit(RenderPipelines.GUI_TEXTURED,
                 FishingMinigameScreen.TEXTURE,
                 width / 2 - 16, height / 2 - 16, 32, 32, 0, 0, 32,
                 32, 256, 256, ARGB.colorFromFloat(alpha, 1, 1, 1));

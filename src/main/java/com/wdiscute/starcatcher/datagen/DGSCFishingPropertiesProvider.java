@@ -16,15 +16,15 @@ import java.util.function.BiConsumer;
 public class DGSCFishingPropertiesProvider extends DatapackBuiltinEntriesProvider
 {
 
-    static
-    {
-        FishingPropertiesRegistry.register(); //register all entries before anything else
-    }
-
     public static final RegistrySetBuilder REGISTRY = new RegistrySetBuilder().add(Starcatcher.FISH_REGISTRY_KEY, FishingPropertiesRegistry::bootstrap);
+
+    public static CompletableFuture<HolderLookup.Provider> lookup = null;
 
     public DGSCFishingPropertiesProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
     {
+        lookup = registries;
+
+        FishingPropertiesRegistry.register(); //register all entries before anything else
         super(output, registries, REGISTRY, DGSCFishingPropertiesProvider::addConditions, Set.of(
                 Starcatcher.MOD_ID,
                 "minecraft",
