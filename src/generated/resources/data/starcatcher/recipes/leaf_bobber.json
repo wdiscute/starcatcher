@@ -18,7 +18,7 @@
     "SL "
   ],
   "result": {
-    "count": 1,
-    "id": "starcatcher:leaf_bobber"
-  }
+    "item": "starcatcher:leaf_bobber"
+  },
+  "show_notification": true
 }

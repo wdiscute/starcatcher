@@ -74,19 +74,19 @@ public class SCModEvents {
     public static void addRegistry(NewRegistryEvent event)
     {
         ForgeRegistryHelper.getInstance(Starcatcher.SWEET_SPOT_BEHAVIOUR)
-                .createWithWrapper(event, reg -> Starcatcher.SWEET_SPOT_BEHAVIOUR_REGISTRY = reg);
+                .create(event, reg -> Starcatcher.SWEET_SPOT_BEHAVIOUR_REGISTRY = reg);
 
         ForgeRegistryHelper.getInstance(Starcatcher.MINIGAME_MODIFIERS)
-                .createWithWrapper(event, reg -> Starcatcher.MINIGAME_MODIFIERS_REGISTRY = reg);
+                .create(event, reg -> Starcatcher.MINIGAME_MODIFIERS_REGISTRY = reg);
 
         ForgeRegistryHelper.getInstance(Starcatcher.CATCH_MODIFIERS)
-                .createWithWrapper(event, reg -> Starcatcher.CATCH_MODIFIERS_REGISTRY = reg);
+                .create(event, reg -> Starcatcher.CATCH_MODIFIERS_REGISTRY = reg);
 
         ForgeRegistryHelper.getInstance(Starcatcher.TACKLE_SKIN)
-                .createWithWrapper(event, reg -> Starcatcher.TACKLE_SKIN_REGISTRY = reg);
+                .create(event, reg -> Starcatcher.TACKLE_SKIN_REGISTRY = reg);
 
         ForgeRegistryHelper.getInstance(Starcatcher.FISH_RESTRICTIONS)
-                .createWithWrapper(event, reg -> Starcatcher.FISH_RESTRICTIONS_REGISTRY = reg);
+                .create(event, reg -> Starcatcher.FISH_RESTRICTIONS_REGISTRY = reg);
 
     }
 

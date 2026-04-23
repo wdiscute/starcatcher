@@ -1,7 +1,6 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "entity": "starcatcher:fish",
     "item": "crittersandcompanions:clam"
   },
   "difficulty": {

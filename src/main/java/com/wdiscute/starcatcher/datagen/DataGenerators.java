@@ -10,6 +10,7 @@ import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraftforge.common.data.BlockTagsProvider;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,6 +18,7 @@ import net.minecraftforge.fml.common.Mod;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -26,16 +28,14 @@ public class DataGenerators
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {
-        //Todo: idk what this is
-/*        event.createDatapackRegistryObjects(
-                new RegistrySetBuilder()
-                        .add(Starcatcher.FISH_REGISTRY_KEY, FishingPropertiesRegistry::bootstrap)
-        );*/
-
         DataGenerator gen = event.getGenerator();
 
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         PackOutput output = gen.getPackOutput();
+
+        RegistrySetBuilder setBuilder = new RegistrySetBuilder().add(Starcatcher.FISH_REGISTRY_KEY, FishingPropertiesRegistry::bootstrap);
+        DatapackBuiltinEntriesProvider registries = gen.addProvider(true, new DatapackBuiltinEntriesProvider(output, lookupProvider, setBuilder, Set.of(Starcatcher.MOD_ID)));
+
 
         //fish properties
         gen.addProvider(
@@ -59,7 +59,7 @@ public class DataGenerators
 
         //fp tags
         //todo figure this out
-        gen.addProvider(event.includeServer(), new DGSCFPTagsProvider(output, lookupProvider, existingFileHelper));
+        gen.addProvider(event.includeServer(), new DGSCFPTagsProvider(output, registries.getRegistryProvider(), existingFileHelper));
 
         //advancements
         gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));

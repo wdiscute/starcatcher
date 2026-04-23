@@ -21,31 +21,16 @@
               "ops": [
                 {
                   "op": "replace",
-                  "source": "Lock",
-                  "target": "BlockEntityTag.Lock"
+                  "source": "Items",
+                  "target": "minecraft:container"
                 },
                 {
                   "op": "replace",
-                  "source": "LootTable",
-                  "target": "BlockEntityTag.LootTable"
-                },
-                {
-                  "op": "replace",
-                  "source": "LootTableSeed",
-                  "target": "BlockEntityTag.LootTableSeed"
+                  "source": "Fishes",
+                  "target": "starcatcher:tackle_box_fishes"
                 }
               ],
               "source": "block_entity"
-            },
-            {
-              "type": "minecraft:shulker_box",
-              "entries": [
-                {
-                  "type": "minecraft:dynamic",
-                  "name": "minecraft:contents"
-                }
-              ],
-              "function": "minecraft:set_contents"
             }
           ],
           "name": "starcatcher:tackle_box_white"

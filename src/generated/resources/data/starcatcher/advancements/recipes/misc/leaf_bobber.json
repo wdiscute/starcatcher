@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#starcatcher:rods"
+            "tag": "starcatcher:rods"
           }
         ]
       },
@@ -20,13 +20,14 @@
   },
   "requirements": [
     [
-      "has_the_recipe",
-      "has_starcatcher_rod"
+      "has_starcatcher_rod",
+      "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
       "starcatcher:leaf_bobber"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

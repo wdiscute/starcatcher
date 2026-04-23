@@ -14,7 +14,7 @@
     " R "
   ],
   "result": {
-    "count": 1,
-    "id": "starcatcher:vanilla_hook"
-  }
+    "item": "starcatcher:vanilla_hook"
+  },
+  "show_notification": true
 }

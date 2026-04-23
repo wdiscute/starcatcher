@@ -616,7 +616,7 @@
       "is_loot_table": false,
       "items": [
         {
-          "count": 1,
+          "Count": 1,
           "id": "starcatcher:iceborn_skin_smithing_template"
         }
       ]
@@ -625,7 +625,7 @@
       "is_loot_table": false,
       "items": [
         {
-          "count": 1,
+          "Count": 1,
           "id": "starcatcher:azure_crystal_skin_smithing_template"
         }
       ]
@@ -662,7 +662,7 @@
       "is_loot_table": false,
       "items": [
         {
-          "count": 1,
+          "Count": 1,
           "id": "starcatcher:clear_smithing_template"
         }
       ]
@@ -683,7 +683,7 @@
       "is_loot_table": false,
       "items": [
         {
-          "count": 1,
+          "Count": 1,
           "id": "starcatcher:king_smithing_template"
         }
       ]
@@ -1108,7 +1108,7 @@
       "is_loot_table": false,
       "items": [
         {
-          "count": 1,
+          "Count": 1,
           "id": "starcatcher:colorful_smithing_template"
         }
       ]
@@ -1133,7 +1133,7 @@
       "is_loot_table": false,
       "items": [
         {
-          "count": 1,
+          "Count": 1,
           "id": "starcatcher:kimbe_smithing_template"
         }
       ]

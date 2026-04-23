@@ -18,7 +18,7 @@
     "SR "
   ],
   "result": {
-    "count": 1,
-    "id": "starcatcher:slimey_bobber"
-  }
+    "item": "starcatcher:slimey_bobber"
+  },
+  "show_notification": true
 }
