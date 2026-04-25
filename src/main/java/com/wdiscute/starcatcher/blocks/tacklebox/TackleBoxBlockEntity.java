@@ -23,6 +23,7 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -235,14 +236,12 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
     }
 
-/*    @Override
-    protected void applyImplicitComponents(DataComponentInput componentInput)
+    public void applyImplicitComponents(ItemStack componentInput)
     {
-        super.applyImplicitComponents(componentInput);
         componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
         fishes = new ArrayList<>(componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of()));
-        this.name = componentInput.get(DataComponents.CUSTOM_NAME);
-    }*/
+        this.name = componentInput.get(DataComponents.CUSTOM_NAME.get());
+    }
 
     @Override
     public void saveToItem(ItemStack stack) {

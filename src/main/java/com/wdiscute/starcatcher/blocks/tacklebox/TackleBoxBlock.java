@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -141,8 +142,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             if (!level.isClientSide && player.isCreative() && !tbbe.isEmpty())
             {
                 ItemStack itemstack = getColoredItemStack(this.getColor());
-                //TODO: fix this
-              // itemstack.applyComponents(blockentity.collectComponents());
+                blockentity.saveToItem(itemstack);
                 ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (double) pos.getY() + (double) 0.5F, (double) pos.getZ() + (double) 0.5F, itemstack);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
@@ -298,6 +298,14 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     public BlockState mirror(BlockState state, Mirror mirror)
     {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @org.jetbrains.annotations.Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (level.getBlockEntity(pos) instanceof TackleBoxBlockEntity blockEntity){
+            blockEntity.applyImplicitComponents(stack);
+        }
     }
 
     @Override

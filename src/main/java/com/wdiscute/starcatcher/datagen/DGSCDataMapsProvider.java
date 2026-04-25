@@ -24,6 +24,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
 import net.nikdo53.neobackports.datagen.DataMapProvider;
 import net.nikdo53.neobackports.datamaps.NeoForgeDataMaps;
 import net.nikdo53.neobackports.datamaps.builtin.Compostable;
