@@ -193,7 +193,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
 
         if (stack.has(DataComponents.CONTAINER.get()))
         {
-            tooltipComponents.add(UNKNOWN_CONTENTS);
+           // tooltipComponents.add(UNKNOWN_CONTENTS);
         }
 
         int i = 0;
