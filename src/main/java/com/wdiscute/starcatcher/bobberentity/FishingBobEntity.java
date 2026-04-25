@@ -86,17 +86,21 @@ public class FishingBobEntity extends Projectile {
     public FishingBobEntity(EntityType<? extends FishingBobEntity> entityType, Level level)
     {
         super(entityType, level);
-        this.player = getPlayer();
-        this.modifiers = SCCatchModifiers.getCatchModifiers(player);
-        modifiers.forEach(acm -> acm.onAdd(this));
+        this.player = level.isClientSide() ? PlayerGetter.getPlayer() : null;
+        if (player != null) {
+            this.modifiers = SCCatchModifiers.getCatchModifiers(player);
+            modifiers.forEach(acm -> acm.onAdd(this));
+        } else {
+            this.modifiers = new ArrayList<>();
+        }
     }
 
-    @OnlyIn(Dist.CLIENT)
-    public static Player getPlayer()
-    {
-        return Minecraft.getInstance().player;
+    // This is how you replace the OnlyIn annotation
+    public static class PlayerGetter{
+        public static Player getPlayer(){
+            return Minecraft.getInstance().player;
+        }
     }
-
     //server
     public FishingBobEntity(Level level, Player player, ItemStack rod)
     {

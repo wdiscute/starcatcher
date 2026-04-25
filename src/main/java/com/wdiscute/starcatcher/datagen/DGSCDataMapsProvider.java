@@ -237,7 +237,14 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
         FishingPropertiesRegistry.PROPERTIES.forEach(o ->
         {
-            treasures.add(o.getFirst(), Treasure.VANILLA_FISHING_LOOT_TABLE, false);
+            String namespace = o.getFirst().location().getNamespace();
+
+            //This keeps it from spamming the log
+            if (namespace.equals(Starcatcher.MOD_ID) || namespace.equals(ResourceLocation.DEFAULT_NAMESPACE)) {
+                treasures.add(o.getFirst(), Treasure.VANILLA_FISHING_LOOT_TABLE, false);
+            } else {
+                treasures.add(o.getFirst(), Treasure.VANILLA_FISHING_LOOT_TABLE, false, new ModLoadedCondition(namespace));
+            }
         });
 
         treasures.add(Starcatcher.rl("azure_crystalback_minnow"), Treasure.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE, false);

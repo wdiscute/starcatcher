@@ -240,9 +240,10 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     {
         super.applyImplicitComponents(componentInput);
         componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
-        fishes = componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of());
-        this.name = (Component)componentInput.get(DataComponents.CUSTOM_NAME);
+        fishes = new ArrayList<>(componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of()));
+        this.name = componentInput.get(DataComponents.CUSTOM_NAME);
     }*/
+
     @Override
     public void saveToItem(ItemStack stack) {
         super.saveToItem(stack);
