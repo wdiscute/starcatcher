@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-23T01:36:42.609681	FishingProperties
+// 1.20.1	2026-04-26T16:23:33.4502708	FishingProperties
 47984659f5fcba839d1d19e3962f7e629edd2840 data/alexscaves/starcatcher/fish/lanternfish.json
 c3b074ed1ef69c08c0369ced097fbe7ac34e59a3 data/alexscaves/starcatcher/fish/radgill.json
 c4c1a020d9084d0a17eb91833053874e04a52e2e data/alexscaves/starcatcher/fish/sweetish_fish_blue.json
@@ -390,7 +390,6 @@ b56efe67f347dabd7f0f28136a71984d92b53d1d data/tide/starcatcher/fish/volcano_tuna
 d2822f2cdeac431d676733541038e87c1e5107d8 data/tide/starcatcher/fish/walleye.json
 f4f874eff3f74a43ac0cd8ae14ea7bfefc7ea83a data/tide/starcatcher/fish/warped_guppy.json
 3a07af9aaf4384b7567abdf47b6b0ddf762cb3f2 data/tide/starcatcher/fish/white_crappie.json
-807f5e3b4f7ab324db62bf6c6dc691705eadfe79 data/tide/starcatcher/fish/windbass.json
 1ee44878e66663fd6c832884ff651da6f950c3bf data/tide/starcatcher/fish/witherfin.json
 7d4248df16bd8fdc31bb64c8905e783cd162ae94 data/tide/starcatcher/fish/yellow_perch.json
 c7bfb0e71bb6acc8fda00352f4fb5387dbaa0af2 data/unusualfishmod/starcatcher/fish/blackcap_snail_bucket.json

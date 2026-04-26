@@ -1,9 +1,9 @@
 {
   "values": {
     "alexscaves:lanternfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -11,9 +11,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:radgill": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -21,9 +21,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_blue": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -31,9 +31,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_green": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -41,9 +41,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_pink": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -51,9 +51,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_red": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -61,9 +61,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:sweetish_fish_yellow": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -71,9 +71,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:trilocaris_tail": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -81,9 +81,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "alexscaves:tripodfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "alexscaves"
         }
       ],
@@ -91,9 +91,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:arapaima": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -101,9 +101,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:arrau_turtle": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -111,9 +111,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:atlantic_cod": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -121,9 +121,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:atlantic_halibut": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -131,9 +131,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:atlantic_herring": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -141,9 +141,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:bayad": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -151,9 +151,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:blackfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -161,9 +161,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:bluegill": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -171,9 +171,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:boulti": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -181,9 +181,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:box_turtle": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -191,9 +191,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:brown_shrooma": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -201,9 +201,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:brown_trout": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -211,9 +211,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:capitaine": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -221,9 +221,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:carp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -231,9 +231,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:catfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -241,9 +241,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:extra_neptunium_ingot": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -251,9 +251,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:gar": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -261,9 +261,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:goldfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -271,9 +271,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:jellyfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -281,9 +281,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:leech": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -291,9 +291,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:minnow": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -301,9 +301,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:muskellunge": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -311,9 +311,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:pacific_halibut": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -321,9 +321,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:perch": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -331,9 +331,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:pink_salmon": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -341,9 +341,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:piranha": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -351,9 +351,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:pollock": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -361,9 +361,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:rainbow_trout": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -371,9 +371,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:red_grouper": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -381,9 +381,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:red_shrooma": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -391,9 +391,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:smallmouth_bass": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -401,9 +401,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:synodontis": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -411,9 +411,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:tambaqui": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -421,9 +421,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquaculture:tuna": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquaculture"
         }
       ],
@@ -431,9 +431,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "aquamirae:spinefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "aquamirae"
         }
       ],
@@ -441,9 +441,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "betterend:end_fish_raw": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "betterend"
         }
       ],
@@ -451,9 +451,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "betterend:gelatine": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "betterend"
         }
       ],
@@ -461,9 +461,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:chieftain_crab": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "collectorsreap"
         }
       ],
@@ -471,9 +471,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:clam": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "collectorsreap"
         }
       ],
@@ -481,9 +481,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:platinum_bass": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "collectorsreap"
         }
       ],
@@ -491,9 +491,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:tiger_prawn": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "collectorsreap"
         }
       ],
@@ -501,9 +501,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "collectorsreap:urchin": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "collectorsreap"
         }
       ],
@@ -511,9 +511,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:clam": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "crittersandcompanions"
         }
       ],
@@ -521,9 +521,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:dumbo_octopus_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "crittersandcompanions"
         }
       ],
@@ -531,9 +531,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:koi_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "crittersandcompanions"
         }
       ],
@@ -541,9 +541,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "crittersandcompanions:sea_bunny_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "crittersandcompanions"
         }
       ],
@@ -551,9 +551,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "environmental:koi": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "environmental"
         }
       ],
@@ -561,9 +561,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "environmental:slabfish_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "environmental"
         }
       ],
@@ -571,9 +571,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:arapaima_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -581,9 +581,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:artemia_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -591,9 +591,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:coelacanth_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -601,9 +601,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:daphnia_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -611,9 +611,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:featherback_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -621,9 +621,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:gourami_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -631,9 +631,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:guppy_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -641,9 +641,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:minnow_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -651,9 +651,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:moony_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -661,9 +661,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fintastic:pleco_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fintastic"
         }
       ],
@@ -671,9 +671,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:ancientscale": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -681,9 +681,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:battlegill": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -691,9 +691,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:devilfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -701,9 +701,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:islehopper": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -711,9 +711,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:plentifin": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -721,9 +721,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:pondie": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -731,9 +731,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:splashtail": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -741,9 +741,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:stormfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -751,9 +751,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:wildsplash": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -761,9 +761,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "fishofthieves:wrecker": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "fishofthieves"
         }
       ],
@@ -771,9 +771,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:anglerfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -781,9 +781,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:barreleye": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -791,9 +791,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:betta": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -801,9 +801,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:blowfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -811,9 +811,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:blue_spotted_stingray": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -821,9 +821,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:boxfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -831,9 +831,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:carp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -841,9 +841,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:clownfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -851,9 +851,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:coelacanth": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -861,9 +861,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:damselfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -871,9 +871,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:danio": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -881,9 +881,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:discus": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -891,9 +891,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:dragonfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -901,9 +901,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:flashlight_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -911,9 +911,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:flying_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -921,9 +921,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:golden_dorado": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -931,9 +931,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:goldfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -941,9 +941,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:gourami": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -951,9 +951,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:herring": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -961,9 +961,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:john_dory": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -971,9 +971,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:lionfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -981,9 +981,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:mackerel": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -991,9 +991,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:mahi": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1001,9 +1001,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:moray_eel": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1011,9 +1011,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:needlefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1021,9 +1021,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:neon_tetra": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1031,9 +1031,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:oarfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1041,9 +1041,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:ocean_sunfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1051,9 +1051,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:opah": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1061,9 +1061,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:oscar": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1071,9 +1071,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:parrotfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1081,9 +1081,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:pearlfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1091,9 +1091,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:pleco": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1101,9 +1101,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:ratfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1111,9 +1111,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:rockfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1121,9 +1121,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:sea_bass": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1131,9 +1131,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:seahorse": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1141,9 +1141,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:sheepshead_wrasse": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1151,9 +1151,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:snailfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1161,9 +1161,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:spotted_eagle_ray": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1171,9 +1171,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:squirrelfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1181,9 +1181,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:stonefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1191,9 +1191,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:surgeonfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1201,9 +1201,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:tiger_barb": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1211,9 +1211,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:triggerfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1221,9 +1221,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "hybrid-aquatic:tuna": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "hybrid-aquatic"
         }
       ],
@@ -1271,9 +1271,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "miners_delight:glow_squid": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "miners_delight"
         }
       ],
@@ -1281,9 +1281,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "miners_delight:squid": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "miners_delight"
         }
       ],
@@ -1291,9 +1291,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:blazefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1301,9 +1301,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:bonefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1311,9 +1311,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:eyeball_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1321,9 +1321,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:glowdine": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1331,9 +1331,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:lava_pufferfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1341,9 +1341,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:magmacubefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1351,9 +1351,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:obsidianfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1361,9 +1361,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:searing_cod": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1371,9 +1371,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:soulsucker": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1381,9 +1381,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "netherdepthsupgrade:wither_bonefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "netherdepthsupgrade"
         }
       ],
@@ -1391,9 +1391,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:angler_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "spawn"
         }
       ],
@@ -1401,9 +1401,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:baby_sunfish_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "spawn"
         }
       ],
@@ -1411,9 +1411,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:captured_octopus": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "spawn"
         }
       ],
@@ -1421,9 +1421,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:herring": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "spawn"
         }
       ],
@@ -1431,9 +1431,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "spawn:tuna_egg_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "spawn"
         }
       ],
@@ -1991,9 +1991,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "sullysmod:lanternfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "sullysmod"
         }
       ],
@@ -2001,9 +2001,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "sullysmod:piranha": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "sullysmod"
         }
       ],
@@ -2011,9 +2011,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:blubber": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2021,9 +2021,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/bluegill": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2031,9 +2031,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/cod": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2041,9 +2041,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/fresh_seaweed": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2051,9 +2051,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/lake_trout": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2061,9 +2061,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/largemouth_bass": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2071,9 +2071,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/rainbow_trout": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2081,9 +2081,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/salmon": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2091,9 +2091,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/shellfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2101,9 +2101,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:food/smallmouth_bass": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2111,9 +2111,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:groundcover/clam": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2121,9 +2121,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:groundcover/driftwood": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2131,9 +2131,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tfc:groundcover/sea_urchin": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tfc"
         }
       ],
@@ -2141,9 +2141,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:abyss_angler": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2151,9 +2151,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:alpha_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2161,9 +2161,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:amber_rockfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2171,9 +2171,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:anchovy": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2181,9 +2181,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:angelfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2191,9 +2191,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:anglerfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2201,9 +2201,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:aquathorn": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2211,9 +2211,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:arapaima": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2221,9 +2221,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:ash_perch": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2231,9 +2231,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bedrock_bug": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2241,9 +2241,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bedrock_tetra": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2251,9 +2251,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:black_crappie": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2261,9 +2261,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:blazing_swordfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2271,9 +2271,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:blossom_bass": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2281,9 +2281,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:blue_neonfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2291,9 +2291,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bluegill": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2301,9 +2301,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:brook_trout": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2311,9 +2311,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:bull_shark": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2321,9 +2321,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:carp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2331,9 +2331,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:catfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2341,9 +2341,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:cave_crawler": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2351,9 +2351,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:cave_eel": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2361,9 +2361,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:chasm_eel": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2371,9 +2371,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:chorus_cod": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2381,9 +2381,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:coelacanth": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2391,9 +2391,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:crimson_fangjaw": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2401,9 +2401,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:crystal_shrimp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2411,9 +2411,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:crystalline_carp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2421,9 +2421,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:darkness_eater": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2431,9 +2431,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:deep_blue": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2441,9 +2441,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:deep_grouper": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2451,9 +2451,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:devils_hole_pupfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2461,9 +2461,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:dragon_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2471,9 +2471,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:dripstone_darter": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2481,9 +2481,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:dutchman_sock": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2491,9 +2491,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:echo_snapper": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2501,9 +2501,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:elytrout": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2511,9 +2511,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:ember_koi": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2521,9 +2521,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:ender_glider": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2531,9 +2531,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:enderfin": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2541,9 +2541,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:endergazer": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2551,9 +2551,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:flounder": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2561,9 +2561,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:frostbite_flounder": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2571,9 +2571,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:gilded_minnow": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2581,9 +2581,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:glowfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2591,9 +2591,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:great_white_shark": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2601,9 +2601,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:guppy": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2611,9 +2611,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:incandescent_larva": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2621,9 +2621,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:inferno_guppy": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2631,9 +2631,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:iron_tetra": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2641,9 +2641,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:judgment_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2651,9 +2651,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:lapis_lanternfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2661,9 +2661,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:largemouth_bass": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2671,9 +2671,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:luminescent_jellyfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2681,9 +2681,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mackerel": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2691,9 +2691,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:magma_mackerel": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2701,9 +2701,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mahi_mahi": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2711,9 +2711,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:manta_ray": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2721,9 +2721,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mantyvern": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2731,9 +2731,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:marstilus": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2741,9 +2741,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:midas_fish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2751,9 +2751,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mirage_catfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2761,9 +2761,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:mooneye": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2771,9 +2771,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:nephrosilu": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2781,9 +2781,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:neptune_koi": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2791,9 +2791,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:obsidian_pike": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2801,9 +2801,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:pale_clubfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2811,9 +2811,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:pentapus": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2821,9 +2821,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:pluto_snail": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2831,9 +2831,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:rainbow_trout": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2841,9 +2841,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:red_40": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2851,9 +2851,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:red_snapper": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2861,9 +2861,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sailfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2871,9 +2871,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sand_tiger_shark": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2881,9 +2881,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:saturn_cuttlefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2891,9 +2891,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:shadow_shark": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2901,9 +2901,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:shadow_snapper": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2911,9 +2911,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:shooting_starfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2921,9 +2921,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sleepy_carp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2931,9 +2931,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:slimy_salmon": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2941,9 +2941,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:snatcher_squid": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2951,9 +2951,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:snook": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2961,9 +2961,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:soulscale": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2971,9 +2971,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:spore_stalker": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2981,9 +2981,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sturgeon": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -2991,9 +2991,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:sun_emblem": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3001,9 +3001,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:swordfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3011,9 +3011,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:tuna": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3021,9 +3021,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:uranias_pisces": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3031,9 +3031,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:vengeance": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3041,9 +3041,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:violet_carp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3051,9 +3051,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:voidseeker": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3061,9 +3061,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:volcano_tuna": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3071,9 +3071,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:walleye": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3081,9 +3081,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:warped_guppy": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3091,19 +3091,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:white_crappie": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
-          "modid": "tide"
-        }
-      ],
-      "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing/treasure"
-    },
-    "tide:windbass": {
-      "neoforge:conditions": [
-        {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3111,9 +3101,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:witherfin": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3121,9 +3111,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "tide:yellow_perch": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "tide"
         }
       ],
@@ -3131,9 +3121,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:blackcap_snail_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3141,9 +3131,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:blizzardfin_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3151,9 +3141,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:brick_snail_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3161,9 +3151,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:celestial_fish_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3171,9 +3161,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:clownthorn_shark_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3181,9 +3171,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:coral_skrimp_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3191,9 +3181,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:crimsonshell_squid_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3201,9 +3191,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:deep_crawler_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3211,9 +3201,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:freshwater_mantis_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3221,9 +3211,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:gnasher_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3231,9 +3221,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:kalappa_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3241,9 +3231,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:lobed_skipper_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3251,9 +3241,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:mossthorn_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3261,9 +3251,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:muddytop_snail_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3271,9 +3261,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:picklefish_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3281,9 +3271,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:pinkfin_idol_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3291,9 +3281,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:porcupine_lobsta_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3301,9 +3291,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:prawn_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3311,9 +3301,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_aero_mono": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3321,9 +3311,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_amber_goby": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3331,9 +3321,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_bark_angelfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3341,9 +3331,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_beaked_herring": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3351,9 +3341,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_blind_sailfin": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3361,9 +3351,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_circus": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3371,9 +3361,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_copperflame_anthias": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3381,9 +3371,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_demon_herring": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3391,9 +3381,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_drooping_gourami": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3401,9 +3391,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_duality_damselfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3411,9 +3401,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_eyelash": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3421,9 +3411,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_forkfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3431,9 +3421,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_hatchetfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3441,9 +3431,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_sailor_barb": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3451,9 +3441,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_sneep_snorp": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3461,9 +3451,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_snowflake": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3471,9 +3461,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_spindlefish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3481,9 +3471,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:raw_triple_twirl_pleco": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3491,9 +3481,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:rhino_tetra_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3501,9 +3491,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:ripper_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3511,9 +3501,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:roughback_guitarfish_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3521,9 +3511,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:sea_mosquito_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3531,9 +3521,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:sea_pancake_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3541,9 +3531,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:sea_spider_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3551,9 +3541,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:shockcat_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3561,9 +3551,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:spoon_shark_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3571,9 +3561,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:squoddle_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3581,9 +3571,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:stout_bichir_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3591,9 +3581,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:tiger_jungle_shark_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3601,9 +3591,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:tiger_puffer_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3611,9 +3601,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:tribble_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3621,9 +3611,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:trumpet_squid_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3631,9 +3621,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:volt_angler_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3641,9 +3631,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:wizard_jelly_bucket": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3651,9 +3641,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "unusualfishmod:zebra_cornetfish_spawn_egg": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "unusualfishmod"
         }
       ],
@@ -3661,9 +3651,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:lionfish": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "upgrade_aquatic"
         }
       ],
@@ -3671,9 +3661,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:perch": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "upgrade_aquatic"
         }
       ],
@@ -3681,9 +3671,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:pike": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "upgrade_aquatic"
         }
       ],
@@ -3691,9 +3681,9 @@
       "location": "minecraft:gameplay/fishing/treasure"
     },
     "upgrade_aquatic:thrasher_tooth": {
-      "neoforge:conditions": [
+      "forge:conditions": [
         {
-          "type": "neoforge:mod_loaded",
+          "type": "forge:mod_loaded",
           "modid": "upgrade_aquatic"
         }
       ],

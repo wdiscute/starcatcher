@@ -576,7 +576,7 @@ public class DGTideFishes extends FishingPropertiesRegistry
                         .withRarity(FishProperties.Rarity.RARE)
         );
 
-        register(
+/*        register( doesnt exist on 1.20
                 overworldCavesFish(U.holderItem("tide", "windbass"))
                         .withBucketedFish(U.holderItem("tide", "windbass_bucket"))
                         .withEntityToSpawn(U.holderEntity("tide", "windbass"))
@@ -584,7 +584,7 @@ public class DGTideFishes extends FishingPropertiesRegistry
                         .withDifficulty(FishProperties.Difficulty.FOUR_BIG_MOVING)
                         .withBaseChance(2)
                         .withRarity(FishProperties.Rarity.EPIC)
-        );
+        );*/
 
         register(
                 overworldDeepDarkFish(U.holderItem("tide", "echo_snapper"))

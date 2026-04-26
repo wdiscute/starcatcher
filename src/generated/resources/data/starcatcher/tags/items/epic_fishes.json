@@ -109,10 +109,6 @@
       "required": false
     },
     {
-      "id": "tide:windbass",
-      "required": false
-    },
-    {
       "id": "tide:echo_snapper",
       "required": false
     },
