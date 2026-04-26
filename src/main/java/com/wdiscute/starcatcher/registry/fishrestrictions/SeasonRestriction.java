@@ -114,7 +114,7 @@ public class SeasonRestriction extends AbstractFishRestriction
         int color = getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0 ?
                 SCColors.GUIDE_GREEN : SCColors.GUIDE_RED;
 
-        if(getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) > 0)
+        if(getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
             return List.of(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(color)));
         else
             return List.of(Component.translatable("gui.guide.seasons.not_in_season").withStyle(Style.EMPTY.withColor(color)));
