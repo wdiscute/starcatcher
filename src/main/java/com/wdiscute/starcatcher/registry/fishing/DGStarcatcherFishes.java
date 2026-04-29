@@ -486,7 +486,7 @@ public class DGStarcatcherFishes
                 .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
                 .withRarity(FishProperties.Rarity.EPIC)
                 .addRestrictions(DimensionRestriction.OVERWORLD,
-                        new ElevationRestriction(-20, -40, "")));
+                        new ElevationRestriction(-40, -20, "")));
 
         //dripstone caves
         registerStarcatcherBucketAndEntity(overworldDripstoneCavesFish(SCItems.FOSSILIZED_ANGELFISH)
