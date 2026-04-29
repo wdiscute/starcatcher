@@ -35,8 +35,8 @@
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": -40,
-      "min_y": -20
+      "max_y": -20,
+      "min_y": -40
     }
   ],
   "size_and_weight": {
