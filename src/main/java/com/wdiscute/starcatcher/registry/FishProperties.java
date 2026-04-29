@@ -2029,10 +2029,38 @@ public record FishProperties(
 
                 List<ItemStack> items = new ArrayList<>();
 
-                //if should spawn entity
-                if (fp.catchInfo().alwaysSpawnEntity() ||
+                boolean spawnEntity = fp.catchInfo().alwaysSpawnEntity() ||
                         ModList.get().isLoaded("fishingreal") ||
-                        fbe.modifiers.stream().anyMatch(AbstractCatchModifier::forceSpawnEntity))
+                        fbe.modifiers.stream().anyMatch(AbstractCatchModifier::forceSpawnEntity);
+
+                //build base fish itemstack so the ItemFishedEvent always sees the catch, even when an entity will be spawned in place of the item
+                ItemStack baseFish = makeItemStack(fbe.rod, fbe.fpToFish, size, weight, percentile, golden, player, perfectCatch);
+                for (AbstractCatchModifier acm : fbe.modifiers) acm.modifyBaseItemStack(baseFish);
+                items.add(baseFish);
+
+                //add items to list from modifiers
+                for (AbstractCatchModifier acm : fbe.modifiers)
+                    items.addAll(acm.addToFishedItems(time, perfectCatch, hits, completedTreasure, player));
+
+                //add treasure
+                if (completedTreasure || fbe.modifiers.stream().anyMatch(acm -> acm.forceAwardTreasure(fbe, time, completedTreasure, perfectCatch, hits)))
+                {
+                    items.add(fp.loadTreasure(player).catchInfo.treasureIs);
+                }
+
+                //fire ItemFishedEvent for mod compat (e.g. PMMO). Throwaway FishingHook only exists to satisfy the event constructor.
+                if (!items.isEmpty())
+                {
+                    FishingHook fakeHook = new FishingHook(player, level, 0, 0);
+                    fakeHook.setPos(fbe.position());
+                    ItemFishedEvent event = new ItemFishedEvent(items, 0, fakeHook);
+                    NeoForge.EVENT_BUS.post(event);
+                    if (event.isCanceled()) items.clear();
+                    fakeHook.discard();
+                }
+
+                //if should spawn entity, do so in place of the base fish item
+                if (spawnEntity && items.remove(baseFish))
                 {
                     Vec3 objPos = player.position().subtract(fbe.position());
 
@@ -2065,36 +2093,6 @@ public record FishProperties(
                     Vec3 vec3 = new Vec3(x, 0.7 + y, z);
                     entity.setDeltaMovement(vec3);
                     level.addFreshEntity(entity);
-                }
-                //if not entity then add base item stack
-                else
-                {
-                    ItemStack is = makeItemStack(fbe.rod, fbe.fpToFish, size, weight, percentile, golden, player, perfectCatch);
-                    items.add(is);
-
-                    //modify base itemstack from modifiers
-                    for (AbstractCatchModifier acm : fbe.modifiers) acm.modifyBaseItemStack(is);
-                }
-
-                //add items to list from modifiers
-                for (AbstractCatchModifier acm : fbe.modifiers)
-                    items.addAll(acm.addToFishedItems(time, perfectCatch, hits, completedTreasure, player));
-
-                //add treasure
-                if (completedTreasure || fbe.modifiers.stream().anyMatch(acm -> acm.forceAwardTreasure(fbe, time, completedTreasure, perfectCatch, hits)))
-                {
-                    items.add(fp.loadTreasure(player).catchInfo.treasureIs);
-                }
-
-                //fire ItemFishedEvent for mod compat (e.g. PMMO). Throwaway FishingHook only exists to satisfy the event constructor.
-                if (!items.isEmpty())
-                {
-                    FishingHook fakeHook = new FishingHook(player, level, 0, 0);
-                    fakeHook.setPos(fbe.position());
-                    ItemFishedEvent event = new ItemFishedEvent(items, 0, fakeHook);
-                    NeoForge.EVENT_BUS.post(event);
-                    if (event.isCanceled()) items.clear();
-                    fakeHook.discard();
                 }
 
                 //spawn items from list
