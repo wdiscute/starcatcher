@@ -84,7 +84,7 @@
       "ranges": [
         {
           "first": 16500,
-          "second": 12700
+          "second": 19500
         }
       ],
       "translation_override": "gui.guide.midnight"

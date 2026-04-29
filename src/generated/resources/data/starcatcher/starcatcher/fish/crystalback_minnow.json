@@ -76,7 +76,7 @@
       "ranges": [
         {
           "first": 12700,
-          "second": 23000
+          "second": 24000
         }
       ],
       "translation_override": "gui.guide.night"

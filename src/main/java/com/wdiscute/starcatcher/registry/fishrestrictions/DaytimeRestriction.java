@@ -131,9 +131,9 @@ public class DaytimeRestriction extends AbstractFishRestriction
     }
 
     public static final DaytimeRestriction DAY = new DaytimeRestriction(List.of(new Duo(0, 12700)), "gui.guide.day");
-    public static final DaytimeRestriction NOON = new DaytimeRestriction(List.of(new Duo(3500, 8500)), "gui.guide.noon");
-    public static final DaytimeRestriction MIDNIGHT = new DaytimeRestriction(List.of(new Duo(16500, 12700)), "gui.guide.midnight");
-    public static final DaytimeRestriction NIGHT = new DaytimeRestriction(List.of(new Duo(12700, 23000)), "gui.guide.night");
+    public static final DaytimeRestriction NOON = new DaytimeRestriction(List.of(new Duo(4500, 7500)), "gui.guide.noon");
+    public static final DaytimeRestriction MIDNIGHT = new DaytimeRestriction(List.of(new Duo(16500, 19500)), "gui.guide.midnight");
+    public static final DaytimeRestriction NIGHT = new DaytimeRestriction(List.of(new Duo(12700, 24000)), "gui.guide.night");
 
     public interface SkipsDaytimeRestriction
     {
