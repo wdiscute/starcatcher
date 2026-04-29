@@ -136,6 +136,7 @@
   "starcatcher.configuration.base_max_ticks" : "Maximum Ticks To Fish",
   "starcatcher.configuration.base_chance" : "Base Chance To Fish Per Tick",
   "starcatcher.configuration.restrict_tackle_box_to_tag" : "Restrict Tackle Box To Tag",
+  "starcatcher.configuration.disable_entity_spawning" : "Disable Entity Spawning",
   "starcatcher.configuration.fish_percentile_size_max_scale" : "Fish Model Max Scale",
   "starcatcher.configuration.fish_percentile_size_min_scale" : "Fish Model Min Scale",
   "starcatcher.configuration.enable_rod_menu" : "Enable Rod Menu",

@@ -2029,9 +2029,10 @@ public record FishProperties(
 
                 List<ItemStack> items = new ArrayList<>();
 
-                boolean spawnEntity = fp.catchInfo().alwaysSpawnEntity() ||
-                        ModList.get().isLoaded("fishingreal") ||
-                        fbe.modifiers.stream().anyMatch(AbstractCatchModifier::forceSpawnEntity);
+                boolean spawnEntity = !SCConfig.DISABLE_ENTITY_SPAWNING.get() &&
+                        (fp.catchInfo().alwaysSpawnEntity() ||
+                                ModList.get().isLoaded("fishingreal") ||
+                                fbe.modifiers.stream().anyMatch(AbstractCatchModifier::forceSpawnEntity));
 
                 //build base fish itemstack so the ItemFishedEvent always sees the catch, even when an entity will be spawned in place of the item
                 ItemStack baseFish = makeItemStack(fbe.rod, fbe.fpToFish, size, weight, percentile, golden, player, perfectCatch);
@@ -2048,7 +2049,7 @@ public record FishProperties(
                     items.add(fp.loadTreasure(player).catchInfo.treasureIs);
                 }
 
-                //fire ItemFishedEvent for mod compat (e.g. PMMO). Throwaway FishingHook only exists to satisfy the event constructor.
+                //fire ItemFishedEvent for mod compat. Throwaway FishingHook only exists to satisfy the event constructor.
                 if (!items.isEmpty())
                 {
                     FishingHook fakeHook = new FishingHook(player, level, 0, 0);

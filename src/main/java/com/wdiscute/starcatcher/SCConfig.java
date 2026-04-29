@@ -159,6 +159,11 @@ public class SCConfig
             .translation("starcatcher.configuration.restrict_tackle_box_to_tag")
             .define("restrict_tackle_box_to_tag", true);
 
+    public static final ModConfigSpec.BooleanValue DISABLE_ENTITY_SPAWNING = BUILDER_SERVER
+            .comment("If enabled, fishes that would normally spawn as an entity (always_spawn_entity / fishingreal / forced by modifier) will spawn as item entities instead.")
+            .translation("starcatcher.configuration.disable_entity_spawning")
+            .define("disable_entity_spawning", false);
+
     public static final ModConfigSpec.BooleanValue ENABLE_ROD_MENU = BUILDER_SERVER
             .translation("starcatcher.configuration.enable_rod_menu")
             .define("enable_rod_menu", false);
