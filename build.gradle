@@ -85,7 +85,7 @@ dependencies {
     // interfaceInjectionData(files(".libs/neobackports-${neobackports_version}-interfaceinjection.json"))
 
     //selling bin
-    jarJar(modImplementation("maven.modrinth:wds-selling-bin:1.4.1-FORGE-1.20.1"))
+    jarJar(modImplementation("com.wdiscute:Selling-Bin:1.4.2-FORGE-1.20.1"))
 
     //tooltips
     jarJar(modImplementation("local:libtooltips:1.6"))

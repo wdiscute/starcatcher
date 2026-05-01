@@ -11,9 +11,9 @@
         {
           "type": "selling_bin:quality_foods_processor",
           "quality_type": {
-            "quality_food:diamond": 2.0,
-            "quality_food:gold": 1.5,
-            "quality_food:iron": 1.25
+            "diamond": 2.0,
+            "gold": 1.5,
+            "iron": 1.25
           }
         }
       ]
@@ -29,9 +29,9 @@
         {
           "type": "selling_bin:quality_foods_processor",
           "quality_type": {
-            "quality_food:diamond": 2.0,
-            "quality_food:gold": 1.5,
-            "quality_food:iron": 1.25
+            "diamond": 2.0,
+            "gold": 1.5,
+            "iron": 1.25
           }
         }
       ]
@@ -47,9 +47,9 @@
         {
           "type": "selling_bin:quality_foods_processor",
           "quality_type": {
-            "quality_food:diamond": 2.0,
-            "quality_food:gold": 1.5,
-            "quality_food:iron": 1.25
+            "diamond": 2.0,
+            "gold": 1.5,
+            "iron": 1.25
           }
         }
       ]
@@ -65,9 +65,9 @@
         {
           "type": "selling_bin:quality_foods_processor",
           "quality_type": {
-            "quality_food:diamond": 2.0,
-            "quality_food:gold": 1.5,
-            "quality_food:iron": 1.25
+            "diamond": 2.0,
+            "gold": 1.5,
+            "iron": 1.25
           }
         }
       ]
@@ -83,9 +83,9 @@
         {
           "type": "selling_bin:quality_foods_processor",
           "quality_type": {
-            "quality_food:diamond": 2.0,
-            "quality_food:gold": 1.5,
-            "quality_food:iron": 1.25
+            "diamond": 2.0,
+            "gold": 1.5,
+            "iron": 1.25
           }
         }
       ]
