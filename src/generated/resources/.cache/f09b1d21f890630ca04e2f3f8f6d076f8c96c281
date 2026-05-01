@@ -1,7 +1,7 @@
-// 1.20.1	2026-04-26T16:23:33.4427464	Tags for starcatcher:fish mod id starcatcher
+// 1.20.1	2026-05-01T21:53:14.7249607	Tags for starcatcher:fish mod id starcatcher
 e1f8863b18773c2cd96c45dd0879e8d4d375d9fb data/starcatcher/tags/starcatcher/fish/common_fishes.json
 32dfbb157e511c80937f51fc786fc5d36f2dfb87 data/starcatcher/tags/starcatcher/fish/epic_fishes.json
 f98e294f39f03914549c2d075e9122f90c6a4118 data/starcatcher/tags/starcatcher/fish/legendary_fishes.json
-2dd96f63deb4df794ca039b824063f4bcc8116a2 data/starcatcher/tags/starcatcher/fish/rare_fishes.json
+8a450cee050a6f37b72ca69143e9fc617e3874a9 data/starcatcher/tags/starcatcher/fish/rare_fishes.json
 b2fabcf619a09d79efc71f1c43df023974ee327d data/starcatcher/tags/starcatcher/fish/trash_fishes.json
 cb73b09ca1f49177fd87be6121781b56240553bc data/starcatcher/tags/starcatcher/fish/uncommon_fishes.json

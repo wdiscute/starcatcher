@@ -151,7 +151,7 @@ public class DGUnusualFishFishes extends FishingPropertiesRegistry
                 .withDifficulty(FishProperties.Difficulty.MEDIUM_MOVING)
         );
 
-        register(helper("circus")
+        register(helper("circus_fish")
                 .addRestrictions(FishProperties.WorldRestrictions.OVERWORLD_LUKEWARM_OCEAN)
                 .withRarity(FishProperties.Rarity.RARE)
                 .withWeather(WeatherRestriction.CLEAR)

@@ -3350,7 +3350,7 @@
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "unusualfishmod:raw_circus": {
+    "unusualfishmod:raw_circus_fish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",

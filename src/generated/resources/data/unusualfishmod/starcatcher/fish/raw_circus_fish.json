@@ -1,9 +1,9 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "entity": "unusualfishmod:circus",
-    "fish_bucket": "unusualfishmod:circus_bucket",
-    "item": "unusualfishmod:raw_circus"
+    "entity": "unusualfishmod:circus_fish",
+    "fish_bucket": "unusualfishmod:circus_fish_bucket",
+    "item": "unusualfishmod:raw_circus_fish"
   },
   "difficulty": {
     "decay": 0.0,

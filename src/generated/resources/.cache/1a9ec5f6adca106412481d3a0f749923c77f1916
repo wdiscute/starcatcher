@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-01T11:39:49.9061902	FishingProperties
+// 1.20.1	2026-05-01T21:53:14.7305133	FishingProperties
 47984659f5fcba839d1d19e3962f7e629edd2840 data/alexscaves/starcatcher/fish/lanternfish.json
 c3b074ed1ef69c08c0369ced097fbe7ac34e59a3 data/alexscaves/starcatcher/fish/radgill.json
 c4c1a020d9084d0a17eb91833053874e04a52e2e data/alexscaves/starcatcher/fish/sweetish_fish_blue.json
@@ -415,7 +415,7 @@ b6b222a0e6f6d307ac1d70568d5b72547c34309e data/unusualfishmod/starcatcher/fish/ra
 f0a136d52b7bd4879d83819f7b9a6f116393d5c1 data/unusualfishmod/starcatcher/fish/raw_bark_angelfish.json
 0558270367d7efe1fad1193685074dc30ec966da data/unusualfishmod/starcatcher/fish/raw_beaked_herring.json
 df4939f044a466bcdcb11927e8667a11f1296e2d data/unusualfishmod/starcatcher/fish/raw_blind_sailfin.json
-7c454c9e3fa3ec15266c0ea62c6fd48fa0498cee data/unusualfishmod/starcatcher/fish/raw_circus.json
+5c6fca5298165c81d5fbbbfc7daca5cd9375b885 data/unusualfishmod/starcatcher/fish/raw_circus_fish.json
 f8afc784369d60fa33b0119d91ae38356db1e38c data/unusualfishmod/starcatcher/fish/raw_copperflame_anthias.json
 a63b24b0135805f9f2086af6efc4adf3c4f8eeb3 data/unusualfishmod/starcatcher/fish/raw_demon_herring.json
 a58c71650f31abf1394d64863db76929360811a7 data/unusualfishmod/starcatcher/fish/raw_drooping_gourami.json
