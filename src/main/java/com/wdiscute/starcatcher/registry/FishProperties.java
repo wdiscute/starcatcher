@@ -54,6 +54,8 @@ import net.minecraft.world.level.storage.loot.entries.LootTableReference;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.fml.ModList;
 import net.nikdo53.neobackports.io.StreamCodec;
 import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
@@ -61,6 +63,7 @@ import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.charset.MalformedInputException;
 import java.util.*;
 import java.util.function.Supplier;
 
@@ -2092,7 +2095,7 @@ public record FishProperties(
                     FishingHook fakeHook = new FishingHook(player, level, 0, 0);
                     fakeHook.setPos(fbe.position());
                     ItemFishedEvent event = new ItemFishedEvent(items, 0, fakeHook);
-                    NeoForge.EVENT_BUS.post(event);
+                    MinecraftForge.EVENT_BUS.post(event);
                     if (event.isCanceled()) items.clear();
                     fakeHook.discard();
                 }
