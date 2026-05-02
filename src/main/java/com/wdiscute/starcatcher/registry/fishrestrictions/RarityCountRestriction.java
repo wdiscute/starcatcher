@@ -141,7 +141,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
 
         Map<ResourceLocation, FishCaughtCounter> fishesCaught = SCDataAttachments.get(entity, SCDataAttachments.FISHING_GUIDE).fishesCaught;
         var registry = FishProperties.getRegistry(level);
-        List<FishProperties> allFishes = FishProperties.getFishes(level);
+        List<FishProperties> allFishes = FishProperties.getFishes(level).stream().filter(o -> o.hasGuideEntry()).toList();
         Map<FishProperties.Rarity, Pair<Integer, Integer>> map = new HashMap<>();
 
         //populate default map with all rarities and [0, 0]
@@ -182,7 +182,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
         if (rarityCount.countType == RarityCount.CountType.ALL)
         {
             Registry<FishProperties> registry = FishProperties.getRegistry(level);
-            List<FishProperties> fps = FishProperties.getFishes(level);
+            List<FishProperties> fps = FishProperties.getFishes(level).stream().filter(o -> o.hasGuideEntry()).toList();
 
             if (rarityCount.rarity.equals(FishProperties.Rarity.NONE))
             {
