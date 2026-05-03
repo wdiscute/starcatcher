@@ -373,12 +373,13 @@ public class FishingBobEntity extends Projectile
                 ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, SingleStackContainer.empty()).create();
                 if (!bait.is(Items.BUCKET))
                 {
-                    bait.shrink(1);
                     if (bait.getCount() < 5)
                     {
                         player.sendOverlayMessage(Component.translatable("gui.starcatcher.bait_running_low"));
                     }
-                    SCDataComponents.set(rod, SCDataComponents.BAIT, SingleStackContainer.empty());
+                    ItemStack copy = bait.copy();
+                    copy.shrink(1);
+                    SCDataComponents.set(rod, SCDataComponents.BAIT, SingleStackContainer.from(copy));
                 }
 
                 if (!level().isClientSide())

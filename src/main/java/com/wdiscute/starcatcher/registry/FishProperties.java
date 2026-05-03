@@ -2105,14 +2105,16 @@ public record FishProperties(
             ItemStack bait = SCDataComponents.getOrDefault(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.empty()).create();
             if (!bait.is(Items.BUCKET))
             {
-                bait.shrink(1);
-                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.empty());
+                ItemStack copy = bait.copy();
+                copy.shrink(1);
+                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.from(copy));
             }
 
             if (bait.is(Items.BUCKET) && !fbe.fpToFish.catchInfo().bucketedFish().is(SCItems.MISSINGNO.getKey()) && time != -1)
             {
-                bait.shrink(1);
-                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.empty());
+                ItemStack copy = bait.copy();
+                copy.shrink(1);
+                SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, SingleStackContainer.from(copy));
             }
 
             fbe.kill(level);
