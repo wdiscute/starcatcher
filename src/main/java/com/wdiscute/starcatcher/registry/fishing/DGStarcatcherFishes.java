@@ -518,7 +518,7 @@ public class DGStarcatcherFishes
                 .withRarity(FishProperties.Rarity.UNCOMMON)
                 .withBaseChance(4));
 
-        registerStarcatcherBucketAndEntity(overworldLushCavesFish(SCItems.THE_QUARRISH)
+        registerStarcatcherBucketAndEntity(fish(SCItems.THE_QUARRISH)
                 .withSizeAndWeight(FishProperties.sizeWeight(620, 270, 700000, 300000))
                 .withDifficulty(FishProperties.Difficulty.HEAVY_FIVE_NORMAL)
                 .withRarity(FishProperties.Rarity.EPIC)

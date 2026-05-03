@@ -14,8 +14,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraftforge.network.PacketDistributor;
 import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
+import net.nikdo53.neobackports.screen.BlurScreenBackports;
 import net.nikdo53.neobackports.screen.BlurShaderLoader;
-import net.nikdo53.neobackports.screen.OptionsScreenBackports;
 
 import java.util.*;
 
@@ -60,7 +60,9 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
 
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY) {
-        OptionsScreenBackports.renderBlurOrPanorama(guiGraphics, 0, 0, this.width, this.height);
+        if (BlurShaderLoader.shouldCancelBackground(true)) {
+            BlurScreenBackports.renderBlurOrPanorama(guiGraphics, 0, 0, this.width, this.height);
+        }
         this.renderBackground(guiGraphics);
     }
 

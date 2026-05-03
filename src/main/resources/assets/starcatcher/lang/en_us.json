@@ -58,6 +58,7 @@
   "tag.minecraft.is_forest" : "Forests",
   "tag.minecraft.is_hill" : "Hills",
   "tag.minecraft.is_jungle" : "Jungles",
+  "tag.starcatcher.lush_and_jungle" : "Jungle & Lush Caves",
   "tag.minecraft.is_mountain" : "Mountains",
   "tag.minecraft.is_nether" : "Nether Biomes",
   "tag.minecraft.is_ocean" : "All Oceans",
