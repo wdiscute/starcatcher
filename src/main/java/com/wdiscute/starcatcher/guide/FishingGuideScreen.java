@@ -704,6 +704,8 @@ public class FishingGuideScreen extends Screen
         //if hovering sign rectangle
         if (mouseX > uiX + 285 - width1 / 2 && mouseX < uiX + 285 + width1 / 2 && mouseY > uiY + 117 && mouseY < uiY + 117 + 12)
         {
+
+            guiGraphics.renderTooltip(font, List.of(Component.translatable("gui.guide.sign.locked.0"), Component.translatable("gui.guide.sign.locked.1")), Optional.empty(), mouseX, mouseY);
             guiGraphics.renderOutline(uiX + 285 - width1 / 2, uiY + 117, width1, 12, 0xff000000);
             if (clicked)
             {

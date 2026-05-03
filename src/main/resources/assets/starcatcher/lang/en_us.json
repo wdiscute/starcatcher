@@ -58,7 +58,7 @@
   "tag.minecraft.is_forest" : "Forests",
   "tag.minecraft.is_hill" : "Hills",
   "tag.minecraft.is_jungle" : "Jungles",
-  "tag.starcatcher.lush_and_jungle" : "Jungle & Lush Caves",
+  "tag.starcatcher.lush_and_jungle" : "Jungles & Lush Caves",
   "tag.minecraft.is_mountain" : "Mountains",
   "tag.minecraft.is_nether" : "Nether Biomes",
   "tag.minecraft.is_ocean" : "All Oceans",
@@ -549,6 +549,8 @@
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
   "gui.guide.sign" : "Sign",
+  "gui.guide.sign.locked.0" : "Signing will lock in all your current catches",
+  "gui.guide.sign.locked.1" : "This book will no longer be updated with new catches after locking.",
   "gui.guide.season" : "Season: ",
   "gui.guide.seasons" : "Seasons: ",
 
