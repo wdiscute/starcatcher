@@ -27,5 +27,6 @@
     "starcatcher:fisherman_hat_light_blue",
     "starcatcher:fisherman_hat_cyan",
     "starcatcher:fisherman_hat_green"
-  ]
+  ],
+  "priority": 1
 }

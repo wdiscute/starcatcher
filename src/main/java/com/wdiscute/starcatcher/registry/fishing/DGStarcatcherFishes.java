@@ -486,7 +486,7 @@ public class DGStarcatcherFishes
                 .withDifficulty(FishProperties.Difficulty.SINGLE_BIG_FAST)
                 .withRarity(FishProperties.Rarity.EPIC)
                 .addRestrictions(DimensionRestriction.OVERWORLD,
-                        new ElevationRestriction(-20, -40, "")));
+                        new ElevationRestriction(-40, -20, "")));
 
         //dripstone caves
         registerStarcatcherBucketAndEntity(overworldDripstoneCavesFish(SCItems.FOSSILIZED_ANGELFISH)
@@ -518,7 +518,7 @@ public class DGStarcatcherFishes
                 .withRarity(FishProperties.Rarity.UNCOMMON)
                 .withBaseChance(4));
 
-        registerStarcatcherBucketAndEntity(overworldLushCavesFish(SCItems.THE_QUARRISH)
+        registerStarcatcherBucketAndEntity(fish(SCItems.THE_QUARRISH)
                 .withSizeAndWeight(FishProperties.sizeWeight(620, 270, 700000, 300000))
                 .withDifficulty(FishProperties.Difficulty.HEAVY_FIVE_NORMAL)
                 .withRarity(FishProperties.Rarity.EPIC)

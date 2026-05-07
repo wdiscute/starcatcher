@@ -80,37 +80,10 @@
       ],
       "biomes_blacklist": [],
       "biomes_blacklist_tags": [],
-      "biomes_tags": []
-    },
-    {
-      "type": "starcatcher:elevation_restriction",
-      "max_y": 50,
-      "min_y": -2147483648,
-      "translation_override": "gui.guide.elevation.underground"
-    },
-    {
-      "type": "starcatcher:bait",
-      "baits": {
-        "starcatcher:lush_bait": 50
-      }
-    },
-    {
-      "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
-    },
-    {
-      "type": "starcatcher:biome",
-      "biomes": [
-        "minecraft:lush_caves"
-      ],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
       "biomes_tags": [
         "minecraft:is_jungle"
-      ]
+      ],
+      "translation_override": "tag.starcatcher.lush_and_jungle"
     },
     {
       "type": "starcatcher:elevation_restriction",

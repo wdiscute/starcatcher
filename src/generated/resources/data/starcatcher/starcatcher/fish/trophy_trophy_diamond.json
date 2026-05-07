@@ -48,8 +48,7 @@
           "count_type": "total"
         },
         {
-          "count_type": "all",
-          "rarity": "common"
+          "count_type": "all"
         }
       ]
     }

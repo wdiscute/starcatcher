@@ -99,7 +99,7 @@ public class DGTrophies
                 .withHasGuideEntry(false)
                 .addRarityRestriction(
                         new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 500, RarityCountRestriction.RarityCount.CountType.TOTAL),
-                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.COMMON, 0, RarityCountRestriction.RarityCount.CountType.ALL)
+                        new RarityCountRestriction.RarityCount(FishProperties.Rarity.NONE, 0, RarityCountRestriction.RarityCount.CountType.ALL)
                 )
                 .trophy()
         );
