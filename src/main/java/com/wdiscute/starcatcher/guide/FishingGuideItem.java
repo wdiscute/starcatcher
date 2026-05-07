@@ -71,22 +71,12 @@ public class FishingGuideItem extends Item
         if (level.isClientSide())
         {
             if (SCDataComponents.has(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE))
-                openSignedGuide(SCDataComponents.get(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE));
+                StarcatcherClient.openSignedGuideScreen(SCDataComponents.get(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE));
             else
-                openPersonalGuide();
+                StarcatcherClient.openGuideScreen();
         }
 
-        level.playSound(null, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS);
+        level.playSound(player, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS);
         return InteractionResult.SUCCESS;
-    }
-
-    private void openPersonalGuide()
-    {
-        StarcatcherClient.openGuideScreen();
-    }
-
-    private void openSignedGuide(SignedGuide signedGuide)
-    {
-        StarcatcherClient.openSignedGuideScreen(signedGuide);
     }
 }

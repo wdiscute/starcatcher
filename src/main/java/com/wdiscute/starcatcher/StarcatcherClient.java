@@ -52,11 +52,13 @@ public class StarcatcherClient
 
     public static void openGuideScreen()
     {
+        Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
         Minecraft.getInstance().setScreen(new FishingGuideScreen());
     }
 
     public static void openSignedGuideScreen(SignedGuide signedGuide)
     {
+        Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
         Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));
     }
 
@@ -66,18 +68,9 @@ public class StarcatcherClient
         Minecraft.getInstance().setScreen(new MessageScreen(message));
     }
 
-    public static void openPersonalGuide()
-    {
-        Minecraft.getInstance().setScreen(new FishingGuideScreen());
-    }
-
-    public static void openSignedGuide(SignedGuide signedGuide)
-    {
-        Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));
-    }
-
     public static void openNoteScreen(SecretNote.Note note)
     {
+        Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
         Minecraft.getInstance().setScreen(new SecretNoteScreen(note, null));
     }
 

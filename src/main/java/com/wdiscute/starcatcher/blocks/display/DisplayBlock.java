@@ -159,9 +159,9 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 {
                     SignedGuide signed = SCDataComponents.get(dbe.getItem(), SCDataComponents.SIGNED_GUIDE);
                     if (signed != null)
-                        StarcatcherClient.openSignedGuide(signed);
+                        StarcatcherClient.openSignedGuideScreen(signed);
                     else
-                        StarcatcherClient.openPersonalGuide();
+                        StarcatcherClient.openGuideScreen();
                 }
                 else
                 {
