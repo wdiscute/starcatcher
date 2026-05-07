@@ -1061,7 +1061,7 @@ public class FishingGuideScreen extends Screen
                     ItemStack stack = trophiesIS.get(Math.abs((leftPageScroll + i) % trophiesIS.size()));
                     FishProperties fp = trophies.get(Math.abs((leftPageScroll + i) % trophies.size()));
                     //render item
-                    renderItemWithHoverAndEmi(guiGraphics, stack, x, y, mouseX, mouseY);
+                    guiGraphics.item(stack, x, y, 1);
                     //render hover item tooltip
                     if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16)
                     {
@@ -1864,13 +1864,6 @@ public class FishingGuideScreen extends Screen
                 renderTooltip(Component.translatable("gui.guide.always_entity"));
         }
 
-        //render name
-        if (fishToDisplay != ItemStack.EMPTY)
-        {
-            guiGraphics.item(fishToDisplay, x + 26, y + 70);
-            renderScrollingString(guiGraphics, font, fp.getDisplayName(), 20, x + 28, y + 36, x + 141, y + 46, true);
-        }
-
         int color = switch (fp.rarity())
         {
             case FishProperties.Rarity.TRASH, FishProperties.Rarity.COMMON, FishProperties.Rarity.NONE -> 0x00ffffff;
@@ -1892,6 +1885,16 @@ public class FishingGuideScreen extends Screen
         int yOffset = y + 132;
         int counter = 0;
 
+        //render name & item
+        if (fishToDisplay != ItemStack.EMPTY)
+        {
+            guiGraphics.pose().pushMatrix();
+            guiGraphics.pose().translate(x + 10, y + 55);
+            guiGraphics.pose().scale(3);
+            guiGraphics.item(fishToDisplay, 0, 0);
+            guiGraphics.pose().popMatrix();
+            renderScrollingString(guiGraphics, font, fp.getDisplayName(), 20, x + 28, y + 36, x + 141, y + 46, true);
+        }
 
         //render restrictions
         for (var restriction : fp.restrictions())
