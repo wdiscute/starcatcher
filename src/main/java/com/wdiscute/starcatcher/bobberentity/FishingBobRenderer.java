@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.bobberentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.U;
@@ -30,6 +31,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.phys.Vec3;
+import org.joml.Quaternionf;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,13 +79,14 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
 
         //render tackle
         poseStack.pushPose();
-        poseStack.scale(-1F, -1F, -1F);
+        poseStack.scale(1F, -1F, 1F);
         poseStack.translate(0, -1.6, 0);
-        EntityModel<FishingBobRenderState> model = map.get(state.skin.getName());
+        poseStack.mulPose(Axis.YP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-state.entityYaw));
 
         //starcatcher:base
         Identifier rl = U.rl(state.skin.getName().getNamespace(), "textures/entity/tackle/" + state.skin.getName().getPath() + ".png");
-
+        EntityModel<FishingBobRenderState> model = map.get(state.skin.getName());
         node.submitModel(
                 model, state, poseStack, RenderTypes.entityCutout(rl), state.lightCoords, OverlayTexture.NO_OVERLAY,
                 0xffffffff, null, state.outlineColor, null
@@ -134,16 +137,6 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
         return (float) i / steps;
     }
 
-    private static void vertex(VertexConsumer builder, PoseStack.Pose pose, int lightCoords, float x, int y, int u, int v)
-    {
-        builder.addVertex(pose, x - 0.5F, y - 0.5F, 0.0F)
-                .setColor(-1)
-                .setUv(u, v)
-                .setOverlay(OverlayTexture.NO_OVERLAY)
-                .setLight(lightCoords)
-                .setNormal(pose, 0.0F, 1.0F, 0.0F);
-    }
-
     private static void stringVertex(float xa, float ya, float za, VertexConsumer stringBuffer, PoseStack.Pose stringPose, float aa, float nexta, float width)
     {
         float x = xa * aa;
@@ -181,6 +174,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
             state.lineOriginOffset = playerPos.subtract(hookPos);
         }
 
+        state.entityYaw = entity.yRotO;
         state.skin = entity.level().registryAccess().lookup(Starcatcher.TACKLE_SKIN).get().getValue(SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN)).get();
     }
 }

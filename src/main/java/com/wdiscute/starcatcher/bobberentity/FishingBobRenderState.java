@@ -9,5 +9,5 @@ public class FishingBobRenderState extends EntityRenderState
 {
     public Vec3 lineOriginOffset = Vec3.ZERO;
     AbstractTackleSkin skin = new BaseTackleSkin();
-
+    float entityYaw = 0;
 }
