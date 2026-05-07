@@ -4,7 +4,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCColors;
+import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
+import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.StringRepresentable;
@@ -99,11 +102,22 @@ public class WeatherRestriction extends AbstractFishRestriction
     @Override
     public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
+        //skip if any modifiers have skipsWeatherRestriction interface
+        if (context.equals(Context.FISHING) && entity instanceof FishingBobEntity bob && bob.player != null)
+        {
+            if (SCCatchModifiers.getCatchModifiers(bob.player).stream().anyMatch(
+                    o -> o instanceof SkipsWeatherRestriction sp && sp.shouldSkipWeather(level)))
+                return 0;
+
+            if (SCMinigameModifiers.getMinigameModifiers(bob.player).stream().anyMatch(
+                    o -> o instanceof SkipsWeatherRestriction sp && sp.shouldSkipWeather(level)))
+                return 0;
+        }
+
         //fishes in area for guidebook ignores this restriction
-        if (context.equals(Context.GUIDE_FISHES_IN_AREA))
-            return 0;
-        else
-            return -9999;
+        if (context.equals(Context.GUIDE_FISHES_IN_AREA)) return 0;
+
+        return weather.isCorrect.test(level) ? 0 : -9999;
     }
 
     @Override
@@ -132,5 +146,8 @@ public class WeatherRestriction extends AbstractFishRestriction
     public static final WeatherRestriction RAIN = new WeatherRestriction(Weather.RAIN);
     public static final WeatherRestriction THUNDER = new WeatherRestriction(Weather.THUNDER);
 
-
+    public interface SkipsWeatherRestriction
+    {
+        boolean shouldSkipWeather(Level level);
+    }
 }

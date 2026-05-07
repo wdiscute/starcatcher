@@ -187,7 +187,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         if (stack.is(SCTags.PLACEABLE_IN_DISPLAY) && !state.getValue(HAS_ITEM) && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
             if (level.isClientSide()) return InteractionResult.SUCCESS;
-            dbe.setItem(stack.copy());
+            dbe.setItem(stack.copyWithCount(1));
             stack.shrink(1);
             level.setBlock(pos, state.setValue(HAS_ITEM, true), 0);
             dbe.sync();
