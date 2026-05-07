@@ -34,7 +34,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         FishRenderer.createMap(context.entityModelSet());
     }
 
-    private void moveFish(AquariumRenderState be)
+    private void moveFish(AquariumBlockEntity be)
     {
         //speed in blocks per second
         double fishSpeed = 1f;
@@ -92,8 +92,6 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
 
         ItemStack fish = be.fish;
 
-        if (!fish.isEmpty()) moveFish(be);
-
         poseStack.pushPose();
 
         Vec3 offsetCenter = new Vec3(0.5f, -0.35f, 0.5f);
@@ -111,7 +109,6 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
             if (!player.getMainHandItem().is(Items.BUCKET) && !player.getOffhandItem().is(Items.BUCKET))
             {
                 poseStack.translate(be.x, be.y, be.z);
-
             }
         }
         else
@@ -139,8 +136,16 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
     public void extractRenderState(AquariumBlockEntity be, AquariumRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress)
     {
         BlockEntityRenderer.super.extractRenderState(be, state, partialTicks, cameraPosition, breakProgress);
+
+        if (!be.fish.isEmpty()) moveFish(be);
+
         state.fishTargetBP = be.fishTargetBP;
         state.fishRotation = be.fishRotation;
+
+        state.x = be.x;
+        state.y = be.y;
+        state.z = be.z;
+
         state.fish = be.fish;
     }
 }

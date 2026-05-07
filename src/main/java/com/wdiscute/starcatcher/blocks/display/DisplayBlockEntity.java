@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.blocks.display;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.io.NBTCodecHelper;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 
 public class DisplayBlockEntity extends BlockEntity
@@ -150,6 +152,20 @@ public class DisplayBlockEntity extends BlockEntity
         }
 
         return 15;
+    }
+
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
+    {
+        return saveWithFullMetadata(registries);
+    }
+
+    @Override
+    public void handleUpdateTag(ValueInput input)
+    {
+        super.handleUpdateTag(input);
+        this.item = input.read("item", SingleStackContainer.CODEC).orElse(SingleStackContainer.empty()).create();
     }
 
     @Override

@@ -171,8 +171,6 @@ public class SCEvents
             //guide
             FishingGuideAttachment fishingGuideAttachment = SCDataAttachments.get(sp, SCDataAttachments.FISHING_GUIDE);
 
-            //sp.sendSystemMessage(Component.literal("Thank you for trying out the beta version of Starcatcher for 26.1! This version is very raw and it's very likely to crash. A lot of things changed and have not been thoroughly playtested. Use at your own risk as items may be lost during crashes! Please report any bugs in the discord linked on CF/modrinth"));
-
             if (SCConfig.GIVE_GUIDE.get() && !fishingGuideAttachment.receivedGuide)
             {
                 sp.addItem(new ItemStack(SCItems.GUIDE.get()));

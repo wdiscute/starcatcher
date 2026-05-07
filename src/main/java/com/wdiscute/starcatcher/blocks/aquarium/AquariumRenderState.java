@@ -7,7 +7,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class AquariumRenderState extends BlockEntityRenderState
 {
-    ItemStack fish;
+    ItemStack fish = ItemStack.EMPTY;
     public BlockPos fishTargetBP = BlockPos.ZERO;
     public Vec3 fishTarget = Vec3.ZERO;
     double partialHelper = 0;

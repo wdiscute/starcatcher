@@ -1,24 +1,34 @@
 package com.wdiscute.starcatcher.blocks.aquarium;
 
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.U;
+import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.io.NBTCodecHelper;
 import com.wdiscute.starcatcher.io.SingleStackContainer;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
+import com.wdiscute.starcatcher.registry.SCEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntitySpawnReason;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.Nullable;
 
 public class AquariumBlockEntity extends BlockEntity implements TickableBlockEntity
 {
@@ -49,6 +59,40 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     public ItemStack getFish()
     {
         return fish;
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state)
+    {
+        super.preRemoveSideEffects(pos, state);
+
+        if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe && !level.isClientSide())
+        {
+            if (abe.getFish().is(SCTags.BUCKETABLE_FISHES))
+            {
+                ItemStack itemstack = abe.getFish().copy();
+                FishEntity entity = SCEntities.FISH.get().create(level, EntitySpawnReason.BUCKET);
+
+                entity.setFish(itemstack);
+
+                entity.setPos(
+                        abe.getBlockPos().getX() + abe.fishTarget.x + 0.5F,
+                        abe.getBlockPos().getY() + abe.fishTarget.y + 0.5F,
+                        abe.getBlockPos().getZ() + abe.fishTarget.z + 0.5F
+                );
+
+                level.addFreshEntity(entity);
+
+            }
+            else
+            {
+                ItemStack itemstack = abe.getFish().copy();
+                ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
+                itementity.setDefaultPickUpDelay();
+                level.addFreshEntity(itementity);
+                abe.setFish(ItemStack.EMPTY);
+            }
+        }
     }
 
     @Override
@@ -127,7 +171,27 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket()
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
+    {
+        return saveWithFullMetadata(registries);
+    }
+
+    @Override
+    public void handleUpdateTag(ValueInput input)
+    {
+        super.handleUpdateTag(input);
+
+        double x = input.getDoubleOr("fish_target_x", 0);
+        double y = input.getDoubleOr("fish_target_y", 0);
+        double z = input.getDoubleOr("fish_target_z", 0);
+
+        fishTarget = new Vec3(x, y, z);
+
+        fish = NBTCodecHelper.decode(SingleStackContainer.CODEC, input, "fish", SingleStackContainer::empty).create();
+    }
+
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket()
     {
         return ClientboundBlockEntityDataPacket.create(this);
     }

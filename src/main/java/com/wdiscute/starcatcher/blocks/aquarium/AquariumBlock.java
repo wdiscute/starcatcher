@@ -84,44 +84,6 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston)
-    {
-        this.popItem(level, pos);
-        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
-    }
-
-    private void popItem(Level level, BlockPos pos)
-    {
-        if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe && !level.isClientSide())
-        {
-            if (abe.getFish().is(SCTags.BUCKETABLE_FISHES))
-            {
-                ItemStack itemstack = abe.getFish().copy();
-                FishEntity entity = SCEntities.FISH.get().create(level, EntitySpawnReason.BUCKET);
-
-                entity.setFish(itemstack);
-
-                entity.setPos(
-                        abe.getBlockPos().getX() + abe.fishTarget.x + 0.5F,
-                        abe.getBlockPos().getY() + abe.fishTarget.y + 0.5F,
-                        abe.getBlockPos().getZ() + abe.fishTarget.z + 0.5F
-                );
-
-                level.addFreshEntity(entity);
-
-            }
-            else
-            {
-                ItemStack itemstack = abe.getFish().copy();
-                ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
-                itementity.setDefaultPickUpDelay();
-                level.addFreshEntity(itementity);
-                abe.setFish(ItemStack.EMPTY);
-            }
-        }
-    }
-
-    @Override
     public ItemStack pickupBlock(@org.jspecify.annotations.Nullable LivingEntity user, LevelAccessor level, BlockPos pos, BlockState state)
     {
         return ItemStack.EMPTY;
