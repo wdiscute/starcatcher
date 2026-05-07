@@ -47,6 +47,13 @@ versionRange="${neo_version_range}" #mandatory
 ordering="AFTER"
 side="BOTH"
 
+[[dependencies.starcatcher]] #optional
+modId="libtooltips" #mandatory
+type="required" #mandatory
+versionRange="[1.6,)" #mandatory
+ordering="AFTER"
+side="BOTH"
+
 [[dependencies.starcatcher]]
 modId="minecraft"
 type="required"
