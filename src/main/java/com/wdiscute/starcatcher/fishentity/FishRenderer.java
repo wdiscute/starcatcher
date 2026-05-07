@@ -162,7 +162,7 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
 
             node.submitModel(
                     model, ir, poseStack, RenderTypes.entityCutout(rl), ir.lightCoords, OverlayTexture.NO_OVERLAY,
-                    ir.lightCoords, null, ir.outlineColor, null
+                    -1, null, ir.outlineColor, null
             );
         }
         else
