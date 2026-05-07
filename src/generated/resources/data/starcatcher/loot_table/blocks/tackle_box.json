@@ -17,8 +17,7 @@
               "include": [
                 "minecraft:custom_name",
                 "minecraft:container",
-                "minecraft:lock",
-                "minecraft:container_loot"
+                "starcatcher:tackle_box_fishes"
               ],
               "source": "block_entity"
             }
