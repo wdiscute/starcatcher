@@ -17,8 +17,6 @@ public class GetNameMixin
     @Inject(method = "getHoverName", at = @At("HEAD"), cancellable = true)
     public void getHoverNameMixin(CallbackInfoReturnable<Component> cir)
     {
-        //todo missing ember's tooltip api
-        if(true)return;
         ItemStack stack = (ItemStack) (Object) this;
 
         stack = stack.copy();

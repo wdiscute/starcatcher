@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.io.network;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.StarcatcherClient;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import io.netty.buffer.ByteBuf;
@@ -39,6 +40,6 @@ public record FishingStartedPayload(FishProperties fp, ItemStack rod) implements
 
     public static void client(FishingStartedPayload data, IPayloadContext context)
     {
-        Minecraft.getInstance().setScreen(new FishingMinigameScreen(data.fp(), data.rod()));
+        StarcatcherClient.openFishingMinigameScreen(data.fp(), data.rod());
     }
 }

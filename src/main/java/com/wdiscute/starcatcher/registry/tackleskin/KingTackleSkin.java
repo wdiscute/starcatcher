@@ -13,28 +13,9 @@ import net.minecraft.world.phys.Vec3;
 public class KingTackleSkin extends AbstractTackleSkin
 {
     @Override
-    public ModelLayerLocation getLayerLocation()
+    public Identifier getName()
     {
-        return new ModelLayerLocation(Starcatcher.rl("king"), "main");
-    }
-
-    @Override
-    public Identifier getTexture()
-    {
-        return Starcatcher.rl("textures/entity/tackle/king.png");
-    }
-
-    public static LayerDefinition createBodyLayer() {
-        MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
-
-        PartDefinition king = partdefinition.addOrReplaceChild("root", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, -6.0F, -3.0F, 6.0F, 6.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 12).addBox(3.1F, -8.0F, -3.0F, 0.0F, 4.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(12, 12).addBox(-3.1F, -8.0F, -3.0F, 0.0F, 4.0F, 6.0F, new CubeDeformation(0.0F))
-                .texOffs(0, 22).addBox(-3.0F, -8.0F, -3.1F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F))
-                .texOffs(12, 22).addBox(-3.0F, -8.0F, 3.1F, 6.0F, 4.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
-
-        return LayerDefinition.create(meshdefinition, 32, 32);
+        return Starcatcher.rl("king");
     }
 
     @Override

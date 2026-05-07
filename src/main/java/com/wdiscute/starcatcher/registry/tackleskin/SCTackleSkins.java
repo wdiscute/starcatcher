@@ -18,25 +18,25 @@ public interface SCTackleSkins
             DeferredRegister.create(Starcatcher.TACKLE_SKIN_REGISTRY, Starcatcher.MOD_ID);
 
     //base
-    Identifier BASE_TACKLE_SKIN = registerCatchModifier("base", BaseTackleSkin::new);
+    Identifier BASE_TACKLE_SKIN = registerSkin("base", BaseTackleSkin::new);
 
     //pearl
-    Identifier PEARL_TACKLE_SKIN = registerCatchModifier("pearl", PearlTackleSkin::new);
+    Identifier PEARL_TACKLE_SKIN = registerSkin("pearl", PearlTackleSkin::new);
 
     //kimbe
-    Identifier KIMBE_TACKLE_SKIN = registerCatchModifier("kimbe", KimbeTackleSkin::new);
+    Identifier KIMBE_TACKLE_SKIN = registerSkin("kimbe", KimbeTackleSkin::new);
 
     //frog
-    Identifier FROG_TACKLE_SKIN = registerCatchModifier("frog", FrogTackleSkin::new);
+    Identifier FROG_TACKLE_SKIN = registerSkin("frog", FrogTackleSkin::new);
 
     //colorful
-    Identifier COLORFUL_TACKLE_SKIN = registerCatchModifier("colorful", ColorfulTackleSkin::new);
+    Identifier COLORFUL_TACKLE_SKIN = registerSkin("colorful", ColorfulTackleSkin::new);
 
     //clear
-    Identifier CLEAR_TACKLE_SKIN = registerCatchModifier("clear", ClearTackleSkin::new);
+    Identifier CLEAR_TACKLE_SKIN = registerSkin("clear", ClearTackleSkin::new);
 
     //king
-    Identifier KING_TACKLE_SKIN = registerCatchModifier("king", KingTackleSkin::new);
+    Identifier KING_TACKLE_SKIN = registerSkin("king", KingTackleSkin::new);
 
     static Identifier getTackleSkin(ItemStack stack)
     {
@@ -48,7 +48,7 @@ public interface SCTackleSkins
         return SCDataMaps.getOrDefault(stack, SCDataMaps.TACKLE_SKIN, Starcatcher.rl("base"));
     }
 
-    static Identifier registerCatchModifier(String name, Supplier<AbstractTackleSkin> sup)
+    static Identifier registerSkin(String name, Supplier<AbstractTackleSkin> sup)
     {
         REGISTRY.register(name, () -> sup);
         return Starcatcher.rl(name);

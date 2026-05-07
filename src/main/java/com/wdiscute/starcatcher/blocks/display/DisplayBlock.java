@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.blocks.display;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.StarcatcherClient;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
@@ -158,9 +159,9 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 {
                     SignedGuide signed = SCDataComponents.get(dbe.getItem(), SCDataComponents.SIGNED_GUIDE);
                     if (signed != null)
-                        openSignedGuide(signed);
+                        StarcatcherClient.openSignedGuide(signed);
                     else
-                        openPersonalGuide();
+                        StarcatcherClient.openPersonalGuide();
                 }
                 else
                 {
@@ -222,16 +223,6 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
             level.addFreshEntity(itementity);
             displayBlockEntity.clearContent();
         }
-    }
-
-    private void openPersonalGuide()
-    {
-        Minecraft.getInstance().setScreen(new FishingGuideScreen());
-    }
-
-    private void openSignedGuide(SignedGuide signedGuide)
-    {
-        Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));
     }
 
 

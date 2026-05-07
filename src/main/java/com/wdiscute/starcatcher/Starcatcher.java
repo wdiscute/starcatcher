@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher;
 
 import com.mojang.logging.LogUtils;
-import com.wdiscute.starcatcher.registry.FishProperties.SizeAndWeight.Units;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.SCFishRestrictions;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
@@ -12,26 +11,19 @@ import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.SCSweetSpotsBehaviour;
 import com.wdiscute.starcatcher.blocks.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.guide.FishCaughtToast;
 import com.wdiscute.starcatcher.io.*;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModifier;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.AbstractSweetSpotBehaviour;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.sellingbin.SCProcessors;
 import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.registries.RegistryBuilder;
 import org.slf4j.Logger;
 
@@ -93,24 +85,6 @@ public class Starcatcher
         return Identifier.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
     }
 
-    public static void fishCaughtToast(FishProperties fp, boolean newFish, int sizeCM, int weightCM)
-    {
-        if (newFish) Minecraft.getInstance().getToastManager().addToast(new FishCaughtToast(fp));
-
-        Units units = SCConfig.UNIT.get();
-
-        String size = units.getSizeAsString(sizeCM);
-        String weight = units.getWeightAsString(weightCM);
-
-        Minecraft.getInstance().player.sendOverlayMessage(
-                Component.literal("")
-                        .append(Component.translatable(fp.catchInfo().fish().value().getDescriptionId()))
-                        .append(Component.literal(" - " + size + " - " + weight)));
-
-        Minecraft.getInstance().gui.overlayMessageTime = 180;
-    }
-
-
     public Starcatcher(IEventBus modEventBus, ModContainer modContainer)
     {
         SCCreativeModeTabs.register(modEventBus);
@@ -129,22 +103,11 @@ public class Starcatcher
         SCFishRestrictions.register(modEventBus);
         SCMinigameModifiers.register(modEventBus);
         SCCatchModifiers.register(modEventBus);
-        SCTackleSkins.register(modEventBus);
         SCProcessors.register(modEventBus);
         SCLootModifiers.register(modEventBus);
+        SCTackleSkins.register(modEventBus);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, SCConfig.SPEC);
         modContainer.registerConfig(ModConfig.Type.SERVER, SCConfig.SPEC_SERVER);
-
-//        SCItems.registerExtra();
-    }
-
-    @Mod(value = Starcatcher.MOD_ID, dist = Dist.CLIENT)
-    public static class Client
-    {
-        public Client(ModContainer modContainer)
-        {
-            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-        }
     }
 }

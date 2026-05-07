@@ -1,9 +1,7 @@
 package com.wdiscute.starcatcher.blocks.Telescope;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -17,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import net.nikdo53.tinymultiblocklib.block.AbstractMultiBlock;
 import net.nikdo53.tinymultiblocklib.block.IPreviewableMultiblock;
 import net.nikdo53.tinymultiblocklib.components.IBlockPosOffsetEnum;
@@ -90,7 +86,7 @@ public class TelescopeBlock extends AbstractMultiBlock implements IPreviewableMu
 
     private void screen()
     {
-        Minecraft.getInstance().setScreen(new TelescopeScreen(Component.empty()));
+        //Minecraft.getInstance().setScreen(new TelescopeScreen(Component.empty()));
     }
 
     public enum TelescopePart implements StringRepresentable, IBlockPosOffsetEnum

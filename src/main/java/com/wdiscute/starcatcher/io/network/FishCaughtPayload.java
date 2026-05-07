@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.io.network;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.StarcatcherClient;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -40,7 +41,7 @@ public record FishCaughtPayload(FishProperties fp, boolean newFish, int size, in
         context.enqueueWork(() ->
         {
             if (fp.hasGuideEntry())
-                Starcatcher.fishCaughtToast(fp(), newFish(), size(), weight());
+                StarcatcherClient.fishCaughtToast(fp(), newFish(), size(), weight());
         });
     }
 }

@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.secretnotes;
 
 import com.mojang.serialization.Codec;
+import com.wdiscute.starcatcher.StarcatcherClient;
 import com.wdiscute.starcatcher.io.SCDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
@@ -31,15 +32,11 @@ public class SecretNote extends Item
         if (!level.isClientSide()) return InteractionResult.SUCCESS;
 
         //read note
-        openNoteScreen(SCDataComponents.getOrDefault(itemInHand, SCDataComponents.SECRET_NOTE, Note.SAMPLE_NOTE));
+        StarcatcherClient.openNoteScreen(SCDataComponents.getOrDefault(itemInHand, SCDataComponents.SECRET_NOTE, Note.SAMPLE_NOTE));
 
         return InteractionResult.SUCCESS;
     }
 
-    private void openNoteScreen(Note note)
-    {
-        Minecraft.getInstance().setScreen(new SecretNoteScreen(note, null));
-    }
 
     public enum Note implements StringRepresentable
     {

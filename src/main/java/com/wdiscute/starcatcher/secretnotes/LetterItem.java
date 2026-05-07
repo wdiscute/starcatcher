@@ -3,21 +3,18 @@ package com.wdiscute.starcatcher.secretnotes;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.StarcatcherClient;
 import com.wdiscute.starcatcher.io.SCDataComponents;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.Identifier;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,23 +34,11 @@ public class LetterItem extends Item
         if(level.isClientSide())
         {
             if (message.locked)
-                openMessageScreen(message);
+                StarcatcherClient.openMessageScreen(message);
             else
-                openMessageWriteScreen(message);
+                StarcatcherClient.openMessageWriteScreen(message);
         }
         return InteractionResult.SUCCESS;
-    }
-
-    private void openMessageScreen(Message message)
-    {
-        Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
-        Minecraft.getInstance().setScreen(new MessageScreen(message));
-    }
-
-    private void openMessageWriteScreen(Message message)
-    {
-        Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
-        Minecraft.getInstance().setScreen(new MessageWriteScreen(message));
     }
 
     public record Message(

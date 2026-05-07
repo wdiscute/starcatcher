@@ -22,8 +22,11 @@ import com.wdiscute.starcatcher.registry.items.rod.StarcatcherFishingRodItem;
 import com.wdiscute.starcatcher.registry.tackleskin.*;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentOverlay;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
@@ -93,17 +96,23 @@ public class SCClientEvents
         event.register(SCMenuTypes.TACKLE_BOX.get(), TackleBoxScreen::new);
     }
 
+    public static void registerTackleSkin(EntityRenderersEvent.RegisterLayerDefinitions event, Identifier rl, LayerDefinition layer)
+    {
+        event.registerLayerDefinition(new ModelLayerLocation(rl, "main"), () -> layer);
+        FishingBobRenderer.skins.add(rl);
+    }
+
     @SubscribeEvent
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
         //tackle skins
-        event.registerLayerDefinition(new BaseTackleSkin().getLayerLocation(), BaseTackleSkin::createBodyLayer);
-        event.registerLayerDefinition(new PearlTackleSkin().getLayerLocation(), PearlTackleSkin::createBodyLayer);
-        event.registerLayerDefinition(new KimbeTackleSkin().getLayerLocation(), KimbeTackleSkin::createBodyLayer);
-        event.registerLayerDefinition(new KingTackleSkin().getLayerLocation(), KingTackleSkin::createBodyLayer);
-        event.registerLayerDefinition(new FrogTackleSkin().getLayerLocation(), FrogTackleSkin::createBodyLayer);
-        event.registerLayerDefinition(new ColorfulTackleSkin().getLayerLocation(), ColorfulTackleSkin::createBodyLayer);
-        event.registerLayerDefinition(new ClearTackleSkin().getLayerLocation(), ClearTackleSkin::createBodyLayer);
+        registerTackleSkin(event, Starcatcher.rl("base"), SCTackleModels.base());
+        registerTackleSkin(event, Starcatcher.rl("pearl"), SCTackleModels.pearl());
+        registerTackleSkin(event, Starcatcher.rl("kimbe"), SCTackleModels.kimbe());
+        registerTackleSkin(event, Starcatcher.rl("king"), SCTackleModels.king());
+        registerTackleSkin(event, Starcatcher.rl("frog"), SCTackleModels.frog());
+        registerTackleSkin(event, Starcatcher.rl("colorful"), SCTackleModels.colorful());
+        registerTackleSkin(event, Starcatcher.rl("clear"), SCTackleModels.clear());
 
         //tackle box
         //event.registerLayerDefinition(TackleBoxRenderer.LAYER_LOCATION, TackleBoxRenderer::createBodyLayer);

@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.guide;
 
+import com.wdiscute.starcatcher.StarcatcherClient;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
@@ -81,11 +82,11 @@ public class FishingGuideItem extends Item
 
     private void openPersonalGuide()
     {
-        Minecraft.getInstance().setScreen(new FishingGuideScreen());
+        StarcatcherClient.openGuideScreen();
     }
 
     private void openSignedGuide(SignedGuide signedGuide)
     {
-        Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));
+        StarcatcherClient.openSignedGuideScreen(signedGuide);
     }
 }

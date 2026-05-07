@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.bobberentity;
 
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.StarcatcherClient;
 import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.io.SCDataAttachments;
 import com.wdiscute.starcatcher.io.SCDataComponents;
@@ -87,14 +88,9 @@ public class FishingBobEntity extends Projectile
     public FishingBobEntity(EntityType<? extends FishingBobEntity> entityType, Level level)
     {
         super(entityType, level);
-        this.player = getPlayer();
+        this.player = StarcatcherClient.getClientPlayer();
         this.modifiers = SCCatchModifiers.getCatchModifiers(player);
         modifiers.forEach(acm -> acm.onAdd(this));
-    }
-
-    public static Player getPlayer()
-    {
-        return Minecraft.getInstance().player;
     }
 
     public @Nullable Player getPlayerOwner()
@@ -315,7 +311,7 @@ public class FishingBobEntity extends Projectile
             if (player != null) SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB);
         }
 
-        BlockPos blockpos = blockPosition();
+        BlockPos blockpos = new BlockPos(new Vec3i((int) position().x, (int) (position().y + 0.175f), (int) position().z));
         FluidState fluid = this.level().getFluidState(blockpos);
         FluidState fluidBellow = this.level().getFluidState(blockpos.below());
 
