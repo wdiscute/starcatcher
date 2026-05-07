@@ -46,9 +46,9 @@ public class FishingSignedGuideScreen extends FishingGuideScreen
         String formatted = zdt.format(formatter);
         String formatted2 = zdt.format(formatter2);
 
-        renderCenteredString(guiGraphics, font, Component.literal(signedGuide.signature()), uiX + 284, uiY + 102, 0x937d70, false);
+        renderCenteredString(guiGraphics, font, Component.literal(signedGuide.signature()), uiX + 284, uiY + 102, 0xff937d70, false);
 
-        renderCenteredString(guiGraphics, font, Component.literal(formatted), uiX + 284, uiY + 118, 0x937d70, false);
-        renderCenteredString(guiGraphics, font, Component.literal(formatted2), uiX + 284, uiY + 128, 0x937d70, false);
+        renderCenteredString(guiGraphics, font, Component.literal(formatted), uiX + 284, uiY + 118, 0xff937d70, false);
+        renderCenteredString(guiGraphics, font, Component.literal(formatted2), uiX + 284, uiY + 128, 0xff937d70, false);
     }
 }
