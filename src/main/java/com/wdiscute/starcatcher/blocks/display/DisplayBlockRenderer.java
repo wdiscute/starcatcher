@@ -58,6 +58,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
         state.rot = be.rot;
         state.oRot = be.oRot;
         state.tRot = be.tRot;
+        state.fishRotating = be.fishRotating;
     }
 
     @Override
