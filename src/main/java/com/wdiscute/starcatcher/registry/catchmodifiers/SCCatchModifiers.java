@@ -15,9 +15,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.registries.DeferredRegister;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 
 public interface SCCatchModifiers
@@ -138,9 +136,9 @@ public interface SCCatchModifiers
         return catchModifiers;
     }
 
-    static List<ResourceLocation> getCatchModifiersRLs(ItemStack itemStack)
+    static Set<ResourceLocation> getCatchModifiersRLs(ItemStack itemStack)
     {
-        List<ResourceLocation> rls = new ArrayList<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.CATCH_MODIFIERS, List.of()));
+        Set<ResourceLocation> rls = new HashSet<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.CATCH_MODIFIERS, List.of()));
 
         rls.addAll(SCDataMaps.getOrDefault(itemStack, SCDataMaps.CATCH_MODIFIERS, List.of()));
 

@@ -17,9 +17,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.nikdo53.neobackports.registry.DeferredHolder;
 import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Supplier;
 
 public interface SCMinigameModifiers
@@ -158,9 +156,9 @@ public interface SCMinigameModifiers
         return minigameModifiers;
     }
 
-    static List<ResourceLocation> getMinigameModifiersRLs(ItemStack itemStack)
+    static Set<ResourceLocation> getMinigameModifiersRLs(ItemStack itemStack)
     {
-        List<ResourceLocation> rls = new ArrayList<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.MINIGAME_MODIFIERS, List.of()));
+        Set<ResourceLocation> rls = new HashSet<>(SCDataComponents.getOrDefault(itemStack, SCDataComponents.MINIGAME_MODIFIERS, List.of()));
 
         rls.addAll(SCDataMaps.getOrDefault(itemStack, SCDataMaps.MINIGAME_MODIFIERS, List.of()));
 
