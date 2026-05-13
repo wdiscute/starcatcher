@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -18,6 +19,8 @@ import net.nikdo53.neobackports.io.utils.BackportCodecs;
 import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
 import net.nikdo53.neobackports.utils.recipe.SmithingRecipeNeo;
+import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
+import net.nikdo53.neobackports.utils.recipe.holder.SmithingRecipeHolder;
 import net.nikdo53.neobackports.utils.recipe.input.SmithingRecipeInput;
 
 import java.util.ArrayList;
@@ -123,6 +126,11 @@ public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient bas
         public StreamCodec<NetheriteUpgradeSmithingRecipe> streamCodec()
         {
             return STREAM_CODEC;
+        }
+
+        @Override
+        public RecipeHolder<? extends Container, ? extends Recipe<Container>> recipeHolderFactory(NetheriteUpgradeSmithingRecipe netheriteUpgradeSmithingRecipe, ResourceLocation resourceLocation) {
+            return new SmithingRecipeHolder(netheriteUpgradeSmithingRecipe, resourceLocation);
         }
 
         private static NetheriteUpgradeSmithingRecipe fromNetwork(FriendlyByteBuf buffer)

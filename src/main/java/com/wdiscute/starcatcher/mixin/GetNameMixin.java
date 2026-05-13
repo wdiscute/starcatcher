@@ -17,8 +17,6 @@ public class GetNameMixin
     public Component getHoverNameMixin(Operation<Component> original)
     {
         ItemStack stack = (ItemStack) (Object) this;
-
-        stack = stack.copy();
         Component baseName = original.call();
 
         if (SCDataComponents.has(stack, SCDataComponents.CAUGHT_FISH_INFO))

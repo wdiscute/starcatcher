@@ -21,7 +21,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.nikdo53.neobackports.NeoBackports;
-import net.nikdo53.neobackports.utils.recipe.RecipeOutput;
 
 import javax.annotation.Nullable;
 import java.util.LinkedHashMap;

@@ -10,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -19,6 +20,8 @@ import net.nikdo53.neobackports.io.StreamCodec;
 import net.nikdo53.neobackports.io.utils.BackportCodecs;
 import net.nikdo53.neobackports.utils.recipe.CraftingRecipeNeo;
 import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
+import net.nikdo53.neobackports.utils.recipe.holder.CraftingRecipeHolder;
+import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
 import net.nikdo53.neobackports.utils.recipe.input.CraftingInput;
 
 public class BottledLetterRecipe implements CraftingRecipeNeo
@@ -159,6 +162,11 @@ public class BottledLetterRecipe implements CraftingRecipeNeo
         public StreamCodec< BottledLetterRecipe> streamCodec()
         {
             return STREAM_CODEC;
+        }
+
+        @Override
+        public RecipeHolder<? extends Container, ? extends Recipe<? extends Container>> recipeHolderFactory(BottledLetterRecipe bottledLetterRecipe, ResourceLocation resourceLocation) {
+            return new CraftingRecipeHolder(bottledLetterRecipe, resourceLocation);
         }
 
         private static BottledLetterRecipe fromNetwork1(FriendlyByteBuf buffer)

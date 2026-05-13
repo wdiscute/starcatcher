@@ -1,4 +1,4 @@
-// 1.20.1	2026-05-01T21:53:14.7305133	FishingProperties
+// 1.20.1	2026-05-13T22:18:17.1523393	FishingProperties
 47984659f5fcba839d1d19e3962f7e629edd2840 data/alexscaves/starcatcher/fish/lanternfish.json
 c3b074ed1ef69c08c0369ced097fbe7ac34e59a3 data/alexscaves/starcatcher/fish/radgill.json
 c4c1a020d9084d0a17eb91833053874e04a52e2e data/alexscaves/starcatcher/fish/sweetish_fish_blue.json
@@ -261,10 +261,10 @@ bc57d502afd5b05f2b34ce6deb840037bd419654 data/starcatcher/starcatcher/fish/sludg
 520bf2e8ade21130636290db0ef0e2091be631e2 data/starcatcher/starcatcher/fish/suneater.json
 18258c3007debda2dcf4ace9acd926627cc828d6 data/starcatcher/starcatcher/fish/sunny_sturgeon.json
 21eea1becac8efdc33ac6d21f95ac1ff657a2b75 data/starcatcher/starcatcher/fish/sun_seeking_carp.json
-44a81587e86de144be6683a196a90b458142a48e data/starcatcher/starcatcher/fish/the_quarrish.json
+2bfff88a9712df123195a6f710858501f29bf55f data/starcatcher/starcatcher/fish/the_quarrish.json
 c152c1be0b4b720866076b46722b442cc58f02da data/starcatcher/starcatcher/fish/thunder_bass.json
 7515361e2926c0d8ba14625908ab5f1b007b4825 data/starcatcher/starcatcher/fish/trophy_trophy_copper.json
-57d9925e520454c975c5877def65f7f756f51397 data/starcatcher/starcatcher/fish/trophy_trophy_diamond.json
+ca0ee2a3a312fc8a858a40efc237a4fd277f925f data/starcatcher/starcatcher/fish/trophy_trophy_diamond.json
 fb211a5c6e83593748dc129d108a07adb9100afa data/starcatcher/starcatcher/fish/trophy_trophy_emerald.json
 7a792c67df72e61b803904585c758d4027823051 data/starcatcher/starcatcher/fish/trophy_trophy_gold.json
 06266d7c65186fe50349fdb726955e817d515672 data/starcatcher/starcatcher/fish/trophy_trophy_iron.json

@@ -25,6 +25,6 @@ public interface SCCriterionTriggers
     }
 
     static void event (FMLCommonSetupEvent event) {
-        CriteriaTriggers.register(MINIGAME_COMPLETED.get());
+        event.enqueueWork(() -> CriteriaTriggers.register(MINIGAME_COMPLETED.get()));
     }
 }

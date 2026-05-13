@@ -20,6 +20,8 @@ import net.nikdo53.neobackports.io.utils.BackportCodecs;
 import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
 import net.nikdo53.neobackports.utils.recipe.SmithingRecipeNeo;
+import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
+import net.nikdo53.neobackports.utils.recipe.holder.SmithingRecipeHolder;
 import net.nikdo53.neobackports.utils.recipe.input.SmithingRecipeInput;
 
 import java.util.ArrayList;
@@ -121,6 +123,11 @@ public record TackleSkinSmithingRecipe(Ingredient template, Ingredient base, Ing
         public StreamCodec<TackleSkinSmithingRecipe> streamCodec()
         {
             return STREAM_CODEC;
+        }
+
+        @Override
+        public RecipeHolder<? extends Container, ? extends Recipe<Container>> recipeHolderFactory(TackleSkinSmithingRecipe tackleSkinSmithingRecipe, ResourceLocation resourceLocation) {
+            return new SmithingRecipeHolder(tackleSkinSmithingRecipe, resourceLocation);
         }
 
         private static TackleSkinSmithingRecipe fromNetwork(FriendlyByteBuf buffer)

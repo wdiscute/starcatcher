@@ -21,9 +21,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
+import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
 
 import java.util.List;
 
@@ -109,18 +109,24 @@ public class StarcatcherEmiPlugin implements EmiPlugin
         //add all starcatcher:smithing_netherite_upgraded
         List<SmithingRecipe> smithingRecipes = registry.getRecipeManager().getAllRecipesFor(RecipeType.SMITHING);
         smithingRecipes.stream()
+                .filter(o -> o instanceof RecipeHolder<?,?>)
+                .map(o -> ((RecipeHolder<?,?>) o).getRecipe())
                 .filter(o -> o instanceof NetheriteUpgradeSmithingRecipe)
                 .forEach(o -> registry.addRecipe(
                         new StarcatcherEmiSmithingRecipe(((NetheriteUpgradeSmithingRecipe) o))));
 
         //add all starcatcher:smithing_rod_skin
         smithingRecipes.stream()
+                .filter(o -> o instanceof RecipeHolder<?,?>)
+                .map(o -> ((RecipeHolder<?,?>) o).getRecipe())
                 .filter(o -> o instanceof FishingRodSkinSmithingRecipe)
                 .forEach(o -> registry.addRecipe(
                         new StarcatcherEmiSmithingRecipe(((FishingRodSkinSmithingRecipe) o))));
 
         //add all starcatcher:smithing_tackle_skin
         smithingRecipes.stream()
+                .filter(o -> o instanceof RecipeHolder<?,?>)
+                .map(o -> ((RecipeHolder<?,?>) o).getRecipe())
                 .filter(o -> o instanceof TackleSkinSmithingRecipe)
                 .forEach(o -> registry.addRecipe(
                         new StarcatcherEmiSmithingRecipe(((TackleSkinSmithingRecipe) o))));

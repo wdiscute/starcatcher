@@ -139,7 +139,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof TackleBoxBlockEntity tbbe)
         {
-            if (!level.isClientSide && player.isCreative() && !tbbe.isEmpty())
+            if (!level.isClientSide && !tbbe.isEmpty())
             {
                 ItemStack itemstack = getColoredItemStack(this.getColor());
                 blockentity.saveToItem(itemstack);
@@ -151,6 +151,8 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
 
          super.playerWillDestroy(level, pos, state, player);
     }
+
+
 
     @Override
     public List<ItemStack> getDrops(BlockState state, LootParams.Builder params)
