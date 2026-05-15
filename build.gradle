@@ -88,7 +88,7 @@ dependencies {
     jarJar(modImplementation("com.wdiscute:Selling-Bin:1.4.2-FORGE-1.20.1"))
 
     //tooltips
-    jarJar(modImplementation("local:libtooltips:1.6"))
+    jarJar(modImplementation("local:libtooltips:1.7"))
 
     //EMI
     modCompileOnly("dev.emi:emi-forge:${emi_version}:api")
