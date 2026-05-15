@@ -15,8 +15,8 @@ import com.wdiscute.starcatcher.registry.SCKeymappings;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModifier;
 import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
-import com.wdiscute.starcatcher.registry.tackleskin.BaseTackleSkin;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.events.GuiEventListener;
@@ -147,11 +147,11 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
             if (optional.isPresent())
                 this.tackleSkin = optional.get().get();
             else
-                this.tackleSkin = new BaseTackleSkin();
+                this.tackleSkin = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.TACKLE_SKIN).get(SCTackleSkins.BASE_TACKLE_SKIN).get();
         }
         else
         {
-            this.tackleSkin = new BaseTackleSkin();
+            this.tackleSkin = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.TACKLE_SKIN).get(SCTackleSkins.BASE_TACKLE_SKIN).get();
         }
 
 

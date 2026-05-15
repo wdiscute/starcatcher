@@ -9,10 +9,12 @@ import net.minecraft.resources.ResourceLocation;
 public class PearlTackleSkin extends AbstractTackleSkin
 {
 
+    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("pearl"), "main");
+
     @Override
     public ModelLayerLocation getLayerLocation()
     {
-        return new ModelLayerLocation(Starcatcher.rl("pearl"), "main");
+        return MODEL_LAYER_LOCATION;
     }
 
     @Override

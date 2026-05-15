@@ -12,10 +12,13 @@ import net.minecraft.world.phys.Vec3;
 
 public class FrogTackleSkin extends AbstractTackleSkin
 {
+
+    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("frog"), "main");
+
     @Override
     public ModelLayerLocation getLayerLocation()
     {
-        return new ModelLayerLocation(Starcatcher.rl("frog"), "main");
+        return MODEL_LAYER_LOCATION;
     }
 
     @Override
