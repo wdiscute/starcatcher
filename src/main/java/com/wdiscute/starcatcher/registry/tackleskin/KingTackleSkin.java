@@ -13,12 +13,10 @@ import net.minecraft.world.phys.Vec3;
 public class KingTackleSkin extends AbstractTackleSkin
 {
 
-    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("king"), "main");
-
     @Override
     public ModelLayerLocation getLayerLocation()
     {
-        return MODEL_LAYER_LOCATION;
+        return new ModelLayerLocation(Starcatcher.rl("king"), "main");
     }
 
     @Override

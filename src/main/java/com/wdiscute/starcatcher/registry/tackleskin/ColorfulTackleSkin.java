@@ -9,12 +9,10 @@ import net.minecraft.resources.ResourceLocation;
 public class ColorfulTackleSkin extends AbstractTackleSkin
 {
 
-    public static final ModelLayerLocation MODEL_LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("colorful"), "main");
-
     @Override
     public ModelLayerLocation getLayerLocation()
     {
-        return MODEL_LAYER_LOCATION;
+        return new ModelLayerLocation(Starcatcher.rl("colorful"), "main");
     }
 
     @Override

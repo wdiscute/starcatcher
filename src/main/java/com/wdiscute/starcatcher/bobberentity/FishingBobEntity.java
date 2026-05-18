@@ -202,6 +202,7 @@ public class FishingBobEntity extends Projectile {
         {
             player.displayClientMessage(Component.translatable("gui.starcatcher.reel_no_fish"), true);
             this.kill();
+            return;
         }
 
         //get random fish from available pool
