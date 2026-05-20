@@ -70,6 +70,10 @@ repositories{
         }
     }
 
+
+    maven {
+        url = 'https://nikdo53.github.io/NeoBackports'
+    }
 }
 
 dependencies {
@@ -78,14 +82,11 @@ dependencies {
     jarJar(modImplementation("maven.modrinth:tiny-multiblock-lib:forge-1.20.1-${tiny_multiblock_lib_version}"))
 
     //NeoBackports
-    jarJar(modImplementation("net.nikdo53.neobackports:NeoBackports:${neobackports_version}"))
-    interfaceInjectionData("net.nikdo53.neobackports:NeoBackports:${neobackports_version}")
-
-    // jarJar(modImplementation(files(".libs/neobackports-${neobackports_version}.jar")))
-    // interfaceInjectionData(files(".libs/neobackports-${neobackports_version}-interfaceinjection.json"))
+    jarJar(modImplementation("net.nikdo53:NeoBackports:${neobackports_version}"))
+    interfaceInjectionData("net.nikdo53:NeoBackports:${neobackports_version}")
 
     //selling bin
-    jarJar(modImplementation("com.wdiscute:Selling-Bin:1.4.2-FORGE-1.20.1"))
+    jarJar(modImplementation("maven.modrinth:wds-selling-bin:1.4.2-FORGE-1.20.1"))
 
     //tooltips
     jarJar(modImplementation("local:libtooltips:1.7"))
