@@ -1,4 +1,8 @@
 {
+  "dimension.minecraft.overworld" : "Overworld",
+  "dimension.minecraft.the_nether" : "The Nether",
+  "dimension.minecraft.the_end" : "The End",
+
   "block.minecraft.empty": "Void",
 
   "advancements.husbandry.starcatcher.fisherman.title": "Fisherman",
