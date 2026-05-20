@@ -1,7 +1,6 @@
 {
   "format_version": 1,
   "effects": [
-    { "type": "rainbow", "params": { "f": 0.2, "w": 0.3 } },
-    { "type": "shadow", "params": { "a": 0 } }
+    { "type": "rainbow", "params": { "speed": 0.2, "phase": 0.3 } }
   ]
 }

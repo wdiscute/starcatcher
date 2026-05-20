@@ -1,7 +1,13 @@
 {
   "format_version": 1,
   "effects": [
-    { "type": "gradient", "params": { "from": "11b902", "to": "02b969" , "f" : "0.15", "sp" : "70"} },
-    { "type": "shadow", "params": { "a": 0 } }
+    {
+      "type": "gradient",
+      "params": {
+        "colors" : "11b902,02b969",
+        "speed": "0.15",
+        "span": "70"
+      }
+    }
   ]
 }
