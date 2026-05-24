@@ -5,8 +5,8 @@
       "type": "gradient",
       "params": {
         "colors" : "ca9305,e6cc09",
-        "speed": "0.15",
-        "span": "70"
+        "freq": "0.15",
+        "len": "70"
       }
     }
   ]

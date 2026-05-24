@@ -5,7 +5,7 @@
       "type": "obfuscate",
       "params": {
         "mode": "reveal",
-        "speed": "300"
+        "interval": "300"
       }
     }
   ]
