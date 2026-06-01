@@ -86,7 +86,7 @@ public class SCConfig
             .comment("Enables/disables fishes caught being unlocked for all online team members.")
             .comment("Offline players won't be awarded the entry.")
             .translation("starcatcher.configuration.enable_ftb_team_sharing")
-            .define("enable_ftb_team_sharing", false);
+            .define("enable_ftb_team_sharing", true);
 
     public static final ModConfigSpec.BooleanValue ENABLE_SEASONS = BUILDER_SERVER
             .comment("Enables/disables fishes being restricted by seasons.")

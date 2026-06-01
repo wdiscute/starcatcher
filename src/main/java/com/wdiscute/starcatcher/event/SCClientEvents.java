@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.event;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bobberentity.FishingBobRenderer;
+import com.wdiscute.starcatcher.bobberentity.tackles.*;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
 import com.wdiscute.starcatcher.fishspotter.FishRadarLayer;
@@ -106,13 +107,13 @@ public class SCClientEvents
     public static void registerLayers(EntityRenderersEvent.RegisterLayerDefinitions event)
     {
         //tackle skins
-        registerTackleSkin(event, Starcatcher.rl("base"), SCTackleModels.base());
-        registerTackleSkin(event, Starcatcher.rl("pearl"), SCTackleModels.pearl());
-        registerTackleSkin(event, Starcatcher.rl("kimbe"), SCTackleModels.kimbe());
-        registerTackleSkin(event, Starcatcher.rl("king"), SCTackleModels.king());
-        registerTackleSkin(event, Starcatcher.rl("frog"), SCTackleModels.frog());
-        registerTackleSkin(event, Starcatcher.rl("colorful"), SCTackleModels.colorful());
-        registerTackleSkin(event, Starcatcher.rl("clear"), SCTackleModels.clear());
+        registerTackleSkin(event, Starcatcher.rl("base"), BaseModel.createBodyLayer());
+        registerTackleSkin(event, Starcatcher.rl("pearl"), PearlModel.createBodyLayer());
+        registerTackleSkin(event, Starcatcher.rl("kimbe"), KimbeModel.createBodyLayer());
+        registerTackleSkin(event, Starcatcher.rl("king"), KingModel.createBodyLayer());
+        registerTackleSkin(event, Starcatcher.rl("frog"), FrogModel.createBodyLayer());
+        registerTackleSkin(event, Starcatcher.rl("colorful"), ColorfulModel.createBodyLayer());
+        registerTackleSkin(event, Starcatcher.rl("clear"), ClearModel.createBodyLayer());
 
         //tackle box
         //event.registerLayerDefinition(TackleBoxRenderer.LAYER_LOCATION, TackleBoxRenderer::createBodyLayer);

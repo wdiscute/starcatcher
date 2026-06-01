@@ -1,13 +1,15 @@
 package com.wdiscute.starcatcher.bobberentity;
 
-import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
-import com.wdiscute.starcatcher.registry.tackleskin.BaseTackleSkin;
+import com.wdiscute.starcatcher.Starcatcher;
+import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.phys.Vec3;
 
 public class FishingBobRenderState extends EntityRenderState
 {
     public Vec3 lineOriginOffset = Vec3.ZERO;
-    AbstractTackleSkin skin = new BaseTackleSkin();
+    EntityModel<FishingBobRenderState> skin = FishingBobRenderer.BOB_MODELS.get(Starcatcher.rl("base"));
+    Identifier skinRL = Starcatcher.rl("base");
     float entityYaw = 0;
 }
