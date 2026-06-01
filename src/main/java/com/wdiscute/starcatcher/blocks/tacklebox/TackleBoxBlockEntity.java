@@ -238,6 +238,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     @Override
     public void stopOpen(ContainerUser containerUser)
     {
+        setChanged();
         if (!this.remove && !containerUser.getLivingEntity().isSpectator())
         {
             --this.openCount;
@@ -263,21 +264,18 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
         //load fishes
         this.fishes = new ArrayList<>();
-        loadAllFishes(input, this.fishes);
+        loadAllFishes(input);
 
         //load name
         this.name = parseCustomNameSafe(input, "CustomName");
     }
 
     //copied from ContainerHelper#LoadAllItems
-    public static void loadAllFishes(ValueInput input, List<ItemStack> itemStacks)
+    public void loadAllFishes(ValueInput input)
     {
         for (ItemStackWithSlot item : input.listOrEmpty("Fishes", ItemStackWithSlot.CODEC))
         {
-            if (item.isValidInContainer(itemStacks.size()))
-            {
-                itemStacks.set(item.slot(), item.stack());
-            }
+            fishes.add(item.stack());
         }
     }
 
