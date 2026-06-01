@@ -5,7 +5,7 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "GetNameMixin",
-    "LecternReturnMixin",
+    "LecternReturnMixin"
   ],
   "injectors": {
     "defaultRequire": 1

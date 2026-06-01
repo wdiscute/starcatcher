@@ -50,5 +50,13 @@ public class FishingSignedGuideScreen extends FishingGuideScreen
 
         renderCenteredString(guiGraphics, font, Component.literal(formatted), uiX + 284, uiY + 118, 0xff937d70, false);
         renderCenteredString(guiGraphics, font, Component.literal(formatted2), uiX + 284, uiY + 128, 0xff937d70, false);
+
+        renderCenteredString(guiGraphics, font,
+                Component.translatable("gui.guide.signed.0"),
+                uiX + 284, uiY + 168, 0xff937d70, false);
+
+        renderCenteredString(guiGraphics, font,
+                Component.translatable("gui.guide.signed.1"),
+                uiX + 284, uiY + 178, 0xff937d70, false);
     }
 }

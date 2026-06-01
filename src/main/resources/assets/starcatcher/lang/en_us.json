@@ -548,6 +548,9 @@
 
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
+  "gui.guide.signed.0" : "This book is Signed and will",
+  "gui.guide.signed.1" : "not update with new catches",
+
   "gui.guide.sign" : "Sign",
   "gui.guide.sign.locked.0" : "Signing will lock in all your current catches",
   "gui.guide.sign.locked.1" : "This book will no longer be updated with new catches after locking.",

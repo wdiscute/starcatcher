@@ -83,7 +83,7 @@ public class SCEvents
                 Component.literal("Starcatcher - Emeralds"),
                 packSource,
                 false,
-                Pack.Position.TOP
+                Pack.Position.BOTTOM
         );
 
         event.addPackFinders(
@@ -92,7 +92,7 @@ public class SCEvents
                 Component.literal("Selling Bin - Fishes"),
                 packSource,
                 false,
-                Pack.Position.TOP
+                Pack.Position.BOTTOM
         );
     }
 
