@@ -372,12 +372,6 @@ public class FishingPropertiesRegistry
     {
         for (ResourceKey<FishProperties> compatKey : COMPAT_KEYS)
         {
-            //fix for hybrid aquatic as their modid is hybrid_aquatic but items use hybrid-aquatic
-            if (compatKey.location().getNamespace().equals("hybrid-aquatic"))
-            {
-                consumer.accept(compatKey, new ModLoadedCondition("hybrid_aquatic"));
-                continue;
-            }
             consumer.accept(compatKey, new ModLoadedCondition(compatKey.location().getNamespace()));
         }
     }
