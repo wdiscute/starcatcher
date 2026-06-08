@@ -87,7 +87,7 @@ dependencies {
     interfaceInjectionData("net.nikdo53:NeoBackports:${neobackports_version}")
 
     //selling bin
-    jarJar(modImplementation("maven.modrinth:wds-selling-bin:1.4.2-FORGE-1.20.1"))
+    jarJar(modImplementation("maven.modrinth:wds-selling-bin:1.4.3-FORGE-1.20.1"))
 
     //tooltips
     jarJar(modImplementation("local:libtooltips:1.7"))
