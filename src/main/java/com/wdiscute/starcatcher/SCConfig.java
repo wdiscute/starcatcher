@@ -53,13 +53,6 @@ public class SCConfig
             .translation("starcatcher.configuration.enable_miss_sound")
             .define("enable_miss_sound", true);
 
-    public static final ForgeConfigSpec.BooleanValue VANILLA_PARTIAL_TICK = BUILDER_CLIENT
-            .comment("Whether to use the vanilla partial ticks for minigame smoothing or a custom implementation")
-            .comment("1.20 partial ticks look ugly so its force enabled, this option does nothing")
-            .translation("starcatcher.configuration.vanilla_partial_ticks")
-            .define("vanilla_partial_ticks", false);
-
-
     static final ForgeConfigSpec SPEC = BUILDER_CLIENT.build();
 
 

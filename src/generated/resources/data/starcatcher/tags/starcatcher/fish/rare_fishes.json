@@ -233,31 +233,27 @@
       "required": false
     },
     {
-      "id": "hybrid-aquatic:moray_eel",
+      "id": "hybrid_aquatic:moray_eel",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:blue_spotted_stingray",
+      "id": "hybrid_aquatic:stingray",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:spotted_eagle_ray",
+      "id": "hybrid_aquatic:coelacanth",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:coelacanth",
+      "id": "hybrid_aquatic:oarfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:oarfish",
+      "id": "hybrid_aquatic:ocean_sunfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:ocean_sunfish",
-      "required": false
-    },
-    {
-      "id": "hybrid-aquatic:golden_dorado",
+      "id": "hybrid_aquatic:golden_dorado",
       "required": false
     },
     {

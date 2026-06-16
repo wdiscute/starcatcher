@@ -2,7 +2,6 @@
   "base_chance": 5,
   "catch_info": {
     "type": "trophy",
-    "entity": "starcatcher:fish",
     "item": "starcatcher:trophy_iron"
   },
   "difficulty": {

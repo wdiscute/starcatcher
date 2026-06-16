@@ -770,461 +770,451 @@
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:anglerfish": {
+    "hybrid_aquatic:anglerfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:barreleye": {
+    "hybrid_aquatic:barreleye": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:betta": {
+    "hybrid_aquatic:betta": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:blowfish": {
+    "hybrid_aquatic:blowfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:blue_spotted_stingray": {
+    "hybrid_aquatic:boxfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:boxfish": {
+    "hybrid_aquatic:carp": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:carp": {
+    "hybrid_aquatic:cichlid": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:clownfish": {
+    "hybrid_aquatic:clownfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:coelacanth": {
+    "hybrid_aquatic:coelacanth": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:damselfish": {
+    "hybrid_aquatic:damselfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:danio": {
+    "hybrid_aquatic:danio": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:discus": {
+    "hybrid_aquatic:discus": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:dragonfish": {
+    "hybrid_aquatic:dragonfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:flashlight_fish": {
+    "hybrid_aquatic:flashlight_fish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:flying_fish": {
+    "hybrid_aquatic:flying_fish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:golden_dorado": {
+    "hybrid_aquatic:golden_dorado": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:goldfish": {
+    "hybrid_aquatic:goldfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:gourami": {
+    "hybrid_aquatic:gourami": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:herring": {
+    "hybrid_aquatic:herring": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:john_dory": {
+    "hybrid_aquatic:john_dory": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:lionfish": {
+    "hybrid_aquatic:lionfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:mackerel": {
+    "hybrid_aquatic:mackerel": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:mahi": {
+    "hybrid_aquatic:mahi": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:moray_eel": {
+    "hybrid_aquatic:moray_eel": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:needlefish": {
+    "hybrid_aquatic:needlefish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:neon_tetra": {
+    "hybrid_aquatic:oarfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:oarfish": {
+    "hybrid_aquatic:ocean_sunfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:ocean_sunfish": {
+    "hybrid_aquatic:opah": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:opah": {
+    "hybrid_aquatic:parrotfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:oscar": {
+    "hybrid_aquatic:pearlfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:parrotfish": {
+    "hybrid_aquatic:pleco": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:pearlfish": {
+    "hybrid_aquatic:ratfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:pleco": {
+    "hybrid_aquatic:rockfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:ratfish": {
+    "hybrid_aquatic:sea_bass": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:rockfish": {
+    "hybrid_aquatic:seahorse": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:sea_bass": {
+    "hybrid_aquatic:sheepshead_wrasse": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:seahorse": {
+    "hybrid_aquatic:snailfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:sheepshead_wrasse": {
+    "hybrid_aquatic:squirrelfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:snailfish": {
+    "hybrid_aquatic:stingray": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:spotted_eagle_ray": {
+    "hybrid_aquatic:stonefish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:squirrelfish": {
+    "hybrid_aquatic:surgeonfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:stonefish": {
+    "hybrid_aquatic:tetra": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:surgeonfish": {
+    "hybrid_aquatic:tiger_barb": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:tiger_barb": {
+    "hybrid_aquatic:triggerfish": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,
       "location": "minecraft:gameplay/fishing/treasure"
     },
-    "hybrid-aquatic:triggerfish": {
+    "hybrid_aquatic:tuna": {
       "forge:conditions": [
         {
           "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
-        }
-      ],
-      "is_loot_table": true,
-      "location": "minecraft:gameplay/fishing/treasure"
-    },
-    "hybrid-aquatic:tuna": {
-      "forge:conditions": [
-        {
-          "type": "forge:mod_loaded",
-          "modid": "hybrid-aquatic"
+          "modid": "hybrid_aquatic"
         }
       ],
       "is_loot_table": true,

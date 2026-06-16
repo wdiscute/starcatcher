@@ -357,91 +357,91 @@
       "required": false
     },
     {
-      "id": "hybrid-aquatic:clownfish",
+      "id": "hybrid_aquatic:clownfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:surgeonfish",
+      "id": "hybrid_aquatic:surgeonfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:damselfish",
+      "id": "hybrid_aquatic:damselfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:parrotfish",
+      "id": "hybrid_aquatic:parrotfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:flying_fish",
+      "id": "hybrid_aquatic:flying_fish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:ratfish",
+      "id": "hybrid_aquatic:ratfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:snailfish",
+      "id": "hybrid_aquatic:snailfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:flashlight_fish",
+      "id": "hybrid_aquatic:flashlight_fish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:squirrelfish",
+      "id": "hybrid_aquatic:squirrelfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:mackerel",
+      "id": "hybrid_aquatic:mackerel",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:herring",
+      "id": "hybrid_aquatic:herring",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:sea_bass",
+      "id": "hybrid_aquatic:sea_bass",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:sheepshead_wrasse",
+      "id": "hybrid_aquatic:sheepshead_wrasse",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:pearlfish",
+      "id": "hybrid_aquatic:pearlfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:rockfish",
+      "id": "hybrid_aquatic:rockfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:carp",
+      "id": "hybrid_aquatic:carp",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:neon_tetra",
+      "id": "hybrid_aquatic:tetra",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:tiger_barb",
+      "id": "hybrid_aquatic:tiger_barb",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:danio",
+      "id": "hybrid_aquatic:danio",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:gourami",
+      "id": "hybrid_aquatic:gourami",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:discus",
+      "id": "hybrid_aquatic:discus",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:pleco",
+      "id": "hybrid_aquatic:pleco",
       "required": false
     },
     {

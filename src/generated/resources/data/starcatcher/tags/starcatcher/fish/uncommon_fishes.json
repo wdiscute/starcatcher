@@ -293,71 +293,71 @@
       "required": false
     },
     {
-      "id": "hybrid-aquatic:blowfish",
+      "id": "hybrid_aquatic:blowfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:boxfish",
+      "id": "hybrid_aquatic:boxfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:lionfish",
+      "id": "hybrid_aquatic:lionfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:needlefish",
+      "id": "hybrid_aquatic:needlefish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:stonefish",
+      "id": "hybrid_aquatic:stonefish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:seahorse",
+      "id": "hybrid_aquatic:seahorse",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:triggerfish",
+      "id": "hybrid_aquatic:triggerfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:anglerfish",
+      "id": "hybrid_aquatic:anglerfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:barreleye",
+      "id": "hybrid_aquatic:barreleye",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:dragonfish",
+      "id": "hybrid_aquatic:dragonfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:john_dory",
+      "id": "hybrid_aquatic:john_dory",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:tuna",
+      "id": "hybrid_aquatic:tuna",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:mahi",
+      "id": "hybrid_aquatic:mahi",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:opah",
+      "id": "hybrid_aquatic:opah",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:goldfish",
+      "id": "hybrid_aquatic:goldfish",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:oscar",
+      "id": "hybrid_aquatic:cichlid",
       "required": false
     },
     {
-      "id": "hybrid-aquatic:betta",
+      "id": "hybrid_aquatic:betta",
       "required": false
     },
     {

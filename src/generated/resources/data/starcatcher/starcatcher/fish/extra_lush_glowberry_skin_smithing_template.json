@@ -2,7 +2,6 @@
   "base_chance": 5,
   "catch_info": {
     "type": "extra",
-    "entity": "starcatcher:fish",
     "item": "starcatcher:lush_glowberry_skin_smithing_template"
   },
   "difficulty": {
