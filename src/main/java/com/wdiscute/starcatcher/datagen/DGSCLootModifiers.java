@@ -31,7 +31,7 @@ public class DGSCLootModifiers extends GlobalLootModifierProvider
     @Override
     protected void start()
     {
-        //thank you kaupen my goat 🐐
+        //thank you kaupen my goat
         this.add("fishing_hat_from_shipwrecks",
                 new AddItemModifier(new LootItemCondition[]{
                         new LootTableIdCondition.Builder(BuiltInLootTables.SHIPWRECK_MAP).build(),

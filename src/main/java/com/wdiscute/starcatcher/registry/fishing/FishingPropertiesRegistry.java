@@ -357,7 +357,6 @@ public class FishingPropertiesRegistry
         register(builder);
     }
 
-
     public static void register(FishProperties.Builder builder)
     {
         FishProperties properties = builder.build();

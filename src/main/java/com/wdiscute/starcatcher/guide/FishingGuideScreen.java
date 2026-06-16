@@ -1381,8 +1381,8 @@ public class FishingGuideScreen extends Screen
         //Legendary
         //Not Caught yet!
         //
-        //✅ dimension
-        //❌ biome
+        //dimension
+        //biome
         //Not in Season!
 
         components.add(Component.empty());

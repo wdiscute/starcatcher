@@ -68,8 +68,8 @@ public class StarcatcherEmiFPRecipe implements EmiRecipe
         //Aurora
         restrictions.add(fp.getDisplayName());
 
-        //❌ Dimension
-        //✅ Biome
+        //Dimension
+        //Biome
         fp.restrictions().stream().filter(AbstractFishRestriction::isEnabled).forEach(o ->
                 restrictions.addAll(
                         o.getIndexHover(
