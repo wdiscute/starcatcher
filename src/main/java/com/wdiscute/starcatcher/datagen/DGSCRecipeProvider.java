@@ -4,9 +4,9 @@ import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
 import com.wdiscute.starcatcher.recipe.FishingRodSkinSmithingRecipeBuilder;
+import com.wdiscute.starcatcher.recipe.NetheriteUpgradeSmithingRecipeBuilder;
 import com.wdiscute.starcatcher.recipe.TackleSkinSmithingRecipeBuilder;
 import com.wdiscute.starcatcher.registry.SCItems;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class DGSCRecipeProvider extends RecipeProvider
@@ -504,6 +503,17 @@ public class DGSCRecipeProvider extends RecipeProvider
 
 
         //templates
+        //netherite upgrade
+        new NetheriteUpgradeSmithingRecipeBuilder(
+                        Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.of(SCTags.RODS),
+                        Ingredient.of(Items.NETHERITE_INGOT),
+                        RecipeCategory.TOOLS
+                )
+                .unlocks("has_netherite_template", has(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
+                .save(output, Starcatcher.rl("netherite_upgrade")
+                );
+
         //tackle skins
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.PEARL_SMITHING_TEMPLATE, 2)
                 .define('T', SCItems.PEARL_SMITHING_TEMPLATE)
@@ -521,7 +531,7 @@ public class DGSCRecipeProvider extends RecipeProvider
                         Ingredient.of(SCItems.PEARL),
                         RecipeCategory.TOOLS
                 )
-                .unlocks("has_template_humble", has(SCItems.PEARL_SMITHING_TEMPLATE))
+                .unlocks("has_template_pearl", has(SCItems.PEARL_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("pearl_tackle")
                 );
 

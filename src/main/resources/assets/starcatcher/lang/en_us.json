@@ -18,6 +18,7 @@
   "emi.starcatcher.entity_entry" : "This entry will always spawn a %s",
 
   "emi.category.starcatcher.fishing" : "Starcatcher's Fishing",
+  "jei.category.starcatcher.smithing" : "Starcatcher's Smithing",
 
   "emi.info.starcatcher.worms.0" : "Worms have different fishing modifiers when used as bait.",
   "emi.info.starcatcher.worms.1" : "Obtainable by bonemealing farmland.",
@@ -814,7 +815,7 @@
   "gui.guide.page.3.left.7" : "of your fishing journey.",
   "gui.guide.page.3.left.8" : "",
   "gui.guide.page.3.left.9" : "The best a angler can wish",
-  "gui.guide.page.3.left.10" : "for is a <sclegendary>Netherite Upgraded<sclegendary>",
+  "gui.guide.page.3.left.10" : "for is a <sclegendary>Netherite Upgraded</sclegendary>",
   "gui.guide.page.3.left.11" : "rod, boosting your stats,",
   "gui.guide.page.3.left.12" : "and unlocking for lava",
   "gui.guide.page.3.left.13" : "fishing, but that will",

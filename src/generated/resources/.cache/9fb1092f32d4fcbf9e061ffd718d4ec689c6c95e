@@ -1,4 +1,4 @@
-// 1.20.1	2026-04-23T01:36:42.6076698	Recipes
+// 1.20.1	2026-06-16T15:34:34.5575686	Recipes
 a5ead0a62df53256ff7fea774d28f1cf7aa1b4ea data/minecraft/advancements/recipes/building_blocks/dye_fisherman_hat_black.json
 a0ea04de09bde15daa98206aa25be79763ca0b83 data/minecraft/advancements/recipes/building_blocks/dye_fisherman_hat_blue.json
 199c37148ab079fb9a7763fffe5977fed995327e data/minecraft/advancements/recipes/building_blocks/dye_fisherman_hat_brown.json
@@ -137,6 +137,7 @@ eb15d01719a91bd653e1d7a64d4619968654d692 data/starcatcher/advancements/recipes/t
 f68cee9e77a1b0389df903bca2e2a06fc99d709f data/starcatcher/advancements/recipes/tools/lush_rod.json
 c4437c1e00e621fabdb1d6f5c2208c0d55eeb8dd data/starcatcher/advancements/recipes/tools/magmaforged_rod.json
 07b94f05d94d938248dc0bef975c86b4cf83c53c data/starcatcher/advancements/recipes/tools/naturalist_rod.json
+775ad91009d9a86d7a662c0e519857656c54da65 data/starcatcher/advancements/recipes/tools/netherite_upgrade.json
 86bc0d61b2e15047dead0b7da915f22ee031147b data/starcatcher/advancements/recipes/tools/obsidian_rod.json
 ca02ef025b7537a496434b45e58d8c0e948c768e data/starcatcher/advancements/recipes/tools/pearl_tackle.json
 08c425919909f8fe2c42ba0d42bc173bbd9f9f2d data/starcatcher/advancements/recipes/tools/rod_from_vanilla.json
@@ -209,6 +210,7 @@ b7b68158d4004d4423dea58b577498138f6478d9 data/starcatcher/recipes/lush_rod.json
 cf61bbfeedbf576ce86e299ea21d1cb1d9ac4e45 data/starcatcher/recipes/murkwater_bait_from_mangrove_roots.json
 ef776d66c9d36364d1f8e3b98c02a213fbe5d5de data/starcatcher/recipes/naturalist_rod.json
 3311ccca7f11800702f55a479d4f05190e61be25 data/starcatcher/recipes/naturalist_skin_smithing_template.json
+af339599fb3211310931f21c5a7b654153523993 data/starcatcher/recipes/netherite_upgrade.json
 a1da6fb30f7135f7a40f034059f3e617bfc49ff7 data/starcatcher/recipes/obsidian_rod.json
 e801bb97f46484beb8e8cd5ed2434f274f1181cd data/starcatcher/recipes/obsidian_skin_smithing_template.json
 a005630f7f1392ca7b656d94444d6c13ebfb9125 data/starcatcher/recipes/oxidised_copper_hook.json

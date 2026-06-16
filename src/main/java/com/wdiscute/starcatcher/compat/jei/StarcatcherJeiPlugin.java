@@ -4,15 +4,14 @@ import com.wdiscute.sellingbin.SellingBin;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.recipe.FishingRodSkinSmithingRecipe;
+import com.wdiscute.starcatcher.recipe.NetheriteUpgradeSmithingRecipe;
+import com.wdiscute.starcatcher.recipe.TackleSkinSmithingRecipe;
 import com.wdiscute.starcatcher.registry.FishProperties;
 import com.wdiscute.starcatcher.registry.SCItems;
-import dev.emi.emi.api.EmiApi;
-import dev.emi.emi.api.recipe.EmiInfoRecipe;
-import dev.emi.emi.api.stack.EmiIngredient;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IFocusFactory;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -27,13 +26,16 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SmithingRecipe;
+import net.minecraft.world.level.block.SmithingTableBlock;
+import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @JeiPlugin
 public class StarcatcherJeiPlugin implements IModPlugin
@@ -72,6 +74,7 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
         //register categories
         registration.addRecipeCategories(new StarcatcherJeiFPRecipe(registration.getJeiHelpers().getGuiHelper()));
+        registration.addRecipeCategories(new StarcatcherJeiSmithingRecipe(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -129,6 +132,31 @@ public class StarcatcherJeiPlugin implements IModPlugin
                     Component.translatable("emi.info.starcatcher.hat.0")
             );
         });
+
+        //smithing
+        List<SmithingRecipe> allSmithingRecipes = Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(RecipeType.SMITHING);
+
+        List<StarcatcherJeiSmithingRecipe.Recipe> smithing = new ArrayList<>();
+
+        for (SmithingRecipe smithingRecipe : allSmithingRecipes)
+        {
+            if(smithingRecipe instanceof RecipeHolder<?, ?> holder)
+            {
+                Recipe<?> recipe = holder.getRecipe();
+
+                if(recipe instanceof NetheriteUpgradeSmithingRecipe nusr)
+                    smithing.add(StarcatcherJeiSmithingRecipe.Recipe.of(nusr));
+
+                if(recipe instanceof TackleSkinSmithingRecipe tssr)
+                    smithing.add(StarcatcherJeiSmithingRecipe.Recipe.of(tssr));
+
+                if(recipe instanceof FishingRodSkinSmithingRecipe frssr)
+                    smithing.add(StarcatcherJeiSmithingRecipe.Recipe.of(frssr));
+            }
+        }
+
+        registration.addRecipes(StarcatcherJeiSmithingRecipe.Recipe.TYPE, smithing);
+
     }
 
     @Override

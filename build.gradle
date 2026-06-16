@@ -89,10 +89,11 @@ dependencies {
 
     //EMI
     modCompileOnly("dev.emi:emi-forge:${emi_version}:api")
-    modRuntimeOnly("dev.emi:emi-forge:${emi_version}")
+    //modRuntimeOnly("dev.emi:emi-forge:${emi_version}")
 
     //JEI
     modCompileOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
+    modRuntimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
 
     //Serene Seasons
     modCompileOnly("maven.modrinth:serene-seasons:9.1.0.2")

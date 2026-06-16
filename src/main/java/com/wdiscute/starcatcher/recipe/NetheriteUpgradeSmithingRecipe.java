@@ -106,7 +106,7 @@ public record NetheriteUpgradeSmithingRecipe(Ingredient template, Ingredient bas
 
     public static class Serializer implements RecipeSerializerNeo<NetheriteUpgradeSmithingRecipe>
     {
-        private static final MapCodec<NetheriteUpgradeSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+        public static final MapCodec<NetheriteUpgradeSmithingRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("template").forGetter((o) -> o.template),
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("base").forGetter((o) -> o.base),
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("addition").forGetter((o) -> o.addition)
