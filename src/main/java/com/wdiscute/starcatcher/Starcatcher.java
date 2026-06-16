@@ -2,6 +2,8 @@ package com.wdiscute.starcatcher;
 
 import com.mojang.logging.LogUtils;
 import com.mojang.serialization.Lifecycle;
+import com.wdiscute.libtooltips.ExampleRGBEffect;
+import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.registry.FishProperties.SizeAndWeight.Units;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.SCFishRestrictions;
@@ -20,15 +22,20 @@ import com.wdiscute.starcatcher.registry.sweetspotbehaviour.AbstractSweetSpotBeh
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.sellingbin.SCProcessors;
 import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.tooltips.SCLegendary;
+import com.wdiscute.starcatcher.tooltips.SCTooltipGradient;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.Holder;
 import net.minecraft.core.MappedRegistry;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModContainer;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
@@ -36,7 +43,10 @@ import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLanguageProvider;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.javafmlmod.FMLModContainer;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.IForgeRegistry;
+import org.apache.commons.lang3.tuple.Triple;
 import org.slf4j.Logger;
 
 import java.util.function.Supplier;
@@ -82,11 +92,14 @@ public class Starcatcher
         return new ResourceLocation(Starcatcher.MOD_ID, s);
     }
 
+    //shitty fix for double toast because its caused by nikdos payload sender thingy
+    static Holder<Item> lastToast = null;
+
     @OnlyIn(Dist.CLIENT)
     public static void fishCaughtToast(FishProperties fp, boolean newFish, int sizeCM, int weightCM)
     {
-        if (newFish) Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(fp));
-
+        if (newFish && !fp.catchInfo().fish().equals(lastToast)) Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(fp));
+        lastToast = fp.catchInfo().fish();
         Units units = SCConfig.UNIT.get();
 
         String size = units.getSizeAsString(sizeCM);
@@ -131,6 +144,59 @@ public class Starcatcher
         modContainer.registerConfig(ModConfig.Type.CLIENT, SCConfig.SPEC);
         modContainer.registerConfig(ModConfig.Type.SERVER, SCConfig.SPEC_SERVER);
 
+        DistExecutor.safeRunWhenOn(Dist.CLIENT,
+                () -> Client::init);
+
 //        SCItems.registerExtra();
     }
+
+    public static class Client
+    {
+        public static void init()
+        {
+
+            //register tooltip tag processors
+            Tooltips.registerProcessor("scgolden",
+                    (t, s, e) -> SCTooltipGradient.process(t,
+                            Triple.of(202, 93, 5),
+                            Triple.of(230, 204, 9)
+                    ));
+
+            Tooltips.registerProcessor("sclegendary", SCLegendary::process);
+
+            Tooltips.registerProcessor("scepic",
+                    (t, s, e) -> SCTooltipGradient.process(t,
+                            Triple.of(61, 0, 255),
+                            Triple.of(255, 0, 224)
+                    ));
+
+            Tooltips.registerProcessor("scrare",
+                    (t, s, e) -> SCTooltipGradient.process(t,
+                            Triple.of(20, 40, 120),
+                            Triple.of(100, 180, 255)
+                    ));
+
+            Tooltips.registerProcessor("scuncommon",
+                    (t, s, e) -> SCTooltipGradient.process(t,
+                            Triple.of(11, 185, 2),
+                            Triple.of(2, 185, 69)
+                    ));
+
+            Tooltips.registerProcessor("sccommon",
+                    (t, s, e) -> Component.literal(t));
+
+            Tooltips.registerProcessor("sctrash",
+                    (t, s, e) -> Component.literal(t));
+
+            Tooltips.registerProcessor("sclava",
+                    (t, s, e) -> SCTooltipGradient.process(t,
+                            Triple.of(197, 11, 11),
+                            Triple.of(197, 64, 11)
+                    ));
+
+            Tooltips.registerProcessor("scnone",
+                    (t, s, e) -> Component.literal(t));
+        }
+    }
+
 }

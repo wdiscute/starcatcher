@@ -56,7 +56,7 @@ file="META-INF/accesstransformer.cfg"
 [[dependencies.starcatcher]]
     modId="libtooltips"
     mandatory=false #mandatory
-    versionRange="[1.6, 1.9)"
+    versionRange="[2.0,)"
     ordering="AFTER"
     side="CLIENT"
 

@@ -317,9 +317,8 @@ public class FishingBobEntity extends Projectile {
             if (player != null) SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB);
         }
 
-        BlockPos blockpos = new BlockPos(new Vec3i((int) position().x, (int) (position().y + 0.175f), (int) position().z));
-        FluidState fluid = this.level().getFluidState(blockpos);
-        FluidState fluidBellow = this.level().getFluidState(blockpos.below());
+        FluidState fluid = this.level().getFluidState(blockPosition());
+        FluidState fluidBellow = this.level().getFluidState(blockPosition().below());
 
         if (this.currentState == FishHookState.FLYING)
         {
@@ -355,7 +354,7 @@ public class FishingBobEntity extends Projectile {
             setDeltaMovement(Vec3.ZERO);
             for (int i = 0; i < 5; i++)
             {
-                if (level().getFluidState(blockpos).is(Fluids.LAVA))
+                if (level().getFluidState(blockPosition()).is(Fluids.LAVA))
                     level().addParticle(
                             SCParticles.FISHING_BITING_LAVA.get(),
                             position().x + random.nextFloat() - 0.5,

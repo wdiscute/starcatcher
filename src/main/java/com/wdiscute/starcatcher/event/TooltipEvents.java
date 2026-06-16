@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.event;
 
+import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -65,7 +66,8 @@ public class TooltipEvents
         {
             if (Boolean.TRUE.equals(SCDataComponents.get(stack, SCDataComponents.NETHERITE_UPGRADE)))
             {
-                comp.add(Component.translatable("tooltip.starcatcher.rod.netherite"));
+                cachedTimer = -1;
+                comp.add(Tooltips.resolveTagsToComponentFromTranslationKey("tooltip.starcatcher.rod.netherite"));
             }
         }
 
@@ -73,7 +75,7 @@ public class TooltipEvents
         ResourceLocation rl = SCTackleSkins.getTackleSkin(stack);
         if (!rl.equals(SCTackleSkins.BASE_TACKLE_SKIN))
         {
-            comp.add(Component.translatable("tooltip.starcatcher.tackle").withStyle(ChatFormatting.GRAY));
+            comp.add(Tooltips.resolveTagsToComponentFromTranslationKey("tooltip.starcatcher.tackle").withStyle(ChatFormatting.GRAY));
             String s = I18n.get("tooltip.tackle." + rl.toLanguageKey());
             if (!s.isEmpty())
                 comp.add(Component.literal(" -").append(Component.literal(s))
@@ -115,7 +117,7 @@ public class TooltipEvents
                 });
 
                 if (!modComp.isEmpty())
-                    comp.add(Component.translatable("tooltip.starcatcher.modifiers").withStyle(ChatFormatting.GRAY));
+                    comp.add(Tooltips.resolveTagsToComponentFromTranslationKey("tooltip.starcatcher.modifiers").withStyle(ChatFormatting.GRAY));
 
                 comp.addAll(modComp);
             }
@@ -129,7 +131,7 @@ public class TooltipEvents
 
             if (sw.golden())
             {
-                MutableComponent element = Component.empty().append(Component.translatable("gui.guide.rarity.golden")).withStyle(Style.EMPTY.withColor(0x888888));
+                MutableComponent element = Component.empty().append(Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.rarity.golden")).withStyle(Style.EMPTY.withColor(0x888888));
                 if (hasShiftDown)
                     element.append(Component.literal(" (top 0%)").withStyle(Style.EMPTY.withColor(0x707070)));
                 comp.add(element);

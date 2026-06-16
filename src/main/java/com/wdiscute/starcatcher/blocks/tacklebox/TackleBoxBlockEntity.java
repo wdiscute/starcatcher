@@ -68,7 +68,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         for (int i = 5; SCConfig.MAX_TACKLE_BOX_FISH_STORAGE.get() - 1 > fishes.size() && i < itemStacks.size(); i++)
         {
             ItemStack item = itemStacks.get(i).copy();
-            if (item.is(SCTags.STARCAUGHT_FISHES))
+            if (item.is(SCTags.FISHABLE))
             {
                 //if slot is not empty, add the fish previously there to stored fishes
                 if(!itemInFishSlot.isEmpty())
