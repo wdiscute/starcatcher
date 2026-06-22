@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.compat;
 
-import dev.ryanhcode.sable.Sable;
-import dev.ryanhcode.sable.sublevel.SubLevel;
+import dev.ryanhcode.sable.companion.SableCompanion;
+import dev.ryanhcode.sable.companion.SubLevelAccess;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.ModList;
@@ -13,20 +13,20 @@ public class SableCompat {
 
 
     public static double getPlayerX(Player player, BlockPos blockPos) {
-        final SubLevel subLevel = Sable.HELPER.getContaining(player.level(), blockPos);
+        final SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(player.level(), blockPos);
 
-        if (subLevel != null) {
-            return subLevel.logicalPose().transformPositionInverse(player.getEyePosition()).x();
+        if (subLevelAccess != null) {
+            return subLevelAccess.logicalPose().transformPositionInverse(player.getEyePosition()).x();
         }
 
         return player.getX();
     }
 
     public static double getPlayerZ(Player player, BlockPos blockPos) {
-        final SubLevel subLevel = Sable.HELPER.getContaining(player.level(), blockPos);
+        final SubLevelAccess subLevelAccess = SableCompanion.INSTANCE.getContaining(player.level(), blockPos);
 
-        if (subLevel != null) {
-            return subLevel.logicalPose().transformPositionInverse(player.getEyePosition()).z();
+        if (subLevelAccess != null) {
+            return subLevelAccess.logicalPose().transformPositionInverse(player.getEyePosition()).z();
         }
 
         return player.getZ();
