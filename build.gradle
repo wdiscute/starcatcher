@@ -56,10 +56,13 @@ repositories
         maven { url = 'https://maven.tysontheember.dev' }
     }
 
-    //sable-companion
-    maven {
-        name = "RyanHCode Maven"
-        url = "https://maven.ryanhcode.dev/releases"
+    exclusiveContent {
+        forRepository {
+            maven { url = "https://maven.ryanhcode.dev/releases" }
+        }
+        filter {
+            includeGroup("dev.ryanhcode.sable-companion")
+        }
     }
 
     repositories {
@@ -85,6 +88,9 @@ dependencies {
 
     //tiny multiblock lib
     jarJar(implementation("maven.modrinth:tiny-multiblock-lib:gbRIPDRZ"))
+
+    //sable-companion (Sable's compat)
+    jarJar(api("dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.4.2"))
 
     //EMI
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
@@ -168,10 +174,8 @@ dependencies {
     //pipez
     //runtimeOnly "maven.modrinth:pipez:z20ZR1YE"
 
-    //sable (Sable's compat)
-    compileOnly files(".compatmods/sable-neoforge-1.21.1-1.0.6.jar")
-    api "dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.4.2"
-  //  runtimeOnly files(".compatmods/sable-neoforge-1.21.1-1.0.6.jar")
+    //sable
+    //  runtimeOnly files(".compatmods/sable-neoforge-1.21.1-1.0.6.jar")
 
 }
 
