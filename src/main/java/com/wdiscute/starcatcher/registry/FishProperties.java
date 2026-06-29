@@ -1929,7 +1929,7 @@ public record FishProperties(
     public int calculateChance(Entity entity, Level level, ItemStack rod, AbstractFishRestriction.Context context)
     {
         //if dev worm return base chance
-        if (SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, new SingleStackContainer(ItemStack.EMPTY)).stack().is(SCItems.DEV_WORM) && catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.FISH))
+        if (SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, new SingleStackContainer(ItemStack.EMPTY)).stack().is(SCItems.DEV_WORM.get()) && catchInfo.fishEntryType.equals(CatchInfo.FishEntryType.FISH))
             return 1;
 
         int chance = baseChance;

@@ -40,7 +40,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
     public void render(DisplayBlockEntity be, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay)
     {
-        if (be.getItem().is(SCItems.GUIDE))
+        if (be.getItem().is(SCItems.GUIDE.get()))
         {
             poseStack.pushPose();
 

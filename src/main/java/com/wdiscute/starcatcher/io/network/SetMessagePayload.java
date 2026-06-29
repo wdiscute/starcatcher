@@ -39,14 +39,14 @@ public record SetMessagePayload(List<String> text, String name) implements Custo
             Player player = context.player();
 
             Level level = player.level();
-            if (level instanceof ServerLevel sl)
+            if (level instanceof ServerLevel)
             {
                 ItemStack is = null;
                 ItemStack main = player.getMainHandItem();
                 ItemStack off = player.getOffhandItem();
 
-                if(main.is(SCItems.LETTER)) is = main;
-                if(off.is(SCItems.LETTER)) is = off;
+                if(main.is(SCItems.LETTER.get())) is = main;
+                if(off.is(SCItems.LETTER.get())) is = off;
                 if(is == null) return;
 
                 LetterItem.Message message = new LetterItem.Message(player.getUUID(), name, level.dimension().location(), text(), false);

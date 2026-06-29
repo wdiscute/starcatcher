@@ -31,10 +31,10 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
     public static boolean SignGuide(String signature, Player player)
     {
         ItemStack book = null;
-        if (player.getMainHandItem().is(SCItems.GUIDE))
+        if (player.getMainHandItem().is(SCItems.GUIDE.get()))
             book = player.getMainHandItem();
 
-        if (player.getOffhandItem().is(SCItems.GUIDE))
+        if (player.getOffhandItem().is(SCItems.GUIDE.get()))
             book = player.getOffhandItem();
 
         if (book == null) return false;

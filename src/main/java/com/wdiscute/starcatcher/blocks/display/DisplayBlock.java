@@ -135,7 +135,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         //if has book, open screen
         if (state.getValue(HAS_ITEM) && !player.isCrouching()) {
             if (level.isClientSide && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe) {
-                if (dbe.getItem().is(SCItems.GUIDE)) {
+                if (dbe.getItem().is(SCItems.GUIDE.get())) {
                     SignedGuide signed = SCDataComponents.get(dbe.getItem(), SCDataComponents.SIGNED_GUIDE);
                     if (signed != null)
                         openSignedGuide(signed);

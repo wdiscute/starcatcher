@@ -143,7 +143,7 @@ public class DisplayBlockEntity extends BlockEntity
     {
         if(item.isEmpty()) return 0;
 
-        if(item.is(SCItems.GUIDE))
+        if(item.is(SCItems.GUIDE.get()))
         {
             if(SCDataComponents.has(item, SCDataComponents.SIGNED_GUIDE)) return 5;
             return 15;
