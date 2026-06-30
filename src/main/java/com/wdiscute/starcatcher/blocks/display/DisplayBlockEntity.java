@@ -194,7 +194,7 @@ public class DisplayBlockEntity extends BlockEntity
         super.saveAdditional(tag, registries);
         if (!this.getItem().isEmpty())
         {
-            tag.put("Book", this.getItem().save(tag));
+            tag.put("Book", this.getItem().save(registries));
         }
         else
         {
