@@ -2032,10 +2032,27 @@ public record FishProperties(
 
                 List<ItemStack> items = new ArrayList<>();
 
-                //if should spawn entity
-                if (fp.catchInfo().alwaysSpawnEntity() ||
-                        ModList.get().isLoaded("fishingreal") ||
-                        fbe.modifiers.stream().anyMatch(AbstractCatchModifier::forceSpawnEntity))
+                //check if it can spawn entity
+                boolean canSpawnEntity;
+                ResourceLocation location = fp.catchInfo().entityToSpawn().getKey().location();
+                if (location.getNamespace().equals("starcatcher"))
+                    //if entity is from starcatcher, can only spawn if it's a bucketable fish (aka has a model)
+                    canSpawnEntity = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().map(
+                            o -> BuiltInRegistries.ITEM.getKey(o.getDelegate().value())
+                    ).anyMatch(rl -> rl.equals(fp.catchInfo.fish().getKey().location()));
+                else
+                    //if entity is not from starcatcher, then it can spawn
+                    //because the default is starcatcher:fish, meaning if its any other entity, then it can spawn
+                    canSpawnEntity = true;
+
+                //check if should spawn entity, can catch && anything wants to spawn it
+                if (canSpawnEntity &&
+                    (
+                            fp.catchInfo().alwaysSpawnEntity()
+                            || fbe.modifiers.stream().anyMatch(AbstractCatchModifier::forceSpawnEntity)
+                            || ModList.get().isLoaded("fishingreal")
+                    )
+                )
                 {
                     Vec3 objPos = player.position().subtract(fbe.position());
 
