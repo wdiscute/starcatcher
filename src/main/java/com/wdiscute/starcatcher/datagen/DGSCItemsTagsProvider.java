@@ -137,7 +137,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
         //hooks tag
         HOOKS_REGISTRY.getEntries().forEach(o -> tag(SCTags.HOOKS).add(o.get()));
-        tag(SCTags.HOOKS).addOptional(rl("tide", "void_fishing_hook"));
+        tag(SCTags.HOOKS).addOptional(rl("tide", "void_hook"));
 
         //bobbers tag
         BOBBERS_REGISTRY.getEntries().forEach(o -> tag(SCTags.BOBBERS).add(o.get()));

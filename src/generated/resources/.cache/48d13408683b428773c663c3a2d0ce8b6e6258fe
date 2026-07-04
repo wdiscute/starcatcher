@@ -1,4 +1,4 @@
-// 1.20.1	2026-06-16T16:02:05.2046569	Tags for minecraft:item mod id starcatcher
+// 1.20.1	2026-07-04T17:32:10.5902572	Tags for minecraft:item mod id starcatcher
 b195e9281f019846d0fdd273d7704e37b0594c01 data/minecraft/tags/items/fishes.json
 1f37b386a46a7e08f5b077bdf3c8ab83366a8cbe data/starcatcher/tags/items/aquarium_guide_display.json
 6938367f174378645270a3f9c81ebfb696006d21 data/starcatcher/tags/items/baits.json
@@ -10,7 +10,7 @@ cd76b40635f273884aec7b0f26a351a83f76fed5 data/starcatcher/tags/items/equipments.
 ad29dfd08257bb214f7e2ad47fc4ebc0270a2eeb data/starcatcher/tags/items/fishable.json
 de6377a3a15fcc745a25e8d8e40184200ee10c90 data/starcatcher/tags/items/gadgets.json
 834e2f963f8e58a4755ff26aebd7bc4ce94530de data/starcatcher/tags/items/hats.json
-3d48d52f640b00fe2c94648e4352834dc775775e data/starcatcher/tags/items/hooks.json
+2d7aadd439cd1bf8e349c02eedb81276fd7cdd7b data/starcatcher/tags/items/hooks.json
 86d8aa886c218102824e5e08dfa3b928677b04df data/starcatcher/tags/items/legendary_fishes.json
 4d3ea7106ba0c65788160a2dff5d344147143b6f data/starcatcher/tags/items/placeable_in_display.json
 d3bb48a5bbe98c2c06f8d0fec3ed288f3d964232 data/starcatcher/tags/items/placeable_in_tackle_box.json

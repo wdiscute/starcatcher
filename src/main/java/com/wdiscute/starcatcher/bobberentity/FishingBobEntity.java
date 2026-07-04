@@ -115,7 +115,7 @@ public class FishingBobEntity extends Projectile {
         modifiers.add(new FishMessagesModifier());
 
         SingleStackContainer ssc = SCDataComponents.getOrDefault(rod, SCDataComponents.HOOK, SingleStackContainer.empty());
-        voidHook = BuiltInRegistries.ITEM.getKey(ssc.stack().getItem()).equals(U.rl("tide", "void_fishing_hook"));
+        voidHook = BuiltInRegistries.ITEM.getKey(ssc.stack().getItem()).equals(U.rl("tide", "void_hook"));
 
         entityData.set(VOID, voidHook);
 
