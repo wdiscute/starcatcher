@@ -55,6 +55,12 @@
       "dimensions_blacklist": []
     },
     {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
+    },
+    {
       "type": "starcatcher:season",
       "season_extra_chance": {
         "early_autumn": 0,

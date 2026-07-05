@@ -62,6 +62,12 @@
       "max_y": 2147483647,
       "min_y": 100,
       "translation_override": "gui.guide.elevation.mountains"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
     }
   ],
   "size_and_weight": {

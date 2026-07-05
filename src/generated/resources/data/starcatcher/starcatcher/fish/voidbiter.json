@@ -70,6 +70,12 @@
       ]
     },
     {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
+    },
+    {
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:legendary_bait": 50

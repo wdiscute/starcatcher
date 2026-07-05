@@ -59,6 +59,12 @@
       "translation_override": "gui.guide.elevation.underground"
     },
     {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
+    },
+    {
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:lush_bait": 50

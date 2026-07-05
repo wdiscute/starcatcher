@@ -57,6 +57,12 @@
       "translation_override": "gui.guide.elevation.deepslate"
     },
     {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
+    },
+    {
       "type": "starcatcher:bait",
       "baits": {
         "fishofthieves:earthworms": 50,

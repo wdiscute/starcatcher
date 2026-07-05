@@ -75,6 +75,12 @@
       "max_y": 50,
       "min_y": 0,
       "translation_override": "gui.guide.elevation.stone_caves"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
     }
   ],
   "size_and_weight": {

@@ -70,6 +70,12 @@
       "translation_override": "gui.guide.elevation.mountains"
     },
     {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
+    },
+    {
       "type": "starcatcher:weather_restriction",
       "weather": "rain"
     }

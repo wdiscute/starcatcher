@@ -64,6 +64,12 @@
       "biomes_tags": [
         "minecraft:is_end"
       ]
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
     }
   ],
   "size_and_weight": {

@@ -55,6 +55,12 @@
       "max_y": 0,
       "min_y": -2147483648,
       "translation_override": "gui.guide.elevation.deepslate"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
     }
   ],
   "size_and_weight": {

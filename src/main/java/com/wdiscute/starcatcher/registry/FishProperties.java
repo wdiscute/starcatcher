@@ -641,242 +641,277 @@ public record FishProperties(
     {
         public static final List<AbstractFishRestriction> OVERWORLD =
                 List.of(
-                        DimensionRestriction.OVERWORLD
+                        DimensionRestriction.OVERWORLD,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_LUSH_CAVES =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.LUSH_CAVES,
-                        ElevationRestriction.BELOW_FIFTY
+                        ElevationRestriction.BELOW_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_LUSH_CAVES_AND_JUNGLES =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.LUSH_CAVES_AND_JUNGLES,
-                        ElevationRestriction.BELOW_FIFTY
+                        ElevationRestriction.BELOW_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_BAMBOO_JUNGLE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.BAMBOO_JUNGLE,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_STONE_CAVES =
                 List.of(
                         DimensionRestriction.OVERWORLD,
-                        ElevationRestriction.ZERO_TO_FIFTY
+                        ElevationRestriction.ZERO_TO_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_DEEPSLATE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
-                        ElevationRestriction.BELOW_ZERO
+                        ElevationRestriction.BELOW_ZERO,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_DRIPSTONE_CAVES =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.DRIPSTONE_CAVES,
-                        ElevationRestriction.BELOW_ZERO
+                        ElevationRestriction.BELOW_ZERO,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_DEEP_DARK =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.DEEP_DARK,
-                        ElevationRestriction.BELOW_FIFTY
+                        ElevationRestriction.BELOW_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_RIVER =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.RIVERS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_ALL_OCEANS =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.ALL_OCEANS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_OCEAN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.NORMAL_OCEANS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_LUKEWARM_OCEAN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.LUKEWARM_OCEAN,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_COLD_AND_LUKEWARM_OCEAN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.COLD_AND_LUKEWARM_OCEAN,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_WARM_OCEAN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.WARM_OCEANS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_DEEP_OCEAN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.DEEP_OCEANS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_MOUNTAIN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.LAKES,
-                        ElevationRestriction.ABOVE_HUNDRED
+                        ElevationRestriction.ABOVE_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_LAKE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.LAKES,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_WARM_LAKE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.WARM_LAKES,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_SAVANNA =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.SAVANNAS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_COLD_RIVER =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.COLD_RIVERS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_COLD_OCEAN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.COLD_OCEANS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_COLD_LAKE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.COLD_LAKES,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_COLD_MOUNTAIN =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.COLD_LAKES,
-                        ElevationRestriction.ABOVE_HUNDRED
+                        ElevationRestriction.ABOVE_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_BEACH =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.BEACHES,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_MUSHROOM_FIELDS =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.MUSHROOM_FIELDS,
-                        ElevationRestriction.FIFTY_TO_HUNDRED
+                        ElevationRestriction.FIFTY_TO_HUNDRED,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_JUNGLE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.JUNGLES,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_TAIGA =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.TAIGAS,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_CHERRY_GROVE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.CHERRY_GROVES,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_JUNGLES_AND_SWAMPS =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.JUNGLES_AND_SWAMPS,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_SWAMPS =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.SWAMPS,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_SWAMP_ONLY =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.SWAMP_ONLY,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_MANGROVE_SWAMP =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.MANGROVE_SWAMP,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_DARK_FOREST =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.DARK_FOREST,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_FOREST =
                 List.of(
                         DimensionRestriction.OVERWORLD,
                         BiomeRestriction.FOREST,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_SURFACE =
                 List.of(
                         DimensionRestriction.OVERWORLD,
-                        ElevationRestriction.ABOVE_FIFTY
+                        ElevationRestriction.ABOVE_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_LAVA_SURFACE =
@@ -896,7 +931,8 @@ public record FishProperties(
         public static final List<AbstractFishRestriction> OVERWORLD_UNDERGROUND =
                 List.of(
                         DimensionRestriction.OVERWORLD,
-                        ElevationRestriction.BELOW_FIFTY
+                        ElevationRestriction.BELOW_FIFTY,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_LAVA_DEEPSLATE =
@@ -942,13 +978,15 @@ public record FishProperties(
 
         public static final List<AbstractFishRestriction> END =
                 List.of(
-                        DimensionRestriction.END
+                        DimensionRestriction.END,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> END_OUTER_ISLANDS =
                 List.of(
                         DimensionRestriction.END,
-                        BiomeRestriction.OUTER_ISLANDS
+                        BiomeRestriction.OUTER_ISLANDS,
+                        FluidRestriction.WATER
                 );
 
         public static final List<AbstractFishRestriction> OVERWORLD_VOID =

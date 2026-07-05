@@ -59,6 +59,12 @@
       "translation_override": "gui.guide.elevation.surface"
     },
     {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
+    },
+    {
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:murkwater_bait": 50
