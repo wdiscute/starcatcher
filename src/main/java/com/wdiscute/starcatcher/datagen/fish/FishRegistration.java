@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.datagen.fish;
 
 import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.compat.CreateCompat;
 import com.wdiscute.starcatcher.fish.CatchInfo;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
@@ -12,6 +13,7 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.starcatcher.registry.items.StarcaughtBucket;
 import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.Utils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -65,7 +67,7 @@ public final class FishRegistration
             return;
         }
 
-        if(fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && fp.restrictions().stream().noneMatch(o -> o instanceof FluidRestriction))
+        if (fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && fp.restrictions().stream().noneMatch(o -> o instanceof FluidRestriction))
             throw new IllegalStateException("No Fluid Restriction found for " + fp);
 
         //add to lists and maps
@@ -75,7 +77,8 @@ public final class FishRegistration
         if (fp.catchInfo().fish().rl().getNamespace().equals("starcatcher") && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.rarity().equals(Rarity.TRASH))
             STARCATCHER_FISHABLE.add(fp);
 
-        context.register(key, fp);
+        if (DGSCFishProperties.MODS_TO_ACTUALLY_DATAGEN.contains(requiredModId))
+            context.register(key, fp);
     }
 
     private static FishProperties prepare(FishProperties fp)
@@ -170,6 +173,10 @@ public final class FishRegistration
 
     public static ResourceKey<FishProperties> key(FishProperties fp)
     {
+        //if starcatcher create fish, make key have create instead
+        if(CreateCompat.CREATE_COMPAT_FISH.stream().anyMatch(o -> fp.catchInfo().fish().rl().equals(o.getId())))
+            return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Utils.rl("create", fp.catchInfo().fish().rl().getPath()));
+
         return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, fp.catchInfo().fish().rl());
     }
 

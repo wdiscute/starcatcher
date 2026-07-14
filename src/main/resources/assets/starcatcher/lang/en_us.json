@@ -26,7 +26,7 @@
   "key.starcatcher.expand_tournament": "Toggle Tournament Overlay",
   "key.starcatcher.open_guide": "Open guide",
 
-  "itemGroup.starcatcher": "Starcatcher",
+  "itemGroup.starcatcher.starcatcher": "Starcatcher",
   "section.starcatcher.fish": "Fish",
   "section.starcatcher.hooks_bobbers": "Hooks, Bobbers & Baits",
   "section.starcatcher.cosmetics": "Cosmetics",

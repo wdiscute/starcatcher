@@ -4,6 +4,8 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.List;
+
 public interface CreateCompat
 {
     DeferredItem<Item> COGGILL = SCItems.registerNonBucketFish("coggill");
@@ -18,6 +20,19 @@ public interface CreateCompat
     DeferredItem<Item> BRASSGILL = SCItems.registerNonBucketFish("brassgill");
     DeferredItem<Item> MEKA_AGAVE_BREAM = SCItems.registerNonBucketFish("meka_agave_bream");
 
+    List<DeferredItem<Item>> CREATE_COMPAT_FISH = List.of(
+            COGGILL,
+            MECHANICAL_BRASS_SNAIL,
+            MECHANICAL_SNAIL,
+            PHILLIPSFISH,
+            VALVE,
+            PIPEHEAD,
+            COGTOPUS,
+            EEL_DYNAMO,
+            DRIVE_PIKE,
+            BRASSGILL,
+            MEKA_AGAVE_BREAM
+    );
 
     static void register()
     {

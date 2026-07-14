@@ -45,6 +45,8 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
 
                         Starcatcher.MOD_ID,
 
+                        "create",
+
                         "tide",
                         "aquaculture",
                         "fishofthieves",
@@ -66,6 +68,18 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
 
     static boolean runningOnlyForConditions = false;
     static List<Pair<ResourceKey<FishProperties>, String>> conditionsFps = new ArrayList<>();
+
+
+    public static final List<String> MODS_TO_ACTUALLY_DATAGEN =
+            List.of(
+                    "minecraft",
+                    "starcatcher"
+
+                    //"create"
+
+
+                    , ""
+            );
 
     public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
     {

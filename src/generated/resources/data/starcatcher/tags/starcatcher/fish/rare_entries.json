@@ -29,7 +29,7 @@
       "required": false
     },
     {
-      "id": "starcatcher:cogtopus",
+      "id": "create:cogtopus",
       "required": false
     },
     {
@@ -37,7 +37,7 @@
       "required": false
     },
     {
-      "id": "starcatcher:drive_pike",
+      "id": "create:drive_pike",
       "required": false
     },
     {
@@ -57,11 +57,11 @@
       "required": false
     },
     {
-      "id": "starcatcher:mechanical_brass_snail",
+      "id": "create:mechanical_brass_snail",
       "required": false
     },
     {
-      "id": "starcatcher:meka_agave_bream",
+      "id": "create:meka_agave_bream",
       "required": false
     },
     {
@@ -77,7 +77,7 @@
       "required": false
     },
     {
-      "id": "starcatcher:pipehead",
+      "id": "create:pipehead",
       "required": false
     },
     {

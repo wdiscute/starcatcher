@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.modifiers.catchmodifiers.AdjustLureTimeModifier;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.NeverLoseModifier;
 import com.wdiscute.utils.Utils;
+import net.dries007.tfc.client.overworld.Star;
 import net.mcexpanded.fancytabsections.FancyTabSections;
 import net.mcexpanded.fancytabsections.Section.Section;
 import net.mcexpanded.fancytabsections.Section.SectionAnimatedTextured;
@@ -31,27 +32,14 @@ import java.util.function.Supplier;
 
 public interface SCCreativeModeTabs
 {
-    DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Starcatcher.MOD_ID);
-
     static void register(IEventBus eventBus)
     {
-        CREATIVE_MODE_TABS.register(eventBus);
-        addItems();
-    }
+        //register creative mode tab
+        FancyTabSections.registerCreativeModeTab(eventBus, Starcatcher.rl("starcatcher"), SCItems.ROD);
 
-    static void addItems()
-    {
         //Must Have
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionAnimatedTextured(Starcatcher.rl("must_have"))
-                {
-                    @Override
-                    public void renderToggle(CreativeModeInventoryScreen screen, GuiGraphics graphics, Section<?> section, int x, int y, int w, int h, int mouseX, int mouseY, boolean isHoveringAny)
-                    {
-
-                    }
-                }
                         .setFrames(9)
                         .setFrameTimeInMS(200)
                         .setTextOutline(0xff000000)
@@ -182,10 +170,4 @@ public interface SCCreativeModeTabs
                         .add(SCItems.COOKED_STARCAUGHT_FISH)
         );
     }
-
-    Supplier<CreativeModeTab> STARCATCHER = CREATIVE_MODE_TABS.register(
-            "starcatcher", () -> CreativeModeTab.builder().icon(() -> new ItemStack(SCItems.ROD.get()))
-                    .title(Component.translatable("itemGroup.starcatcher"))
-                    .build()
-    );
 }

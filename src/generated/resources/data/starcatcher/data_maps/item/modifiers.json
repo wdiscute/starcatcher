@@ -442,11 +442,6 @@
         "hits_to_spawn_treasure": 3
       }
     ],
-    "starcatcher:sky_rod": [
-      {
-        "type": "starcatcher:pull_down"
-      }
-    ],
     "starcatcher:slimey_bobber": [
       {
         "type": "starcatcher:bounce_back"

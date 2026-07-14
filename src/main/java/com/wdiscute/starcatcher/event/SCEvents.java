@@ -88,6 +88,17 @@ public class SCEvents
             }
         };
 
+        //create
+        event.addPackFinders(
+                Starcatcher.rl("built_in_datapacks/create_compat"),
+                PackType.SERVER_DATA,
+                Component.literal("Starcatcher - Create Compat"),
+                packSource,
+                false,
+                Pack.Position.BOTTOM
+        );
+
+        //tide
         event.addPackFinders(
                 Starcatcher.rl("built_in_datapacks/tide_compat"),
                 PackType.SERVER_DATA,

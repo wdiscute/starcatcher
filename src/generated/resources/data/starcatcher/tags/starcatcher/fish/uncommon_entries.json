@@ -9,7 +9,7 @@
       "required": false
     },
     {
-      "id": "starcatcher:brassgill",
+      "id": "create:brassgill",
       "required": false
     },
     {
@@ -17,7 +17,7 @@
       "required": false
     },
     {
-      "id": "starcatcher:coggill",
+      "id": "create:coggill",
       "required": false
     },
     {
@@ -57,7 +57,7 @@
       "required": false
     },
     {
-      "id": "starcatcher:mechanical_snail",
+      "id": "create:mechanical_snail",
       "required": false
     },
     {

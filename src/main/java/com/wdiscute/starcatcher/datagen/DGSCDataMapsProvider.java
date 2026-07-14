@@ -50,8 +50,8 @@ public class DGSCDataMapsProvider extends DataMapProvider
     protected void gather(HolderLookup.Provider provider)
     {
         var aquarium = this.builder(SCDataMaps.AQUARIUM_INTERACTION);
-        var currencies = this.builder(SBDataMaps.SELLING_BIN_CURRENCIES);
-        var sellable = this.builder(SBDataMaps.SELLING_BIN_VALUE);
+        //var currencies = this.builder(SBDataMaps.SELLING_BIN_CURRENCIES);
+        //var sellable = this.builder(SBDataMaps.SELLING_BIN_VALUE);
         var compostable = this.builder(NeoForgeDataMaps.COMPOSTABLES);
         var modifiers = this.builder(SCDataMaps.ITEM_MODIFIERS);
         var modifiers_effects = this.builder(SCDataMaps.EFFECT_MODIFIERS);
@@ -91,46 +91,46 @@ public class DGSCDataMapsProvider extends DataMapProvider
         //selling sellable datagen
         //shouldn't be run as the JSONs are manually moved to a
         //built-in datapack instead of hard coded into the mod's resources
-        if (false)
-        {
-            //selling sellable currencies
-            currencies.add(Items.EMERALD.builtInRegistryHolder(), 100, false);
-            currencies.add(Items.EMERALD_BLOCK.builtInRegistryHolder(), 900, false);
-
-            //selling sellable fishes
-            Map<ResourceLocation, Float> qualities = Map.of(
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "diamond"), 2f,
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "gold"), 1.5f,
-                    ResourceLocation.fromNamespaceAndPath("quality_food", "iron"), 1.25f
-            );
-
-            sellable.add(SCTags.COMMON_FISHES, new SBDataMaps.ItemValue(25, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
-            )), false);
-
-            sellable.add(SCTags.UNCOMMON_FISHES, new SBDataMaps.ItemValue(50, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
-            )), false);
-
-            sellable.add(SCTags.RARE_FISHES, new SBDataMaps.ItemValue(100, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
-            )), false);
-
-            sellable.add(SCTags.EPIC_FISHES, new SBDataMaps.ItemValue(150, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
-            )), false);
-
-            sellable.add(SCTags.LEGENDARY_FISHES, new SBDataMaps.ItemValue(200, List.of(
-                    new FishProcessor(2, 10f),
-                    new QualityFoodsProcessor(qualities)
-            )), false);
-
-            sellable.add(SCItems.PEARL.get().asItem().builtInRegistryHolder(), AbstractProcessor.createEmpty(50), false);
-        }
+        //if (false)
+        //{
+        //    //selling sellable currencies
+        //    currencies.add(Items.EMERALD.builtInRegistryHolder(), 100, false);
+        //    currencies.add(Items.EMERALD_BLOCK.builtInRegistryHolder(), 900, false);
+//
+        //    //selling sellable fishes
+        //    Map<ResourceLocation, Float> qualities = Map.of(
+        //            ResourceLocation.fromNamespaceAndPath("quality_food", "diamond"), 2f,
+        //            ResourceLocation.fromNamespaceAndPath("quality_food", "gold"), 1.5f,
+        //            ResourceLocation.fromNamespaceAndPath("quality_food", "iron"), 1.25f
+        //    );
+//
+        //    sellable.add(SCTags.COMMON_FISHES, new SBDataMaps.ItemValue(25, List.of(
+        //            new FishProcessor(2, 10f),
+        //            new QualityFoodsProcessor(qualities)
+        //    )), false);
+//
+        //    sellable.add(SCTags.UNCOMMON_FISHES, new SBDataMaps.ItemValue(50, List.of(
+        //            new FishProcessor(2, 10f),
+        //            new QualityFoodsProcessor(qualities)
+        //    )), false);
+//
+        //    sellable.add(SCTags.RARE_FISHES, new SBDataMaps.ItemValue(100, List.of(
+        //            new FishProcessor(2, 10f),
+        //            new QualityFoodsProcessor(qualities)
+        //    )), false);
+//
+        //    sellable.add(SCTags.EPIC_FISHES, new SBDataMaps.ItemValue(150, List.of(
+        //            new FishProcessor(2, 10f),
+        //            new QualityFoodsProcessor(qualities)
+        //    )), false);
+//
+        //    sellable.add(SCTags.LEGENDARY_FISHES, new SBDataMaps.ItemValue(200, List.of(
+        //            new FishProcessor(2, 10f),
+        //            new QualityFoodsProcessor(qualities)
+        //    )), false);
+//
+        //    sellable.add(SCItems.PEARL.get().asItem().builtInRegistryHolder(), AbstractProcessor.createEmpty(50), false);
+        //}
 
 
         //
@@ -241,11 +241,6 @@ public class DGSCDataMapsProvider extends DataMapProvider
         modifiers.add(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE.builtInRegistryHolder(), List.of(
                 new SurvivesLavaModifier(""),
                 new ExtraGoldenChanceModifier(0.1f, true, "")
-        ), false);
-
-        //rods
-        modifiers.add(SCItems.SKY_ROD, List.of(
-                new PullDownModifier("")
         ), false);
 
         //worms
