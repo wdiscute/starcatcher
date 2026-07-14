@@ -80,7 +80,7 @@ dependencies {
     //jarJar(implementation("com.wdiscute:libtooltips:2.3.1-NEOFORGE-1.21.1"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:nrGOzmNu"))
+    jarJar(implementation("maven.modrinth:wds-selling-bin:1.4.1-NEOFORGE-1.21.1"))
 
     //wdUtils
     jarJar(implementation("com.wdiscute:wdUtils:1.2-NEOFORGE-1.21.1"))
