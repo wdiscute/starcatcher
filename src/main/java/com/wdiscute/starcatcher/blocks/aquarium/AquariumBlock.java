@@ -472,7 +472,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
                 if (!abe.getFish().isEmpty()) return false;
                 if (SCDataComponents.has(is, SCDataComponents.BUCKETED_FISH))
                 {
-                    abe.setFish(SCDataComponents.get(is, SCDataComponents.BUCKETED_FISH).stack());
+                    abe.setFish(SCDataComponents.get(is, SCDataComponents.BUCKETED_FISH).toStack());
                     if (is.getItem() instanceof BucketItem)
                     {
                         ItemStack emptySuccessItem = BucketItem.getEmptySuccessItem(is, p);
