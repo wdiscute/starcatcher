@@ -1,56 +1,106 @@
 package com.wdiscute.starcatcher;
 
+import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
-import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.client.resources.language.I18n;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 public class SCConfig
 {
     private static final ModConfigSpec.Builder BUILDER_CLIENT = new ModConfigSpec.Builder();
 
+    //minigame & overlays positioning
+    public static final ModConfigSpec.DoubleValue MINIGAME_X_OFFSET = BUILDER_CLIENT
+            .push("ui_settings")
+            .translation("starcatcher.configuration.minigame_x_offset")
+            .defineInRange("minigame_x_offset", 0d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue MINIGAME_Y_OFFSET = BUILDER_CLIENT
+            .translation("starcatcher.configuration.minigame_y_offset")
+            .defineInRange("minigame_y_offset", 0d, -10000, 10000);
+
     public static final ModConfigSpec.DoubleValue MINIGAME_RENDER_SCALE = BUILDER_CLIENT
-            .push("minigame_window")
             .translation("starcatcher.configuration.minigame_scale")
             .defineInRange("minigame_scale", 1.5, 0.1, 6);
 
-    public static final ModConfigSpec.IntValue MINIGAME_X_OFFSET = BUILDER_CLIENT
-            .translation("starcatcher.configuration.x_offset")
-            .defineInRange("minigame_x_offset", 0, -10000, 10000);
+    public static final ModConfigSpec.DoubleValue TOURNAMENT_X_OFFSET = BUILDER_CLIENT
+            .translation("starcatcher.configuration.tournament_x_offset")
+            .defineInRange("tournament_x_offset", 0d, -10000, 10000);
 
-    public static final ModConfigSpec.IntValue MINIGAME_Y_OFFSET = BUILDER_CLIENT
-            .translation("starcatcher.configuration.y_offset")
-            .defineInRange("minigame_y_offset", 0, -10000, 10000);
+    public static final ModConfigSpec.DoubleValue TOURNAMENT_Y_OFFSET = BUILDER_CLIENT
+            .translation("starcatcher.configuration.tournament_y_offset")
+            .defineInRange("tournament_y_offset", 0d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue TOURNAMENT_SCALE = BUILDER_CLIENT
+            .translation("starcatcher.configuration.tournament_scale")
+            .defineInRange("tournament_scale", 1d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue RADAR_X_OFFSET = BUILDER_CLIENT
+            .translation("starcatcher.configuration.radar_x_offset")
+            .defineInRange("radar_x_offset", 0d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue RADAR_Y_OFFSET = BUILDER_CLIENT
+            .translation("starcatcher.configuration.radar_y_offset")
+            .defineInRange("radar_y_offset", 80d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue RADAR_SCALE = BUILDER_CLIENT
+            .translation("starcatcher.configuration.radar_scale")
+            .defineInRange("radar_scale", 1d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue TRACKER_X_OFFSET = BUILDER_CLIENT
+            .translation("starcatcher.configuration.tracker_x_offset")
+            .defineInRange("tracker_x_offset", 0d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue TRACKER_Y_OFFSET = BUILDER_CLIENT
+            .translation("starcatcher.configuration.tracker_y_offset")
+            .defineInRange("tracker_y_offset", -50d, -10000, 10000);
+
+    public static final ModConfigSpec.DoubleValue TRACKER_SCALE = BUILDER_CLIENT
+            .translation("starcatcher.configuration.tracker_scale")
+            .defineInRange("tracker_scale", 1d, -10000, 10000);
 
     public static final ModConfigSpec.DoubleValue HIT_DELAY = BUILDER_CLIENT
             .pop()
             .translation("starcatcher.configuration.hit_delay")
             .defineInRange("hit_delay", 0.0d, -20, 20);
 
+    public static final ModConfigSpec.BooleanValue DEBUG_MINIGAME = BUILDER_CLIENT
+            .comment("Shows a bunch of extra text info during the minigame for debugging")
+            .translation("starcatcher.configuration.debug")
+            .define("debug", false);
+
+    //non minigame
+    public static final ModConfigSpec.IntValue OVERLAY_UPDATE_FREQUENCY = BUILDER_CLIENT
+            .translation("starcatcher.configuration.overlay_update_frequency")
+            .defineInRange("overlay_update_frequency", 1000, 100, Integer.MAX_VALUE);
+
     public static final ModConfigSpec.BooleanValue REMOVE_NOTIFICATION_ON_HOVER = BUILDER_CLIENT
             .translation("starcatcher.configuration.remove_notif_on_hover")
             .comment("If enabled the new fish notifications will be removed when hovering on the index, instead of only when visiting the specific fish entry")
             .define("remove_notif_on_hover", true);
 
-    public static final ModConfigSpec.EnumValue<FishProperties.SizeAndWeight.Units> UNIT = BUILDER_CLIENT
+    public static final ModConfigSpec.EnumValue<SizeAndWeight.Units> UNIT = BUILDER_CLIENT
             .translation("starcatcher.configuration.units")
-            .defineEnum("units", FishProperties.SizeAndWeight.Units.METRIC);
+            .defineEnum("units", SizeAndWeight.Units.METRIC);
 
     public static final ModConfigSpec.EnumValue<FishingGuideScreen.Sort> SORT = BUILDER_CLIENT
             .translation("starcatcher.configuration.sort")
             .defineEnum("sort", FishingGuideScreen.Sort.ALPHABETICAL_DOWN);
 
-    public static final ModConfigSpec.BooleanValue ENABLE_VILLAGER_SOUND = BUILDER_CLIENT
-            .translation("starcatcher.configuration.enable_villager_sound")
-            .define("enable_villager_sound", true);
+    public static final ModConfigSpec.BooleanValue ENABLE_TACKLE_SOUNDS = BUILDER_CLIENT
+            .comment("Controls whether sounds for reeling, failing minigame, completing minigame etc should play")
+            .translation("starcatcher.configuration.enable_tackle_sounds")
+            .define("enable_tackle_sound", true);
 
-    public static final ModConfigSpec.BooleanValue ENABLE_HIT_SOUND = BUILDER_CLIENT
-            .translation("starcatcher.configuration.enable_hit_sound")
-            .define("enable_hit_sound", true);
+    public static final ModConfigSpec.BooleanValue ENABLE_HIT_SOUNDS = BUILDER_CLIENT
+            .comment("Should sweet-spots play the hit sounds")
+            .translation("starcatcher.configuration.enable_hit_sounds")
+            .define("enable_hit_sounds", true);
 
     public static final ModConfigSpec.BooleanValue ENABLE_MISS_SOUND = BUILDER_CLIENT
+            .comment("Should play the hit sound")
             .translation("starcatcher.configuration.enable_miss_sound")
             .define("enable_miss_sound", true);
+
 
     static final ModConfigSpec SPEC = BUILDER_CLIENT.build();
 
@@ -62,9 +112,10 @@ public class SCConfig
             .comment("Award guide when joining the world/server once per player")
             .define("give_guide", true);
 
-    public static final ModConfigSpec.BooleanValue SHOW_EXCLAMATION_MARK_PARTICLE = BUILDER_SERVER
-            .translation("starcatcher.configuration.show_exclamation_mark_particle")
-            .define("show_exclamation_mark_particle", false);
+    public static final ModConfigSpec.BooleanValue GIVE_ROD = BUILDER_SERVER
+            .translation("starcatcher.configuration.give_rod")
+            .comment("Award rod & guide the first time a player fishes with a vanilla fishing rod")
+            .define("give_rod", true);
 
     public static final ModConfigSpec.BooleanValue ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS = BUILDER_SERVER
             .translation("starcatcher.configuration.enable_worms")
@@ -80,12 +131,6 @@ public class SCConfig
             .comment("Offline players won't be awarded the entry.")
             .translation("starcatcher.configuration.enable_ftb_team_sharing")
             .define("enable_ftb_team_sharing", true);
-
-    public static final ModConfigSpec.BooleanValue ENABLE_SEASONS = BUILDER_SERVER
-            .comment("Enables/disables fishes being restricted by seasons.")
-            .comment("Useful if you want to play with a seasons mod but don't like the built-in restrictions.")
-            .translation("starcatcher.configuration.enable_seasons")
-            .define("enable_seasons", true);
 
     public static final ModConfigSpec.DoubleValue VANISHING_RATE_MULTIPLIER = BUILDER_SERVER
             .comment("Adjusts the vanishing rate, useful if you want to adjust the fishes' difficulty globally.")
@@ -112,20 +157,15 @@ public class SCConfig
             .translation("starcatcher.configuration.hp_multiplier")
             .defineInRange("hp_multiplier", 1d, 0d, 100d);
 
-    public static final ModConfigSpec.DoubleValue POINTER_SPEED_MULTIPLIER = BUILDER_SERVER
-            .comment("Adjusts the pointer speed rate, useful if you want to adjust the fishes' difficulty globally.")
-            .translation("starcatcher.configuration.pointer_speed_multiplier")
-            .defineInRange("pointer_speed_multiplier", 1d, 0d, 100d);
+    public static final ModConfigSpec.DoubleValue HANDLE_SPEED_MULTIPLIER = BUILDER_SERVER
+            .comment("Adjusts the handle speed, useful if you want to adjust the fishes' difficulty globally.")
+            .translation("starcatcher.configuration.handle_speed_multiplier")
+            .defineInRange("handle_speed_multiplier", 1d, 0d, 100d);
 
     public static final ModConfigSpec.BooleanValue HIDE_ENTRIES_UNTIL_FOUND = BUILDER_SERVER
             .comment("Hides entries in the guide book until one has been caught.")
             .translation("starcatcher.configuration.hide_entries_until_found")
             .define("hide_entries_until_found", true);
-
-    public static final ModConfigSpec.DoubleValue FISH_PLAYER_MESSAGES_CHANCE = BUILDER_SERVER
-            .comment("Controls the chance of fishing up messages-in-a-bottle left by other players of the server. Does not affect built-in Secrets")
-            .translation("starcatcher.configuration.fish_player_messages_chance")
-            .defineInRange("fish_player_messages_chance", 0.05d, 0d, 1d);
 
     public static final ModConfigSpec.BooleanValue SAVE_DATA_TO_ITEMS = BUILDER_SERVER
             .comment("If enabled the size, weight, percentile, rarity & golden values will be saved to the item for displaying")
@@ -143,7 +183,7 @@ public class SCConfig
             .defineInRange("base_max_ticks", 300, 0, 999999);
 
     public static final ModConfigSpec.DoubleValue BASE_CHANCE_TO_FISH = BUILDER_SERVER
-            .comment("The base chance to fish every tick (out of 1)")
+            .comment("The rod weight to fish every tick (out of 1)")
             .translation("starcatcher.configuration.base_chance")
             .defineInRange("base_chance", 0.005d, 0, 1);
 
@@ -151,10 +191,6 @@ public class SCConfig
             .comment("Restricts items placeable inside the tackle box to #starcatcher:placeable_in_tacle_box")
             .translation("starcatcher.configuration.restrict_tackle_box_to_tag")
             .define("restrict_tackle_box_to_tag", true);
-
-    public static final ModConfigSpec.BooleanValue ENABLE_ROD_MENU = BUILDER_SERVER
-            .translation("starcatcher.configuration.enable_rod_menu")
-            .define("enable_rod_menu", false);
 
     public static final ModConfigSpec.DoubleValue FISH_MAX_SCALE = BUILDER_SERVER
             .comment("Controls the maximum scale of the fish model based on the size and weight percentile")
@@ -168,15 +204,29 @@ public class SCConfig
 
 
     public static final ModConfigSpec.IntValue MAX_TACKLE_BOX_FISH_STORAGE = BUILDER_SERVER
-            .comment("Sets the maximum number of fishes the tackle box can store in it's 'infinite slot'")
+            .comment("Sets the maximum number of fishes the tackle box can store in its 'infinite slot'")
             .translation("starcatcher.configuration.max_tackle_box_fish_storage")
             .defineInRange("max_tackle_box_fish_storage", 900, 0, 999);
 
+    public static final ModConfigSpec.BooleanValue HIDE_TREASURES = BUILDER_SERVER
+            .comment("Hides the treasure item during minigame")
+            .translation("starcatcher.configuration.hide_treasures")
+            .define("hide_treasures", false);
 
-    //todo add base modifiers config
-//    public static final ModConfigSpec.ListValueSpec BASE_MODIFIERS = BUILDER_SERVER
-//            .comment("Adjusts the fish decay rate multiplier, useful if you want to adjust the fishes' difficulty globally.")
-//            .define("pointer_speed_multiplier", List.of());
+    public static final ModConfigSpec.BooleanValue HIDE_CATCHES = BUILDER_SERVER
+            .comment("Hides the catch during minigame")
+            .translation("starcatcher.configuration.hide_catches")
+            .define("hide_catches", false);
+
+    public static final ModConfigSpec.BooleanValue ENABLE_ROD_DURABILITY = BUILDER_SERVER
+            .comment("Enable Starcatcher's fishing rod durability")
+            .translation("starcatcher.configuration.enable_rod_durability")
+            .define("enable_rod_durability", false);
+
+    public static final ModConfigSpec.BooleanValue ALLOW_GUIDE_KEYBIND = BUILDER_SERVER
+            .comment("Allows players to use a keybind to open the guide without having the item")
+            .translation("starcatcher.configuration.allow_guide_keybind")
+            .define("allow_guide_keybind", true);
 
     static final ModConfigSpec SPEC_SERVER = BUILDER_SERVER.build();
 

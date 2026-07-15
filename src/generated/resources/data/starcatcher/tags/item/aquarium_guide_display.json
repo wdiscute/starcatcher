@@ -8,7 +8,7 @@
     "minecraft:red_sand",
     "minecraft:kelp",
     "minecraft:seagrass",
-    "minecraft:bucket",
+    "#c:buckets/empty",
     "starcatcher:aurora",
     "starcatcher:conch",
     "starcatcher:clam"

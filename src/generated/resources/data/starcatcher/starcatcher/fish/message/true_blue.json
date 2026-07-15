@@ -1,0 +1,91 @@
+{
+  "base_chance": 5,
+  "catch_info": {
+    "type": "message",
+    "item": {
+      "components": {
+        "starcatcher:message": {
+          "background": "starcatcher:textures/gui/message/message_overworld.png",
+          "dimension": "starcatcher:missingno",
+          "sender": [
+            1706407745,
+            -1005039813,
+            -1902890649,
+            38309877
+          ],
+          "sender_display_name": "starcatcher.message.true_blue.sender",
+          "text": [
+            "starcatcher.message.true_blue.0",
+            "starcatcher.message.true_blue.1",
+            "starcatcher.message.true_blue.2",
+            "starcatcher.message.true_blue.3",
+            "starcatcher.message.true_blue.4",
+            "starcatcher.message.true_blue.5",
+            "starcatcher.message.true_blue.6",
+            "starcatcher.message.true_blue.7",
+            "starcatcher.message.true_blue.8",
+            "starcatcher.message.true_blue.9",
+            "starcatcher.message.true_blue.10",
+            "starcatcher.message.true_blue.11",
+            "starcatcher.message.true_blue.12",
+            "starcatcher.message.true_blue.13",
+            "starcatcher.message.true_blue.14",
+            "starcatcher.message.true_blue.15"
+          ]
+        }
+      },
+      "count": 1,
+      "id": "starcatcher:message_in_a_bottle"
+    }
+  },
+  "difficulty": {
+    "decay": 0.0,
+    "hp": 100,
+    "missPenalty": 0,
+    "modifiers": [],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 30,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 30,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": false,
+  "rarity": "common",
+  "restrictions": [
+    {
+      "type": "starcatcher:percentage_chance",
+      "chance": 0.004
+    },
+    {
+      "type": "starcatcher:caught_limit",
+      "limit": 1
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 41.0,
+    "average_weight_grams": 2001.0,
+    "deviation_size_cm": 21.0,
+    "deviation_weight_grams": 701.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
+}

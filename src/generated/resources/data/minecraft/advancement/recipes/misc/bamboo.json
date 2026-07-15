@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_livid_bamboo": {
+      "conditions": {
+        "items": [
+          {
+            "items": "starcatcher:livid_bamboo"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:bamboo"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_livid_bamboo"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:bamboo"
+    ]
+  }
+}

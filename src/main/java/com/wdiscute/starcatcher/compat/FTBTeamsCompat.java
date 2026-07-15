@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.compat;
 
-import com.wdiscute.starcatcher.io.FishCaughtCounter;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.data.FishCaughtCounter;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import dev.ftb.mods.ftbteams.api.Team;
 import dev.ftb.mods.ftbteams.data.TeamManagerImpl;
 import net.minecraft.resources.ResourceLocation;
@@ -17,7 +17,7 @@ public class FTBTeamsCompat
 {
     private static final Logger log = LoggerFactory.getLogger(FTBTeamsCompat.class);
 
-    public static void awardToTeam(Player player, FishProperties fp, ResourceLocation rl, int ticks, int size, int weight)
+    public static void awardToTeam(Player player, FishProperties fp, ResourceLocation rl, int ticks)
     {
         TeamManagerImpl teamManager = TeamManagerImpl.INSTANCE;
         Optional<Team> teamByID = teamManager.getTeamForPlayerID(player.getUUID());
@@ -29,10 +29,10 @@ public class FTBTeamsCompat
             for (UUID uuid : members)
             {
                 Player playerByUUID = player.getServer().getPlayerList().getPlayer(uuid);
-                if (playerByUUID != null && !playerByUUID.getUUID().equals(player.getUUID()))
+                if (playerByUUID != null && playerByUUID.getUUID().equals(player.getUUID()))
                 {
                     FishCaughtCounter.awardFishCaughtCounter(fp, rl, playerByUUID,
-                            ticks, size, weight, 100, false, false, false);
+                            ticks, 100, false, false, false, false);
                 }
             }
         }

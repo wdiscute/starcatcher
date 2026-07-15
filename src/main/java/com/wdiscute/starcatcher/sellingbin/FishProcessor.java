@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.sellingbin.processors.AbstractProcessor;
-import com.wdiscute.starcatcher.io.CaughtFishInfo;
-import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -76,13 +76,13 @@ public class FishProcessor extends AbstractProcessor
     @Override
     public int addValue(int baseValue, int currentValue, ItemStack itemStack, BlockEntity blockEntity, Player player)
     {
-        if(!SCDataComponents.has(itemStack, SCDataComponents.CAUGHT_FISH_INFO)) return 0;
+        if (!SCDataComponents.has(itemStack, SCDataComponents.CAUGHT_FISH_INFO)) return 0;
 
         CaughtFishInfo caughtFishInfo = SCDataComponents.get(itemStack, SCDataComponents.CAUGHT_FISH_INFO);
 
-        if(caughtFishInfo.golden()) return (int) (baseValue * goldenMultiplier);
+        if (caughtFishInfo.golden()) return (int) (baseValue * goldenMultiplier);
 
-        if(caughtFishInfo.percentile() >= 50) return 0;
+        if (caughtFishInfo.percentile() >= 50) return 0;
 
         //wd sucks at math
         float percentile = (100 - caughtFishInfo.percentile() - 50) / 50;

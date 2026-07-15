@@ -2,9 +2,9 @@ package com.wdiscute.starcatcher.blocks.tacklebox;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.io.SingleStackContainer;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCMenuTypes;
+import com.wdiscute.utils.MaybeStack;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -106,13 +106,13 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
     public void update()
     {
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, new SingleStackContainer(container.getItem(BOBBER_SLOT).copy()));
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, new SingleStackContainer(container.getItem(BAIT_SLOT).copy()));
-        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, new SingleStackContainer(container.getItem(HOOK_SLOT).copy()));
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, new MaybeStack(container.getItem(BOBBER_SLOT)));
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.BAIT, new MaybeStack(container.getItem(BAIT_SLOT)));
+        SCDataComponents.set(container.getItem(ROD_SLOT), SCDataComponents.HOOK, new MaybeStack(container.getItem(HOOK_SLOT)));
 
-        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, SingleStackContainer.empty()).stack());
-        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, SingleStackContainer.empty()).stackDoNotUse());
-        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, SingleStackContainer.empty()).stack());
+        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BOBBER, MaybeStack.EMPTY).stack());
+        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.BAIT, MaybeStack.EMPTY).stack());
+        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(container.getItem(ROD_SLOT), SCDataComponents.HOOK, MaybeStack.EMPTY).stack());
     }
 
     public ItemStack getRod()
@@ -122,8 +122,8 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
     public void onPlaceRod(ItemStack newStack)
     {
-        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack());
-        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BAIT, SingleStackContainer.empty()).stack());
-        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.HOOK, SingleStackContainer.empty()).stack());
+        container.setItem(BOBBER_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BOBBER, MaybeStack.EMPTY).stack());
+        container.setItem(BAIT_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.BAIT, MaybeStack.EMPTY).stack());
+        container.setItem(HOOK_SLOT, SCDataComponents.getOrDefault(newStack, SCDataComponents.HOOK, MaybeStack.EMPTY).stack());
     }
 }

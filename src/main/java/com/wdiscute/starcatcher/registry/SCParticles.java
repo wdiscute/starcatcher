@@ -9,22 +9,22 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
-public class SCParticles
+public interface SCParticles
 {
-    public static final DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
+    DeferredRegister<ParticleType<?>> PARTICLE_TYPES =
             DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, Starcatcher.MOD_ID);
 
 
-    public static final Supplier<SimpleParticleType> FISHING_NOTIFICATION =
-            PARTICLE_TYPES.register("fishing_notification", () -> new SimpleParticleType(true));
+    Supplier<SimpleParticleType> VALLEY_NOTIFICATION =
+            PARTICLE_TYPES.register("valley_notification", () -> new SimpleParticleType(true));
 
-    public static final Supplier<SimpleParticleType> FISHING_BITING =
+    Supplier<SimpleParticleType> FISHING_BITING =
             PARTICLE_TYPES.register("fishing_biting", () -> new SimpleParticleType(true));
 
-    public static final Supplier<SimpleParticleType> FISHING_BITING_LAVA =
+    Supplier<SimpleParticleType> FISHING_BITING_LAVA =
             PARTICLE_TYPES.register("fishing_biting_lava", () -> new SimpleParticleType(true));
 
-    public static void register(IEventBus eventBus)
+    static void register(IEventBus eventBus)
     {
         PARTICLE_TYPES.register(eventBus);
     }

@@ -1,88 +1,82 @@
 {
-  "base_chance": 15,
+  "base_chance": 25,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:thunder_bass"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:thunder_bass"
+    }
   },
   "difficulty": {
     "decay": 1.0,
     "hp": 100,
-    "missPenalty": 10,
+    "missPenalty": 20,
     "modifiers": [],
     "speed": 11,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
-        "moving_rate": 0.0,
+        "moving_rate": 1.0,
         "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
-        "moving_rate": 0.0,
+        "moving_rate": 1.0,
         "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       }
     ]
   },
   "has_guide_entry": true,
-  "rarity": "rare",
+  "rarity": "epic",
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
       "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [
-        "starcatcher:is_ocean",
-        "starcatcher:is_river",
-        "starcatcher:is_mushroom_fields"
+      "blacklist": [
+        "#starcatcher:is_ocean",
+        "#starcatcher:is_river",
+        "#starcatcher:is_mushroom_fields",
+        "#starcatcher:is_cold_lake",
+        "#starcatcher:is_warm_lake",
+        "#starcatcher:is_cherry_grove"
       ],
-      "biomes_tags": [],
       "hover_translation": "gui.guide.lakes.hover",
       "translation_override": "gui.guide.lakes"
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": 100,
+      "max_y": 2147483647,
       "min_y": 50,
       "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:weather_restriction",
+      "weather": "thunder"
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
-    },
-    {
-      "type": "starcatcher:season",
-      "season_extra_chance": {
-        "early_autumn": 0,
-        "early_summer": 0,
-        "late_autumn": 0,
-        "late_summer": 0,
-        "mid_autumn": 0,
-        "mid_summer": 0
-      },
-      "translation_override": "gui.guide.seasons.summer_autumn"
-    },
-    {
-      "type": "starcatcher:weather_restriction",
-      "weather": "thunder"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -93,11 +87,5 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "star": {
-    "connections": [],
-    "debug_color": -890519,
-    "name": "pherkad",
-    "x": 2577,
-    "y": 754
-  }
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

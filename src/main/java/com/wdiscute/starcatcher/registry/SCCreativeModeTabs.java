@@ -1,112 +1,173 @@
 package com.wdiscute.starcatcher.registry;
 
+import com.wdiscute.sellingbin.registry.SBBlocks;
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.secretnotes.LetterItem;
+import com.wdiscute.starcatcher.fish.FishApi;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.messageinabottle.message.Message;
+import com.wdiscute.starcatcher.modifiers.catchmodifiers.AdjustLureTimeModifier;
+import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
+import com.wdiscute.starcatcher.modifiers.minigamemodifiers.NeverLoseModifier;
+import com.wdiscute.utils.Utils;
+import net.dries007.tfc.client.overworld.Star;
+import net.mcexpanded.fancytabsections.FancyTabSections;
+import net.mcexpanded.fancytabsections.Section.Section;
+import net.mcexpanded.fancytabsections.Section.SectionAnimatedTextured;
+import net.mcexpanded.fancytabsections.Section.SectionColored;
+import net.mcexpanded.fancytabsections.creativetab.ConglomerateOfItems;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Supplier;
 
 
-public class SCCreativeModeTabs
+public interface SCCreativeModeTabs
 {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-            DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Starcatcher.MOD_ID);
-
-    public static void register(IEventBus eventBus)
+    static void register(IEventBus eventBus)
     {
-        CREATIVE_MODE_TABS.register(eventBus);
-    }
+        //register creative mode tab
+        FancyTabSections.registerCreativeModeTab(eventBus, Starcatcher.rl("starcatcher"), SCItems.ROD);
 
-    public static final LetterItem.Message MESSAGE = new LetterItem.Message(
-            UUID.randomUUID(),
-            "<sclegendary>-dev (wd)</sclegendary>",
-            Level.OVERWORLD.location(),
-            List.of(
-                    "",
-                    "",
-                    "This is a cheated message from creative.",
-                    "",
-                    "Usually players would write their own",
-                    "message and send it to the ocean for",
-                    "others to fish later.",
-                    "(5% chance if there is any available)",
-                    "",
-                    "<scgolden>Also did you know it supports markdown?</scgolden>",
-                    "learn more about it in the LibTooltips wiki"
-            ),
-            true
-    );
-
-    public static final Supplier<CreativeModeTab> STARCATCHER = CREATIVE_MODE_TABS.register(
-            "starcatcher", () -> CreativeModeTab.builder().icon(() -> new ItemStack(SCItems.ROD.get()))
-                    .title(Component.translatable("creativetab.starcatcher.starcatcher"))
-                    .displayItems((itemDisplayParameters, output) ->
-                    {
-
-                        output.accept(SCItems.ROD);
-
-                        //adds items
-                        for (DeferredHolder<Item, ? extends Item> item : SCItems.ITEMS.getEntries())
+        //Must Have
+        FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
+                new SectionAnimatedTextured(Starcatcher.rl("must_have"))
+                        .setFrames(9)
+                        .setFrameTimeInMS(200)
+                        .setTextOutline(0xff000000)
+                        .setTitle(Component.empty())
+                        .setCollapsible(false)
+                        .add(SCItems.ROD)
+                        .add(() ->
                         {
-                            if (item.equals(SCItems.ROD)) continue;
+                            ItemStack devRod = SCItems.ICEBORN_ROD.toStack();
+                            SCDataComponents.set(devRod, SCDataComponents.MODIFIERS, List.of(
+                                    new NeverLoseModifier(""),
+                                    new AdjustLureTimeModifier(0.05f, 0.05f, 1f, "")
+                            ));
+                            return devRod;
+                        })
+                        .add(() ->
+                        {
+                            ItemStack devRod = SCItems.OBSIDIAN_ROD.toStack();
+                            SCDataComponents.set(devRod, SCDataComponents.MODIFIERS, List.of(
+                                    new ExtraGoldenChanceModifier(1, false, ""),
+                                    new AdjustLureTimeModifier(0.05f, 0.05f, 1f, "")
+                            ));
+                            return devRod;
+                        })
+                        .add(SCItems.GUIDE)
+                        .add(SCBlocks.STAND)
+                        .add(SCBlocks.DISPLAY)
+                        .add(SCBlocks.TACKLE_BOX)
+                        .add(SCBlocks.AQUARIUM)
+                        .add(SBBlocks.SELLING_BIN)
+        );
 
-                            if (item.equals(SCItems.BOTTLED_LETTER))
-                            {
-                                ItemStack is = new ItemStack(SCItems.BOTTLED_LETTER.get());
 
-                                SCDataComponents.set(is, SCDataComponents.MESSAGE, MESSAGE);
-                                output.accept(is);
-                                continue;
-                            }
+        //hooks & bobbers
+        FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
+                new SectionColored(Starcatcher.rl("hooks_bobbers"))
+                        .setBannerColor(0xff344545)
 
-                            if (item.equals(SCItems.MESSAGE_IN_A_BOTTLE))
-                            {
-                                ItemStack is = new ItemStack(SCItems.MESSAGE_IN_A_BOTTLE.get());
+                        .addItemTag(SCTags.HOOKS)
+                        .addItemTag(SCTags.BOBBERS)
+                        .addItemTag(SCTags.BAITS)
+        );
 
-                                SCDataComponents.set(is, SCDataComponents.MESSAGE, MESSAGE);
-                                output.accept(is);
-                                continue;
-                            }
+        //cosmetics
+        FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
+                new SectionColored(Starcatcher.rl("cosmetics"))
+                        .setBannerColor(0xff344545)
+                        .add(SCItems.RODS_REGISTRY)
+                        .add(SCItems.TEMPLATES_REGISTRY)
+                        .add((d) -> SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
+        );
 
-                            if (item.equals(SCItems.MESSAGE)) continue;
+        //tackle boxes
+        FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
+                new SectionColored(Starcatcher.rl("tackle_boxes"))
+                        .setBannerColor(0xff344545)
+                        .add((d) -> SCBlocks.TACKLE_BOXES.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
+        );
 
-                            output.accept(item.get());
-                        }
+        //Trophies & Secrets
+        FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
+                new SectionColored(Starcatcher.rl("trophies"))
+                        .setBannerColor(0xff344545)
 
+                        .add(SCBlocks.TROPHY_COPPER)
+                        .add(SCBlocks.TROPHY_IRON)
+                        .add(SCBlocks.TROPHY_GOLD)
+                        .add(SCBlocks.TROPHY_EMERALD)
+                        .add(SCBlocks.TROPHY_DIAMOND)
+                        .add(SCBlocks.TROPHY_OF_THE_OLDER_ANGLER)
 
-                        //adds bobbers
-                        for (DeferredHolder<Item, ? extends Item> item : SCItems.BOBBERS_REGISTRY.getEntries())
-                            output.accept(item.get());
+                        .add(SCItems.LETTER)
+                        .add(SCItems.BOTTLED_LETTER)
+                        .add(SCItems.MESSAGE_IN_A_BOTTLE)
+                        .add(SCItems.BROKEN_BOTTLE)
+                        .add(SCItems.MESSAGE)
 
-                        //adds hooks
-                        for (DeferredHolder<Item, ? extends Item> item : SCItems.HOOKS_REGISTRY.getEntries())
-                            output.accept(item.get());
+                        //secret messages
+                        .add((registryAccess) ->
+                                {
+                                    List<ItemStack> list = new ArrayList<>();
+                                    for (FishProperties fp : FishApi.getMessages(registryAccess))
+                                    {
+                                        ItemStack stack = fp.catchInfo().fish().toStack();
 
-                        //adds templates
-                        for (DeferredHolder<Item, ? extends Item> item : SCItems.TEMPLATES_REGISTRY.getEntries())
-                            output.accept(item.get());
+                                        if (stack.has(SCDataComponents.MESSAGE))
+                                        {
+                                            SCDataComponents.set(stack, SCDataComponents.MESSAGE, stack.get(SCDataComponents.MESSAGE));
+                                            list.add(stack);
+                                        }
+                                    }
+                                    return list;
+                                }
+                        )
+        );
 
-                        //adds rods besides default
-                        for (DeferredHolder<Item, ? extends Item> item : SCItems.RODS_REGISTRY.getEntries())
-                            if (!item.equals(SCItems.ROD))
-                                output.accept(item.get());
+        //Fish
+        FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
+                new SectionColored(Starcatcher.rl("fish"))
+                        .setBannerColor(0xff344545)
+                        .add(SCItems.BUCKETABLE_FISHES_REGISTRY)
+                        .add(SCItems.NON_BUCKETABLE_FISH_REGISTRY)
+                        .add(SCItems.NON_FISH_FISH_REGISTRY)
+                        .add(SCItems.LAVA_CRAB_CLAW)
+                        .add(SCBlocks.CLAM)
+                        .add(SCBlocks.CONCH)
+        );
 
-                        //adds fish
-                        for (DeferredHolder<Item, ? extends Item> item : SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries())
-                            output.accept(item.get());
+        //Miscellaneous
+        FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
+                new SectionColored(Starcatcher.rl("miscellaneous"))
+                        .setBannerColor(0xff344545)
+                        .add(SCItems.BOOT)
+                        .add(SCItems.MOSSY_BOOT)
+                        .add(SCItems.DRIED_SEAWEED)
+                        .add(SCItems.LAVA_CRAB_CLAW)
 
-                    })
-                    .build()
-    );
+                        .add(SCItems.FISH_BONES)
+
+                        .add(SCItems.FISH_RADAR)
+                        .add(SCItems.PEARL)
+                        .add(SCItems.STARCATCHER_TWINE)
+                        .add(SCItems.MISSINGNO)
+                        .add(SCItems.UNKNOWN_FISH)
+                        .add(SCItems.STARCAUGHT_BUCKET)
+                        .add(SCItems.STARCAUGHT_LAVA_BUCKET)
+                        .add(SCItems.STARCAUGHT_FISH)
+                        .add(SCItems.COOKED_STARCAUGHT_FISH)
+        );
+    }
 }

@@ -18,9 +18,9 @@ public class FishingNotificationParticles extends TextureSheetParticle
         this.yd = 0f;
         this.zd = 0f;
 
-        this.quadSize = 0.5f;
+        this.quadSize = 0.3f;
 
-        this.lifetime = 80;
+        this.lifetime = 15;
 
         this.sprites = spriteSet;
         this.setSpriteFromAge(spriteSet);
@@ -31,14 +31,8 @@ public class FishingNotificationParticles extends TextureSheetParticle
     {
         this.setSpriteFromAge(this.sprites);
 
-
-        if(age % 20 > 10)
-        {
-            this.yd = 0.04f;
-        }else
-        {
-            this.yd = -0.04f;
-        }
+        alpha -= 0.06f;
+        this.yd = 0.06f;
 
         this.xo = this.x;
         this.yo = this.y;

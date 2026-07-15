@@ -2,13 +2,13 @@ package com.wdiscute.starcatcher.compat.emi;
 
 import com.wdiscute.sellingbin.SellingBin;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.recipe.FishingRodSkinSmithingRecipe;
-import com.wdiscute.starcatcher.recipe.NetheriteUpgradeSmithingRecipe;
-import com.wdiscute.starcatcher.recipe.TackleSkinSmithingRecipe;
+import com.wdiscute.starcatcher.fish.FishApi;
+import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipe;
+import com.wdiscute.starcatcher.registry.SCDataEntries;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.SCBlocks;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import dev.emi.emi.api.EmiApi;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
@@ -22,8 +22,10 @@ import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @EmiEntrypoint
@@ -46,13 +48,21 @@ public class StarcatcherEmiPlugin implements EmiPlugin
         registry.addCategory(STARCATCHER_CATEGORY);
         registry.addWorkstation(STARCATCHER_CATEGORY, MY_WORKSTATION);
 
+        //bonemealing farmland
+        List<EmiIngredient> list = new ArrayList<>(SCDataEntries.FARMLAND_BONEMEAL_DROPS.get().stream().map(o -> EmiIngredient.of(Ingredient.of(o.first()))).toList());
+        list.add(0, EmiIngredient.of(Ingredient.of(Items.BONE_MEAL)));
+        list.add(0, EmiIngredient.of(Ingredient.of(Items.FARMLAND)));
+        registry.addRecipe(new EmiInfoRecipe(list,
+                List.of(
+                        Component.translatable("emi.info.starcatcher.bonemeal_farmland")
+                ),
+                SellingBin.rl("/bonemealing_farmland")));
+
         //worms info
-        registry.addRecipe(new EmiInfoRecipe(List.of(
-                EmiIngredient.of(SCTags.WORMS)),
+        registry.addRecipe(new EmiInfoRecipe(List.of(EmiIngredient.of(SCTags.WORMS)),
                 List.of(
                         Component.translatable("emi.info.starcatcher.worms.0"),
-                        Component.translatable("emi.info.starcatcher.worms.1"),
-                        Component.translatable("emi.info.starcatcher.worms.2")
+                        Component.translatable("emi.info.starcatcher.worms.1")
                 ),
                 SellingBin.rl("/worms")));
 
@@ -99,32 +109,18 @@ public class StarcatcherEmiPlugin implements EmiPlugin
                 ),
                 SellingBin.rl("/hats")));
 
-        Registry<FishProperties> fps = FishProperties.getRegistry(Minecraft.getInstance().level);
+        Registry<FishProperties> fps = FishApi.getRegistry(Minecraft.getInstance().level);
 
         for (FishProperties fp : fps)
             registry.addRecipe(new StarcatcherEmiFPRecipe(fps.getKey(fp), fp));
 
 
-        //add all starcatcher:smithing_netherite_upgraded
+        //add all smithing recipes
         List<RecipeHolder<SmithingRecipe>> smithingRecipes = registry.getRecipeManager().getAllRecipesFor(RecipeType.SMITHING);
         smithingRecipes.stream()
-                .filter(o -> o.value() instanceof NetheriteUpgradeSmithingRecipe)
-                .forEach(o -> registry.addRecipe(
-                        new StarcatcherEmiSmithingRecipe(((NetheriteUpgradeSmithingRecipe) o.value()))));
-
-        //add all starcatcher:smithing_rod_skin
-        smithingRecipes.stream()
-                .filter(o -> o.value() instanceof FishingRodSkinSmithingRecipe)
-                .forEach(o -> registry.addRecipe(
-                        new StarcatcherEmiSmithingRecipe(((FishingRodSkinSmithingRecipe) o.value()))));
-
-        //add all starcatcher:smithing_tackle_skin
-        smithingRecipes.stream()
-                .filter(o -> o.value() instanceof TackleSkinSmithingRecipe)
-                .forEach(o -> registry.addRecipe(
-                        new StarcatcherEmiSmithingRecipe(((TackleSkinSmithingRecipe) o.value()))));
-
-
+                .filter(o -> o.value() instanceof StarcatcherRodRecipe)
+                .map(o -> (StarcatcherRodRecipe) o.value())
+                .forEach(recipe -> registry.addRecipe(new StarcatcherEmiSmithingRecipe(recipe)));
 
     }
 }

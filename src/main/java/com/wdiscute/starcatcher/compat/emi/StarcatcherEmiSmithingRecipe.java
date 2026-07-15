@@ -1,11 +1,8 @@
 package com.wdiscute.starcatcher.compat.emi;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.recipe.FishingRodSkinSmithingRecipe;
-import com.wdiscute.starcatcher.recipe.NetheriteUpgradeSmithingRecipe;
-import com.wdiscute.starcatcher.recipe.TackleSkinSmithingRecipe;
-import com.wdiscute.starcatcher.registry.SCDataMaps;
+import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipe;
+import com.wdiscute.starcatcher.registry.SCItems;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.recipe.EmiRecipeCategory;
 import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
@@ -16,6 +13,7 @@ import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.SmithingRecipeInput;
 
 import java.util.List;
 
@@ -24,62 +22,24 @@ public class StarcatcherEmiSmithingRecipe implements EmiRecipe
     protected final EmiIngredient template;
     protected final EmiIngredient input;
     protected final EmiIngredient base;
-    protected final EmiIngredient addition;
+    protected final EmiIngredient material;
     protected final EmiStack output;
 
-    public StarcatcherEmiSmithingRecipe(NetheriteUpgradeSmithingRecipe recipe)
+    public StarcatcherEmiSmithingRecipe(StarcatcherRodRecipe recipe)
     {
         this.template = EmiIngredient.of(recipe.template());
-        this.input = EmiIngredient.of(recipe.base());
-        this.base = EmiIngredient.of(recipe.base());
-        this.addition = EmiIngredient.of(recipe.addition());
+        this.input = EmiIngredient.of(recipe.rod());
+        this.base = EmiIngredient.of(recipe.rod());
+        this.material = EmiIngredient.of(recipe.material());
 
-        ItemStack stack = recipe.base().getItems()[0].copy();
-        SCDataComponents.set(stack, SCDataComponents.NETHERITE_UPGRADE, true);
+        ItemStack result = recipe.assembledwad(
+                new SmithingRecipeInput(
+                        recipe.template().getItems()[0],
+                        SCItems.ROD.toStack(),
+                        recipe.material().getItems()[0])
+        );
 
-        ItemStack template = new ItemStack(recipe.template().getItems()[0].getItem());
-
-        List<ResourceLocation> minigameRLs = SCDataMaps.getOrDefault(template, SCDataMaps.MINIGAME_MODIFIERS, List.of());
-        List<ResourceLocation> catchRLs = SCDataMaps.getOrDefault(template, SCDataMaps.CATCH_MODIFIERS, List.of());
-
-        SCDataComponents.set(stack, SCDataComponents.MINIGAME_MODIFIERS, minigameRLs);
-        SCDataComponents.set(stack, SCDataComponents.CATCH_MODIFIERS, catchRLs);
-
-        this.output = EmiStack.of(stack);
-    }
-
-    public StarcatcherEmiSmithingRecipe(TackleSkinSmithingRecipe recipe)
-    {
-        this.template = EmiIngredient.of(recipe.template());
-        this.input = EmiIngredient.of(recipe.base());
-        this.base = EmiIngredient.of(recipe.base());
-        this.addition = EmiIngredient.of(recipe.addition());
-
-        ItemStack resultRod = recipe.base().getItems()[0].copy();
-
-        ItemStack template = new ItemStack(recipe.template().getItems()[0].getItem());
-
-        List<ResourceLocation> minigameRLs = SCDataMaps.getOrDefault(template, SCDataMaps.MINIGAME_MODIFIERS, List.of());
-        List<ResourceLocation> catchRLs = SCDataMaps.getOrDefault(template, SCDataMaps.CATCH_MODIFIERS, List.of());
-
-        ResourceLocation tackleSkin = SCDataComponents.get(template, SCDataComponents.TACKLE_SKIN);
-
-        if (tackleSkin != null)
-            SCDataComponents.set(resultRod, SCDataComponents.TACKLE_SKIN, tackleSkin);
-
-        SCDataComponents.set(resultRod, SCDataComponents.MINIGAME_MODIFIERS, minigameRLs);
-        SCDataComponents.set(resultRod, SCDataComponents.CATCH_MODIFIERS, catchRLs);
-
-        this.output = EmiStack.of(resultRod);
-    }
-
-    public StarcatcherEmiSmithingRecipe(FishingRodSkinSmithingRecipe recipe)
-    {
-        this.template = EmiIngredient.of(recipe.template);
-        this.input = EmiIngredient.of(recipe.base);
-        this.base = EmiIngredient.of(recipe.base);
-        this.addition = EmiIngredient.of(recipe.addition);
-        this.output = EmiStack.of(recipe.result.copy());
+        this.output = EmiStack.of(result);
     }
 
     @Override
@@ -124,7 +84,7 @@ public class StarcatcherEmiSmithingRecipe implements EmiRecipe
         widgets.addTexture(EmiTexture.EMPTY_ARROW, 62, 1);
         widgets.addSlot(template, 0, 0);
         widgets.addSlot(input, 18, 0);
-        widgets.addSlot(addition, 36, 0);
+        widgets.addSlot(material, 36, 0);
         widgets.addSlot(output, 94, 0).recipeContext(this);
     }
 }

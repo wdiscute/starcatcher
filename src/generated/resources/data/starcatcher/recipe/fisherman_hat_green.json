@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:green_carpet"
+    },
+    "P": {
+      "item": "starcatcher:pearl"
+    },
+    "W": {
+      "item": "minecraft:green_wool"
+    }
+  },
+  "pattern": [
+    " P ",
+    "CWW",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:fisherman_hat_green"
+  }
+}

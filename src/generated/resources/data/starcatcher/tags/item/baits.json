@@ -3,7 +3,6 @@
     "starcatcher:worm",
     "starcatcher:almighty_worm",
     "starcatcher:seeking_worm",
-    "starcatcher:dev_worm",
     "starcatcher:gunpowder_bait",
     "starcatcher:cherry_bait",
     "starcatcher:lush_bait",
@@ -13,7 +12,7 @@
     "starcatcher:legendary_bait",
     "starcatcher:meteorological_bait",
     "minecraft:wither_skeleton_skull",
-    "minecraft:bucket",
+    "#c:buckets/empty",
     {
       "id": "fishofthieves:earthworms",
       "required": false

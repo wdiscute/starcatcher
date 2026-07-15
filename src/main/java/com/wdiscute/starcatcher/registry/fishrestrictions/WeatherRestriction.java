@@ -4,11 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCColors;
-import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
-import com.wdiscute.starcatcher.registry.FishProperties;
-import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
-import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
+import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
@@ -24,12 +24,11 @@ import java.util.function.Predicate;
 public class WeatherRestriction extends AbstractFishRestriction
 {
     private final Weather weather;
-    private final String translationOverride;
 
     public static final MapCodec<WeatherRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Weather.CODEC.fieldOf("weather").forGetter(WeatherRestriction::getWeather),
-                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(WeatherRestriction::getTranslationOverride)
+                    Weather.CODEC.fieldOf("weather").forGetter(o -> o.weather),
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, WeatherRestriction::new));
 
     public enum Weather implements StringRepresentable
@@ -46,6 +45,11 @@ public class WeatherRestriction extends AbstractFishRestriction
         private final String name;
         public final Predicate<Level> isCorrect;
 
+        public String toLanguageKey()
+        {
+            return "gui.guide.weather." + name;
+        }
+
         Weather(String name, Predicate<Level> isCorrect)
         {
             this.name = name;
@@ -59,32 +63,17 @@ public class WeatherRestriction extends AbstractFishRestriction
         }
     }
 
-    public WeatherRestriction()
-    {
-        this.weather = Weather.CLEAR;
-        this.translationOverride = "";
-    }
 
     public WeatherRestriction(Weather weather)
     {
+        super("");
         this.weather = weather;
-        this.translationOverride = "";
     }
 
     public WeatherRestriction(Weather weather, String translationOverride)
     {
+        super(translationOverride);
         this.weather = weather;
-        this.translationOverride = translationOverride;
-    }
-
-    public Weather getWeather()
-    {
-        return weather;
-    }
-
-    public String getTranslationOverride()
-    {
-        return translationOverride;
     }
 
     @Override
@@ -100,22 +89,30 @@ public class WeatherRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public MutableComponent getDescriptionPrefix()
     {
+        return Component.translatable("gui.guide.weather");
+    }
+
+    @Override
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    {
+        //fishes in area for guidebook ignores this restriction
+        if(context.equals(Context.RADAR)) return 0;
+        if (context.equals(Context.GUIDE_FISHES_IN_AREA)) return 0;
+        if (context.equals(Context.TRACKER)) return weather.isCorrect.test(level) ? 0 : -9999;
+
         //skip if any modifiers have skipsWeatherRestriction interface
         if (context.equals(Context.FISHING) && entity instanceof FishingBobEntity bob && bob.player != null)
         {
-            if (SCCatchModifiers.getCatchModifiers(bob.player).stream().anyMatch(
+            if (Modifier.getCatchModifiers(bob.player).stream().anyMatch(
                     o -> o instanceof SkipsWeatherRestriction sp && sp.shouldSkipWeather(level)))
                 return 0;
 
-            if (SCMinigameModifiers.getMinigameModifiers(bob.player).stream().anyMatch(
+            if (Modifier.getModifiers(bob.player).stream().anyMatch(
                     o -> o instanceof SkipsWeatherRestriction sp && sp.shouldSkipWeather(level)))
                 return 0;
         }
-
-        //fishes in area for guidebook ignores this restriction
-        if (context.equals(Context.GUIDE_FISHES_IN_AREA)) return 0;
 
         return weather.isCorrect.test(level) ? 0 : -9999;
     }
@@ -123,23 +120,16 @@ public class WeatherRestriction extends AbstractFishRestriction
     @Override
     public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        if (getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
+        if (adjustChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
             return List.of(Component.translatable("gui.guide.hover.weather.correct").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN)));
         else
             return List.of(Component.translatable("gui.guide.hover.weather.incorrect").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)));
     }
 
     @Override
-    public Component getDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        int color = getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0 ?
-                SCColors.GUIDE_GREEN : SCColors.GUIDE_RED;
-
-        return Component.translatable("gui.guide.weather").copy().append(
-                translationOverride.isEmpty() ?
-                        Component.translatable("gui.guide.weather." + weather.name).withStyle(Style.EMPTY.withColor(color)) :
-                        Component.translatable(translationOverride).withStyle(Style.EMPTY.withColor(color))
-        );
+        return Component.translatable(weather.toLanguageKey());
     }
 
     public static final WeatherRestriction CLEAR = new WeatherRestriction(Weather.CLEAR);

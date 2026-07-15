@@ -4,7 +4,7 @@
   "cookingtime": 100,
   "experience": 0.35,
   "ingredient": {
-    "tag": "starcatcher:starcaught_fishes"
+    "tag": "starcatcher:starcaught_fishable"
   },
   "result": {
     "count": 1,

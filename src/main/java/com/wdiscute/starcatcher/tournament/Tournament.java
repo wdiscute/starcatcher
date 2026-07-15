@@ -2,9 +2,7 @@ package com.wdiscute.starcatcher.tournament;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.io.ExtraComposites;
-import com.wdiscute.starcatcher.io.SingleStackContainer;
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import com.wdiscute.starcatcher.data.ExtraComposites;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -21,20 +19,24 @@ public class Tournament
     public String name;
     public Status status;
     public UUID owner;
-    public List<TournamentPlayerScore> playerScores;
-    public TournamentSettings settings;
-    public List<SingleStackContainer> lootPool;
-    public long lastsUntilEpoch;
+    public String ownerName;
+    public List<PlayerScore> playerScores;
+    public TournamentScoreSettings scoreSettings;
+    public long startTimeEpoch;
+    public long durationInTicks;
 
-    public static final Tournament DEFAULT = new Tournament(
-            UUID.randomUUID(),
-            "missingno",
-            Tournament.Status.SETUP,
-            UUID.randomUUID(),
-            new ArrayList<>(),
-            TournamentSettings.DEFAULT,
-            new ArrayList<>(),
-            0);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Tournament> STREAM_CODEC = ExtraComposites.composite(
+            UUIDUtil.STREAM_CODEC, t -> t.tournamentUUID,
+            ByteBufCodecs.STRING_UTF8, t -> t.name,
+            Status.STREAM_CODEC, t -> t.status,
+            UUIDUtil.STREAM_CODEC, t -> t.owner,
+            ByteBufCodecs.STRING_UTF8, t -> t.ownerName,
+            PlayerScore.LIST_STREAM_CODEC, t -> t.playerScores,
+            TournamentScoreSettings.STREAM_CODEC, t -> t.scoreSettings,
+            ByteBufCodecs.VAR_LONG, t -> t.startTimeEpoch,
+            ByteBufCodecs.VAR_LONG, t -> t.durationInTicks,
+            Tournament::new
+    );
 
     public static final Codec<Tournament> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -42,77 +44,76 @@ public class Tournament
                     Codec.STRING.optionalFieldOf("name", "Unnamed Tournament").forGetter(t -> t.name),
                     Status.CODEC.fieldOf("status").forGetter(t -> t.status),
                     UUIDUtil.CODEC.fieldOf("owner").forGetter(t -> t.owner),
-                    TournamentPlayerScore.CODEC.listOf().fieldOf("player_scores").forGetter(t -> t.playerScores),
-                    TournamentSettings.CODEC.fieldOf("settings").forGetter(t -> t.settings),
-                    SingleStackContainer.LIST_CODEC.optionalFieldOf("loot_pool", SingleStackContainer.EMPTY_LIST).forGetter(t -> t.lootPool),
-                    Codec.LONG.fieldOf("lastsUntil").forGetter(t -> t.lastsUntilEpoch)
+                    Codec.STRING.optionalFieldOf("owner_name", "Unknown Player").forGetter(t -> t.ownerName),
+                    PlayerScore.CODEC.listOf().fieldOf("scores").forGetter(t -> t.playerScores),
+                    TournamentScoreSettings.CODEC.fieldOf("score_settings").forGetter(t -> t.scoreSettings),
+                    Codec.LONG.fieldOf("start_time").forGetter(t -> t.startTimeEpoch),
+                    Codec.LONG.fieldOf("duration").forGetter(t -> t.durationInTicks)
             ).apply(instance, Tournament::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, Tournament> STREAM_CODEC = ExtraComposites.composite(
-            UUIDUtil.STREAM_CODEC, t -> t.tournamentUUID,
-            ByteBufCodecs.STRING_UTF8, t -> t.name,
-            Status.STREAM_CODEC, t -> t.status,
-            UUIDUtil.STREAM_CODEC, t -> t.owner,
-            TournamentPlayerScore.STREAM_CODEC.apply(ByteBufCodecs.list()), t -> t.playerScores,
-            TournamentSettings.STREAM_CODEC, t -> t.settings,
-            SingleStackContainer.STREAM_CODEC_LIST, t -> t.lootPool,
-            ByteBufCodecs.VAR_LONG, t -> t.lastsUntilEpoch,
-            Tournament::new
-    );
 
     public Tournament(UUID tournamentUUID,
                       String name,
                       Status status,
                       UUID owner,
-                      List<TournamentPlayerScore> playerScore,
-                      TournamentSettings settings,
-                      List<SingleStackContainer> pool,
-                      long lastsUntil
+                      String ownerName,
+                      List<PlayerScore> playerScore,
+                      TournamentScoreSettings scoreSettings,
+                      long startTime,
+                      long duration
     )
     {
         this.tournamentUUID = tournamentUUID;
         this.name = name;
         this.status = status;
         this.owner = owner;
+        this.ownerName = ownerName;
         this.playerScores = playerScore;
-        this.settings = settings;
-        this.lootPool = pool;
-        this.lastsUntilEpoch = lastsUntil;
+        this.scoreSettings = scoreSettings;
+        this.startTimeEpoch = startTime;
+        this.durationInTicks = duration;
     }
 
-    public static Tournament empty(UUID uuid)
+    public static Tournament empty(UUID tournamentUUID, Player owner)
     {
         return new Tournament(
-                uuid,
+                tournamentUUID,
                 "Unnamed Tournament",
-                Tournament.Status.SETUP,
-                null,
-                new ArrayList<>(),
-                new TournamentSettings(
-                        TournamentSettings.Scoring.SIMPLE,
-                        48000,
-                        0,
-                        0,
-                        SingleStackContainer.EMPTY_LIST),
-                SingleStackContainer.EMPTY_LIST,
-                200
+                Status.PREPARING,
+                owner.getUUID(),
+                owner.getName().getString(),
+                new ArrayList<>(){{add(new PlayerScore(owner.getUUID(), owner.getName().getString(), 0));}},
+                TournamentScoreSettings.empty(),
+                0L,
+                36000L
         );
     }
 
-    public Tournament setOwner(UUID owner)
+    public static Tournament empty(UUID tournamentUUID, UUID owner, String ownerName)
     {
-        this.owner = owner;
-        playerScores.add(TournamentPlayerScore.empty(owner));
+        return new Tournament(
+                tournamentUUID,
+                "Unnamed Tournament",
+                Status.PREPARING,
+                owner,
+                ownerName,
+                new ArrayList<>(),
+                TournamentScoreSettings.empty(),
+                0L,
+                36000L
+        );
+    }
 
-        return this;
+    public boolean isPlayerSignedUp(Player player)
+    {
+        return playerScores.stream().anyMatch(o -> o.uuid.equals(player.getUUID()));
     }
 
     public enum Status implements StringRepresentable
     {
-        SETUP("gui.starcatcher.tournament.status.setup"),
+        PREPARING("gui.starcatcher.tournament.status.preparing"),
         ACTIVE("gui.starcatcher.tournament.status.active"),
-        CANCELLED("gui.starcatcher.tournament.status.cancelled"),
         FINISHED("gui.starcatcher.tournament.status.finished");
 
         Status(String name)
@@ -137,8 +138,37 @@ public class Tournament
 
         public boolean isDone()
         {
-            return this == FINISHED || this == CANCELLED;
+            return this == FINISHED;
         }
     }
 
+    public static class PlayerScore
+    {
+        public UUID uuid;
+        public String name;
+        public float score;
+
+        public PlayerScore(UUID uuid, String name, float score)
+        {
+            this.uuid = uuid;
+            this.name = name;
+            this.score = score;
+        }
+
+        public static final Codec<PlayerScore> CODEC = RecordCodecBuilder.create(instance ->
+                instance.group(
+                        UUIDUtil.CODEC.fieldOf("uuid").forGetter(ps -> ps.uuid),
+                        Codec.STRING.fieldOf("name").forGetter(ps -> ps.name),
+                        Codec.FLOAT.fieldOf("score").forGetter(ps -> ps.score)
+                ).apply(instance, PlayerScore::new));
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, PlayerScore> STREAM_CODEC = StreamCodec.composite(
+                UUIDUtil.STREAM_CODEC, ps -> ps.uuid,
+                ByteBufCodecs.STRING_UTF8, ps -> ps.name,
+                ByteBufCodecs.FLOAT, ps -> ps.score,
+                PlayerScore::new
+        );
+
+        public static final StreamCodec<RegistryFriendlyByteBuf, List<PlayerScore>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+    }
 }

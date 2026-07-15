@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.compat.curios;
 
-import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.registry.SCItems;
 import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
 

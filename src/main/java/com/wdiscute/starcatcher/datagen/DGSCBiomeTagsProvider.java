@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.U;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -110,15 +110,15 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
 
         this.tag(create(SCTags.IS_OCEAN))
                 .addOptionalTag(BiomeTags.IS_OCEAN)
-                .addOptional(U.rl("tfc", "deep_ocean"))
-                .addOptional(U.rl("tfc", "deep_ocean_trench"))
-                .addOptional(U.rl("tfc", "ocean"))
-                .addOptional(U.rl("tfc", "ocean_reef"))
+                .addOptional(Utils.rl("tfc", "deep_ocean"))
+                .addOptional(Utils.rl("tfc", "deep_ocean_trench"))
+                .addOptional(Utils.rl("tfc", "ocean"))
+                .addOptional(Utils.rl("tfc", "ocean_reef"))
         ;
 
         this.tag(create(SCTags.IS_RIVER))
                 .addOptionalTag(BiomeTags.IS_RIVER)
-                .addOptionalTag(U.rl("tfc", "river"))
+                .addOptionalTag(Utils.rl("tfc", "river"))
         ;
 
         this.tag(create(SCTags.IS_SWAMP))
@@ -128,8 +128,6 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
         ;
 
         this.tag(create(SCTags.IS_WARM_LAKE))
-                .addOptionalTag(BiomeTags.IS_SAVANNA)
-                .addOptionalTag(BiomeTags.HAS_DESERT_PYRAMID)
                 .addOptionalTag(Tags.Biomes.IS_DESERT)
                 .addOptionalTag(Tags.Biomes.IS_BADLANDS)
         ;

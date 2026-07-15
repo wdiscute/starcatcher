@@ -1,14 +1,12 @@
 package com.wdiscute.starcatcher.compat;
 
-import com.wdiscute.starcatcher.U;
-import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
-import com.wdiscute.starcatcher.io.FishCaughtCounter;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
+import com.wdiscute.starcatcher.fish.FishApi;
+import com.wdiscute.starcatcher.fish.SizeAndWeight;
+import com.wdiscute.utils.Utils;
 import it.hurts.sskirillss.relics.api.relics.IRelicItem;
 import it.hurts.sskirillss.relics.api.relics.data.AbilityData;
 import it.hurts.sskirillss.relics.api.relics.data.RelicData;
-import it.hurts.sskirillss.relics.api.relics.data.RelicMetricData;
-import it.hurts.sskirillss.relics.api.relics.data.RelicStatisticData;
 import it.hurts.sskirillss.relics.utils.EntityUtils;
 import it.hurts.sskirillss.relics.utils.MathUtils;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -23,7 +21,7 @@ public class ReliquifiedArtifactsCompat
 {
     private static Item getHatItem()
     {
-        return BuiltInRegistries.ITEM.get(U.rl("artifacts", "anglers_hat"));
+        return BuiltInRegistries.ITEM.get(Utils.rl("artifacts", "anglers_hat"));
     }
 
     private static ItemStack getEquippedHatStack(Player player)
@@ -48,7 +46,7 @@ public class ReliquifiedArtifactsCompat
         if (!ability.isRankModifierUnlocked("treasure")) return false;
 
         double treasureChance = ability.getStatData("treasure_chance").getValue();
-        return U.r.nextFloat() < treasureChance;
+        return Utils.r.nextFloat() < treasureChance;
     }
 
     public static List<ItemStack> getBonusCatchItems(Player player, FishingBobEntity fbe)
@@ -57,7 +55,7 @@ public class ReliquifiedArtifactsCompat
         if (stack.isEmpty()) return List.of();
 
         AbilityData ability = getCatchAbility(player, stack);
-        double chance = ability.getStatData("chance").getValue();
+        double chance = ability.getStatData("weight").getValue();
         int maxCasts = (int) Math.round(ability.getStatData("max_casts").getValue());
 
         int bonusCount = MathUtils.multicast(player.getRandom(), chance, maxCasts);
@@ -66,10 +64,8 @@ public class ReliquifiedArtifactsCompat
         List<ItemStack> items = new ArrayList<>();
         for (int i = 0; i < bonusCount; i++)
         {
-            float percentile = U.r.nextFloat(100);
-            int size = FishProperties.SizeAndWeight.getRandomSize(fbe.fpToFish, percentile);
-            int weight = FishProperties.SizeAndWeight.getRandomWeight(fbe.fpToFish, percentile);
-            ItemStack is = FishProperties.makeItemStack(ItemStack.EMPTY, fbe.fpToFish, size, weight, percentile, false, player, false);
+            float percentile = Utils.r.nextFloat(100);
+            ItemStack is = FishApi.makeItemStack(ItemStack.EMPTY, fbe.fpToFish, percentile, false, player, false);
             items.add(is);
         }
 

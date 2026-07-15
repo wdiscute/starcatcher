@@ -1,13 +1,19 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:charfish"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:charfish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
-    "missPenalty": 10,
+    "hp": 250,
+    "missPenalty": 20,
     "modifiers": [
       {
         "type": "starcatcher:teleport"
@@ -16,22 +22,22 @@
     "speed": 11,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       }
@@ -42,16 +48,15 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:the_end"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "the_end",
+      "translation_override": "dimension.minecraft.the_end"
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
-        "minecraft:water"
-      ]
+        "minecraft:empty"
+      ],
+      "translation_override": "fluid.starcatcher.air"
     }
   ],
   "size_and_weight": {
@@ -61,5 +66,6 @@
     "deviation_weight_grams": 700.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/end_void.png"
 }

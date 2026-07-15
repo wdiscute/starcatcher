@@ -4,13 +4,15 @@
   "package": "com.wdiscute.starcatcher.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "GetNameMixin",
+    "DispenserWormBehaviourMixin",
     "LecternReturnMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "client": [
+    "GetNameMixin",
+    "ItemRendererMixin",
     "RenderTypeHelperMixin"
   ]
 }

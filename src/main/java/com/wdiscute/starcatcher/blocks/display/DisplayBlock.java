@@ -2,12 +2,12 @@ package com.wdiscute.starcatcher.blocks.display;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.blocks.SCBlockEntities;
+import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.FishingSignedGuideScreen;
-import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
-import com.wdiscute.starcatcher.registry.SignedGuide;
+import com.wdiscute.starcatcher.data.SignedGuide;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -209,7 +209,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
     @OnlyIn(Dist.CLIENT)
     private void openPersonalGuide() {
-        Minecraft.getInstance().setScreen(new FishingGuideScreen());
+        Minecraft.getInstance().setScreen(new FishingGuideScreen(true, null));
     }
 
     @OnlyIn(Dist.CLIENT)

@@ -10,7 +10,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import static com.wdiscute.starcatcher.registry.SCItems.*;
-import static com.wdiscute.starcatcher.blocks.SCBlocks.*;
+import static com.wdiscute.starcatcher.registry.SCBlocks.*;
 
 public class DGSCItemModelProvider extends ItemModelProvider
 {
@@ -27,16 +27,12 @@ public class DGSCItemModelProvider extends ItemModelProvider
             simpleItem((DeferredItem<? extends Item>) item);
 
         //non bucket fishes
-        simpleItem(BLACK_EEL);
-        simpleItem(GEODE_EEL);
-        simpleItem(OBSIDIAN_EEL);
-        simpleItem(MOLTEN_SHRIMP);
-        simpleItem(OBSIDIAN_CRAB);
-        simpleItem(SCORCHED_BLOODSUCKER);
-        simpleItem(MOLTEN_DEEPSLATE_CRAB);
-        simpleItem(LAVA_CRAB);
-        simpleItem(CINDER_SQUID);
-        simpleItem(CHORUS_CRAB);
+        for (DeferredHolder<Item, ? extends Item> item : NON_BUCKETABLE_FISH_REGISTRY.getEntries())
+            simpleItem((DeferredItem<? extends Item>) item);
+
+        //non fish fishes
+        for (DeferredHolder<Item, ? extends Item> item : NON_FISH_FISH_REGISTRY.getEntries())
+            simpleItem((DeferredItem<? extends Item>) item);
 
         //trash
         simpleItem(BOOT);
@@ -50,30 +46,23 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(GUIDE);
         simpleItem(FISH_RADAR);
         simpleItem(STARCATCHER_TWINE);
-        simpleItem(WATERLOGGED_SATCHEL);
         simpleItem(FISH_BONES);
         simpleItem(PEARL);
         simpleItem(STARCAUGHT_BUCKET);
+        simpleItem(STARCAUGHT_LAVA_BUCKET);
+        simpleItem(STARCAUGHT_FISH);
         simpleItem(COOKED_STARCAUGHT_FISH);
         simpleItem(SETTINGS);
+        simpleItem(TREASURE);
 
         //notes & messages
         simpleItem(LETTER);
         simpleItem(BOTTLED_LETTER);
 
         simpleItem(MESSAGE_IN_A_BOTTLE);
-        simpleItem(MESSAGE);
+        //simpleItem(MESSAGE);
 
         simpleItem(BROKEN_BOTTLE);
-
-        simpleItem(SECRET_NOTE);
-        simpleItem(DRIFTING_WATERLOGGED_BOTTLE);
-        simpleItem(SCALDING_BOTTLE);
-        simpleItem(BURNING_BOTTLE);
-        simpleItem(HOPEFUL_BOTTLE);
-        simpleItem(HOPELESS_BOTTLE);
-        simpleItem(TRUE_BLUE_BOTTLE);
-        simpleItem(WITHERED_BOTTLE);
 
         //hooks
         simpleItem(HOOK);
@@ -96,16 +85,18 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(BOBBER);
         simpleItem(STEADY_BOBBER);
         simpleItem(CLEAR_BOBBER);
-        simpleItem(AQUA_BOBBER);
+        simpleItem(DRIPSTONE_BOBBER);
         simpleItem(VANILLA_BOBBER);
         simpleItem(LEAF_BOBBER);
         simpleItem(SLIMEY_BOBBER);
+        simpleItem(GLOWING_BOBBER);
+        simpleItem(GOLDEN_BOBBER);
+        simpleItem(CLOUD_BOBBER);
 
         //baits
         simpleItem(WORM);
         simpleItem(ALMIGHTY_WORM);
         simpleItem(SEEKING_WORM);
-        simpleItem(DEV_WORM);
         simpleItem(GUNPOWDER_BAIT);
         simpleItem(CHERRY_BAIT);
         simpleItem(LUSH_BAIT);
@@ -174,9 +165,6 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleBlockItem(TACKLE_BOX_GREEN.get());
 
     }
-
-
-
 
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item)
     {

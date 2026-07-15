@@ -9,21 +9,8 @@ import net.minecraft.world.phys.Vec3;
 public class KingTackleSkin extends AbstractTackleSkin
 {
     @Override
-    public boolean skipMissSound()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean skipSuccessSound()
-    {
-        return true;
-    }
-
-    @Override
     public void onMissed(Player player)
     {
-        super.onMissed(player);
         Vec3 p = player.position();
         player.level().playSound(null, p.x, p.y, p.z, SCSounds.KING_GRR.get(), SoundSource.NEUTRAL, 1f, 1f);
     }
@@ -39,6 +26,9 @@ public class KingTackleSkin extends AbstractTackleSkin
     public void onFailedMinigame(Player player)
     {
         Vec3 p = player.position();
-        player.level().playSound(null, p.x, p.y, p.z, SCSounds.KING_CRY.get(), SoundSource.NEUTRAL, 1f, 1f);
+        if (player.level().getRandom().nextBoolean())
+            player.level().playSound(null, p.x, p.y, p.z, SCSounds.KING_CRY.get(), SoundSource.NEUTRAL, 1f, 1f);
+        else
+            player.level().playSound(null, p.x, p.y, p.z, SCSounds.KING_GRR.get(), SoundSource.NEUTRAL, 1f, 1f);
     }
 }

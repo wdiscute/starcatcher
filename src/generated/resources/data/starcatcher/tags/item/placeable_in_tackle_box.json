@@ -3,11 +3,9 @@
     "#starcatcher:baits",
     "#starcatcher:hooks",
     "#starcatcher:bobbers",
+    "#starcatcher:fishable",
     "#minecraft:fishes",
-    "#starcatcher:common_fishes",
-    "#starcatcher:uncommon_fishes",
-    "#starcatcher:rare_fishes",
-    "#starcatcher:epic_fishes",
-    "#starcatcher:legendary_fishes"
+    "starcatcher:starcatcher_guide",
+    "starcatcher:fish_radar"
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "type": "tipsmod:simple",
+  "title": {
+    "text": "Starcatcher Tip",
+    "bold": true,
+    "color": "yellow",
+    "underlined": true
+  },
+  "text": {
+    "translate": "starcatcher.tip.ice"
+  }
+}

@@ -1,9 +1,16 @@
 {
-  "type": "starcatcher:smithing_netherite_upgraded",
-  "addition": {
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_netherite_text": true,
+  "apply_tackle_skin": false,
+  "keep_stack": true,
+  "material": {
     "item": "minecraft:netherite_ingot"
   },
-  "base": {
+  "result": {
+    "count": 1,
+    "id": "starcatcher:missingno"
+  },
+  "rod": {
     "tag": "starcatcher:rods"
   },
   "template": {

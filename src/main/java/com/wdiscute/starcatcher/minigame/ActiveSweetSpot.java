@@ -3,12 +3,13 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.logging.LogUtils;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModifier;
+import com.wdiscute.starcatcher.registry.SCAttributes;
+import com.wdiscute.starcatcher.fish.Difficulty;
+import com.wdiscute.starcatcher.modifiers.minigamemodifiers.AbstractMinigameModifier;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.AbstractSweetSpotBehaviour;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -17,18 +18,15 @@ public class ActiveSweetSpot
 {
     //from ss
     public final AbstractSweetSpotBehaviour behaviour;
-    public final FishProperties.SweetSpot baseSS;
+    public final Difficulty.SweetSpot baseSS;
     public int thickness;
     public ResourceLocation texture;
     public int reward;
     public int particleColor;
-    public List<Supplier<AbstractMinigameModifier>> onHitModifiers;
+    public List<AbstractMinigameModifier> modifiers;
 
     //from minigame screen/rod
     public final FishingMinigameScreen instance;
-    public final ItemStack bobber;
-    public final ItemStack bait;
-    public final ItemStack hook;
 
     //from fp
     public boolean isFlip;
@@ -43,16 +41,20 @@ public class ActiveSweetSpot
     public boolean removed = false;
     public boolean shouldSudokuOnVanish = false;
 
+    public int ticksActive = 0;
+    public boolean canHit = true;
+    public int seed = Utils.r.nextInt();
+
     // For use with modifiers, map an id with some data
     public Map<Integer, Object> extraData = new HashMap<>();
 
-    public ActiveSweetSpot(FishingMinigameScreen instance, FishProperties.SweetSpot ss, ItemStack bobber, ItemStack bait, ItemStack hook)
+    public ActiveSweetSpot(FishingMinigameScreen instance, Difficulty.SweetSpot ss)
     {
         //get sweet spot type from rl
-        Optional<Supplier<? extends AbstractSweetSpotBehaviour>> behaviour = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.SWEET_SPOT_BEHAVIOUR).getOptional(ss.sweetSpotType());
+        Optional<Supplier<? extends AbstractSweetSpotBehaviour>> behaviour = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.SWEETSPOT_BEHAVIOUR).getOptional(ss.sweetSpotType());
 
         //if sweet spot type is registered then continue, otherwise set as removed
-        if(behaviour.isPresent())
+        if (behaviour.isPresent())
             this.behaviour = behaviour.get().get();
         else
         {
@@ -68,14 +70,10 @@ public class ActiveSweetSpot
         this.thickness = ss.size();
         this.reward = ss.reward();
         this.particleColor = ss.particleColor();
-        this.onHitModifiers = ss.onHitModifiers().stream().map(Supplier::get).toList();
-
-        this.bobber = bobber;
-        this.bait = bait;
-        this.hook = hook;
+        this.modifiers = ss.modifiers().stream().filter(o -> o instanceof AbstractMinigameModifier).map(o -> (AbstractMinigameModifier)o).toList();
 
         this.isFlip = ss.isFlip();
-        this.vanishingRate = (float) (ss.vanishingRate() * SCConfig.VANISHING_RATE_MULTIPLIER.get());
+        this.vanishingRate = (float) (ss.vanishingRate() * Minecraft.getInstance().player.getAttributeValue(SCAttributes.VANISHING_RATE_MULTIPLIER) * SCConfig.VANISHING_RATE_MULTIPLIER.get());
         this.movingRate = (float) (ss.movingRate() * SCConfig.MOVING_SPEED_MULTIPLIER.get());
 
         currentRotation = -1;
@@ -83,13 +81,8 @@ public class ActiveSweetSpot
         this.alpha = 1;
     }
 
-    public ActiveSweetSpot(FishingMinigameScreen instance, FishProperties.SweetSpot ss)
+    public boolean isHoveredOver()
     {
-        this(instance, ss, instance.bobber, instance.bait, instance.hook);
-    }
-
-    public boolean isHoveredOver(){
         return FishingMinigameScreen.doDegreesOverlapWithLeeway(instance.getPointerPosPrecise(), this.pos, thickness);
     }
-
 }

@@ -1,33 +1,39 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:lily_snapper"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:lily_snapper"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
+    "hp": 200,
     "missPenalty": 20,
     "modifiers": [],
-    "speed": 10,
+    "speed": 11,
     "sweetspots": [
       {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 20,
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       }
@@ -38,19 +44,15 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
-      "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "starcatcher:is_swamp"
-      ]
+      "biomes": [
+        "#starcatcher:is_swamp"
+      ],
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -62,13 +64,8 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
-    },
-    {
-      "type": "starcatcher:bait",
-      "baits": {
-        "starcatcher:murkwater_bait": 50
-      }
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -79,14 +76,5 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "star": {
-    "connections": [
-      "aldebaran",
-      "gamma_tauri"
-    ],
-    "debug_color": -9606670,
-    "name": "ain",
-    "x": 2977,
-    "y": 1553
-  }
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

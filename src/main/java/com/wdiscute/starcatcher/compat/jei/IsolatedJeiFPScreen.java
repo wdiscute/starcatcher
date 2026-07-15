@@ -1,32 +1,27 @@
 package com.wdiscute.starcatcher.compat.jei;
 
-import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.IsolatedFPScreen;
-import com.wdiscute.starcatcher.io.FishCaughtCounter;
+import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.client.gui.screens.Screen;
 
 public class IsolatedJeiFPScreen extends IsolatedFPScreen
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/emi/emi_entry.png");
+    private final Screen screen;
 
-    private final StarcatcherJeiFPRecipe.Recipe recipe;
-
-    public IsolatedJeiFPScreen(StarcatcherJeiFPRecipe.Recipe recipe)
+    public IsolatedJeiFPScreen(StarcatcherJeiFPRecipe.Recipe recipe, Screen screen)
     {
         super(recipe.fp(), null);
-        this.recipe = recipe;
+        this.screen = screen;
     }
 
     @Override
     public void onClose()
     {
         super.onClose();
-
-        //EmiApi.displayRecipe(recipe);
+        Minecraft.getInstance().setScreen(screen);
     }
 
     @Override
@@ -45,8 +40,8 @@ public class IsolatedJeiFPScreen extends IsolatedFPScreen
         FishingGuideScreen.renderFishEntryPage(
                 guiGraphics,
                 fp,
-                new ItemStack(fp.catchInfo().fish().value()),
-                FishCaughtCounter.get(Minecraft.getInstance().player, fp),
+                fp.catchInfo().fish().toStack(),
+                FishCaughtCounter.get(Minecraft.getInstance().player, fp.toLoc(Minecraft.getInstance().level)),
                 uiX + 31,
                 uiY - 25,
                 mouseX,

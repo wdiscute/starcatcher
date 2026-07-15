@@ -1,9 +1,11 @@
 package com.wdiscute.starcatcher.mixin;
 
 import com.wdiscute.libtooltips.Tooltips;
-import com.wdiscute.starcatcher.io.CaughtFishInfo;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.fish.FishApi;
+import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -38,14 +40,11 @@ public class GetNameMixin
             }
             else baseName = Component.translatable(stack.getDescriptionId());
 
-            //get sw
-            CaughtFishInfo sw = SCDataComponents.get(stack, SCDataComponents.CAUGHT_FISH_INFO);
-
-            //if golden, use golden rarity color
-            FishProperties.Rarity rarity = sw.golden() ? FishProperties.Rarity.GOLDEN : sw.rarity();
+            //get cfi
+            CaughtFishInfo caughtFishInfo = SCDataComponents.get(stack, SCDataComponents.CAUGHT_FISH_INFO);
 
             //decode name string and return value
-            cir.setReturnValue(Tooltips.resolveTagsToComponent(rarity.wrapWithRarityMarkdownAsString(baseName.getString())));
+            cir.setReturnValue(Tooltips.resolveTagsToComponent(caughtFishInfo.rarity().wrapWithRarityMarkdownAsString(baseName.getString())));
             cir.cancel();
         }
     }

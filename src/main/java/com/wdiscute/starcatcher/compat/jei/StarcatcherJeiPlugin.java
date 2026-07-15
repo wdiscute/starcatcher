@@ -3,20 +3,15 @@ package com.wdiscute.starcatcher.compat.jei;
 import com.wdiscute.sellingbin.SellingBin;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.recipe.FishingRodSkinSmithingRecipe;
-import com.wdiscute.starcatcher.recipe.NetheriteUpgradeSmithingRecipe;
-import com.wdiscute.starcatcher.recipe.TackleSkinSmithingRecipe;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.SCBlocks;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.registry.SCDataEntries;
 import com.wdiscute.starcatcher.registry.SCItems;
-import com.wdiscute.starcatcher.registry.SCRecipes;
-import dev.emi.emi.api.EmiApi;
-import dev.emi.emi.api.recipe.EmiInfoRecipe;
+import com.wdiscute.utils.Utils;
 import dev.emi.emi.api.stack.EmiIngredient;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.ingredients.ITypedIngredient;
 import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IFocusFactory;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -30,23 +25,20 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.references.Blocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.RecipeHolder;
-import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.SmithingRecipe;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Optional;
 
 @JeiPlugin
 public class StarcatcherJeiPlugin implements IModPlugin
 {
-    public static final ResourceLocation ARROW = Starcatcher.rl("textures/gui/emi/arrow.png");
-    public static final ResourceLocation SLOT_BACKGROUND = SellingBin.rl("textures/gui/slot_background.png");
+    public static final ResourceLocation ARROW = Starcatcher.rl("textures/gui/jemi/arrow.png");
+    public static final ResourceLocation SLOT_BACKGROUND_FILLED = Starcatcher.rl("textures/gui/jemi/slot_background_filled.png");
 
     public static List<StarcatcherJeiFPRecipe.Recipe> listRecipes = new ArrayList<>();
 
@@ -79,7 +71,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
         //register categories
         registration.addRecipeCategories(new StarcatcherJeiFPRecipe(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new StarcatcherJeiSmithingRecipe(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -93,8 +84,15 @@ public class StarcatcherJeiPlugin implements IModPlugin
                 BuiltInRegistries.ITEM.getTag(SCTags.WORMS).get()
                         .stream().map(o -> o.value().getDefaultInstance()).toList(),
                 Component.translatable("emi.info.starcatcher.worms.0"),
-                Component.translatable("emi.info.starcatcher.worms.1"),
-                Component.translatable("emi.info.starcatcher.worms.2")
+                Component.translatable("emi.info.starcatcher.worms.1")
+        );
+
+        //bonemealing farmland
+        List<ItemStack> list = new ArrayList<>(SCDataEntries.FARMLAND_BONEMEAL_DROPS.get().stream().map(Utils.Duo::first).toList());
+        list.add(0, Items.BONE_MEAL.getDefaultInstance());
+        list.add(0, Items.FARMLAND.getDefaultInstance());
+        registration.addItemStackInfo(list,
+                Component.translatable("emi.info.starcatcher.bonemeal_farmland")
         );
 
         //clams info
@@ -137,26 +135,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
                     Component.translatable("emi.info.starcatcher.hat.0")
             );
         });
-
-        //smithing
-        List<RecipeHolder<SmithingRecipe>> allSmithingRecipes = Minecraft.getInstance().level.getRecipeManager().getAllRecipesFor(RecipeType.SMITHING);
-
-        List<StarcatcherJeiSmithingRecipe.Recipe> smithing = new ArrayList<>();
-
-        for (RecipeHolder<SmithingRecipe> smithingRecipe : allSmithingRecipes)
-        {
-            if(smithingRecipe.value() instanceof NetheriteUpgradeSmithingRecipe nusr)
-                smithing.add(StarcatcherJeiSmithingRecipe.Recipe.of(nusr));
-
-            if(smithingRecipe.value() instanceof TackleSkinSmithingRecipe tssr)
-                smithing.add(StarcatcherJeiSmithingRecipe.Recipe.of(tssr));
-
-            if(smithingRecipe.value() instanceof FishingRodSkinSmithingRecipe frssr)
-                smithing.add(StarcatcherJeiSmithingRecipe.Recipe.of(frssr));
-        }
-
-        registration.addRecipes(StarcatcherJeiSmithingRecipe.Recipe.TYPE, smithing);
-
     }
 
     @Override

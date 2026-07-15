@@ -3,12 +3,14 @@ package com.wdiscute.starcatcher.registry.fishrestrictions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.U;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.SCColors;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -18,7 +20,6 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,40 +27,29 @@ import java.util.List;
 public class FluidRestriction extends AbstractFishRestriction
 {
     private final List<ResourceLocation> fluids;
-    private final String translationOverride;
 
     public static final MapCodec<FluidRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("fluids").forGetter(FluidRestriction::getFluids),
-                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(FluidRestriction::getTranslationOverride)
+                    ResourceLocation.CODEC.listOf().fieldOf("fluids").forGetter(o -> o.fluids),
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, FluidRestriction::new));
 
     public FluidRestriction()
     {
+        super("");
         this.fluids = List.of();
-        this.translationOverride = "";
     }
 
     public FluidRestriction(List<ResourceLocation> fluids, String translationOverride)
     {
+        super(translationOverride);
         this.fluids = fluids;
-        this.translationOverride = translationOverride;
     }
 
     public FluidRestriction(ResourceLocation fluids, String translationOverride)
     {
+        super(translationOverride);
         this.fluids = List.of(fluids);
-        this.translationOverride = translationOverride;
-    }
-
-    public List<ResourceLocation> getFluids()
-    {
-        return fluids;
-    }
-
-    public String getTranslationOverride()
-    {
-        return translationOverride;
     }
 
     @Override
@@ -75,9 +65,9 @@ public class FluidRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        if (context.isGuide())
+        if (context.isGuide() || context.equals(Context.RADAR) || context.equals(Context.TRACKER))
         {
             return 0;
         }
@@ -94,17 +84,51 @@ public class FluidRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public Component getDescription(Level level, FishProperties fp, @Nullable Player player, Context context)
+    public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        if (!translationOverride.isEmpty()) return Component.translatable(translationOverride);
+        if(fluids.size() == 1 && !fluids.getFirst().getPath().equals("water"))
+        {
+            if(!translationOverride.isEmpty())
+                return List.of(Component.translatable(translationOverride).withStyle(Style.EMPTY.withColor(SCColors.GUIDE_TEXT_DARK)));
+            else
+                return List.of(Component.translatable("block." + fluids.getFirst().toLanguageKey()).withStyle(Style.EMPTY.withColor(SCColors.GUIDE_TEXT_DARK)));
+        }
+        return super.getIndexHover(level, fp, player, context);
+    }
 
-        MutableComponent start = Component.translatable("gui.guide.fluid");
+    @Override
+    public MutableComponent getDescriptionPrefix()
+    {
+        return Component.translatable("gui.guide.fluid");
+    }
 
+    @Override
+    public int getSortPriority()
+    {
+        return 99;
+    }
+
+    @Override
+    public Component getDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
+        if(fluids.size() == 1 && fluids.getFirst().equals(ResourceLocation.withDefaultNamespace("water"))) return Component.empty();
+        return super.getDescription(level, fp, player, context);
+    }
+
+    @Override
+    public int getColor(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
+        return SCColors.GUIDE_TEXT_DARK;
+    }
+
+    @Override
+    public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
         //Fluid name / [hover]
         if (fluids.size() == 1)
-            return start.append(Component.translatable("block." + fluids.getFirst().toLanguageKey()));
+            return Component.translatable("block." + fluids.getFirst().toLanguageKey());
         else
-            return start.append(Component.translatable("gui.guide.hover"));
+            return Component.translatable("gui.guide.hover");
     }
 
     @Override
@@ -128,9 +152,10 @@ public class FluidRestriction extends AbstractFishRestriction
         return fluid;
     }
 
-    public static final FluidRestriction LAVA = new FluidRestriction(ResourceLocation.withDefaultNamespace("lava"), "");
-    public static final FluidRestriction WATER = new FluidRestriction(ResourceLocation.withDefaultNamespace("water"), "");
-    public static final FluidRestriction VOID = new FluidRestriction(ResourceLocation.withDefaultNamespace("empty"), "");
-    public static final FluidRestriction ACID = new FluidRestriction(U.rl("alexscaves", "acid"), "");
-    public static final FluidRestriction PURPLE_SODA = new FluidRestriction(U.rl("alexscaves", "purple_soda"), "");
+    public static final FluidRestriction LAVA = new FluidRestriction(ResourceLocation.withDefaultNamespace("lava"), "fluid.starcatcher.lava");
+    public static final FluidRestriction WATER = new FluidRestriction(ResourceLocation.withDefaultNamespace("water"), "fluid.starcatcher.water");
+    public static final FluidRestriction VOID = new FluidRestriction(ResourceLocation.withDefaultNamespace("empty"), "fluid.starcatcher.void");
+    public static final FluidRestriction AIR = new FluidRestriction(ResourceLocation.withDefaultNamespace("empty"), "fluid.starcatcher.air");
+    public static final FluidRestriction ACID = new FluidRestriction(Utils.rl("alexscaves", "acid"), "fluid.starcatcher.acid");
+    public static final FluidRestriction PURPLE_SODA = new FluidRestriction(Utils.rl("alexscaves", "purple_soda"), "fluid.starcatcher.purple_soda");
 }

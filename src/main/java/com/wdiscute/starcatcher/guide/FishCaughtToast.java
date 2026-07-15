@@ -1,15 +1,22 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.libtooltips.Tooltips;
+import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.U;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.fish.SizeAndWeight;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.toasts.Toast;
 import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
 
@@ -19,13 +26,15 @@ public class FishCaughtToast implements Toast
     private final Component title;
     private final String fishName;
     private final ItemStack is;
-    private FishProperties.Rarity rarity;
+    private Rarity rarity;
 
     public FishCaughtToast(FishProperties fp)
     {
-        this.is = new ItemStack(fp.catchInfo().fish());
+        this.is = new ItemStack(fp.catchInfo().fish().toItem());
         this.title = Component.translatable("gui.starcatcher.toast.fish_caught");
         this.fishName = is.getHoverName().getString();
+        if(fp.rarity().equals(Rarity.GOLDEN))
+            SCDataComponents.set(is, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
         this.rarity = fp.rarity();
     }
 
@@ -52,7 +61,7 @@ public class FishCaughtToast implements Toast
 
         if (this.old != lettersRevealed)
         {
-            Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.4F, U.r.nextFloat(0.2F) + 1.3F);
+            Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.4F, Utils.r.nextFloat(0.2F) + 1.3F);
             this.old = lettersRevealed;
         }
 
@@ -65,4 +74,27 @@ public class FishCaughtToast implements Toast
             return Visibility.HIDE;
     }
 
+    public static void newFish(FishProperties fp, boolean displayToast, float percentile, boolean golden)
+    {
+        if (displayToast || golden)
+            Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(golden ? fp.withRarity(Rarity.GOLDEN) : fp));
+
+        if(golden)
+            Minecraft.getInstance().player.playSound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 0.4f, 0.3f);
+
+        SizeAndWeight.Units units = SCConfig.UNIT.get();
+
+        String size = units.getSizeAsString(fp.sizeWeight().getSizeForPercentile(percentile));
+        String weight = units.getWeightAsString(fp.sizeWeight().getWeightForPercentile(percentile));
+
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player == null) return;
+        player.displayClientMessage(
+                Component.literal("")
+                        .append(Component.translatable(fp.catchInfo().fish().toStack().getDescriptionId()))
+                        .append(Component.literal(" - " + size + " - " + weight))
+                , true);
+
+        Minecraft.getInstance().gui.overlayMessageTime = 180;
+    }
 }

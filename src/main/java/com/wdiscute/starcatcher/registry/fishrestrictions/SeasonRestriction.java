@@ -8,8 +8,9 @@ import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
 import com.wdiscute.starcatcher.compat.TerraFirmaCraftSeasonsCompat;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.Entity;
@@ -27,35 +28,17 @@ import java.util.Map;
 public class SeasonRestriction extends AbstractFishRestriction
 {
     private final Map<Seasons, Integer> seasons;
-    private final String translationOverride;
 
     public static final MapCodec<SeasonRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Codec.unboundedMap(Seasons.CODEC, Codec.INT).fieldOf("season_extra_chance").forGetter(SeasonRestriction::getSeasons),
-                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(SeasonRestriction::getTranslationOverride)
+                    Codec.unboundedMap(Seasons.CODEC, Codec.INT).fieldOf("season_extra_chance").forGetter(o -> o.seasons),
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, SeasonRestriction::new));
-
-    public SeasonRestriction()
-    {
-        this.seasons = Map.of();
-        this.translationOverride = "";
-    }
 
     public SeasonRestriction(Map<Seasons, Integer> seasons, String translationOverride)
     {
+        super(translationOverride);
         this.seasons = seasons;
-        this.translationOverride = translationOverride;
-    }
-
-    public Map<Seasons, Integer> getSeasons()
-    {
-        return seasons;
-    }
-
-
-    public String getTranslationOverride()
-    {
-        return translationOverride;
     }
 
     @Override
@@ -73,29 +56,28 @@ public class SeasonRestriction extends AbstractFishRestriction
     @Override
     public boolean isEnabled()
     {
-        return SCConfig.ENABLE_SEASONS.get() && (
-                ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"));
+        return ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons");
     }
 
     @Override
-    public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
         Seasons currentSeason = Seasons.ALL;
 
         //Serene Seasons check
-        if (ModList.get().isLoaded("sereneseasons") && SCConfig.ENABLE_SEASONS.get())
+        if (ModList.get().isLoaded("sereneseasons"))
         {
             currentSeason = SereneSeasonsCompat.getSeason(level);
         }
 
         //Ecliptic Seasons check
-        if (ModList.get().isLoaded("eclipticseasons") && SCConfig.ENABLE_SEASONS.get())
+        if (ModList.get().isLoaded("eclipticseasons"))
         {
             currentSeason = EclipticSeasonsCompat.getSeason(level);
         }
 
         //TerraFirmaCraft Seasons check
-        if (ModList.get().isLoaded("tfc") && SCConfig.ENABLE_SEASONS.get())
+        if (ModList.get().isLoaded("tfc"))
         {
             currentSeason = TerraFirmaCraftSeasonsCompat.getSeason(level);
         }
@@ -111,20 +93,28 @@ public class SeasonRestriction extends AbstractFishRestriction
     @Override
     public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        int color = getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0 ?
+        int color = adjustChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0 ?
                 SCColors.GUIDE_GREEN : SCColors.GUIDE_RED;
 
-        if(getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
+        if (adjustChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
             return List.of(Component.translatable("gui.guide.seasons.in_season").withStyle(Style.EMPTY.withColor(color)));
         else
             return List.of(Component.translatable("gui.guide.seasons.not_in_season").withStyle(Style.EMPTY.withColor(color)));
     }
 
     @Override
-    public Component getDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    public MutableComponent getDescriptionPrefix()
     {
-        return Component.translatable("gui.guide.season").copy().append(
-                translationOverride.isEmpty() ? Component.translatable("gui.guide.hover") : Component.translatable(translationOverride));
+        return Component.translatable("gui.guide.season");
+    }
+
+    @Override
+    public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
+        if (seasons.entrySet().size() == 1)
+            return Component.translatable(seasons.entrySet().stream().findFirst().get().getKey().toTranslationKey());
+        else
+            return Component.translatable("gui.guide.hover");
     }
 
     @Override
@@ -162,16 +152,22 @@ public class SeasonRestriction extends AbstractFishRestriction
         LATE_WINTER("late_winter");
 
         public static final Codec<Seasons> CODEC = StringRepresentable.fromEnum(Seasons::values);
-        private final String key;
+        private final String name;
 
-        Seasons(String key)
+        Seasons(String name)
         {
-            this.key = key;
+            this.name = name;
         }
+
+        public String toTranslationKey()
+        {
+            return "gui.guide.seasons." + name;
+        }
+
 
         public String getSerializedName()
         {
-            return this.key;
+            return this.name;
         }
     }
 

@@ -1,0 +1,114 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 10,
+  "catch_info": {
+    "entity": "tide:catfish",
+    "fish_bucket": "tide:catfish_bucket",
+    "item": "tide:catfish"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 100,
+    "missPenalty": 20,
+    "modifiers": [
+      {
+        "type": "starcatcher:spawn_sweetspots",
+        "chance": 1.0,
+        "cooldown": 140,
+        "sudoku_vanish": false,
+        "sweetspot": {
+          "color_as_int": -16711936,
+          "hitbox_size_in_pixels": 22,
+          "is_flip": false,
+          "moving_rate": 1.0,
+          "reward": 0,
+          "sweetspot_type": "starcatcher:mirage",
+          "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+          "vanishing_rate": 0.0
+        }
+      },
+      {
+        "type": "starcatcher:spawn_sweetspots",
+        "chance": 0.3,
+        "cooldown": 100,
+        "sudoku_vanish": false,
+        "sweetspot": {
+          "color_as_int": -16711936,
+          "hitbox_size_in_pixels": 22,
+          "is_flip": false,
+          "moving_rate": 1.0,
+          "reward": 0,
+          "sweetspot_type": "starcatcher:mirage",
+          "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+          "vanishing_rate": 0.0
+        }
+      }
+    ],
+    "speed": 10,
+    "sweetspots": [
+      {
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "uncommon",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [
+        "#starcatcher:is_warm_lake"
+      ],
+      "blacklist": []
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 2147483647,
+      "min_y": 50,
+      "translation_override": "gui.guide.elevation.surface"
+    },
+    {
+      "type": "starcatcher:daytime_restriction",
+      "ranges": [
+        {
+          "first": 12700,
+          "second": 24000
+        }
+      ],
+      "translation_override": "gui.guide.night"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 60.0,
+    "average_weight_grams": 6000.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 4000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
+}

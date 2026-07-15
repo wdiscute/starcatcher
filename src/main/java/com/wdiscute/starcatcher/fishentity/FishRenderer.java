@@ -3,45 +3,39 @@ package com.wdiscute.starcatcher.fishentity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.wdiscute.starcatcher.U;
-import com.wdiscute.starcatcher.io.CaughtFishInfo;
-import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
-import com.wdiscute.starcatcher.registry.SCRenderTypes;
-import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.client.Minecraft;
+import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.entity.EntityRenderer;
-import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.Mth;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class FishRenderer extends EntityRenderer<FishEntity>
+public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity>>
 {
     ItemRenderer itemRenderer;
     public static Map<Item, EntityModel<FishEntity>> map = new HashMap<>();
 
     public FishRenderer(EntityRendererProvider.Context context)
     {
-        super(context);
+        super(context, null, 0.25f);
         itemRenderer = context.getItemRenderer();
         createMap(context.getModelSet());
     }
@@ -105,56 +99,56 @@ public class FishRenderer extends EntityRenderer<FishEntity>
         map.put(SCItems.THUNDER_BASS.get(), new ThunderBass<>(modelSet.bakeLayer(ThunderBass.LAYER_LOCATION)));
         map.put(SCItems.TWILIGHT_KOI.get(), new TwilightKoi<>(modelSet.bakeLayer(TwilightKoi.LAYER_LOCATION)));
         map.put(SCItems.WILLOW_BREAM.get(), new WillowBream<>(modelSet.bakeLayer(WillowBream.LAYER_LOCATION)));
+        map.put(SCItems.CERBERAY.get(), new Cerberay<>(modelSet.bakeLayer(Cerberay.LAYER_LOCATION)));
     }
 
     @Override
-    public void render(FishEntity fishEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
-    {
-        ItemStack fish = fishEntity.getFish();
+    public void render(FishEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+        model = map.get(entity.getFish().getItem());
+        if (model == null) {
+            return;
+        }
 
         poseStack.pushPose();
+        poseStack.translate(0, -0.2, 0);
 
-        Vec3 offsetCenter = new Vec3(0f, -0.75f, 0f);
+        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
 
-        float scale = SCDataComponents.getOrDefault(
-                fish, SCDataComponents.CAUGHT_FISH_INFO,
-                new CaughtFishInfo(100, 100, 50, FishProperties.Rarity.COMMON, false)
-        ).getScale();
-
-        //todo needed?
-        //poseStack.translate(be.x, be.y, be.z);
-
-        //block centering
-        poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
-
-        //scaling + pivot adjusting
-        poseStack.translate(0, 1, 0);
-        poseStack.scale(scale, -scale, scale);
-        poseStack.translate(0, -1, 0);
-
-        poseStack.mulPose(Axis.YN.rotationDegrees(entityYaw + 180));
-
-        // Render model here
-        if (!fish.isEmpty())
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, fishEntity.level());
 
         poseStack.popPose();
     }
 
     @Override
-    public ResourceLocation getTextureLocation(FishEntity fish)
-    {
-        return Starcatcher.rl("missingno");
+    protected @Nullable RenderType getRenderType(FishEntity livingEntity, boolean bodyVisible, boolean translucent, boolean glowing) {
+        ItemStack fish = livingEntity.getFish();
+
+        return getGoldRendertype(getTextureLocation(livingEntity), model, fish);
     }
 
-    public static void renderFishFromItem(ItemRenderer itemRenderer, Map<Item, EntityModel<FishEntity>> map, ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, Level level)
+    @Override
+    public @NotNull ResourceLocation getTextureLocation(FishEntity fish)
+    {
+        Item item = fish.getFish().getItem();
+        if (map.containsKey(item))
+           return Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath());
+
+       return Starcatcher.MISSINGNO;
+    }
+
+    @Override
+    protected void setupRotations(FishEntity entity, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale) {
+        super.setupRotations(entity, poseStack, bob, yBodyRot, partialTick, scale);
+
+    }
+
+    public static void renderFishFromItem(ItemRenderer itemRenderer, Map<Item, EntityModel<FishEntity>> map, ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, int overlay, Level level)
     {
         if (map.containsKey(itemStack.getItem()))
         {
             Item item = itemStack.getItem();
             EntityModel<FishEntity> model = map.get(item);
-            VertexConsumer vertexconsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("textures/entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath() + ".png"), model, itemStack));
-            model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
+            VertexConsumer vertexconsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
+            model.renderToBuffer(poseStack, vertexconsumer, packedLight, overlay);
         }
         else
         {
@@ -162,17 +156,15 @@ public class FishRenderer extends EntityRenderer<FishEntity>
             poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
             poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
             itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight,
-                    OverlayTexture.NO_OVERLAY, poseStack, buffer, level, U.r.nextInt());
+                    overlay, poseStack, buffer, level, 0);
         }
 
     }
 
     public static RenderType getGoldRendertype(ResourceLocation texture, EntityModel<FishEntity> model, ItemStack fishItem)
     {
-        if (FishProperties.Rarity.isGolden(fishItem))
-        {
-            return SCRenderTypes.RENDER_TYPE_GOLD.apply(texture);
-        }
-        return model.renderType(texture);
+        return Rarity.isGolden(fishItem)
+                ? GoldRenderer.INSTANCE.getOrCreateEntity(texture, model::renderType).renderType
+                : model.renderType(GoldRenderer.getTextureLoc(texture));
     }
 }

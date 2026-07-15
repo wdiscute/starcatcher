@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "starcatcher:starcatcher_guide"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:starcatcher_guide"
+  }
+}

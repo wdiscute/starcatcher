@@ -1,38 +1,56 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:frostgill_chub"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:frostgill_chub"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
+    "hp": 75,
     "missPenalty": 5,
     "modifiers": [
       {
-        "type": "starcatcher:freeze_on_miss"
+        "type": "starcatcher:freeze_on_miss",
+        "length": 40,
+        "rampTime": 10
       }
     ],
-    "speed": 9,
+    "speed": 7,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": -5383962,
+        "hitbox_size_in_pixels": 33,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:freeze",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/frozen.png",
         "vanishing_rate": 0.0
       }
     ]
@@ -42,23 +60,19 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
-      "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "starcatcher:is_cold_river"
-      ]
+      "biomes": [
+        "#starcatcher:is_cold_river"
+      ],
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": 100,
+      "max_y": 2147483647,
       "min_y": 50,
       "translation_override": "gui.guide.elevation.surface"
     },
@@ -66,22 +80,8 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
-    },
-    {
-      "type": "starcatcher:season",
-      "season_extra_chance": {
-        "early_autumn": 0,
-        "early_spring": 0,
-        "early_summer": 0,
-        "late_autumn": 0,
-        "late_spring": 0,
-        "late_summer": 0,
-        "mid_autumn": 0,
-        "mid_spring": 0,
-        "mid_summer": 0
-      },
-      "translation_override": "gui.guide.seasons.not_winter"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -91,5 +91,6 @@
     "deviation_weight_grams": 600.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

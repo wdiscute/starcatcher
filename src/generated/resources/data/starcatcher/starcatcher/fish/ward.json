@@ -1,94 +1,40 @@
 {
-  "base_chance": 2,
+  "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:ward"
+    "item": {
+      "count": 1,
+      "id": "starcatcher:ward"
+    }
   },
   "difficulty": {
-    "decay": 0.0,
+    "decay": 1.0,
     "hp": 1000,
     "missPenalty": 20,
-    "modifiers": [],
-    "speed": 12,
+    "modifiers": [
+      {
+        "type": "starcatcher:deep_dark"
+      }
+    ],
+    "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": 3701122,
+        "color_as_int": -14312285,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
+        "reward": 15,
+        "sweetspot_type": "starcatcher:sculk",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/sculk.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 3701122,
+        "color_as_int": -14312285,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
+        "reward": 15,
+        "sweetspot_type": "starcatcher:sculk",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/sculk.png",
         "vanishing_rate": 0.0
       }
     ]
@@ -98,43 +44,28 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
       "biomes": [
         "minecraft:deep_dark"
       ],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": []
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": 50,
+      "max_y": 0,
       "min_y": -2147483648,
-      "translation_override": "gui.guide.elevation.underground"
+      "translation_override": "gui.guide.elevation.deepslate"
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
-    },
-    {
-      "type": "starcatcher:bait",
-      "baits": {
-        "starcatcher:sculk_bait": 50
-      }
-    },
-    {
-      "type": "starcatcher:bait",
-      "baits": {
-        "starcatcher:legendary_bait": 50
-      }
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -144,5 +75,6 @@
     "deviation_weight_grams": 600.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/deep_dark.png"
 }

@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.datagen;
 
-import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import static com.wdiscute.starcatcher.blocks.SCBlocks.*;
+import static com.wdiscute.starcatcher.registry.SCBlocks.*;
 
 public class DGSCBlockLootTableProvider extends BlockLootSubProvider
 {
@@ -41,6 +41,9 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
                                                                 .include(SCDataComponents.TACKLE_BOX_FISHES.get())
                                                         ))))
                 ));
+
+
+
 
         dropSelf(AQUARIUM.get());
 

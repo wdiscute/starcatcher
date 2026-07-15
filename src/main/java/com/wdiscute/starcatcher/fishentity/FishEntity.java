@@ -2,13 +2,16 @@ package com.wdiscute.starcatcher.fishentity;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.U;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.io.SingleStackContainer;
+import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -21,6 +24,7 @@ import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.pathfinder.PathType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -31,6 +35,7 @@ public class FishEntity extends AbstractFish
     public FishEntity(EntityType<? extends FishEntity> entityType, Level level)
     {
         super(entityType, level);
+        if (fireImmune()) this.setPathfindingMalus(PathType.LAVA, 0.0F);
     }
 
     private boolean shouldDropItem = true;
@@ -65,9 +70,19 @@ public class FishEntity extends AbstractFish
         return SoundEvents.TROPICAL_FISH_FLOP;
     }
 
+    @Override
+    public boolean fireImmune() {
+        return getFish().has(DataComponents.FIRE_RESISTANT);
+    }
+
     public static AttributeSupplier.Builder createAttributes()
     {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 8.0F);
+    }
+
+    @Override
+    public boolean isInWater() {
+        return !fireImmune() ? super.isInWater() : isInLava();
     }
 
     @Override
@@ -81,7 +96,7 @@ public class FishEntity extends AbstractFish
 
             for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             {
-                if (fp.calculateChance(this, level(), SCItems.ROD.toStack(), AbstractFishRestriction.Context.FISH_ENTITY) > 0 && fp.catchInfo().fish().is(SCTags.BUCKETABLE_FISHES))
+                if (fp.calculateChance(this, level(), SCItems.ROD.toStack(), AbstractFishRestriction.Context.FISH_ENTITY) > 0 && fp.catchInfo().fish().toStack().is(SCTags.BUCKETABLE_FISHES))
                     available.add(fp);
             }
 
@@ -89,11 +104,19 @@ public class FishEntity extends AbstractFish
                 kill();
             else
             {
-                FishProperties fp = available.get(U.r.nextInt(available.size()));
-                ItemStack is = new ItemStack(fp.catchInfo().fish());
+                FishProperties fp = available.get(Utils.r.nextInt(available.size()));
+                ItemStack is = fp.catchInfo().fish().toStack();
                 setBodyArmorItem(is);
             }
         }
+    }
+
+    @Override
+    public float getScale() {
+        return SCDataComponents.getOrDefault(
+                getFish(), SCDataComponents.CAUGHT_FISH_INFO,
+                CaughtFishInfo.AVERAGE
+        ).getScale();
     }
 
     @Override
@@ -117,8 +140,8 @@ public class FishEntity extends AbstractFish
     @Override
     public ItemStack getBucketItemStack()
     {
-        ItemStack is = new ItemStack(SCItems.STARCAUGHT_BUCKET.get());
-        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new SingleStackContainer(getBodyArmorItem().copy()));
+        ItemStack is = new ItemStack(fireImmune() ? SCItems.STARCAUGHT_LAVA_BUCKET.asItem() : SCItems.STARCAUGHT_BUCKET.asItem());
+        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new MaybeStack(getBodyArmorItem().copy()));
         return is;
     }
 

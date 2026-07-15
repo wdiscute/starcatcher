@@ -1,34 +1,37 @@
 {
-  "base_chance": 1,
+  "base_chance": 11,
   "catch_info": {
     "always_spawn_entity": true,
     "entity": "minecraft:drowned",
-    "item": "minecraft:rotten_flesh"
+    "item": {
+      "count": 1,
+      "id": "minecraft:rotten_flesh"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
+    "hp": 75,
     "missPenalty": 5,
     "modifiers": [],
-    "speed": 9,
+    "speed": 7,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       }
@@ -37,13 +40,6 @@
   "has_guide_entry": false,
   "rarity": "common",
   "restrictions": [
-    {
-      "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
-    },
     {
       "type": "starcatcher:elevation_restriction",
       "max_y": 2147483647,
@@ -69,6 +65,13 @@
     {
       "type": "starcatcher:weather_restriction",
       "weather": "rain"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -78,5 +81,6 @@
     "deviation_weight_grams": 701.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": true
+  "skips_minigame": true,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

@@ -1,34 +1,63 @@
 {
-  "base_chance": 5,
+  "base_chance": 6,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:mirage_carp"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:mirage_carp"
+    }
   },
   "difficulty": {
     "decay": 1.0,
     "hp": 100,
     "missPenalty": 20,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "type": "starcatcher:spawn_sweetspots",
+        "chance": 1.0,
+        "cooldown": 140,
+        "sudoku_vanish": false,
+        "sweetspot": {
+          "color_as_int": -16711936,
+          "hitbox_size_in_pixels": 22,
+          "is_flip": false,
+          "moving_rate": 0.0,
+          "reward": 0,
+          "sweetspot_type": "starcatcher:mirage",
+          "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+          "vanishing_rate": 0.0
+        }
+      },
+      {
+        "type": "starcatcher:spawn_sweetspots",
+        "chance": 0.3,
+        "cooldown": 100,
+        "sudoku_vanish": false,
+        "sweetspot": {
+          "color_as_int": -16711936,
+          "hitbox_size_in_pixels": 22,
+          "is_flip": false,
+          "moving_rate": 0.0,
+          "reward": 0,
+          "sweetspot_type": "starcatcher:mirage",
+          "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+          "vanishing_rate": 0.0
+        }
+      }
+    ],
     "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 15,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       }
     ]
@@ -38,23 +67,19 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
-      "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "starcatcher:is_warm_lake"
-      ]
+      "biomes": [
+        "#starcatcher:is_warm_lake"
+      ],
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": 100,
+      "max_y": 2147483647,
       "min_y": 50,
       "translation_override": "gui.guide.elevation.surface"
     },
@@ -75,8 +100,11 @@
       "translation_override": "gui.guide.day"
     },
     {
-      "type": "starcatcher:weather_restriction",
-      "weather": "clear"
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -87,13 +115,5 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "star": {
-    "connections": [
-      "dubhe"
-    ],
-    "debug_color": -7146903,
-    "name": "merak",
-    "x": 2371,
-    "y": 987
-  }
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

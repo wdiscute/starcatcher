@@ -1,0 +1,73 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "tide:devils_hole_pupfish",
+    "fish_bucket": "tide:devils_hole_pupfish_bucket",
+    "item": "tide:devils_hole_pupfish"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 200,
+    "missPenalty": 20,
+    "modifiers": [],
+    "speed": 11,
+    "sweetspots": [
+      {
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 20,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.1
+      },
+      {
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 15,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 20,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.1
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "legendary",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 30,
+      "min_y": 20
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 35.0,
+    "average_weight_grams": 1000.0,
+    "deviation_size_cm": 25.0,
+    "deviation_weight_grams": 700.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
+}

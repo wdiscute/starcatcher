@@ -6,7 +6,7 @@
       "loot_table_id": "minecraft:chests/shipwreck_map"
     },
     {
-      "chance": 0.1,
+      "chance": 0.5,
       "condition": "minecraft:random_chance"
     }
   ],

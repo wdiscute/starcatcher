@@ -1,34 +1,50 @@
 {
-  "base_chance": 2,
+  "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:ghostly_pike"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:ghostly_pike"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
-    "missPenalty": 5,
+    "hp": 200,
+    "missPenalty": 20,
     "modifiers": [],
-    "speed": 9,
+    "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
+        "color_as_int": -9934744,
+        "hitbox_size_in_pixels": 24,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "reward": 10,
+        "sweetspot_type": "starcatcher:deepslate",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/deepslate.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "reward": 20,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": -9934744,
+        "hitbox_size_in_pixels": 24,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 10,
+        "sweetspot_type": "starcatcher:deepslate",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/deepslate.png",
         "vanishing_rate": 0.0
       }
     ]
@@ -38,10 +54,8 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -53,7 +67,8 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -63,5 +78,6 @@
     "deviation_weight_grams": 3000.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/cave.png"
 }

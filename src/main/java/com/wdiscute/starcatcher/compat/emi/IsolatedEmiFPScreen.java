@@ -1,37 +1,30 @@
 package com.wdiscute.starcatcher.compat.emi;
 
-import com.mojang.blaze3d.platform.InputConstants;
-import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.IsolatedFPScreen;
-import com.wdiscute.starcatcher.io.FishCaughtCounter;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.data.FishCaughtCounter;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import dev.emi.emi.api.EmiApi;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 
 public class IsolatedEmiFPScreen extends IsolatedFPScreen
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/emi/emi_entry.png");
+    private final Screen screen;
 
-    private final EmiRecipe emiRecipe;
-
-    public IsolatedEmiFPScreen(FishProperties fishProperties, EmiRecipe emiRecipe)
+    public IsolatedEmiFPScreen(FishProperties fishProperties, Screen screen)
     {
         super(fishProperties, null);
-        this.emiRecipe = emiRecipe;
+        this.screen = screen;
     }
 
     @Override
     public void onClose()
     {
         super.onClose();
-        EmiApi.displayRecipe(emiRecipe);
+        Minecraft.getInstance().setScreen(screen);
     }
 
     @Override
@@ -50,8 +43,8 @@ public class IsolatedEmiFPScreen extends IsolatedFPScreen
         FishingGuideScreen.renderFishEntryPage(
                 guiGraphics,
                 fp,
-                new ItemStack(fp.catchInfo().fish().value()),
-                FishCaughtCounter.get(Minecraft.getInstance().player, fp),
+                fp.catchInfo().fish().toStack(),
+                FishCaughtCounter.get(Minecraft.getInstance().player, fp.toLoc(Minecraft.getInstance().level)),
                 uiX + 31,
                 uiY - 25,
                 mouseX,

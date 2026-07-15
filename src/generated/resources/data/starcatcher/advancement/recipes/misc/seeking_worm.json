@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_almighty_worm": {
+      "conditions": {
+        "items": [
+          {
+            "items": "starcatcher:worm"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "starcatcher:seeking_worm"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_almighty_worm"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "starcatcher:seeking_worm"
+    ]
+  }
+}

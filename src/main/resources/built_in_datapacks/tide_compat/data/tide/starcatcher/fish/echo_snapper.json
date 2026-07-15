@@ -1,0 +1,85 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
+  "base_chance": 5,
+  "catch_info": {
+    "entity": "tide:echo_snapper",
+    "fish_bucket": "tide:echo_snapper_bucket",
+    "item": "tide:echo_snapper"
+  },
+  "difficulty": {
+    "decay": 1.0,
+    "hp": 500,
+    "missPenalty": 20,
+    "modifiers": [
+      {
+        "type": "starcatcher:deep_dark"
+      }
+    ],
+    "speed": 11,
+    "sweetspots": [
+      {
+        "color_as_int": -14312285,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:sculk",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/sculk.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": -14312285,
+        "hitbox_size_in_pixels": 22,
+        "is_flip": false,
+        "moving_rate": 0.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:sculk",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/sculk.png",
+        "vanishing_rate": 0.0
+      }
+    ]
+  },
+  "has_guide_entry": true,
+  "rarity": "epic",
+  "restrictions": [
+    {
+      "type": "starcatcher:dimension",
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
+    },
+    {
+      "type": "starcatcher:biome",
+      "biomes": [
+        "minecraft:deep_dark"
+      ],
+      "blacklist": []
+    },
+    {
+      "type": "starcatcher:elevation_restriction",
+      "max_y": 0,
+      "min_y": -2147483648,
+      "translation_override": "gui.guide.elevation.deepslate"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
+    }
+  ],
+  "size_and_weight": {
+    "average_size_cm": 60.0,
+    "average_weight_grams": 7000.0,
+    "deviation_size_cm": 20.0,
+    "deviation_weight_grams": 2000.0,
+    "golden_chance": 0.02
+  },
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/deep_dark.png"
+}

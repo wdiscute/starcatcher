@@ -1,8 +1,9 @@
 package com.wdiscute.starcatcher.tournament;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.datafixers.util.Pair;
+import com.wdiscute.starcatcher.SCColors;
+import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
+import net.minecraft.Util;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -11,6 +12,8 @@ import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,17 +22,14 @@ import java.util.*;
 
 public class TournamentOverlay implements LayeredDraw.Layer
 {
-    private static final Logger log = LoggerFactory.getLogger(TournamentOverlay.class);
     public static Tournament tournament;
-    public static Map<UUID, String> gameProfilesCache = new HashMap<>();
 
-    public static Pair<Component, Integer> firstPlace = Pair.of(Component.literal("[empty]"), 0);
-    public static Pair<Component, Integer> secondPlace = Pair.of(Component.literal("[empty]"), 0);
-    public static Pair<Component, Integer> thirdPlace = Pair.of(Component.literal("[empty]"), 0);
+    public static Tournament.PlayerScore firstPlace = null;
+    public static Tournament.PlayerScore secondPlace = null;
+    public static Tournament.PlayerScore thirdPlace = null;
 
-    public static Pair<Component, Integer> playerPlace = Pair.of(Component.empty(), 0);
+    public static Tournament.PlayerScore playerScore = null;
     public static ExpandedType expandedType = ExpandedType.BIG;
-    static int playerRank = 0;
 
 
     private static final ResourceLocation BACKGROUND_TINY = Starcatcher.rl("textures/gui/tournament/overlay_tiny.png");
@@ -67,8 +67,14 @@ public class TournamentOverlay implements LayeredDraw.Layer
 
 
         guiGraphics.pose().pushPose();
-        guiGraphics.pose().translate(0, 0, 0);
-        //add scale with config like minigame
+        guiGraphics.pose().translate(SCConfig.TOURNAMENT_X_OFFSET.get(), SCConfig.TOURNAMENT_Y_OFFSET.get(), 0);
+        guiGraphics.pose().scale(((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()), ((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()), 1);
+
+        //get fish for player position
+        ResourceLocation fish = null;
+        if (firstPlace != null && firstPlace.uuid.equals(playerScore.uuid)) fish = FIRST_PLACE_FISH;
+        if (secondPlace != null && secondPlace.uuid.equals(playerScore.uuid)) fish = SECOND_PLACE_FISH;
+        if (thirdPlace != null && thirdPlace.uuid.equals(playerScore.uuid)) fish = THIRD_PLACE_FISH;
 
         //if small
         if (expandedType.equals(ExpandedType.SMALL))
@@ -77,62 +83,117 @@ public class TournamentOverlay implements LayeredDraw.Layer
 
             guiGraphics.drawString(this.font, tournament.name, 58, 35, 0x635040, false);
 
-            guiGraphics.drawString(this.font, playerPlace.getFirst(), 48, 70, -1, false);
-            guiGraphics.drawString(this.font, playerPlace.getSecond() + "", 160, 70, -1, false);
-
-            guiGraphics.drawString(this.font, getDisplayTimeLeft(tournament.lastsUntilEpoch - System.currentTimeMillis()), 21, 35, -1, false);
-            switch (playerRank)
+            if (playerScore != null)
             {
-                case 1:
-                    guiGraphics.blit(FIRST_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
-                case 2:
-                    guiGraphics.blit(SECOND_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
-                case 3:
-                    guiGraphics.blit(THIRD_PLACE_FISH, 30, 72, 0, 0, 11, 6, 11, 6);
+                renderStringWithLimitedSpace(guiGraphics, this.font, Component.literal(playerScore.name), 48, 140, 70);
+                renderCenteredScrollingString(guiGraphics, this.font, Component.literal(String.format("%.1f", playerScore.score)),
+                        160, 151, 178, 70);
             }
+
+            guiGraphics.drawString(this.font, getDisplayTimeLeft(), 21, 35, -1, false);
+
+            //render fish icon for first/second/third place
+            if (fish != null)
+                guiGraphics.blit(fish, 30, 72, 0, 0, 11, 6, 11, 6);
         }
         //if big
-        else if(expandedType.equals(ExpandedType.BIG))
+        else if (expandedType.equals(ExpandedType.BIG))
+
         {
             renderImage(guiGraphics, BACKGROUND_EXPANDED);
 
             guiGraphics.drawString(this.font, tournament.name, 58, 16, 0x635040, false);
 
-            //render first/second/third player + scores
-            if(firstPlace.getSecond() != 0)guiGraphics.drawString(this.font, firstPlace.getFirst(), 48, 71, -1, false);
-            if(firstPlace.getSecond() != 0)guiGraphics.drawString(this.font, firstPlace.getSecond() + "", 154, 71, -1, false);
-            if(secondPlace.getSecond() != 0)guiGraphics.drawString(this.font, secondPlace.getFirst(), 48, 92, -1, false);
-            if(secondPlace.getSecond() != 0)guiGraphics.drawString(this.font, secondPlace.getSecond() + "", 154, 92, -1, false);
-            if(thirdPlace.getSecond() != 0)guiGraphics.drawString(this.font, thirdPlace.getFirst(), 48, 113, -1, false);
-            if(thirdPlace.getSecond() != 0) guiGraphics.drawString(this.font, thirdPlace.getSecond() + "", 154, 113, -1, false);
+            //render first place
+            if (firstPlace != null)
+                renderStringWithLimitedSpace(guiGraphics, this.font, Component.literal(firstPlace.name), 48, 140, 71);
+            if (firstPlace != null)
+                renderCenteredScrollingString(guiGraphics, this.font, Component.literal(String.format("%.1f", firstPlace.score)),
+                        160, 151, 178, 71);
 
-            guiGraphics.drawString(this.font, playerPlace.getFirst(), 48, 141, -1, false);
-            guiGraphics.drawString(this.font, playerPlace.getSecond() + "", 154, 141, -1, false);
+            //render second place
+            if (secondPlace != null)
+                renderStringWithLimitedSpace(guiGraphics, this.font, Component.literal(secondPlace.name), 48, 140, 92);
+            if (secondPlace != null)
+                renderCenteredScrollingString(guiGraphics, this.font, Component.literal(String.format("%.1f", secondPlace.score)),
+                        160, 151, 178, 92);
 
-            guiGraphics.drawString(this.font, getDisplayTimeLeft(tournament.lastsUntilEpoch - System.currentTimeMillis()), 12, 31, -1, false);
+            //render third place
+            if (thirdPlace != null)
+                renderStringWithLimitedSpace(guiGraphics, this.font, Component.literal(thirdPlace.name), 48, 140, 113);
+            if (thirdPlace != null)
+                renderCenteredScrollingString(guiGraphics, this.font, Component.literal(String.format("%.1f", thirdPlace.score)),
+                        160, 151, 178, 113);
+
+            //render player score
+            if (playerScore != null)
+                renderStringWithLimitedSpace(guiGraphics, this.font, Component.literal(playerScore.name), 48, 140, 141);
+            if (playerScore != null)
+                renderCenteredScrollingString(guiGraphics, this.font, Component.literal(String.format("%.1f", playerScore.score)),
+                        160, 151, 178, 141);
+
+            guiGraphics.drawString(this.font, getDisplayTimeLeft(), 12, 31, -1, false);
 
             //render fish icon for first/second/third place
-            if (playerRank != 0)
-                guiGraphics.blit(
-                        switch (playerRank)
-                        {
-                            case 1:
-                                yield FIRST_PLACE_FISH;
-                            case 2:
-                                yield SECOND_PLACE_FISH;
-                            default:
-                                yield THIRD_PLACE_FISH;
-                        },
-                        30, 142, 0, 0, 11, 6, 11, 6);
+            if (fish != null)
+                guiGraphics.blit(fish, 30, 142, 0, 0, 11, 6, 11, 6);
         }
 
         guiGraphics.pose().popPose();
     }
 
-
-    public static String getDisplayTimeLeft(long ticks)
+    public static void renderStringWithLimitedSpace(GuiGraphics guiGraphics, Font font, Component comp, int minX, int maxX, int y)
     {
-        long ticksRemainingToCalculate = ticks / 1000;
+        int width = font.width(comp);
+        int sizeAvailable = maxX - minX;
+        if (width > sizeAvailable)
+        {
+            int l = width - sizeAvailable;
+            double d0 = (double) Util.getMillis() / (double) 300.0F;
+            double d1 = Math.max((double) l * (double) 0.5F, 3.0F);
+            double d2 = Math.sin((Math.PI / 2D) * Math.cos((Math.PI * 2D) * d0 / d1)) / (double) 2.0F + (double) 0.5F;
+            double d3 = Mth.lerp(d2, 0.0F, l);
+            guiGraphics.enableScissor(minX, y - 20, maxX, y + 20);
+            int x = minX - (int) d3;
+            guiGraphics.drawString(font, comp, x, y, SCColors.WHITE, false);
+            guiGraphics.disableScissor();
+        }
+        else
+        {
+            guiGraphics.drawString(font, comp, minX, y, SCColors.WHITE, false);
+        }
+    }
+
+    public static void renderCenteredScrollingString(GuiGraphics guiGraphics, Font font, Component text, int centerX, int minX, int maxX, int y)
+    {
+        int i = font.width(text);
+        int k = maxX - minX;
+        if (i > k)
+        {
+            int l = i - k;
+            double d0 = (double) Util.getMillis() / (double) 300.0F;
+            double d1 = Math.max((double) l * (double) 0.5F, 3.0F);
+            double d2 = Math.sin((Math.PI / 2D) * Math.cos((Math.PI * 2D) * d0 / d1)) / (double) 2.0F + (double) 0.5F;
+            double d3 = Mth.lerp(d2, 0.0F, l);
+            guiGraphics.enableScissor(minX, y - 10, maxX, y + 10);
+            int x = minX - (int) d3;
+            guiGraphics.drawString(font, text, x, y, SCColors.WHITE, false);
+            guiGraphics.disableScissor();
+        }
+        else
+        {
+            int i1 = Mth.clamp(centerX, minX + i / 2, maxX - i / 2);
+            guiGraphics.drawString(font, text.getVisualOrderText(), i1 - font.width(text.getVisualOrderText()) / 2, y, SCColors.WHITE, false);
+        }
+    }
+
+    public static String getDisplayTimeLeft()
+    {
+        long endTime = tournament.startTimeEpoch + tournament.durationInTicks * 50;
+        long currentTime = System.currentTimeMillis();
+        long remaining = endTime - currentTime;
+
+        long ticksRemainingToCalculate = remaining / 1000;
         if (ticksRemainingToCalculate < 0) return "????";
         String finalString = "";
 
@@ -163,60 +224,44 @@ public class TournamentOverlay implements LayeredDraw.Layer
         return finalString;
     }
 
-    public static void onTournamentReceived(Tournament t, List<GameProfile> list)
+    public static void onTournamentReceived(Tournament t)
     {
-        //add entries to cached game profile
-        list.forEach(e -> gameProfilesCache.put(e.getId(), e.getName()));
+        //assign with nulls so we can compare the score
+        firstPlace = new Tournament.PlayerScore(null, null, 0);
+        secondPlace = new Tournament.PlayerScore(null, null, 0);
+        thirdPlace = new Tournament.PlayerScore(null, null, 0);
 
-        firstPlace = Pair.of(Component.literal(""), 0);
-        secondPlace = Pair.of(Component.literal(""), 0);
-        thirdPlace = Pair.of(Component.literal(""), 0);
-
-        if (t.status.equals(Tournament.Status.ACTIVE))
+        //if tournament is active
+        //get first
+        for (Tournament.PlayerScore tps : t.playerScores)
         {
-            for (TournamentPlayerScore tps : t.playerScores)
+            if (tps.score > thirdPlace.score || thirdPlace.name == null)
             {
-                if (tps.score > thirdPlace.getSecond())
-                {
-                    thirdPlace = Pair.of(
-                            Component.literal(gameProfilesCache.get(tps.playerUUID)),
-                            tps.score
-                    );
-                }
-
-                if (tps.score > secondPlace.getSecond())
-                {
-                    thirdPlace = secondPlace;
-                    secondPlace = Pair.of(
-                            Component.literal(gameProfilesCache.get(tps.playerUUID)),
-                            tps.score
-                    );
-                }
-
-                if (tps.score > firstPlace.getSecond())
-                {
-                    secondPlace = firstPlace;
-                    firstPlace = Pair.of(
-                            Component.literal(gameProfilesCache.get(tps.playerUUID)),
-                            tps.score
-                    );
-                }
-
-
+                thirdPlace = tps;
             }
 
-            //set player place name & score
-            Optional<TournamentPlayerScore> optional = t.playerScores.stream().filter(p -> p.playerUUID.equals(Minecraft.getInstance().player.getUUID())).findFirst();
-            optional.ifPresent(playerScore -> playerPlace = Pair.of(
-                    Minecraft.getInstance().player.getName(),
-                    playerScore.score));
+            if (tps.score > secondPlace.score || secondPlace.name == null)
+            {
+                thirdPlace = secondPlace;
+                secondPlace = tps;
+            }
 
-            //set playerRank
-            if (firstPlace.getFirst().equals(playerPlace.getFirst())) playerRank = 1;
-            else if (secondPlace.getFirst().equals(playerPlace.getFirst())) playerRank = 2;
-            else if (thirdPlace.getFirst().equals(playerPlace.getFirst())) playerRank = 3;
-            else playerRank = 0;
+            if (tps.score > firstPlace.score || firstPlace.name == null)
+            {
+                secondPlace = firstPlace;
+                firstPlace = tps;
+            }
         }
+
+        //reset back to null
+        if (firstPlace.name == null) firstPlace = null;
+        if (secondPlace.name == null) secondPlace = null;
+        if (thirdPlace.name == null) thirdPlace = null;
+
+        //set player place name & score
+        Optional<Tournament.PlayerScore> optional = t.playerScores.stream().filter(p -> p.uuid.equals(Minecraft.getInstance().player.getUUID())).findFirst();
+        optional.ifPresentOrElse(playerScore -> TournamentOverlay.playerScore = playerScore, () -> playerScore = new Tournament.PlayerScore(UUID.randomUUID(), "???", 0));
+
         tournament = t;
     }
 

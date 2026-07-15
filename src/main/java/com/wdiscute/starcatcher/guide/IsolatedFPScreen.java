@@ -2,18 +2,17 @@ package com.wdiscute.starcatcher.guide;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.io.FishCaughtCounter;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.data.FishCaughtCounter;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 
 public class IsolatedFPScreen extends Screen
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/emi/emi_entry.png");
+    protected static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/jemi/entry.png");
 
     protected final FishProperties fp;
     protected int uiX;
@@ -73,8 +72,8 @@ public class IsolatedFPScreen extends Screen
         FishingGuideScreen.renderFishEntryPage(
                 guiGraphics,
                 fp,
-                new ItemStack(fp.catchInfo().fish().value()),
-                FishCaughtCounter.get(Minecraft.getInstance().player, fp),
+                fp.catchInfo().fish().toStack(),
+                FishCaughtCounter.get(Minecraft.getInstance().player, fp.toLoc(Minecraft.getInstance().level)),
                 uiX + 31,
                 uiY - 25,
                 mouseX,

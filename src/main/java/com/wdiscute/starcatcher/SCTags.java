@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher;
 
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
@@ -8,7 +8,6 @@ import net.minecraft.world.item.Item;
 
 public class SCTags
 {
-
     public static final ResourceLocation IS_COLD_LAKE = Starcatcher.rl("is_cold_lake");
     public static final ResourceLocation IS_COLD_RIVER = Starcatcher.rl("is_cold_river");
     public static final ResourceLocation IS_COLD_OCEAN = Starcatcher.rl("is_cold_ocean");
@@ -49,29 +48,38 @@ public class SCTags
 
     public static final TagKey<Item> PLACEABLE_IN_DISPLAY = ItemTags.create(Starcatcher.rl("placeable_in_display"));
     public static final TagKey<Item> PLACEABLE_IN_TACKLE_BOX = ItemTags.create(Starcatcher.rl("placeable_in_tackle_box"));
-    public static final TagKey<Item> PLACEABLE_IN_TACKLE_BOX_FISH_SLOT = ItemTags.create(Starcatcher.rl("placeable_in_tackle_box_fish_slot"));
     public static final TagKey<Item> WORMS = ItemTags.create(Starcatcher.rl("worms"));
 
     public static final TagKey<Item> RODS = ItemTags.create(Starcatcher.rl("rods"));
 
     public static final TagKey<Item> BUCKETABLE_FISHES = ItemTags.create(Starcatcher.rl("bucketable_fishes"));
-    public static final TagKey<Item> STARCAUGHT_FISHES = ItemTags.create(Starcatcher.rl("starcaught_fishes"));
+    public static final TagKey<Item> STARCAUGHT_FISHABLE = ItemTags.create(Starcatcher.rl("starcaught_fishable"));
+    public static final TagKey<Item> STARCAUGHT_FISHABLE_FISH = ItemTags.create(Starcatcher.rl("starcaught_fishable_fish"));
     public static final TagKey<Item> FISHABLE = ItemTags.create(Starcatcher.rl("fishable"));
 
-    public static final TagKey<Item> TRASH = ItemTags.create(Starcatcher.rl("trash"));
+    public static final TagKey<Item> CRABS = ItemTags.create(Starcatcher.rl("crabs"));
+    public static final TagKey<Item> EELS = ItemTags.create(Starcatcher.rl("eels"));
+    public static final TagKey<Item> SHRIMPS = ItemTags.create(Starcatcher.rl("shrimps"));
 
     public static final TagKey<Item> COMMON_FISHES = ItemTags.create(Starcatcher.rl("common_fishes"));
+    public static final TagKey<Item> COMMON_STARCAUGHT_FISHES = ItemTags.create(Starcatcher.rl("common_starcaught_fishes"));
     public static final TagKey<Item> UNCOMMON_FISHES = ItemTags.create(Starcatcher.rl("uncommon_fishes"));
+    public static final TagKey<Item> UNCOMMON_STARCAUGHT_FISHES = ItemTags.create(Starcatcher.rl("uncommon_starcaught_fishes"));
     public static final TagKey<Item> RARE_FISHES = ItemTags.create(Starcatcher.rl("rare_fishes"));
+    public static final TagKey<Item> RARE_STARCAUGHT_FISHES = ItemTags.create(Starcatcher.rl("rare_starcaught_fishes"));
     public static final TagKey<Item> EPIC_FISHES = ItemTags.create(Starcatcher.rl("epic_fishes"));
+    public static final TagKey<Item> EPIC_STARCAUGHT_FISHES = ItemTags.create(Starcatcher.rl("epic_starcaught_fishes"));
     public static final TagKey<Item> LEGENDARY_FISHES = ItemTags.create(Starcatcher.rl("legendary_fishes"));
+    public static final TagKey<Item> LEGENDARY_STARCAUGHT_FISHES = ItemTags.create(Starcatcher.rl("legendary_starcaught_fishes"));
 
-    public static final TagKey<FishProperties> TRASH_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("trash_fishes"));
-    public static final TagKey<FishProperties> COMMON_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("common_fishes"));
-    public static final TagKey<FishProperties> UNCOMMON_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("uncommon_fishes"));
-    public static final TagKey<FishProperties> RARE_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("rare_fishes"));
-    public static final TagKey<FishProperties> EPIC_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("epic_fishes"));
-    public static final TagKey<FishProperties> LEGENDARY_FISHES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("legendary_fishes"));
+    public static final TagKey<Item> HAS_RADAR_LAYER = ItemTags.create(Starcatcher.rl("has_radar_layer"));
+    public static final TagKey<Item> HAS_TRACKER_LAYER = ItemTags.create(Starcatcher.rl("has_tracker_layer"));
+    public static final TagKey<Item> HAS_FARMLAND_INTERACTION = ItemTags.create(Starcatcher.rl("has_farmland_interaction"));
 
-
+    public static final TagKey<FishProperties> TRASH_ENTRIES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("trash_entries"));
+    public static final TagKey<FishProperties> COMMON_ENTRIES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("common_entries"));
+    public static final TagKey<FishProperties> UNCOMMON_ENTRIES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("uncommon_entries"));
+    public static final TagKey<FishProperties> RARE_ENTRIES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("rare_entries"));
+    public static final TagKey<FishProperties> EPIC_ENTRIES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("epic_entries"));
+    public static final TagKey<FishProperties> LEGENDARY_ENTRIES_FP = TagKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("legendary_entries"));
 }

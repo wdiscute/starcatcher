@@ -1,7 +1,10 @@
 {
-  "base_chance": 1,
+  "base_chance": 2,
   "catch_info": {
-    "item": "starcatcher:conch"
+    "item": {
+      "count": 1,
+      "id": "starcatcher:conch"
+    }
   },
   "difficulty": {
     "decay": 0.0,
@@ -11,22 +14,22 @@
     "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 30,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 30,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       }
@@ -37,23 +40,19 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
-      "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "starcatcher:is_beach"
-      ]
+      "biomes": [
+        "#starcatcher:is_beach"
+      ],
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": 100,
+      "max_y": 2147483647,
       "min_y": 50,
       "translation_override": "gui.guide.elevation.surface"
     },
@@ -61,7 +60,8 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -71,5 +71,6 @@
     "deviation_weight_grams": 49.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

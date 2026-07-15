@@ -3,7 +3,7 @@ package com.wdiscute.starcatcher.registry.fishrestrictions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -26,50 +26,21 @@ public class BiomeBias extends AbstractFishRestriction
     private final List<ResourceLocation> biomes;
     private final List<ResourceLocation> biomesTags;
     private final int extraChance;
-    private final String translationOverride;
 
     public static final MapCodec<BiomeBias> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes").forGetter(BiomeBias::getBiomes),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_tags").forGetter(BiomeBias::getBiomesTags),
-                    Codec.INT.fieldOf("extra_chance").forGetter(BiomeBias::getExtraChance),
-                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(BiomeBias::getTranslationOverride)
+                    ResourceLocation.CODEC.listOf().fieldOf("biomes").forGetter(o -> o.biomes),
+                    ResourceLocation.CODEC.listOf().fieldOf("biomes_tags").forGetter(o -> o.biomesTags),
+                    Codec.INT.fieldOf("extra_chance").forGetter(o -> o.extraChance),
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, BiomeBias::new));
-
-    public BiomeBias()
-    {
-        this.biomes = List.of();
-        this.biomesTags = List.of();
-        this.extraChance = 0;
-        this.translationOverride = "";
-    }
 
     public BiomeBias(List<ResourceLocation> biomes, List<ResourceLocation> biomesTags, int extraChance, String translationOverride)
     {
+        super(translationOverride);
         this.biomes = biomes;
         this.biomesTags = biomesTags;
         this.extraChance = extraChance;
-        this.translationOverride = translationOverride;
-    }
-
-    public List<ResourceLocation> getBiomes()
-    {
-        return biomes;
-    }
-
-    public List<ResourceLocation> getBiomesTags()
-    {
-        return biomesTags;
-    }
-
-    public int getExtraChance()
-    {
-        return extraChance;
-    }
-
-    public String getTranslationOverride()
-    {
-        return translationOverride;
     }
 
     @Override
@@ -85,7 +56,7 @@ public class BiomeBias extends AbstractFishRestriction
     }
 
     @Override
-    public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
         Holder<Biome> biome = level.getBiome(entity.blockPosition());
 
@@ -98,7 +69,7 @@ public class BiomeBias extends AbstractFishRestriction
     }
 
     @Override
-    public Component getDescription(Level level, FishProperties fp, @Nullable Player player, Context context)
+    public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
         //todo finish this :)
         MutableComponent comp = Component.literal("todo");

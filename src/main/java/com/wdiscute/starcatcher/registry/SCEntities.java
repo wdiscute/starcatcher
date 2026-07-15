@@ -1,10 +1,10 @@
 package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.secretnotes.BottledLetterEntity;
-import com.wdiscute.starcatcher.secretnotes.BrokenBottleEntity;
+import com.wdiscute.starcatcher.messageinabottle.letter.BottledLetterEntity;
+import com.wdiscute.starcatcher.messageinabottle.BrokenBottleEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
+import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -13,33 +13,32 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
-public class SCEntities
+public interface SCEntities
 {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES =
+    DeferredRegister<EntityType<?>> ENTITY_TYPES =
             DeferredRegister.create(BuiltInRegistries.ENTITY_TYPE, Starcatcher.MOD_ID);
 
-    public static final DeferredHolder<EntityType<?>, EntityType<FishingBobEntity>> FISHING_BOB =
+    DeferredHolder<EntityType<?>, EntityType<FishingBobEntity>> FISHING_BOB =
             register("fishing_bob", FishingBobEntity::new, MobCategory.MISC,
                     b -> b.noSummon().noSave().sized(0.3f, 0.3f));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<FishEntity>> FISH =
+    DeferredHolder<EntityType<?>, EntityType<FishEntity>> FISH =
             register("fish", FishEntity::new, MobCategory.WATER_AMBIENT,
-                    b -> b.sized(0.5f, 0.5f));
+                    b -> b.sized(0.5f, 0.5f).fireImmune());
 
-    public static final DeferredHolder<EntityType<?>,EntityType<BrokenBottleEntity>> BROKEN_BOTTLE =
+    DeferredHolder<EntityType<?>,EntityType<BrokenBottleEntity>> BROKEN_BOTTLE =
             register("broken_bottle", BrokenBottleEntity::new, MobCategory.MISC,
                     b -> b.sized(0.25f, 0.25f)
                             .clientTrackingRange(4).updateInterval(10));
 
-    public static final DeferredHolder<EntityType<?>,EntityType<BottledLetterEntity>> BOTTLED_LETTER =
+    DeferredHolder<EntityType<?>,EntityType<BottledLetterEntity>> BOTTLED_LETTER =
             register("bottled_letter", BottledLetterEntity::new, MobCategory.MISC,
                     b -> b.sized(0.25f, 0.25f)
                             .clientTrackingRange(4).updateInterval(10));
 
-    public static void register(IEventBus eventBus)
+    static void register(IEventBus eventBus)
     {
         ENTITY_TYPES.register(eventBus);
     }

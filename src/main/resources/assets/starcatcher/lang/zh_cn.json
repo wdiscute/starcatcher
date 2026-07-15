@@ -1207,7 +1207,7 @@
   "gui.starcatcher.tournament.status.cancelled" : "已取消",
   "gui.starcatcher.tournament.status.finished" : "已完成",
 
-  "gui.starcatcher.tournament.scoring.simple" : "简单",
+  "gui.starcatcher.tournament.scoring.simple" : "基础",
   "gui.starcatcher.tournament.scoring.weight" : "重量",
   "gui.starcatcher.tournament.scoring.rarity" : "稀有度",
   "gui.starcatcher.tournament.scoring.golden" : "黄金",
@@ -1230,7 +1230,7 @@
   "gui.secret_note.amethyst_hook.13" : "<scuncommon>老钓鱼者</scuncommon>会祝福你，",
   "gui.secret_note.amethyst_hook.14" : "我的紫水晶钩会主动上钩。",
   "gui.secret_note.amethyst_hook.15" : "",
-  "gui.secret_note.amethyst_hook.16" : "-罗盖伊",
+  "gui.secret_note.amethyst_hook.16" : "-Roguy",
 
   "gui.secret_note.lava_proof_bottle_1.0" : "'买我的瓶子！买我的瓶子！'",
   "gui.secret_note.lava_proof_bottle_1.1" : "'它们是<sclava>防熔岩的</sclava4>！！'",
@@ -1248,7 +1248,7 @@
   "gui.secret_note.lava_proof_bottle_1.13" : "最近的熔岩池！哼，让他们看看。",
   "gui.secret_note.lava_proof_bottle_1.14" : "",
   "gui.secret_note.lava_proof_bottle_1.15" : "",
-  "gui.secret_note.lava_proof_bottle_1.16" : "-怀疑者阿恩伍尔夫",
+  "gui.secret_note.lava_proof_bottle_1.16" : "-怀疑者Arnwulf",
 
   "gui.secret_note.lava_proof_bottle_2.0" : "",
   "gui.secret_note.lava_proof_bottle_2.1" : "如果有人发现这封信，我想",
@@ -1266,7 +1266,7 @@
   "gui.secret_note.lava_proof_bottle_2.13" : "所谓的‘防熔岩’附魔。想得美。",
   "gui.secret_note.lava_proof_bottle_2.14" : "",
   "gui.secret_note.lava_proof_bottle_2.15" : "",
-  "gui.secret_note.lava_proof_bottle_2.16" : "-怀疑者阿恩伍尔夫",
+  "gui.secret_note.lava_proof_bottle_2.16" : "-怀疑者Arnwulf",
 
   "gui.secret_note.hopeful_note.0" : "",
   "gui.secret_note.hopeful_note.1" : "",
@@ -1284,7 +1284,7 @@
   "gui.secret_note.hopeful_note.13" : "",
   "gui.secret_note.hopeful_note.14" : "",
   "gui.secret_note.hopeful_note.15" : "",
-  "gui.secret_note.hopeful_note.16" : "-高瓦德",
+  "gui.secret_note.hopeful_note.16" : "-Gauward",
 
   "gui.secret_note.hopeless_note.0" : "",
   "gui.secret_note.hopeless_note.1" : "",
@@ -1302,7 +1302,7 @@
   "gui.secret_note.hopeless_note.13" : "",
   "gui.secret_note.hopeless_note.14" : "",
   "gui.secret_note.hopeless_note.15" : "",
-  "gui.secret_note.hopeless_note.16" : "-高瓦德",
+  "gui.secret_note.hopeless_note.16" : "-Gauward",
 
   "gui.secret_note.true_blue.0"  : "   有什么东西被放入，",
   "gui.secret_note.true_blue.1"  : "   或被取出，或被审视。",
@@ -1882,5 +1882,7 @@
   "tooltip.starcatcher.voidbiter.2" : "据说只有<scuncommon>渔翁老祖</scuncommon>才成功地",
   "tooltip.starcatcher.voidbiter.3" : "将其捕获。",
 
-  "block.selling_bin.selling_bin" : "出售箱"
+  "block.selling_bin.selling_bin" : "出售箱",
+  "gui.guide.sign.locked.0" : "标记后将锁定你当前所有渔获",
+  "gui.guide.sign.locked.1" : "锁定后，此书将不再收录新增渔获"
 }

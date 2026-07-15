@@ -1,0 +1,16 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "starcatcher:item/message"
+  },
+  "overrides": [
+    {
+      "predicate": {"starcatcher:message": 1},
+      "model": "starcatcher:item/message_nether"
+    },
+    {
+      "predicate": {"starcatcher:message": 2},
+      "model": "starcatcher:item/message_end"
+    }
+  ]
+}

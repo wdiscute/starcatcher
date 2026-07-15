@@ -3,7 +3,7 @@ package com.wdiscute.starcatcher.datagen;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.registry.SCBlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,7 +36,7 @@ public class DGSCLootModifiers extends GlobalLootModifierProvider
         this.add("fishing_hat_from_shipwrecks",
                 new AddItemModifier(new LootItemCondition[]{
                         new LootTableIdCondition.Builder(BuiltInLootTables.SHIPWRECK_MAP.location()).build(),
-                        LootItemRandomChanceCondition.randomChance(0.1f).build()
+                        LootItemRandomChanceCondition.randomChance(0.5f).build()
                 }, SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem()).toList()
                 ));
     }
@@ -57,13 +57,6 @@ public class DGSCLootModifiers extends GlobalLootModifierProvider
         @Override
         protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> generatedLoot, LootContext lootContext)
         {
-            for (LootItemCondition condition : this.conditions)
-            {
-                if (!condition.test(lootContext))
-                {
-                    return generatedLoot;
-                }
-            }
             generatedLoot.add(items.get(lootContext.getRandom().nextInt(items.size())).getDefaultInstance());
             return generatedLoot;
         }

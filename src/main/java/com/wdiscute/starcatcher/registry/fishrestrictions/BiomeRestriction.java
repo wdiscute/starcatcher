@@ -3,14 +3,19 @@ package com.wdiscute.starcatcher.registry.fishrestrictions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.core.Holder;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.EntryOrTag;
+import net.minecraft.ChatFormatting;
+import net.minecraft.core.*;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
@@ -22,68 +27,41 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class BiomeRestriction extends AbstractFishRestriction
 {
-    private final List<ResourceLocation> biomes;
-    private final List<ResourceLocation> biomesTags;
-    private final List<ResourceLocation> biomesBlacklist;
-    private final List<ResourceLocation> biomesBlacklistTags;
+    private final List<EntryOrTag<Biome>> biomes;
+    private final List<EntryOrTag<Biome>> blacklist;
     private final String hover;
-    private final String translationOverride;
 
     public static final MapCodec<BiomeRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes").forGetter(o -> o.biomes),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_tags").forGetter(o -> o.biomesTags),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_blacklist").forGetter(o -> o.biomesBlacklist),
-                    ResourceLocation.CODEC.listOf().fieldOf("biomes_blacklist_tags").forGetter(o -> o.biomesBlacklistTags),
+                    EntryOrTag.codec(Registries.BIOME).listOf()
+                            .fieldOf("biomes")
+                            .forGetter(o -> o.biomes),
+                    EntryOrTag.codec(Registries.BIOME).listOf()
+                            .fieldOf("blacklist")
+                            .forGetter(o -> o.blacklist),
                     Codec.STRING.optionalFieldOf("hover_translation", "").forGetter(o -> o.hover),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, BiomeRestriction::new));
 
-    public BiomeRestriction()
+    public BiomeRestriction(List<EntryOrTag<Biome>> biomes, List<EntryOrTag<Biome>> blacklist, String hover, String translation)
     {
-        this.biomes = List.of();
-        this.biomesTags = List.of();
-        this.biomesBlacklist = List.of();
-        this.biomesBlacklistTags = List.of();
-        this.translationOverride = "";
-        this.hover = "";
-    }
-
-    public BiomeRestriction(ResourceLocation biome, String translationOverride)
-    {
-        this.biomes = List.of(biome);
-        this.biomesTags = List.of();
-        this.biomesBlacklist = List.of();
-        this.biomesBlacklistTags = List.of();
-        this.translationOverride = translationOverride;
-        this.hover = "";
-    }
-
-    public BiomeRestriction(List<ResourceLocation> biomes, List<ResourceLocation> biomesTags, List<ResourceLocation> biomesBlacklist, List<ResourceLocation> biomesBlacklistTags, String translationOverride)
-    {
+        super(translation);
         this.biomes = biomes;
-        this.biomesTags = biomesTags;
-        this.biomesBlacklist = biomesBlacklist;
-        this.biomesBlacklistTags = biomesBlacklistTags;
-        this.hover = "";
-        this.translationOverride = translationOverride;
-    }
-
-    public BiomeRestriction(List<ResourceLocation> biomes, List<ResourceLocation> biomesTags, List<ResourceLocation> biomesBlacklist, List<ResourceLocation> biomesBlacklistTags, String hover, String translationOverride)
-    {
-        this.biomes = biomes;
-        this.biomesTags = biomesTags;
-        this.biomesBlacklist = biomesBlacklist;
-        this.biomesBlacklistTags = biomesBlacklistTags;
+        this.blacklist = blacklist;
         this.hover = hover;
-        this.translationOverride = translationOverride;
+    }
+
+    @Override
+    public int getSortPriority()
+    {
+        return -50;
     }
 
     @Override
@@ -98,162 +76,426 @@ public class BiomeRestriction extends AbstractFishRestriction
         return SCFishRestrictions.BIOME;
     }
 
+    private static final BlockPos[] BPS = {
+            new BlockPos(5, 0, 0),
+            new BlockPos(-5, 0, 0),
+            new BlockPos(0, 0, 5),
+            new BlockPos(0, 0, -5)
+    };
+
     @Override
-    public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        Holder<Biome> biome = level.getBiome(entity.blockPosition());
-        ResourceLocation biomeRL = biome.getKey().location();
+        Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
 
-        //if biomes or biomesTags then check if biome is in any of them
-        if (!biomes.isEmpty() || !biomesTags.isEmpty())
+        //check biomes around the bobber
+        for (int i = 0; i < 4; i++)
         {
-            boolean safe = false;
+            BlockPos offset = BPS[i];
+            Holder<Biome> biome = level.getBiome(entity.blockPosition().offset(offset.getX(), offset.getY(), offset.getZ()));
 
-            if (biomes.contains(biomeRL)) safe = true;
-
-            if (biomesTags.stream().anyMatch(rl -> biome.is(TagKey.create(Registries.BIOME, rl))))
-                safe = true;
-
-            if (!safe) return -9999;
+            //if biomes contains biome and blacklist doesn't contain biome
+            if ((biomes.isEmpty() || biomes.stream().anyMatch(o -> o.matches(biome, registry)))
+                && blacklist.stream().noneMatch(o -> o.matches(biome, registry)))
+                return 0;
         }
 
-        //return if biome is in blacklist
-        if (biomesBlacklist.contains(biomeRL)) return -9999;
-
-        //return if biome is part of blacklist tags
-        for (ResourceLocation rl : biomesBlacklistTags)
-            if (biome.is(TagKey.create(Registries.BIOME, rl)))
-                return -9999;
-
-        return 0;
+        return -9999;
     }
 
     @Override
     public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        if (getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
-            return List.of(Component.translatable("gui.guide.hover.biome.correct").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN)));
+        if (adjustChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
+            return List.of(Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.hover.biome.correct").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN)));
         else
-            return List.of(Component.translatable("gui.guide.hover.biome.incorrect").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)));
+            return List.of(Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.hover.biome.incorrect").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)));
     }
 
     @Override
-    public Component getDescription(Level level, FishProperties fp, @Nullable Player player, Context context)
+    public MutableComponent getDescriptionPrefix()
     {
-        int color = getFishChance(0, level, fp, player, ItemStack.EMPTY, context) >= 0 ? SCColors.GUIDE_GREEN : SCColors.GUIDE_RED;
+        return Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.biome");
+    }
 
-        if (!translationOverride.isEmpty())
-            return Component.translatable("gui.guide.biome").append(Component.translatable(translationOverride).withStyle(Style.EMPTY.withColor(color)));
-
-        MutableComponent comp;
-
-        List<ResourceLocation> biomesList = FishProperties.getBiomesAsListFromTags(biomes, biomesTags, level);
-
+    @Override
+    public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
         //Biomes: ------
-        if (biomesList.isEmpty())
-            return Component.translatable("gui.guide.biome").append(Component.translatable("gui.guide.no_restriction"));
+        if (biomes.isEmpty())
+            return Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.biomes.empty");
 
-        //single biome name / biome tag name / [hover]
-        if (biomesList.size() == 1)
-            comp = Component.translatable("biome." + biomesList.getFirst().toLanguageKey());
-        else if (biomesTags.size() == 1)
-            comp = Component.translatable("tag." + biomesTags.getFirst().toLanguageKey());
+        //
+        if (biomes.size() == 1)
+        {
+            //single biome name / biome tag name / [hover]
+            return Tooltips.resolveTagsToComponentFromTranslationKey(biomes.get(0).getTranslation());
+        }
         else
-            comp = Component.translatable("gui.guide.hover");
-
-        return Component.translatable("gui.guide.biome").append(comp.withStyle(Style.EMPTY.withColor(color)));
+        {
+            return Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.hover");
+        }
     }
 
     @Override
     public List<Component> getHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        List<Component> hover = new ArrayList<>();
-        List<ResourceLocation> biomesList = FishProperties.getBiomesAsListFromTags(biomes, biomesTags, level);
+        if (!this.hover.isEmpty()) return List.of(Tooltips.resolveTagsToComponentFromTranslationKey(this.hover));
 
-        if(!this.hover.isEmpty()) return List.of(Component.translatable(this.hover));
+        List<Component> list = new ArrayList<>();
 
-        if (!biomesList.isEmpty())
+        List<Component> tags = new ArrayList<>();
+        List<Component> biomes = new ArrayList<>();
+
+        tags.add(Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.biome_tags").withStyle(ChatFormatting.BOLD));
+        biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.biome").withStyle(ChatFormatting.BOLD));
+
+        for (EntryOrTag<Biome> eot : this.biomes)
         {
-            if (!biomesTags.isEmpty())
+            if (eot instanceof EntryOrTag.Tag<Biome> tag)
             {
-                hover.add(Component.translatable("gui.guide.biome_tags").withStyle(Style.EMPTY.withBold(true)));
+                tags.add(Tooltips.resolveTagsToComponentFromTranslationKey(tag.getTranslation()));
 
-                for (ResourceLocation rl : biomesTags)
-                    hover.add(Component.translatable("tag." + rl.toLanguageKey()));
-                hover.add(Component.empty());
+                //adds all biomes from tag into biomes list
+                Optional<HolderSet.Named<Biome>> optional = level.registryAccess().registryOrThrow(Registries.BIOME).getTag(tag.tag());
+                optional.ifPresent(holders ->
+                        holders.forEach(o ->
+                                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey("biome." + o.getRegisteredName().replace(":", "." )))));
+
             }
 
-            hover.add(Component.translatable("gui.guide.biomes").withStyle(Style.EMPTY.withBold(true)));
-            if (biomesList.isEmpty())
-                hover.add(Component.translatable("gui.guide.biomes.empty"));
-
-            for (ResourceLocation rl : biomesList)
-                hover.add(Component.translatable("biome." + rl.toLanguageKey()));
+            if (eot instanceof EntryOrTag.Entry<Biome> entry)
+                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey(entry.getTranslation()));
         }
 
-        return hover;
+        if (tags.size() > 1)
+            list.addAll(tags);
+
+        if (biomes.size() > 1)
+        {
+            //add empty line if there are tags
+            if (!list.isEmpty())
+                list.add(Component.empty());
+
+            list.addAll(biomes);
+        }
+
+        return list;
     }
 
     @Override
     public List<Component> getBlacklist(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        List<Component> blacklist = new ArrayList<>();
-        List<ResourceLocation> biomesBlacklistList = FishProperties.getBiomesBlacklistAsList(biomesBlacklist, biomesBlacklistTags, level);
+        List<Component> list = new ArrayList<>();
 
-        if (!biomesBlacklistTags.isEmpty())
+        List<Component> tags = new ArrayList<>();
+        List<Component> biomes = new ArrayList<>();
+
+        tags.add(Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.blacklisted_biome_tags").withStyle(ChatFormatting.BOLD));
+        biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey("gui.guide.blacklisted_biomes").withStyle(ChatFormatting.BOLD));
+
+        for (EntryOrTag<Biome> eot : blacklist)
         {
-            blacklist.add(Component.translatable("gui.guide.blacklisted_biome_tags").withStyle(Style.EMPTY.withBold(true)));
+            if (eot instanceof EntryOrTag.Tag<Biome> tag)
+                tags.add(Tooltips.resolveTagsToComponentFromTranslationKey(tag.getTranslation()));
 
-            for (ResourceLocation rl : biomesBlacklistTags)
-                blacklist.add(Component.translatable("tag." + rl.toLanguageKey()));
-            blacklist.add(Component.empty());
+            if (eot instanceof EntryOrTag.Entry<Biome> entry)
+                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey(entry.getTranslation()));
         }
 
-        if (!biomesBlacklistList.isEmpty())
-        {
-            blacklist.add(Component.translatable("gui.guide.blacklisted_biomes").withStyle(Style.EMPTY.withBold(true)));
+        if (tags.size() > 1)
+            list.addAll(tags);
 
-            for (ResourceLocation rl : biomesBlacklistList)
-                blacklist.add(Component.translatable("biome." + rl.toLanguageKey()));
-        }
+        if (biomes.size() > 1)
+            list.addAll(biomes);
 
-        return blacklist;
+        return list;
     }
 
-    //Vanilla
-    public static final BiomeRestriction LUSH_CAVES = new BiomeRestriction(Biomes.LUSH_CAVES.location(), "");
-    public static final BiomeRestriction DRIPSTONE_CAVES = new BiomeRestriction(Biomes.DRIPSTONE_CAVES.location(), "");
-    public static final BiomeRestriction DEEP_DARK = new BiomeRestriction(Biomes.DEEP_DARK.location(), "");
-    public static final BiomeRestriction SWAMP_ONLY = new BiomeRestriction(Biomes.SWAMP.location(), "");
-    public static final BiomeRestriction BAMBOO_JUNGLE = new BiomeRestriction(Biomes.BAMBOO_JUNGLE.location(), "");
-    public static final BiomeRestriction RIVERS = new BiomeRestriction(List.of(), List.of(SCTags.IS_RIVER), List.of(), List.of(), "");
-    public static final BiomeRestriction ALL_OCEANS = new BiomeRestriction(List.of(), List.of(SCTags.IS_OCEAN), List.of(), List.of(), "");
-    public static final BiomeRestriction NORMAL_OCEANS = new BiomeRestriction(List.of(), List.of(SCTags.IS_NORMAL_OCEAN), List.of(), List.of(), "");
-    public static final BiomeRestriction LUKEWARM_OCEAN = new BiomeRestriction(List.of(), List.of(SCTags.IS_LUKEWARM_OCEAN), List.of(), List.of(), "");
-    public static final BiomeRestriction COLD_AND_LUKEWARM_OCEAN = new BiomeRestriction(List.of(), List.of(SCTags.IS_LUKEWARM_OCEAN, SCTags.IS_COLD_OCEAN), List.of(), List.of(), "");
-    public static final BiomeRestriction WARM_OCEANS = new BiomeRestriction(List.of(), List.of(SCTags.IS_WARM_OCEAN), List.of(), List.of(), "");
-    public static final BiomeRestriction DEEP_OCEANS = new BiomeRestriction(List.of(), List.of(SCTags.IS_DEEP_OCEAN), List.of(), List.of(), "");
-    public static final BiomeRestriction LAKES = new BiomeRestriction(List.of(), List.of(), List.of(), List.of(SCTags.IS_OCEAN, SCTags.IS_RIVER, SCTags.IS_MUSHROOM_FIELDS),
-            "gui.guide.lakes.hover", "gui.guide.lakes");
-    public static final BiomeRestriction WARM_LAKES = new BiomeRestriction(List.of(), List.of(SCTags.IS_WARM_LAKE), List.of(), List.of(), "");
-    public static final BiomeRestriction COLD_RIVERS = new BiomeRestriction(List.of(), List.of(SCTags.IS_COLD_RIVER), List.of(), List.of(), "");
-    public static final BiomeRestriction COLD_OCEANS = new BiomeRestriction(List.of(), List.of(SCTags.IS_COLD_OCEAN), List.of(), List.of(), "");
-    public static final BiomeRestriction COLD_LAKES = new BiomeRestriction(List.of(), List.of(SCTags.IS_COLD_LAKE), List.of(), List.of(), "");
-    public static final BiomeRestriction SAVANNAS = new BiomeRestriction(List.of(), List.of(BiomeTags.IS_SAVANNA.location()), List.of(), List.of(), "");
-    public static final BiomeRestriction BEACHES = new BiomeRestriction(List.of(), List.of(SCTags.IS_BEACH), List.of(), List.of(), "");
-    public static final BiomeRestriction MUSHROOM_FIELDS = new BiomeRestriction(List.of(), List.of(SCTags.IS_MUSHROOM_FIELDS), List.of(), List.of(), "");
-    public static final BiomeRestriction JUNGLES = new BiomeRestriction(List.of(), List.of(BiomeTags.IS_JUNGLE.location()), List.of(), List.of(), "");
-    public static final BiomeRestriction TAIGAS = new BiomeRestriction(List.of(), List.of(BiomeTags.IS_TAIGA.location()), List.of(), List.of(), "");
-    public static final BiomeRestriction CHERRY_GROVES = new BiomeRestriction(List.of(), List.of(SCTags.IS_CHERRY_GROVE), List.of(), List.of(), "");
-    public static final BiomeRestriction JUNGLES_AND_SWAMPS = new BiomeRestriction(List.of(), List.of(BiomeTags.IS_JUNGLE.location(), SCTags.IS_SWAMP), List.of(), List.of(), "");
-    public static final BiomeRestriction SWAMPS = new BiomeRestriction(List.of(), List.of(SCTags.IS_SWAMP), List.of(), List.of(), "");
-    public static final BiomeRestriction MANGROVE_SWAMP = new BiomeRestriction(List.of(Biomes.MANGROVE_SWAMP.location()), List.of(), List.of(), List.of(), "");
-    public static final BiomeRestriction DARK_FOREST = new BiomeRestriction(List.of(), List.of(SCTags.IS_DARK_FOREST), List.of(), List.of(), "");
-    public static final BiomeRestriction FOREST = new BiomeRestriction(List.of(), List.of(BiomeTags.IS_FOREST.location()), List.of(), List.of(), "");
-    public static final BiomeRestriction LUSH_CAVES_AND_JUNGLES = new BiomeRestriction(List.of(Biomes.LUSH_CAVES.location()), List.of(BiomeTags.IS_JUNGLE.location()), List.of(), List.of(), "tag.starcatcher.lush_and_jungle");
-    public static final BiomeRestriction CRIMSON_FOREST = new BiomeRestriction(List.of(), List.of(SCTags.IS_CRIMSON_FOREST), List.of(), List.of(), "");
-    public static final BiomeRestriction WARPED_FOREST = new BiomeRestriction(List.of(), List.of(SCTags.IS_WARPED_FOREST), List.of(), List.of(), "");
-    public static final BiomeRestriction SOUL_SAND_VALLEY = new BiomeRestriction(List.of(), List.of(SCTags.IS_SOUL_SAND_VALLEY), List.of(), List.of(), "");
-    public static final BiomeRestriction BASALT_DELTAS = new BiomeRestriction(List.of(), List.of(SCTags.IS_BASALT_DELTAS), List.of(), List.of(), "");
-    public static final BiomeRestriction OUTER_ISLANDS = new BiomeRestriction(List.of(), List.of(BiomeTags.IS_END.location()), List.of(Biomes.THE_END.location()), List.of(), "");
+    public BiomeRestriction biome(ResourceLocation biome)
+    {
+        biomes.add(new EntryOrTag.Entry<>(ResourceKey.create(Registries.BIOME, biome)));
+        return this;
+    }
+
+    public BiomeRestriction tag(ResourceLocation tag)
+    {
+        biomes.add(new EntryOrTag.Tag<>(TagKey.create(Registries.BIOME, tag)));
+        return this;
+    }
+
+    public BiomeRestriction blacklisted(ResourceLocation biome)
+    {
+        blacklist.add(new EntryOrTag.Entry<>(ResourceKey.create(Registries.BIOME, biome)));
+        return this;
+    }
+
+    public BiomeRestriction blacklistedTag(ResourceLocation tag)
+    {
+        blacklist.add(new EntryOrTag.Tag<>(TagKey.create(Registries.BIOME, tag)));
+        return this;
+    }
+
+    public BiomeRestriction hover(String hover)
+    {
+        return new BiomeRestriction(biomes, blacklist, hover, translationOverride);
+    }
+
+    public BiomeRestriction translation(String translation)
+    {
+        return new BiomeRestriction(biomes, blacklist, hover, translation);
+    }
+
+    public static BiomeRestriction empty()
+    {
+        return new BiomeRestriction(new ArrayList<>(), new ArrayList<>(), "", "");
+    }
+
+    public static BiomeRestriction lakes()
+    {
+        return empty()
+                .blacklistedTag(SCTags.IS_OCEAN)
+                .blacklistedTag(SCTags.IS_RIVER)
+                .blacklistedTag(SCTags.IS_MUSHROOM_FIELDS)
+                .blacklistedTag(SCTags.IS_COLD_LAKE)
+                .blacklistedTag(SCTags.IS_WARM_LAKE)
+                .blacklistedTag(SCTags.IS_CHERRY_GROVE)
+                .hover("gui.guide.lakes.hover")
+                .translation("gui.guide.lakes");
+    }
+
+    public static BiomeRestriction warmLakes()
+    {
+        return empty()
+                .tag(SCTags.IS_WARM_LAKE);
+    }
+
+    public static BiomeRestriction coldLakes()
+    {
+        return empty()
+                .tag(SCTags.IS_COLD_LAKE);
+    }
+
+    public static BiomeRestriction iceSpikes()
+    {
+        return empty()
+                .biome(Biomes.ICE_SPIKES.location());
+    }
+
+    public static BiomeRestriction flowerForest()
+    {
+        return empty()
+                .biome(Biomes.FLOWER_FOREST.location());
+    }
+
+    public static BiomeRestriction sunflowerPlains()
+    {
+        return empty()
+                .biome(Biomes.SUNFLOWER_PLAINS.location());
+    }
+
+    public static BiomeRestriction swampOnly()
+    {
+        return empty()
+                .biome(Biomes.SWAMP.location());
+    }
+
+    public static BiomeRestriction bambooJungle()
+    {
+        return empty()
+                .biome(Biomes.BAMBOO_JUNGLE.location());
+    }
+
+    // underground
+    public static BiomeRestriction lushCaves()
+    {
+        return empty()
+                .biome(Biomes.LUSH_CAVES.location());
+    }
+
+    public static BiomeRestriction underground()
+    {
+        return empty()
+                .blacklisted(Biomes.DRIPSTONE_CAVES.location())
+                .blacklisted(Biomes.LUSH_CAVES.location())
+                .blacklisted(Biomes.DEEP_DARK.location())
+                .translation("gui.guide.caves")
+                ;
+    }
+
+    public static BiomeRestriction dripstoneCaves()
+    {
+        return empty()
+                .biome(Biomes.DRIPSTONE_CAVES.location());
+    }
+
+    public static BiomeRestriction deepDark()
+    {
+        return empty()
+                .biome(Biomes.DEEP_DARK.location());
+    }
+
+    // oceans
+    public static BiomeRestriction coldOceans()
+    {
+        return empty()
+                .tag(SCTags.IS_COLD_OCEAN);
+    }
+
+    public static BiomeRestriction allOceans()
+    {
+        return empty()
+                .tag(SCTags.IS_OCEAN);
+    }
+
+    public static BiomeRestriction normalOceans()
+    {
+        return empty()
+                .tag(SCTags.IS_NORMAL_OCEAN);
+    }
+
+    public static BiomeRestriction lukewarmOcean()
+    {
+        return empty()
+                .tag(SCTags.IS_LUKEWARM_OCEAN);
+    }
+
+    public static BiomeRestriction coldAndLukewarmOcean()
+    {
+        return empty()
+                .tag(SCTags.IS_LUKEWARM_OCEAN)
+                .tag(SCTags.IS_COLD_OCEAN);
+    }
+
+    public static BiomeRestriction warmOceans()
+    {
+        return empty()
+                .tag(SCTags.IS_WARM_OCEAN);
+    }
+
+    public static BiomeRestriction deepOceans()
+    {
+        return empty()
+                .tag(SCTags.IS_DEEP_OCEAN);
+    }
+
+    // rivers
+    public static BiomeRestriction coldRivers()
+    {
+        return empty()
+                .tag(SCTags.IS_COLD_RIVER);
+    }
+
+    public static BiomeRestriction rivers()
+    {
+        return empty()
+                .tag(SCTags.IS_RIVER)
+                .blacklistedTag(SCTags.IS_COLD_RIVER);
+    }
+
+    public static BiomeRestriction savannas()
+    {
+        return empty()
+                .tag(BiomeTags.IS_SAVANNA.location());
+    }
+
+    public static BiomeRestriction beaches()
+    {
+        return empty()
+                .tag(SCTags.IS_BEACH);
+    }
+
+    public static BiomeRestriction mushroomFields()
+    {
+        return empty()
+                .tag(SCTags.IS_MUSHROOM_FIELDS);
+    }
+
+    public static BiomeRestriction jungles()
+    {
+        return empty()
+                .tag(BiomeTags.IS_JUNGLE.location());
+    }
+
+    public static BiomeRestriction taigas()
+    {
+        return empty()
+                .tag(BiomeTags.IS_TAIGA.location());
+    }
+
+    public static BiomeRestriction cherryGroves()
+    {
+        return empty()
+                .tag(SCTags.IS_CHERRY_GROVE);
+    }
+
+    public static BiomeRestriction junglesAndSwamps()
+    {
+        return empty()
+                .tag(BiomeTags.IS_JUNGLE.location())
+                .tag(SCTags.IS_SWAMP);
+    }
+
+    public static BiomeRestriction swamps()
+    {
+        return empty()
+                .tag(SCTags.IS_SWAMP);
+    }
+
+    public static BiomeRestriction mangroveSwamp()
+    {
+        return empty()
+                .biome(Biomes.MANGROVE_SWAMP.location());
+    }
+
+    public static BiomeRestriction darkForest()
+    {
+        return empty()
+                .tag(SCTags.IS_DARK_FOREST);
+    }
+
+    public static BiomeRestriction forest()
+    {
+        return empty()
+                .tag(BiomeTags.IS_FOREST.location());
+    }
+
+    public static BiomeRestriction lushCavesAndJungles()
+    {
+        return empty()
+                .biome(Biomes.LUSH_CAVES.location())
+                .tag(BiomeTags.IS_JUNGLE.location());
+    }
+
+    public static BiomeRestriction crimsonForest()
+    {
+        return empty()
+                .tag(SCTags.IS_CRIMSON_FOREST);
+    }
+
+    public static BiomeRestriction warpedForest()
+    {
+        return empty()
+                .tag(SCTags.IS_WARPED_FOREST);
+    }
+
+    public static BiomeRestriction soulSandValley()
+    {
+        return empty()
+                .tag(SCTags.IS_SOUL_SAND_VALLEY);
+    }
+
+    public static BiomeRestriction basaltDeltas()
+    {
+        return empty()
+                .tag(SCTags.IS_BASALT_DELTAS);
+    }
+
+    public static BiomeRestriction outerIslands()
+    {
+        return empty()
+                .tag(BiomeTags.IS_END.location())
+                .blacklisted(Biomes.THE_END.location())
+                .translation("gui.guide.outer_end_islands");
+    }
 }

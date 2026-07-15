@@ -14,7 +14,7 @@ public class SCFoodProperties
 
     public static final FoodProperties BASIC_COOKED_FISH = new FoodProperties.Builder()
             .nutrition(6)
-            .saturationModifier(2f)
+            .saturationModifier(0.7f)
             .usingConvertsTo(SCItems.FISH_BONES.get())
             .alwaysEdible()
             .build();

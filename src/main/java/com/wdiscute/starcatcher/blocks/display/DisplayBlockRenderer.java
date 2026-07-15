@@ -3,27 +3,23 @@ package com.wdiscute.starcatcher.blocks.display;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
-import com.wdiscute.starcatcher.io.CaughtFishInfo;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
@@ -102,7 +98,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
             float scale = SCDataComponents.getOrDefault(
                     fish, SCDataComponents.CAUGHT_FISH_INFO,
-                    new CaughtFishInfo(100, 100, 50, FishProperties.Rarity.COMMON, false)
+                    CaughtFishInfo.AVERAGE
             ).getScale();
 
             //scaling + pivot adjusting
@@ -117,7 +113,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
             // Render model here
 
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, be.getLevel());
+            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY, be.getLevel());
 
             poseStack.popPose();
         }

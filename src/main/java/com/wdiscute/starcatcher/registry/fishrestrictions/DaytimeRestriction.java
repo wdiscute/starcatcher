@@ -4,11 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCColors;
-import com.wdiscute.starcatcher.bobberentity.FishingBobEntity;
-import com.wdiscute.starcatcher.registry.FishProperties;
-import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
-import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
+import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -23,12 +23,11 @@ import java.util.List;
 public class DaytimeRestriction extends AbstractFishRestriction
 {
     private final List<Duo> ranges;
-    private final String translationOverride;
 
     public static final MapCodec<DaytimeRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Duo.CODEC.listOf().fieldOf("ranges").forGetter(DaytimeRestriction::getRanges),
-                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(DaytimeRestriction::getTranslationOverride)
+                    Duo.CODEC.listOf().fieldOf("ranges").forGetter(o -> o.ranges),
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, DaytimeRestriction::new));
 
     public record Duo(int first, int second)
@@ -40,26 +39,10 @@ public class DaytimeRestriction extends AbstractFishRestriction
                 ).apply(instance, Duo::new));
     }
 
-    public DaytimeRestriction()
-    {
-        this.ranges = List.of();
-        this.translationOverride = "";
-    }
-
     public DaytimeRestriction(List<Duo> ranges, String translationOverride)
     {
+        super(translationOverride);
         this.ranges = ranges;
-        this.translationOverride = translationOverride;
-    }
-
-    public List<Duo> getRanges()
-    {
-        return ranges;
-    }
-
-    public String getTranslationOverride()
-    {
-        return translationOverride;
     }
 
     @Override
@@ -75,20 +58,25 @@ public class DaytimeRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
+        if(context.equals(Context.RADAR)) return 0;
+        if(context.equals(Context.GUIDE_FISHES_IN_AREA)) return 0;
+
         //skip if any modifiers have SkipsDaytimeRestriction interface
-        if (context.equals(Context.FISHING) && entity instanceof FishingBobEntity bob && bob.player != null)
+        if (context.equals(Context.FISHING))
         {
-            if (SCCatchModifiers.getCatchModifiers(bob.player).stream().anyMatch(
-                    o -> o instanceof SkipsDaytimeRestriction sp && sp.shouldSkipDaytime(level)))
-                return 0;
+            if (entity instanceof FishingBobEntity bob && bob.player != null)
+            {
+                if (Modifier.getModifiers(bob.player).stream().anyMatch(
+                        o -> o instanceof SkipsDaytimeRestriction sp && sp.shouldSkipDaytime(level)))
+                    return 0;
 
-            if (SCMinigameModifiers.getMinigameModifiers(bob.player).stream().anyMatch(
-                    o -> o instanceof SkipsDaytimeRestriction sp && sp.shouldSkipDaytime(level)))
-                return 0;
+                if (Modifier.getModifiers(bob.player).stream().anyMatch(
+                        o -> o instanceof SkipsDaytimeRestriction sp && sp.shouldSkipDaytime(level)))
+                    return 0;
+            }
         }
-
 
         float daytime = level.dayTime() % 24000;
 
@@ -101,22 +89,22 @@ public class DaytimeRestriction extends AbstractFishRestriction
     @Override
     public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        if (getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
+        if (adjustChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
             return List.of(Component.translatable("gui.guide.hover.daytime.correct").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN)));
         else
             return List.of(Component.translatable("gui.guide.hover.daytime.incorrect").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)));
     }
 
     @Override
-    public Component getDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    public MutableComponent getDescriptionPrefix()
     {
-        int color = getFishChance(0, level, fp, player, ItemStack.EMPTY, context) >= 0 ? SCColors.GUIDE_GREEN : SCColors.GUIDE_RED;
+        return Component.translatable("gui.guide.daytime");
+    }
 
-        return Component.translatable("gui.guide.daytime").copy().append(
-                translationOverride.isEmpty() ?
-                        Component.translatable("gui.guide.hover").withStyle(Style.EMPTY.withColor(color)) :
-                        Component.translatable(translationOverride).withStyle(Style.EMPTY.withColor(color))
-        );
+    @Override
+    public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
+        return Component.translatable("gui.guide.hover");
     }
 
     @Override
@@ -125,12 +113,13 @@ public class DaytimeRestriction extends AbstractFishRestriction
         List<Component> hover = new ArrayList<>();
 
         for (Duo range : ranges)
-            hover.add(Component.literal(" > " + range.first + " & < " + range.second));
+            hover.add(Component.translatable("gui.guide.between", range.first, range.second));
 
         return hover;
     }
 
     public static final DaytimeRestriction DAY = new DaytimeRestriction(List.of(new Duo(0, 12700)), "gui.guide.day");
+    public static final DaytimeRestriction DAWN_AND_DUSK = new DaytimeRestriction(List.of(new Duo(12400, 13700), new Duo(22500, 23700)), "gui.guide.dawn_and_dusk");
     public static final DaytimeRestriction NOON = new DaytimeRestriction(List.of(new Duo(4500, 7500)), "gui.guide.noon");
     public static final DaytimeRestriction MIDNIGHT = new DaytimeRestriction(List.of(new Duo(16500, 19500)), "gui.guide.midnight");
     public static final DaytimeRestriction NIGHT = new DaytimeRestriction(List.of(new Duo(12700, 24000)), "gui.guide.night");

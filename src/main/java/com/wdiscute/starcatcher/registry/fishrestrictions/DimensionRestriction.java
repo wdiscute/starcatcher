@@ -4,7 +4,8 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCColors;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.registry.SCDataEntries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -15,52 +16,30 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class DimensionRestriction extends AbstractFishRestriction
 {
-
-    private final List<ResourceLocation> dimensions;
-    private final List<ResourceLocation> dimensionsBlacklist;
-    private final String translationOverride;
+    private final String dimensionEntry;
 
     public static final MapCodec<DimensionRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("dimensions").forGetter(DimensionRestriction::getDimensions),
-                    ResourceLocation.CODEC.listOf().fieldOf("dimensions_blacklist").forGetter(DimensionRestriction::getDimensionsBlacklist),
-                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(DimensionRestriction::getTranslationOverride)
+                    Codec.STRING.fieldOf("dimension_entry").forGetter(o -> o.dimensionEntry),
+                    Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, DimensionRestriction::new));
 
-    public DimensionRestriction()
+    public DimensionRestriction(String dimensions, String translationOverride)
     {
-        this.dimensions = List.of();
-        this.dimensionsBlacklist = List.of();
-        this.translationOverride = "";
+        super(translationOverride);
+        this.dimensionEntry = dimensions;
     }
 
-    public DimensionRestriction(List<ResourceLocation> dimensions, List<ResourceLocation> dimensionsBlacklist, String translationOverride)
+    @Override
+    public int getSortPriority()
     {
-        this.dimensions = dimensions;
-        this.dimensionsBlacklist = dimensionsBlacklist;
-        this.translationOverride = translationOverride;
-    }
-
-    public List<ResourceLocation> getDimensions()
-    {
-        return dimensions;
-    }
-
-    public List<ResourceLocation> getDimensionsBlacklist()
-    {
-        return dimensionsBlacklist;
-    }
-
-    public String getTranslationOverride()
-    {
-        return translationOverride;
+        return -100;
     }
 
     @Override
@@ -76,78 +55,59 @@ public class DimensionRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public int getFishChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        ResourceLocation dim = level.dimension().location();
-        if (!dimensions.isEmpty() && !dimensions.contains(dim)) return -9999;
-        if (dimensionsBlacklist.contains(dim)) return -9999;
-        return 0;
+        Map<String, List<ResourceLocation>> stringListMap = SCDataEntries.DIMENSION_TAGS.get();
+        List<ResourceLocation> allowedDimensions = stringListMap.getOrDefault(dimensionEntry, List.of());
+
+        if(allowedDimensions.contains(level.dimension().location())) return 0;
+
+        return allowedDimensions.isEmpty() ? 0 : -9999;
     }
 
     @Override
     public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        if (getFishChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
+        if (adjustChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
             return List.of(Component.translatable("gui.guide.hover.dimension.correct").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN)));
         else
             return List.of(Component.translatable("gui.guide.hover.dimension.incorrect").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)));
     }
 
     @Override
-    public Component getDescription(Level level, FishProperties fp, @Nullable Player player, Context context)
+    public MutableComponent getDescriptionPrefix()
     {
-
-        MutableComponent comp;
-        List<Component> hover = new ArrayList<>();
-
-        if (dimensions.isEmpty())
-            return Component.translatable("gui.guide.dimension").append(Component.translatable("gui.guide.no_restriction"));
-
-
-        //if there's only one dimension
-        if (dimensions.size() == 1)
-        {
-            comp = Component.translatable("dimension." + dimensions.getFirst().toLanguageKey());
-        }
-        else
-        {
-            comp = Component.translatable("gui.guide.hover");
-
-            //show tooltip while hovering
-            List<Component> c = new ArrayList<>();
-
-            c.add(Component.translatable("gui.guide.dimensions"));
-
-            for (ResourceLocation dimension : dimensions)
-                hover.add(Component.translatable("dimension." + dimension.toLanguageKey()));
-        }
-
-        if (dimensions.contains(level.dimension().location()))
-            comp.withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN));
-        else
-            comp.withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED));
-
-        return Component.translatable("gui.guide.dimension").append(comp);
+        return Component.translatable("gui.guide.dimension");
     }
 
     @Override
-    public List<Component> getBlacklist(Level level, FishProperties fp, @NotNull Player player, Context context)
+    public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        List<Component> blacklist = new ArrayList<>();
+        List<ResourceLocation> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
 
-        if (!dimensionsBlacklist.isEmpty())
-        {
-            //show tooltip while hovering
-            blacklist.add(Component.translatable("gui.guide.blacklisted_dimensions"));
+        //Dimensions: [No Dimensions]
+        if (allowedDimensions.isEmpty())
+            return Component.translatable("gui.guide.dimension.empty");
 
-            for (ResourceLocation resourceLocation : dimensionsBlacklist)
-                blacklist.add(Component.literal(resourceLocation.toString()));
-        }
-
-        return blacklist;
+        //single dimension name / [hover]
+        if (allowedDimensions.size() == 1)
+            return Component.translatable("dimension." + allowedDimensions.getFirst().toLanguageKey());
+        else
+            return Component.translatable("gui.guide.hover");
     }
 
-    public static final DimensionRestriction OVERWORLD = new DimensionRestriction(List.of(Level.OVERWORLD.location()), List.of(), "");
-    public static final DimensionRestriction NETHER = new DimensionRestriction(List.of(Level.NETHER.location()), List.of(), "");
-    public static final DimensionRestriction END = new DimensionRestriction(List.of(Level.END.location()), List.of(), "");
+    @Override
+    public List<Component> getHover(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
+        List<ResourceLocation> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
+
+        if(allowedDimensions.isEmpty()) return List.of();
+        if(allowedDimensions.size() == 1) return List.of();
+
+        return allowedDimensions.stream().map(o -> (Component) Component.translatable("dimension." + o.toLanguageKey())).toList();
+    }
+
+    public static final DimensionRestriction OVERWORLD = new DimensionRestriction("overworld", "dimension.minecraft.overworld");
+    public static final DimensionRestriction NETHER = new DimensionRestriction("the_nether", "dimension.minecraft.the_nether");
+    public static final DimensionRestriction END = new DimensionRestriction("the_end", "dimension.minecraft.the_end");
 }

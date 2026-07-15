@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#starcatcher:starcaught_fishes"
+            "items": "#starcatcher:starcaught_fishable"
           }
         ]
       },

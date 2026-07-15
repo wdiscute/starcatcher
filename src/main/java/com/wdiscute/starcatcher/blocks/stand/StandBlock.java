@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.blocks.stand;
 
-import com.wdiscute.starcatcher.blocks.SCBlockEntities;
+import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.tournament.*;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -92,13 +92,21 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
         if (level.getBlockEntity(center) instanceof StandBlockEntity sbe)
         {
             //initial tournament setup, makes new one if empty
-            sbe.makeOrGetTournament();
+            sbe.makeOrGetTournament(player);
+
+            if(sbe.tournament.status.equals(Tournament.Status.FINISHED))
+            {
+                sbe.tournament = null;
+                sbe.setUuid(UUID.randomUUID());
+                sbe.makeOrGetTournament(player);
+            }
 
             if (sbe.tournament.owner == null)
             {
                 sbe.tournament.owner = player.getUUID();
-                sbe.tournament.playerScores.add(TournamentPlayerScore.empty(player.getUUID()));
             }
+            sbe.sync();
+
             player.openMenu(new SimpleMenuProvider(sbe, Component.empty()), center);
         }
 

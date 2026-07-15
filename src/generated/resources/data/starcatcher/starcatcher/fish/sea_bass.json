@@ -1,33 +1,35 @@
 {
-  "base_chance": 15,
+  "base_chance": 6,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:sea_bass"
+    "item": {
+      "count": 1,
+      "id": "starcatcher:sea_bass"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
+    "hp": 75,
     "missPenalty": 5,
     "modifiers": [],
-    "speed": 9,
+    "speed": 7,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
-        "moving_rate": 1.0,
+        "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
-        "moving_rate": 1.0,
+        "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       }
@@ -38,46 +40,21 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
-      "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "starcatcher:is_ocean"
-      ]
+      "biomes": [
+        "#starcatcher:is_ocean"
+      ],
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": 100,
+      "max_y": 2147483647,
       "min_y": 50,
       "translation_override": "gui.guide.elevation.surface"
-    },
-    {
-      "type": "starcatcher:fluid",
-      "fluids": [
-        "minecraft:water"
-      ]
-    },
-    {
-      "type": "starcatcher:season",
-      "season_extra_chance": {
-        "early_autumn": 0,
-        "early_summer": 0,
-        "early_winter": 0,
-        "late_autumn": 0,
-        "late_summer": 0,
-        "late_winter": 0,
-        "mid_autumn": 0,
-        "mid_summer": 0,
-        "mid_winter": 0
-      },
-      "translation_override": "gui.guide.seasons.not_spring"
     },
     {
       "type": "starcatcher:daytime_restriction",
@@ -88,6 +65,13 @@
         }
       ],
       "translation_override": "gui.guide.day"
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -97,5 +81,6 @@
     "deviation_weight_grams": 1100.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

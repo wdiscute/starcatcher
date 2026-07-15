@@ -3,8 +3,14 @@
   "catch_info": {
     "always_spawn_entity": true,
     "entity": "minecraft:creeper",
-    "item": "minecraft:creeper_head",
-    "override_minigame_item": "starcatcher:unknown_fish"
+    "item": {
+      "count": 1,
+      "id": "minecraft:creeper_head"
+    },
+    "override_minigame_item": {
+      "count": 1,
+      "id": "starcatcher:unknown_fish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -12,41 +18,41 @@
     "missPenalty": 20,
     "modifiers": [
       {
-        "type": "starcatcher:spawn_sweet_spots",
+        "type": "starcatcher:spawn_sweetspots",
         "chance": 0.25,
-        "cooldown": 5,
+        "cooldown": 10,
         "sudoku_vanish": true,
-        "sweet_spot": {
-          "color_as_int": 16711680,
+        "sweetspot": {
+          "color_as_int": -65536,
           "hitbox_size_in_pixels": 33,
           "is_flip": false,
           "moving_rate": 0.0,
-          "reward": 30,
-          "sweet_spot_type": "starcatcher:tnt",
+          "reward": -30,
+          "sweetspot_type": "starcatcher:tnt",
           "texture_path": "starcatcher:textures/gui/minigame/spots/tnt.png",
-          "vanishing_rate": 0.0
+          "vanishing_rate": 0.06
         }
       }
     ],
     "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": 5329747,
+        "color_as_int": -11447469,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/creeper.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 5329747,
+        "color_as_int": -11447469,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/creeper.png",
         "vanishing_rate": 0.0
       }
@@ -57,16 +63,21 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:bait",
       "baits": {
         "starcatcher:gunpowder_bait": 200
       }
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -76,5 +87,6 @@
     "deviation_weight_grams": 701.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

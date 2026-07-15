@@ -1,101 +1,65 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:the_quarrish"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:the_quarrish"
+    }
   },
   "difficulty": {
-    "decay": 0.0,
-    "hp": 100,
-    "missPenalty": 40,
+    "decay": 1.0,
+    "hp": 220,
+    "missPenalty": 20,
     "modifiers": [],
-    "speed": 5,
+    "speed": 4,
     "sweetspots": [
       {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "reward": 20,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "reward": 20,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       }
     ]
   },
   "has_guide_entry": true,
-  "rarity": "epic",
+  "rarity": "rare",
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
       "biomes": [
         "minecraft:lush_caves"
       ],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "minecraft:is_jungle"
-      ],
-      "translation_override": "tag.starcatcher.lush_and_jungle"
-    },
-    {
-      "type": "starcatcher:elevation_restriction",
-      "max_y": 50,
-      "min_y": -2147483648,
-      "translation_override": "gui.guide.elevation.underground"
+      "blacklist": []
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -105,5 +69,6 @@
     "deviation_weight_grams": 300000.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/cave.png"
 }

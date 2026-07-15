@@ -1,281 +1,193 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.SCConfig;
-import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import com.wdiscute.starcatcher.registry.minigamemodifiers.AbstractMinigameModifier;
-import com.wdiscute.starcatcher.registry.FishProperties;
-import net.minecraft.client.OptionInstance;
-import net.minecraft.client.Options;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.starcatcher.registry.tackleskin.BaseTackleSkin;
+import com.wdiscute.starcatcher.tournament.Tournament;
+import com.wdiscute.starcatcher.tournament.TournamentOverlay;
+import com.wdiscute.starcatcher.tournament.TournamentScoreSettings;
+import com.wdiscute.utils.MaybeStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
-import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.client.gui.components.events.GuiEventListener;
-import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import net.neoforged.neoforge.common.ModConfigSpec;
 
-import java.util.function.Supplier;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
-public class SettingsScreen extends FishingMinigameScreen {
-    public static final ResourceLocation SETTINGS = Starcatcher.rl("textures/gui/minigame/settings.png");
-    public static final ResourceLocation GUI_SCALE = Starcatcher.rl("textures/gui/minigame/gui_scale.png");
+public class SettingsScreen extends FishingMinigameScreen
+{
+    SizeAndWeight.Units unitSelected;
 
-    FishProperties.SizeAndWeight.Units unitSelected;
+    Tournament tournamentCached = null;
 
-    public SettingsScreen(FishProperties fp, ItemStack rod) {
-        super(fp, rod);
+    List<Button> buttons = new ArrayList<>();
+
+    public SettingsScreen()
+    {
+        super(FishProperties.empty().withFish(new MaybeStack(SCItems.AURORA)), SCItems.UNKNOWN_FISH.toStack(), List.of(), new BaseTackleSkin());
     }
 
     @Override
-    protected void init() {
+    protected void init()
+    {
         super.init();
 
         hitDelay = (SCConfig.HIT_DELAY.get().floatValue());
         unitSelected = SCConfig.UNIT.get();
-        //Use widgets instead of doing hovering/clicking logic manually
-        // addRenderableWidget(new GuiScaleWidget(width / 2 - 50, 0, 100, 50));
+
+        renderBlur = true;
+
+        tournamentCached = TournamentOverlay.tournament;
+        TournamentOverlay.onTournamentReceived(new Tournament(
+                UUID.randomUUID(),
+                "example",
+                Tournament.Status.ACTIVE,
+                UUID.randomUUID(),
+                "wd",
+                List.of(
+                        new Tournament.PlayerScore(UUID.randomUUID(), "wd", 10),
+                        new Tournament.PlayerScore(UUID.randomUUID(), "nikdo", 67),
+                        new Tournament.PlayerScore(UUID.randomUUID(), "day", 420),
+                        new Tournament.PlayerScore(Minecraft.getInstance().player.getUUID(), "you", 2)
+                ),
+                TournamentScoreSettings.empty(),
+                10,
+                10
+        ));
 
 
-        //new gui scale
-        addRenderableWidget(new LeftRightButtonWidget<>(
-                () -> renderScale, // the value to render
-                () -> renderScale -= 0.1f, // left button action
-                () -> renderScale += 0.1f, // right button action
-                0.2f, //lower limit
-                5.9f, //upper limit
-                Component.literal("Scale"),
-                width / 2 + 100, height / 2 - 90, 91, 19, 160, 69, 256, 256, SETTINGS, 13));
+        buttons.add(new Button(SCConfig.MINIGAME_X_OFFSET, 70, -110, "x offset: ", 1));
+        buttons.add(new Button(SCConfig.MINIGAME_Y_OFFSET, 70, -95, "y offset: ", 1));
+        buttons.add(new Button(SCConfig.MINIGAME_RENDER_SCALE, 70, -80, "scale: ", 0.01f));
 
+        buttons.add(new Button(SCConfig.TOURNAMENT_X_OFFSET, 70, -50, "x offset: ", 1));
+        buttons.add(new Button(SCConfig.TOURNAMENT_Y_OFFSET, 70, -35, "y offset: ", 1));
+        buttons.add(new Button(SCConfig.TOURNAMENT_SCALE, 70, -20, "scale: ", 0.01f));
 
-        //hit delay
-        addRenderableWidget(new LeftRightButtonWidget<>(
-                () -> hitDelay, // the value to render
-                () -> hitDelay -= 0.2f, // left button action
-                () -> hitDelay += 0.2f, // right button action
-                -5f,  //lower limit
-                5f, //upper limit
-                Component.literal("Hit Delay"),
-                width / 2 + 100, height / 2 - 40, 91, 19, 160, 69, 256, 256, SETTINGS, 13));
+        buttons.add(new Button(SCConfig.RADAR_X_OFFSET, 70, 10, "x offset: ", 1));
+        buttons.add(new Button(SCConfig.RADAR_Y_OFFSET, 70, 25, "y offset: ", 1));
+        buttons.add(new Button(SCConfig.RADAR_SCALE, 70, 40, "scale: ", 0.01f));
 
-        //Speed
-        addRenderableWidget(new LeftRightButtonWidget<>(
-                () -> pointerSpeed, // the value to render
-                () -> pointerSpeed -= 0.1f, // left button action
-                () -> pointerSpeed += 0.1f, // right button action
-                null,
-                null,
-                Component.literal("Speed"),
-                width / 2 + 100, height / 2 + 10, 91, 19, 160, 69, 256, 256, SETTINGS, 13));
+        buttons.add(new Button(SCConfig.TRACKER_X_OFFSET, 70, 70, "x offset: ", 1));
+        buttons.add(new Button(SCConfig.TRACKER_Y_OFFSET, 70, 85, "y offset: ", 1));
+        buttons.add(new Button(SCConfig.TRACKER_SCALE, 70, 100, "scale: ", 0.01f));
 
-        //x offset
-        addRenderableWidget(new LeftRightButtonWidget<>(
-                () -> xOffset, // the value to render
-                () -> xOffset--, // left button action
-                () -> xOffset++, // right button action
-                null,
-                null,
-                Component.literal("X Offset"),
-                width / 2 + 100, height / 2 + 30, 91, 19, 160, 69, 256, 256, SETTINGS, 13));
-
-        //y offset
-        addRenderableWidget(new LeftRightButtonWidget<>(
-                () -> yOffset, // the value to render
-                () -> yOffset++, // left button action
-                () -> yOffset--, // right button action
-                null,
-                null,
-                Component.literal("Y Offset"),
-                width / 2 + 100, height / 2 + 50, 91, 19, 160, 69, 256, 256, SETTINGS, 13));
-
-
-        //Units
-        addRenderableWidget(new LeftRightButtonWidget<>(
-                () -> unitSelected, // the value to render
-                () -> unitSelected = unitSelected.previous(), // left button action
-                () -> unitSelected = unitSelected.next(), // right button action
-                null,
-                null,
-                Component.literal("Units"),
-                width / 2, height / 2 + 80, 136, 25, 34, 222, 256, 256, SETTINGS, 16));
-
-    }
-
-    public Options getOptions() {
-        return getMinecraft().options;
-    }
-
-    private @NotNull OptionInstance<Integer> guiScale() {
-        return getOptions().guiScale();
     }
 
     @Override
-    public boolean isSettingsScreen() {
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        buttons.forEach(o -> o.render(guiGraphics, width, height, font));
+
+        guiGraphics.drawString(font, "Minigame: ", width / 2 + 70, height / 2 - 120, 0xffffff00);
+        guiGraphics.drawString(font, "Tournament: ", width / 2 + 70, height / 2 - 60, 0xffffff00);
+        guiGraphics.drawString(font, "Radar: ", width / 2 + 70, height / 2, 0xffffff00);
+        guiGraphics.drawString(font, "Tracker: ", width / 2 + 70, height / 2 + 60, 0xffffff00);
+    }
+
+    public record Button(ModConfigSpec.DoubleValue configSpec, int x, int y, String text, float increase)
+    {
+        public void render(GuiGraphics guiGraphics, int width, int height, Font font)
+        {
+            guiGraphics.fill(width / 2 + x, height / 2 + y, width / 2 + x + 100, height / 2 + y + 15, 0xff000000);
+            guiGraphics.blit(FishingGuideScreen.ARROW_LEFT, width / 2 + x, height / 2 + y,
+                    16, 16, 0, 0, 16, 16, 16, 16);
+            guiGraphics.blit(FishingGuideScreen.ARROW_RIGHT, width / 2 + x + 7, height / 2 + y,
+                    16, 16, 0, 0, 16, 16, 16, 16);
+
+            guiGraphics.drawString(font, text + new DecimalFormat("#.##").format(configSpec.get()), width / 2 + x + 23, height / 2 + y + 2, 0xffffffff);
+            guiGraphics.drawString(font, "X", width / 2 + x + 92, height / 2 + y + 2, 0xffff0000);
+
+        }
+
+        public void mouseClicked(double mouseX, double mouseY)
+        {
+            //left button
+            if (mouseX > x && mouseX < x + 10 && mouseY > y && mouseY < y + 10)
+            {
+                if (hasShiftDown())
+                    configSpec.set(configSpec.get() - increase * 10);
+                else
+                    configSpec.set(configSpec.get() - increase);
+            }
+
+            //right button
+            if (mouseX > x + 10 && mouseX < x + 20 && mouseY > y && mouseY < y + 10)
+            {
+                if (hasShiftDown())
+                    configSpec.set(configSpec.get() + increase * 10);
+                else
+                    configSpec.set(configSpec.get() + increase);
+            }
+
+            //X button
+            if (mouseX > x + 92 && mouseX < x + 100 && mouseY > y && mouseY < y + 10)
+            {
+                configSpec.set(configSpec.getDefault());
+            }
+            configSpec.save();
+        }
+
+        public void mouseScrolled(double mouseX, double mouseY, double scroll)
+        {
+            //scroll
+            if (mouseX > x && mouseX < x + 70 && mouseY > y && mouseY < y + 10)
+            {
+                if (hasShiftDown())
+                    configSpec.set(configSpec.get() + (increase * 10) * scroll);
+                else
+                    configSpec.set(configSpec.get() + (increase) * scroll);
+            }
+            configSpec.save();
+        }
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
+    {
+        buttons.forEach(o -> o.mouseScrolled(mouseX - (double) width / 2, mouseY - (double) height / 2, scrollY));
+        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    {
+        buttons.forEach(o -> o.mouseClicked(mouseX - (double) width / 2, mouseY - (double) height / 2));
+
+        return super.mouseClicked(mouseX, mouseY, button);
+    }
+
+    @Override
+    public boolean isSettingsScreen()
+    {
         return true;
     }
 
     @Override
-    public void inputPressed() {
-        if (!(isHoldingMouse && children().stream().anyMatch(GuiEventListener::isFocused)))
-            super.inputPressed();
-
-        if (progress > 100) progress = 100;
-        if (progress < 0 ) progress = 0;
-    }
-
-    @Override
-    public void tick() {
+    public void tick()
+    {
         super.tick();
         if (progress > 100) progress = 100;
-        if (progress < 0 ) progress = 0;
+        if (progress < 0) progress = 0;
     }
 
     @Override
-    public void onClose() {
-        //round it to 2 decimal points
-        SCConfig.HIT_DELAY.set(Math.round(hitDelay * 10) / 10d);
-        SCConfig.HIT_DELAY.save();
+    public void onClose()
+    {
+        modifiers.forEach(o -> o.onRemove(this));
 
-
-        SCConfig.MINIGAME_RENDER_SCALE.set((double) renderScale);
-        SCConfig.MINIGAME_RENDER_SCALE.save();
-
-        SCConfig.MINIGAME_X_OFFSET.set(xOffset);
-        SCConfig.MINIGAME_Y_OFFSET.set(yOffset);
-        SCConfig.MINIGAME_X_OFFSET.save();
-        SCConfig.MINIGAME_Y_OFFSET.save();
-
-
-        SCConfig.UNIT.set(unitSelected);
-        SCConfig.UNIT.save();
-
-        modifiers.forEach(AbstractMinigameModifier::onRemove);
+        if (tournamentCached == null)
+            TournamentOverlay.clear();
+        else
+            TournamentOverlay.onTournamentReceived(tournamentCached);
 
         this.minecraft.popGuiLayer();
     }
-
-    public class LeftRightButtonWidget<T extends Comparable<T>> extends AbstractWidget {
-        int uOffset, vOffset, textureWidth, textureHeight, buttonWidth;
-        ResourceLocation texture;
-        Supplier<T> value;
-        @Nullable T rightLimit, leftLimit;
-        Runnable rightAction, leftAction;
-        Component name;
-
-        // This is automatically centered
-        public LeftRightButtonWidget(Supplier<T> value, Runnable leftAction, Runnable rightAction, @Nullable T leftLimit, @Nullable T rightLimit, MutableComponent name,
-                                     int x, int y, int width, int height, int uOffset, int vOffset, int textureWidth, int textureHeight, ResourceLocation texture, int buttonWidth) {
-
-            super(x - (width >> 1), y - (height >> 1), width, height, Component.empty());
-
-            this.uOffset = uOffset;
-            this.vOffset = vOffset;
-            this.texture = texture;
-            this.textureWidth = textureWidth;
-            this.textureHeight = textureHeight;
-            this.buttonWidth = buttonWidth;
-
-            this.rightAction = rightAction;
-            this.leftAction = leftAction;
-            this.rightLimit = rightLimit;
-            this.leftLimit = leftLimit;
-
-            this.value = value;
-            this.name = name;
-        }
-
-        @Override
-        protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-            Object o = value.get();
-            if (o instanceof Float number){
-               number = Math.round(number * 10) / 10f;
-               o = number;
-            }
-
-            MutableComponent component = Component.empty().append(name).append(": ").append(String.valueOf(o));
-            guiGraphics.drawCenteredString(getMinecraft().font, component, getX() + (getWidth() / 2), getY() + (getHeight() / 4), 0x000000);
-
-            guiGraphics.blit(
-                    texture, getX(), getY(),
-                    getWidth(), getHeight(), uOffset, vOffset, getWidth(), getHeight(), textureWidth, textureHeight);
-
-        }
-
-
-        @Override
-        public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            //confirm the mouse is on the element
-            if (!(mouseX > getX() && mouseX < getRight() && mouseY > getY() && mouseY < getBottom()))
-                return super.mouseClicked(mouseX, mouseY, button);
-
-            //left button
-            if (mouseX < getX() + buttonWidth){
-                if (leftLimit != null && value.get().compareTo(leftLimit) <= 0) return false;
-
-                leftAction.run();
-            }
-
-
-            //right button
-            if (mouseX > getRight() - buttonWidth){
-                if (rightLimit != null && value.get().compareTo(rightLimit) >= 0) return false;
-
-                rightAction.run();
-            }
-
-            return true;
-        }
-
-        @Override
-        protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {}
-    }
-
-
-    public class GuiScaleWidget extends AbstractWidget {
-        public GuiScaleWidget(int x, int y, int width, int height) {
-            super(x, y, width, height, Component.empty());
-
-            if (hasDistantHorizons()) {
-                setTooltip(Tooltip.create(Component.literal("GUI Scale is not supported while Distant Horizons is installed. It causes a massive frame drop upon starting and ending the minigame.")));
-            } else {
-                setTooltip(Tooltip.create(Component.literal("Change the GUI Scale of the minigame.")));
-            }
-        }
-
-        @Override
-        protected void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-            //GUI SCALE
-            guiGraphics.blit(
-                    GUI_SCALE, getX(), getY(),
-                    getWidth(), getHeight(), 0, 0, getWidth(), getHeight(), getWidth(), getHeight());
-
-        }
-
-        @Override
-        public boolean mouseClicked(double mouseX, double mouseY, int button) {
-            //confirm the mouse is on the element
-            if (!(mouseX > getX() && mouseX < getRight() && mouseY > getY() && mouseY < getBottom()))
-                return super.mouseClicked(mouseX, mouseY, button);
-
-            int current = guiScale().get();
-
-            // if it's on the right half
-            if (mouseX < getX() + getWidth() / 2f) {
-                if (current > 1)
-                    guiScale().set(current - 1);
-
-            } else {
-                guiScale().set(current + 1);
-            }
-            return true;
-        }
-
-        @Override
-        protected void updateWidgetNarration(NarrationElementOutput narrationElementOutput) {}
-    }
-
 }

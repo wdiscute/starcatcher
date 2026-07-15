@@ -5,7 +5,7 @@
 	"render_type": "cutout",
 	"textures": {
 		"0": "starcatcher:block/tackle_box/tackle_box",
-		"particle": "starcatcher:block/tackle_box/tackle_box"
+		"particle": "minecraft:block/cyan_concrete"
 	},
 	"elements": [
 		{

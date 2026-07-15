@@ -23,7 +23,7 @@ public class HatBlock extends HorizontalDirectionalBlock implements SimpleWaterl
         super(Properties.of()
                 .noOcclusion()
                 .sound(SoundType.WOOL)
-                .strength(1)
+                .instabreak()
         );
     }
 

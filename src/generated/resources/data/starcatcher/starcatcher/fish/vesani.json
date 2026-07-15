@@ -1,12 +1,14 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:vesani"
+    "item": {
+      "count": 1,
+      "id": "starcatcher:vesani"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
+    "hp": 300,
     "missPenalty": 20,
     "modifiers": [],
     "speed": 10,
@@ -17,19 +19,15 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
-      "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "starcatcher:is_cherry_grove"
-      ]
+      "biomes": [
+        "#starcatcher:is_cherry_grove"
+      ],
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
@@ -41,25 +39,8 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
-    },
-    {
-      "type": "starcatcher:bait",
-      "baits": {
-        "starcatcher:cherry_bait": 50
-      }
-    },
-    {
-      "type": "starcatcher:season",
-      "season_extra_chance": {
-        "early_spring": 0,
-        "early_winter": 0,
-        "late_spring": 0,
-        "late_winter": 0,
-        "mid_spring": 0,
-        "mid_winter": 0
-      },
-      "translation_override": "gui.guide.seasons.spring_winter"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -70,11 +51,5 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "star": {
-    "connections": [],
-    "debug_color": -9606670,
-    "name": "omicron_tauri",
-    "x": 3209,
-    "y": 1529
-  }
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.io.SCDataComponents;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -88,9 +88,9 @@ public class BottledLetterRecipe implements CraftingRecipe
         ItemStack is = this.result.copy();
         for (int i = 0; i < input.size(); i++)
         {
-            if(SCDataComponents.has(input.getItem(i), SCDataComponents.MESSAGE))
+            if(SCDataComponents.has(input.getItem(i), SCDataComponents.EDITABLE_MESSAGE))
             {
-                SCDataComponents.set(is, SCDataComponents.MESSAGE, SCDataComponents.get(input.getItem(i), SCDataComponents.MESSAGE));
+                SCDataComponents.set(is, SCDataComponents.EDITABLE_MESSAGE, SCDataComponents.get(input.getItem(i), SCDataComponents.EDITABLE_MESSAGE));
                 break;
             }
         }

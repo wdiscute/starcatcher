@@ -1,50 +1,50 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:cerberay"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_lava_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:cerberay"
+    }
   },
   "difficulty": {
     "decay": 1.5,
-    "hp": 100,
+    "hp": 500,
     "missPenalty": 10,
     "modifiers": [
       {
-        "type": "starcatcher:burn_on_miss"
+        "type": "starcatcher:burn_on_miss",
+        "extra_speed": 20,
+        "length": 40,
+        "ramp_time": 10
       },
       {
-        "type": "starcatcher:nikdo53_modifier"
+        "type": "starcatcher:multi_layer",
+        "max_layers": 2
       }
     ],
-    "speed": 16,
+    "speed": 14,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 15,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
         "vanishing_rate": 0.0
       }
@@ -55,22 +55,15 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:the_nether"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "the_nether",
+      "translation_override": "dimension.minecraft.the_nether"
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ]
-    },
-    {
-      "type": "starcatcher:bait",
-      "baits": {
-        "starcatcher:legendary_bait": 50
-      }
+      ],
+      "translation_override": "fluid.starcatcher.lava"
     }
   ],
   "size_and_weight": {
@@ -80,5 +73,6 @@
     "deviation_weight_grams": 300.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/nether.png"
 }

@@ -3,30 +3,28 @@ package com.wdiscute.starcatcher.blocks.aquarium;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.U;
-import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.io.SingleStackContainer;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
-import com.wdiscute.starcatcher.blocks.SCBlockEntities;
-import com.wdiscute.starcatcher.blocks.SCBlocks;
+import com.wdiscute.starcatcher.registry.SCBlockEntities;
+import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
 import com.wdiscute.starcatcher.registry.SCEntities;
-import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.starcatcher.registry.items.StarcaughtBucket;
+import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.BlockGetter;
@@ -47,6 +45,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -96,7 +95,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     {
         if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe && !level.isClientSide)
         {
-            if(abe.getFish().is(SCTags.BUCKETABLE_FISHES))
+            if (abe.getFish().is(SCTags.BUCKETABLE_FISHES))
             {
                 ItemStack itemstack = abe.getFish().copy();
                 FishEntity entity = SCEntities.FISH.get().create(level);
@@ -147,6 +146,54 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
         return level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
     }
 
+    private static final VoxelShape BOTTOM_SHAPE = Block.box(-2, -2, -2, 18, 2, 18);
+
+    private static final VoxelShape NORTH_SHAPE = Block.box(0, 0, 0, 16, 16, 2);
+    private static final VoxelShape SOUTH_SHAPE = Block.box(0, 0, 14, 16, 16, 16);
+
+    private static final VoxelShape WEST_SHAPE = Block.box(0, 0, 0, 2, 16, 16);
+    private static final VoxelShape EAST_SHAPE = Block.box(14, 0, 0, 16, 16, 16);
+
+    private static final VoxelShape[] SHAPES = new VoxelShape[32];
+
+    static
+    {
+        for (int i = 0; i < 32; i++)
+        {
+            VoxelShape shape = Shapes.empty();
+
+            if ((i & 1) == 0)
+                shape = Shapes.or(shape, BOTTOM_SHAPE);
+
+            if ((i & 2) == 0)
+                shape = Shapes.or(shape, NORTH_SHAPE);
+
+            if ((i & 4) == 0)
+                shape = Shapes.or(shape, SOUTH_SHAPE);
+
+            if ((i & 8) == 0)
+                shape = Shapes.or(shape, WEST_SHAPE);
+
+            if ((i & 16) == 0)
+                shape = Shapes.or(shape, EAST_SHAPE);
+
+            SHAPES[i] = shape.optimize();
+        }
+    }
+
+    private static int getShapeIndex(BlockState state)
+    {
+        int index = 0;
+
+        if (state.getValue(BOTTOM)) index |= 1;
+        if (state.getValue(NORTH)) index |= 2;
+        if (state.getValue(SOUTH)) index |= 4;
+        if (state.getValue(WEST)) index |= 8;
+        if (state.getValue(EAST)) index |= 16;
+
+        return index;
+    }
+
     @Override
     protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
@@ -154,18 +201,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
         {
             if (e.getEntity() != null)
             {
-                VoxelShape shape = Shapes.empty();
-
-                if (!state.getValue(BOTTOM)) shape = Shapes.join(shape, Block.box(-2, -2, -2, 18, 2, 18), BooleanOp.OR);
-                //if (!state.getValue(TOP)) shape = Shapes.join(shape, Block.box(-2, 14, -2, 16, 16, 16), BooleanOp.OR);
-
-                if (!state.getValue(NORTH)) shape = Shapes.join(shape, Block.box(-2, -2, -2, 18, 18, 0), BooleanOp.OR);
-                if (!state.getValue(WEST)) shape = Shapes.join(shape, Block.box(-2, -2, -2, 0, 18, 18), BooleanOp.OR);
-
-                if (!state.getValue(EAST)) shape = Shapes.join(shape, Block.box(16, -2, -2, 18, 18, 18), BooleanOp.OR);
-                if (!state.getValue(SOUTH)) shape = Shapes.join(shape, Block.box(-2, -2, 16, 18, 18, 18), BooleanOp.OR);
-
-                return shape;
+                return SHAPES[getShapeIndex(state)];
             }
         }
 
@@ -175,17 +211,17 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        VoxelShape shape = Shapes.empty();
-
-        if (!state.getValue(BOTTOM)) shape = Shapes.join(shape, Block.box(-2, -2, -2, 18, 2, 18), BooleanOp.OR);
-        //if (!state.getValue(TOP)) shape = Shapes.join(shape, Block.box(-2, 14, -2, 16, 16, 16), BooleanOp.OR);
-
-        if (!state.getValue(NORTH)) shape = Shapes.join(shape, Block.box(-2, -2, -2, 18, 18, 4), BooleanOp.OR);
-        if (!state.getValue(WEST)) shape = Shapes.join(shape, Block.box(-2, -2, -2, 4, 18, 18), BooleanOp.OR);
-
-        if (!state.getValue(EAST)) shape = Shapes.join(shape, Block.box(12, -2, -2, 18, 18, 18), BooleanOp.OR);
-        if (!state.getValue(SOUTH)) shape = Shapes.join(shape, Block.box(-2, -2, 12, 18, 18, 18), BooleanOp.OR);
-
+        VoxelShape shape = SHAPES[getShapeIndex(state)];
+        if (context instanceof EntityCollisionContext ecc)
+        {
+            if (ecc.getEntity() instanceof LivingEntity le)
+                if (le.getMainHandItem().is(Tags.Items.BUCKETS_EMPTY) || le.getMainHandItem().is(SCBlocks.AQUARIUM.asItem()))
+                    return Shapes.block();
+                else
+                    return shape;
+        }
+        if (shape.isEmpty())
+            return Shapes.block();
         return shape;
     }
 
@@ -210,7 +246,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
-        if (stack.getItem() instanceof BucketItem bucket && !stack.is(SCItems.STARCAUGHT_BUCKET) && !stack.is(Items.BUCKET))
+        if (stack.getItem() instanceof BucketItem bucket && !(stack.getItem() instanceof StarcaughtBucket) && !stack.is(Tags.Items.BUCKETS_EMPTY))
         {
             bucket.checkExtraContent(player, level, stack, pos);
             player.setItemInHand(hand, BucketItem.getEmptySuccessItem(stack, player));
@@ -427,7 +463,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
 
     public enum Interaction implements StringRepresentable
     {
-        NOTHING("nothing", null, U::alwaysFalse),
+        NOTHING("nothing", null, Utils::alwaysFalse),
 
         PLACE_FISH("place_fish", SoundEvents.DOLPHIN_SPLASH, (l, bp, bs, is, p) ->
         {
@@ -436,7 +472,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
                 if (!abe.getFish().isEmpty()) return false;
                 if (SCDataComponents.has(is, SCDataComponents.BUCKETED_FISH))
                 {
-                    abe.setFish(SCDataComponents.get(is, SCDataComponents.BUCKETED_FISH).stack());
+                    abe.setFish(SCDataComponents.get(is, SCDataComponents.BUCKETED_FISH).toStack());
                     if (is.getItem() instanceof BucketItem)
                     {
                         ItemStack emptySuccessItem = BucketItem.getEmptySuccessItem(is, p);
@@ -474,9 +510,9 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
                 if (abe.getFish().isEmpty()) return false;
                 is.shrink(1);
 
-                ItemStack bucketToReturn = new ItemStack(SCItems.STARCAUGHT_BUCKET.get());
+                ItemStack bucketToReturn = new ItemStack(StarcaughtBucket.getBucketForStack(abe.fish));
 
-                SCDataComponents.set(bucketToReturn, SCDataComponents.BUCKETED_FISH, SingleStackContainer.from(abe.fish));
+                SCDataComponents.set(bucketToReturn, SCDataComponents.BUCKETED_FISH, new MaybeStack(abe.fish));
                 p.addItem(bucketToReturn);
 
                 abe.setFish(ItemStack.EMPTY);

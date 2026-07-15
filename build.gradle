@@ -18,92 +18,110 @@ version = mod_version
 group = mod_group_id
 
 repositories
-{
-    //emi
-    maven {
-        name = "TerraformersMC"
-        url = "https://maven.terraformersmc.com/"
-    }
+        {
+            //local
+            mavenLocal()
 
-    //jei
-    maven {
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
+            //modrinth
+            maven {
+                url = "https://api.modrinth.com/maven"
+            }
 
-    //jei
-    maven {
-        url = "https://modmaven.dev"
-    }
+            //emi
+            maven {
+                name = "TerraformersMC"
+                url = "https://maven.terraformersmc.com/"
+            }
 
-    //favouriteless
-    maven {
-        url = "https://maven.favouriteless.net/releases"
-    }
+            //jei
+            maven {
+                url = "https://dvs1.progwml6.com/files/maven/"
+            }
 
-    //curios
-    maven {
-        name = "Illusive Soulworks maven"
-        url = "https://maven.theillusivec4.top/"
-    }
+            //jei
+            maven {
+                url = "https://modmaven.dev"
+            }
 
-    //modrinth
-    maven {
-        url = "https://api.modrinth.com/maven"
-    }
+            //favouriteless
+            maven {
+                url = "https://maven.favouriteless.net/releases"
+            }
 
-    //tyson the ember
-    repositories {
-        maven { url = 'https://maven.tysontheember.dev' }
-    }
+            //curios
+            maven {
+                name = "Illusive Soulworks maven"
+                url = "https://maven.theillusivec4.top/"
+            }
 
-    //sable-companion
-    maven {
-        name = "RyanHCode Maven"
-        url = "https://maven.ryanhcode.dev/releases"
-    }
+            //sable-companion
+            maven {
+                name = "RyanHCode Maven"
+                url = "https://maven.ryanhcode.dev/releases"
+            }
 
-    repositories {
-        exclusiveContent {
-            forRepository {
-                maven {
-                    url "https://cursemaven.com"
+            repositories {
+                exclusiveContent {
+                    forRepository {
+                        maven {
+                            url "https://cursemaven.com"
+                        }
+                    }
+                    filter {
+                        includeGroup "curse.maven"
+                    }
                 }
             }
-            filter {
-                includeGroup "curse.maven"
-            }
         }
-    }
-}
 
 dependencies {
     //libtooltips
-    jarJar(implementation("maven.modrinth:libtooltips:2.0-NEOFORGE-1.21.1"))
+    jarJar(implementation("maven.modrinth:libtooltips:2.3.1-NEOFORGE-1.21.1"))
+    //jarJar(implementation("com.wdiscute:libtooltips:2.3.1-NEOFORGE-1.21.1"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:nrGOzmNu"))
+    jarJar(implementation("maven.modrinth:wds-selling-bin:1.4.1-NEOFORGE-1.21.1"))
+
+    //wdUtils
+    jarJar(implementation("com.wdiscute:wdUtils:1.2-NEOFORGE-1.21.1"))
 
     //tiny multiblock lib
     jarJar(implementation("maven.modrinth:tiny-multiblock-lib:gbRIPDRZ"))
 
+    //fancy tab sections
+    jarJar(implementation("maven.modrinth:fancytabsections:5.0-NEOFORGE-1.21.1"))
+    //jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:4.0-NEOFORGE-1.21.1"))
+
+
     //EMI
     compileOnly "dev.emi:emi-neoforge:${emi_version}:api"
-    //runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
+    runtimeOnly "dev.emi:emi-neoforge:${emi_version}"
 
     //JEI
     compileOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    //runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 
     //ftb teams
     compileOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
-    runtimeOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
+    //runtimeOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")
 
     compileOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
-    runtimeOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
+    //runtimeOnly files(".compatmods/ftb-library-neoforge-2101.1.28.jar")
 
     compileOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
-    runtimeOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
+    //runtimeOnly files(".compatmods/architectury-13.0.8-neoforge.jar")
 
+    //kambrik
+    //compileOnly "maven.modrinth:zfbCkvdZ:rCSmCZpX"
+    runtimeOnly "maven.modrinth:zfbCkvdZ:rCSmCZpX"
+
+    //bountiful
+    //compileOnly "maven.modrinth:BpwWFOVM:swTb6NU9"
+    runtimeOnly "maven.modrinth:BpwWFOVM:swTb6NU9"
+
+    //kotlin for forge
+    //compileOnly "maven.modrinth:BpwWFOVM:swTb6NU9"
+    runtimeOnly "maven.modrinth:ordsPcFz:uhJhCT7X"
 
     //Serene Seasons
     compileOnly files(".compatmods/SereneSeasons-neoforge-1.21.1-10.1.0.3.jar")
@@ -155,7 +173,7 @@ dependencies {
 
     //curios (check modifiers in curio slots)
     compileOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}:api"
-    //runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
+    runtimeOnly "top.theillusivec4.curios:curios-neoforge:${curios_version}"
 
     //octolib because jarinjar must be illegal or something
     //compileOnly "maven.modrinth:octo-lib:AbiyvpxR"
@@ -171,8 +189,10 @@ dependencies {
     //sable (Sable's compat)
     compileOnly files(".compatmods/sable-neoforge-1.21.1-1.0.6.jar")
     api "dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.4.2"
-  //  runtimeOnly files(".compatmods/sable-neoforge-1.21.1-1.0.6.jar")
+    //runtimeOnly files(".compatmods/sable-neoforge-1.21.1-1.0.6.jar")
 
+    implementation "curse.maven:sodium-394468:6382651"
+    implementation "curse.maven:irisshaders-455508:6661598"
 }
 
 publishing {
@@ -184,17 +204,7 @@ publishing {
     }
 
     repositories {
-        if (System.getenv("MAVEN_USER") == null || System.getenv("MAVEN_PASS") == null) {
-            mavenLocal()
-        } else maven {
-            name = "wdReleases"
-            url = "https://maven.favouriteless.net/releases"
-
-            credentials {
-                username = System.getenv("MAVEN_USER")
-                password = System.getenv("MAVEN_PASS")
-            }
-        }
+        mavenLocal()
     }
 }
 

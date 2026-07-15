@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "starcatcher:bobber"
+    },
+    "F": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "O": {
+      "tag": "minecraft:wool"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " FS",
+    "OBO",
+    "SO "
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:cloud_bobber"
+  }
+}

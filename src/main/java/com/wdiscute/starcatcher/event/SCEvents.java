@@ -1,58 +1,62 @@
 package com.wdiscute.starcatcher.event;
 
-import com.wdiscute.sellingbin.bin.SellingBinBlockEntity;
 import com.wdiscute.sellingbin.event.SBevents;
-import com.wdiscute.sellingbin.registry.SBBlockEntities;
 import com.wdiscute.starcatcher.SCConfig;
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.SCBlockEntities;
+import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.registry.SCCommands;
+import com.wdiscute.starcatcher.data.network.tournament.CBFinishedTournamentsListPayload;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.io.SCDataAttachments;
-import com.wdiscute.starcatcher.io.TournamentSavedData;
-import com.wdiscute.starcatcher.io.attachments.FishingGuideAttachment;
-import com.wdiscute.starcatcher.io.network.*;
-import com.wdiscute.starcatcher.io.network.tournament.CBActiveTournamentUpdatePayload;
-import com.wdiscute.starcatcher.io.network.tournament.CBClearTournamentPayload;
-import com.wdiscute.starcatcher.io.network.tournament.SBStandTournamentNameChangePayload;
-import com.wdiscute.starcatcher.registry.SCDataMaps;
-import com.wdiscute.starcatcher.registry.SCEntities;
-import com.wdiscute.starcatcher.registry.SCItems;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.registry.SCDataAttachments;
+import com.wdiscute.starcatcher.data.TournamentSavedData;
+import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
+import com.wdiscute.starcatcher.data.network.*;
+import com.wdiscute.starcatcher.data.network.tournament.CBActiveTournamentUpdatePayload;
+import com.wdiscute.starcatcher.data.network.tournament.CBClearTournamentPayload;
+import com.wdiscute.starcatcher.data.network.tournament.SBStandTournamentNameChangePayload;
+import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.StatFormatter;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
 import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
+import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
+import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
@@ -84,6 +88,35 @@ public class SCEvents
             }
         };
 
+        //create
+        event.addPackFinders(
+                Starcatcher.rl("built_in_datapacks/create_compat"),
+                PackType.SERVER_DATA,
+                Component.literal("Starcatcher - Create Compat"),
+                packSource,
+                false,
+                Pack.Position.BOTTOM
+        );
+
+        //tide
+        event.addPackFinders(
+                Starcatcher.rl("built_in_datapacks/tide_compat"),
+                PackType.SERVER_DATA,
+                Component.literal("Starcatcher - Tide Compat"),
+                packSource,
+                false,
+                Pack.Position.BOTTOM
+        );
+
+
+        //
+        //                 ,--. ,--. ,--.                      ,--.    ,--.
+        //  ,---.   ,---.  |  | |  | `--' ,--,--,   ,---.      |  |-.  `--' ,--,--,
+        // (  .-'  | .-. : |  | |  | ,--. |      \ | .-. |     | .-. ' ,--. |      \
+        // .-'  `) \   --. |  | |  | |  | |  ||  | ' '-' '     | `-' | |  | |  ||  |
+        // `----'   `----' `--' `--' `--' `--''--' .`-  /       `---'  `--' `--''--'
+        //                                         `---'
+
         event.addPackFinders(
                 Starcatcher.rl("built_in_datapacks/selling_bin_starcatcher_emeralds"),
                 PackType.SERVER_DATA,
@@ -101,6 +134,42 @@ public class SCEvents
                 false,
                 Pack.Position.BOTTOM
         );
+    }
+
+    @SubscribeEvent
+    public static void itemFished(ItemFishedEvent event)
+    {
+        if (!SCConfig.GIVE_ROD.get()) return;
+        Player player = event.getHookEntity().getPlayerOwner();
+        if (SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB).isEmpty())
+        {
+            if (!FishingGuideAttachment.getFishedRod(player))
+            {
+                FishingGuideAttachment.setFishedRod(player, true);
+
+                FishingHook bobber = event.getHookEntity();
+
+                double x = Math.clamp((player.position().x - bobber.position().x) / 25, -1, 1);
+                double y = Math.clamp((player.position().y - bobber.position().y) / 20, -1, 1);
+                double z = Math.clamp((player.position().z - bobber.position().z) / 25, -1, 1);
+                Vec3 vec3 = new Vec3(x, 0.7 + y, z);
+
+                ItemEntity rodFished = new ItemEntity(player.level(),
+                        bobber.position().x, bobber.position().y + 1.2f, bobber.position().z,
+                        SCItems.ROD.toStack());
+
+                ItemEntity guideFished = new ItemEntity(player.level(),
+                        bobber.position().x, bobber.position().y + 1.2f, bobber.position().z,
+                        SCItems.GUIDE.toStack());
+
+                rodFished.setDeltaMovement(vec3);
+                guideFished.setDeltaMovement(vec3);
+
+                bobber.level().addFreshEntity(guideFished);
+                bobber.level().addFreshEntity(rodFished);
+
+            }
+        }
     }
 
     @SubscribeEvent
@@ -139,6 +208,14 @@ public class SCEvents
     }
 
     @SubscribeEvent
+    public static void commonSetup(FMLCommonSetupEvent event)
+    {
+        event.enqueueWork(() -> {
+            Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get(), StatFormatter.TIME);
+        });
+    }
+
+    @SubscribeEvent
     public static void levelTick(ServerTickEvent.Post event)
     {
         TournamentHandler.tick(event);
@@ -153,8 +230,12 @@ public class SCEvents
     @SubscribeEvent
     public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event)
     {
-        if (event.getEntity() instanceof ServerPlayer sp)
+        Player player = event.getEntity();
+        if (player instanceof ServerPlayer sp)
         {
+            //send stats for guide book
+            sp.getStats().sendStats(sp);
+
             //tournament
             var tournament = TournamentHandler.getTournamentForPlayer(sp);
             if (tournament != null)
@@ -162,13 +243,14 @@ public class SCEvents
             else
                 TournamentHandler.clearTournamentToClient(sp);
 
-            //guide
-            FishingGuideAttachment fishingGuideAttachment = SCDataAttachments.get(sp, SCDataAttachments.FISHING_GUIDE);
+            //send list of finished tournaments to client
+            PacketDistributor.sendToPlayer(sp, new CBFinishedTournamentsListPayload(TournamentHandler.getFinishedTournaments()));
 
-            if (SCConfig.GIVE_GUIDE.get() && !fishingGuideAttachment.receivedGuide)
+            //guide
+            if (SCConfig.GIVE_GUIDE.get() && !FishingGuideAttachment.getReceivedGuide(player))
             {
                 sp.addItem(new ItemStack(SCItems.GUIDE.get()));
-                fishingGuideAttachment.receivedGuide = true;
+                FishingGuideAttachment.setReceivedGuide(player, true);
             }
         }
     }
@@ -177,9 +259,7 @@ public class SCEvents
     @SubscribeEvent
     public static void addRegistry(NewRegistryEvent event)
     {
-        event.register(Starcatcher.SWEET_SPOT_BEHAVIOUR_REGISTRY);
-        event.register(Starcatcher.MINIGAME_MODIFIERS_REGISTRY);
-        event.register(Starcatcher.CATCH_MODIFIERS_REGISTRY);
+        event.register(Starcatcher.SWEETSPOT_BEHAVIOUR_REGISTRY);
         event.register(Starcatcher.TACKLE_SKIN_REGISTRY);
         event.register(Starcatcher.FISH_RESTRICTIONS_REGISTRY);
     }
@@ -198,22 +278,14 @@ public class SCEvents
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
 
-        if (event.getItemStack().is(Items.BONE_MEAL) && level.getBlockState(event.getPos()).getBlock() instanceof FarmBlock)
+        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && level.getBlockState(event.getPos()).getBlock() instanceof FarmBlock)
         {
             if (!level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
             {
-                ItemStack is;
-                float i = level.getRandom().nextFloat();
-                if (i < 0.8f)
-                    is = new ItemStack(SCItems.WORM.get());
-                else if (i < 0.99f)
-                    is = new ItemStack(SCItems.ALMIGHTY_WORM.get());
-                else
-                    is = new ItemStack(SCItems.SEEKING_WORM.get());
+                ItemStack is = getWorm(level.getRandom());
 
                 Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
                 ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), is);
-                itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
 
                 level.playSound(null, pos, SoundEvents.COMPOSTER_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
@@ -228,20 +300,50 @@ public class SCEvents
         }
     }
 
+    public static ItemStack getWorm(RandomSource random)
+    {
+        int totalWeight = SCDataEntries.FARMLAND_BONEMEAL_DROPS.get().stream()
+                .mapToInt(Utils.Duo::second)
+                .sum();
+
+        if (totalWeight <= 0)
+            return ItemStack.EMPTY;
+
+        int value = random.nextInt(totalWeight);
+
+        for (Utils.Duo<ItemStack, Integer> entry : SCDataEntries.FARMLAND_BONEMEAL_DROPS.get())
+        {
+            value -= entry.second();
+            if (value < 0)
+                return entry.first().copy();
+        }
+
+        return ItemStack.EMPTY;
+    }
+
     @SubscribeEvent
-    public static void registerAttributed(EntityAttributeCreationEvent event)
+    public static void modifyDefaultAttributes(EntityAttributeModificationEvent event)
+    {
+        SCAttributes.REGISTRY.getEntries().forEach(o -> event.add(EntityType.PLAYER, o, 1.0));
+    }
+
+    @SubscribeEvent
+    public static void entityAttributes(EntityAttributeCreationEvent event)
     {
         event.put(SCEntities.FISH.get(), FishEntity.createAttributes().build());
     }
 
     @SubscribeEvent
-    public static void registerAttributed(RegisterDataMapTypesEvent event)
+    public static void registerDataMaps(RegisterDataMapTypesEvent event)
     {
         event.register(SCDataMaps.AQUARIUM_INTERACTION);
-        event.register(SCDataMaps.CATCH_MODIFIERS);
-        event.register(SCDataMaps.MINIGAME_MODIFIERS);
         event.register(SCDataMaps.TACKLE_SKIN);
         event.register(SCDataMaps.TREASURE);
+        event.register(SCDataMaps.MESSAGE_BACKGROUND);
+
+        event.register(SCDataMaps.ITEM_MODIFIERS);
+        event.register(SCDataMaps.ENCHANTMENT_MODIFIERS);
+        event.register(SCDataMaps.EFFECT_MODIFIERS);
     }
 
     @SubscribeEvent
@@ -249,27 +351,27 @@ public class SCEvents
     {
         final PayloadRegistrar registrar = event.registrar("1");
         registrar.playToClient(
-                FishingStartedPayload.TYPE,
-                FishingStartedPayload.STREAM_CODEC,
-                FishingStartedPayload::handle
+                CBFishingStartedPayload.TYPE,
+                CBFishingStartedPayload.STREAM_CODEC,
+                CBFishingStartedPayload::handle
         );
 
         registrar.playToServer(
-                FishingCompletedPayload.TYPE,
-                FishingCompletedPayload.STREAM_CODEC,
-                FishingCompletedPayload::handle
+                SBFishingCompletedPayload.TYPE,
+                SBFishingCompletedPayload.STREAM_CODEC,
+                SBFishingCompletedPayload::handle
         );
 
         registrar.playToClient(
-                FishCaughtPayload.TYPE,
-                FishCaughtPayload.STREAM_CODEC,
-                FishCaughtPayload::handle
+                CBFishCaughtNotifs.TYPE,
+                CBFishCaughtNotifs.STREAM_CODEC,
+                CBFishCaughtNotifs::handle
         );
 
         registrar.playToServer(
-                FPsSeenPayload.TYPE,
-                FPsSeenPayload.STREAM_CODEC,
-                FPsSeenPayload::handle
+                SBFPsSeenPayload.TYPE,
+                SBFPsSeenPayload.STREAM_CODEC,
+                SBFPsSeenPayload::handle
         );
 
         registrar.playToServer(
@@ -291,15 +393,39 @@ public class SCEvents
         );
 
         registrar.playToServer(
-                SetMessagePayload.TYPE,
-                SetMessagePayload.STREAM_CODEC,
-                SetMessagePayload::handle
-        );
-
-        registrar.playToServer(
                 SignGuidePayload.TYPE,
                 SignGuidePayload.STREAM_CODEC,
                 SignGuidePayload::handle
+        );
+
+        registrar.playToClient(
+                CBFinishedTournamentsListPayload.TYPE,
+                CBFinishedTournamentsListPayload.STREAM_CODEC,
+                CBFinishedTournamentsListPayload::handle
+        );
+
+        registrar.playToServer(
+                SBTrackFishPayload.TYPE,
+                SBTrackFishPayload.STREAM_CODEC,
+                SBTrackFishPayload::handle
+        );
+
+        registrar.playToServer(
+                SBSetEditableMessagePayload.TYPE,
+                SBSetEditableMessagePayload.STREAM_CODEC,
+                SBSetEditableMessagePayload::handle
+        );
+
+        registrar.playToClient(
+                CBOpenEditableMessagePayload.TYPE,
+                CBOpenEditableMessagePayload.STREAM_CODEC,
+                CBOpenEditableMessagePayload::handle
+        );
+
+        registrar.playToClient(
+                CBOpenMessagePayload.TYPE,
+                CBOpenMessagePayload.STREAM_CODEC,
+                CBOpenMessagePayload::handle
         );
     }
 }

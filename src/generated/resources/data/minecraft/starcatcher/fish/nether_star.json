@@ -3,8 +3,14 @@
   "catch_info": {
     "always_spawn_entity": true,
     "entity": "minecraft:wither",
-    "item": "minecraft:nether_star",
-    "override_minigame_item": "starcatcher:unknown_fish"
+    "item": {
+      "count": 1,
+      "id": "minecraft:nether_star"
+    },
+    "override_minigame_item": {
+      "count": 1,
+      "id": "starcatcher:unknown_fish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -14,32 +20,32 @@
     "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": 2039583,
+        "color_as_int": -14737633,
         "hitbox_size_in_pixels": 33,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/wither_big.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 2039583,
+        "color_as_int": -14737633,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 3.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/wither.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 2039583,
+        "color_as_int": -14737633,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": -3.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/wither.png",
         "vanishing_rate": 0.0
       }
@@ -51,8 +57,15 @@
     {
       "type": "starcatcher:bait",
       "baits": {
-        "minecraft:wither_skeleton_skull": 200
+        "minecraft:wither_skeleton_skull": 50
       }
+    },
+    {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -62,5 +75,6 @@
     "deviation_weight_grams": 701.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/surface.png"
 }

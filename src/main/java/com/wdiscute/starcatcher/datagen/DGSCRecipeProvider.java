@@ -2,17 +2,14 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.SCBlocks;
-import com.wdiscute.starcatcher.recipe.FishingRodSkinSmithingRecipeBuilder;
-import com.wdiscute.starcatcher.recipe.NetheriteUpgradeSmithingRecipeBuilder;
-import com.wdiscute.starcatcher.recipe.TackleSkinSmithingRecipeBuilder;
+import com.wdiscute.starcatcher.registry.SCBlocks;
+import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipeBuilder;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
@@ -37,6 +34,12 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .requires(Items.BOOK)
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
                 .save(output);
+
+        //guide sign reset
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, SCItems.GUIDE)
+                .requires(SCItems.GUIDE)
+                .unlockedBy("has_guide", has(SCItems.GUIDE))
+                .save(output, "guide_sign_reset");
 
         //rod
         ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, SCItems.ROD)
@@ -130,6 +133,13 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
+        //leather from boot
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.LEATHER, 1)
+                .requires(SCItems.BOOT)
+                .unlockedBy("has_boot", has(SCItems.BOOT))
+                .save(output);
+
+
         //sculk
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.SCULK_BAIT, 4)
                 .requires(Items.BONE_MEAL)
@@ -181,8 +191,16 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output, Starcatcher.rl("meteorological_bait_from_epic_fishes"));
 
-        //hats
-        colorBlockWithDye(output, dyes, hats, "fisherman_hats");
+        //radar
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.FISH_RADAR)
+                .define('E', Items.ECHO_SHARD)
+                .define('F', SCTags.LEGENDARY_FISHES)
+                .define('I', Items.IRON_INGOT)
+                .pattern(" E ")
+                .pattern("IFI")
+                .pattern(" I ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
 
         //bobber
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.BOBBER)
@@ -240,15 +258,15 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
-        //aqua bobber
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.AQUA_BOBBER)
+        //dripstone bobber
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.DRIPSTONE_BOBBER)
                 .define('B', SCItems.BOBBER)
                 .define('S', Items.STICK)
-                .define('D', Items.DIAMOND)
-                .define('H', Items.HEART_OF_THE_SEA)
-                .pattern(" HS")
+                .define('D', Items.DRIPSTONE_BLOCK)
+                .define('P', Items.POINTED_DRIPSTONE)
+                .pattern(" DS")
                 .pattern("DBD")
-                .pattern("SD ")
+                .pattern("SP ")
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
@@ -260,6 +278,42 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .pattern(" WS")
                 .pattern("WBW")
                 .pattern("SW ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
+
+        //glowing bobber
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.GLOWING_BOBBER)
+                .define('B', SCItems.BOBBER)
+                .define('S', Items.STICK)
+                .define('W', Items.GLOW_INK_SAC)
+                .define('G', Items.GLOW_BERRIES)
+                .pattern(" WS")
+                .pattern("GBG")
+                .pattern("SG ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
+
+        //golden bobber
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.GOLDEN_BOBBER)
+                .define('B', SCItems.BOBBER)
+                .define('S', Items.STICK)
+                .define('G', Items.GOLD_BLOCK)
+                .define('W', Items.GOLD_INGOT)
+                .pattern(" GS")
+                .pattern("WBW")
+                .pattern("SW ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
+
+        //cloud bobber
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.CLOUD_BOBBER)
+                .define('B', SCItems.BOBBER)
+                .define('S', Items.STICK)
+                .define('F', Items.PHANTOM_MEMBRANE)
+                .define('O', ItemTags.WOOL)
+                .pattern(" FS")
+                .pattern("OBO")
+                .pattern("SO ")
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
@@ -449,7 +503,7 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .pattern("   ")
                 .pattern("BBB")
                 .pattern(" P ")
-                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHES))
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
                 .save(output);
 
         //aquarium
@@ -489,32 +543,57 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output, Starcatcher.rl("bone_meal_from_fish_bones"));
 
-        //cooked fish
-        SimpleCookingRecipeBuilder.smelting(Ingredient.of(SCTags.STARCAUGHT_FISHES), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 200)
-                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHES))
+        //starcaught fish
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.STARCAUGHT_FISH, 1)
+                .requires(SCTags.STARCAUGHT_FISHABLE)
+                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output, Starcatcher.rl("starcaught_fish_from_common"));
+
+        //cooked fish from starcaught
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(SCItems.STARCAUGHT_FISH), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 200)
+                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output, Starcatcher.rl("starcaught_fish_from_smelting_from_starcaught_fish"));
+
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(SCItems.STARCAUGHT_FISH), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 600)
+                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output, Starcatcher.rl("starcaught_fish_from_campfire_from_starcaught_fish"));
+
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(SCItems.STARCAUGHT_FISH), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 100)
+                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output, Starcatcher.rl("starcaught_fish_from_smoking_from_starcaught_fish"));
+
+        //cooked fish from tag
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(SCTags.STARCAUGHT_FISHABLE), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 200)
+                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHABLE))
                 .save(output, Starcatcher.rl("starcaught_fish_from_smelting"));
 
-        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(SCTags.STARCAUGHT_FISHES), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 600)
-                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHES))
+        SimpleCookingRecipeBuilder.campfireCooking(Ingredient.of(SCTags.STARCAUGHT_FISHABLE), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 600)
+                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHABLE))
                 .save(output, Starcatcher.rl("starcaught_fish_from_campfire"));
 
-        SimpleCookingRecipeBuilder.smoking(Ingredient.of(SCTags.STARCAUGHT_FISHES), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 100)
-                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHES))
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(SCTags.STARCAUGHT_FISHABLE), RecipeCategory.FOOD, SCItems.COOKED_STARCAUGHT_FISH, 0.35F, 100)
+                .unlockedBy("has_starcaught_fish", has(SCTags.STARCAUGHT_FISHABLE))
                 .save(output, Starcatcher.rl("starcaught_fish_from_smoking"));
 
-        //netherite
-        NetheriteUpgradeSmithingRecipeBuilder.smithing(
+        //
+        //                   ,--.   ,--.   ,--.      ,--.
+        // ,---.  ,--,--,--. `--' ,-'  '-. |  ,---.  `--' ,--,--,   ,---.
+        //(  .-'  |        | ,--. '-.  .-' |  .-.  | ,--. |      \ | .-. |
+        //.-'  `) |  |  |  | |  |   |  |   |  | |  | |  | |  ||  | ' '-' '
+        //`----'  `--`--`--' `--'   `--'   `--' `--' `--' `--''--' .`-  /
+        //                                                         `---'
+
+        //netherite upgrade
+        StarcatcherRodRecipeBuilder.netheriteUpgrade(
                         Ingredient.of(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(Items.NETHERITE_INGOT),
-                        RecipeCategory.TOOLS
+                        Ingredient.of(Items.NETHERITE_INGOT)
                 )
                 .unlocks("has_netherite", has(Items.NETHERITE_INGOT))
                 .save(output, Starcatcher.rl("netherite_upgrade")
                 );
 
-        //templates
-        //tackle skins
+        //tackle
+        //pearl
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.PEARL_SMITHING_TEMPLATE, 2)
                 .define('T', SCItems.PEARL_SMITHING_TEMPLATE)
                 .define('D', Items.DIAMOND)
@@ -525,11 +604,9 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_pearl", has(SCItems.PEARL_SMITHING_TEMPLATE))
                 .save(output);
 
-        TackleSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.tackleSkin(
                         Ingredient.of(SCItems.PEARL_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(SCItems.PEARL),
-                        RecipeCategory.TOOLS
+                        Ingredient.of(SCItems.PEARL)
                 )
                 .unlocks("has_template_humble", has(SCItems.PEARL_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("pearl_tackle")
@@ -546,11 +623,9 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_kimbe", has(SCItems.KIMBE_SMITHING_TEMPLATE))
                 .save(output);
 
-        TackleSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.tackleSkin(
                         Ingredient.of(SCItems.KIMBE_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(SCItems.WILLISH),
-                        RecipeCategory.TOOLS
+                        Ingredient.of(SCItems.WILLISH)
                 )
                 .unlocks("has_template_humble", has(SCItems.KIMBE_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("kimbe_tackle")
@@ -567,11 +642,9 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_colorful", has(SCItems.COLORFUL_SMITHING_TEMPLATE))
                 .save(output);
 
-        TackleSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.tackleSkin(
                         Ingredient.of(SCItems.COLORFUL_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(Tags.Items.DYES),
-                        RecipeCategory.TOOLS
+                        Ingredient.of(Tags.Items.DYES)
                 )
                 .unlocks("has_template_humble", has(SCItems.COLORFUL_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("colorful_tackle")
@@ -588,11 +661,9 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_clean", has(SCItems.CLEAR_SMITHING_TEMPLATE))
                 .save(output);
 
-        TackleSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.tackleSkin(
                         Ingredient.of(SCItems.CLEAR_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(Items.GLASS),
-                        RecipeCategory.TOOLS
+                        Ingredient.of(Items.GLASS)
                 )
                 .unlocks("has_template_humble", has(SCItems.CLEAR_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("clear_tackle")
@@ -609,11 +680,9 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_frog", has(SCItems.FROG_SMITHING_TEMPLATE))
                 .save(output);
 
-        TackleSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.tackleSkin(
                         Ingredient.of(SCItems.FROG_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(Items.TADPOLE_BUCKET),
-                        RecipeCategory.TOOLS
+                        Ingredient.of(Items.TADPOLE_BUCKET)
                 )
                 .unlocks("has_template_humble", has(SCItems.FROG_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("frog_tackle")
@@ -630,18 +699,16 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_king", has(SCItems.KING_SMITHING_TEMPLATE))
                 .save(output);
 
-        TackleSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.tackleSkin(
                         Ingredient.of(SCItems.KING_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(Items.GOLD_INGOT),
-                        RecipeCategory.TOOLS
+                        Ingredient.of(Items.GOLD_INGOT)
                 )
                 .unlocks("has_template_humble", has(SCItems.KING_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("king_tackle")
                 );
 
 
-        //rod skins
+        //rods
         //naturalist
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE, 2)
                 .define('T', SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE)
@@ -653,12 +720,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_naturalist", has(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(ItemTags.SAPLINGS),
-                        RecipeCategory.TOOLS,
-                        SCItems.NATURALIST_ROD.get()
+                        SCItems.NATURALIST_ROD.toStack()
                 )
                 .unlocks("has_template_naturalist", has(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("naturalist_rod")
@@ -675,12 +740,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_iceborn", has(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(Items.PACKED_ICE),
-                        RecipeCategory.TOOLS,
-                        SCItems.ICEBORN_ROD.get()
+                        SCItems.ICEBORN_ROD.toStack()
                 )
                 .unlocks("has_template_iceborn", has(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("iceborn_rod")
@@ -698,12 +761,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_magmaforged", has(SCItems.MAGMAFORGED_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.MAGMAFORGED_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(Items.MAGMA_CREAM),
-                        RecipeCategory.TOOLS,
-                        SCItems.MAGMAFORGED_ROD.get()
+                        SCItems.MAGMAFORGED_ROD.toStack()
                 )
                 .unlocks("has_template_magmaforged", has(SCItems.MAGMAFORGED_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("magmaforged_rod")
@@ -722,12 +783,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_slimed", has(SCItems.SLIMED_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.SLIMED_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(Items.SLIME_BALL),
-                        RecipeCategory.TOOLS,
-                        SCItems.SLIMED_ROD.get()
+                        SCItems.SLIMED_ROD.toStack()
                 )
                 .unlocks("has_template_slimed", has(SCItems.SLIMED_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("slimed_rod")
@@ -747,12 +806,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_azure", has(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(SCItems.AZURE_CRYSTALBACK_MINNOW),
-                        RecipeCategory.TOOLS,
-                        SCItems.AZURE_CRYSTAL_ROD.get()
+                        SCItems.AZURE_CRYSTAL_ROD.toStack()
                 )
                 .unlocks("has_template_azure", has(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("azure_rod")
@@ -771,12 +828,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_bamboo", has(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(Items.BAMBOO),
-                        RecipeCategory.TOOLS,
-                        SCItems.BAMBOO_ROD.get()
+                        SCItems.BAMBOO_ROD.toStack()
                 )
                 .unlocks("has_template_bamboo", has(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("bamboo_rod")
@@ -794,12 +849,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_sharktooth", has(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(SCItems.JOEL),
-                        RecipeCategory.TOOLS,
-                        SCItems.SHARKTOOTH_ROD.get()
+                        SCItems.SHARKTOOTH_ROD.toStack()
                 )
                 .unlocks("has_template_sharktooth", has(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("sharktooth_rod")
@@ -816,62 +869,14 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_obsidian", has(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(SCItems.OBSIDIAN_EEL),
-                        RecipeCategory.TOOLS,
-                        SCItems.OBSIDIAN_ROD.get()
+                        SCItems.OBSIDIAN_ROD.toStack()
                 )
                 .unlocks("has_template_obsidian", has(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("obsidian_rod")
                 );
-
-        //alpha
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.ALPHA_SKIN_SMITHING_TEMPLATE, 2)
-                .define('T', SCItems.ALPHA_SKIN_SMITHING_TEMPLATE)
-                .define('D', Items.DIAMOND)
-                .define('C', Items.GRASS_BLOCK)
-                .pattern("DTD")
-                .pattern("DCD")
-                .pattern("DDD")
-                .unlockedBy("has_template_alpha", has(SCItems.ALPHA_SKIN_SMITHING_TEMPLATE))
-                .save(output);
-
-        FishingRodSkinSmithingRecipeBuilder.smithing(
-                        Ingredient.of(SCItems.ALPHA_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(Items.GRASS_BLOCK),
-                        RecipeCategory.TOOLS,
-                        SCItems.ALPHA_ROD.get()
-                )
-                .unlocks("has_template_alpha", has(SCItems.ALPHA_SKIN_SMITHING_TEMPLATE))
-                .save(output, Starcatcher.rl("alpha_rod")
-                );
-
-
-        //good old
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.GOOD_OLD_SKIN_SMITHING_TEMPLATE, 2)
-                .define('T', SCItems.GOOD_OLD_SKIN_SMITHING_TEMPLATE)
-                .define('D', Items.DIAMOND)
-                .define('C', Items.FISHING_ROD)
-                .pattern("DTD")
-                .pattern("DCD")
-                .pattern("DDD")
-                .unlockedBy("has_template_good_old", has(SCItems.GOOD_OLD_SKIN_SMITHING_TEMPLATE))
-                .save(output);
-
-        FishingRodSkinSmithingRecipeBuilder.smithing(
-                        Ingredient.of(SCItems.GOOD_OLD_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
-                        Ingredient.of(Items.FISHING_ROD),
-                        RecipeCategory.TOOLS,
-                        SCItems.GOOD_OLD_ROD.get()
-                )
-                .unlocks("has_template_good_old", has(SCItems.GOOD_OLD_SKIN_SMITHING_TEMPLATE))
-                .save(output, Starcatcher.rl("good_old_rod")
-                );
-
 
         //boner
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.BONER_SKIN_SMITHING_TEMPLATE, 2)
@@ -884,12 +889,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_boner", has(SCItems.BONER_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.BONER_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(Items.BONE_BLOCK),
-                        RecipeCategory.TOOLS,
-                        SCItems.BONER_ROD.get()
+                        SCItems.BONER_ROD.toStack()
                 )
                 .unlocks("has_template_boner", has(SCItems.BONER_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("boner_rod")
@@ -906,12 +909,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_sky", has(SCItems.SKY_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.SKY_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(Items.PHANTOM_MEMBRANE),
-                        RecipeCategory.TOOLS,
-                        SCItems.SKY_ROD.get()
+                        SCItems.SKY_ROD.toStack()
                 )
                 .unlocks("has_template_sky", has(SCItems.SKY_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("sky_rod")
@@ -929,12 +930,10 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_lush", has(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(SCItems.LUSH_PIKE),
-                        RecipeCategory.TOOLS,
-                        SCItems.LUSH_GLOWBERRY_ROD.get()
+                        SCItems.LUSH_GLOWBERRY_ROD.toStack()
                 )
                 .unlocks("has_template_lush", has(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("lush_rod")
@@ -952,27 +951,28 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_template_humble", has(SCItems.HUMBLE_SKIN_SMITHING_TEMPLATE))
                 .save(output);
 
-        FishingRodSkinSmithingRecipeBuilder.smithing(
+        StarcatcherRodRecipeBuilder.rodSkin(
                         Ingredient.of(SCItems.HUMBLE_SKIN_SMITHING_TEMPLATE),
-                        Ingredient.of(SCTags.RODS),
                         Ingredient.of(Items.STICK),
-                        RecipeCategory.TOOLS,
-                        SCItems.HUMBLE_ROD.get()
+                        SCItems.HUMBLE_ROD.toStack()
                 )
                 .unlocks("has_template_humble", has(SCItems.HUMBLE_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("humble_rod")
                 );
 
-        //tackle box
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.TACKLE_BOX, 1)
-                .define('C', Items.COPPER_INGOT)
-                .define('H', Items.CHAIN)
-                .define('I', Items.IRON_INGOT)
-                .pattern("CCC")
-                .pattern("H H")
-                .pattern("III")
-                .unlockedBy("has_fish", has(ItemTags.FISHES))
-                .save(output);
+        //hats
+        for (int i = 0; i < dyes.size(); i++)
+        {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, hats.get(i), 1)
+                    .define('P', SCItems.PEARL)
+                    .define('C', carpets.get(i))
+                    .define('W', wools.get(i))
+                    .pattern(" P ")
+                    .pattern("CWW")
+                    .pattern("   ")
+                    .unlockedBy("has_pearl", has(SCItems.PEARL))
+                    .save(output);
+        }
 
         //tackle boxes
         for (int i = 0; i < dyes.size(); i++)
@@ -989,6 +989,17 @@ public class DGSCRecipeProvider extends RecipeProvider
                     .save(output);
         }
 
+        //tackle box
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.TACKLE_BOX, 1)
+                .define('C', Items.COPPER_INGOT)
+                .define('H', Items.CHAIN)
+                .define('I', Items.IRON_INGOT)
+                .pattern("CCC")
+                .pattern("H H")
+                .pattern("III")
+                .unlockedBy("has_fish", has(ItemTags.FISHES))
+                .save(output);
+
         //letter
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.LETTER, 1)
                 .requires(Items.PAPER)
@@ -997,25 +1008,50 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_paper", has(Items.PAPER))
                 .save(output);
 
+        //worm > almighty
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.ALMIGHTY_WORM, 1)
+                .requires(SCItems.WORM)
+                .requires(SCItems.WORM)
+                .requires(SCItems.WORM)
+                .requires(SCItems.WORM)
+                .unlockedBy("has_worm", has(SCItems.WORM))
+                .save(output);
 
+        //almighty > seeking
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.SEEKING_WORM, 1)
+                .requires(SCItems.ALMIGHTY_WORM)
+                .requires(SCItems.ALMIGHTY_WORM)
+                .requires(SCItems.ALMIGHTY_WORM)
+                .requires(SCItems.ALMIGHTY_WORM)
+                .unlockedBy("has_almighty_worm", has(SCItems.WORM))
+                .save(output);
 
+        //fish recipes
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.SUNFLOWER, 1)
+                .requires(SCItems.SUNFLOWER_CARP)
+                .unlockedBy("has_sunflower_carp", has(SCItems.SUNFLOWER_CARP))
+                .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.BAMBOO, 1)
+                .requires(SCItems.LIVID_BAMBOO)
+                .unlockedBy("has_livid_bamboo", has(SCItems.LIVID_BAMBOO))
+                .save(output);
 
-    }
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.OBSIDIAN, 4)
+                .requires(SCItems.OBSIDIAN_CRAB)
+                .unlockedBy("has_obsidian_crab", has(SCItems.OBSIDIAN_CRAB))
+                .save(output);
 
-    protected static void colorBlockWithDye(RecipeOutput recipeOutput, List<Item> dyes, List<Item> dyeableItems, String group)
-    {
-        for (int i = 0; i < dyes.size(); ++i)
-        {
-            Item item = dyes.get(i);
-            Item item1 = dyeableItems.get(i);
-            ShapelessRecipeBuilder.shapeless(
-                    RecipeCategory.BUILDING_BLOCKS, item1)
-                    .requires(item)
-                    .requires(SCItems.PEARL)
-                    .requires(Ingredient.of(dyeableItems.stream().filter((p_288265_) -> !p_288265_.equals(item1)).map(ItemStack::new))).group(group).unlockedBy("has_needed_dye", has(item)).save(recipeOutput, "dye_" + getItemName(item1));
-        }
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.SEAGRASS, 1)
+                .requires(SCItems.DRIED_SEAWEED)
+                .requires(Items.POTION)
+                .unlockedBy("has_dried_seaweed", has(SCItems.DRIED_SEAWEED))
+                .save(output);
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.SCULK, 1)
+                .requires(SCItems.SCULKFISH)
+                .unlockedBy("has_sculkfish", has(SCItems.SCULKFISH))
+                .save(output);
     }
 
     List<Item> dyes = List.of(
@@ -1035,6 +1071,44 @@ public class DGSCRecipeProvider extends RecipeProvider
             Items.RED_DYE,
             Items.YELLOW_DYE,
             Items.WHITE_DYE
+    );
+
+    List<Item> wools = List.of(
+            Items.BLACK_WOOL,
+            Items.BLUE_WOOL,
+            Items.BROWN_WOOL,
+            Items.CYAN_WOOL,
+            Items.GRAY_WOOL,
+            Items.GREEN_WOOL,
+            Items.LIGHT_BLUE_WOOL,
+            Items.LIGHT_GRAY_WOOL,
+            Items.LIME_WOOL,
+            Items.MAGENTA_WOOL,
+            Items.ORANGE_WOOL,
+            Items.PINK_WOOL,
+            Items.PURPLE_WOOL,
+            Items.RED_WOOL,
+            Items.YELLOW_WOOL,
+            Items.WHITE_WOOL
+    );
+
+    List<Item> carpets = List.of(
+            Items.BLACK_CARPET,
+            Items.BLUE_CARPET,
+            Items.BROWN_CARPET,
+            Items.CYAN_CARPET,
+            Items.GRAY_CARPET,
+            Items.GREEN_CARPET,
+            Items.LIGHT_BLUE_CARPET,
+            Items.LIGHT_GRAY_CARPET,
+            Items.LIME_CARPET,
+            Items.MAGENTA_CARPET,
+            Items.ORANGE_CARPET,
+            Items.PINK_CARPET,
+            Items.PURPLE_CARPET,
+            Items.RED_CARPET,
+            Items.YELLOW_CARPET,
+            Items.WHITE_CARPET
     );
 
     List<Item> hats = List.of(

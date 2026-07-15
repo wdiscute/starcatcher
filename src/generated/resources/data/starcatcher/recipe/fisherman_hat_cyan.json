@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:cyan_carpet"
+    },
+    "P": {
+      "item": "starcatcher:pearl"
+    },
+    "W": {
+      "item": "minecraft:cyan_wool"
+    }
+  },
+  "pattern": [
+    " P ",
+    "CWW",
+    "   "
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:fisherman_hat_cyan"
+  }
+}

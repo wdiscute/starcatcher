@@ -1,8 +1,10 @@
 {
-  "base_chance": 2,
+  "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:cinder_squid"
+    "item": {
+      "count": 1,
+      "id": "starcatcher:cinder_squid"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -10,50 +12,33 @@
     "missPenalty": 20,
     "modifiers": [
       {
-        "type": "starcatcher:burn_on_miss"
+        "type": "starcatcher:burn_on_miss",
+        "extra_speed": 20,
+        "length": 40,
+        "ramp_time": 10
       }
     ],
     "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": 3701122,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
+        "reward": 15,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.1
       },
       {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
-      },
-      {
-        "color_as_int": 3701122,
-        "hitbox_size_in_pixels": 22,
-        "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 10,
-        "sweet_spot_type": "starcatcher:aqua",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/aqua.png",
-        "vanishing_rate": 0.0
+        "reward": 20,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "vanishing_rate": 0.1
       }
     ]
   },
@@ -62,16 +47,15 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:the_nether"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "the_nether",
+      "translation_override": "dimension.minecraft.the_nether"
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:lava"
-      ]
+      ],
+      "translation_override": "fluid.starcatcher.lava"
     }
   ],
   "size_and_weight": {
@@ -81,5 +65,6 @@
     "deviation_weight_grams": 700.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/nether.png"
 }

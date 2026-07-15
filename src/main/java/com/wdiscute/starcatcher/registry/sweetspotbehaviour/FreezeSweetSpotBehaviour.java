@@ -1,15 +1,25 @@
 package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 
-import com.wdiscute.starcatcher.registry.minigamemodifiers.FrozenPointerWhileActiveModifier;
+import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
+import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
+import com.wdiscute.starcatcher.modifiers.minigamemodifiers.AbstractMinigameModifier;
+import com.wdiscute.starcatcher.modifiers.minigamemodifiers.FreezeHandleModifier;
 
-public class FreezeSweetSpotBehaviour extends AbstractSweetSpotBehaviour
+public class FreezeSweetSpotBehaviour extends NormalSweetSpotBehaviour
 {
     @Override
-    public void onHit()
+    public void onHit(FishingMinigameScreen instance, ActiveSweetSpot ass)
     {
-        super.onHit();
-        instance.addParticles(ass.pos, 30, 0xADD8E6);
+        super.onHit(instance, ass);
+        for (AbstractMinigameModifier modifier : instance.getModifiers())
+        {
+            if(modifier instanceof FreezeHandleModifier fpwam)
+            {
+                fpwam.tickCount = 0;
+                return;
+            }
+        }
 
-        instance.addUniqueModifier(new FrozenPointerWhileActiveModifier(40, 10));
+        instance.addModifier(new FreezeHandleModifier(40, 10));
     }
 }

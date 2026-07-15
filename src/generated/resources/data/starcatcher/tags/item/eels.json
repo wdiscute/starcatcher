@@ -1,0 +1,11 @@
+{
+  "values": [
+    "starcatcher:black_eel",
+    "starcatcher:geode_eel",
+    "starcatcher:obsidian_eel",
+    {
+      "id": "starcatcher:eel_dynamo",
+      "required": false
+    }
+  ]
+}

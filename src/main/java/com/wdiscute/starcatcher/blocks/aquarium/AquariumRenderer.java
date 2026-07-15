@@ -2,23 +2,24 @@ package com.wdiscute.starcatcher.blocks.aquarium;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
-import com.wdiscute.starcatcher.io.CaughtFishInfo;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.registry.FishProperties;
+import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.neoforge.common.Tags;
 
 public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity>
 {
@@ -83,7 +84,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
 
         float scale = SCDataComponents.getOrDefault(
                 fish, SCDataComponents.CAUGHT_FISH_INFO,
-                new CaughtFishInfo(100, 100, 50, FishProperties.Rarity.COMMON, false)
+                CaughtFishInfo.AVERAGE
         ).getScale();
 
 
@@ -91,7 +92,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null)
         {
-            if (!player.getMainHandItem().is(Items.BUCKET) && !player.getOffhandItem().is(Items.BUCKET))
+            if (!player.getMainHandItem().is(Tags.Items.BUCKETS_EMPTY) && !player.getOffhandItem().is(Tags.Items.BUCKETS_EMPTY))
             {
                 poseStack.translate(be.x, be.y, be.z);
 
@@ -113,7 +114,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         // Render model here
 
         if (!be.getFish().isEmpty())
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, be.getLevel());
+            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY, be.getLevel());
 
         poseStack.popPose();
     }

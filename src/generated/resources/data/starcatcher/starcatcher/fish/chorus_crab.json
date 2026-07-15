@@ -1,11 +1,14 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "item": "starcatcher:chorus_crab"
+    "item": {
+      "count": 1,
+      "id": "starcatcher:chorus_crab"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
+    "hp": 350,
     "missPenalty": 10,
     "modifiers": [
       {
@@ -15,82 +18,82 @@
     "speed": 14,
     "sweetspots": [
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 24,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 10,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_claw.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 24,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 10,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_claw.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_leg.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_leg.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_leg.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_leg.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_leg.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 13008601,
+        "color_as_int": -3768615,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
         "reward": 1,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/end_crab_leg.png",
         "vanishing_rate": 0.0
       }
@@ -101,16 +104,15 @@
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:the_end"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "the_end",
+      "translation_override": "dimension.minecraft.the_end"
     },
     {
       "type": "starcatcher:fluid",
       "fluids": [
-        "minecraft:water"
-      ]
+        "minecraft:empty"
+      ],
+      "translation_override": "fluid.starcatcher.air"
     }
   ],
   "size_and_weight": {
@@ -120,5 +122,6 @@
     "deviation_weight_grams": 300.0,
     "golden_chance": 0.02
   },
-  "skips_minigame": false
+  "skips_minigame": false,
+  "textures": "starcatcher:textures/gui/minigame/end_void.png"
 }

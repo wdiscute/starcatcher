@@ -1,64 +1,78 @@
 {
   "base_chance": 5,
   "catch_info": {
-    "fish_bucket": "starcatcher:starcaught_bucket",
-    "item": "starcatcher:crystalback_trout"
+    "fish_bucket": {
+      "count": 1,
+      "id": "starcatcher:starcaught_bucket"
+    },
+    "item": {
+      "count": 1,
+      "id": "starcatcher:crystalback_trout"
+    }
   },
   "difficulty": {
     "decay": 1.0,
-    "hp": 100,
-    "missPenalty": 20,
+    "hp": 150,
+    "missPenalty": 5,
     "modifiers": [
       {
-        "type": "starcatcher:freeze_on_miss"
+        "type": "starcatcher:freeze_on_miss",
+        "length": 40,
+        "rampTime": 10
       }
     ],
-    "speed": 10,
+    "speed": 7,
     "sweetspots": [
       {
-        "color_as_int": 65280,
+        "color_as_int": -16711936,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
-        "moving_rate": 0.0,
+        "moving_rate": 1.0,
         "reward": 15,
-        "sweet_spot_type": "starcatcher:normal",
+        "sweetspot_type": "starcatcher:normal",
         "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": 65280,
-        "hitbox_size_in_pixels": 15,
+        "color_as_int": -16711936,
+        "hitbox_size_in_pixels": 22,
         "is_flip": false,
-        "moving_rate": 0.0,
-        "reward": 20,
-        "sweet_spot_type": "starcatcher:normal",
-        "texture_path": "starcatcher:textures/gui/minigame/spots/thin.png",
+        "moving_rate": 1.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:normal",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/normal.png",
+        "vanishing_rate": 0.0
+      },
+      {
+        "color_as_int": -5383962,
+        "hitbox_size_in_pixels": 33,
+        "is_flip": false,
+        "moving_rate": 1.0,
+        "reward": 15,
+        "sweetspot_type": "starcatcher:freeze",
+        "texture_path": "starcatcher:textures/gui/minigame/spots/frozen.png",
         "vanishing_rate": 0.0
       }
     ]
   },
   "has_guide_entry": true,
-  "rarity": "common",
+  "rarity": "uncommon",
   "restrictions": [
     {
       "type": "starcatcher:dimension",
-      "dimensions": [
-        "minecraft:overworld"
-      ],
-      "dimensions_blacklist": []
+      "dimension_entry": "overworld",
+      "translation_override": "dimension.minecraft.overworld"
     },
     {
       "type": "starcatcher:biome",
-      "biomes": [],
-      "biomes_blacklist": [],
-      "biomes_blacklist_tags": [],
-      "biomes_tags": [
-        "starcatcher:is_cold_lake"
-      ]
+      "biomes": [
+        "#starcatcher:is_cold_lake"
+      ],
+      "blacklist": []
     },
     {
       "type": "starcatcher:elevation_restriction",
-      "max_y": 100,
+      "max_y": 2147483647,
       "min_y": 50,
       "translation_override": "gui.guide.elevation.surface"
     },
@@ -66,19 +80,8 @@
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
-      ]
-    },
-    {
-      "type": "starcatcher:season",
-      "season_extra_chance": {
-        "early_autumn": 0,
-        "early_winter": 0,
-        "late_autumn": 0,
-        "late_winter": 0,
-        "mid_autumn": 0,
-        "mid_winter": 0
-      },
-      "translation_override": "gui.guide.seasons.autumn_winter"
+      ],
+      "translation_override": "fluid.starcatcher.water"
     }
   ],
   "size_and_weight": {
@@ -89,13 +92,5 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "star": {
-    "connections": [
-      "alioth"
-    ],
-    "debug_color": -7146903,
-    "name": "mizar",
-    "x": 2363,
-    "y": 770
-  }
+  "textures": "starcatcher:textures/gui/minigame/icy.png"
 }

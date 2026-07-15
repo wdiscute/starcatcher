@@ -1,0 +1,116 @@
+{
+  "values": [
+    {
+      "id": "starcatcher:aquamarine_pike",
+      "required": false
+    },
+    {
+      "id": "starcatcher:blossomfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:crystalback_sturgeon",
+      "required": false
+    },
+    {
+      "id": "starcatcher:deepjaw_herring",
+      "required": false
+    },
+    {
+      "id": "starcatcher:driftfin",
+      "required": false
+    },
+    {
+      "id": "starcatcher:drifting_bream",
+      "required": false
+    },
+    {
+      "id": "starcatcher:dripfin",
+      "required": false
+    },
+    {
+      "id": "starcatcher:dusktail_snapper",
+      "required": false
+    },
+    {
+      "id": "starcatcher:embergill",
+      "required": false
+    },
+    {
+      "id": "starcatcher:frostgill_chub",
+      "required": false
+    },
+    {
+      "id": "starcatcher:frostjaw_trout",
+      "required": false
+    },
+    {
+      "id": "starcatcher:garnet_mackerel",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowstone_seeker",
+      "required": false
+    },
+    {
+      "id": "starcatcher:gold_fan",
+      "required": false
+    },
+    {
+      "id": "starcatcher:hollowbelly_darter",
+      "required": false
+    },
+    {
+      "id": "starcatcher:mistback_chub",
+      "required": false
+    },
+    {
+      "id": "starcatcher:obidontiee",
+      "required": false
+    },
+    {
+      "id": "starcatcher:pale_carp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:peakdweller",
+      "required": false
+    },
+    {
+      "id": "starcatcher:phillipsfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:pink_koi",
+      "required": false
+    },
+    {
+      "id": "starcatcher:rainfin",
+      "required": false
+    },
+    {
+      "id": "starcatcher:rockgill",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sandtail",
+      "required": false
+    },
+    {
+      "id": "starcatcher:scorchfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sea_bass",
+      "required": false
+    },
+    {
+      "id": "starcatcher:valve",
+      "required": false
+    },
+    {
+      "id": "starcatcher:whiteveil",
+      "required": false
+    }
+  ]
+}

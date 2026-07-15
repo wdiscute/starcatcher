@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.particles;
 
-import com.wdiscute.starcatcher.U;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
@@ -14,11 +14,11 @@ public class FishingBitingLavaParticles extends TextureSheetParticle
     {
         super(level, x, y, z);
 
-        this.xd = 0f + U.r.nextFloat(0.2f) - 0.1f;
-        this.yd = 0f + U.r.nextFloat(0.2f) + 0.1f;
-        this.zd = 0f + U.r.nextFloat(0.2f) - 0.1f;
+        this.xd = 0f + Utils.r.nextFloat(0.2f) - 0.1f;
+        this.yd = 0f + Utils.r.nextFloat(0.2f) + 0.1f;
+        this.zd = 0f + Utils.r.nextFloat(0.2f) - 0.1f;
 
-        this.quadSize = U.r.nextFloat(0.2f) + 0.05f;
+        this.quadSize = Utils.r.nextFloat(0.2f) + 0.05f;
 
         this.lifetime = 20;
 

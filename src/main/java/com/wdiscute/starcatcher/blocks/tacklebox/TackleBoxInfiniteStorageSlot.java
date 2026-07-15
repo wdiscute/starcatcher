@@ -25,7 +25,7 @@ public class TackleBoxInfiniteStorageSlot extends Slot
     @Override
     public boolean mayPlace(ItemStack stack)
     {
-        return stack.is(SCTags.PLACEABLE_IN_TACKLE_BOX_FISH_SLOT);
+        return false;
     }
 
     @Override

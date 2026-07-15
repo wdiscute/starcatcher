@@ -1,11 +1,9 @@
 package com.wdiscute.starcatcher.guide;
 
-import com.wdiscute.starcatcher.registry.SignedGuide;
+import com.wdiscute.starcatcher.data.SignedGuide;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-import java.sql.Date;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -17,9 +15,8 @@ public class FishingSignedGuideScreen extends FishingGuideScreen
 
     public FishingSignedGuideScreen(SignedGuide signedGuide)
     {
-        super();
+        super(false, signedGuide);
         this.signedGuide = signedGuide;
-        isSigned = true;
     }
 
     @Override

@@ -43,9 +43,7 @@ public class TackleBoxAttachmentSlot extends Slot
     public void onTake(Player player, ItemStack stack)
     {
         if(tackleMenu != null)
-        {
             tackleMenu.update();
-        }
 
         super.onTake(player, stack);
     }

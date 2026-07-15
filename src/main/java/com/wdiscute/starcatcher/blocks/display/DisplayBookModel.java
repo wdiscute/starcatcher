@@ -30,7 +30,8 @@ public class DisplayBookModel extends Model
     private final ModelPart flipPage1;
     private final ModelPart flipPage2;
 
-    public DisplayBookModel(ModelPart root) {
+    public DisplayBookModel(ModelPart root)
+    {
         super(RenderType::entitySolid);
         this.root = root;
         this.leftLid = root.getChild("left_lid");
@@ -41,7 +42,8 @@ public class DisplayBookModel extends Model
         this.flipPage2 = root.getChild("flip_page2");
     }
 
-    public static LayerDefinition createBodyLayer() {
+    public static LayerDefinition createBodyLayer()
+    {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
         partdefinition.addOrReplaceChild(
@@ -64,15 +66,18 @@ public class DisplayBookModel extends Model
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color)
+    {
         this.render(poseStack, buffer, packedLight, packedOverlay, color);
     }
 
-    public void render(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
+    public void render(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color)
+    {
         this.root.render(poseStack, buffer, packedLight, packedOverlay, color);
     }
 
-    public void setupAnim(float time, float rightPageFlipAmount, float leftPageFlipAmount, float bookOpenAmount) {
+    public void setupAnim(float time, float rightPageFlipAmount, float leftPageFlipAmount, float bookOpenAmount)
+    {
         float f = (Mth.sin(time * 0.02F) * 0.1F + 1.25F) * bookOpenAmount;
         this.leftLid.yRot = (float) Math.PI + f;
         this.rightLid.yRot = -f;

@@ -1,27 +1,13 @@
 package com.wdiscute.starcatcher.registry.items;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.io.SCDataComponents;
-import com.wdiscute.starcatcher.io.SingleStackContainer;
-import com.wdiscute.starcatcher.registry.catchmodifiers.SCCatchModifiers;
-import com.wdiscute.starcatcher.registry.items.rod.StarcatcherFishingRodItem;
-import com.wdiscute.starcatcher.registry.minigamemodifiers.SCMinigameModifiers;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
+import com.wdiscute.starcatcher.registry.SCDataComponents;
+import com.wdiscute.utils.MaybeStack;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class RodSlotTooltipRenderer implements ClientTooltipComponent
 {
@@ -42,9 +28,9 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
     {
         this.tooltip = tooltip;
         ItemStack rod = tooltip.rod();
-        bobber = SCDataComponents.getOrDefault(rod, SCDataComponents.BOBBER, SingleStackContainer.empty()).stack();
-        bait = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.BAIT, SingleStackContainer.empty()).stack();
-        hook = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.HOOK, SingleStackContainer.empty()).stack();
+        bobber = SCDataComponents.getOrDefault(rod, SCDataComponents.BOBBER, MaybeStack.EMPTY).toStack();
+        bait = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
+        hook = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.HOOK, MaybeStack.EMPTY).toStack();
     }
 
     @Override
@@ -69,16 +55,25 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
         if (bobber.isEmpty())
             guiGraphics.blit(BOBBER, x + 2, y + 1, 0, 0, 16, 16, 16, 16);
         else
+        {
             guiGraphics.renderItem(bobber, x + 2, y + 1);
+            guiGraphics.renderItemDecorations(font, bobber, x + 2 + 2, y + 1);
+        }
 
         if (bait.isEmpty())
             guiGraphics.blit(BAIT, x + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
         else
+        {
             guiGraphics.renderItem(bait, x + 18 + 2, y + 1);
+            guiGraphics.renderItemDecorations(font, bait, x + 18 + 2, y + 1);
+        }
 
         if (hook.isEmpty())
             guiGraphics.blit(HOOK, x + 18 + 18 + 2, y + 1, 0, 0, 16, 16, 16, 16);
         else
+        {
             guiGraphics.renderItem(hook, x + 18 + 18 + 2, y + 1);
+            guiGraphics.renderItemDecorations(font, hook, x + 18 + 18 + 2, y + 1);
+        }
     }
 }
