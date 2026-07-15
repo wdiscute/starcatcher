@@ -2,5 +2,11 @@
   "parent": "item/handheld_rod",
   "textures": {
     "layer0": "starcatcher:item/obsidian_rod_uncast"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {"starcatcher:cast": 1},
+      "model": "starcatcher:item/obsidian_rod_cast"
+    }
+  ]
 }

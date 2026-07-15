@@ -16,5 +16,57 @@
     "sounds": [
       "starcatcher:king_grr"
     ]
+  },
+
+  "valley_biting": {
+    "subtitle": "sounds.starcatcher.biting",
+    "sounds": [
+      "starcatcher:valley_biting"
+    ]
+  },
+  "valley_cast": {
+    "subtitle": "sounds.starcatcher.cast",
+    "sounds": [
+      "starcatcher:valley_cast"
+    ]
+  },
+  "valley_missed": {
+    "subtitle": "sounds.starcatcher.missed",
+    "sounds": [
+      "starcatcher:valley_missed"
+    ]
+  },
+  "valley_minigame_starts": {
+    "subtitle": "sounds.starcatcher.minigame_starts",
+    "sounds": [
+      "starcatcher:valley_minigame_starts"
+    ]
+  },
+  "valley_boop": {
+    "subtitle": "sounds.starcatcher.boop",
+    "sounds": [
+      "starcatcher:valley_boop"
+    ]
+  },
+  "valley_reel": {
+    "subtitle": "sounds.starcatcher.reel",
+    "sounds": [
+      "starcatcher:valley_reel"
+    ]
+  },
+
+
+
+  "survivor_biting": {
+    "subtitle": "sounds.starcatcher.biting",
+    "sounds": [
+      "starcatcher:survivor_biting"
+    ]
+  },
+  "survivor_minigame_starts": {
+    "subtitle": "sounds.starcatcher.minigame_starts",
+    "sounds": [
+      "starcatcher:survivor_minigame_starts"
+    ]
   }
 }

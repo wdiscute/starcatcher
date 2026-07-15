@@ -274,13 +274,13 @@
 
   "tooltip.modifier.starcatcher.freeze_on_miss": "Промах по точке заморозит катушку на короткое время",
 
-  "tooltip.modifier.starcatcher.spawn_frozen_sweet_spots": "Время от времени может появиться замороженная точка, замораживающая катушку",
+  "tooltip.modifier.starcatcher.spawn_frozen_sweetspots": "Время от времени может появиться замороженная точка, замораживающая катушку",
 
-  "tooltip.modifier.starcatcher.spawn_tnt_sweet_spots": "Могут появляться взрывные точки",
+  "tooltip.modifier.starcatcher.spawn_tnt_sweetspots": "Могут появляться взрывные точки",
 
   "tooltip.modifier.starcatcher.spawn_treasure_on_three_hits": "Три успешных попадания подряд призовут сундук с сокровищами",
 
-  "tooltip.modifier.starcatcher.slower_moving_sweet_spots": "Замедляет движущиеся точки",
+  "tooltip.modifier.starcatcher.slower_moving_sweetspots": "Замедляет движущиеся точки",
 
   "tooltip.modifier.starcatcher.stop_decay_on_hit": "Ненадолго не даёт рыбе уплыть после попадания по точке",
 
@@ -290,13 +290,13 @@
 
   "tooltip.modifier.starcatcher.slower_vanishing": "Исчезающие точки исчезают дольше",
 
-  "tooltip.modifier.starcatcher.bigger_green_sweet_spots": "Зелёные точки будут немного больше",
+  "tooltip.modifier.starcatcher.bigger_green_sweetspots": "Зелёные точки будут немного больше",
 
   "tooltip.modifier.starcatcher.add_leaves_spots": "В случайные моменты появляются листяные точки",
 
-  "tooltip.modifier.starcatcher.add_aqua_sweet_spot": "Добавляется дополнительная водяная точка",
+  "tooltip.modifier.starcatcher.add_aqua_sweetspot": "Добавляется дополнительная водяная точка",
 
-  "tooltip.modifier.starcatcher.add_three_aqua_sweet_spot": "Добавляются три дополнительные водяные точки",
+  "tooltip.modifier.starcatcher.add_three_aqua_sweetspot": "Добавляются три дополнительные водяные точки",
 
   "tooltip.modifier.starcatcher.flip_every_hit": "При каждом попадании по точке происходит переворот",
 
@@ -531,8 +531,6 @@
 
   "block.starcatcher.display" : "Дисплей Ловца Звёзд",
   "tooltip.starcatcher.display.0" : "[В разработке]",
-  "block.starcatcher.telescope" : "Телескоп",
-  "tooltip.starcatcher.telescope.0" : "[В разработке]",
 
   "item.starcatcher.award_all_fishes" : "Выдать всю рыбу",
   "item.starcatcher.award_one_fish" : "Выдать одну рыбу",

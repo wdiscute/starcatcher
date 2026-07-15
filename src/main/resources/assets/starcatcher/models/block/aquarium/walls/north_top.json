@@ -3,14 +3,14 @@
 	"credit": "Made with Blockbench",
 	"render_type": "cutout_mipped",
 	"textures": {
-		"1": "minecraft:block/spruce_planks",
-		"glass": "minecraft:block/glass",
+		"1": "block/spruce_planks",
+		"glass": "block/glass",
 		"particle": "starcatcher:block/aquarium/center"
 	},
 	"elements": [
 		{
-			"from": [0, 16, -2],
-			"to": [16, 18, 0],
+			"from": [0.01, 15.99, -1.99],
+			"to": [15.99, 17.99, 0.01],
 			"rotation": {"angle": 0, "axis": "y", "origin": [0, 17, -2]},
 			"faces": {
 				"north": {"uv": [0, 0, 16, 2], "texture": "#1"},

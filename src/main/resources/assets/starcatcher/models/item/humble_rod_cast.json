@@ -1,5 +1,5 @@
 {
-  "parent": "item/handheld_rod",
+  "parent": "item/fishing_rod",
   "textures": {
     "layer0": "starcatcher:item/humble_rod_cast"
   }

@@ -3,6 +3,8 @@
     "player"
   ],
   "slots": [
-    "head"
+    "head",
+    "charm",
+    "hands"
   ]
 }

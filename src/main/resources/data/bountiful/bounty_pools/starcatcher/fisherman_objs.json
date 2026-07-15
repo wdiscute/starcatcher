@@ -1,0 +1,22 @@
+{
+    "requires": ["starcatcher"],
+    "content": {
+
+        "starcatcher_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "none"
+            },
+            "amount": {
+                "min": 10,
+                "max": 16
+            },
+            "icon" : "starcatcher:sea_bass",
+            "name" : "Catch fish!",
+            "rarity" : "COMMON",
+            "unitWorth": 40,
+            "timeMult": 3
+        }
+    }
+}

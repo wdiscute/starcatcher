@@ -2,6 +2,6 @@
 	"parent" : "starcatcher:block/tackle_box",
 	"textures": {
 		"0": "starcatcher:block/tackle_box/tackle_box_gray",
-		"particle": "starcatcher:block/tackle_box/tackle_box_gray"
+		"particle": "minecraft:block/gray_concrete"
 	}
 }

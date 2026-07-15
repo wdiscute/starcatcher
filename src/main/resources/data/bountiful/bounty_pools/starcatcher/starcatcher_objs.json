@@ -1,0 +1,331 @@
+{
+    "requires": ["starcatcher"],
+    "content": {
+        "common_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "common"
+            },
+            "amount": {
+                "min": 4,
+                "max": 6
+            },
+            "icon" : "starcatcher:sea_bass",
+            "name" : "Catch common fish",
+            "rarity" : "COMMON",
+            "unitWorth": 100,
+            "timeMult": 3
+        },
+
+        "uncommon_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "uncommon"
+            },
+            "amount": {
+                "min": 3,
+                "max": 4
+            },
+            "icon" : "starcatcher:silverveil_perch",
+            "name" : "Catch uncommon fish",
+            "rarity" : "UNCOMMON",
+            "unitWorth": 300,
+            "timeMult": 3
+        },
+
+        "rare_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "rare"
+            },
+            "amount": {
+                "min": 2,
+                "max": 3
+            },
+            "icon" : "starcatcher:ripple_catfish",
+            "name" : "Catch rare fish",
+            "rarity" : "RARE",
+            "unitWorth": 600,
+            "timeMult": 3
+        },
+
+        "epic_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "epic"
+            },
+            "amount": {
+                "min": 1,
+                "max": 2
+            },
+            "icon" : "starcatcher:rose_siamese_fish",
+            "name" : "Catch epic fish",
+            "rarity" : "EPIC",
+            "unitWorth": 2500,
+            "timeMult": 3
+        },
+
+        "legendary_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "legendary"
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:aurora",
+            "name" : "Catch a legendary fish",
+            "rarity" : "LEGENDARY",
+            "unitWorth": 10000,
+            "timeMult": 3
+        },
+
+
+
+
+
+
+        "catch_any_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "none"
+            },
+            "amount": {
+                "min": 10,
+                "max": 16
+            },
+            "icon" : "starcatcher:elderscale",
+            "name" : "Catch any fish",
+            "rarity" : "COMMON",
+            "unitWorth": 40,
+            "timeMult": 3
+        },
+
+
+
+        "perfect_catch_fish": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "require_perfect_catch": true
+            },
+            "amount": {
+                "min": 3,
+                "max": 5
+            },
+            "icon" : "starcatcher:blue_crystal_fin",
+            "name" : "Get perfect catches",
+            "rarity" : "COMMON",
+            "unitWorth": 40
+        },
+
+
+
+        "quick_catch": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "max_time": 200
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:stonefish",
+            "name" : "Catch a fish within 10 seconds",
+            "rarity" : "COMMON",
+            "unitWorth": 400
+        },
+
+
+
+        "sea_bass": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rl": "starcatcher:sea_bass"
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:sea_bass",
+            "name" : "Catch a Sea bass. No, wait—it's at least a C+!",
+            "rarity" : "UNCOMMON",
+            "unitWorth": 1200
+        },
+
+        "salmon": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rl": "starcatcher:salmon"
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "minecraft:salmon",
+            "name" : "Catch a salmon",
+            "rarity" : "UNCOMMON",
+            "unitWorth": 1200
+        },
+
+
+        "obidontiee": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rl": "starcatcher:obidontiee"
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:obidontiee",
+            "name" : "Catch an Obidontiee",
+            "rarity" : "UNCOMMON",
+            "unitWorth": 1200
+        },
+
+
+
+        "quick_rare": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "rare",
+                "max_time": 200
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:lightning_bass",
+            "name" : "Catch a rare fish within 10 seconds",
+            "rarity" : "UNCOMMON",
+            "unitWorth": 1700
+        },
+
+
+
+        "quick_epic": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "epic",
+                "max_time": 300
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:crystalback_boreal",
+            "name" : "Catch an epic fish within 15 seconds",
+            "rarity" : "RARE",
+            "unitWorth": 2800
+        },
+
+
+
+        "perfect_epic": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "epic",
+                "require_perfect_catch": true
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:blue_herring",
+            "name" : "Get a perfect catch on an epic fish",
+            "rarity" : "EPIC",
+            "unitWorth": 6000
+        },
+
+
+
+        "perfect_rare": {
+            "type": "criteria",
+            "content": "starcatcher:fish_caught",
+            "conditions": {
+                "rarity": "rare",
+                "require_perfect_catch": true
+            },
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "icon" : "starcatcher:petal_bass",
+            "name" : "Get a perfect catch on an rare fish",
+            "rarity" : "RARE",
+            "unitWorth": 3000
+        },
+
+
+
+        "deliver_common_fish": {
+            "type": "item_tag",
+            "content": "starcatcher:common_fishes",
+            "name": "Deliver common fishes",
+            "amount": {
+                "min": 4,
+                "max": 7
+            },
+            "unitWorth": 40
+        },
+
+        "deliver_uncommon_fish": {
+            "type": "item_tag",
+            "content": "starcatcher:uncommon_fishes",
+            "name": "Deliver uncommon fishes",
+            "amount": {
+                "min": 4,
+                "max": 7
+            },
+            "unitWorth": 70
+        },
+
+        "deliver_rare_fish": {
+            "type": "item_tag",
+            "content": "starcatcher:rare_fishes",
+            "name": "Deliver rare fishes",
+            "amount": {
+                "min": 4,
+                "max": 7
+            },
+            "unitWorth": 150
+        },
+
+        "deliver_epic_fish": {
+            "type": "item_tag",
+            "content": "starcatcher:epic_fishes",
+            "name": "Deliver epic fishes",
+            "amount": {
+                "min": 2,
+                "max": 5
+            },
+            "unitWorth": 1000
+        },
+
+        "deliver_legendary_fish": {
+            "type": "item_tag",
+            "content": "starcatcher:legendary_fishes",
+            "name": "Deliver a legendary fish",
+            "amount": {
+                "min": 1,
+                "max": 1
+            },
+            "unitWorth": 7500
+        }
+    }
+}
