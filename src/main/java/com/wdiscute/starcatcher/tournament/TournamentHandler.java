@@ -71,8 +71,6 @@ public class TournamentHandler
 
     public static void cancelTournament(Level level, Tournament tournament)
     {
-        // Multiblock removal can reach this method through more than one block update.
-        // A finished tournament has already been removed, recorded, and broadcast.
         if (tournament == null || tournament.status == Tournament.Status.FINISHED) return;
 
         for (var entry : tournament.playerScores)

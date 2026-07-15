@@ -16,8 +16,6 @@ public record CBFinishedTournamentsListPayload(List<Tournament> list) implements
 {
     public CBFinishedTournamentsListPayload
     {
-        // Encoding happens asynchronously. Keep a stable snapshot instead of exposing
-        // TournamentHandler's mutable list to Netty while another tournament finishes.
         list = List.copyOf(list);
     }
 
