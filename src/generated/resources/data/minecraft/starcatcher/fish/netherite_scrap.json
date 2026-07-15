@@ -52,6 +52,12 @@
       "translation_override": "dimension.minecraft.the_nether"
     },
     {
+      "type": "starcatcher:fluid",
+      "fluids": [
+        "minecraft:water"
+      ]
+    },
+    {
       "type": "starcatcher:caught_limit",
       "limit": 3
     },

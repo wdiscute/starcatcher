@@ -16,7 +16,7 @@
     "starcatcher:echoing_hook",
     "starcatcher:frozen_hook",
     {
-      "id": "tide:void_fishing_hook",
+      "id": "tide:void_hook",
       "required": false
     }
   ]
