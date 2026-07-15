@@ -31,8 +31,6 @@ import static java.lang.Float.NaN;
 
 public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
 {
-    final EntityRendererProvider.Context context;
-
     public static final Map<ResourceLocation, EntityModel<FishEntity>> BOB_MODELS = new HashMap<>();
 
     public static void createMap(EntityModelSet modelSet)
@@ -53,7 +51,6 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
     public FishingBobRenderer(EntityRendererProvider.Context context)
     {
         super(context);
-        this.context = context;
         createMap(context.getModelSet());
     }
 

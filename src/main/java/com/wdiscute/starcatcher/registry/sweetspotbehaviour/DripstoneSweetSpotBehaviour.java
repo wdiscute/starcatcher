@@ -8,7 +8,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.sounds.SoundEvents;
 
-import java.awt.image.ImagingOpException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

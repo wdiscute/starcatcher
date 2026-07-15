@@ -8,7 +8,6 @@ import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
 import com.wdiscute.starcatcher.data.network.tournament.CBFinishedTournamentsListPayload;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.data.TournamentSavedData;
 import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.data.network.*;
@@ -35,7 +34,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
@@ -66,16 +64,6 @@ import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 @EventBusSubscriber(modid = Starcatcher.MOD_ID)
 public class SCEvents
 {
-    @SubscribeEvent
-    public static void serverStarted(RegisterSpawnPlacementsEvent event)
-    {
-        event.register(
-                SCEntities.FISH.get(), SpawnPlacementTypes.IN_WATER,
-                Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                FishEntity::validSpawnPlacement,
-                RegisterSpawnPlacementsEvent.Operation.REPLACE);
-    }
-
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event)
     {

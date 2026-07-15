@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.messageinabottle.letter;
 
-import com.wdiscute.libtooltips.Tooltips;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;

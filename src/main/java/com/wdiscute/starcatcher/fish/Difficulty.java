@@ -30,14 +30,6 @@ public record Difficulty(
         this(hp, speed, penalty, decay, modifiers, Arrays.stream(sweetSpots).toList());
     }
 
-    public Difficulty addModifiers(List<Modifier> newModifier)
-    {
-        List<Modifier> list = new ArrayList<>();
-        list.addAll(newModifier);
-        list.addAll(this.modifiers);
-        return new Difficulty(this.hp, this.speed, this.penalty, this.decay, list, this.sweetSpots);
-    }
-
     public Difficulty addModifier(Modifier newModifier)
     {
         List<Modifier> list = new ArrayList<>();
@@ -52,11 +44,6 @@ public record Difficulty(
     }
 
     public Difficulty withPenalty(int penalty)
-    {
-        return new Difficulty(hp, speed, penalty, decay, modifiers, sweetSpots);
-    }
-
-    public Difficulty withDecay(int decay)
     {
         return new Difficulty(hp, speed, penalty, decay, modifiers, sweetSpots);
     }
@@ -91,13 +78,6 @@ public record Difficulty(
     {
         List<SweetSpot> sss = new ArrayList<>();
         sweetSpots.forEach(s -> sss.add(s.moving(1)));
-        return new Difficulty(hp, speed, penalty, decay, modifiers, sss);
-    }
-
-    public Difficulty flip()
-    {
-        List<SweetSpot> sss = new ArrayList<>();
-        sweetSpots.forEach(s -> sss.add(s.flip()));
         return new Difficulty(hp, speed, penalty, decay, modifiers, sss);
     }
 
@@ -466,11 +446,6 @@ public record Difficulty(
             List<Modifier> modifiers
     )
     {
-        public SweetSpot(ResourceLocation sweetSpotType, ResourceLocation texturePath, int size, int reward, int particleColor, List<Modifier> onHitModifiers)
-        {
-            this(sweetSpotType, texturePath, size, reward, false, 0, 0, particleColor, onHitModifiers);
-        }
-
         public SweetSpot(ResourceLocation sweetSpotType, ResourceLocation texturePath, int size, int reward, int particleColor)
         {
             this(sweetSpotType, texturePath, size, reward, false, 0, 0, particleColor, List.of());
@@ -535,12 +510,6 @@ public record Difficulty(
             return new SweetSpot(this.sweetSpotType, this.texturePath, this.size, this.reward, this.isFlip, this.vanishingRate, movingRate, this.particleColor, this.modifiers);
         }
 
-        public final SweetSpot withModifiers(Modifier... modifiers)
-        {
-            return new SweetSpot(this.sweetSpotType, this.texturePath, this.size, this.reward, this.isFlip, this.vanishingRate, this.movingRate, this.particleColor, Arrays.stream(modifiers).toList());
-        }
-
-
         public static SweetSpot TRASH = new SweetSpot(
                 SCSweetSpotsBehaviour.NORMAL,
                 RL_NORMAL,
@@ -578,15 +547,6 @@ public record Difficulty(
                 RL_THIN_STEADY,
                 20,
                 20,
-                0xff00ff00
-        );
-
-        public static SweetSpot THIN_STEADY_MOSSY = new SweetSpot(
-                SCSweetSpotsBehaviour.NORMAL,
-                RL_THIN_STEADY_MOSSY,
-                20,
-                10,
-                true, 0.01f, 1,
                 0xff00ff00
         );
 
@@ -636,14 +596,6 @@ public record Difficulty(
                 RL_THIN,
                 15,
                 0,
-                0xff00ff00
-        );
-
-        public static SweetSpot NORMAL_HEAVY = new SweetSpot(
-                SCSweetSpotsBehaviour.NORMAL,
-                RL_NORMAL,
-                22,
-                1,
                 0xff00ff00
         );
 

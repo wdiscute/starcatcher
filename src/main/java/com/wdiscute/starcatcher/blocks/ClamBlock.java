@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.blocks;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.registry.SCItems;
-import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;

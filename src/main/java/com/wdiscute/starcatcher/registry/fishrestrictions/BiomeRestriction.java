@@ -10,7 +10,6 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.EntryOrTag;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.*;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

@@ -173,7 +173,7 @@ public final class FishRegistration
 
     public static ResourceKey<FishProperties> key(FishProperties fp)
     {
-        //if starcatcher create fish, make key have create instead
+        //if starcatcher create compat fish, make key have create instead
         if(CreateCompat.CREATE_COMPAT_FISH.stream().anyMatch(o -> fp.catchInfo().fish().rl().equals(o.getId())))
             return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Utils.rl("create", fp.catchInfo().fish().rl().getPath()));
 

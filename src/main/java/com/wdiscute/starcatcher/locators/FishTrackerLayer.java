@@ -11,7 +11,6 @@ import com.wdiscute.starcatcher.fish.FishApi;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.guide.SettingsScreen;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
-import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import net.minecraft.CrashReport;
@@ -261,10 +260,5 @@ public class FishTrackerLayer implements LayeredDraw.Layer
     private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
     {
         guiGraphics.blit(rl, uiX, uiY, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
-    }
-
-    private void drawComp(GuiGraphics guiGraphics, Component comp, int xOffset, int yOffset)
-    {
-        guiGraphics.drawString(font, comp, uiX + xOffset, uiY + yOffset, 0, false);
     }
 }

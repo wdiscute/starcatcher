@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.compat;
 
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.fish.FishApi;
-import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.utils.Utils;
 import it.hurts.sskirillss.relics.api.relics.IRelicItem;
 import it.hurts.sskirillss.relics.api.relics.data.AbilityData;

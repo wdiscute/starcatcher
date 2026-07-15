@@ -21,7 +21,6 @@ public class StarcatcherEmiSmithingRecipe implements EmiRecipe
 {
     protected final EmiIngredient template;
     protected final EmiIngredient input;
-    protected final EmiIngredient base;
     protected final EmiIngredient material;
     protected final EmiStack output;
 
@@ -29,7 +28,6 @@ public class StarcatcherEmiSmithingRecipe implements EmiRecipe
     {
         this.template = EmiIngredient.of(recipe.template());
         this.input = EmiIngredient.of(recipe.rod());
-        this.base = EmiIngredient.of(recipe.rod());
         this.material = EmiIngredient.of(recipe.material());
 
         ItemStack result = recipe.assembledwad(

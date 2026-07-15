@@ -61,16 +61,10 @@ public class StarcatcherRodRecipeBuilder
                 false, false, true);
     }
 
-
     public StarcatcherRodRecipeBuilder unlocks(String key, Criterion<?> criterion)
     {
         this.criteria.put(key, criterion);
         return this;
-    }
-
-    public void save(RecipeOutput recipeOutput, String recipeId)
-    {
-        this.save(recipeOutput, ResourceLocation.parse(recipeId));
     }
 
     public void save(RecipeOutput recipeOutput, ResourceLocation recipeId)

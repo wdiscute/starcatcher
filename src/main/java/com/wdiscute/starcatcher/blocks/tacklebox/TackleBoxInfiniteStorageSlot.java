@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
 import com.mojang.datafixers.util.Pair;
-import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;

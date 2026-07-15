@@ -54,11 +54,6 @@ public interface SCCommands
             o -> Component.translatableEscape("commands.starcatcher.fish_entry_not_found", o)
     );
 
-    DynamicCommandExceptionType ERROR_MODIFIER_INVALID = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.modifier_not_found", o)
-    );
-
-
     static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context)
     {
         dispatcher.register(Commands.literal("starcatcher")

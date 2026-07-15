@@ -7,7 +7,6 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 
 public class ExtraExpBasedOnPerformanceModifier extends AbstractCatchModifier
 {

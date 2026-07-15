@@ -3,13 +3,7 @@ package com.wdiscute.starcatcher.data;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCConfig;
-import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.fish.FishApi;
-import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
-import net.dries007.tfc.client.overworld.Star;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.Level;
 
 public record CaughtFishInfo(
         float size,

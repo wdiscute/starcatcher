@@ -17,15 +17,6 @@ import java.util.UUID;
 
 public record SBStandTournamentNameChangePayload(UUID uuid, String name) implements CustomPacketPayload
 {
-
-    public static final StreamCodec<ByteBuf, GameProfile> GAME_PROFILE_STREAM_CODEC = StreamCodec.composite(
-            UUIDUtil.STREAM_CODEC, GameProfile::getId,
-            ByteBufCodecs.STRING_UTF8, GameProfile::getName,
-            GameProfile::new
-    );
-
-    public static final StreamCodec<ByteBuf, List<GameProfile>> GAME_PROFILE_STREAM_CODEC_LIST = GAME_PROFILE_STREAM_CODEC.apply(ByteBufCodecs.list());
-
     public static final Type<SBStandTournamentNameChangePayload> TYPE = new Type<>(Starcatcher.rl("sb_stand_tournament_name"));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, SBStandTournamentNameChangePayload> STREAM_CODEC = StreamCodec.composite(
@@ -39,7 +30,6 @@ public record SBStandTournamentNameChangePayload(UUID uuid, String name) impleme
     {
         return TYPE;
     }
-
 
     public void handle(IPayloadContext context)
     {

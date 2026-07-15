@@ -118,7 +118,6 @@ public record SizeAndWeight(float sizeAverage, float sizeDeviation, float weight
 
             return weightString;
         }
-
     }
 
     public SizeAndWeight(float sizeAverage, float sizeDeviation, float weightAverage, float weightDeviation)
@@ -127,7 +126,6 @@ public record SizeAndWeight(float sizeAverage, float sizeDeviation, float weight
     }
 
     public static final SizeAndWeight DEFAULT = new SizeAndWeight(41f, 21f, 2001f, 701f, 0.02f);
-    public static final SizeAndWeight NONE = new SizeAndWeight(0, 0, 0, 0, 0);
 
     public static final Codec<SizeAndWeight> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -146,26 +144,4 @@ public record SizeAndWeight(float sizeAverage, float sizeDeviation, float weight
             ByteBufCodecs.FLOAT, SizeAndWeight::goldenChance,
             SizeAndWeight::new
     );
-
-    public static int getRandomSize(FishProperties fp, float percentile)
-    {
-        percentile = Mth.clamp(percentile, 0.01f, 99.999f);
-        percentile = 100 - percentile;
-        percentile = percentile / 100;
-        float dev = fp.sizeWeight().sizeDeviation() * 2;
-        float average = fp.sizeWeight().sizeAverage();
-
-        return (int) (average + percentile * dev - dev / 2);
-    }
-
-    public static int getRandomWeight(FishProperties fp, float percentile)
-    {
-        percentile = Mth.clamp(percentile, 0.01f, 99.999f);
-        percentile = 100 - percentile;
-        percentile = percentile / 100;
-        float dev = fp.sizeWeight().weightDeviation() * 2;
-        float average = fp.sizeWeight().weightAverage();
-
-        return (int) (average + percentile * dev - dev / 2);
-    }
 }

@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.minigame;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.logging.LogUtils;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.fish.Difficulty;
@@ -789,11 +788,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         return isHoldingMouse || isHoldingKey;
     }
 
-    public static boolean hasDistantHorizons()
-    {
-        return ModList.get().isLoaded("distanthorizons");
-    }
-
     public boolean isSettingsScreen()
     {
         return false;
@@ -818,18 +812,5 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     public boolean isPauseScreen()
     {
         return false;
-    }
-
-    public void refreshSweetSpotsAlphas()
-    {
-        activeSweetSpots.forEach(s -> s.alpha = 1);
-    }
-
-    public void removeAllSweetSpots()
-    {
-        for (var ass : activeSweetSpots)
-        {
-            ass.removed = true;
-        }
     }
 }

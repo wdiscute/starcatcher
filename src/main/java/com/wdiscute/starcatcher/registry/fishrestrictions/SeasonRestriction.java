@@ -3,11 +3,9 @@ package com.wdiscute.starcatcher.registry.fishrestrictions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.compat.EclipticSeasonsCompat;
 import com.wdiscute.starcatcher.compat.SereneSeasonsCompat;
-import com.wdiscute.starcatcher.compat.TerraFirmaCraftSeasonsCompat;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -74,12 +72,6 @@ public class SeasonRestriction extends AbstractFishRestriction
         if (ModList.get().isLoaded("eclipticseasons"))
         {
             currentSeason = EclipticSeasonsCompat.getSeason(level);
-        }
-
-        //TerraFirmaCraft Seasons check
-        if (ModList.get().isLoaded("tfc"))
-        {
-            currentSeason = TerraFirmaCraftSeasonsCompat.getSeason(level);
         }
 
         if (currentSeason.equals(Seasons.ALL)) return 0;

@@ -2,15 +2,12 @@ package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-
-import static com.ibm.icu.impl.ValidIdentifiers.Datatype.x;
 
 public class BurnPointerWhileActiveModifier extends AbstractTimedModifier
 {

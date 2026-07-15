@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import com.wdiscute.utils.Utils;
 
 public class GlowingSweetSpotBehaviour extends NormalSweetSpotBehaviour
 {

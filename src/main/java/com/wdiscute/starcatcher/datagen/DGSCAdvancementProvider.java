@@ -17,7 +17,6 @@ public class DGSCAdvancementProvider extends AdvancementProvider {
 
     private static class Generator implements AdvancementGenerator {
 
-        @SuppressWarnings("removal")
         @Override
         public void generate(HolderLookup.Provider provider, Consumer<AdvancementHolder> consumer, ExistingFileHelper existingFileHelper) {
 //            consumer.accept(Advancement.Builder

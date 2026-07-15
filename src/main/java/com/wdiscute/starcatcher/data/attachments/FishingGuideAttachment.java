@@ -24,6 +24,7 @@ public class FishingGuideAttachment
     {
         this.fishesCaught = new HashMap<>(fishesCaught); //guarantees the map is mutable
         this.receivedGuide = receivedGuide;
+        this.fishedRod = fishedRod;
     }
 
     public static FishingGuideAttachment createDefault()

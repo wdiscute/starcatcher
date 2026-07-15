@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher.compat.emi;
 
 import com.wdiscute.starcatcher.fish.FishProperties;
-import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.widget.Bounds;
 import dev.emi.emi.api.widget.Widget;
 import net.minecraft.client.Minecraft;

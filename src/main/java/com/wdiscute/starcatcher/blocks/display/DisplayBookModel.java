@@ -18,10 +18,6 @@ public class DisplayBookModel extends Model
 {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("book"), "main");
 
-    private static final String LEFT_PAGES = "left_pages";
-    private static final String RIGHT_PAGES = "right_pages";
-    private static final String FLIP_PAGE_1 = "flip_page1";
-    private static final String FLIP_PAGE_2 = "flip_page2";
     private final ModelPart root;
     private final ModelPart leftLid;
     private final ModelPart rightLid;

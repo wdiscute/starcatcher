@@ -12,11 +12,8 @@ import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.*;
 
@@ -38,14 +35,10 @@ public class TournamentOverlay implements LayeredDraw.Layer
     private static final ResourceLocation SECOND_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/second_place_fish.png");
     private static final ResourceLocation THIRD_PLACE_FISH = Starcatcher.rl("textures/gui/tournament/third_place_fish.png");
 
-    int uiX;
-    int uiY;
 
     Font font;
     int imageWidth = 420;
     int imageHeight = 260;
-    Player player;
-    ClientLevel level;
 
     public static void clear()
     {
@@ -57,14 +50,9 @@ public class TournamentOverlay implements LayeredDraw.Layer
     {
         if (tournament == null) return;
         if (Minecraft.getInstance().level == null) return;
-        else level = Minecraft.getInstance().level;
         if (Minecraft.getInstance().player == null) return;
-        else player = Minecraft.getInstance().player;
 
-        uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
-        uiY = Minecraft.getInstance().getWindow().getGuiScaledHeight() - imageHeight - 80;
         font = Minecraft.getInstance().font;
-
 
         guiGraphics.pose().pushPose();
         guiGraphics.pose().translate(SCConfig.TOURNAMENT_X_OFFSET.get(), SCConfig.TOURNAMENT_Y_OFFSET.get(), 0);

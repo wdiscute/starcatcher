@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.registry.items;
 
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCEntities;
 import net.minecraft.world.InteractionHand;

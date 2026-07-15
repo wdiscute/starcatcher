@@ -22,11 +22,8 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
 
     int width;
 
-    public StarcatcherFishingRodItem.RodSlotTooltip tooltip;
-
     public RodSlotTooltipRenderer(StarcatcherFishingRodItem.RodSlotTooltip tooltip)
     {
-        this.tooltip = tooltip;
         ItemStack rod = tooltip.rod();
         bobber = SCDataComponents.getOrDefault(rod, SCDataComponents.BOBBER, MaybeStack.EMPTY).toStack();
         bait = SCDataComponents.getOrDefault(tooltip.rod(), SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();

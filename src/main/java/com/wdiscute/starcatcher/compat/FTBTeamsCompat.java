@@ -15,8 +15,6 @@ import java.util.UUID;
 
 public class FTBTeamsCompat
 {
-    private static final Logger log = LoggerFactory.getLogger(FTBTeamsCompat.class);
-
     public static void awardToTeam(Player player, FishProperties fp, ResourceLocation rl, int ticks)
     {
         TeamManagerImpl teamManager = TeamManagerImpl.INSTANCE;

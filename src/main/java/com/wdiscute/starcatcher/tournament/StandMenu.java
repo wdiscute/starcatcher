@@ -195,7 +195,6 @@ public class StandMenu extends AbstractContainerMenu
         //wipe a finished/canceled tournament
         if (id == 53 && currentTournament.status.isDone())
         {
-            Tournament tournamentOld = sbe.tournament;
             sbe.setUuid(UUID.randomUUID());
             sbe.tournament = null;
             sbe.tournament = sbe.makeOrGetTournament(player);

@@ -9,7 +9,6 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
-import net.minecraft.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

@@ -22,8 +22,6 @@ import java.util.UUID;
 
 public class SettingsScreen extends FishingMinigameScreen
 {
-    SizeAndWeight.Units unitSelected;
-
     Tournament tournamentCached = null;
 
     List<Button> buttons = new ArrayList<>();
@@ -39,7 +37,6 @@ public class SettingsScreen extends FishingMinigameScreen
         super.init();
 
         hitDelay = (SCConfig.HIT_DELAY.get().floatValue());
-        unitSelected = SCConfig.UNIT.get();
 
         renderBlur = true;
 

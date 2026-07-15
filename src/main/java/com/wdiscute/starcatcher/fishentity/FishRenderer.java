@@ -4,8 +4,6 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.fish.Rarity;
-import com.wdiscute.starcatcher.data.CaughtFishInfo;
-import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
@@ -21,7 +19,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,13 +27,11 @@ import java.util.Map;
 
 public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity>>
 {
-    ItemRenderer itemRenderer;
     public static Map<Item, EntityModel<FishEntity>> map = new HashMap<>();
 
     public FishRenderer(EntityRendererProvider.Context context)
     {
         super(context, null, 0.25f);
-        itemRenderer = context.getItemRenderer();
         createMap(context.getModelSet());
     }
 
@@ -114,7 +109,6 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
 
         super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
 
-
         poseStack.popPose();
     }
 
@@ -158,7 +152,6 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
             itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight,
                     overlay, poseStack, buffer, level, 0);
         }
-
     }
 
     public static RenderType getGoldRendertype(ResourceLocation texture, EntityModel<FishEntity> model, ItemStack fishItem)

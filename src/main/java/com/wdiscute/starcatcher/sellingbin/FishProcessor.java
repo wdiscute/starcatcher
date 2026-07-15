@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.sellingbin.processors.AbstractProcessor;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
+import net.dries007.tfc.common.entities.aquatic.Fish;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -25,10 +26,7 @@ public class FishProcessor extends AbstractProcessor
 
     private final float percentileMultiplier, goldenMultiplier;
 
-    public FishProcessor()
-    {
-        this(0, 0);
-    }
+    public static final FishProcessor DEFAULT = new FishProcessor(0, 0);
 
     public FishProcessor(float percentileMultiplier, float goldenMultiplier)
     {

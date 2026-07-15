@@ -14,7 +14,7 @@ public class SCProcessors
     public static final DeferredRegister<AbstractProcessor> SELLING_BIN_PROCESSORS =
             DeferredRegister.create(SellingBin.SELLING_BIN_REGISTRY, Starcatcher.MOD_ID);
 
-    public static DeferredHolder<AbstractProcessor, AbstractProcessor> FISHES_PROCESSOR = register("fishes_processor", FishProcessor::new);
+    public static DeferredHolder<AbstractProcessor, AbstractProcessor> FISHES_PROCESSOR = register("fishes_processor", () -> FishProcessor.DEFAULT);
 
     public static DeferredHolder<AbstractProcessor, AbstractProcessor> register(String name, Supplier<AbstractProcessor> sup)
     {

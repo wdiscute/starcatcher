@@ -8,7 +8,6 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.registry.SCDataEntries;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.Utils;
-import dev.emi.emi.api.stack.EmiIngredient;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
@@ -25,11 +24,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.references.Blocks;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +41,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
     public static IRecipesGui iRecipesGui = null;
     public static IFocusFactory iFocusFactory = null;
-    public static IIngredientManager iIngredientManager = null;
 
     public static void displayRecipes(ItemStack is)
     {
@@ -57,7 +53,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
     {
         iRecipesGui = jeiRuntime.getRecipesGui();
         iFocusFactory = jeiRuntime.getJeiHelpers().getFocusFactory();
-        iIngredientManager = jeiRuntime.getIngredientManager();
     }
 
     @Override

@@ -1,8 +1,5 @@
 package com.wdiscute.starcatcher.datagen;
 
-import com.wdiscute.sellingbin.processors.AbstractProcessor;
-import com.wdiscute.sellingbin.processors.QualityFoodsProcessor;
-import com.wdiscute.sellingbin.registry.SBDataMaps;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.Difficulty;
@@ -16,7 +13,6 @@ import com.wdiscute.starcatcher.fish.Treasure;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.*;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.*;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
-import com.wdiscute.starcatcher.sellingbin.FishProcessor;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -36,7 +32,6 @@ import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 public class DGSCDataMapsProvider extends DataMapProvider

@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.registry.fishrestrictions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sun.jna.platform.win32.COM.COMBindingBaseObject;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.registries.BuiltInRegistries;

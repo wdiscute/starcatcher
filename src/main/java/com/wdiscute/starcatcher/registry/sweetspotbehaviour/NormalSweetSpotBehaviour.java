@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import com.wdiscute.starcatcher.modifiers.minigamemodifiers.AbstractMinigameModifier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.sounds.SoundEvents;
 

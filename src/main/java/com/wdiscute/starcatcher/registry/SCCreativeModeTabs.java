@@ -5,29 +5,18 @@ import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.FishApi;
 import com.wdiscute.starcatcher.fish.FishProperties;
-import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.AdjustLureTimeModifier;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.NeverLoseModifier;
-import com.wdiscute.utils.Utils;
-import net.dries007.tfc.client.overworld.Star;
 import net.mcexpanded.fancytabsections.FancyTabSections;
-import net.mcexpanded.fancytabsections.Section.Section;
 import net.mcexpanded.fancytabsections.Section.SectionAnimatedTextured;
 import net.mcexpanded.fancytabsections.Section.SectionColored;
-import net.mcexpanded.fancytabsections.creativetab.ConglomerateOfItems;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Supplier;
 
 
 public interface SCCreativeModeTabs

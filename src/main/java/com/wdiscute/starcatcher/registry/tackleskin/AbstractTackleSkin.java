@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher.registry.tackleskin;
 
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;

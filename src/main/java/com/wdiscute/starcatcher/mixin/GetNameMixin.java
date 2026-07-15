@@ -1,11 +1,8 @@
 package com.wdiscute.starcatcher.mixin;
 
 import com.wdiscute.libtooltips.Tooltips;
-import com.wdiscute.starcatcher.fish.FishApi;
-import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;

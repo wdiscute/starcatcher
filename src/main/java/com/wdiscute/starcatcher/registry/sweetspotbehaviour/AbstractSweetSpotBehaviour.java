@@ -4,7 +4,6 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import com.wdiscute.starcatcher.modifiers.minigamemodifiers.AbstractMinigameModifier;
 import net.minecraft.client.gui.GuiGraphics;
 
 public abstract class AbstractSweetSpotBehaviour

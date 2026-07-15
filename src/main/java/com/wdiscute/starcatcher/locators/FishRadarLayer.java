@@ -90,7 +90,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
 
         //if any of the curios has the tag
         if (!shouldShow)
-            if (ModList.get().isLoaded("curios"))
+            if (CuriosCompat.isLoaded())
                 shouldShow = CuriosCompat.getItems(player).stream().anyMatch(o -> o.is(SCTags.HAS_RADAR_LAYER));
 
         //smoothly moves ui in and out of screen
@@ -145,18 +145,11 @@ public class FishRadarLayer implements LayeredDraw.Layer
                     uiY + 48 + i / 5 * 18);
         }
 
-
         guiGraphics.pose().popPose();
-
     }
 
     private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
     {
         guiGraphics.blit(rl, uiX, uiY, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
-    }
-
-    private void drawComp(GuiGraphics guiGraphics, Component comp, int xOffset, int yOffset)
-    {
-        guiGraphics.drawString(font, comp, uiX + xOffset, uiY + yOffset, 0, false);
     }
 }

@@ -2,11 +2,9 @@ package com.wdiscute.starcatcher.fish;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.AbstractCatchModifier;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.MaybeStack;
-import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -152,7 +150,7 @@ public record Treasure
                 ResourceKey.create(Registries.LOOT_TABLE, rl)
         );
 
-        ObjectArrayList<ItemStack> randomItems = table.getRandomItems(lootparams);
+        List<ItemStack> randomItems = table.getRandomItems(lootparams).stream().filter(o -> !o.isEmpty()).toList();
 
         if (randomItems.isEmpty()) return ItemStack.EMPTY;
 

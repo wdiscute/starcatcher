@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.registry.tackleskin;
 
-import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;

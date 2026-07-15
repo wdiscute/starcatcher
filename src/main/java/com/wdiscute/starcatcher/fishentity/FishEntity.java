@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.fishentity;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -143,15 +142,5 @@ public class FishEntity extends AbstractFish
         ItemStack is = new ItemStack(fireImmune() ? SCItems.STARCAUGHT_LAVA_BUCKET.asItem() : SCItems.STARCAUGHT_BUCKET.asItem());
         SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new MaybeStack(getBodyArmorItem().copy()));
         return is;
-    }
-
-    public static boolean validSpawnPlacement(EntityType<FishEntity> entity, ServerLevelAccessor serverLevelAccessor, MobSpawnType mobSpawnType, BlockPos blockPos, RandomSource randomSource)
-    {
-        //todo fix this shit
-        for (FishProperties fp : serverLevelAccessor.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
-            if (fp.calculateChance(entity.create(serverLevelAccessor.getLevel()), serverLevelAccessor.getLevel(), ItemStack.EMPTY, AbstractFishRestriction.Context.FISH_ENTITY) > 0)
-                return true;
-
-        return false;
     }
 }
