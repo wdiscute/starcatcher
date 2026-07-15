@@ -116,9 +116,12 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
     {
-        //before super since super removed BE
-        BlockPos center = IMultiBlock.getCenter(level, pos);
-        if (level.getBlockEntity(center) instanceof StandBlockEntity sbe && !level.isClientSide && sbe.tournament != null)
+        // Only the center owns the tournament. During survival destruction the multiblock
+        // removes several parts in sequence, so forwarding every part here cancels and
+        // broadcasts the same tournament more than once.
+        if (!state.is(newState.getBlock()) && state.getValue(CENTER)
+                && level.getBlockEntity(pos) instanceof StandBlockEntity sbe
+                && !level.isClientSide && sbe.tournament != null)
         {
             TournamentHandler.cancelTournament(level, sbe.tournament);
         }

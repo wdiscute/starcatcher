@@ -14,6 +14,12 @@ import java.util.List;
 
 public record CBFinishedTournamentsListPayload(List<Tournament> list) implements CustomPacketPayload
 {
+    public CBFinishedTournamentsListPayload
+    {
+        // Encoding happens asynchronously. Keep a stable snapshot instead of exposing
+        // TournamentHandler's mutable list to Netty while another tournament finishes.
+        list = List.copyOf(list);
+    }
 
     public static final Type<CBFinishedTournamentsListPayload> TYPE = new Type<>(Starcatcher.rl("cb_finished_tournaments_list"));
 
