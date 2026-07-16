@@ -34,19 +34,10 @@ import java.util.List;
 @JeiPlugin
 public class StarcatcherJeiPlugin implements IModPlugin
 {
-    public static final ResourceLocation ARROW = Starcatcher.rl("textures/gui/jemi/arrow.png");
-    public static final ResourceLocation SLOT_BACKGROUND_FILLED = Starcatcher.rl("textures/gui/jemi/slot_background_filled.png");
-
     public static List<StarcatcherJeiFPRecipe.Recipe> listRecipes = new ArrayList<>();
 
     public static IRecipesGui iRecipesGui = null;
     public static IFocusFactory iFocusFactory = null;
-
-    public static void displayRecipes(ItemStack is)
-    {
-        IFocus<ItemStack> focus = iFocusFactory.createFocus(RecipeIngredientRole.OUTPUT, VanillaTypes.ITEM_STACK, is);
-        iRecipesGui.show(focus);
-    }
 
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime)

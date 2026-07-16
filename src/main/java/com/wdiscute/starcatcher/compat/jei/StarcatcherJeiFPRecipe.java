@@ -34,6 +34,8 @@ import java.util.Optional;
 
 public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJeiFPRecipe.Recipe>
 {
+    public static final ResourceLocation SLOT_BACKGROUND_FILLED = Starcatcher.rl("textures/gui/jemi/slot_background_filled.png");
+    public static final ResourceLocation ARROW = Starcatcher.rl("textures/gui/jemi/arrow.png");
     public ItemStack rodIs;
 
     public StarcatcherJeiFPRecipe(IGuiHelper guiHelper)
@@ -84,7 +86,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
     {
         Font font = Minecraft.getInstance().font;
-        guiGraphics.blit(StarcatcherJeiPlugin.ARROW, 25, 2, 16, 16, 0, 0, 16, 16, 16, 16);
+        guiGraphics.blit(ARROW, 25, 2, 16, 16, 0, 0, 16, 16, 16, 16);
 
         if (!recipe.treasureTooltips.isEmpty() && mouseX > 62 && mouseX < 62 + 19 && mouseY > 0 && mouseY < 19)
         {
@@ -114,7 +116,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
     public void bookIcon(GuiGraphics draw, int x, int y, int mouseX, int mouseY)
     {
-        draw.blit(StarcatcherJeiPlugin.SLOT_BACKGROUND_FILLED, x, y, 0, 0, 20, 20, 20, 20);
+        draw.blit(SLOT_BACKGROUND_FILLED, x, y, 0, 0, 20, 20, 20, 20);
         draw.renderItem(SCItems.GUIDE.toStack(), x + 2, y + 2, 20);
         if (mouseX > x && mouseX < x + 19 && mouseY > y && mouseY < y + 19)
         {

@@ -37,11 +37,6 @@ public class StarcatcherEmiPlugin implements EmiPlugin
             Starcatcher.rl("fishing"),
             MY_WORKSTATION);
 
-    public static void displayRecipes(ItemStack is)
-    {
-        EmiApi.displayRecipes(EmiIngredient.of(Ingredient.of(is)));
-    }
-
     @Override
     public void register(EmiRegistry registry)
     {

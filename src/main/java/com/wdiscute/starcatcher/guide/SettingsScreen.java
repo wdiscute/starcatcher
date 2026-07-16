@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.SCConfig;
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.fish.FishProperties;
@@ -10,9 +11,12 @@ import com.wdiscute.starcatcher.tournament.Tournament;
 import com.wdiscute.starcatcher.tournament.TournamentOverlay;
 import com.wdiscute.starcatcher.tournament.TournamentScoreSettings;
 import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.ScreenUtils;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.text.DecimalFormat;
@@ -22,6 +26,9 @@ import java.util.UUID;
 
 public class SettingsScreen extends FishingMinigameScreen
 {
+    private static final ScreenUtils.Image ARROW_LEFT = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/settings/arrow_left.png"), 16, 16);
+    private static final ScreenUtils.Image ARROW_RIGHT = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/settings/arrow_right.png"), 16, 16);
+
     Tournament tournamentCached = null;
 
     List<Button> buttons = new ArrayList<>();
@@ -83,25 +90,26 @@ public class SettingsScreen extends FishingMinigameScreen
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         buttons.forEach(o -> o.render(guiGraphics, width, height, font));
 
-        guiGraphics.drawString(font, "Minigame: ", width / 2 + 70, height / 2 - 120, 0xffffff00);
-        guiGraphics.drawString(font, "Tournament: ", width / 2 + 70, height / 2 - 60, 0xffffff00);
-        guiGraphics.drawString(font, "Radar: ", width / 2 + 70, height / 2, 0xffffff00);
-        guiGraphics.drawString(font, "Tracker: ", width / 2 + 70, height / 2 + 60, 0xffffff00);
+        ScreenUtils.text(guiGraphics, font, "Minigame: ", width / 2 + 70, height / 2 - 120, 0xffffff00);
+        ScreenUtils.text(guiGraphics, font, "Tournament: ", width / 2 + 70, height / 2 - 60, 0xffffff00);
+        ScreenUtils.text(guiGraphics, font, "Radar: ", width / 2 + 70, height / 2, 0xffffff00);
+        ScreenUtils.text(guiGraphics, font, "Tracker: ", width / 2 + 70, height / 2 + 60, 0xffffff00);
     }
 
     public record Button(ModConfigSpec.DoubleValue configSpec, int x, int y, String text, float increase)
     {
         public void render(GuiGraphics guiGraphics, int width, int height, Font font)
         {
-            guiGraphics.fill(width / 2 + x, height / 2 + y, width / 2 + x + 100, height / 2 + y + 15, 0xff000000);
-            guiGraphics.blit(FishingGuideScreen.ARROW_LEFT, width / 2 + x, height / 2 + y,
-                    16, 16, 0, 0, 16, 16, 16, 16);
-            guiGraphics.blit(FishingGuideScreen.ARROW_RIGHT, width / 2 + x + 7, height / 2 + y,
-                    16, 16, 0, 0, 16, 16, 16, 16);
+            //fill background for text
+            ScreenUtils.fill(guiGraphics, width / 2 + x, height / 2 + y, 100, 15, 0xff000000);
 
-            guiGraphics.drawString(font, text + new DecimalFormat("#.##").format(configSpec.get()), width / 2 + x + 23, height / 2 + y + 2, 0xffffffff);
-            guiGraphics.drawString(font, "X", width / 2 + x + 92, height / 2 + y + 2, 0xffff0000);
+            //render arrows
+            ARROW_LEFT.render(guiGraphics, width / 2 + x, height / 2 + y);
+            ARROW_RIGHT.render(guiGraphics, width / 2 + x + 7, height / 2 + y);
 
+            //draw text
+            ScreenUtils.text(guiGraphics, font, text + new DecimalFormat("#.##").format(configSpec.get()), width / 2 + x + 23, height / 2 + y + 2, 0xffffffff);
+            ScreenUtils.text(guiGraphics, font, "X", width / 2 + x + 92, height / 2 + y + 2, 0xffff0000);
         }
 
         public void mouseClicked(double mouseX, double mouseY)
@@ -157,7 +165,6 @@ public class SettingsScreen extends FishingMinigameScreen
     public boolean mouseClicked(double mouseX, double mouseY, int button)
     {
         buttons.forEach(o -> o.mouseClicked(mouseX - (double) width / 2, mouseY - (double) height / 2));
-
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
