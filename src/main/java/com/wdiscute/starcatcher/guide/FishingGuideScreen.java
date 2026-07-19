@@ -114,7 +114,7 @@ public class FishingGuideScreen extends Screen
 
     private static final ScreenUtils.Image NEW_FISH = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/new_fish.png"), 32, 32);
     private static final ScreenUtils.Image GLOW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/glow.png"), 18, 18);
-    private static final ResourceLocation TRACKED = Starcatcher.rl("textures/gui/guide/tracked.png");
+    private static final ScreenUtils.Image TRACKED = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/tracked.png"), 48, 48);
 
     private static final ResourceLocation BUCKET = Starcatcher.rl("textures/gui/guide/bucketable.png");
     private static final ResourceLocation ENTITY = Starcatcher.rl("textures/gui/guide/entity.png");
@@ -1520,12 +1520,7 @@ public class FishingGuideScreen extends Screen
         if (trackedFP.equals(fp))
         {
             //render tracked icon
-            guiGraphics.blit(TRACKED,
-                    uiX + 112 + xOffset, uiY + 20,
-                    48, 48,
-                    0, 0,
-                    48, 48,
-                    48, 48);
+            TRACKED.render(guiGraphics, uiX + 112 + xOffset, uiY + 20);
 
             //sound on clicking
             if (x > 124 + xOffset && x < 145 + xOffset && y > 44 && y < 64 && clicked)
@@ -1533,18 +1528,18 @@ public class FishingGuideScreen extends Screen
             //render golden spyglass if tracked
             int xxx = -1;
             int yyy = 111;
-            guiGraphics.fill(uiX + xxx + xOffset, uiY + yyy, uiX + 16 + xxx + xOffset, uiY + 16 + yyy, SCColors.GUIDE_TEXT);
-            guiGraphics.renderItem(SPYGLASS_GOLDEN, uiX + xOffset - 1, uiY + 111);
+            ScreenUtils.fill(guiGraphics, uiX + xxx + xOffset, uiY + yyy, 16, 16, SCColors.GUIDE_TEXT);
+            ScreenUtils.item(guiGraphics, SPYGLASS_GOLDEN, uiX + xOffset - 1, uiY + 111);
         }
         else
         {
             //render spyglass
-            guiGraphics.renderItem(SPYGLASS, uiX + xOffset - 1, uiY + 111);
+            ScreenUtils.item(guiGraphics, SPYGLASS, uiX + xOffset - 1, uiY + 111);
         }
 
         //render spyglass hover text
         if (x > xOffset - 3 && x < 17 + xOffset - 2 && y > 111 && y < 128)
-            guiGraphics.renderTooltip(font, translatable("gui.guide.track"), mouseX, mouseY);
+            ScreenUtils.Tooltip.add(translatable("gui.guide.track"));
 
 
         //white highlight on jumping to

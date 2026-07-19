@@ -8,12 +8,19 @@ import com.wdiscute.starcatcher.messageinabottle.letter.BottledLetterItem;
 import com.wdiscute.starcatcher.messageinabottle.letter.LetterItem;
 import com.wdiscute.starcatcher.messageinabottle.message.MessageInABottleItem;
 import com.wdiscute.starcatcher.messageinabottle.message.MessageItem;
+import com.wdiscute.starcatcher.morajai.MoraJaiScreen;
 import com.wdiscute.starcatcher.registry.items.*;
 import com.wdiscute.starcatcher.messageinabottle.*;
 import com.wdiscute.utils.item.BasicItem;
 import com.wdiscute.utils.item.FireResistantBasicItem;
 import com.wdiscute.utils.item.SingleStackBasicItem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
@@ -50,7 +57,16 @@ public interface SCItems
     DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", SingleStackBasicItem::new);
 
     DeferredItem<Item> SETTINGS = ITEMS.register("settings", () -> new Item(new Item
-            .Properties().component(Tooltips.TOOLTIP_ALWAYS, List.of("wadwad"))));
+            .Properties().component(Tooltips.TOOLTIP_ALWAYS, List.of("wadwad")))
+    {
+        @Override
+        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+        {
+            if(level.isClientSide)
+                Minecraft.getInstance().setScreen(new MoraJaiScreen());
+            return super.use(level, player, usedHand);
+        }
+    });
     DeferredItem<Item> TREASURE = ITEMS.register("treasure", BasicItem::new);
 
     //hooks
