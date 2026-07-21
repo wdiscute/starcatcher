@@ -33,11 +33,7 @@ Thank you to all the translators who contribuited their time to make the mod acc
 Thank you everyone who stopped by my streams as I developed the mod and followed along the journey ♥
 '''
 
-[[mixins]]
-config="starcatcher.mixins.json"
-
-[[accessTransformers]]
-file="META-INF/accesstransformer.cfg"
+accessTransformers = ["META-INF/accesstransformer.cfg"]
 
 [[dependencies.starcatcher]] #optional
     modId="forge" #mandatory
