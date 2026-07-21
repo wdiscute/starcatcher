@@ -67,6 +67,8 @@ import java.nio.charset.MalformedInputException;
 import java.util.*;
 import java.util.function.Supplier;
 
+import static com.wdiscute.starcatcher.U.rl;
+
 //      <><|    <- fish
 public record FishProperties(
         CatchInfo catchInfo,
@@ -1950,7 +1952,7 @@ public record FishProperties(
                 {
                     String biomeString = biomeHolder.getRegisteredName();
 
-                    rls.add(new ResourceLocation(biomeString));
+                    rls.add(rl(biomeString));
                 }
             }
         }

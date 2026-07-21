@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.recipe;
 
 import com.google.gson.JsonObject;
+import com.wdiscute.starcatcher.U;
 import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -52,7 +53,7 @@ public class TackleSkinSmithingRecipeBuilder
 
 
     public void save(Consumer<FinishedRecipe> recipeConsumer, String location) {
-        this.save(recipeConsumer, new ResourceLocation(location));
+        this.save(recipeConsumer, U.rl(location));
     }
 
     public void save(Consumer<FinishedRecipe> recipeConsumer, ResourceLocation location) {

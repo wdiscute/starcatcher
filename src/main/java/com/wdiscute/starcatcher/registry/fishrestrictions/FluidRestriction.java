@@ -128,9 +128,9 @@ public class FluidRestriction extends AbstractFishRestriction
         return fluid;
     }
 
-    public static final FluidRestriction LAVA = new FluidRestriction(new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE, "lava"), "");
-    public static final FluidRestriction WATER = new FluidRestriction(new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE,"water"), "");
-    public static final FluidRestriction VOID = new FluidRestriction(new ResourceLocation(ResourceLocation.DEFAULT_NAMESPACE,"empty"), "");
+    public static final FluidRestriction LAVA = new FluidRestriction(U.rl("lava"), "");
+    public static final FluidRestriction WATER = new FluidRestriction(U.rl("water"), "");
+    public static final FluidRestriction VOID = new FluidRestriction(U.rl("empty"), "");
     public static final FluidRestriction ACID = new FluidRestriction(U.rl("alexscaves", "acid"), "");
     public static final FluidRestriction PURPLE_SODA = new FluidRestriction(U.rl("alexscaves", "purple_soda"), "");
 }

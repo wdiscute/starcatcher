@@ -182,12 +182,12 @@ public class U
 
     public static ResourceLocation rl(String ns, String path)
     {
-        return new ResourceLocation(ns, path);
+        return ResourceLocation.fromNamespaceAndPath(ns, path);
     }
 
     public static ResourceLocation rl(String path)
     {
-        return new ResourceLocation("minecraft", path);
+        return ResourceLocation.withDefaultNamespace(path);
     }
 
     public static Holder<Item> holderItem(String ns, String path)

@@ -21,6 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
+import static com.wdiscute.starcatcher.U.rl;
 import static com.wdiscute.starcatcher.registry.SCItems.*;
 import static com.wdiscute.starcatcher.blocks.SCBlocks.*;
 
@@ -211,11 +212,5 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .add(TACKLE_BOX_WHITE.asItem())
         ;
 
-    }
-
-
-    public static ResourceLocation rl(String ns, String path)
-    {
-        return new ResourceLocation(ns, path);
     }
 }

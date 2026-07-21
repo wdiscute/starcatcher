@@ -89,7 +89,7 @@ public class Starcatcher
 
     public static ResourceLocation rl(String s)
     {
-        return new ResourceLocation(Starcatcher.MOD_ID, s);
+        return U.rl(Starcatcher.MOD_ID, s);
     }
 
     //shitty fix for double toast because its caused by nikdos payload sender thingy
@@ -115,10 +115,9 @@ public class Starcatcher
     }
 
 
-    public Starcatcher()
+    public Starcatcher(FMLJavaModLoadingContext ctx)
     {
-        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-        ModLoadingContext modContainer = ModLoadingContext.get();
+        IEventBus modEventBus = ctx.getModEventBus();
 
         SCCreativeModeTabs.register(modEventBus);
 
@@ -141,8 +140,8 @@ public class Starcatcher
         SCProcessors.register(modEventBus);
         SCLootModifiers.register(modEventBus);
 
-        modContainer.registerConfig(ModConfig.Type.CLIENT, SCConfig.SPEC);
-        modContainer.registerConfig(ModConfig.Type.SERVER, SCConfig.SPEC_SERVER);
+        ctx.registerConfig(ModConfig.Type.CLIENT, SCConfig.SPEC);
+        ctx.registerConfig(ModConfig.Type.SERVER, SCConfig.SPEC_SERVER);
 
         DistExecutor.safeRunWhenOn(Dist.CLIENT,
                 () -> Client::init);
