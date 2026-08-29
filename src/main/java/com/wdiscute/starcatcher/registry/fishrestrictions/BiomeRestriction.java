@@ -128,7 +128,7 @@ public class BiomeRestriction extends AbstractFishRestriction
         if (biomes.size() == 1)
         {
             //single biome name / biome tag name / [hover]
-            return Tooltips.resolveTagsToComponentFromTranslationKey(biomes.get(0).getTranslation());
+            return Tooltips.resolveTagsToComponentFromTranslationKey(biomes.get(0).getTranslation("biome"));
         }
         else
         {
@@ -153,7 +153,7 @@ public class BiomeRestriction extends AbstractFishRestriction
         {
             if (eot instanceof EntryOrTag.Tag<Biome> tag)
             {
-                tags.add(Tooltips.resolveTagsToComponentFromTranslationKey(tag.getTranslation()));
+                tags.add(Tooltips.resolveTagsToComponentFromTranslationKey(tag.getTranslation("biome")));
 
                 //adds all biomes from tag into biomes list
                 Optional<HolderSet.Named<Biome>> optional = level.registryAccess().registryOrThrow(Registries.BIOME).getTag(tag.tag());
@@ -164,7 +164,7 @@ public class BiomeRestriction extends AbstractFishRestriction
             }
 
             if (eot instanceof EntryOrTag.Entry<Biome> entry)
-                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey(entry.getTranslation()));
+                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey(entry.getTranslation("biome")));
         }
 
         if (tags.size() > 1)
@@ -196,10 +196,10 @@ public class BiomeRestriction extends AbstractFishRestriction
         for (EntryOrTag<Biome> eot : blacklist)
         {
             if (eot instanceof EntryOrTag.Tag<Biome> tag)
-                tags.add(Tooltips.resolveTagsToComponentFromTranslationKey(tag.getTranslation()));
+                tags.add(Tooltips.resolveTagsToComponentFromTranslationKey(tag.getTranslation("biome")));
 
             if (eot instanceof EntryOrTag.Entry<Biome> entry)
-                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey(entry.getTranslation()));
+                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey(entry.getTranslation("biome")));
         }
 
         if (tags.size() > 1)

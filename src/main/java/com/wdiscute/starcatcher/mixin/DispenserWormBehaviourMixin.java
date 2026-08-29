@@ -1,6 +1,8 @@
 package com.wdiscute.starcatcher.mixin;
 
 import com.wdiscute.starcatcher.SCConfig;
+import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.event.SCEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
@@ -39,9 +41,12 @@ public abstract class DispenserWormBehaviourMixin
     {
         Level level = source.level();
         BlockPos blockpos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
-        if (level.getBlockState(blockpos).getBlock() instanceof FarmBlock && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.get())
+        if (SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.get() && stack.is(SCTags.HAS_FARMLAND_INTERACTION))
         {
-            ItemStack is = SCEvents.getWorm(level.getRandom());
+            ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(blockpos).getBlockHolder(), level.random).toStack();
+
+            if(is.isEmpty())
+                return;
 
             Vec3 vec3 = Vec3.atLowerCornerWithOffset(blockpos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
             ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), is);

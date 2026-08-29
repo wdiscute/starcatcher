@@ -10,14 +10,10 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.Utils;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.recipe.IFocus;
 import mezz.jei.api.recipe.IFocusFactory;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.runtime.IIngredientManager;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.runtime.IRecipesGui;
 import net.minecraft.client.Minecraft;
@@ -73,8 +69,8 @@ public class StarcatcherJeiPlugin implements IModPlugin
                 Component.translatable("emi.info.starcatcher.worms.1")
         );
 
-        //bonemealing farmland
-        List<ItemStack> list = new ArrayList<>(SCDataEntries.FARMLAND_BONEMEAL_DROPS.get().stream().map(Utils.Duo::first).toList());
+        //bonemealing block
+        List<ItemStack> list = new ArrayList<>(SCDataEntries.BONEMEAL_INTERACTION_ENTRY.get().stream().map(o -> o.stack().toStack()).toList());
         list.add(0, Items.BONE_MEAL.getDefaultInstance());
         list.add(0, Items.FARMLAND.getDefaultInstance());
         registration.addItemStackInfo(list,

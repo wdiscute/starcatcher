@@ -119,7 +119,7 @@ public class SCConfig
 
     public static final ModConfigSpec.BooleanValue ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS = BUILDER_SERVER
             .translation("starcatcher.configuration.enable_worms")
-            .comment("Enables/disables the ability to bonemeal farmland for worms.")
+            .comment("Enables/disables the ability to bonemeal block for worms.")
             .define("enable_worms", true);
 
     public static final ModConfigSpec.BooleanValue ENABLE_MINIGAME = BUILDER_SERVER

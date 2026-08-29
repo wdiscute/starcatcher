@@ -9,7 +9,6 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.fish.FishProperties;
-import dev.emi.emi.api.EmiApi;
 import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
@@ -21,7 +20,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
 
@@ -43,8 +41,8 @@ public class StarcatcherEmiPlugin implements EmiPlugin
         registry.addCategory(STARCATCHER_CATEGORY);
         registry.addWorkstation(STARCATCHER_CATEGORY, MY_WORKSTATION);
 
-        //bonemealing farmland
-        List<EmiIngredient> list = new ArrayList<>(SCDataEntries.FARMLAND_BONEMEAL_DROPS.get().stream().map(o -> EmiIngredient.of(Ingredient.of(o.first()))).toList());
+        //bonemealing block
+        List<EmiIngredient> list = new ArrayList<>(SCDataEntries.BONEMEAL_INTERACTION_ENTRY.get().stream().map(o -> EmiIngredient.of(Ingredient.of(o.stack().toStack()))).toList());
         list.add(0, EmiIngredient.of(Ingredient.of(Items.BONE_MEAL)));
         list.add(0, EmiIngredient.of(Ingredient.of(Items.FARMLAND)));
         registry.addRecipe(new EmiInfoRecipe(list,

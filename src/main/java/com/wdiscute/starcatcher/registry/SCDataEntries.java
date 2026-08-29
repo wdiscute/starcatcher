@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.registry;
 
 import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.DataEntry;
 import com.wdiscute.utils.Utils;
@@ -34,7 +35,7 @@ public interface SCDataEntries
     DataEntry<List<Modifier>> DEFAULT_MINIGAME_MODIFIERS = DataEntry.register(Starcatcher.rl("default_minigame_modifiers"), Modifier.CODEC.listOf(),
             List.of());
 
-    DataEntry<List<Utils.Duo<ItemStack, Integer>>> FARMLAND_BONEMEAL_DROPS = DataEntry.register(Starcatcher.rl("farmland_bonemeal_drops"),
-            Utils.Duo.codec(ItemStack.CODEC, "item", Codec.INT, "weight").listOf(),
+    DataEntry<List<BonemealInteractionEntry>> BONEMEAL_INTERACTION_ENTRY = DataEntry.register(Starcatcher.rl("bonemeal_interaction_drops"),
+            BonemealInteractionEntry.CODEC.listOf(),
             List.of());
 }

@@ -4,6 +4,7 @@ import com.wdiscute.sellingbin.event.SBevents;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
 import com.wdiscute.starcatcher.data.network.tournament.CBFinishedTournamentsListPayload;
@@ -197,7 +198,8 @@ public class SCEvents
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event)
     {
-        event.enqueueWork(() -> {
+        event.enqueueWork(() ->
+        {
             Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get(), StatFormatter.TIME);
         });
     }
@@ -265,47 +267,27 @@ public class SCEvents
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
 
-        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && level.getBlockState(event.getPos()).getBlock() instanceof FarmBlock)
+        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && !level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
         {
-            if (!level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
+            ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(pos).getBlockHolder(), level.getRandom()).toStack();
+
+            if(is.isEmpty())
+                return;
+
+            Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
+            ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), is);
+            level.addFreshEntity(itementity);
+
+            level.playSound(null, pos, SoundEvents.COMPOSTER_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+
+            if (event.getEntity() instanceof ServerPlayer player)
             {
-                ItemStack is = getWorm(level.getRandom());
-
-                Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
-                ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), is);
-                level.addFreshEntity(itementity);
-
-                level.playSound(null, pos, SoundEvents.COMPOSTER_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-
-                if (event.getEntity() instanceof ServerPlayer player)
-                {
-                    player.swing(event.getHand(), true);
-                    if (!player.hasInfiniteMaterials())
-                        event.getItemStack().shrink(1);
-                }
+                player.swing(event.getHand(), true);
+                if (!player.hasInfiniteMaterials())
+                    event.getItemStack().shrink(1);
             }
         }
-    }
 
-    public static ItemStack getWorm(RandomSource random)
-    {
-        int totalWeight = SCDataEntries.FARMLAND_BONEMEAL_DROPS.get().stream()
-                .mapToInt(Utils.Duo::second)
-                .sum();
-
-        if (totalWeight <= 0)
-            return ItemStack.EMPTY;
-
-        int value = random.nextInt(totalWeight);
-
-        for (Utils.Duo<ItemStack, Integer> entry : SCDataEntries.FARMLAND_BONEMEAL_DROPS.get())
-        {
-            value -= entry.second();
-            if (value < 0)
-                return entry.first().copy();
-        }
-
-        return ItemStack.EMPTY;
     }
 
     @SubscribeEvent
