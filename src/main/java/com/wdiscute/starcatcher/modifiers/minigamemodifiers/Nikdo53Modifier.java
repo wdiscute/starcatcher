@@ -5,11 +5,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
-import com.wdiscute.utils.Utils;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphics;
@@ -19,48 +20,47 @@ import org.joml.Quaternionf;
 
 public class Nikdo53Modifier extends AbstractMinigameModifier
 {
-    public static final ResourceLocation POINTER_SMALL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_pointer_1.png");
-    public static final ResourceLocation POINTER_LARGE = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_pointer_2.png");
+    public static final ScreenUtils.Image HANDLE_SMALL = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_handle_1.png"), 128, 128);
+    public static final ScreenUtils.Image HANDLE_LARGE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_handle_2.png"), 128, 128);
     public static final ResourceLocation WHEEL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_wheel.png");
 
-    public int pointerLayer = 0;
-    public int maxPointerLayer;
+    public int handleLayer = 0;
+    public int maxHandleLayer;
     public boolean isHoldingLeft = false;
     public boolean isHoldingRight = false;
 
     public static final MapCodec<Nikdo53Modifier> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Codec.INT.fieldOf("max_layers").forGetter(mod -> mod.maxPointerLayer),
+                    Codec.INT.fieldOf("max_layers").forGetter(mod -> mod.maxHandleLayer),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, Nikdo53Modifier::new));
 
     public Nikdo53Modifier(int extra_layers, String translationOverride)
     {
         super(translationOverride);
-        this.maxPointerLayer = extra_layers;
+        this.maxHandleLayer = extra_layers;
     }
 
     @Override
     public void onAdd(FishingMinigameScreen instance)
     {
         super.onAdd(instance);
-        instance.modifierData.put(getIdentifier(), maxPointerLayer);
+        instance.modifierData.put(getIdentifier(), maxHandleLayer);
     }
 
     @Override
     public boolean canHitSpot(FishingMinigameScreen fishingMinigameScreen, ActiveSweetSpot ass)
     {
-        return getSpotLayer(ass) == pointerLayer;
+        return getSpotLayer(ass) == handleLayer;
     }
 
     @Override
     public boolean onHit(FishingMinigameScreen instance, ActiveSweetSpot ass)
     {
-        instance.kimbeMarkerAlpha = 1;
-        instance.kimbeMarkerColor = 0x2ce17d;
-        instance.kimbeMarkerPos = instance.getPointerPosPrecise();
+        instance.kimbeMarkerColor = SCColors.GREEN;
+        instance.kimbeMarkerPos = instance.getHandlePosPrecise();
 
-        if (getSpotLayer(ass) == pointerLayer)
+        if (getSpotLayer(ass) == handleLayer)
         {
             putSpotLayer(ass, getRandomLayer());
             return super.onHit(instance, ass);
@@ -86,23 +86,23 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     @Override
     public void mouseScrolled(FishingMinigameScreen instance, double mouseX, double mouseY, double scrollX, double scrollY)
     {
-        if(scrollY < 0)
+        if (scrollY < 0)
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
-            pointerLayer--;
+            handleLayer--;
         }
 
-        if(scrollY > 0)
+        if (scrollY > 0)
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
-            pointerLayer++;
+            handleLayer++;
         }
 
-        if (pointerLayer > maxPointerLayer)
-            pointerLayer = maxPointerLayer;
+        if (handleLayer > maxHandleLayer)
+            handleLayer = maxHandleLayer;
 
-        if (pointerLayer < 0)
-            pointerLayer = 0;
+        if (handleLayer < 0)
+            handleLayer = 0;
 
         super.mouseScrolled(instance, mouseX, mouseY, scrollX, scrollY);
     }
@@ -113,22 +113,22 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         if (key == getOptions().keyLeft.getKey().getValue())
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
-            pointerLayer--;
+            handleLayer--;
             isHoldingLeft = true;
         }
 
         if (key == getOptions().keyRight.getKey().getValue())
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
-            pointerLayer++;
+            handleLayer++;
             isHoldingRight = true;
         }
 
-        if (pointerLayer > maxPointerLayer)
-            pointerLayer = maxPointerLayer;
+        if (handleLayer > maxHandleLayer)
+            handleLayer = maxHandleLayer;
 
-        if (pointerLayer < 0)
-            pointerLayer = 0;
+        if (handleLayer < 0)
+            handleLayer = 0;
     }
 
     @Override
@@ -136,9 +136,21 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     {
         instance.getModifiers().forEach(o ->
         {
-            if(o instanceof KimbeMarkerModifier k)
+            if (o instanceof KimbeMarkerModifier k)
                 k.removed = true;
         });
+
+        //decrease kimbe markers alpha
+        int color = instance.kimbeMarkerColor;
+
+        int alpha = (color >>> 24) & 0xff;
+
+
+        alpha = Math.max(0, alpha - 20);
+
+        color = (color & 0x00ffffff) | (alpha << 24);
+
+        instance.kimbeMarkerColor = color;
     }
 
     @Override
@@ -151,16 +163,16 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
 
     private int getRandomLayer()
     {
-        return Minecraft.getInstance().level.getRandom().nextIntBetweenInclusive(0, maxPointerLayer);
+        return Minecraft.getInstance().level.getRandom().nextIntBetweenInclusive(0, maxHandleLayer);
     }
 
     @Override
-    public void renderOnPointer(FishingMinigameScreen instance, GuiGraphics guiGraphics, PoseStack poseStack, float partialTick)
+    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphics g, PoseStack poseStack, float partialTick)
     {
-        if (pointerLayer == 0)
-            FishingMinigameScreen.renderPoseCentered(guiGraphics, POINTER_SMALL, 128);
+        if (handleLayer == 0)
+            HANDLE_SMALL.renderCentered(g, instance.width / 2, instance.height / 2);
         else
-            FishingMinigameScreen.renderPoseCentered(guiGraphics, POINTER_LARGE, 128);
+            HANDLE_LARGE.renderCentered(g, instance.width / 2, instance.height / 2);
     }
 
     @Override
@@ -175,7 +187,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         poseStack.translate(0, -9 * layer, 0);
 
         // Dim when not in use
-        if (pointerLayer != layer)
+        if (handleLayer != layer)
             RenderSystem.setShaderColor(0.3f, 0.3f, 0.3f, 1);
 
         ass.behaviour.render(guiGraphics, poseStack, partialTick, instance, ass);
@@ -188,7 +200,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     @Override
     public boolean shouldDarkenWheel(FishingMinigameScreen instance)
     {
-        return pointerLayer != 0;
+        return handleLayer != 0;
     }
 
     @Override
@@ -201,11 +213,10 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         // kapiten reference!1!1!1!1!!
         poseStack.translate(width >> 1, height >> 1, 0);
 
-
-        for (int i = maxPointerLayer; i > 0; i--)
+        for (int i = maxHandleLayer; i > 0; i--)
         {
             // Dim when not in use
-            if(pointerLayer != i)
+            if (handleLayer != i)
                 RenderSystem.setShaderColor(0.5f, 0.5f, 0.5f, 1);
 
             float increase = (i - 1) * 0.22f + 1;
@@ -219,25 +230,22 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
 
             RenderSystem.setShaderColor(1, 1, 1, 1);
         }
-
-
         poseStack.popPose();
     }
 
     @Override
     public void onMiss(FishingMinigameScreen instance)
     {
-        instance.kimbeMarkerAlpha = 1;
-        instance.kimbeMarkerColor = 0xff6767;
-        instance.kimbeMarkerPos = instance.getPointerPosPrecise();
+        instance.kimbeMarkerColor = 0xffff6767;
+        instance.kimbeMarkerPos = instance.getHandlePosPrecise();
 
         super.onMiss(instance);
     }
 
     @Override
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphics g, float partialTick, int width, int height)
     {
-        PoseStack poseStack = guiGraphics.pose();
+        PoseStack poseStack = g.pose();
         poseStack.pushPose();
 
         float centerX = (float) width / 2;
@@ -247,31 +255,21 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(instance.kimbeMarkerPos)));
         poseStack.translate(-centerX, -centerY, 0);
 
-        RenderSystem.setShaderColor(
-                (float) Utils.intToRed(instance.kimbeMarkerColor) / 255,
-                (float) Utils.intToGreen(instance.kimbeMarkerColor) / 255,
-                (float) Utils.intToBlue(instance.kimbeMarkerColor) / 255,
-                instance.kimbeMarkerAlpha);
-        RenderSystem.enableBlend();
-
-        guiGraphics.renderOutline((int) centerX, (int) centerY - 34 - maxPointerLayer * 7, 2, 34 + maxPointerLayer * 7, 0xffffffff);
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.disableBlend();
+        ScreenUtils.outline(g, (int) centerX, (int) centerY - 34 - maxHandleLayer * 7, 2, 34 + maxHandleLayer * 7, instance.kimbeMarkerColor);
 
         poseStack.popPose();
 
         //render A
-        guiGraphics.blit(instance.texture, width / 2 - 50, height / 2 + 50, 32, 16,
-                112, isHoldingLeft ? 80 : 64, 32, 16, 256, 256);
+        instance.tank.render(g, width / 2 - 50, height / 2 + 50,
+                112, isHoldingLeft ? 80 : 64, 32, 16);
 
         //render D
-        guiGraphics.blit(instance.texture, width / 2 + 18, height / 2 + 50, 32, 16,
-                144, isHoldingRight ? 80 : 64, 32, 16, 256, 256);
+        instance.tank.render(g, width / 2 + 18, height / 2 + 50,
+                144, isHoldingRight ? 80 : 64, 32, 16);
     }
 
     @Override
-    public boolean disablePointerRendering(FishingMinigameScreen instance)
+    public boolean disableHandleRendering(FishingMinigameScreen instance)
     {
         return true;
     }

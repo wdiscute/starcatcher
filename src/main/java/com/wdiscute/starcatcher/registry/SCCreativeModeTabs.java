@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.sellingbin.registry.SBBlocks;
+import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.FishApi;
@@ -31,7 +32,7 @@ public interface SCCreativeModeTabs
                 new SectionAnimatedTextured(Starcatcher.rl("must_have"))
                         .setFrames(9)
                         .setFrameTimeInMS(200)
-                        .setTextOutline(0xff000000)
+                        .setTextOutline(SCColors.BLACK)
                         .setTitle(Component.empty())
                         .setCollapsible(false)
                         .add(SCItems.ROD)
@@ -65,7 +66,7 @@ public interface SCCreativeModeTabs
         //hooks & bobbers
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("hooks_bobbers"))
-                        .setBannerColor(0xff344545)
+                        .setBannerColor(SCColors.BANNER_COLOR)
 
                         .addItemTag(SCTags.HOOKS)
                         .addItemTag(SCTags.BOBBERS)
@@ -75,7 +76,7 @@ public interface SCCreativeModeTabs
         //cosmetics
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("cosmetics"))
-                        .setBannerColor(0xff344545)
+                        .setBannerColor(SCColors.BANNER_COLOR)
                         .add(SCItems.RODS_REGISTRY)
                         .add(SCItems.TEMPLATES_REGISTRY)
                         .add((d) -> SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
@@ -84,14 +85,14 @@ public interface SCCreativeModeTabs
         //tackle boxes
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("tackle_boxes"))
-                        .setBannerColor(0xff344545)
+                        .setBannerColor(SCColors.BANNER_COLOR)
                         .add((d) -> SCBlocks.TACKLE_BOXES.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
         );
 
         //Trophies & Secrets
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("trophies"))
-                        .setBannerColor(0xff344545)
+                        .setBannerColor(SCColors.BANNER_COLOR)
 
                         .add(SCBlocks.TROPHY_COPPER)
                         .add(SCBlocks.TROPHY_IRON)
@@ -128,7 +129,7 @@ public interface SCCreativeModeTabs
         //Fish
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("fish"))
-                        .setBannerColor(0xff344545)
+                        .setBannerColor(SCColors.BANNER_COLOR)
                         .add(SCItems.BUCKETABLE_FISHES_REGISTRY)
                         .add(SCItems.NON_BUCKETABLE_FISH_REGISTRY)
                         .add(SCItems.NON_FISH_FISH_REGISTRY)
@@ -140,7 +141,7 @@ public interface SCCreativeModeTabs
         //Miscellaneous
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("miscellaneous"))
-                        .setBannerColor(0xff344545)
+                        .setBannerColor(SCColors.BANNER_COLOR)
                         .add(SCItems.BOOT)
                         .add(SCItems.MOSSY_BOOT)
                         .add(SCItems.DRIED_SEAWEED)

@@ -22,7 +22,7 @@
     "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -32,7 +32,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -50,12 +50,6 @@
       "type": "starcatcher:dimension",
       "dimension_entry": "the_nether",
       "translation_override": "dimension.minecraft.the_nether"
-    },
-    {
-      "type": "starcatcher:fluid",
-      "fluids": [
-        "minecraft:water"
-      ]
     },
     {
       "type": "starcatcher:caught_limit",
@@ -97,5 +91,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/nether.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/nether.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

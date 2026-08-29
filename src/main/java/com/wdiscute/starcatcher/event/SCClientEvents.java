@@ -26,7 +26,7 @@ import com.wdiscute.starcatcher.registry.items.StarcatcherFishingRodItem;
 import com.wdiscute.starcatcher.shaders.BakedModelRemapper;
 import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import com.wdiscute.starcatcher.tournament.StandScreen;
-import com.wdiscute.starcatcher.tournament.TournamentOverlay;
+import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -48,7 +48,7 @@ public class SCClientEvents
             KonamiDetector.keyPressed(event.getKey());
 
         if (SCKeymappings.EXPAND_TOURNAMENT.consumeClick())
-            TournamentOverlay.expandedType = TournamentOverlay.expandedType.next();
+            TournamentLayer.expandedType = TournamentLayer.expandedType.next();
 
         if (SCKeymappings.OPEN_GUIDE.consumeClick() && SCConfig.ALLOW_GUIDE_KEYBIND.get())
             Minecraft.getInstance().setScreen(new FishingGuideScreen(false, null));
@@ -93,7 +93,7 @@ public class SCClientEvents
     {
         event.registerAboveAll(Starcatcher.rl("tracked_fish"), new FishTrackerLayer());
         event.registerAboveAll(Starcatcher.rl("fish_radar"), new FishRadarLayer());
-        event.registerAboveAll(Starcatcher.rl("tournament"), new TournamentOverlay());
+        event.registerAboveAll(Starcatcher.rl("tournament"), new TournamentLayer());
     }
 
     @SubscribeEvent

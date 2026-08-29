@@ -8,6 +8,7 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
+import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -21,7 +22,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class FishCaughtToast implements Toast
 {
-    private static final ResourceLocation BACKGROUND_SPRITE = Starcatcher.rl("toast/fish_caught");
+    private static final ScreenUtils.Image BACKGROUND_SPRITE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_caught.png"), 164, 51);
     private final Component title;
     private final String fishName;
     private final ItemStack is;
@@ -51,11 +52,11 @@ public class FishCaughtToast implements Toast
 
     private int old;
 
-    public Toast.Visibility render(GuiGraphics guiGraphics, ToastComponent toastComponent, long timeSinceLastVisible)
+    public Toast.Visibility render(GuiGraphics g, ToastComponent toastComponent, long timeSinceLastVisible)
     {
-        guiGraphics.blitSprite(BACKGROUND_SPRITE, 0, 0, this.width(), this.height());
-        guiGraphics.renderItem(this.is, 6, 29);
-        guiGraphics.drawString(toastComponent.getMinecraft().font, this.title, 40, 13, 0, false);
+        BACKGROUND_SPRITE.render(g);
+        ScreenUtils.item(g, is, 6, 29);
+        ScreenUtils.text(g, toastComponent.getMinecraft().font, this.title, 40, 13, 0, false);
         int lettersRevealed = Math.clamp((timeSinceLastVisible - 500L) / 150L, 0, this.fishName.length());
 
         if (this.old != lettersRevealed)
@@ -65,7 +66,7 @@ public class FishCaughtToast implements Toast
         }
 
         Component comp = Tooltips.resolveTagsToComponent(rarity.wrapWithRarityMarkdownAsString(this.fishName.substring(0, lettersRevealed))).append(Component.literal("§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".substring(0, this.fishName.length() - lettersRevealed + 2)));
-        guiGraphics.drawString(toastComponent.getMinecraft().font, comp, 40, 22, 0x635040, false);
+        ScreenUtils.text(g, toastComponent.getMinecraft().font, comp, 40, 22, 0x635040, false);
 
         if (timeSinceLastVisible < 10000)
             return Visibility.SHOW;

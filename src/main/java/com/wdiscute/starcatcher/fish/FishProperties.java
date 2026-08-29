@@ -36,19 +36,9 @@ public record FishProperties(
         Difficulty dif,
         boolean skipMinigame,
         boolean hasGuideEntry,
-        ResourceLocation textures
+        Textures textures
 )
 {
-    public static final ResourceLocation SURFACE = Starcatcher.rl("textures/gui/minigame/surface.png");
-    public static final ResourceLocation SKY = Starcatcher.rl("textures/gui/minigame/sky.png");
-    public static final ResourceLocation LAVA_OVERWORLD = Starcatcher.rl("textures/gui/minigame/lava_overworld.png");
-    public static final ResourceLocation NETHER = Starcatcher.rl("textures/gui/minigame/nether.png");
-    public static final ResourceLocation CAVE = Starcatcher.rl("textures/gui/minigame/cave.png");
-    public static final ResourceLocation ICY = Starcatcher.rl("textures/gui/minigame/icy.png");
-    public static final ResourceLocation DEEP_DARK = Starcatcher.rl("textures/gui/minigame/deep_dark.png");
-    public static final ResourceLocation END = Starcatcher.rl("textures/gui/minigame/end.png");
-    public static final ResourceLocation END_VOID = Starcatcher.rl("textures/gui/minigame/end_void.png");
-
     public static final Codec<FishProperties> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     CatchInfo.CODEC.fieldOf("catch_info").forGetter(FishProperties::catchInfo),
@@ -59,7 +49,7 @@ public record FishProperties(
                     Difficulty.CODEC.fieldOf("difficulty").forGetter(FishProperties::dif),
                     Codec.BOOL.fieldOf("skips_minigame").forGetter(FishProperties::skipMinigame),
                     Codec.BOOL.fieldOf("has_guide_entry").forGetter(FishProperties::hasGuideEntry),
-                    ResourceLocation.CODEC.fieldOf("textures").forGetter(FishProperties::textures)
+                    Textures.CODEC.fieldOf("textures").forGetter(FishProperties::textures)
 
             ).apply(instance, FishProperties::new)
     );
@@ -73,7 +63,7 @@ public record FishProperties(
             Difficulty.STREAM_CODEC, FishProperties::dif,
             ByteBufCodecs.BOOL, FishProperties::skipMinigame,
             ByteBufCodecs.BOOL, FishProperties::hasGuideEntry,
-            ResourceLocation.STREAM_CODEC, FishProperties::textures,
+            Textures.STREAM_CODEC, FishProperties::textures,
             FishProperties::new
     );
 
@@ -107,7 +97,7 @@ public record FishProperties(
                 Difficulty.EASY,
                 false,
                 true,
-                SURFACE
+                Textures.DEFAULT
         );
     }
 
@@ -144,7 +134,7 @@ public record FishProperties(
                 this.restrictions, this.dif, this.skipMinigame, this.hasGuideEntry, this.textures);
     }
 
-    public FishProperties withTextures(ResourceLocation textures)
+    public FishProperties withTextures(Textures textures)
     {
         return new FishProperties(this.catchInfo, this.baseChance, this.sizeWeight, this.rarity,
                 this.restrictions, this.dif, this.skipMinigame, this.hasGuideEntry, textures);

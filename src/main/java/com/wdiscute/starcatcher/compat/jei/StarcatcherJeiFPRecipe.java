@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.fish.Treasure;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
+import com.wdiscute.utils.ScreenUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -20,6 +21,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
@@ -34,8 +36,9 @@ import java.util.Optional;
 
 public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJeiFPRecipe.Recipe>
 {
-    public static final ResourceLocation SLOT_BACKGROUND_FILLED = Starcatcher.rl("textures/gui/jemi/slot_background_filled.png");
-    public static final ResourceLocation ARROW = Starcatcher.rl("textures/gui/jemi/arrow.png");
+    public static final ScreenUtils.Image SLOT_BACKGROUND_FILLED = new ScreenUtils.Image(Starcatcher.rl("textures/gui/jemi/slot_background_filled.png"), 18, 18);
+    public static final ScreenUtils.Image ARROW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/jemi/arrow.png"), 16, 16);
+    public final ItemStack stack = SCItems.GUIDE.toStack();
     public ItemStack rodIs;
 
     public StarcatcherJeiFPRecipe(IGuiHelper guiHelper)
@@ -86,20 +89,16 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
     {
         Font font = Minecraft.getInstance().font;
-        guiGraphics.blit(ARROW, 25, 2, 16, 16, 0, 0, 16, 16, 16, 16);
+        ARROW.render(guiGraphics, 25, 2);
 
         if (!recipe.treasureTooltips.isEmpty() && mouseX > 62 && mouseX < 62 + 19 && mouseY > 0 && mouseY < 19)
-        {
-            guiGraphics.renderTooltip(font, recipe.treasureTooltips, Optional.empty(), (int) mouseX, (int) mouseY);
-        }
+            ScreenUtils.Tooltip.set(recipe.treasureTooltips);
 
         bookIcon(guiGraphics, 83, 0, (int) mouseX, (int) mouseY);
 
         //restrictions on arrow hover
         if (mouseX > 25 && mouseX < 25 + 16 && mouseY > 0 && mouseY < 16)
-        {
-            guiGraphics.renderTooltip(font, recipe.components, Optional.empty(), ((int) mouseX), ((int) mouseY));
-        }
+            ScreenUtils.Tooltip.set(recipe.components);
 
         //[!] + hover
         if (recipe.fp.catchInfo().alwaysSpawnEntity())
@@ -108,19 +107,20 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
                     105, 12, 0x000000, false);
 
             if (mouseX > 105 && mouseX < 105 + 9 && mouseY > 12 && mouseY < 12 + 9)
-            {
-                guiGraphics.renderTooltip(font, Component.translatable("emi.starcatcher.entity_entry", recipe.fp.getDisplayName()), ((int) mouseX), ((int) mouseY));
-            }
+                ScreenUtils.Tooltip.set(Component.translatable("emi.starcatcher.entity_entry", recipe.fp.getDisplayName()));
         }
+
+        ScreenUtils.Tooltip.render(guiGraphics, font, (int) mouseX, (int) mouseY);
     }
 
-    public void bookIcon(GuiGraphics draw, int x, int y, int mouseX, int mouseY)
+    public void bookIcon(GuiGraphics g, int x, int y, int mouseX, int mouseY)
     {
-        draw.blit(SLOT_BACKGROUND_FILLED, x, y, 0, 0, 20, 20, 20, 20);
-        draw.renderItem(SCItems.GUIDE.toStack(), x + 2, y + 2, 20);
+        SLOT_BACKGROUND_FILLED.render(g, x, y);
+        ScreenUtils.item(g, stack, x + 2, y + 2);
         if (mouseX > x && mouseX < x + 19 && mouseY > y && mouseY < y + 19)
         {
-            draw.renderTooltip(Minecraft.getInstance().font, Component.translatable("emi.starcatcher.open_as_guide_entry"), mouseX, mouseY);
+            ScreenUtils.Tooltip.set(Component.translatable("emi.starcatcher.open_as_guide_entry"));
+            ScreenUtils.Tooltip.render(g, Minecraft.getInstance().font, mouseX, mouseY);
         }
     }
 

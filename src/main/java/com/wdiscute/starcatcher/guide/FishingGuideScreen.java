@@ -116,9 +116,9 @@ public class FishingGuideScreen extends Screen
     private static final ScreenUtils.Image GLOW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/glow.png"), 18, 18);
     private static final ScreenUtils.Image TRACKED = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/tracked.png"), 48, 48);
 
-    private static final ResourceLocation BUCKET = Starcatcher.rl("textures/gui/guide/bucketable.png");
-    private static final ResourceLocation ENTITY = Starcatcher.rl("textures/gui/guide/entity.png");
-    private static final ResourceLocation ALWAYS_ENTITY = Starcatcher.rl("textures/gui/guide/always_entity.png");
+    private static final ScreenUtils.Image BUCKET = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/bucketable.png"), 14, 14);
+    private static final ScreenUtils.Image ENTITY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/entity.png"), 14, 14);
+    private static final ScreenUtils.Image ALWAYS_ENTITY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/always_entity.png"), 14, 14);
 
     public static final int MAX_HELP_PAGES = 12;
 
@@ -850,123 +850,122 @@ public class FishingGuideScreen extends Screen
 
         if (I18n.exists("gui.guide.page." + page + ".right.title"))
             ScreenUtils.centeredText(guiGraphics, this.font, translatable("gui.guide.page." + page + ".right.title"), uiX + 270, uiY + 45, SCColors.GUIDE_TEXT_DARK, false);
-
     }
 
-    private void renderTheBasics(GuiGraphics gui, int mouseX, int mouseY)
+    private void renderTheBasics(GuiGraphics g, int mouseX, int mouseY)
     {
         //shitty workaround for signed guides
-        ScreenUtils.text(gui, this.font, page + "/" + MAX_HELP_PAGES, uiX + 213, uiY + 206, 0x9c897c, false);
+        ScreenUtils.text(g, this.font, page + "/" + MAX_HELP_PAGES, uiX + 213, uiY + 206, 0x9c897c, false);
 
-        renderHelpText(gui, page);
+        renderHelpText(g, page);
 
         switch (page)
         {
             //the basics
             case 0 ->
             {
-                HELP_PAGE_BASICS.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, rodIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_BASICS.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, rodIcon, uiX + 166, uiY + 39, mouseX, mouseY);
             }
 
             //tackle boxes
             case 1 ->
             {
-                HELP_PAGE_TACKLE_BOX.render(gui, uiX, uiY);
+                HELP_PAGE_TACKLE_BOX.render(g, uiX, uiY);
 
                 //tackle boxes icon
-                renderItemWithHoverAndEmi(gui, tackleBoxIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                renderItemWithHoverAndEmi(g, tackleBoxIcon, uiX + 166, uiY + 39, mouseX, mouseY);
 
                 //render tackle boxes
-                renderScrollableItems(gui, tackleBoxes, mouseX, mouseY, true);
+                renderScrollableItems(g, tackleBoxes, mouseX, mouseY, true);
             }
 
             //treasures
             case 2 ->
             {
-                HELP_PAGE_TREASURE.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, treasureIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_TREASURE.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, treasureIcon, uiX + 166, uiY + 39, mouseX, mouseY);
             }
 
             //sweet-spot types
             case 3 ->
             {
-                HELP_PAGE_SWEETSPOTS.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, sweetspotsIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_SWEETSPOTS.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, sweetspotsIcon, uiX + 166, uiY + 39, mouseX, mouseY);
             }
 
             //upgrades
             case 4 ->
             {
-                HELP_PAGE_UPGRADES.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, upgradeIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_UPGRADES.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, upgradeIcon, uiX + 166, uiY + 39, mouseX, mouseY);
             }
 
             //hooks & bobbers & baits
             case 5 ->
             {
-                HELP_PAGE_HOOKS_BOBBERS_BAITS.render(gui, uiX, uiY);
+                HELP_PAGE_HOOKS_BOBBERS_BAITS.render(g, uiX, uiY);
 
                 //hook icon
-                renderItemWithHoverAndEmi(gui, hookIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                renderItemWithHoverAndEmi(g, hookIcon, uiX + 166, uiY + 39, mouseX, mouseY);
 
                 //render hooks & bobbers
-                renderScrollableItems(gui, hooksBobbers, mouseX, mouseY, true);
+                renderScrollableItems(g, hooksBobbers, mouseX, mouseY, true);
 
                 //bait icon
-                renderItemWithHoverAndEmi(gui, baitIcon, uiX + 321, uiY + 39, mouseX, mouseY);
+                renderItemWithHoverAndEmi(g, baitIcon, uiX + 321, uiY + 39, mouseX, mouseY);
 
                 //render baits
-                renderScrollableItems(gui, baits, mouseX, mouseY, false);
+                renderScrollableItems(g, baits, mouseX, mouseY, false);
             }
 
             //cosmetics
             case 6 ->
             {
-                HELP_PAGE_COSMETICS.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, cosmeticsIcon, uiX + 166, uiY + 39, mouseX, mouseY);
-                renderItemWithHoverAndEmi(gui, templateIcon, uiX + 321, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_COSMETICS.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, cosmeticsIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                renderItemWithHoverAndEmi(g, templateIcon, uiX + 321, uiY + 39, mouseX, mouseY);
 
                 //render cosmetics (hats, skins)
-                renderScrollableItems(gui, cosmetics, mouseX, mouseY, true);
+                renderScrollableItems(g, cosmetics, mouseX, mouseY, true);
 
                 //render templates
-                renderScrollableItems(gui, templates, mouseX, mouseY, false);
+                renderScrollableItems(g, templates, mouseX, mouseY, false);
             }
 
             //tournaments
             case 7 ->
             {
-                HELP_PAGE_TOURNAMENTS.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, standIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_TOURNAMENTS.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, standIcon, uiX + 166, uiY + 39, mouseX, mouseY);
             }
 
             //message-in-a-bottle
             case 8 ->
             {
-                HELP_PAGE_MESSAGES.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, letterIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_MESSAGES.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, letterIcon, uiX + 166, uiY + 39, mouseX, mouseY);
 
                 //letter, bottled letter, message-in-a-bottle, message
                 for (int i = 0; i < 4; i++)
                 {
                     if (mouseX > uiX + 241 + (i * 24) && mouseX < uiX + 241 + 16 + (i * 24) && mouseY > uiY + 130 && mouseY < uiY + 130 + 16)
-                        ScreenUtils.outline(gui, uiX + 241 + (i * 24) - 2, uiY + 128, 20, 20, SCColors.GUIDE_HIGHLIGHT);
+                        ScreenUtils.outline(g, uiX + 241 + (i * 24) - 2, uiY + 128, 20, 20, SCColors.GUIDE_HIGHLIGHT);
                     else
-                        ScreenUtils.outline(gui, uiX + 239 + (i * 24), uiY + 128, 20, 20, 0xff9c897c);
+                        ScreenUtils.outline(g, uiX + 239 + (i * 24), uiY + 128, 20, 20, 0xff9c897c);
 
-                    renderItemWithHoverAndEmi(gui, bottles.get(i), uiX + 241 + (i * 24), uiY + 130, mouseX, mouseY);
+                    renderItemWithHoverAndEmi(g, bottles.get(i), uiX + 241 + (i * 24), uiY + 130, mouseX, mouseY);
                 }
 
                 //scrollable found messages
                 //right page scroll arrows
-                ARROW_LEFT.render(gui, uiX + 219, uiY + 170);
-                ARROW_RIGHT.render(gui, uiX + 337, uiY + 170);
+                ARROW_LEFT.render(g, uiX + 219, uiY + 170);
+                ARROW_RIGHT.render(g, uiX + 337, uiY + 170);
 
                 //if clicked on left arrow
                 if (mouseX > uiX + 219 && mouseX < uiX + 235 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
-                    ARROW_LEFT_HIGHLIGHT.render(gui, uiX + 219, uiY + 170);
+                    ARROW_LEFT_HIGHLIGHT.render(g, uiX + 219, uiY + 170);
                     if (clicked)
                     {
                         rightPageScroll--;
@@ -976,7 +975,7 @@ public class FishingGuideScreen extends Screen
                 //if clicked on right arrow
                 if (mouseX > uiX + 337 && mouseX < uiX + 353 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
-                    ARROW_RIGHT_HIGHLIGHT.render(gui, uiX + 337, uiY + 170);
+                    ARROW_RIGHT_HIGHLIGHT.render(g, uiX + 337, uiY + 170);
                     if (clicked)
                     {
                         rightPageScroll++;
@@ -985,7 +984,7 @@ public class FishingGuideScreen extends Screen
                 }
 
                 //messages found text
-                ScreenUtils.centeredText(gui, font, translatable("gui.guide.page.8.left.messages_found"),
+                ScreenUtils.centeredText(g, font, translatable("gui.guide.page.8.left.messages_found"),
                         uiX + 286, uiY + 157, SCColors.GUIDE_TEXT_DARK, false);
 
                 //scrollable messages icons
@@ -995,13 +994,13 @@ public class FishingGuideScreen extends Screen
                     int y = uiY + 170;
                     ItemStack stack = messages.get(Math.abs((rightPageScroll + i) % messages.size()));
                     //render item
-                    ScreenUtils.item(gui, stack, x, y);
+                    ScreenUtils.item(g, stack, x, y);
                     //render hover item tooltip
                     if (mouseX > x - 2 && mouseX < x + 16 + 2 && mouseY > y - 2 && mouseY < y + 16 + 2)
                     {
-                        ScreenUtils.outline(gui, x - 2, y - 2, 20, 20, SCColors.GUIDE_HIGHLIGHT);
+                        ScreenUtils.outline(g, x - 2, y - 2, 20, 20, SCColors.GUIDE_HIGHLIGHT);
 
-                        gui.renderTooltip(this.font, stack, mouseX, mouseY);
+                        ScreenUtils.Tooltip.set(stack);
                         Message message = SCDataComponents.getOrDefault(stack, SCDataComponents.MESSAGE, Message.DEFAULT);
                         //if clicked open message screen
                         if (clicked && !message.equals(Message.DEFAULT))
@@ -1009,107 +1008,107 @@ public class FishingGuideScreen extends Screen
                                     new MessageScreen(message, this));
                     }
                     //scrollable background fill
-                    gui.fill(x - 1, y - 1, x + 17, y + 17, 0xffb4a697);
+                    ScreenUtils.fill(g, x - 1, y - 1, 18, 18, 0xffb4a697);
                 }
             }
 
             //selling bin
             case 9 ->
             {
-                HELP_PAGE_SELLING.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, sellingBinIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_SELLING.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, sellingBinIcon, uiX + 166, uiY + 39, mouseX, mouseY);
             }
 
             //aquariums
             case 10 ->
             {
-                HELP_PAGE_AQUARIUM.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, aquariumIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_AQUARIUM.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, aquariumIcon, uiX + 166, uiY + 39, mouseX, mouseY);
 
                 //render scrollable items
-                renderScrollableItems(gui, aquariumInteractions, mouseX, mouseY, true);
+                renderScrollableItems(g, aquariumInteractions, mouseX, mouseY, true);
             }
 
             //selling bin
             case 11 ->
             {
-                HELP_PAGE_DISPLAY.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, displayIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_DISPLAY.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, displayIcon, uiX + 166, uiY + 39, mouseX, mouseY);
 
-                renderItemWithHoverAndEmi(gui, guideIcon, uiX + 321, uiY + 39, mouseX, mouseY);
+                renderItemWithHoverAndEmi(g, guideIcon, uiX + 321, uiY + 39, mouseX, mouseY);
             }
 
             //stats and trophies
             case 12 ->
             {
-                HELP_PAGE_TROPHIES.render(gui, uiX, uiY);
-                renderItemWithHoverAndEmi(gui, letterIcon, uiX + 166, uiY + 39, mouseX, mouseY);
+                HELP_PAGE_TROPHIES.render(g, uiX, uiY);
+                renderItemWithHoverAndEmi(g, letterIcon, uiX + 166, uiY + 39, mouseX, mouseY);
 
                 //stats
                 //fishes caught
-                gui.drawString(font, translatable("gui.guide.stats.fishes_caught"), uiX + 53, uiY + 63, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, fishesCaught + "", uiX + 165, uiY + 63, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.fishes_caught"), uiX + 53, uiY + 63, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, fishesCaught + "", uiX + 165, uiY + 63, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //trash
-                gui.drawString(font, translatable("gui.guide.stats.trash_caught"), uiX + 53, uiY + 73, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, trashCaught + "", uiX + 165, uiY + 73, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.trash_caught"), uiX + 53, uiY + 73, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, trashCaught + "", uiX + 165, uiY + 73, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //common
-                gui.drawString(font, translatable("gui.guide.stats.common_caught"), uiX + 53, uiY + 83, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, commonCaught + "", uiX + 165, uiY + 83, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.common_caught"), uiX + 53, uiY + 83, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, commonCaught + "", uiX + 165, uiY + 83, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //uncommon
-                gui.drawString(font, translatable("gui.guide.stats.uncommon_caught"), uiX + 53, uiY + 93, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, uncommonCaught + "", uiX + 165, uiY + 93, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.uncommon_caught"), uiX + 53, uiY + 93, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, uncommonCaught + "", uiX + 165, uiY + 93, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //rare
-                gui.drawString(font, translatable("gui.guide.stats.rare_caught"), uiX + 53, uiY + 103, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, rareCaught + "", uiX + 165, uiY + 103, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.rare_caught"), uiX + 53, uiY + 103, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, rareCaught + "", uiX + 165, uiY + 103, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //epic
-                gui.drawString(font, translatable("gui.guide.stats.epic_caught"), uiX + 53, uiY + 113, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, epicCaught + "", uiX + 165, uiY + 113, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.epic_caught"), uiX + 53, uiY + 113, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, epicCaught + "", uiX + 165, uiY + 113, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //rare
-                gui.drawString(font, translatable("gui.guide.stats.legendary_caught"), uiX + 53, uiY + 123, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, legendaryCaught + "", uiX + 165, uiY + 123, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.legendary_caught"), uiX + 53, uiY + 123, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, legendaryCaught + "", uiX + 165, uiY + 123, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //golden fishes caught
-                gui.drawString(font, translatable("gui.guide.stats.golden_fishes_caught"), uiX + 53, uiY + 133, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, goldenFishesCaught + "", uiX + 165, uiY + 133, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.golden_fishes_caught"), uiX + 53, uiY + 133, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, goldenFishesCaught + "", uiX + 165, uiY + 133, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //perfect fishes caught
-                gui.drawString(font, translatable("gui.guide.stats.perfect_fishes_caught"), uiX + 53, uiY + 143, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, perfectFishesCaught + "", uiX + 165, uiY + 143, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.perfect_fishes_caught"), uiX + 53, uiY + 143, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, perfectFishesCaught + "", uiX + 165, uiY + 143, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //fishes missed
-                gui.drawString(font, translatable("gui.guide.stats.starcaught_fish_missed"), uiX + 53, uiY + 153, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, fishMissed + "", uiX + 165, uiY + 153, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.starcaught_fish_missed"), uiX + 53, uiY + 153, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, fishMissed + "", uiX + 165, uiY + 153, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //treasures caught
-                gui.drawString(font, translatable("gui.guide.stats.treasures_caught"), uiX + 53, uiY + 163, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, treasuresCaught + "", uiX + 165, uiY + 163, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.treasures_caught"), uiX + 53, uiY + 163, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, treasuresCaught + "", uiX + 165, uiY + 163, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //bait used
-                gui.drawString(font, translatable("gui.guide.stats.bait_used"), uiX + 53, uiY + 173, SCColors.GUIDE_TEXT_SEMI_DARK, false);
-                gui.drawString(font, baitUsed + "", uiX + 165, uiY + 173, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.bait_used"), uiX + 53, uiY + 173, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, baitUsed + "", uiX + 165, uiY + 173, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //time spent
-                gui.drawString(font, translatable("gui.guide.stats.time_spent"), uiX + 53, uiY + 183, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, translatable("gui.guide.stats.time_spent"), uiX + 53, uiY + 183, SCColors.GUIDE_TEXT_SEMI_DARK, false);
                 String text = Utils.calculateRealLifeTimeFromTicks(timeSpent);
-                gui.drawString(font, text.isEmpty() ? "---" : text, uiX + 130, uiY + 183, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+                ScreenUtils.text(g, font, text.isEmpty() ? "---" : text, uiX + 130, uiY + 183, SCColors.GUIDE_TEXT_SEMI_DARK, false);
 
                 //trophy icon
-                renderItemWithHoverAndEmi(gui, trophyIcon, uiX + 321, uiY + 39, mouseX, mouseY);
+                renderItemWithHoverAndEmi(g, trophyIcon, uiX + 321, uiY + 39, mouseX, mouseY);
 
                 //right page scroll arrows
-                ARROW_LEFT.render(gui, uiX + 219, uiY + 170);
-                ARROW_RIGHT.render(gui, uiX + 337, uiY + 170);
+                ARROW_LEFT.render(g, uiX + 219, uiY + 170);
+                ARROW_RIGHT.render(g, uiX + 337, uiY + 170);
 
                 //if clicked on left arrow
                 if (mouseX > uiX + 219 && mouseX < uiX + 235 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
-                    ARROW_LEFT_HIGHLIGHT.render(gui, uiX + 219, uiY + 170);
+                    ARROW_LEFT_HIGHLIGHT.render(g, uiX + 219, uiY + 170);
                     if (clicked)
                     {
                         rightPageScroll--;
@@ -1119,7 +1118,7 @@ public class FishingGuideScreen extends Screen
                 //if clicked on right arrow
                 if (mouseX > uiX + 337 && mouseX < uiX + 353 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
-                    ARROW_RIGHT_HIGHLIGHT.render(gui, uiX + 337, uiY + 170);
+                    ARROW_RIGHT_HIGHLIGHT.render(g, uiX + 337, uiY + 170);
                     if (clicked)
                     {
                         rightPageScroll++;
@@ -1135,11 +1134,11 @@ public class FishingGuideScreen extends Screen
                     ItemStack stack = trophiesIS.get(Math.abs((rightPageScroll + i) % trophiesIS.size()));
                     FishProperties fp = trophies.get(Math.abs((rightPageScroll + i) % trophies.size()));
                     //render item
-                    ScreenUtils.item(gui, stack, x, y);
+                    ScreenUtils.item(g, stack, x, y);
                     //render hover item tooltip
                     if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16)
                     {
-                        ScreenUtils.outline(gui, x - 2, y - 2, 20, 20, SCColors.GUIDE_HIGHLIGHT);
+                        ScreenUtils.outline(g, x - 2, y - 2, 20, 20, SCColors.GUIDE_HIGHLIGHT);
 
                         FishCaughtCounter fishCaughtCounter = fishCaughtCounterMap.get(fp.toLoc(level));
                         if (!fp.equals(FishProperties.empty()))
@@ -1150,7 +1149,7 @@ public class FishingGuideScreen extends Screen
                             Minecraft.getInstance().setScreen(new IsolatedFPScreen(fp, this));
                     }
                     //scrollable background fill
-                    gui.fill(x - 1, y - 1, x + 17, y + 17, 0xffb4a697);
+                    ScreenUtils.fill(g, x - 1, y - 1, x + 17, y + 17, 0xffb4a697);
                 }
             }
         }
@@ -1541,7 +1540,6 @@ public class FishingGuideScreen extends Screen
         if (x > xOffset - 3 && x < 17 + xOffset - 2 && y > 111 && y < 128)
             ScreenUtils.Tooltip.add(translatable("gui.guide.track"));
 
-
         //white highlight on jumping to
         if (highlightRightAlpha > 0)
         {
@@ -1567,7 +1565,7 @@ public class FishingGuideScreen extends Screen
         ScreenUtils.item(guiGraphics, stack, x, y);
         if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16)
         {
-            guiGraphics.renderTooltip(font, stack, mouseX, mouseY);
+            ScreenUtils.Tooltip.set(stack);
             if (clicked)
                 ScreenUtils.displayRecipe(stack);
         }
@@ -1889,7 +1887,7 @@ public class FishingGuideScreen extends Screen
         );
     }
 
-    public static void renderFishEntryPage(GuiGraphics guiGraphics, FishProperties fp, ItemStack fishToDisplay,
+    public static void renderFishEntryPage(GuiGraphics g, FishProperties fp, ItemStack fishToDisplay,
                                            FishCaughtCounter fcc, int x, int y, int absoluteMouseX, int absoluteMouseY)
     {
         Level level = Minecraft.getInstance().level;
@@ -1900,65 +1898,62 @@ public class FishingGuideScreen extends Screen
 
         //render caught:
         //caught:
-        guiGraphics.drawString(
-                font, translatable("gui.guide.caught"),
-                x + 73, y + 64, 0x9c897c, false);
+        ScreenUtils.text(g, font, translatable("gui.guide.caught"), x + 73, y + 64, 0x9c897c, false);
 
         //render caught count
         if (fcc == null)
         {
             //------
-            guiGraphics.drawString(
-                    font, translatable("gui.guide.not_caught"),
-                    x + 73, y + 73, 0x9c897c, false);
+            ScreenUtils.text(g, font, translatable("gui.guide.not_caught"), x + 73, y + 73, 0x9c897c, false);
         }
         else
         {
             //[324]
             Component c = Component.literal("[" + fcc.count() + "]").withStyle(Style.EMPTY.withColor(0x635040));
-            guiGraphics.drawString(font, Component.empty().append(c), x + 73, y + 73, 0, false);
+            ScreenUtils.text(g, font, Component.empty().append(c), x + 73, y + 73, 0, false);
         }
 
         //render rarity (always shown)
         //rarity:
-        guiGraphics.drawString(
+        ScreenUtils.text(g,
                 font, translatable("gui.guide.rarity"),
                 x + 73, y + 84, 0x9c897c, false);
+
         //common
-        guiGraphics.drawString(
+        ScreenUtils.text(g,
                 font, translatable("gui.guide.rarity." + fp.rarity().getSerializedName()),
                 x + 73, y + 93, 0, false);
 
         //render bucketable
         if (!fp.catchInfo().bucketedFish().isEmpty())
         {
-            guiGraphics.blit(BUCKET, x + 77, y + 103, 0, 0, 14, 14, 14, 14);
+            BUCKET.render(g, x + 77, y + 103);
             if (mouseX > 75 && mouseX < 93 && mouseY > 105 && mouseY < 115)
-                guiGraphics.renderTooltip(font, translatable("gui.guide.bucketable"), absoluteMouseX, absoluteMouseY);
+                ScreenUtils.Tooltip.set(translatable("gui.guide.bucketable"));
         }
 
         //render almighty wormable
         if ((!fp.catchInfo().entityToSpawn().equals(Utils.holderEntity("starcatcher", "fish")) && !fp.catchInfo().alwaysSpawnEntity())
             || (fp.catchInfo().entityToSpawn().equals(Utils.holderEntity("starcatcher", "fish")) && fp.catchInfo().fish().toStack().is(SCTags.BUCKETABLE_FISHES)))
         {
-            guiGraphics.blit(ENTITY, x + 93, y + 103, 0, 0, 14, 14, 14, 14);
+            ENTITY.render(g, x + 93, y + 103);
             if (mouseX > 92 && mouseX < 107 && mouseY > 105 && mouseY < 115)
-                guiGraphics.renderTooltip(font, translatable("gui.guide.entity"), absoluteMouseX, absoluteMouseY);
+                ScreenUtils.Tooltip.set(translatable("gui.guide.entity"));
         }
 
         //render sword
         if (fp.catchInfo().alwaysSpawnEntity())
         {
-            guiGraphics.blit(ALWAYS_ENTITY, x + 93, y + 103, 0, 0, 14, 14, 14, 14);
+            ALWAYS_ENTITY.render(g, x + 93, y + 103);
             if (mouseX > 92 && mouseX < 107 && mouseY > 105 && mouseY < 115)
-                guiGraphics.renderTooltip(font, translatable("gui.guide.always_entity"), absoluteMouseX, absoluteMouseY);
+                ScreenUtils.Tooltip.set(translatable("gui.guide.always_entity"));
         }
 
         //render fish & name at the top
         if (fishToDisplay != ItemStack.EMPTY)
         {
-            ScreenUtils.item(guiGraphics, fishToDisplay, x + 19, y + 64, guiGraphics.pose(), 3);
-            renderScrollingString(guiGraphics, font, fp.getDisplayName(), 20, x + 28, y + 36, x + 141, y + 46, true);
+            ScreenUtils.item(g, fishToDisplay, x + 19, y + 64, g.pose(), 3);
+            ScreenUtils.scrollingText(g, font, fp.getDisplayName(), x + 28, y + 36, x + 141, SCColors.GUIDE_TEXT_DARK, false);
         }
 
         int color = switch (fp.rarity())
@@ -1975,12 +1970,12 @@ public class FishingGuideScreen extends Screen
         if (fcc != null)
         {
             ScreenUtils.setColor(color);
-            GLOW.render(guiGraphics, x + 8, y + 53, 3);
+            GLOW.render(g, x + 8, y + 53, 3);
         }
 
         //render new fish icon
         if (fcc != null && fcc.hasGuideNotification())
-            NEW_FISH.render(guiGraphics, x + 120, y + 95);
+            NEW_FISH.render(g, x + 120, y + 95);
 
         int yOffset = y + 132;
         int counter = 0;
@@ -2002,20 +1997,18 @@ public class FishingGuideScreen extends Screen
 
             if (description.equals(Component.empty())) continue;
 
-            renderScrollingString(guiGraphics, font, description, x, x, yOffset - 2, x + 128, yOffset + 10, hoveringMain);
+            ScreenUtils.scrollingText(g, font, description, x, x + 128, yOffset - 2, SCColors.GUIDE_TEXT_DARK, false);
 
             //if has hover and cursor is hovering
             if (!hover.isEmpty() && hoveringMain)
-            {
-                guiGraphics.renderTooltip(font, hover, Optional.empty(), absoluteMouseX, absoluteMouseY);
-            }
+                ScreenUtils.Tooltip.set(hover);
 
             //if blacklist then render [!]
             if (!blacklist.isEmpty())
             {
-                guiGraphics.drawString(font, "[!]", x + 129, yOffset, SCColors.GUIDE_RED, false);
+                g.drawString(font, "[!]", x + 129, yOffset, SCColors.GUIDE_RED, false);
                 if (hoveringBlacklist)
-                    guiGraphics.renderTooltip(font, blacklist, Optional.empty(), absoluteMouseX, absoluteMouseY);
+                    ScreenUtils.Tooltip.set(blacklist);
             }
 
             yOffset += 12;
@@ -2025,9 +2018,9 @@ public class FishingGuideScreen extends Screen
         if (mouseX > 6 && mouseX < 61 && mouseY > 51 && mouseY < 105)
         {
             if (fp.catchInfo().alwaysSpawnEntity() && (fcc != null || !SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get()))
-                guiGraphics.renderTooltip(font, fp.getDisplayName(), absoluteMouseX, absoluteMouseY);
+                ScreenUtils.Tooltip.set(fp.getDisplayName());
             else if (fishToDisplay != ItemStack.EMPTY)
-                guiGraphics.renderTooltip(font, fishToDisplay, absoluteMouseX, absoluteMouseY);
+                ScreenUtils.Tooltip.set(fishToDisplay);
         }
 
         //render stats tooltip (at the end because of the scissor bug)
@@ -2059,33 +2052,7 @@ public class FishingGuideScreen extends Screen
             components.add(translatable("gui.guide.heaviest").append(Component.literal(weight).withStyle(ChatFormatting.BOLD)));
             components.add(translatable("gui.guide.percentile").append(Component.literal(fcc.percentile() + "%").withStyle(ChatFormatting.BOLD)));
 
-            guiGraphics.renderTooltip(font, components, Optional.empty(), absoluteMouseX, absoluteMouseY);
-        }
-
-    }
-
-    public static void renderScrollingString(GuiGraphics guiGraphics, Font font, Component text, int centerX, int minX, int minY, int maxX, int maxY, boolean hovering)
-    {
-        int i = font.width(text);
-        int j = (minY + maxY - 9) / 2 + 1;
-        int k = maxX - minX;
-        if (i > k)
-        {
-            int l = i - k;
-            double d0 = (double) Util.getMillis() / (double) 300.0F;
-            double d1 = Math.max((double) l * (double) 0.5F, 3.0F);
-            double d2 = Math.sin((Math.PI / 2D) * Math.cos((Math.PI * 2D) * d0 / d1)) / (double) 2.0F + (double) 0.5F;
-            double d3 = Mth.lerp(d2, 0.0F, l);
-            guiGraphics.enableScissor(minX, minY, maxX, maxY);
-            int x = minX - (int) d3;
-            if (!hovering) x = minX;
-            guiGraphics.drawString(font, text, x, j, SCColors.GUIDE_TEXT_DARK, false);
-            guiGraphics.disableScissor();
-        }
-        else
-        {
-            int i1 = Mth.clamp(centerX, minX + i / 2, maxX - i / 2);
-            guiGraphics.drawString(font, text.getVisualOrderText(), i1 - font.width(text.getVisualOrderText()) / 2, j, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.Tooltip.set(components);
         }
     }
 

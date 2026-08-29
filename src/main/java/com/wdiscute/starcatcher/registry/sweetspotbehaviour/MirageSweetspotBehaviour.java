@@ -56,15 +56,10 @@ public class MirageSweetspotBehaviour extends AbstractSweetSpotBehaviour
             return;
         }
 
-
         ass.alpha = Math.min(
                 Math.max(distance - deadZone, 0f) / (mirageRange - deadZone),
                 1f
         );
-
-
-        //if(ass.alpha == 0)
-        //    ass.removed = true;
 
         super.render(guiGraphics, poseStack, partialTick, instance, ass);
     }

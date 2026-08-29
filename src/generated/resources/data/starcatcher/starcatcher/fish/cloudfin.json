@@ -99,5 +99,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/sky.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/sky.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

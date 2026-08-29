@@ -17,7 +17,7 @@
         "cooldown": 100,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -33,7 +33,7 @@
         "cooldown": 110,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -49,7 +49,7 @@
         "cooldown": 120,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -65,7 +65,7 @@
         "cooldown": 130,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -81,7 +81,7 @@
         "cooldown": 140,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -97,7 +97,7 @@
         "cooldown": 150,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -113,7 +113,7 @@
         "cooldown": 260,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -127,7 +127,7 @@
     "speed": 12,
     "sweetspots": [
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 1.0,
@@ -185,5 +185,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/surface.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

@@ -129,7 +129,7 @@
   "starcatcher.configuration.penalty_multiplier" : "Глобальный множитель штрафа",
   "starcatcher.configuration.decay_multiplier" : "Глобальный множитель убывания",
   "starcatcher.configuration.hp_multiplier" : "Глобальный множитель ОЗ",
-  "starcatcher.configuration.pointer_speed_multiplier" : "Глобальный множитель скорости указателя",
+  "starcatcher.configuration.handle_speed_multiplier" : "Глобальный множитель скорости указателя",
   "starcatcher.configuration.hide_entries_until_found" : "Скрывать записи путеводителя до нахождения",
   "starcatcher.configuration.fish_player_messages_chance" : "Шанс сообщений игрока рыбе",
   "starcatcher.configuration.save_data_to_items" : "Сохранение NBT размера, веса, редкости и золота",

@@ -9,12 +9,12 @@ import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 
-public class BurnPointerWhileActiveModifier extends AbstractTimedModifier
+public class BurnHandleWhileActiveModifier extends AbstractTimedModifier
 {
     private final int rampTime;
     private final float extraSpeed;
 
-    public BurnPointerWhileActiveModifier(int length, int rampTime, float extraSpeed)
+    public BurnHandleWhileActiveModifier(int length, int rampTime, float extraSpeed)
     {
         super(length);
         this.length = length;
@@ -32,6 +32,7 @@ public class BurnPointerWhileActiveModifier extends AbstractTimedModifier
         RenderSystem.setShaderColor(1, 1, 1, alpha);
         RenderSystem.enableBlend();
 
+        //vanilla code
         TextureAtlasSprite sprite = Minecraft.getInstance()
                 .getModelManager()
                 .getAtlas(TextureAtlas.LOCATION_BLOCKS)
@@ -72,8 +73,8 @@ public class BurnPointerWhileActiveModifier extends AbstractTimedModifier
         //slowdown / ending
         if (tickCount >= length - rampTime)
         {
-            float newPointerSpeed = currentSpeed - Math.signum(currentSpeed) * increaseValueEveryTick;
-            instance.handleSpeed = Math.abs(instance.handleBaseSpeed) < newPointerSpeed ? newPointerSpeed : instance.handleBaseSpeed;
+            float newHandleSpeed = currentSpeed - Math.signum(currentSpeed) * increaseValueEveryTick;
+            instance.handleSpeed = Math.abs(instance.handleBaseSpeed) < newHandleSpeed ? newHandleSpeed : instance.handleBaseSpeed;
         }
     }
 

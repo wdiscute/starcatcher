@@ -7,11 +7,12 @@ import com.wdiscute.starcatcher.registry.SCAttributes;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.AbstractMinigameModifier;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.AbstractSweetSpotBehaviour;
+import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
 
 import java.util.*;
+import java.util.List;
 import java.util.function.Supplier;
 
 public class ActiveSweetSpot
@@ -20,7 +21,7 @@ public class ActiveSweetSpot
     public final AbstractSweetSpotBehaviour behaviour;
     public final Difficulty.SweetSpot baseSS;
     public int thickness;
-    public ResourceLocation texture;
+    public ScreenUtils.Image texture;
     public int reward;
     public int particleColor;
     public List<AbstractMinigameModifier> modifiers;
@@ -83,6 +84,6 @@ public class ActiveSweetSpot
 
     public boolean isHoveredOver()
     {
-        return FishingMinigameScreen.doDegreesOverlapWithLeeway(instance.getPointerPosPrecise(), this.pos, thickness);
+        return FishingMinigameScreen.doDegreesOverlapWithLeeway(instance.getHandlePosPrecise(), this.pos, thickness);
     }
 }

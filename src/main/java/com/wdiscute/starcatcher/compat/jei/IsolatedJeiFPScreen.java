@@ -31,14 +31,14 @@ public class IsolatedJeiFPScreen extends IsolatedFPScreen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(g, mouseX, mouseY, partialTick);
 
-        guiGraphics.blit(BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
+        BACKGROUND.render(g, uiX, uiY);
 
         FishingGuideScreen.renderFishEntryPage(
-                guiGraphics,
+                g,
                 fp,
                 fp.catchInfo().fish().toStack(),
                 FishCaughtCounter.get(Minecraft.getInstance().player, fp.toLoc(Minecraft.getInstance().level)),

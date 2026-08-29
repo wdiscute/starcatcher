@@ -13,6 +13,7 @@ import com.wdiscute.starcatcher.guide.SettingsScreen;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.tournament.StandScreen;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.CrashReport;
 import net.minecraft.CrashReportCategory;
 import net.minecraft.ReportedException;
@@ -41,8 +42,8 @@ import java.util.List;
 public class FishTrackerLayer implements LayeredDraw.Layer
 {
 
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/fish_tracker/background.png");
-    private static final ResourceLocation EMPTY = Starcatcher.rl("textures/gui/fish_tracker/empty.png");
+    private static final ScreenUtils.Image BACKGROUND = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_tracker/background.png"), 155, 135);
+    private static final ScreenUtils.Image EMPTY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_tracker/empty.png"), 34, 34);
 
     int uiX;
     int uiY;
@@ -174,91 +175,31 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         }
 
         //render base background
-        renderImage(guiGraphics, BACKGROUND);
+        BACKGROUND.render(guiGraphics, uiX, uiY);
 
         //render fish + name
         if (cachedCaughtFish || !SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get())
         {
-            StandScreen.renderCenteredScrollingString(guiGraphics, font, cachedFP.getDisplayName(),
-                    uiX + 80, uiX + 77, uiX + 151, uiY + 27, SCColors.GUIDE_TEXT_DARK);
-            renderItem(guiGraphics, level, cachedFP.catchInfo().fish().toStack(), uiX + 42, uiY + 15, 2);
+            ScreenUtils.text(guiGraphics, font, font.plainSubstrByWidth(cachedFP.getDisplayName().getString(), 77),
+                    uiX + 77,  uiY + 27, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.item(guiGraphics, cachedFP.catchInfo().fish().toStack(), uiX + 42, uiY + 15, guiGraphics.pose(), 2);
         }
         else
         {
-            guiGraphics.blit(EMPTY,
-                    uiX + 34, uiY + 7,
-                    34, 34,
-                    0, 0,
-                    34, 34,
-                    34, 34);
+            EMPTY.render(guiGraphics, uiX + 34, uiY + 7);
         }
 
         //render weight
         double percentage = (double) cachedChance / cachedTotalChance * 100;
-        renderCenteredString(guiGraphics, font, Component.literal(new DecimalFormat("0.#").format(percentage) + "%"),
-                uiX + 34, uiY + 65, SCColors.GUIDE_TEXT_DARK);
-        renderCenteredString(guiGraphics, font, Component.literal(cachedChance + "/" + cachedTotalChance),
-                uiX + 34, uiY + 75, SCColors.GUIDE_TEXT_DARK);
+        ScreenUtils.centeredText(guiGraphics, font, Component.literal(new DecimalFormat("0.#").format(percentage) + "%"),
+                uiX + 34, uiY + 65, SCColors.GUIDE_TEXT_DARK, false);
+        ScreenUtils.centeredText(guiGraphics, font, Component.literal(cachedChance + "/" + cachedTotalChance),
+                uiX + 34, uiY + 75, SCColors.GUIDE_TEXT_DARK, false);
 
         //render restrictions
         for (int i = 0; i < cachedRestrictions.size(); i++)
             guiGraphics.drawString(font, cachedRestrictions.get(i), uiX + 70, uiY + 49 + i * 10, SCColors.GUIDE_TEXT_DARK, false);
 
         guiGraphics.pose().popPose();
-
-    }
-
-    private void renderItem(GuiGraphics guiGraphics, @Nullable Level level, ItemStack stack, int x, int y, float scale)
-    {
-        PoseStack pose = guiGraphics.pose();
-        if (!stack.isEmpty())
-        {
-            Minecraft minecraft = Minecraft.getInstance();
-            BakedModel bakedmodel = minecraft.getItemRenderer().getModel(stack, level, null, 0);
-            pose.pushPose();
-            pose.translate((float) (x + 8), (float) (y + 8), (float) (150));
-
-            try
-            {
-                pose.scale(16.0F * scale, -16.0F * scale, 16.0F * scale);
-                boolean flag = !bakedmodel.usesBlockLight();
-                if (flag)
-                {
-                    Lighting.setupForFlatItems();
-                }
-
-                minecraft
-                        .getItemRenderer()
-                        .render(stack, ItemDisplayContext.GUI, false, pose, guiGraphics.bufferSource(), 15728880, OverlayTexture.NO_OVERLAY, bakedmodel);
-                RenderSystem.disableDepthTest();
-                guiGraphics.bufferSource().endBatch();
-                RenderSystem.enableDepthTest();
-                if (flag)
-                {
-                    Lighting.setupFor3DItems();
-                }
-            } catch (Throwable throwable)
-            {
-                CrashReport crashreport = CrashReport.forThrowable(throwable, "Rendering item");
-                CrashReportCategory crashreportcategory = crashreport.addCategory("Item being rendered");
-                crashreportcategory.setDetail("Item Type", () -> String.valueOf(stack.getItem()));
-                crashreportcategory.setDetail("Item Components", () -> String.valueOf(stack.getComponents()));
-                crashreportcategory.setDetail("Item Foil", () -> String.valueOf(stack.hasFoil()));
-                throw new ReportedException(crashreport);
-            }
-
-            pose.popPose();
-        }
-    }
-
-    public void renderCenteredString(GuiGraphics guiGraphics, Font font, Component text, int x, int y, int color)
-    {
-        FormattedCharSequence formattedcharsequence = text.getVisualOrderText();
-        guiGraphics.drawString(font, formattedcharsequence, x - font.width(formattedcharsequence) / 2, y, color, false);
-    }
-
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
-    {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
     }
 }

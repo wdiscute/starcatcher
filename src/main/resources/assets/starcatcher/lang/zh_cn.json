@@ -128,7 +128,7 @@
   "starcatcher.configuration.penalty_multiplier": "全局惩罚倍率",
   "starcatcher.configuration.decay_multiplier": "全局衰减倍率",
   "starcatcher.configuration.hp_multiplier": "全局生命值倍率",
-  "starcatcher.configuration.pointer_speed_multiplier": "全局指针速度倍率",
+  "starcatcher.configuration.handle_speed_multiplier": "全局指针速度倍率",
   "starcatcher.configuration.hide_entries_until_found": "未捕获前隐藏指南条目",
   "starcatcher.configuration.fish_player_messages_chance": "钓鱼触发玩家消息概率",
   "starcatcher.configuration.save_data_to_items": "尺寸、重量、稀有度及金色属性NBT保存",

@@ -22,20 +22,36 @@ public class KimbeMarkerModifier extends AbstractMinigameModifier
     }
 
     @Override
+    public void tick(FishingMinigameScreen instance)
+    {
+        super.tick(instance);
+
+        //decrease kimbe markers alpha
+        int color = instance.kimbeMarkerColor;
+
+        int alpha = (color >>> 24) & 0xff;
+
+
+        alpha = Math.max(0, alpha - 20);
+
+        color = (color & 0x00ffffff) | (alpha << 24);
+
+        instance.kimbeMarkerColor = color;
+    }
+
+    @Override
     public void onMiss(FishingMinigameScreen instance)
     {
         super.onMiss(instance);
-        instance.kimbeMarkerAlpha = 1;
-        instance.kimbeMarkerColor = 0xff6767;
-        instance.kimbeMarkerPos = instance.getPointerPosPrecise();
+        instance.kimbeMarkerColor = 0xffff6767;
+        instance.kimbeMarkerPos = instance.getHandlePosPrecise();
     }
 
     @Override
     public boolean onHit(FishingMinigameScreen instance, ActiveSweetSpot ass)
     {
-        instance.kimbeMarkerAlpha = 1;
-        instance.kimbeMarkerColor = 0x2ce17d;
-        instance.kimbeMarkerPos = instance.getPointerPosPrecise();
+        instance.kimbeMarkerColor = 0xff2ce17d;
+        instance.kimbeMarkerPos = instance.getHandlePosPrecise();
         return super.onHit(instance, ass);
     }
 

@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.data.network.tournament;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.tournament.TournamentOverlay;
+import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -26,6 +26,6 @@ public record CBClearTournamentPayload(String text) implements CustomPacketPaylo
 
     public void handle(IPayloadContext context)
     {
-        TournamentOverlay.clear();
+        TournamentLayer.clear();
     }
 }

@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.compat.emi;
 
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.ScreenUtils;
 import dev.emi.emi.api.widget.Bounds;
 import dev.emi.emi.api.widget.Widget;
 import net.minecraft.client.Minecraft;
@@ -42,6 +43,7 @@ public class StarcatcherShowInGuideEmiWidget extends Widget
     {
         //render tooltip
         if(mouseX > x && mouseX < x + 19 && mouseY > y && mouseY < y + 19)
-            draw.renderTooltip(Minecraft.getInstance().font, Component.translatable("emi.starcatcher.open_as_guide_entry"), mouseX, mouseY);
+            ScreenUtils.Tooltip.set(Component.translatable("emi.starcatcher.open_as_guide_entry"));
+        ScreenUtils.Tooltip.render(draw, Minecraft.getInstance().font, mouseX, mouseY);
     }
 }

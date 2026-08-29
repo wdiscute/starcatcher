@@ -40,7 +40,7 @@ public class DripstoneSweetSpotBehaviour extends NormalSweetSpotBehaviour
         if (map.containsKey(ass))
         {
             Integer value = map.get(ass);
-            if(value == 10)
+            if (value == 10)
                 Minecraft.getInstance().player.playSound(SoundEvents.POINTED_DRIPSTONE_LAND, 0.4f, 1.6f);
 
             if (value > 20)
@@ -78,11 +78,11 @@ public class DripstoneSweetSpotBehaviour extends NormalSweetSpotBehaviour
         RenderSystem.enableBlend();
 
         poseStack.pushPose();
-        if(map.containsKey(ass))
+        if (map.containsKey(ass))
             poseStack.translate(0, map.get(ass) + 1 * partialTick, 0);
 
         //offsets vertically by the value in the map so it falls towards the center
-        FishingMinigameScreen.renderPoseCentered(guiGraphics, ass.texture, 96);
+        ass.texture.render(guiGraphics, -48, -48);
 
         poseStack.popPose();
 

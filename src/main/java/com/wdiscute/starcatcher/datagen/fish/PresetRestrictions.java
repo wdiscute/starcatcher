@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.datagen.fish;
 
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.fish.Textures;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import net.minecraft.data.worldgen.BootstrapContext;
 
@@ -52,7 +53,7 @@ public class PresetRestrictions
     public static FishProperties coldLake(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.ICY)
+                .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.coldLakes())
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
@@ -63,7 +64,7 @@ public class PresetRestrictions
     public static FishProperties iceSpikes(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.ICY)
+                .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.iceSpikes())
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
@@ -76,7 +77,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .withBaseChance(10)
-                .withTextures(FishProperties.ICY)
+                .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.coldLakes())
                 .addRestriction(ElevationBias.MOUNTAIN)
@@ -258,7 +259,7 @@ public class PresetRestrictions
     public static FishProperties caves(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.CAVE)
+                .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(ElevationRestriction.ZERO_TO_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
@@ -269,7 +270,7 @@ public class PresetRestrictions
     public static FishProperties dripstoneCaves(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.CAVE)
+                .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.dripstoneCaves())
                 .addRestriction(FluidRestriction.WATER)
@@ -279,7 +280,7 @@ public class PresetRestrictions
     public static FishProperties lushCaves(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.CAVE)
+                .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.lushCaves())
                 .addRestriction(FluidRestriction.WATER)
@@ -289,7 +290,7 @@ public class PresetRestrictions
     public static FishProperties deepslate(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.CAVE)
+                .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(ElevationRestriction.BELOW_ZERO)
                 .addRestriction(FluidRestriction.WATER)
@@ -299,7 +300,7 @@ public class PresetRestrictions
     public static FishProperties deepDark(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.DEEP_DARK)
+                .withTextures(Textures.DEFAULT.withTank(Textures.DEEP_DARK))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.deepDark())
                 .addRestriction(ElevationRestriction.BELOW_ZERO)
@@ -310,7 +311,7 @@ public class PresetRestrictions
     public static FishProperties surfaceLava(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.LAVA_OVERWORLD)
+                .withTextures(Textures.DEFAULT.withTank(Textures.LAVA_OVERWORLD))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(BiomeRestriction.lakes())
@@ -321,7 +322,7 @@ public class PresetRestrictions
     public static FishProperties caveLava(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.LAVA_OVERWORLD)
+                .withTextures(Textures.DEFAULT.withTank(Textures.LAVA_OVERWORLD))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(ElevationRestriction.ZERO_TO_FIFTY)
                 .addRestriction(FluidRestriction.LAVA)
@@ -331,7 +332,7 @@ public class PresetRestrictions
     public static FishProperties deepslateLava(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.LAVA_OVERWORLD)
+                .withTextures(Textures.DEFAULT.withTank(Textures.LAVA_OVERWORLD))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(ElevationRestriction.BELOW_ZERO)
                 .addRestriction(FluidRestriction.LAVA)
@@ -341,7 +342,7 @@ public class PresetRestrictions
     public static FishProperties netherLava(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.NETHER)
+                .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
                 .addRestriction(FluidRestriction.LAVA)
                 ;
@@ -350,7 +351,7 @@ public class PresetRestrictions
     public static FishProperties crimsonForest(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.NETHER)
+                .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
                 .addRestriction(BiomeRestriction.crimsonForest())
                 .addRestriction(FluidRestriction.LAVA)
@@ -360,7 +361,7 @@ public class PresetRestrictions
     public static FishProperties warpedForest(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.NETHER)
+                .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
                 .addRestriction(BiomeRestriction.warpedForest())
                 .addRestriction(FluidRestriction.LAVA)
@@ -370,7 +371,7 @@ public class PresetRestrictions
     public static FishProperties netherLavaBasaltDeltas(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.NETHER)
+                .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
                 .addRestriction(BiomeRestriction.basaltDeltas())
                 .addRestriction(FluidRestriction.LAVA)
@@ -380,7 +381,7 @@ public class PresetRestrictions
     public static FishProperties soulSandValley(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.NETHER)
+                .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
                 .addRestriction(BiomeRestriction.soulSandValley())
                 .addRestriction(FluidRestriction.LAVA)
@@ -390,7 +391,7 @@ public class PresetRestrictions
     public static FishProperties endAir(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.END_VOID)
+                .withTextures(Textures.DEFAULT.withTank(Textures.END_VOID))
                 .addRestriction(DimensionRestriction.END)
                 .addRestriction(FluidRestriction.AIR)
                 ;
@@ -399,7 +400,7 @@ public class PresetRestrictions
     public static FishProperties endVoid(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.END_VOID)
+                .withTextures(Textures.DEFAULT.withTank(Textures.END_VOID))
                 .addRestriction(DimensionRestriction.END)
                 .addRestriction(ElevationRestriction.END_VOID)
                 .addRestriction(FluidRestriction.VOID)
@@ -409,7 +410,7 @@ public class PresetRestrictions
     public static FishProperties endOuterIslandsAir(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
-                .withTextures(FishProperties.END_VOID)
+                .withTextures(Textures.DEFAULT.withTank(Textures.END_VOID))
                 .addRestriction(DimensionRestriction.END)
                 .addRestriction(BiomeRestriction.outerIslands())
                 .addRestriction(FluidRestriction.AIR)

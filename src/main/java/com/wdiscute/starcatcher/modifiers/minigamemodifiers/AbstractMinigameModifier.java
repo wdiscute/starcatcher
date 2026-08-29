@@ -103,9 +103,9 @@ public abstract class AbstractMinigameModifier implements Modifier
     }
 
     /**
-     * Disables rendering the included pointer
+     * Disables rendering the included handle
      */
-    public boolean disablePointerRendering(FishingMinigameScreen instance)
+    public boolean disableHandleRendering(FishingMinigameScreen instance)
     {
         return false;
     }
@@ -113,7 +113,7 @@ public abstract class AbstractMinigameModifier implements Modifier
     /**
      * Has the correctly rotated poseStack already
      */
-    public void renderOnPointer(FishingMinigameScreen instance, GuiGraphics guiGraphics, PoseStack poseStack, float partialTick)
+    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphics guiGraphics, PoseStack poseStack, float partialTick)
     {
     }
 

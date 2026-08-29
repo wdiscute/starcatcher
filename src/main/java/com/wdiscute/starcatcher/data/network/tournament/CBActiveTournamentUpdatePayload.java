@@ -3,7 +3,7 @@ package com.wdiscute.starcatcher.data.network.tournament;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.tournament.Tournament;
-import com.wdiscute.starcatcher.tournament.TournamentOverlay;
+import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -28,7 +28,7 @@ public record CBActiveTournamentUpdatePayload(Tournament tournament) implements 
 
     public void handle(IPayloadContext context)
     {
-        TournamentOverlay.onTournamentReceived(tournament);
+        TournamentLayer.onTournamentReceived(tournament);
     }
 
 }

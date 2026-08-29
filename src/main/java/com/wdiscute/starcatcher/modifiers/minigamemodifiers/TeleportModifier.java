@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
+import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -110,9 +111,9 @@ public class TeleportModifier extends AbstractMinigameModifier
         renderKimbeMarker(guiGraphics, width, height);
     }
 
-    public void renderKimbeMarker(GuiGraphics guiGraphics, int width, int height)
+    public void renderKimbeMarker(GuiGraphics g, int width, int height)
     {
-        PoseStack poseStack = guiGraphics.pose();
+        PoseStack poseStack = g.pose();
         poseStack.pushPose();
 
         float centerX = width / 2f;
@@ -122,19 +123,7 @@ public class TeleportModifier extends AbstractMinigameModifier
         poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(kimbePosition + 180)));
         poseStack.translate(-centerX, -centerY, 0);
 
-        RenderSystem.setShaderColor(
-                (float) Utils.intToRed(0x653bea) / 255,
-                (float) Utils.intToGreen(0x653bea) / 255,
-                (float) Utils.intToBlue(0x653bea) / 255,
-                0.6f);
-
-        RenderSystem.enableBlend();
-
-        guiGraphics.renderOutline(width / 2, height / 2 + 8, 2, 28, 0xffffffff);
-
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.disableBlend();
+        ScreenUtils.outline(g, width / 2, height / 2 + 8, 2, 28, 0x99653bea);
 
         poseStack.popPose();
     }

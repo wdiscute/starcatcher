@@ -37,7 +37,7 @@ public class BurnOnMissModifier extends AbstractMinigameModifier
     public void onMiss(FishingMinigameScreen instance)
     {
         super.onMiss(instance);
-        instance.addUniqueModifier(new BurnPointerWhileActiveModifier(length, rampTime, extraSpeed));
+        instance.addUniqueModifier(new BurnHandleWhileActiveModifier(length, rampTime, extraSpeed));
     }
 
     @Override

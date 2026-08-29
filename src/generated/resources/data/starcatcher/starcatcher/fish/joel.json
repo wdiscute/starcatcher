@@ -14,7 +14,7 @@
     "speed": 6,
     "sweetspots": [
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -24,7 +24,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -34,7 +34,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -44,7 +44,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -54,7 +54,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -64,7 +64,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -74,7 +74,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -84,7 +84,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -132,5 +132,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/surface.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

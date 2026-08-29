@@ -1,10 +1,9 @@
 package com.wdiscute.starcatcher.minigame;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.utils.ScreenUtils;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
 import org.joml.Vector2d;
 
 import java.util.Random;
@@ -13,10 +12,7 @@ public class HitFakeParticle
 {
     private static final Random random = new Random();
 
-    public float r;
-    public float g;
-    public float b;
-    public float a;
+    public int color;
 
     public Vector2d pos;
     public double speed;
@@ -29,20 +25,15 @@ public class HitFakeParticle
         PoseStack poseStack = guiGraphics.pose();
         poseStack.pushPose();
         poseStack.translate(pos.x, pos.y, 0);
-        RenderSystem.setShaderColor(r, g, b, a);
 
-        guiGraphics.fill(width / 2, height / 2, width / 2 + 1, height / 2 + 1, 0xffffffff);
+        ScreenUtils.fill(guiGraphics, width / 2, height / 2, 1, 1, color);
 
-        RenderSystem.setShaderColor(1, 1, 1, 1);
         poseStack.popPose();
     }
 
-    public HitFakeParticle(int x, int y, Vector2d vec, float r, float g, float b, float a)
+    public HitFakeParticle(int x, int y, Vector2d vec, int color)
     {
-        this.r = r;
-        this.g = g;
-        this.b = b;
-        this.a = a;
+        this.color = color;
 
         pos = new Vector2d(x + random.nextFloat() * 10 - 5, y + random.nextFloat() * 10 - 5);
         this.vecDirection = vec.normalize();

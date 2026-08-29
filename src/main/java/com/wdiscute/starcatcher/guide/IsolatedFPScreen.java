@@ -4,6 +4,7 @@ import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -12,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 
 public class IsolatedFPScreen extends Screen
 {
-    protected static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/jemi/entry.png");
+    protected static final ScreenUtils.Image BACKGROUND = new ScreenUtils.Image(Starcatcher.rl("textures/gui/jemi/entry.png"), 200, 200);
 
     protected final FishProperties fp;
     protected int uiX;
@@ -63,14 +64,14 @@ public class IsolatedFPScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(g, mouseX, mouseY, partialTick);
 
-        guiGraphics.blit(BACKGROUND, uiX, uiY, 0, 0, 200, 200, 200, 200);
+        BACKGROUND.render(g, uiX, uiY);
 
         FishingGuideScreen.renderFishEntryPage(
-                guiGraphics,
+                g,
                 fp,
                 fp.catchInfo().fish().toStack(),
                 FishCaughtCounter.get(Minecraft.getInstance().player, fp.toLoc(Minecraft.getInstance().level)),

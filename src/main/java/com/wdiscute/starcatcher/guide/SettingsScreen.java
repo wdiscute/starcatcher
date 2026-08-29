@@ -1,22 +1,20 @@
 package com.wdiscute.starcatcher.guide;
 
+import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.tackleskin.BaseTackleSkin;
 import com.wdiscute.starcatcher.tournament.Tournament;
-import com.wdiscute.starcatcher.tournament.TournamentOverlay;
+import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import com.wdiscute.starcatcher.tournament.TournamentScoreSettings;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.ScreenUtils;
-import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.text.DecimalFormat;
@@ -47,8 +45,8 @@ public class SettingsScreen extends FishingMinigameScreen
 
         renderBlur = true;
 
-        tournamentCached = TournamentOverlay.tournament;
-        TournamentOverlay.onTournamentReceived(new Tournament(
+        tournamentCached = TournamentLayer.tournament;
+        TournamentLayer.onTournamentReceived(new Tournament(
                 UUID.randomUUID(),
                 "example",
                 Tournament.Status.ACTIVE,
@@ -90,10 +88,10 @@ public class SettingsScreen extends FishingMinigameScreen
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         buttons.forEach(o -> o.render(guiGraphics, width, height, font));
 
-        ScreenUtils.text(guiGraphics, font, "Minigame: ", width / 2 + 70, height / 2 - 120, 0xffffff00);
-        ScreenUtils.text(guiGraphics, font, "Tournament: ", width / 2 + 70, height / 2 - 60, 0xffffff00);
-        ScreenUtils.text(guiGraphics, font, "Radar: ", width / 2 + 70, height / 2, 0xffffff00);
-        ScreenUtils.text(guiGraphics, font, "Tracker: ", width / 2 + 70, height / 2 + 60, 0xffffff00);
+        ScreenUtils.text(guiGraphics, font, "Minigame: ", width / 2 + 70, height / 2 - 120, SCColors.YELLOW);
+        ScreenUtils.text(guiGraphics, font, "Tournament: ", width / 2 + 70, height / 2 - 60, SCColors.YELLOW);
+        ScreenUtils.text(guiGraphics, font, "Radar: ", width / 2 + 70, height / 2, SCColors.YELLOW);
+        ScreenUtils.text(guiGraphics, font, "Tracker: ", width / 2 + 70, height / 2 + 60, SCColors.YELLOW);
     }
 
     public record Button(ModConfigSpec.DoubleValue configSpec, int x, int y, String text, float increase)
@@ -101,7 +99,7 @@ public class SettingsScreen extends FishingMinigameScreen
         public void render(GuiGraphics guiGraphics, int width, int height, Font font)
         {
             //fill background for text
-            ScreenUtils.fill(guiGraphics, width / 2 + x, height / 2 + y, 100, 15, 0xff000000);
+            ScreenUtils.fill(guiGraphics, width / 2 + x, height / 2 + y, 100, 15, SCColors.BLACK);
 
             //render arrows
             ARROW_LEFT.render(guiGraphics, width / 2 + x, height / 2 + y);
@@ -188,9 +186,9 @@ public class SettingsScreen extends FishingMinigameScreen
         modifiers.forEach(o -> o.onRemove(this));
 
         if (tournamentCached == null)
-            TournamentOverlay.clear();
+            TournamentLayer.clear();
         else
-            TournamentOverlay.onTournamentReceived(tournamentCached);
+            TournamentLayer.onTournamentReceived(tournamentCached);
 
         this.minecraft.popGuiLayer();
     }

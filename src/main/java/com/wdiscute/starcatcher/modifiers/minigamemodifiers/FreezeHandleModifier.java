@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -12,16 +13,16 @@ public class FreezeHandleModifier extends AbstractTimedModifier
 {
     private final int rampTime;
 
-    public static final ResourceLocation FROZEN = Starcatcher.rl("textures/gui/minigame/modifiers/freeze_center.png");
+    public static final ScreenUtils.Image FROZEN = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/freeze_center.png"), 32, 32);
 
     @Override
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphics g, float partialTick, int width, int height)
     {
-        super.renderForeground(instance, guiGraphics, partialTick, width, height);
+        super.renderForeground(instance, g, partialTick, width, height);
         float alpha = 1 - (instance.handleSpeed - instance.handleBaseSpeed / 2) / (instance.handleBaseSpeed - instance.handleBaseSpeed / 2);
         RenderSystem.setShaderColor(1, 1, 1, alpha);
         RenderSystem.enableBlend();
-        guiGraphics.blit(FROZEN, width / 2 - 16, height / 2 - 16, 32, 32, 0, 0, 32, 32, 32, 32);
+        FROZEN.render(g, width / 2 - 16, height / 2 - 16);
         RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.enableBlend();
     }
@@ -65,8 +66,8 @@ public class FreezeHandleModifier extends AbstractTimedModifier
 
         if (tickCount >= length - rampTime)
         {
-            float newPointerSpeed = currentSpeed + instance.currentRotation * decreaseTime;
-            instance.handleSpeed = Math.min(instance.handleBaseSpeed, newPointerSpeed);
+            float newHandleSpeed = currentSpeed + instance.currentRotation * decreaseTime;
+            instance.handleSpeed = Math.min(instance.handleBaseSpeed, newHandleSpeed);
         }
 
         if(tickCount > length) removed = true;

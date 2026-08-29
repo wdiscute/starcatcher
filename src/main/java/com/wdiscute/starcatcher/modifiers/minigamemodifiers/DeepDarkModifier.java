@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.GlowingSweetSpotBehaviour;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.SculkSweetSpotBehaviour;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
@@ -75,7 +76,7 @@ public class DeepDarkModifier extends AbstractMinigameModifier
                     newAlpha
             );
 
-            guiGraphics.fill(0, 0, instance.width, instance.height, newColor.getRGB());
+            ScreenUtils.fill(guiGraphics, 0, 0, instance.width, instance.height, newColor.getRGB());
         }
     }
 

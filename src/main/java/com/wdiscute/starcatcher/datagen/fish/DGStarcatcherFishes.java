@@ -530,7 +530,7 @@ public class DGStarcatcherFishes
         FishRegistration.register(context,
                 PresetRestrictions.empty(context)
                         .withFish(SCItems.CLOUDFIN)
-                        .withTextures(FishProperties.SKY)
+                        .withTextures(Textures.DEFAULT.withTank(Textures.SKY))
                         .withSizeAndWeight(new SizeAndWeight(920, 120, 0, 0))
                         .addRestriction(DimensionRestriction.OVERWORLD)
                         .addRestriction(ElevationRestriction.ABOVE_TWO_HUNDRED)
