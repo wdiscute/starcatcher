@@ -155,7 +155,6 @@ public class SCEvents
 
                 bobber.level().addFreshEntity(guideFished);
                 bobber.level().addFreshEntity(rodFished);
-
             }
         }
     }

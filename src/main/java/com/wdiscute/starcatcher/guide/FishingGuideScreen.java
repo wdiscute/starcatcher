@@ -17,6 +17,7 @@ import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.data.network.SBTrackFishPayload;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.messageinabottle.message.MessageScreen;
+import com.wdiscute.starcatcher.minigame.KonamiDetector;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.data.network.SignGuidePayload;
@@ -1954,6 +1955,15 @@ public class FishingGuideScreen extends Screen
         {
             ScreenUtils.item(g, fishToDisplay, x + 19, y + 64, g.pose(), 3);
             ScreenUtils.scrollingText(g, font, fp.getDisplayName(), x + 28, y + 36, x + 141, SCColors.GUIDE_TEXT_DARK, false);
+        }
+
+        //render debug fish name
+        if (SCConfig.DEBUG_MINIGAME.get())
+        {
+            ScreenUtils.text(g, font, fp.hashCode() + "", x + 6, y + 60, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.text(g, font, fp.getDisplayName(), x + 6, y + 70, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.text(g, font, fishToDisplay.toString(), x + 6, y + 80, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.text(g, font, fp.catchInfo().entityToSpawn().getRegisteredName(), x + 6, y + 90, SCColors.GUIDE_TEXT_DARK, false);
         }
 
         int color = switch (fp.rarity())
