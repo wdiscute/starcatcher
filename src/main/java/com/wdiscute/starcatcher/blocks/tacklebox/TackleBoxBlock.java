@@ -10,6 +10,9 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -74,7 +77,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        if(state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) return NORTH_SOUTH;
+        if (state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) return NORTH_SOUTH;
         return EAST_WEST;
     }
 
@@ -103,9 +106,24 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         {
             if (level.getBlockEntity(pos) instanceof TackleBoxBlockEntity tbbe)
             {
-                //todo?
-                //player.awardStat(Stats.OPEN_SHULKER_BOX);
-                player.openMenu(tbbe, pos);
+                if (player.isCrouching())
+                {
+                    ItemStack stack = getColoredItemStack(this.getColor());
+                    stack.applyComponents(tbbe.collectComponents());
+                    level.playSound(null, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
+                    if (player.getMainHandItem().isEmpty())
+                    {
+                        player.setItemInHand(InteractionHand.MAIN_HAND, stack);
+                    }
+                    else
+                        player.addItem(stack);
+
+                    level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+                }
+                else
+                {
+                    player.openMenu(tbbe, pos);
+                }
             }
         }
         return InteractionResult.SUCCESS;
@@ -127,6 +145,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         builder.add(FACING);
         builder.add(BlockStateProperties.WATERLOGGED);
     }
+
 
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
@@ -253,7 +272,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             {
                 case WHITE -> SCBlocks.TACKLE_BOX_WHITE;
                 case ORANGE -> SCBlocks.TACKLE_BOX_ORANGE;
-                case MAGENTA ->  SCBlocks.TACKLE_BOX_MAGENTA;
+                case MAGENTA -> SCBlocks.TACKLE_BOX_MAGENTA;
                 case LIGHT_BLUE -> SCBlocks.TACKLE_BOX_LIGHT_BLUE;
                 case YELLOW -> SCBlocks.TACKLE_BOX_YELLOW;
                 case LIME -> SCBlocks.TACKLE_BOX_LIME;
@@ -299,7 +318,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     {
         return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) ->
         {
-            if(blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
+            if (blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
         };
     }
 }
