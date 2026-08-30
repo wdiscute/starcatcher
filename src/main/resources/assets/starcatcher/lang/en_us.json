@@ -31,7 +31,7 @@
   "section.starcatcher.hooks_bobbers": "Hooks, Bobbers & Baits",
   "section.starcatcher.cosmetics": "Cosmetics",
   "section.starcatcher.must_have": "Must Have",
-  "section.starcatcher.trophies": "Trophies & Messages",
+  "section.starcatcher.trophies": "Stats & Trophies",
   "section.starcatcher.miscellaneous": "Miscellaneous",
   "section.starcatcher.tackle_boxes": "Tackle Boxes",
 
@@ -769,7 +769,7 @@
 
   "gui.guide.index.cosmetics" : "Cosmetics",
   "gui.guide.index.tournaments" : "Fishing Tournaments",
-  "gui.guide.index.messages" : "Letters  & Messages-in-a-bottle",
+  "gui.guide.index.messages" : "Messages-in-a-bottle & secrets",
   "gui.guide.index.selling_bin" : "Selling Your Fishes!",
   "gui.guide.index.aquarium" : "Aquariums",
   "gui.guide.index.display" : "Display & Book Signing",

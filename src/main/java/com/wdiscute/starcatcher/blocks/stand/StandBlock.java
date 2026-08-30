@@ -51,7 +51,6 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
         return List.of(center, center.above(), center.relative(direction.getCounterClockWise()), center.relative(direction.getCounterClockWise()).above());
     }
 
-
     @Override
     public RenderShape getMultiblockRenderShape(BlockState state, boolean isCenter) {
         return RenderShape.MODEL;
@@ -76,18 +75,6 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     {
         return getStateForPlacementHelper(context, context.getHorizontalDirection().getOpposite());
     }
-
-    @Override
-    public BlockState getDefaultStateForPreviews(BlockState state, BlockPlaceContext blockPlaceContext)
-    {
-        return IPreviewableMultiblock.super.getDefaultStateForPreviews(state, blockPlaceContext);
-    }
-
-    //@Override
-    //public BlockState getDefaultStateForPreviews(Direction direction)
-    //{
-    //    return IPreviewableMultiblock.super.getDefaultStateForPreviews(direction.getOpposite());
-    //}
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)

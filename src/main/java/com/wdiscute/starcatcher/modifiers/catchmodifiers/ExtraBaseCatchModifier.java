@@ -39,7 +39,7 @@ public class ExtraBaseCatchModifier extends AbstractCatchModifier
     @Override
     public List<Component> getNonOverriddenDescription(boolean shift)
     {
-        return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_base_catch", I18n.get("tooltip.modifier.number." + count)));
+        return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_base_catch", I18n.exists("tooltip.modifier.number." + count) ? I18n.get("tooltip.modifier.number." + count) : count));
     }
 
     @Override

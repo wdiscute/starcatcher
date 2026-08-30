@@ -1151,7 +1151,7 @@ public class FishingGuideScreen extends Screen
                             Minecraft.getInstance().setScreen(new IsolatedFPScreen(fp, this));
                     }
                     //scrollable background fill
-                    ScreenUtils.fill(g, x - 1, y - 1, x + 17, y + 17, 0xffb4a697);
+                    ScreenUtils.fill(g, x - 1, y - 1, 18, 18, 0xffb4a697);
                 }
             }
         }
