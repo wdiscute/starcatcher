@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-30T04:46:43.277545	FishingProperties
+// 1.21.1	2026-08-30T15:40:50.5287465	FishingProperties
 afbe4cf8b29f10778aaba5c2cdb0f217351be97c data/minecraft/starcatcher/fish/bamboo.json
 760d88a50754750efee9b6e6a08302f25b110a01 data/minecraft/starcatcher/fish/cod.json
 59f84e94160b7ec09955c0fcc07680427210c034 data/minecraft/starcatcher/fish/creeper_head.json
@@ -139,11 +139,11 @@ b91348b60f5b3cbc10b33b24779900500c7c5ffe data/starcatcher/starcatcher/fish/survi
 4f69d830ae9adee1bf49a77a014e30add2cfde3f data/starcatcher/starcatcher/fish/the_quarrish.json
 2cf5c1066ecb07e9684a05ae433d1ce17885eb66 data/starcatcher/starcatcher/fish/thunder_bass.json
 b278ab6edb8538ab929717bf1a5a82b8c9bfd506 data/starcatcher/starcatcher/fish/trophy_copper.json
-8e29219d7b4caa687fc7324791c0eb65d19aa712 data/starcatcher/starcatcher/fish/trophy_diamond.json
+8e31db66203694e8ffb56ab753b29249b74d740e data/starcatcher/starcatcher/fish/trophy_diamond.json
 7447be6b6bc7f31e974815d5fef8e26afbb135cc data/starcatcher/starcatcher/fish/trophy_emerald.json
 75102a7037862913de6aa18345d00de27a619e31 data/starcatcher/starcatcher/fish/trophy_gold.json
-fa0d98adbb15e3b08462126ee7875f525817383d data/starcatcher/starcatcher/fish/trophy_iron.json
-b5e17417fde721c774e7b3db1f5dfc072b80d083 data/starcatcher/starcatcher/fish/trophy_of_the_older_angler.json
+4b7f55b8d5d05e954aafeeee96f827bb1c1e1d63 data/starcatcher/starcatcher/fish/trophy_iron.json
+29d77be36aab6dccafdc0dd4fea230259e28a570 data/starcatcher/starcatcher/fish/trophy_of_the_older_angler.json
 47ed1b6f921db46a0ca38db371bc0e6bc9407099 data/starcatcher/starcatcher/fish/twilight_koi.json
 d7920c7d398059b778f673280dfe9a4407095453 data/starcatcher/starcatcher/fish/valley_smithing_template.json
 a83a17382d189bf65423e14f2dce8745617a5544 data/starcatcher/starcatcher/fish/vesani.json

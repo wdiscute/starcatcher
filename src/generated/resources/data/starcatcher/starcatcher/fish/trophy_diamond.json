@@ -51,7 +51,9 @@
           "count_type": "total"
         },
         {
-          "count_type": "all"
+          "count": 10,
+          "count_type": "unique",
+          "rarity": "golden"
         }
       ]
     }
