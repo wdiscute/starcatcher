@@ -122,6 +122,11 @@ public class SCConfig
             .comment("Enables/disables the ability to bonemeal block for worms.")
             .define("enable_worms", true);
 
+    public static final ModConfigSpec.BooleanValue ENABLE_GUIDE_HELP_PAGES = BUILDER_SERVER
+            .translation("starcatcher.configuration.enable_guide_help_pages")
+            .comment("Whether players should see and access the guide help pages")
+            .define("enable_guide_help_pages", true);
+
     public static final ModConfigSpec.BooleanValue ENABLE_MINIGAME = BUILDER_SERVER
             .translation("starcatcher.configuration.enable_minigame")
             .define("enable_minigame", true);

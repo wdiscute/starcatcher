@@ -1,17 +1,19 @@
 package com.wdiscute.starcatcher.guide;
 
+import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
+import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.data.SignedGuide;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
+import com.wdiscute.starcatcher.registry.SCStats;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Style;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
@@ -19,17 +21,17 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LecternBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 
-import java.util.List;
+import java.time.Instant;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FishingGuideItem extends Item
 {
@@ -65,44 +67,51 @@ public class FishingGuideItem extends Item
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))
-        {
-            var sign = SCDataComponents.get(stack, SCDataComponents.SIGNED_GUIDE);
-
-            if (tooltipFlag.hasShiftDown())
-                tooltipComponents.add(Component.translatable("tooltip.starcatcher.starcatcher_guide.signed_shift", sign.owner().toString()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-            else
-                tooltipComponents.add(Component.translatable("tooltip.starcatcher.starcatcher_guide.signed", sign.signature()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
-        }
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-    }
-
-    @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
+        ItemStack stack = player.getItemInHand(usedHand);
         if (level.isClientSide)
         {
             if (SCDataComponents.has(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE))
-                openSignedGuide(SCDataComponents.get(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE));
+                FishingGuideScreen.open(false, SCDataComponents.get(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE));
             else
-                openPersonalGuide();
+                FishingGuideScreen.open(false, null);
+        }
+        else
+        {
+            level.playSound(null, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS);
+
+            //return if not signed
+            if (!SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))
+                return InteractionResultHolder.success(stack);
+
+            SignedGuide signedGuide = SCDataComponents.get(stack, SCDataComponents.SIGNED_GUIDE);
+
+            Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+
+            Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
+            map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
+
+            if (player instanceof ServerPlayer sp)
+            {
+                FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
+                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get())),
+                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get())),
+                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get())),
+                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.BAIT_USED.get()))
+                );
+
+                SCDataComponents.set(stack, SCDataComponents.SIGNED_GUIDE,
+                        new SignedGuide(
+                                player.getUUID(),
+                                mapToSave,
+                                signedGuide.signature(),
+                                Date.from(Instant.now()).getTime(),
+                                statsData
+                        ));
+            }
         }
 
-        level.playSound(null, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS);
-        return InteractionResultHolder.success(player.getItemInHand(usedHand));
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    private void openPersonalGuide()
-    {
-        Minecraft.getInstance().setScreen(new FishingGuideScreen(false, null));
-    }
-
-    @OnlyIn(Dist.CLIENT)
-    private void openSignedGuide(SignedGuide signedGuide)
-    {
-        Minecraft.getInstance().setScreen(new FishingSignedGuideScreen(signedGuide));
+        return InteractionResultHolder.success(stack);
     }
 }

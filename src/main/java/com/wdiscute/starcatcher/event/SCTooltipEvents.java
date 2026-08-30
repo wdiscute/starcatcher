@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
-public class TooltipEvents
+public class SCTooltipEvents
 {
     static int cachedTimer = 0;
     static ItemStack cachedItem = ItemStack.EMPTY;
@@ -69,6 +69,17 @@ public class TooltipEvents
                 comp.add(Tooltips.resolveTagsToComponentFromTranslationKey("tooltip.starcatcher.rod.netherite"));
                 cachedTimer = 0;
             }
+        }
+
+        //signed guide
+        if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))
+        {
+            var sign = SCDataComponents.get(stack, SCDataComponents.SIGNED_GUIDE);
+
+            if (hasShiftDown)
+                comp.add(Component.translatable("tooltip.starcatcher.starcatcher_guide.signed_shift", sign.owner().toString()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
+            else
+                comp.add(Component.translatable("tooltip.starcatcher.starcatcher_guide.signed", sign.signature()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
         }
 
         //tackle skin data component

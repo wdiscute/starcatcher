@@ -17,7 +17,6 @@ import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.data.network.SBTrackFishPayload;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.messageinabottle.message.MessageScreen;
-import com.wdiscute.starcatcher.minigame.KonamiDetector;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.data.network.SignGuidePayload;
@@ -44,8 +43,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.FastColor;
-import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -55,7 +52,6 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.awt.*;
-import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -190,7 +186,7 @@ public class FishingGuideScreen extends Screen
 
     boolean hasNextPage = false;
 
-    int menu = 0;
+    MenuEntry menu = MenuEntry.INDEX;
     int page = 0;
 
     public boolean isSigned;
@@ -244,12 +240,8 @@ public class FishingGuideScreen extends Screen
         fishInArea = new ArrayList<>();
 
         for (FishProperties fp : FishApi.getAllFPs(level))
-        {
             if (fp.hasGuideEntry() && fp.calculateChance(player, player.level(), ItemStack.EMPTY, AbstractFishRestriction.Context.GUIDE_FISHES_IN_AREA) > 0)
                 fishInArea.add(fp);
-        }
-
-        fishCaughtCounterMap = FishingGuideAttachment.getFishesCaught(player);
 
         for (FishProperties fp : FishApi.getAllFPs(level)) if (fp.hasGuideEntry()) entries.add(fp);
         entries = sortEntries(SCConfig.SORT.get(), entries, player);
@@ -307,7 +299,7 @@ public class FishingGuideScreen extends Screen
         {
             if (entries.get(i).equals(trackedFP))
             {
-                menu = 2;
+                menu = MenuEntry.ENTRY;
                 page = i / 2;
             }
         }
@@ -339,35 +331,139 @@ public class FishingGuideScreen extends Screen
         InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(key) && !editBox.canConsumeInput())
         {
-            if (menu == 0)
-            {
+            if (menu.equals(MenuEntry.INDEX))
                 this.onClose();
-                return true;
-            }
             else
             {
-                menu = 0;
+                menu = MenuEntry.INDEX;
                 page = 0;
-                return true;
             }
+            return true;
         }
 
         if (keyCode == 256 && this.shouldCloseOnEsc())
         {
-            if (menu == 0)
-            {
+            if (menu.equals(MenuEntry.INDEX))
                 this.onClose();
-                return true;
-            }
             else
             {
-                menu = 0;
+                menu = MenuEntry.INDEX;
                 page = 0;
-                return true;
             }
+            return true;
         }
 
         return super.keyPressed(keyCode, scanCode, modifiers);
+    }
+
+    public void previousPage()
+    {
+        switch (menu)
+        {
+            case COVER ->
+            {
+
+            }
+
+            case INDEX ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+
+                if (page == 0)
+                    menu = MenuEntry.COVER;
+                else
+                    page--;
+            }
+
+            case HELP ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+
+                if (page == 0)
+                    menu = MenuEntry.INDEX;
+                else
+                    page--;
+            }
+
+            case ENTRY ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+
+                if (page == 0)
+                {
+                    if (SCConfig.ENABLE_GUIDE_HELP_PAGES.get())
+                    {
+                        menu = MenuEntry.HELP;
+                        page = MAX_HELP_PAGES;
+                    }
+                    else
+                        menu = MenuEntry.INDEX;
+                }
+                else
+                    page--;
+            }
+
+        }
+    }
+
+    public void nextPage()
+    {
+        switch (menu)
+        {
+            case COVER ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = MenuEntry.INDEX;
+                page = 0;
+            }
+
+            case INDEX ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+
+                int entriesOnCurrentAndPreviousPages = (page == 0) ? 49 : 49 + (page * 98);
+
+                //if there is next page
+                if (indexEntries.size() > entriesOnCurrentAndPreviousPages)
+                {
+                    page++;
+                }
+                else
+                {
+                    page = 0;
+                    //if help is enabled, go to help
+                    if (SCConfig.ENABLE_GUIDE_HELP_PAGES.get())
+                        menu = MenuEntry.HELP;
+                    else
+                        menu = MenuEntry.ENTRY;
+                }
+            }
+
+            case HELP ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                if (page == MAX_HELP_PAGES)
+                {
+                    menu = MenuEntry.ENTRY;
+                    page = 0;
+                }
+                else
+                {
+                    page++;
+                }
+            }
+
+            case ENTRY ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+
+                int entriesOnCurrentAndPreviousPages = page * 2;
+
+                //if there's next page
+                if (entries.size() > entriesOnCurrentAndPreviousPages)
+                    page++;
+            }
+        }
     }
 
     @Override
@@ -383,147 +479,28 @@ public class FishingGuideScreen extends Screen
         //previous arrow
         if (x > 49 && x < 69 && y > 203 && y < 217)
         {
-            switch (menu)
-            {
-                case 0 ->
-                {
-                    //index <- previous page of index
-                    if (page != 0)
-                    {
-                        player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                        page--;
-                        return true;
-                    }
-                    //go to book cover
-                    else if (!inLectern || isSigned)
-                    {
-                        player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                        menu = -1;
-                    }
-                }
-                case 1 ->
-                {
-                    player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    //help -> index
-                    if (page == 0)
-                    {
-                        menu = 0;
-                        page = entries.size() / 49 - 1;
-                        return true;
-                    }
-                    //help -> previous help page
-                    page--;
-                    return true;
-                }
-                case 2 ->
-                {
-                    player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    //entries -> index page (if signed)
-                    if (isSigned)
-                    {
-                        page = 0;
-                        menu = 0;
-                        return true;
-                    }
-                    //entries -> last page of help
-                    if (page == 0)
-                    {
-                        menu = 1;
-                        page = MAX_HELP_PAGES;
-                        return true;
-                    }
-                    //entries -> previous entry
-                    page--;
-                    return true;
-                }
-
-                case 3 ->
-                {
-                    player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    //end of the book -> last page of entries
-                    if (page == 0)
-                    {
-                        menu = 2;
-                        page = entries.size() / 2;
-                        return true;
-                    }
-                    return true;
-                }
-            }
+            previousPage();
+            return true;
         }
 
         //next arrow
         if (x > 336 && x < 356 && y > 202 && y < 216)
         {
-            switch (menu)
-            {
-                case -1 ->
-                {
-                    //cover -> index
-                    player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    menu = 0;
-                    page = 0;
-                    return true;
-                }
-                case 0 ->
-                {
-                    //index -> next page of index
-                    player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    if (hasNextPage)
-                    {
-                        page++;
-                        return true;
-                    }
-                    //index -> first page of help
-                    menu = 1;
-                    page = 0;
-                    if (isSigned) menu = 2;
-                    return true;
-                }
-                case 1 ->
-                {
-                    //help -> next page of help
-                    player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    if (page != MAX_HELP_PAGES)
-                    {
-                        player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                        page++;
-                        return true;
-                    }
-                    //index -> first page of help
-                    menu = 2;
-                    page = 0;
-                    return true;
-                }
-                case 2 ->
-                {
-                    //entries -> next entry
-                    if (entries.size() > page * 2 + 2)
-                    {
-                        player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                        page++;
-                    }
-                    else
-                    {
-                        menu = 3;
-                        page = 0;
-                    }
-                    return true;
-                }
-            }
+            nextPage();
+            return true;
         }
 
         //index arrow
-        if (x > 174 && x < 196 && y > 202 && y < 216)
+        if (!menu.equals(MenuEntry.INDEX) && x > 174 && x < 196 && y > 202 && y < 216)
         {
             player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 0;
+            menu = MenuEntry.INDEX;
             page = 0;
             return true;
         }
 
         //track fish left
-        if (x > 50 && x < 67 && y > 111 && y < 128 && entries.size() > page * 2)
+        if (menu.equals(MenuEntry.ENTRY) && entries.size() > page * 2 + 1 && x > 50 && x < 67 && y > 111 && y < 128)
         {
             FishProperties fishProperties = entries.get(page * 2);
             ResourceLocation key = level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fishProperties);
@@ -534,7 +511,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //track fish right
-        if (x > 210 && x < 227 && y > 111 && y < 128 && entries.size() > page * 2 + 1)
+        if (menu.equals(MenuEntry.ENTRY) && entries.size() > page * 2 + 1 && x > 210 && x < 227 && y > 111 && y < 128)
         {
             FishProperties fishProperties = entries.get(page * 2 + 1);
             ResourceLocation key = level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fishProperties);
@@ -558,7 +535,7 @@ public class FishingGuideScreen extends Screen
         double y = mouseY - uiY;
 
         //if hovering scrollable on left
-        if (x > 53 && x < 189 && y > 155 && y < 200 && menu == 1 &&
+        if (x > 53 && x < 189 && y > 155 && y < 200 && menu.equals(MenuEntry.HELP) &&
             (page == 1 || page == 5 || page == 6 || page == 10))
         {
             if (scrollY < 0)
@@ -569,7 +546,7 @@ public class FishingGuideScreen extends Screen
         else
         {
             //if hovering scrollable on right
-            if (x > 212 && x < 356 && y > 155 && y < 200 && menu == 1 &&
+            if (x > 212 && x < 356 && y > 155 && y < 200 && menu.equals(MenuEntry.HELP) &&
                 (page == 5 || page == 6 || page == 8 || page == 12))
             {
                 if (scrollY < 0)
@@ -616,11 +593,10 @@ public class FishingGuideScreen extends Screen
             compassRotation += Utils.r.nextInt(40) - 20;
         }
 
-
         //previous arrow
         if (x > 49 && x < 69 && y > 203 && y < 217)
         {
-            if (!(menu == 0 && page == 0))
+            if (!menu.equals(MenuEntry.COVER))
             {
                 arrowPreviousPressed = true;
             }
@@ -629,7 +605,7 @@ public class FishingGuideScreen extends Screen
         //next arrow
         if (x > 336 && x < 356 && y > 202 && y < 216)
         {
-            if (entries.size() > page * 2 + 2 && menu != 3)
+            if (entries.size() > page * 2 + 2 && !menu.equals(MenuEntry.ENTRY))
             {
                 arrowNextPressed = true;
             }
@@ -693,36 +669,32 @@ public class FishingGuideScreen extends Screen
 
         switch (menu)
         {
-            //render settings screen
-            case -99 ->
+            //settings screen
+            case SETTINGS ->
             {
                 Minecraft.getInstance().setScreen(new SettingsScreen());
                 return;
             }
 
-            //sign page
-            case -1 ->
+            //cover page
+            case COVER ->
             {
-                RenderSystem.enableBlend();
                 BACKGROUND_COVER.render(guiGraphics, uiX, uiY);
-                RenderSystem.disableBlend();
                 renderCoverText(guiGraphics, mouseX, mouseY);
                 renderCompass(guiGraphics);
             }
 
-            //render index
-            case 0 ->
+            //index pages
+            case INDEX ->
             {
-                RenderSystem.enableBlend();
                 if (page == 0) BACKGROUND_INDEX_FIRST.render(guiGraphics, uiX, uiY);
                 else BACKGROUND_INDEX_SECOND.render(guiGraphics, uiX, uiY);
-                RenderSystem.disableBlend();
                 renderIndex(guiGraphics, mouseX, mouseY);
                 renderCompass(guiGraphics);
             }
 
-            //render help pages
-            case 1 ->
+            //help pages
+            case HELP ->
             {
                 RenderSystem.enableBlend();
                 BACKGROUND_BASICS.render(guiGraphics, uiX, uiY);
@@ -731,8 +703,8 @@ public class FishingGuideScreen extends Screen
                 renderCompass(guiGraphics);
             }
 
-            //render entries
-            case 2 ->
+            //entries pages
+            case ENTRY ->
             {
                 RenderSystem.enableBlend();
                 BACKGROUND_ENTRY.render(guiGraphics, uiX, uiY);
@@ -743,20 +715,20 @@ public class FishingGuideScreen extends Screen
                 guiGraphics.drawString(this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0x9c897c, false);
             }
 
-            case 3 ->
-            {
-                RenderSystem.enableBlend();
-                BACKGROUND_LAST_PAGE.render(guiGraphics, uiX, uiY);
-                RenderSystem.disableBlend();
-                renderCompass(guiGraphics);
-            }
+            //case 3 ->
+            //{
+            //    RenderSystem.enableBlend();
+            //    BACKGROUND_LAST_PAGE.render(guiGraphics, uiX, uiY);
+            //    RenderSystem.disableBlend();
+            //    renderCompass(guiGraphics);
+            //}
         }
 
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
         //previous arrow should not render on book cover
-        if (menu != -1)
+        if (!menu.equals(MenuEntry.COVER))
         {
             //previous arrow
             if (x > 49 && x < 69 && y > 203 && y < 217)
@@ -769,7 +741,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //index should not render on book cover and first page of index
-        if (menu != -1 && !(menu == 0 && page == 0))
+        if (!menu.equals(MenuEntry.COVER) && !(menu.equals(MenuEntry.INDEX) && page == 0))
         {
             if (x > 174 && x < 196 && y > 202 && y < 216)
                 ARROW_INDEX_HIGHLIGHT.render(guiGraphics, uiX, uiY);
@@ -781,7 +753,11 @@ public class FishingGuideScreen extends Screen
         }
 
         //next arrow
-        if (menu != 3)
+        if (menu.equals(MenuEntry.ENTRY) && (page + 1) * 2 == entries.size())
+        {
+
+        }
+        else
         {
             if (x > 336 && x < 356 && y > 202 && y < 216)
                 ARROW_NEXT_HIGHLIGHT.render(guiGraphics, uiX, uiY);
@@ -810,16 +786,16 @@ public class FishingGuideScreen extends Screen
 
         //draw fitting rectangle
         //todo fix the width calculation here
-        ScreenUtils.fill(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, 10, 12, 0xffb4a697);
-        ScreenUtils.outline(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, 0xff937d70);
-        ScreenUtils.centeredText(guiGraphics, font, s, uiX + 285, uiY + 119, 0x937d70, false);
+        ScreenUtils.fill(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_BACKGROUND_DARK);
+        ScreenUtils.centeredText(guiGraphics, font, s, uiX + 285, uiY + 119, SCColors.GUIDE_TEXT_SEMI_DARK, false);
+        ScreenUtils.outline(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_TEXT);
 
         //if hovering sign rectangle
         if (mouseX > uiX + 285 - width1 / 2 && mouseX < uiX + 285 + width1 / 2 && mouseY > uiY + 117 && mouseY < uiY + 117 + 12)
         {
-            ScreenUtils.Tooltip.set(List.of(translatable("gui.guide.sign.locked.0"), translatable("gui.guide.sign.locked.1")));
-
-            ScreenUtils.outline(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, 0xff000000);
+            ScreenUtils.fill(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_SCROLLABLE_ITEM_BACKGROUND);
+            ScreenUtils.centeredText(guiGraphics, font, s, uiX + 285, uiY + 119, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.outline(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_TEXT_DARK);
             if (clicked)
             {
                 SignGuidePayload payload = new SignGuidePayload(editBox.getValue());
@@ -1159,71 +1135,73 @@ public class FishingGuideScreen extends Screen
 
     private void renderIndex(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
-
-//        if (Minecraft.getInstance().level.getDayTime() % 20 == 0)
-//        {
-//            var f = new ArrayList<>(fishInArea);
-//            f.add(FishProperties.DEFAULT);
-//            fishInArea = f;
-//        }
-
-        //render first line index
+        //render first line help shortcuts
         int xx = uiX + 55;
-        if (page == 0)
+        if(SCConfig.ENABLE_GUIDE_HELP_PAGES.get())
         {
-            for (int i = 0; i < 7; i++)
+            if (page == 0)
             {
-                ScreenUtils.item(guiGraphics, indexEntries.get(i).getFirst(), xx + i * 20, uiY + 47);
-
-                if (mouseX > xx + (i * 20) - 2 && mouseX < xx + (i * 20) + 17 && mouseY > uiY + 47 - 2 && mouseY < uiY + 47 + 17)
-                    ScreenUtils.Tooltip.add(translatable(indexEntries.get(i).getSecond()));
-
-                if (clicked && mouseX > xx + (i * 20) - 2 && mouseX < xx + (i * 20) + 17 && mouseY > uiY + 47 - 2 && mouseY < uiY + 47 + 17)
+                for (int i = 0; i < 7; i++)
                 {
-                    clicked = false;
-                    player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                    menu = 1;
-                    switch (i)
-                    {
-                        case 0 -> page = 0;
-                        case 1 -> page = 1;
-                        case 2 -> page = 2;
-                        case 3 -> page = 3;
-                        case 4 -> page = 4;
-                        case 5 -> page = 5;
-                    }
-                    if (i == 6) menu = -99;
-                }
-            }
+                    ScreenUtils.item(guiGraphics, indexEntries.get(i).getFirst(), xx + i * 20, uiY + 47);
 
-            xx = uiX + 55;
-            //render second line index
-            for (int i = 7; i < 14; i++)
-            {
-                ScreenUtils.item(guiGraphics, indexEntries.get(i).getFirst(), xx + (i - 7) * 20, uiY + 47 + 20);
+                    if (mouseX > xx + (i * 20) - 2 && mouseX < xx + (i * 20) + 17 && mouseY > uiY + 47 - 2 && mouseY < uiY + 47 + 17)
+                        ScreenUtils.Tooltip.add(translatable(indexEntries.get(i).getSecond()));
 
-                if (mouseX > xx + ((i - 7) * 20) - 2 && mouseX < xx + ((i - 7) * 20) + 17 && mouseY > uiY + 47 + 20 - 2 && mouseY < uiY + 47 + 20 + 17)
-                {
-                    ScreenUtils.Tooltip.add(translatable(indexEntries.get(i).getSecond()));
-                    if (clicked)
+                    if (clicked && mouseX > xx + (i * 20) - 2 && mouseX < xx + (i * 20) + 17 && mouseY > uiY + 47 - 2 && mouseY < uiY + 47 + 17)
                     {
                         clicked = false;
                         player.playSound(SoundEvents.BOOK_PAGE_TURN);
-                        menu = 1;
+                        menu = MenuEntry.HELP;
                         switch (i)
                         {
-                            case 7 -> page = 6;
-                            case 8 -> page = 7;
-                            case 9 -> page = 8;
-                            case 10 -> page = 9;
-                            case 11 -> page = 10;
-                            case 12 -> page = 11;
-                            case 13 -> page = 12;
+                            case 0 -> page = 0;
+                            case 1 -> page = 1;
+                            case 2 -> page = 2;
+                            case 3 -> page = 3;
+                            case 4 -> page = 4;
+                            case 5 -> page = 5;
+                        }
+                        if (i == 6) menu = MenuEntry.SETTINGS;
+                    }
+                }
+
+                xx = uiX + 55;
+                //render second line help shortcuts
+                for (int i = 7; i < 14; i++)
+                {
+                    ScreenUtils.item(guiGraphics, indexEntries.get(i).getFirst(), xx + (i - 7) * 20, uiY + 47 + 20);
+
+                    if (mouseX > xx + ((i - 7) * 20) - 2 && mouseX < xx + ((i - 7) * 20) + 17 && mouseY > uiY + 47 + 20 - 2 && mouseY < uiY + 47 + 20 + 17)
+                    {
+                        ScreenUtils.Tooltip.add(translatable(indexEntries.get(i).getSecond()));
+                        if (clicked)
+                        {
+                            clicked = false;
+                            player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                            menu = MenuEntry.HELP;
+                            switch (i)
+                            {
+                                case 7 -> page = 6;
+                                case 8 -> page = 7;
+                                case 9 -> page = 8;
+                                case 10 -> page = 9;
+                                case 11 -> page = 10;
+                                case 12 -> page = 11;
+                                case 13 -> page = 12;
+                            }
                         }
                     }
                 }
             }
         }
+        {
+            ScreenUtils.centeredText(guiGraphics, font,
+                    translatable("gui.guide.disabled_by_server"),
+                    uiX + 123, uiY + 60,
+                    SCColors.GUIDE_TEXT, false);
+        }
+
 
         //[sort] text
         if (page == 0)
@@ -1318,7 +1296,8 @@ public class FishingGuideScreen extends Screen
         hasNextPage = true;
     }
 
-    private void renderScrollableItems(GuiGraphics guiGraphics, List<ItemStack> stacks, int mouseX, int mouseY, boolean isLeftPage)
+    private void renderScrollableItems(GuiGraphics guiGraphics, List<ItemStack> stacks, int mouseX,
+                                       int mouseY, boolean isLeftPage)
     {
         int offset = isLeftPage ? 0 : 161;
         //left page scroll arrows
@@ -1374,7 +1353,8 @@ public class FishingGuideScreen extends Screen
         }
     }
 
-    private void renderFishIndex(GuiGraphics guiGraphics, int xOffset, int yOffset, int mouseX, int mouseY, FishProperties fp)
+    private void renderFishIndex(GuiGraphics guiGraphics, int xOffset, int yOffset, int mouseX,
+                                 int mouseY, FishProperties fp)
     {
         ResourceLocation rl = fp.toLoc(level);
         FishCaughtCounter fcc = fishCaughtCounterMap.get(rl);
@@ -1390,7 +1370,7 @@ public class FishingGuideScreen extends Screen
         if (clicked && mouseX > xOffset - 3 && mouseX < xOffset + 21 - 3 && mouseY > yOffset - 3 && mouseY < yOffset + 21 - 3)
         {
             player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = 2;
+            menu = MenuEntry.ENTRY;
             page = entries.indexOf(fp) / 2;
 
             if (entries.indexOf(fp) % 2 == 0)
@@ -1562,7 +1542,8 @@ public class FishingGuideScreen extends Screen
         }
     }
 
-    private void renderItemWithHoverAndEmi(GuiGraphics guiGraphics, ItemStack stack, int x, int y, int mouseX, int mouseY)
+    private void renderItemWithHoverAndEmi(GuiGraphics guiGraphics, ItemStack stack, int x, int y, int mouseX,
+                                           int mouseY)
     {
         ScreenUtils.item(guiGraphics, stack, x, y);
         if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16)
@@ -1621,7 +1602,8 @@ public class FishingGuideScreen extends Screen
         public Sort previous()
         {
             int lenght = vals.length - 2;
-            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
+            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"))
+                lenght += 2;
 
             if (this.ordinal() == 0) return vals[lenght - 1];
             return vals[(this.ordinal() - 1) % lenght];
@@ -1630,7 +1612,8 @@ public class FishingGuideScreen extends Screen
         public Sort next()
         {
             int lenght = vals.length - 2;
-            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons")) lenght += 2;
+            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"))
+                lenght += 2;
 
             return vals[(this.ordinal() + 1) % lenght];
         }
@@ -1740,6 +1723,11 @@ public class FishingGuideScreen extends Screen
         }
 
         return entriesToSort;
+    }
+
+    public static void open(boolean inLectern, SignedGuide signedGuide)
+    {
+        Minecraft.getInstance().setScreen(new FishingGuideScreen(inLectern, signedGuide));
     }
 
     public FishingGuideScreen(boolean inLectern, SignedGuide signedGuide)
@@ -2065,6 +2053,15 @@ public class FishingGuideScreen extends Screen
 
             ScreenUtils.Tooltip.set(components);
         }
+    }
+
+    enum MenuEntry
+    {
+        SETTINGS,
+        COVER,
+        INDEX,
+        HELP,
+        ENTRY
     }
 
     public static MutableComponent translatable(String key)
