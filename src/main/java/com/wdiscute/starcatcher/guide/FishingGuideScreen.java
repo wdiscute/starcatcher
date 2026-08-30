@@ -1137,12 +1137,13 @@ public class FishingGuideScreen extends Screen
     {
         //render first line help shortcuts
         int xx = uiX + 55;
-        if(SCConfig.ENABLE_GUIDE_HELP_PAGES.get())
+        if (SCConfig.ENABLE_GUIDE_HELP_PAGES.get())
         {
             if (page == 0)
             {
                 for (int i = 0; i < 7; i++)
                 {
+                    ScreenUtils.fill(guiGraphics, xx + i * 20 - 1, uiY + 47 - 1, 18, 18, SCColors.GUIDE_WHITE);
                     ScreenUtils.item(guiGraphics, indexEntries.get(i).getFirst(), xx + i * 20, uiY + 47);
 
                     if (mouseX > xx + (i * 20) - 2 && mouseX < xx + (i * 20) + 17 && mouseY > uiY + 47 - 2 && mouseY < uiY + 47 + 17)
@@ -1170,6 +1171,7 @@ public class FishingGuideScreen extends Screen
                 //render second line help shortcuts
                 for (int i = 7; i < 14; i++)
                 {
+                    ScreenUtils.fill(guiGraphics, xx + (i - 7) * 20 - 1, uiY + 47 + 20 - 1, 18, 18, SCColors.GUIDE_WHITE);
                     ScreenUtils.item(guiGraphics, indexEntries.get(i).getFirst(), xx + (i - 7) * 20, uiY + 47 + 20);
 
                     if (mouseX > xx + ((i - 7) * 20) - 2 && mouseX < xx + ((i - 7) * 20) + 17 && mouseY > uiY + 47 + 20 - 2 && mouseY < uiY + 47 + 20 + 17)
@@ -1195,6 +1197,7 @@ public class FishingGuideScreen extends Screen
                 }
             }
         }
+        else
         {
             ScreenUtils.centeredText(guiGraphics, font,
                     translatable("gui.guide.disabled_by_server"),

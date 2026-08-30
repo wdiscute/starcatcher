@@ -221,6 +221,7 @@
   "starcatcher.configuration.give_rod" : "Give Rod",
   "starcatcher.configuration.enable_worms" : "Worms From Bonemealing Farmland",
   "starcatcher.configuration.enable_minigame" : "Enable Fishing Minigame",
+  "starcatcher.configuration.enable_guide_help_pages" : "Enable Guide Help",
   "starcatcher.configuration.enable_ftb_team_sharing" : "Enable FTBTeams Sharing",
   "starcatcher.configuration.enable_seasons" : "Enable Seasons Compatibility",
   "starcatcher.configuration.vanishing_rate_multiplier" : "Global Vanishing Rate Multiplier",
