@@ -45,9 +45,9 @@ public class AdjustHPModifier extends AbstractMinigameModifier
         else
         {
             if (multiplier > 1)
-                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_hp.increase"));
-            else
                 return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_hp.decrease"));
+            else
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_hp.increase"));
         }
     }
 

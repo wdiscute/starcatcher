@@ -1957,7 +1957,7 @@ public class FishingGuideScreen extends Screen
         if (fishToDisplay != ItemStack.EMPTY)
         {
             ScreenUtils.item(g, fishToDisplay, x + 19, y + 64, g.pose(), 3);
-            ScreenUtils.scrollingText(g, font, fp.getDisplayName(), x + 28, y + 36, x + 141, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.scrollingText(g, font, fp.getDisplayName(), x + 28, x + 141, y + 36, SCColors.GUIDE_TEXT_DARK, false);
         }
 
         //render debug fish name
