@@ -29,6 +29,7 @@ import net.neoforged.neoforge.registries.RegistryBuilder;
 import org.apache.commons.lang3.tuple.Triple;
 import org.slf4j.Logger;
 
+import java.text.DecimalFormat;
 import java.util.function.Supplier;
 
 @Mod(Starcatcher.MOD_ID)
@@ -38,6 +39,7 @@ public class Starcatcher
     public static final Logger LOGGER = LogUtils.getLogger();
     public static final ResourceLocation MISSINGNO = rl("missingno");
     public static final ResourceLocation BASE = rl("base");
+    public static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 
     //resource keys
     public static final ResourceKey<Registry<FishProperties>> FISH_REGISTRY_KEY =

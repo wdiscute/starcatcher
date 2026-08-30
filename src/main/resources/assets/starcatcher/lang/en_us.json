@@ -368,12 +368,6 @@
 
   "tooltip.modifier.starcatcher.flip_every_hit": "Flip every time you hit a sweet-spot",
 
-
-  "tooltip.modifier.keyword.big_decrease": "Tremendously decreases",
-  "tooltip.modifier.keyword.decrease": "Decreases",
-  "tooltip.modifier.keyword.increase": "Increases",
-  "tooltip.modifier.keyword.big_increase": "Tremendously increases",
-
   "tooltip.modifier.number.1": "One",
   "tooltip.modifier.number.2": "Two",
   "tooltip.modifier.number.3": "Three",
@@ -389,17 +383,26 @@
   "tooltip.modifier.number.32": "Thirty-two",
   "tooltip.modifier.number.64": "A stack",
 
-  "tooltip.modifier.starcatcher.adjust_handle_speed": " the handle's rotation speed",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.big_increase": "Tremendously the handle's rotation speed",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.increase": "Increases the handle's rotation speed",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.decrease": "Decreases the handle's rotation speed",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.big_decrease": "Tremendously decreases the handle's rotation speed",
   "tooltip.modifier.starcatcher.adjust_handle_speed.shift": "Adjusts the handle's rotation speed by %s%%",
 
   "tooltip.modifier.starcatcher.add_basic_sweetspot": "Adds a sweet-spot",
   "tooltip.modifier.starcatcher.dripstone_bobber": "Adds a Dripstone sweet-spot",
   "tooltip.modifier.starcatcher.glowing_bobber": "Adds a Glowing sweet-spot",
 
-  "tooltip.modifier.starcatcher.adjust_vanishing_rate": " the vanishing rate of sweet-spots",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.big_increase": "Tremendously increases the vanishing rate of sweet-spots",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.increase": "Increases the vanishing rate of sweet-spots",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.decrease": "Decreases the vanishing rate of sweet-spots",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.big_decrease": "Tremendously decreases the vanishing rate of sweet-spots",
   "tooltip.modifier.starcatcher.adjust_vanishing_rate.shift": "Adjusts the vanishing rate of sweet-spots by %s%%",
 
-  "tooltip.modifier.starcatcher.adjust_lure_time.base": " lure time",
+  "tooltip.modifier.starcatcher.adjust_lure_time.big_increase": "Tremendously increases lure time",
+  "tooltip.modifier.starcatcher.adjust_lure_time.increase": "Increases lure time",
+  "tooltip.modifier.starcatcher.adjust_lure_time.decrease": "Decreases lure time",
+  "tooltip.modifier.starcatcher.adjust_lure_time.big_decrease": "Tremendously decreases lure time",
   "tooltip.modifier.starcatcher.adjust_lure_time.shift.min_ticks": "Adjusts minimum ticks to fish by %s%%",
   "tooltip.modifier.starcatcher.adjust_lure_time.shift.max_ticks": "Adjusts maximum ticks to fish by %s%%",
   "tooltip.modifier.starcatcher.adjust_lure_time.shift.random": "Adjusts the chance of biting every tick by %s%%",

@@ -32,25 +32,23 @@ public class AdjustBaseHandleSpeedModifier extends AbstractMinigameModifier
     @Override
     public List<Component> getNonOverriddenDescription(boolean shift)
     {
-        MutableComponent end = Component.translatable("tooltip.modifier.starcatcher.adjust_handle_speed");
-
         if(shift)
         {
             return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_handle_speed.shift",
-                    new DecimalFormat("#.##").format(multiplier * 100)));
+                    Starcatcher.FORMAT.format(multiplier * 100)));
         }
         else
         {
             if(multiplier >= 1.5f)
-                return List.of(Component.translatable("tooltip.modifier.keyword.big_increase").append(end));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_handle_speed.big_increase"));
 
             if(multiplier >= 1f)
-                return List.of(Component.translatable("tooltip.modifier.keyword.increase").append(end));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_handle_speed.increase"));
 
             if(multiplier <= 0.5f)
-                return List.of(Component.translatable("tooltip.modifier.keyword.big_decrease").append(end));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_handle_speed.big_decrease"));
 
-            return List.of(Component.translatable("tooltip.modifier.keyword.decrease").append(end));
+            return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_handle_speed.decrease"));
         }
     }
 

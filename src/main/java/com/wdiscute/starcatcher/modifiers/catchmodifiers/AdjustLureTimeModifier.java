@@ -55,17 +55,15 @@ public class AdjustLureTimeModifier extends AbstractCatchModifier
         {
             List<Component> list = new ArrayList<>();
 
-            var format = new DecimalFormat("#.##");
-
             if (minTicks != 1)
                 list.add(Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.shift.min_ticks",
-                        format.format(minTicks * 100)));
+                        Starcatcher.FORMAT.format(minTicks * 100)));
             if (maxTicks != 1)
                 list.add(Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.shift.max_ticks",
-                        format.format(maxTicks * 100)));
+                        Starcatcher.FORMAT.format(maxTicks * 100)));
             if (randomness != 1)
                 list.add(Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.shift.random",
-                        format.format(randomness * 100)));
+                        Starcatcher.FORMAT.format(randomness * 100)));
 
             return list;
         }
@@ -73,18 +71,16 @@ public class AdjustLureTimeModifier extends AbstractCatchModifier
         {
             float total = (minTicks + maxTicks) / 2;
 
-            MutableComponent lureTime = Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.base");
-
             if (total > 2f)
-                return List.of(Component.translatable("tooltip.modifier.keyword.big_increase").append(lureTime));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.big_increase"));
 
             if (total > 1f)
-                return List.of(Component.translatable("tooltip.modifier.keyword.increase").append(lureTime));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.increase"));
 
             if (total < 0.75f)
-                return List.of(Component.translatable("tooltip.modifier.keyword.big_decrease").append(lureTime));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.big_decrease"));
 
-            return List.of(Component.translatable("tooltip.modifier.keyword.decrease").append(lureTime));
+            return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_lure_time.decrease"));
         }
     }
 
