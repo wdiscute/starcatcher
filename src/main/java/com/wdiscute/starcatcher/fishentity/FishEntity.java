@@ -37,6 +37,12 @@ public class FishEntity extends AbstractFish
         if (fireImmune()) this.setPathfindingMalus(PathType.LAVA, 0.0F);
     }
 
+    @Override
+    public boolean isPersistenceRequired()
+    {
+        return false;
+    }
+
     private boolean shouldDropItem = true;
 
     @Override
@@ -90,7 +96,7 @@ public class FishEntity extends AbstractFish
         super.tick();
         if (getBodyArmorItem().isEmpty() && !level().isClientSide)
         {
-            shouldDropItem = false;
+            //shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();
 
             for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))

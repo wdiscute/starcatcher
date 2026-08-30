@@ -13,10 +13,13 @@ import com.wdiscute.starcatcher.modifiers.catchmodifiers.AbstractCatchModifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
@@ -25,6 +28,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
@@ -241,7 +246,7 @@ public class FishingBobEntity extends Projectile
     {
         super.tick();
 
-        if(tackleSkin == null)
+        if (tackleSkin == null)
             tackleSkin = Starcatcher.TACKLE_SKIN_REGISTRY.get(SCDataAttachments.get(this, SCDataAttachments.TACKLE_SKIN));
 
         tackleSkin.onTick(this);
@@ -275,7 +280,6 @@ public class FishingBobEntity extends Projectile
 
         if (this.currentState == FishHookState.FLYING)
         {
-
             if (!noGravity)
                 if (getDeltaMovement().y < 1.2f)
                     this.setDeltaMovement(this.getDeltaMovement().add(0, -0.02, 0));
@@ -344,6 +348,32 @@ public class FishingBobEntity extends Projectile
         //TODO check for water level instead of just blockstate to make the entity sit better in water
         if (this.currentState == FishHookState.BOBBING || this.currentState == FishHookState.FISHING)
         {
+            //spawn vanilla-like particles (copied from vanilla fishinghook class)
+            if (this.random.nextFloat() < tickCount / 600f && level() instanceof ServerLevel sl)
+            {
+                float f6 = Mth.nextFloat(this.random, 0.0F, 360.0F) * (float) (Math.PI / 180.0);
+                float f7 = Mth.nextFloat(this.random, 25.0F, 60.0F);
+                double d4 = this.getX() + (double) (Mth.sin(f6) * f7) * 0.1;
+                double d5 = (float) Mth.floor(this.getY()) + 1.0F;
+                double d6 = this.getZ() + (double) (Mth.cos(f6) * f7) * 0.1;
+                BlockState blockstate1 = sl.getBlockState(BlockPos.containing(d4, d5 - 1.0, d6));
+                if (blockstate1.is(Blocks.WATER))
+                    sl.sendParticles(ParticleTypes.SPLASH, d4, d5, d6, 2 + this.random.nextInt(2), 0.1F, 0.0, 0.1F, 0.0);
+            }
+
+            if (this.random.nextFloat() < tickCount / 600f && level() instanceof ServerLevel sl)
+            {
+                float f6 = Mth.nextFloat(this.random, 0.0F, 360.0F) * (float) (Math.PI / 180.0);
+                float f7 = Mth.nextFloat(this.random, 25.0F, 60.0F);
+                double d4 = this.getX() + (double) (Mth.sin(f6) * f7) * 0.1;
+                double d5 = (float) Mth.floor(this.getY()) + 1.0F;
+                double d6 = this.getZ() + (double) (Mth.cos(f6) * f7) * 0.1;
+                BlockState blockstate1 = sl.getBlockState(BlockPos.containing(d4, d5 - 1.0, d6));
+                if (blockstate1.is(Blocks.WATER))
+                    sl.sendParticles(ParticleTypes.SPLASH, d4, d5, d6, 2 + this.random.nextInt(2), 0.1F, 0.0, 0.1F, 0.0);
+            }
+
+
             checkForFish();
 
             if (!noGravity)

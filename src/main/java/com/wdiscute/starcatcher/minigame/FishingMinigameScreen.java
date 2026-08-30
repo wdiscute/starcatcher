@@ -447,12 +447,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         int barSize = Math.min(64, (64 * treasureProgressSmooth) / 100);
 
         //treasure bar
-        tank.render(g, centerX - 3 - 155, centerY + 22 - barSize,
-                77, 6,
-                5, barSize);
+        treasure.render(g, centerX - 16 - 155, centerY - 48 + 70 - barSize,
+                64, 70 - barSize,
+                32, barSize + 6);
 
         //treasure bar outline + chest at bottom
-        tank.render(g, centerX - 16 - 155, centerY - 48,
+        treasure.render(g, centerX - 16 - 155, centerY - 48,
                 32, 0,
                 32, 96);
 
@@ -463,7 +463,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         //outline when treasure complete
         if (treasureProgress > 99)
-            tank.render(g, centerX - 16 - 155, centerY - 48,
+            treasure.render(g, centerX - 16 - 155, centerY - 48,
                     0, 0,
                     32, 96);
 

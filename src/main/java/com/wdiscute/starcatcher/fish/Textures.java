@@ -55,7 +55,7 @@ public record Textures(
             ScreenUtils.Image.streamCodecFixedSize(112, 112), Textures::rod,
             ScreenUtils.Image.streamCodecFixedSize(32, 64), Textures::handle,
             ScreenUtils.Image.streamCodecFixedSize(112, 64), Textures::buttons,
-            ScreenUtils.Image.streamCodecFixedSize(96, 112), Textures::treasure,
+            ScreenUtils.Image.streamCodecFixedSize(96, 96), Textures::treasure,
             ScreenUtils.Image.streamCodecFixedSize(160, 64), Textures::wheels,
             Textures::new
     );

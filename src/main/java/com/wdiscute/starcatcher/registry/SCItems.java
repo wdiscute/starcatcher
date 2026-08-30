@@ -54,17 +54,7 @@ public interface SCItems
     DeferredItem<Item> FISH_RADAR = ITEMS.register("fish_radar", SingleStackBasicItem::new);
     DeferredItem<Item> STARCATCHER_TWINE = ITEMS.register("starcatcher_twine", SingleStackBasicItem::new);
 
-    DeferredItem<Item> SETTINGS = ITEMS.register("settings", () -> new Item(new Item
-            .Properties().component(Tooltips.TOOLTIP_ALWAYS, List.of("wadwad")))
-    {
-        @Override
-        public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
-        {
-            //if(level.isClientSide)
-            //    Minecraft.getInstance().setScreen(new MoraJaiScreen());
-            return super.use(level, player, usedHand);
-        }
-    });
+    DeferredItem<Item> SETTINGS = ITEMS.register("settings", BasicItem::new);
     DeferredItem<Item> TREASURE = ITEMS.register("treasure", BasicItem::new);
 
     //hooks
@@ -83,6 +73,7 @@ public interface SCItems
     DeferredItem<Item> OXIDISED_COPPER_HOOK = HOOKS_REGISTRY.register("oxidised_copper_hook", SingleStackBasicItem::new);
     DeferredItem<Item> ECHOING_HOOK = HOOKS_REGISTRY.register("echoing_hook", SingleStackBasicItem::new);
     DeferredItem<Item> FROZEN_HOOK = HOOKS_REGISTRY.register("frozen_hook", SingleStackBasicItem::new);
+    DeferredItem<Item> RUSTY_HOOK = HOOKS_REGISTRY.register("rusty_hook", SingleStackBasicItem::new);
 
     //bobbers
     DeferredItem<Item> BOBBER = BOBBERS_REGISTRY.register("bobber", SingleStackBasicItem::new);
