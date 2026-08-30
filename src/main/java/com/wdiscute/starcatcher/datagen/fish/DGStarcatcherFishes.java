@@ -777,6 +777,7 @@ public class DGStarcatcherFishes
                         .withFish(SCBlocks.CONCH.asItem())
                         .withSizeAndWeight(new SizeAndWeight(5, 2, 100, 49))
                         .withRarity(Rarity.TRASH)
+                        .withBaseChance(10)
                         .withDifficulty(Difficulty.TRASH)
         );
 
@@ -785,6 +786,7 @@ public class DGStarcatcherFishes
                         .withFish(SCBlocks.CLAM.asItem())
                         .withSizeAndWeight(new SizeAndWeight(20, 5, 1000, 400))
                         .withRarity(Rarity.TRASH)
+                        .withBaseChance(10)
                         .withDifficulty(Difficulty.TRASH)
         );
 

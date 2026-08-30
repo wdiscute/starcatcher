@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-30T04:27:07.433808	FishingProperties
+// 1.21.1	2026-08-30T04:46:43.277545	FishingProperties
 afbe4cf8b29f10778aaba5c2cdb0f217351be97c data/minecraft/starcatcher/fish/bamboo.json
 760d88a50754750efee9b6e6a08302f25b110a01 data/minecraft/starcatcher/fish/cod.json
 59f84e94160b7ec09955c0fcc07680427210c034 data/minecraft/starcatcher/fish/creeper_head.json
@@ -35,9 +35,9 @@ efa452abd8e2e958ea9887d3a16e52316b763d5f data/starcatcher/starcatcher/fish/cacti
 7aa2346958c135913ca7a12c57c2adc5fbe64ede data/starcatcher/starcatcher/fish/chorus_crab.json
 952d7646a37412e5ec32655063eedac5f600f7fe data/starcatcher/starcatcher/fish/chorus_minnow.json
 ac44e23a1938b16efb4216ae1b883654c7474705 data/starcatcher/starcatcher/fish/cinder_squid.json
-0716bf14d5d1670e468d4e2674dc84dbd021bbc1 data/starcatcher/starcatcher/fish/clam.json
+58d2ea8cbbb48e88f3b5288c73943238013f58ca data/starcatcher/starcatcher/fish/clam.json
 8fc0ddeaa3afa900065ef710434238ce39b43219 data/starcatcher/starcatcher/fish/cloudfin.json
-7604369a5146d12baaca01cbe8e782bdf72ae4e9 data/starcatcher/starcatcher/fish/conch.json
+2de85a97246df32fd1cf40fdd2ac87d34e0dc4ad data/starcatcher/starcatcher/fish/conch.json
 ec5b6abc8dd92e67d54fb0d55b369b551e659d2b data/starcatcher/starcatcher/fish/crystalback_boreal.json
 662f078a8dc8b97652555c47a04860d0cb38cc39 data/starcatcher/starcatcher/fish/crystalback_minnow.json
 9d3768e15787be048e2f128dc19d0d23d8fa41a8 data/starcatcher/starcatcher/fish/crystalback_sturgeon.json
