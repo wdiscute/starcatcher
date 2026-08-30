@@ -412,6 +412,16 @@
         "multiplier": 0.5
       }
     ],
+    "starcatcher:rusty_hook": [
+      {
+        "type": "starcatcher:adjust_penalty_rate",
+        "multiplier": 3.0
+      },
+      {
+        "type": "starcatcher:adjust_hp",
+        "multiplier": 0.75
+      }
+    ],
     "starcatcher:sculk_bait": [
       {
         "type": "starcatcher:adjust_lure_time",

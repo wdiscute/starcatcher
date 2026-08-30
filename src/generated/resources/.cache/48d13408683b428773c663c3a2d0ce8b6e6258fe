@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-29T19:13:48.7078901	Tags for minecraft:item mod id starcatcher
+// 1.21.1	2026-08-30T03:36:01.3046817	Tags for minecraft:item mod id starcatcher
 a536536e023cc19d54708aef85f13b69f0c9e344 data/c/tags/item/foods/raw_fish.json
 908e2b9f53c578cb9fa13b72d63847b670548712 data/c/tags/item/tools/fishing_rod.json
 4a6efce3001f3df5fa31251ca2905008ee066879 data/minecraft/tags/item/bookshelf_books.json
@@ -24,7 +24,7 @@ c7500f481948159c566ddedb8a200fe63a413a56 data/starcatcher/tags/item/has_farmland
 de6377a3a15fcc745a25e8d8e40184200ee10c90 data/starcatcher/tags/item/has_radar_layer.json
 75bbb79c7112848a018427a015b07ea93978f81f data/starcatcher/tags/item/has_tracker_layer.json
 834e2f963f8e58a4755ff26aebd7bc4ce94530de data/starcatcher/tags/item/hats.json
-3d48d52f640b00fe2c94648e4352834dc775775e data/starcatcher/tags/item/hooks.json
+e5757d1fbe99563fe9228c6f41b58ec158b68480 data/starcatcher/tags/item/hooks.json
 4b3d79139741c7a222ebf3794e092aad5f9a587a data/starcatcher/tags/item/legendary_fishes.json
 4ba167fa09981a7fd4351e0033436ba3e7828725 data/starcatcher/tags/item/legendary_starcaught_fishes.json
 4d3ea7106ba0c65788160a2dff5d344147143b6f data/starcatcher/tags/item/placeable_in_display.json

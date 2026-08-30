@@ -430,6 +430,17 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
+        //rusty hook
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.RUSTY_HOOK)
+                .define('H', SCItems.HOOK)
+                .define('I', Items.IRON_NUGGET)
+                .define('D', Items.IRON_NUGGET)
+                .pattern("I  ")
+                .pattern("DHD")
+                .pattern(" D ")
+                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
+                .save(output);
+
         //gold hook
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.GOLD_HOOK)
                 .define('H', SCItems.HOOK)

@@ -235,9 +235,9 @@ public interface Modifier
         Modifier.MODIFIERS.put(Starcatcher.rl("adjust_handle_speed"), AdjustBaseHandleSpeedModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("adjust_decay_rate"), AdjustDecayRateModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("adjust_penalty_rate"), AdjustPenaltyModifier.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("adjust_hp"), AdjustHPModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("disable_miss_sounds"), DisableMissSoundsModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("disable_hit_sounds"), DisableHitSoundsModifier.CODEC);
-        Modifier.MODIFIERS.put(Starcatcher.rl("move_sweetspots_on_miss"), MoveSweetSpotsOnMissModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("flip_sweetspots_on_miss"), FlipSweetSpotsOnMissModifier.CODEC);
     }
 }

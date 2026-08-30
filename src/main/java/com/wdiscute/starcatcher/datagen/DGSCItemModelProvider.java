@@ -79,6 +79,7 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(WEATHERED_COPPER_HOOK);
         simpleItem(OXIDISED_COPPER_HOOK);
         simpleItem(FROZEN_HOOK);
+        simpleItem(RUSTY_HOOK);
         simpleItem(ECHOING_HOOK);
 
         //bobbers

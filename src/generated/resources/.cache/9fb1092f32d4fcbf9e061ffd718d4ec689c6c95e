@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-14T16:18:52.2220937	Recipes
+// 1.21.1	2026-08-30T03:36:28.6275521	Recipes
 940be898fdeeeae0ac99119bdc59150675e4c0ff data/minecraft/advancement/recipes/misc/bamboo.json
 aa7822d1fb2c6a6681ee1627e9f5146dc6ac0f14 data/minecraft/advancement/recipes/misc/leather.json
 87ee1450cc69fbbdc54ef710195cc48f6310c790 data/minecraft/advancement/recipes/misc/moss_block.json
@@ -92,6 +92,7 @@ c71d495538a43c803abf63c66aca113132b80257 data/starcatcher/advancement/recipes/mi
 0d46fd89137f17ebc74ce98b6dfeedc7a2ef696b data/starcatcher/advancement/recipes/misc/obsidian_skin_smithing_template.json
 cd55372203d4f08255826a7ba53bf9ae7d6c9b0c data/starcatcher/advancement/recipes/misc/oxidised_copper_hook.json
 d09b16315ec1d0db1bb7e828f48a6c76d336760f data/starcatcher/advancement/recipes/misc/pearl_smithing_template.json
+1abb8c5ecdeb71d194fbbb8d4d2496b59398bc28 data/starcatcher/advancement/recipes/misc/rusty_hook.json
 4d90a2af2b7a1f43a156715395d460f2177ebd08 data/starcatcher/advancement/recipes/misc/sculk_bait.json
 44c913ec2405ea0ae5709b621da82427c8549dca data/starcatcher/advancement/recipes/misc/sculk_bait_from_sculkfish.json
 7e48eb31a0058f502c3533da0a84b839cb1ee961 data/starcatcher/advancement/recipes/misc/sculk_bait_from_sculk_catalyst.json
@@ -238,6 +239,7 @@ c1d6ee6cd6184e638ac9272d02206988b843e278 data/starcatcher/recipe/oxidised_copper
 8d58fdb212910baa955a966214a090fda272ef2f data/starcatcher/recipe/pearl_smithing_template.json
 f94e01a76fe2dab71cb5dc8710a64c5338fd63cd data/starcatcher/recipe/pearl_tackle.json
 4e411ec1d4ad2dbb3cc06ddb4758b5aba8c1feff data/starcatcher/recipe/rod_from_vanilla.json
+d440bcb0e113d09372af50d7cff7121841ea9c19 data/starcatcher/recipe/rusty_hook.json
 228f0847d32e57408031cfe97f3859ad5fa709c4 data/starcatcher/recipe/sculk_bait.json
 212bd589931733b3b5e0272d26085967b841e18f data/starcatcher/recipe/sculk_bait_from_sculkfish.json
 7fd2866b60b0afb2a79d85d536e81cabe097d679 data/starcatcher/recipe/sculk_bait_from_sculk_catalyst.json

@@ -188,6 +188,11 @@ public class DGSCDataMapsProvider extends DataMapProvider
                 new PreventFrozenModifier("")
         ), false);
 
+        modifiers.add(SCItems.RUSTY_HOOK, List.of(
+                new AdjustPenaltyModifier(3,""),
+                new AdjustHPModifier(0.75f,"")
+        ), false);
+
         modifiers.add(SCItems.SHINY_HOOK, List.of(
                 new HideCatchModifier(1, ""),
                 new SpawnTreasureOnHitX(3, "")

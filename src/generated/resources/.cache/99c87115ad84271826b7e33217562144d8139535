@@ -1,4 +1,4 @@
-// 1.21.1	2026-07-14T16:18:52.219097	Item Models: starcatcher
+// 1.21.1	2026-08-30T03:36:01.2996808	Item Models: starcatcher
 190248e04c8aaf81e80cc0d828c1b3f9addf4641 assets/starcatcher/models/item/agave_bream.json
 2acefa5cf3f98fbcb50f2258e2777ac75275271d assets/starcatcher/models/item/almighty_worm.json
 033477fbb520065b97801242f6e7c58288fea05d assets/starcatcher/models/item/amethystback.json
@@ -162,6 +162,7 @@ ffd781c60c354e6744bdee12a4fe76ab754f3ed4 assets/starcatcher/models/item/rainfin.
 067ffc11284fc603f4242aad8d33c0daef9a1aba assets/starcatcher/models/item/ripple_catfish.json
 6c3a55061144f9826e0adf18ba7f1f7d047d0259 assets/starcatcher/models/item/rockgill.json
 9bd9b57e46cd5e12aaa0fd4c734049ec0c0fa36e assets/starcatcher/models/item/rose_siamese_fish.json
+fe8be591e481b534e21ee634892caa2a0f62d17b assets/starcatcher/models/item/rusty_hook.json
 3c4cd0702fa550bd122de83061ef2a4600a4143b assets/starcatcher/models/item/sage_catfish.json
 738d3b60bd2d0291668337ed7ba12c423f01da7b assets/starcatcher/models/item/sandtail.json
 6c088ceab662d333017cb31aabb5f39f0af97183 assets/starcatcher/models/item/scalding_pike.json

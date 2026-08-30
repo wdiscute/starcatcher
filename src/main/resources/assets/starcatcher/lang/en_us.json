@@ -416,6 +416,10 @@
   "tooltip.modifier.starcatcher.adjust_penalty_rate.decrease": "Decreases the penalty for missing sweet-spots",
   "tooltip.modifier.starcatcher.adjust_penalty_rate.shift": "Adjusts the penalty of missing sweet-spots by %s%%",
 
+  "tooltip.modifier.starcatcher.adjust_hp.increase": "Fish will be easier to reel in",
+  "tooltip.modifier.starcatcher.adjust_hp.decrease": "Fish will be harder to reel in",
+  "tooltip.modifier.starcatcher.adjust_hp.shift": "Adjusts the hp of fish by %s%%",
+
   "tooltip.modifier.starcatcher.vanilla_fishing_loot": "Restores vanilla fishing loot",
   "tooltip.modifier.starcatcher.skip_minigame_if_vanilla_bobber": "Skips minigame if equipped alongsides the Vanilla-flavoured Bobber",
 
@@ -479,6 +483,7 @@
   "item.starcatcher.oxidised_copper_hook": "Oxidised Copper Hook",
   "item.starcatcher.echoing_hook": "Echoing Hook",
   "item.starcatcher.frozen_hook": "Frozen Hook",
+  "item.starcatcher.rusty_hook": "Rusty Hook",
 
 
 
@@ -1937,7 +1942,7 @@
   "tooltip.starcatcher.the_quarrish.1" : "Its heavy size makes for a very tedious catch.",
 
   "item.starcatcher.lush_pike" : "Lush Pike",
-  "tooltip.starcatcher.lush_pike.0" : "A mossy <sclegendary>legendary</sclegendary> pike found rarity in the Lush Caves.",
+  "tooltip.starcatcher.lush_pike.0" : "A mossy pike found rarity in the Lush Caves.",
   "tooltip.starcatcher.lush_pike.1" : "A real tough catch even for experienced anglers.",
 
 
