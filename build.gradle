@@ -44,6 +44,12 @@ repositories
                 url = "https://maven.theillusivec4.top/"
             }
 
+            //nikdo github
+            maven {
+                name = 'Nikdo53 Maven'
+                url = 'https://nikdo53.github.io'
+            }
+
             //sable-companion
             maven {
                 name = "RyanHCode Maven"
@@ -76,7 +82,7 @@ dependencies {
     jarJar(implementation("maven.modrinth:wds-selling-bin:1.4.1-NEOFORGE-1.21.1"))
 
     //tiny multiblock lib
-    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:gbRIPDRZ"))
+    jarJar(implementation("net.nikdo53:tiny-multiblock-lib-neoforge-1.21.1:4.0.0"))
 
     //fancy tab sections
     //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-1.21.1"))

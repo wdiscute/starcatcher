@@ -35,7 +35,7 @@ public class AdjustMovingModifier extends AbstractMinigameModifier
     {
         if (shift)
             return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_moving_sweetspots.shift",
-                    new DecimalFormat("#.##").format(multiplier * 100)));
+                    Starcatcher.FORMAT.format(multiplier * 100)));
         else
         {
             if (multiplier > 1)

@@ -34,7 +34,7 @@ public class ExtraGoldenChanceModifier extends AbstractCatchModifier
     @Override
     public List<Component> getNonOverriddenDescription(boolean shift)
     {
-        String chanceS = new DecimalFormat("#.##").format(risk * 100);
+        String chanceS = Starcatcher.FORMAT.format(risk * 100);
 
         if (onlyForPerfectCatch)
         {

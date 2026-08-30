@@ -41,7 +41,7 @@ public class AdjustDecayRateModifier extends AbstractMinigameModifier
     {
         if (shift)
             return List.of(Component.translatable("tooltip.modifier.starcatcher.adjust_decay_rate.shift",
-                    new DecimalFormat("#.##").format(multiplier * 100)));
+                    Starcatcher.FORMAT.format(multiplier * 100)));
         else
         {
             if (multiplier > 1)

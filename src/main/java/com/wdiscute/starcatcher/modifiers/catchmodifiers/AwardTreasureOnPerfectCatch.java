@@ -32,7 +32,7 @@ public class AwardTreasureOnPerfectCatch extends AbstractCatchModifier
     public List<Component> getNonOverriddenDescription(boolean shift)
     {
         if(shift)
-            return List.of(Component.translatable("tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.shift", new DecimalFormat("#.##").format(chance * 100)));
+            return List.of(Component.translatable("tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.shift", Starcatcher.FORMAT.format(chance * 100)));
         else if(chance >= 1)
             return List.of(Component.translatable("tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.always"));
         else

@@ -106,7 +106,7 @@ public class SettingsScreen extends FishingMinigameScreen
             ARROW_RIGHT.render(guiGraphics, width / 2 + x + 7, height / 2 + y);
 
             //draw text
-            ScreenUtils.text(guiGraphics, font, text + new DecimalFormat("#.##").format(configSpec.get()), width / 2 + x + 23, height / 2 + y + 2, 0xffffffff);
+            ScreenUtils.text(guiGraphics, font, text + Starcatcher.FORMAT.format(configSpec.get()), width / 2 + x + 23, height / 2 + y + 2, 0xffffffff);
             ScreenUtils.text(guiGraphics, font, "X", width / 2 + x + 92, height / 2 + y + 2, 0xffff0000);
         }
 

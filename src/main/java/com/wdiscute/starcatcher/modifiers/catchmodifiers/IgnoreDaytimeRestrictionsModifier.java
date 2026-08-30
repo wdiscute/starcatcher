@@ -33,7 +33,7 @@ public class IgnoreDaytimeRestrictionsModifier extends AbstractCatchModifier imp
     public List<Component> getNonOverriddenDescription(boolean shift)
     {
         if(shift)
-            return List.of(Component.translatable("tooltip.modifier.starcatcher.ignore_daytime_restrictions.shift", new DecimalFormat("#.##").format(chance * 100)));
+            return List.of(Component.translatable("tooltip.modifier.starcatcher.ignore_daytime_restrictions.shift", Starcatcher.FORMAT.format(chance * 100)));
 
         if(chance >= 1)
             return List.of(Component.translatable("tooltip.modifier.starcatcher.ignore_daytime_restrictions"));

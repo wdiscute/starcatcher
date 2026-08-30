@@ -78,10 +78,16 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     }
 
     @Override
-    public BlockState getDefaultStateForPreviews(Direction direction)
+    public BlockState getDefaultStateForPreviews(BlockState state, BlockPlaceContext blockPlaceContext)
     {
-        return IPreviewableMultiblock.super.getDefaultStateForPreviews(direction.getOpposite());
+        return IPreviewableMultiblock.super.getDefaultStateForPreviews(state, blockPlaceContext);
     }
+
+    //@Override
+    //public BlockState getDefaultStateForPreviews(Direction direction)
+    //{
+    //    return IPreviewableMultiblock.super.getDefaultStateForPreviews(direction.getOpposite());
+    //}
 
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
@@ -203,7 +209,7 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState)
+    public @Nullable StandBlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState)
     {
         return SCBlockEntities.STAND.get().create(blockPos, blockState);
     }

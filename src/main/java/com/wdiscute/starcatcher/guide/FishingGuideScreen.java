@@ -124,8 +124,6 @@ public class FishingGuideScreen extends Screen
 
     public static final int MAX_HELP_PAGES = 12;
 
-    public static final DecimalFormat FORMAT = new DecimalFormat("#.##");
-
     private final List<ItemStack> tackleBoxes = new ArrayList<>();
     private final List<ItemStack> baits = new ArrayList<>();
     private final List<ItemStack> hooksBobbers = new ArrayList<>();
@@ -2063,7 +2061,7 @@ public class FishingGuideScreen extends Screen
             components.add(Component.literal(""));
             components.add(translatable("gui.guide.biggest").append(Component.literal(size).withStyle(ChatFormatting.BOLD)));
             components.add(translatable("gui.guide.heaviest").append(Component.literal(weight).withStyle(ChatFormatting.BOLD)));
-            components.add(translatable("gui.guide.percentile").append(Component.literal(FORMAT.format(fcc.percentile()) + "%").withStyle(ChatFormatting.BOLD)));
+            components.add(translatable("gui.guide.percentile").append(Component.literal(Starcatcher.FORMAT.format(fcc.percentile()) + "%").withStyle(ChatFormatting.BOLD)));
 
             ScreenUtils.Tooltip.set(components);
         }
