@@ -295,6 +295,8 @@ public interface SCItems
     DeferredItem<Item> LUSH_PIKE = registerBucketFish("lush_pike");
     DeferredItem<Item> VIVID_MOSS = registerBucketFish("vivid_moss");
     DeferredItem<Item> THE_QUARRISH = registerBucketFish("the_quarrish");
+    DeferredItem<Item> SHADOWFIN = registerBucketFish("shadowfin");
+    DeferredItem<Item> MOSSFIN = registerBucketFish("mossfin");
 
     //bamboo
     DeferredItem<Item> LIVID_BAMBOO = registerNonBucketFish("livid_bamboo");

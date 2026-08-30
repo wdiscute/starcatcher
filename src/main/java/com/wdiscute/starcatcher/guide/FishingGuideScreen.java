@@ -55,6 +55,7 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.awt.*;
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
@@ -122,6 +123,8 @@ public class FishingGuideScreen extends Screen
     private static final ScreenUtils.Image ALWAYS_ENTITY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/always_entity.png"), 14, 14);
 
     public static final int MAX_HELP_PAGES = 12;
+
+    public static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 
     private final List<ItemStack> tackleBoxes = new ArrayList<>();
     private final List<ItemStack> baits = new ArrayList<>();
@@ -2007,7 +2010,7 @@ public class FishingGuideScreen extends Screen
 
             if (description.equals(Component.empty())) continue;
 
-            ScreenUtils.scrollingText(g, font, description, x, x + 128, yOffset - 2, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.scrollingText(g, font, description, x, x + 128, yOffset, SCColors.GUIDE_TEXT_DARK, false);
 
             //if has hover and cursor is hovering
             if (!hover.isEmpty() && hoveringMain)
@@ -2060,7 +2063,7 @@ public class FishingGuideScreen extends Screen
             components.add(Component.literal(""));
             components.add(translatable("gui.guide.biggest").append(Component.literal(size).withStyle(ChatFormatting.BOLD)));
             components.add(translatable("gui.guide.heaviest").append(Component.literal(weight).withStyle(ChatFormatting.BOLD)));
-            components.add(translatable("gui.guide.percentile").append(Component.literal(fcc.percentile() + "%").withStyle(ChatFormatting.BOLD)));
+            components.add(translatable("gui.guide.percentile").append(Component.literal(FORMAT.format(fcc.percentile()) + "%").withStyle(ChatFormatting.BOLD)));
 
             ScreenUtils.Tooltip.set(components);
         }

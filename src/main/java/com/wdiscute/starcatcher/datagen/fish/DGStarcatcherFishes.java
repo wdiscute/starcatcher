@@ -932,10 +932,29 @@ public class DGStarcatcherFishes
         // `--'  `----'  `----'  `--' `--'      `---'  `--`--'    `--'     `----' `----'
         //
 
-        //uncommon
+        //common
         FishRegistration.register(context,
                 PresetRestrictions.lushCaves(context)
                         .withFish(SCItems.VIVID_MOSS)
+                        .withSizeAndWeight(new SizeAndWeight(120, 70, 7000, 3000))
+                        .withDifficulty(Difficulty.MEDIUM.moving().withHP(160))
+                        .withRarity(Rarity.COMMON)
+        );
+
+        //uncommon
+        FishRegistration.register(context,
+                PresetRestrictions.lushCaves(context)
+                        .withFish(SCItems.SHADOWFIN)
+                        .addRestriction(LightLevelRestriction.DARKNESS)
+                        .withSizeAndWeight(new SizeAndWeight(120, 70, 7000, 3000))
+                        .withDifficulty(Difficulty.MEDIUM.moving().withHP(160))
+                        .withRarity(Rarity.UNCOMMON)
+        );
+
+        FishRegistration.register(context,
+                PresetRestrictions.lushCaves(context)
+                        .addRestriction(LightLevelRestriction.BRIGHT)
+                        .withFish(SCItems.MOSSFIN)
                         .withSizeAndWeight(new SizeAndWeight(120, 70, 7000, 3000))
                         .withDifficulty(Difficulty.MEDIUM.moving().withHP(160))
                         .withRarity(Rarity.UNCOMMON)

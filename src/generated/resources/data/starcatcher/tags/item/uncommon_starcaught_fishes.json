@@ -65,6 +65,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:mossfin",
+      "required": false
+    },
+    {
       "id": "starcatcher:petaldrift_carp",
       "required": false
     },
@@ -85,6 +89,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:shadowfin",
+      "required": false
+    },
+    {
       "id": "starcatcher:silverfin_pike",
       "required": false
     },
@@ -98,10 +106,6 @@
     },
     {
       "id": "starcatcher:sunny_sturgeon",
-      "required": false
-    },
-    {
-      "id": "starcatcher:vivid_moss",
       "required": false
     },
     {

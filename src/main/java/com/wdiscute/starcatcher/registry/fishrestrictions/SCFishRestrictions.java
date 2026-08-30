@@ -33,6 +33,9 @@ public interface SCFishRestrictions
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> ELEVATION_RESTRICTION =
             registerFishRestriction("elevation_restriction", ElevationRestriction::new);
 
+    DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> LIGHT_LEVEL_RESTRICTION =
+            registerFishRestriction("light_level_restriction", LightLevelRestriction::new);
+
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> ELEVATION_BIAS =
             registerFishRestriction("elevation_bias", ElevationBias::new);
 

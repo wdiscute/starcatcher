@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-29T19:13:48.7088891	FishingProperties
+// 1.21.1	2026-08-30T04:27:07.433808	FishingProperties
 afbe4cf8b29f10778aaba5c2cdb0f217351be97c data/minecraft/starcatcher/fish/bamboo.json
 760d88a50754750efee9b6e6a08302f25b110a01 data/minecraft/starcatcher/fish/cod.json
 59f84e94160b7ec09955c0fcc07680427210c034 data/minecraft/starcatcher/fish/creeper_head.json
@@ -91,6 +91,7 @@ cc44095e1afccc25ec46940d9d0b38378d5a4240 data/starcatcher/starcatcher/fish/messa
 7c0022a32046f7ac73ab306b5addf7876aafa81d data/starcatcher/starcatcher/fish/molten_deepslate_crab.json
 4306c147c13ffb11135a624704f52552bdf0eac4 data/starcatcher/starcatcher/fish/molten_shrimp.json
 0286f023f4f6fece54a1ba1e9edb71d21671a40e data/starcatcher/starcatcher/fish/morganite.json
+48ec2b45cd1127451b2aa90d0c7bdd2776a7a7aa data/starcatcher/starcatcher/fish/mossfin.json
 788594d030eaef6b72224709c5b9970ebacf4a5a data/starcatcher/starcatcher/fish/mossy_boot.json
 1cc3dbce200f9171dd42979cb6e7078af972214c data/starcatcher/starcatcher/fish/naturalist_skin_smithing_template.json
 83d0825694957e60743926f4aa6bf145c2a4ff78 data/starcatcher/starcatcher/fish/nebula_squid.json
@@ -121,6 +122,7 @@ e449f06ccba6f3104531ac40438c60c905261e26 data/starcatcher/starcatcher/fish/sandt
 d4f6a8e8524c04844940dbed20eb0c2b17e9d2cf data/starcatcher/starcatcher/fish/scorchfish.json
 7e216ef9d1c13b90cfbc56228210680b76597694 data/starcatcher/starcatcher/fish/sculkfish.json
 59237549e90a1789d4cfc7eda4e9727e8bd3fcab data/starcatcher/starcatcher/fish/sea_bass.json
+c8d67f5734bf9185019e84a0984ec0285f7c95e9 data/starcatcher/starcatcher/fish/shadowfin.json
 43614f5f303bf44171608c1f64bdc6af87318f96 data/starcatcher/starcatcher/fish/shroomfish.json
 fafced6bb4cdff03a1d3439b9ba683da3bb41459 data/starcatcher/starcatcher/fish/silverfin_pike.json
 548fd1a0186919f95209bc0be31e3898a5f8e089 data/starcatcher/starcatcher/fish/silverveil_perch.json
@@ -145,7 +147,7 @@ b5e17417fde721c774e7b3db1f5dfc072b80d083 data/starcatcher/starcatcher/fish/troph
 47ed1b6f921db46a0ca38db371bc0e6bc9407099 data/starcatcher/starcatcher/fish/twilight_koi.json
 d7920c7d398059b778f673280dfe9a4407095453 data/starcatcher/starcatcher/fish/valley_smithing_template.json
 a83a17382d189bf65423e14f2dce8745617a5544 data/starcatcher/starcatcher/fish/vesani.json
-b5b5d3065b2fcc211b92aad9a524ad06dcb4488c data/starcatcher/starcatcher/fish/vivid_moss.json
+0fc6daf3c1bda04232f86360134a5f7a9f0487f9 data/starcatcher/starcatcher/fish/vivid_moss.json
 2e94f62c99d41db20f51491b82a5c296d0cae774 data/starcatcher/starcatcher/fish/voidbiter.json
 5602ac243e2d2343ae723024c0bec5b8bc211fbf data/starcatcher/starcatcher/fish/voidfin.json
 6c5f8400e52ae06dbd2d5fbbb237b6e76279f080 data/starcatcher/starcatcher/fish/ward.json

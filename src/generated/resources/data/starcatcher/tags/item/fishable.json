@@ -305,6 +305,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:mossfin",
+      "required": false
+    },
+    {
       "id": "starcatcher:nebula_squid",
       "required": false
     },
@@ -414,6 +418,10 @@
     },
     {
       "id": "starcatcher:sea_bass",
+      "required": false
+    },
+    {
+      "id": "starcatcher:shadowfin",
       "required": false
     },
     {

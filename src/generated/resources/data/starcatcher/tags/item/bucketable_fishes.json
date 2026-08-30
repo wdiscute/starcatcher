@@ -181,6 +181,14 @@
       "required": false
     },
     {
+      "id": "starcatcher:shadowfin",
+      "required": false
+    },
+    {
+      "id": "starcatcher:mossfin",
+      "required": false
+    },
+    {
       "id": "starcatcher:ghostly_pike",
       "required": false
     },

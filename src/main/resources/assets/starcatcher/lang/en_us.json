@@ -692,6 +692,9 @@
   "gui.guide.elevation.stone_caves" : "Stone Caves",
   "gui.guide.elevation.underground" : "Underground",
 
+  "gui.guide.light_level.darkness" : "Darkness",
+  "gui.guide.light_level.bright" : "Bright",
+
   "gui.guide.sort" : "[sort]",
 
   "gui.guide.sort.alphabetical_up" : "⏬ Alphabetical",
@@ -1219,6 +1222,8 @@
   "gui.guide.hover.weather.incorrect" : "❌ Weather",
   "gui.guide.hover.elevation.correct" : "✅ Elevation",
   "gui.guide.hover.elevation.incorrect" : "❌ Elevation",
+  "gui.guide.hover.light_level.correct" : "✅ Light",
+  "gui.guide.hover.light_level.incorrect" : "❌ Light",
   "gui.guide.hover.caught_limit" : "Caught Limit: %s",
 
   "gui.guide.dimension" : "Dimension: ",
@@ -1244,6 +1249,7 @@
   "gui.guide.luck" : "Luck: ",
   "gui.guide.structure" : "Structure: ",
   "gui.guide.elevation" : "Elevation: ",
+  "gui.guide.light_level" : "Light Level: ",
   "gui.guide.elevation_bias" : "Around %s",
   "gui.guide.elevation_bias.hover" : "From %s to %s, best at %s",
   "gui.guide.caught_limit" : "Caught Limit: ",
@@ -1944,6 +1950,17 @@
   "item.starcatcher.lush_pike" : "Lush Pike",
   "tooltip.starcatcher.lush_pike.0" : "A mossy pike found rarity in the Lush Caves.",
   "tooltip.starcatcher.lush_pike.1" : "A real tough catch even for experienced anglers.",
+
+  "item.starcatcher.shadowfin" : "Shadowfin",
+  "tooltip.starcatcher.shadowfin.0" : "A grumpy fish that dislikes most others.",
+  "tooltip.starcatcher.shadowfin.1" : "It spends its days in the shadows,",
+  "tooltip.starcatcher.shadowfin.2" : "only leaving to meet its Mossfin.",
+
+  "item.starcatcher.mossfin" : "Mossfin",
+  "tooltip.starcatcher.mossfin.0" : "Has strangely large eyes, serving no purpose beyond being cute.",
+  "tooltip.starcatcher.mossfin.1" : "It enjoys all things bright and mossy.",
+  "tooltip.starcatcher.mossfin.2" : "The only time it enters the shadows is to search for its Shadowfin.",
+
 
 
 

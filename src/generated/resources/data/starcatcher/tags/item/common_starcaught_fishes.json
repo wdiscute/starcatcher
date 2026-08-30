@@ -109,6 +109,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:vivid_moss",
+      "required": false
+    },
+    {
       "id": "starcatcher:whiteveil",
       "required": false
     }
