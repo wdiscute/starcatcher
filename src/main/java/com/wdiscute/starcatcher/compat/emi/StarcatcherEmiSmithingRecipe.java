@@ -30,7 +30,7 @@ public class StarcatcherEmiSmithingRecipe implements EmiRecipe
         this.input = EmiIngredient.of(recipe.rod());
         this.material = EmiIngredient.of(recipe.material());
 
-        ItemStack result = recipe.assembledwad(
+        ItemStack result = recipe.assembledNoRegistries(
                 new SmithingRecipeInput(
                         recipe.template().getItems()[0],
                         SCItems.ROD.toStack(),

@@ -33,10 +33,10 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
 
     public ItemStack assemble(SmithingRecipeInput input, HolderLookup.Provider registries)
     {
-        return assembledwad(input);
+        return assembledNoRegistries(input);
     }
 
-    public ItemStack assembledwad(SmithingRecipeInput input)
+    public ItemStack assembledNoRegistries(SmithingRecipeInput input)
     {
         ItemStack resultRod;
 

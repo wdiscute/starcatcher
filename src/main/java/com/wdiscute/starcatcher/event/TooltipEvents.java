@@ -34,7 +34,6 @@ import java.util.List;
 @EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
 public class TooltipEvents
 {
-
     static int cachedTimer = 0;
     static ItemStack cachedItem = ItemStack.EMPTY;
     static List<Component> cachedComps = List.of();
@@ -65,9 +64,10 @@ public class TooltipEvents
         //Netherite Upgrade
         if (SCDataComponents.has(stack, SCDataComponents.NETHERITE_UPGRADE))
         {
-            if (Boolean.TRUE.equals(SCDataComponents.get(stack, SCDataComponents.NETHERITE_UPGRADE)))
+            if (SCDataComponents.getOrDefault(stack, SCDataComponents.NETHERITE_UPGRADE, false))
             {
                 comp.add(Tooltips.resolveTagsToComponentFromTranslationKey("tooltip.starcatcher.rod.netherite"));
+                cachedTimer = 0;
             }
         }
 

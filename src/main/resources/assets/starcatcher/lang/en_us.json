@@ -61,6 +61,7 @@
   "emi.starcatcher.entity_entry" : "This entry will always spawn a %s",
 
   "emi.category.starcatcher.fishing" : "Starcatcher's Fishing",
+  "emi.category.starcatcher.smithing" : "Starcatcher's Smithing",
 
   "emi.info.starcatcher.worms.0" : "Worms have different fishing modifiers when used as bait.",
   "emi.info.starcatcher.worms.1" : "Compostable.",
