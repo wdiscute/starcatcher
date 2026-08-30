@@ -51,7 +51,7 @@ public class DGTrophies
                         .withRarity(Rarity.UNCOMMON)
                         .withHasGuideEntry(false)
                         .addRarityRestriction(
-                                new RarityCountRestriction.RarityCount(Rarity.NONE, 35, RarityCountRestriction.RarityCount.CountType.UNIQUE)
+                                new RarityCountRestriction.RarityCount(Rarity.NONE, 35, RarityCountRestriction.RarityCount.CountType.TOTAL)
                         )
                         .trophy()
         );
@@ -97,7 +97,7 @@ public class DGTrophies
                         .withHasGuideEntry(false)
                         .addRarityRestriction(
                                 new RarityCountRestriction.RarityCount(Rarity.NONE, 500, RarityCountRestriction.RarityCount.CountType.TOTAL),
-                                new RarityCountRestriction.RarityCount(Rarity.NONE, 0, RarityCountRestriction.RarityCount.CountType.ALL)
+                                new RarityCountRestriction.RarityCount(Rarity.GOLDEN, 10, RarityCountRestriction.RarityCount.CountType.UNIQUE)
                         )
                         .trophy()
         );
@@ -111,8 +111,7 @@ public class DGTrophies
                         .withRarity(Rarity.LEGENDARY)
                         .withHasGuideEntry(false)
                         .addRarityRestriction(
-                                new RarityCountRestriction.RarityCount(Rarity.NONE, 0, RarityCountRestriction.RarityCount.CountType.ALL),
-                                new RarityCountRestriction.RarityCount(Rarity.GOLDEN, 0, RarityCountRestriction.RarityCount.CountType.ALL)
+                                new RarityCountRestriction.RarityCount(Rarity.NONE, 0, RarityCountRestriction.RarityCount.CountType.ALL)
                         )
                         .trophy()
         );

@@ -48,10 +48,6 @@
       "rarities": [
         {
           "count_type": "all"
-        },
-        {
-          "count_type": "all",
-          "rarity": "golden"
         }
       ]
     }
