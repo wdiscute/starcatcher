@@ -915,7 +915,7 @@ public class DGTideFishes
                         .withDifficulty(Difficulty.HARD.vanishing().moving().withHP(300))
                         .addRestriction(DimensionRestriction.OVERWORLD)
                         .addRestriction(FluidRestriction.WATER)
-                        .addRestriction(new LuckRestriction(5, ""))
+                        //.addRestriction(new LuckRestriction(1, ""))
                         .withPercentageChance(0.001f)
                 , "tide"
         );
