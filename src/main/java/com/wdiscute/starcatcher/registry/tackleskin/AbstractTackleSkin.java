@@ -1,11 +1,13 @@
 package com.wdiscute.starcatcher.registry.tackleskin;
 
+import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.fml.loading.FMLLoader;
 
 public abstract class AbstractTackleSkin
 {
@@ -37,12 +39,14 @@ public abstract class AbstractTackleSkin
 
     public void onSuccessfulMinigame(Player player)
     {
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_CELEBRATE, SoundSource.NEUTRAL, 1.0F, 1.0F);
+        if (FMLLoader.getDist().isClient() && SCConfig.ENABLE_VILLAGER_SOUNDS.get())
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_CELEBRATE, SoundSource.NEUTRAL, 1.0F, 1.0F);
     }
 
     public void onFailedMinigame(Player player)
     {
-        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_NO, SoundSource.NEUTRAL, 1.0F, 1.0F);
+        if (FMLLoader.getDist().isClient() && SCConfig.ENABLE_VILLAGER_SOUNDS.get())
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_NO, SoundSource.NEUTRAL, 1.0F, 1.0F);
     }
 
     public void onTick(FishingBobEntity bobEntity)

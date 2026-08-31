@@ -86,10 +86,10 @@ public class SCConfig
             .translation("starcatcher.configuration.sort")
             .defineEnum("sort", FishingGuideScreen.Sort.ALPHABETICAL_DOWN);
 
-    public static final ModConfigSpec.BooleanValue ENABLE_TACKLE_SOUNDS = BUILDER_CLIENT
-            .comment("Controls whether sounds for reeling, failing minigame, completing minigame etc should play")
-            .translation("starcatcher.configuration.enable_tackle_sounds")
-            .define("enable_tackle_sound", true);
+    public static final ModConfigSpec.BooleanValue ENABLE_VILLAGER_SOUNDS = BUILDER_CLIENT
+            .comment("Controls whether villager sounds for winning and losing the minigame should play. Does not affect tackle skins with custom sounds.")
+            .translation("starcatcher.configuration.enable_villager_sounds")
+            .define("enable_villager_sound", true);
 
     public static final ModConfigSpec.BooleanValue ENABLE_HIT_SOUNDS = BUILDER_CLIENT
             .comment("Should sweet-spots play the hit sounds")

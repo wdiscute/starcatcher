@@ -559,9 +559,8 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(mouseKey) && !SCKeymappings.MINIGAME_HIT.getKey().equals(mouseKey))
         {
-            //play miss sound
-            if (SCConfig.ENABLE_TACKLE_SOUNDS.get() && modifiers.stream().anyMatch(o -> o.skipMissSound(this)))
-                tackleSkin.onFailedMinigame(Minecraft.getInstance().player);
+            //play failed sound
+            tackleSkin.onFailedMinigame(Minecraft.getInstance().player);
             this.onClose();
             return true;
         }
@@ -706,8 +705,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
             if (progressSmooth < 0 && modifiers.stream().noneMatch(o -> o.preventLosingMinigame(this)))
             {
-                if (SCConfig.ENABLE_TACKLE_SOUNDS.get())
-                    tackleSkin.onFailedMinigame(Minecraft.getInstance().player);
+                tackleSkin.onFailedMinigame(Minecraft.getInstance().player);
                 this.onClose();
             }
 
@@ -716,8 +714,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 //if completed treasure minigame, or is a perfect catch with the mossy hook
                 boolean awardTreasure = treasureProgress > 100 || modifiers.stream().anyMatch(o -> o.forceAwardTreasure(this));
 
-                if (SCConfig.ENABLE_TACKLE_SOUNDS.get())
-                    tackleSkin.onSuccessfulMinigame(Minecraft.getInstance().player);
+                tackleSkin.onSuccessfulMinigame(Minecraft.getInstance().player);
 
                 PacketDistributor.sendToServer(new SBFishingCompletedPayload(true, tickCount, awardTreasure, perfectCatch, consecutiveHits));
                 this.onClose();

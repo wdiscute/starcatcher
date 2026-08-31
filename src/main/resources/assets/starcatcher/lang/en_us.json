@@ -211,7 +211,7 @@
   "starcatcher.configuration.hit_delay" : "Minigame Hit Delay",
   "starcatcher.configuration.units" : "Measurement Units",
   "starcatcher.configuration.sort" : "Guide Sort order",
-  "starcatcher.configuration.enable_tackle_sounds" : "Tackle Skin Sounds",
+  "starcatcher.configuration.enable_villager_sounds" : "Enable Villager Sounds",
   "starcatcher.configuration.enable_hit_sounds" : "Sweet-spot Hit Sounds",
   "starcatcher.configuration.enable_miss_sound" : "Minigame miss Sound",
   "starcatcher.configuration.remove_notif_on_hover" : "Remove New Fish Notif on Hover",
