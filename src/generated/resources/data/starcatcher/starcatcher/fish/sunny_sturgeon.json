@@ -70,8 +70,8 @@
       "type": "starcatcher:daytime_restriction",
       "ranges": [
         {
-          "first": 0,
-          "second": 12700
+          "max": 12700,
+          "min": 0
         }
       ],
       "translation_override": "gui.guide.day"

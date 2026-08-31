@@ -18,7 +18,6 @@ import com.wdiscute.starcatcher.data.network.SBTrackFishPayload;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.messageinabottle.message.MessageScreen;
 import com.wdiscute.starcatcher.registry.*;
-import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.data.network.SignGuidePayload;
 import com.wdiscute.starcatcher.data.network.SBFPsSeenPayload;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
@@ -48,8 +47,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.time.Instant;
@@ -66,7 +65,13 @@ public class FishingGuideScreen extends Screen
     private static final ScreenUtils.Image BACKGROUND_INDEX_FIRST = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/background_index_first.png"), 420, 260);
     private static final ScreenUtils.Image BACKGROUND_INDEX_SECOND = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/background_index_second.png"), 420, 260);
     private static final ScreenUtils.Image BACKGROUND_ENTRY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/background_entry.png"), 420, 260);
+    private static final ScreenUtils.Image BACKGROUND_ENTRY_2 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/background_entry_2.png"), 420, 260);
+    private static final ScreenUtils.Image BACKGROUND_ENTRY_3 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/background_entry_3.png"), 420, 260);
+    private static final ScreenUtils.Image BACKGROUND_ENTRY_4 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/background_entry_4.png"), 420, 260);
     private static final ScreenUtils.Image BACKGROUND_BASICS = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/background_basics.png"), 420, 260);
+
+    private static final ScreenUtils.Image COMPASS_CLOSED = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/compass_closed.png"), 420, 260);
+    private static final ScreenUtils.Image COMPASS_OPEN = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/background/compass_open.png"), 420, 260);
 
     private static final ScreenUtils.Image COMPASS = new ScreenUtils.Image(Starcatcher.rl("textures/gui/guide/compass.png"), 32, 32);
 
@@ -187,9 +192,11 @@ public class FishingGuideScreen extends Screen
     MenuEntry menu = MenuEntry.INDEX;
     int page = 0;
 
-    public boolean isSigned;
-
+    public SignedGuide signedGuide;
     final boolean inLectern;
+
+    boolean isCompassOpen = true;
+    static float compassRotation = 0;
 
     ClientLevel level;
     LocalPlayer player;
@@ -202,7 +209,7 @@ public class FishingGuideScreen extends Screen
     List<FishProperties> fishInArea = new ArrayList<>();
     Map<ResourceLocation, FishCaughtCounter> fishCaughtCounterMap = new HashMap<>();
 
-    EditBox editBox;
+    EditBox signedNameEditBox;
 
     FishProperties trackedFP;
     ResourceLocation trackedRL;
@@ -219,16 +226,15 @@ public class FishingGuideScreen extends Screen
         uiY = (height - imageHeight) / 2;
 
         //editbox for cover
-        this.editBox = new EditBox(this.font, uiX + 240, uiY + 102, 103, 12, translatable("container.repair"));
-        this.editBox.setCanLoseFocus(false);
-        this.editBox.setTextColor(0xff937d70);
-        this.editBox.setBordered(false);
-        this.editBox.setMaxLength(20);
-        this.editBox.setTextShadow(false);
-        this.editBox.setCanLoseFocus(true);
-        this.editBox.setValue("");
-        this.addWidget(this.editBox);
-        this.editBox.setEditable(true);
+        this.signedNameEditBox = new EditBox(this.font, uiX + 240, uiY + 102, 103, 12, translatable("container.repair"));
+        this.signedNameEditBox.setTextColor(0xff937d70);
+        this.signedNameEditBox.setBordered(false);
+        this.signedNameEditBox.setMaxLength(20);
+        this.signedNameEditBox.setTextShadow(false);
+        this.signedNameEditBox.setCanLoseFocus(false);
+        this.signedNameEditBox.setValue(signedGuide == null ? "" : signedGuide.signature());
+        this.addWidget(this.signedNameEditBox);
+        this.signedNameEditBox.setEditable(signedGuide == null);
 
         entries = new ArrayList<>();
 
@@ -327,7 +333,7 @@ public class FishingGuideScreen extends Screen
     public boolean keyPressed(int keyCode, int scanCode, int modifiers)
     {
         InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
-        if (this.minecraft.options.keyInventory.isActiveAndMatches(key) && !editBox.canConsumeInput())
+        if (this.minecraft.options.keyInventory.isActiveAndMatches(key) && !signedNameEditBox.canConsumeInput())
         {
             if (menu.equals(MenuEntry.INDEX))
                 this.onClose();
@@ -407,6 +413,13 @@ public class FishingGuideScreen extends Screen
                     page--;
             }
 
+            case LAST ->
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                page = entries.size() / 2 - 1;
+                menu = MenuEntry.ENTRY;
+            }
+
         }
     }
 
@@ -461,11 +474,21 @@ public class FishingGuideScreen extends Screen
             {
                 player.playSound(SoundEvents.BOOK_PAGE_TURN);
 
-                int entriesOnCurrentAndPreviousPages = page * 2;
+                int entriesOnCurrentAndPreviousPages = (page + 1) * 2;
 
                 //if there's next page
                 if (entries.size() > entriesOnCurrentAndPreviousPages)
                     page++;
+                else
+                {
+                    menu = MenuEntry.LAST;
+                    page = 0;
+                }
+            }
+
+            case LAST ->
+            {
+
             }
         }
     }
@@ -586,15 +609,32 @@ public class FishingGuideScreen extends Screen
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
-        //System.out.println("clicked on x :" + x);
-        //System.out.println("clicked on y :" + y);
+        System.out.println("clicked on x :" + x);
+        System.out.println("clicked on y :" + y);
 
-        //shake compass
+        //compass bottom
         if (x > 17 && x < 46 && y > 37 && y < 63)
         {
-            player.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 0.1f, 1.2f);
-            player.playSound(SoundEvents.GLASS_STEP, 0.4f, 1.2f);
-            compassRotation += Utils.r.nextInt(40) - 20;
+            if (isCompassOpen)
+            {
+                player.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 0.1f, 1.2f + level.getRandom().nextFloat() / 10);
+                player.playSound(SoundEvents.GLASS_STEP, 0.4f, 1.2f);
+                compassRotation += Utils.r.nextInt(40) - 20;
+            }
+            else
+            {
+                player.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 0.5f, 1.3f);
+                player.playSound(SoundEvents.GLASS_STEP, 0.8f, 1.2f);
+                isCompassOpen = true;
+            }
+        }
+
+        //compass top
+        if (x > 40 && x < 76 && y > 1 && y < 39 && isCompassOpen)
+        {
+            player.playSound(SoundEvents.NOTE_BLOCK_CHIME.value(), 0.5f, 0.6f);
+            player.playSound(SoundEvents.GLASS_STEP, 0.8f, 0.6f);
+            isCompassOpen = false;
         }
 
         //previous arrow
@@ -633,10 +673,16 @@ public class FishingGuideScreen extends Screen
         arrowPressedFromScrollDecay--;
     }
 
-    static float compassRotation = 0;
-
     private void renderCompass(GuiGraphics guiGraphics)
     {
+        if (isCompassOpen)
+            COMPASS_OPEN.render(guiGraphics, uiX, uiY);
+        else
+        {
+            COMPASS_CLOSED.render(guiGraphics, uiX, uiY);
+            return;
+        }
+
         float targetRotation = ((player.yRotO % 360.0f) + 360.0f) % 360.0f;
         float smoothing = 0.05f;   // Lower = smoother, higher = faster
 
@@ -669,7 +715,6 @@ public class FishingGuideScreen extends Screen
     {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         resolveTrackedFP();
-        editBox.setEditable(false);
 
         switch (menu)
         {
@@ -683,18 +728,23 @@ public class FishingGuideScreen extends Screen
             //cover page
             case COVER ->
             {
+                RenderSystem.enableBlend();
                 BACKGROUND_COVER.render(guiGraphics, uiX, uiY);
-                renderCoverText(guiGraphics, mouseX, mouseY);
-                renderCompass(guiGraphics);
+                RenderSystem.disableBlend();
+                if (signedGuide == null)
+                    renderUnsignedCover(guiGraphics, mouseX, mouseY);
+                else
+                    renderSignedCover(guiGraphics, mouseX, mouseY);
             }
 
             //index pages
             case INDEX ->
             {
+                RenderSystem.enableBlend();
                 if (page == 0) BACKGROUND_INDEX_FIRST.render(guiGraphics, uiX, uiY);
                 else BACKGROUND_INDEX_SECOND.render(guiGraphics, uiX, uiY);
+                RenderSystem.disableBlend();
                 renderIndex(guiGraphics, mouseX, mouseY);
-                renderCompass(guiGraphics);
             }
 
             //help pages
@@ -704,29 +754,52 @@ public class FishingGuideScreen extends Screen
                 BACKGROUND_BASICS.render(guiGraphics, uiX, uiY);
                 RenderSystem.disableBlend();
                 renderTheBasics(guiGraphics, mouseX, mouseY);
-                renderCompass(guiGraphics);
             }
 
             //entries pages
             case ENTRY ->
             {
                 RenderSystem.enableBlend();
-                BACKGROUND_ENTRY.render(guiGraphics, uiX, uiY);
+
+                //pick random background for that page from player uuid
+                long seed = player.getUUID().getMostSignificantBits()
+                            ^ player.getUUID().getLeastSignificantBits()
+                            ^ page;
+
+                seed ^= seed >>> 33;
+                seed *= 0xff51afd7ed558ccdL;
+                seed ^= seed >>> 33;
+                seed *= 0xc4ceb9fe1a85ec53L;
+                seed ^= seed >>> 33;
+
+                int variant = Math.floorMod(seed, 4);
+
+                ScreenUtils.Image background = switch (variant) {
+                    case 0 -> BACKGROUND_ENTRY;
+                    case 1 -> BACKGROUND_ENTRY_2;
+                    case 2 -> BACKGROUND_ENTRY_3;
+                    default -> BACKGROUND_ENTRY_4;
+                };
+
+                background.render(guiGraphics, uiX, uiY);
+
+                background.render(guiGraphics, uiX, uiY);
                 RenderSystem.disableBlend();
                 renderEntry(guiGraphics, mouseX, mouseY, 52, page * 2);
                 renderEntry(guiGraphics, mouseX, mouseY, 212, page * 2 + 1);
-                renderCompass(guiGraphics);
                 guiGraphics.drawString(this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0x9c897c, false);
             }
 
-            //case 3 ->
-            //{
-            //    RenderSystem.enableBlend();
-            //    BACKGROUND_LAST_PAGE.render(guiGraphics, uiX, uiY);
-            //    RenderSystem.disableBlend();
-            //    renderCompass(guiGraphics);
-            //}
+            case LAST ->
+            {
+                RenderSystem.enableBlend();
+                BACKGROUND_LAST_PAGE.render(guiGraphics, uiX, uiY);
+                RenderSystem.disableBlend();
+                renderCompass(guiGraphics);
+            }
         }
+
+        renderCompass(guiGraphics);
 
         double x = mouseX - uiX;
         double y = mouseY - uiY;
@@ -756,15 +829,12 @@ public class FishingGuideScreen extends Screen
                 ARROW_INDEX.render(guiGraphics, uiX, uiY);
         }
 
-        //next arrow
-        if (menu.equals(MenuEntry.ENTRY) && (page + 1) * 2 == entries.size())
-        {
-
-        }
-        else
+        //next arrow should not render on LAST
+        if (!(menu.equals(MenuEntry.LAST)))
         {
             if (x > 336 && x < 356 && y > 202 && y < 216)
                 ARROW_NEXT_HIGHLIGHT.render(guiGraphics, uiX, uiY);
+
             if (arrowNextPressed)
                 ARROW_NEXT_PRESSED.render(guiGraphics, uiX, uiY);
             else
@@ -776,17 +846,17 @@ public class FishingGuideScreen extends Screen
             arrowNextPressed = false;
             arrowPreviousPressed = false;
         }
+
         clicked = false;
 
         ScreenUtils.Tooltip.render(guiGraphics, font, mouseX, mouseY);
     }
 
-    public void renderCoverText(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    public void renderUnsignedCover(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
         String s = I18n.get("gui.guide.sign");
 
         int width1 = font.width(s) + 15;
-        editBox.setEditable(true);
 
         //draw fitting rectangle
         //todo fix the width calculation here
@@ -802,13 +872,19 @@ public class FishingGuideScreen extends Screen
             ScreenUtils.outline(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_TEXT_DARK);
             if (clicked)
             {
-                SignGuidePayload payload = new SignGuidePayload(editBox.getValue());
+                SignGuidePayload payload = new SignGuidePayload(signedNameEditBox.getValue());
                 PacketDistributor.sendToServer(payload);
                 onClose();
             }
         }
 
-        editBox.render(guiGraphics, mouseX, mouseY, 0);
+        signedNameEditBox.render(guiGraphics, mouseX, mouseY, 0);
+    }
+
+    public void renderSignedCover(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    {
+        ScreenUtils.centeredText(guiGraphics, font, signedNameEditBox.getValue(),
+                uiX + 285, uiY + 102, SCColors.GUIDE_TEXT, false);
     }
 
     private void renderHelpText(GuiGraphics guiGraphics, int page)
@@ -1772,16 +1848,11 @@ public class FishingGuideScreen extends Screen
     {
         super(Component.empty());
         this.inLectern = inLectern;
-        if (signedGuide == null)
-        {
-            this.isSigned = false;
-            this.fishCaughtCounterMap = SCDataAttachments.get(Minecraft.getInstance().player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
-        }
-        else
-        {
-            this.isSigned = true;
-            this.fishCaughtCounterMap = signedGuide.fishesCaught();
-        }
+        this.signedGuide = signedGuide;
+
+        LocalPlayer player = Minecraft.getInstance().player;
+        this.fishCaughtCounterMap = signedGuide == null || signedGuide.owner().equals(player.getUUID()) ?
+                SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught : signedGuide.fishesCaught();
 
         missingnoStack = SCItems.MISSINGNO.toStack();
 
@@ -1841,7 +1912,7 @@ public class FishingGuideScreen extends Screen
 
         bottles = List.of(letterIcon, letterBottleIcon, messageBottleIcon, messageIcon);
 
-        if (Minecraft.getInstance().player == null || Minecraft.getInstance().level == null)
+        if (player == null || Minecraft.getInstance().level == null)
             return;
 
         List<Pair<Rarity, FishCaughtCounter>> list = new ArrayList<>();
@@ -1896,10 +1967,10 @@ public class FishingGuideScreen extends Screen
         }
         else
         {
-            timeSpent = Minecraft.getInstance().player.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get()));
-            treasuresCaught = Minecraft.getInstance().player.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get()));
-            fishMissed = Minecraft.getInstance().player.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get()));
-            baitUsed = Minecraft.getInstance().player.getStats().getValue(Stats.CUSTOM.get(SCStats.BAIT_USED.get()));
+            timeSpent = player.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get()));
+            treasuresCaught = player.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get()));
+            fishMissed = player.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get()));
+            baitUsed = player.getStats().getValue(Stats.CUSTOM.get(SCStats.BAIT_USED.get()));
         }
     }
 
@@ -2099,7 +2170,8 @@ public class FishingGuideScreen extends Screen
         COVER,
         INDEX,
         HELP,
-        ENTRY
+        ENTRY,
+        LAST
     }
 
     public static MutableComponent translatable(String key)

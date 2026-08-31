@@ -707,7 +707,7 @@
   "gui.guide.sort.caught_up" : "⏬ Caught",
   "gui.guide.sort.caught_down" : "⏫ Caught",
   "gui.guide.sort.caught_golden_up" : "⏬ Caught Golden",
-  "gui.guide.sort.caught_golden_down" : "⏫ CaughtGolden",
+  "gui.guide.sort.caught_golden_down" : "⏫ Caught Golden",
 
   "gui.guide.units.metric" : "Metric (cm & kg)",
   "gui.guide.units.imperial" : "Imperial (in & lb)",

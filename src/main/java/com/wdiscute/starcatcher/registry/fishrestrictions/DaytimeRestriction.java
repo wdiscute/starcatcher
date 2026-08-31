@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.modifiers.Modifier;
+import com.wdiscute.utils.Utils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -22,24 +23,15 @@ import java.util.List;
 
 public class DaytimeRestriction extends AbstractFishRestriction
 {
-    private final List<Duo> ranges;
+    private final List<Utils.Duo<Integer, Integer>> ranges;
 
     public static final MapCodec<DaytimeRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Duo.CODEC.listOf().fieldOf("ranges").forGetter(o -> o.ranges),
+                    Utils.Duo.codec(Codec.INT, "min", Codec.INT, "max").listOf().fieldOf("ranges").forGetter(o -> o.ranges),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, DaytimeRestriction::new));
 
-    public record Duo(int first, int second)
-    {
-        public static final Codec<Duo> CODEC = RecordCodecBuilder.create(instance ->
-                instance.group(
-                        Codec.INT.fieldOf("first").forGetter(Duo::first),
-                        Codec.INT.fieldOf("second").forGetter(Duo::second)
-                ).apply(instance, Duo::new));
-    }
-
-    public DaytimeRestriction(List<Duo> ranges, String translationOverride)
+    public DaytimeRestriction(List<Utils.Duo<Integer, Integer>> ranges, String translationOverride)
     {
         super(translationOverride);
         this.ranges = ranges;
@@ -60,8 +52,8 @@ public class DaytimeRestriction extends AbstractFishRestriction
     @Override
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        if(context.equals(Context.RADAR)) return 0;
-        if(context.equals(Context.GUIDE_FISHES_IN_AREA)) return 0;
+        if (context.equals(Context.RADAR)) return 0;
+        if (context.equals(Context.GUIDE_FISHES_IN_AREA)) return 0;
 
         //skip if any modifiers have SkipsDaytimeRestriction interface
         if (context.equals(Context.FISHING))
@@ -80,7 +72,7 @@ public class DaytimeRestriction extends AbstractFishRestriction
 
         float daytime = level.dayTime() % 24000;
 
-        if (ranges.stream().anyMatch(range -> daytime > range.first && daytime < range.second))
+        if (ranges.stream().anyMatch(range -> daytime > range.first() && daytime < range.second()))
             return 0;
 
         return -9999;
@@ -112,17 +104,17 @@ public class DaytimeRestriction extends AbstractFishRestriction
     {
         List<Component> hover = new ArrayList<>();
 
-        for (Duo range : ranges)
-            hover.add(Component.translatable("gui.guide.between", range.first, range.second));
+        for (Utils.Duo<Integer, Integer> range : ranges)
+            hover.add(Component.translatable("gui.guide.between", range.first(), range.second()));
 
         return hover;
     }
 
-    public static final DaytimeRestriction DAY = new DaytimeRestriction(List.of(new Duo(0, 12700)), "gui.guide.day");
-    public static final DaytimeRestriction DAWN_AND_DUSK = new DaytimeRestriction(List.of(new Duo(12400, 13700), new Duo(22500, 23700)), "gui.guide.dawn_and_dusk");
-    public static final DaytimeRestriction NOON = new DaytimeRestriction(List.of(new Duo(4500, 7500)), "gui.guide.noon");
-    public static final DaytimeRestriction MIDNIGHT = new DaytimeRestriction(List.of(new Duo(16500, 19500)), "gui.guide.midnight");
-    public static final DaytimeRestriction NIGHT = new DaytimeRestriction(List.of(new Duo(12700, 24000)), "gui.guide.night");
+    public static final DaytimeRestriction DAY = new DaytimeRestriction(List.of(new Utils.Duo<>(0, 12700)), "gui.guide.day");
+    public static final DaytimeRestriction DAWN_AND_DUSK = new DaytimeRestriction(List.of(new Utils.Duo<>(12400, 13700), new Utils.Duo<>(22500, 23700)), "gui.guide.dawn_and_dusk");
+    public static final DaytimeRestriction NOON = new DaytimeRestriction(List.of(new Utils.Duo<>(4500, 7500)), "gui.guide.noon");
+    public static final DaytimeRestriction MIDNIGHT = new DaytimeRestriction(List.of(new Utils.Duo<>(16500, 19500)), "gui.guide.midnight");
+    public static final DaytimeRestriction NIGHT = new DaytimeRestriction(List.of(new Utils.Duo<>(12700, 24000)), "gui.guide.night");
 
     public interface SkipsDaytimeRestriction
     {

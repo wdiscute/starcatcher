@@ -8,6 +8,7 @@ import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.data.SignedGuide;
 import com.wdiscute.starcatcher.registry.SCStats;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -29,9 +30,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.time.Instant;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FishingGuideItem extends Item
 {
@@ -87,29 +86,41 @@ public class FishingGuideItem extends Item
 
             SignedGuide signedGuide = SCDataComponents.get(stack, SCDataComponents.SIGNED_GUIDE);
 
-            Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
-
-            Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
-            map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
-
-            if (player instanceof ServerPlayer sp)
+            //if owner opening guide
+            if(signedGuide.owner().equals(player.getUUID()))
             {
-                FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
-                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get())),
-                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get())),
-                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get())),
-                        sp.getStats().getValue(Stats.CUSTOM.get(SCStats.BAIT_USED.get()))
-                );
+                Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
-                SCDataComponents.set(stack, SCDataComponents.SIGNED_GUIDE,
-                        new SignedGuide(
-                                player.getUUID(),
-                                mapToSave,
-                                signedGuide.signature(),
-                                Date.from(Instant.now()).getTime(),
-                                statsData
-                        ));
+                Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
+                map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
+
+                if (player instanceof ServerPlayer sp)
+                {
+                    FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
+                            sp.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get())),
+                            sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get())),
+                            sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get())),
+                            sp.getStats().getValue(Stats.CUSTOM.get(SCStats.BAIT_USED.get()))
+                    );
+
+                    SCDataComponents.set(stack, SCDataComponents.SIGNED_GUIDE,
+                            new SignedGuide(
+                                    player.getUUID(),
+                                    mapToSave,
+                                    signedGuide.signature(),
+                                    Date.from(Instant.now()).getTime(),
+                                    statsData
+                            ));
+                }
             }
+            //visitor opening guide
+            else
+            {
+                HashSet<Utils.Duo<UUID, String>> duos = new HashSet<>(SCDataComponents.getOrDefault(stack, SCDataComponents.GUIDE_VISITS, List.of()));
+                duos.add(new Utils.Duo<>(player.getUUID(), player.getScoreboardName()));
+                SCDataComponents.set(stack, SCDataComponents.GUIDE_VISITS, List.copyOf(duos));
+            }
+
         }
 
         return InteractionResultHolder.success(stack);

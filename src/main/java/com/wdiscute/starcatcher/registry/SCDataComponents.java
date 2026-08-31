@@ -9,6 +9,8 @@ import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.Utils;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
@@ -19,6 +21,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
@@ -32,12 +35,14 @@ public interface SCDataComponents
             "bucketed_fish",
             builder -> builder.persistent(MaybeStack.CODEC));
 
-
     //signed book system
     DeferredHolder<DataComponentType<?>, DataComponentType<SignedGuide>> SIGNED_GUIDE = register(
             "signed_guide",
             builder -> builder.persistent(SignedGuide.CODEC));
 
+    DeferredHolder<DataComponentType<?>, DataComponentType<List<Utils.Duo<UUID, String>>>> GUIDE_VISITS = register(
+            "guide_visits",
+            builder -> builder.persistent(Utils.Duo.codec(UUIDUtil.CODEC, Codec.STRING).listOf()));
 
     //rod menu
     DeferredHolder<DataComponentType<?>, DataComponentType<MaybeStack>> BOBBER = register(
