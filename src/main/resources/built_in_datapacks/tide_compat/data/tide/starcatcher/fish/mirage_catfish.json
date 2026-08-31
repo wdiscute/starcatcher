@@ -8,8 +8,12 @@
   "base_chance": 20,
   "catch_info": {
     "entity": "tide:mirage_catfish",
-    "fish_bucket": "tide:mirage_catfish_bucket",
-    "item": "tide:mirage_catfish"
+    "fish_bucket": {
+      "identifier": "tide:mirage_catfish_bucket"
+    },
+    "item": {
+      "identifier": "tide:mirage_catfish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -22,7 +26,7 @@
         "cooldown": 140,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 22,
           "is_flip": false,
           "moving_rate": 0.0,
@@ -38,7 +42,7 @@
         "cooldown": 130,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 0.0,
@@ -54,7 +58,7 @@
         "cooldown": 120,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 15,
           "is_flip": false,
           "moving_rate": 0.0,
@@ -68,7 +72,7 @@
     "speed": 11,
     "sweetspots": [
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -78,7 +82,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 0.0,
@@ -114,8 +118,8 @@
       "type": "starcatcher:daytime_restriction",
       "ranges": [
         {
-          "first": 16500,
-          "second": 19500
+          "max": 19500,
+          "min": 16500
         }
       ],
       "translation_override": "gui.guide.midnight"
@@ -136,5 +140,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/surface.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

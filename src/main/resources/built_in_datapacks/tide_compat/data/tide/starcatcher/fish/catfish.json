@@ -8,8 +8,12 @@
   "base_chance": 10,
   "catch_info": {
     "entity": "tide:catfish",
-    "fish_bucket": "tide:catfish_bucket",
-    "item": "tide:catfish"
+    "fish_bucket": {
+      "identifier": "tide:catfish_bucket"
+    },
+    "item": {
+      "identifier": "tide:catfish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -22,7 +26,7 @@
         "cooldown": 140,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 22,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -38,7 +42,7 @@
         "cooldown": 100,
         "sudoku_vanish": false,
         "sweetspot": {
-          "color_as_int": -16711936,
+          "color_as_int": -15732736,
           "hitbox_size_in_pixels": 22,
           "is_flip": false,
           "moving_rate": 1.0,
@@ -52,7 +56,7 @@
     "speed": 10,
     "sweetspots": [
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 22,
         "is_flip": false,
         "moving_rate": 1.0,
@@ -88,8 +92,8 @@
       "type": "starcatcher:daytime_restriction",
       "ranges": [
         {
-          "first": 12700,
-          "second": 24000
+          "max": 24000,
+          "min": 12700
         }
       ],
       "translation_override": "gui.guide.night"
@@ -110,5 +114,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/surface.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

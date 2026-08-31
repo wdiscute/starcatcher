@@ -8,8 +8,12 @@
   "base_chance": 40,
   "catch_info": {
     "entity": "tide:shooting_starfish",
-    "fish_bucket": "tide:shooting_starfish_bucket",
-    "item": "tide:shooting_starfish"
+    "fish_bucket": {
+      "identifier": "tide:shooting_starfish_bucket"
+    },
+    "item": {
+      "identifier": "tide:shooting_starfish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -19,7 +23,7 @@
     "speed": 11,
     "sweetspots": [
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 1.0,
@@ -29,7 +33,7 @@
         "vanishing_rate": 0.1
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 1.0,
@@ -62,17 +66,11 @@
       "translation_override": "gui.guide.elevation.surface"
     },
     {
-      "type": "starcatcher:fluid",
-      "fluids": [
-        "minecraft:water"
-      ]
-    },
-    {
       "type": "starcatcher:daytime_restriction",
       "ranges": [
         {
-          "first": 16500,
-          "second": 19500
+          "max": 19500,
+          "min": 16500
         }
       ],
       "translation_override": "gui.guide.midnight"
@@ -105,5 +103,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/surface.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

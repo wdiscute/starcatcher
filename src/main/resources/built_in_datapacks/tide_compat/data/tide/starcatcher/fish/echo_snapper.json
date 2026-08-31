@@ -8,8 +8,12 @@
   "base_chance": 5,
   "catch_info": {
     "entity": "tide:echo_snapper",
-    "fish_bucket": "tide:echo_snapper_bucket",
-    "item": "tide:echo_snapper"
+    "fish_bucket": {
+      "identifier": "tide:echo_snapper_bucket"
+    },
+    "item": {
+      "identifier": "tide:echo_snapper"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -81,5 +85,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/deep_dark.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/deep_dark.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

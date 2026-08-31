@@ -8,8 +8,12 @@
   "base_chance": 5,
   "catch_info": {
     "entity": "tide:lapis_lanternfish",
-    "fish_bucket": "tide:lapis_lanternfish_bucket",
-    "item": "tide:lapis_lanternfish"
+    "fish_bucket": {
+      "identifier": "tide:lapis_lanternfish_bucket"
+    },
+    "item": {
+      "identifier": "tide:lapis_lanternfish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -29,7 +33,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 1.0,
@@ -80,5 +84,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/cave.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/cave.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

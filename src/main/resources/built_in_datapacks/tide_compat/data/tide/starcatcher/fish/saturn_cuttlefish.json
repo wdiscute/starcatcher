@@ -8,8 +8,12 @@
   "base_chance": 25,
   "catch_info": {
     "entity": "tide:saturn_cuttlefish",
-    "fish_bucket": "tide:saturn_cuttlefish_bucket",
-    "item": "tide:saturn_cuttlefish"
+    "fish_bucket": {
+      "identifier": "tide:saturn_cuttlefish_bucket"
+    },
+    "item": {
+      "identifier": "tide:saturn_cuttlefish"
+    }
   },
   "difficulty": {
     "decay": 1.0,
@@ -19,7 +23,7 @@
     "speed": 11,
     "sweetspots": [
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 1.0,
@@ -29,7 +33,7 @@
         "vanishing_rate": 0.0
       },
       {
-        "color_as_int": -16711936,
+        "color_as_int": -15732736,
         "hitbox_size_in_pixels": 15,
         "is_flip": false,
         "moving_rate": 1.0,
@@ -83,5 +87,12 @@
     "golden_chance": 0.02
   },
   "skips_minigame": false,
-  "textures": "starcatcher:textures/gui/minigame/surface.png"
+  "textures": {
+    "buttons": "starcatcher:textures/gui/minigame/buttons.png",
+    "handle": "starcatcher:textures/gui/minigame/handle.png",
+    "rod": "starcatcher:textures/gui/minigame/rod.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "treasure": "starcatcher:textures/gui/minigame/treasure.png",
+    "wheels": "starcatcher:textures/gui/minigame/wheels.png"
+  }
 }

@@ -71,9 +71,10 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
     public static final List<String> MODS_TO_ACTUALLY_DATAGEN =
             List.of(
                     "minecraft",
-                    "starcatcher"
+                    "starcatcher",
 
-                    //"create"
+                    //replace line under with the mod
+                    ""
 
 
                     , ""
