@@ -2,8 +2,7 @@
   "base_chance": 17,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:oasis_sturgeon"
+      "identifier": "starcatcher:oasis_sturgeon"
     }
   },
   "difficulty": {

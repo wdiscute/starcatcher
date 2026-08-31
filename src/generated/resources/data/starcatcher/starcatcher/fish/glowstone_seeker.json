@@ -2,8 +2,7 @@
   "base_chance": 5,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:glowstone_seeker"
+      "identifier": "starcatcher:glowstone_seeker"
     }
   },
   "difficulty": {

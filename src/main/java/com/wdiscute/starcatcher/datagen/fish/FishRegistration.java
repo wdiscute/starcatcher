@@ -74,7 +74,7 @@ public final class FishRegistration
         ALL_FISHABLE.add(fp);
         ALL_FISHABLE_MAP.put(fp, key.location());
         //add every starcatcher fish that is not trash to STARCATCHER_FISHABLE tag
-        if (fp.catchInfo().fish().rl().getNamespace().equals("starcatcher") && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.rarity().equals(Rarity.TRASH))
+        if (fp.catchInfo().fish().identifier().getNamespace().equals("starcatcher") && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.rarity().equals(Rarity.TRASH))
             STARCATCHER_FISHABLE.add(fp);
 
         if (DGSCFishProperties.MODS_TO_ACTUALLY_DATAGEN.contains(requiredModId))
@@ -174,10 +174,10 @@ public final class FishRegistration
     public static ResourceKey<FishProperties> key(FishProperties fp)
     {
         //if starcatcher create compat fish, make key have create instead
-        if(CreateCompat.CREATE_COMPAT_FISH.stream().anyMatch(o -> fp.catchInfo().fish().rl().equals(o.getId())))
-            return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Utils.rl("create", fp.catchInfo().fish().rl().getPath()));
+        if(CreateCompat.CREATE_COMPAT_FISH.stream().anyMatch(o -> fp.catchInfo().fish().identifier().equals(o.getId())))
+            return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Utils.rl("create", fp.catchInfo().fish().identifier().getPath()));
 
-        return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, fp.catchInfo().fish().rl());
+        return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, fp.catchInfo().fish().identifier());
     }
 
     public static ResourceKey<FishProperties> key(String string)

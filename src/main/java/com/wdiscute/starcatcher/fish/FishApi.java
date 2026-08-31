@@ -209,7 +209,7 @@ public class FishApi
                     //if entity is from starcatcher, can only spawn if it's a bucketable fish (aka has a model)
                     canSpawnEntity = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().map(
                             o -> BuiltInRegistries.ITEM.getKey(o.getDelegate().value())
-                    ).anyMatch(rl -> rl.equals(fp.catchInfo().fish().rl()));
+                    ).anyMatch(rl -> rl.equals(fp.catchInfo().fish().identifier()));
                 else
                     //if entity is not from starcatcher, then it can spawn if not golden
                     //because the default is starcatcher:fish, meaning if its any other entity, then it can spawn

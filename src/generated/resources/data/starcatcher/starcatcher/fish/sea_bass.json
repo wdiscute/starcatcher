@@ -2,8 +2,7 @@
   "base_chance": 6,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:sea_bass"
+      "identifier": "starcatcher:sea_bass"
     }
   },
   "difficulty": {

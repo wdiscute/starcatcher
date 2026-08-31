@@ -3,12 +3,10 @@
   "catch_info": {
     "entity": "minecraft:salmon",
     "fish_bucket": {
-      "count": 1,
-      "id": "minecraft:salmon_bucket"
+      "identifier": "minecraft:salmon_bucket"
     },
     "item": {
-      "count": 1,
-      "id": "minecraft:salmon"
+      "identifier": "minecraft:salmon"
     }
   },
   "difficulty": {

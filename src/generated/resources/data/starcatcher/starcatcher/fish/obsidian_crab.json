@@ -2,8 +2,7 @@
   "base_chance": 5,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:obsidian_crab"
+      "identifier": "starcatcher:obsidian_crab"
     }
   },
   "difficulty": {

@@ -4,12 +4,10 @@
     "always_spawn_entity": true,
     "entity": "minecraft:wither",
     "item": {
-      "count": 1,
-      "id": "minecraft:nether_star"
+      "identifier": "minecraft:nether_star"
     },
     "override_minigame_item": {
-      "count": 1,
-      "id": "starcatcher:unknown_fish"
+      "identifier": "starcatcher:unknown_fish"
     }
   },
   "difficulty": {

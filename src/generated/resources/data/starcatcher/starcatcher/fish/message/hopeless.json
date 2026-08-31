@@ -3,7 +3,7 @@
   "catch_info": {
     "type": "message",
     "item": {
-      "components": {
+      "data_components_patch": {
         "starcatcher:message": {
           "background": "starcatcher:textures/gui/message/message_overworld.png",
           "dimension": "starcatcher:missingno",
@@ -34,8 +34,7 @@
           ]
         }
       },
-      "count": 1,
-      "id": "starcatcher:message_in_a_bottle"
+      "identifier": "starcatcher:message_in_a_bottle"
     }
   },
   "difficulty": {

@@ -3,12 +3,10 @@
   "catch_info": {
     "entity": "minecraft:tropical_fish",
     "fish_bucket": {
-      "count": 1,
-      "id": "minecraft:tropical_fish_bucket"
+      "identifier": "minecraft:tropical_fish_bucket"
     },
     "item": {
-      "count": 1,
-      "id": "minecraft:tropical_fish"
+      "identifier": "minecraft:tropical_fish"
     }
   },
   "difficulty": {

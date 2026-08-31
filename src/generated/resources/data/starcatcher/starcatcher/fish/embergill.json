@@ -2,12 +2,10 @@
   "base_chance": 5,
   "catch_info": {
     "fish_bucket": {
-      "count": 1,
-      "id": "starcatcher:starcaught_lava_bucket"
+      "identifier": "starcatcher:starcaught_lava_bucket"
     },
     "item": {
-      "count": 1,
-      "id": "starcatcher:embergill"
+      "identifier": "starcatcher:embergill"
     }
   },
   "difficulty": {

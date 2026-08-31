@@ -2,15 +2,17 @@ package com.wdiscute.starcatcher.blocks.display;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.registry.SCBlockEntities;
+import com.wdiscute.starcatcher.data.FishCaughtCounter;
+import com.wdiscute.starcatcher.data.SignedGuide;
+import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
-import com.wdiscute.starcatcher.registry.SCDataComponents;
-import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.MenuProvider;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.stats.Stats;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -36,6 +38,9 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.time.Instant;
+import java.util.*;
 
 public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
@@ -153,11 +158,63 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         //if has book, open screen
         if (state.getValue(HAS_ITEM) && !player.isCrouching())
         {
-            if (level.isClientSide && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
+            if (level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
             {
-                if (dbe.getItem().is(SCItems.GUIDE))
-                    //signed is null if not signed!
-                    FishingGuideScreen.open(true, SCDataComponents.get(dbe.getItem(), SCDataComponents.SIGNED_GUIDE));
+                ItemStack guide = dbe.getImmutableItem();
+                if (guide.is(SCItems.GUIDE))
+                {
+                    if (level.isClientSide)
+                    {
+                        FishingGuideScreen.open(pos, SCDataComponents.get(dbe.getImmutableItem(), SCDataComponents.SIGNED_GUIDE));
+                        return ItemInteractionResult.SUCCESS;
+                    }
+
+                    //return if not signed
+                    if (!SCDataComponents.has(guide, SCDataComponents.SIGNED_GUIDE))
+                        return ItemInteractionResult.SUCCESS;
+
+                    SignedGuide signedGuide = SCDataComponents.get(guide, SCDataComponents.SIGNED_GUIDE);
+
+                    //if owner opening guide
+                    if (signedGuide.owner().equals(player.getUUID()))
+                    {
+                        Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+
+                        Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
+                        map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
+
+                        if (player instanceof ServerPlayer sp)
+                        {
+                            FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
+                                    sp.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get())),
+                                    sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get())),
+                                    sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get())),
+                                    sp.getStats().getValue(Stats.CUSTOM.get(SCStats.BAIT_USED.get()))
+                            );
+
+                            SCDataComponents.set(guide, SCDataComponents.SIGNED_GUIDE,
+                                    new SignedGuide(
+                                            player.getUUID(),
+                                            mapToSave,
+                                            signedGuide.signature(),
+                                            Date.from(Instant.now()).getTime(),
+                                            statsData,
+                                            signedGuide.visitors()
+                                    ));
+
+                            dbe.setItem(guide);
+                        }
+                    }
+                    //visitor opening guide
+                    else
+                    {
+                        HashSet<Utils.Duo<UUID, String>> visitors = new HashSet<>(signedGuide.visitors());
+                        visitors.add(new Utils.Duo<>(player.getUUID(), player.getScoreboardName()));
+                        SCDataComponents.set(guide, SCDataComponents.SIGNED_GUIDE, signedGuide.withVisitors(List.copyOf(visitors)));
+                        dbe.setItem(guide);
+                    }
+
+                }
                 else
                     dbe.fishRotating = !dbe.fishRotating;
             }
@@ -168,7 +225,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         if (state.getValue(HAS_ITEM) && player.isCrouching() && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
             if (level.isClientSide) return ItemInteractionResult.SUCCESS;
-            player.addItem(dbe.getItem().copy());
+            player.addItem(dbe.getImmutableItem().copy());
             dbe.clearContent();
             dbe.sync();
             level.setBlockAndUpdate(pos, state.setValue(HAS_ITEM, false));
@@ -208,7 +265,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     {
         if (level.getBlockEntity(pos) instanceof DisplayBlockEntity displayBlockEntity)
         {
-            ItemStack itemstack = displayBlockEntity.getItem().copy();
+            ItemStack itemstack = displayBlockEntity.getImmutableItem().copy();
             ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
             itementity.setDefaultPickUpDelay();
             level.addFreshEntity(itementity);

@@ -50,7 +50,6 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
         Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
         map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
 
-
         if (player instanceof ServerPlayer sp)
         {
             FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
@@ -70,7 +69,6 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
                             List.of()
                     ));
         }
-
     }
 
     public SignedGuide withVisitors(List<Utils.Duo<UUID, String>> visitors)

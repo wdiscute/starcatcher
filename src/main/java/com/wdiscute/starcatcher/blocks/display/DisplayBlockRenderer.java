@@ -35,7 +35,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
     public void render(DisplayBlockEntity be, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay)
     {
-        if (be.getItem().is(SCItems.GUIDE))
+        if (be.getImmutableItem().is(SCItems.GUIDE))
         {
             poseStack.pushPose();
 
@@ -85,9 +85,9 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
         }
 
 
-        if (be.getItem().is(SCTags.BUCKETABLE_FISHES))
+        if (be.getImmutableItem().is(SCTags.BUCKETABLE_FISHES))
         {
-            ItemStack fish = be.getItem();
+            ItemStack fish = be.getImmutableItem();
 
             poseStack.pushPose();
 

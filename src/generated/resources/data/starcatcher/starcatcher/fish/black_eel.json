@@ -2,8 +2,7 @@
   "base_chance": 5,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:black_eel"
+      "identifier": "starcatcher:black_eel"
     }
   },
   "difficulty": {

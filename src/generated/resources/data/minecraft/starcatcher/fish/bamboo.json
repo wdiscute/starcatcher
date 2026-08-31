@@ -2,8 +2,7 @@
   "base_chance": 2,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "minecraft:bamboo"
+      "identifier": "minecraft:bamboo"
     }
   },
   "difficulty": {

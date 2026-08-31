@@ -64,8 +64,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:iceborn_skin_smithing_template"
+            "identifier": "starcatcher:iceborn_skin_smithing_template"
           }
         }
       ]
@@ -74,8 +73,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:azure_crystal_skin_smithing_template"
+            "identifier": "starcatcher:azure_crystal_skin_smithing_template"
           }
         }
       ]
@@ -84,8 +82,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:clear_smithing_template"
+            "identifier": "starcatcher:clear_smithing_template"
           }
         }
       ]
@@ -94,8 +91,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:king_smithing_template"
+            "identifier": "starcatcher:king_smithing_template"
           }
         }
       ]
@@ -104,8 +100,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:sky_skin_smithing_template"
+            "identifier": "starcatcher:sky_skin_smithing_template"
           }
         }
       ]
@@ -114,8 +109,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:sharktooth_skin_smithing_template"
+            "identifier": "starcatcher:sharktooth_skin_smithing_template"
           }
         }
       ]
@@ -124,8 +118,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:lush_glowberry_skin_smithing_template"
+            "identifier": "starcatcher:lush_glowberry_skin_smithing_template"
           }
         }
       ]
@@ -134,8 +127,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:colorful_smithing_template"
+            "identifier": "starcatcher:colorful_smithing_template"
           }
         }
       ]
@@ -144,8 +136,7 @@
       "stacks": [
         {
           "stack": {
-            "count": 1,
-            "id": "starcatcher:kimbe_smithing_template"
+            "identifier": "starcatcher:kimbe_smithing_template"
           }
         }
       ]

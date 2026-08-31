@@ -2,8 +2,7 @@
   "base_chance": 6,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:pale_carp"
+      "identifier": "starcatcher:pale_carp"
     }
   },
   "difficulty": {

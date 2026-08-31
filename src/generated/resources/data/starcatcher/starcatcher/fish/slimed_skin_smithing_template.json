@@ -3,8 +3,7 @@
   "catch_info": {
     "type": "extra",
     "item": {
-      "count": 1,
-      "id": "starcatcher:slimed_skin_smithing_template"
+      "identifier": "starcatcher:slimed_skin_smithing_template"
     }
   },
   "difficulty": {

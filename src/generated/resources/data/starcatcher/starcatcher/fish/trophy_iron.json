@@ -3,8 +3,7 @@
   "catch_info": {
     "type": "trophy",
     "item": {
-      "count": 1,
-      "id": "starcatcher:trophy_iron"
+      "identifier": "starcatcher:trophy_iron"
     }
   },
   "difficulty": {

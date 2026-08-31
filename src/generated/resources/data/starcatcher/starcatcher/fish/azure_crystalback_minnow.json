@@ -2,8 +2,7 @@
   "base_chance": 20,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:azure_crystalback_minnow"
+      "identifier": "starcatcher:azure_crystalback_minnow"
     }
   },
   "difficulty": {

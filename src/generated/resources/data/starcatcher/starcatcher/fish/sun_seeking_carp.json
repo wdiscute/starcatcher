@@ -2,12 +2,10 @@
   "base_chance": 25,
   "catch_info": {
     "fish_bucket": {
-      "count": 1,
-      "id": "starcatcher:starcaught_bucket"
+      "identifier": "starcatcher:starcaught_bucket"
     },
     "item": {
-      "count": 1,
-      "id": "starcatcher:sun_seeking_carp"
+      "identifier": "starcatcher:sun_seeking_carp"
     }
   },
   "difficulty": {

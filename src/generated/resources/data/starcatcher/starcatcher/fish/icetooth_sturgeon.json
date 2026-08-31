@@ -2,12 +2,10 @@
   "base_chance": 10,
   "catch_info": {
     "fish_bucket": {
-      "count": 1,
-      "id": "starcatcher:starcaught_bucket"
+      "identifier": "starcatcher:starcaught_bucket"
     },
     "item": {
-      "count": 1,
-      "id": "starcatcher:icetooth_sturgeon"
+      "identifier": "starcatcher:icetooth_sturgeon"
     }
   },
   "difficulty": {

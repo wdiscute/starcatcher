@@ -111,12 +111,12 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
         //DGSpawnFishes.bootstrap(context);
         //DGUnusualFishFishes.bootstrap(context);
 
-        FishRegistration.ALL_FISHABLE.sort(Comparator.comparing(o -> o.catchInfo().fish().rl().toLanguageKey()));
-        FishRegistration.STARCATCHER_FISHABLE.sort(Comparator.comparing(o -> o.catchInfo().fish().rl().toLanguageKey()));
+        FishRegistration.ALL_FISHABLE.sort(Comparator.comparing(o -> o.catchInfo().fish().identifier().toLanguageKey()));
+        FishRegistration.STARCATCHER_FISHABLE.sort(Comparator.comparing(o -> o.catchInfo().fish().identifier().toLanguageKey()));
         FishRegistration.ALL_FISHABLE_MAP = FishRegistration.ALL_FISHABLE_MAP.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByKey(
-                        Comparator.comparing(o -> o.catchInfo().fish().rl().toLanguageKey())
+                        Comparator.comparing(o -> o.catchInfo().fish().identifier().toLanguageKey())
                 ))
                 .collect(Collectors.toMap(
                         Map.Entry::getKey,

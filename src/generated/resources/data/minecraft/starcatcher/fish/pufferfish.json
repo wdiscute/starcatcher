@@ -3,12 +3,10 @@
   "catch_info": {
     "entity": "minecraft:pufferfish",
     "fish_bucket": {
-      "count": 1,
-      "id": "minecraft:pufferfish_bucket"
+      "identifier": "minecraft:pufferfish_bucket"
     },
     "item": {
-      "count": 1,
-      "id": "minecraft:pufferfish"
+      "identifier": "minecraft:pufferfish"
     }
   },
   "difficulty": {

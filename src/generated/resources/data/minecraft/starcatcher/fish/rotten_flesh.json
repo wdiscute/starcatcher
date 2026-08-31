@@ -4,8 +4,7 @@
     "always_spawn_entity": true,
     "entity": "minecraft:drowned",
     "item": {
-      "count": 1,
-      "id": "minecraft:rotten_flesh"
+      "identifier": "minecraft:rotten_flesh"
     }
   },
   "difficulty": {

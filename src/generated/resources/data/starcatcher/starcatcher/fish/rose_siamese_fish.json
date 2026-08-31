@@ -2,8 +2,7 @@
   "base_chance": 11,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:rose_siamese_fish"
+      "identifier": "starcatcher:rose_siamese_fish"
     }
   },
   "difficulty": {

@@ -2,8 +2,7 @@
   "base_chance": 10,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:ripple_catfish"
+      "identifier": "starcatcher:ripple_catfish"
     }
   },
   "difficulty": {

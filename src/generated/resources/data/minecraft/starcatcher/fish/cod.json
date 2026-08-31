@@ -3,12 +3,10 @@
   "catch_info": {
     "entity": "minecraft:cod",
     "fish_bucket": {
-      "count": 1,
-      "id": "minecraft:cod_bucket"
+      "identifier": "minecraft:cod_bucket"
     },
     "item": {
-      "count": 1,
-      "id": "minecraft:cod"
+      "identifier": "minecraft:cod"
     }
   },
   "difficulty": {

@@ -72,9 +72,9 @@ public class FishingGuideItem extends Item
         if (level.isClientSide)
         {
             if (SCDataComponents.has(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE))
-                FishingGuideScreen.open(false, SCDataComponents.get(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE));
+                FishingGuideScreen.open(BlockPos.ZERO, SCDataComponents.get(player.getItemInHand(usedHand), SCDataComponents.SIGNED_GUIDE));
             else
-                FishingGuideScreen.open(false, null);
+                FishingGuideScreen.open(BlockPos.ZERO, null);
         }
         else
         {

@@ -2,8 +2,7 @@
   "base_chance": 10,
   "catch_info": {
     "item": {
-      "count": 1,
-      "id": "starcatcher:rainfin"
+      "identifier": "starcatcher:rainfin"
     }
   },
   "difficulty": {

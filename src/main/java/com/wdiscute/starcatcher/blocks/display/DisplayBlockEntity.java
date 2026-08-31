@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.compat.SableCompat;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
@@ -23,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DisplayBlockEntity extends BlockEntity
 {
-    private ItemStack item = ItemStack.EMPTY;
+    private MaybeStack item = MaybeStack.EMPTY;
 
     public int time;
     public float flip;
@@ -37,6 +38,7 @@ public class DisplayBlockEntity extends BlockEntity
     public float tRot;
 
     public boolean fishRotating = true;
+
     public static void bookAnimationTick(Level level, BlockPos pos, BlockState state, DisplayBlockEntity enchantingTable)
     {
         enchantingTable.oOpen = enchantingTable.open;
@@ -47,17 +49,16 @@ public class DisplayBlockEntity extends BlockEntity
             double d0;
             double d1;
 
-            if (SableCompat.isLoaded()) {
+            if (SableCompat.isLoaded())
                 d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
-            } else {
+            else
                 d0 = player.getX() - ((double) pos.getX() + 0.5);
-            }
 
-            if (SableCompat.isLoaded()) {
+            if (SableCompat.isLoaded())
                 d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
-            } else {
+            else
                 d1 = player.getZ() - ((double) pos.getZ() + 0.5);
-            }
+
             enchantingTable.tRot = (float) Mth.atan2(d1, d0);
             enchantingTable.open += 0.1F;
             if (enchantingTable.open < 0.5F || Utils.r.nextInt(40) == 0)
@@ -71,42 +72,28 @@ public class DisplayBlockEntity extends BlockEntity
             }
         }
         else
-        {
             //enchantingTable.tRot += 0.02F;
             enchantingTable.open -= 0.1F;
-        }
 
         while (enchantingTable.rot >= (float) Math.PI)
-        {
             enchantingTable.rot -= (float) (Math.PI * 2);
-        }
 
         while (enchantingTable.rot < (float) -Math.PI)
-        {
             enchantingTable.rot += (float) (Math.PI * 2);
-        }
 
         while (enchantingTable.tRot >= (float) Math.PI)
-        {
             enchantingTable.tRot -= (float) (Math.PI * 2);
-        }
 
         while (enchantingTable.tRot < (float) -Math.PI)
-        {
             enchantingTable.tRot += (float) (Math.PI * 2);
-        }
 
         float f2 = enchantingTable.tRot - enchantingTable.rot;
 
         while (f2 >= (float) Math.PI)
-        {
             f2 -= (float) (Math.PI * 2);
-        }
 
         while (f2 < (float) -Math.PI)
-        {
             f2 += (float) (Math.PI * 2);
-        }
 
         enchantingTable.rot += f2 * 0.4F;
         enchantingTable.open = Mth.clamp(enchantingTable.open, 0.0F, 1.0F);
@@ -123,15 +110,16 @@ public class DisplayBlockEntity extends BlockEntity
         super(SCBlockEntities.DISPLAY.get(), pos, blockState);
     }
 
-    public ItemStack getItem()
+    public ItemStack getImmutableItem()
     {
-        return this.item;
+        return this.item.toStack();
     }
 
     public void setItem(ItemStack stack)
     {
-        this.item = stack;
+        this.item = new MaybeStack(stack);
         this.setChanged();
+        sync();
     }
 
     @Override
@@ -142,17 +130,18 @@ public class DisplayBlockEntity extends BlockEntity
 
     public int getRedstoneSignal()
     {
-        if(item.isEmpty()) return 0;
+        if (item.isEmpty()) return 0;
 
-        if(item.is(SCItems.GUIDE))
+        ItemStack stack = item.toStack();
+        if (stack.is(SCItems.GUIDE))
         {
-            if(SCDataComponents.has(item, SCDataComponents.SIGNED_GUIDE)) return 5;
+            if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE)) return 5;
             return 15;
         }
 
-        if(SCDataComponents.has(item, SCDataComponents.CAUGHT_FISH_INFO))
+        if (SCDataComponents.has(stack, SCDataComponents.CAUGHT_FISH_INFO))
         {
-            double percentile = SCDataComponents.get(item, SCDataComponents.CAUGHT_FISH_INFO).percentile();
+            double percentile = SCDataComponents.get(stack, SCDataComponents.CAUGHT_FISH_INFO).percentile();
             percentile = Math.clamp(percentile, 0, 100);
             double scaledValue = (percentile / 100.0) * 14 + 1;
             return (16 - (int) scaledValue);
@@ -175,15 +164,11 @@ public class DisplayBlockEntity extends BlockEntity
     {
         super.loadAdditional(tag, registries);
         if (tag.contains("Book"))
-        {
-            this.item = ItemStack.parse(registries, tag.getCompound("Book")).orElse(ItemStack.EMPTY);
-        }
+            this.item = new MaybeStack(ItemStack.parse(registries, tag.getCompound("Book")).orElse(ItemStack.EMPTY));
         else
-        {
-            this.item = ItemStack.EMPTY;
-        }
+            this.item = MaybeStack.EMPTY;
 
-        if(tag.contains("rotating"))
+        if (tag.contains("rotating"))
             fishRotating = tag.getBoolean("rotating");
     }
 
@@ -191,9 +176,9 @@ public class DisplayBlockEntity extends BlockEntity
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
-        if (!this.getItem().isEmpty())
+        if (!this.getImmutableItem().isEmpty())
         {
-            tag.put("Book", this.getItem().save(registries));
+            tag.put("Book", this.getImmutableItem().save(registries));
         }
         else
         {
@@ -206,7 +191,7 @@ public class DisplayBlockEntity extends BlockEntity
 
     public void clearContent()
     {
-        item = ItemStack.EMPTY;
+        item = MaybeStack.EMPTY;
         BlockState blockState = level.getBlockState(getBlockPos());
         if (blockState.is(SCBlocks.DISPLAY))
             level.setBlockAndUpdate(getBlockPos(), blockState.setValue(DisplayBlock.HAS_ITEM, false));
@@ -219,8 +204,6 @@ public class DisplayBlockEntity extends BlockEntity
         setChanged();
 
         if (level instanceof ServerLevel serverLevel)
-        {
             serverLevel.sendBlockUpdated(getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
-        }
     }
 }

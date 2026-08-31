@@ -3,8 +3,7 @@
   "catch_info": {
     "type": "extra",
     "item": {
-      "count": 1,
-      "id": "starcatcher:valley_smithing_template"
+      "identifier": "starcatcher:valley_smithing_template"
     }
   },
   "difficulty": {

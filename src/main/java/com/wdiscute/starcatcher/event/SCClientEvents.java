@@ -30,6 +30,7 @@ import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -51,7 +52,7 @@ public class SCClientEvents
             TournamentLayer.expandedType = TournamentLayer.expandedType.next();
 
         if (SCKeymappings.OPEN_GUIDE.consumeClick() && SCConfig.ALLOW_GUIDE_KEYBIND.get())
-            Minecraft.getInstance().setScreen(new FishingGuideScreen(false, null));
+            Minecraft.getInstance().setScreen(new FishingGuideScreen(BlockPos.ZERO, null));
 
     }
 

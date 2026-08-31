@@ -33,6 +33,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -48,7 +49,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.time.Instant;
@@ -193,7 +193,7 @@ public class FishingGuideScreen extends Screen
     int page = 0;
 
     public SignedGuide signedGuide;
-    final boolean inLectern;
+    final BlockPos displayBP;
 
     boolean isCompassOpen = true;
     static float compassRotation = 0;
@@ -739,6 +739,16 @@ public class FishingGuideScreen extends Screen
                     renderUnsignedCover(guiGraphics, mouseX, mouseY);
                 else
                     renderSignedCover(guiGraphics, mouseX, mouseY);
+
+                if (x > 91 && x < 159 && y > 89 && y < 217 && signedGuide != null && !signedGuide.visitors().isEmpty())
+                {
+                    List<Component> comps = new ArrayList<>();
+                    comps.add(Component.translatable("gui.guide.visitors"));
+
+                    signedGuide.visitors().forEach(o -> comps.add(Component.literal(o.second())));
+
+                    ScreenUtils.Tooltip.set(comps);
+                }
             }
 
             //index pages
@@ -873,7 +883,7 @@ public class FishingGuideScreen extends Screen
             ScreenUtils.outline(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_TEXT_DARK);
             if (clicked)
             {
-                SignGuidePayload payload = new SignGuidePayload(signedNameEditBox.getValue());
+                SignGuidePayload payload = new SignGuidePayload(signedNameEditBox.getValue(), displayBP);
                 PacketDistributor.sendToServer(payload);
                 onClose();
             }
@@ -884,20 +894,6 @@ public class FishingGuideScreen extends Screen
 
     public void renderSignedCover(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
-        double x = mouseX - uiX;
-        double y = mouseY - uiY;
-
-        if (x > 91 && x < 159 && y > 89 && y < 217 && !signedGuide.visitors().isEmpty())
-        {
-            List<Component> comps = new ArrayList<>();
-            comps.add(Component.translatable("gui.guide.visitors"));
-
-            signedGuide.visitors().forEach(o -> comps.add(Component.literal(o.second())));
-
-            ScreenUtils.Tooltip.set(comps);
-
-        }
-
         ScreenUtils.centeredText(guiGraphics, font, signedNameEditBox.getValue(),
                 uiX + 285, uiY + 102, SCColors.GUIDE_TEXT, false);
     }
@@ -1854,20 +1850,25 @@ public class FishingGuideScreen extends Screen
         return entriesToSort;
     }
 
-    public static void open(boolean inLectern, SignedGuide signedGuide)
+    public static void open(BlockPos displayBP, SignedGuide signedGuide)
     {
-        Minecraft.getInstance().setScreen(new FishingGuideScreen(inLectern, signedGuide));
+        Minecraft.getInstance().setScreen(new FishingGuideScreen(displayBP, signedGuide));
     }
 
-    public FishingGuideScreen(boolean inLectern, SignedGuide signedGuide)
+    public FishingGuideScreen(BlockPos displayBP, SignedGuide signedGuide)
     {
         super(Component.empty());
-        this.inLectern = inLectern;
+        this.displayBP = displayBP;
         this.signedGuide = signedGuide;
 
         LocalPlayer player = Minecraft.getInstance().player;
-        this.fishCaughtCounterMap = signedGuide == null || signedGuide.owner().equals(player.getUUID()) ?
+        boolean shouldUseLocalMap = signedGuide == null || signedGuide.owner().equals(player.getUUID());
+        this.fishCaughtCounterMap =  shouldUseLocalMap?
                 SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught : signedGuide.fishesCaught();
+
+        if(!shouldUseLocalMap)
+            menu = MenuEntry.COVER;
+
 
         missingnoStack = SCItems.MISSINGNO.toStack();
 

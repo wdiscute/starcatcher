@@ -63,7 +63,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         //cycle every FP
         for (FishProperties fp : FishRegistration.ALL_FISHABLE)
         {
-            ResourceLocation key = fp.catchInfo().fish().rl();
+            ResourceLocation key = fp.catchInfo().fish().identifier();
 
             //add all non-trophy non-message non-extra to rarity tags
             if (fp.hasGuideEntry() && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.catchInfo().alwaysSpawnEntity())
