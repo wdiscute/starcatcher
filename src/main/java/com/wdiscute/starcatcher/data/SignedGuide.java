@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCStats;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -15,13 +16,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 import java.time.Instant;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> fishesCaught, String signature,
-                          long date, FishingGuideScreen.StatsData stats)
+                          long date, FishingGuideScreen.StatsData stats, List<Utils.Duo<UUID, String>> visitors)
 {
     public static final Codec<SignedGuide> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -30,11 +28,12 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
                             .fieldOf("fishes_caught").forGetter(SignedGuide::fishesCaught),
                     Codec.STRING.fieldOf("signature").forGetter(SignedGuide::signature),
                     Codec.LONG.fieldOf("date_signed").forGetter(SignedGuide::date),
-                    FishingGuideScreen.StatsData.CODEC.fieldOf("stats").forGetter(SignedGuide::stats)
+                    FishingGuideScreen.StatsData.CODEC.fieldOf("stats").forGetter(SignedGuide::stats),
+                    Utils.Duo.codec(UUIDUtil.CODEC, Codec.STRING).listOf().optionalFieldOf("visitors", List.of()).forGetter(SignedGuide::visitors)
             ).apply(instance, SignedGuide::new)
     );
 
-    public static boolean SignGuide(String signature, Player player)
+    public static void signGuide(String signature, Player player)
     {
         ItemStack book = null;
         if (player.getMainHandItem().is(SCItems.GUIDE))
@@ -43,8 +42,8 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
         if (player.getOffhandItem().is(SCItems.GUIDE))
             book = player.getOffhandItem();
 
-        if (book == null) return false;
-        if (SCDataComponents.has(book, SCDataComponents.SIGNED_GUIDE)) return false;
+        if (book == null) return;
+        if (SCDataComponents.has(book, SCDataComponents.SIGNED_GUIDE)) return;
 
         Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
@@ -67,12 +66,15 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
                             mapToSave,
                             signature,
                             Date.from(Instant.now()).getTime(),
-                            statsData
+                            statsData,
+                            List.of()
                     ));
         }
 
-        return true;
     }
 
-
+    public SignedGuide withVisitors(List<Utils.Duo<UUID, String>> visitors)
+    {
+        return new SignedGuide(owner, fishesCaught, signature, date, stats, visitors);
+    }
 }

@@ -609,8 +609,8 @@ public class FishingGuideScreen extends Screen
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
-        System.out.println("clicked on x :" + x);
-        System.out.println("clicked on y :" + y);
+        //System.out.println("clicked on x :" + x);
+        //System.out.println("clicked on y :" + y);
 
         //compass bottom
         if (x > 17 && x < 46 && y > 37 && y < 63)
@@ -716,6 +716,9 @@ public class FishingGuideScreen extends Screen
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         resolveTrackedFP();
 
+        double x = mouseX - uiX;
+        double y = mouseY - uiY;
+
         switch (menu)
         {
             //settings screen
@@ -731,6 +734,7 @@ public class FishingGuideScreen extends Screen
                 RenderSystem.enableBlend();
                 BACKGROUND_COVER.render(guiGraphics, uiX, uiY);
                 RenderSystem.disableBlend();
+
                 if (signedGuide == null)
                     renderUnsignedCover(guiGraphics, mouseX, mouseY);
                 else
@@ -800,9 +804,6 @@ public class FishingGuideScreen extends Screen
         }
 
         renderCompass(guiGraphics);
-
-        double x = mouseX - uiX;
-        double y = mouseY - uiY;
 
         //previous arrow should not render on book cover
         if (!menu.equals(MenuEntry.COVER))
@@ -883,6 +884,20 @@ public class FishingGuideScreen extends Screen
 
     public void renderSignedCover(GuiGraphics guiGraphics, int mouseX, int mouseY)
     {
+        double x = mouseX - uiX;
+        double y = mouseY - uiY;
+
+        if (x > 91 && x < 159 && y > 89 && y < 217 && !signedGuide.visitors().isEmpty())
+        {
+            List<Component> comps = new ArrayList<>();
+            comps.add(Component.translatable("gui.guide.visitors"));
+
+            signedGuide.visitors().forEach(o -> comps.add(Component.literal(o.second())));
+
+            ScreenUtils.Tooltip.set(comps);
+
+        }
+
         ScreenUtils.centeredText(guiGraphics, font, signedNameEditBox.getValue(),
                 uiX + 285, uiY + 102, SCColors.GUIDE_TEXT, false);
     }

@@ -40,10 +40,6 @@ public interface SCDataComponents
             "signed_guide",
             builder -> builder.persistent(SignedGuide.CODEC));
 
-    DeferredHolder<DataComponentType<?>, DataComponentType<List<Utils.Duo<UUID, String>>>> GUIDE_VISITS = register(
-            "guide_visits",
-            builder -> builder.persistent(Utils.Duo.codec(UUIDUtil.CODEC, Codec.STRING).listOf()));
-
     //rod menu
     DeferredHolder<DataComponentType<?>, DataComponentType<MaybeStack>> BOBBER = register(
             "bobber",

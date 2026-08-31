@@ -635,6 +635,7 @@
   "gui.starcatcher.toast.fish_caught" : "New Fish Caught!",
 
   "gui.guide.disabled_by_server" : "[disabled by the server]",
+  "gui.guide.visitors" : "Spied on by:",
   "gui.guide.sign" : "Sign",
   "gui.guide.season" : "Season: ",
   "gui.guide.seasons" : "Seasons: ",

@@ -28,7 +28,7 @@ public record SignGuidePayload(String signature) implements CustomPacketPayload
     {
         context.enqueueWork(() ->
         {
-            SignedGuide.SignGuide(signature, context.player());
+            SignedGuide.signGuide(signature, context.player());
         });
     }
 }

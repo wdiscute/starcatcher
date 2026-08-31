@@ -109,20 +109,19 @@ public class FishingGuideItem extends Item
                                     mapToSave,
                                     signedGuide.signature(),
                                     Date.from(Instant.now()).getTime(),
-                                    statsData
+                                    statsData,
+                                    signedGuide.visitors()
                             ));
                 }
             }
             //visitor opening guide
             else
             {
-                HashSet<Utils.Duo<UUID, String>> duos = new HashSet<>(SCDataComponents.getOrDefault(stack, SCDataComponents.GUIDE_VISITS, List.of()));
-                duos.add(new Utils.Duo<>(player.getUUID(), player.getScoreboardName()));
-                SCDataComponents.set(stack, SCDataComponents.GUIDE_VISITS, List.copyOf(duos));
+                HashSet<Utils.Duo<UUID, String>> visitors = new HashSet<>(signedGuide.visitors());
+                visitors.add(new Utils.Duo<>(player.getUUID(), player.getScoreboardName()));
+                SCDataComponents.set(stack, SCDataComponents.SIGNED_GUIDE, signedGuide.withVisitors(List.copyOf(visitors)));
             }
-
         }
-
         return InteractionResultHolder.success(stack);
     }
 }
