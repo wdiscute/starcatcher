@@ -146,7 +146,7 @@ public class SCTooltipEvents
                 if (hasShiftDown)
                     comp.add(Component.translatable("tooltip.starcatcher.letter", message.sender().toString()).withStyle(ChatFormatting.GRAY));
                 else
-                    comp.add(Component.translatable("tooltip.starcatcher.letter").withStyle(ChatFormatting.GRAY).append(Component.translatable(message.senderDisplayName())).withStyle(ChatFormatting.GRAY));
+                    comp.add(Component.translatable("tooltip.starcatcher.letter", Component.translatable(message.senderDisplayName())).withStyle(ChatFormatting.GRAY));
             }
         }
 
@@ -156,10 +156,7 @@ public class SCTooltipEvents
             EditableMessage message = SCDataComponents.get(stack, SCDataComponents.EDITABLE_MESSAGE);
             if (!message.sender().isEmpty())
             {
-                if (hasShiftDown)
-                    comp.add(Component.translatable("tooltip.starcatcher.letter", message.sender()).withStyle(ChatFormatting.GRAY));
-                else
-                    comp.add(Component.translatable("tooltip.starcatcher.letter", message.sender()).withStyle(ChatFormatting.GRAY));
+                comp.add(Component.translatable("tooltip.starcatcher.letter", message.sender()).withStyle(ChatFormatting.GRAY));
             }
         }
 

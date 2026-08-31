@@ -297,7 +297,7 @@
   "tooltip.starcatcher.starcatcher_guide.signed": "This Book Belongs To: %s",
   "tooltip.starcatcher.starcatcher_guide.signed_shift": "Signed By: %s",
 
-  "tooltip.starcatcher.letter": "Written by: ",
+  "tooltip.starcatcher.letter": "Written by: %s",
 
   "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
   "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine wrapped around a stick.",
