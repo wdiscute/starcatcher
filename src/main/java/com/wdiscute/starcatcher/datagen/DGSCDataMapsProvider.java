@@ -295,10 +295,10 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
 
         //angler's hat (artifacts / reliquified artifacts compat)
-        modifiers.add(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("artifacts", "anglers_hat")),
-                List.of(
-                        new AnglersHatModifier("")
-                ), false);
+        //modifiers.add(ResourceKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("artifacts", "anglers_hat")),
+        //        List.of(
+        //                new AnglersHatModifier("")
+        //        ), false);
 
 
         //hats

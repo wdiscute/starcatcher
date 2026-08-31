@@ -234,9 +234,11 @@ public class FishingBobEntity extends Projectile
     @Override
     public void kill()
     {
-        player.awardStat(SCStats.TICKS_SPENT_FISHING.get(), tickCount);
         if (player instanceof ServerPlayer sp)
+        {
+            player.awardStat(SCStats.TICKS_SPENT_FISHING.get(), tickCount);
             sp.getStats().sendStats(sp);
+        }
         SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB);
         super.kill();
     }

@@ -198,7 +198,7 @@ public interface Modifier
         Modifier.MODIFIERS.put(Starcatcher.rl("extra_golden_chance"), ExtraGoldenChanceModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("cancel_golden"), CancelGoldenModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("hide_catch"), HideCatchModifier.CODEC);
-        Modifier.MODIFIERS.put(Starcatcher.rl("anglers_hat"), AnglersHatModifier.CODEC);
+        //Modifier.MODIFIERS.put(Starcatcher.rl("anglers_hat"), AnglersHatModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("award_treasure_on_perfect_catch"), AwardTreasureOnPerfectCatch.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("no_gravity"), NoGravityModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("boost_throw_speed"), BoostThrowSpeedModifier.CODEC);

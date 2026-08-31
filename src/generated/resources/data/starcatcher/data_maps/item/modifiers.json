@@ -1,10 +1,5 @@
 {
   "values": {
-    "artifacts:anglers_hat": [
-      {
-        "type": "starcatcher:anglers_hat"
-      }
-    ],
     "minecraft:netherite_upgrade_smithing_template": [
       {
         "type": "starcatcher:survives_lava"
