@@ -143,6 +143,11 @@
       "translation_override": "dimension.minecraft.the_end"
     },
     {
+      "type": "starcatcher:light_level_restriction",
+      "max_light": 1,
+      "translation_override": "gui.guide.light_level.darkness"
+    },
+    {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:empty"

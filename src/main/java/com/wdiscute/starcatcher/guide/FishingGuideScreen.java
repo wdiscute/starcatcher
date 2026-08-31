@@ -184,8 +184,6 @@ public class FishingGuideScreen extends Screen
     boolean arrowNextPressed;
     boolean arrowIndexPressed;
 
-    boolean hasNextPage = false;
-
     MenuEntry menu = MenuEntry.INDEX;
     int page = 0;
 
@@ -380,7 +378,10 @@ public class FishingGuideScreen extends Screen
                 player.playSound(SoundEvents.BOOK_PAGE_TURN);
 
                 if (page == 0)
+                {
+                    page = entries.size() <= 49 ? 0 : 1 + (entries.size() - 50) / 98;
                     menu = MenuEntry.INDEX;
+                }
                 else
                     page--;
             }
@@ -397,7 +398,10 @@ public class FishingGuideScreen extends Screen
                         page = MAX_HELP_PAGES;
                     }
                     else
+                    {
+                        page = entries.size() <= 49 ? 0 : 1 + (entries.size() - 50) / 98;
                         menu = MenuEntry.INDEX;
+                    }
                 }
                 else
                     page--;
@@ -424,7 +428,7 @@ public class FishingGuideScreen extends Screen
                 int entriesOnCurrentAndPreviousPages = (page == 0) ? 49 : 49 + (page * 98);
 
                 //if there is next page
-                if (indexEntries.size() > entriesOnCurrentAndPreviousPages)
+                if (entries.size() > entriesOnCurrentAndPreviousPages)
                 {
                     page++;
                 }
@@ -1268,7 +1272,6 @@ public class FishingGuideScreen extends Screen
 
         }
 
-        hasNextPage = false;
         //render all fishes
         if (page == 0)
         {
@@ -1296,7 +1299,6 @@ public class FishingGuideScreen extends Screen
                 renderFishIndex(guiGraphics, xx + 160 + (i % 7 * 20), uiY + 56 + (i / 7 * 20), mouseX, mouseY, entries.get(order));
             }
         }
-        hasNextPage = true;
     }
 
     private void renderScrollableItems(GuiGraphics guiGraphics, List<ItemStack> stacks, int mouseX,
@@ -1586,6 +1588,8 @@ public class FishingGuideScreen extends Screen
         RARITY_DOWN("gui.guide.sort.rarity_down"),
         CAUGHT_UP("gui.guide.sort.caught_up"),
         CAUGHT_DOWN("gui.guide.sort.caught_down"),
+        CAUGHT_GOLDEN_UP("gui.guide.sort.caught_golden_up"),
+        CAUGHT_GOLDEN_DOWN("gui.guide.sort.caught_golden_down"),
         ;
 
         private static final Sort[] vals = values();
@@ -1604,20 +1608,14 @@ public class FishingGuideScreen extends Screen
 
         public Sort previous()
         {
-            int lenght = vals.length - 2;
-            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"))
-                lenght += 2;
-
+            int lenght = vals.length;
             if (this.ordinal() == 0) return vals[lenght - 1];
             return vals[(this.ordinal() - 1) % lenght];
         }
 
         public Sort next()
         {
-            int lenght = vals.length - 2;
-            if (ModList.get().isLoaded("sereneseasons") || ModList.get().isLoaded("eclipticseasons"))
-                lenght += 2;
-
+            int lenght = vals.length;
             return vals[(this.ordinal() + 1) % lenght];
         }
     }
@@ -1712,6 +1710,43 @@ public class FishingGuideScreen extends Screen
 
 
             if (sort.equals(Sort.CAUGHT_UP))
+            {
+                toReturn.addAll(hasCaught);
+                toReturn.addAll(hasNotCaught);
+            }
+            else
+            {
+                toReturn.addAll(hasNotCaught);
+                toReturn.addAll(hasCaught);
+            }
+
+            return toReturn;
+        }
+
+        //caught golden
+        if (sort.equals(Sort.CAUGHT_GOLDEN_UP) || sort.equals(Sort.CAUGHT_GOLDEN_DOWN))
+        {
+            //sort alphabetical first
+            entriesToSort = entriesToSort.stream().sorted(Comparator.comparing(o -> BuiltInRegistries.ITEM.getKey(o.catchInfo().fish().toItem()).getPath())).toList();
+
+            //add all fishes caught to start
+            Map<ResourceLocation, FishCaughtCounter> fishesCaught = fishCaughtCounterMap;
+
+            List<FishProperties> hasCaught = new ArrayList<>();
+            List<FishProperties> hasNotCaught = new ArrayList<>();
+            List<FishProperties> toReturn = new ArrayList<>();
+
+            //populate hasCaught and hasNotCaught
+            entriesToSort.forEach(fp ->
+            {
+                if (fp.hasGuideEntry() && fishesCaught.containsKey(fp.toLoc(level)) && fishesCaught.get(fp.toLoc(level)).caughtGolden())
+                    hasCaught.add(fp);
+                else
+                    hasNotCaught.add(fp);
+            });
+
+
+            if (sort.equals(Sort.CAUGHT_GOLDEN_UP))
             {
                 toReturn.addAll(hasCaught);
                 toReturn.addAll(hasNotCaught);
@@ -1942,13 +1977,6 @@ public class FishingGuideScreen extends Screen
                 ScreenUtils.Tooltip.set(translatable("gui.guide.always_entity"));
         }
 
-        //render fish & name at the top
-        if (fishToDisplay != ItemStack.EMPTY)
-        {
-            ScreenUtils.item(g, fishToDisplay, x + 19, y + 64, g.pose(), 3);
-            ScreenUtils.scrollingText(g, font, fp.getDisplayName(), x + 28, x + 141, y + 36, SCColors.GUIDE_TEXT_DARK, false);
-        }
-
         //render debug fish name
         if (SCConfig.DEBUG_MINIGAME.get())
         {
@@ -1973,6 +2001,13 @@ public class FishingGuideScreen extends Screen
         {
             ScreenUtils.setColor(color);
             GLOW.render(g, x + 8, y + 53, 3);
+        }
+
+        //render fish & name at the top
+        if (fishToDisplay != ItemStack.EMPTY)
+        {
+            ScreenUtils.item(g, fishToDisplay, x + 19, y + 64, g.pose(), 3);
+            ScreenUtils.scrollingText(g, font, fp.getDisplayName(), x + 28, x + 141, y + 36, SCColors.GUIDE_TEXT_DARK, false);
         }
 
         //render new fish icon

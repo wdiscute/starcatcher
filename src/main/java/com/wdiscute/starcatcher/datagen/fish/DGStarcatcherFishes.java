@@ -1315,6 +1315,7 @@ public class DGStarcatcherFishes
                         .withFish(SCItems.END_GLOW)
                         .withSizeAndWeight(new SizeAndWeight(235, 25, 7000, 700))
                         .withRarity(Rarity.UNCOMMON)
+                        .addRestriction(LightLevelRestriction.BRIGHT)
                         .withDifficulty(Difficulty.MEDIUM.withHP(250))
         );
 
@@ -1340,6 +1341,7 @@ public class DGStarcatcherFishes
         FishRegistration.register(context,
                 PresetRestrictions.endAir(context)
                         .withFish(SCItems.VOIDBITER)
+                        .addRestriction(LightLevelRestriction.DARKNESS)
                         .withSizeAndWeight(new SizeAndWeight(50, 15, 2000, 200))
                         .withRarity(Rarity.LEGENDARY)
                         .withDifficulty(Difficulty.VOIDBITER)

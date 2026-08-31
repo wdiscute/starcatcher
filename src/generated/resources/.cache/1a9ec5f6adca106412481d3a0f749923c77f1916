@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-30T15:40:50.5287465	FishingProperties
+// 1.21.1	2026-08-31T04:01:33.9893476	FishingProperties
 afbe4cf8b29f10778aaba5c2cdb0f217351be97c data/minecraft/starcatcher/fish/bamboo.json
 760d88a50754750efee9b6e6a08302f25b110a01 data/minecraft/starcatcher/fish/cod.json
 59f84e94160b7ec09955c0fcc07680427210c034 data/minecraft/starcatcher/fish/creeper_head.json
@@ -53,7 +53,7 @@ f4a0016a6a4295e13e1621be7916bb1b23485b15 data/starcatcher/starcatcher/fish/dripf
 c42e06924c52e0b8484499f1f79ac4fba45520fe data/starcatcher/starcatcher/fish/dusktail_snapper.json
 b57c0a066c3c58bed2461bcac1319a8b4d725ccb data/starcatcher/starcatcher/fish/elderscale.json
 49986cb0279b96d7665c17c64718af09277471db data/starcatcher/starcatcher/fish/embergill.json
-2d5d987dc90d0f0fe4e33610ba4580d8054d70fd data/starcatcher/starcatcher/fish/end_glow.json
+cea01e5fedcdae8c48d7b55dc03b1931b93d692d data/starcatcher/starcatcher/fish/end_glow.json
 37640fe896727dbebae54208156a77e680e08337 data/starcatcher/starcatcher/fish/fossilized_angelfish.json
 8360341051f39e8a7d73e3d49a4fb2ad2cc6a4e3 data/starcatcher/starcatcher/fish/frog_smithing_template.json
 636b0c7cf317a260fa9d40c9ea1bec1d6a105b5f data/starcatcher/starcatcher/fish/frostgill_chub.json
@@ -148,7 +148,7 @@ b278ab6edb8538ab929717bf1a5a82b8c9bfd506 data/starcatcher/starcatcher/fish/troph
 d7920c7d398059b778f673280dfe9a4407095453 data/starcatcher/starcatcher/fish/valley_smithing_template.json
 a83a17382d189bf65423e14f2dce8745617a5544 data/starcatcher/starcatcher/fish/vesani.json
 0fc6daf3c1bda04232f86360134a5f7a9f0487f9 data/starcatcher/starcatcher/fish/vivid_moss.json
-2e94f62c99d41db20f51491b82a5c296d0cae774 data/starcatcher/starcatcher/fish/voidbiter.json
+0f142b6da3e2212eea39e28e735a6e517c71e14a data/starcatcher/starcatcher/fish/voidbiter.json
 5602ac243e2d2343ae723024c0bec5b8bc211fbf data/starcatcher/starcatcher/fish/voidfin.json
 6c5f8400e52ae06dbd2d5fbbb237b6e76279f080 data/starcatcher/starcatcher/fish/ward.json
 a2d4d0c8f0e9824b0fb40ff2d63a3c85dae81e8c data/starcatcher/starcatcher/fish/whiteveil.json

@@ -706,10 +706,8 @@
   "gui.guide.sort.rarity_down" : "⏫ Rarity",
   "gui.guide.sort.caught_up" : "⏬ Caught",
   "gui.guide.sort.caught_down" : "⏫ Caught",
-  "gui.guide.sort.fluid_up" : "⏬ Fluid",
-  "gui.guide.sort.fluid_down" : "⏫ Fluid",
-  "gui.guide.sort.season_up" : "⏬ Season",
-  "gui.guide.sort.season_down" : "⏫ Season",
+  "gui.guide.sort.caught_golden_up" : "⏬ Caught Golden",
+  "gui.guide.sort.caught_golden_down" : "⏫ CaughtGolden",
 
   "gui.guide.units.metric" : "Metric (cm & kg)",
   "gui.guide.units.imperial" : "Imperial (in & lb)",
