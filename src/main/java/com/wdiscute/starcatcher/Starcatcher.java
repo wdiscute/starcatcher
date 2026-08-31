@@ -97,6 +97,7 @@ public class Starcatcher
         SCAttributes.register(modEventBus);
         SCDataEntries.register(modEventBus);
         SCCriterionTriggers.register(modEventBus);
+        SCFeatures.register(modEventBus);
 
         Modifier.registerCatch();
         Modifier.registerMinigame();

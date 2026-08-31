@@ -3,6 +3,8 @@ package com.wdiscute.starcatcher.registry;
 import com.wdiscute.starcatcher.blocks.*;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
+import com.wdiscute.starcatcher.blocks.clam.ClamBlock;
+import com.wdiscute.starcatcher.blocks.clam.ConchBlock;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
 import com.wdiscute.starcatcher.blocks.stand.StandBlock;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlock;

@@ -2,15 +2,19 @@ package com.wdiscute.starcatcher.datagen.fish;
 
 import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.datagen.DGSCBiomeModifiers;
+import com.wdiscute.starcatcher.datagen.DGSCDataGenerators;
 import com.wdiscute.starcatcher.datagen.fish.compat.*;
 import com.wdiscute.starcatcher.fish.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
@@ -19,8 +23,6 @@ import java.util.stream.Collectors;
 
 public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
 {
-    public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder().add(Starcatcher.FISH_REGISTRY_KEY, DGSCFishProperties::bootstrap);
-
     public DGSCFishProperties(
             PackOutput output,
             CompletableFuture<HolderLookup.Provider> registries)
@@ -28,7 +30,7 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
         super(
                 output,
                 registries,
-                BUILDER,
+                DGSCDataGenerators.BUILDER,
                 (consumer) ->
                 {
                     runningOnlyForConditions = true;

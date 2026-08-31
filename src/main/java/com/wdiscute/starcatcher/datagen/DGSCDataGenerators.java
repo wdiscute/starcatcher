@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.datagen;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.datagen.fish.DGSCFishProperties;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -13,14 +14,20 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = Starcatcher.MOD_ID)
-public class SCDataGenerators
+public class DGSCDataGenerators
 {
+    public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+            .add(Starcatcher.FISH_REGISTRY_KEY, DGSCFishProperties::bootstrap)
+            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, DGSCBiomeModifiers::bootstrap)
+            ;
+
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event)
     {

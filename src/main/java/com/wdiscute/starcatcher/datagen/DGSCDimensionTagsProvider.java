@@ -6,9 +6,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DGDimensionTagsProvider// extends TagsProvider<LevelStem>
+public class DGSCDimensionTagsProvider// extends TagsProvider<LevelStem>
 {
-    public DGDimensionTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper)
+    public DGSCDimensionTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, ExistingFileHelper existingFileHelper)
     {
         //super(output, Registries.LEVEL_STEM, lookupProvider, Starcatcher.MOD_ID, existingFileHelper);
     }

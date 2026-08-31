@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-31T04:01:33.9893476	FishingProperties
+// 1.21.1	2026-08-31T13:44:11.1172534	FishingProperties
 afbe4cf8b29f10778aaba5c2cdb0f217351be97c data/minecraft/starcatcher/fish/bamboo.json
 760d88a50754750efee9b6e6a08302f25b110a01 data/minecraft/starcatcher/fish/cod.json
 59f84e94160b7ec09955c0fcc07680427210c034 data/minecraft/starcatcher/fish/creeper_head.json
@@ -11,6 +11,7 @@ c19b4aa7b5f826057a44daf2d6c61dd0be97e0d9 data/minecraft/starcatcher/fish/pufferf
 9fc63bb3055d176ad61070eede5adaf925751bee data/minecraft/starcatcher/fish/rotten_flesh.json
 849d68f58703ab4325f397010d244646fe0380d0 data/minecraft/starcatcher/fish/salmon.json
 7882555dcb0d8bb56b13d5ea6db94705ad6ded2b data/minecraft/starcatcher/fish/tropical_fish.json
+02309f03dc72c56a384096153cc3791fcbc12dc1 data/starcatcher/neoforge/biome_modifier/clams.json
 12759cdc7bacae0c4f026f33094f3f251e400978 data/starcatcher/starcatcher/fish/agave_bream.json
 12823b9807a0c066acaecc5d893f57538bbbcb65 data/starcatcher/starcatcher/fish/amethystback.json
 ac8ad9301fe234515e394558babeffcade6f70b0 data/starcatcher/starcatcher/fish/aquamarine_pike.json

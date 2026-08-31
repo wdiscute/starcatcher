@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:beach",
+  "features": "starcatcher:clams",
+  "step": "vegetal_decoration"
+}
