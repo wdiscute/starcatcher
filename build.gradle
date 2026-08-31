@@ -76,10 +76,10 @@ dependencies {
     //jarJar(implementation("com.wdiscute:libtooltips:2.3.1-NEOFORGE-1.21.1"))
 
     //wdutils
-    jarJar(implementation("com.wdiscute:wdUtils:1.7-NEOFORGE-1.21.1"))
+    jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-1.21.1"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:1.4.1-NEOFORGE-1.21.1"))
+    jarJar(implementation("com.wdiscute:Selling-Bin:1.6-NEOFORGE-1.21.1"))
 
     //tiny multiblock lib
     jarJar(implementation("net.nikdo53:tiny-multiblock-lib-neoforge-1.21.1:4.0.0"))
