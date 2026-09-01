@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.shaders;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.DynamicTexture;
@@ -31,7 +32,7 @@ public class GoldRenderer implements AutoCloseable
 
     public static ResourceLocation getTextureLoc(ResourceLocation resourceLoc)
     {
-        return ResourceLocation.fromNamespaceAndPath(resourceLoc.getNamespace(), "textures/" + resourceLoc.getPath() + ".png");
+        return Utils.rl(resourceLoc.getNamespace(), "textures/" + resourceLoc.getPath() + ".png");
     }
 
     public GoldTextureInstance getOrCreateItem(ItemStack stack, boolean cull)

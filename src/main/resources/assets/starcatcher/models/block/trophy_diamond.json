@@ -1,7 +1,6 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:gold_block",
 	"render_type": "cutout_mipped",
 	"texture_size": [64, 64],
 	"textures": {

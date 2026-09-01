@@ -14,6 +14,7 @@ import com.wdiscute.starcatcher.sellingbin.SCProcessors;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.tooltips.SCLegendary;
 import com.wdiscute.starcatcher.tooltips.SCTooltipGradient;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -72,7 +73,7 @@ public class Starcatcher
 
     public static ResourceLocation rl(String s)
     {
-        return ResourceLocation.fromNamespaceAndPath(Starcatcher.MOD_ID, s);
+        return Utils.rl(Starcatcher.MOD_ID, s);
     }
 
     public Starcatcher(IEventBus modEventBus, ModContainer modContainer)

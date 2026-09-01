@@ -26,7 +26,13 @@
       "data_components_patch": {
         "starcatcher:caught_fish_info": {
           "rarity": "golden"
-        }
+        },
+        "starcatcher:modifiers": [
+          {
+            "type": "starcatcher:extra_golden_chance",
+            "weight": 0.1
+          }
+        ]
       },
       "identifier": "starcatcher:worm"
     },
@@ -38,7 +44,13 @@
       "data_components_patch": {
         "starcatcher:caught_fish_info": {
           "rarity": "golden"
-        }
+        },
+        "starcatcher:modifiers": [
+          {
+            "type": "starcatcher:extra_golden_chance",
+            "weight": 0.1
+          }
+        ]
       },
       "identifier": "starcatcher:almighty_worm"
     },
@@ -50,7 +62,13 @@
       "data_components_patch": {
         "starcatcher:caught_fish_info": {
           "rarity": "golden"
-        }
+        },
+        "starcatcher:modifiers": [
+          {
+            "type": "starcatcher:extra_golden_chance",
+            "weight": 0.1
+          }
+        ]
       },
       "identifier": "starcatcher:seeking_worm"
     },
@@ -83,7 +101,13 @@
       "data_components_patch": {
         "starcatcher:caught_fish_info": {
           "rarity": "golden"
-        }
+        },
+        "starcatcher:modifiers": [
+          {
+            "type": "starcatcher:extra_golden_chance",
+            "weight": 0.1
+          }
+        ]
       },
       "identifier": "starcatcher:worm"
     },
@@ -95,7 +119,13 @@
       "data_components_patch": {
         "starcatcher:caught_fish_info": {
           "rarity": "golden"
-        }
+        },
+        "starcatcher:modifiers": [
+          {
+            "type": "starcatcher:extra_golden_chance",
+            "weight": 0.1
+          }
+        ]
       },
       "identifier": "starcatcher:almighty_worm"
     },
@@ -107,7 +137,13 @@
       "data_components_patch": {
         "starcatcher:caught_fish_info": {
           "rarity": "golden"
-        }
+        },
+        "starcatcher:modifiers": [
+          {
+            "type": "starcatcher:extra_golden_chance",
+            "weight": 0.1
+          }
+        ]
       },
       "identifier": "starcatcher:seeking_worm"
     },

@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.compat.CreateCompat;
 import com.wdiscute.starcatcher.datagen.fish.FishRegistration;
 import com.wdiscute.starcatcher.fish.CatchInfo;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -258,6 +259,6 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
     public static ResourceLocation rl(String ns, String path)
     {
-        return ResourceLocation.fromNamespaceAndPath(ns, path);
+        return Utils.rl(ns, path);
     }
 }

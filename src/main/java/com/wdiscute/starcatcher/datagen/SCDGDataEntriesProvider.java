@@ -75,12 +75,18 @@ public class SCDGDataEntriesProvider
                 ))
         );
 
+
         ItemStack goldenWorm = SCItems.WORM.toStack();
-        ItemStack goldenAlmightyWorm = SCItems.ALMIGHTY_WORM.toStack();
-        ItemStack goldenSeekingWorm = SCItems.SEEKING_WORM.toStack();
         SCDataComponents.set(goldenWorm, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
+        SCDataComponents.set(goldenWorm, SCDataComponents.MODIFIERS, List.of(new ExtraGoldenChanceModifier(0.1f, false, "")));
+
+        ItemStack goldenAlmightyWorm = SCItems.ALMIGHTY_WORM.toStack();
         SCDataComponents.set(goldenAlmightyWorm, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
+        SCDataComponents.set(goldenAlmightyWorm, SCDataComponents.MODIFIERS, List.of(new ExtraGoldenChanceModifier(0.1f, false, "")));
+
+        ItemStack goldenSeekingWorm = SCItems.SEEKING_WORM.toStack();
         SCDataComponents.set(goldenSeekingWorm, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
+        SCDataComponents.set(goldenSeekingWorm, SCDataComponents.MODIFIERS, List.of(new ExtraGoldenChanceModifier(0.1f, false, "")));
 
         gen.addProvider(includeServer, new DataEntryProvider<>(output, SCDataEntries.BONEMEAL_INTERACTION_ENTRY,
                 List.of(
@@ -120,34 +126,34 @@ public class SCDGDataEntriesProvider
 
                         //base worms on rich soil
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "rich_soil_farmland"))),
+                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
                                 new MaybeStack(SCItems.WORM),
                                 50),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "rich_soil_farmland"))),
+                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
                                 new MaybeStack(SCItems.WORM),
                                 30),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "rich_soil_farmland"))),
+                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
                                 new MaybeStack(SCItems.WORM),
                                 20),
 
 
                         //golden worms on rich soil
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "rich_soil_farmland"))),
+                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
                                 new MaybeStack(goldenWorm),
                                 5),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "rich_soil_farmland"))),
+                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
                                 new MaybeStack(goldenAlmightyWorm),
                                 3),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("farmersdelight", "rich_soil_farmland"))),
+                                new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
                                 new MaybeStack(goldenSeekingWorm),
                                 2)
                 )

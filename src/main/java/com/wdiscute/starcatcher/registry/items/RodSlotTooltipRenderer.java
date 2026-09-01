@@ -46,9 +46,7 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
     @Override
     public void renderImage(Font font, int x, int y, GuiGraphics g)
     {
-        //todo render modifiers if holding shift
         TEXTURE.render(g, x, y);
-
 
         if (bobber.isEmpty())
             BOBBER.render(g, x + 2, y + 1);
