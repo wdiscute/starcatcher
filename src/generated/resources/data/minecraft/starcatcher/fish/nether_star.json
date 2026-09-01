@@ -78,7 +78,7 @@
     "buttons": "starcatcher:textures/gui/minigame/buttons.png",
     "handle": "starcatcher:textures/gui/minigame/handle.png",
     "rod": "starcatcher:textures/gui/minigame/rod.png",
-    "tank": "starcatcher:textures/gui/minigame/tanks/surface.png",
+    "tank": "starcatcher:textures/gui/minigame/tanks/nether.png",
     "treasure": "starcatcher:textures/gui/minigame/treasure.png",
     "wheels": "starcatcher:textures/gui/minigame/wheels.png"
   }

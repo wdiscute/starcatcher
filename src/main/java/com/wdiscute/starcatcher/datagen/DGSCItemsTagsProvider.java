@@ -211,6 +211,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .addTag(SCTags.HOOKS)
                 .addTag(SCTags.BOBBERS)
                 .addTag(SCTags.FISHABLE)
+                .addTag(SCTags.HATS)
                 .addTag(ItemTags.FISHES)
                 .add(GUIDE.get())
                 .add(FISH_RADAR.get())

@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.fish.Textures;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.utils.MaybeStack;
@@ -56,6 +57,7 @@ public class DGMinecraftFishes
         FishRegistration.register(context,
                 FishProperties.empty()
                         .withFish(Items.NETHER_STAR)
+                        .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                         .withAlwaysSpawnEntity()
                         .withEntityToSpawn(EntityType.WITHER.builtInRegistryHolder())
                         .withBaseChance(0)

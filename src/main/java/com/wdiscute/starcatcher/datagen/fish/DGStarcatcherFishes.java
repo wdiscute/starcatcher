@@ -876,6 +876,7 @@ public class DGStarcatcherFishes
         FishRegistration.register(context,
                 PresetRestrictions.empty(context)
                         .withFish(SCItems.AMETHYSTBACK)
+                        .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
                         .withSizeAndWeight(new SizeAndWeight(300, 150, 16000, 7000))
                         .withRarity(Rarity.EPIC)
                         .withDifficulty(Difficulty.HARD_STONE.withHP(300))
