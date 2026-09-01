@@ -163,7 +163,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 ItemStack guide = dbe.getImmutableItem();
                 if (guide.is(SCItems.GUIDE))
                 {
-                    if (level.isClientSide)
+                    if (level.isClientSide())
                     {
                         FishingGuideScreen.open(pos, SCDataComponents.get(dbe.getImmutableItem(), SCDataComponents.SIGNED_GUIDE));
                         return ItemInteractionResult.SUCCESS;
@@ -224,7 +224,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         //remove item if crouching
         if (state.getValue(HAS_ITEM) && player.isCrouching() && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
             player.addItem(dbe.getImmutableItem().copy());
             dbe.clearContent();
             dbe.sync();
@@ -235,7 +235,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         //place book
         if (stack.is(SCTags.PLACEABLE_IN_DISPLAY) && !state.getValue(HAS_ITEM) && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
             dbe.setItem(stack.copyWithCount(1));
             stack.shrink(1);
             level.setBlock(pos, state.setValue(HAS_ITEM, true), 0);
@@ -282,7 +282,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        return level.isClientSide ? createTickerHelper(blockEntityType, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
+        return level.isClientSide() ? createTickerHelper(blockEntityType, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
     }
 
     @Override

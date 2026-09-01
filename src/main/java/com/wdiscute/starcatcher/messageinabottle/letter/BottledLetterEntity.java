@@ -141,7 +141,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
     protected void onHit(HitResult result)
     {
         super.onHit(result);
-        if (!this.level().isClientSide)
+        if (!this.level().isClientSide())
         {
             level().playSound(
                     null,

@@ -94,7 +94,7 @@ public class FishEntity extends AbstractFish
     public void tick()
     {
         super.tick();
-        if (getBodyArmorItem().isEmpty() && !level().isClientSide)
+        if (getBodyArmorItem().isEmpty() && !level().isClientSide())
         {
             //shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();

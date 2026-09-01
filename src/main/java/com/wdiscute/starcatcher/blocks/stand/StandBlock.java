@@ -79,7 +79,7 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
 
         BlockPos center = IMultiBlock.getCenter(level, pos);
         if (level.getBlockEntity(center) instanceof StandBlockEntity sbe)
@@ -111,7 +111,7 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     {
         if (!state.is(newState.getBlock()) && state.getValue(CENTER)
                 && level.getBlockEntity(pos) instanceof StandBlockEntity sbe
-                && !level.isClientSide && sbe.tournament != null)
+                && !level.isClientSide() && sbe.tournament != null)
         {
             TournamentHandler.cancelTournament(level, sbe.tournament);
         }
