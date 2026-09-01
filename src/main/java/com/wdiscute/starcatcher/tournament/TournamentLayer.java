@@ -76,7 +76,7 @@ public class TournamentLayer implements LayeredDraw.Layer
                         160, 70, SCColors.WHITE, false);
             }
 
-            g.drawString(this.font, getDisplayTimeLeft(), 21, 35, -1, false);
+            ScreenUtils.text(g, this.font, getDisplayTimeLeft(), 21, 35, -1, false);
 
             //render fish icon for first/second/third place
             if (fish != null)
@@ -87,7 +87,7 @@ public class TournamentLayer implements LayeredDraw.Layer
         {
             BACKGROUND_EXPANDED.render(g);
 
-            g.drawString(this.font, tournament.name, 58, 16, 0x635040, false);
+            ScreenUtils.text(g, this.font, tournament.name, 58, 16, 0x635040, false);
 
             //render first place
             if (firstPlace != null)
@@ -117,7 +117,7 @@ public class TournamentLayer implements LayeredDraw.Layer
                 ScreenUtils.centeredText(g, this.font, Component.literal(FORMAT.format(playerScore.score)),
                         160, 141, SCColors.WHITE, false);
 
-            g.drawString(this.font, getDisplayTimeLeft(), 12, 31, -1, false);
+            ScreenUtils.text(g, this.font, getDisplayTimeLeft(), 12, 31, -1, false);
 
             //render fish icon for first/second/third place
             if (fish != null)

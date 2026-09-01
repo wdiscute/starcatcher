@@ -711,9 +711,9 @@ public class FishingGuideScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(g, mouseX, mouseY, partialTick);
         resolveTrackedFP();
 
         double x = mouseX - uiX;
@@ -732,13 +732,13 @@ public class FishingGuideScreen extends Screen
             case COVER ->
             {
                 RenderSystem.enableBlend();
-                BACKGROUND_COVER.render(guiGraphics, uiX, uiY);
+                BACKGROUND_COVER.render(g, uiX, uiY);
                 RenderSystem.disableBlend();
 
                 if (signedGuide == null)
-                    renderUnsignedCover(guiGraphics, mouseX, mouseY);
+                    renderUnsignedCover(g, mouseX, mouseY);
                 else
-                    renderSignedCover(guiGraphics, mouseX, mouseY);
+                    renderSignedCover(g, mouseX, mouseY);
 
                 if (x > 91 && x < 159 && y > 89 && y < 217 && signedGuide != null && !signedGuide.visitors().isEmpty())
                 {
@@ -755,26 +755,24 @@ public class FishingGuideScreen extends Screen
             case INDEX ->
             {
                 RenderSystem.enableBlend();
-                if (page == 0) BACKGROUND_INDEX_FIRST.render(guiGraphics, uiX, uiY);
-                else BACKGROUND_INDEX_SECOND.render(guiGraphics, uiX, uiY);
+                if (page == 0) BACKGROUND_INDEX_FIRST.render(g, uiX, uiY);
+                else BACKGROUND_INDEX_SECOND.render(g, uiX, uiY);
                 RenderSystem.disableBlend();
-                renderIndex(guiGraphics, mouseX, mouseY);
+                renderIndex(g, mouseX, mouseY);
             }
 
             //help pages
             case HELP ->
             {
                 RenderSystem.enableBlend();
-                BACKGROUND_BASICS.render(guiGraphics, uiX, uiY);
+                BACKGROUND_BASICS.render(g, uiX, uiY);
                 RenderSystem.disableBlend();
-                renderTheBasics(guiGraphics, mouseX, mouseY);
+                renderTheBasics(g, mouseX, mouseY);
             }
 
             //entries pages
             case ENTRY ->
             {
-                RenderSystem.enableBlend();
-
                 //pick random background for that page from player uuid
                 long seed = player.getUUID().getMostSignificantBits()
                             ^ player.getUUID().getLeastSignificantBits()
@@ -788,68 +786,69 @@ public class FishingGuideScreen extends Screen
 
                 int variant = Math.floorMod(seed, 4);
 
-                ScreenUtils.Image background = switch (variant) {
+                ScreenUtils.Image background = switch (variant)
+                {
                     case 0 -> BACKGROUND_ENTRY;
                     case 1 -> BACKGROUND_ENTRY_2;
                     case 2 -> BACKGROUND_ENTRY_3;
                     default -> BACKGROUND_ENTRY_4;
                 };
 
-                background.render(guiGraphics, uiX, uiY);
-
-                background.render(guiGraphics, uiX, uiY);
+                RenderSystem.enableBlend();
+                background.render(g, uiX, uiY);
                 RenderSystem.disableBlend();
-                renderEntry(guiGraphics, mouseX, mouseY, 52, page * 2);
-                renderEntry(guiGraphics, mouseX, mouseY, 212, page * 2 + 1);
-                guiGraphics.drawString(this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0x9c897c, false);
+
+                renderEntry(g, mouseX, mouseY, 52, page * 2);
+                renderEntry(g, mouseX, mouseY, 212, page * 2 + 1);
+                ScreenUtils.text(g, this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0x9c897c, false);
             }
 
             case LAST ->
             {
                 RenderSystem.enableBlend();
-                BACKGROUND_LAST_PAGE.render(guiGraphics, uiX, uiY);
+                BACKGROUND_LAST_PAGE.render(g, uiX, uiY);
                 RenderSystem.disableBlend();
-                renderCompass(guiGraphics);
+                renderCompass(g);
             }
         }
 
-        renderCompass(guiGraphics);
+        renderCompass(g);
 
         //previous arrow should not render on book cover
         if (!menu.equals(MenuEntry.COVER))
         {
             //previous arrow
             if (x > 49 && x < 69 && y > 203 && y < 217)
-                ARROW_PREVIOUS_HIGHLIGHT.render(guiGraphics, uiX, uiY);
+                ARROW_PREVIOUS_HIGHLIGHT.render(g, uiX, uiY);
 
             if (arrowPreviousPressed)
-                ARROW_PREVIOUS_PRESSED.render(guiGraphics, uiX, uiY);
+                ARROW_PREVIOUS_PRESSED.render(g, uiX, uiY);
             else
-                ARROW_PREVIOUS.render(guiGraphics, uiX, uiY);
+                ARROW_PREVIOUS.render(g, uiX, uiY);
         }
 
         //index should not render on book cover and first page of index
         if (!menu.equals(MenuEntry.COVER) && !(menu.equals(MenuEntry.INDEX) && page == 0))
         {
             if (x > 174 && x < 196 && y > 202 && y < 216)
-                ARROW_INDEX_HIGHLIGHT.render(guiGraphics, uiX, uiY);
+                ARROW_INDEX_HIGHLIGHT.render(g, uiX, uiY);
 
             if (arrowIndexPressed)
-                ARROW_INDEX_PRESSED.render(guiGraphics, uiX, uiY);
+                ARROW_INDEX_PRESSED.render(g, uiX, uiY);
             else
-                ARROW_INDEX.render(guiGraphics, uiX, uiY);
+                ARROW_INDEX.render(g, uiX, uiY);
         }
 
         //next arrow should not render on LAST
         if (!(menu.equals(MenuEntry.LAST)))
         {
             if (x > 336 && x < 356 && y > 202 && y < 216)
-                ARROW_NEXT_HIGHLIGHT.render(guiGraphics, uiX, uiY);
+                ARROW_NEXT_HIGHLIGHT.render(g, uiX, uiY);
 
             if (arrowNextPressed)
-                ARROW_NEXT_PRESSED.render(guiGraphics, uiX, uiY);
+                ARROW_NEXT_PRESSED.render(g, uiX, uiY);
             else
-                ARROW_NEXT.render(guiGraphics, uiX, uiY);
+                ARROW_NEXT.render(g, uiX, uiY);
         }
 
         if (arrowPressedFromScrollDecay == 0)
@@ -860,7 +859,7 @@ public class FishingGuideScreen extends Screen
 
         clicked = false;
 
-        ScreenUtils.Tooltip.render(guiGraphics, font, mouseX, mouseY);
+        ScreenUtils.Tooltip.render(g, font, mouseX, mouseY);
     }
 
     public void renderUnsignedCover(GuiGraphics guiGraphics, int mouseX, int mouseY)
@@ -1617,19 +1616,15 @@ public class FishingGuideScreen extends Screen
         //white highlight on jumping to
         if (highlightRightAlpha > 0)
         {
-            RenderSystem.enableBlend();
-            RenderSystem.setShaderColor(1, 1, 1, highlightRightAlpha);
+            ScreenUtils.setColorF(highlightRightAlpha, 1, 1, 1);
             HIGHLIGHT_RIGHT.render(guiGraphics, uiX, uiY);
-            RenderSystem.setShaderColor(1, 1, 1, 1);
-            RenderSystem.disableBlend();
         }
 
         if (highlightLeftAlpha > 0)
         {
             RenderSystem.enableBlend();
-            RenderSystem.setShaderColor(1, 1, 1, highlightLeftAlpha);
+            ScreenUtils.setColorF(highlightLeftAlpha, 1, 1, 1);
             HIGHLIGHT_LEFT.render(guiGraphics, uiX, uiY);
-            RenderSystem.setShaderColor(1, 1, 1, 1);
             RenderSystem.disableBlend();
         }
     }
@@ -1863,10 +1858,10 @@ public class FishingGuideScreen extends Screen
 
         LocalPlayer player = Minecraft.getInstance().player;
         boolean shouldUseLocalMap = signedGuide == null || signedGuide.owner().equals(player.getUUID());
-        this.fishCaughtCounterMap =  shouldUseLocalMap?
+        this.fishCaughtCounterMap = shouldUseLocalMap ?
                 SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught : signedGuide.fishesCaught();
 
-        if(!shouldUseLocalMap)
+        if (!shouldUseLocalMap)
             menu = MenuEntry.COVER;
 
 
@@ -2130,7 +2125,7 @@ public class FishingGuideScreen extends Screen
             //if blacklist then render [!]
             if (!blacklist.isEmpty())
             {
-                g.drawString(font, "[!]", x + 129, yOffset, SCColors.GUIDE_RED, false);
+                ScreenUtils.text(g, font, "[!]", x + 129, yOffset, SCColors.GUIDE_RED, false);
                 if (hoveringBlacklist)
                     ScreenUtils.Tooltip.set(blacklist);
             }

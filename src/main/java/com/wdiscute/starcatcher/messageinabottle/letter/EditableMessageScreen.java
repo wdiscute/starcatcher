@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.messageinabottle.letter;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.data.network.SBSetEditableMessagePayload;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
@@ -13,6 +14,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class EditableMessageScreen extends Screen
     private final List<EditBox> boxes = new ArrayList<>();
     private EditBox nameBox = new EditBox(Minecraft.getInstance().font, 0, 0, Component.empty());
 
-    public static final ResourceLocation BACKGROUND = Starcatcher.rl("textures/gui/message/message.png");
+    public static final ScreenUtils.Image BACKGROUND = new ScreenUtils.Image(Starcatcher.rl("textures/gui/message/message.png"), 512, 256);
 
     public static void openEditableMessageScreen(EditableMessage message)
     {
@@ -100,7 +102,7 @@ public class EditableMessageScreen extends Screen
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
     {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        renderImage(guiGraphics, BACKGROUND);
+        BACKGROUND.render(guiGraphics, uiX, uiY);
         boxes.forEach(b -> b.render(guiGraphics, mouseX, mouseY, partialTick));
         nameBox.render(guiGraphics, mouseX, mouseY, partialTick);
     }
@@ -131,11 +133,6 @@ public class EditableMessageScreen extends Screen
         boxes.forEach(o -> o.setFocused(false));
         nameBox.setFocused(false);
         return super.mouseClicked(mouseX, mouseY, button);
-    }
-
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
-    {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
 
     @Override

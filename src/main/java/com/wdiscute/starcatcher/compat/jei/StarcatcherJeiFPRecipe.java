@@ -86,15 +86,15 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     }
 
     @Override
-    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
+    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics g, double mouseX, double mouseY)
     {
         Font font = Minecraft.getInstance().font;
-        ARROW.render(guiGraphics, 25, 2);
+        ARROW.render(g, 25, 2);
 
         if (!recipe.treasureTooltips.isEmpty() && mouseX > 62 && mouseX < 62 + 19 && mouseY > 0 && mouseY < 19)
             ScreenUtils.Tooltip.set(recipe.treasureTooltips);
 
-        bookIcon(guiGraphics, 83, 0, (int) mouseX, (int) mouseY);
+        bookIcon(g, 83, 0, (int) mouseX, (int) mouseY);
 
         //restrictions on arrow hover
         if (mouseX > 25 && mouseX < 25 + 16 && mouseY > 0 && mouseY < 16)
@@ -103,14 +103,14 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
         //[!] + hover
         if (recipe.fp.catchInfo().alwaysSpawnEntity())
         {
-            guiGraphics.drawString(font, Component.literal("[!]").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)),
+            ScreenUtils.text(g, font, Component.literal("[!]").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)),
                     105, 12, 0x000000, false);
 
             if (mouseX > 105 && mouseX < 105 + 9 && mouseY > 12 && mouseY < 12 + 9)
                 ScreenUtils.Tooltip.set(Component.translatable("emi.starcatcher.entity_entry", recipe.fp.getDisplayName()));
         }
 
-        ScreenUtils.Tooltip.render(guiGraphics, font, (int) mouseX, (int) mouseY);
+        ScreenUtils.Tooltip.render(g, font, (int) mouseX, (int) mouseY);
     }
 
     public void bookIcon(GuiGraphics g, int x, int y, int mouseX, int mouseY)

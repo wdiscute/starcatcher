@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.compat.emi;
 
+import com.wdiscute.utils.ScreenUtils;
 import dev.emi.emi.api.widget.Bounds;
 import dev.emi.emi.api.widget.Widget;
 import net.minecraft.client.gui.GuiGraphics;
@@ -27,6 +28,6 @@ public class StarcatcherRenderItemEmiWidget extends Widget
     @Override
     public void render(GuiGraphics draw, int mouseX, int mouseY, float delta)
     {
-        draw.renderItem(is, x, y);
+        ScreenUtils.item(draw, is, x, y);
     }
 }

@@ -6,12 +6,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
 public class FreezeOnMissModifier extends AbstractMinigameModifier
 {
-    public static final ResourceLocation OVERLAY = Starcatcher.rl("textures/gui/minigame/modifiers/freeze.png");
+    public static final ScreenUtils.Image OVERLAY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/freeze.png"), 96, 96);
 
     private final int length;
     private final int rampTime;
@@ -64,13 +65,9 @@ public class FreezeOnMissModifier extends AbstractMinigameModifier
         int posX = (int) ((float) width / 2 - 48 * increase);
         int posY = (int) ((float) height / 2 - 48 * increase);
 
-        guiGraphics.blit(OVERLAY,
-                posX, posY,
-                (int) (96 * increase), (int) (96 * increase),
-                0, 0,
-                96, 96,
-                96, 96
-        );
+        ScreenUtils.Image image = new ScreenUtils.Image(OVERLAY.id(), (int) (OVERLAY.textureWidth() * increase), (int) (OVERLAY.textureHeight() * increase));
+
+        image.render(guiGraphics, posX, posY);
     }
 
     @Override

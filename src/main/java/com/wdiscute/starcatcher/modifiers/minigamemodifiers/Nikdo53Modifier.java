@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -170,9 +169,9 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     public void renderOnHandle(FishingMinigameScreen instance, GuiGraphics g, PoseStack poseStack, float partialTick)
     {
         if (handleLayer == 0)
-            HANDLE_SMALL.renderCentered(g, instance.width / 2, instance.height / 2);
+            HANDLE_SMALL.render(g, -64, -64);
         else
-            HANDLE_LARGE.renderCentered(g, instance.width / 2, instance.height / 2);
+            HANDLE_LARGE.render(g, -64, -64);
     }
 
     @Override
@@ -188,11 +187,9 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
 
         // Dim when not in use
         if (handleLayer != layer)
-            RenderSystem.setShaderColor(0.3f, 0.3f, 0.3f, 1);
+            ScreenUtils.setColorF(1, 0.3f, 0.3f, 0.3f);
 
         ass.behaviour.render(guiGraphics, poseStack, partialTick, instance, ass);
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
 
         poseStack.popPose();
     }
@@ -217,18 +214,13 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         {
             // Dim when not in use
             if (handleLayer != i)
-                RenderSystem.setShaderColor(0.5f, 0.5f, 0.5f, 1);
+                ScreenUtils.setColorF(1, 0.5f, 0.5f, 0.5f);
 
             float increase = (i - 1) * 0.22f + 1;
 
-            guiGraphics.blit(WHEEL,
-                    (int) (-48 * increase), (int) (-48 * increase),
-                    (int) (96 * increase), (int) (96 * increase),
-                    0, 0,
-                    96, 96,
-                    96, 96);
+            ScreenUtils.Image image = new ScreenUtils.Image(WHEEL, (int) (96 * increase), (int) (96 * increase));
+            image.render(guiGraphics, (int) (-48 * increase), (int) (-48 * increase));
 
-            RenderSystem.setShaderColor(1, 1, 1, 1);
         }
         poseStack.popPose();
     }
@@ -260,12 +252,12 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         poseStack.popPose();
 
         //render A
-        instance.tank.render(g, width / 2 - 50, height / 2 + 50,
-                112, isHoldingLeft ? 80 : 64, 32, 16);
+        instance.buttons.render(g, width / 2 - 50, height / 2 + 50,
+                48, isHoldingLeft ? 16 : 0, 32, 16);
 
         //render D
-        instance.tank.render(g, width / 2 + 18, height / 2 + 50,
-                144, isHoldingRight ? 80 : 64, 32, 16);
+        instance.buttons.render(g, width / 2 + 18, height / 2 + 50,
+                80, isHoldingRight ? 16 : 0, 32, 16);
     }
 
     @Override

@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
@@ -28,8 +29,8 @@ import java.util.List;
 public class FishRadarLayer implements LayeredDraw.Layer
 {
 
-    private static final ResourceLocation BASE = Starcatcher.rl("textures/gui/fish_radar/base.png");
-    private static final ResourceLocation EXTRA_ROW = Starcatcher.rl("textures/gui/fish_radar/extra_row.png");
+    private static final ScreenUtils.Image BASE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_radar/base.png"), 101, 160);
+    private static final ScreenUtils.Image EXTRA_ROW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_radar/extra_row.png"), 101, 22);
 
     int uiX;
     int uiY;
@@ -68,7 +69,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker)
+    public void render(GuiGraphics g, DeltaTracker deltaTracker)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -107,26 +108,25 @@ public class FishRadarLayer implements LayeredDraw.Layer
         else
             offScreen = 0;
 
+        g.pose().pushPose();
+        g.pose().scale(((float) SCConfig.RADAR_SCALE.getAsDouble()), ((float) SCConfig.RADAR_SCALE.getAsDouble()), 1);
+        g.pose().translate(SCConfig.RADAR_X_OFFSET.get(), SCConfig.RADAR_Y_OFFSET.get(), 0);
 
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(((float) SCConfig.RADAR_SCALE.getAsDouble()), ((float) SCConfig.RADAR_SCALE.getAsDouble()), 1);
-        guiGraphics.pose().translate(SCConfig.RADAR_X_OFFSET.get(), SCConfig.RADAR_Y_OFFSET.get(), 0);
-
-        guiGraphics.pose().translate(-offScreen, 0, 0);
+        g.pose().translate(-offScreen, 0, 0);
 
         //rows of radar to render
-        renderImage(guiGraphics, BASE);
+        BASE.render(g, uiX, uiY);
 
-        int rows = (fpsInArea.size() -1) / 5;
+        int rows = (fpsInArea.size() - 1) / 5;
 
         for (int i = 0; i < rows; i++)
-        {
-            guiGraphics.blit(EXTRA_ROW, uiX, uiY + i * 18 + 66, 0, 0, 101, 22, 101, 22);
-        }
-
+            EXTRA_ROW.render(g, uiX, uiY + i * 18 + 66);
 
         int animationFrame = ((int) (level.getGameTime() / 2 % 32 + 1));
-        renderImage(guiGraphics, Starcatcher.rl("textures/gui/fish_radar/radar_animation" + animationFrame + ".png"));
+        new ScreenUtils.Image(
+                Starcatcher.rl("textures/gui/fish_radar/radar_animation" + animationFrame + ".png"),
+                101, 160)
+                .render(g, uiX, uiY);
 
         //recalculate every <config value>
         if (System.currentTimeMillis() > lastRefreshMS + SCConfig.OVERLAY_UPDATE_FREQUENCY.get())
@@ -139,17 +139,11 @@ public class FishRadarLayer implements LayeredDraw.Layer
             if (fishesCaught.contains(fpsInArea.get(i)))
                 is = fpsInArea.get(i).catchInfo().fish().toStack();
 
-            guiGraphics.renderItem(
-                    is,
+            ScreenUtils.item(g, is,
                     uiX + 9 + i * 18 % 90,
                     uiY + 48 + i / 5 * 18);
         }
 
-        guiGraphics.pose().popPose();
-    }
-
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
-    {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
+        g.pose().popPose();
     }
 }

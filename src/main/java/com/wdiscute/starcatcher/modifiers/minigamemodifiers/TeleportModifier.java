@@ -19,7 +19,7 @@ import org.joml.Quaternionf;
 
 public class TeleportModifier extends AbstractMinigameModifier
 {
-    public static final ResourceLocation OVERLAY = Starcatcher.rl("textures/gui/minigame/modifiers/teleport.png");
+    public static final ScreenUtils.Image OVERLAY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/teleport.png"), 96, 96);
 
     private float kimbePosition = Utils.r.nextInt(359);
 
@@ -94,13 +94,9 @@ public class TeleportModifier extends AbstractMinigameModifier
         int posX = (int) ((float) width / 2 - 48 * increase);
         int posY = (int) ((float) height / 2 - 48 * increase);
 
-        guiGraphics.blit(OVERLAY,
-                posX, posY,
-                (int) (96 * increase), (int) (96 * increase),
-                0, 0,
-                96, 96,
-                96, 96
-        );
+        ScreenUtils.Image image = new ScreenUtils.Image(OVERLAY.id(), (int) (OVERLAY.textureWidth() * increase), (int) (OVERLAY.textureHeight() * increase));
+
+        image.render(guiGraphics, posX, posY);
     }
 
 

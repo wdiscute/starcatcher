@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
@@ -9,8 +10,8 @@ import net.minecraft.world.entity.player.Inventory;
 
 public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
 {
-    private static final ResourceLocation TEXTURE = Starcatcher.rl("textures/gui/tackle_box/tackle_box.png");
-    private static final ResourceLocation ICONS = Starcatcher.rl("textures/gui/tackle_box/tackle_box_icons.png");
+    private static final ScreenUtils.Image TEXTURE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/tackle_box/tackle_box.png"), 256, 256);
+    private static final ScreenUtils.Image ICONS = new ScreenUtils.Image(Starcatcher.rl("textures/gui/tackle_box/tackle_box_icons.png"), 256, 256);
 
     public TackleBoxScreen(TackleBoxMenu menu, Inventory playerInventory, Component title)
     {
@@ -29,16 +30,14 @@ public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
-    protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY)
+    protected void renderBg(GuiGraphics g, float partialTick, int mouseX, int mouseY)
     {
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
-        guiGraphics.blit(TEXTURE, x, y, 0, 0, this.imageWidth, this.imageHeight);
+        TEXTURE.render(g, x, y);
 
         if (!menu.getRod().isEmpty())
-        {
-            guiGraphics.blit(ICONS, x, y, 0, 0, this.imageWidth, this.imageHeight);
-        }
+            ICONS.render(g, x, y);
     }
 }

@@ -7,6 +7,7 @@ import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.fish.Textures;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.Nikdo53Modifier;
 import com.wdiscute.starcatcher.registry.*;
@@ -38,7 +39,7 @@ import java.util.*;
 
 public class FishingMinigameScreen extends Screen implements GuiEventListener
 {
-    public static final ScreenUtils.Image GOLD_OUTLINE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/gold_outline.png"), 96, 112);
+    public static final ScreenUtils.Image GOLD_OUTLINE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/tanks/gold_outline.png"), 96, 112);
 
     public ScreenUtils.Image tank;
     public ScreenUtils.Image rod;
@@ -251,7 +252,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         boolean shouldDarken = modifiers.stream().anyMatch(o -> o.shouldDarkenWheel(this));
 
         //render tank background
-        tank.render(g, centerX - 44 - 106, centerY - 58, 0, 112, 96, 112);
+        tank.render(g, centerX - 44 - 106, centerY - 58);
 
         //render golden border if legendary fish
         if (rarity.equals(Rarity.LEGENDARY))
@@ -259,7 +260,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         //render wheel background
         if (shouldDarken)
-            ScreenUtils.setColorF(0.5f, 0.5f, 0.5f, 1);
+            ScreenUtils.setColorF(1, 0.5f, 0.5f, 0.5f);
         wheels.render(g, centerX - 32, centerY - 32, 0, 0, 64, 64);
 
         //render spacebar

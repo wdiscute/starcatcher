@@ -120,7 +120,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker)
+    public void render(GuiGraphics g, DeltaTracker deltaTracker)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -157,12 +157,12 @@ public class FishTrackerLayer implements LayeredDraw.Layer
             offScreen = 0;
 
         //transform and scale from config
-        guiGraphics.pose().pushPose();
-        guiGraphics.pose().scale(((float) SCConfig.TRACKER_SCALE.getAsDouble()), ((float) SCConfig.TRACKER_SCALE.getAsDouble()), 1);
-        guiGraphics.pose().translate(SCConfig.TRACKER_X_OFFSET.get(), SCConfig.TRACKER_Y_OFFSET.get(), 0);
+        g.pose().pushPose();
+        g.pose().scale(((float) SCConfig.TRACKER_SCALE.getAsDouble()), ((float) SCConfig.TRACKER_SCALE.getAsDouble()), 1);
+        g.pose().translate(SCConfig.TRACKER_X_OFFSET.get(), SCConfig.TRACKER_Y_OFFSET.get(), 0);
 
         //translate offset animation
-        guiGraphics.pose().translate(-offScreen, 0, 0);
+        g.pose().translate(-offScreen, 0, 0);
 
         //recalculate every <config freq>
         if (System.currentTimeMillis() > lastRefreshMS + SCConfig.OVERLAY_UPDATE_FREQUENCY.get())
@@ -170,36 +170,36 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
         if (cachedFP == null || cachedRL == null)
         {
-            guiGraphics.pose().popPose();
+            g.pose().popPose();
             return;
         }
 
         //render base background
-        BACKGROUND.render(guiGraphics, uiX, uiY);
+        BACKGROUND.render(g, uiX, uiY);
 
         //render fish + name
         if (cachedCaughtFish || !SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get())
         {
-            ScreenUtils.text(guiGraphics, font, font.plainSubstrByWidth(cachedFP.getDisplayName().getString(), 77),
+            ScreenUtils.text(g, font, font.plainSubstrByWidth(cachedFP.getDisplayName().getString(), 77),
                     uiX + 77,  uiY + 27, SCColors.GUIDE_TEXT_DARK, false);
-            ScreenUtils.item(guiGraphics, cachedFP.catchInfo().fish().toStack(), uiX + 42, uiY + 15, guiGraphics.pose(), 2);
+            ScreenUtils.item(g, cachedFP.catchInfo().fish().toStack(), uiX + 42, uiY + 15, g.pose(), 2);
         }
         else
         {
-            EMPTY.render(guiGraphics, uiX + 34, uiY + 7);
+            EMPTY.render(g, uiX + 34, uiY + 7);
         }
 
         //render weight
         double percentage = (double) cachedChance / cachedTotalChance * 100;
-        ScreenUtils.centeredText(guiGraphics, font, Component.literal(new DecimalFormat("0.#").format(percentage) + "%"),
+        ScreenUtils.centeredText(g, font, Component.literal(new DecimalFormat("0.#").format(percentage) + "%"),
                 uiX + 34, uiY + 65, SCColors.GUIDE_TEXT_DARK, false);
-        ScreenUtils.centeredText(guiGraphics, font, Component.literal(cachedChance + "/" + cachedTotalChance),
+        ScreenUtils.centeredText(g, font, Component.literal(cachedChance + "/" + cachedTotalChance),
                 uiX + 34, uiY + 75, SCColors.GUIDE_TEXT_DARK, false);
 
         //render restrictions
         for (int i = 0; i < cachedRestrictions.size(); i++)
-            guiGraphics.drawString(font, cachedRestrictions.get(i), uiX + 70, uiY + 49 + i * 10, SCColors.GUIDE_TEXT_DARK, false);
+            ScreenUtils.text(g, font, cachedRestrictions.get(i), uiX + 70, uiY + 49 + i * 10, SCColors.GUIDE_TEXT_DARK, false);
 
-        guiGraphics.pose().popPose();
+        g.pose().popPose();
     }
 }

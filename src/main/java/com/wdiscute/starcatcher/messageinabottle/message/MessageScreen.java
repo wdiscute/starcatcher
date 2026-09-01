@@ -2,6 +2,9 @@ package com.wdiscute.starcatcher.messageinabottle.message;
 
 import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.libtooltips.Tooltips;
+import com.wdiscute.starcatcher.SCColors;
+import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -9,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 
+import javax.swing.plaf.ButtonUI;
 import java.util.List;
 
 public class MessageScreen extends Screen
@@ -49,22 +53,25 @@ public class MessageScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.render(g, mouseX, mouseY, partialTick);
 
-        renderImage(guiGraphics, message.background());
+        ScreenUtils.Image image = new ScreenUtils.Image(message.background(), 512, 256);
+
+        image.render(g, uiX, uiY);
 
         //render main text
         List<String> text = message.text();
         for (int i = 0; i < text.size(); i++)
-        {
-            guiGraphics.drawString(this.font, Tooltips.resolveTagsToComponentFromTranslationKey(text.get(i)), uiX + 140, uiY + 55 + 9 * i, 0x635040, false);
-        }
+            ScreenUtils.text(g, this.font,
+                    Tooltips.resolveTagsToComponentFromTranslationKey(text.get(i)), uiX + 140, uiY + 55 + 9 * i,
+                    SCColors.GUIDE_TEXT_DARK, false);
 
         //render name
-        guiGraphics.drawString(this.font, Tooltips.resolveTagsToComponentFromTranslationKey(message.senderDisplayName()), uiX + 255, uiY + 208, 0x635040, false);
-
+        ScreenUtils.text(g, this.font,
+                Tooltips.resolveTagsToComponentFromTranslationKey(message.senderDisplayName()),
+                uiX + 255, uiY + 208, SCColors.GUIDE_TEXT_DARK, false);
     }
 
     @Override
@@ -77,11 +84,6 @@ public class MessageScreen extends Screen
             return true;
         }
         return super.keyPressed(keyCode, scanCode, modifiers);
-    }
-
-    private void renderImage(GuiGraphics guiGraphics, ResourceLocation rl)
-    {
-        guiGraphics.blit(rl, uiX, uiY, 0, 0, 512, 256, 512, 256);
     }
 
     @Override

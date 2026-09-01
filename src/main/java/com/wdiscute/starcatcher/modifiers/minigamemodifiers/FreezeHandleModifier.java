@@ -20,11 +20,8 @@ public class FreezeHandleModifier extends AbstractTimedModifier
     {
         super.renderForeground(instance, g, partialTick, width, height);
         float alpha = 1 - (instance.handleSpeed - instance.handleBaseSpeed / 2) / (instance.handleBaseSpeed - instance.handleBaseSpeed / 2);
-        RenderSystem.setShaderColor(1, 1, 1, alpha);
-        RenderSystem.enableBlend();
+        ScreenUtils.setColorF(alpha, 1, 1,1);
         FROZEN.render(g, width / 2 - 16, height / 2 - 16);
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.enableBlend();
     }
 
     @Override

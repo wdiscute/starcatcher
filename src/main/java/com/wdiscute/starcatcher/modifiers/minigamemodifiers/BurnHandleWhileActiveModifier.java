@@ -2,6 +2,8 @@ package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
+import com.wdiscute.utils.ScreenUtils;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -11,6 +13,10 @@ import net.minecraft.sounds.SoundEvents;
 
 public class BurnHandleWhileActiveModifier extends AbstractTimedModifier
 {
+    public static final ScreenUtils.Image FIRE = new ScreenUtils.Image(
+            Utils.rl("textures/block/fire_1.png"), 16, 512
+    );
+
     private final int rampTime;
     private final float extraSpeed;
 
@@ -29,20 +35,15 @@ public class BurnHandleWhileActiveModifier extends AbstractTimedModifier
 
         float alpha = 1 - (instance.handleBaseSpeed - instance.handleSpeed / 2) / (instance.handleSpeed - instance.handleSpeed / 2);
 
-        RenderSystem.setShaderColor(1, 1, 1, alpha);
-        RenderSystem.enableBlend();
+        long animationTime = System.currentTimeMillis() % 2000;
+        int offset = (int) (animationTime * 33 / 2000);
+        int offset2 = (offset + 12) % 33;
 
-        //vanilla code
-        TextureAtlasSprite sprite = Minecraft.getInstance()
-                .getModelManager()
-                .getAtlas(TextureAtlas.LOCATION_BLOCKS)
-                .getSprite(ResourceLocation.withDefaultNamespace("block/fire_1"));
+        ScreenUtils.setColorF(alpha, 1, 1, 1);
+        FIRE.render(guiGraphics, width / 2 - 8, height / 2 - 16, 0, 16 * offset, 16, 16);
 
-        guiGraphics.blit(width / 2 - 8, height / 2 - 16, 0, 16, 16, sprite);
-        guiGraphics.blit(width / 2 - 8, height / 2 - 8, 0, 16, 16, sprite);
-
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.enableBlend();
+        ScreenUtils.setColorF(alpha, 1, 1, 1);
+        FIRE.render(guiGraphics, width / 2 - 8, height / 2 - 8, 0, 16 * offset2, 16, 16);
     }
 
     @Override

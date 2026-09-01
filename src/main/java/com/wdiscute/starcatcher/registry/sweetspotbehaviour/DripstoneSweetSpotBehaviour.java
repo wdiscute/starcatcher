@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.sounds.SoundEvents;
@@ -71,13 +72,8 @@ public class DripstoneSweetSpotBehaviour extends NormalSweetSpotBehaviour
     {
         if (ass.removed) return;
 
-        // allows modifier to change color
-        float[] shaderColor = RenderSystem.getShaderColor();
-        RenderSystem.setShaderColor(shaderColor[0], shaderColor[1], shaderColor[2], shaderColor[3] * ass.alpha);
-
-        RenderSystem.enableBlend();
-
         poseStack.pushPose();
+
         if (map.containsKey(ass))
             poseStack.translate(0, map.get(ass) + 1 * partialTick, 0);
 
@@ -85,8 +81,5 @@ public class DripstoneSweetSpotBehaviour extends NormalSweetSpotBehaviour
         ass.texture.render(guiGraphics, -48, -48);
 
         poseStack.popPose();
-
-        RenderSystem.disableBlend();
-        RenderSystem.setShaderColor(1, 1, 1, 1);
     }
 }
