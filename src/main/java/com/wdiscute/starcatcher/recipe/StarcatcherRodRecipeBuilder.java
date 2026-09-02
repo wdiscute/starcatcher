@@ -6,10 +6,12 @@ import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -43,21 +45,21 @@ public class StarcatcherRodRecipeBuilder
         this.applySkin = applySkin;
     }
 
-    public static StarcatcherRodRecipeBuilder tackleSkin(Ingredient template, Ingredient material)
+    public static StarcatcherRodRecipeBuilder tackleSkin(HolderLookup.Provider lookup, Ingredient template, Ingredient material)
     {
-        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(SCTags.RODS), material, RecipeCategory.TOOLS, SCItems.MISSINGNO.toStack(),
+        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, SCItems.MISSINGNO.toStack(),
                 false, true, true);
     }
 
-    public static StarcatcherRodRecipeBuilder netheriteUpgrade(Ingredient template, Ingredient material)
+    public static StarcatcherRodRecipeBuilder netheriteUpgrade(HolderLookup.Provider lookup, Ingredient template, Ingredient material)
     {
-        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(SCTags.RODS), material, RecipeCategory.TOOLS, SCItems.MISSINGNO.toStack(),
+        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, SCItems.MISSINGNO.toStack(),
                 true, true, false);
     }
 
-    public static StarcatcherRodRecipeBuilder rodSkin(Ingredient template, Ingredient material, ItemStack result)
+    public static StarcatcherRodRecipeBuilder rodSkin(HolderLookup.Provider lookup, Ingredient template, Ingredient material, ItemStack result)
     {
-        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(SCTags.RODS), material, RecipeCategory.TOOLS, result,
+        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, result,
                 false, false, true);
     }
 
@@ -67,7 +69,7 @@ public class StarcatcherRodRecipeBuilder
         return this;
     }
 
-    public void save(RecipeOutput recipeOutput, ResourceLocation recipeId)
+    public void save(RecipeOutput recipeOutput, Identifier recipeId)
     {
         this.ensureValid(recipeId);
         Advancement.Builder advancement$builder = recipeOutput.advancement()

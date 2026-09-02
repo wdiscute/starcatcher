@@ -3,7 +3,6 @@ package com.wdiscute.starcatcher.mixin;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
-import com.wdiscute.starcatcher.event.SCEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.dispenser.BlockSource;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
@@ -13,7 +12,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -43,12 +41,12 @@ public abstract class DispenserWormBehaviourMixin
         BlockPos blockpos = source.pos().relative(source.state().getValue(DispenserBlock.FACING));
         if (SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.get() && stack.is(SCTags.HAS_FARMLAND_INTERACTION))
         {
-            ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(blockpos).getBlockHolder(), level.random).toStack();
+            ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(blockpos).getBlock().builtInRegistryHolder(), level.getRandom()).toStack();
 
             if(is.isEmpty())
                 return;
 
-            Vec3 vec3 = Vec3.atLowerCornerWithOffset(blockpos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
+            Vec3 vec3 = Vec3.atLowerCornerWithOffset(blockpos, 0.5F, 1.01, 0.5F).offsetRandom(level.getRandom(), 0.7F);
             ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), is);
             level.addFreshEntity(itementity);
 

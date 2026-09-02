@@ -7,7 +7,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 
 public class BounceBackModifier extends AbstractMinigameModifier
@@ -71,7 +71,7 @@ public class BounceBackModifier extends AbstractMinigameModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("bounce_back");
     }

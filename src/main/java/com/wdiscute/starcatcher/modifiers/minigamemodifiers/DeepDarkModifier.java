@@ -11,8 +11,8 @@ import com.wdiscute.starcatcher.registry.sweetspotbehaviour.GlowingSweetSpotBeha
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.SculkSweetSpotBehaviour;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 
 import java.awt.*;
@@ -57,7 +57,7 @@ public class DeepDarkModifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderForeground(instance, guiGraphics, partialTick, width, height);
 
@@ -81,7 +81,7 @@ public class DeepDarkModifier extends AbstractMinigameModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("deep_dark");
     }

@@ -6,7 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class MoveSweetSpotsOnMissModifier extends AbstractMinigameModifier
 {
@@ -29,7 +29,7 @@ public class MoveSweetSpotsOnMissModifier extends AbstractMinigameModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("move_sweetspots_on_miss");
     }

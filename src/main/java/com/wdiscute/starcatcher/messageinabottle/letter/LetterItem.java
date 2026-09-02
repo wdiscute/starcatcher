@@ -4,7 +4,7 @@ import com.wdiscute.starcatcher.data.network.CBOpenEditableMessagePayload;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -15,16 +15,16 @@ import java.util.List;
 
 public class LetterItem extends Item
 {
-    public LetterItem()
+    public LetterItem(Properties p)
     {
-        super(new Properties().stacksTo(1).fireResistant());
+        super(p.stacksTo(1).fireResistant());
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand)
     {
         ItemStack stack = player.getItemInHand(usedHand);
-        if (level.isClientSide()) return InteractionResultHolder.success(stack);
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
 
         EditableMessage editableMessage = SCDataComponents.get(stack, SCDataComponents.EDITABLE_MESSAGE);
 
@@ -34,6 +34,6 @@ public class LetterItem extends Item
 
         PacketDistributor.sendToPlayer((ServerPlayer) player, new CBOpenEditableMessagePayload(editableMessage));
 
-        return InteractionResultHolder.success(player.getItemInHand(usedHand));
+        return InteractionResult.SUCCESS;
     }
 }

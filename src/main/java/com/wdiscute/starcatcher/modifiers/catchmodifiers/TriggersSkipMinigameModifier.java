@@ -5,7 +5,7 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.modifiers.Modifier;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class TriggersSkipMinigameModifier extends AbstractCatchModifier implements SkipMinigameIfTriggerFoundModifier.SkipsMinigame
 {
@@ -20,7 +20,7 @@ public class TriggersSkipMinigameModifier extends AbstractCatchModifier implemen
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("trigger_skip_minigame");
     }

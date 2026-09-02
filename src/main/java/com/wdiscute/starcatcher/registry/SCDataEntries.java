@@ -5,9 +5,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.DataEntry;
-import com.wdiscute.utils.Utils;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 
 import java.util.List;
@@ -18,8 +16,8 @@ public interface SCDataEntries
     static void register(IEventBus eventBus){}
 
     //todo tag-like loader system for this
-    DataEntry<Map<String, List<ResourceLocation>>> DIMENSION_TAGS = DataEntry.register(Starcatcher.rl("dimension_tags"),
-            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC.listOf()),
+    DataEntry<Map<String, List<Identifier>>> DIMENSION_TAGS = DataEntry.register(Starcatcher.rl("dimension_tags"),
+            Codec.unboundedMap(Codec.STRING, Identifier.CODEC.listOf()),
             Map.of());
 
     //todo void fishing with this

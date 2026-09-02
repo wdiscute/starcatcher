@@ -56,15 +56,15 @@ public class SCClientEvents
 
     }
 
-    @SubscribeEvent
-    public static void onAssetReload(RegisterClientReloadListenersEvent event)
-    {
-        event.registerReloadListener((ResourceManagerReloadListener) resourceManager ->
-        {
-            GoldRenderer.INSTANCE.close();
-            BakedModelRemapper.REMAPPED_MODELS.clear();
-        });
-    }
+    //@SubscribeEvent
+    //public static void onAssetReload(RegisterClientReloadListenersEvent event)
+    //{
+    //    event.registerReloadListener((ResourceManagerReloadListener) resourceManager ->
+    //    {
+    //        GoldRenderer.INSTANCE.close();
+    //        BakedModelRemapper.REMAPPED_MODELS.clear();
+    //    });
+    //}
 
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event)

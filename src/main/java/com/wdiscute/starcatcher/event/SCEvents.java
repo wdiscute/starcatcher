@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.event;
 
-import com.wdiscute.sellingbin.event.SBevents;
+import com.wdiscute.sellingbin.event.SBEvents;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -28,18 +28,13 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
@@ -51,35 +46,42 @@ import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
-import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.server.ServerStartedEvent;
 import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
+import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
 
 @EventBusSubscriber(modid = Starcatcher.MOD_ID)
 public class SCEvents
 {
+    public static class DefaultPackSource implements PackSource
+    {
+        @Override
+        public Component decorate(Component name)
+        {
+            return name;
+        }
+
+        @Override
+        public boolean shouldAddAutomatically()
+        {
+            return true;
+        }
+    }
+
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event)
     {
-        PackSource packSource = new SBevents.DefaultPackSource()
-        {
-            @Override
-            public boolean shouldAddAutomatically()
-            {
-                return true;
-            }
-        };
+        PackSource packSource = new DefaultPackSource();
 
         //create
         event.addPackFinders(
@@ -167,21 +169,16 @@ public class SCEvents
     @SubscribeEvent
     public static void addCapabilities(RegisterCapabilitiesEvent event)
     {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
-                (container, side) ->
+        event.registerBlockEntity(
+                Capabilities.Item.BLOCK,
+                SCBlockEntities.TACKLE_BOX.get(),
+                (be, _) ->
                 {
-                    if (container instanceof TackleBoxBlockEntity be)
+                    if (be instanceof TackleBoxBlockEntity tackleBox)
                     {
-                        return new SidedInvWrapper(container, side)
-                        {
-                            @Override
-                            public void setStackInSlot(int slot, ItemStack stack)
-                            {
-                                super.setStackInSlot(slot, stack);
-                                be.updateFishSlot();
-                            }
-                        };
+                        return VanillaContainerWrapper.of(tackleBox);
                     }
+
                     return null;
                 }
         );
@@ -285,14 +282,14 @@ public class SCEvents
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
 
-        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && !level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
+        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && !level.isClientSide() && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
         {
-            ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(pos).getBlockHolder(), level.getRandom()).toStack();
+            ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(pos).getBlock().builtInRegistryHolder(), level.getRandom()).toStack();
 
             if (is.isEmpty())
                 return;
 
-            Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
+            Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.getRandom(), 0.7F);
             ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), is);
             level.addFreshEntity(itementity);
 

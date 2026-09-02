@@ -1,11 +1,10 @@
 package com.wdiscute.starcatcher.morajai;
 
 import com.wdiscute.utils.ScreenUtils;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Supplier;
 
 public class MoraJai
 {
@@ -92,7 +91,7 @@ public class MoraJai
             map.put(pos2, pos1Old);
         }
 
-        public void render(GuiGraphics guiGraphics)
+        public void render(GuiGraphicsExtractor guiGraphics)
         {
             for (Map.Entry<Pos, Behaviour> entry : map.entrySet())
             {

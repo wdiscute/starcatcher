@@ -3,9 +3,12 @@ package com.wdiscute.starcatcher.morajai;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
+import org.joml.Matrix3x2fStack;
 
 public class MoraJaiScreen extends Screen
 {
@@ -19,35 +22,35 @@ public class MoraJaiScreen extends Screen
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    public boolean keyPressed(KeyEvent event)
     {
-        InputConstants.Key mouseKey = InputConstants.getKey(keyCode, scanCode);
+        InputConstants.Key mouseKey = InputConstants.getKey(event);
         if(Minecraft.getInstance().options.keyInventory.isActiveAndMatches(mouseKey))
         {
             onClose();
             return true;
         }
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(event);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
-        if(button == 0 && grid.click(mouseX - width / 2f, mouseY - height / 2f)) return true;
-        return super.mouseClicked(mouseX, mouseY, button);
+        if(event.button() == 0 && grid.click(event.x() - width / 2f, event.y() - height / 2f)) return true;
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(graphics, mouseX, mouseY, a);
 
-        PoseStack pose = guiGraphics.pose();
-        pose.pushPose();
-        pose.translate(width / 2f, height / 2f, 0);
+        Matrix3x2fStack pose = graphics.pose();
+        pose.pushMatrix();
+        pose.translate(width / 2f, height / 2f);
 
-        grid.render(guiGraphics);
+        grid.render(graphics);
 
-        pose.popPose();
+        pose.popMatrix();
     }
 }

@@ -7,9 +7,8 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
-import java.text.DecimalFormat;
 import java.util.List;
 
 public class ExtraGoldenChanceModifier extends AbstractCatchModifier
@@ -67,7 +66,7 @@ public class ExtraGoldenChanceModifier extends AbstractCatchModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("extra_golden_chance");
     }

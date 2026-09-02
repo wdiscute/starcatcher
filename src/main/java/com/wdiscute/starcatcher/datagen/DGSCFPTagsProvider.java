@@ -8,17 +8,17 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.TagsProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.data.tags.KeyTagProvider;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DGSCFPTagsProvider extends TagsProvider<FishProperties>
+public class DGSCFPTagsProvider extends KeyTagProvider<FishProperties>
 {
-    public DGSCFPTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper)
+    public DGSCFPTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider)
     {
-        super(output, Starcatcher.FISH_REGISTRY_KEY, lookupProvider, Starcatcher.MOD_ID, existingFileHelper);
+        super(output, Starcatcher.FISH_REGISTRY_KEY, lookupProvider, Starcatcher.MOD_ID);
     }
 
     @Override
@@ -28,13 +28,23 @@ public class DGSCFPTagsProvider extends TagsProvider<FishProperties>
         {
             if(fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH))
             {
-                if(fp.rarity().equals(Rarity.TRASH)) tag(SCTags.TRASH_ENTRIES_FP).addOptional(rl);
-                if(fp.rarity().equals(Rarity.COMMON)) tag(SCTags.COMMON_ENTRIES_FP).addOptional(rl);
-                if(fp.rarity().equals(Rarity.UNCOMMON)) tag(SCTags.UNCOMMON_ENTRIES_FP).addOptional(rl);
-                if(fp.rarity().equals(Rarity.RARE)) tag(SCTags.RARE_ENTRIES_FP).addOptional(rl);
-                if(fp.rarity().equals(Rarity.EPIC)) tag(SCTags.EPIC_ENTRIES_FP).addOptional(rl);
-                if(fp.rarity().equals(Rarity.LEGENDARY)) tag(SCTags.LEGENDARY_ENTRIES_FP).addOptional(rl);
+                if(fp.rarity().equals(Rarity.TRASH)) tag(SCTags.TRASH_ENTRIES_FP).addOptional(rk(rl));
+                if(fp.rarity().equals(Rarity.COMMON)) tag(SCTags.COMMON_ENTRIES_FP).addOptional(rk(rl));
+                if(fp.rarity().equals(Rarity.UNCOMMON)) tag(SCTags.UNCOMMON_ENTRIES_FP).addOptional(rk(rl));
+                if(fp.rarity().equals(Rarity.RARE)) tag(SCTags.RARE_ENTRIES_FP).addOptional(rk(rl));
+                if(fp.rarity().equals(Rarity.EPIC)) tag(SCTags.EPIC_ENTRIES_FP).addOptional(rk(rl));
+                if(fp.rarity().equals(Rarity.LEGENDARY)) tag(SCTags.LEGENDARY_ENTRIES_FP).addOptional(rk(rl));
             }
         });
     }
+
+    private static ResourceKey<FishProperties> rk(Identifier id)
+    {
+        return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, id);
+    }
+
+    //private static ResourceKey<FishProperties> rk(FishProperties fp)
+    //{
+    //    return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, BuiltInRegistries.ITEM.getKey(item));
+    //}
 }

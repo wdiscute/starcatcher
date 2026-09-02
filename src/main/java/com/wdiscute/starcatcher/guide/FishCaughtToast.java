@@ -11,9 +11,10 @@ import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.toasts.Toast;
-import net.minecraft.client.gui.components.toasts.ToastComponent;
+import net.minecraft.client.gui.components.toasts.ToastManager;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -26,6 +27,9 @@ public class FishCaughtToast implements Toast
     private final String fishName;
     private final ItemStack is;
     private Rarity rarity;
+
+    private int old;
+    Visibility v = Visibility.HIDE;
 
     public FishCaughtToast(FishProperties fp)
     {
@@ -49,14 +53,31 @@ public class FishCaughtToast implements Toast
         return 51;
     }
 
-    private int old;
+    @Override
+    public Visibility getWantedVisibility()
+    {
+        return v;
+    }
 
-    public Toast.Visibility render(GuiGraphics g, ToastComponent toastComponent, long timeSinceLastVisible)
+
+    @Override
+    public void update(ToastManager manager, long fullyVisibleForMs)
+    {
+        if (fullyVisibleForMs < 10000)
+            v = Visibility.SHOW;
+        else
+            v = Visibility.HIDE;
+    }
+
+
+    @Override
+    public void extractRenderState(GuiGraphicsExtractor g, Font font, long fullyVisibleForMs)
     {
         BACKGROUND_SPRITE.render(g);
         ScreenUtils.item(g, is, 6, 29);
-        ScreenUtils.text(g, toastComponent.getMinecraft().font, this.title, 40, 13, 0, false);
-        int lettersRevealed = Math.clamp((timeSinceLastVisible - 500L) / 150L, 0, this.fishName.length());
+        ScreenUtils.text(g, font, this.title, 40, 13, 0, false);
+        //todo 26
+        int lettersRevealed = Math.clamp((fullyVisibleForMs - 500L) / 150L, 0, this.fishName.length());
 
         if (this.old != lettersRevealed)
         {
@@ -65,18 +86,13 @@ public class FishCaughtToast implements Toast
         }
 
         Component comp = Tooltips.resolveTagsToComponent(rarity.wrapWithRarityMarkdownAsString(this.fishName.substring(0, lettersRevealed))).append(Component.literal("§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".substring(0, this.fishName.length() - lettersRevealed + 2)));
-        ScreenUtils.text(g, toastComponent.getMinecraft().font, comp, 40, 22, 0x635040, false);
-
-        if (timeSinceLastVisible < 10000)
-            return Visibility.SHOW;
-        else
-            return Visibility.HIDE;
+        ScreenUtils.text(g, font, comp, 40, 22, 0x635040, false);
     }
 
     public static void newFish(FishProperties fp, boolean displayToast, float percentile, boolean golden)
     {
         if (displayToast || golden)
-            Minecraft.getInstance().getToasts().addToast(new FishCaughtToast(golden ? fp.withRarity(Rarity.GOLDEN) : fp));
+            Minecraft.getInstance().getToastManager().addToast(new FishCaughtToast(golden ? fp.withRarity(Rarity.GOLDEN) : fp));
 
         if(golden)
             Minecraft.getInstance().player.playSound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 0.4f, 0.3f);
@@ -88,11 +104,11 @@ public class FishCaughtToast implements Toast
 
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
-        player.displayClientMessage(
+        player.sendOverlayMessage(
                 Component.literal("")
-                        .append(Component.translatable(fp.catchInfo().fish().toStack().getDescriptionId()))
+                        .append(Component.translatable(fp.catchInfo().fish().toStack().getItem().getDescriptionId()))
                         .append(Component.literal(" - " + size + " - " + weight))
-                , true);
+        );
 
         Minecraft.getInstance().gui.overlayMessageTime = 180;
     }

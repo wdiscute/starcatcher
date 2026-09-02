@@ -8,7 +8,7 @@ import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.Utils;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class FlipSweetSpotsOnMissModifier extends AbstractMinigameModifier
 {
@@ -41,7 +41,7 @@ public class FlipSweetSpotsOnMissModifier extends AbstractMinigameModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("flip_sweetspots_on_miss");
     }

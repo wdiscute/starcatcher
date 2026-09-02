@@ -5,10 +5,10 @@ import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 
 public class BurnHandleWhileActiveModifier extends AbstractTimedModifier
@@ -29,7 +29,7 @@ public class BurnHandleWhileActiveModifier extends AbstractTimedModifier
     }
 
     @Override
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderForeground(instance, guiGraphics, partialTick, width, height);
 

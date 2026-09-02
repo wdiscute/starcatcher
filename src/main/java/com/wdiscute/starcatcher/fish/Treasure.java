@@ -9,8 +9,8 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
@@ -37,12 +37,12 @@ public record Treasure
         )
 {
     public static final Treasure EMPTY = new Treasure(List.of(), List.of(), List.of());
-    public static final Treasure VANILLA_FISHING_LOOT_TABLE = Treasure.lootTable(List.of(BuiltInLootTables.FISHING_TREASURE.location()), Items.FISHING_ROD);
+    public static final Treasure VANILLA_FISHING_LOOT_TABLE = Treasure.lootTable(List.of(BuiltInLootTables.FISHING_TREASURE.identifier()), Items.FISHING_ROD);
     public static final Treasure EXAMPLE_TREASURE =
             new Treasure(
                     List.of(
-                            new WeightedLootTable(BuiltInLootTables.FISHING.location(), 20),
-                            new WeightedLootTable(BuiltInLootTables.ANCIENT_CITY.location(), 1)
+                            new WeightedLootTable(BuiltInLootTables.FISHING.identifier(), 20),
+                            new WeightedLootTable(BuiltInLootTables.ANCIENT_CITY.identifier(), 1)
                     ),
                     List.of(
                             new WeightedStack(new MaybeStack(Items.DIAMOND), 2),
@@ -76,7 +76,7 @@ public record Treasure
             Treasure::new
     );
 
-    public static Treasure lootTable(List<ResourceLocation> lootTables, Item... blacklist)
+    public static Treasure lootTable(List<Identifier> lootTables, Item... blacklist)
     {
         return new Treasure(lootTables.stream().map(o -> new WeightedLootTable(o, 1))
                 .toList(), List.of(), Arrays.stream(blacklist).map(Ingredient::of).toList());
@@ -89,7 +89,7 @@ public record Treasure
 
     public ItemStack unpack(ServerPlayer player, List<AbstractCatchModifier> modifiers)
     {
-        List<ResourceLocation> weightedLootTables = new ArrayList<>();
+        List<Identifier> weightedLootTables = new ArrayList<>();
 
         RandomSource r = player.getRandom();
 
@@ -137,7 +137,7 @@ public record Treasure
 
     }
 
-    private ItemStack unpackLootTable(ServerPlayer player, ResourceLocation rl, List<Ingredient> blacklist)
+    private ItemStack unpackLootTable(ServerPlayer player, Identifier rl, List<Ingredient> blacklist)
     {
         LootParams lootparams = new LootParams.Builder((ServerLevel) player.level())
                 .withParameter(LootContextParams.ORIGIN, player.position())

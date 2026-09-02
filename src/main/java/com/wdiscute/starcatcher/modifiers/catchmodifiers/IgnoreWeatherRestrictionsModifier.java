@@ -7,7 +7,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.fishrestrictions.WeatherRestriction;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.Level;
 
 import java.text.DecimalFormat;
@@ -48,7 +48,7 @@ public class IgnoreWeatherRestrictionsModifier extends AbstractCatchModifier imp
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("ignore_weather_restrictions");
     }

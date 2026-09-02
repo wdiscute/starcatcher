@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.guide;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -14,10 +15,9 @@ import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -83,20 +83,20 @@ public class SettingsScreen extends FishingMinigameScreen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float a)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        buttons.forEach(o -> o.render(guiGraphics, width, height, font));
+        super.extractRenderState(g, mouseX, mouseY, a);
+        buttons.forEach(o -> o.render(g, width, height, font));
 
-        ScreenUtils.text(guiGraphics, font, "Minigame: ", width / 2 + 70, height / 2 - 120, SCColors.YELLOW);
-        ScreenUtils.text(guiGraphics, font, "Tournament: ", width / 2 + 70, height / 2 - 60, SCColors.YELLOW);
-        ScreenUtils.text(guiGraphics, font, "Radar: ", width / 2 + 70, height / 2, SCColors.YELLOW);
-        ScreenUtils.text(guiGraphics, font, "Tracker: ", width / 2 + 70, height / 2 + 60, SCColors.YELLOW);
+        ScreenUtils.text(g, font, "Minigame: ", width / 2 + 70, height / 2 - 120, SCColors.YELLOW);
+        ScreenUtils.text(g, font, "Tournament: ", width / 2 + 70, height / 2 - 60, SCColors.YELLOW);
+        ScreenUtils.text(g, font, "Radar: ", width / 2 + 70, height / 2, SCColors.YELLOW);
+        ScreenUtils.text(g, font, "Tracker: ", width / 2 + 70, height / 2 + 60, SCColors.YELLOW);
     }
 
     public record Button(ModConfigSpec.DoubleValue configSpec, int x, int y, String text, float increase)
     {
-        public void render(GuiGraphics guiGraphics, int width, int height, Font font)
+        public void render(GuiGraphicsExtractor guiGraphics, int width, int height, Font font)
         {
             //fill background for text
             ScreenUtils.fill(guiGraphics, width / 2 + x, height / 2 + y, 100, 15, SCColors.BLACK);
@@ -136,6 +136,11 @@ public class SettingsScreen extends FishingMinigameScreen
                 configSpec.set(configSpec.getDefault());
             }
             configSpec.save();
+        }
+
+        private boolean hasShiftDown()
+        {
+            return InputConstants.isKeyDown(Minecraft.getInstance().getWindow(), 340) || InputConstants.isKeyDown(Minecraft.getInstance().getWindow(), 344);
         }
 
         public void mouseScrolled(double mouseX, double mouseY, double scroll)

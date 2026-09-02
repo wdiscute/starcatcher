@@ -1,7 +1,5 @@
 package com.wdiscute.starcatcher.fishentity.fishmodels;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishentity.FishEntityRenderState;
 import net.minecraft.client.model.EntityModel;

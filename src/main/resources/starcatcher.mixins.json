@@ -11,8 +11,6 @@
     "defaultRequire": 1
   },
   "client": [
-    "GetNameMixin",
-    "ItemRendererMixin",
-    "RenderTypeHelperMixin"
+    "GetNameMixin"
   ]
 }

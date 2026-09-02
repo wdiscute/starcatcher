@@ -1,26 +1,54 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
-import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static com.wdiscute.starcatcher.registry.SCItems.*;
 import static com.wdiscute.starcatcher.registry.SCBlocks.*;
 
-public class DGSCItemModelProvider extends ItemModelProvider
+public class DGSCModelProvider extends ModelProvider
 {
-    public DGSCItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper)
+    public DGSCModelProvider(PackOutput output)
     {
-        super(output, Starcatcher.MOD_ID, existingFileHelper);
+        super(output, Starcatcher.MOD_ID);
+    }
+
+    private ItemModelGenerators itemModels = null;
+    private BlockModelGenerators blockModels = null;
+
+    @Override
+    protected Stream<? extends Holder<Block>> getKnownBlocks()
+    {
+        List<Holder<Block>> list = new ArrayList<>();
+
+
+        return list.stream();
     }
 
     @Override
-    protected void registerModels()
+    protected Stream<? extends Holder<Item>> getKnownItems()
+    {
+        List<Holder<Item>> list = new ArrayList<>();
+
+
+        return list.stream();
+    }
+
+    @Override
+    protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels)
     {
         //bucket fishes
         for (DeferredHolder<Item, ? extends Item> item : BUCKETABLE_FISHES_REGISTRY.getEntries())
@@ -117,58 +145,65 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(DeferredItem.createItem(Starcatcher.rl("conch")));
 
         //trophies block item
-        simpleBlockItem(TROPHY_COPPER.get());
-        simpleBlockItem(TROPHY_IRON.get());
-        simpleBlockItem(TROPHY_GOLD.get());
-        simpleBlockItem(TROPHY_EMERALD.get());
-        simpleBlockItem(TROPHY_DIAMOND.get());
-        simpleBlockItem(TROPHY_OF_THE_OLDER_ANGLER.get());
+        simpleBlockItem(TROPHY_COPPER);
+        simpleBlockItem(TROPHY_IRON);
+        simpleBlockItem(TROPHY_GOLD);
+        simpleBlockItem(TROPHY_EMERALD);
+        simpleBlockItem(TROPHY_DIAMOND);
+        simpleBlockItem(TROPHY_OF_THE_OLDER_ANGLER);
 
         //aquarium
-        simpleBlockItem(AQUARIUM.get());
+        simpleBlockItem(AQUARIUM);
 
 
         //hats model, just parents to block
-        simpleBlockItem(FISHERMAN_HAT_WHITE.get());
-        simpleBlockItem(FISHERMAN_HAT_LIME.get());
-        simpleBlockItem(FISHERMAN_HAT_ORANGE.get());
-        simpleBlockItem(FISHERMAN_HAT_RED.get());
-        simpleBlockItem(FISHERMAN_HAT_GRAY.get());
-        simpleBlockItem(FISHERMAN_HAT_LIGHT_GRAY.get());
-        simpleBlockItem(FISHERMAN_HAT_BLACK.get());
-        simpleBlockItem(FISHERMAN_HAT_BROWN.get());
-        simpleBlockItem(FISHERMAN_HAT_YELLOW.get());
-        simpleBlockItem(FISHERMAN_HAT_PINK.get());
-        simpleBlockItem(FISHERMAN_HAT_MAGENTA.get());
-        simpleBlockItem(FISHERMAN_HAT_PURPLE.get());
-        simpleBlockItem(FISHERMAN_HAT_BLUE.get());
-        simpleBlockItem(FISHERMAN_HAT_LIGHT_BLUE.get());
-        simpleBlockItem(FISHERMAN_HAT_CYAN.get());
-        simpleBlockItem(FISHERMAN_HAT_GREEN.get());
+        simpleBlockItem(FISHERMAN_HAT_WHITE);
+        simpleBlockItem(FISHERMAN_HAT_LIME);
+        simpleBlockItem(FISHERMAN_HAT_ORANGE);
+        simpleBlockItem(FISHERMAN_HAT_RED);
+        simpleBlockItem(FISHERMAN_HAT_GRAY);
+        simpleBlockItem(FISHERMAN_HAT_LIGHT_GRAY);
+        simpleBlockItem(FISHERMAN_HAT_BLACK);
+        simpleBlockItem(FISHERMAN_HAT_BROWN);
+        simpleBlockItem(FISHERMAN_HAT_YELLOW);
+        simpleBlockItem(FISHERMAN_HAT_PINK);
+        simpleBlockItem(FISHERMAN_HAT_MAGENTA);
+        simpleBlockItem(FISHERMAN_HAT_PURPLE);
+        simpleBlockItem(FISHERMAN_HAT_BLUE);
+        simpleBlockItem(FISHERMAN_HAT_LIGHT_BLUE);
+        simpleBlockItem(FISHERMAN_HAT_CYAN);
+        simpleBlockItem(FISHERMAN_HAT_GREEN);
 
         //tacklebox
-        simpleBlockItem(TACKLE_BOX.get());
-        simpleBlockItem(TACKLE_BOX_WHITE.get());
-        simpleBlockItem(TACKLE_BOX_LIME.get());
-        simpleBlockItem(TACKLE_BOX_ORANGE.get());
-        simpleBlockItem(TACKLE_BOX_RED.get());
-        simpleBlockItem(TACKLE_BOX_GRAY.get());
-        simpleBlockItem(TACKLE_BOX_LIGHT_GRAY.get());
-        simpleBlockItem(TACKLE_BOX_BLACK.get());
-        simpleBlockItem(TACKLE_BOX_BROWN.get());
-        simpleBlockItem(TACKLE_BOX_YELLOW.get());
-        simpleBlockItem(TACKLE_BOX_PINK.get());
-        simpleBlockItem(TACKLE_BOX_MAGENTA.get());
-        simpleBlockItem(TACKLE_BOX_PURPLE.get());
-        simpleBlockItem(TACKLE_BOX_BLUE.get());
-        simpleBlockItem(TACKLE_BOX_LIGHT_BLUE.get());
-        simpleBlockItem(TACKLE_BOX_CYAN.get());
-        simpleBlockItem(TACKLE_BOX_GREEN.get());
+        simpleBlockItem(TACKLE_BOX);
+        simpleBlockItem(TACKLE_BOX_WHITE);
+        simpleBlockItem(TACKLE_BOX_LIME);
+        simpleBlockItem(TACKLE_BOX_ORANGE);
+        simpleBlockItem(TACKLE_BOX_RED);
+        simpleBlockItem(TACKLE_BOX_GRAY);
+        simpleBlockItem(TACKLE_BOX_LIGHT_GRAY);
+        simpleBlockItem(TACKLE_BOX_BLACK);
+        simpleBlockItem(TACKLE_BOX_BROWN);
+        simpleBlockItem(TACKLE_BOX_YELLOW);
+        simpleBlockItem(TACKLE_BOX_PINK);
+        simpleBlockItem(TACKLE_BOX_MAGENTA);
+        simpleBlockItem(TACKLE_BOX_PURPLE);
+        simpleBlockItem(TACKLE_BOX_BLUE);
+        simpleBlockItem(TACKLE_BOX_LIGHT_BLUE);
+        simpleBlockItem(TACKLE_BOX_CYAN);
+        simpleBlockItem(TACKLE_BOX_GREEN);
 
     }
 
-    private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item)
+    private void simpleItem(DeferredItem<? extends Item> item)
     {
-        return withExistingParent(item.getId().getPath(), mcLoc("item/generated")).texture("layer0", modLoc("item/" + item.getId().getPath()));
+        itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
+    }
+
+    private void simpleBlockItem(Holder<Block> block)
+    {
+        blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block.value(),
+                        BlockModelGenerators.plainVariant(Starcatcher.rl("block/" + block.getKey().identifier().getPath())))
+                .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING));
     }
 }

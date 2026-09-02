@@ -12,8 +12,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BucketItem;
@@ -31,9 +31,9 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
 {
     EntityType<FishEntity> entity;
 
-    public StarcaughtBucket(Fluid fluid)
+    public StarcaughtBucket(Properties p, Fluid fluid)
     {
-        super(fluid, new Item.Properties().stacksTo(1));
+        super(fluid, p.stacksTo(1));
 
         entity = SCEntities.FISH.get();
     }
@@ -55,7 +55,7 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
 
     private void spawn(ServerLevel serverLevel, ItemStack bucketedMobStack, BlockPos pos)
     {
-        FishEntity fishEntity = this.entity.spawn(serverLevel, bucketedMobStack, null, pos, MobSpawnType.BUCKET, true, false);
+        FishEntity fishEntity = this.entity.spawn(serverLevel, bucketedMobStack, null, pos, EntitySpawnReason.BUCKET, true, false);
         if (SCDataComponents.has(bucketedMobStack, SCDataComponents.BUCKETED_FISH))
             fishEntity.setFish(getFish(bucketedMobStack));
         else
@@ -88,7 +88,7 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
             {
                 baseName = itemName;
             }
-            else baseName = Component.translatable(maybeStack.toStack().getDescriptionId());
+            else baseName = Component.translatable(maybeStack.toStack().getItem().getDescriptionId());
 
             CaughtFishInfo sw = SCDataComponents.get(maybeStack.toStack(), SCDataComponents.CAUGHT_FISH_INFO);
             if (sw != null)

@@ -3,7 +3,7 @@ package com.wdiscute.starcatcher.modifiers;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public class EmptyModifier implements Modifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("empty");
     }

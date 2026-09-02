@@ -10,7 +10,7 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.*;
 
@@ -49,12 +49,12 @@ public class NewCatchIncreaseModifier extends AbstractCatchModifier
         // otherwise FPs with high base chances would disproportionally get increased odds
         Set<FishProperties> set = new HashSet<>();
 
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = fbe.player.getData(SCDataAttachments.FISHING_GUIDE).fishesCaught;
+        Map<Identifier, FishCaughtCounter> fishesCaught = fbe.player.getData(SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
         for (FishProperties fp : available)
         {
             if(set.contains(fp)) continue;
-            ResourceLocation key = fbe.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp);
+            Identifier key = fbe.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp);
 
             if (key == null) continue;
 
@@ -72,7 +72,7 @@ public class NewCatchIncreaseModifier extends AbstractCatchModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("new_catch_increase");
     }

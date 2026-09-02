@@ -11,7 +11,7 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class ExtraBaseCatchModifier extends AbstractCatchModifier
 
         for (int i = 0; i < count; i++)
         {
-            float percentile = fbe.level().random.nextFloat() * 100;
+            float percentile = fbe.level().getRandom().nextFloat() * 100;
 
             ItemStack itemStack = FishApi.makeItemStackNonBucket(fp, percentile, false, fbe.player, perfectCatch);
 
@@ -63,7 +63,7 @@ public class ExtraBaseCatchModifier extends AbstractCatchModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("extra_base_catch");
     }

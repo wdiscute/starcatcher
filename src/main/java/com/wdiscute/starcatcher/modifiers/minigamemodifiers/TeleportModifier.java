@@ -1,7 +1,5 @@
 package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -12,10 +10,10 @@ import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
-import org.joml.Quaternionf;
+import org.joml.Matrix3x2fStack;
 
 public class TeleportModifier extends AbstractMinigameModifier
 {
@@ -83,7 +81,7 @@ public class TeleportModifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderBackground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderBackground(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderBackground(instance, guiGraphics, partialTick, width, height);
 
@@ -101,31 +99,32 @@ public class TeleportModifier extends AbstractMinigameModifier
 
 
     @Override
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderForeground(instance, guiGraphics, partialTick, width, height);
         renderKimbeMarker(guiGraphics, width, height);
     }
 
-    public void renderKimbeMarker(GuiGraphics g, int width, int height)
+    public void renderKimbeMarker(GuiGraphicsExtractor g, int width, int height)
     {
-        PoseStack poseStack = g.pose();
-        poseStack.pushPose();
+        Matrix3x2fStack poseStack = g.pose();
+        poseStack.pushMatrix();
 
         float centerX = width / 2f;
         float centerY = height / 2f;
 
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(kimbePosition + 180)));
-        poseStack.translate(-centerX, -centerY, 0);
+        poseStack.translate(centerX, centerY);
+        //todo 26
+        poseStack.rotate((float) Math.toRadians(kimbePosition + 180));
+        poseStack.translate(-centerX, -centerY);
 
         ScreenUtils.outline(g, width / 2, height / 2 + 8, 2, 28, 0x99653bea);
 
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("teleport");
     }

@@ -6,7 +6,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
@@ -17,13 +17,13 @@ import net.minecraft.world.level.Level;
 public class BrokenBottleItem extends Item implements ProjectileItem
 {
 
-    public BrokenBottleItem()
+    public BrokenBottleItem(Properties p)
     {
-        super(new Item.Properties().stacksTo(16));
+        super(p.stacksTo(16));
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack itemstack = player.getItemInHand(hand);
         level.playSound(
                 null,
@@ -47,7 +47,7 @@ public class BrokenBottleItem extends Item implements ProjectileItem
                 0.4F / (level.getRandom().nextFloat() * 0.4F + 0.8F)
         );
 
-        if (!level.isClientSide) {
+        if (!level.isClientSide()) {
             BrokenBottleEntity bottleEntity = new BrokenBottleEntity(level, player);
             bottleEntity.setItem(itemstack);
             bottleEntity.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 1.5F, 1.0F);
@@ -56,7 +56,7 @@ public class BrokenBottleItem extends Item implements ProjectileItem
 
         player.awardStat(Stats.ITEM_USED.get(this));
         itemstack.consume(1, player);
-        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
+        return InteractionResult.SUCCESS;
     }
 
     @Override

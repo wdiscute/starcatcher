@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.modifiers.Modifier;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 /**
  * This class should be used only for minigame modifiers created during runtime and not from codec!
@@ -17,7 +17,7 @@ public abstract class AbstractInstancedMinigameModifier extends AbstractMinigame
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return null;
     }

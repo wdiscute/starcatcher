@@ -8,7 +8,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.modifiers.Modifier;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 public class ForceSelectFishModifier extends AbstractCatchModifier
 {
@@ -29,15 +29,15 @@ public class ForceSelectFishModifier extends AbstractCatchModifier
     }
 
     @Override
-    public Pair<FishProperties, ResourceLocation> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
+    public Pair<FishProperties, Identifier> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
     {
         //return if chance doesn't hit
-        if(fbe.level().random.nextFloat() > chance) return null;
+        if(fbe.level().getRandom().nextFloat() > chance) return null;
         return Pair.of(fp, Starcatcher.MISSINGNO);
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("force_select_fish");
     }

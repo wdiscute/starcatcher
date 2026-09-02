@@ -12,13 +12,11 @@ import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
@@ -26,7 +24,7 @@ import java.util.Optional;
 
 public class StarcatcherFishingRodItem extends Item
 {
-    public StarcatcherFishingRodItem()
+    public StarcatcherFishingRodItem(Properties p)
     {
         super(new Properties()
                 .rarity(Rarity.EPIC)
@@ -39,7 +37,7 @@ public class StarcatcherFishingRodItem extends Item
         );
     }
 
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand)
+    public InteractionResult use(Level level, Player player, InteractionHand hand)
     {
         ItemStack stack = player.getItemInHand(hand);
 
@@ -47,18 +45,18 @@ public class StarcatcherFishingRodItem extends Item
         if (SCDataComponents.getOrDefault(stack, SCDataComponents.HOOK, MaybeStack.EMPTY).toStack().isEmpty()
             || SCDataComponents.getOrDefault(stack, SCDataComponents.BOBBER, MaybeStack.EMPTY).toStack().isEmpty())
         {
-            player.displayClientMessage(Component.translatable("gui.starcatcher.no_hook_or_bobber"), true);
-            return InteractionResultHolder.fail(stack);
+            player.sendOverlayMessage(Component.translatable("gui.starcatcher.no_hook_or_bobber"));
+            return InteractionResult.PASS;
         }
 
         //end client side pipeline
-        if (level.isClientSide) return InteractionResultHolder.success(stack);
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
 
         //get attachment
         FishingBobAttachment fishingBobAttachment = SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB.get());
 
         //get tackle skin
-        AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(Starcatcher.BASE));
+        AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
 
         //if player is not fishing, cast
         if (fishingBobAttachment.isEmpty())
@@ -67,9 +65,9 @@ public class StarcatcherFishingRodItem extends Item
 
             //display bait count messages
             if (bait.isEmpty())
-                player.displayClientMessage(Component.translatable("gui.starcatcher.bait_out"), true);
+                player.sendOverlayMessage(Component.translatable("gui.starcatcher.bait_out"));
             else if (bait.getCount() < 5)
-                player.displayClientMessage(Component.translatable("gui.starcatcher.bait_running_low"), true);
+                player.sendOverlayMessage(Component.translatable("gui.starcatcher.bait_running_low"));
 
             //spawn bobber
             Entity entity = new FishingBobEntity(level, player, stack, tackleSkin);
@@ -86,7 +84,7 @@ public class StarcatcherFishingRodItem extends Item
         //if player is fishing
         else
         {
-            Entity maybeEntity = ((ServerLevel) level).getEntity(fishingBobAttachment.getUuid());
+            Entity maybeEntity = level.getEntity(fishingBobAttachment.getUuid());
 
             //if fish is not biting
             if (maybeEntity instanceof FishingBobEntity fbe && !fbe.checkBiting())
@@ -95,28 +93,26 @@ public class StarcatcherFishingRodItem extends Item
                 tackleSkin.onRetrieve(player);
 
                 //kill bobber
-                fbe.kill();
+                fbe.kill((ServerLevel) level);
 
                 //remove fishing bobber uuid data attachment
                 SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB.get());
             }
         }
 
-        return InteractionResultHolder.success(stack);
+        return InteractionResult.SUCCESS;
     }
 
     @Override
-    public boolean hasCraftingRemainingItem(ItemStack stack)
+    public ItemStackTemplate getCraftingRemainder(ItemInstance instance)
     {
-        return true;
+        return switch (instance)
+        {
+            case ItemStack stack -> new ItemStackTemplate(instance.typeHolder(), instance.count(), stack.getComponentsPatch());
+            case ItemStackTemplate template -> template;
+            default -> null;
+        };
     }
-
-    @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack)
-    {
-        return itemStack.copy();
-    }
-
 
     @Override
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack)

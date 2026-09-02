@@ -1,12 +1,10 @@
 package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.sounds.SoundEvents;
 
 public class FreezeHandleModifier extends AbstractTimedModifier
@@ -16,7 +14,7 @@ public class FreezeHandleModifier extends AbstractTimedModifier
     public static final ScreenUtils.Image FROZEN = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/freeze_center.png"), 32, 32);
 
     @Override
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics g, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphicsExtractor g, float partialTick, int width, int height)
     {
         super.renderForeground(instance, g, partialTick, width, height);
         float alpha = 1 - (instance.handleSpeed - instance.handleBaseSpeed / 2) / (instance.handleBaseSpeed - instance.handleBaseSpeed / 2);

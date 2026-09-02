@@ -5,12 +5,14 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.data.network.SBSetEditableMessagePayload;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 
@@ -81,7 +83,7 @@ public class EditableMessageScreen extends Screen
     }
 
     @Override
-    public void resize(Minecraft minecraft, int width, int height)
+    public void resize(int width, int height)
     {
         List<String> s = new ArrayList<>();
 
@@ -90,7 +92,7 @@ public class EditableMessageScreen extends Screen
         for (int i = 0; i < 15; i++)
             s.add(this.boxes.get(i).getValue());
 
-        this.init(minecraft, width, height);
+        this.init(width, height);
 
         for (int i = 0; i < 15; i++)
             boxes.get(i).setValue(s.get(i));
@@ -99,18 +101,18 @@ public class EditableMessageScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTick)
     {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        BACKGROUND.render(guiGraphics, uiX, uiY);
-        boxes.forEach(b -> b.render(guiGraphics, mouseX, mouseY, partialTick));
-        nameBox.render(guiGraphics, mouseX, mouseY, partialTick);
+        super.extractRenderState(g, mouseX, mouseY, partialTick);
+        BACKGROUND.render(g, uiX, uiY);
+        boxes.forEach(b -> b.extractRenderState(g, mouseX, mouseY, partialTick));
+        nameBox.extractRenderState(g, mouseX, mouseY, partialTick);
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    public boolean keyPressed(KeyEvent event)
     {
-        InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
+        InputConstants.Key key = InputConstants.getKey(event);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(key) && boxes.stream().noneMatch(EditBox::canConsumeInput) && !nameBox.canConsumeInput())
         {
             this.onClose();
@@ -118,21 +120,21 @@ public class EditableMessageScreen extends Screen
         }
 
         //if pressed enter, send arrow down to go to next line
-        if (keyCode == GLFW.GLFW_KEY_ENTER)
+        if (event.key() == GLFW.GLFW_KEY_ENTER)
         {
-            keyPressed(GLFW.GLFW_KEY_DOWN, 0, 0);
+            keyPressed(new KeyEvent(GLFW.GLFW_KEY_DOWN, 0, 0));
             return true;
         }
 
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(event);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
         boxes.forEach(o -> o.setFocused(false));
         nameBox.setFocused(false);
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
@@ -140,7 +142,7 @@ public class EditableMessageScreen extends Screen
     {
         List<String> text = new ArrayList<>();
         boxes.forEach(b -> text.add(b.getValue()));
-        PacketDistributor.sendToServer(new SBSetEditableMessagePayload(new EditableMessage(nameBox.getValue(), text)));
+        ClientPacketDistributor.sendToServer(new SBSetEditableMessagePayload(new EditableMessage(nameBox.getValue(), text)));
         super.onClose();
     }
 

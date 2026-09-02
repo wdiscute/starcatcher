@@ -15,7 +15,7 @@ import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.MaybeStack;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 
@@ -45,16 +45,16 @@ public class FishMessagesModifier extends AbstractCatchModifier
     }
 
     @Override
-    public Pair<FishProperties, ResourceLocation> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
+    public Pair<FishProperties, Identifier> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
     {
         //if passes the chance
-        if (fbe.level().random.nextFloat() > chance)
+        if (fbe.level().getRandom().nextFloat() > chance)
             return null;
 
         List<Message> messages = MessagesSavedData.get(((ServerLevel) fbe.level())).getMessages();
 
         //if there are any messages
-        List<Message> list = messages.stream().filter(o -> o.dimension().equals(fbe.level().dimension().location()) && !o.sender().equals(fbe.player.getUUID())).toList();
+        List<Message> list = messages.stream().filter(o -> o.dimension().equals(fbe.level().dimension().identifier()) && !o.sender().equals(fbe.player.getUUID())).toList();
 
         if (!list.isEmpty())
         {
@@ -83,7 +83,7 @@ public class FishMessagesModifier extends AbstractCatchModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("fish_messages");
     }

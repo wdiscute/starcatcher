@@ -11,7 +11,7 @@ import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.LeafSweetSpotBehaviour;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 
 public class AddLeavesSweetspotsModifier extends AbstractMinigameModifier
@@ -45,7 +45,7 @@ public class AddLeavesSweetspotsModifier extends AbstractMinigameModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("add_leaves_spots");
     }

@@ -15,8 +15,8 @@ import com.wdiscute.starcatcher.registry.items.StarcaughtBucket;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -27,7 +27,7 @@ import java.util.Map;
 public final class FishRegistration
 {
     public static List<FishProperties> ALL_FISHABLE = new ArrayList<>();
-    public static Map<FishProperties, ResourceLocation> ALL_FISHABLE_MAP = new HashMap<>();
+    public static Map<FishProperties, Identifier> ALL_FISHABLE_MAP = new HashMap<>();
     public static List<FishProperties> STARCATCHER_FISHABLE = new ArrayList<>();
 
     //apply fp specific stuff and register
@@ -72,7 +72,7 @@ public final class FishRegistration
 
         //add to lists and maps
         ALL_FISHABLE.add(fp);
-        ALL_FISHABLE_MAP.put(fp, key.location());
+        ALL_FISHABLE_MAP.put(fp, key.identifier());
         //add every starcatcher fish that is not trash to STARCATCHER_FISHABLE tag
         if (fp.catchInfo().fish().identifier().getNamespace().equals("starcatcher") && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.rarity().equals(Rarity.TRASH))
             STARCATCHER_FISHABLE.add(fp);
@@ -166,7 +166,7 @@ public final class FishRegistration
         return fp;
     }
 
-    public static ResourceKey<FishProperties> key(ResourceLocation id)
+    public static ResourceKey<FishProperties> key(Identifier id)
     {
         return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, id);
     }

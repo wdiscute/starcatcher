@@ -19,7 +19,7 @@ import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -83,8 +83,8 @@ public class SCTooltipEvents
         }
 
         //tackle skin data component
-        ResourceLocation tackleSkinDC = Starcatcher.TACKLE_SKIN_REGISTRY.getKey(
-                SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(Starcatcher.BASE)));
+        Identifier tackleSkinDC = Starcatcher.TACKLE_SKIN_REGISTRY.getKey(
+                SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE)));
         if (tackleSkinDC != null && !tackleSkinDC.equals(Starcatcher.BASE))
         {
             String s = I18n.get("tooltip.tackle." + tackleSkinDC.toLanguageKey());
@@ -97,8 +97,8 @@ public class SCTooltipEvents
         }
 
         //tackle skin data map
-        ResourceLocation tackleSkinDM = Starcatcher.TACKLE_SKIN_REGISTRY.getKey(
-                SCDataMaps.getOrDefault(stack, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(Starcatcher.BASE)));
+        Identifier tackleSkinDM = Starcatcher.TACKLE_SKIN_REGISTRY.getKey(
+                SCDataMaps.getOrDefault(stack, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE)));
         if (tackleSkinDM != null && !tackleSkinDM.equals(Starcatcher.BASE))
         {
             String s = I18n.get("tooltip.tackle." + tackleSkinDM.toLanguageKey());

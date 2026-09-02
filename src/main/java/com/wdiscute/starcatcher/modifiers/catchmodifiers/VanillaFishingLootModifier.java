@@ -13,7 +13,7 @@ import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -41,9 +41,9 @@ public class VanillaFishingLootModifier extends AbstractCatchModifier
     }
 
     @Override
-    public Pair<FishProperties, ResourceLocation> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
+    public Pair<FishProperties, Identifier> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
     {
-        if(fbe.level().random.nextFloat() > chance) return null;
+        if(fbe.level().getRandom().nextFloat() > chance) return null;
 
         Level level = fbe.level();
         Player player = fbe.player;
@@ -57,7 +57,7 @@ public class VanillaFishingLootModifier extends AbstractCatchModifier
                 .create(LootContextParamSets.FISHING);
 
         LootTable table = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE,
-                ResourceLocation.withDefaultNamespace("gameplay/fishing")));
+                Identifier.withDefaultNamespace("gameplay/fishing")));
 
         Optional<ItemStack> any = table.getRandomItems(lootparams).stream().findAny();
 
@@ -72,7 +72,7 @@ public class VanillaFishingLootModifier extends AbstractCatchModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("vanilla_fishing_loot");
     }
