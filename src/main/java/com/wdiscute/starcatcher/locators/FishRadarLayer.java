@@ -14,21 +14,18 @@ import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FishRadarLayer implements LayeredDraw.Layer
+public class FishRadarLayer implements GuiLayer
 {
-
     private static final ScreenUtils.Image BASE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_radar/base.png"), 101, 160);
     private static final ScreenUtils.Image EXTRA_ROW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_radar/extra_row.png"), 101, 22);
 
@@ -56,7 +53,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
 
         lastRefreshMS = System.currentTimeMillis();
 
-        for (FishProperties fp : player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
+        for (FishProperties fp : player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             if (fp.hasGuideEntry() && fp.calculateChance(player, player.level(), ItemStack.EMPTY, AbstractFishRestriction.Context.RADAR) > 0)
                 fpsInArea.add(fp);
 
@@ -69,7 +66,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics g, DeltaTracker deltaTracker)
+    public void render(GuiGraphicsExtractor g, DeltaTracker deltaTracker)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -87,7 +84,12 @@ public class FishRadarLayer implements LayeredDraw.Layer
 
         //if any armor slots has tag
         if (!shouldShow)
-            shouldShow = player.getInventory().armor.stream().anyMatch(o -> o.is(SCTags.HAS_RADAR_LAYER));
+        {
+            shouldShow = shouldShow || player.getItemBySlot(EquipmentSlot.HEAD).is(SCTags.HAS_RADAR_LAYER);
+            shouldShow = shouldShow || player.getItemBySlot(EquipmentSlot.CHEST).is(SCTags.HAS_RADAR_LAYER);
+            shouldShow = shouldShow || player.getItemBySlot(EquipmentSlot.LEGS).is(SCTags.HAS_RADAR_LAYER);
+            shouldShow = shouldShow || player.getItemBySlot(EquipmentSlot.FEET).is(SCTags.HAS_RADAR_LAYER);
+        }
 
         //if any of the curios has the tag
         if (!shouldShow)
@@ -108,11 +110,11 @@ public class FishRadarLayer implements LayeredDraw.Layer
         else
             offScreen = 0;
 
-        g.pose().pushPose();
-        g.pose().scale(((float) SCConfig.RADAR_SCALE.getAsDouble()), ((float) SCConfig.RADAR_SCALE.getAsDouble()), 1);
-        g.pose().translate(SCConfig.RADAR_X_OFFSET.get(), SCConfig.RADAR_Y_OFFSET.get(), 0);
+        g.pose().pushMatrix();
+        g.pose().scale(((float) SCConfig.RADAR_SCALE.getAsDouble()), ((float) SCConfig.RADAR_SCALE.getAsDouble()));
+        g.pose().translate(((float)SCConfig.RADAR_X_OFFSET.getAsDouble()), (float) SCConfig.RADAR_Y_OFFSET.getAsDouble());
 
-        g.pose().translate(-offScreen, 0, 0);
+        g.pose().translate(-offScreen, 0);
 
         //rows of radar to render
         BASE.render(g, uiX, uiY);
@@ -144,6 +146,6 @@ public class FishRadarLayer implements LayeredDraw.Layer
                     uiY + 48 + i / 5 * 18);
         }
 
-        g.pose().popPose();
+        g.pose().popMatrix();
     }
 }

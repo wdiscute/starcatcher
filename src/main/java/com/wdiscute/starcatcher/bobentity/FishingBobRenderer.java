@@ -6,47 +6,32 @@ import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bobentity.tackles.*;
-import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
-import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
-import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.SubmitNodeCollector;
+import net.minecraft.client.renderer.culling.Frustum;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import static java.lang.Float.NaN;
-
-public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
+public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, FishingBobRenderState>
 {
-    public static final Map<ResourceLocation, EntityModel<FishEntity>> BOB_MODELS = new HashMap<>();
-
-    public static void createMap(EntityModelSet modelSet)
-    {
-        if (!BOB_MODELS.isEmpty()) return;
-
-        BOB_MODELS.put(Starcatcher.BASE, new BaseModel<>(modelSet.bakeLayer(BaseModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("clear"), new ClearModel<>(modelSet.bakeLayer(ClearModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("colorful"), new ColorfulModel<>(modelSet.bakeLayer(ColorfulModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("frog"), new FrogModel<>(modelSet.bakeLayer(FrogModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("kimbe"), new KimbeModel<>(modelSet.bakeLayer(KimbeModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("king"), new KingModel<>(modelSet.bakeLayer(KingModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("pearl"), new PearlModel<>(modelSet.bakeLayer(PearlModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("valley"), new ValleyModel<>(modelSet.bakeLayer(ValleyModel.LAYER_LOCATION)));
-        BOB_MODELS.put(Starcatcher.rl("survivor"), new SurvivorModel<>(modelSet.bakeLayer(SurvivorModel.LAYER_LOCATION)));
-    }
+    public static final List<Identifier> skins = new ArrayList<>();
 
     public FishingBobRenderer(EntityRendererProvider.Context context)
     {
@@ -54,114 +39,145 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
         createMap(context.getModelSet());
     }
 
-    @Override
-    public ResourceLocation getTextureLocation(FishingBobEntity fishingBobEntity)
+    public static final Map<Identifier, EntityModel<FishingBobRenderState>> BOB_MODELS = new HashMap<>();
+
+    public static void createMap(EntityModelSet modelSet)
     {
-        return Starcatcher.rl("textures/entity/fishing/base.png");
+        if (!BOB_MODELS.isEmpty()) return;
+
+        BOB_MODELS.put(Starcatcher.rl("base"), new BaseModel(modelSet.bakeLayer(BaseModel.LAYER_LOCATION)));
+        BOB_MODELS.put(Starcatcher.rl("clear"), new ClearModel(modelSet.bakeLayer(ClearModel.LAYER_LOCATION)));
+        BOB_MODELS.put(Starcatcher.rl("colorful"), new ColorfulModel(modelSet.bakeLayer(ColorfulModel.LAYER_LOCATION)));
+        BOB_MODELS.put(Starcatcher.rl("frog"), new FrogModel(modelSet.bakeLayer(FrogModel.LAYER_LOCATION)));
+        BOB_MODELS.put(Starcatcher.rl("kimbe"), new KimbeModel(modelSet.bakeLayer(KimbeModel.LAYER_LOCATION)));
+        BOB_MODELS.put(Starcatcher.rl("king"), new KingModel(modelSet.bakeLayer(KingModel.LAYER_LOCATION)));
+        BOB_MODELS.put(Starcatcher.rl("pearl"), new PearlModel(modelSet.bakeLayer(PearlModel.LAYER_LOCATION)));
     }
 
-    @Override
-    public void render(FishingBobEntity fishingBobEntity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    public boolean shouldRender(FishingBobEntity entity, Frustum culler, double camX, double camY, double camZ)
     {
+        return super.shouldRender(entity, culler, camX, camY, camZ) && entity.getOwner() != null;
+    }
+
+    public void submit(FishingBobRenderState state, PoseStack poseStack, SubmitNodeCollector node, CameraRenderState camera)
+    {
+        //render line
         poseStack.pushPose();
-        poseStack.translate(0.0F, 1.5F, 0.0F);
-        poseStack.scale(-1.0F, -1.0F, 1.0F);
-
-        poseStack.mulPose(Axis.YP.rotationDegrees(180));
-        poseStack.mulPose(Axis.YP.rotationDegrees(entityYaw));
-
-        //render tackle based on tackle skin, defaults to BaseTackleSkin
-        //data attachment returns starcatcher:base if there's no attachment
-        ResourceLocation tackleRl = SCDataAttachments.get(fishingBobEntity, SCDataAttachments.TACKLE_SKIN);
-
-        EntityModel<FishEntity> model = BOB_MODELS.getOrDefault(tackleRl, BOB_MODELS.get(Starcatcher.BASE));
-        VertexConsumer vertexconsumer = buffer.getBuffer(model.renderType(Utils.rl(tackleRl.getNamespace(),
-                "textures/entity/tackle/" + tackleRl.getPath() + ".png")));
-        model.renderToBuffer(poseStack, vertexconsumer, packedLight, OverlayTexture.NO_OVERLAY);
+        float xa = (float) state.lineOriginOffset.x;
+        float ya = (float) state.lineOriginOffset.y;
+        float za = (float) state.lineOriginOffset.z;
+        float width = Minecraft.getInstance().gameRenderer.getGameRenderState().windowRenderState.appropriateLineWidth;
+        node.submitCustomGeometry(poseStack, RenderTypes.lines(), (pose, buffer) ->
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                float a0 = fraction(i, 16);
+                float a1 = fraction(i + 1, 16);
+                stringVertex(xa, ya, za, buffer, pose, a0, a1, width);
+                stringVertex(xa, ya, za, buffer, pose, a1, a0, width);
+            }
+        });
         poseStack.popPose();
 
 
-        //render fishing line from bobber to player
-        if (fishingBobEntity.getOwner() instanceof Player player)
-        {
-            poseStack.pushPose();
-            float f = player.getAttackAnim(partialTicks);
-            float f1 = Mth.sin(Mth.sqrt(f) * (float) Math.PI);
-            Vec3 vec3 = this.getPlayerHandPos(player, f1, partialTicks);
-            Vec3 vec31 = fishingBobEntity.getPosition(partialTicks).add(0.0, 0.25, 0.0);
-            float f2 = (float) (vec3.x - vec31.x);
-            float f3 = (float) (vec3.y - vec31.y);
-            float f4 = (float) (vec3.z - vec31.z);
-            VertexConsumer vertexconsumer1 = buffer.getBuffer(RenderType.lineStrip());
-            PoseStack.Pose posestack$pose1 = poseStack.last();
+        //render tackle
+        poseStack.pushPose();
+        poseStack.scale(1F, -1F, 1F);
+        poseStack.translate(0, -1.6, 0);
+        poseStack.mulPose(Axis.YP.rotationDegrees(180));
+        poseStack.mulPose(Axis.YP.rotationDegrees(-state.entityYaw));
 
-            for (int j = 0; j <= 16; j++)
-            {
-                stringVertex(0xff000000, f2, f3, f4, vertexconsumer1, posestack$pose1, fraction(j, 16), fraction(j + 1, 16));
-            }
+        //starcatcher:base
+        node.submitModel(
+                state.skin, state, poseStack,
+                RenderTypes.entityCutout(state.skinRL.withPrefix("textures/entity/tackle/").withSuffix(".png")),
+                state.lightCoords,
+                OverlayTexture.NO_OVERLAY, 0xffffffff, null, state.outlineColor, null
+        );
 
-            //PLEASE FOR THE LOVE OF GOD DONT REMOVE THIS LINE JUST DONT PLEASE THIS TOOK TOO FUCKING LONG DONT YOU DARE TOUCH IT
-            vertexconsumer1.addVertex(NaN, NaN, NaN).setColor(0).setNormal(posestack$pose1, 0, 0, 0);
+        poseStack.popPose();
 
-            poseStack.popPose();
-            super.render(fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
-
-        }
+        super.submit(state, poseStack, node, camera);
     }
 
-    private static void stringVertex(int color, float x, float y, float z, VertexConsumer consumer, PoseStack.Pose pose, float stringFraction, float nextStringFraction)
+    public static HumanoidArm getHoldingArm(Player owner)
     {
-        if (color == 0xffff9999) color = -16777216;
-
-        float f = x * stringFraction;
-        float f1 = y * (stringFraction * stringFraction + stringFraction) * 0.5F + 0.25F;
-        float f2 = z * stringFraction;
-        float f3 = x * nextStringFraction - f;
-        float f4 = y * (nextStringFraction * nextStringFraction + nextStringFraction) * 0.5F + 0.25F - f1;
-        float f5 = z * nextStringFraction - f2;
-        float f6 = Mth.sqrt(f3 * f3 + f4 * f4 + f5 * f5);
-        f3 /= f6;
-        f4 /= f6;
-        f5 /= f6;
-        consumer.addVertex(pose, f, f1, f2).setColor(color).setNormal(pose, f3, f4, f5);
+        return owner.getMainHandItem().is(SCTags.RODS) ? owner.getMainArm() : owner.getMainArm().getOpposite();
     }
 
-    private static float fraction(int numerator, int denominator)
+    private Vec3 getPlayerHandPos(Player owner, float swing, float partialTicks)
     {
-        return (float) numerator / (float) denominator;
-    }
-
-    private Vec3 getPlayerHandPos(Player player, float p_340872_, float partialTick)
-    {
-        int i = player.getMainArm() == HumanoidArm.RIGHT ? 1 : -1;
-        ItemStack itemstack = player.getMainHandItem();
-        if (!itemstack.is(SCTags.RODS))
+        int invert = getHoldingArm(owner) == HumanoidArm.RIGHT ? 1 : -1;
+        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && owner == Minecraft.getInstance().player)
         {
-            i = -i;
-        }
-
-        if (this.entityRenderDispatcher.options.getCameraType().isFirstPerson() && player == Minecraft.getInstance().player)
-        {
-            double d4 = 960.0 / (double) this.entityRenderDispatcher.options.fov().get().intValue();
-            Vec3 vec3 = this.entityRenderDispatcher
+            float fov = this.entityRenderDispatcher.options.fov().get().intValue();
+            double viewBobbingScale = 960.0 / fov;
+            Vec3 viewVec = this.entityRenderDispatcher
                     .camera
-                    .getNearPlane()
-                    .getPointOnPlane((float) i * 0.525F, -0.1F)
-                    .scale(d4)
-                    .yRot(p_340872_ * 0.5F)
-                    .xRot(-p_340872_ * 0.7F);
-            return player.getEyePosition(partialTick).add(vec3);
+                    .getNearPlane(fov)
+                    .getPointOnPlane(invert * 0.525F, -0.1F)
+                    .scale(viewBobbingScale)
+                    .yRot(swing * 0.5F)
+                    .xRot(-swing * 0.7F);
+            return owner.getEyePosition(partialTicks).add(viewVec);
         }
         else
         {
-            float f = Mth.lerp(partialTick, player.yBodyRotO, player.yBodyRot) * (float) (Math.PI / 180.0);
-            double d0 = (double) Mth.sin(f);
-            double d1 = (double) Mth.cos(f);
-            float f1 = player.getScale();
-            double d2 = (double) i * 0.35 * (double) f1;
-            double d3 = 0.8 * (double) f1;
-            float f2 = player.isCrouching() ? -0.1875F : 0.0F;
-            return player.getEyePosition(partialTick).add(-d1 * d2 - d0 * d3, (double) f2 - 0.45 * (double) f1, -d0 * d2 + d1 * d3);
+            float ownerYRot = Mth.lerp(partialTicks, owner.yBodyRotO, owner.yBodyRot) * (float) (Math.PI / 180.0);
+            double sin = Mth.sin(ownerYRot);
+            double cos = Mth.cos(ownerYRot);
+            float playerScale = owner.getScale();
+            double rightOffset = invert * 0.35 * playerScale;
+            double forwardOffset = 0.8 * playerScale;
+            float yOffset = owner.isCrouching() ? -0.1875F : 0.0F;
+            return owner.getEyePosition(partialTicks)
+                    .add(-cos * rightOffset - sin * forwardOffset, yOffset - 0.45 * playerScale, -sin * rightOffset + cos * forwardOffset);
         }
+    }
+
+    private static float fraction(int i, int steps)
+    {
+        return (float) i / steps;
+    }
+
+    private static void stringVertex(float xa, float ya, float za, VertexConsumer stringBuffer, PoseStack.Pose stringPose, float aa, float nexta, float width)
+    {
+        float x = xa * aa;
+        float y = ya * (aa * aa + aa) * 0.5F + 0.25F;
+        float z = za * aa;
+        float nx = xa * nexta - x;
+        float ny = ya * (nexta * nexta + nexta) * 0.5F + 0.25F - y;
+        float nz = za * nexta - z;
+        float length = Mth.sqrt(nx * nx + ny * ny + nz * nz);
+        nx /= length;
+        ny /= length;
+        nz /= length;
+        stringBuffer.addVertex(stringPose, x, y, z).setColor(-16777216).setNormal(stringPose, nx, ny, nz).setLineWidth(width);
+    }
+
+    public FishingBobRenderState createRenderState()
+    {
+        return new FishingBobRenderState();
+    }
+
+    public void extractRenderState(FishingBobEntity entity, FishingBobRenderState state, float partialTicks)
+    {
+        super.extractRenderState(entity, state, partialTicks);
+
+        if (entity.getOwner() instanceof Player player)
+        {
+            float swing = player.getAttackAnim(partialTicks);
+            float swing2 = Mth.sin(Mth.sqrt(swing) * (float) Math.PI);
+            Vec3 playerPos = this.getPlayerHandPos(player, swing2, partialTicks);
+            Vec3 hookPos = entity.getPosition(partialTicks).add(0.0, 0.25, 0.0);
+            state.lineOriginOffset = playerPos.subtract(hookPos);
+        }
+        else
+            state.lineOriginOffset = Vec3.ZERO;
+
+        state.entityYaw = entity.yRotO;
+
+        state.skin = BOB_MODELS.get(SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN));
+        state.skinRL = SCDataAttachments.get(entity, SCDataAttachments.TACKLE_SKIN);
     }
 }

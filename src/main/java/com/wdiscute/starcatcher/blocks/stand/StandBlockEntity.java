@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.tournament.Tournament;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.UUIDUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -19,6 +20,8 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.nikdo53.tinymultiblocklib.blockentities.AbstractMultiBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
@@ -80,54 +83,38 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void preRemoveSideEffects(BlockPos pos, BlockState state)
     {
-        super.loadAdditional(tag, registries);
+        TournamentHandler.cancelTournament(level, tournament);
 
-        if (!isCenter()) return;
-
-        if (tag.contains("tournament_uuid"))
-            tournamentUUID = tag.getUUID("tournament_uuid");
-
-        if (tag.contains("preparing_tournament"))
-            tournament = NBTCodecHelper.decode(Tournament.CODEC, tag, "preparing_tournament");
-
+        super.preRemoveSideEffects(pos, state);
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void loadAdditional(ValueInput input)
     {
-        super.saveAdditional(tag, registries);
+        super.loadAdditional(input);
+
+        if (!isCenter()) return;
+
+        tournamentUUID = input.read("tournament_uuid", UUIDUtil.CODEC).orElse(tournamentUUID);
+
+        tournament = input.read("preparing_tournament", Tournament.CODEC).orElse(tournament);
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output)
+    {
+        super.saveAdditional(output);
         if (!isCenter()) return;
 
         //blockentity needs to save tournament UUID to not forget which one is on this stand
         if (tournamentUUID != null)
-            tag.putUUID("tournament_uuid", tournamentUUID);
+            output.store("tournament_uuid", UUIDUtil.CODEC, tournamentUUID);
 
         //if status is preparing, we need to save the tournament as it's not stored in SavedData yet
         if (tournament != null && tournament.status.equals(Tournament.Status.PREPARING))
-            NBTCodecHelper.encode(Tournament.CODEC, tournament, tag, "preparing_tournament");
-
-    }
-
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider)
-    {
-        super.onDataPacket(net, pkt, lookupProvider);
-
-        CompoundTag tag = pkt.getTag();
-        if (!isCenter()) return;
-
-        //client needs to receive current tournament and tournament history
-        Tournament tournament = NBTCodecHelper.decode(Tournament.CODEC, tag, "current_tournament");
-
-        if (tournament == null)
-            this.tournament = Tournament.empty(UUID.randomUUID(), UUID.randomUUID(), "Unknown Owner");
-        else
-            this.tournament = tournament;
-
-        //todo add tournament history
-
+            output.store("preparing_tournament", Tournament.CODEC, tournament);
     }
 
     @Override
@@ -138,7 +125,6 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
         if (tournament != null)
             NBTCodecHelper.encode(Tournament.CODEC, tournament, tag, "current_tournament");
 
-        //todo add tournament history
         return tag;
     }
 

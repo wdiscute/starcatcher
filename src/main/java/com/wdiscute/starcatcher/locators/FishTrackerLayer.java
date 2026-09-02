@@ -1,8 +1,5 @@
 package com.wdiscute.starcatcher.locators;
 
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
@@ -12,36 +9,24 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.guide.SettingsScreen;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
-import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.utils.ScreenUtils;
-import net.minecraft.CrashReport;
-import net.minecraft.CrashReportCategory;
-import net.minecraft.ReportedException;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 
-import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FishTrackerLayer implements LayeredDraw.Layer
+public class FishTrackerLayer implements GuiLayer
 {
-
     private static final ScreenUtils.Image BACKGROUND = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_tracker/background.png"), 155, 135);
     private static final ScreenUtils.Image EMPTY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/fish_tracker/empty.png"), 34, 34);
 
@@ -66,7 +51,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
     List<Component> cachedRestrictions = new ArrayList<>();
 
     FishProperties cachedFP = null;
-    ResourceLocation cachedRL = null;
+    Identifier cachedRL = null;
 
     private void recalculate()
     {
@@ -83,7 +68,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
         for (FishProperties fish : fishes)
         {
-            ResourceLocation key = level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fish);
+            Identifier key = level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fish);
 
             int chance = fish.calculateChance(player, level, player.getMainHandItem().is(SCTags.RODS) ? player.getMainHandItem() : player.getOffhandItem(), AbstractFishRestriction.Context.TRACKER);
 
@@ -120,7 +105,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics g, DeltaTracker deltaTracker)
+    public void render(GuiGraphicsExtractor g, DeltaTracker deltaTracker)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -133,7 +118,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
         boolean shouldShow = player.getMainHandItem().is(SCTags.HAS_TRACKER_LAYER) || player.getOffhandItem().is(SCTags.HAS_TRACKER_LAYER);
 
-        ResourceLocation trackedRL = Minecraft.getInstance().player.getData(SCDataAttachments.TRACKED_FISH);
+        Identifier trackedRL = Minecraft.getInstance().player.getData(SCDataAttachments.TRACKED_FISH);
         shouldShow = shouldShow && !trackedRL.equals(Starcatcher.MISSINGNO);
 
         if (Minecraft.getInstance().screen instanceof SettingsScreen)
@@ -157,12 +142,12 @@ public class FishTrackerLayer implements LayeredDraw.Layer
             offScreen = 0;
 
         //transform and scale from config
-        g.pose().pushPose();
-        g.pose().scale(((float) SCConfig.TRACKER_SCALE.getAsDouble()), ((float) SCConfig.TRACKER_SCALE.getAsDouble()), 1);
-        g.pose().translate(SCConfig.TRACKER_X_OFFSET.get(), SCConfig.TRACKER_Y_OFFSET.get(), 0);
+        g.pose().pushMatrix();
+        g.pose().scale(((float) SCConfig.TRACKER_SCALE.getAsDouble()), ((float) SCConfig.TRACKER_SCALE.getAsDouble()));
+        g.pose().translate(((float) SCConfig.TRACKER_X_OFFSET.getAsDouble()), (float) SCConfig.TRACKER_Y_OFFSET.getAsDouble());
 
         //translate offset animation
-        g.pose().translate(-offScreen, 0, 0);
+        g.pose().translate(-offScreen, 0);
 
         //recalculate every <config freq>
         if (System.currentTimeMillis() > lastRefreshMS + SCConfig.OVERLAY_UPDATE_FREQUENCY.get())
@@ -170,7 +155,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
 
         if (cachedFP == null || cachedRL == null)
         {
-            g.pose().popPose();
+            g.pose().popMatrix();
             return;
         }
 
@@ -200,6 +185,6 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         for (int i = 0; i < cachedRestrictions.size(); i++)
             ScreenUtils.text(g, font, cachedRestrictions.get(i), uiX + 70, uiY + 49 + i * 10, SCColors.GUIDE_TEXT_DARK, false);
 
-        g.pose().popPose();
+        g.pose().popMatrix();
     }
 }

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 
 import java.util.List;
@@ -94,11 +94,11 @@ public abstract class AbstractMinigameModifier implements Modifier
     {
     }
 
-    public void renderBackground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderBackground(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
     }
 
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
     }
 
@@ -113,7 +113,7 @@ public abstract class AbstractMinigameModifier implements Modifier
     /**
      * Has the correctly rotated poseStack already
      */
-    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphics guiGraphics, PoseStack poseStack, float partialTick)
+    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick)
     {
     }
 
@@ -122,7 +122,7 @@ public abstract class AbstractMinigameModifier implements Modifier
         return false;
     }
 
-    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphics guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick)
+    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick)
     {
     }
 

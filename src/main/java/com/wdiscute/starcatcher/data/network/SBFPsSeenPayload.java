@@ -7,19 +7,19 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public record SBFPsSeenPayload(List<ResourceLocation> locs) implements CustomPacketPayload {
+public record SBFPsSeenPayload(List<Identifier> locs) implements CustomPacketPayload {
 
     public static final Type<SBFPsSeenPayload> TYPE = new Type<>(Starcatcher.rl("fps_seen"));
 
     public static final StreamCodec<ByteBuf, SBFPsSeenPayload> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()),
+            Identifier.STREAM_CODEC.apply(ByteBufCodecs.list()),
             SBFPsSeenPayload::locs,
             SBFPsSeenPayload::new
     );
@@ -31,7 +31,7 @@ public record SBFPsSeenPayload(List<ResourceLocation> locs) implements CustomPac
 
     public void handle(IPayloadContext context) {
         context.enqueueWork(() -> {
-            Map<ResourceLocation, FishCaughtCounter> map = new HashMap<>(FishingGuideAttachment.getFishesCaught(context.player()));
+            Map<Identifier, FishCaughtCounter> map = new HashMap<>(FishingGuideAttachment.getFishesCaught(context.player()));
 
             locs.forEach(loc -> {
                 FishCaughtCounter fishCaughtCounter = map.get(loc);

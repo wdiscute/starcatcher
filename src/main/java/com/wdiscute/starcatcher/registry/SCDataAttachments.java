@@ -6,7 +6,7 @@ import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -34,33 +34,33 @@ public interface SCDataAttachments
                     .build()
     );
 
-    Supplier<AttachmentType<ResourceLocation>> TRACKED_FISH = ATTACHMENT_TYPES.register(
+    Supplier<AttachmentType<Identifier>> TRACKED_FISH = ATTACHMENT_TYPES.register(
             "tracked_fish", () -> AttachmentType.builder(() -> Starcatcher.MISSINGNO)
-                    .serialize(ResourceLocation.CODEC)
-                    .sync(ResourceLocation.STREAM_CODEC)
+                    .serialize(Identifier.CODEC.fieldOf("id"))
+                    .sync(Identifier.STREAM_CODEC)
                     .build()
     );
 
     Supplier<AttachmentType<FishingGuideAttachment>> FISHING_GUIDE = ATTACHMENT_TYPES.register(
             "fishing_guide", () -> AttachmentType.builder(FishingGuideAttachment::createDefault)
-                    .serialize(FishingGuideAttachment.CODEC)
+                    .serialize(FishingGuideAttachment.CODEC.fieldOf("data"))
                     .sync(FishingGuideAttachment.STREAM_CODEC)
                     .copyOnDeath()
                     .build()
     );
 
-    Supplier<AttachmentType<ResourceLocation>> TACKLE_SKIN = ATTACHMENT_TYPES.register(
+    Supplier<AttachmentType<Identifier>> TACKLE_SKIN = ATTACHMENT_TYPES.register(
             "tackle_skin", () ->
                     AttachmentType.builder(() -> Starcatcher.BASE)
-                            .serialize(ResourceLocation.CODEC)
-                            .sync(ResourceLocation.STREAM_CODEC)
+                            .serialize(Identifier.CODEC.fieldOf("data"))
+                            .sync(Identifier.STREAM_CODEC)
                             .build()
     );
 
     Supplier<AttachmentType<List<Modifier>>> MODIFIERS = ATTACHMENT_TYPES.register(
             "modifiers", () ->
                     AttachmentType.builder(() -> List.<Modifier>of())
-                            .serialize(Modifier.CODEC.listOf())
+                            .serialize(Modifier.CODEC.listOf().fieldOf("modifiers"))
                             .sync(ByteBufCodecs.fromCodec(Modifier.CODEC).apply(ByteBufCodecs.list()))
                             .build()
     );

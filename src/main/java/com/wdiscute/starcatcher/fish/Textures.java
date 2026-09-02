@@ -6,7 +6,6 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.utils.ScreenUtils;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 
 public record Textures(
         ScreenUtils.Image tank,

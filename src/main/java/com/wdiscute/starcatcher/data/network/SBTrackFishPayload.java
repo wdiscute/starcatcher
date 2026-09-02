@@ -5,16 +5,16 @@ import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record SBTrackFishPayload(ResourceLocation fp) implements CustomPacketPayload
+public record SBTrackFishPayload(Identifier fp) implements CustomPacketPayload
 {
 
     public static final Type<SBTrackFishPayload> TYPE = new Type<>(Starcatcher.rl("track_fish"));
 
     public static final StreamCodec<ByteBuf, SBTrackFishPayload> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC,
+            Identifier.STREAM_CODEC,
             SBTrackFishPayload::fp,
             SBTrackFishPayload::new
     );

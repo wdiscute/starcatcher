@@ -12,16 +12,17 @@ import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
+import org.joml.Matrix3x2fStack;
 import org.joml.Quaternionf;
 
 public class Nikdo53Modifier extends AbstractMinigameModifier
 {
     public static final ScreenUtils.Image HANDLE_SMALL = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_handle_1.png"), 128, 128);
     public static final ScreenUtils.Image HANDLE_LARGE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_handle_2.png"), 128, 128);
-    public static final ResourceLocation WHEEL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_wheel.png");
+    public static final Identifier WHEEL = Starcatcher.rl("textures/gui/minigame/modifiers/nikdo53_wheel.png");
 
     public int handleLayer = 0;
     public int maxHandleLayer;
@@ -166,7 +167,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphics g, PoseStack poseStack, float partialTick)
+    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphicsExtractor g, PoseStack poseStack, float partialTick)
     {
         if (handleLayer == 0)
             HANDLE_SMALL.render(g, -64, -64);
@@ -175,7 +176,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphics guiGraphics, PoseStack poseStack, ActiveSweetSpot ass, float partialTick)
+    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot ass, float partialTick)
     {
         if (ass.behaviour == null) return;
 
@@ -201,14 +202,14 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderBackground(FishingMinigameScreen instance, GuiGraphics guiGraphics, float partialTick, int width, int height)
+    public void renderBackground(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height)
     {
         super.renderBackground(instance, guiGraphics, partialTick, width, height);
-        PoseStack poseStack = guiGraphics.pose();
-        poseStack.pushPose();
+        Matrix3x2fStack poseStack = guiGraphics.pose();
+        poseStack.pushMatrix();
 
         // kapiten reference!1!1!1!1!!
-        poseStack.translate(width >> 1, height >> 1, 0);
+        poseStack.translate(width >> 1, height >> 1);
 
         for (int i = maxHandleLayer; i > 0; i--)
         {
@@ -222,7 +223,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
             image.render(guiGraphics, (int) (-48 * increase), (int) (-48 * increase));
 
         }
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     @Override
@@ -235,21 +236,21 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderForeground(FishingMinigameScreen instance, GuiGraphics g, float partialTick, int width, int height)
+    public void renderForeground(FishingMinigameScreen instance, GuiGraphicsExtractor g, float partialTick, int width, int height)
     {
-        PoseStack poseStack = g.pose();
-        poseStack.pushPose();
+        Matrix3x2fStack poseStack = g.pose();
+        poseStack.pushMatrix();
 
         float centerX = (float) width / 2;
         float centerY = (float) height / 2;
 
-        poseStack.translate(centerX, centerY, 0);
-        poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(instance.kimbeMarkerPos)));
-        poseStack.translate(-centerX, -centerY, 0);
+        poseStack.translate(centerX, centerY);
+        poseStack.rotate((float) Math.toRadians(instance.kimbeMarkerPos));
+        poseStack.translate(-centerX, -centerY);
 
         ScreenUtils.outline(g, (int) centerX, (int) centerY - 34 - maxHandleLayer * 7, 2, 34 + maxHandleLayer * 7, instance.kimbeMarkerColor);
 
-        poseStack.popPose();
+        poseStack.pushMatrix();
 
         //render A
         instance.buttons.render(g, width / 2 - 50, height / 2 + 50,
@@ -283,7 +284,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public ResourceLocation getIdentifier()
+    public Identifier getIdentifier()
     {
         return Starcatcher.rl("multi_layer");
     }

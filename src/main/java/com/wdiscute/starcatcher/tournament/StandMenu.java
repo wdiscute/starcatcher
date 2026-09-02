@@ -37,7 +37,7 @@ public class StandMenu extends AbstractContainerMenu
     @Override
     public boolean clickMenuButton(Player player, int id)
     {
-        if (level.isClientSide) return false;
+        if (level.isClientSide()) return false;
 
         //six seven
         //¯\_(ツ)¯\_

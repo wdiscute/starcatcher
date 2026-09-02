@@ -7,14 +7,14 @@ import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
+import net.neoforged.neoforge.client.gui.GuiLayer;
 
 import java.text.DecimalFormat;
 import java.util.*;
 
-public class TournamentLayer implements LayeredDraw.Layer
+public class TournamentLayer implements GuiLayer
 {
     public static Tournament tournament;
 
@@ -44,7 +44,7 @@ public class TournamentLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics g, DeltaTracker deltaTracker)
+    public void render(GuiGraphicsExtractor g, DeltaTracker deltaTracker)
     {
         if (tournament == null) return;
         if (Minecraft.getInstance().level == null) return;
@@ -52,9 +52,9 @@ public class TournamentLayer implements LayeredDraw.Layer
 
         font = Minecraft.getInstance().font;
 
-        g.pose().pushPose();
-        g.pose().translate(SCConfig.TOURNAMENT_X_OFFSET.get(), SCConfig.TOURNAMENT_Y_OFFSET.get(), 0);
-        g.pose().scale(((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()), ((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()), 1);
+        g.pose().pushMatrix();
+        g.pose().translate(((float)SCConfig.TOURNAMENT_X_OFFSET.getAsDouble()), ((float)SCConfig.TOURNAMENT_Y_OFFSET.getAsDouble()));
+        g.pose().scale(((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()), ((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()));
 
         //get fish for player position
         ScreenUtils.Image fish = null;
@@ -124,7 +124,7 @@ public class TournamentLayer implements LayeredDraw.Layer
                 fish.render(g, 30, 142);
         }
 
-        g.pose().popPose();
+        g.pose().popMatrix();
     }
 
     public static String getDisplayTimeLeft()

@@ -8,7 +8,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,13 +18,13 @@ public record Message(
         UUID sender,
         String senderDisplayName,
         List<String> text,
-        ResourceLocation dimension,
-        ResourceLocation background
+        Identifier dimension,
+        Identifier background
 )
 {
-    public static final ResourceLocation BACKGROUND_OVERWORLD = Starcatcher.rl("textures/gui/message/message_overworld.png");
-    public static final ResourceLocation BACKGROUND_NETHER = Starcatcher.rl("textures/gui/message/message_nether.png");
-    public static final ResourceLocation BACKGROUND_END = Starcatcher.rl("textures/gui/message/message_end.png");
+    public static final Identifier BACKGROUND_OVERWORLD = Starcatcher.rl("textures/gui/message/message_overworld.png");
+    public static final Identifier BACKGROUND_NETHER = Starcatcher.rl("textures/gui/message/message_nether.png");
+    public static final Identifier BACKGROUND_END = Starcatcher.rl("textures/gui/message/message_end.png");
 
     public static final Message DEFAULT = new Message(
             UUID.randomUUID(),
@@ -51,16 +51,16 @@ public record Message(
                     UUIDUtil.CODEC.fieldOf("sender").forGetter(Message::sender),
                     Codec.STRING.fieldOf("sender_display_name").forGetter(Message::senderDisplayName),
                     Codec.STRING.listOf().fieldOf("text").forGetter(Message::text),
-                    ResourceLocation.CODEC.fieldOf("dimension").forGetter(Message::dimension),
-                    ResourceLocation.CODEC.fieldOf("background").forGetter(Message::background)
+                    Identifier.CODEC.fieldOf("dimension").forGetter(Message::dimension),
+                    Identifier.CODEC.fieldOf("background").forGetter(Message::background)
             ).apply(instance, Message::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, Message> STREAM_CODEC = StreamCodec.composite(
             UUIDUtil.STREAM_CODEC, Message::sender,
             ByteBufCodecs.STRING_UTF8, Message::senderDisplayName,
             ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), Message::text,
-            ResourceLocation.STREAM_CODEC, Message::dimension,
-            ResourceLocation.STREAM_CODEC, Message::background,
+            Identifier.STREAM_CODEC, Message::dimension,
+            Identifier.STREAM_CODEC, Message::background,
             Message::new
     );
 
@@ -75,7 +75,7 @@ public record Message(
         Message WITHER = create("wither", Message.BACKGROUND_NETHER, 16);
 
         //creates a built-in message from a translation key
-        static Message create(String translationKey, ResourceLocation background, int length)
+        static Message create(String translationKey, Identifier background, int length)
         {
             List<String> text = new ArrayList<>();
 

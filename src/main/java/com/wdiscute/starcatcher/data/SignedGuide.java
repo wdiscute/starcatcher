@@ -9,7 +9,7 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCStats;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
@@ -18,13 +18,13 @@ import net.minecraft.world.item.ItemStack;
 import java.time.Instant;
 import java.util.*;
 
-public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> fishesCaught, String signature,
+public record SignedGuide(UUID owner, Map<Identifier, FishCaughtCounter> fishesCaught, String signature,
                           long date, FishingGuideScreen.StatsData stats, List<Utils.Duo<UUID, String>> visitors)
 {
     public static final Codec<SignedGuide> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     UUIDUtil.CODEC.fieldOf("uuid").forGetter(SignedGuide::owner),
-                    Codec.unboundedMap(ResourceLocation.CODEC, FishCaughtCounter.CODEC)
+                    Codec.unboundedMap(Identifier.CODEC, FishCaughtCounter.CODEC)
                             .fieldOf("fishes_caught").forGetter(SignedGuide::fishesCaught),
                     Codec.STRING.fieldOf("signature").forGetter(SignedGuide::signature),
                     Codec.LONG.fieldOf("date_signed").forGetter(SignedGuide::date),
@@ -45,9 +45,9 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
         if (book == null) return;
         if (SCDataComponents.has(book, SCDataComponents.SIGNED_GUIDE)) return;
 
-        Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+        Map<Identifier, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
-        Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
+        Map<Identifier, FishCaughtCounter> mapToSave = new HashMap<>();
         map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
 
         if (player instanceof ServerPlayer sp)

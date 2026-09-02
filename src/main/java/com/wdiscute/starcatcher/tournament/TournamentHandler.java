@@ -135,7 +135,7 @@ public class TournamentHandler
             t.playerScores = mutableList;
 
             //send blockstate update to every opened stand
-            for (ServerPlayer sp : player.getServer().getPlayerList().getPlayers())
+            for (ServerPlayer sp : player.level().getServer().getPlayerList().getPlayers())
             {
                 if (sp.containerMenu instanceof StandMenu sm)
                 {

@@ -1,11 +1,10 @@
 package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.utils.ScreenUtils;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 
 public abstract class AbstractSweetSpotBehaviour
 {
@@ -40,11 +39,11 @@ public abstract class AbstractSweetSpotBehaviour
     {
     }
 
-    public void renderForeground(GuiGraphics guiGraphics, float partialTick, int width, int height, FishingMinigameScreen instance, ActiveSweetSpot ass)
+    public void renderForeground(GuiGraphicsExtractor guiGraphics, float partialTick, int width, int height, FishingMinigameScreen instance, ActiveSweetSpot ass)
     {
     }
 
-    public void render(GuiGraphics guiGraphics, PoseStack poseStack, float partialTick, FishingMinigameScreen instance, ActiveSweetSpot ass)
+    public void render(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick, FishingMinigameScreen instance, ActiveSweetSpot ass)
     {
         if (ass.removed) return;
 

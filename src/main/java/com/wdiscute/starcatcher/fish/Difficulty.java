@@ -12,7 +12,7 @@ import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -437,7 +437,7 @@ public record Difficulty(
     );
 
     public record SweetSpot(
-            ResourceLocation sweetSpotType,
+            Identifier sweetSpotType,
             ScreenUtils.Image texturePath,
             int size,
             int reward,
@@ -448,12 +448,12 @@ public record Difficulty(
             List<Modifier> modifiers
     )
     {
-        public SweetSpot(ResourceLocation sweetSpotType, ScreenUtils.Image texturePath, int size, int reward, int particleColor)
+        public SweetSpot(Identifier sweetSpotType, ScreenUtils.Image texturePath, int size, int reward, int particleColor)
         {
             this(sweetSpotType, texturePath, size, reward, false, 0, 0, particleColor, List.of());
         }
 
-        public SweetSpot(ResourceLocation sweetSpotType, ScreenUtils.Image texturePath, int size, int reward, boolean isFlip, float vanishingRate, float movingRate, int particleColor)
+        public SweetSpot(Identifier sweetSpotType, ScreenUtils.Image texturePath, int size, int reward, boolean isFlip, float vanishingRate, float movingRate, int particleColor)
         {
             this(sweetSpotType, texturePath, size, reward, isFlip, vanishingRate, movingRate, particleColor, List.of());
         }
@@ -810,7 +810,7 @@ public record Difficulty(
         public static final Codec<List<SweetSpot>> LIST_CODEC = CODEC.listOf();
 
         public static final StreamCodec<FriendlyByteBuf, SweetSpot> STREAM_CODEC = ExtraComposites.composite(
-                ResourceLocation.STREAM_CODEC, SweetSpot::sweetSpotType,
+                Identifier.STREAM_CODEC, SweetSpot::sweetSpotType,
                 ScreenUtils.Image.STREAM_CODEC, SweetSpot::texturePath,
                 ByteBufCodecs.INT, SweetSpot::size,
                 ByteBufCodecs.INT, SweetSpot::reward,

@@ -7,7 +7,7 @@ import com.wdiscute.starcatcher.fish.Treasure;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -43,13 +43,13 @@ public interface SCDataMaps
             Starcatcher.rl("treasures"), Starcatcher.FISH_REGISTRY_KEY, Treasure.CODEC
     ).synced(Treasure.CODEC, true).build();
 
-    DataMapType<LevelStem, ResourceLocation> MESSAGE_BACKGROUND = DataMapType.builder(
-            Starcatcher.rl("message_background"), Registries.LEVEL_STEM, ResourceLocation.CODEC
+    DataMapType<LevelStem, Identifier> MESSAGE_BACKGROUND = DataMapType.builder(
+            Starcatcher.rl("message_background"), Registries.LEVEL_STEM, Identifier.CODEC
     ).build();
 
     static <T> T getOrDefault(ItemStack stack, DataMapType<Item, T> dataMap, T d)
     {
-        T data = stack.getItemHolder().getData(dataMap);
+        T data = stack.getItem().builtInRegistryHolder().getData(dataMap);
         if (data == null) return d;
         return data;
     }

@@ -17,6 +17,7 @@ public class Cerberay<T extends Entity> extends EntityModel<T> {
     private final ModelPart fish;
 
     public Cerberay(ModelPart root) {
+        super(root);
         this.fish = root.getChild("fish");
     }
 

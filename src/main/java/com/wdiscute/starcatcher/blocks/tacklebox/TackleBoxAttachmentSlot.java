@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
 import com.mojang.datafixers.util.Pair;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
@@ -9,15 +9,15 @@ import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class TackleBoxAttachmentSlot extends Slot
 {
-    ResourceLocation background;
+    Identifier background;
     TackleBoxMenu tackleMenu;
     TagKey<Item> mayPlaceTag;
 
-    public TackleBoxAttachmentSlot(TackleBoxMenu tackleMenu, TagKey<Item> mayPlaceTag, Container container, int slot, int x, int y, ResourceLocation background)
+    public TackleBoxAttachmentSlot(TackleBoxMenu tackleMenu, TagKey<Item> mayPlaceTag, Container container, int slot, int x, int y, Identifier background)
     {
         super(container, slot, x, y);
         this.background = background;
@@ -27,10 +27,10 @@ public class TackleBoxAttachmentSlot extends Slot
     }
 
     @Override
-    public @Nullable Pair<ResourceLocation, ResourceLocation> getNoItemIcon()
+    public @Nullable Identifier getNoItemIcon()
     {
         if(tackleMenu.getRod().isEmpty()) return null;
-        return Pair.of(InventoryMenu.BLOCK_ATLAS, background);
+        return background;
     }
 
     @Override

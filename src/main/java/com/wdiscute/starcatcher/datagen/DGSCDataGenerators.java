@@ -56,7 +56,7 @@ public class DGSCDataGenerators
         gen.addProvider(event.includeServer(), itp);
 
         //advancements
-        gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
+        //gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 
         //loot modifiers
         gen.addProvider(event.includeServer(), new DGSCLootModifiers(output, lookupProvider));

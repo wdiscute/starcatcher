@@ -9,11 +9,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponentGetter;
 import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -30,6 +32,8 @@ import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -52,7 +56,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
     public void updateFishSlot()
     {
-        if (level.isClientSide) return;
+        if (level.isClientSide()) return;
 
         //store & remove fish placed
         ItemStack itemInFishSlot = getItem(TackleBoxMenu.FISH_SLOT);
@@ -63,7 +67,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             if (item.is(SCTags.FISHABLE))
             {
                 //if slot is not empty, add the fish previously there to stored fishes
-                if(!itemInFishSlot.isEmpty())
+                if (!itemInFishSlot.isEmpty())
                     fishes.add(itemInFishSlot.copy());
                 //remove the fish item found and put it on the fish slot
                 itemStacks.get(i).setCount(0);
@@ -200,9 +204,9 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             if (this.openCount == 1)
             {
                 this.level.gameEvent(player, GameEvent.CONTAINER_OPEN, this.worldPosition);
-                this.level.playSound(null, this.worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.9F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.9F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.4F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
             }
         }
 
@@ -217,16 +221,16 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             if (this.openCount <= 0)
             {
                 this.level.gameEvent(player, GameEvent.CONTAINER_CLOSE, this.worldPosition);
-                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.9F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 0.2F, this.level.random.nextFloat() * 0.1F + 0.4F);
-                this.level.playSound(null, this.worldPosition, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.3F, this.level.random.nextFloat() * 0.1F + 0.4F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
+                this.level.playSound(null, this.worldPosition, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.3F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
             }
         }
 
     }
 
     @Override
-    protected void applyImplicitComponents(DataComponentInput componentInput)
+    protected void applyImplicitComponents(DataComponentGetter componentInput)
     {
         super.applyImplicitComponents(componentInput);
         componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
@@ -243,73 +247,24 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         components.set(SCDataComponents.TACKLE_BOX_FISHES, fishes);
     }
 
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    @Override
+    protected void loadAdditional(ValueInput input)
     {
-        super.loadAdditional(tag, registries);
-        this.loadFromTag(tag, registries);
-        if (tag.contains("CustomName", 8)) {
-            this.name = parseCustomNameSafe(tag.getString("CustomName"), registries);
-        }
+        super.loadAdditional(input);
+
+        this.name = input.read("CustomName", ComponentSerialization.CODEC).orElse(Component.empty());
     }
 
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    @Override
+    protected void saveAdditional(ValueOutput output)
     {
-        super.saveAdditional(tag, registries);
+        super.saveAdditional(output);
+
         //save normal slots
-        ContainerHelper.saveAllItems(tag, this.itemStacks, false, registries);
+        ContainerHelper.saveAllItems(output, this.itemStacks);
 
-        //save fishes
-        saveAllFishes(tag, fishes, false, registries);
-
-        if (this.name != null) {
-            tag.putString("CustomName", Component.Serializer.toJson(this.name, registries));
-        }
+        output.store("CustomName", ComponentSerialization.CODEC, name);
     }
-
-    public static void saveAllFishes(CompoundTag tag, List<ItemStack> items, boolean alwaysPutTag, HolderLookup.Provider levelRegistry)
-    {
-        ListTag listtag = new ListTag();
-
-        for (int i = 0; i < items.size(); i++)
-        {
-            ItemStack itemstack = items.get(i);
-            if (!itemstack.isEmpty())
-            {
-                CompoundTag compoundtag = new CompoundTag();
-                compoundtag.putByte("Slot", (byte) i);
-                listtag.add(itemstack.save(levelRegistry, compoundtag));
-            }
-        }
-
-        if (!listtag.isEmpty() || alwaysPutTag) tag.put("Fishes", listtag);
-
-    }
-
-    public void loadFromTag(CompoundTag tag, HolderLookup.Provider levelRegistry)
-    {
-        //load normal slots
-        this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        if (tag.contains("Items", 9))
-            ContainerHelper.loadAllItems(tag, this.itemStacks, levelRegistry);
-
-        //load fishes
-        this.fishes = new ArrayList<>();
-        if (tag.contains("Fishes", 9))
-            loadAllFishes(tag, this.fishes, levelRegistry);
-
-    }
-
-    public static void loadAllFishes(CompoundTag tag, List<ItemStack> items, HolderLookup.Provider levelRegistry)
-    {
-        ListTag listtag = tag.getList("Fishes", 10);
-
-        for (int i = 0; i < listtag.size(); i++)
-        {
-            CompoundTag compoundtag = listtag.getCompound(i);
-            items.add(ItemStack.parse(levelRegistry, compoundtag).orElse(ItemStack.EMPTY));
-        }
-    }
-
 
     protected NonNullList<ItemStack> getItems()
     {

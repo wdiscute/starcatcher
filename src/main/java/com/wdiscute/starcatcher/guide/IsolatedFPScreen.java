@@ -6,10 +6,10 @@ import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 
 public class IsolatedFPScreen extends Screen
 {
@@ -19,7 +19,6 @@ public class IsolatedFPScreen extends Screen
     protected int uiX;
     protected int uiY;
     private Screen screen;
-
 
     public IsolatedFPScreen(FishProperties fishProperties, Screen screen)
     {
@@ -37,16 +36,16 @@ public class IsolatedFPScreen extends Screen
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    public boolean keyPressed(KeyEvent event)
     {
-        InputConstants.Key key = InputConstants.getKey(keyCode, scanCode);
+        InputConstants.Key key = InputConstants.getKey(event);
         if (this.minecraft.options.keyInventory.isActiveAndMatches(key))
         {
             this.onClose();
             return true;
         }
 
-        return super.keyPressed(keyCode, scanCode, modifiers);
+        return super.keyPressed(event);
     }
 
     @Override
@@ -64,11 +63,9 @@ public class IsolatedFPScreen extends Screen
     }
 
     @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float a)
     {
-        super.render(g, mouseX, mouseY, partialTick);
-
-        BACKGROUND.render(g, uiX, uiY);
+        super.extractRenderState(g, mouseX, mouseY, a);
 
         FishingGuideScreen.renderFishEntryPage(
                 g,

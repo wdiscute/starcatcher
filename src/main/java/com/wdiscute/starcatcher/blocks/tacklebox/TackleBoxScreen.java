@@ -2,10 +2,9 @@ package com.wdiscute.starcatcher.blocks.tacklebox;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.utils.ScreenUtils;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
 public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
@@ -16,22 +15,12 @@ public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
     public TackleBoxScreen(TackleBoxMenu menu, Inventory playerInventory, Component title)
     {
         super(menu, playerInventory, title);
-        ++this.imageHeight;
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float a)
     {
-    }
-
-    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick)
-    {
-        super.render(guiGraphics, mouseX, mouseY, partialTick);
-        this.renderTooltip(guiGraphics, mouseX, mouseY);
-    }
-
-    protected void renderBg(GuiGraphics g, float partialTick, int mouseX, int mouseY)
-    {
+        super.extractBackground(g, mouseX, mouseY, a);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 

@@ -8,6 +8,7 @@ import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 
@@ -19,10 +20,11 @@ public class WillowBream<T extends Entity> extends EntityModel<T>
 
 
 	public WillowBream(ModelPart root) {
+		super(root);
 		this.fish = root.getChild("fish");
 	}
 
-	public static ResourceLocation getTexture()
+	public static Identifier getTexture()
 	{
 		return Starcatcher.rl("textures/entity/fishes/" + NAME + ".png");
 	}

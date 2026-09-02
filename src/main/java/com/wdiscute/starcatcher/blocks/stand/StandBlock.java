@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
@@ -37,7 +36,7 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
 {
 
     public static final EnumProperty<StandPart> PART = EnumProperty.create("stand_part", StandPart.class);
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public StandBlock()
     {
@@ -57,7 +56,7 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     }
 
     @Override
-    public @Nullable DirectionProperty getDirectionProperty()
+    public @Nullable EnumProperty<Direction> getDirectionProperty()
     {
         return FACING;
     }
@@ -79,7 +78,7 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
-        if (level.isClientSide) return InteractionResult.SUCCESS;
+        if (level.isClientSide()) return InteractionResult.SUCCESS;
 
         BlockPos center = IMultiBlock.getCenter(level, pos);
         if (level.getBlockEntity(center) instanceof StandBlockEntity sbe)
@@ -104,19 +103,6 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
         }
 
         return InteractionResult.SUCCESS;
-    }
-
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston)
-    {
-        if (!state.is(newState.getBlock()) && state.getValue(CENTER)
-                && level.getBlockEntity(pos) instanceof StandBlockEntity sbe
-                && !level.isClientSide && sbe.tournament != null)
-        {
-            TournamentHandler.cancelTournament(level, sbe.tournament);
-        }
-
-        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
     private static final VoxelShape SHAPE_NORTH = makeShapeNorth();

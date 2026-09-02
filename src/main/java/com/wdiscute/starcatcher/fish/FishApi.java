@@ -6,7 +6,6 @@ import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
-import com.wdiscute.starcatcher.compat.QualityFoodCompat;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
@@ -21,10 +20,11 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -43,21 +43,21 @@ public class FishApi
 {
     /**
      * Runs all the logic including modifiers to select which FishProperties to catch.
-     * The ResourceLocation might be MISSINGNO if the FishProperties was created by a modifier, such as player-written Message-in-a-Bottle
+     * The Identifier might be MISSINGNO if the FishProperties was created by a modifier, such as player-written Message-in-a-Bottle
      */
-    public static Pair<FishProperties, ResourceLocation> getFP(FishingBobEntity fbe, Player player, List<AbstractCatchModifier> modifiers, ItemStack rod)
+    public static Pair<FishProperties, Identifier> getFP(FishingBobEntity fbe, Player player, List<AbstractCatchModifier> modifiers, ItemStack rod)
     {
         //force select fish from modifiers
         for (AbstractCatchModifier modifier : modifiers)
         {
-            Pair<FishProperties, ResourceLocation> force = modifier.forceSelectFish(fbe);
+            Pair<FishProperties, Identifier> force = modifier.forceSelectFish(fbe);
             if (force != null) return force;
         }
 
         Level level = fbe.level();
 
         FishProperties fpToFish = null;
-        ResourceLocation rlToAwardUponFishingComplete = null;
+        Identifier rlToAwardUponFishingComplete = null;
 
         List<FishProperties> available = new ArrayList<>();
 
@@ -80,7 +80,7 @@ public class FishApi
         if (fpToFish == null)
             for (AbstractCatchModifier modifier : modifiers)
             {
-                Pair<FishProperties, ResourceLocation> force = modifier.forceSelectFishIfNoNonFishAvailable(fbe);
+                Pair<FishProperties, Identifier> force = modifier.forceSelectFishIfNoNonFishAvailable(fbe);
                 if (force != null) return force;
             }
 
@@ -97,7 +97,7 @@ public class FishApi
         //if no fish is available and no non-fish was selected, reset player fishing data and award nothing
         if (available.isEmpty() && fpToFish == null && player != null)
         {
-            player.displayClientMessage(Component.translatable("gui.starcatcher.reel_no_fish"), true);
+            player.sendOverlayMessage(Component.translatable("gui.starcatcher.reel_no_fish"));
             return null;
         }
 
@@ -204,7 +204,7 @@ public class FishApi
 
                 //check if it can spawn entity
                 boolean canSpawnEntity;
-                ResourceLocation location = fp.catchInfo().entityToSpawn().getKey().location();
+                Identifier location = fp.catchInfo().entityToSpawn().getKey().identifier();
                 if (location.getNamespace().equals("starcatcher"))
                     //if entity is from starcatcher, can only spawn if it's a bucketable fish (aka has a model)
                     canSpawnEntity = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().map(
@@ -238,7 +238,7 @@ public class FishApi
                     y *= 2;
                     z *= 2.5;
 
-                    Entity entity = fp.catchInfo().entityToSpawn().value().create(level);
+                    Entity entity = fp.catchInfo().entityToSpawn().value().create(level, EntitySpawnReason.TRIGGERED);
 
                     if (entity == null)
                     {
@@ -265,7 +265,7 @@ public class FishApi
                         SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, new MaybeStack(bait));
                     }
                 }
-                //if not entity then add rod item resourceLocation
+                //if not entity then add rod item Identifier
                 else
                 {
                     ItemStack is = makeItemStack(fbe.rod, fbe.fpToFish, percentile, golden, player, perfectCatch);
@@ -329,7 +329,7 @@ public class FishApi
                 //spawn items from list
                 for (ItemStack itemStackToSpawn : items)
                 {
-                    //make ItemEntities for fish item resourceLocation
+                    //make ItemEntities for fish item Identifier
                     ItemEntity itemFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, itemStackToSpawn);
 
                     //assign delta movement so fish flies towards player
@@ -434,7 +434,7 @@ public class FishApi
                 if (ModList.get().isLoaded("quality_food") && SCConfig.SAVE_DATA_TO_ITEMS.get())
                     QualityFoodCompat.addQuality(baseFish, player, golden, perfectCatch, percentile);
 
-                //only save data on fish resourceLocation if config is enabled
+                //only save data on fish Identifier if config is enabled
                 if (SCConfig.SAVE_DATA_TO_ITEMS.get())
                     SCDataComponents.set(baseFish, SCDataComponents.CAUGHT_FISH_INFO, caughtFishInfo);
 
@@ -452,7 +452,7 @@ public class FishApi
 
     public static ItemStack getTreasure(ServerPlayer player, FishProperties fp, List<AbstractCatchModifier> modifiers)
     {
-        Registry<FishProperties> fishProperties = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+        Registry<FishProperties> fishProperties = player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY);
         Treasure data = fishProperties.wrapAsHolder(fp).getData(SCDataMaps.TREASURE);
 
         if (data == null) return ItemStack.EMPTY;
@@ -460,14 +460,14 @@ public class FishApi
         return data.unpack(player, modifiers);
     }
 
-    public static ResourceLocation getKey(Level level, FishProperties fp)
+    public static Identifier getKey(Level level, FishProperties fp)
     {
-        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp);
+        return level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp);
     }
 
     public static List<FishProperties> getFishes(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
+        return registryAccess.lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
                 .filter(o -> o.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH)).toList();
     }
 
@@ -478,22 +478,22 @@ public class FishApi
 
     public static Registry<FishProperties> getRegistry(Level level)
     {
-        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+        return level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY);
     }
 
-    public static FishProperties getFP(RegistryAccess registryAccess, ResourceLocation rl)
+    public static FishProperties getFP(RegistryAccess registryAccess, Identifier rl)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).get(rl);
+        return registryAccess.lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getValue(rl);
     }
 
-    public static FishProperties getFP(Level level, ResourceLocation rl)
+    public static FishProperties getFP(Level level, Identifier rl)
     {
         return getFP(level.registryAccess(), rl);
     }
 
     public static List<FishProperties> getNonFishes(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
+        return registryAccess.lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream()
                 .filter(o -> !o.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH)).toList();
     }
 
@@ -509,7 +509,7 @@ public class FishApi
 
     public static List<FishProperties> getAllFPs(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().toList();
+        return registryAccess.lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().toList();
     }
 
     public static List<FishProperties> getTrophies(Level level)
@@ -519,7 +519,7 @@ public class FishApi
 
     public static List<FishProperties> getTrophies(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.TROPHY)).toList();
+        return registryAccess.lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.TROPHY)).toList();
     }
 
     public static List<FishProperties> getMessages(Level level)
@@ -529,6 +529,6 @@ public class FishApi
 
     public static List<FishProperties> getMessages(RegistryAccess registryAccess)
     {
-        return registryAccess.registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.MESSAGE)).toList();
+        return registryAccess.lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().filter(o -> o.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.MESSAGE)).toList();
     }
 }

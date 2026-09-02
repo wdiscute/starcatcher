@@ -13,26 +13,31 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestrictio
 import com.wdiscute.utils.ScreenUtils;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.gui.inputs.IJeiInputHandler;
+import mezz.jei.api.gui.inputs.IJeiUserInput;
+import mezz.jei.api.gui.widgets.IRecipeExtrasBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
+import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.gui.navigation.ScreenRectangle;
 import net.minecraft.core.Holder;
+import net.minecraft.core.HolderSet;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJeiFPRecipe.Recipe>
 {
@@ -57,36 +62,59 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses)
     {
         builder.addInputSlot(5, 2)
-                .addItemStack(rodIs)
+                .add(rodIs)
                 .setStandardSlotBackground()
         ;
 
         if (!recipe.treasure.isEmpty())
             builder.addOutputSlot(64, 2)
-                    .addIngredients(recipe.treasure)
+                    .add(recipe.treasure)
                     .setStandardSlotBackground()
-                    .addRichTooltipCallback((recipeSlotView, tooltip) -> tooltip.clear())
+                    .addRichTooltipCallback((_, tooltip) -> tooltip.clear())
                     ;
 
         builder.addOutputSlot(44, 2)
-                .addItemStack(recipe.fp.catchInfo().fish().toStack())
+                .add(recipe.fp.catchInfo().fish().toStack())
                 .setStandardSlotBackground()
         ;
     }
 
     @Override
-    public boolean handleInput(Recipe recipe, double mouseX, double mouseY, InputConstants.Key input)
+    public void createRecipeExtras(IRecipeExtrasBuilder builder, Recipe recipe, IFocusGroup focuses)
     {
-        if (mouseX > 90 && mouseX < 90 + 19 && mouseY > 0 && mouseY < 19)
+        super.createRecipeExtras(builder, recipe, focuses);
+        builder.addInputHandler(new Input(recipe));
+    }
+
+    public static class Input implements IJeiInputHandler
+    {
+        Recipe recipe;
+
+        public Input(Recipe recipe)
         {
-            Minecraft.getInstance().setScreen(new IsolatedJeiFPScreen(recipe, Minecraft.getInstance().screen));
-            return true;
+            this.recipe = recipe;
         }
-        return false;
+
+        @Override
+        public boolean handleInput(double mouseX, double mouseY, IJeiUserInput input)
+        {
+            if (mouseX > 90 && mouseX < 90 + 19 && mouseY > 0 && mouseY < 19)
+            {
+                Minecraft.getInstance().setScreen(new IsolatedJeiFPScreen(recipe, Minecraft.getInstance().screen));
+                return true;
+            }
+            return IJeiInputHandler.super.handleInput(mouseX, mouseY, input);
+        }
+
+        @Override
+        public ScreenRectangle getArea()
+        {
+            return new ScreenRectangle(0, 0, 99999, 99999);
+        }
     }
 
     @Override
-    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics g, double mouseX, double mouseY)
+    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor g, double mouseX, double mouseY)
     {
         Font font = Minecraft.getInstance().font;
         ARROW.render(g, 25, 2);
@@ -113,7 +141,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
         ScreenUtils.Tooltip.render(g, font, (int) mouseX, (int) mouseY);
     }
 
-    public void bookIcon(GuiGraphics g, int x, int y, int mouseX, int mouseY)
+    public void bookIcon(GuiGraphicsExtractor g, int x, int y, int mouseX, int mouseY)
     {
         SLOT_BACKGROUND_FILLED.render(g, x, y);
         ScreenUtils.item(g, stack, x + 2, y + 2);
@@ -125,9 +153,9 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     }
 
     @Override
-    public ResourceLocation getRegistryName(Recipe recipe)
+    public @Nullable Identifier getIdentifier(Recipe recipe)
     {
-        return Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(recipe.fp);
+        return Minecraft.getInstance().level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(recipe.fp);
     }
 
     public record Recipe(FishProperties fp, List<Component> components, List<Component> treasureTooltips,
@@ -138,7 +166,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
             List<Component> restrictions = new ArrayList<>();
             List<Component> treasureTooltip = new ArrayList<>();
 
-            Holder<FishProperties> holder = Minecraft.getInstance().level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).wrapAsHolder(fp);
+            Holder<FishProperties> holder = Minecraft.getInstance().level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).wrapAsHolder(fp);
             Treasure treasure = holder.getData(SCDataMaps.TREASURE);
 
             if (treasure == null) treasure = Treasure.EMPTY;
@@ -189,10 +217,10 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
                 treasureTooltip.add(Component.translatable("emi.starcatcher.fp.blacklisted_items").withStyle(ChatFormatting.BOLD));
                 for (Ingredient ing : treasure.blacklist())
                 {
-                    ItemStack[] items = ing.getItems();
-                    for (ItemStack item : items)
+                    HolderSet<Item> items = ing.getValues();
+                    for (Holder<Item> item : items)
                     {
-                        treasureTooltip.add(item.getHoverName());
+                        treasureTooltip.add(item.value().getName(item.value().getDefaultInstance()));
                     }
                 }
             }
@@ -221,6 +249,6 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
             return new Recipe(fp, restrictions, treasureTooltip, treasureIngredient);
         }
 
-        public static final RecipeType<Recipe> TYPE = new RecipeType<>(Starcatcher.rl("fishing"), Recipe.class);
+        public static final IRecipeType<Recipe> TYPE = IRecipeType.create(Starcatcher.rl("fishing"), Recipe.class);
     }
 }

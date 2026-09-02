@@ -5,7 +5,7 @@ import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -145,12 +145,12 @@ public abstract class AbstractCatchModifier implements Modifier
         return vec3;
     }
 
-    public Pair<FishProperties, ResourceLocation> forceSelectFish(FishingBobEntity fbe)
+    public Pair<FishProperties, Identifier> forceSelectFish(FishingBobEntity fbe)
     {
         return null;
     }
 
-    public Pair<FishProperties, ResourceLocation> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
+    public Pair<FishProperties, Identifier> forceSelectFishIfNoNonFishAvailable(FishingBobEntity fbe)
     {
         return null;
     }

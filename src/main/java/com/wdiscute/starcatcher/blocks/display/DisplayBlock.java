@@ -9,7 +9,7 @@ import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.*;
@@ -34,10 +34,12 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jspecify.annotations.Nullable;
 
 import java.time.Instant;
 import java.util.*;
@@ -132,9 +134,9 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos)
+    protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction)
     {
-        if (blockState.getValue(HAS_ITEM))
+        if (state.getValueOrElse(HAS_ITEM, false))
         {
             BlockEntity blockentity = level.getBlockEntity(pos);
             if (blockentity instanceof DisplayBlockEntity dbe)
@@ -145,15 +147,15 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston)
     {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
         if (level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
             dbe.setChanged();
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         //if has book, open screen
         if (state.getValue(HAS_ITEM) && !player.isCrouching())
@@ -163,24 +165,24 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 ItemStack guide = dbe.getImmutableItem();
                 if (guide.is(SCItems.GUIDE))
                 {
-                    if (level.isClientSide)
+                    if (level.isClientSide())
                     {
                         FishingGuideScreen.open(pos, SCDataComponents.get(dbe.getImmutableItem(), SCDataComponents.SIGNED_GUIDE));
-                        return ItemInteractionResult.SUCCESS;
+                        return InteractionResult.SUCCESS;
                     }
 
                     //return if not signed
                     if (!SCDataComponents.has(guide, SCDataComponents.SIGNED_GUIDE))
-                        return ItemInteractionResult.SUCCESS;
+                        return InteractionResult.SUCCESS;
 
                     SignedGuide signedGuide = SCDataComponents.get(guide, SCDataComponents.SIGNED_GUIDE);
 
                     //if owner opening guide
                     if (signedGuide.owner().equals(player.getUUID()))
                     {
-                        Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+                        Map<Identifier, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
-                        Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
+                        Map<Identifier, FishCaughtCounter> mapToSave = new HashMap<>();
                         map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
 
                         if (player instanceof ServerPlayer sp)
@@ -224,7 +226,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         //remove item if crouching
         if (state.getValue(HAS_ITEM) && player.isCrouching() && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
             player.addItem(dbe.getImmutableItem().copy());
             dbe.clearContent();
             dbe.sync();
@@ -235,7 +237,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         //place book
         if (stack.is(SCTags.PLACEABLE_IN_DISPLAY) && !state.getValue(HAS_ITEM) && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
             dbe.setItem(stack.copyWithCount(1));
             stack.shrink(1);
             level.setBlock(pos, state.setValue(HAS_ITEM, true), 0);
@@ -282,7 +284,7 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
-        return level.isClientSide ? createTickerHelper(blockEntityType, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
+        return level.isClientSide() ? createTickerHelper(blockEntityType, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
     }
 
     @Override

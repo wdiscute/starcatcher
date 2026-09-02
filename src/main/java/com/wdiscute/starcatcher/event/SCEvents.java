@@ -4,6 +4,7 @@ import com.wdiscute.sellingbin.event.SBevents;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.compat.jei.StarcatcherJeiPlugin;
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
@@ -17,7 +18,6 @@ import com.wdiscute.starcatcher.data.network.tournament.CBClearTournamentPayload
 import com.wdiscute.starcatcher.data.network.tournament.SBStandTournamentNameChangePayload;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
-import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -35,15 +35,19 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FarmBlock;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -184,6 +188,20 @@ public class SCEvents
     }
 
     @SubscribeEvent
+    public static void onDatapackSync(OnDatapackSyncEvent event)
+    {
+        if (ModList.get().isLoaded("jei"))
+            event.sendRecipes(RecipeType.SMITHING);
+    }
+
+    @SubscribeEvent
+    public static void onRecipesReceived(RecipesReceivedEvent event)
+    {
+        if (ModList.get().isLoaded("jei"))
+            StarcatcherJeiPlugin.receiveRecipes(event);
+    }
+
+    @SubscribeEvent
     public static void serverStarted(ServerStartedEvent event)
     {
         TournamentHandler.setAll(TournamentSavedData.get(event.getServer().overworld()).getTournaments());
@@ -271,7 +289,7 @@ public class SCEvents
         {
             ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(pos).getBlockHolder(), level.getRandom()).toStack();
 
-            if(is.isEmpty())
+            if (is.isEmpty())
                 return;
 
             Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);

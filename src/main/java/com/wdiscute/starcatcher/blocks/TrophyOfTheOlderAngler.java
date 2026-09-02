@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -20,15 +20,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.nikdo53.tinymultiblocklib.block.AbstractMultiBlock;
 import net.nikdo53.tinymultiblocklib.block.BaseMultiblock;
 import net.nikdo53.tinymultiblocklib.block.IPreviewableMultiblock;
-import net.nikdo53.tinymultiblocklib.block.shape.MultiblockShape;
-import net.nikdo53.tinymultiblocklib.blockentities.AbstractMultiBlockEntity;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPreviewableMultiblock
 {
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
     public TrophyOfTheOlderAngler()
     {
@@ -97,7 +95,7 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
     }
 
     @Override
-    public @Nullable DirectionProperty getDirectionProperty()
+    public @Nullable EnumProperty<Direction> getDirectionProperty()
     {
         return FACING;
     }

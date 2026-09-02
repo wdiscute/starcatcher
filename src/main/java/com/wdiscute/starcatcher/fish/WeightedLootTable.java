@@ -5,23 +5,23 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 
-public record WeightedLootTable(ResourceLocation resourceLocation, int weight)
+public record WeightedLootTable(Identifier resourceLocation, int weight)
 {
-    public WeightedLootTable(ResourceLocation resourceLocation)
+    public WeightedLootTable(Identifier resourceLocation)
     {
         this(resourceLocation, 1);
     }
 
     public static final Codec<WeightedLootTable> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    ResourceLocation.CODEC.fieldOf("loot_table").forGetter(WeightedLootTable::resourceLocation),
+                    Identifier.CODEC.fieldOf("loot_table").forGetter(WeightedLootTable::resourceLocation),
                     Codec.INT.optionalFieldOf("weight", 1).forGetter(WeightedLootTable::weight)
             ).apply(instance, WeightedLootTable::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, WeightedLootTable> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, WeightedLootTable::resourceLocation,
+            Identifier.STREAM_CODEC, WeightedLootTable::resourceLocation,
             ByteBufCodecs.INT, WeightedLootTable::weight,
             WeightedLootTable::new
     );

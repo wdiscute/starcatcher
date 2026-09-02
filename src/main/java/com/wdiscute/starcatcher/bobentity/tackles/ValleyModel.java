@@ -1,17 +1,15 @@
 package com.wdiscute.starcatcher.bobentity.tackles;
 
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.bobentity.FishingBobRenderState;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.resources.Identifier;
 
-public class ValleyModel<T extends Entity> extends EntityModel<T>
+public class ValleyModel extends EntityModel<FishingBobRenderState>
 {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("valley"), "main");
     private final ModelPart root;
@@ -19,10 +17,11 @@ public class ValleyModel<T extends Entity> extends EntityModel<T>
 
     public ValleyModel(ModelPart root)
     {
+        super(root);
         this.root = root.getChild("root");
     }
 
-    public static ResourceLocation getTexture()
+    public static Identifier getTexture()
     {
         return Starcatcher.rl("textures/entity/tackle/valley.png");
     }
@@ -40,17 +39,5 @@ public class ValleyModel<T extends Entity> extends EntityModel<T>
                         .texOffs(8, 8).addBox(0.0F, 1.0F, -1.0F, 0.0F, 3.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 24.0F, 0.0F));
 
         return LayerDefinition.create(meshdefinition, 16, 16);
-    }
-
-    @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int i, int i1, int i2)
-    {
-        root.render(poseStack, vertexConsumer, i, i1, i2);
-    }
-
-    @Override
-    public void setupAnim(T fishEntity, float v, float v1, float v2, float v3, float v4)
-    {
-
     }
 }

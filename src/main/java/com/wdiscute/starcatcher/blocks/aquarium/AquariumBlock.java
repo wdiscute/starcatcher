@@ -13,23 +13,23 @@ import com.wdiscute.starcatcher.registry.SCEntities;
 import com.wdiscute.starcatcher.registry.items.StarcaughtBucket;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
+import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -43,6 +43,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.redstone.Orientation;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
 import net.neoforged.neoforge.common.Tags;
@@ -82,48 +83,13 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    protected void affectNeighborsAfterRemoval(BlockState state, ServerLevel level, BlockPos pos, boolean movedByPiston)
     {
-        if (!state.is(newState.getBlock()))
-        {
-            this.popItem(level, pos);
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
-    }
-
-    private void popItem(Level level, BlockPos pos)
-    {
-        if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe && !level.isClientSide)
-        {
-            if (abe.getFish().is(SCTags.BUCKETABLE_FISHES))
-            {
-                ItemStack itemstack = abe.getFish().copy();
-                FishEntity entity = SCEntities.FISH.get().create(level);
-
-                entity.setFish(itemstack);
-
-                entity.setPos(
-                        abe.getBlockPos().getX() + abe.fishTarget.x + 0.5F,
-                        abe.getBlockPos().getY() + abe.fishTarget.y + 0.5F,
-                        abe.getBlockPos().getZ() + abe.fishTarget.z + 0.5F
-                );
-
-                level.addFreshEntity(entity);
-
-            }
-            else
-            {
-                ItemStack itemstack = abe.getFish().copy();
-                ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
-                itementity.setDefaultPickUpDelay();
-                level.addFreshEntity(itementity);
-                abe.setFish(ItemStack.EMPTY);
-            }
-        }
+        super.affectNeighborsAfterRemoval(state, level, pos, movedByPiston);
     }
 
     @Override
-    public ItemStack pickupBlock(@Nullable Player player, LevelAccessor level, BlockPos pos, BlockState state)
+    public ItemStack pickupBlock(@org.jspecify.annotations.Nullable LivingEntity user, LevelAccessor level, BlockPos pos, BlockState state)
     {
         return ItemStack.EMPTY;
     }
@@ -141,7 +107,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest, FluidState fluid)
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack toolStack, boolean willHarvest, FluidState fluid)
     {
         return level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
     }
@@ -226,7 +192,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndTintGetter level, BlockPos pos, FluidState fluidState)
+    public boolean shouldDisplayFluidOverlay(BlockState state, BlockAndLightGetter level, BlockPos pos, FluidState fluidState)
     {
         return false;
     }
@@ -238,40 +204,37 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    protected boolean propagatesSkylightDown(BlockState state, BlockGetter level, BlockPos pos)
+    protected boolean propagatesSkylightDown(BlockState state)
     {
         return true;
     }
 
     @Override
-    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
+    protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
         if (stack.getItem() instanceof BucketItem bucket && !(stack.getItem() instanceof StarcaughtBucket) && !stack.is(Tags.Items.BUCKETS_EMPTY))
         {
             bucket.checkExtraContent(player, level, stack, pos);
             player.setItemInHand(hand, BucketItem.getEmptySuccessItem(stack, player));
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         Interaction interaction = SCDataMaps.getOrDefault(stack, SCDataMaps.AQUARIUM_INTERACTION, Interaction.NOTHING);
         if (interaction.executePlace(level, pos, state, stack, player))
         {
             if (interaction.sound != null) player.playSound(interaction.sound);
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
     }
 
     @Override
-    protected BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos pos, BlockPos neighborPos)
+    protected BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos pos, Direction directionToNeighbour, BlockPos neighbourPos, BlockState neighbourState, RandomSource random)
     {
         if (state.getValue(WATERLOGGED))
-        {
-            level.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
-        }
-
-        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+            ticks.scheduleTick(pos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        return super.updateShape(state, level, ticks, pos, directionToNeighbour, neighbourPos, neighbourState, random);
     }
 
     @Override
@@ -310,9 +273,9 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston)
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @org.jspecify.annotations.Nullable Orientation orientation, boolean movedByPiston)
     {
-        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        super.neighborChanged(state, level, pos, block, orientation, movedByPiston);
 
         Decoration decoration = state.getValue(DECORATION);
         Ground ground = state.getValue(GROUND);
@@ -365,7 +328,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     }
 
     @Override
-    public boolean canPlaceLiquid(@Nullable Player player, BlockGetter level, BlockPos pos, BlockState state, Fluid fluid)
+    public boolean canPlaceLiquid(@org.jspecify.annotations.Nullable LivingEntity user, BlockGetter level, BlockPos pos, BlockState state, Fluid type)
     {
         return false;
     }

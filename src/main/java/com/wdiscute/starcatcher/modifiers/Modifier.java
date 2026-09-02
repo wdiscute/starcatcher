@@ -12,8 +12,9 @@ import com.wdiscute.utils.MaybeStack;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
@@ -27,7 +28,7 @@ import java.util.Map;
 
 public interface Modifier
 {
-    Map<ResourceLocation, MapCodec<? extends Modifier>> MODIFIERS = new HashMap<>();
+    Map<Identifier, MapCodec<? extends Modifier>> MODIFIERS = new HashMap<>();
 
     static List<AbstractMinigameModifier> getDefaultMinigameModifiers()
     {
@@ -53,11 +54,11 @@ public interface Modifier
 
     List<Component> getDescription(boolean shift);
 
-    ResourceLocation getIdentifier();
+    Identifier getIdentifier();
 
     MapCodec<? extends Modifier> getCodec();
 
-    Codec<Modifier> CODEC = ResourceLocation.CODEC
+    Codec<Modifier> CODEC = Identifier.CODEC
             .dispatch(
                     Modifier::getIdentifier,
                     rl ->
@@ -65,7 +66,7 @@ public interface Modifier
                         if (MODIFIERS.containsKey(rl))
                             return MODIFIERS.get(rl);
 
-                        if (FMLEnvironment.dist.isClient())
+                        if (FMLEnvironment.getDist().isClient())
                             LogUtils.getLogger().warn("Modifier [{}] not found. Using empty modifier instead.", rl);
                         return EmptyModifier.CODEC;
                     }
@@ -109,7 +110,10 @@ public interface Modifier
             modifiers.addAll(getModifiers(off));
 
         //armor
-        player.getInventory().armor.forEach(o -> modifiers.addAll(getModifiers(o)));
+        modifiers.addAll(getModifiers(player.getItemBySlot(EquipmentSlot.FEET)));
+        modifiers.addAll(getModifiers(player.getItemBySlot(EquipmentSlot.LEGS)));
+        modifiers.addAll(getModifiers(player.getItemBySlot(EquipmentSlot.BODY)));
+        modifiers.addAll(getModifiers(player.getItemBySlot(EquipmentSlot.HEAD)));
 
         //curios
         if (ModList.get().isLoaded("curios"))

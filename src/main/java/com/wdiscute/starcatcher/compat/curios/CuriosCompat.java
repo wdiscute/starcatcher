@@ -11,16 +11,20 @@ import java.util.List;
 
 public class CuriosCompat
 {
-    public static boolean isLoaded() {
+    public static boolean isLoaded()
+    {
         return ModList.get().isLoaded("curios");
     }
 
-    public static List<ItemStack> getItems(Player player) {
+    public static List<ItemStack> getItems(Player player)
+    {
         List<ItemStack> items = new ArrayList<>();
 
-        CuriosApi.getCuriosInventory(player).ifPresent(handler -> {
+        CuriosApi.getCuriosInventory(player).ifPresent(handler ->
+        {
             IItemHandlerModifiable equippedCurios = handler.getEquippedCurios();
-            for (int i = 0; i < equippedCurios.getSlots(); i++) {
+            for (int i = 0; i < equippedCurios.getSlots(); i++)
+            {
                 items.add(equippedCurios.getStackInSlot(i));
             }
         });

@@ -8,16 +8,17 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.AbstractRecipeCategory;
-import net.minecraft.client.gui.GuiGraphics;
+import mezz.jei.api.recipe.types.IRecipeType;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.SmithingRecipeInput;
+import org.jspecify.annotations.Nullable;
 
 public class StarcatcherJeiSmithingRecipe extends AbstractRecipeCategory<StarcatcherJeiSmithingRecipe.Recipe>
 {
@@ -39,36 +40,36 @@ public class StarcatcherJeiSmithingRecipe extends AbstractRecipeCategory<Starcat
     public void setRecipe(IRecipeLayoutBuilder builder, Recipe recipe, IFocusGroup focuses)
     {
         builder.addInputSlot(5, 2)
-                .addItemStack(rodIs)
+                .add(rodIs)
                 .setStandardSlotBackground()
         ;
 
         builder.addInputSlot(25, 2)
-                .addIngredient(VanillaTypes.ITEM_STACK, recipe.template.getItems()[0])
+                .add(VanillaTypes.ITEM_STACK, recipe.template.getValues().get(0).value().getDefaultInstance())
                 .setStandardSlotBackground()
         ;
 
         builder.addInputSlot(45, 2)
-                .addIngredient(VanillaTypes.ITEM_STACK, recipe.material.getItems()[0])
+                .add(VanillaTypes.ITEM_STACK, recipe.material.getValues().get(0).value().getDefaultInstance())
                 .setStandardSlotBackground()
         ;
 
         builder.addOutputSlot(85, 2)
-                .addItemStack(recipe.result)
+                .add(recipe.result)
                 .setStandardSlotBackground()
         ;
     }
 
     @Override
-    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY)
+    public void draw(Recipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY)
     {
         StarcatcherJeiFPRecipe.ARROW.render(guiGraphics, 65, 2);
     }
 
     @Override
-    public ResourceLocation getRegistryName(Recipe recipe)
+    public @Nullable Identifier getIdentifier(Recipe recipe)
     {
-        return Starcatcher.rl(BuiltInRegistries.ITEM.getKey(recipe.template.getItems()[0].getItem()).getPath());
+        return Starcatcher.rl(BuiltInRegistries.ITEM.getKey(recipe.template.getValues().get(0).value()).getPath());
     }
 
     public record Recipe(Ingredient template, Ingredient material, ItemStack result)
@@ -77,13 +78,13 @@ public class StarcatcherJeiSmithingRecipe extends AbstractRecipeCategory<Starcat
         public static Recipe of(StarcatcherRodRecipe recipe)
         {
             ItemStack stack = recipe.assembledNoRegistries(new SmithingRecipeInput(
-                    recipe.template().getItems()[0],
+                    recipe.template().getValues().get(0).value().getDefaultInstance(),
                     SCItems.ROD.toStack(),
-                    recipe.material().getItems()[0]));
+                    recipe.material().getValues().get(0).value().getDefaultInstance()));
 
             return new Recipe(recipe.template(), recipe.material(), stack);
         }
 
-        public static final RecipeType<Recipe> TYPE = new RecipeType<>(Starcatcher.rl("smithing"), Recipe.class);
+        public static final IRecipeType<Recipe> TYPE = IRecipeType.create(Starcatcher.rl("smithing"), Recipe.class);
     }
 }

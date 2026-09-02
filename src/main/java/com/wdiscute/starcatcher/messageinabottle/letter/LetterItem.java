@@ -24,7 +24,7 @@ public class LetterItem extends Item
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
     {
         ItemStack stack = player.getItemInHand(usedHand);
-        if (level.isClientSide) return InteractionResultHolder.success(stack);
+        if (level.isClientSide()) return InteractionResultHolder.success(stack);
 
         EditableMessage editableMessage = SCDataComponents.get(stack, SCDataComponents.EDITABLE_MESSAGE);
 

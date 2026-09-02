@@ -17,8 +17,8 @@ import com.wdiscute.starcatcher.tooltips.SCTooltipGradient;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -38,8 +38,8 @@ public class Starcatcher
 {
     public static final String MOD_ID = "starcatcher";
     public static final Logger LOGGER = LogUtils.getLogger();
-    public static final ResourceLocation MISSINGNO = rl("missingno");
-    public static final ResourceLocation BASE = rl("base");
+    public static final Identifier MISSINGNO = rl("missingno");
+    public static final Identifier BASE = rl("base");
     public static final DecimalFormat FORMAT = new DecimalFormat("#.##");
 
     //resource keys
@@ -71,7 +71,7 @@ public class Starcatcher
             .defaultKey(Starcatcher.BASE)
             .create();
 
-    public static ResourceLocation rl(String s)
+    public static Identifier rl(String s)
     {
         return Utils.rl(Starcatcher.MOD_ID, s);
     }

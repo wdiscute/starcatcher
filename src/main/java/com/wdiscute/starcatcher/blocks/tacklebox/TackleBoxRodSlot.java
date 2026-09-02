@@ -3,7 +3,7 @@ package com.wdiscute.starcatcher.blocks.tacklebox;
 import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.InventoryMenu;
@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class TackleBoxRodSlot extends Slot
 {
-    private static final ResourceLocation BACKGROUND = Starcatcher.rl("item/background/rod");
+    private static final Identifier BACKGROUND = Starcatcher.rl("item/background/rod");
 
     TackleBoxMenu tackleMenu;
 
@@ -25,9 +25,9 @@ public class TackleBoxRodSlot extends Slot
     }
 
     @Override
-    public @Nullable Pair<ResourceLocation, ResourceLocation> getNoItemIcon()
+    public @Nullable Identifier getNoItemIcon()
     {
-        return Pair.of(InventoryMenu.BLOCK_ATLAS, BACKGROUND);
+        return BACKGROUND;
     }
 
     @Override

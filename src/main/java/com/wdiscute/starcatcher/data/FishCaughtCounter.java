@@ -10,13 +10,13 @@ import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.data.network.CBFishCaughtNotifs;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.registry.SCStats;
-import net.minecraft.Util;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Util;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -36,7 +36,7 @@ public record FishCaughtCounter(
         boolean hasGuideNotification
 )
 {
-    public static FishCaughtCounter get(Player player, ResourceLocation loc)
+    public static FishCaughtCounter get(Player player, Identifier loc)
     {
         return FishingGuideAttachment.getFishesCaught(player).get(loc);
     }
@@ -50,8 +50,8 @@ public record FishCaughtCounter(
         if(fp.hasGuideEntry()) return false;
 
         //returns false if player has already caught the golden fish of that fp
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
-        ResourceLocation loc = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKeyOrNull(fp);
+        Map<Identifier, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
+        Identifier loc = player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKeyOrNull(fp);
         if (!fishesCaught.containsKey(loc)) return true;
         return !fishesCaught.get(loc).caughtGolden;
     }
@@ -93,7 +93,7 @@ public record FishCaughtCounter(
                 hasGuideNotification);
     }
 
-    public static void awardFishCaughtCounter(FishProperties fpCaught, @Nullable ResourceLocation rl, Player player,
+    public static void awardFishCaughtCounter(FishProperties fpCaught, @Nullable Identifier rl, Player player,
                                               int ticks, float percentile,
                                               boolean perfectCatch, boolean awardToTeam, boolean golden, boolean displayToast)
     {
@@ -125,10 +125,10 @@ public record FishCaughtCounter(
                 sp.getStats().sendStats(sp);
         }
 
-        Map<ResourceLocation, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
+        Map<Identifier, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
 
         //if rl param is null, get it from fp from registry
-        ResourceLocation loc = rl == null ? player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKeyOrNull(fpCaught) : rl;
+        Identifier loc = rl == null ? player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKeyOrNull(fpCaught) : rl;
         //if fp/rl is valid
         if (loc != null)
         {

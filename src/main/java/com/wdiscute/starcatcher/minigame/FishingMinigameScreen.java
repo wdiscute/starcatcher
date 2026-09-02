@@ -18,12 +18,13 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -89,7 +90,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     public int treasureProgressSmooth = 0;
 
     //used to store data that changes at runtime and is independent of each minigame, ie number of hits so far
-    public final Map<ResourceLocation, Object> modifierData = new HashMap<>();
+    public final Map<Identifier, Object> modifierData = new HashMap<>();
 
     List<HitFakeParticle> hitParticles = new ArrayList<>();
 
@@ -222,10 +223,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTickNeo)
+    public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTickNeo)
     {
         if (renderBlur)
-            super.renderBackground(g, mouseX, mouseY, partialTickNeo);
+            super.extractBackground(g, mouseX, mouseY, partialTickNeo);
 
         final float partialTick = PartialTickHelper.INSTANCE.getPartialTicks(minecraft.level);
 
@@ -419,7 +420,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         }
     }
 
-    public void renderSweetSpot(ActiveSweetSpot ass, GuiGraphics guiGraphics, float partialTick, PoseStack poseStack)
+    public void renderSweetSpot(ActiveSweetSpot ass, GuiGraphicsExtractor guiGraphics, float partialTick, PoseStack poseStack)
     {
         float centerX = (float) width / 2;
         float centerY = (float) height / 2;
@@ -439,7 +440,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         poseStack.popPose();
     }
 
-    public void renderTreasure(GuiGraphics g)
+    public void renderTreasure(GuiGraphicsExtractor g)
     {
         int centerX = width / 2;
         int centerY = height / 2;
@@ -470,7 +471,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
     }
 
-    public void renderKimbeMarker(GuiGraphics g)
+    public void renderKimbeMarker(GuiGraphicsExtractor g)
     {
         PoseStack poseStack = g.pose();
         poseStack.pushPose();
@@ -482,16 +483,12 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         poseStack.mulPose(new Quaternionf().rotateZ((float) Math.toRadians(kimbeMarkerPos)));
         poseStack.translate(-centerX, -centerY, 0);
 
-        RenderSystem.enableBlend();
-
         ScreenUtils.outline(g, (int) centerX, (int) centerY - 34, 2, 34, kimbeMarkerColor);
-
-        RenderSystem.disableBlend();
 
         poseStack.popPose();
     }
 
-    public void renderHandle(GuiGraphics guiGraphics, PoseStack poseStack, float partialTickDONOTUSE)
+    public void renderHandle(GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTickDONOTUSE)
     {
         poseStack.pushPose();
 
@@ -517,9 +514,9 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public boolean keyReleased(int keyCode, int scanCode, int keyModifiers)
+    public boolean keyReleased(KeyEvent event)
     {
-        if (keyCode == SCKeymappings.MINIGAME_HIT.getKey().getValue())
+        if (event.key() == SCKeymappings.MINIGAME_HIT.getKey().getValue())
         {
             isHoldingKey = false;
             holdingTicks = 0;
@@ -527,7 +524,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         modifiers.forEach(mod -> mod.onKeyReleased(this, keyCode, scanCode, keyModifiers));
 
-        return super.keyReleased(keyCode, scanCode, keyModifiers);
+        return super.keyReleased(event);
     }
 
     @Override

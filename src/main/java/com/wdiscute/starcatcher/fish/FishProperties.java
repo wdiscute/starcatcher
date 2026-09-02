@@ -12,7 +12,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -78,12 +78,12 @@ public record FishProperties(
         if (catchInfo.alwaysSpawnEntity())
             return Component.translatable("entity." + catchInfo.entityToSpawn().getRegisteredName().replace(":", "."));
         else
-            return Component.translatable(catchInfo.fish().toStack().getDescriptionId());
+            return Component.translatable(catchInfo.fish().toStack().getItem().getDescriptionId());
     }
 
-    public ResourceLocation toLoc(Level level)
+    public Identifier toLoc(Level level)
     {
-        return level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(this);
+        return level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(this);
     }
 
     public static FishProperties empty()
@@ -271,7 +271,7 @@ public record FishProperties(
 
     public FishProperties addBait(BaitRestriction bait)
     {
-        Map<ResourceLocation, Integer> map = new HashMap<>();
+        Map<Identifier, Integer> map = new HashMap<>();
         AtomicReference<String> override = new AtomicReference<>();
         override.set("");
 

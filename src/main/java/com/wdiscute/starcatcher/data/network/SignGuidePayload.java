@@ -14,7 +14,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
@@ -63,9 +63,9 @@ public record SignGuidePayload(String signature, BlockPos bp) implements CustomP
                     {
                         if (SCDataComponents.has(guide, SCDataComponents.SIGNED_GUIDE)) return;
 
-                        Map<ResourceLocation, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
+                        Map<Identifier, FishCaughtCounter> map = SCDataAttachments.get(player, SCDataAttachments.FISHING_GUIDE).fishesCaught;
 
-                        Map<ResourceLocation, FishCaughtCounter> mapToSave = new HashMap<>();
+                        Map<Identifier, FishCaughtCounter> mapToSave = new HashMap<>();
                         map.forEach((rl, fcc) -> mapToSave.put(rl, fcc.removeNotification()));
 
                         if (player instanceof ServerPlayer sp)

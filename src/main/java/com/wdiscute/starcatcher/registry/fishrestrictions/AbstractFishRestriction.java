@@ -6,11 +6,11 @@ import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.FishProperties;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -24,11 +24,11 @@ public abstract class AbstractFishRestriction implements Comparable<AbstractFish
 {
     public final String translationOverride;
 
-    public static final Codec<AbstractFishRestriction> ABSTRACT_PROCESSOR_CODEC = ResourceLocation.CODEC
+    public static final Codec<AbstractFishRestriction> ABSTRACT_PROCESSOR_CODEC = Identifier.CODEC
             .dispatch(processor -> processor.getRegistryHolderOrThrow().getId(),
                     loc ->
                     {
-                        AbstractFishRestriction fr = Starcatcher.FISH_RESTRICTIONS_REGISTRY.get(loc);
+                        AbstractFishRestriction fr = Starcatcher.FISH_RESTRICTIONS_REGISTRY.getValue(loc);
                         if (fr == null)
                         {
                             LogUtils.getLogger().error("Fish Restriction {} is not registered! " +
@@ -112,7 +112,7 @@ public abstract class AbstractFishRestriction implements Comparable<AbstractFish
         return List.of();
     }
 
-    public void render(GuiGraphics guiGraphics, int topLeftX, int topLeftY, int mouseX, int mouseY, Context context)
+    public void render(GuiGraphicsExtractor guiGraphics, int topLeftX, int topLeftY, int mouseX, int mouseY, Context context)
     {
     }
 

@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.blocks.aquarium;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.client.Minecraft;
@@ -10,7 +9,8 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.ItemRenderer;
+import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.item.ItemModelResolver;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
@@ -18,16 +18,16 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.Tags;
+import org.jspecify.annotations.Nullable;
 
-public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity>
+public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity, AquariumRenderState>
 {
-
-    ItemRenderer itemRenderer;
+    ItemModelResolver itemRenderer;
 
     public AquariumRenderer(BlockEntityRendererProvider.Context context)
     {
-        itemRenderer = context.getItemRenderer();
-        FishRenderer.createMap(context.getModelSet());
+        itemRenderer = context.itemModelResolver();
+        FishRenderer.createMap(context.entityModelSet());
     }
 
     private void moveFish(AquariumBlockEntity be)
@@ -67,6 +67,13 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         be.z += Math.sin(be.fishRotation) * fishSpeed * partial * closenessAngle * closenessDistance;
 
         be.fishRotation += Math.atan2(Math.sin(targetAngle - be.fishRotation), Math.cos(targetAngle - be.fishRotation)) * partial * closenessDistance;
+    }
+
+    @Override
+    public void extractRenderState(AquariumBlockEntity be, AquariumRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress)
+    {
+        BlockEntityRenderer.super.extractRenderState(be, state, partialTicks, cameraPosition, breakProgress);
+        state.itemStack = be.getFish();
     }
 
     @Override
@@ -118,9 +125,9 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
     }
 
     @Override
-    public AABB getRenderBoundingBox(AquariumBlockEntity aquariumBlockEntity)
+    public AABB getRenderBoundingBox(AquariumBlockEntity blockEntity)
     {
-        BlockPos pos = aquariumBlockEntity.getBlockPos();
+        BlockPos pos = blockEntity.getBlockPos();
         return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0F, pos.getY() + 1.5F, pos.getZ() + 1.0F);
     }
 }

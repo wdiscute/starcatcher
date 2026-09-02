@@ -3,13 +3,12 @@ package com.wdiscute.starcatcher.shaders;
 import com.mojang.blaze3d.platform.NativeImage;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.model.data.ModelData;
 
 import java.io.InputStream;
 import java.util.HashMap;
@@ -18,19 +17,19 @@ import java.util.function.Function;
 
 public class GoldRenderer implements AutoCloseable
 {
-    public final Map<ResourceLocation, GoldTextureInstance> cache = new HashMap<>();
+    public final Map<Identifier, GoldTextureInstance> cache = new HashMap<>();
     public static final GoldRenderer INSTANCE = new GoldRenderer();
 
     public static TextureAtlasSprite getItemSprite(ItemStack stack)
     {
         Minecraft minecraft = Minecraft.getInstance();
 
-        BakedModel model = minecraft.getItemRenderer().getModel(stack, minecraft.level, minecraft.player, 0);
+        BakedModel model = minecraft.getItemModelResolver().getModel(stack, minecraft.level, minecraft.player, 0);
 
         return model.getParticleIcon(ModelData.EMPTY);
     }
 
-    public static ResourceLocation getTextureLoc(ResourceLocation resourceLoc)
+    public static Identifier getTextureLoc(Identifier resourceLoc)
     {
         return Utils.rl(resourceLoc.getNamespace(), "textures/" + resourceLoc.getPath() + ".png");
     }
@@ -38,11 +37,11 @@ public class GoldRenderer implements AutoCloseable
     public GoldTextureInstance getOrCreateItem(ItemStack stack, boolean cull)
     {
         TextureAtlasSprite sprite = getItemSprite(stack);
-        ResourceLocation loc = sprite.contents().name();
+        Identifier loc = sprite.contents().name();
         return cache.computeIfAbsent(loc, l -> GoldTextureInstance.fromItemStack(l, cull));
     }
 
-    public GoldTextureInstance getOrCreateEntity(ResourceLocation loc, Function<ResourceLocation, RenderType> renderTypeGetter)
+    public GoldTextureInstance getOrCreateEntity(Identifier loc, Function<Identifier, RenderType> renderTypeGetter)
     {
         return cache.computeIfAbsent(loc, l -> GoldTextureInstance.fromEntity(l, renderTypeGetter));
     }
@@ -59,26 +58,26 @@ public class GoldRenderer implements AutoCloseable
         public final DynamicTexture texture;
         public final RenderType renderType;
 
-        public GoldTextureInstance(ResourceLocation loc, Function<ResourceLocation, RenderType> renderTypeGetter)
+        public GoldTextureInstance(Identifier loc, Function<Identifier, RenderType> renderTypeGetter)
         {
             this.texture = recolorTexture(getNativeImage(getTextureLoc(loc)));
-            ResourceLocation resourcelocation = Minecraft.getInstance().getTextureManager().register("starcatcher_gold/" + loc.getPath(), this.texture);
-            this.renderType = renderTypeGetter.apply(resourcelocation);
+            Identifier Identifier = Minecraft.getInstance().getTextureManager().register("starcatcher_gold/" + loc.getPath(), this.texture);
+            this.renderType = renderTypeGetter.apply(Identifier);
         }
 
 
-        public static GoldTextureInstance fromItemStack(ResourceLocation loc, boolean cull)
+        public static GoldTextureInstance fromItemStack(Identifier loc, boolean cull)
         {
             return new GoldTextureInstance(loc, cull ? RenderType::entityTranslucentCull : RenderType::itemEntityTranslucentCull);
         }
 
-        public static GoldTextureInstance fromEntity(ResourceLocation loc, Function<ResourceLocation, RenderType> renderTypeGetter)
+        public static GoldTextureInstance fromEntity(Identifier loc, Function<Identifier, RenderType> renderTypeGetter)
         {
             return new GoldTextureInstance(loc, renderTypeGetter);
         }
 
 
-        public static NativeImage getNativeImage(ResourceLocation loc)
+        public static NativeImage getNativeImage(Identifier loc)
         {
             try (InputStream stream = Minecraft.getInstance().getResourceManager().getResource(loc).orElseThrow().open())
             {

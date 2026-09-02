@@ -9,20 +9,19 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestrictio
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.animal.AbstractFish;
+import net.minecraft.world.entity.animal.fish.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.pathfinder.PathType;
 import org.jetbrains.annotations.Nullable;
 
@@ -76,8 +75,9 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    public boolean fireImmune() {
-        return getFish().has(DataComponents.FIRE_RESISTANT);
+    public boolean fireImmune()
+    {
+        return !this.getFish().canBeHurtBy(this.damageSources().inFire()) || super.fireImmune();
     }
 
     public static AttributeSupplier.Builder createAttributes()
@@ -86,7 +86,8 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    public boolean isInWater() {
+    public boolean isInWater()
+    {
         return !fireImmune() ? super.isInWater() : isInLava();
     }
 
@@ -94,19 +95,19 @@ public class FishEntity extends AbstractFish
     public void tick()
     {
         super.tick();
-        if (getBodyArmorItem().isEmpty() && !level().isClientSide)
+        if (getBodyArmorItem().isEmpty() && !level().isClientSide())
         {
             //shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();
 
-            for (FishProperties fp : level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
+            for (FishProperties fp : level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             {
                 if (fp.calculateChance(this, level(), SCItems.ROD.toStack(), AbstractFishRestriction.Context.FISH_ENTITY) > 0 && fp.catchInfo().fish().toStack().is(SCTags.BUCKETABLE_FISHES))
                     available.add(fp);
             }
 
             if (available.isEmpty())
-                kill();
+                kill((ServerLevel) level());
             else
             {
                 FishProperties fp = available.get(Utils.r.nextInt(available.size()));
@@ -114,14 +115,6 @@ public class FishEntity extends AbstractFish
                 setBodyArmorItem(is);
             }
         }
-    }
-
-    @Override
-    public float getScale() {
-        return SCDataComponents.getOrDefault(
-                getFish(), SCDataComponents.CAUGHT_FISH_INFO,
-                CaughtFishInfo.AVERAGE
-        ).getScale();
     }
 
     @Override
@@ -135,6 +128,14 @@ public class FishEntity extends AbstractFish
     {
         setBodyArmorItem(is);
         shouldDropItem = true;
+
+        //todo 26 check if this works
+        AttributeInstance instance = getAttributes().getInstance(Attributes.SCALE);
+        if (instance != null)
+            instance.setBaseValue(SCDataComponents.getOrDefault(
+                    getFish(), SCDataComponents.CAUGHT_FISH_INFO,
+                    CaughtFishInfo.AVERAGE
+            ).getScale());
     }
 
     public ItemStack getFish()

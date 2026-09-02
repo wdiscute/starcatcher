@@ -7,7 +7,7 @@ import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 
@@ -16,11 +16,11 @@ import java.util.Map;
 
 public class FishingGuideAttachment
 {
-    public Map<ResourceLocation, FishCaughtCounter> fishesCaught;
+    public Map<Identifier, FishCaughtCounter> fishesCaught;
     public boolean receivedGuide;
     public boolean fishedRod;
 
-    public FishingGuideAttachment(Map<ResourceLocation, FishCaughtCounter> fishesCaught, boolean receivedGuide, boolean fishedRod)
+    public FishingGuideAttachment(Map<Identifier, FishCaughtCounter> fishesCaught, boolean receivedGuide, boolean fishedRod)
     {
         this.fishesCaught = new HashMap<>(fishesCaught); //guarantees the map is mutable
         this.receivedGuide = receivedGuide;
@@ -36,25 +36,25 @@ public class FishingGuideAttachment
 
     public static final Codec<FishingGuideAttachment> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
-                    Codec.unboundedMap(ResourceLocation.CODEC, FishCaughtCounter.CODEC).fieldOf("fishes_caught").forGetter(data -> data.fishesCaught),
+                    Codec.unboundedMap(Identifier.CODEC, FishCaughtCounter.CODEC).fieldOf("fishes_caught").forGetter(data -> data.fishesCaught),
                     Codec.BOOL.lenientOptionalFieldOf("received_guide", false).forGetter(data -> data.receivedGuide),
                     Codec.BOOL.lenientOptionalFieldOf("fished_rod", false).forGetter(data -> data.fishedRod)
             ).apply(instance, FishingGuideAttachment::new)
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, FishingGuideAttachment> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.map(HashMap::new, ResourceLocation.STREAM_CODEC, FishCaughtCounter.STREAM_CODEC), data -> data.fishesCaught,
+            ByteBufCodecs.map(HashMap::new, Identifier.STREAM_CODEC, FishCaughtCounter.STREAM_CODEC), data -> data.fishesCaught,
             ByteBufCodecs.BOOL, data -> data.receivedGuide,
             ByteBufCodecs.BOOL, data -> data.fishedRod,
             FishingGuideAttachment::new
     );
 
-    public static Map<ResourceLocation, FishCaughtCounter> getFishesCaught(Player player)
+    public static Map<Identifier, FishCaughtCounter> getFishesCaught(Player player)
     {
         return get(player).fishesCaught;
     }
 
-    public static void setFishesCaught(Player player, Map<ResourceLocation, FishCaughtCounter> fishesCaught)
+    public static void setFishesCaught(Player player, Map<Identifier, FishCaughtCounter> fishesCaught)
     {
         get(player).fishesCaught = fishesCaught;
         sync(player);

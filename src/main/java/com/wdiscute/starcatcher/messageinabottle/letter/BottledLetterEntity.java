@@ -13,7 +13,7 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -22,7 +22,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
+import net.minecraft.world.entity.projectile.throwableitemprojectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,18 +38,20 @@ public class BottledLetterEntity extends ThrowableItemProjectile
         super(entityType, level);
     }
 
-    public BottledLetterEntity(Level level, LivingEntity shooter) {
-        super(SCEntities.BOTTLED_LETTER.get(), shooter, level);
+    public BottledLetterEntity(Level level, LivingEntity shooter)
+    {
+        super(SCEntities.BOTTLED_LETTER.get(), shooter, level, SCItems.BOTTLED_LETTER.toStack());
     }
 
-    public BottledLetterEntity(Level level, double x, double y, double z) {
-        super(SCEntities.BOTTLED_LETTER.get(), x, y, z, level);
+    public BottledLetterEntity(Level level, double x, double y, double z)
+    {
+        super(SCEntities.BOTTLED_LETTER.get(), x, y, z, level, SCItems.BOTTLED_LETTER.toStack());
     }
 
     @Override
     protected void onHitBlock(BlockHitResult result)
     {
-        if(level().getFluidState(result.getBlockPos().above()).isEmpty())
+        if (level().getFluidState(result.getBlockPos().above()).isEmpty())
         {
             //spawn item if hit block
             ItemEntity itemEntity = new ItemEntity(level(), position().x, position().y, position().z, getItem());
@@ -58,32 +60,32 @@ public class BottledLetterEntity extends ThrowableItemProjectile
         else
         {
             //add to messages pool if hit fluid
-            if(getOwner() != null)
+            if (getOwner() != null)
             {
-                if(getOwner() instanceof ServerPlayer sp)
+                if (getOwner() instanceof ServerPlayer sp)
                 {
                     EditableMessage editableMessage = SCDataComponents.get(getItem(), SCDataComponents.EDITABLE_MESSAGE);
 
-                    if(editableMessage != null)
+                    if (editableMessage != null)
                     {
-                        sp.displayClientMessage(Component.translatable("item.starcatcher.bottled_letter.thrown"), true);
+                        sp.sendOverlayMessage(Component.translatable("item.starcatcher.bottled_letter.thrown"));
 
-                        Registry<LevelStem> levelStemRegistry = level().registryAccess().registryOrThrow(Registries.LEVEL_STEM);
-                        LevelStem levelStem = levelStemRegistry.get(level().dimension().location());
+                        Registry<LevelStem> levelStemRegistry = level().registryAccess().lookupOrThrow(Registries.LEVEL_STEM);
+                        LevelStem levelStem = levelStemRegistry.getValue(level().dimension().identifier());
 
                         Holder<LevelStem> levelStemHolder = levelStemRegistry.wrapAsHolder(levelStem);
 
-                        ResourceLocation data = levelStemHolder.getData(SCDataMaps.MESSAGE_BACKGROUND);
+                        Identifier data = levelStemHolder.getData(SCDataMaps.MESSAGE_BACKGROUND);
 
-                        if(data == null)
+                        if (data == null)
                             data = Message.BACKGROUND_OVERWORLD;
 
-                        Message message = new Message(sp.getUUID(), editableMessage.sender(), editableMessage.text(), level().dimension().location(), data);
+                        Message message = new Message(sp.getUUID(), editableMessage.sender(), editableMessage.text(), level().dimension().identifier(), data);
                         MessagesSavedData.get(((ServerLevel) level())).addMessage(message);
                     }
                     else
                     {
-                        sp.displayClientMessage(Component.translatable("item.starcatcher.bottled_letter.thrown.fail"), false);
+                        sp.sendOverlayMessage(Component.translatable("item.starcatcher.bottled_letter.thrown.fail"));
                     }
                 }
             }
@@ -100,7 +102,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
     private ParticleOptions getParticle()
     {
         ItemStack itemstack = this.getItem();
-        return new ItemParticleOption(ParticleTypes.ITEM, itemstack);
+        return new ItemParticleOption(ParticleTypes.ITEM, itemstack.getItem());
     }
 
     @Override
@@ -141,7 +143,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
     protected void onHit(HitResult result)
     {
         super.onHit(result);
-        if (!this.level().isClientSide)
+        if (!this.level().isClientSide())
         {
             level().playSound(
                     null,
@@ -156,8 +158,5 @@ public class BottledLetterEntity extends ThrowableItemProjectile
             this.level().broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
-
     }
-
-
 }
