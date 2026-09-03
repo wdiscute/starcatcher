@@ -31,8 +31,6 @@ import java.util.Map;
 
 public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, FishingBobRenderState>
 {
-    public static final List<Identifier> skins = new ArrayList<>();
-
     public FishingBobRenderer(EntityRendererProvider.Context context)
     {
         super(context);
@@ -77,14 +75,14 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
                 stringVertex(xa, ya, za, buffer, pose, a1, a0, width);
             }
         });
-        poseStack.popPose();
 
+        poseStack.popPose();
 
         //render tackle
         poseStack.pushPose();
-        poseStack.scale(1F, -1F, 1F);
-        poseStack.translate(0, -1.6, 0);
         poseStack.mulPose(Axis.YP.rotationDegrees(180));
+        poseStack.translate(0, 1.5, 0);
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
         poseStack.mulPose(Axis.YP.rotationDegrees(-state.entityYaw));
 
         //starcatcher:base

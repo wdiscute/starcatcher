@@ -161,7 +161,6 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
                 );
 
                 level.addFreshEntity(entity);
-
             }
             else
             {
@@ -187,7 +186,8 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
         CompoundTag tag = super.getUpdateTag(registries);
 
         RegistryOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
-        tag.store("item", ItemStack.CODEC, ops, getFish());
+        if (!fish.isEmpty())
+            tag.store("item", ItemStack.CODEC, ops, getFish());
 
         tag.putDouble("fish_target_x", fishTarget.x);
         tag.putDouble("fish_target_y", fishTarget.y);

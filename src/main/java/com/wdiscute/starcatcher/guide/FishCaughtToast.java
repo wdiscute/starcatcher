@@ -59,7 +59,6 @@ public class FishCaughtToast implements Toast
         return v;
     }
 
-
     @Override
     public void update(ToastManager manager, long fullyVisibleForMs)
     {
@@ -69,14 +68,12 @@ public class FishCaughtToast implements Toast
             v = Visibility.HIDE;
     }
 
-
     @Override
     public void extractRenderState(GuiGraphicsExtractor g, Font font, long fullyVisibleForMs)
     {
         BACKGROUND_SPRITE.render(g);
         ScreenUtils.item(g, is, 6, 29);
-        ScreenUtils.text(g, font, this.title, 40, 13, 0, false);
-        //todo 26
+        ScreenUtils.text(g, font, this.title, 40, 13, 0xff000000, false);
         int lettersRevealed = Math.clamp((fullyVisibleForMs - 500L) / 150L, 0, this.fishName.length());
 
         if (this.old != lettersRevealed)
@@ -86,7 +83,7 @@ public class FishCaughtToast implements Toast
         }
 
         Component comp = Tooltips.resolveTagsToComponent(rarity.wrapWithRarityMarkdownAsString(this.fishName.substring(0, lettersRevealed))).append(Component.literal("§kaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa".substring(0, this.fishName.length() - lettersRevealed + 2)));
-        ScreenUtils.text(g, font, comp, 40, 22, 0x635040, false);
+        ScreenUtils.text(g, font, comp, 40, 22, 0xff635040, false);
     }
 
     public static void newFish(FishProperties fp, boolean displayToast, float percentile, boolean golden)

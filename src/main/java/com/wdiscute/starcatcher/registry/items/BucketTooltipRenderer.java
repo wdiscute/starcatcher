@@ -32,9 +32,9 @@ public class BucketTooltipRenderer implements ClientTooltipComponent
 
             if (cfi.golden())
             {
-                MutableComponent element = Component.empty().append(Component.translatable("gui.guide.rarity.golden")).withStyle(Style.EMPTY.withColor(0x888888));
+                MutableComponent element = Component.empty().append(Component.translatable("gui.guide.rarity.golden")).withStyle(Style.EMPTY.withColor(0xff888888));
                 if (Utils.hasShiftDown())
-                    element.append(Component.literal(" (top 0%)").withStyle(Style.EMPTY.withColor(0x707070)));
+                    element.append(Component.literal(" (top 0%)").withStyle(Style.EMPTY.withColor(0xff707070)));
                 text = element;
                 return;
             }
@@ -42,9 +42,9 @@ public class BucketTooltipRenderer implements ClientTooltipComponent
             String weight = units.getWeightAsString(cfi.weight());
             String percentile = " (top " + (int) cfi.percentile() + "%)";
 
-            MutableComponent element = Component.literal(size + " - " + weight).withStyle(Style.EMPTY.withColor(0x888888));
+            MutableComponent element = Component.literal(size + " - " + weight).withStyle(Style.EMPTY.withColor(0xff888888));
             if (Utils.hasShiftDown())
-                element.append(Component.literal(percentile).withStyle(Style.EMPTY.withColor(0x707070)));
+                element.append(Component.literal(percentile).withStyle(Style.EMPTY.withColor(0xff707070)));
             text = element;
         }
 
@@ -73,7 +73,7 @@ public class BucketTooltipRenderer implements ClientTooltipComponent
             ScreenUtils.item(g, tooltip.fish(), x, y);
 
             if (hasProperties())
-                ScreenUtils.text(g, Minecraft.getInstance().font, text, x + 20, y + 4, 0x888888, true);
+                ScreenUtils.text(g, Minecraft.getInstance().font, text, x + 20, y + 4, 0xff888888, true);
         }
     }
 
