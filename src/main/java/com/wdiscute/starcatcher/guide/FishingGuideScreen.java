@@ -703,7 +703,7 @@ public class FishingGuideScreen extends Screen
 
         pose.pushMatrix();
         pose.translate((float) (uiX + 16 + 16.5), (float) (uiY + 16 + 34.50));
-        pose.rotate(-compassRotation - 45 - 180);
+        pose.rotate((float) Math.toRadians(-compassRotation - 45 - 180));
         pose.translate(-16, -16);
         COMPASS.render(guiGraphics);
         pose.popMatrix();

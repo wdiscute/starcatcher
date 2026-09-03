@@ -111,7 +111,8 @@ public interface SCCreativeModeTabs
                         .add((registryAccess) ->
                                 {
                                     List<ItemStack> list = new ArrayList<>();
-                                    for (FishProperties fp : FishApi.getMessages(registryAccess))
+                                    List<FishProperties> messages = FishApi.getMessages(registryAccess);
+                                    for (FishProperties fp : messages)
                                     {
                                         ItemStack stack = fp.catchInfo().fish().toStack();
 

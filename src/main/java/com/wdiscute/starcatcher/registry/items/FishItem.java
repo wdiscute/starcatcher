@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCEntities;
+import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -16,7 +17,7 @@ public class FishItem extends Item
 {
     public FishItem(Item.Properties properties)
     {
-        super(properties);
+        super(properties.usingConvertsTo(SCItems.FISH_BONES.asItem()));
     }
 
     @Override

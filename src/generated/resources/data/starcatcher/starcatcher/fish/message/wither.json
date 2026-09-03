@@ -3,7 +3,6 @@
   "catch_info": {
     "type": "message",
     "item": {
-      "count": 0,
       "data_components_patch": {
         "starcatcher:message": {
           "background": "starcatcher:textures/gui/message/message_nether.png",

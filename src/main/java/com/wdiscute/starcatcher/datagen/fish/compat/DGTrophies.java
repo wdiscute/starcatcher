@@ -287,7 +287,7 @@ public class DGTrophies
                     FishRegistration.key("message/amethyst_hook"),
                     PresetRestrictions.empty(context)
                             .addRestriction(ElevationRestriction.ABOVE_FIFTY)
-                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 0,
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
                                     DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.AMETHYST_HOOK).build()))
                             .withMaxLimit(1)
                             .withDifficulty(Difficulty.TRASH)
@@ -303,7 +303,7 @@ public class DGTrophies
                     FishRegistration.key("message/hopeful"),
                     PresetRestrictions.empty(context)
                             .addRestriction(ElevationRestriction.ABOVE_FIFTY)
-                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 0,
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
                                     DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.HOPEFUL).build()))
                             .withMaxLimit(1)
                             .withDifficulty(Difficulty.TRASH)
@@ -319,7 +319,7 @@ public class DGTrophies
                     FishRegistration.key("message/hopeless"),
                     PresetRestrictions.empty(context)
                             .addRestriction(ElevationRestriction.ABOVE_FIFTY)
-                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 0,
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
                                     DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.HOPELESS).build()))
                             .withMaxLimit(1)
                             .withDifficulty(Difficulty.TRASH)
@@ -329,13 +329,12 @@ public class DGTrophies
             );
         }
 
-
         //lava
         {
             FishRegistration.registerRaw(context,
                     FishRegistration.key("message/lava_1"),
                     PresetRestrictions.surfaceLava(context)
-                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 0,
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
                                     DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.LAVA_PROOF_1).build()))
                             .withMaxLimit(1)
                             .withDifficulty(Difficulty.TRASH)
@@ -350,7 +349,7 @@ public class DGTrophies
             FishRegistration.registerRaw(context,
                     FishRegistration.key("message/lava_2"),
                     PresetRestrictions.surfaceLava(context)
-                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 0,
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
                                     DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.LAVA_PROOF_2).build()))
                             .withMaxLimit(1)
                             .withDifficulty(Difficulty.TRASH)
@@ -367,7 +366,7 @@ public class DGTrophies
                     FishRegistration.key("message/true_blue"),
                     PresetRestrictions.empty(context)
                             .withPercentageChance(0.004f)
-                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 0,
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
                                     DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.TRUE_BLUE).build()))
                             .withMaxLimit(1)
                             .withDifficulty(Difficulty.TRASH)
@@ -381,7 +380,7 @@ public class DGTrophies
             FishRegistration.registerRaw(context,
                     FishRegistration.key("message/wither"),
                     PresetRestrictions.empty(context)
-                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 0,
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
                                     DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.WITHER).build()))
                             .withMaxLimit(1)
                             .withDifficulty(Difficulty.TRASH)

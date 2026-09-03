@@ -428,7 +428,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         poseStack.translate(centerX, centerY);
 
-        poseStack.rotate(ass.pos + (partialTick * ass.movingRate) * ass.currentRotation);
+        poseStack.rotate((float) Math.toRadians(ass.pos + (partialTick * ass.movingRate) * ass.currentRotation));
 
         boolean isDisabled = modifiers.stream().anyMatch(mod -> mod.disableSweetSpotRendering(this, ass));
         if (!isDisabled)
@@ -498,7 +498,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         poseStack.translate(centerX, centerY);
 
         float v = handlePos + ((handleSpeed * partial) * currentRotation);
-        poseStack.rotate(v);
+        poseStack.rotate((float) Math.toRadians(v));
 
         poseStack.translate(0, -16);
 

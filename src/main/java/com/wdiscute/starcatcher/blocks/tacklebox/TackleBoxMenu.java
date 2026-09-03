@@ -43,9 +43,9 @@ public class TackleBoxMenu extends AbstractContainerMenu
 
         this.addSlot(new TackleBoxRodSlot(this, container, ROD_SLOT, 134, 37));
 
-        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BOBBERS, container, BOBBER_SLOT, 158, 11, Starcatcher.rl("item/background/bobber_white")));
-        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BAITS, container, BAIT_SLOT, 158, 31, Starcatcher.rl("item/background/bait_white")));
-        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.HOOKS, container, HOOK_SLOT, 158, 51, Starcatcher.rl("item/background/hook_white")));
+        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BOBBERS, container, BOBBER_SLOT, 158, 11, Starcatcher.rl("bobber_white")));
+        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.BAITS, container, BAIT_SLOT, 158, 31, Starcatcher.rl("bait_white")));
+        this.addSlot(new TackleBoxAttachmentSlot(this, SCTags.HOOKS, container, HOOK_SLOT, 158, 51, Starcatcher.rl("hook_white")));
 
         this.addSlot(new TackleBoxInfiniteStorageSlot(this, container, FISH_SLOT, 134, 55));
 
@@ -96,6 +96,7 @@ public class TackleBoxMenu extends AbstractContainerMenu
                 slot.setChanged();
         }
 
+        if (index == FISH_SLOT) be.updateFishSlot();
         return itemstack;
     }
 

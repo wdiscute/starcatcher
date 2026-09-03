@@ -18,6 +18,11 @@ public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
     }
 
     @Override
+    protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym)
+    {
+    }
+
+    @Override
     public void extractBackground(GuiGraphicsExtractor g, int mouseX, int mouseY, float a)
     {
         super.extractBackground(g, mouseX, mouseY, a);

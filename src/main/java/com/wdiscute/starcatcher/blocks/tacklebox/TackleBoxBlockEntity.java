@@ -23,6 +23,7 @@ import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.entity.ContainerUser;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -94,6 +95,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         }
     }
 
+    @Override
     public int getContainerSize()
     {
         return this.itemStacks.size();
@@ -103,12 +105,8 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     public boolean isEmpty()
     {
         for (ItemStack itemstack : this.getItems())
-        {
             if (!itemstack.isEmpty())
-            {
                 return false;
-            }
-        }
 
         return true;
     }
@@ -124,9 +122,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     {
         ItemStack itemstack = ContainerHelper.removeItem(this.getItems(), slot, amount);
         if (!itemstack.isEmpty())
-        {
             this.setChanged();
-        }
 
         return itemstack;
     }
@@ -177,6 +173,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         return WorldlyContainer.super.canPlaceItem(slot, stack);
     }
 
+    @Override
     public boolean triggerEvent(int id, int type)
     {
         if (id == 1)
@@ -190,9 +187,10 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         }
     }
 
-    public void startOpen(Player player)
+    @Override
+    public void startOpen(ContainerUser containerUser)
     {
-        if (!this.remove && !player.isSpectator())
+        if (!this.remove && !containerUser.getLivingEntity().isSpectator())
         {
             if (this.openCount < 0)
             {
@@ -203,7 +201,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
             this.level.blockEvent(this.worldPosition, this.getBlockState().getBlock(), 1, this.openCount);
             if (this.openCount == 1)
             {
-                this.level.gameEvent(player, GameEvent.CONTAINER_OPEN, this.worldPosition);
+                this.level.gameEvent(containerUser.getLivingEntity(), GameEvent.CONTAINER_OPEN, this.worldPosition);
                 this.level.playSound(null, this.worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
@@ -212,15 +210,16 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
     }
 
-    public void stopOpen(Player player)
+    @Override
+    public void stopOpen(ContainerUser containerUser)
     {
-        if (!this.remove && !player.isSpectator())
+        if (!this.remove && !containerUser.getLivingEntity().isSpectator())
         {
             --this.openCount;
             this.level.blockEvent(this.worldPosition, this.getBlockState().getBlock(), 1, this.openCount);
             if (this.openCount <= 0)
             {
-                this.level.gameEvent(player, GameEvent.CONTAINER_CLOSE, this.worldPosition);
+                this.level.gameEvent(containerUser.getLivingEntity(), GameEvent.CONTAINER_CLOSE, this.worldPosition);
                 this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.3F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
@@ -242,7 +241,8 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     protected void collectImplicitComponents(DataComponentMap.Builder components)
     {
         super.collectImplicitComponents(components);
-        components.set(DataComponents.CUSTOM_NAME, this.name);
+        if (!name.equals(Component.empty()))
+            components.set(DataComponents.CUSTOM_NAME, this.name);
         components.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
         components.set(SCDataComponents.TACKLE_BOX_FISHES, fishes);
     }

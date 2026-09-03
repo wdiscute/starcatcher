@@ -131,14 +131,14 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         ScreenUtils.scrollingText(g, this.font, Component.literal(currentTournament.ownerName),
                 uiX + 55, uiX + 116, uiY + 56, SCColors.GUIDE_TEXT_DARK, false);
 
-        ScreenUtils.text(g, this.font, translatable("gui.starcatcher.tournament.organizer"), uiX + 55, uiY + 68, 0x9c897c, false);
+        ScreenUtils.text(g, this.font, translatable("gui.starcatcher.tournament.organizer"), uiX + 55, uiY + 68, 0xff9c897c, false);
 
         //status
-        ScreenUtils.text(g, this.font, translatable(currentTournament.status.getSerializedName()), uiX + 130, uiY + 56, 0x635040, false);
-        ScreenUtils.text(g, this.font, translatable("gui.starcatcher.tournament.status"), uiX + 130, uiY + 68, 0x9c897c, false);
+        ScreenUtils.text(g, this.font, translatable(currentTournament.status.getSerializedName()), uiX + 130, uiY + 56, 0xff635040, false);
+        ScreenUtils.text(g, this.font, translatable("gui.starcatcher.tournament.status"), uiX + 130, uiY + 68, 0xff9c897c, false);
 
         //duration
-        ScreenUtils.text(g, this.font, Utils.calculateRealLifeTimeFromTicks(currentTournament.durationInTicks), uiX + 55, uiY + 88, 0x635040, false);
+        ScreenUtils.text(g, this.font, Utils.calculateRealLifeTimeFromTicks(currentTournament.durationInTicks), uiX + 55, uiY + 88, 0xff635040, false);
         if (isOwner && currentTournament.status.equals(Tournament.Status.PREPARING))
         {
             TINY_ARROW_LEFT.render(g, uiX + 54, uiY + 101);
@@ -149,7 +149,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         else
         {
             ScreenUtils.text(g, this.font, translatable("gui.starcatcher.tournament.duration"),
-                    uiX + 55, uiY + 100, 0x9c897c, false);
+                    uiX + 55, uiY + 100, 0xff9c897c, false);
         }
 
         //duration hover
@@ -353,12 +353,12 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         //render names with offset based on page selected
         for (int i = playerListPage * 8; i < Math.min(currentTournament.playerScores.size(), playerListPage * 8 + 8); i++)
             ScreenUtils.scrollingText(g, this.font, Component.literal(currentTournament.playerScores.get(i).name),
-                    uiX + 220, uiX + 323, uiY + 57 + i * 12 - playerListPage * 8 * 12, SCColors.GUIDE_TEXT, false);
+                    uiX + 220, uiX + 323, uiY + 57 + i * 12 - playerListPage * 8 * 12, SCColors.GUIDE_TEXT_DARK, false);
 
         //render scores
         for (int i = playerListPage * 8; i < Math.min(currentTournament.playerScores.size(), playerListPage * 8 + 8); i++)
             ScreenUtils.scrollingText(g, this.font, Component.literal(String.format("%.1f", currentTournament.playerScores.get(i).score)),
-                    uiX + 319, uiX + 345, uiY + 57 + i * 12 - playerListPage * 8 * 12, SCColors.GUIDE_TEXT, false);
+                    uiX + 319, uiX + 345, uiY + 57 + i * 12 - playerListPage * 8 * 12, SCColors.GUIDE_TEXT_DARK, false);
 
         //previous arrow
         if (playerListPage > 0)
