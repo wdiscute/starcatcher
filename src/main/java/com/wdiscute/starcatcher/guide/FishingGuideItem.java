@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
+import com.wdiscute.starcatcher.data.network.CBPlayerStructuresPayload;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
@@ -10,7 +11,10 @@ import com.wdiscute.starcatcher.data.SignedGuide;
 import com.wdiscute.starcatcher.registry.SCStats;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -23,10 +27,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LecternBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.levelgen.structure.Structure;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.time.Instant;
 import java.util.*;
@@ -77,6 +84,18 @@ public class FishingGuideItem extends Item
         }
         else
         {
+            List<Identifier> structures = new ArrayList<>();
+            ServerLevel sl = (ServerLevel) level;
+            StructureManager manager = sl.structureManager();
+            Set<Structure> allStructuresOnBlockPos = manager.getAllStructuresAt(player.blockPosition()).keySet();
+            Registry<Structure> registry = level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+
+            for (Structure structure : allStructuresOnBlockPos)
+                structures.add(registry.getKey(structure));
+
+            PacketDistributor.sendToPlayer((ServerPlayer) player, new CBPlayerStructuresPayload(structures));
+
+
             level.playSound(null, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS);
 
             //return if not signed

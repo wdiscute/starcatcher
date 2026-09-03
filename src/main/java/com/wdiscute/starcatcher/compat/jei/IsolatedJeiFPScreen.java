@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.compat.jei;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.IsolatedFPScreen;
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
@@ -47,5 +48,6 @@ public class IsolatedJeiFPScreen extends IsolatedFPScreen
                 mouseX,
                 mouseY
         );
+        ScreenUtils.Tooltip.render(g, font, mouseX, mouseY);
     }
 }

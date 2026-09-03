@@ -1,10 +1,8 @@
 package com.wdiscute.starcatcher.event;
 
-import com.wdiscute.sellingbin.event.SBEvents;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.compat.jei.StarcatcherJeiPlugin;
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
@@ -42,7 +40,6 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
@@ -340,9 +337,9 @@ public class SCEvents
         );
 
         registrar.playToClient(
-                CBFishCaughtNotifs.TYPE,
-                CBFishCaughtNotifs.STREAM_CODEC,
-                CBFishCaughtNotifs::handle
+                CBFishCaughtNotifsPayload.TYPE,
+                CBFishCaughtNotifsPayload.STREAM_CODEC,
+                CBFishCaughtNotifsPayload::handle
         );
 
         registrar.playToServer(

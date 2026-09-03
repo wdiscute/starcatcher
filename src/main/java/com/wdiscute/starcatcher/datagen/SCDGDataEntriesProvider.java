@@ -54,14 +54,14 @@ public class SCDGDataEntriesProvider
                 new DataEntryProvider<>(output, lookup, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
                         List.of(
                                 new FishMessagesModifier(0.05f, ""),
-                                new LuckAttributeModifier(new HashMap<>()
-                                {{
-                                    put(Rarity.COMMON, 16);
-                                    put(Rarity.UNCOMMON, 17);
-                                    put(Rarity.RARE, 18);
-                                    put(Rarity.EPIC, 19);
-                                    put(Rarity.LEGENDARY, 20);
-                                }}, "tooltip.modifier.starcatcher.luck_attribute"),
+                                //new LuckAttributeModifier(new HashMap<>()
+                                //{{
+                                //    put(Rarity.COMMON, 16);
+                                //    put(Rarity.UNCOMMON, 17);
+                                //    put(Rarity.RARE, 18);
+                                //    put(Rarity.EPIC, 19);
+                                //    put(Rarity.LEGENDARY, 20);
+                                //}}, "tooltip.modifier.starcatcher.luck_attribute"),
                                 new ExtraGoldenChanceModifier(0.01f, false, ""),
                                 new ExtraGoldenChanceModifier(0.01f, true, "")
                         )

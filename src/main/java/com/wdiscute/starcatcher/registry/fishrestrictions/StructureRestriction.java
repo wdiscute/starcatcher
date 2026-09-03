@@ -3,12 +3,16 @@ package com.wdiscute.starcatcher.registry.fishrestrictions;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -27,6 +31,7 @@ import java.util.Map;
 public class StructureRestriction extends AbstractFishRestriction
 {
     private final List<Identifier> structures;
+    public static List<Identifier> playerInStructures = List.of();
 
     public static final MapCodec<StructureRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
@@ -83,20 +88,37 @@ public class StructureRestriction extends AbstractFishRestriction
     }
 
     @Override
+    public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
+    {
+        if (adjustChance(0, level, fp, player, ItemStack.EMPTY, Context.GUIDE_FISHES_HOVER) >= 0)
+            return List.of(Component.translatable("gui.guide.hover.structure.correct").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_GREEN)));
+        else
+            return List.of(Component.translatable("gui.guide.hover.structure.incorrect").withStyle(Style.EMPTY.withColor(SCColors.GUIDE_RED)));
+    }
+
+    @Override
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        if (level.isClientSide()) return -9999;
+        //if client side use client-only structure cache
+        if (level.isClientSide())
+            return playerInStructures.stream().anyMatch(structures::contains) ? 0 : -9999;
 
-        ServerLevel sl = (ServerLevel) level;
-        StructureManager manager = sl.structureManager();
-        Map<Structure, LongSet> allStructuresAt = manager.getAllStructuresAt(entity.blockPosition());
+        ServerLevel serverLevel = (ServerLevel) level;
+        StructureManager structureManager = serverLevel.structureManager();
 
-        for (Map.Entry<Structure, LongSet> entry : allStructuresAt.entrySet())
+        var structureRegistry = level.registryAccess().lookupOrThrow(Registries.STRUCTURE);
+
+        //for every structure allowed
+        for (Identifier structureId : structures)
         {
-            Identifier key = BuiltInRegistries.STRUCTURE_TYPE.getKey(entry.getKey().type());
+            //get structure from rl
+            var structure = structureRegistry.get(ResourceKey.create(Registries.STRUCTURE, structureId));
 
-            if (structures.contains(key))
-                return 0;
+            //if structure exists
+            if (structure.isPresent())
+                //if structure is at blockpos
+                if (structureManager.getStructureWithPieceAt(entity.blockPosition(), structure.get().value()).isValid())
+                    return 0;
         }
 
         return -9999;

@@ -70,6 +70,7 @@ public class SCConfig
 
     //non minigame
     public static final ModConfigSpec.IntValue OVERLAY_UPDATE_FREQUENCY = BUILDER_CLIENT
+            .comment("How many MS to wait before refreshing starcatcher's ui overlays (not in minigame)")
             .translation("starcatcher.configuration.overlay_update_frequency")
             .defineInRange("overlay_update_frequency", 1000, 100, Integer.MAX_VALUE);
 
