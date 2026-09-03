@@ -642,7 +642,7 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .save(output, Starcatcher.rl("kimbe_tackle")
                 );
 
-        //colorful
+        //survivor
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.SURVIVOR_SMITHING_TEMPLATE, 2)
                 .define('T', SCItems.SURVIVOR_SMITHING_TEMPLATE)
                 .define('D', Items.DIAMOND)
@@ -674,7 +674,7 @@ public class DGSCRecipeProvider extends RecipeProvider
 
         StarcatcherRodRecipeBuilder.tackleSkin(
                         Ingredient.of(SCItems.VALLEY_SMITHING_TEMPLATE),
-                        Ingredient.of(Items.BASALT)
+                        Ingredient.of(Items.APPLE)
                 )
                 .unlocks("has_template_valley", has(SCItems.VALLEY_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("valley_tackle")

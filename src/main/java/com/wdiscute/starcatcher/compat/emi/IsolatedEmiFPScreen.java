@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.guide.IsolatedFPScreen;
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -48,5 +49,6 @@ public class IsolatedEmiFPScreen extends IsolatedFPScreen
                 mouseX,
                 mouseY
         );
+        ScreenUtils.Tooltip.render(g,font, mouseX, mouseY);
     }
 }

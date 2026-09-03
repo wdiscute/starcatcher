@@ -4,7 +4,7 @@
   "apply_tackle_skin": true,
   "keep_stack": true,
   "material": {
-    "item": "minecraft:basalt"
+    "item": "minecraft:apple"
   },
   "result": {
     "count": 1,

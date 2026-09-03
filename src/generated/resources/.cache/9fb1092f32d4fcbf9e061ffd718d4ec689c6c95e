@@ -1,4 +1,4 @@
-// 1.21.1	2026-09-03T16:56:55.1261378	Recipes
+// 1.21.1	2026-09-03T17:02:55.43123	Recipes
 940be898fdeeeae0ac99119bdc59150675e4c0ff data/minecraft/advancement/recipes/misc/bamboo.json
 aa7822d1fb2c6a6681ee1627e9f5146dc6ac0f14 data/minecraft/advancement/recipes/misc/leather.json
 87ee1450cc69fbbdc54ef710195cc48f6310c790 data/minecraft/advancement/recipes/misc/moss_block.json
@@ -290,7 +290,7 @@ a5c1dadbc77804cb8347db0ce7dd38021d18a868 data/starcatcher/recipe/tackle_box_whit
 f032ddf1b70f94dfe61a66001ca76a83265e66e2 data/starcatcher/recipe/tackle_box_yellow.json
 6db199b141e8d618deef165638668896346ab0ce data/starcatcher/recipe/tournament_stand.json
 c57d1384ee0fe70a2da9f84b3b414a5fced6f601 data/starcatcher/recipe/valley_smithing_template.json
-877af3fb0f25d8ab88f45352a44a76ec25fb94f2 data/starcatcher/recipe/valley_tackle.json
+908e6d6bf91c24c621ae35fd255fc1f2385b1bb4 data/starcatcher/recipe/valley_tackle.json
 89fd0169b2f580764d8fcb68efc04b03ff6ef4ab data/starcatcher/recipe/vanilla_bobber.json
 7cb0cb106f964e4bcc5e508e3f04ba4e655db38c data/starcatcher/recipe/vanilla_bobber_from_vanilla_fishing_rod.json
 0171166f3cd346b9eb8e4d9cdff7b5b72c28421b data/starcatcher/recipe/vanilla_hook.json
