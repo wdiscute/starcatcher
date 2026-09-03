@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    "minecraft:fishing_rod",
+    "starcatcher:hook",
+    "starcatcher:bobber",
+    "starcatcher:starcatcher_twine"
+  ],
+  "result": {
+    "id": "starcatcher:starcatcher_rod"
+  }
+}

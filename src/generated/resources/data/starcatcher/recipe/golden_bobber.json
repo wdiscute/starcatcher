@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "starcatcher:bobber",
+    "G": "minecraft:gold_block",
+    "S": "minecraft:stick",
+    "W": "minecraft:gold_ingot"
+  },
+  "pattern": [
+    " GS",
+    "WBW",
+    "SW "
+  ],
+  "result": {
+    "id": "starcatcher:golden_bobber"
+  }
+}

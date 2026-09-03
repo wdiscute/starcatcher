@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "E": "minecraft:echo_shard",
+    "F": "#starcatcher:legendary_fishes",
+    "I": "minecraft:iron_ingot"
+  },
+  "pattern": [
+    " E ",
+    "IFI",
+    " I "
+  ],
+  "result": {
+    "id": "starcatcher:fish_radar"
+  }
+}

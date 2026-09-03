@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": "minecraft:amethyst_shard",
+    "D": "minecraft:diamond",
+    "H": "starcatcher:hook"
+  },
+  "pattern": [
+    "D  ",
+    "AHA",
+    " A "
+  ],
+  "result": {
+    "id": "starcatcher:amethyst_hook"
+  }
+}

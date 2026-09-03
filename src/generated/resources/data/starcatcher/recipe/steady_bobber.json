@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "starcatcher:bobber",
+    "C": "minecraft:copper_ingot",
+    "I": "minecraft:iron_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    " IS",
+    "CBC",
+    "SC "
+  ],
+  "result": {
+    "id": "starcatcher:steady_bobber"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "starcatcher:bobber",
+    "G": "minecraft:glow_berries",
+    "S": "minecraft:stick",
+    "W": "minecraft:glow_ink_sac"
+  },
+  "pattern": [
+    " WS",
+    "GBG",
+    "SG "
+  ],
+  "result": {
+    "id": "starcatcher:glowing_bobber"
+  }
+}

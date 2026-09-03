@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "minecraft:iron_nugget",
+    "H": "starcatcher:hook",
+    "I": "minecraft:iron_nugget"
+  },
+  "pattern": [
+    "I  ",
+    "DHD",
+    " D "
+  ],
+  "result": {
+    "id": "starcatcher:rusty_hook"
+  }
+}

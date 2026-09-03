@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "starcatcher:obsidian_crab"
+  ],
+  "result": {
+    "count": 4,
+    "id": "minecraft:obsidian"
+  }
+}

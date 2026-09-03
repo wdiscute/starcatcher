@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "starcatcher:dried_seaweed",
+    "minecraft:potion"
+  ],
+  "result": {
+    "id": "minecraft:seagrass"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:red_carpet",
+    "P": "starcatcher:pearl",
+    "W": "minecraft:red_wool"
+  },
+  "pattern": [
+    " P ",
+    "CWW",
+    "   "
+  ],
+  "result": {
+    "id": "starcatcher:fisherman_hat_red"
+  }
+}

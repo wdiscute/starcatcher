@@ -1,0 +1,12 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "apply_skin": true,
+  "keep_stack": true,
+  "material": "#c:dyes",
+  "result": {
+    "identifier": "starcatcher:missingno"
+  },
+  "rod": "#starcatcher:rods",
+  "template": "starcatcher:colorful_smithing_template"
+}

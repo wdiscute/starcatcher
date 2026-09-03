@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": "minecraft:echo_shard",
+    "H": "starcatcher:hook",
+    "I": "minecraft:diamond"
+  },
+  "pattern": [
+    "I  ",
+    "DHD",
+    " D "
+  ],
+  "result": {
+    "id": "starcatcher:echoing_hook"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "#minecraft:wooden_slabs",
+    "P": "#minecraft:planks"
+  },
+  "pattern": [
+    "   ",
+    "BBB",
+    " P "
+  ],
+  "result": {
+    "id": "starcatcher:display"
+  }
+}

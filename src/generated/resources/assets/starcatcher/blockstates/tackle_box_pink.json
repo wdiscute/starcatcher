@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "starcatcher:block/tackle_box_pink",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "starcatcher:block/tackle_box_pink"
+    },
+    "facing=south": {
+      "model": "starcatcher:block/tackle_box_pink",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "starcatcher:block/tackle_box_pink",
+      "y": 270
+    }
+  }
+}

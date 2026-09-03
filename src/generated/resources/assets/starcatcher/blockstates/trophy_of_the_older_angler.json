@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "starcatcher:block/trophy_of_the_older_angler",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "starcatcher:block/trophy_of_the_older_angler"
+    },
+    "facing=south": {
+      "model": "starcatcher:block/trophy_of_the_older_angler",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "starcatcher:block/trophy_of_the_older_angler",
+      "y": 270
+    }
+  }
+}

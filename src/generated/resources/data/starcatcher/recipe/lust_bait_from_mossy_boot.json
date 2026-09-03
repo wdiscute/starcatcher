@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    "minecraft:bone_meal",
+    "starcatcher:mossy_boot"
+  ],
+  "result": {
+    "count": 8,
+    "id": "starcatcher:lush_bait"
+  }
+}
