@@ -63,9 +63,9 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         return null;
     }
 
-    public TackleBoxBlock(@javax.annotation.Nullable DyeColor color, MapColor mapColor)
+    public TackleBoxBlock(Properties p, @javax.annotation.Nullable DyeColor color, MapColor mapColor)
     {
-        super(Properties.of()
+        super(p
                 .mapColor(mapColor)
                 .strength(2.0F)
                 .dynamicShape()

@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.registry.items;
 
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
@@ -14,7 +13,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -22,12 +21,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
-import org.jetbrains.annotations.Nullable;
+import net.minecraft.world.level.material.Fluids;
 
-import java.util.List;
 import java.util.Optional;
 
-public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
+public class StarcaughtBucket extends BucketItem
 {
     EntityType<FishEntity> entity;
 
@@ -40,16 +38,17 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
 
     public static Item getBucketForStack(ItemStack stack)
     {
-        return stack.has(DataComponents.FIRE_RESISTANT) ? SCItems.STARCAUGHT_LAVA_BUCKET.get() : SCItems.STARCAUGHT_BUCKET.get();
+        return stack.getItem() instanceof BucketItem bucketItem && bucketItem.content.equals(Fluids.LAVA)
+                ? SCItems.STARCAUGHT_LAVA_BUCKET.get() : SCItems.STARCAUGHT_BUCKET.get();
     }
 
     @Override
-    public void checkExtraContent(@Nullable Player player, Level level, ItemStack containerStack, BlockPos pos)
+    public void checkExtraContent(@org.jspecify.annotations.Nullable LivingEntity user, Level level, ItemStack itemStack, BlockPos pos)
     {
         if (level instanceof ServerLevel)
         {
-            this.spawn((ServerLevel) level, containerStack, pos);
-            level.gameEvent(player, GameEvent.ENTITY_PLACE, pos);
+            this.spawn((ServerLevel) level, itemStack, pos);
+            level.gameEvent(user, GameEvent.ENTITY_PLACE, pos);
         }
     }
 
@@ -105,21 +104,6 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
     public Optional<TooltipComponent> getTooltipImage(ItemStack stack)
     {
         return Optional.of(new BucketTooltip(getFish(stack)));
-    }
-
-    @Override
-    public List<String> getAlwaysTooltips(ItemStack stack)
-    {
-        if (SCDataComponents.has(stack, SCDataComponents.BUCKETED_FISH))
-            return List.of();
-        else
-            return List.of("tooltip.starcatcher.starcaught_bucket.creative.0", "tooltip.starcatcher.starcaught_bucket.creative.1");
-    }
-
-    @Override
-    public List<String> getShiftTooltips(ItemStack stack)
-    {
-        return List.of();
     }
 
     public record BucketTooltip(ItemStack fish) implements TooltipComponent

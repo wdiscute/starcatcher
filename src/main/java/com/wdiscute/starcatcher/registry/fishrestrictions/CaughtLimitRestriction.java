@@ -13,7 +13,7 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -76,7 +76,7 @@ public class CaughtLimitRestriction extends AbstractFishRestriction
 
     private int getCaughtCounter(FishProperties fp, Entity entity)
     {
-        ResourceLocation fpKey = FishApi.getKey(entity.level(), fp);
+        Identifier fpKey = FishApi.getKey(entity.level(), fp);
         if (fpKey == null) return 0;
         FishingGuideAttachment fishingGuideAttachment = SCDataAttachments.get(entity, SCDataAttachments.FISHING_GUIDE);
         FishCaughtCounter fcc = fishingGuideAttachment.fishesCaught.get(fpKey);

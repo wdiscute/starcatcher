@@ -13,7 +13,7 @@ public class ValleyTackleSkin extends AbstractTackleSkin
     @Override
     public void onBiting(Player player, Entity bobber)
     {
-        if (player.level().isClientSide) return;
+        if (player.level().isClientSide()) return;
         ((ServerLevel) player.level()).sendParticles(
                 SCParticles.VALLEY_NOTIFICATION.get(),
                 bobber.position().x, bobber.position().y + 1f, bobber.position().z,

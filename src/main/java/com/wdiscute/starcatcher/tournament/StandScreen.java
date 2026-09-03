@@ -7,14 +7,17 @@ import com.wdiscute.starcatcher.data.network.tournament.SBStandTournamentNameCha
 import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.input.CharacterEvent;
+import net.minecraft.client.input.KeyEvent;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Inventory;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -63,8 +66,8 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     {
         super.init();
         currentTournament = menu.sbe.tournament;
-        uiX = (width - imageWidth) / 2;
-        uiY = (height - imageHeight) / 2;
+        uiX = (width - 420) / 2;
+        uiY = (height - 260) / 2;
         subInit();
     }
 
@@ -80,11 +83,6 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         addWidget(this.nameEditBox);
     }
 
-    @Override
-    protected void renderBg(GuiGraphics guiGraphics, float v, int i, int i1)
-    {
-        this.renderBlurredBackground(i);
-    }
 
     private void onFocusNameEditBox()
     {
@@ -94,13 +92,13 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     private void onUnfocusNameEditBox()
     {
         //send packet
-        PacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
+        ClientPacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
     }
 
     @Override
-    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
+    public void extractRenderState(GuiGraphicsExtractor g, int mouseX, int mouseY, float partialTick)
     {
-        super.render(g, mouseX, mouseY, partialTick);
+        super.extractRenderState(g, mouseX, mouseY, partialTick);
 
         //render background
         BACKGROUND.render(g, uiX, uiY);
@@ -126,7 +124,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
 
         //render tournament name
         if (currentTournament.status.equals(Tournament.Status.FINISHED)) nameEditBox.setValue(currentTournament.name);
-        nameEditBox.render(g, mouseX, mouseY, partialTick);
+        nameEditBox.extractRenderState(g, mouseX, mouseY, partialTick);
 
 
         //organizer
@@ -477,7 +475,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
             //duration decrease, shift does x10
             if (x > 53 && x < 117 && y > 88 && y < 107 && scrollY < -0.5f)
             {
-                if (!hasShiftDown())
+                if (!Utils.hasShiftDown())
                     minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 101);
                 else
                     minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 102);
@@ -487,7 +485,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
             //duration increase, shift does x10
             if (x > 53 && x < 117 && y > 88 && y < 107 && scrollY > 0.5f)
             {
-                if (!hasShiftDown())
+                if (!Utils.hasShiftDown())
                     minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 103);
                 else
                     minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 104);
@@ -580,12 +578,12 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     }
 
     @Override
-    public boolean mouseReleased(double mouseX, double mouseY, int button)
+    public boolean mouseReleased(MouseButtonEvent event)
     {
-        if (button == 0)
+        if (event.button() == 0)
         {
-            double x = mouseX - uiX;
-            double y = mouseY - uiY;
+            double x = event.x() - uiX;
+            double y = event.y() - uiY;
             mouseDown = false;
 
             //gold button click
@@ -595,17 +593,18 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
                 return true;
             }
         }
-        return super.mouseReleased(mouseX, mouseY, button);
+        return super.mouseReleased(event);
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
-        double x = mouseX - uiX;
-        double y = mouseY - uiY;
+        double x = event.x() - uiX;
+        double y = event.y() - uiY;
         assert minecraft != null;
         assert minecraft.gameMode != null;
-        if (button != 0) super.mouseClicked(mouseX, mouseY, button);
+        if (event.button() != 0)
+            super.mouseClicked(event, doubleClick);
 
         //System.out.println("clicked relative x: " + x);
         //System.out.println("clicked relative y: " + y);
@@ -670,7 +669,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         //duration decrease, shift does x10
         if (x > 50 && x < 60 && y > 98 && y < 107 && isOwner)
         {
-            if (!hasShiftDown())
+            if (!Utils.hasShiftDown())
                 minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 101);
             else
                 minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 102);
@@ -680,7 +679,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         //duration increase, shift does x10
         if (x > 109 && x < 119 && y > 99 && y < 109 && isOwner)
         {
-            if (!hasShiftDown())
+            if (!Utils.hasShiftDown())
                 minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 103);
             else
                 minecraft.gameMode.handleInventoryButtonClick(this.menu.containerId, 104);
@@ -688,35 +687,35 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
         }
 
         nameEditBox.setFocused(false);
-        return super.mouseClicked(mouseX, mouseY, button);
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY)
+    protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym)
     {
     }
 
     @Override
-    public boolean charTyped(char codePoint, int modifiers)
+    public boolean charTyped(CharacterEvent event)
     {
-        boolean b = super.charTyped(codePoint, modifiers);
-        PacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
+        boolean b = super.charTyped(event);
+        ClientPacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
         return b;
     }
 
     @Override
-    public boolean keyPressed(int keyCode, int scanCode, int modifiers)
+    public boolean keyPressed(KeyEvent event)
     {
-        if (keyCode == 256)
+        if (event.key() == 256)
         {
             this.minecraft.player.closeContainer();
         }
 
-        boolean editbox = this.nameEditBox.keyPressed(keyCode, scanCode, modifiers) || this.nameEditBox.canConsumeInput();
+        boolean editbox = this.nameEditBox.keyPressed(event) || this.nameEditBox.canConsumeInput();
 
         if (editbox)
-            PacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
-        return editbox || super.keyPressed(keyCode, scanCode, modifiers);
+            ClientPacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
+        return editbox || super.keyPressed(event);
     }
 
     @Override
@@ -724,15 +723,13 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     {
         super.onClose();
         if (!nameEditBox.getValue().isEmpty())
-            PacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
+            ClientPacketDistributor.sendToServer(new SBStandTournamentNameChangePayload(currentTournament.tournamentUUID, nameEditBox.getValue()));
     }
 
     public StandScreen(StandMenu menu, Inventory playerInventory, Component title)
     {
         super(menu, playerInventory, title);
         currentTournament = menu.sbe.tournament;
-        imageWidth = 420;
-        imageHeight = 260;
     }
 
     public MutableComponent translatable(String key)

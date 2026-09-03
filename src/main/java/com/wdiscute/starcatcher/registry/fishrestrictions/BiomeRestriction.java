@@ -15,7 +15,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.Entity;
@@ -85,7 +85,7 @@ public class BiomeRestriction extends AbstractFishRestriction
     @Override
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
+        Registry<Biome> registry = level.registryAccess().lookupOrThrow(Registries.BIOME);
 
         //check biomes around the bobber
         for (int i = 0; i < 4; i++)
@@ -156,10 +156,10 @@ public class BiomeRestriction extends AbstractFishRestriction
                 tags.add(Tooltips.resolveTagsToComponentFromTranslationKey(tag.getTranslation("biome")));
 
                 //adds all biomes from tag into biomes list
-                Optional<HolderSet.Named<Biome>> optional = level.registryAccess().registryOrThrow(Registries.BIOME).getTag(tag.tag());
-                optional.ifPresent(holders ->
-                        holders.forEach(o ->
-                                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey("biome." + o.getRegisteredName().replace(":", "." )))));
+                Iterable<Holder<Biome>> tagOrEmpty = level.registryAccess().lookupOrThrow(Registries.BIOME).getTagOrEmpty(tag.tag());
+
+                tagOrEmpty.forEach(o ->
+                                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey("biome." + o.getRegisteredName().replace(":", "." ))));
 
             }
 
@@ -211,25 +211,25 @@ public class BiomeRestriction extends AbstractFishRestriction
         return list;
     }
 
-    public BiomeRestriction biome(ResourceLocation biome)
+    public BiomeRestriction biome(Identifier biome)
     {
         biomes.add(new EntryOrTag.Entry<>(ResourceKey.create(Registries.BIOME, biome)));
         return this;
     }
 
-    public BiomeRestriction tag(ResourceLocation tag)
+    public BiomeRestriction tag(Identifier tag)
     {
         biomes.add(new EntryOrTag.Tag<>(TagKey.create(Registries.BIOME, tag)));
         return this;
     }
 
-    public BiomeRestriction blacklisted(ResourceLocation biome)
+    public BiomeRestriction blacklisted(Identifier biome)
     {
         blacklist.add(new EntryOrTag.Entry<>(ResourceKey.create(Registries.BIOME, biome)));
         return this;
     }
 
-    public BiomeRestriction blacklistedTag(ResourceLocation tag)
+    public BiomeRestriction blacklistedTag(Identifier tag)
     {
         blacklist.add(new EntryOrTag.Tag<>(TagKey.create(Registries.BIOME, tag)));
         return this;
@@ -278,46 +278,46 @@ public class BiomeRestriction extends AbstractFishRestriction
     public static BiomeRestriction iceSpikes()
     {
         return empty()
-                .biome(Biomes.ICE_SPIKES.location());
+                .biome(Biomes.ICE_SPIKES.identifier());
     }
 
     public static BiomeRestriction flowerForest()
     {
         return empty()
-                .biome(Biomes.FLOWER_FOREST.location());
+                .biome(Biomes.FLOWER_FOREST.identifier());
     }
 
     public static BiomeRestriction sunflowerPlains()
     {
         return empty()
-                .biome(Biomes.SUNFLOWER_PLAINS.location());
+                .biome(Biomes.SUNFLOWER_PLAINS.identifier());
     }
 
     public static BiomeRestriction swampOnly()
     {
         return empty()
-                .biome(Biomes.SWAMP.location());
+                .biome(Biomes.SWAMP.identifier());
     }
 
     public static BiomeRestriction bambooJungle()
     {
         return empty()
-                .biome(Biomes.BAMBOO_JUNGLE.location());
+                .biome(Biomes.BAMBOO_JUNGLE.identifier());
     }
 
     // underground
     public static BiomeRestriction lushCaves()
     {
         return empty()
-                .biome(Biomes.LUSH_CAVES.location());
+                .biome(Biomes.LUSH_CAVES.identifier());
     }
 
     public static BiomeRestriction underground()
     {
         return empty()
-                .blacklisted(Biomes.DRIPSTONE_CAVES.location())
-                .blacklisted(Biomes.LUSH_CAVES.location())
-                .blacklisted(Biomes.DEEP_DARK.location())
+                .blacklisted(Biomes.DRIPSTONE_CAVES.identifier())
+                .blacklisted(Biomes.LUSH_CAVES.identifier())
+                .blacklisted(Biomes.DEEP_DARK.identifier())
                 .translation("gui.guide.caves")
                 ;
     }
@@ -325,13 +325,13 @@ public class BiomeRestriction extends AbstractFishRestriction
     public static BiomeRestriction dripstoneCaves()
     {
         return empty()
-                .biome(Biomes.DRIPSTONE_CAVES.location());
+                .biome(Biomes.DRIPSTONE_CAVES.identifier());
     }
 
     public static BiomeRestriction deepDark()
     {
         return empty()
-                .biome(Biomes.DEEP_DARK.location());
+                .biome(Biomes.DEEP_DARK.identifier());
     }
 
     // oceans
@@ -444,7 +444,7 @@ public class BiomeRestriction extends AbstractFishRestriction
     public static BiomeRestriction mangroveSwamp()
     {
         return empty()
-                .biome(Biomes.MANGROVE_SWAMP.location());
+                .biome(Biomes.MANGROVE_SWAMP.identifier());
     }
 
     public static BiomeRestriction darkForest()
@@ -462,7 +462,7 @@ public class BiomeRestriction extends AbstractFishRestriction
     public static BiomeRestriction lushCavesAndJungles()
     {
         return empty()
-                .biome(Biomes.LUSH_CAVES.location())
+                .biome(Biomes.LUSH_CAVES.identifier())
                 .tag(BiomeTags.IS_JUNGLE.location());
     }
 
@@ -494,7 +494,7 @@ public class BiomeRestriction extends AbstractFishRestriction
     {
         return empty()
                 .tag(BiomeTags.IS_END.location())
-                .blacklisted(Biomes.THE_END.location())
+                .blacklisted(Biomes.THE_END.identifier())
                 .translation("gui.guide.outer_end_islands");
     }
 }

@@ -54,30 +54,3 @@ type="required"
 versionRange="${minecraft_version_range}"
 ordering="AFTER"
 side="BOTH"
-
-[[dependencies.starcatcher]]
-modId = "starcatcher_delight"
-type = "optional"
-versionRange = "[3.0,)"
-ordering = "AFTER"
-side = "BOTH"
-
-[[dependencies.starcatcher]]
-modId = "starcatcher_delight"
-type = "incompatible"
-versionRange = "[,3.0)"
-reason = "Starcatcher requires Starcatcher's Delight v3.0 or newer."
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.starcatcher]]
-modId = "scauto"
-type = "incompatible"
-reason = "No cheating allowed!"
-
-[[dependencies.starcatcher]]
-modId="libtooltips"
-type="required"
-versionRange="[2.3.1,)"
-ordering="AFTER"
-side="CLIENT"

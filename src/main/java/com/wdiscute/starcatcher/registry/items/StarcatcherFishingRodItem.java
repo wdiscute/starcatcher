@@ -26,7 +26,7 @@ public class StarcatcherFishingRodItem extends Item
 {
     public StarcatcherFishingRodItem(Properties p)
     {
-        super(new Properties()
+        super(p
                 .rarity(Rarity.EPIC)
                 .fireResistant()
                 .durability(128)

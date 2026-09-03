@@ -18,9 +18,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class HatBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock
 {
-    public HatBlock()
+    public HatBlock(Properties p)
     {
-        super(Properties.of()
+        super(p
                 .noOcclusion()
                 .sound(SoundType.WOOL)
                 .instabreak()

@@ -14,15 +14,12 @@ import com.wdiscute.starcatcher.blocks.aquarium.AquariumRenderer;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockRenderer;
 import com.wdiscute.starcatcher.blocks.display.DisplayBookModel;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxScreen;
-import com.wdiscute.starcatcher.registry.items.BucketTooltipRenderer;
-import com.wdiscute.starcatcher.registry.items.RodSlotTooltipRenderer;
-import com.wdiscute.starcatcher.registry.items.StarcaughtBucket;
+import com.wdiscute.starcatcher.registry.items.*;
 import com.wdiscute.starcatcher.particles.FishingBitingLavaParticles;
 import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.compat.curios.CuriosEvents;
-import com.wdiscute.starcatcher.registry.items.StarcatcherFishingRodItem;
 import com.wdiscute.starcatcher.shaders.BakedModelRemapper;
 import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import com.wdiscute.starcatcher.tournament.StandScreen;
@@ -56,6 +53,12 @@ public class SCClientEvents
 
     }
 
+    @SubscribeEvent
+    public static void registerItemModelProperties(RegisterConditionalItemModelPropertyEvent event)
+    {
+        event.register(Starcatcher.rl("is_cast"), new IsCastItemProperty(false).type());
+    }
+
     //@SubscribeEvent
     //public static void onAssetReload(RegisterClientReloadListenersEvent event)
     //{
@@ -81,7 +84,6 @@ public class SCClientEvents
         EntityRenderers.register(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.FISH.get(), FishRenderer::new);
-        event.enqueueWork(SCItemProperties::addCustomItemProperties);
 
         if (ModList.get().isLoaded("curios"))
         {

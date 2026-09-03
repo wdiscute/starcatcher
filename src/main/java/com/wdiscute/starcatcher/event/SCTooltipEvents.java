@@ -71,6 +71,13 @@ public class SCTooltipEvents
             }
         }
 
+        //bucketed fish
+        if (!SCDataComponents.has(stack, SCDataComponents.BUCKETED_FISH))
+        {
+            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1"));
+            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0"));
+        }
+
         //signed guide
         if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))
         {

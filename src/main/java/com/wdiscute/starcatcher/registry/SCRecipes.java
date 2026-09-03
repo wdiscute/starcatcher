@@ -15,10 +15,10 @@ public interface SCRecipes
             DeferredRegister.create(Registries.RECIPE_SERIALIZER, Starcatcher.MOD_ID);
 
      Supplier<RecipeSerializer<StarcatcherRodRecipe>> FISHING_ROD_SMITHING =
-            REGISTRY.register("starcatcher_rod_smithing_recipe", StarcatcherRodRecipe.Serializer::new);
+            REGISTRY.register("starcatcher_rod_smithing_recipe", () -> StarcatcherRodRecipe.SERIALIZER);
 
      Supplier<RecipeSerializer<BottledLetterRecipe>> BOTTLED_LETTER =
-            REGISTRY.register("bottled_letter", BottledLetterRecipe.Serializer::new);
+            REGISTRY.register("bottled_letter", () -> BottledLetterRecipe.SERIALIZER);
 
     static void register(IEventBus eventBus)
     {

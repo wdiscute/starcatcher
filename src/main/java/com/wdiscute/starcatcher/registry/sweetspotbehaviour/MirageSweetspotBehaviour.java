@@ -3,7 +3,8 @@ package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
+import org.joml.Matrix3x2fStack;
 
 public class MirageSweetspotBehaviour extends AbstractSweetSpotBehaviour
 {
@@ -30,7 +31,7 @@ public class MirageSweetspotBehaviour extends AbstractSweetSpotBehaviour
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, PoseStack poseStack, float partialTick, FishingMinigameScreen instance, ActiveSweetSpot ass)
+    public void render(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, float partialTick, FishingMinigameScreen instance, ActiveSweetSpot ass)
     {
 
         int mirageRange = 50;

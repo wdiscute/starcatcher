@@ -38,9 +38,9 @@ public class StandBlock extends AbstractMultiBlock implements IPreviewableMultib
     public static final EnumProperty<StandPart> PART = EnumProperty.create("stand_part", StandPart.class);
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    public StandBlock()
+    public StandBlock(Properties p)
     {
-        super(Properties.of().noOcclusion().destroyTime(2));
+        super(p.noOcclusion().destroyTime(2));
         registerDefaultState(defaultBlockState().setValue(PART, StandPart.BOTTOM_LEFT));
     }
 

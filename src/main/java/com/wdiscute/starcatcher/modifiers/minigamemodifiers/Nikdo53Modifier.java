@@ -167,7 +167,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphicsExtractor g, PoseStack poseStack, float partialTick)
+    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphicsExtractor g, Matrix3x2fStack poseStack, float partialTick)
     {
         if (handleLayer == 0)
             HANDLE_SMALL.render(g, -64, -64);
@@ -176,15 +176,15 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot ass, float partialTick)
+    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, ActiveSweetSpot ass, float partialTick)
     {
         if (ass.behaviour == null) return;
 
-        poseStack.pushPose();
+        poseStack.pushMatrix();
 
         int layer = getSpotLayer(ass);
 
-        poseStack.translate(0, -9 * layer, 0);
+        poseStack.translate(0, -9 * layer);
 
         // Dim when not in use
         if (handleLayer != layer)
@@ -192,7 +192,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
 
         ass.behaviour.render(guiGraphics, poseStack, partialTick, instance, ass);
 
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 
     @Override

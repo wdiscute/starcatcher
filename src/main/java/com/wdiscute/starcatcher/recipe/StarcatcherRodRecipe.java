@@ -1,9 +1,15 @@
 package com.wdiscute.starcatcher.recipe;
 
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
@@ -21,6 +27,38 @@ public record StarcatcherRodRecipe(Ingredient template,
                                    boolean applySkin)
         implements SmithingRecipe
 {
+    public static final StreamCodec<RegistryFriendlyByteBuf, StarcatcherRodRecipe> STREAM_CODEC = StreamCodec.composite(
+            Ingredient.CONTENTS_STREAM_CODEC,
+            o -> o.template,
+            Ingredient.CONTENTS_STREAM_CODEC,
+            o -> o.rod,
+            Ingredient.CONTENTS_STREAM_CODEC,
+            o -> o.material,
+            ItemStack.STREAM_CODEC,
+            o -> o.result,
+            ByteBufCodecs.BOOL,
+            o -> o.addText,
+            ByteBufCodecs.BOOL,
+            o -> o.keepStack,
+            ByteBufCodecs.BOOL,
+            o -> o.applySkin,
+            StarcatcherRodRecipe::new
+    );
+
+    public static final MapCodec<StarcatcherRodRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
+            i -> i.group(
+                    Ingredient.CODEC.fieldOf("template").forGetter(StarcatcherRodRecipe::template),
+                    Ingredient.CODEC.fieldOf("rod").forGetter(StarcatcherRodRecipe::rod),
+                    Ingredient.CODEC.fieldOf("material").forGetter(StarcatcherRodRecipe::material),
+                    ItemStack.CODEC.fieldOf("result").forGetter(StarcatcherRodRecipe::result),
+                    Codec.BOOL.fieldOf("add_text").forGetter(StarcatcherRodRecipe::addText),
+                    Codec.BOOL.fieldOf("keep_stack").forGetter(StarcatcherRodRecipe::keepStack),
+                    Codec.BOOL.fieldOf("apply_skin").forGetter(StarcatcherRodRecipe::applySkin)
+            ).apply(i, StarcatcherRodRecipe::new)
+    );
+
+    public static final RecipeSerializer<StarcatcherRodRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
+
     @Override
     public Optional<Ingredient> templateIngredient()
     {

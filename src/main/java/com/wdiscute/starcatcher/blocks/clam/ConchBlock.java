@@ -27,12 +27,12 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class ConchBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock
 {
-    public ConchBlock()
+    public ConchBlock(Properties p)
     {
-        super(Properties.of()
+        super(p
                 .destroyTime(0.2f)
                 .noOcclusion()
-                .noCollission()
+                .noCollision()
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.BONE_BLOCK)
         );

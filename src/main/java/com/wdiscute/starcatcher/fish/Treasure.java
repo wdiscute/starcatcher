@@ -53,15 +53,15 @@ public record Treasure
                     ));
 
 
-    public static final Treasure AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure KIMBE_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.KIMBE_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure COLORFUL_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.COLORFUL_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure CLEAR_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.CLEAR_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure KING_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.KING_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure ICEBORN_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure SKY_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.SKY_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure SHARK_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
-    public static final Treasure LUSH_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE.value().getDefaultInstance());
+    public static final Treasure AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE));
+    public static final Treasure KIMBE_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.KIMBE_SMITHING_TEMPLATE));
+    public static final Treasure COLORFUL_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.COLORFUL_SMITHING_TEMPLATE));
+    public static final Treasure CLEAR_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.CLEAR_SMITHING_TEMPLATE));
+    public static final Treasure KING_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.KING_SMITHING_TEMPLATE));
+    public static final Treasure ICEBORN_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE));
+    public static final Treasure SKY_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.SKY_SKIN_SMITHING_TEMPLATE));
+    public static final Treasure SHARK_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE));
+    public static final Treasure LUSH_SKIN_SMITHING_TEMPLATE = Treasure.specificItem(new MaybeStack(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE));
 
     public static final Codec<Treasure> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             WeightedLootTable.CODEC.listOf().optionalFieldOf("loot_tables", List.of()).forGetter(Treasure::lootTables),
@@ -82,9 +82,9 @@ public record Treasure
                 .toList(), List.of(), Arrays.stream(blacklist).map(Ingredient::of).toList());
     }
 
-    public static Treasure specificItem(ItemStack itemStack)
+    public static Treasure specificItem(MaybeStack stack)
     {
-        return new Treasure(List.of(), List.of(new WeightedStack(new MaybeStack(itemStack), 1)), List.of());
+        return new Treasure(List.of(), List.of(new WeightedStack(stack, 1)), List.of());
     }
 
     public ItemStack unpack(ServerPlayer player, List<AbstractCatchModifier> modifiers)

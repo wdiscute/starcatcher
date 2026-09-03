@@ -6,20 +6,8 @@ import net.minecraft.world.item.ItemStack;
 
 public class MossyBootItem extends Item
 {
-    public MossyBootItem()
+    public MossyBootItem(Properties p)
     {
-        super(new Properties());
-    }
-
-    @Override
-    public boolean hasCraftingRemainingItem(ItemStack stack)
-    {
-        return true;
-    }
-
-    @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemStack)
-    {
-        return SCItems.BOOT.toStack();
+        super(p.craftRemainder(SCItems.BOOT.asItem()));
     }
 }

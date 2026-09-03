@@ -29,7 +29,7 @@ public class DGSCDataGenerators
             ;
 
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event)
+    public static void gatherData(GatherDataEvent.Client event)
     {
         DataGenerator gen = event.getGenerator();
 

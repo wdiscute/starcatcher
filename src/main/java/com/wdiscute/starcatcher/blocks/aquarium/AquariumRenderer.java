@@ -3,25 +3,31 @@ package com.wdiscute.starcatcher.blocks.aquarium;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
+import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.fishentity.FishEntityRenderState;
+import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.item.ItemModelResolver;
-import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
 import org.jspecify.annotations.Nullable;
 
 public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity, AquariumRenderState>
 {
+
     ItemModelResolver itemRenderer;
 
     public AquariumRenderer(BlockEntityRendererProvider.Context context)
@@ -70,18 +76,23 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
     }
 
     @Override
-    public void extractRenderState(AquariumBlockEntity be, AquariumRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress)
+    public AABB getRenderBoundingBox(AquariumBlockEntity blockEntity)
     {
-        BlockEntityRenderer.super.extractRenderState(be, state, partialTicks, cameraPosition, breakProgress);
-        state.itemStack = be.getFish();
+        BlockPos pos = blockEntity.getBlockPos();
+        return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0F, pos.getY() + 1.5F, pos.getZ() + 1.0F);
     }
 
     @Override
-    public void render(AquariumBlockEntity be, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay)
+    public AquariumRenderState createRenderState()
     {
-        ItemStack fish = be.getFish();
+        return new AquariumRenderState();
+    }
 
-        if (!fish.isEmpty()) moveFish(be);
+    @Override
+    public void submit(AquariumRenderState be, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
+    {
+
+        ItemStack fish = be.fish;
 
         poseStack.pushPose();
 
@@ -89,7 +100,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
 
         float scale = SCDataComponents.getOrDefault(
                 fish, SCDataComponents.CAUGHT_FISH_INFO,
-                CaughtFishInfo.AVERAGE
+                new CaughtFishInfo(100, 100, 50, Rarity.COMMON)
         ).getScale();
 
 
@@ -97,10 +108,9 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null)
         {
-            if (!player.getMainHandItem().is(Tags.Items.BUCKETS_EMPTY) && !player.getOffhandItem().is(Tags.Items.BUCKETS_EMPTY))
+            if (!player.getMainHandItem().is(Items.BUCKET) && !player.getOffhandItem().is(Items.BUCKET))
             {
                 poseStack.translate(be.x, be.y, be.z);
-
             }
         }
         else
@@ -116,18 +126,28 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
 
         poseStack.rotateAround(Axis.YN.rotation((float) ((float) be.fishRotation + Math.PI / 2)), 0, 0, 0);
 
-        // Render model here
-
-        if (!be.getFish().isEmpty())
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY, be.getLevel());
+        // Render model
+        if (!fish.isEmpty())
+            FishRenderer.renderFishFromItem(new FishEntityRenderState(), fish, submitNodeCollector, poseStack);
 
         poseStack.popPose();
+
     }
 
     @Override
-    public AABB getRenderBoundingBox(AquariumBlockEntity blockEntity)
+    public void extractRenderState(AquariumBlockEntity be, AquariumRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress)
     {
-        BlockPos pos = blockEntity.getBlockPos();
-        return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0F, pos.getY() + 1.5F, pos.getZ() + 1.0F);
+        BlockEntityRenderer.super.extractRenderState(be, state, partialTicks, cameraPosition, breakProgress);
+
+        if (!be.fish.isEmpty()) moveFish(be);
+
+        state.fishTargetBP = be.fishTargetBP;
+        state.fishRotation = be.fishRotation;
+
+        state.x = be.x;
+        state.y = be.y;
+        state.z = be.z;
+
+        state.fish = be.fish;
     }
 }

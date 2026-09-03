@@ -26,12 +26,14 @@ public class BrokenBottleEntity extends ThrowableItemProjectile
         super(entityType, level);
     }
 
-    public BrokenBottleEntity(Level level, LivingEntity shooter) {
-        super(SCEntities.BROKEN_BOTTLE.get(), shooter, level);
+    public BrokenBottleEntity(Level level, LivingEntity shooter)
+    {
+        super(SCEntities.BROKEN_BOTTLE.get(), shooter, level, SCItems.BROKEN_BOTTLE.toStack());
     }
 
-    public BrokenBottleEntity(Level level, double x, double y, double z) {
-        super(SCEntities.BROKEN_BOTTLE.get(), x, y, z, level);
+    public BrokenBottleEntity(Level level, double x, double y, double z)
+    {
+        super(SCEntities.BROKEN_BOTTLE.get(), x, y, z, level, SCItems.BROKEN_BOTTLE.toStack());
     }
 
     @Override
@@ -52,7 +54,7 @@ public class BrokenBottleEntity extends ThrowableItemProjectile
     private ParticleOptions getParticle()
     {
         ItemStack itemstack = this.getItem();
-        return new ItemParticleOption(ParticleTypes.ITEM, itemstack);
+        return new ItemParticleOption(ParticleTypes.ITEM, itemstack.getItem());
     }
 
     public void handleEntityEvent(byte id)
@@ -89,7 +91,7 @@ public class BrokenBottleEntity extends ThrowableItemProjectile
     protected void onHit(HitResult result)
     {
         super.onHit(result);
-        if (!this.level().isClientSide)
+        if (!this.level().isClientSide())
         {
             level().playSound(
                     null,
@@ -104,8 +106,5 @@ public class BrokenBottleEntity extends ThrowableItemProjectile
             this.level().broadcastEntityEvent(this, (byte) 3);
             this.discard();
         }
-
     }
-
-
 }

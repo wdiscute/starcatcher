@@ -32,6 +32,7 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jspecify.annotations.Nullable;
 
@@ -227,9 +228,9 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
             Ingredient treasureIngredient;
             if ((!stacks.isEmpty() && !stacks.get(0).is(SCItems.TREASURE)) || !lts.isEmpty() || !treasure.blacklist().isEmpty())
-                treasureIngredient = Ingredient.of(stacks.stream());
+                treasureIngredient = Ingredient.of(stacks.get(0).getItem());
             else
-                treasureIngredient = Ingredient.EMPTY;
+                treasureIngredient = Ingredient.of(Items.AIR);
 
             //aurora
             restrictions.add(fp.getDisplayName());

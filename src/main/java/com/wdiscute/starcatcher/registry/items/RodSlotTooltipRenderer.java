@@ -5,9 +5,8 @@ import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class RodSlotTooltipRenderer implements ClientTooltipComponent
@@ -32,7 +31,7 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
     }
 
     @Override
-    public int getHeight()
+    public int getHeight(Font font)
     {
         return 21;
     }
@@ -44,7 +43,7 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, GuiGraphics g)
+    public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor g)
     {
         TEXTURE.render(g, x, y);
 
@@ -53,7 +52,7 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
         else
         {
             ScreenUtils.item(g, bobber, x + 2, y + 1);
-            g.renderItemDecorations(font, bobber, x + 2 + 2, y + 1);
+            g.itemDecorations(font, bobber, x + 2 + 2, y + 1);
         }
 
         if (bait.isEmpty())
@@ -61,7 +60,7 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
         else
         {
             ScreenUtils.item(g, bait, x + 18 + 2, y + 1);
-            g.renderItemDecorations(font, bait, x + 18 + 2, y + 1);
+            g.itemDecorations(font, bait, x + 18 + 2, y + 1);
         }
 
         if (hook.isEmpty())
@@ -69,7 +68,7 @@ public class RodSlotTooltipRenderer implements ClientTooltipComponent
         else
         {
             ScreenUtils.item(g, hook, x + 18 + 18 + 2, y + 1);
-            g.renderItemDecorations(font, hook, x + 18 + 18 + 2, y + 1);
+            g.itemDecorations(font, hook, x + 18 + 18 + 2, y + 1);
         }
     }
 }

@@ -8,7 +8,7 @@ import it.unimi.dsi.fastutil.longs.LongSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
@@ -26,15 +26,15 @@ import java.util.Map;
 
 public class StructureRestriction extends AbstractFishRestriction
 {
-    private final List<ResourceLocation> structures;
+    private final List<Identifier> structures;
 
     public static final MapCodec<StructureRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ResourceLocation.CODEC.listOf().fieldOf("structure").forGetter(o -> o.structures),
+                    Identifier.CODEC.listOf().fieldOf("structure").forGetter(o -> o.structures),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, StructureRestriction::new));
 
-    public StructureRestriction(List<ResourceLocation> rl, String translationOverride)
+    public StructureRestriction(List<Identifier> rl, String translationOverride)
     {
         super(translationOverride);
         this.structures = rl;
@@ -85,7 +85,7 @@ public class StructureRestriction extends AbstractFishRestriction
     @Override
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        if (level.isClientSide) return -9999;
+        if (level.isClientSide()) return -9999;
 
         ServerLevel sl = (ServerLevel) level;
         StructureManager manager = sl.structureManager();
@@ -93,7 +93,7 @@ public class StructureRestriction extends AbstractFishRestriction
 
         for (Map.Entry<Structure, LongSet> entry : allStructuresAt.entrySet())
         {
-            ResourceLocation key = BuiltInRegistries.STRUCTURE_TYPE.getKey(entry.getKey().type());
+            Identifier key = BuiltInRegistries.STRUCTURE_TYPE.getKey(entry.getKey().type());
 
             if (structures.contains(key))
                 return 0;
@@ -102,14 +102,14 @@ public class StructureRestriction extends AbstractFishRestriction
         return -9999;
     }
 
-    public static final StructureRestriction TRIAL_CHAMBERS = new StructureRestriction(List.of(BuiltinStructures.TRIAL_CHAMBERS.location()), "");
-    public static final StructureRestriction OCEAN_MONUMENT = new StructureRestriction(List.of(BuiltinStructures.OCEAN_MONUMENT.location()), "");
-    public static final StructureRestriction END_CITIES = new StructureRestriction(List.of(BuiltinStructures.END_CITY.location()), "");
+    public static final StructureRestriction TRIAL_CHAMBERS = new StructureRestriction(List.of(BuiltinStructures.TRIAL_CHAMBERS.identifier()), "");
+    public static final StructureRestriction OCEAN_MONUMENT = new StructureRestriction(List.of(BuiltinStructures.OCEAN_MONUMENT.identifier()), "");
+    public static final StructureRestriction END_CITIES = new StructureRestriction(List.of(BuiltinStructures.END_CITY.identifier()), "");
     public static final StructureRestriction VILLAGES = new StructureRestriction(List.of(
-            BuiltinStructures.VILLAGE_TAIGA.location(),
-            BuiltinStructures.VILLAGE_SNOWY.location(),
-            BuiltinStructures.VILLAGE_SAVANNA.location(),
-            BuiltinStructures.VILLAGE_PLAINS.location(),
-            BuiltinStructures.VILLAGE_DESERT.location()
+            BuiltinStructures.VILLAGE_TAIGA.identifier(),
+            BuiltinStructures.VILLAGE_SNOWY.identifier(),
+            BuiltinStructures.VILLAGE_SAVANNA.identifier(),
+            BuiltinStructures.VILLAGE_PLAINS.identifier(),
+            BuiltinStructures.VILLAGE_DESERT.identifier()
             ), "");
 }

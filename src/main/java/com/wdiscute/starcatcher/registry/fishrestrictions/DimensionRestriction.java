@@ -9,7 +9,7 @@ import com.wdiscute.starcatcher.registry.SCDataEntries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -57,10 +57,10 @@ public class DimensionRestriction extends AbstractFishRestriction
     @Override
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        Map<String, List<ResourceLocation>> stringListMap = SCDataEntries.DIMENSION_TAGS.get();
-        List<ResourceLocation> allowedDimensions = stringListMap.getOrDefault(dimensionEntry, List.of());
+        Map<String, List<Identifier>> stringListMap = SCDataEntries.DIMENSION_TAGS.get();
+        List<Identifier> allowedDimensions = stringListMap.getOrDefault(dimensionEntry, List.of());
 
-        if(allowedDimensions.contains(level.dimension().location())) return 0;
+        if(allowedDimensions.contains(level.dimension().identifier())) return 0;
 
         return allowedDimensions.isEmpty() ? 0 : -9999;
     }
@@ -83,7 +83,7 @@ public class DimensionRestriction extends AbstractFishRestriction
     @Override
     public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        List<ResourceLocation> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
+        List<Identifier> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
 
         //Dimensions: [No Dimensions]
         if (allowedDimensions.isEmpty())
@@ -99,7 +99,7 @@ public class DimensionRestriction extends AbstractFishRestriction
     @Override
     public List<Component> getHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        List<ResourceLocation> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
+        List<Identifier> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
 
         if(allowedDimensions.isEmpty()) return List.of();
         if(allowedDimensions.size() == 1) return List.of();

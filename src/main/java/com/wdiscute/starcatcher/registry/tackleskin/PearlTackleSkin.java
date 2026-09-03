@@ -17,7 +17,7 @@ public class PearlTackleSkin extends AbstractTackleSkin
         Vec3 pos = bobEntity.position();
         RandomSource r = bobEntity.getRandom();
 
-        if(!bobEntity.level().isClientSide)
+        if(!bobEntity.level().isClientSide())
         {
             if(r.nextFloat() > 0.3f) return;
             ServerLevel level = (ServerLevel) bobEntity.level();

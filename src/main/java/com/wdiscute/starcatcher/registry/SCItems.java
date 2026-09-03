@@ -200,7 +200,7 @@ public interface SCItems
     DeferredItem<Item> OASIS_STURGEON = registerNonBucketFish("oasis_sturgeon");
 
     //swamp
-    DeferredItem<Item> MOSSY_BOOT = ITEMS.register("mossy_boot", MossyBootItem::new);
+    DeferredItem<Item> MOSSY_BOOT = ITEMS.registerItem("mossy_boot", MossyBootItem::new);
 
     DeferredItem<Item> SLUDGE_CATFISH = registerBucketFish("sludge_catfish");
 
@@ -351,10 +351,10 @@ public interface SCItems
 
     //bucket
     DeferredItem<Item> STARCAUGHT_BUCKET = ITEMS.registerItem("starcaught_bucket", (p) -> new StarcaughtBucket(p, Fluids.WATER));
-    DeferredItem<Item> STARCAUGHT_LAVA_BUCKET = ITEMS.registerItem("starcaught_lava_bucket", (p) -> new StarcaughtBucket(p, Fluids.LAVA));
+    DeferredItem<Item> STARCAUGHT_LAVA_BUCKET = ITEMS.registerItem("starcaught_lava_bucket", (p) -> new StarcaughtBucket(p.fireResistant(), Fluids.LAVA));
 
-    DeferredItem<Item> STARCAUGHT_FISH = ITEMS.registerItem("starcaught_fish", (p) -> new Item(p.food(SCFoodProperties.BASIC_RAW_FISH)));
-    DeferredItem<Item> COOKED_STARCAUGHT_FISH = ITEMS.registerItem("cooked_starcaught_fish", (p) -> new Item(p.food(SCFoodProperties.BASIC_COOKED_FISH)));
+    DeferredItem<Item> STARCAUGHT_FISH = ITEMS.registerItem("starcaught_fish", (p) -> new Item(p.usingConvertsTo(SCItems.FISH_BONES.get()).food(SCFoodProperties.BASIC_RAW_FISH)));
+    DeferredItem<Item> COOKED_STARCAUGHT_FISH = ITEMS.registerItem("cooked_starcaught_fish", (p) -> new Item(p.usingConvertsTo(SCItems.FISH_BONES.get()).food(SCFoodProperties.BASIC_COOKED_FISH)));
 
     static DeferredItem<Item> registerNonFishFish(String name)
     {

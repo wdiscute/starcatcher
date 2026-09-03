@@ -6,7 +6,6 @@ import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCEntities;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -21,12 +20,12 @@ public class FishItem extends Item
     }
 
     @Override
-    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand usedHand)
+    public InteractionResult use(Level level, Player player, InteractionHand usedHand)
     {
         //cant eat if golden
         CaughtFishInfo cfi = SCDataComponents.get(player.getItemInHand(usedHand), SCDataComponents.CAUGHT_FISH_INFO);
         if (cfi != null && cfi.golden())
-            return InteractionResultHolder.fail(player.getItemInHand(usedHand));
+            return InteractionResult.FAIL;
 
         return super.use(level, player, usedHand);
     }

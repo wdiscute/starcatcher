@@ -70,7 +70,8 @@ public class DaytimeRestriction extends AbstractFishRestriction
             }
         }
 
-        float daytime = level.dayTime() % 24000;
+        //todo 26
+        float daytime = level.getGameTime() % level.getDefaultClockTime();
 
         if (ranges.stream().anyMatch(range -> daytime > range.first() && daytime < range.second()))
             return 0;

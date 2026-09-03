@@ -16,6 +16,7 @@ import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.input.MouseButtonEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
 import java.util.ArrayList;
@@ -165,10 +166,10 @@ public class SettingsScreen extends FishingMinigameScreen
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int button)
+    public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
-        buttons.forEach(o -> o.mouseClicked(mouseX - (double) width / 2, mouseY - (double) height / 2));
-        return super.mouseClicked(mouseX, mouseY, button);
+        buttons.forEach(o -> o.mouseClicked(event.x() - (double) width / 2, event.y() - (double) height / 2));
+        return super.mouseClicked(event, doubleClick);
     }
 
     @Override

@@ -32,12 +32,12 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
 {
     public static final BooleanProperty HAS_PEARL = BooleanProperty.create("has_pearl");
 
-    public ClamBlock()
+    public ClamBlock(Properties p)
     {
-        super(Properties.of()
+        super(p
                 .destroyTime(0.2f)
                 .noOcclusion()
-                .noCollission()
+                .noCollision()
                 .pushReaction(PushReaction.DESTROY)
                 .sound(SoundType.BONE_BLOCK)
                 .randomTicks()
@@ -68,8 +68,8 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
             level.playSound(null, pos, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
             level.playSound(null, pos, SoundEvents.BONE_BLOCK_PLACE, SoundSource.BLOCKS, 0.6f, 0.6f);
             level.setBlockAndUpdate(pos, state.setValue(HAS_PEARL, false));
-            Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 0.4, 0.5F).offsetRandom(level.random, 0.7F);
-            ItemStack stack = level.random.nextFloat() > 0.01f ? SCItems.PEARL.value().getDefaultInstance() : SCItems.PEARL_SMITHING_TEMPLATE.value().getDefaultInstance();
+            Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 0.4, 0.5F).offsetRandom(level.getRandom(), 0.7F);
+            ItemStack stack = level.getRandom().nextFloat() > 0.01f ? SCItems.PEARL.value().getDefaultInstance() : SCItems.PEARL_SMITHING_TEMPLATE.value().getDefaultInstance();
             ItemEntity itementity = new ItemEntity(level, vec3.x(), vec3.y(), vec3.z(), stack);
             itementity.setDefaultPickUpDelay();
             level.addFreshEntity(itementity);

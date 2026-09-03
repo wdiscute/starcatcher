@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.network.chat.Component;
+import org.joml.Matrix3x2fStack;
 
 import java.util.List;
 
@@ -113,7 +114,7 @@ public abstract class AbstractMinigameModifier implements Modifier
     /**
      * Has the correctly rotated poseStack already
      */
-    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, PoseStack poseStack, float partialTick)
+    public void renderOnHandle(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, float partialTick)
     {
     }
 
@@ -122,7 +123,7 @@ public abstract class AbstractMinigameModifier implements Modifier
         return false;
     }
 
-    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, PoseStack poseStack, ActiveSweetSpot spot, float partialTick)
+    public void renderOnSweetSpot(FishingMinigameScreen instance, GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, ActiveSweetSpot spot, float partialTick)
     {
     }
 

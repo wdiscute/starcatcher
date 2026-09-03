@@ -28,9 +28,9 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
 {
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
 
-    public TrophyOfTheOlderAngler()
+    public TrophyOfTheOlderAngler(Properties p)
     {
-        super(Properties.of()
+        super(p
                 .destroyTime(2)
                 .sound(SoundType.AMETHYST)
                 .lightLevel((state) -> 15)

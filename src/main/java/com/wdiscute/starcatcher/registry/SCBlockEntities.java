@@ -18,22 +18,18 @@ public interface SCBlockEntities
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Starcatcher.MOD_ID);
 
     Supplier<BlockEntityType<StandBlockEntity>> STAND = BLOCK_ENTITIES.register("stand",
-            () -> BlockEntityType.Builder.of(StandBlockEntity::new,
-                            SCBlocks.STAND.get()
-                    ).build(null));
+            () -> new BlockEntityType<>(StandBlockEntity::new, SCBlocks.STAND.get()));
 
     Supplier<BlockEntityType<DisplayBlockEntity>> DISPLAY = BLOCK_ENTITIES.register("display",
-            () -> BlockEntityType.Builder.of(DisplayBlockEntity::new,
-                    SCBlocks.DISPLAY.get()
-            ).build(null));
+            () -> new BlockEntityType<>(DisplayBlockEntity::new,
+                    SCBlocks.DISPLAY.get()));
 
     Supplier<BlockEntityType<AquariumBlockEntity>> AQUARIUM = BLOCK_ENTITIES.register("aquarium",
-            () -> BlockEntityType.Builder.of(AquariumBlockEntity::new,
-                    SCBlocks.AQUARIUM.get()
-            ).build(null));
+            () -> new BlockEntityType<>(AquariumBlockEntity::new,
+                    SCBlocks.AQUARIUM.get()));
 
     Supplier<BlockEntityType<TackleBoxBlockEntity>> TACKLE_BOX = BLOCK_ENTITIES.register("tackle_box",
-            () -> BlockEntityType.Builder.of(TackleBoxBlockEntity::new,
+            () -> new BlockEntityType<>(TackleBoxBlockEntity::new,
                     SCBlocks.TACKLE_BOX.get(),
                     SCBlocks.TACKLE_BOX_WHITE.get(),
                     SCBlocks.TACKLE_BOX_LIME.get(),
@@ -51,7 +47,7 @@ public interface SCBlockEntities
                     SCBlocks.TACKLE_BOX_LIGHT_BLUE.get(),
                     SCBlocks.TACKLE_BOX_CYAN.get(),
                     SCBlocks.TACKLE_BOX_GREEN.get()
-            ).build(null));
+            ));
 
 
     static void register(IEventBus eventBus) {

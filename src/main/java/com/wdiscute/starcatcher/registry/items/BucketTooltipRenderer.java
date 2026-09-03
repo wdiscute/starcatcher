@@ -5,9 +5,10 @@ import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.utils.ScreenUtils;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.network.chat.Component;
@@ -32,7 +33,7 @@ public class BucketTooltipRenderer implements ClientTooltipComponent
             if (cfi.golden())
             {
                 MutableComponent element = Component.empty().append(Component.translatable("gui.guide.rarity.golden")).withStyle(Style.EMPTY.withColor(0x888888));
-                if (Screen.hasShiftDown())
+                if (Utils.hasShiftDown())
                     element.append(Component.literal(" (top 0%)").withStyle(Style.EMPTY.withColor(0x707070)));
                 text = element;
                 return;
@@ -42,7 +43,7 @@ public class BucketTooltipRenderer implements ClientTooltipComponent
             String percentile = " (top " + (int) cfi.percentile() + "%)";
 
             MutableComponent element = Component.literal(size + " - " + weight).withStyle(Style.EMPTY.withColor(0x888888));
-            if (Screen.hasShiftDown())
+            if (Utils.hasShiftDown())
                 element.append(Component.literal(percentile).withStyle(Style.EMPTY.withColor(0x707070)));
             text = element;
         }
@@ -50,7 +51,7 @@ public class BucketTooltipRenderer implements ClientTooltipComponent
     }
 
     @Override
-    public int getHeight()
+    public int getHeight(Font font)
     {
         return isEmpty() ? 0 : 18;
     }
@@ -65,7 +66,7 @@ public class BucketTooltipRenderer implements ClientTooltipComponent
     }
 
     @Override
-    public void renderImage(Font font, int x, int y, GuiGraphics g)
+    public void extractImage(Font font, int x, int y, int w, int h, GuiGraphicsExtractor g)
     {
         if (!isEmpty())
         {

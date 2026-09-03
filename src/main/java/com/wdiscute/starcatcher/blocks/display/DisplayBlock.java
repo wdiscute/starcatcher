@@ -59,9 +59,9 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
         return null;
     }
 
-    public DisplayBlock()
+    public DisplayBlock(Properties p)
     {
-        super(BlockBehaviour.Properties.of().destroyTime(2));
+        super(p.destroyTime(2));
         this.registerDefaultState(
                 this.stateDefinition.any().setValue(POWERED, false).setValue(HAS_ITEM, false)
         );
@@ -220,59 +220,32 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 else
                     dbe.fishRotating = !dbe.fishRotating;
             }
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         //remove item if crouching
         if (state.getValue(HAS_ITEM) && player.isCrouching() && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return InteractionResult.SUCCESS;
             player.addItem(dbe.getImmutableItem().copy());
             dbe.clearContent();
             dbe.sync();
             level.setBlockAndUpdate(pos, state.setValue(HAS_ITEM, false));
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
         //place book
         if (stack.is(SCTags.PLACEABLE_IN_DISPLAY) && !state.getValue(HAS_ITEM) && level.getBlockEntity(pos) instanceof DisplayBlockEntity dbe)
         {
-            if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
+            if (level.isClientSide()) return InteractionResult.SUCCESS;
             dbe.setItem(stack.copyWithCount(1));
             stack.shrink(1);
             level.setBlock(pos, state.setValue(HAS_ITEM, true), 0);
             dbe.sync();
-            return ItemInteractionResult.SUCCESS;
+            return InteractionResult.SUCCESS;
         }
 
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-
-
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
-    {
-        if (!state.is(newState.getBlock()))
-        {
-            if (state.getValue(HAS_ITEM))
-                this.popItem(level, pos);
-
-            super.onRemove(state, level, pos, newState, isMoving);
-            if (state.getValue(POWERED))
-                level.updateNeighborsAt(pos.below(), this);
-        }
-    }
-
-    private void popItem(Level level, BlockPos pos)
-    {
-        if (level.getBlockEntity(pos) instanceof DisplayBlockEntity displayBlockEntity)
-        {
-            ItemStack itemstack = displayBlockEntity.getImmutableItem().copy();
-            ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
-            itementity.setDefaultPickUpDelay();
-            level.addFreshEntity(itementity);
-            displayBlockEntity.clearContent();
-        }
+        return InteractionResult.PASS;
     }
 
     @Override

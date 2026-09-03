@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.shaders;
 
 import com.mojang.blaze3d.platform.NativeImage;
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.rendertype.RenderType;
@@ -24,9 +25,9 @@ public class GoldRenderer implements AutoCloseable
     {
         Minecraft minecraft = Minecraft.getInstance();
 
-        BakedModel model = minecraft.getItemModelResolver().getModel(stack, minecraft.level, minecraft.player, 0);
+        //BakedModel model = minecraft.getItemModelResolver().getModel(stack, minecraft.level, minecraft.player, 0);
 
-        return model.getParticleIcon(ModelData.EMPTY);
+        return null; //model.getParticleIcon(ModelData.EMPTY);
     }
 
     public static Identifier getTextureLoc(Identifier resourceLoc)
@@ -61,14 +62,15 @@ public class GoldRenderer implements AutoCloseable
         public GoldTextureInstance(Identifier loc, Function<Identifier, RenderType> renderTypeGetter)
         {
             this.texture = recolorTexture(getNativeImage(getTextureLoc(loc)));
-            Identifier Identifier = Minecraft.getInstance().getTextureManager().register("starcatcher_gold/" + loc.getPath(), this.texture);
-            this.renderType = renderTypeGetter.apply(Identifier);
+            Identifier rl = Starcatcher.rl("starcatcher_gold/" + loc.getPath());
+            Minecraft.getInstance().getTextureManager().register(rl, this.texture);
+            this.renderType = renderTypeGetter.apply(rl);
         }
 
 
         public static GoldTextureInstance fromItemStack(Identifier loc, boolean cull)
         {
-            return new GoldTextureInstance(loc, cull ? RenderType::entityTranslucentCull : RenderType::itemEntityTranslucentCull);
+            return null; //new GoldTextureInstance(loc, cull ? RenderType::entityTranslucentCull : RenderType::itemEntityTranslucentCull);
         }
 
         public static GoldTextureInstance fromEntity(Identifier loc, Function<Identifier, RenderType> renderTypeGetter)
@@ -98,14 +100,14 @@ public class GoldRenderer implements AutoCloseable
             {
                 for (int x = 0; x < image.getWidth(); x++)
                 {
-                    int colorOriginalRGBA = image.getPixelRGBA(x, y);
-                    int colorRecoloredRGBA = GoldShader.recolorGold(colorOriginalRGBA);
-                    image.setPixelRGBA(x, y, colorRecoloredRGBA);
+                    //int colorOriginalRGBA = image.getPixelRGBA(x, y);
+                    //int colorRecoloredRGBA = GoldShader.recolorGold(colorOriginalRGBA);
+                    //image.setPixelRGBA(x, y, colorRecoloredRGBA);
                 }
             }
 
 
-            return new DynamicTexture(image);
+            return null; //new DynamicTexture(image);
         }
 
         @Override

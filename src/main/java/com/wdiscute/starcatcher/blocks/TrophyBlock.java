@@ -18,9 +18,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class TrophyBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock
 {
-    public TrophyBlock()
+    public TrophyBlock(Properties p)
     {
-        super(BlockBehaviour.Properties.of()
+        super(p
                 .noOcclusion()
                 .destroyTime(2)
                 .lightLevel((state) -> 5)

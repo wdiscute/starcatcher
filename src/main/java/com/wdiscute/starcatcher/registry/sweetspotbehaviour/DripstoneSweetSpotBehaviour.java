@@ -1,13 +1,12 @@
 package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
-import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.sounds.SoundEvents;
+import org.joml.Matrix3x2fStack;
 
 import java.util.HashMap;
 import java.util.List;
@@ -68,18 +67,18 @@ public class DripstoneSweetSpotBehaviour extends NormalSweetSpotBehaviour
     }
 
     @Override
-    public void render(GuiGraphics guiGraphics, PoseStack poseStack, float partialTick, FishingMinigameScreen instance, ActiveSweetSpot ass)
+    public void render(GuiGraphicsExtractor guiGraphics, Matrix3x2fStack poseStack, float partialTick, FishingMinigameScreen instance, ActiveSweetSpot ass)
     {
         if (ass.removed) return;
 
-        poseStack.pushPose();
+        poseStack.pushMatrix();
 
         if (map.containsKey(ass))
-            poseStack.translate(0, map.get(ass) + 1 * partialTick, 0);
+            poseStack.translate(0, map.get(ass) + 1 * partialTick);
 
         //offsets vertically by the value in the map so it falls towards the center
         ass.texture.render(guiGraphics, -48, -48);
 
-        poseStack.popPose();
+        poseStack.popMatrix();
     }
 }

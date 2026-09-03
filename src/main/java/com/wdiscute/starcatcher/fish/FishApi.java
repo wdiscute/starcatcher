@@ -370,7 +370,7 @@ public class FishApi
                 sp.getStats().sendStats(sp);
 
             //kill bobber entity
-            fbe.kill();
+            fbe.kill(level);
         }
 
         SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB.get());
@@ -384,8 +384,8 @@ public class FishApi
         ItemStack fish = fp.catchInfo().fish().toStack();
 
         //quality food compat
-        if (ModList.get().isLoaded("quality_food"))
-            QualityFoodCompat.addQuality(fish, player, golden, perfectCatch, percentile);
+        //if (ModList.get().isLoaded("quality_food"))
+        //    QualityFoodCompat.addQuality(fish, player, golden, perfectCatch, percentile);
 
         //store caught fish info data component
         if (fp.hasGuideEntry() && SCConfig.SAVE_DATA_TO_ITEMS.get() && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH))
@@ -431,8 +431,8 @@ public class FishApi
                 ItemStack bucket = StarcaughtBucket.getBucketForStack(baseFish).getDefaultInstance();
 
                 //quality food compat
-                if (ModList.get().isLoaded("quality_food") && SCConfig.SAVE_DATA_TO_ITEMS.get())
-                    QualityFoodCompat.addQuality(baseFish, player, golden, perfectCatch, percentile);
+                //if (ModList.get().isLoaded("quality_food") && SCConfig.SAVE_DATA_TO_ITEMS.get())
+                //    QualityFoodCompat.addQuality(baseFish, player, golden, perfectCatch, percentile);
 
                 //only save data on fish Identifier if config is enabled
                 if (SCConfig.SAVE_DATA_TO_ITEMS.get())

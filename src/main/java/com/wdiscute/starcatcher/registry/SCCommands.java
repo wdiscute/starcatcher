@@ -27,6 +27,8 @@ import net.minecraft.commands.arguments.ResourceArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.permissions.Permission;
+import net.minecraft.server.permissions.Permissions;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.network.PacketDistributor;
@@ -57,7 +59,7 @@ public interface SCCommands
     static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context)
     {
         dispatcher.register(Commands.literal("starcatcher")
-                .requires(sourceStack -> sourceStack.hasPermission(2))
+                .requires(sourceStack -> sourceStack.permissions().hasPermission(Permissions.COMMANDS_ADMIN))
 
                 //starcatcher simulate_fish starcatcher:aurora
                 .then(Commands.literal("simulate_fish")
@@ -214,14 +216,14 @@ public interface SCCommands
 
     private static int revokeFish(ServerPlayer player, ResourceKey<FishProperties> fish)
     {
-        FishingGuideAttachment.getFishesCaught(player).remove(fish.location());
+        FishingGuideAttachment.getFishesCaught(player).remove(fish.identifier());
         FishingGuideAttachment.sync(player);
         return 0;
     }
 
     private static int awardAllFish(ServerPlayer player, int ticks, float percentile, boolean golden)
     {
-        for (FishProperties fp : player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
+        for (FishProperties fp : player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             FishCaughtCounter.awardFishCaughtCounter(fp, null, player, ticks, percentile,
                     false, false, golden, false);
 
@@ -230,7 +232,7 @@ public interface SCCommands
 
     private static int awardAllFish(ServerPlayer player)
     {
-        for (FishProperties fp : player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
+        for (FishProperties fp : player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY))
             FishCaughtCounter.awardFishCaughtCounter(fp, null, player, 0, 0,
                     false, false, false, false);
 
@@ -245,7 +247,7 @@ public interface SCCommands
 
     private static int awardRandomFish(ServerPlayer player, int ticks, float percentile, boolean golden)
     {
-        List<FishProperties> list = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().toList();
+        List<FishProperties> list = player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).stream().toList();
 
         if (list.isEmpty()) return 0;
 
@@ -258,7 +260,7 @@ public interface SCCommands
 
     private static int awardFish(ServerPlayer player, ResourceKey<FishProperties> fish, int ticks, float percentile, boolean golden) throws CommandSyntaxException
     {
-        Optional<FishProperties> optional = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getOptional(fish);
+        Optional<FishProperties> optional = player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getOptional(fish);
         if (optional.isPresent())
             FishCaughtCounter.awardFishCaughtCounter(optional.get(), null, player, ticks, percentile, false, false, golden, true);
         else
@@ -271,7 +273,7 @@ public interface SCCommands
         ItemStack stack = player.getMainHandItem();
         if (!stack.is(SCTags.RODS)) throw ERROR_ROD.create(null);
 
-        SCDataComponents.set(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(tackleSkin));
+        SCDataComponents.set(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(tackleSkin));
 
         return 1;
     }
@@ -281,7 +283,7 @@ public interface SCCommands
         if (!player.getMainHandItem().is(SCTags.RODS)) throw ERROR_ROD.create(null);
 
         List<FishProperties> available = new ArrayList<>();
-        for (FishProperties fp : player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
+        for (FishProperties fp : player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY))
         {
             if (fp.calculateChance(player, player.level(), player.getMainHandItem(), AbstractFishRestriction.Context.COMMAND) > 0)
                 available.add(fp);
@@ -303,7 +305,7 @@ public interface SCCommands
     {
         if (!player.getMainHandItem().is(SCTags.RODS)) throw ERROR_ROD.create(null);
 
-        Optional<FishProperties> optional = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getOptional(fish);
+        Optional<FishProperties> optional = player.level().registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getOptional(fish);
 
         if (optional.isPresent())
         {
@@ -314,7 +316,7 @@ public interface SCCommands
         }
         else
         {
-            throw ERROR_FISH_ENTRY_INVALID.create(fish.location());
+            throw ERROR_FISH_ENTRY_INVALID.create(fish.identifier());
         }
     }
 

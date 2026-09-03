@@ -7,18 +7,26 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.Display;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import org.jetbrains.annotations.Nullable;
 
 public class DisplayBlockEntity extends BlockEntity
@@ -48,14 +56,14 @@ public class DisplayBlockEntity extends BlockEntity
             double d0;
             double d1;
 
-            if (SableCompat.isLoaded())
-                d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
-            else
+            //if (SableCompat.isLoaded())
+            //    d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
+            //else
                 d0 = player.getX() - ((double) pos.getX() + 0.5);
 
-            if (SableCompat.isLoaded())
-                d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
-            else
+            //if (SableCompat.isLoaded())
+            //    d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
+            //else
                 d1 = player.getZ() - ((double) pos.getZ() + 0.5);
 
             enchantingTable.tRot = (float) Mth.atan2(d1, d0);
@@ -152,40 +160,60 @@ public class DisplayBlockEntity extends BlockEntity
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries)
     {
-        super.getUpdateTag(registries);
-        CompoundTag tag = new CompoundTag();
-        saveAdditional(tag, registries);
+        CompoundTag tag = super.getUpdateTag(registries);
+
+        RegistryOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
+
+        tag.store("item", MaybeStack.CODEC, ops, this.item);
+
+        tag.putBoolean("rotating", fishRotating);
+
         return tag;
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void preRemoveSideEffects(BlockPos pos, BlockState state)
     {
-        super.loadAdditional(tag, registries);
-        if (tag.contains("Book"))
-            this.item = new MaybeStack(ItemStack.parse(registries, tag.getCompound("Book")).orElse(ItemStack.EMPTY));
-        else
-            this.item = MaybeStack.EMPTY;
+        if (state.getValue(DisplayBlock.HAS_ITEM))
+            popItem(level, pos);
 
-        if (tag.contains("rotating"))
-            fishRotating = tag.getBoolean("rotating");
+        super.preRemoveSideEffects(pos, state);
+
+        if (state.getValue(DisplayBlock.POWERED))
+            level.updateNeighborsAt(pos.below(), state.getBlock());
+
+    }
+
+    private void popItem(Level level, BlockPos pos)
+    {
+        if (level.getBlockEntity(pos) instanceof DisplayBlockEntity displayBlockEntity)
+        {
+            ItemStack itemstack = displayBlockEntity.getImmutableItem().copy();
+            ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
+            itementity.setDefaultPickUpDelay();
+            level.addFreshEntity(itementity);
+            displayBlockEntity.clearContent();
+        }
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    protected void loadAdditional(ValueInput input)
     {
-        super.saveAdditional(tag, registries);
-        if (!this.getImmutableItem().isEmpty())
-        {
-            tag.put("Book", this.getImmutableItem().save(registries));
-        }
-        else
-        {
-            //need to put a tag otherwise its not sent to client since the tag is empty
-            tag.putBoolean("empty", true);
-        }
+        super.loadAdditional(input);
 
-        tag.putBoolean("rotating", fishRotating);
+        item = input.read("Book", MaybeStack.CODEC).orElse(MaybeStack.EMPTY);
+
+        fishRotating = input.getBooleanOr("rotating", false);
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output)
+    {
+        super.saveAdditional(output);
+
+        output.store("Book", MaybeStack.CODEC, item);
+
+        output.putBoolean("rotating", fishRotating);
     }
 
     public void clearContent()

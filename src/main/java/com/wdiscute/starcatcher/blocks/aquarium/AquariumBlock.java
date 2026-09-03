@@ -62,9 +62,9 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     public static final EnumProperty<Decoration> DECORATION = EnumProperty.create("decoration", Decoration.class);
     public static final EnumProperty<Ground> GROUND = EnumProperty.create("ground", Ground.class);
 
-    public AquariumBlock()
+    public AquariumBlock(Properties p)
     {
-        super(Properties.of()
+        super(p
                 .pushReaction(PushReaction.IGNORE)
                 .sound(SoundType.GLASS)
                 .strength(2.0F)

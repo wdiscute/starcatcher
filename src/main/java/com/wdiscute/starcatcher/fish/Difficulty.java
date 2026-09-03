@@ -796,7 +796,7 @@ public record Difficulty(
 
         public static final Codec<SweetSpot> CODEC = RecordCodecBuilder.create(instance ->
                 instance.group(
-                        ResourceLocation.CODEC.fieldOf("sweetspot_type").forGetter(SweetSpot::sweetSpotType),
+                        Identifier.CODEC.fieldOf("sweetspot_type").forGetter(SweetSpot::sweetSpotType),
                         ScreenUtils.Image.codecFixedSize(96, 96).fieldOf("texture_path").forGetter(SweetSpot::texturePath),
                         Codec.INT.fieldOf("hitbox_size_in_pixels").forGetter(SweetSpot::size),
                         Codec.INT.fieldOf("reward").forGetter(SweetSpot::reward),

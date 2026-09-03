@@ -52,6 +52,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
 import net.neoforged.neoforge.network.PacketDistributor;
+import org.joml.Matrix3x2fStack;
 
 import java.awt.*;
 import java.time.Instant;
@@ -324,7 +325,7 @@ public class FishingGuideScreen extends Screen
             if (player != null && level != null)
             {
                 trackedRL = newTrackedRL;
-                trackedFP = level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).get(trackedRL);
+                trackedFP = level.registryAccess().lookupOrThrow(Starcatcher.FISH_REGISTRY_KEY).getValue(trackedRL);
             }
         }
         cachedRL = newTrackedRL;
@@ -698,14 +699,14 @@ public class FishingGuideScreen extends Screen
         else if (compassRotation >= 360.0f)
             compassRotation -= 360.0f;
 
-        PoseStack pose = guiGraphics.pose();
+        Matrix3x2fStack pose = guiGraphics.pose();
 
-        pose.pushPose();
-        pose.translate(uiX + 16 + 16.5, uiY + 16 + 34.5, 0);
-        pose.mulPose(Axis.ZP.rotationDegrees(-compassRotation - 45 - 180));
-        pose.translate(-16, -16, 0);
+        pose.pushMatrix();
+        pose.translate((float) (uiX + 16 + 16.5), (float) (uiY + 16 + 34.50));
+        pose.rotate(-compassRotation - 45 - 180);
+        pose.translate(-16, -16);
         COMPASS.render(guiGraphics);
-        pose.popPose();
+        pose.popMatrix();
     }
 
     @Override

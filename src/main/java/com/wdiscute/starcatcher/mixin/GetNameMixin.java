@@ -35,7 +35,7 @@ public class GetNameMixin
             {
                 baseName = itemName;
             }
-            else baseName = Component.translatable(stack.getDescriptionId());
+            else baseName = Component.translatable(stack.getItem().getDescriptionId());
 
             //get cfi
             CaughtFishInfo caughtFishInfo = SCDataComponents.get(stack, SCDataComponents.CAUGHT_FISH_INFO);
