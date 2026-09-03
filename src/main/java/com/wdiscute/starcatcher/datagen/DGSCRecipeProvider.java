@@ -643,6 +643,44 @@ public class DGSCRecipeProvider extends RecipeProvider
                 );
 
         //colorful
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.SURVIVOR_SMITHING_TEMPLATE, 2)
+                .define('T', SCItems.SURVIVOR_SMITHING_TEMPLATE)
+                .define('D', Items.DIAMOND)
+                .define('C', Items.BASALT)
+                .pattern("DTD")
+                .pattern("DCD")
+                .pattern("DDD")
+                .unlockedBy("has_template_survivor", has(SCItems.SURVIVOR_SMITHING_TEMPLATE))
+                .save(output);
+
+        StarcatcherRodRecipeBuilder.tackleSkin(
+                        Ingredient.of(SCItems.SURVIVOR_SMITHING_TEMPLATE),
+                        Ingredient.of(Items.BASALT)
+                )
+                .unlocks("has_template_survivor", has(SCItems.SURVIVOR_SMITHING_TEMPLATE))
+                .save(output, Starcatcher.rl("survivor_tackle")
+                );
+
+        //valley
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.VALLEY_SMITHING_TEMPLATE, 2)
+                .define('T', SCItems.VALLEY_SMITHING_TEMPLATE)
+                .define('D', Items.DIAMOND)
+                .define('C', Items.APPLE)
+                .pattern("DTD")
+                .pattern("DCD")
+                .pattern("DDD")
+                .unlockedBy("has_template_valley", has(SCItems.VALLEY_SMITHING_TEMPLATE))
+                .save(output);
+
+        StarcatcherRodRecipeBuilder.tackleSkin(
+                        Ingredient.of(SCItems.VALLEY_SMITHING_TEMPLATE),
+                        Ingredient.of(Items.BASALT)
+                )
+                .unlocks("has_template_valley", has(SCItems.VALLEY_SMITHING_TEMPLATE))
+                .save(output, Starcatcher.rl("valley_tackle")
+                );
+
+        //colorful
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.COLORFUL_SMITHING_TEMPLATE, 2)
                 .define('T', SCItems.COLORFUL_SMITHING_TEMPLATE)
                 .define('D', Items.DIAMOND)
@@ -928,7 +966,6 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlocks("has_template_sky", has(SCItems.SKY_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("sky_rod")
                 );
-
 
         //lush
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE, 2)
