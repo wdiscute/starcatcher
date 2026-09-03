@@ -9,21 +9,21 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
-public record CBFishCaughtNotifs(FishProperties fp, boolean displayToast, float percentile, boolean golden) implements CustomPacketPayload
+public record CBFishCaughtNotifsPayload(FishProperties fp, boolean displayToast, float percentile, boolean golden) implements CustomPacketPayload
 {
 
-    public static final Type<CBFishCaughtNotifs> TYPE = new Type<>(Starcatcher.rl("fish_caught_toast"));
+    public static final Type<CBFishCaughtNotifsPayload> TYPE = new Type<>(Starcatcher.rl("fish_caught_toast"));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CBFishCaughtNotifs> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<RegistryFriendlyByteBuf, CBFishCaughtNotifsPayload> STREAM_CODEC = StreamCodec.composite(
             FishProperties.STREAM_CODEC,
-            CBFishCaughtNotifs::fp,
+            CBFishCaughtNotifsPayload::fp,
             ByteBufCodecs.BOOL,
-            CBFishCaughtNotifs::displayToast,
+            CBFishCaughtNotifsPayload::displayToast,
             ByteBufCodecs.FLOAT,
-            CBFishCaughtNotifs::percentile,
+            CBFishCaughtNotifsPayload::percentile,
             ByteBufCodecs.BOOL,
-            CBFishCaughtNotifs::golden,
-            CBFishCaughtNotifs::new
+            CBFishCaughtNotifsPayload::golden,
+            CBFishCaughtNotifsPayload::new
     );
 
     @Override

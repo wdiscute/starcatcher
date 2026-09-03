@@ -1214,6 +1214,8 @@
   "gui.guide.hover.biome.incorrect" : "❌ Biome",
   "gui.guide.hover.daytime.correct" : "✅ Time of Day",
   "gui.guide.hover.daytime.incorrect" : "❌ Time of Day",
+  "gui.guide.hover.structure.correct" : "✅ Structure",
+  "gui.guide.hover.structure.incorrect" : "❌ Structure",
   "gui.guide.hover.moon_phase.incorrect" : "❌ Moon Phase",
   "gui.guide.hover.moon_phase.correct" : "✅ Moon Phase",
   "gui.guide.hover.luck_restriction.incorrect" : "❌ Luck",

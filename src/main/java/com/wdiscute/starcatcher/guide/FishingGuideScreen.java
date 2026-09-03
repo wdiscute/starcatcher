@@ -2189,4 +2189,10 @@ public class FishingGuideScreen extends Screen
     {
         return Tooltips.resolveTagsToComponentFromTranslationKey(key);
     }
+
+    public static void onStructuresReceived()
+    {
+        if(Minecraft.getInstance().screen instanceof FishingGuideScreen screen)
+            screen.init();
+    }
 }

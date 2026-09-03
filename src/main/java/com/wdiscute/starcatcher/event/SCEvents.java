@@ -17,7 +17,6 @@ import com.wdiscute.starcatcher.data.network.tournament.CBClearTournamentPayload
 import com.wdiscute.starcatcher.data.network.tournament.SBStandTournamentNameChangePayload;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
-import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,16 +27,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.SpawnPlacementTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.FarmBlock;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -47,7 +42,6 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.*;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
-import net.neoforged.neoforge.event.entity.RegisterSpawnPlacementsEvent;
 import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
@@ -332,9 +326,9 @@ public class SCEvents
         );
 
         registrar.playToClient(
-                CBFishCaughtNotifs.TYPE,
-                CBFishCaughtNotifs.STREAM_CODEC,
-                CBFishCaughtNotifs::handle
+                CBFishCaughtNotifsPayload.TYPE,
+                CBFishCaughtNotifsPayload.STREAM_CODEC,
+                CBFishCaughtNotifsPayload::handle
         );
 
         registrar.playToServer(
@@ -395,6 +389,12 @@ public class SCEvents
                 CBOpenMessagePayload.TYPE,
                 CBOpenMessagePayload.STREAM_CODEC,
                 CBOpenMessagePayload::handle
+        );
+
+        registrar.playToClient(
+                CBPlayerStructuresPayload.TYPE,
+                CBPlayerStructuresPayload.STREAM_CODEC,
+                CBPlayerStructuresPayload::handle
         );
     }
 }
