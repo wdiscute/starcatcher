@@ -1530,10 +1530,8 @@
   "item.starcatcher.starcaught_lava_bucket" : "Starcaught Lava Bucket",
   "tooltip.starcatcher.starcaught_lava_bucket.name" : "Bucket of %s",
 
-  "tooltip.starcatcher.starcaught_bucket.creative.0" : "[CREATIVE MODE] This bucket will always spawn a CERBERAY. To get the corresponding [Bucket of X] you must catch it through normal means using a bucket as a bait.",
+  "tooltip.starcatcher.starcaught_bucket.creative.0" : "[CREATIVE MODE] This bucket will always spawn the same fish. To get the corresponding [Bucket of X] you must catch it through normal means using a bucket as a bait.",
   "tooltip.starcatcher.starcaught_bucket.creative.1" : "If you wish to summon the fish entity, you can right click on the ground with the fish item in creative mode.",
-
-
 
 
 

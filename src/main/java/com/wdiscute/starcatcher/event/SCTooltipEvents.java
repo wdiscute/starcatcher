@@ -75,8 +75,8 @@ public class SCTooltipEvents
         //bucketed fish
         if ((stack.is(SCItems.STARCAUGHT_BUCKET) || stack.is(SCItems.STARCAUGHT_LAVA_BUCKET)) && !SCDataComponents.has(stack, SCDataComponents.BUCKETED_FISH))
         {
-            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1"));
-            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0"));
+            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0").withColor(SCColors.TOOLTIP_GRAY));
+            comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1").withColor(SCColors.TOOLTIP_GRAY));
         }
 
         //signed guide

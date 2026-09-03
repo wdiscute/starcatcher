@@ -129,7 +129,6 @@ public class FishEntity extends AbstractFish
         setBodyArmorItem(is);
         shouldDropItem = true;
 
-        //todo 26 check if this works
         AttributeInstance instance = getAttributes().getInstance(Attributes.SCALE);
         if (instance != null)
             instance.setBaseValue(SCDataComponents.getOrDefault(
