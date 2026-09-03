@@ -122,7 +122,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
         for (int i = 0; i < rows; i++)
             EXTRA_ROW.render(g, uiX, uiY + i * 18 + 66);
 
-        int animationFrame = ((int) (level.getGameTime() / 2 % 32 + 1));
+        int animationFrame = ((int) (System.currentTimeMillis() / 100 % 32 + 1));
         new ScreenUtils.Image(
                 Starcatcher.rl("textures/gui/fish_radar/radar_animation" + animationFrame + ".png"),
                 101, 160)

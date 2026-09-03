@@ -206,6 +206,11 @@
   "starcatcher.configuration.radar_y_offset": "Radar Y Offset",
   "starcatcher.configuration.radar_scale": "Radar Scale",
 
+  "starcatcher.configuration.tracker_x_offset": "Tracker X Offset",
+  "starcatcher.configuration.tracker_y_offset": "Tracker Y Offset",
+  "starcatcher.configuration.tracker_scale": "Tracker Scale",
+
+
   "starcatcher.configuration.debug": "Debug Minigame Info",
 
   "starcatcher.configuration.hit_delay" : "Minigame Hit Delay",
