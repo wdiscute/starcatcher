@@ -34,9 +34,9 @@ import java.util.*;
 
 public class FishingGuideItem extends Item
 {
-    public FishingGuideItem()
+    public FishingGuideItem(Properties p)
     {
-        super(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC));
+        super(p.stacksTo(1).rarity(Rarity.EPIC));
     }
 
     @Override

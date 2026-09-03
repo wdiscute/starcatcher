@@ -15,6 +15,7 @@ import mezz.jei.api.recipe.IFocusFactory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.runtime.IRecipesGui;
 import net.minecraft.client.Minecraft;
@@ -48,6 +49,12 @@ public class StarcatcherJeiPlugin implements IModPlugin
     }
 
     @Override
+    public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration)
+    {
+        registration.getSmithingCategory().addExtension(StarcatcherRodRecipe.class, new StarcatcherJeiSmithingCategoryExtension());
+    }
+
+    @Override
     public void registerCategories(IRecipeCategoryRegistration registration)
     {
         listRecipes.clear();
@@ -58,7 +65,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
         //register categories
         registration.addRecipeCategories(new StarcatcherJeiFPRecipe(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new StarcatcherJeiSmithingRecipe(registration.getJeiHelpers().getGuiHelper()));
     }
 
     @Override
@@ -66,20 +72,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
     {
         //add fp recipes
         registration.addRecipes(StarcatcherJeiFPRecipe.Recipe.TYPE, listRecipes);
-
-        //add blacksmith recipes
-        List<StarcatcherJeiSmithingRecipe.Recipe> smithing =
-                Minecraft.getInstance().level
-                        .getRecipeManager()
-                        .getAllRecipesFor(RecipeType.SMITHING)
-                        .stream()
-                        .map(RecipeHolder::value)
-                        .filter(StarcatcherRodRecipe.class::isInstance)
-                        .map(StarcatcherRodRecipe.class::cast)
-                        .map(StarcatcherJeiSmithingRecipe.Recipe::of)
-                        .toList();
-
-        registration.addRecipes(StarcatcherJeiSmithingRecipe.Recipe.TYPE, smithing);
 
         //worms info
         registration.addItemStackInfo(
@@ -149,6 +141,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
     @Override
     public ResourceLocation getPluginUid()
     {
-        return SellingBin.rl("selling_bin_jei_plugin");
+        return SellingBin.rl("starcatcher_jei_plugin");
     }
 }

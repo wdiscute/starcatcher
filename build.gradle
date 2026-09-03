@@ -95,7 +95,7 @@ dependencies {
 
     //JEI
     compileOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
-    runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+    //runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 
     //ftb teams
     compileOnly files(".compatmods/ftb-teams-neoforge-2101.1.7.jar")

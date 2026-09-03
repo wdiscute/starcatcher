@@ -19,10 +19,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.BaseEntityBlock;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -59,7 +56,10 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
 
     public DisplayBlock()
     {
-        super(BlockBehaviour.Properties.of().destroyTime(2));
+        super(BlockBehaviour.Properties.of()
+                .destroyTime(2)
+                .sound(SoundType.WOOD)
+        );
         this.registerDefaultState(
                 this.stateDefinition.any().setValue(POWERED, false).setValue(HAS_ITEM, false)
         );
