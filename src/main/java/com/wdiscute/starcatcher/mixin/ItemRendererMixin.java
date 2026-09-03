@@ -20,7 +20,8 @@ public class ItemRendererMixin
 {
     @WrapOperation(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/ItemRenderer;renderModelLists(Lnet/minecraft/client/resources/model/BakedModel;Lnet/minecraft/world/item/ItemStack;IILcom/mojang/blaze3d/vertex/PoseStack;Lcom/mojang/blaze3d/vertex/VertexConsumer;)V"))
     public void render(ItemRenderer instance, BakedModel model, ItemStack stack, int combinedLight, int combinedOverlay, PoseStack poseStack, VertexConsumer vertexConsumer, Operation<Void> original,
-                       @Local(argsOnly = true) MultiBufferSource bufferSource){
+                       @Local(argsOnly = true) MultiBufferSource bufferSource)
+    {
         boolean isGolden = Rarity.isGolden(stack);
         BakedModel bakedModel = isGolden ? BakedModelRemapper.getOrCreate(model) : model;
 
@@ -33,19 +34,5 @@ public class ItemRendererMixin
                 poseStack,
                 vertexConsumer
         );
-
-        if (isGolden) {
-            original.call(
-                    instance,
-                    bakedModel,
-                    stack,
-                    combinedLight,
-                    combinedOverlay,
-                    poseStack,
-                    bufferSource.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT)
-            );
-        }
-
-
     }
 }

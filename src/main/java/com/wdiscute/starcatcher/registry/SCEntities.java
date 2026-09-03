@@ -26,7 +26,7 @@ public interface SCEntities
 
     DeferredHolder<EntityType<?>, EntityType<FishEntity>> FISH =
             register("fish", FishEntity::new, MobCategory.WATER_AMBIENT,
-                    b -> b.sized(0.5f, 0.5f).fireImmune());
+                    b -> b.sized(0.5f, 0.5f));
 
     DeferredHolder<EntityType<?>,EntityType<BrokenBottleEntity>> BROKEN_BOTTLE =
             register("broken_bottle", BrokenBottleEntity::new, MobCategory.MISC,
