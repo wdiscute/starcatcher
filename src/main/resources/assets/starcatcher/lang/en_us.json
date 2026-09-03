@@ -159,6 +159,13 @@
   "tag.starcatcher.epic_fishes" : "Epic Fishes",
   "tag.starcatcher.legendary_fishes" : "Legendary Fishes",
 
+  "tag.starcatcher.common_starcaught_fishes" : "Common Fishes",
+  "tag.starcatcher.uncommon_starcaught_fishes" : "Uncommon Fishes",
+  "tag.starcatcher.rare_starcaught_fishes" : "Rare Fishes",
+  "tag.starcatcher.epic_starcaught_fishes" : "Epic Fishes",
+  "tag.starcatcher.legendary_starcaught_fishes" : "Legendary Fishes",
+
+
   "tag.starcatcher.aquarium_guide_display" : "Aquarium Interactions For The Guide",
   "tag.starcatcher.placeable_in_display" : "Placeable In The Display Block",
   "tag.starcatcher.placeable_in_tackle_box" : "Placeable In Tackle Box",
@@ -167,6 +174,10 @@
   "tag.starcatcher.tackle_skins" : "Tackle Skins",
   "tag.starcatcher.trash" : "Trash",
   "tag.starcatcher.worms" : "Worms",
+
+  "tag.starcatcher.crabs" : "Crabs",
+  "tag.starcatcher.eels" : "Eels",
+  "tag.starcatcher.shrimps" : "Shrimps",
 
   "tag.starcatcher.has_radar_layer" : "Has Fish Radar Layer",
   "tag.starcatcher.has_tracker_layer" : "Has Fish Tracker Layer",
