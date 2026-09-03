@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.messageinabottle.letter.EditableMessage;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.modifiers.Modifier;
+import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -72,7 +73,7 @@ public class SCTooltipEvents
         }
 
         //bucketed fish
-        if (!SCDataComponents.has(stack, SCDataComponents.BUCKETED_FISH))
+        if ((stack.is(SCItems.STARCAUGHT_BUCKET) || stack.is(SCItems.STARCAUGHT_LAVA_BUCKET)) && !SCDataComponents.has(stack, SCDataComponents.BUCKETED_FISH))
         {
             comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1"));
             comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.0"));

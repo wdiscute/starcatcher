@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
+import com.wdiscute.utils.MaybeStack;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
@@ -21,7 +22,7 @@ import java.util.Optional;
 public record StarcatcherRodRecipe(Ingredient template,
                                    Ingredient rod,
                                    Ingredient material,
-                                   ItemStack result,
+                                   MaybeStack result,
                                    boolean addText,
                                    boolean keepStack,
                                    boolean applySkin)
@@ -34,7 +35,7 @@ public record StarcatcherRodRecipe(Ingredient template,
             o -> o.rod,
             Ingredient.CONTENTS_STREAM_CODEC,
             o -> o.material,
-            ItemStack.STREAM_CODEC,
+            MaybeStack.STREAM_CODEC,
             o -> o.result,
             ByteBufCodecs.BOOL,
             o -> o.addText,
@@ -50,7 +51,7 @@ public record StarcatcherRodRecipe(Ingredient template,
                     Ingredient.CODEC.fieldOf("template").forGetter(StarcatcherRodRecipe::template),
                     Ingredient.CODEC.fieldOf("rod").forGetter(StarcatcherRodRecipe::rod),
                     Ingredient.CODEC.fieldOf("material").forGetter(StarcatcherRodRecipe::material),
-                    ItemStack.CODEC.fieldOf("result").forGetter(StarcatcherRodRecipe::result),
+                    MaybeStack.CODEC.fieldOf("result").forGetter(StarcatcherRodRecipe::result),
                     Codec.BOOL.fieldOf("add_text").forGetter(StarcatcherRodRecipe::addText),
                     Codec.BOOL.fieldOf("keep_stack").forGetter(StarcatcherRodRecipe::keepStack),
                     Codec.BOOL.fieldOf("apply_skin").forGetter(StarcatcherRodRecipe::applySkin)
@@ -113,7 +114,7 @@ public record StarcatcherRodRecipe(Ingredient template,
             resultRod = input.base().copy();
         else
         {
-            resultRod = result.copy();
+            resultRod = result.toStack();
             resultRod.applyComponents(input.base().getComponentsPatch());
         }
 
@@ -138,15 +139,6 @@ public record StarcatcherRodRecipe(Ingredient template,
             SCDataComponents.set(resultRod, SCDataComponents.NETHERITE_UPGRADE, true);
 
         return resultRod;
-    }
-
-    @Override
-    public ItemStack result()
-    {
-        ItemStack itemstack = new ItemStack(SCItems.ROD.get());
-        if (addText)
-            SCDataComponents.set(itemstack, SCDataComponents.NETHERITE_UPGRADE, true);
-        return itemstack;
     }
 
     @Override

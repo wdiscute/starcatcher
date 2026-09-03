@@ -26,14 +26,21 @@ public class DGSCModelProvider extends ModelProvider
         super(output, Starcatcher.MOD_ID);
     }
 
-    private ItemModelGenerators itemModels = null;
-    private BlockModelGenerators blockModels = null;
+    private ItemModelGenerators itemModels;
+    private BlockModelGenerators blockModels;
 
     @Override
     protected Stream<? extends Holder<Block>> getKnownBlocks()
     {
         List<Holder<Block>> list = new ArrayList<>();
+        list.addAll(HATS.getEntries().stream().toList());
+        list.addAll(TACKLE_BOXES.getEntries().stream().toList());
 
+        list.add(TROPHY_COPPER);
+        list.add(TROPHY_IRON);
+        list.add(TROPHY_GOLD);
+        list.add(TROPHY_EMERALD);
+        list.add(TROPHY_DIAMOND);
 
         return list.stream();
     }
@@ -43,6 +50,18 @@ public class DGSCModelProvider extends ModelProvider
     {
         List<Holder<Item>> list = new ArrayList<>();
 
+        list.addAll(BUCKETABLE_FISHES_REGISTRY.getEntries().stream().toList());
+        list.addAll(TEMPLATES_REGISTRY.getEntries().stream().toList());
+        list.addAll(HOOKS_REGISTRY.getEntries().stream().toList());
+        list.addAll(BOBBERS_REGISTRY.getEntries().stream().toList());
+        list.addAll(HATS.getEntries().stream().map(o -> o.get().asItem().builtInRegistryHolder()).toList());
+        list.addAll(TACKLE_BOXES.getEntries().stream().map(o -> o.get().asItem().builtInRegistryHolder()).toList());
+
+        list.add(TROPHY_COPPER.asItem().builtInRegistryHolder());
+        list.add(TROPHY_IRON.asItem().builtInRegistryHolder());
+        list.add(TROPHY_GOLD.asItem().builtInRegistryHolder());
+        list.add(TROPHY_EMERALD.asItem().builtInRegistryHolder());
+        list.add(TROPHY_DIAMOND.asItem().builtInRegistryHolder());
 
         return list.stream();
     }
@@ -50,6 +69,9 @@ public class DGSCModelProvider extends ModelProvider
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels)
     {
+        this.itemModels = itemModels;
+        this.blockModels = blockModels;
+
         //bucket fishes
         for (DeferredHolder<Item, ? extends Item> item : BUCKETABLE_FISHES_REGISTRY.getEntries())
             simpleItem((DeferredItem<? extends Item>) item);
@@ -151,10 +173,6 @@ public class DGSCModelProvider extends ModelProvider
         simpleBlockItem(TROPHY_EMERALD);
         simpleBlockItem(TROPHY_DIAMOND);
         simpleBlockItem(TROPHY_OF_THE_OLDER_ANGLER);
-
-        //aquarium
-        simpleBlockItem(AQUARIUM);
-
 
         //hats model, just parents to block
         simpleBlockItem(FISHERMAN_HAT_WHITE);

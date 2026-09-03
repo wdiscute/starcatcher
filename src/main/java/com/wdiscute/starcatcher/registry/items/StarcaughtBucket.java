@@ -38,7 +38,12 @@ public class StarcaughtBucket extends BucketItem
 
     public static Item getBucketForStack(ItemStack stack)
     {
-        return stack.getItem() instanceof BucketItem bucketItem && bucketItem.content.equals(Fluids.LAVA)
+        return getBucketForStack(stack.getItem());
+    }
+
+    public static Item getBucketForStack(Item item)
+    {
+        return item instanceof BucketItem bucketItem && bucketItem.content.equals(Fluids.LAVA)
                 ? SCItems.STARCAUGHT_LAVA_BUCKET.get() : SCItems.STARCAUGHT_BUCKET.get();
     }
 

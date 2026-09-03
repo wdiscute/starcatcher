@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.recipe;
 
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.utils.MaybeStack;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
@@ -25,7 +26,7 @@ public class StarcatcherRodRecipeBuilder
     private final Ingredient template;
     private final Ingredient base;
     private final Ingredient addition;
-    private final ItemStack result;
+    private final MaybeStack result;
     private final boolean addText;
     private final boolean keepStack;
     private final boolean applySkin;
@@ -34,7 +35,7 @@ public class StarcatcherRodRecipeBuilder
 
     public StarcatcherRodRecipeBuilder(
             Ingredient template, Ingredient rod, Ingredient material,
-            RecipeCategory category, ItemStack result,
+            RecipeCategory category, MaybeStack result,
             boolean addText, boolean keepStack, boolean applySkin)
     {
         this.category = category;
@@ -49,17 +50,17 @@ public class StarcatcherRodRecipeBuilder
 
     public static StarcatcherRodRecipeBuilder tackleSkin(HolderLookup.Provider lookup, Ingredient template, Ingredient material)
     {
-        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, SCItems.MISSINGNO.toStack(),
+        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, new MaybeStack(SCItems.MISSINGNO),
                 false, true, true);
     }
 
     public static StarcatcherRodRecipeBuilder netheriteUpgrade(HolderLookup.Provider lookup, Ingredient template, Ingredient material)
     {
-        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, SCItems.MISSINGNO.toStack(),
+        return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, new MaybeStack(SCItems.MISSINGNO),
                 true, true, false);
     }
 
-    public static StarcatcherRodRecipeBuilder rodSkin(HolderLookup.Provider lookup, Ingredient template, Ingredient material, ItemStack result)
+    public static StarcatcherRodRecipeBuilder rodSkin(HolderLookup.Provider lookup, Ingredient template, Ingredient material, MaybeStack result)
     {
         return new StarcatcherRodRecipeBuilder(template, Ingredient.of(lookup.lookupOrThrow(Registries.ITEM).getOrThrow(SCTags.RODS)), material, RecipeCategory.TOOLS, result,
                 false, false, true);

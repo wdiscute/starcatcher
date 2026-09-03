@@ -28,7 +28,7 @@ public class HitFakeParticle
 
         ScreenUtils.fill(guiGraphics, width / 2, height / 2, 1, 1, color);
 
-        poseStack.pushMatrix();
+        poseStack.popMatrix();
     }
 
     public HitFakeParticle(int x, int y, Vector2d vec, int color)

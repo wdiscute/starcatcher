@@ -59,6 +59,13 @@ public class SCClientEvents
         event.register(Starcatcher.rl("is_cast"), new IsCastItemProperty(false).type());
     }
 
+    @SubscribeEvent
+    public static void registerItemModelProperties(RegisterRangeSelectItemModelPropertyEvent event)
+    {
+        event.register(Starcatcher.rl("message"), new MessageTextureItemProperty().type());
+    }
+
+
     //@SubscribeEvent
     //public static void onAssetReload(RegisterClientReloadListenersEvent event)
     //{

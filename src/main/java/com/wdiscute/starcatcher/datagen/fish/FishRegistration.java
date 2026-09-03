@@ -17,6 +17,7 @@ import com.wdiscute.utils.Utils;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.util.ArrayList;
@@ -152,9 +153,9 @@ public final class FishRegistration
 
     private static FishProperties applyStarcaughtLogic(FishProperties fp)
     {
-        ItemStack fish = fp.catchInfo().fish().toStack();
+        Item fish = fp.catchInfo().fish().toItem();
 
-        boolean isBucketable = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().map(e -> e.getDelegate().value()).anyMatch(fish::is);
+        boolean isBucketable = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().map(e -> e.getDelegate().value()).anyMatch(e -> e.equals(fish));
 
         if (isBucketable && fp.catchInfo().fishEntryType() == CatchInfo.FishEntryType.FISH)
         {

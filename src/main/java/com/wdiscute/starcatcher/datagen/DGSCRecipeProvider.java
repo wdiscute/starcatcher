@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipeBuilder;
 import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -25,7 +26,8 @@ public class DGSCRecipeProvider extends RecipeProvider
     public DGSCRecipeProvider(
             HolderLookup.Provider registries,
             RecipeOutput output
-    ) {
+    )
+    {
         super(registries, output);
     }
 
@@ -759,7 +761,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(itemReg.getOrThrow(ItemTags.SAPLINGS)),
-                        SCItems.NATURALIST_ROD.toStack()
+                        new MaybeStack(SCItems.NATURALIST_ROD)
                 )
                 .unlocks("has_template_naturalist", has(SCItems.NATURALIST_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("naturalist_rod")
@@ -779,7 +781,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(Items.PACKED_ICE),
-                        SCItems.ICEBORN_ROD.toStack()
+                        new MaybeStack(SCItems.ICEBORN_ROD)
                 )
                 .unlocks("has_template_iceborn", has(SCItems.ICEBORN_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("iceborn_rod")
@@ -800,12 +802,11 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.MAGMAFORGED_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(Items.MAGMA_CREAM),
-                        SCItems.MAGMAFORGED_ROD.toStack()
+                        new MaybeStack(SCItems.MAGMAFORGED_ROD)
                 )
                 .unlocks("has_template_magmaforged", has(SCItems.MAGMAFORGED_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("magmaforged_rod")
                 );
-
 
 
         //slimed
@@ -822,13 +823,11 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.SLIMED_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(Items.SLIME_BALL),
-                        SCItems.SLIMED_ROD.toStack()
+                        new MaybeStack(SCItems.SLIMED_ROD)
                 )
                 .unlocks("has_template_slimed", has(SCItems.SLIMED_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("slimed_rod")
                 );
-
-
 
 
         //azure
@@ -845,12 +844,11 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(SCItems.AZURE_CRYSTALBACK_MINNOW),
-                        SCItems.AZURE_CRYSTAL_ROD.toStack()
+                        new MaybeStack(SCItems.AZURE_CRYSTAL_ROD)
                 )
                 .unlocks("has_template_azure", has(SCItems.AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("azure_rod")
                 );
-
 
 
         //bamboo
@@ -867,7 +865,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(Items.BAMBOO),
-                        SCItems.BAMBOO_ROD.toStack()
+                        new MaybeStack(SCItems.BAMBOO_ROD)
                 )
                 .unlocks("has_template_bamboo", has(SCItems.BAMBOO_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("bamboo_rod")
@@ -888,7 +886,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(SCItems.JOEL),
-                        SCItems.SHARKTOOTH_ROD.toStack()
+                        new MaybeStack(SCItems.SHARKTOOTH_ROD)
                 )
                 .unlocks("has_template_sharktooth", has(SCItems.SHARKTOOTH_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("sharktooth_rod")
@@ -908,7 +906,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(SCItems.OBSIDIAN_EEL),
-                        SCItems.OBSIDIAN_ROD.toStack()
+                        new MaybeStack(SCItems.OBSIDIAN_ROD)
                 )
                 .unlocks("has_template_obsidian", has(SCItems.OBSIDIAN_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("obsidian_rod")
@@ -928,7 +926,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.BONER_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(Items.BONE_BLOCK),
-                        SCItems.BONER_ROD.toStack()
+                        new MaybeStack(SCItems.BONER_ROD)
                 )
                 .unlocks("has_template_boner", has(SCItems.BONER_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("boner_rod")
@@ -948,7 +946,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.SKY_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(Items.PHANTOM_MEMBRANE),
-                        SCItems.SKY_ROD.toStack()
+                        new MaybeStack(SCItems.SKY_ROD)
                 )
                 .unlocks("has_template_sky", has(SCItems.SKY_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("sky_rod")
@@ -969,7 +967,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(SCItems.LUSH_PIKE),
-                        SCItems.LUSH_GLOWBERRY_ROD.toStack()
+                        new MaybeStack(SCItems.LUSH_GLOWBERRY_ROD)
                 )
                 .unlocks("has_template_lush", has(SCItems.LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("lush_rod")
@@ -990,7 +988,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         StarcatcherRodRecipeBuilder.rodSkin(registries,
                         Ingredient.of(SCItems.HUMBLE_SKIN_SMITHING_TEMPLATE),
                         Ingredient.of(Items.STICK),
-                        SCItems.HUMBLE_ROD.toStack()
+                        new MaybeStack(SCItems.HUMBLE_ROD)
                 )
                 .unlocks("has_template_humble", has(SCItems.HUMBLE_SKIN_SMITHING_TEMPLATE))
                 .save(output, Starcatcher.rl("humble_rod")

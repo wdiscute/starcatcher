@@ -1,0 +1,26 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "starcatcher:message",
+    "entries": [
+      {
+        "threshold": 1.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/message_nether"
+        }
+      },
+      {
+        "threshold": 2.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/message_end"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "starcatcher:item/message"
+    }
+  }
+}

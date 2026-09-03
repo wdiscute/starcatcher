@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.datagen.DGSCBiomeModifiers;
 import com.wdiscute.starcatcher.datagen.DGSCDataGenerators;
 import com.wdiscute.starcatcher.datagen.fish.compat.*;
 import com.wdiscute.starcatcher.fish.*;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -82,6 +83,7 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
 
     public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
     {
+
         //vanilla
         DGTrophies.bootstrap(context);
         DGMinecraftFishes.bootstrap(context);

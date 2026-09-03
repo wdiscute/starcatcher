@@ -1,0 +1,14 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "property": "starcatcher:is_cast",
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "starcatcher:item/sharktooth_rod_cast"
+    },
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "starcatcher:item/sharktooth_rod"
+    }
+  }
+}

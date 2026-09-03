@@ -62,7 +62,8 @@ dependencies {
     jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-26.1.2"))
 
     //FTS
-    jarJar(implementation("maven.modrinth:fancytabsections:6.1-NEOFORGE-26.1.2"))
+    //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.1.2"))
+    jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:6.2-NEOFORGE-26.1.2"))
 
     //libtooltips
     jarJar(implementation("maven.modrinth:libtooltips:2.2-NEOFORGE-26.1.2"))

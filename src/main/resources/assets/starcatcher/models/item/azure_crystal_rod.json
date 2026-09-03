@@ -1,12 +1,6 @@
 {
-  "parent": "item/handheld_rod",
+  "parent": "item/fishing_rod",
   "textures": {
     "layer0": "starcatcher:item/azure_crystal_rod_uncast"
-  },
-  "overrides": [
-    {
-      "predicate": {"starcatcher:cast": 1},
-      "model": "starcatcher:item/azure_crystal_rod_cast"
-    }
-  ]
+  }
 }

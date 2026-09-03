@@ -46,7 +46,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     public int openCount;
     @Nullable
     private final DyeColor color;
-    private Component name;
+    private Component name = Component.empty();
 
     @Override
     public void tick()
@@ -235,7 +235,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         super.applyImplicitComponents(componentInput);
         componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
         fishes = new ArrayList<>(componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of()));
-        this.name = componentInput.get(DataComponents.CUSTOM_NAME);
+        this.name = componentInput.getOrDefault(DataComponents.CUSTOM_NAME, Component.empty());
     }
 
     @Override
