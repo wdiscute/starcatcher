@@ -19,15 +19,35 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public record StarcatcherRodRecipe(Ingredient template,
-                                   Ingredient rod,
-                                   Ingredient material,
-                                   MaybeStack result,
-                                   boolean addText,
-                                   boolean keepStack,
-                                   boolean applySkin)
-        implements SmithingRecipe
+public class StarcatcherRodRecipe extends SimpleSmithingRecipe
 {
+    public StarcatcherRodRecipe(
+            Ingredient template,
+            Ingredient rod,
+            Ingredient material,
+            MaybeStack result,
+            boolean addText,
+            boolean keepStack,
+            boolean applySkin)
+    {
+        super(new Recipe.CommonInfo(true));
+        this.template = template;
+        this.rod = rod;
+        this.material = material;
+        this.result = result;
+        this.addText = addText;
+        this.keepStack = keepStack;
+        this.applySkin = applySkin;
+    }
+
+    public Ingredient template;
+    public Ingredient rod;
+    public Ingredient material;
+    public MaybeStack result;
+    public boolean addText;
+    public boolean keepStack;
+    public boolean applySkin;
+
     public static final StreamCodec<RegistryFriendlyByteBuf, StarcatcherRodRecipe> STREAM_CODEC = StreamCodec.composite(
             Ingredient.CONTENTS_STREAM_CODEC,
             o -> o.template,
@@ -48,13 +68,13 @@ public record StarcatcherRodRecipe(Ingredient template,
 
     public static final MapCodec<StarcatcherRodRecipe> MAP_CODEC = RecordCodecBuilder.mapCodec(
             i -> i.group(
-                    Ingredient.CODEC.fieldOf("template").forGetter(StarcatcherRodRecipe::template),
-                    Ingredient.CODEC.fieldOf("rod").forGetter(StarcatcherRodRecipe::rod),
-                    Ingredient.CODEC.fieldOf("material").forGetter(StarcatcherRodRecipe::material),
-                    MaybeStack.CODEC.fieldOf("result").forGetter(StarcatcherRodRecipe::result),
-                    Codec.BOOL.fieldOf("add_text").forGetter(StarcatcherRodRecipe::addText),
-                    Codec.BOOL.fieldOf("keep_stack").forGetter(StarcatcherRodRecipe::keepStack),
-                    Codec.BOOL.fieldOf("apply_skin").forGetter(StarcatcherRodRecipe::applySkin)
+                    Ingredient.CODEC.fieldOf("template").forGetter(o -> o.template),
+                    Ingredient.CODEC.fieldOf("rod").forGetter(o -> o.rod),
+                    Ingredient.CODEC.fieldOf("material").forGetter(o -> o.material),
+                    MaybeStack.CODEC.fieldOf("result").forGetter(o -> o.result),
+                    Codec.BOOL.fieldOf("add_text").forGetter(o -> o.addText),
+                    Codec.BOOL.fieldOf("keep_stack").forGetter(o -> o.keepStack),
+                    Codec.BOOL.fieldOf("apply_skin").forGetter(o -> o.applySkin)
             ).apply(i, StarcatcherRodRecipe::new)
     );
 
@@ -92,12 +112,6 @@ public record StarcatcherRodRecipe(Ingredient template,
     public ItemStack assemble(SmithingRecipeInput input)
     {
         return assembledNoRegistries(input);
-    }
-
-    @Override
-    public boolean showNotification()
-    {
-        return true;
     }
 
     @Override
@@ -142,7 +156,7 @@ public record StarcatcherRodRecipe(Ingredient template,
     }
 
     @Override
-    public RecipeSerializer<? extends SmithingRecipe> getSerializer()
+    public RecipeSerializer<? extends SimpleSmithingRecipe> getSerializer()
     {
         return SCRecipes.FISHING_ROD_SMITHING.get();
     }
@@ -157,5 +171,11 @@ public record StarcatcherRodRecipe(Ingredient template,
     public PlacementInfo placementInfo()
     {
         return PlacementInfo.createFromOptionals(List.of(templateIngredient(), Optional.of(rod), additionIngredient()));
+    }
+
+    @Override
+    protected PlacementInfo createPlacementInfo()
+    {
+        return PlacementInfo.createFromOptionals(List.of(Optional.of(this.template), Optional.of(this.rod), Optional.of(this.material)));
     }
 }

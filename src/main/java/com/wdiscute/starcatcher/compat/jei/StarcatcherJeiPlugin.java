@@ -12,11 +12,14 @@ import com.wdiscute.utils.Utils;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.recipe.IFocusFactory;
+import mezz.jei.api.recipe.category.extensions.vanilla.smithing.IExtendableSmithingRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import mezz.jei.api.runtime.IRecipesGui;
+import mezz.jei.library.plugins.vanilla.anvil.SmithingTransformCategoryExtension;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
@@ -28,6 +31,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 
 import java.util.ArrayList;
@@ -41,6 +45,12 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
     public static IRecipesGui iRecipesGui = null;
     public static IFocusFactory iFocusFactory = null;
+
+    @Override
+    public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration)
+    {
+        registration.getSmithingCategory().addExtension(StarcatcherRodRecipe.class, new StarcatcherJeiSmithingCategoryExtension());
+    }
 
     @Override
     public void onRuntimeAvailable(IJeiRuntime jeiRuntime)
@@ -60,22 +70,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
 
         //register categories
         registration.addRecipeCategories(new StarcatcherJeiFPRecipe(registration.getJeiHelpers().getGuiHelper()));
-        registration.addRecipeCategories(new StarcatcherJeiSmithingRecipe(registration.getJeiHelpers().getGuiHelper()));
-    }
-
-    //todo 26 check if this works
-    public static List<StarcatcherJeiSmithingRecipe.Recipe> recipes = new ArrayList<>();
-
-    public static void receiveRecipes(RecipesReceivedEvent event)
-    {
-        recipes = event.getRecipeMap()
-                .byType(RecipeType.SMITHING)
-                .stream()
-                .map(RecipeHolder::value)
-                .filter(StarcatcherRodRecipe.class::isInstance)
-                .map(StarcatcherRodRecipe.class::cast)
-                .map(StarcatcherJeiSmithingRecipe.Recipe::of)
-                .toList();
     }
 
     @Override
@@ -83,9 +77,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
     {
         //add fp recipes
         registration.addRecipes(StarcatcherJeiFPRecipe.Recipe.TYPE, listRecipes);
-
-        //add blacksmith recipes
-        registration.addRecipes(StarcatcherJeiSmithingRecipe.Recipe.TYPE, recipes);
 
         //worms info
         List<ItemStack> worms = new ArrayList<>();
@@ -150,6 +141,7 @@ public class StarcatcherJeiPlugin implements IModPlugin
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration)
     {
         registration.addCraftingStation(StarcatcherJeiFPRecipe.Recipe.TYPE, SCItems.ROD.get());
+        //registration.addCraftingStation(StarcatcherJeiSmithingRecipe.Recipe.TYPE, Blocks.SMITHING_TABLE);
     }
 
     @Override

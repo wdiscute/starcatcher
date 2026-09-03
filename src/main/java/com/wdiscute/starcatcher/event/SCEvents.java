@@ -192,13 +192,6 @@ public class SCEvents
     }
 
     @SubscribeEvent
-    public static void onRecipesReceived(RecipesReceivedEvent event)
-    {
-        if (ModList.get().isLoaded("jei"))
-            StarcatcherJeiPlugin.receiveRecipes(event);
-    }
-
-    @SubscribeEvent
     public static void serverStarted(ServerStartedEvent event)
     {
         TournamentHandler.setAll(TournamentSavedData.get(event.getServer().overworld()).getTournaments());

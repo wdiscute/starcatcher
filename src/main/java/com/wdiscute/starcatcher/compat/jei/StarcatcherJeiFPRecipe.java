@@ -230,7 +230,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
             if ((!stacks.isEmpty() && !stacks.get(0).is(SCItems.TREASURE)) || !lts.isEmpty() || !treasure.blacklist().isEmpty())
                 treasureIngredient = Ingredient.of(stacks.get(0).getItem());
             else
-                treasureIngredient = Ingredient.of(Items.AIR);
+                treasureIngredient = Ingredient.of(SCItems.TREASURE);
 
             //aurora
             restrictions.add(fp.getDisplayName());

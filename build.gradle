@@ -96,8 +96,8 @@ dependencies {
     runtimeOnly "maven.modrinth:AANobbMI:UETw0GTI"
 
     //JEI
-    compileOnly "mezz.jei:jei-26.1.2-neoforge:29.5.0.26"
-    runtimeOnly "mezz.jei:jei-26.1.2-neoforge:29.5.0.26"
+    compileOnly "mezz.jei:jei-26.1.2-neoforge:29.34.0.92"
+    runtimeOnly "mezz.jei:jei-26.1.2-neoforge:29.34.0.92"
 }
 
 base {
