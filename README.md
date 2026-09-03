@@ -1,18 +1,31 @@
-## **Starcatcher** adds a new skill-based fishing mini-game, lots of secrets, trophies, tournaments and everything else an angler could ask for 🎣
+**Starcatcher** adds a new fishing mini-game, tackle boxes, baits, trophies, fishing hats, tournaments and everything else an angler could ask for 🎣
 
 There are **100+** new fishes ready for you to catch and record in your catalogue, uniquely restricted by biome, weather, daytime, elevation and more!
 
-![Fishing a cod in a river, as one usually does](https://media.forgecdn.net/attachments/description/1357603/description_5a9015b7-33a4-4b82-a64b-054101898128.webp)
+***
 
-**Starcatcher** features a handy book companion to aid you throughout your angler journey! It will guide you through all the content Starcatcher has, alongsides cataloguing all your catches 🐟
+## ✨ Perfect Your Skill ✨
+
+**Starcatcher** features a new skill-based minigame! Master the art of fishing and catch all 100+ new unique fish</p>
+
+![Fishing a cod in a river, as one usually does](https://cdn.modrinth.com/data/cached_images/84a97bbca6db96a9d35b81c33aa5917596665d47.png)
+
+***
+
+## 📝 Catalog Your Catches📝
+Every fish you catch will be recorded, keeping track of your best catches and much more!</p>
 
 ![image](https://media.forgecdn.net/attachments/description/1357603/description_cc07e5e4-249d-400b-abc8-15008ba5c7ae.png)
 
-## Starcatcher has a lot of features waiting for you! 🐟 ✨
+![Salmon Entry](https://media.forgecdn.net/attachments/description/1357603/description_74c2d48b-7f32-4edc-96a0-d8cc0f19d18d.png)
 
-*   🎣 **Hooks, Bobbers, and Baits** for your rod
+***
+
+## 🐟🐡🐠 Starcatcher has a lot of features waiting for you! 🐠🐡🐟
+
+*   🎣 **Hooks, Bobbers, and Baits** for your rod
 *   🐡 **100+ Unique fish** with different size, weight, and fishing conditions
-*   🐛 **Tackle Boxes** to store your baits and take your fish back home
+*   🐛 **Tackle Boxes** to store your fish and swap your rod attachments
 *   🔥 Unique **Minigame** gimmicks for different fishes
 *   🏆 **Trophies** to reward your progression
 *   🕵️‍♀️ **Catalogue** to record all your catches
@@ -20,90 +33,140 @@ There are **100+** new fishes ready for you to catch and record in your catalogu
 *   ♒ **Aquariums** to showcase your best catches
 *   😮 **Display** block to showcase your progress to your friends
 *   🕵️‍♀️ **Secrets Messages** left for you to find
-*   📜 Player written **Message-in-a-Bottle** to share your stories with the server
+*   📜 **Message-in-a-Bottle** to share your stories with the server
 *   🤑 **Selling bin** to turn your catches into money
-*   🥇 **Golden Fish** variations for those who want only the best
-*   👒 Different **Cosmetics** to show your fashion sense
-*   🦈 **Dynamic model** size based on the specific catch
+*   🥇 **Golden Fish** for those who want only the best
+*   👒 Different **Cosmetics** to show your fashion sense
 *   🎣 **Fishable Entities** to fish live fish
-*   🔧 Extensive built-in **Compatibility** with several other fish related mods
+*   🔧 Built-in **Compatibility** with fish from other mods
 
-### Coming soon:
+***
 
-*   🍣 **Farmer's Delight add-on** coming very soon!
-*   🐠 **Unique** per-fish uses and characteristics (v2.4?)
-*   🕵️‍♀️ **Even More Secrets** (coming every update)
-*   ⚓ Even more **Mod Compatibility**
+## 🔎Will you fill out your collection? 🔎
 
-The discord has preview development versions containing some of the upcoming features! Link at the bottom 🐟
+Some of these catches are harder than they appear!
 
-## Will you fill out your collection? 🔎 Some of these catches are harder than they appear!
+***
 
-![Nether Fish](https://media.forgecdn.net/attachments/description/1357603/description_f8d8c6f7-b5f7-4002-b695-186c71d1f87c.webp)
+## 🎣 Tackle Boxes🎣
+Tackle boxes allow you to store your Fish, Hooks, Bobbers, Baits, as well as modify your Rod Attachements!
+It's important to use the correct attachments when hunting for **Legendary** fish 🎣
 
-![Salmon Entry](https://media.forgecdn.net/attachments/description/1357603/description_74c2d48b-7f32-4edc-96a0-d8cc0f19d18d.png)
+![](https://media.forgecdn.net/attachments/description/1357603/description_905b6815-335b-44ef-820f-a67569064093.png)
 
-A more detailed list of the different features will follow. Not every feature of the mod is shown here, for more information please visit the wiki! 🐠
+***
 
-## Tackle Boxes
-
-Tackle boxes allow you to store your Fishes, Hooks, Bobbers, baits, as well as modify your rod attachements! It's important to use the correct attachments when hunting for the harder fish 🎣
-
-![image](https://media.forgecdn.net/attachments/description/1357603/description_30fdfd61-f3ab-4ce7-a9b4-0565ff2442f7.png)
-
-## Aquariums ♒
-
-Starcatcher features a dynamic multi-block aquarium to display your fish! You can interact with a few different items to change that block's decoration.
-
-Starcaught fish placed inside will be scaled based on their size & weight percentile 🤏
+## ♒ Aquariums ♒ 
+Display your catches in the new **Aquarium** multi-block! Customize it to your liking with different decorations and fish.
+Starcaught fish placed inside will be scaled based on their size & weight percentile 🤏</p>
 
 ![image](https://media.forgecdn.net/attachments/description/1357603/description_dbab7b05-e46d-47e6-9feb-a3694aa92610.png)
 
-## Trophies & Secrets
+***
 
-There are a lot of Trophies to collect and Secrets to uncover! Keep your eyes out for bottles and you might just be able to follow along the story of anglers from many moons ago
+## 🏆 Trophies & Secrets 🕵️‍♀️
+As you progress through the mod you'll collect different **trophies** to showcase (flex) to your friends
 
-Players can also write their own message-in-a-bottle and send them out to sea for other players to fish up 📜🍾
+![](https://media.forgecdn.net/attachments/description/1357603/description_62b63dfa-76f7-4744-b8a4-4d06676fdcb1.png)
 
-![image](https://media.forgecdn.net/attachments/description/1357603/description_7a567d99-bcaf-4230-84bc-0ca640a8e1e9.png)
+You might also come across some messages left behind, some might even lead you to rare treasure
+  
+![message](https://media.forgecdn.net/attachments/description/1357603/description_b1792321-b332-4722-a328-31ddfc170955.png)</p>
 
-## Cosmetics
+***
 
-There's a lot of different cosmetics to collect! Fisherman Hats can be found inside shipwrecks, whilst templates for your Rod & Tackle are found mostly through treasures!
+## 👒 Cosmetics 🎣
+Tired of your boring-looking rods? **Starcatcher** features a bunch of new cosmetics to spruce up your fishing!
 
 ![image](https://media.forgecdn.net/attachments/description/1357603/description_4bbc8f21-1912-44e5-a865-4ec0388b4548.png)
 
-## Selling Bin 💰
+***
 
-Starcatcher features [wd's Selling Bin](https://www.curseforge.com/minecraft/mc-mods/wds-selling-bin) to allow for the selling of fishes and other items 💸 The sale price is
+## 💸 Selling Bin 💰
+Turn your fish into money with [wd's Selling Bin](https://www.curseforge.com/minecraft/mc-mods/wds-selling-bin). The bigger the fish, the better is sells!
 
 ![image](https://media.forgecdn.net/attachments/description/1357603/description_9e0cd46e-40b1-4a13-86ad-75fe240d1c5e.png)
 
-## Tournaments! 🏆
+***
 
-Do you consider yourself the best fisherman in all of the overworld? Why not put it to the test against your friends with the tournament system? 🏆
+## 🏆 Fishing Tournaments! 🏆
+Are you the best fisherman in all of the Overworld?
+Why not put it to the test against your friends with a friendly **Tournament**?
 
 ![Stand](https://media.forgecdn.net/attachments/description/1357603/description_0d7a2a7c-c9de-4ce4-b789-3f6b4baf7c70.png)
 
-![image](https://media.forgecdn.net/attachments/description/1357603/description_4943cf3e-5b8b-4e9e-99a0-7b9798270783.png)
+***
 
-## Compatibility!
+## 🍣 Farmer's Delight 🍥
+ 
+[There is an farmer's delight addon available for all your fish cooking needs!](https://www.curseforge.com/minecraft/mc-mods/starcatchers-delight)</p> 
 
-**Starcatcher features compatibility with many fish-related mods**
+![](https://media.forgecdn.net/attachments/description/1357603/description_f49b31f5-8672-4ce9-abb5-201b4d2ab8c5.png)
 
-### Farmer's Delight 🍣
+***
 
-[There is an farmer's delight addon available for all your fish cooking needs! Go check it out!](https://www.curseforge.com/minecraft/mc-mods/starcatchers-delight)
+## 🔧Built with Customization in Mind 👷‍♀️
+Everything in Starcatcher can be costumized to fit your style.  
+  
+**Using datapacks you can easily:**</p>
 
-![starcatcher's delight](https://media.forgecdn.net/attachments/description/1357603/description_cfcff0cf-2366-4c51-9987-5afeec56c790.png)
+*   Add new fishable entries
+*   Remove or edit existing entries
+*   Modify the treasure pool each fish has
+*   Edit the Minigame Difficulty per-entry
+*   Modify which items have which fishing modifiers
+*   Modify which items act as hooks, bobbers & bait
+*   Add new Secrets
+*   Add new Trophies
+*   Modify what can be sold in the Selling Bin
+*   Modify the available Selling Bin currencies
+*   And everything else datapacks can already modify, such as recipes, tags etc.
 
-(Only available for neo 1.21.1 as it's still in development!)
+***
 
-### Extra Fishes
+## 🌸 Built with Accessibility in Mind🌸
 
-Fishes (and more) from these mods are automatically added as catchable entries, with the corresponding entity & bucketed fish version (when available)
+Not sure how to make datapacks but want to change some settings? No problem, Starcatcher undefinedfeatures a lot of accessibility settings designed to ease out the minigame difficulty for those who want a more relaxed experience. 
 
-*   Tide 🌊
+Using the in-game config menu you can adjust global multipliers for:
+
+*   Vanishing rate of vanishing sweet-spots
+*   Moving Rate of moving sweet-spots
+*   Missing penalty
+*   Total fish HP
+*   Handle speed
+*   Swimaway speed (decay)
+
+You can also change miscellanious behaviour such as:
+
+*   Disable the minigame completely
+*   Hide catches until found
+*   Min & Max ticks for a fish to bite
+*   Disable tackle-box item restriction
+*   Fish models max & min scale
+*   Hide catches during the minigame
+*   Hide treasures during the minigame
+*   Enable rod durability
+*   Enable FTB Team catch-sharing
+*   And much more!
+
+***
+
+## 🐟 Compatibility 🔧
+Fish from these mods are catchable with Starcatcher added to the catalogue!
+
+[!] Please note that fishing rods from these mods do not work with Starcatcher [!]
+
+v3 and above:
+
+*   Tide 2 🐟
+*   Create 👷‍♀️ (+11 create-themed fishes)
+*   Other mods will be added back overtime (more fish does not equal better!)
+
+v2.3 and under:
+
+*   Tide 2 🐟
+*   Hybrid Aquatic 🐠
 *   Aquaculture 2 🐟
 *   Nether Depths Upgrade 🦴
 *   Fish of Thieves 🦜
@@ -116,51 +179,52 @@ Fishes (and more) from these mods are automatically added as catchable entries, 
 *   Alex's Caves 🗻
 *   Critters and Companions 🐛
 *   Aquamirae 🌟
-*   Hybrid Aquatic 🐠
 *   Fintastic 🏄‍♀️
 *   Spawn 🐹
 *   Unusual Fish Mod 🐡
+*   Saint's Dragons 🐉
 
-### Seasons
+v3+ had some major changes to the difficulty system, and as such compatibility will be added back over the upcoming updates. You can still implement compatibility yourself through datapacks.
 
-If any are installed, fishes will be limited by season
+For more information on how to make a datapack head over to the wiki!
 
-*   🌸 Serene Seasons 🌸
-*   🌞 Ecliptic Seasons 🌞
+***
 
-### Fishing Real
-
-If Fishing Real is installed, completing the minigame will fish up the live fish! (Similar to the built-in behavior with the **Almighty Worm**)
-
-### EMI/JEI
-
-Both EMI & Jei feature custom integration with Starcatcher's fish restrictions and ways of obtaining items, as well as the "information" tab
+## 🧙‍♀️ EMI & JEI 🧲
+Custom integration with Starcatcher will guide you on the more specific mechanics.
+The guide book does not display recipes. Using either of these mods is highly recommended.
 
 ![image](https://media.forgecdn.net/attachments/description/1357603/description_4fba4275-3cbb-4139-ab04-0aed27d1a852.png)
 
-# For Modpack Developers & Modders
+***
 
-*   There are a lot of built-in configs available, both for client and server, make sure you check all of them if you're looking to customize the overall experience for a modpack!
-*   All the mods above have their fishes (and extra marine creatures) added as fishable entries to Starcatcher.
-*   If the mod also provides baits, that mod's fishes will be attracted to the respective mods bait.
-*   If the mod adds fishing rods (such as Aquaculture & Tide), they are not and will not be overridden by Starcatcher. You must use a Starcatcher rod, unless the mod's author has added compatibility on their side with Starcatcher's fishing minigame.
+## 📘 Wiki / Guide 📝** I've recorded a video going over every feature as of v2.3
 
-Each fish and trophy is fully customizable through datapacks, perfect for modpacks looking to further customize the fishing experience! Reach out to me on discord and I'll be happy to help.
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/H5sIsgm6FhA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-Check the wiki (wip) page on how to add your custom fish or trophy json with your restrictions, starcatcher will handle everything else.
+***
 
 ## Credits
 
-There have been a lot of different artists who were either comissioned or donated their time out of their own will to contribuite to the mod! [Here you'll find](https://github.com/wdiscute/starcatcher/wiki/Credits) everyone who has contribuited to the mod's development 🐟
+There have been a lot of different artists who were either comissioned or donated their time out of their own will to contribuite to the mod!
+
+[Here you'll find](https://github.com/wdiscute/starcatcher/wiki/Credits) everyone who has contribuited to the mod's development 🐟  
+  
+A special thanks to all the translators who have helped Starcatcher reach beyond the english speaking community!
+
+Interested in translating Starcatcher? Join the Discord and reach out to me!
+
+***
 
 ## Licensing
 
-Starcatcher's Source Code is distribuited under [MIT](https://github.com/wdiscute/starcatcher/blob/Last-Published-Version-\(neo\)/license_code), whilst every Asset unless specifically stated otherwise is distribuited under ARR. If you wish to modify or use any of the assets in Starcatcher please contact me first
+Starcatcher's Source Code is distribuited under [MIT.](https://github.com/wdiscute/starcatcher/blob/Last-Published-Version-\(neo\)/license_code)
 
 The Main Starcatcher's Fishing Rod Asset was acquired under a custom license which [can be found here](https://github.com/wdiscute/starcatcher/blob/Last-Published-Version-\(neo\)/license_rod.pdf).
 
-Starcatcher's includes [LibTooltips](https://www.curseforge.com/minecraft/mc-mods/libtooltips) which makes use of special text effects powered by [Ember's Text API](https://www.curseforge.com/minecraft/mc-mods/embers-text-api). Documentation available at [tysontheember.dev](http://tysontheember.dev/). Jar-in-jar inclusion has been explicitly approved for this mod. See [Ember's Modding License](https://tysontheember.dev/modding-licence/) for details.
+Every other asset is distribuited under All Rights Reserved. If you wish to modify or use any of the assets in Starcatcher please contact me first.
 
-### 🌸 Join the discord! 🌸 [https://discord.gg/tCs89QTuzn](https://discord.gg/tCs89QTuzn)
+***
 
-*   made by wd with lots of love
+## 🌸 Join the discord! 🌸 [https://discord.gg/tCs89QTuzn](https://discord.gg/tCs89QTuzn)
+- A Labour of Love by wd ♥
