@@ -153,6 +153,7 @@ You can also change miscellanious behaviour such as:
 ***
 
 ## 🐟 Compatibility 🔧
+
 Fish from these mods are catchable with Starcatcher added to the catalogue!
 
 [!] Please note that fishing rods from these mods do not work with Starcatcher [!]
@@ -191,6 +192,7 @@ For more information on how to make a datapack head over to the wiki!
 ***
 
 ## 🧙‍♀️ EMI & JEI 🧲
+
 Custom integration with Starcatcher will guide you on the more specific mechanics.
 The guide book does not display recipes. Using either of these mods is highly recommended.
 
@@ -198,7 +200,9 @@ The guide book does not display recipes. Using either of these mods is highly re
 
 ***
 
-## 📘 Wiki / Guide 📝** I've recorded a video going over every feature as of v2.3
+## 📘 Wiki / Guide 📝
+
+I've recorded a video going over every feature as of v2.3
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/H5sIsgm6FhA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
