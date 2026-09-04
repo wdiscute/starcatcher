@@ -252,6 +252,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     {
         super.loadAdditional(input);
 
+        //todo 26 wheres the item loading???
         this.name = input.read("CustomName", ComponentSerialization.CODEC).orElse(Component.empty());
     }
 

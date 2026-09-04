@@ -15,6 +15,7 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.tooltips.SCLegendary;
 import com.wdiscute.starcatcher.tooltips.SCTooltipGradient;
 import com.wdiscute.utils.Utils;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;

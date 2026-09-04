@@ -59,45 +59,45 @@ repositories {
 dependencies {
     //wdUtils
     //jarJar(implementation("com.wdiscute:wdUtils:1.6-NEOFORGE-26.1.2"))
-    jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-26.1.2"))
+    jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-26.2"))
 
     //FTS
-    //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.1.2"))
-    jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:6.2-NEOFORGE-26.1.2"))
+    jarJar(implementation("maven.modrinth:fancytabsections:5.0-NEOFORGE-26.2"))
+    //jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:5.0-NEOFORGE-26.2"))
 
     //libtooltips
-    jarJar(implementation("maven.modrinth:libtooltips:2.2-NEOFORGE-26.1.2"))
+    jarJar(implementation("com.wdiscute:libtooltips:2.2-NEOFORGE-26.2"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:1.4.1-NEOFORGE-26.1.2"))
+    jarJar(implementation("maven.modrinth:wds-selling-bin:1.4.1-NEOFORGE-26.2"))
 
     //tiny multiblock lib
-    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-26.1-4.0.0"))
+    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-26.2-4.0.0"))
+
+    //JEI
+    compileOnly "mezz.jei:jei-26.2-neoforge:30.30.0.204"
+
+
 
     //curios (check modifiers in curio slots)
-    compileOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2:api"
-    runtimeOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2"
+    //compileOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2:api"
+    //runtimeOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2"
 
     //EclipticSeasons
-    compileOnly files(".compatmods/EclipticSeasons-26.1.2-neoforge-0.15.0-rc.jar")
+    //compileOnly files(".compatmods/EclipticSeasons-26.1.2-neoforge-0.15.0-rc.jar")
 
     //Serene Seasons
-    compileOnly files(".compatmods/SereneSeasons-neoforge-26.1.2-26.1.2.0.4.jar")
-
+    //compileOnly files(".compatmods/SereneSeasons-neoforge-26.1.2-26.1.2.0.4.jar")
 
     //ftb teams
-    compileOnly files(".compatmods/ftb-teams-neoforge-26.1.2.4.jar")
+    //compileOnly files(".compatmods/ftb-teams-neoforge-26.1.2.4.jar")
 
     //iris
-    compileOnly "maven.modrinth:YL57xq9U:BO8hxvMR"
+    //compileOnly "maven.modrinth:YL57xq9U:BO8hxvMR"
     //runtimeOnly "maven.modrinth:YL57xq9U:BO8hxvMR"
 
     //sodium
-    runtimeOnly "maven.modrinth:AANobbMI:UETw0GTI"
-
-    //JEI
-    compileOnly "mezz.jei:jei-26.1.2-neoforge:29.34.0.92"
-    runtimeOnly "mezz.jei:jei-26.1.2-neoforge:29.34.0.92"
+    //runtimeOnly "maven.modrinth:AANobbMI:UETw0GTI"
 }
 
 base {
@@ -115,7 +115,7 @@ java {
 
 neoForge {
     // Specify the version of NeoForge to use.
-    version = project.neo_version_range
+    version = project.neo_version
 
     // This line is optional. Access Transformers are automatically detected
     // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
@@ -171,19 +171,12 @@ neoForge {
     }
 
     mods {
-        // define mod <-> source bindings
-        // these are used to tell the game which sources are for which mod
-        // multi mod projects should define one per mod
         "${mod_id}" {
             sourceSet(sourceSets.main)
         }
     }
 }
 
-// Sets up a dependency configuration called 'localRuntime'.
-// This configuration should be used instead of 'runtimeOnly' to declare
-// a dependency that will be present for runtime testing but that is
-// "optional", meaning it will not be pulled by dependents of this mod.
 configurations {
     runtimeClasspath.extendsFrom localRuntime
 }
@@ -194,7 +187,7 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
     var replaceProperties = [
             minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
-            neo_version_range      : neo_version_range,
+            neo_version_range      : neo_version,
             mod_id                 : mod_id,
             mod_name               : mod_name,
             mod_license            : mod_license,
