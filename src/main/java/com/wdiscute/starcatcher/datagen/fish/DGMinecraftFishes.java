@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,7 +23,7 @@ public class DGMinecraftFishes
                 PresetRestrictions.allOceans(context)
                         .withFish(Items.COD)
                         .withBucketedFish(new MaybeStack(Items.COD_BUCKET))
-                        .withEntityToSpawn(EntityType.COD.builtInRegistryHolder())
+                        .withEntityToSpawn(EntityTypes.COD.builtInRegistryHolder())
                         .withDifficulty(Difficulty.EASY.moving())
                         .withSizeAndWeight(80, 40, 12000, 7000)
         );
@@ -31,7 +32,7 @@ public class DGMinecraftFishes
                 PresetRestrictions.allOceans(context)
                         .withFish(Items.PUFFERFISH)
                         .withBucketedFish(new MaybeStack(Items.PUFFERFISH_BUCKET))
-                        .withEntityToSpawn(EntityType.PUFFERFISH.builtInRegistryHolder())
+                        .withEntityToSpawn(EntityTypes.PUFFERFISH.builtInRegistryHolder())
                         .withSizeAndWeight(70, 20, 10000, 3000)
                         .withDifficulty(Difficulty.MEDIUM.vanishing())
                         .withRarity(Rarity.UNCOMMON)
@@ -41,7 +42,7 @@ public class DGMinecraftFishes
                 PresetRestrictions.warmOcean(context)
                         .withFish(Items.TROPICAL_FISH)
                         .withBucketedFish(new MaybeStack(Items.TROPICAL_FISH_BUCKET))
-                        .withEntityToSpawn(EntityType.TROPICAL_FISH.builtInRegistryHolder())
+                        .withEntityToSpawn(EntityTypes.TROPICAL_FISH.builtInRegistryHolder())
                         .withSizeAndWeight(70, 20, 10000, 3000)
                         .withRarity(Rarity.RARE)
         );
@@ -50,7 +51,7 @@ public class DGMinecraftFishes
                 PresetRestrictions.river(context)
                         .withFish(Items.SALMON)
                         .withBucketedFish(new MaybeStack(Items.SALMON_BUCKET))
-                        .withEntityToSpawn(EntityType.SALMON.builtInRegistryHolder())
+                        .withEntityToSpawn(EntityTypes.SALMON.builtInRegistryHolder())
                         .withSizeAndWeight(80, 40, 10000, 8000)
         );
 
@@ -59,7 +60,7 @@ public class DGMinecraftFishes
                         .withFish(Items.NETHER_STAR)
                         .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                         .withAlwaysSpawnEntity()
-                        .withEntityToSpawn(EntityType.WITHER.builtInRegistryHolder())
+                        .withEntityToSpawn(EntityTypes.WITHER.builtInRegistryHolder())
                         .withBaseChance(0)
                         .addRestriction(FluidRestriction.WATER)
                         .addBait(BaitRestriction.WITHER_SKELETON_SKULL)
@@ -72,7 +73,7 @@ public class DGMinecraftFishes
                 FishProperties.empty()
                         .withFish(Items.CREEPER_HEAD)
                         .withAlwaysSpawnEntity()
-                        .withEntityToSpawn(EntityType.CREEPER.builtInRegistryHolder())
+                        .withEntityToSpawn(EntityTypes.CREEPER.builtInRegistryHolder())
                         .withBaseChance(0)
                         .addRestrictions(DimensionRestriction.OVERWORLD)
                         .addRestrictions(FluidRestriction.WATER)
@@ -85,7 +86,7 @@ public class DGMinecraftFishes
         FishRegistration.register(context,
                 FishProperties.empty()
                         .withFish(Items.ROTTEN_FLESH)
-                        .withEntityToSpawn(EntityType.DROWNED.builtInRegistryHolder())
+                        .withEntityToSpawn(EntityTypes.DROWNED.builtInRegistryHolder())
                         .addRestriction(FluidRestriction.WATER)
                         .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                         .withBaseChance(1)

@@ -121,7 +121,7 @@ public class FishTrackerLayer implements GuiLayer
         Identifier trackedRL = Minecraft.getInstance().player.getData(SCDataAttachments.TRACKED_FISH);
         shouldShow = shouldShow && !trackedRL.equals(Starcatcher.MISSINGNO);
 
-        if (Minecraft.getInstance().screen instanceof SettingsScreen)
+        if (Minecraft.getInstance().gui.screen() instanceof SettingsScreen)
         {
             shouldShow = true;
             cachedFP = FishProperties.empty();

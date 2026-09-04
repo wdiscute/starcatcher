@@ -112,7 +112,7 @@ public class FishEntity extends AbstractFish
             {
                 FishProperties fp = available.get(Utils.r.nextInt(available.size()));
                 ItemStack is = fp.catchInfo().fish().toStack();
-                setBodyArmorItem(is);
+                setItemSlot(EquipmentSlot.BODY, is);
             }
         }
     }
@@ -126,7 +126,7 @@ public class FishEntity extends AbstractFish
 
     public void setFish(ItemStack is)
     {
-        setBodyArmorItem(is);
+        setItemSlot(EquipmentSlot.BODY, is);
         shouldDropItem = true;
 
         AttributeInstance instance = getAttributes().getInstance(Attributes.SCALE);

@@ -11,7 +11,7 @@ modId="starcatcher"
 version="${mod_version}"
 displayName="${mod_name}"
 displayURL="http://curseforge.com/minecraft/mc-mods/starcatcher"
-logoFile = "icon.png"
+iconFile = "icon.png"
 mod_authors="${mod_authors}" #optional
 description='''A fishing mod with lots of fishes to collect!
 

@@ -11,13 +11,14 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.KeyTagProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.concurrent.CompletableFuture;
@@ -25,12 +26,12 @@ import java.util.concurrent.CompletableFuture;
 import static com.wdiscute.starcatcher.registry.SCItems.*;
 import static com.wdiscute.starcatcher.registry.SCBlocks.*;
 
-public class DGSCItemsTagsProvider extends KeyTagProvider<Item>
+public class DGSCItemsTagsProvider extends ItemTagsProvider
 {
 
     public DGSCItemsTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider)
     {
-        super(output, Registries.ITEM, lookupProvider, Starcatcher.MOD_ID);
+        super(output, lookupProvider, Starcatcher.MOD_ID);
     }
 
     @Override

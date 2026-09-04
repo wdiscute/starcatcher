@@ -8,13 +8,13 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.tags.KeyTagProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 
 import java.util.concurrent.CompletableFuture;
 
-public class DGSCFPTagsProvider extends KeyTagProvider<FishProperties>
+public class DGSCFPTagsProvider extends TagsProvider<FishProperties>
 {
     public DGSCFPTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider)
     {

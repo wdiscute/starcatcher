@@ -27,6 +27,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
@@ -298,7 +299,7 @@ public class SCEvents
     @SubscribeEvent
     public static void modifyDefaultAttributes(EntityAttributeModificationEvent event)
     {
-        SCAttributes.REGISTRY.getEntries().forEach(o -> event.add(EntityType.PLAYER, o, 1.0));
+        SCAttributes.REGISTRY.getEntries().forEach(o -> event.add(EntityTypes.PLAYER, o, 1.0));
     }
 
     @SubscribeEvent

@@ -80,7 +80,7 @@ public class FishRadarLayer implements GuiLayer
         //if is holding item with tag to show radar in hand or is in settings screen
         boolean shouldShow = player.getMainHandItem().is(SCTags.HAS_RADAR_LAYER)
                              || player.getOffhandItem().is(SCTags.HAS_RADAR_LAYER)
-                             || Minecraft.getInstance().screen instanceof SettingsScreen;
+                             || Minecraft.getInstance().gui.screen() instanceof SettingsScreen;
 
         //if any armor slots has tag
         if (!shouldShow)

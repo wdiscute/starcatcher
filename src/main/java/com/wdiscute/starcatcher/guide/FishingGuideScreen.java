@@ -723,7 +723,7 @@ public class FishingGuideScreen extends Screen
             //settings screen
             case SETTINGS ->
             {
-                Minecraft.getInstance().setScreen(new SettingsScreen());
+                Minecraft.getInstance().setScreenAndShow(new SettingsScreen());
                 return;
             }
 
@@ -890,22 +890,22 @@ public class FishingGuideScreen extends Screen
     {
         for (int i = 0; i < 40; i++)
         {
-            if (!I18n.exists("gui.guide.page." + page + ".left." + i)) break;
+            if (!Utils.i18nExists("gui.guide.page." + page + ".left." + i)) break;
             Component comp = translatable("gui.guide.page." + page + ".left." + i).copy().withStyle(Style.EMPTY.withColor(SCColors.GUIDE_TEXT_SEMI_DARK));
             ScreenUtils.text(guiGraphics, font, comp, uiX + 52, uiY + 10 * i + 13, 0xff000000, false);
         }
 
         for (int i = 0; i < 40; i++)
         {
-            if (!I18n.exists("gui.guide.page." + page + ".right." + i)) break;
+            if (!Utils.i18nExists("gui.guide.page." + page + ".right." + i)) break;
             Component comp = translatable("gui.guide.page." + page + ".right." + i).copy().withStyle(Style.EMPTY.withColor(SCColors.GUIDE_TEXT_SEMI_DARK));
             ScreenUtils.text(guiGraphics, this.font, comp, uiX + 213, uiY + 10 * i + 13, 0xff000000, false);
         }
 
-        if (I18n.exists("gui.guide.page." + page + ".left.title"))
+        if (Utils.i18nExists("gui.guide.page." + page + ".left.title"))
             ScreenUtils.centeredText(guiGraphics, this.font, translatable("gui.guide.page." + page + ".left.title"), uiX + 116, uiY + 45, SCColors.GUIDE_TEXT_DARK, false);
 
-        if (I18n.exists("gui.guide.page." + page + ".right.title"))
+        if (Utils.i18nExists("gui.guide.page." + page + ".right.title"))
             ScreenUtils.centeredText(guiGraphics, this.font, translatable("gui.guide.page." + page + ".right.title"), uiX + 270, uiY + 45, SCColors.GUIDE_TEXT_DARK, false);
     }
 
@@ -1061,7 +1061,7 @@ public class FishingGuideScreen extends Screen
                         Message message = SCDataComponents.getOrDefault(stack, SCDataComponents.MESSAGE, Message.DEFAULT);
                         //if clicked open message screen
                         if (clicked && !message.equals(Message.DEFAULT))
-                            Minecraft.getInstance().setScreen(
+                            Minecraft.getInstance().setScreenAndShow(
                                     new MessageScreen(message, this));
                     }
                     //scrollable background fill
@@ -1203,7 +1203,7 @@ public class FishingGuideScreen extends Screen
 
                         //if clicked on a trophy, display FP
                         if (clicked && !fp.equals(FishProperties.empty()))
-                            Minecraft.getInstance().setScreen(new IsolatedFPScreen(fp, this));
+                            Minecraft.getInstance().setScreenAndShow(new IsolatedFPScreen(fp, this));
                     }
                     //scrollable background fill
                     ScreenUtils.fill(g, x - 1, y - 1, 18, 18, 0xffb4a697);
@@ -1843,7 +1843,7 @@ public class FishingGuideScreen extends Screen
 
     public static void open(BlockPos displayBP, SignedGuide signedGuide)
     {
-        Minecraft.getInstance().setScreen(new FishingGuideScreen(displayBP, signedGuide));
+        Minecraft.getInstance().setScreenAndShow(new FishingGuideScreen(displayBP, signedGuide));
     }
 
     public FishingGuideScreen(BlockPos displayBP, SignedGuide signedGuide)
@@ -2197,7 +2197,7 @@ public class FishingGuideScreen extends Screen
 
     public static void onStructuresReceived()
     {
-        if(Minecraft.getInstance().screen instanceof FishingGuideScreen screen)
+        if(Minecraft.getInstance().gui.screen() instanceof FishingGuideScreen screen)
             screen.init();
     }
 }

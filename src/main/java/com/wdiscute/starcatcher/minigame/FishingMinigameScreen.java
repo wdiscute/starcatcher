@@ -728,7 +728,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         modifiers.forEach(o -> o.onRemove(this));
 
         ClientPacketDistributor.sendToServer(new SBFishingCompletedPayload(false, tickCount, false, false, consecutiveHits));
-        this.minecraft.popGuiLayer();
+        this.minecraft.gui.popScreenLayer();
     }
 
     public void addParticles(float posInDegrees, int count, int color)
@@ -786,6 +786,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(maybeRod, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.rl("rod")));
 
         //start minigame
-        Minecraft.getInstance().setScreen(new FishingMinigameScreen(cbFishingStartedPayload.fp(), cbFishingStartedPayload.treasure().toStack(), List.of(), tackleSkin));
+        Minecraft.getInstance().setScreenAndShow(new FishingMinigameScreen(cbFishingStartedPayload.fp(), cbFishingStartedPayload.treasure().toStack(), List.of(), tackleSkin));
     }
 }

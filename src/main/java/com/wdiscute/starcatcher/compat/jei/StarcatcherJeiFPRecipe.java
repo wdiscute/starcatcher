@@ -101,7 +101,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
         {
             if (mouseX > 90 && mouseX < 90 + 19 && mouseY > 0 && mouseY < 19)
             {
-                Minecraft.getInstance().setScreen(new IsolatedJeiFPScreen(recipe, Minecraft.getInstance().screen));
+                Minecraft.getInstance().setScreenAndShow(new IsolatedJeiFPScreen(recipe, Minecraft.getInstance().gui.screen()));
                 return true;
             }
             return IJeiInputHandler.super.handleInput(mouseX, mouseY, input);

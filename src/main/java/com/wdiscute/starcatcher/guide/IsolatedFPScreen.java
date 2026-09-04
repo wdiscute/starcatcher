@@ -53,7 +53,7 @@ public class IsolatedFPScreen extends Screen
     {
         super.onClose();
         if (screen != null)
-            Minecraft.getInstance().setScreen(screen);
+            Minecraft.getInstance().setScreenAndShow(screen);
     }
 
     @Override

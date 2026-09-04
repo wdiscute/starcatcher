@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.fish.CatchInfo;
 import com.wdiscute.starcatcher.fish.FishApi;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.modifiers.Modifier;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -39,7 +40,7 @@ public class ExtraBaseCatchModifier extends AbstractCatchModifier
     @Override
     public List<Component> getNonOverriddenDescription(boolean shift)
     {
-        return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_base_catch", I18n.exists("tooltip.modifier.number." + count) ? I18n.get("tooltip.modifier.number." + count) : count));
+        return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_base_catch", Utils.i18nExists("tooltip.modifier.number." + count) ? I18n.get("tooltip.modifier.number." + count) : count));
     }
 
     @Override

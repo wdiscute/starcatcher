@@ -62,14 +62,14 @@ dependencies {
     jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-26.2"))
 
     //FTS
-    jarJar(implementation("maven.modrinth:fancytabsections:5.0-NEOFORGE-26.2"))
+    jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.2"))
     //jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:5.0-NEOFORGE-26.2"))
 
     //libtooltips
     jarJar(implementation("com.wdiscute:libtooltips:2.2-NEOFORGE-26.2"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:1.4.1-NEOFORGE-26.2"))
+    jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-26.2"))
 
     //tiny multiblock lib
     jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-26.2-4.0.0"))
@@ -77,19 +77,17 @@ dependencies {
     //JEI
     compileOnly "mezz.jei:jei-26.2-neoforge:30.30.0.204"
 
-
-
     //curios (check modifiers in curio slots)
-    //compileOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2:api"
-    //runtimeOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:16.0.0+26.2:api"
+    //runtimeOnly "top.theillusivec4.curios:curios-neoforge:16.0.0+26.2"
 
     //EclipticSeasons
-    //compileOnly files(".compatmods/EclipticSeasons-26.1.2-neoforge-0.15.0-rc.jar")
+    compileOnly files(".compatmods/EclipticSeasons-26.2-neoforge-0.15.0-rc-3.jar")
 
     //Serene Seasons
-    //compileOnly files(".compatmods/SereneSeasons-neoforge-26.1.2-26.1.2.0.4.jar")
+    compileOnly files(".compatmods/SereneSeasons-neoforge-26.2-26.1.2.0.5.jar")
 
-    //ftb teams
+    //ftb teams not on 26.2 yet
     //compileOnly files(".compatmods/ftb-teams-neoforge-26.1.2.4.jar")
 
     //iris

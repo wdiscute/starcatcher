@@ -10,6 +10,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.BlockItemTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -301,7 +302,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.VANILLA_BOBBER)
                 .define('B', SCItems.BOBBER)
                 .define('S', Items.STICK)
-                .define('W', Items.RED_WOOL)
+                .define('W', Blocks.WOOL.red())
                 .pattern(" WS")
                 .pattern("WBW")
                 .pattern("SW ")
@@ -384,7 +385,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.COPPER_HOOK)
                 .define('H', SCItems.HOOK)
                 .define('C', Items.COPPER_INGOT)
-                .define('B', Items.COPPER_BLOCK)
+                .define('B', Items.COPPER_BLOCK.weathering().unaffected())
                 .pattern("B  ")
                 .pattern("CHC")
                 .pattern(" C ")
@@ -395,33 +396,33 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.EXPOSED_COPPER_HOOK)
                 .define('H', SCItems.HOOK)
                 .define('C', Items.COPPER_INGOT)
-                .define('B', Items.EXPOSED_COPPER)
+                .define('B', Items.COPPER_BLOCK.weathering().exposed())
                 .pattern("B  ")
                 .pattern("CHC")
                 .pattern(" C ")
-                .unlockedBy("has_exposed_copper", has(Items.EXPOSED_COPPER))
+                .unlockedBy("has_exposed_copper", has(Items.COPPER_BLOCK.weathering().exposed()))
                 .save(output);
 
         //weathered copper hook
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.WEATHERED_COPPER_HOOK)
                 .define('H', SCItems.HOOK)
                 .define('C', Items.COPPER_INGOT)
-                .define('B', Items.WEATHERED_COPPER)
+                .define('B', Items.COPPER_BLOCK.weathering().weathered())
                 .pattern("B  ")
                 .pattern("CHC")
                 .pattern(" C ")
-                .unlockedBy("has_weathered_copper_block", has(Items.WEATHERED_COPPER))
+                .unlockedBy("has_weathered_copper_block", has(Items.COPPER_BLOCK.weathering().weathered()))
                 .save(output);
 
         //weathered copper hook
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.OXIDISED_COPPER_HOOK)
                 .define('H', SCItems.HOOK)
                 .define('C', Items.COPPER_INGOT)
-                .define('B', Items.OXIDIZED_COPPER)
+                .define('B', Items.COPPER_BLOCK.weathering().oxidized())
                 .pattern("B  ")
                 .pattern("CHC")
                 .pattern(" C ")
-                .unlockedBy("has_oxidised_copper_block", has(Items.OXIDIZED_COPPER))
+                .unlockedBy("has_oxidised_copper_block", has(Items.COPPER_BLOCK.weathering().oxidized()))
                 .save(output);
 
         //shiny hook
@@ -504,7 +505,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         //split hook
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.SPLIT_HOOK)
                 .define('H', SCItems.HOOK)
-                .define('C', ItemTags.CHAINS)
+                .define('C', BlockItemTags.CHAINS.item())
                 .define('N', Items.IRON_NUGGET)
                 .pattern("N  ")
                 .pattern("CHC")
@@ -670,45 +671,6 @@ public class DGSCRecipeProvider extends RecipeProvider
                 );
 
         //survivor
-        ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.SURVIVOR_SMITHING_TEMPLATE, 2)
-                .define('T', SCItems.SURVIVOR_SMITHING_TEMPLATE)
-                .define('D', Items.DIAMOND)
-                .define('C', Items.BASALT)
-                .pattern("DTD")
-                .pattern("DCD")
-                .pattern("DDD")
-                .unlockedBy("has_template_survivor", has(SCItems.SURVIVOR_SMITHING_TEMPLATE))
-                .save(output);
-
-        StarcatcherRodRecipeBuilder.tackleSkin(registries,
-                        Ingredient.of(SCItems.SURVIVOR_SMITHING_TEMPLATE),
-                        Ingredient.of(Items.BASALT)
-                )
-                .unlocks("has_template_survivor", has(SCItems.SURVIVOR_SMITHING_TEMPLATE))
-                .save(output, Starcatcher.rl("survivor_tackle")
-                );
-
-        //valley
-        ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.VALLEY_SMITHING_TEMPLATE, 2)
-                .define('T', SCItems.VALLEY_SMITHING_TEMPLATE)
-                .define('D', Items.DIAMOND)
-                .define('C', Items.APPLE)
-                .pattern("DTD")
-                .pattern("DCD")
-                .pattern("DDD")
-                .unlockedBy("has_template_valley", has(SCItems.VALLEY_SMITHING_TEMPLATE))
-                .save(output);
-
-        StarcatcherRodRecipeBuilder.tackleSkin(registries,
-                        Ingredient.of(SCItems.VALLEY_SMITHING_TEMPLATE),
-                        Ingredient.of(Items.BASALT)
-                )
-                .unlocks("has_template_valley", has(SCItems.VALLEY_SMITHING_TEMPLATE))
-                .save(output, Starcatcher.rl("valley_tackle")
-                );
-
-
-        //colorful
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCItems.SURVIVOR_SMITHING_TEMPLATE, 2)
                 .define('T', SCItems.SURVIVOR_SMITHING_TEMPLATE)
                 .define('D', Items.DIAMOND)
@@ -1090,7 +1052,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         {
             ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, tackle_boxes.get(i), 1)
                     .define('C', Items.COPPER_INGOT)
-                    .define('H', ItemTags.CHAINS)
+                    .define('H', BlockItemTags.CHAINS.item())
                     .define('D', dyes.get(i))
                     .define('I', Items.IRON_INGOT)
                     .pattern("CCC")
@@ -1103,7 +1065,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         //tackle box
         ShapedRecipeBuilder.shaped(itemReg, RecipeCategory.MISC, SCBlocks.TACKLE_BOX, 1)
                 .define('C', Items.COPPER_INGOT)
-                .define('H', ItemTags.CHAINS)
+                .define('H', BlockItemTags.CHAINS.item())
                 .define('I', Items.IRON_INGOT)
                 .pattern("CCC")
                 .pattern("H H")
@@ -1166,60 +1128,60 @@ public class DGSCRecipeProvider extends RecipeProvider
     }
 
     List<Item> dyes = List.of(
-            Items.BLACK_DYE,
-            Items.BLUE_DYE,
-            Items.BROWN_DYE,
-            Items.CYAN_DYE,
-            Items.GRAY_DYE,
-            Items.GREEN_DYE,
-            Items.LIGHT_BLUE_DYE,
-            Items.LIGHT_GRAY_DYE,
-            Items.LIME_DYE,
-            Items.MAGENTA_DYE,
-            Items.ORANGE_DYE,
-            Items.PINK_DYE,
-            Items.PURPLE_DYE,
-            Items.RED_DYE,
-            Items.YELLOW_DYE,
-            Items.WHITE_DYE
+            Items.DYE.black(),
+            Items.DYE.blue(),
+            Items.DYE.brown(),
+            Items.DYE.cyan(),
+            Items.DYE.gray(),
+            Items.DYE.green(),
+            Items.DYE.lightBlue(),
+            Items.DYE.lightGray(),
+            Items.DYE.lime(),
+            Items.DYE.magenta(),
+            Items.DYE.orange(),
+            Items.DYE.pink(),
+            Items.DYE.purple(),
+            Items.DYE.red(),
+            Items.DYE.yellow(),
+            Items.DYE.white()
     );
 
     List<Item> wools = List.of(
-            Items.BLACK_WOOL,
-            Items.BLUE_WOOL,
-            Items.BROWN_WOOL,
-            Items.CYAN_WOOL,
-            Items.GRAY_WOOL,
-            Items.GREEN_WOOL,
-            Items.LIGHT_BLUE_WOOL,
-            Items.LIGHT_GRAY_WOOL,
-            Items.LIME_WOOL,
-            Items.MAGENTA_WOOL,
-            Items.ORANGE_WOOL,
-            Items.PINK_WOOL,
-            Items.PURPLE_WOOL,
-            Items.RED_WOOL,
-            Items.YELLOW_WOOL,
-            Items.WHITE_WOOL
+            Items.WOOL.black(),
+            Items.WOOL.blue(),
+            Items.WOOL.brown(),
+            Items.WOOL.cyan(),
+            Items.WOOL.gray(),
+            Items.WOOL.green(),
+            Items.WOOL.lightBlue(),
+            Items.WOOL.lightGray(),
+            Items.WOOL.lime(),
+            Items.WOOL.magenta(),
+            Items.WOOL.orange(),
+            Items.WOOL.pink(),
+            Items.WOOL.purple(),
+            Items.WOOL.red(),
+            Items.WOOL.yellow(),
+            Items.WOOL.white()
     );
 
     List<Item> carpets = List.of(
-            Items.BLACK_CARPET,
-            Items.BLUE_CARPET,
-            Items.BROWN_CARPET,
-            Items.CYAN_CARPET,
-            Items.GRAY_CARPET,
-            Items.GREEN_CARPET,
-            Items.LIGHT_BLUE_CARPET,
-            Items.LIGHT_GRAY_CARPET,
-            Items.LIME_CARPET,
-            Items.MAGENTA_CARPET,
-            Items.ORANGE_CARPET,
-            Items.PINK_CARPET,
-            Items.PURPLE_CARPET,
-            Items.RED_CARPET,
-            Items.YELLOW_CARPET,
-            Items.WHITE_CARPET
+            Items.CARPET.black(),
+            Items.CARPET.blue(),
+            Items.CARPET.brown(),
+            Items.CARPET.cyan(),
+            Items.CARPET.gray(),
+            Items.CARPET.green(),
+            Items.CARPET.lightBlue(),
+            Items.CARPET.lightGray(),
+            Items.CARPET.lime(),
+            Items.CARPET.magenta(),
+            Items.CARPET.orange(),
+            Items.CARPET.pink(),
+            Items.CARPET.purple(),
+            Items.CARPET.red(),
+            Items.CARPET.yellow(),
+            Items.CARPET.white()
     );
 
     List<Item> hats = List.of(

@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
+import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
@@ -19,10 +20,7 @@ import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.WorldlyContainer;
+import net.minecraft.world.*;
 import net.minecraft.world.entity.ContainerUser;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -254,6 +252,15 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
 
         //todo 26 wheres the item loading???
         this.name = input.read("CustomName", ComponentSerialization.CODEC).orElse(Component.empty());
+
+        //load normal slots
+        this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(input, this.itemStacks);
+
+        //load fishes
+        this.fishes = new ArrayList<>();
+        for (int i = 0; i < input.getIntOr("fish_size", 0); i++)
+            fishes.add(input.read("fish_" + i, ItemStack.CODEC).orElse(ItemStack.EMPTY));
     }
 
     @Override
@@ -264,7 +271,18 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         //save normal slots
         ContainerHelper.saveAllItems(output, this.itemStacks);
 
+        //save fishes
+        output.putInt("fish_size", fishes.size());
+        for (int i = 0; i < fishes.size(); i++)
+            if(!fishes.get(i).isEmpty())
+                output.store("fish_" + i, ItemStack.CODEC, fishes.get(i));
+
         output.store("CustomName", ComponentSerialization.CODEC, name);
+    }
+
+    @Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state)
+    {
     }
 
     protected NonNullList<ItemStack> getItems()

@@ -32,7 +32,7 @@ public class EditableMessageScreen extends Screen
     public static void openEditableMessageScreen(EditableMessage message)
     {
         Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
-        Minecraft.getInstance().setScreen(new EditableMessageScreen(message));
+        Minecraft.getInstance().setScreenAndShow(new EditableMessageScreen(message));
     }
 
     public EditableMessageScreen(EditableMessage message)

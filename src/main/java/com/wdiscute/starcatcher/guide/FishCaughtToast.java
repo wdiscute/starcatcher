@@ -89,7 +89,7 @@ public class FishCaughtToast implements Toast
     public static void newFish(FishProperties fp, boolean displayToast, float percentile, boolean golden)
     {
         if (displayToast || golden)
-            Minecraft.getInstance().getToastManager().addToast(new FishCaughtToast(golden ? fp.withRarity(Rarity.GOLDEN) : fp));
+            Minecraft.getInstance().gui.toastManager().addToast(new FishCaughtToast(golden ? fp.withRarity(Rarity.GOLDEN) : fp));
 
         if(golden)
             Minecraft.getInstance().player.playSound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 0.4f, 0.3f);
@@ -107,6 +107,6 @@ public class FishCaughtToast implements Toast
                         .append(Component.literal(" - " + size + " - " + weight))
         );
 
-        Minecraft.getInstance().gui.overlayMessageTime = 180;
+        Minecraft.getInstance().gui.hud.overlayMessageTime = 180;
     }
 }

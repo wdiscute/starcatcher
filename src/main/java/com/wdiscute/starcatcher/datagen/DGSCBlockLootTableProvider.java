@@ -42,6 +42,7 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
                                                         .include(DataComponents.CONTAINER)
                                                         .include(DataComponents.LOCK)
                                                         .include(DataComponents.CONTAINER_LOOT)
+                                                        .include(SCDataComponents.TACKLE_BOX_FISHES.get())
                                         ))))
                 )
         );

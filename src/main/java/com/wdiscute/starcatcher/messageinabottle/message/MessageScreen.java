@@ -36,7 +36,7 @@ public class MessageScreen extends Screen
     public static void openMessageScreen(Message message)
     {
         Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
-        Minecraft.getInstance().setScreen(new MessageScreen(message));
+        Minecraft.getInstance().setScreenAndShow(new MessageScreen(message));
     }
 
     int uiX;
@@ -89,7 +89,7 @@ public class MessageScreen extends Screen
     {
         if(screenToReturnTo != null)
         {
-            Minecraft.getInstance().setScreen(screenToReturnTo);
+            Minecraft.getInstance().setScreenAndShow(screenToReturnTo);
             Minecraft.getInstance().player.playSound(SoundEvents.BOOK_PAGE_TURN);
         }
         else

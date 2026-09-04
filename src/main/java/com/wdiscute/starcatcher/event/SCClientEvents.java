@@ -49,7 +49,7 @@ public class SCClientEvents
             TournamentLayer.expandedType = TournamentLayer.expandedType.next();
 
         if (SCKeymappings.OPEN_GUIDE.consumeClick() && SCConfig.ALLOW_GUIDE_KEYBIND.get())
-            Minecraft.getInstance().setScreen(new FishingGuideScreen(BlockPos.ZERO, null));
+            Minecraft.getInstance().setScreenAndShow(new FishingGuideScreen(BlockPos.ZERO, null));
 
     }
 
