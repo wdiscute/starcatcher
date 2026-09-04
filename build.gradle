@@ -63,7 +63,7 @@ dependencies {
 
     //FTS
     //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.1.2"))
-    jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:6.2-NEOFORGE-26.1.2"))
+    implementation "maven.modrinth:K0NYarUG:yWigbWI3"
 
     //libtooltips
     jarJar(implementation("maven.modrinth:libtooltips:2.2-NEOFORGE-26.1.2"))
@@ -119,6 +119,7 @@ neoForge {
 
     // This line is optional. Access Transformers are automatically detected
     // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    setValidateAccessTransformers(true)
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.

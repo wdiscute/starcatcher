@@ -16,6 +16,7 @@ import com.wdiscute.starcatcher.tooltips.SCLegendary;
 import com.wdiscute.starcatcher.tooltips.SCTooltipGradient;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
