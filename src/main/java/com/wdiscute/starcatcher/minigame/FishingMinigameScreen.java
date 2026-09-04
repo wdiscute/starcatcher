@@ -299,7 +299,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         rod.render(g, centerX - 118, centerY - 116 + (flip ? 130 : 0),
                 16, 0, 96, 112);
 
-        progressSmooth += ((progress - progressSmooth) / 6) * partialTickNeo;
+        progressSmooth += ((progress - progressSmooth) / 6) * partialTick;
 
         float yoffset = progressSmooth == 0 ? 0 : (progressSmooth / (float) hp * 77);
 
