@@ -4,9 +4,6 @@
     "chance": 0.05
   },
   {
-    "type": "starcatcher:luck_attribute"
-  },
-  {
     "type": "starcatcher:extra_golden_chance",
     "weight": 0.01
   },
