@@ -10,9 +10,9 @@ public class GoldShader
     public static int recolorGold(int abgr)
     {
         int a = (abgr >> 24) & 0xFF;
-        int r8 = abgr & 0xFF;        // R is lowest byte
+        int r8 = (abgr >> 16) & 0xFF;        // R is lowest byte
         int g8 = (abgr >> 8) & 0xFF;
-        int b8 = (abgr >> 16) & 0xFF;        // B is third byte
+        int b8 = abgr & 0xFF;        // B is third byte
 
         float r = r8 / 255f;
         float g = g8 / 255f;
@@ -51,7 +51,7 @@ public class GoldShader
         int outB = Math.round(clamp(rb, 0f, 1f) * 255f);
 
         // pack back as ABGR
-        return (a << 24) | (outB << 16) | (outG << 8) | outR;
+        return (a << 24) | (outR << 16) | (outG << 8) | outB;
     }
 
     private static float clamp(float x, float lo, float hi)

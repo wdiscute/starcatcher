@@ -66,7 +66,7 @@ dependencies {
     //jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:5.0-NEOFORGE-26.2"))
 
     //libtooltips
-    jarJar(implementation("com.wdiscute:libtooltips:2.2-NEOFORGE-26.2"))
+    jarJar(implementation("maven.modrinth:libtooltips:2.3-NEOFORGE-26.2"))
 
     //selling bin
     jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-26.2"))
@@ -117,6 +117,7 @@ neoForge {
 
     // This line is optional. Access Transformers are automatically detected
     // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    setValidateAccessTransformers(true)
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
