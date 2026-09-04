@@ -5,10 +5,10 @@ import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 
 public enum Rarity implements StringRepresentable
 {
@@ -22,7 +22,7 @@ public enum Rarity implements StringRepresentable
     GOLDEN("golden", 0);
 
     public static final Codec<Rarity> CODEC = StringRepresentable.fromEnum(Rarity::values);
-    public static final StreamCodec<FriendlyByteBuf, Rarity> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Rarity.class);
+    public static final StreamCodec<Rarity> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Rarity.class);
     private final String key;
     private final int xp;
 
@@ -59,9 +59,9 @@ public enum Rarity implements StringRepresentable
 
     public static boolean isGolden(ItemStack stack)
     {
-        if (stack.has(SCDataComponents.CAUGHT_FISH_INFO))
+        if (stack.has(SCDataComponents.CAUGHT_FISH_INFO.get()))
         {
-            CaughtFishInfo caughtFishInfo = stack.get(SCDataComponents.CAUGHT_FISH_INFO);
+            CaughtFishInfo caughtFishInfo = stack.get(SCDataComponents.CAUGHT_FISH_INFO.get());
             return caughtFishInfo != null && caughtFishInfo.rarity().equals(GOLDEN);
         }
         return false;

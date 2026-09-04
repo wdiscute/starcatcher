@@ -2,22 +2,27 @@ package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.trigger.FishCaughtTrigger;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.advancements.CriterionTrigger;
 import net.minecraft.core.registries.Registries;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
-public interface SCCriterionTriggers
+public class SCCriterionTriggers
 {
-    DeferredRegister<CriterionTrigger<?>> REGISTRY =
-            DeferredRegister.create(Registries.TRIGGER_TYPE, Starcatcher.MOD_ID);
+    //done in SCEvents in 1.20.1
+//    DeferredRegisterTyped<CriterionTrigger<?>> REGISTRY =
+//            DeferredRegisterTyped.create(Registries.TRIGGER_TYPE, Starcatcher.MOD_ID);
+//
+//    CriteriaTriggers.
+//
+    public static FishCaughtTrigger FISH;
 
-    Supplier<FishCaughtTrigger> FISH = REGISTRY.register("fish_caught", FishCaughtTrigger::new);
-
-    static void register(IEventBus eventBus)
+    public static void register(IEventBus eventBus)
     {
-        REGISTRY.register(eventBus);
+        //REGISTRY.register(eventBus);
     }
 }

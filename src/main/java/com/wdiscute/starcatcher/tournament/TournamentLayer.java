@@ -4,12 +4,11 @@ import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.utils.ScreenUtils;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.network.chat.Component;
+import net.nikdo53.neobackports.screen.LayeredDraw;
 
 import java.text.DecimalFormat;
 import java.util.*;
@@ -44,7 +43,7 @@ public class TournamentLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics g, DeltaTracker deltaTracker)
+    public void render(GuiGraphics g, float v)
     {
         if (tournament == null) return;
         if (Minecraft.getInstance().level == null) return;
@@ -54,7 +53,7 @@ public class TournamentLayer implements LayeredDraw.Layer
 
         g.pose().pushPose();
         g.pose().translate(SCConfig.TOURNAMENT_X_OFFSET.get(), SCConfig.TOURNAMENT_Y_OFFSET.get(), 0);
-        g.pose().scale(((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()), ((float) SCConfig.TOURNAMENT_SCALE.getAsDouble()), 1);
+        g.pose().scale(((float) (double)SCConfig.TOURNAMENT_SCALE.get()), ((float) (double) SCConfig.TOURNAMENT_SCALE.get()), 1);
 
         //get fish for player position
         ScreenUtils.Image fish = null;

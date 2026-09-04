@@ -15,9 +15,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.nikdo53.neobackports.registry.DeferredBlock;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -42,9 +42,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
             tag(SCTags.BUCKETABLE_FISHES).addOptional(BuiltInRegistries.ITEM.getKey(item.value()));
 
         //starcatcher fishes to minecraft and common tags
-        tag(ItemTags.CAT_FOOD).addTag(SCTags.STARCAUGHT_FISHABLE_FISH);
         tag(ItemTags.FISHES).addTag(SCTags.STARCAUGHT_FISHABLE_FISH);
-        tag(Tags.Items.FOODS_RAW_FISH).addTag(SCTags.STARCAUGHT_FISHABLE_FISH);
 
         //add every starcatcher FP of STARCAUGHT_FISHABLES to STARCAUGHT_FISHABLES item tag
         for (FishProperties fp : FishRegistration.STARCATCHER_FISHABLE)
@@ -134,7 +132,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .add(LEGENDARY_BAIT.get())
                 .add(METEOROLOGICAL_BAIT.get())
                 .add(Items.WITHER_SKELETON_SKULL)
-                .addTag(Tags.Items.BUCKETS_EMPTY)
+                .add(Items.BUCKET)
 
                 .addOptional(rl("fishofthieves", "earthworms"))
                 .addOptional(rl("fishofthieves", "grubs"))
@@ -174,7 +172,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
         //rods and tools/fishing_rod
         RODS_REGISTRY.getEntries().forEach(o -> tag(SCTags.RODS).add(o.get()));
-        RODS_REGISTRY.getEntries().forEach(o -> tag(Tags.Items.TOOLS_FISHING_ROD).add(o.get()));
+        RODS_REGISTRY.getEntries().forEach(o -> tag(Tags.Items.TOOLS_FISHING_RODS).add(o.get()));
 
         tag(SCTags.AQUARIUM_INTERACTIONS)
                 .add(Items.DIAMOND_PICKAXE)
@@ -185,7 +183,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .add(Items.RED_SAND)
                 .add(Items.KELP)
                 .add(Items.SEAGRASS)
-                .addTag(Tags.Items.BUCKETS_EMPTY)
+                .add(Items.BUCKET)
                 .add(AURORA.get())
                 .add(CONCH.asItem())
                 .add(CLAM.asItem())
@@ -194,13 +192,13 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         //hats
         HATS.getEntries().forEach(o -> tag(SCTags.HATS).add(((DeferredBlock<?>) o).asItem()));
 
-        //equippable hats
-        tag(ItemTags.EQUIPPABLE_ENCHANTABLE)
-                .addTag(SCTags.HATS);
+        //equippable hats - this is done on item class on 1.20.1
+        //tag(ItemTags.EQUIPPABLE_ENCHANTABLE)
+        //        .addTag(SCTags.HATS);
 
-        //enchantable rods
-        tag(ItemTags.FISHING_ENCHANTABLE)
-                .addTag(SCTags.RODS);
+        //enchantable rods - this is done on item class on 1.20.1
+        //tag(ItemTags.FISHING_ENCHANTABLE)
+        //        .addTag(SCTags.RODS);
 
         tag(SCTags.PLACEABLE_IN_DISPLAY)
                 .addTag(SCTags.BUCKETABLE_FISHES)
@@ -252,8 +250,8 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         tag(SCTags.HAS_FARMLAND_INTERACTION)
                 .add(Items.BONE_MEAL);
 
-        this.tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .addTag(SCTags.RODS);
+        //this.tag(ItemTags.DURABILITY_ENCHANTABLE)
+        //        .addTag(SCTags.RODS);
     }
 
 

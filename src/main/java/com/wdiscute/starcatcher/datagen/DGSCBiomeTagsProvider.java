@@ -12,8 +12,8 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
@@ -31,7 +31,7 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
     {
         this.tag(create(SCTags.IS_BEACH))
                 .addOptional(BiomeTags.IS_BEACH.location())
-                .addOptionalTag(Tags.Biomes.IS_BEACH)
+                .addOptionalTag(tag("is_beach"))
         ;
 
         this.tag(create(SCTags.IS_WARPED_FOREST))
@@ -53,7 +53,7 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
         this.tag(create(SCTags.IS_BIRCH_FOREST))
                 .addOptional(Biomes.BIRCH_FOREST.location())
                 .addOptional(Biomes.OLD_GROWTH_BIRCH_FOREST.location())
-                .addOptionalTag(Tags.Biomes.IS_BIRCH_FOREST)
+                .addOptionalTag(tag("is_birch_forest"))
         ;
 
         this.tag(create(SCTags.IS_CHERRY_GROVE))
@@ -90,7 +90,7 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
                 .addOptional(Biomes.DEEP_FROZEN_OCEAN.location())
                 .addOptional(Biomes.DEEP_LUKEWARM_OCEAN.location())
                 .addOptional(Biomes.DEEP_OCEAN.location())
-                .addOptionalTag(Tags.Biomes.IS_DEEP_OCEAN)
+                .addOptionalTag(tag("is_deep_ocean"))
         ;
 
         this.tag(create(SCTags.IS_LUKEWARM_OCEAN))
@@ -129,7 +129,7 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
 
         this.tag(create(SCTags.IS_WARM_LAKE))
                 .addOptionalTag(Tags.Biomes.IS_DESERT)
-                .addOptionalTag(Tags.Biomes.IS_BADLANDS)
+                .addOptionalTag(tag("is_badlands"))
         ;
 
         this.tag(create(SCTags.IS_WARM_OCEAN))
@@ -142,6 +142,11 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
                 .addOptional(Biomes.RIVER.location())
         ;
 
+    }
+
+    private static TagKey<Biome> tag(String name)
+    {
+        return TagKey.create(Registries.BIOME, new ResourceLocation("forge", name));
     }
 
     private static TagKey<Biome> create(ResourceLocation rl)

@@ -37,7 +37,7 @@ import net.minecraft.world.level.block.LecternBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.levelgen.structure.Structure;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 import java.time.Instant;
 import java.util.*;
@@ -97,7 +97,7 @@ public class FishingGuideItem extends Item
             for (Structure structure : allStructuresOnBlockPos)
                 structures.add(registry.getKey(structure));
 
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new CBPlayerStructuresPayload(structures));
+            PacketDistributorNeo.sendToPlayer((ServerPlayer) player, new CBPlayerStructuresPayload(structures));
 
             level.playSound(null, player.blockPosition(), SoundEvents.BOOK_PAGE_TURN, SoundSource.PLAYERS);
 

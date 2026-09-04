@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.guide;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -48,7 +49,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 import java.awt.*;
 import java.time.Instant;
@@ -532,7 +534,7 @@ public class FishingGuideScreen extends Screen
             FishProperties fishProperties = entries.get(page * 2);
             ResourceLocation key = level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fishProperties);
             if (key != null)
-                PacketDistributor.sendToServer(new SBTrackFishPayload(key));
+                PacketDistributorNeo.sendToServer(new SBTrackFishPayload(key));
             player.playSound(SoundEvents.GLASS_HIT);
             player.playSound(SoundEvents.AMETHYST_BLOCK_HIT, 0.3f, 0.6f);
         }
@@ -543,7 +545,7 @@ public class FishingGuideScreen extends Screen
             FishProperties fishProperties = entries.get(page * 2 + 1);
             ResourceLocation key = level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fishProperties);
             if (key != null)
-                PacketDistributor.sendToServer(new SBTrackFishPayload(key));
+                PacketDistributorNeo.sendToServer(new SBTrackFishPayload(key));
             player.playSound(SoundEvents.GLASS_HIT);
             player.playSound(SoundEvents.AMETHYST_BLOCK_HIT, 0.3f, 0.6f);
         }
@@ -555,9 +557,8 @@ public class FishingGuideScreen extends Screen
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta)
     {
-
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
@@ -565,7 +566,7 @@ public class FishingGuideScreen extends Screen
         if (x > 53 && x < 189 && y > 155 && y < 200 && menu.equals(MenuEntry.HELP) &&
             (page == 1 || page == 5 || page == 6 || page == 10))
         {
-            if (scrollY < 0)
+            if (delta < 0)
                 leftPageScroll++;
             else
                 leftPageScroll--;
@@ -576,7 +577,7 @@ public class FishingGuideScreen extends Screen
             if (x > 212 && x < 356 && y > 155 && y < 200 && menu.equals(MenuEntry.HELP) &&
                 (page == 5 || page == 6 || page == 8 || page == 12))
             {
-                if (scrollY < 0)
+                if (delta < 0)
                     rightPageScroll++;
                 else
                     rightPageScroll--;
@@ -584,7 +585,7 @@ public class FishingGuideScreen extends Screen
             else
             {
                 //if not hovering either scrollables, scroll page
-                if (scrollY > 0)
+                if (delta > 0)
                 {
                     mouseReleased(uiX + 50, uiY + 210, 0);
                     arrowPreviousPressed = true;
@@ -600,7 +601,7 @@ public class FishingGuideScreen extends Screen
         }
 
 
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        return super.mouseScrolled(mouseX, mouseY, delta);
     }
 
     @Override
@@ -883,7 +884,7 @@ public class FishingGuideScreen extends Screen
             if (clicked)
             {
                 SignGuidePayload payload = new SignGuidePayload(signedNameEditBox.getValue(), displayBP);
-                PacketDistributor.sendToServer(payload);
+                PacketDistributorNeo.sendToServer(payload);
                 onClose();
             }
         }
@@ -1476,12 +1477,21 @@ public class FishingGuideScreen extends Screen
         //glow color
         int color = switch (fp.rarity())
         {
-            case Rarity.TRASH, Rarity.COMMON, Rarity.NONE -> FastColor.ARGB32.color(50, 0x000000);
-            case Rarity.UNCOMMON -> FastColor.ARGB32.color(255, 0xff92f28d);
-            case Rarity.RARE -> FastColor.ARGB32.color(255, 0xff78c8ff);
-            case Rarity.EPIC -> FastColor.ARGB32.color(255, 0xffc060ff);
-            case Rarity.LEGENDARY, Rarity.GOLDEN ->
-                    FastColor.ARGB32.color(175, Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1));
+            case TRASH, COMMON, NONE -> Utils.toColorI(0, 0, 0, 50);
+            case UNCOMMON -> 0xff92f28d;
+            case RARE -> 0xff78c8ff;
+            case EPIC -> 0xffc060ff;
+            case LEGENDARY, GOLDEN ->
+            {
+                int colorI = Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1);
+
+                yield Utils.toColorI(
+                        Utils.intToRed(colorI),
+                        Utils.intToGreen(colorI),
+                        Utils.intToBlue(colorI),
+                        175
+                );
+            }
         };
 
         //render glow
@@ -1542,8 +1552,8 @@ public class FishingGuideScreen extends Screen
         //Legendary
         //Not Caught yet!
         //
-        //✅ dimension
-        //❌ biome
+        // dimension
+        // biome
         //Not in Season!
 
         components.add(Component.empty());
@@ -1554,7 +1564,7 @@ public class FishingGuideScreen extends Screen
             components.addAll(indexHover);
         }
 
-        if (components.getLast().equals(Component.empty())) components.removeLast();
+        if (components.get(components.size() - 1).equals(Component.empty())) components.remove(components.size() -1);
 
         cachedHoverList = components;
         return components;
@@ -1644,7 +1654,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public void onClose()
     {
-        PacketDistributor.sendToServer(new SBFPsSeenPayload(fpsSeen));
+        PacketDistributorNeo.sendToServer(new SBFPsSeenPayload(fpsSeen));
         super.onClose();
     }
 
@@ -1749,7 +1759,7 @@ public class FishingGuideScreen extends Screen
                 if (e.rarity().equals(Rarity.GOLDEN)) entriesSorted.add(e);
             });
 
-            return sort.equals(Sort.RARITY_UP) ? entriesSorted : entriesSorted.reversed();
+            return sort.equals(Sort.RARITY_UP) ? entriesSorted : Lists.reverse(entriesSorted);
         }
 
         //alphabetical
@@ -1757,7 +1767,7 @@ public class FishingGuideScreen extends Screen
         {
             List<FishProperties> entriesSorted = entriesToSort.stream().sorted(Comparator.comparing(
                     o -> BuiltInRegistries.ITEM.getKey(o.catchInfo().fish().toItem()).getPath())).toList();
-            return sort.equals(Sort.ALPHABETICAL_UP) ? entriesSorted : entriesSorted.reversed();
+            return sort.equals(Sort.ALPHABETICAL_UP) ? entriesSorted : Lists.reverse(entriesSorted);
         }
 
         //mod
@@ -1765,7 +1775,7 @@ public class FishingGuideScreen extends Screen
         {
             List<FishProperties> entriesSorted = entriesToSort.stream().sorted(Comparator.comparing(
                     o -> BuiltInRegistries.ITEM.getKey(o.catchInfo().fish().toItem()).getNamespace())).toList();
-            return sort.equals(Sort.MOD_DOWN) ? entriesSorted : entriesSorted.reversed();
+            return sort.equals(Sort.MOD_DOWN) ? entriesSorted : Lists.reverse(entriesSorted);
         }
 
         //caught
@@ -2070,12 +2080,21 @@ public class FishingGuideScreen extends Screen
 
         int color = switch (fp.rarity())
         {
-            case Rarity.TRASH, Rarity.COMMON, Rarity.NONE -> FastColor.ARGB32.color(60, 0x000000);
-            case Rarity.UNCOMMON -> FastColor.ARGB32.color(200, 0x92f28d);
-            case Rarity.RARE -> FastColor.ARGB32.color(200, 0x78c8ff);
-            case Rarity.EPIC -> FastColor.ARGB32.color(200, 0xc060ff);
-            case Rarity.LEGENDARY, GOLDEN ->
-                    FastColor.ARGB32.color(175, Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1));
+            case TRASH, COMMON, NONE -> Utils.toColorI(0, 0, 0, 50);
+            case UNCOMMON -> 0xff92f28d;
+            case RARE -> 0xff78c8ff;
+            case EPIC -> 0xffc060ff;
+            case LEGENDARY, GOLDEN ->
+            {
+                int colorI = Color.HSBtoRGB((float) Util.getMillis() / 10000, 1, 1);
+
+                yield Utils.toColorI(
+                        Utils.intToRed(colorI),
+                        Utils.intToGreen(colorI),
+                        Utils.intToBlue(colorI),
+                        175
+                );
+            }
         };
 
         //render glow

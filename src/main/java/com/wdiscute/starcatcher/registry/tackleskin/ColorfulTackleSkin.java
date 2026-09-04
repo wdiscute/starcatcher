@@ -13,7 +13,7 @@ public class ColorfulTackleSkin extends AbstractTackleSkin
     public void onTick(FishingBobEntity bobEntity)
     {
         Vec3 pos = bobEntity.position();
-        RandomSource r = bobEntity.getRandom();
+        RandomSource r = bobEntity.level().getRandom();
 
         if(!bobEntity.level().isClientSide)
         {

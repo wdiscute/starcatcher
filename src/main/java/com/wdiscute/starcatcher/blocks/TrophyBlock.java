@@ -29,7 +29,7 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements SimpleWat
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
 
         if (state.getValue(FACING) == Direction.WEST || state.getValue(FACING).equals(Direction.EAST))
@@ -55,15 +55,9 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements SimpleWat
     }
 
     @Override
-    protected FluidState getFluidState(BlockState state)
+    public FluidState getFluidState(BlockState state)
     {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
-    {
-        return null;
     }
 
     @Override

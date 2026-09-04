@@ -10,12 +10,12 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.DimensionRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.FluidRestriction;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import org.jetbrains.annotations.Nullable;
 
 public class DGAlexsCavesFishes
 {
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
 
         //

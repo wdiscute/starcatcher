@@ -19,12 +19,12 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,34 +92,34 @@ public class SCDGDataEntriesProvider
                 List.of(
                         //base worms
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
-                                new MaybeStack(SCItems.WORM),
+                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new MaybeStack(SCItems.WORM.asItem()),
                                 1485),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
-                                new MaybeStack(SCItems.ALMIGHTY_WORM),
+                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new MaybeStack(SCItems.ALMIGHTY_WORM.asItem()),
                                 396),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
-                                new MaybeStack(SCItems.SEEKING_WORM),
+                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new MaybeStack(SCItems.SEEKING_WORM.asItem()),
                                 99),
 
 
                         //golden worms
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
+                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(goldenWorm),
                                 15),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
+                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(goldenAlmightyWorm),
                                 4),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
+                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(goldenSeekingWorm),
                                 1),
 
@@ -127,17 +127,17 @@ public class SCDGDataEntriesProvider
                         //base worms on rich soil
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                new MaybeStack(SCItems.WORM),
+                                new MaybeStack(SCItems.WORM.asItem()),
                                 50),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                new MaybeStack(SCItems.WORM),
+                                new MaybeStack(SCItems.WORM.asItem()),
                                 30),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                new MaybeStack(SCItems.WORM),
+                                new MaybeStack(SCItems.WORM.asItem()),
                                 20),
 
 

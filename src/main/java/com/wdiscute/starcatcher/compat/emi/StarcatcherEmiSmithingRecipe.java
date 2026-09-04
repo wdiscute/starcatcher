@@ -13,7 +13,7 @@ import dev.emi.emi.api.widget.WidgetHolder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.SmithingRecipeInput;
+import net.nikdo53.neobackports.utils.recipe.input.SmithingRecipeInput;
 
 import java.util.List;
 
@@ -49,7 +49,7 @@ public class StarcatcherEmiSmithingRecipe implements EmiRecipe
     @Override
     public ResourceLocation getId()
     {
-        return Starcatcher.rl("/" + BuiltInRegistries.ITEM.getKey(template.getEmiStacks().getFirst().getItemStack().getItem()).getPath());
+        return Starcatcher.rl("/" + BuiltInRegistries.ITEM.getKey(template.getEmiStacks().get(0).getItemStack().getItem()).getPath());
     }
 
     @Override

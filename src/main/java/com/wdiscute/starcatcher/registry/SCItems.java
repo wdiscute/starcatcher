@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.registry;
 
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.compat.CreateCompat;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
@@ -13,20 +12,14 @@ import com.wdiscute.starcatcher.messageinabottle.*;
 import com.wdiscute.utils.item.BasicItem;
 import com.wdiscute.utils.item.FireResistantBasicItem;
 import com.wdiscute.utils.item.SingleStackBasicItem;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.data.loading.DatagenModLoader;
-import net.neoforged.neoforge.registries.DeferredItem;
-import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.List;
+import net.minecraftforge.data.loading.DatagenModLoader;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.registry.DeferredItem;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 public interface SCItems
 {
@@ -37,14 +30,14 @@ public interface SCItems
             CreateCompat.register();
     }
 
-    DeferredRegister.Items ITEMS = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items NON_BUCKETABLE_FISH_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items BUCKETABLE_FISHES_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items NON_FISH_FISH_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items TEMPLATES_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items RODS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items HOOKS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
-    DeferredRegister.Items BOBBERS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items ITEMS = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items NON_BUCKETABLE_FISH_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items BUCKETABLE_FISHES_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items NON_FISH_FISH_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items TEMPLATES_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items RODS_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items HOOKS_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Items BOBBERS_REGISTRY = DeferredRegisterTyped.createItems(Starcatcher.MOD_ID);
 
     DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", BasicItem::new);
     DeferredItem<Item> UNKNOWN_FISH = ITEMS.register("unknown_fish", BasicItem::new);

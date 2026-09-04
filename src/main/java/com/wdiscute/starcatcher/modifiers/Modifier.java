@@ -9,16 +9,15 @@ import com.wdiscute.starcatcher.modifiers.minigamemodifiers.*;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.*;
 import com.wdiscute.utils.MaybeStack;
-import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLEnvironment;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,18 +32,18 @@ public interface Modifier
     {
         List<Modifier> data = SCDataEntries.DEFAULT_MINIGAME_MODIFIERS.get();
 
-        if(data == null) data = List.of();
+        if (data == null) data = List.of();
 
         return data.stream()
-            .filter(AbstractMinigameModifier.class::isInstance)
-            .map(o -> (AbstractMinigameModifier) o).toList();
+                .filter(AbstractMinigameModifier.class::isInstance)
+                .map(o -> (AbstractMinigameModifier) o).toList();
     }
 
     static List<AbstractCatchModifier> getDefaultCatchModifiers()
     {
         List<Modifier> data = SCDataEntries.DEFAULT_CATCH_MODIFIERS.get();
 
-        if(data == null) data = List.of();
+        if (data == null) data = List.of();
 
         return data.stream()
                 .filter(AbstractCatchModifier.class::isInstance)
@@ -57,19 +56,20 @@ public interface Modifier
 
     MapCodec<? extends Modifier> getCodec();
 
-    Codec<Modifier> CODEC = ResourceLocation.CODEC
-            .dispatch(
-                    Modifier::getIdentifier,
-                    rl ->
-                    {
-                        if (MODIFIERS.containsKey(rl))
-                            return MODIFIERS.get(rl);
+    Codec<Modifier> CODEC = ResourceLocation.CODEC.dispatch(
+            Modifier::getIdentifier,
+            rl ->
+            {
+                if (MODIFIERS.containsKey(rl))
+                    return MODIFIERS.get(rl).codec();
 
-                        if (FMLEnvironment.dist.isClient())
-                            LogUtils.getLogger().warn("Modifier [{}] not found. Using empty modifier instead.", rl);
-                        return EmptyModifier.CODEC;
-                    }
-            );
+                if (FMLEnvironment.dist.isClient())
+                    LogUtils.getLogger().warn(
+                            "Modifier [{}] not found. Using empty modifier instead.", rl);
+
+                return EmptyModifier.CODEC.codec();
+            }
+    );
 
     static List<AbstractCatchModifier> getCatchModifiers(Player player)
     {
@@ -121,9 +121,9 @@ public interface Modifier
         //potion effects
         for (MobEffectInstance activeEffect : player.getActiveEffects())
         {
-            List<Modifier> list = activeEffect.getEffect().getData(SCDataMaps.EFFECT_MODIFIERS);
+            List<Modifier> list = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(activeEffect.getEffect()).getData(SCDataMaps.EFFECT_MODIFIERS);
 
-            if(list != null && !list.isEmpty())
+            if (list != null && !list.isEmpty())
                 for (int i = 0; i < activeEffect.getAmplifier(); i++)
                     modifiers.addAll(list);
         }
@@ -142,14 +142,14 @@ public interface Modifier
         modifiers.addAll(SCDataMaps.getOrDefault(itemStack, SCDataMaps.ITEM_MODIFIERS, List.of()));
 
         //enchants
-        if(itemStack.isEnchanted())
+        if (itemStack.isEnchanted())
         {
-            for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemStack.getTagEnchantments().entrySet())
+            for (Map.Entry<Enchantment, Integer> entry : itemStack.getAllEnchantments().entrySet())
             {
-                List<Modifier> list = entry.getKey().getData(SCDataMaps.ENCHANTMENT_MODIFIERS);
-                if(list != null && !list.isEmpty())
+                List<Modifier> list = BuiltInRegistries.ENCHANTMENT.wrapAsHolder(entry.getKey()).getData(SCDataMaps.ENCHANTMENT_MODIFIERS);
+                if (list != null && !list.isEmpty())
                 {
-                    for (int i = 0; i < entry.getIntValue(); i++)
+                    for (int i = 0; i < entry.getValue(); i++)
                     {
                         modifiers.addAll(list);
                     }

@@ -7,13 +7,13 @@ import com.wdiscute.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -21,7 +21,6 @@ import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -40,9 +39,12 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.neoforged.neoforge.registries.DeferredBlock;
+import net.nikdo53.neobackports.io.components.DataComponents;
+import net.nikdo53.neobackports.io.components.ItemContainerContents;
+import net.nikdo53.neobackports.registry.DeferredBlock;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -75,14 +77,14 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         if (state.getValue(FACING) == Direction.NORTH || state.getValue(FACING) == Direction.SOUTH) return NORTH_SOUTH;
         return EAST_WEST;
     }
 
     @Override
-    protected FluidState getFluidState(BlockState state)
+    public FluidState getFluidState(BlockState state)
     {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
@@ -94,13 +96,13 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    protected RenderShape getRenderShape(BlockState state)
+    public RenderShape getRenderShape(BlockState state)
     {
         return RenderShape.MODEL;
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
         if (!level.isClientSide)
         {
@@ -109,7 +111,8 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
                 if (player.isCrouching())
                 {
                     ItemStack stack = getColoredItemStack(this.getColor());
-                    stack.applyComponents(tbbe.collectComponents());
+                    //save tackle box data to stack
+                    tbbe.saveToItem(stack);
                     level.playSound(null, pos.getX() + 0.5f, pos.getY() + 0.5f, pos.getZ() + 0.5f, SoundEvents.ITEM_PICKUP, SoundSource.BLOCKS);
                     if (player.getMainHandItem().isEmpty())
                     {
@@ -127,6 +130,14 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             }
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @org.jetbrains.annotations.Nullable LivingEntity placer, ItemStack stack)
+    {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (level.getBlockEntity(pos) instanceof TackleBoxBlockEntity blockEntity)
+            blockEntity.applyImplicitComponents(stack);
     }
 
     @Override
@@ -148,7 +159,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
 
 
     @Override
-    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
     {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof TackleBoxBlockEntity tbbe)
@@ -156,18 +167,19 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             if (!level.isClientSide && player.isCreative() && !tbbe.isEmpty())
             {
                 ItemStack itemstack = getColoredItemStack(this.getColor());
-                itemstack.applyComponents(blockentity.collectComponents());
+                //save tackle box data to stack
+                tbbe.saveToItem(itemstack);
                 ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (double) pos.getY() + (double) 0.5F, (double) pos.getZ() + (double) 0.5F, itemstack);
                 itementity.setDefaultPickUpDelay();
                 level.addFreshEntity(itementity);
             }
         }
 
-        return super.playerWillDestroy(level, pos, state, player);
+        super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override
-    protected List<ItemStack> getDrops(BlockState state, LootParams.Builder params)
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder params)
     {
         BlockEntity blockentity = params.getOptionalParameter(LootContextParams.BLOCK_ENTITY);
         if (blockentity instanceof TackleBoxBlockEntity tbbe)
@@ -186,7 +198,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
     {
         if (!state.is(newState.getBlock()))
         {
@@ -201,12 +213,12 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
+    public void appendHoverText(ItemStack stack, @org.jetbrains.annotations.Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag)
     {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        if (stack.has(DataComponents.CONTAINER_LOOT))
+        super.appendHoverText(stack, level, tooltip, flag);
+        if (stack.has(DataComponents.CONTAINER_LOOT.get()))
         {
-            tooltipComponents.add(UNKNOWN_CONTENTS);
+            tooltip.add(UNKNOWN_CONTENTS);
         }
 
         int i = 0;
@@ -218,33 +230,32 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             if (i <= 4)
             {
                 ++i;
-                tooltipComponents.add(Component.translatable("container.starcatcher.tackle_box.itemCount", itemstack.getHoverName(), itemstack.getCount()));
+                tooltip.add(Component.translatable("container.starcatcher.tackle_box.itemCount", itemstack.getHoverName(), itemstack.getCount()));
             }
         }
 
         if (j - i > 0)
-        {
-            tooltipComponents.add(Component.translatable("container.starcatcher.tackle_box.more", j - i).withStyle(ChatFormatting.ITALIC));
-        }
+            tooltip.add(Component.translatable("container.starcatcher.tackle_box.more", j - i).withStyle(ChatFormatting.ITALIC));
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState state)
+    public boolean hasAnalogOutputSignal(BlockState state)
     {
         return true;
     }
 
     @Override
-    protected int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos)
+    public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos)
     {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(level.getBlockEntity(pos));
     }
 
     @Override
-    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state)
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player)
     {
         ItemStack itemstack = super.getCloneItemStack(level, pos, state);
-        level.getBlockEntity(pos, SCBlockEntities.TACKLE_BOX.get()).ifPresent((ebbe) -> ebbe.saveToItem(itemstack, level.registryAccess()));
+        level.getBlockEntity(pos, SCBlockEntities.TACKLE_BOX.get())
+                .ifPresent((ebbe) -> ebbe.saveToItem(itemstack));
         return itemstack;
     }
 
@@ -302,13 +313,13 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    protected BlockState rotate(BlockState state, Rotation rot)
+    public BlockState rotate(BlockState state, Rotation rot)
     {
         return state.setValue(FACING, rot.rotate(state.getValue(FACING)));
     }
 
     @Override
-    protected BlockState mirror(BlockState state, Mirror mirror)
+    public BlockState mirror(BlockState state, Mirror mirror)
     {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
     }

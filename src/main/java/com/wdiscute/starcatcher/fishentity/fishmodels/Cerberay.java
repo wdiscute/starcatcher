@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.fishentity.fishmodels;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -51,5 +52,11 @@ public class Cerberay<T extends Entity> extends EntityModel<T> {
     @Override
     public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color) {
         fish.render(poseStack, buffer, packedLight, packedOverlay, color);
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
+    {
+        renderToBuffer(poseStack, buffer, packedLight, packedOverlay, Utils.toColorF(red, green, blue, alpha));
     }
 }

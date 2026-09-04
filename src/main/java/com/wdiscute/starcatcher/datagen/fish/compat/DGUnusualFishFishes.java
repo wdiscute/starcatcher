@@ -5,12 +5,12 @@ import com.wdiscute.starcatcher.datagen.fish.PresetRestrictions;
 import com.wdiscute.starcatcher.fish.*;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.utils.Utils;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import org.jetbrains.annotations.Nullable;
 
 public class DGUnusualFishFishes
 {
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
 
         //

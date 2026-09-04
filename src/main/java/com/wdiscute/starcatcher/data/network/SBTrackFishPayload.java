@@ -2,19 +2,18 @@ package com.wdiscute.starcatcher.data.network;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.networking.CustomPacketPayload;
+import net.nikdo53.neobackports.io.networking.IPayloadContext;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 public record SBTrackFishPayload(ResourceLocation fp) implements CustomPacketPayload
 {
+    public static final Type<SBTrackFishPayload> TYPE = new Type<>(Starcatcher.rl("track_fish"), SBTrackFishPayload.class);
 
-    public static final Type<SBTrackFishPayload> TYPE = new Type<>(Starcatcher.rl("track_fish"));
-
-    public static final StreamCodec<ByteBuf, SBTrackFishPayload> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC,
+    public static final StreamCodec<SBTrackFishPayload> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.RESOURCE_LOCATION,
             SBTrackFishPayload::fp,
             SBTrackFishPayload::new
     );

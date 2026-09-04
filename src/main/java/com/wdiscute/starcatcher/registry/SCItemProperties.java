@@ -5,14 +5,14 @@ import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 
 public interface SCItemProperties
 {
 
     static void addCustomItemProperties()
     {
-        for (DeferredHolder<Item, ? extends Item> item : SCItems.RODS_REGISTRY.getEntries())
+        for (DeferredHolder<Item, Item> item : SCItems.RODS_REGISTRY.getEntries())
         {
             ItemProperties.register(
                     item.get(),

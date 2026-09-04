@@ -39,16 +39,16 @@ public class ExtraGoldenChanceModifier extends AbstractCatchModifier
         if (onlyForPerfectCatch)
         {
             if (shift)
-                return List.of(Component.translatableEscape("tooltip.modifier.starcatcher.extra_golden_chance.perfect.shift", chanceS));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_golden_chance.perfect.shift", chanceS));
             else
-                return List.of(Component.translatableEscape("tooltip.modifier.starcatcher.extra_golden_chance.perfect", chanceS));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_golden_chance.perfect", chanceS));
         }
         else
         {
             if (shift)
-                return List.of(Component.translatableEscape("tooltip.modifier.starcatcher.extra_golden_chance.base.shift", chanceS));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_golden_chance.base.shift", chanceS));
             else
-                return List.of(Component.translatableEscape("tooltip.modifier.starcatcher.extra_golden_chance.base", chanceS));
+                return List.of(Component.translatable("tooltip.modifier.starcatcher.extra_golden_chance.base", chanceS));
         }
     }
 

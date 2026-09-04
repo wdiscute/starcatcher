@@ -97,7 +97,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
 
@@ -109,7 +109,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
 

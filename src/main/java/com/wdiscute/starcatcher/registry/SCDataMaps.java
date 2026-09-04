@@ -13,7 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.dimension.LevelStem;
-import net.neoforged.neoforge.registries.datamaps.DataMapType;
+import net.nikdo53.neobackports.datamaps.DataMapType;
 
 import java.util.List;
 
@@ -36,8 +36,8 @@ public interface SCDataMaps
     ).synced(Modifier.CODEC.listOf(), true).build();
 
     DataMapType<Item, AbstractTackleSkin> TACKLE_SKIN = DataMapType.builder(
-            Starcatcher.rl("tackle_skin"), Registries.ITEM, Starcatcher.TACKLE_SKIN_REGISTRY.byNameCodec()
-    ).synced(Starcatcher.TACKLE_SKIN_REGISTRY.byNameCodec(), true).build();
+            Starcatcher.rl("tackle_skin"), Registries.ITEM, Starcatcher.TACKLE_SKIN_REGISTRY.getCodec()
+    ).synced(Starcatcher.TACKLE_SKIN_REGISTRY.getCodec(), true).build();
 
     DataMapType<FishProperties, Treasure> TREASURE = DataMapType.builder(
             Starcatcher.rl("treasures"), Starcatcher.FISH_REGISTRY_KEY, Treasure.CODEC

@@ -4,12 +4,11 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,13 +36,13 @@ public class FishingGuideAttachment
     public static final Codec<FishingGuideAttachment> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
                     Codec.unboundedMap(ResourceLocation.CODEC, FishCaughtCounter.CODEC).fieldOf("fishes_caught").forGetter(data -> data.fishesCaught),
-                    Codec.BOOL.lenientOptionalFieldOf("received_guide", false).forGetter(data -> data.receivedGuide),
-                    Codec.BOOL.lenientOptionalFieldOf("fished_rod", false).forGetter(data -> data.fishedRod)
+                    Codec.BOOL.optionalFieldOf("received_guide", false).forGetter(data -> data.receivedGuide),
+                    Codec.BOOL.optionalFieldOf("fished_rod", false).forGetter(data -> data.fishedRod)
             ).apply(instance, FishingGuideAttachment::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, FishingGuideAttachment> STREAM_CODEC = StreamCodec.composite(
-            ByteBufCodecs.map(HashMap::new, ResourceLocation.STREAM_CODEC, FishCaughtCounter.STREAM_CODEC), data -> data.fishesCaught,
+    public static final StreamCodec<FishingGuideAttachment> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.map(HashMap::new, ByteBufCodecs.RESOURCE_LOCATION, FishCaughtCounter.STREAM_CODEC), data -> data.fishesCaught,
             ByteBufCodecs.BOOL, data -> data.receivedGuide,
             ByteBufCodecs.BOOL, data -> data.fishedRod,
             FishingGuideAttachment::new

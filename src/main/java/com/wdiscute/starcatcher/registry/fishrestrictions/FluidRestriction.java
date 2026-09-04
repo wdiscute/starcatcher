@@ -18,7 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -86,12 +86,12 @@ public class FluidRestriction extends AbstractFishRestriction
     @Override
     public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        if(fluids.size() == 1 && !fluids.getFirst().getPath().equals("water"))
+        if(fluids.size() == 1 && !fluids.get(0).getPath().equals("water"))
         {
             if(!translationOverride.isEmpty())
                 return List.of(Component.translatable(translationOverride).withStyle(Style.EMPTY.withColor(SCColors.GUIDE_TEXT_DARK)));
             else
-                return List.of(Component.translatable("block." + fluids.getFirst().toLanguageKey()).withStyle(Style.EMPTY.withColor(SCColors.GUIDE_TEXT_DARK)));
+                return List.of(Component.translatable("block." + fluids.get(0).toLanguageKey()).withStyle(Style.EMPTY.withColor(SCColors.GUIDE_TEXT_DARK)));
         }
         return super.getIndexHover(level, fp, player, context);
     }
@@ -111,7 +111,7 @@ public class FluidRestriction extends AbstractFishRestriction
     @Override
     public Component getDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        if(fluids.size() == 1 && fluids.getFirst().equals(ResourceLocation.withDefaultNamespace("water"))) return Component.empty();
+        if(fluids.size() == 1 && fluids.get(0).equals(ResourceLocation.withDefaultNamespace("water"))) return Component.empty();
         return super.getDescription(level, fp, player, context);
     }
 
@@ -126,7 +126,7 @@ public class FluidRestriction extends AbstractFishRestriction
     {
         //Fluid name / [hover]
         if (fluids.size() == 1)
-            return Component.translatable("block." + fluids.getFirst().toLanguageKey());
+            return Component.translatable("block." + fluids.get(0).toLanguageKey());
         else
             return Component.translatable("gui.guide.hover");
     }

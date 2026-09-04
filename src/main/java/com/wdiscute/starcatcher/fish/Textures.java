@@ -5,8 +5,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.utils.ScreenUtils;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
+import net.nikdo53.neobackports.io.StreamCodec;
 
 public record Textures(
         ScreenUtils.Image tank,
@@ -50,7 +49,7 @@ public record Textures(
                     ScreenUtils.Image.codecFixedSize(160, 64).fieldOf("wheels").forGetter(Textures::wheels)
             ).apply(instance, Textures::new));
 
-    public static final StreamCodec<ByteBuf, Textures> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<Textures> STREAM_CODEC = StreamCodec.composite(
             ScreenUtils.Image.streamCodecFixedSize(96, 112), Textures::tank,
             ScreenUtils.Image.streamCodecFixedSize(112, 112), Textures::rod,
             ScreenUtils.Image.streamCodecFixedSize(32, 64), Textures::handle,

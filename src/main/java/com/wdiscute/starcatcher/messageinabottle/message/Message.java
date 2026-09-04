@@ -4,11 +4,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,12 +54,12 @@ public record Message(
                     ResourceLocation.CODEC.fieldOf("background").forGetter(Message::background)
             ).apply(instance, Message::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, Message> STREAM_CODEC = StreamCodec.composite(
-            UUIDUtil.STREAM_CODEC, Message::sender,
+    public static final StreamCodec<Message> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.UUID, Message::sender,
             ByteBufCodecs.STRING_UTF8, Message::senderDisplayName,
             ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), Message::text,
-            ResourceLocation.STREAM_CODEC, Message::dimension,
-            ResourceLocation.STREAM_CODEC, Message::background,
+            ByteBufCodecs.RESOURCE_LOCATION, Message::dimension,
+            ByteBufCodecs.RESOURCE_LOCATION, Message::background,
             Message::new
     );
 

@@ -9,12 +9,9 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestrictio
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -22,8 +19,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.pathfinder.PathType;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -34,7 +30,7 @@ public class FishEntity extends AbstractFish
     public FishEntity(EntityType<? extends FishEntity> entityType, Level level)
     {
         super(entityType, level);
-        if (fireImmune()) this.setPathfindingMalus(PathType.LAVA, 0.0F);
+        if (fireImmune()) this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
     }
 
     @Override
@@ -66,7 +62,7 @@ public class FishEntity extends AbstractFish
     @Override
     public @Nullable ItemStack getPickResult()
     {
-        return getBodyArmorItem();
+        return getItemBySlot(EquipmentSlot.CHEST);
     }
 
     @Override
@@ -76,8 +72,9 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    public boolean fireImmune() {
-        return getFish().has(DataComponents.FIRE_RESISTANT);
+    public boolean fireImmune()
+    {
+        return getFish().getItem().isFireResistant();
     }
 
     public static AttributeSupplier.Builder createAttributes()
@@ -86,7 +83,8 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    public boolean isInWater() {
+    public boolean isInWater()
+    {
         return !fireImmune() ? super.isInWater() : isInLava();
     }
 
@@ -94,7 +92,7 @@ public class FishEntity extends AbstractFish
     public void tick()
     {
         super.tick();
-        if (getBodyArmorItem().isEmpty() && !level().isClientSide())
+        if (getPickResult().isEmpty() && !level().isClientSide())
         {
             //shouldDropItem = false;
             List<FishProperties> available = new ArrayList<>();
@@ -111,13 +109,14 @@ public class FishEntity extends AbstractFish
             {
                 FishProperties fp = available.get(Utils.r.nextInt(available.size()));
                 ItemStack is = fp.catchInfo().fish().toStack();
-                setBodyArmorItem(is);
+                setItemSlot(EquipmentSlot.CHEST, is);
             }
         }
     }
 
     @Override
-    public float getScale() {
+    public float getScale()
+    {
         return SCDataComponents.getOrDefault(
                 getFish(), SCDataComponents.CAUGHT_FISH_INFO,
                 CaughtFishInfo.AVERAGE
@@ -125,28 +124,28 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    protected void dropAllDeathLoot(ServerLevel p_level, DamageSource damageSource)
+    protected void dropAllDeathLoot(DamageSource damageSource)
     {
         if (shouldDropItem)
-            super.dropAllDeathLoot(p_level, damageSource);
+            super.dropAllDeathLoot(damageSource);
     }
 
     public void setFish(ItemStack is)
     {
-        setBodyArmorItem(is);
+        setItemSlot(EquipmentSlot.CHEST, is);
         shouldDropItem = true;
     }
 
     public ItemStack getFish()
     {
-        return getBodyArmorItem();
+        return getPickResult();
     }
 
     @Override
     public ItemStack getBucketItemStack()
     {
         ItemStack is = new ItemStack(fireImmune() ? SCItems.STARCAUGHT_LAVA_BUCKET.asItem() : SCItems.STARCAUGHT_BUCKET.asItem());
-        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new MaybeStack(getBodyArmorItem().copy()));
+        SCDataComponents.set(is, SCDataComponents.BUCKETED_FISH, new MaybeStack(getPickResult().copy()));
         return is;
     }
 }

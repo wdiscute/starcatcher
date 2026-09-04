@@ -83,15 +83,15 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void mouseScrolled(FishingMinigameScreen instance, double mouseX, double mouseY, double scrollX, double scrollY)
+    public void mouseScrolled(FishingMinigameScreen instance, double mouseX, double mouseY, double delta)
     {
-        if (scrollY < 0)
+        if (delta < 0)
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
             handleLayer--;
         }
 
-        if (scrollY > 0)
+        if (delta > 0)
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
             handleLayer++;
@@ -103,7 +103,7 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
         if (handleLayer < 0)
             handleLayer = 0;
 
-        super.mouseScrolled(instance, mouseX, mouseY, scrollX, scrollY);
+        super.mouseScrolled(instance, mouseX, mouseY, delta);
     }
 
     @Override

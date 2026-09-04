@@ -13,20 +13,21 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraftforge.common.Tags;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Consumer;
 
 public class DGSCRecipeProvider extends RecipeProvider
 {
-    public DGSCRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries)
+    public DGSCRecipeProvider(PackOutput output)
     {
-        super(output, registries);
+        super(output);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output)
+    protected void buildRecipes(Consumer<FinishedRecipe> output)
     {
         //guide
         ShapelessRecipeBuilder.shapeless(RecipeCategory.TOOLS, SCItems.GUIDE)

@@ -10,14 +10,14 @@ import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
 
 public class DGTrophies
 {
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
 
         //

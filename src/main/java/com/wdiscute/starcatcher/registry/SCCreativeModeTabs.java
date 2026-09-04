@@ -14,18 +14,17 @@ import net.mcexpanded.fancytabsections.Section.SectionAnimatedTextured;
 import net.mcexpanded.fancytabsections.Section.SectionColored;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
+import net.minecraftforge.eventbus.api.IEventBus;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public interface SCCreativeModeTabs
 {
     static void register(IEventBus eventBus)
     {
         //register creative mode tab
-        FancyTabSections.registerCreativeModeTab(eventBus, Starcatcher.rl("starcatcher"), SCItems.ROD);
+        FancyTabSections.registerCreativeModeTab(eventBus, Starcatcher.rl("starcatcher"), SCItems.ROD::toStack);
 
         //Must Have
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
@@ -77,8 +76,8 @@ public interface SCCreativeModeTabs
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("cosmetics"))
                         .setBannerColor(SCColors.BANNER_COLOR)
-                        .add(SCItems.RODS_REGISTRY)
-                        .add(SCItems.TEMPLATES_REGISTRY)
+                        .add((d) -> SCItems.RODS_REGISTRY.getEntries().stream().map(o -> o.getDelegate().value().getDefaultInstance()).toList())
+                        .add((d) -> SCItems.TEMPLATES_REGISTRY.getEntries().stream().map(o -> o.getDelegate().value().getDefaultInstance()).toList())
                         .add((d) -> SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
         );
 
@@ -115,9 +114,9 @@ public interface SCCreativeModeTabs
                                     {
                                         ItemStack stack = fp.catchInfo().fish().toStack();
 
-                                        if (stack.has(SCDataComponents.MESSAGE))
+                                        if (stack.has(SCDataComponents.MESSAGE.get()))
                                         {
-                                            SCDataComponents.set(stack, SCDataComponents.MESSAGE, stack.get(SCDataComponents.MESSAGE));
+                                            SCDataComponents.set(stack, SCDataComponents.MESSAGE, stack.get(SCDataComponents.MESSAGE.get()));
                                             list.add(stack);
                                         }
                                     }
@@ -130,9 +129,9 @@ public interface SCCreativeModeTabs
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("fish"))
                         .setBannerColor(SCColors.BANNER_COLOR)
-                        .add(SCItems.BUCKETABLE_FISHES_REGISTRY)
-                        .add(SCItems.NON_BUCKETABLE_FISH_REGISTRY)
-                        .add(SCItems.NON_FISH_FISH_REGISTRY)
+                        .add((d) -> SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().map(o -> o.getDelegate().value().getDefaultInstance()).toList())
+                        .add((d) -> SCItems.NON_BUCKETABLE_FISH_REGISTRY.getEntries().stream().map(o -> o.getDelegate().value().getDefaultInstance()).toList())
+                        .add((d) -> SCItems.NON_FISH_FISH_REGISTRY.getEntries().stream().map(o -> o.getDelegate().value().getDefaultInstance()).toList())
                         .add(SCItems.LAVA_CRAB_CLAW)
                         .add(SCBlocks.CLAM)
                         .add(SCBlocks.CONCH)

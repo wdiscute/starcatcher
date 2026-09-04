@@ -1,8 +1,5 @@
 package com.wdiscute.starcatcher.locators;
 
-import com.mojang.blaze3d.platform.Lighting;
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
@@ -12,29 +9,17 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.guide.SettingsScreen;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
-import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.utils.ScreenUtils;
-import net.minecraft.CrashReport;
-import net.minecraft.CrashReportCategory;
-import net.minecraft.ReportedException;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.nikdo53.neobackports.screen.LayeredDraw;
 
-import javax.annotation.Nullable;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +105,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics g, DeltaTracker deltaTracker)
+    public void render(GuiGraphics g, float v)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -145,20 +130,20 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         //smoothly moves ui in and out of screen
         if (!shouldShow)
             if (offScreen > -250 + SCConfig.TRACKER_X_OFFSET.get())
-                offScreen -= 15F * deltaTracker.getRealtimeDeltaTicks();
+                offScreen -= 15F * v;
             else
             {
                 offScreen = (float) (-250 + SCConfig.TRACKER_X_OFFSET.get());
                 return;
             }
         else if (offScreen < 0)
-            offScreen += 15F * deltaTracker.getRealtimeDeltaTicks();
+            offScreen += 15F * v;
         else
             offScreen = 0;
 
         //transform and scale from config
         g.pose().pushPose();
-        g.pose().scale(((float) SCConfig.TRACKER_SCALE.getAsDouble()), ((float) SCConfig.TRACKER_SCALE.getAsDouble()), 1);
+        g.pose().scale(((float) (double) SCConfig.TRACKER_SCALE.get()), ((float) (double) SCConfig.TRACKER_SCALE.get()), 1);
         g.pose().translate(SCConfig.TRACKER_X_OFFSET.get(), SCConfig.TRACKER_Y_OFFSET.get(), 0);
 
         //translate offset animation
@@ -181,7 +166,7 @@ public class FishTrackerLayer implements LayeredDraw.Layer
         if (cachedCaughtFish || !SCConfig.HIDE_ENTRIES_UNTIL_FOUND.get())
         {
             ScreenUtils.text(g, font, font.plainSubstrByWidth(cachedFP.getDisplayName().getString(), 77),
-                    uiX + 77,  uiY + 27, SCColors.GUIDE_TEXT_DARK, false);
+                    uiX + 77, uiY + 27, SCColors.GUIDE_TEXT_DARK, false);
             ScreenUtils.item(g, cachedFP.catchInfo().fish().toStack(), uiX + 42, uiY + 15, g.pose(), 2);
         }
         else

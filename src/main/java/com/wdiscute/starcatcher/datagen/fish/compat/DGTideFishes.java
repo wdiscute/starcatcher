@@ -7,12 +7,12 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import org.jetbrains.annotations.Nullable;
 
 public class DGTideFishes
 {
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
         //
         //  ,--.   ,--.    ,--.
@@ -770,7 +770,7 @@ public class DGTideFishes
                         .withSizeAndWeight(40, 12, 1600, 1100)
                         .addRestriction(DimensionRestriction.OVERWORLD)
                         .addRestriction(FluidRestriction.WATER)
-                        .addRestriction(StructureRestriction.TRIAL_CHAMBERS)
+                        //.addRestriction(StructureRestriction.TRIAL_CHAMBERS)
                         .withRarity(Rarity.EPIC),
                 "tide"
         );

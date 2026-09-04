@@ -9,7 +9,6 @@ import com.wdiscute.starcatcher.registry.SCEntities;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.EntityType;
@@ -22,6 +21,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.Fluid;
+import net.nikdo53.neobackports.io.components.DataComponents;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -40,7 +40,7 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
 
     public static Item getBucketForStack(ItemStack stack)
     {
-        return stack.has(DataComponents.FIRE_RESISTANT) ? SCItems.STARCAUGHT_LAVA_BUCKET.get() : SCItems.STARCAUGHT_BUCKET.get();
+        return stack.getItem().isFireResistant() ? SCItems.STARCAUGHT_LAVA_BUCKET.get() : SCItems.STARCAUGHT_BUCKET.get();
     }
 
     @Override
@@ -77,8 +77,8 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
         else
         {
             Component baseName;
-            Component customName = maybeStack.toStack().get(DataComponents.CUSTOM_NAME);
-            Component itemName = maybeStack.toStack().get(DataComponents.ITEM_NAME);
+            Component customName = maybeStack.toStack().get(DataComponents.CUSTOM_NAME.get());
+            Component itemName = maybeStack.toStack().get(DataComponents.ITEM_NAME.get());
 
             if (customName != null)
             {

@@ -75,7 +75,7 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
     );
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         if (state.getOptionalValue(BaseMultiblock.CENTER).orElse(false))
             return BOTTOM;
@@ -103,7 +103,7 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
         //open reset screen
         //if (level.isClientSide) screen();

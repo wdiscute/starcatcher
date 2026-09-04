@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class LetterItem extends Item
         if (editableMessage == null)
             editableMessage = new EditableMessage(player.getName().getString(), List.of());
 
-        PacketDistributor.sendToPlayer((ServerPlayer) player, new CBOpenEditableMessagePayload(editableMessage));
+        PacketDistributorNeo.sendToPlayer((ServerPlayer) player, new CBOpenEditableMessagePayload(editableMessage));
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }

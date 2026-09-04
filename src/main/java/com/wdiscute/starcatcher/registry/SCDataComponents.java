@@ -9,26 +9,24 @@ import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.utils.MaybeStack;
-import com.wdiscute.utils.Utils;
-import net.minecraft.core.UUIDUtil;
-import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.nikdo53.neobackports.io.components.DataComponentType;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.Supplier;
 import java.util.function.UnaryOperator;
 
 public interface SCDataComponents
 {
-    DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES =
-            DeferredRegister.createDataComponents(Registries.DATA_COMPONENT_TYPE, Starcatcher.MOD_ID);
+    DeferredRegisterTyped.DataComponents DATA_COMPONENT_TYPES =
+            DeferredRegisterTyped.createDataComponents(Starcatcher.MOD_ID);
 
     //bucketed fish
     DeferredHolder<DataComponentType<?>, DataComponentType<MaybeStack>> BUCKETED_FISH = register(
@@ -70,7 +68,7 @@ public interface SCDataComponents
 
     DeferredHolder<DataComponentType<?>, DataComponentType<AbstractTackleSkin>> TACKLE_SKIN = register(
             "tackle_skin",
-            builder -> builder.persistent(Starcatcher.TACKLE_SKIN_REGISTRY.byNameCodec()));
+            builder -> builder.persistent(Starcatcher.TACKLE_SKIN_REGISTRY.getCodec()));
 
     DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> NETHERITE_UPGRADE = register(
             "netherite_upgraded",
@@ -79,7 +77,7 @@ public interface SCDataComponents
     //tackle box
     DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> TACKLE_BOX_FISHES = register(
             "tackle_box_fishes",
-            builder -> builder.persistent(ItemStack.OPTIONAL_CODEC.listOf()));
+            builder -> builder.persistent(ItemStack.CODEC.listOf()));
 
     static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {
@@ -89,17 +87,17 @@ public interface SCDataComponents
     @Nullable
     static <T> T get(ItemStack stack, Supplier<DataComponentType<T>> component)
     {
-        return stack.get(component);
+        return stack.get(component.get());
     }
 
     static <T> boolean has(ItemStack stack, Supplier<DataComponentType<T>> component)
     {
-        return stack.has(component);
+        return stack.has(component.get());
     }
 
     static <T> void remove(ItemStack stack, Supplier<DataComponentType<T>> component)
     {
-        stack.remove(component);
+        stack.remove(component.get());
     }
 
     @Nonnull

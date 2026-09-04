@@ -29,8 +29,9 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.server.command.EnumArgument;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.server.command.EnumArgument;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,19 +40,19 @@ import java.util.Optional;
 public interface SCCommands
 {
     DynamicCommandExceptionType ERROR_ROD = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.rod_not_found", o)
+            o -> Component.translatable("commands.starcatcher.rod_not_found", o)
     );
 
     DynamicCommandExceptionType NOTHING_THERE = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.nothing_there")
+            o -> Component.translatable("commands.starcatcher.nothing_there")
     );
 
     DynamicCommandExceptionType ERROR_EMPTY = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.item_empty", o)
+            o -> Component.translatable("commands.starcatcher.item_empty", o)
     );
 
     DynamicCommandExceptionType ERROR_FISH_ENTRY_INVALID = new DynamicCommandExceptionType(
-            o -> Component.translatableEscape("commands.starcatcher.fish_entry_not_found", o)
+            o -> Component.translatable("commands.starcatcher.fish_entry_not_found", o)
     );
 
     static void register(CommandDispatcher<CommandSourceStack> dispatcher, CommandBuildContext context)
@@ -271,7 +272,7 @@ public interface SCCommands
         ItemStack stack = player.getMainHandItem();
         if (!stack.is(SCTags.RODS)) throw ERROR_ROD.create(null);
 
-        SCDataComponents.set(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(tackleSkin));
+        SCDataComponents.set(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(tackleSkin.location()));
 
         return 1;
     }
@@ -290,7 +291,7 @@ public interface SCCommands
         if (!available.isEmpty())
         {
             FishProperties fpToFish = available.get(Utils.r.nextInt(available.size()));
-            PacketDistributor.sendToPlayer(player, new CBFishingStartedPayload(fpToFish, MaybeStack.EMPTY, new MaybeStack(player.getMainHandItem())));
+            PacketDistributorNeo.sendToPlayer(player, new CBFishingStartedPayload(fpToFish, MaybeStack.EMPTY, new MaybeStack(player.getMainHandItem())));
         }
         else
         {
@@ -308,8 +309,8 @@ public interface SCCommands
         if (optional.isPresent())
         {
             var treasure = new MaybeStack(FishApi.getTreasure(player, optional.get(), List.of()));
-            if (SCConfig.HIDE_TREASURES.get()) treasure = new MaybeStack(SCItems.UNKNOWN_FISH);
-            PacketDistributor.sendToPlayer(player, new CBFishingStartedPayload(optional.get(), treasure, new MaybeStack(player.getMainHandItem())));
+            if (SCConfig.HIDE_TREASURES.get()) treasure = new MaybeStack(SCItems.UNKNOWN_FISH.asItem());
+            PacketDistributorNeo.sendToPlayer(player, new CBFishingStartedPayload(optional.get(), treasure, new MaybeStack(player.getMainHandItem())));
             return 1;
         }
         else

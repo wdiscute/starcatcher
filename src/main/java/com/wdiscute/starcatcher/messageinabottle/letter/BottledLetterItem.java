@@ -1,7 +1,5 @@
 package com.wdiscute.starcatcher.messageinabottle.letter;
 
-import net.minecraft.core.Direction;
-import net.minecraft.core.Position;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -9,13 +7,11 @@ import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 
-public class BottledLetterItem extends Item implements ProjectileItem
+public class BottledLetterItem extends Item
 {
     public BottledLetterItem()
     {
@@ -66,13 +62,5 @@ public class BottledLetterItem extends Item implements ProjectileItem
         player.awardStat(Stats.ITEM_USED.get(this));
         itemstack.consume(1, player);
         return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
-    }
-
-    @Override
-    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction)
-    {
-        BottledLetterEntity bottleEntity = new BottledLetterEntity(level, pos.x(), pos.y(), pos.z());
-        bottleEntity.setItem(stack);
-        return bottleEntity;
     }
 }

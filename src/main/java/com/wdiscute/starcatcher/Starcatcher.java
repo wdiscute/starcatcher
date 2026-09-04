@@ -19,14 +19,15 @@ import net.minecraft.core.Registry;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.client.gui.ConfigurationScreen;
-import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
-import net.neoforged.neoforge.registries.RegistryBuilder;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.commons.lang3.tuple.Triple;
 import org.slf4j.Logger;
 
@@ -56,28 +57,23 @@ public class Starcatcher
             ResourceKey.createRegistryKey(Starcatcher.rl("bobber_skin"));
 
     //registry
-    public static final Registry<AbstractFishRestriction> FISH_RESTRICTIONS_REGISTRY = new RegistryBuilder<>(FISH_RESTRICTIONS)
-            .sync(true)
-            .defaultKey(Starcatcher.rl("empty"))
-            .create();
+    public static IForgeRegistry<AbstractFishRestriction> FISH_RESTRICTIONS_REGISTRY;
 
-    public static final Registry<Supplier<? extends AbstractSweetSpotBehaviour>> SWEETSPOT_BEHAVIOUR_REGISTRY = new RegistryBuilder<>(SWEETSPOT_BEHAVIOUR)
-            .sync(true)
-            .defaultKey(Starcatcher.rl("normal"))
-            .create();
+    public static IForgeRegistry<Supplier<? extends AbstractSweetSpotBehaviour>> SWEETSPOT_BEHAVIOUR_REGISTRY;
 
-    public static final Registry<AbstractTackleSkin> TACKLE_SKIN_REGISTRY = new RegistryBuilder<>(TACKLE_SKIN)
-            .sync(true)
-            .defaultKey(Starcatcher.BASE)
-            .create();
+    public static IForgeRegistry<AbstractTackleSkin> TACKLE_SKIN_REGISTRY;
+
 
     public static ResourceLocation rl(String s)
     {
         return Utils.rl(Starcatcher.MOD_ID, s);
     }
 
-    public Starcatcher(IEventBus modEventBus, ModContainer modContainer)
+    public Starcatcher()
     {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        ModLoadingContext modContainer = ModLoadingContext.get();
+
         SCCreativeModeTabs.register(modEventBus);
         SCItems.register(modEventBus);
         SCBlocks.register(modEventBus);
@@ -93,7 +89,7 @@ public class Starcatcher
         SCFishRestrictions.register(modEventBus);
         SCTackleSkins.register(modEventBus);
         SCProcessors.register(modEventBus);
-        SCLootModifiers.register(modEventBus);
+        //SCLootModifiers.register(modEventBus);
         SCStats.register(modEventBus);
         SCAttributes.register(modEventBus);
         SCDataEntries.register(modEventBus);
@@ -108,56 +104,8 @@ public class Starcatcher
 
         //register mod-specific fishes
         SCItems.registerExtraItems();
-    }
 
-    @Mod(value = Starcatcher.MOD_ID, dist = Dist.CLIENT)
-    public static class Client
-    {
-        public Client(ModContainer modContainer)
-        {
-            modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
-
-            //register tooltip tag processors
-            Tooltips.registerProcessor("scgolden",
-                    (t, s, e) -> SCTooltipGradient.process(t,
-                            Triple.of(202, 93, 5),
-                            Triple.of(230, 204, 9)
-                    ));
-
-            Tooltips.registerProcessor("sclegendary", SCLegendary::process);
-
-            Tooltips.registerProcessor("scepic",
-                    (t, s, e) -> SCTooltipGradient.process(t,
-                            Triple.of(61, 0, 255),
-                            Triple.of(255, 0, 224)
-                    ));
-
-            Tooltips.registerProcessor("scrare",
-                    (t, s, e) -> SCTooltipGradient.process(t,
-                            Triple.of(20, 40, 120),
-                            Triple.of(100, 180, 255)
-                    ));
-
-            Tooltips.registerProcessor("scuncommon",
-                    (t, s, e) -> SCTooltipGradient.process(t,
-                            Triple.of(11, 185, 2),
-                            Triple.of(2, 185, 69)
-                    ));
-
-            Tooltips.registerProcessor("sccommon",
-                    (t, s, e) -> Component.literal(t));
-
-            Tooltips.registerProcessor("sctrash",
-                    (t, s, e) -> Component.literal(t));
-
-            Tooltips.registerProcessor("scnone",
-                    (t, s, e) -> Component.literal(t));
-
-            Tooltips.registerProcessor("sclava",
-                    (t, s, e) -> SCTooltipGradient.process(t,
-                            Triple.of(219, 91, 41),
-                            Triple.of(219, 129, 41)
-                    ));
-        }
+        if(FMLLoader.getDist().isClient())
+            new StarcatcherClient();
     }
 }

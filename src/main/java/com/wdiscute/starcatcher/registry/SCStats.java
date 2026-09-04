@@ -3,14 +3,14 @@ package com.wdiscute.starcatcher.registry;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 public interface SCStats
 {
-    DeferredRegister<ResourceLocation> CUSTOM_STATS =
-            DeferredRegister.create(BuiltInRegistries.CUSTOM_STAT, Starcatcher.MOD_ID);
+    DeferredRegisterTyped<ResourceLocation> CUSTOM_STATS =
+            DeferredRegisterTyped.create(BuiltInRegistries.CUSTOM_STAT, Starcatcher.MOD_ID);
 
 
     DeferredHolder<ResourceLocation, ResourceLocation> STARCAUGHT_FISH = register("starcaught_fish");

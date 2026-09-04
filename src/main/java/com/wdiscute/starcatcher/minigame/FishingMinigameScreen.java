@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.minigame;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -30,8 +31,9 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 import org.joml.Quaternionf;
 import org.joml.Vector2d;
 
@@ -222,10 +224,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public void renderBackground(GuiGraphics g, int mouseX, int mouseY, float partialTickNeo)
+    public void renderBackground(GuiGraphics g)
     {
         if (renderBlur)
-            super.renderBackground(g, mouseX, mouseY, partialTickNeo);
+            super.renderBackground(g);
 
         final float partialTick = PartialTickHelper.INSTANCE.getPartialTicks(minecraft.level);
 
@@ -237,7 +239,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         poseStack.translate(SCConfig.MINIGAME_X_OFFSET.get(), SCConfig.MINIGAME_Y_OFFSET.get(), 0);
 
-        poseStack.scale(((float) SCConfig.MINIGAME_RENDER_SCALE.getAsDouble()), ((float) SCConfig.MINIGAME_RENDER_SCALE.getAsDouble()), 1);
+        poseStack.scale(((float) (double) SCConfig.MINIGAME_RENDER_SCALE.get()), ((float) (double) SCConfig.MINIGAME_RENDER_SCALE.get()), 1);
 
         poseStack.translate(-width >> 1, -height >> 1, 0);
 
@@ -299,7 +301,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         rod.render(g, centerX - 118, centerY - 116 + (flip ? 130 : 0),
                 16, 0, 96, 112);
 
-        progressSmooth += ((progress - progressSmooth) / 6) * partialTickNeo;
+        progressSmooth += ((progress - progressSmooth) / 6) * partialTick;
 
         float yoffset = progressSmooth == 0 ? 0 : (progressSmooth / (float) hp * 77);
 
@@ -531,10 +533,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta)
     {
-        modifiers.forEach(o -> o.mouseScrolled(this, mouseX, mouseY, scrollX, scrollY));
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        modifiers.forEach(o -> o.mouseScrolled(this, mouseX, mouseY, delta));
+        return super.mouseScrolled(mouseX, mouseY, delta);
     }
 
     @Override
@@ -593,7 +595,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         kimbeMarkerPos = getHandlePosPrecise();
 
 
-        for (ActiveSweetSpot ass : activeSweetSpots.reversed())
+        for (ActiveSweetSpot ass : Lists.reverse(activeSweetSpots))
         {
             //if can hit spot
             if (ass.canHit && doDegreesOverlapWithLeeway(getHandlePosPrecise(), ass.pos, ass.thickness / 2)
@@ -717,7 +719,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
                 tackleSkin.onSuccessfulMinigame(Minecraft.getInstance().player);
 
-                PacketDistributor.sendToServer(new SBFishingCompletedPayload(true, tickCount, awardTreasure, perfectCatch, consecutiveHits));
+                PacketDistributorNeo.sendToServer(new SBFishingCompletedPayload(true, tickCount, awardTreasure, perfectCatch, consecutiveHits));
                 this.onClose();
             }
         }
@@ -730,7 +732,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     {
         modifiers.forEach(o -> o.onRemove(this));
 
-        PacketDistributor.sendToServer(new SBFishingCompletedPayload(false, tickCount, false, false, consecutiveHits));
+        PacketDistributorNeo.sendToServer(new SBFishingCompletedPayload(false, tickCount, false, false, consecutiveHits));
         this.minecraft.popGuiLayer();
     }
 

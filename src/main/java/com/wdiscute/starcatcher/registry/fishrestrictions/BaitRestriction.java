@@ -20,7 +20,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -30,18 +30,24 @@ import java.util.Optional;
 
 public class BaitRestriction extends AbstractFishRestriction
 {
-    public final Map<ResourceLocation, Integer> baits;
+    public final List<Utils.Duo<ResourceLocation, Integer>> baits;
 
     public static final MapCodec<BaitRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    ExtraCodecs.strictUnboundedMap(ResourceLocation.CODEC, Codec.INT).fieldOf("baits").forGetter(o -> o.baits),
+                    Utils.Duo.codec(ResourceLocation.CODEC, "id", Codec.INT, "extra_chance").listOf().fieldOf("baits").forGetter(o -> o.baits),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, BaitRestriction::new));
 
-    public BaitRestriction(Map<ResourceLocation, Integer> baits, String translationOverride)
+    public BaitRestriction(List<Utils.Duo<ResourceLocation, Integer>> baits, String translationOverride)
     {
         super(translationOverride);
         this.baits = baits;
+    }
+
+    public BaitRestriction(Utils.Duo<ResourceLocation, Integer> baits, String translationOverride)
+    {
+        super(translationOverride);
+        this.baits = List.of(baits);
     }
 
     @Override
@@ -63,10 +69,9 @@ public class BaitRestriction extends AbstractFishRestriction
 
         Item bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack().getItem();
 
-        if (baits.containsKey(BuiltInRegistries.ITEM.getKey(bait)))
-            return baits.get(BuiltInRegistries.ITEM.getKey(bait));
-
-        return 0;
+        return baits.stream()
+                .filter(o -> o.first().equals(BuiltInRegistries.ITEM.getKey(bait)))
+                .findAny().map(Utils.Duo::second).orElse(0);
     }
 
     @Override
@@ -86,7 +91,7 @@ public class BaitRestriction extends AbstractFishRestriction
     {
         //bait name / [hover]
         if (baits.size() == 1)
-            return MutableComponent.create(BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getDescription().getContents());
+            return MutableComponent.create(BuiltInRegistries.ITEM.get(baits.get(0).first()).getDescription().getContents());
         else
             return Component.translatable("gui.guide.hover");
     }
@@ -99,10 +104,10 @@ public class BaitRestriction extends AbstractFishRestriction
         hover.add(Component.translatable("gui.guide.bait_chance_added").withStyle(Style.EMPTY.withBold(true)));
         hover.add(Component.empty());
 
-        baits.forEach((item, value) ->
+        baits.forEach((duo) ->
         {
-            Optional<Item> optional = BuiltInRegistries.ITEM.getOptional(item);
-            optional.ifPresent(o -> hover.add(Component.literal(value + " - ")
+            Optional<Item> optional = BuiltInRegistries.ITEM.getOptional(duo.first());
+            optional.ifPresent(o -> hover.add(Component.literal(duo.second() + " - ")
                     .append(Component.translatable(o.getDescriptionId()))));
         });
         return hover;
@@ -114,22 +119,22 @@ public class BaitRestriction extends AbstractFishRestriction
         return fp.baseChance() == 0 ? List.of(Component.translatable("gui.guide.bait_required")) : List.of();
     }
 
-    public static final BaitRestriction CHERRY_BAIT = new BaitRestriction(Map.of(SCItems.CHERRY_BAIT.getId(), 50), "");
-    public static final BaitRestriction LUSH_BAIT = new BaitRestriction(Map.of(SCItems.LUSH_BAIT.getId(), 50), "");
-    public static final BaitRestriction SCULK_BAIT = new BaitRestriction(Map.of(SCItems.SCULK_BAIT.getId(), 50), "");
-    public static final BaitRestriction DRIPSTONE_BAIT = new BaitRestriction(Map.of(SCItems.DRIPSTONE_BAIT.getId(), 50), "");
-    public static final BaitRestriction MURKWATER_BAIT = new BaitRestriction(Map.of(SCItems.MURKWATER_BAIT.getId(), 50), "");
-    public static final BaitRestriction LEGENDARY_BAIT = new BaitRestriction(Map.of(SCItems.LEGENDARY_BAIT.getId(), 50), "");
+    public static final BaitRestriction CHERRY_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.CHERRY_BAIT.getId(), 50), "");
+    public static final BaitRestriction LUSH_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.LUSH_BAIT.getId(), 50), "");
+    public static final BaitRestriction SCULK_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.SCULK_BAIT.getId(), 50), "");
+    public static final BaitRestriction DRIPSTONE_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.DRIPSTONE_BAIT.getId(), 50), "");
+    public static final BaitRestriction MURKWATER_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.MURKWATER_BAIT.getId(), 50), "");
+    public static final BaitRestriction LEGENDARY_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.LEGENDARY_BAIT.getId(), 50), "");
 
-    public static final BaitRestriction WITHER_SKELETON_SKULL = new BaitRestriction(Map.of(Utils.rl("wither_skeleton_skull"), 50), "");
+    public static final BaitRestriction WITHER_SKELETON_SKULL = new BaitRestriction(new Utils.Duo<>(Utils.rl("wither_skeleton_skull"), 50), "");
 
     public static final BaitRestriction FISH_OF_THIEVES = new BaitRestriction(
-            Map.of(
-                    Utils.rl("fishofthieves", "earthworms"), 50,
-                    Utils.rl("fishofthieves", "grubs"), 50,
-                    Utils.rl("fishofthieves", "leeches"), 50),
+            List.of(
+                    new Utils.Duo<>(Utils.rl("fishofthieves", "earthworms"), 50),
+                    new Utils.Duo<>(Utils.rl("fishofthieves", "grubs"), 50),
+                    new Utils.Duo<>(Utils.rl("fishofthieves", "leeches"), 50)),
             "");
 
-    public static final BaitRestriction ALMIGHTY_WORM = new BaitRestriction(Map.of(SCItems.ALMIGHTY_WORM.getId(), 5), "");
+    public static final BaitRestriction ALMIGHTY_WORM = new BaitRestriction(new Utils.Duo<>(SCItems.ALMIGHTY_WORM.getId(), 5), "");
 
 }

@@ -58,7 +58,7 @@ public class StarcatcherFishingRodItem extends Item
         FishingBobAttachment fishingBobAttachment = SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB.get());
 
         //get tackle skin
-        AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(Starcatcher.BASE));
+        AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
 
         //if player is not fishing, cast
         if (fishingBobAttachment.isEmpty())
@@ -103,6 +103,11 @@ public class StarcatcherFishingRodItem extends Item
         }
 
         return InteractionResultHolder.success(stack);
+    }
+
+    public int getEnchantmentValue()
+    {
+        return 1;
     }
 
     @Override

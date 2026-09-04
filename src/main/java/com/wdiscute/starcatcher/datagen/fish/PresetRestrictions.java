@@ -3,7 +3,7 @@ package com.wdiscute.starcatcher.datagen.fish;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Textures;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 
 import java.util.List;
 
@@ -14,12 +14,12 @@ public class PresetRestrictions
                     DimensionRestriction.OVERWORLD
             );
 
-    public static FishProperties empty(BootstrapContext<FishProperties> context)
+    public static FishProperties empty(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty();
     }
 
-    public static FishProperties overworldVoid(BootstrapContext<FishProperties> context)
+    public static FishProperties overworldVoid(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -28,7 +28,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties lake(BootstrapContext<FishProperties> context)
+    public static FishProperties lake(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -38,7 +38,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties lakeMountain(BootstrapContext<FishProperties> context)
+    public static FishProperties lakeMountain(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withBaseChance(10)
@@ -50,7 +50,7 @@ public class PresetRestrictions
     }
 
 
-    public static FishProperties coldLake(BootstrapContext<FishProperties> context)
+    public static FishProperties coldLake(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
@@ -61,7 +61,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties iceSpikes(BootstrapContext<FishProperties> context)
+    public static FishProperties iceSpikes(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
@@ -73,7 +73,7 @@ public class PresetRestrictions
     }
 
 
-    public static FishProperties coldLakeMountain(BootstrapContext<FishProperties> context)
+    public static FishProperties coldLakeMountain(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withBaseChance(10)
@@ -85,7 +85,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties warmLake(BootstrapContext<FishProperties> context)
+    public static FishProperties warmLake(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -95,7 +95,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties swamp(BootstrapContext<FishProperties> context)
+    public static FishProperties swamp(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -105,7 +105,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties darkOakForest(BootstrapContext<FishProperties> context)
+    public static FishProperties darkOakForest(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -115,7 +115,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties forest(BootstrapContext<FishProperties> context)
+    public static FishProperties forest(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -126,7 +126,7 @@ public class PresetRestrictions
     }
 
 
-    public static FishProperties cherryGrove(BootstrapContext<FishProperties> context)
+    public static FishProperties cherryGrove(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -136,7 +136,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties jungle(BootstrapContext<FishProperties> context)
+    public static FishProperties jungle(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -146,7 +146,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties bambooJungle(BootstrapContext<FishProperties> context)
+    public static FishProperties bambooJungle(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -156,7 +156,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties flowerForest(BootstrapContext<FishProperties> context)
+    public static FishProperties flowerForest(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -166,7 +166,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties sunflowerPlains(BootstrapContext<FishProperties> context)
+    public static FishProperties sunflowerPlains(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -176,7 +176,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties river(BootstrapContext<FishProperties> context)
+    public static FishProperties river(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -186,7 +186,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties coldRiver(BootstrapContext<FishProperties> context)
+    public static FishProperties coldRiver(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -196,7 +196,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties allOceans(BootstrapContext<FishProperties> context)
+    public static FishProperties allOceans(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -206,7 +206,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties deepOcean(BootstrapContext<FishProperties> context)
+    public static FishProperties deepOcean(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -216,7 +216,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties warmOcean(BootstrapContext<FishProperties> context)
+    public static FishProperties warmOcean(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -226,7 +226,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties coldOcean(BootstrapContext<FishProperties> context)
+    public static FishProperties coldOcean(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -236,7 +236,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties beach(BootstrapContext<FishProperties> context)
+    public static FishProperties beach(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -246,7 +246,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties mushroomFields(BootstrapContext<FishProperties> context)
+    public static FishProperties mushroomFields(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
@@ -256,7 +256,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties caves(BootstrapContext<FishProperties> context)
+    public static FishProperties caves(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
@@ -267,7 +267,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties dripstoneCaves(BootstrapContext<FishProperties> context)
+    public static FishProperties dripstoneCaves(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
@@ -277,7 +277,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties lushCaves(BootstrapContext<FishProperties> context)
+    public static FishProperties lushCaves(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
@@ -287,7 +287,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties deepslate(BootstrapContext<FishProperties> context)
+    public static FishProperties deepslate(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
@@ -297,7 +297,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties deepDark(BootstrapContext<FishProperties> context)
+    public static FishProperties deepDark(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.DEEP_DARK))
@@ -308,7 +308,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties surfaceLava(BootstrapContext<FishProperties> context)
+    public static FishProperties surfaceLava(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.LAVA_OVERWORLD))
@@ -319,7 +319,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties caveLava(BootstrapContext<FishProperties> context)
+    public static FishProperties caveLava(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.LAVA_OVERWORLD))
@@ -329,7 +329,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties deepslateLava(BootstrapContext<FishProperties> context)
+    public static FishProperties deepslateLava(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.LAVA_OVERWORLD))
@@ -339,7 +339,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties netherLava(BootstrapContext<FishProperties> context)
+    public static FishProperties netherLava(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
@@ -348,7 +348,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties crimsonForest(BootstrapContext<FishProperties> context)
+    public static FishProperties crimsonForest(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
@@ -358,7 +358,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties warpedForest(BootstrapContext<FishProperties> context)
+    public static FishProperties warpedForest(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
@@ -368,7 +368,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties netherLavaBasaltDeltas(BootstrapContext<FishProperties> context)
+    public static FishProperties netherLavaBasaltDeltas(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
@@ -378,7 +378,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties soulSandValley(BootstrapContext<FishProperties> context)
+    public static FishProperties soulSandValley(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
@@ -388,7 +388,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties endAir(BootstrapContext<FishProperties> context)
+    public static FishProperties endAir(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.END_VOID))
@@ -397,7 +397,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties endVoid(BootstrapContext<FishProperties> context)
+    public static FishProperties endVoid(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.END_VOID))
@@ -407,7 +407,7 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties endOuterIslandsAir(BootstrapContext<FishProperties> context)
+    public static FishProperties endOuterIslandsAir(BootstapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.END_VOID))

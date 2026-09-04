@@ -3,20 +3,15 @@ package com.wdiscute.starcatcher.compat.jei;
 import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipe;
 import com.wdiscute.starcatcher.registry.SCItems;
 import mezz.jei.api.gui.builder.IIngredientAcceptor;
-import mezz.jei.api.gui.ingredient.IRecipeSlotDrawable;
-import mezz.jei.api.recipe.IFocus;
-import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.common.platform.Services;
 import mezz.jei.library.plugins.vanilla.anvil.SmithingCategoryExtension;
 import mezz.jei.library.util.RecipeUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.SmithingRecipeInput;
+import net.nikdo53.neobackports.utils.recipe.input.SmithingRecipeInput;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public class StarcatcherJeiSmithingCategoryExtension extends SmithingCategoryExtension<StarcatcherRodRecipe>
 {
@@ -63,7 +58,7 @@ public class StarcatcherJeiSmithingCategoryExtension extends SmithingCategoryExt
         for (ItemStack template : templateStacks)
         {
             SmithingRecipeInput recipeInput = new SmithingRecipeInput(template, SCItems.ROD.toStack(), addition);
-            ItemStack output = RecipeUtil.assembleResultItem(recipeInput, recipe);
+            ItemStack output = recipe.assembledNoRegistries(recipeInput);
             ingredientAcceptor.addItemStack(output);
         }
     }

@@ -14,6 +14,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 
 import java.awt.*;
 
@@ -53,7 +54,7 @@ public class DeepDarkModifier extends AbstractMinigameModifier
         Object data = instance.modifierData.computeIfAbsent(getIdentifier(), o -> 0);
 
         if (data instanceof Integer i)
-            instance.modifierData.put(getIdentifier(), Math.clamp(i - 10, 0, 255));
+            instance.modifierData.put(getIdentifier(), Mth.clamp(i - 10, 0, 255));
     }
 
     @Override
@@ -67,7 +68,7 @@ public class DeepDarkModifier extends AbstractMinigameModifier
         {
             Color c = new Color(0x00000000, true);
 
-            int newAlpha = Math.clamp(c.getAlpha() + i, 0, 255);
+            int newAlpha = Mth.clamp(c.getAlpha() + i, 0, 255);
 
             Color newColor = new Color(
                     c.getRed(),

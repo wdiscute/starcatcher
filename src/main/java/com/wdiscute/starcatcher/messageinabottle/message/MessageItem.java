@@ -9,7 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 public class MessageItem extends Item
 {
@@ -29,9 +29,9 @@ public class MessageItem extends Item
 
         //if item has message, open message screen
         if (message != null)
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new CBOpenMessagePayload(message));
+            PacketDistributorNeo.sendToPlayer((ServerPlayer) player, new CBOpenMessagePayload(message));
         else
-            PacketDistributor.sendToPlayer((ServerPlayer) player, new CBOpenMessagePayload(Message.DEFAULT));
+            PacketDistributorNeo.sendToPlayer((ServerPlayer) player, new CBOpenMessagePayload(Message.DEFAULT));
 
         return InteractionResultHolder.success(player.getItemInHand(usedHand));
     }

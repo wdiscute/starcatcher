@@ -2,7 +2,6 @@ package com.wdiscute.starcatcher.blocks.display;
 
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.registry.SCBlocks;
-import com.wdiscute.starcatcher.compat.SableCompat;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.MaybeStack;
@@ -46,18 +45,8 @@ public class DisplayBlockEntity extends BlockEntity
         Player player = level.getNearestPlayer((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 3.0, false);
         if (player != null)
         {
-            double d0;
-            double d1;
-
-            if (SableCompat.isLoaded())
-                d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
-            else
-                d0 = player.getX() - ((double) pos.getX() + 0.5);
-
-            if (SableCompat.isLoaded())
-                d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
-            else
-                d1 = player.getZ() - ((double) pos.getZ() + 0.5);
+            double d0 = player.getX() - ((double) pos.getX() + 0.5);
+            double d1 = player.getZ() - ((double) pos.getZ() + 0.5);
 
             enchantingTable.tRot = (float) Mth.atan2(d1, d0);
             enchantingTable.open += 0.1F;
@@ -142,7 +131,7 @@ public class DisplayBlockEntity extends BlockEntity
         if (SCDataComponents.has(stack, SCDataComponents.CAUGHT_FISH_INFO))
         {
             double percentile = SCDataComponents.get(stack, SCDataComponents.CAUGHT_FISH_INFO).percentile();
-            percentile = Math.clamp(percentile, 0, 100);
+            percentile = Mth.clamp(percentile, 0, 100);
             double scaledValue = (percentile / 100.0) * 14 + 1;
             return (16 - (int) scaledValue);
         }
@@ -160,11 +149,11 @@ public class DisplayBlockEntity extends BlockEntity
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
         if (tag.contains("Book"))
-            this.item = new MaybeStack(ItemStack.parse(registries, tag.getCompound("Book")).orElse(ItemStack.EMPTY));
+            this.item = new MaybeStack(ItemStack.of(tag.getCompound("Book")));
         else
             this.item = MaybeStack.EMPTY;
 
@@ -173,7 +162,7 @@ public class DisplayBlockEntity extends BlockEntity
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
         if (!this.getImmutableItem().isEmpty())

@@ -7,12 +7,11 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 public class EmptyRestriction extends AbstractFishRestriction
 {
-    public static final MapCodec<EmptyRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
+    public static final MapCodec<? extends AbstractFishRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, EmptyRestriction::new));
@@ -29,7 +28,7 @@ public class EmptyRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> getRegistryHolder()
+    public net.nikdo53.neobackports.registry.DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> getRegistryHolder()
     {
         return SCFishRestrictions.EMPTY;
     }

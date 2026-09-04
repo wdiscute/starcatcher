@@ -2,15 +2,15 @@ package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public interface SCSweetSpotsBehaviour
 {
-    DeferredRegister<Supplier<? extends AbstractSweetSpotBehaviour>> REGISTRY =
-            DeferredRegister.create(Starcatcher.SWEETSPOT_BEHAVIOUR_REGISTRY, Starcatcher.MOD_ID);
+    DeferredRegisterTyped<Supplier<? extends AbstractSweetSpotBehaviour>> REGISTRY =
+            DeferredRegisterTyped.create(Starcatcher.SWEETSPOT_BEHAVIOUR_REGISTRY, Starcatcher.MOD_ID);
 
     ResourceLocation NORMAL = registerSweetspot("normal", () -> NormalSweetSpotBehaviour::new);
     ResourceLocation MUSHROOM = registerSweetspot("mushroom", () -> MushroomSweetSpotBehaviour::new);

@@ -20,6 +20,6 @@ public class TntSweetSpotBehaviour extends NormalSweetSpotBehaviour
     {
         super.onHit(instance, ass);
         if (SCConfig.ENABLE_HIT_SOUNDS.get())
-            Minecraft.getInstance().player.playSound(SoundEvents.GENERIC_EXPLODE.value(), 0.2f, 1f);
+            Minecraft.getInstance().player.playSound(SoundEvents.GENERIC_EXPLODE, 0.2f, 1f);
     }
 }

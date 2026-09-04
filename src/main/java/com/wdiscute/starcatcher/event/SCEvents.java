@@ -17,6 +17,8 @@ import com.wdiscute.starcatcher.data.network.tournament.CBClearTournamentPayload
 import com.wdiscute.starcatcher.data.network.tournament.SBStandTournamentNameChangePayload;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
+import com.wdiscute.starcatcher.trigger.FishCaughtTrigger;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -27,36 +29,42 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.StatFormatter;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.event.*;
-import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
-import net.neoforged.neoforge.event.entity.EntityAttributeModificationEvent;
-import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
-import net.neoforged.neoforge.event.server.ServerStartedEvent;
-import net.neoforged.neoforge.event.server.ServerStoppingEvent;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.items.wrapper.SidedInvWrapper;
-import net.neoforged.neoforge.network.PacketDistributor;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
-import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
+import net.minecraftforge.common.capabilities.ForgeCapabilities;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
+import net.minecraftforge.event.AddPackFindersEvent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
+import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.server.ServerStartedEvent;
+import net.minecraftforge.event.server.ServerStoppingEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.items.wrapper.SidedInvWrapper;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.registries.DataPackRegistryEvent;
+import net.minecraftforge.registries.NewRegistryEvent;
+import net.nikdo53.neobackports.event.RegisterDataMapTypesEvent;
+import net.nikdo53.neobackports.event.RegisterPayloadHandlersEvent;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
+import net.nikdo53.neobackports.io.networking.PayloadRegistrar;
+import net.nikdo53.neobackports.registry.ForgeRegistryHelper;
 
-@EventBusSubscriber(modid = Starcatcher.MOD_ID)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID)
 public class SCEvents
 {
     @SubscribeEvent
@@ -132,9 +140,9 @@ public class SCEvents
 
                 FishingHook bobber = event.getHookEntity();
 
-                double x = Math.clamp((player.position().x - bobber.position().x) / 25, -1, 1);
-                double y = Math.clamp((player.position().y - bobber.position().y) / 20, -1, 1);
-                double z = Math.clamp((player.position().z - bobber.position().z) / 25, -1, 1);
+                double x = Mth.clamp((player.position().x - bobber.position().x) / 25, -1, 1);
+                double y = Mth.clamp((player.position().y - bobber.position().y) / 20, -1, 1);
+                double z = Mth.clamp((player.position().z - bobber.position().z) / 25, -1, 1);
                 Vec3 vec3 = new Vec3(x, 0.7 + y, z);
 
                 ItemEntity rodFished = new ItemEntity(player.level(),
@@ -155,29 +163,6 @@ public class SCEvents
     }
 
     @SubscribeEvent
-    public static void addCapabilities(RegisterCapabilitiesEvent event)
-    {
-        event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, SCBlockEntities.TACKLE_BOX.get(),
-                (container, side) ->
-                {
-                    if (container instanceof TackleBoxBlockEntity be)
-                    {
-                        return new SidedInvWrapper(container, side)
-                        {
-                            @Override
-                            public void setStackInSlot(int slot, ItemStack stack)
-                            {
-                                super.setStackInSlot(slot, stack);
-                                be.updateFishSlot();
-                            }
-                        };
-                    }
-                    return null;
-                }
-        );
-    }
-
-    @SubscribeEvent
     public static void serverStarted(ServerStartedEvent event)
     {
         TournamentHandler.setAll(TournamentSavedData.get(event.getServer().overworld()).getTournaments());
@@ -195,13 +180,18 @@ public class SCEvents
         event.enqueueWork(() ->
         {
             Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get(), StatFormatter.TIME);
+            SCCriterionTriggers.FISH = CriteriaTriggers.register(new FishCaughtTrigger());
         });
+
+
+
     }
 
     @SubscribeEvent
-    public static void levelTick(ServerTickEvent.Post event)
+    public static void levelTick(TickEvent.ServerTickEvent event)
     {
-        TournamentHandler.tick(event);
+        if (event.phase.equals(TickEvent.Phase.END))
+            TournamentHandler.tick(event);
     }
 
     @SubscribeEvent
@@ -227,7 +217,7 @@ public class SCEvents
                 TournamentHandler.clearTournamentToClient(sp);
 
             //send list of finished tournaments to client
-            PacketDistributor.sendToPlayer(sp, new CBFinishedTournamentsListPayload(TournamentHandler.getFinishedTournaments()));
+            PacketDistributorNeo.sendToPlayer(sp, new CBFinishedTournamentsListPayload(TournamentHandler.getFinishedTournaments()));
 
             //guide
             if (SCConfig.GIVE_GUIDE.get() && !FishingGuideAttachment.getReceivedGuide(player))
@@ -242,17 +232,21 @@ public class SCEvents
     @SubscribeEvent
     public static void addRegistry(NewRegistryEvent event)
     {
-        event.register(Starcatcher.SWEETSPOT_BEHAVIOUR_REGISTRY);
-        event.register(Starcatcher.TACKLE_SKIN_REGISTRY);
-        event.register(Starcatcher.FISH_RESTRICTIONS_REGISTRY);
+        ForgeRegistryHelper.getInstance(Starcatcher.SWEETSPOT_BEHAVIOUR)
+                .create(event, reg -> Starcatcher.SWEETSPOT_BEHAVIOUR_REGISTRY = reg);
+
+        ForgeRegistryHelper.getInstance(Starcatcher.TACKLE_SKIN)
+                .create(event, reg -> Starcatcher.TACKLE_SKIN_REGISTRY = reg);
+
+        ForgeRegistryHelper.getInstance(Starcatcher.FISH_RESTRICTIONS)
+                .create(event, reg -> Starcatcher.FISH_RESTRICTIONS_REGISTRY = reg);
     }
 
     @SubscribeEvent
     public static void addDatapackRegistry(DataPackRegistryEvent.NewRegistry event)
     {
         event.dataPackRegistry(
-                Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC,
-                builder -> builder.maxId(512));
+                Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC);
     }
 
     @SubscribeEvent
@@ -261,11 +255,11 @@ public class SCEvents
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
 
-        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && !level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.getAsBoolean())
+        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && !level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.get())
         {
             ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(pos).getBlockHolder(), level.getRandom()).toStack();
 
-            if(is.isEmpty())
+            if (is.isEmpty())
                 return;
 
             Vec3 vec3 = Vec3.atLowerCornerWithOffset(pos, 0.5F, 1.01, 0.5F).offsetRandom(level.random, 0.7F);
@@ -277,7 +271,7 @@ public class SCEvents
             if (event.getEntity() instanceof ServerPlayer player)
             {
                 player.swing(event.getHand(), true);
-                if (!player.hasInfiniteMaterials())
+                if (!player.isCreative())
                     event.getItemStack().shrink(1);
             }
         }
@@ -287,7 +281,7 @@ public class SCEvents
     @SubscribeEvent
     public static void modifyDefaultAttributes(EntityAttributeModificationEvent event)
     {
-        SCAttributes.REGISTRY.getEntries().forEach(o -> event.add(EntityType.PLAYER, o, 1.0));
+        SCAttributes.REGISTRY.getEntries().forEach(o -> event.add(EntityType.PLAYER, o.value(), 1.0));
     }
 
     @SubscribeEvent
@@ -312,7 +306,7 @@ public class SCEvents
     @SubscribeEvent
     public static void registerPayloads(final RegisterPayloadHandlersEvent event)
     {
-        final PayloadRegistrar registrar = event.registrar("1");
+        final PayloadRegistrar registrar = event.registrar("1", Starcatcher.MOD_ID);
         registrar.playToClient(
                 CBFishingStartedPayload.TYPE,
                 CBFishingStartedPayload.STREAM_CODEC,

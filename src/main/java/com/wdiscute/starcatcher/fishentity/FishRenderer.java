@@ -129,12 +129,6 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
        return Starcatcher.MISSINGNO;
     }
 
-    @Override
-    protected void setupRotations(FishEntity entity, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale) {
-        super.setupRotations(entity, poseStack, bob, yBodyRot, partialTick, scale);
-
-    }
-
     public static void renderFishFromItem(ItemRenderer itemRenderer, Map<Item, EntityModel<FishEntity>> map, ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, int overlay, Level level)
     {
         if (map.containsKey(itemStack.getItem()))

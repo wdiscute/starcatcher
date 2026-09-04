@@ -2,9 +2,8 @@ package com.wdiscute.starcatcher.messageinabottle.letter;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public record EditableMessage(
                     Codec.STRING.listOf().fieldOf("text").forGetter(EditableMessage::text)
             ).apply(instance, EditableMessage::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, EditableMessage> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<EditableMessage> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8, EditableMessage::sender,
             ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()), EditableMessage::text,
             EditableMessage::new

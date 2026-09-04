@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.compat.jei;
 
+import com.google.common.collect.Lists;
 import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -145,7 +146,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
             List<WeightedLootTable> lts = new ArrayList<>(treasure.lootTables());
             lts.sort(Comparator.comparingInt(WeightedLootTable::weight));
-            lts = lts.reversed();
+            lts = Lists.reverse(lts);
 
             if (!lts.isEmpty())
             {
@@ -159,7 +160,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
             List<WeightedStack> stks = new ArrayList<>(treasure.stacks());
             stks.sort(Comparator.comparingInt(WeightedStack::weight));
-            stks = stks.reversed();
+            stks = Lists.reverse(stks);
 
             List<ItemStack> stacks = new ArrayList<>();
 
@@ -167,7 +168,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
             if (!stks.isEmpty())
             {
-                stacks.removeFirst();
+                stacks.remove(0);
 
                 if (!treasureTooltip.isEmpty())
                     treasureTooltip.add(Component.literal(""));
@@ -206,8 +207,8 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
             //aurora
             restrictions.add(fp.getDisplayName());
 
-            //❌ Dimension
-            //✅ Biome
+            // Dimension
+            // Biome
             fp.restrictions().stream().filter(AbstractFishRestriction::isEnabled).forEach(o ->
                     restrictions.addAll(
                             o.getIndexHover(

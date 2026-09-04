@@ -14,7 +14,7 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.starcatcher.registry.items.StarcaughtBucket;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -31,29 +31,29 @@ public final class FishRegistration
     public static List<FishProperties> STARCATCHER_FISHABLE = new ArrayList<>();
 
     //apply fp specific stuff and register
-    public static void register(BootstrapContext<FishProperties> context, FishProperties fp)
+    public static void register(BootstapContext<FishProperties> context, FishProperties fp)
     {
         register(context, fp, "");
     }
 
-    public static void register(BootstrapContext<FishProperties> context, FishProperties input, String requiredModId)
+    public static void register(BootstapContext<FishProperties> context, FishProperties input, String requiredModId)
     {
         FishProperties fp = prepare(input);
         registerInternal(context, key(fp), fp, requiredModId);
     }
 
     //register without applying fp specific stuff
-    public static void registerRaw(BootstrapContext<FishProperties> context, ResourceKey<FishProperties> key, FishProperties properties, String requiredModId)
+    public static void registerRaw(BootstapContext<FishProperties> context, ResourceKey<FishProperties> key, FishProperties properties, String requiredModId)
     {
         registerInternal(context, key, properties, requiredModId);
     }
 
-    public static void registerRaw(BootstrapContext<FishProperties> context, ResourceKey<FishProperties> key, FishProperties properties)
+    public static void registerRaw(BootstapContext<FishProperties> context, ResourceKey<FishProperties> key, FishProperties properties)
     {
         registerInternal(context, key, properties, "");
     }
 
-    private static void registerInternal(BootstrapContext<FishProperties> context,
+    private static void registerInternal(BootstapContext<FishProperties> context,
                                          ResourceKey<FishProperties> key,
                                          FishProperties fp,
                                          String requiredModId)
@@ -160,7 +160,7 @@ public final class FishRegistration
         {
             fp = fp.withCatchInfo(fp.catchInfo().withBucket(new MaybeStack(StarcaughtBucket.getBucketForStack(fish))));
 
-            fp = fp.withCatchInfo(fp.catchInfo().withEntityToSpawn(SCEntities.FISH));
+            fp = fp.withCatchInfo(fp.catchInfo().withEntityToSpawn(SCEntities.FISH.get().builtInRegistryHolder()));
         }
 
         return fp;

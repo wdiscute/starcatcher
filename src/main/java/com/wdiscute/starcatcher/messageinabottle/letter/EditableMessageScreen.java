@@ -9,9 +9,9 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
@@ -23,7 +23,7 @@ public class EditableMessageScreen extends Screen
     private final String sender;
     private final List<String> text = new ArrayList<>();
     private final List<EditBox> boxes = new ArrayList<>();
-    private EditBox nameBox = new EditBox(Minecraft.getInstance().font, 0, 0, Component.empty());
+    private EditBox nameBox = new EditBox(Minecraft.getInstance().font, 0, 0, 500, 12, Component.empty());
 
     public static final ScreenUtils.Image BACKGROUND = new ScreenUtils.Image(Starcatcher.rl("textures/gui/message/message.png"), 512, 256);
 
@@ -140,7 +140,7 @@ public class EditableMessageScreen extends Screen
     {
         List<String> text = new ArrayList<>();
         boxes.forEach(b -> text.add(b.getValue()));
-        PacketDistributor.sendToServer(new SBSetEditableMessagePayload(new EditableMessage(nameBox.getValue(), text)));
+        PacketDistributorNeo.sendToServer(new SBSetEditableMessagePayload(new EditableMessage(nameBox.getValue(), text)));
         super.onClose();
     }
 

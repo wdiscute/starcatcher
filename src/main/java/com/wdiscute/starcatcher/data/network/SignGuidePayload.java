@@ -11,16 +11,16 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCStats;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.core.BlockPos;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.networking.CustomPacketPayload;
+import net.nikdo53.neobackports.io.networking.IPayloadContext;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.time.Instant;
 import java.util.Date;
@@ -30,12 +30,12 @@ import java.util.Map;
 
 public record SignGuidePayload(String signature, BlockPos bp) implements CustomPacketPayload
 {
-    public static final Type<SignGuidePayload> TYPE = new Type<>(Starcatcher.rl("sign_guide"));
+    public static final Type<SignGuidePayload> TYPE = new Type<>(Starcatcher.rl("sign_guide"), SignGuidePayload.class);
 
-    public static final StreamCodec<ByteBuf, SignGuidePayload> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<SignGuidePayload> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8,
             SignGuidePayload::signature,
-            BlockPos.STREAM_CODEC,
+            ByteBufCodecs.fromCodec(BlockPos.CODEC),
             SignGuidePayload::bp,
             SignGuidePayload::new
     );

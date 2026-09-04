@@ -52,12 +52,12 @@ public class VanillaFishingLootModifier extends AbstractCatchModifier
                 .withParameter(LootContextParams.ORIGIN, fbe.position())
                 .withParameter(LootContextParams.TOOL, fbe.rod)
                 .withParameter(LootContextParams.THIS_ENTITY, player)
-                .withParameter(LootContextParams.ATTACKING_ENTITY, player)
+                //.withParameter(LootContextParams.ATTACKING_ENTITY, player)
                 .withLuck(player.getLuck())
                 .create(LootContextParamSets.FISHING);
 
-        LootTable table = level.getServer().reloadableRegistries().getLootTable(ResourceKey.create(Registries.LOOT_TABLE,
-                ResourceLocation.withDefaultNamespace("gameplay/fishing")));
+        LootTable table = level.getServer().getLootData().getLootTable(
+                ResourceLocation.withDefaultNamespace("gameplay/fishing"));
 
         Optional<ItemStack> any = table.getRandomItems(lootparams).stream().findAny();
 

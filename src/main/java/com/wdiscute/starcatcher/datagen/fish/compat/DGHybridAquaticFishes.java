@@ -7,12 +7,12 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.registry.fishrestrictions.DaytimeRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.WeatherRestriction;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import org.jetbrains.annotations.Nullable;
 
 public class DGHybridAquaticFishes
 {
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
 
         //Literally The Coolest Mod Ever (this fact has been fact-checked by true fisherman ✅)

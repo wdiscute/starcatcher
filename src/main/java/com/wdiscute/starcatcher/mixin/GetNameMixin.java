@@ -3,9 +3,9 @@ package com.wdiscute.starcatcher.mixin;
 import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.nikdo53.neobackports.io.components.DataComponents;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -24,8 +24,8 @@ public class GetNameMixin
         if (SCDataComponents.has(stack, SCDataComponents.CAUGHT_FISH_INFO))
         {
             Component baseName;
-            Component customName = stack.get(DataComponents.CUSTOM_NAME);
-            Component itemName = stack.get(DataComponents.ITEM_NAME);
+            Component customName = stack.get(DataComponents.CUSTOM_NAME.get());
+            Component itemName = stack.get(DataComponents.ITEM_NAME.get());
 
             if (customName != null)
             {

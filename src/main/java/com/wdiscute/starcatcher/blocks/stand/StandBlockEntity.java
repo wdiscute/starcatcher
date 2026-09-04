@@ -80,7 +80,7 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void loadAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.loadAdditional(tag, registries);
 
@@ -95,7 +95,7 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
+    public void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
         if (!isCenter()) return;
@@ -111,9 +111,9 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt, HolderLookup.Provider lookupProvider)
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt)
     {
-        super.onDataPacket(net, pkt, lookupProvider);
+        super.onDataPacket(net, pkt);
 
         CompoundTag tag = pkt.getTag();
         if (!isCenter()) return;

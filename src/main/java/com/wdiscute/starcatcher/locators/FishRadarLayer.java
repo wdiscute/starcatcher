@@ -11,17 +11,13 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.utils.ScreenUtils;
-import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.LayeredDraw;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
+import net.nikdo53.neobackports.screen.LayeredDraw;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +65,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
     }
 
     @Override
-    public void render(GuiGraphics g, DeltaTracker deltaTracker)
+    public void render(GuiGraphics g, float v)
     {
         font = Minecraft.getInstance().font;
         uiX = Minecraft.getInstance().getWindow().getGuiScaledWidth() - imageWidth;
@@ -97,19 +93,19 @@ public class FishRadarLayer implements LayeredDraw.Layer
         //smoothly moves ui in and out of screen
         if (!shouldShow)
             if (offScreen > -150 + SCConfig.RADAR_X_OFFSET.get())
-                offScreen -= 15 * deltaTracker.getGameTimeDeltaTicks();
+                offScreen -= 15 * v;
             else
             {
                 offScreen = (float) (-150 + SCConfig.RADAR_X_OFFSET.get());
                 return;
             }
         else if (offScreen < 0)
-            offScreen += 15 * deltaTracker.getGameTimeDeltaTicks();
+            offScreen += 15 * v;
         else
             offScreen = 0;
 
         g.pose().pushPose();
-        g.pose().scale(((float) SCConfig.RADAR_SCALE.getAsDouble()), ((float) SCConfig.RADAR_SCALE.getAsDouble()), 1);
+        g.pose().scale(((float) (double) SCConfig.RADAR_SCALE.get()), ((float) (double) SCConfig.RADAR_SCALE.get()), 1);
         g.pose().translate(SCConfig.RADAR_X_OFFSET.get(), SCConfig.RADAR_Y_OFFSET.get(), 0);
 
         g.pose().translate(-offScreen, 0, 0);

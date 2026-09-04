@@ -4,12 +4,12 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.data.ExtraComposites;
 import net.minecraft.core.UUIDUtil;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 
 import java.util.*;
 
@@ -25,11 +25,11 @@ public class Tournament
     public long startTimeEpoch;
     public long durationInTicks;
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, Tournament> STREAM_CODEC = ExtraComposites.composite(
-            UUIDUtil.STREAM_CODEC, t -> t.tournamentUUID,
+    public static final StreamCodec<Tournament> STREAM_CODEC = ExtraComposites.composite(
+            ByteBufCodecs.UUID, t -> t.tournamentUUID,
             ByteBufCodecs.STRING_UTF8, t -> t.name,
             Status.STREAM_CODEC, t -> t.status,
-            UUIDUtil.STREAM_CODEC, t -> t.owner,
+            ByteBufCodecs.UUID, t -> t.owner,
             ByteBufCodecs.STRING_UTF8, t -> t.ownerName,
             PlayerScore.LIST_STREAM_CODEC, t -> t.playerScores,
             TournamentScoreSettings.STREAM_CODEC, t -> t.scoreSettings,
@@ -127,7 +127,7 @@ public class Tournament
         }
 
         public static final Codec<Status> CODEC = StringRepresentable.fromEnum(Status::values);
-        public static final StreamCodec<RegistryFriendlyByteBuf, Status> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Status.class);
+        public static final StreamCodec<Status> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(Status.class);
         private final String key;
 
         @Override
@@ -162,13 +162,13 @@ public class Tournament
                         Codec.FLOAT.fieldOf("score").forGetter(ps -> ps.score)
                 ).apply(instance, PlayerScore::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, PlayerScore> STREAM_CODEC = StreamCodec.composite(
-                UUIDUtil.STREAM_CODEC, ps -> ps.uuid,
+        public static final StreamCodec<PlayerScore> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.UUID, ps -> ps.uuid,
                 ByteBufCodecs.STRING_UTF8, ps -> ps.name,
                 ByteBufCodecs.FLOAT, ps -> ps.score,
                 PlayerScore::new
         );
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, List<PlayerScore>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+        public static final StreamCodec<List<PlayerScore>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
     }
 }

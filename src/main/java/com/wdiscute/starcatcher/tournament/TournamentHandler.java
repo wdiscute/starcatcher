@@ -9,11 +9,11 @@ import net.minecraft.network.chat.*;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.CommonColors;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.event.tick.ServerTickEvent;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -40,13 +40,13 @@ public class TournamentHandler
     public static void sendActiveTournamentUpdateToClient(ServerPlayer sp, Tournament tournament)
     {
         if (sp == null || tournament == null) return;
-        PacketDistributor.sendToPlayer(sp, new CBActiveTournamentUpdatePayload(tournament));
+        PacketDistributorNeo.sendToPlayer(sp, new CBActiveTournamentUpdatePayload(tournament));
     }
 
     public static void clearTournamentToClient(ServerPlayer sp)
     {
         if (sp == null) return;
-        PacketDistributor.sendToPlayer(sp, new CBClearTournamentPayload(":)"));
+        PacketDistributorNeo.sendToPlayer(sp, new CBClearTournamentPayload(":)"));
     }
 
     public static void startTournament(Player playerWhoStartedTheTournament, Tournament tournament)
@@ -64,7 +64,7 @@ public class TournamentHandler
             if (player != null)
             {
                 player.sendSystemMessage(Component.translatable("gui.starcatcher.tournament.started", tournament.name));
-                player.sendSystemMessage(Component.translatable("gui.starcatcher.tournament.press_tab").withColor(CommonColors.LIGHT_GRAY));
+                player.sendSystemMessage(Component.translatable("gui.starcatcher.tournament.press_tab").withColor(-6250336));
             }
         }
     }
@@ -89,7 +89,7 @@ public class TournamentHandler
         {
             for (ServerPlayer player : serverLevel.getServer().getPlayerList().getPlayers())
             {
-                PacketDistributor.sendToPlayer(player, new CBFinishedTournamentsListPayload(TournamentHandler.getFinishedTournaments()));
+                PacketDistributorNeo.sendToPlayer(player, new CBFinishedTournamentsListPayload(TournamentHandler.getFinishedTournaments()));
             }
         }
     }
@@ -106,7 +106,7 @@ public class TournamentHandler
 
             if (list.isEmpty()) continue;
 
-            Tournament.PlayerScore first = list.getFirst();
+            Tournament.PlayerScore first = list.get(0);
 
             float baseScore = switch (fp.rarity())
             {
@@ -148,12 +148,12 @@ public class TournamentHandler
             {
                 Player playerByUUID = player.level().getPlayerByUUID(playerScore.uuid);
                 if (playerByUUID != null)
-                    PacketDistributor.sendToPlayer((ServerPlayer) playerByUUID, new CBActiveTournamentUpdatePayload(t));
+                    PacketDistributorNeo.sendToPlayer((ServerPlayer) playerByUUID, new CBActiveTournamentUpdatePayload(t));
             }
         }
     }
 
-    public static void tick(ServerTickEvent.Post event)
+    public static void tick(TickEvent.ServerTickEvent event)
     {
         MinecraftServer server = event.getServer();
         long levelTicks = server.getTickCount();
@@ -213,7 +213,7 @@ public class TournamentHandler
         //update finished tournaments to client
         for (ServerPlayer player : server.getPlayerList().getPlayers())
         {
-            PacketDistributor.sendToPlayer(player, new CBFinishedTournamentsListPayload(TournamentHandler.getFinishedTournaments()));
+            PacketDistributorNeo.sendToPlayer(player, new CBFinishedTournamentsListPayload(TournamentHandler.getFinishedTournaments()));
         }
     }
 

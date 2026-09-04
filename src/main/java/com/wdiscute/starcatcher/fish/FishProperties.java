@@ -8,19 +8,19 @@ import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.Holder;
-import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.Resource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import net.neoforged.neoforge.registries.DeferredItem;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.registry.DeferredBlock;
+import net.nikdo53.neobackports.registry.DeferredItem;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -54,7 +54,7 @@ public record FishProperties(
             ).apply(instance, FishProperties::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, FishProperties> STREAM_CODEC = ExtraComposites.composite(
+    public static final StreamCodec<FishProperties> STREAM_CODEC = ExtraComposites.composite(
             CatchInfo.STREAM_CODEC, FishProperties::catchInfo,
             ByteBufCodecs.VAR_INT, FishProperties::baseChance,
             SizeAndWeight.STREAM_CODEC, FishProperties::sizeWeight,
@@ -230,7 +230,7 @@ public record FishProperties(
 
     public FishProperties withFish(DeferredBlock<Block> fish)
     {
-        return withCatchInfo(catchInfo.withFish(new MaybeStack(fish)));
+        return withCatchInfo(catchInfo.withFish(new MaybeStack(fish.asItem())));
     }
 
     public FishProperties withFish(Item fish)
@@ -245,7 +245,7 @@ public record FishProperties(
 
     public FishProperties withFish(DeferredItem<Item> fish)
     {
-        return withCatchInfo(catchInfo.withFish(new MaybeStack(fish)));
+        return withCatchInfo(catchInfo.withFish(new MaybeStack(fish.asItem())));
     }
 
     public FishProperties withBucketedFish(MaybeStack bucket)
@@ -271,7 +271,7 @@ public record FishProperties(
 
     public FishProperties addBait(BaitRestriction bait)
     {
-        Map<ResourceLocation, Integer> map = new HashMap<>();
+        List<Utils.Duo<ResourceLocation, Integer>> map = new ArrayList<>();
         AtomicReference<String> override = new AtomicReference<>();
         override.set("");
 
@@ -280,13 +280,13 @@ public record FishProperties(
         {
             if (o instanceof BaitRestriction be)
             {
-                map.putAll(be.baits);
+                map.addAll(be.baits);
                 override.set(be.translationOverride);
             }
         });
 
         //put baits from method param
-        map.putAll(bait.baits);
+        map.addAll(bait.baits);
         override.set(bait.translationOverride);
 
         List<AbstractFishRestriction> list = new ArrayList<>(this.restrictions);

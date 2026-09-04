@@ -17,6 +17,7 @@ import net.minecraft.client.gui.components.toasts.ToastComponent;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 
 public class FishCaughtToast implements Toast
@@ -56,7 +57,7 @@ public class FishCaughtToast implements Toast
         BACKGROUND_SPRITE.render(g);
         ScreenUtils.item(g, is, 6, 29);
         ScreenUtils.text(g, toastComponent.getMinecraft().font, this.title, 40, 13, 0, false);
-        int lettersRevealed = Math.clamp((timeSinceLastVisible - 500L) / 150L, 0, this.fishName.length());
+        int lettersRevealed = (int) Mth.clamp((float) (timeSinceLastVisible - 500L) / 150L, 0, this.fishName.length());
 
         if (this.old != lettersRevealed)
         {
@@ -94,6 +95,6 @@ public class FishCaughtToast implements Toast
                         .append(Component.literal(" - " + size + " - " + weight))
                 , true);
 
-        Minecraft.getInstance().gui.overlayMessageTime = 180;
+        Minecraft.getInstance().gui.vignetteBrightness = 180;
     }
 }

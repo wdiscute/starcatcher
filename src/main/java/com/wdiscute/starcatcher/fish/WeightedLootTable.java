@@ -2,10 +2,9 @@ package com.wdiscute.starcatcher.fish;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 public record WeightedLootTable(ResourceLocation resourceLocation, int weight)
 {
@@ -20,8 +19,8 @@ public record WeightedLootTable(ResourceLocation resourceLocation, int weight)
                     Codec.INT.optionalFieldOf("weight", 1).forGetter(WeightedLootTable::weight)
             ).apply(instance, WeightedLootTable::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, WeightedLootTable> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC, WeightedLootTable::resourceLocation,
+    public static final StreamCodec<WeightedLootTable> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.RESOURCE_LOCATION, WeightedLootTable::resourceLocation,
             ByteBufCodecs.INT, WeightedLootTable::weight,
             WeightedLootTable::new
     );

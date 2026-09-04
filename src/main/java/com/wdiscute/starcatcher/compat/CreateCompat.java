@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.compat;
 
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.registries.DeferredItem;
+import net.nikdo53.neobackports.registry.DeferredItem;
 
 import java.util.List;
 

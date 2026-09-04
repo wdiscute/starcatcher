@@ -6,12 +6,11 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.sellingbin.processors.AbstractProcessor;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
-import net.dries007.tfc.common.entities.aquatic.Fish;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 
 import java.util.List;
 
@@ -66,8 +65,8 @@ public class FishProcessor extends AbstractProcessor
     public List<Component> getDescription()
     {
         return List.of(
-                Component.translatableEscape("gui.starcatcher.processor.fishes_processor.percentile", ((int) (percentileMultiplier * 100))),
-                Component.translatableEscape("gui.starcatcher.processor.fishes_processor.golden", goldenMultiplier)
+                Component.translatable("gui.starcatcher.processor.fishes_processor.percentile", ((int) (percentileMultiplier * 100))),
+                Component.translatable("gui.starcatcher.processor.fishes_processor.golden", goldenMultiplier)
         );
     }
 

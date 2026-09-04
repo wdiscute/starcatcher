@@ -8,18 +8,27 @@ import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.BackportCodecs;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
+import net.nikdo53.neobackports.utils.recipe.SmithingRecipeNeo;
+import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
+import net.nikdo53.neobackports.utils.recipe.holder.SmithingRecipeHolder;
+import net.nikdo53.neobackports.utils.recipe.input.SmithingRecipeInput;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredient material, ItemStack result, boolean addText, boolean keepStack, boolean applySkin) implements SmithingRecipe
+public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredient material, ItemStack result, boolean addText, boolean keepStack, boolean applySkin) implements SmithingRecipeNeo
 {
     public boolean matches(SmithingRecipeInput input, Level level)
     {
@@ -45,7 +54,8 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
         else
         {
             resultRod = result.copy();
-            resultRod.applyComponents(input.base().getComponentsPatch());
+            CompoundTag compoundTag = resultRod.serializeNBT();
+            resultRod.deserializeNBT(compoundTag);
         }
 
         //get data components already in the rod
@@ -60,7 +70,7 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
         //set tackle skin
         if (applySkin)
         {
-            AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(input.template(), SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(Starcatcher.BASE));
+            AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(input.template(), SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
             SCDataComponents.set(resultRod, SCDataComponents.TACKLE_SKIN, tackleSkin);
         }
 
@@ -116,20 +126,20 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
         return Stream.of(this.template, this.rod, this.material).anyMatch(Ingredient::hasNoItems);
     }
 
-    public static class Serializer implements RecipeSerializer<StarcatcherRodRecipe>
+    public static class Serializer implements RecipeSerializerNeo<StarcatcherRodRecipe>
     {
-        private static final MapCodec<StarcatcherRodRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
-                Ingredient.CODEC.fieldOf("template").forGetter((o) -> o.template),
-                Ingredient.CODEC.fieldOf("rod").forGetter((o) -> o.rod),
-                Ingredient.CODEC.fieldOf("material").forGetter((o) -> o.material),
-                ItemStack.CODEC.fieldOf("result").forGetter((o) -> o.result),
-                Codec.BOOL.fieldOf("add_netherite_text").forGetter((o) -> o.addText),
-                Codec.BOOL.fieldOf("keep_stack").forGetter((o) -> o.keepStack),
-                Codec.BOOL.fieldOf("apply_tackle_skin").forGetter((o) -> o.applySkin)
+        public static final MapCodec<StarcatcherRodRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("template").forGetter((o) -> o.template),
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("base").forGetter((o) -> o.rod),
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("addition").forGetter((o) -> o.material),
+                BackportCodecs.ITEM_STACK_RECIPE.fieldOf("result").forGetter(o -> o.result),
+                Codec.BOOL.fieldOf("add_text").forGetter(o -> o.addText),
+                Codec.BOOL.fieldOf("keep_stack").forGetter(o -> o.keepStack),
+                Codec.BOOL.fieldOf("apply_skin").forGetter(o -> o.applySkin)
         ).apply(instance, StarcatcherRodRecipe::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, StarcatcherRodRecipe> STREAM_CODEC = StreamCodec.of(
-                Serializer::toNetwork, Serializer::fromNetwork
+        public static final StreamCodec<StarcatcherRodRecipe> STREAM_CODEC = StreamCodec.of(
+                StarcatcherRodRecipe.Serializer::toNetworkA, StarcatcherRodRecipe.Serializer::fromNetwork
         );
 
         @Override
@@ -139,32 +149,34 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
         }
 
         @Override
-        public StreamCodec<RegistryFriendlyByteBuf, StarcatcherRodRecipe> streamCodec()
+        public StreamCodec<StarcatcherRodRecipe> streamCodec()
         {
             return STREAM_CODEC;
         }
 
-        private static StarcatcherRodRecipe fromNetwork(RegistryFriendlyByteBuf buffer)
-        {
-            Ingredient template = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient base = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            Ingredient addition = Ingredient.CONTENTS_STREAM_CODEC.decode(buffer);
-            ItemStack result = ItemStack.STREAM_CODEC.decode(buffer);
-            boolean netheriteUpgrade = ByteBufCodecs.BOOL.decode(buffer);
-            boolean keepStack = ByteBufCodecs.BOOL.decode(buffer);
-            boolean applySkin = ByteBufCodecs.BOOL.decode(buffer);
-            return new StarcatcherRodRecipe(template, base, addition, result, netheriteUpgrade, keepStack, applySkin);
+        @Override
+        public RecipeHolder<? extends Container, ? extends Recipe<Container>> recipeHolderFactory(StarcatcherRodRecipe fishingRodSkinSmithingRecipe, ResourceLocation resourceLocation) {
+            return new SmithingRecipeHolder(fishingRodSkinSmithingRecipe, resourceLocation);
         }
 
-        private static void toNetwork(RegistryFriendlyByteBuf buffer, StarcatcherRodRecipe recipe)
+        private static StarcatcherRodRecipe fromNetwork(FriendlyByteBuf buffer)
         {
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.template);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.rod);
-            Ingredient.CONTENTS_STREAM_CODEC.encode(buffer, recipe.material);
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
-            ByteBufCodecs.BOOL.encode(buffer, recipe.addText);
-            ByteBufCodecs.BOOL.encode(buffer, recipe.keepStack);
-            ByteBufCodecs.BOOL.encode(buffer, recipe.applySkin);
+            Ingredient template = ByteBufCodecs.INGREDIENT.decode(buffer);
+            Ingredient base = ByteBufCodecs.INGREDIENT.decode(buffer);
+            Ingredient addition = ByteBufCodecs.INGREDIENT.decode(buffer);
+            ItemStack result = ByteBufCodecs.ITEM_STACK.decode(buffer);
+            boolean add_text = ByteBufCodecs.BOOL.decode(buffer);
+            boolean keep_stack = ByteBufCodecs.BOOL.decode(buffer);
+            boolean apply_skin = ByteBufCodecs.BOOL.decode(buffer);
+            return new StarcatcherRodRecipe(template, base, addition, result, add_text, keep_stack, apply_skin);
+        }
+
+        private static void toNetworkA(FriendlyByteBuf buffer, StarcatcherRodRecipe recipe)
+        {
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.template);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.rod);
+            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.material);
+            ByteBufCodecs.ITEM_STACK.encode(buffer, recipe.result);
         }
     }
 }

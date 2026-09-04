@@ -3,15 +3,14 @@ package com.wdiscute.starcatcher.datagen;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.nikdo53.neobackports.io.components.DataComponents;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,28 +20,16 @@ import static com.wdiscute.starcatcher.registry.SCBlocks.*;
 
 public class DGSCBlockLootTableProvider extends BlockLootSubProvider
 {
-    protected DGSCBlockLootTableProvider(HolderLookup.Provider registries)
+    protected DGSCBlockLootTableProvider()
     {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+        super(Set.of(), FeatureFlags.REGISTRY.allFlags());
     }
 
     @Override
     protected void generate()
     {
         HATS.getEntries().forEach(o -> dropSelf(o.get()));
-        TACKLE_BOXES.getEntries().forEach(o ->
-                add(o.get(), LootTable.lootTable().withPool(this.applyExplosionCondition(
-                                        o.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                                                .add(LootItem.lootTableItem(o.get())
-                                                        .apply(CopyComponentsFunction
-                                                                .copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
-                                                                .include(DataComponents.CUSTOM_NAME)
-                                                                .include(DataComponents.CONTAINER)
-                                                                .include(SCDataComponents.TACKLE_BOX_FISHES.get())
-                                                        ))))
-                ));
-
-
+        TACKLE_BOXES.getEntries().forEach(o -> add(o.get(), noDrop()));
 
 
         dropSelf(AQUARIUM.get());

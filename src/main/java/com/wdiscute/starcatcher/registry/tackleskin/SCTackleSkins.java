@@ -1,16 +1,16 @@
 package com.wdiscute.starcatcher.registry.tackleskin;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.function.Supplier;
 
 public interface SCTackleSkins
 {
-    DeferredRegister<AbstractTackleSkin> REGISTRY =
-            DeferredRegister.create(Starcatcher.TACKLE_SKIN_REGISTRY, Starcatcher.MOD_ID);
+    DeferredRegisterTyped<AbstractTackleSkin> REGISTRY =
+            DeferredRegisterTyped.create(Starcatcher.TACKLE_SKIN_REGISTRY, Starcatcher.MOD_ID);
 
     //rod
     DeferredHolder<AbstractTackleSkin, AbstractTackleSkin> BASE_TACKLE_SKIN = registerCatchModifier("base", BaseTackleSkin::new);

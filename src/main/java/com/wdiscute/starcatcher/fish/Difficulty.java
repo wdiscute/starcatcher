@@ -10,9 +10,9 @@ import com.wdiscute.starcatcher.modifiers.minigamemodifiers.*;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.SCSweetSpotsBehaviour;
 import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -426,7 +426,7 @@ public record Difficulty(
             ).apply(instance, Difficulty::new));
 
 
-    public static final StreamCodec<FriendlyByteBuf, Difficulty> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<Difficulty> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.INT, Difficulty::hp,
             ByteBufCodecs.INT, Difficulty::speed,
             ByteBufCodecs.INT, Difficulty::penalty,
@@ -809,8 +809,8 @@ public record Difficulty(
 
         public static final Codec<List<SweetSpot>> LIST_CODEC = CODEC.listOf();
 
-        public static final StreamCodec<FriendlyByteBuf, SweetSpot> STREAM_CODEC = ExtraComposites.composite(
-                ResourceLocation.STREAM_CODEC, SweetSpot::sweetSpotType,
+        public static final StreamCodec<SweetSpot> STREAM_CODEC = ExtraComposites.composite(
+                ByteBufCodecs.RESOURCE_LOCATION, SweetSpot::sweetSpotType,
                 ScreenUtils.Image.STREAM_CODEC, SweetSpot::texturePath,
                 ByteBufCodecs.INT, SweetSpot::size,
                 ByteBufCodecs.INT, SweetSpot::reward,
@@ -822,6 +822,6 @@ public record Difficulty(
                 SweetSpot::new
         );
 
-        public static final StreamCodec<FriendlyByteBuf, List<SweetSpot>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
+        public static final StreamCodec<List<SweetSpot>> LIST_STREAM_CODEC = STREAM_CODEC.apply(ByteBufCodecs.list());
     }
 }

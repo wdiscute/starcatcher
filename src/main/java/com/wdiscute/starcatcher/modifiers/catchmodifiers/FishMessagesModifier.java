@@ -60,7 +60,7 @@ public class FishMessagesModifier extends AbstractCatchModifier
         {
 
             //get random message
-            Message message = list.get(fbe.getRandom().nextInt(list.size()));
+            Message message = list.get(fbe.level().getRandom().nextInt(list.size()));
 
             //remove message from server saved data
             MessagesSavedData.get(((ServerLevel) fbe.level())).removeMessage(message);

@@ -45,13 +45,13 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
     }
 
     @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
         return Block.box(3, 0, 3, 13, 3, 13);
     }
 
     @Override
-    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random)
     {
         if (!state.getValue(HAS_PEARL) && random.nextFloat() > 0.99f && !level.isClientSide() && level.getBlockState(pos.below()).is(BlockTags.SAND))
         {
@@ -61,7 +61,7 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
     }
 
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
+    public InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult)
     {
         if (state.getValue(HAS_PEARL))
         {
@@ -86,15 +86,9 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
     }
 
     @Override
-    protected FluidState getFluidState(BlockState state)
+    public FluidState getFluidState(BlockState state)
     {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
-    {
-        return null;
     }
 
     @Override

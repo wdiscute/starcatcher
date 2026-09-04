@@ -1,9 +1,9 @@
 package com.wdiscute.starcatcher.registry.fishrestrictions;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.registry.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 import java.util.List;
 import java.util.Map;
@@ -11,8 +11,8 @@ import java.util.function.Supplier;
 
 public interface SCFishRestrictions
 {
-    DeferredRegister<AbstractFishRestriction> REGISTRY =
-            DeferredRegister.create(Starcatcher.FISH_RESTRICTIONS_REGISTRY, Starcatcher.MOD_ID);
+    DeferredRegisterTyped<AbstractFishRestriction> REGISTRY =
+            DeferredRegisterTyped.create(Starcatcher.FISH_RESTRICTIONS_REGISTRY, Starcatcher.MOD_ID);
 
 
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> EMPTY =
@@ -25,7 +25,7 @@ public interface SCFishRestrictions
             registerFishRestriction("biome", () -> new BiomeRestriction(List.of(), List.of(), "", ""));
 
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> BAIT =
-            registerFishRestriction("bait", () -> new BaitRestriction(Map.of(), ""));
+            registerFishRestriction("bait", () -> new BaitRestriction(List.of(), ""));
 
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> FLUID =
             registerFishRestriction("fluid", FluidRestriction::new);

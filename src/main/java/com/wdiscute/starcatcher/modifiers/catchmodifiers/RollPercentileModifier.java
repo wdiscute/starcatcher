@@ -44,7 +44,7 @@ public class RollPercentileModifier extends AbstractCatchModifier
 
         for (int i = 0; i < rolls; i++)
         {
-            p = Math.max(fbe.getRandom().nextFloat() * 100, p);
+            p = Math.max(fbe.level().getRandom().nextFloat() * 100, p);
         }
 
 

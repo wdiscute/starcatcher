@@ -25,8 +25,8 @@ public record CaughtFishInfo(
 
     public float getScale()
     {
-        float maxScale = ((float) SCConfig.FISH_MAX_SCALE.getAsDouble());
-        float minScale = ((float) SCConfig.FISH_MIN_SCALE.getAsDouble());
+        float maxScale = ((float) (double) SCConfig.FISH_MAX_SCALE.get());
+        float minScale = ((float) (double) SCConfig.FISH_MIN_SCALE.get());
 
         if (rarity.equals(Rarity.GOLDEN)) return maxScale;
         return maxScale - (percentile / 100f) * (maxScale - minScale);

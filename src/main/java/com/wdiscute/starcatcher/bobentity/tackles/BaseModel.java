@@ -3,6 +3,8 @@ package com.wdiscute.starcatcher.bobentity.tackles;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.utils.Utils;
+import net.minecraft.Util;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -51,5 +53,11 @@ public class BaseModel<T extends Entity> extends EntityModel<T>
     public void setupAnim(T fishEntity, float v, float v1, float v2, float v3, float v4)
     {
 
+    }
+
+    @Override
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
+    {
+        renderToBuffer(poseStack, buffer, packedLight, packedOverlay, Utils.toColorF(red, green, blue, alpha));
     }
 }

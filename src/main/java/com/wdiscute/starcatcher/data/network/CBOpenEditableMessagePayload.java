@@ -3,16 +3,15 @@ package com.wdiscute.starcatcher.data.network;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.messageinabottle.letter.EditableMessage;
 import com.wdiscute.starcatcher.messageinabottle.letter.EditableMessageScreen;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.networking.CustomPacketPayload;
+import net.nikdo53.neobackports.io.networking.IPayloadContext;
 
 public record CBOpenEditableMessagePayload(EditableMessage message) implements CustomPacketPayload
 {
-    public static final Type<CBOpenEditableMessagePayload> TYPE = new Type<>(Starcatcher.rl("open_editable_message"));
+    public static final Type<CBOpenEditableMessagePayload> TYPE = new Type<>(Starcatcher.rl("open_editable_message"), CBOpenEditableMessagePayload.class);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CBOpenEditableMessagePayload> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<CBOpenEditableMessagePayload> STREAM_CODEC = StreamCodec.composite(
             EditableMessage.STREAM_CODEC, CBOpenEditableMessagePayload::message,
             CBOpenEditableMessagePayload::new
     );

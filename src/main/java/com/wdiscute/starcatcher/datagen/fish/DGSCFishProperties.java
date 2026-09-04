@@ -2,23 +2,21 @@ package com.wdiscute.starcatcher.datagen.fish;
 
 import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.datagen.DGSCBiomeModifiers;
 import com.wdiscute.starcatcher.datagen.DGSCDataGenerators;
 import com.wdiscute.starcatcher.datagen.fish.compat.*;
 import com.wdiscute.starcatcher.fish.*;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
-import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
-import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.ModLoadedCondition;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
@@ -31,13 +29,6 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
                 output,
                 registries,
                 DGSCDataGenerators.BUILDER,
-                (consumer) ->
-                {
-                    runningOnlyForConditions = true;
-                    bootstrap(null);
-                    conditionsFps.forEach(pair -> consumer.accept(pair.getFirst(), new ModLoadedCondition(pair.getSecond())));
-                    runningOnlyForConditions = false;
-                },
                 Set.of(
                         "minecraft",
 
@@ -64,9 +55,19 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
         );
     }
 
+    @Override
+    public void registerConditions(BiConsumer<ResourceKey<?>, ICondition> consumer)
+    {
+        runningOnlyForConditions = true;
+        bootstrap(null);
+        conditionsFps.forEach(pair -> consumer.accept(pair.getFirst(), new ModLoadedCondition(pair.getSecond())));
+        runningOnlyForConditions = false;
+
+        super.registerConditions(consumer);
+    }
+
     static boolean runningOnlyForConditions = false;
     static List<Pair<ResourceKey<FishProperties>, String>> conditionsFps = new ArrayList<>();
-
 
     public static final List<String> MODS_TO_ACTUALLY_DATAGEN =
             List.of(
@@ -80,7 +81,7 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
                     , ""
             );
 
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
         //vanilla
         DGTrophies.bootstrap(context);

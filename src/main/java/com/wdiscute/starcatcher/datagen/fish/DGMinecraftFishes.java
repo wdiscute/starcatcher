@@ -8,7 +8,8 @@ import com.wdiscute.starcatcher.fish.Textures;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.utils.MaybeStack;
-import net.minecraft.data.worldgen.BootstrapContext;
+import com.wdiscute.utils.Utils;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class DGMinecraftFishes
 {
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
         FishRegistration.register(context,
                 PresetRestrictions.allOceans(context)
@@ -64,7 +65,7 @@ public class DGMinecraftFishes
                         .addRestriction(FluidRestriction.WATER)
                         .addBait(BaitRestriction.WITHER_SKELETON_SKULL)
                         .withDifficulty(Difficulty.WITHER)
-                        .withItemToOverrideWith(new MaybeStack(SCItems.UNKNOWN_FISH))
+                        .withItemToOverrideWith(new MaybeStack(SCItems.UNKNOWN_FISH.asItem()))
                         .withRarity(Rarity.LEGENDARY)
         );
 
@@ -76,9 +77,9 @@ public class DGMinecraftFishes
                         .withBaseChance(0)
                         .addRestrictions(DimensionRestriction.OVERWORLD)
                         .addRestrictions(FluidRestriction.WATER)
-                        .addRestrictions(new BaitRestriction(java.util.Map.of(Starcatcher.rl("gunpowder_bait"), 200), ""))
+                        .addRestrictions(new BaitRestriction(new Utils.Duo<>(Starcatcher.rl("gunpowder_bait"), 200), ""))
                         .withDifficulty(Difficulty.CREEPER)
-                        .withItemToOverrideWith(new MaybeStack(SCItems.UNKNOWN_FISH))
+                        .withItemToOverrideWith(new MaybeStack(SCItems.UNKNOWN_FISH.asItem()))
                         .withRarity(Rarity.EPIC)
         );
 

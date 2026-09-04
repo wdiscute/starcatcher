@@ -8,12 +8,11 @@ import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
-import net.neoforged.neoforge.network.codec.NeoForgeStreamCodecs;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 
 public record CatchInfo(
         MaybeStack fish,
@@ -33,7 +32,7 @@ public record CatchInfo(
         EXTRA("extra");
 
         public static final Codec<FishEntryType> CODEC = StringRepresentable.fromEnum(FishEntryType::values);
-        public static final StreamCodec<RegistryFriendlyByteBuf, FishEntryType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(FishEntryType.class);
+        public static final StreamCodec<FishEntryType> STREAM_CODEC = NeoForgeStreamCodecs.enumCodec(FishEntryType.class);
         private final String name;
 
         FishEntryType(String key)
@@ -51,13 +50,13 @@ public record CatchInfo(
             instance.group(
                     MaybeStack.CODEC.fieldOf("item").forGetter(CatchInfo::fish),
                     MaybeStack.CODEC.optionalFieldOf("fish_bucket", MaybeStack.EMPTY).forGetter(CatchInfo::bucketedFish),
-                    BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().optionalFieldOf("entity", SCEntities.FISH).forGetter(CatchInfo::entityToSpawn),
+                    BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().optionalFieldOf("entity", SCEntities.FISH.get().builtInRegistryHolder()).forGetter(CatchInfo::entityToSpawn),
                     Codec.BOOL.optionalFieldOf("always_spawn_entity", false).forGetter(CatchInfo::alwaysSpawnEntity),
                     MaybeStack.CODEC.optionalFieldOf("override_minigame_item", MaybeStack.EMPTY).forGetter(CatchInfo::overrideMinigameWith),
                     FishEntryType.CODEC.optionalFieldOf("type", FishEntryType.FISH).forGetter(CatchInfo::fishEntryType)
             ).apply(instance, CatchInfo::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CatchInfo> STREAM_CODEC = ExtraComposites.composite(
+    public static final StreamCodec<CatchInfo> STREAM_CODEC = ExtraComposites.composite(
             MaybeStack.STREAM_CODEC, CatchInfo::fish,
             MaybeStack.STREAM_CODEC, CatchInfo::bucketedFish,
             ByteBufCodecs.holderRegistry(Registries.ENTITY_TYPE), CatchInfo::entityToSpawn,
@@ -70,7 +69,7 @@ public record CatchInfo(
     public static final CatchInfo DEFAULT = new CatchInfo(
             MaybeStack.EMPTY,
             MaybeStack.EMPTY,
-            SCEntities.FISH,
+            SCEntities.FISH.get().builtInRegistryHolder(),
             false,
             MaybeStack.EMPTY,
             FishEntryType.FISH

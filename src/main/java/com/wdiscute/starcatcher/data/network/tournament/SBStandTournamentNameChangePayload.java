@@ -1,26 +1,21 @@
 package com.wdiscute.starcatcher.data.network.tournament;
 
 
-import com.mojang.authlib.GameProfile;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.tournament.StandMenu;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.core.UUIDUtil;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.networking.CustomPacketPayload;
+import net.nikdo53.neobackports.io.networking.IPayloadContext;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
-import java.util.List;
 import java.util.UUID;
 
 public record SBStandTournamentNameChangePayload(UUID uuid, String name) implements CustomPacketPayload
 {
-    public static final Type<SBStandTournamentNameChangePayload> TYPE = new Type<>(Starcatcher.rl("sb_stand_tournament_name"));
+    public static final Type<SBStandTournamentNameChangePayload> TYPE = new Type<>(Starcatcher.rl("sb_stand_tournament_name"), SBStandTournamentNameChangePayload.class);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, SBStandTournamentNameChangePayload> STREAM_CODEC = StreamCodec.composite(
-            UUIDUtil.STREAM_CODEC, SBStandTournamentNameChangePayload::uuid,
+    public static final StreamCodec<SBStandTournamentNameChangePayload> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.UUID, SBStandTournamentNameChangePayload::uuid,
             ByteBufCodecs.STRING_UTF8, SBStandTournamentNameChangePayload::name,
             SBStandTournamentNameChangePayload::new
     );
@@ -33,13 +28,14 @@ public record SBStandTournamentNameChangePayload(UUID uuid, String name) impleme
 
     public void handle(IPayloadContext context)
     {
-       context.enqueueWork(() -> {
-           if(context.player().containerMenu instanceof StandMenu sm)
-           {
-               sm.sbe.tournament.name = name;
-               sm.sbe.sync();
-           }
-       });
+        context.enqueueWork(() ->
+        {
+            if (context.player().containerMenu instanceof StandMenu sm)
+            {
+                sm.sbe.tournament.name = name;
+                sm.sbe.sync();
+            }
+        });
     }
 
 }

@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.registry.sweetspotbehaviour;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
+import net.minecraft.util.Mth;
 
 public class GlowingSweetSpotBehaviour extends NormalSweetSpotBehaviour
 {
@@ -13,6 +14,6 @@ public class GlowingSweetSpotBehaviour extends NormalSweetSpotBehaviour
         Object data = instance.modifierData.computeIfAbsent(Starcatcher.rl("deep_dark"), o -> 0);
 
         if (data instanceof Integer i)
-            instance.modifierData.put(Starcatcher.rl("deep_dark"), Math.clamp(i - 10, 0, 255));
+            instance.modifierData.put(Starcatcher.rl("deep_dark"), Mth.clamp(i - 10, 0, 255));
     }
 }

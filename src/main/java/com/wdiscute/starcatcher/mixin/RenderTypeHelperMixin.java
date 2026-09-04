@@ -8,10 +8,10 @@ import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.neoforge.client.RenderTypeHelper;
+import net.minecraftforge.client.RenderTypeHelper;
 import org.spongepowered.asm.mixin.Mixin;
 
-@Mixin(RenderTypeHelper.class)
+@Mixin(value = RenderTypeHelper.class, remap = false)
 public class RenderTypeHelperMixin
 {
     @WrapMethod(method = "getFallbackItemRenderType")

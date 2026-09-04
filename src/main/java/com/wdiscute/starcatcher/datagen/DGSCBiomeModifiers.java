@@ -4,27 +4,28 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.neoforged.neoforge.common.world.BiomeModifier;
-import net.neoforged.neoforge.common.world.BiomeModifiers;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.common.world.ForgeBiomeModifiers;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.nikdo53.neobackports.registry.NeoForgeRegistries;
 
 public class DGSCBiomeModifiers
 {
 
     public static final ResourceKey<BiomeModifier> CLAMS =
-            ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, Starcatcher.rl("clams"));
+            ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, Starcatcher.rl("clams"));
 
     public static final ResourceKey<PlacedFeature> CLAMS_PLACED =
             ResourceKey.create(Registries.PLACED_FEATURE, Starcatcher.rl("clams"));
 
 
-    public static void bootstrap(BootstrapContext<BiomeModifier> context)
+    public static void bootstrap(BootstapContext<BiomeModifier> context)
     {
         HolderGetter<Biome> biomes =
                 context.lookup(Registries.BIOME);
@@ -34,7 +35,7 @@ public class DGSCBiomeModifiers
 
         context.register(
                 CLAMS,
-                new BiomeModifiers.AddFeaturesBiomeModifier(
+                new ForgeBiomeModifiers.AddFeaturesBiomeModifier(
                         HolderSet.direct(
                                 biomes.getOrThrow(
                                         Biomes.BEACH

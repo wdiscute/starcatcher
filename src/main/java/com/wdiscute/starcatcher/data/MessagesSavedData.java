@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.data;
 import com.mojang.datafixers.util.Pair;
 import com.mojang.serialization.Codec;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.messageinabottle.letter.LetterItem;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -43,7 +44,7 @@ public class MessagesSavedData extends SavedData
 
     public static MessagesSavedData get(ServerLevel level)
     {
-        return level.getDataStorage().computeIfAbsent(factory(), NAME);
+        return level.getDataStorage().computeIfAbsent(MessagesSavedData::load, MessagesSavedData::new, NAME);
     }
 
     public List<Message> getMessages()
@@ -51,22 +52,7 @@ public class MessagesSavedData extends SavedData
         return messages;
     }
 
-    public static Factory<MessagesSavedData> factory()
-    {
-        return new Factory<>(MessagesSavedData::new, MessagesSavedData::load);
-    }
-
-    @Override
-    public CompoundTag save(CompoundTag compoundTag, HolderLookup.Provider registries)
-    {
-        CODEC.encodeStart(NbtOps.INSTANCE, messages)
-                .resultOrPartial(Starcatcher.LOGGER::error)
-                .ifPresent(tag -> compoundTag.put(NAME, tag));
-
-        return compoundTag;
-    }
-
-    public static MessagesSavedData load(CompoundTag compoundTag, HolderLookup.Provider registries)
+    public static MessagesSavedData load(CompoundTag compoundTag)
     {
         Tag tag = compoundTag.get(NAME);
 
@@ -76,5 +62,15 @@ public class MessagesSavedData extends SavedData
                 .orElseGet(ArrayList::new);
 
         return new MessagesSavedData(messagesNew);
+    }
+
+    @Override
+    public CompoundTag save(CompoundTag compoundTag)
+    {
+        CODEC.encodeStart(NbtOps.INSTANCE, messages)
+                .resultOrPartial(Starcatcher.LOGGER::error)
+                .ifPresent(tag -> compoundTag.put(NAME, tag));
+
+        return compoundTag;
     }
 }

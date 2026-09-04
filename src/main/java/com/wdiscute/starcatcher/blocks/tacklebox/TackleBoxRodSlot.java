@@ -46,9 +46,9 @@ public class TackleBoxRodSlot extends Slot
     }
 
     @Override
-    public void setByPlayer(ItemStack newStack, ItemStack oldStack)
+    public void setByPlayer(ItemStack stack)
     {
-        super.setByPlayer(newStack, oldStack);
-        tackleMenu.onPlaceRod(newStack);
+        super.setByPlayer(stack);
+        tackleMenu.onPlaceRod(stack);
     }
 }

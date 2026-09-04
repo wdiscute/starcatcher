@@ -2,11 +2,9 @@ package com.wdiscute.starcatcher.fish;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import io.netty.buffer.ByteBuf;
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.Mth;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 public record SizeAndWeight(float sizeAverage, float sizeDeviation, float weightAverage, float weightDeviation, float goldenChance)
 {
@@ -136,7 +134,7 @@ public record SizeAndWeight(float sizeAverage, float sizeDeviation, float weight
                     Codec.FLOAT.fieldOf("golden_chance").forGetter(SizeAndWeight::goldenChance)
             ).apply(instance, SizeAndWeight::new));
 
-    public static final StreamCodec<ByteBuf, SizeAndWeight> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<SizeAndWeight> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.FLOAT, SizeAndWeight::sizeAverage,
             ByteBufCodecs.FLOAT, SizeAndWeight::sizeDeviation,
             ByteBufCodecs.FLOAT, SizeAndWeight::weightAverage,

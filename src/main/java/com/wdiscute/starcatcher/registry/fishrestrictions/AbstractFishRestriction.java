@@ -15,7 +15,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -28,15 +28,15 @@ public abstract class AbstractFishRestriction implements Comparable<AbstractFish
             .dispatch(processor -> processor.getRegistryHolderOrThrow().getId(),
                     loc ->
                     {
-                        AbstractFishRestriction fr = Starcatcher.FISH_RESTRICTIONS_REGISTRY.get(loc);
+                        AbstractFishRestriction fr = Starcatcher.FISH_RESTRICTIONS_REGISTRY.getValue(loc);
                         if (fr == null)
                         {
                             LogUtils.getLogger().error("Fish Restriction {} is not registered! " +
                                                        "Make sure it's not dependent on another mod, and that you spelt the name correctly. " +
                                                        "Using empty restriction instead.", loc);
-                            return EmptyRestriction.CODEC;
+                            return EmptyRestriction.CODEC.codec();
                         }
-                        return fr.getCodecOrThrow();
+                        return fr.getCodecOrThrow().codec();
                     });
 
     protected AbstractFishRestriction(String translationOverride)

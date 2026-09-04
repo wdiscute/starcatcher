@@ -2,23 +2,21 @@ package com.wdiscute.starcatcher.data.network;
 
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
-import com.wdiscute.starcatcher.messageinabottle.message.MessageScreen;
 import com.wdiscute.starcatcher.registry.fishrestrictions.StructureRestriction;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.network.handling.IPayloadContext;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.networking.CustomPacketPayload;
+import net.nikdo53.neobackports.io.networking.IPayloadContext;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.List;
 
 public record CBPlayerStructuresPayload(List<ResourceLocation> structures) implements CustomPacketPayload
 {
-    public static final Type<CBPlayerStructuresPayload> TYPE = new Type<>(Starcatcher.rl("player_in_structures"));
+    public static final Type<CBPlayerStructuresPayload> TYPE = new Type<>(Starcatcher.rl("player_in_structures"), CBPlayerStructuresPayload.class);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, CBPlayerStructuresPayload> STREAM_CODEC = StreamCodec.composite(
-            ResourceLocation.STREAM_CODEC.apply(ByteBufCodecs.list()), CBPlayerStructuresPayload::structures,
+    public static final StreamCodec<CBPlayerStructuresPayload> STREAM_CODEC = StreamCodec.composite(
+            ByteBufCodecs.RESOURCE_LOCATION.apply(ByteBufCodecs.list()), CBPlayerStructuresPayload::structures,
             CBPlayerStructuresPayload::new
     );
 

@@ -5,12 +5,12 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
 public interface SCAttributes
 {
-    DeferredRegister<Attribute> REGISTRY = DeferredRegister.create(Registries.ATTRIBUTE, Starcatcher.MOD_ID);
+    DeferredRegisterTyped<Attribute> REGISTRY = DeferredRegisterTyped.create(Registries.ATTRIBUTE, Starcatcher.MOD_ID);
 
     Holder<Attribute> HANDLE_ROTATION_SPEED_MULTIPLIER = register("handle_rotation_speed_multiplier", 1, 0, 10);
     Holder<Attribute> PENALTY_MULTIPLIER = registerNegative("penalty_multiplier", 1, 0, 10);
@@ -25,7 +25,7 @@ public interface SCAttributes
 
     private static Holder<Attribute> registerNegative(String name, double defaultVal, double min, double max)
     {
-        return REGISTRY.register(name, () -> new RangedAttribute(name, defaultVal, min, max).setSyncable(true).setSentiment(Attribute.Sentiment.NEGATIVE));
+        return REGISTRY.register(name, () -> new RangedAttribute(name, defaultVal, min, max).setSyncable(true));
     }
 
     static void register(IEventBus eventBus)

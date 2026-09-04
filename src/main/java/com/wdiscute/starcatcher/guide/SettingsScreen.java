@@ -15,9 +15,8 @@ import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -33,7 +32,7 @@ public class SettingsScreen extends FishingMinigameScreen
 
     public SettingsScreen()
     {
-        super(FishProperties.empty().withFish(new MaybeStack(SCItems.AURORA)), SCItems.UNKNOWN_FISH.toStack(), List.of(), new BaseTackleSkin());
+        super(FishProperties.empty().withFish(new MaybeStack(SCItems.AURORA.asItem())), SCItems.UNKNOWN_FISH.toStack(), List.of(), new BaseTackleSkin());
     }
 
     @Override
@@ -94,7 +93,7 @@ public class SettingsScreen extends FishingMinigameScreen
         ScreenUtils.text(guiGraphics, font, "Tracker: ", width / 2 + 70, height / 2 + 60, SCColors.YELLOW);
     }
 
-    public record Button(ModConfigSpec.DoubleValue configSpec, int x, int y, String text, float increase)
+    public record Button(ForgeConfigSpec.DoubleValue configSpec, int x, int y, String text, float increase)
     {
         public void render(GuiGraphics guiGraphics, int width, int height, Font font)
         {
@@ -153,10 +152,10 @@ public class SettingsScreen extends FishingMinigameScreen
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scrollX, double scrollY)
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta)
     {
-        buttons.forEach(o -> o.mouseScrolled(mouseX - (double) width / 2, mouseY - (double) height / 2, scrollY));
-        return super.mouseScrolled(mouseX, mouseY, scrollX, scrollY);
+        buttons.forEach(o -> o.mouseScrolled(mouseX - (double) width / 2, mouseY - (double) height / 2, delta));
+        return super.mouseScrolled(mouseX, mouseY, delta);
     }
 
     @Override

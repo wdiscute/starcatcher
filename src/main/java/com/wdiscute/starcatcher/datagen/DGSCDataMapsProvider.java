@@ -26,10 +26,10 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.dimension.LevelStem;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.DataMapProvider;
-import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
-import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
+import net.minecraftforge.common.Tags;
+import net.nikdo53.neobackports.datagen.DataMapProvider;
+import net.nikdo53.neobackports.datamaps.NeoForgeDataMaps;
+import net.nikdo53.neobackports.datamaps.builtin.Compostable;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -77,7 +77,7 @@ public class DGSCDataMapsProvider extends DataMapProvider
         aquarium.add(SCItems.STARCAUGHT_LAVA_BUCKET, AquariumBlock.Interaction.PLACE_FISH, false);
 
         aquarium.add(SCTags.BUCKETABLE_FISHES, AquariumBlock.Interaction.PLACE_FISH_CREATIVE, false);
-        aquarium.add(Tags.Items.BUCKETS_EMPTY, AquariumBlock.Interaction.RETRIEVE_FISH, false);
+        aquarium.add(Items.BUCKET.builtInRegistryHolder(), AquariumBlock.Interaction.RETRIEVE_FISH, false);
 
         //compostable
         compostable.add(SCTags.WORMS, new Compostable(0.65F, false), false);
@@ -418,7 +418,7 @@ public class DGSCDataMapsProvider extends DataMapProvider
         // `----' `--'   `--'    `----'  `---'   `--'   `----'
         //
 
-        modifiers_effects.add(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(MobEffects.LUCK.value()),
+        modifiers_effects.add(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(MobEffects.LUCK),
                 List.of(
                         new AdjustBaseHandleSpeedModifier(1.25f, "")
                 ), false);
@@ -432,12 +432,12 @@ public class DGSCDataMapsProvider extends DataMapProvider
         // `----' `--''--'  `---' `--' `--'  `--`--' `--''--'   `--'   `----'
         //
 
-        modifiers_enchants.add(Enchantments.LUCK_OF_THE_SEA,
+        modifiers_enchants.add(BuiltInRegistries.ENCHANTMENT.wrapAsHolder(Enchantments.FISHING_LUCK),
                 List.of(
                         new SpawnTreasureModifier(0.02f, "hide")
                 ), false);
 
-        modifiers_enchants.add(Enchantments.LURE,
+        modifiers_enchants.add(BuiltInRegistries.ENCHANTMENT.wrapAsHolder(Enchantments.FISHING_SPEED),
                 List.of(
                         new AdjustLureTimeModifier(0.95f, 0.95f, 1f, "hide")
                 ), false);

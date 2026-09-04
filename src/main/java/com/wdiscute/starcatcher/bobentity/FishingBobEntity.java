@@ -27,6 +27,7 @@ import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -34,8 +35,9 @@ import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.network.PacketDistributor;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.network.PacketDistributor;
+import net.nikdo53.neobackports.io.networking.PacketDistributorNeo;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -103,9 +105,9 @@ public class FishingBobEntity extends Projectile
 
         survivesLava = SCDataComponents.getOrDefault(rod, SCDataComponents.NETHERITE_UPGRADE, false) || modifiers.stream().anyMatch(o -> o.survivesLava(this));
 
-        minTicksToFish = SCConfig.BASE_MIN_TICKS_TO_FISH.getAsInt();
-        maxTicksToFish = SCConfig.BASE_MAX_TICKS_TO_FISH.getAsInt();
-        chanceToFishEachTick = (float) SCConfig.BASE_CHANCE_TO_FISH.getAsDouble();
+        minTicksToFish = SCConfig.BASE_MIN_TICKS_TO_FISH.get();
+        maxTicksToFish = SCConfig.BASE_MAX_TICKS_TO_FISH.get();
+        chanceToFishEachTick = Float.parseFloat(String.valueOf(SCConfig.BASE_CHANCE_TO_FISH.get()));
 
         //modify rod chances
         for (AbstractCatchModifier acm : modifiers)
@@ -184,13 +186,13 @@ public class FishingBobEntity extends Projectile
             //create payload
             CBFishingStartedPayload payload = new CBFishingStartedPayload(
                     //hide catch
-                    shouldHideCatch ? fpToFish.withCatchInfo(fpToFish.catchInfo().withFish(new MaybeStack(SCItems.UNKNOWN_FISH))) : fpToFish,
+                    shouldHideCatch ? fpToFish.withCatchInfo(fpToFish.catchInfo().withFish(new MaybeStack(SCItems.UNKNOWN_FISH.asItem()))) : fpToFish,
                     //hide treasure
                     SCConfig.HIDE_TREASURES.get() ? new MaybeStack(SCItems.UNKNOWN_FISH.toStack()) : new MaybeStack(treasure),
                     new MaybeStack(rod));
 
             //send payload
-            PacketDistributor.sendToPlayer(((ServerPlayer) player), payload);
+            PacketDistributorNeo.sendToPlayer(((ServerPlayer) player), payload);
         }
     }
 
@@ -249,7 +251,7 @@ public class FishingBobEntity extends Projectile
         super.tick();
 
         if (tackleSkin == null)
-            tackleSkin = Starcatcher.TACKLE_SKIN_REGISTRY.get(SCDataAttachments.get(this, SCDataAttachments.TACKLE_SKIN));
+            tackleSkin = Starcatcher.TACKLE_SKIN_REGISTRY.getValue(SCDataAttachments.get(this, SCDataAttachments.TACKLE_SKIN));
 
         tackleSkin.onTick(this);
 
@@ -324,7 +326,7 @@ public class FishingBobEntity extends Projectile
                 player.awardStat(SCStats.STARCAUGHT_FISH_MISSED.get());
 
                 ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, new MaybeStack(ItemStack.EMPTY)).toStack();
-                if (!bait.is(Tags.Items.BUCKETS_EMPTY))
+                if (!bait.is(Items.BUCKET))
                 {
                     bait.shrink(1);
                     SCDataComponents.set(rod, SCDataComponents.BAIT, new MaybeStack(bait));
@@ -418,7 +420,7 @@ public class FishingBobEntity extends Projectile
     {
         if (currentState == FishHookState.BITING)
         {
-            AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(Starcatcher.BASE));
+            AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
             tackleSkin.onMinigameStarted(player);
 
             currentState = FishHookState.FISHING;
@@ -443,7 +445,7 @@ public class FishingBobEntity extends Projectile
                 if (!level().isClientSide) currentState = FishHookState.BITING;
 
                 //trigger tackle skin on biting
-                AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.get(Starcatcher.BASE));
+                AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
                 tackleSkin.onBiting(player, this);
             }
         }
@@ -465,9 +467,9 @@ public class FishingBobEntity extends Projectile
     }
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder)
+    protected void defineSynchedData()
     {
-        builder.define(STATE, 0);
-        builder.define(VOID, false);
+        entityData.define(STATE, 0);
+        entityData.define(VOID, false);
     }
 }

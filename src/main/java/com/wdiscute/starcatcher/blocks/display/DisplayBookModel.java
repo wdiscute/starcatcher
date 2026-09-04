@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.blocks.display;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
@@ -62,9 +63,9 @@ public class DisplayBookModel extends Model
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color)
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha)
     {
-        this.render(poseStack, buffer, packedLight, packedOverlay, color);
+        this.render(poseStack,buffer, packedLight, packedOverlay, Utils.toColorF(red, green, blue, alpha));
     }
 
     public void render(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, int color)

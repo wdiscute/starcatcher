@@ -24,17 +24,19 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.ModList;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.event.entity.player.ItemFishedEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
+import net.minecraftforge.fml.ModList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -104,7 +106,7 @@ public class FishApi
         //get random fish from available pool, if no trophy/secret is selected
         if (fpToFish == null)
         {
-            fpToFish = available.get(fbe.getRandom().nextInt(available.size()));
+            fpToFish = available.get(fbe.level().getRandom().nextInt(available.size()));
             rlToAwardUponFishingComplete = FishApi.getKey(level, fpToFish);
         }
 
@@ -144,7 +146,7 @@ public class FishApi
 
         return chance;
     }
- 
+
     /**
      * Spawns the fished (item)entity using the FishingBobEntity linked in the player DataAttachment.
      */
@@ -165,7 +167,7 @@ public class FishApi
                 //todo change this to be a neoforge event
 
                 //trigger criterion
-                SCCriterionTriggers.FISH.get().trigger(player, fbe.rlToAwardUponFishingComplete == null ? Starcatcher.MISSINGNO : fbe.rlToAwardUponFishingComplete, fp.rarity(), time, perfectCatch);
+                SCCriterionTriggers.FISH.trigger(player, fbe.rlToAwardUponFishingComplete == null ? Starcatcher.MISSINGNO : fbe.rlToAwardUponFishingComplete, fp.rarity(), time, perfectCatch);
 
                 //trigger modifiers
                 fbe.modifiers.forEach(m -> m.onSuccessfulMinigameCompletion(fbe, time, completedTreasure, perfectCatch, hits));
@@ -174,7 +176,7 @@ public class FishApi
                 fbe.tackleSkin.onSuccessfulMinigame(player);
 
                 //pick rod percentile
-                float percentile = fbe.getRandom().nextFloat() * 100;
+                float percentile = fbe.level().getRandom().nextFloat() * 100;
 
                 //modify percentile from modifiers
                 for (AbstractCatchModifier modifier : fbe.modifiers)
@@ -230,9 +232,9 @@ public class FishApi
                     double y = pPos.y / 20;
                     double z = pPos.z / 25;
 
-                    x = Math.clamp(x, -1, 1);
-                    y = Math.clamp(y, -1, 1);
-                    z = Math.clamp(z, -1, 1);
+                    x = Mth.clamp(x, -1, 1);
+                    y = Mth.clamp(y, -1, 1);
+                    z = Mth.clamp(z, -1, 1);
 
                     x *= 2.5;
                     y *= 2;
@@ -258,7 +260,7 @@ public class FishApi
 
                     //consume bait if not bucket
                     ItemStack bait = SCDataComponents.getOrDefault(fbe.rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
-                    if(!bait.is(Tags.Items.BUCKETS_EMPTY))
+                    if (!bait.is(Items.BUCKET))
                     {
                         bait.shrink(1);
                         player.awardStat(SCStats.BAIT_USED.get(), 1);
@@ -288,7 +290,7 @@ public class FishApi
                         ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
                         ItemStack hook = SCDataComponents.getOrDefault(rod, SCDataComponents.HOOK, MaybeStack.EMPTY).toStack();
 
-                        rod.hurtAndBreak(1, (ServerLevel) player.level(), player, Utils::nothing);
+                        rod.hurtAndBreak(1, player, Utils::nothing);
 
                         //if rod broke, award bobber, bait & hook
                         if (rod.isEmpty())
@@ -321,7 +323,7 @@ public class FishApi
                     FishingHook fakeHook = new FishingHook(player, level, 0, 0);
                     fakeHook.setPos(fbe.position());
                     ItemFishedEvent event = new ItemFishedEvent(items, 0, fakeHook);
-                    NeoForge.EVENT_BUS.post(event);
+                    MinecraftForge.EVENT_BUS.post(event);
                     if (event.isCanceled()) items.clear();
                     fakeHook.discard();
                 }
@@ -333,9 +335,9 @@ public class FishApi
                     ItemEntity itemFished = new ItemEntity(level, fbe.position().x, fbe.position().y + 1.2f, fbe.position().z, itemStackToSpawn);
 
                     //assign delta movement so fish flies towards player
-                    double x = Math.clamp((player.position().x - fbe.position().x) / 25, -1, 1);
-                    double y = Math.clamp((player.position().y - fbe.position().y) / 20, -1, 1);
-                    double z = Math.clamp((player.position().z - fbe.position().z) / 25, -1, 1);
+                    double x = Mth.clamp((player.position().x - fbe.position().x) / 25, -1, 1);
+                    double y = Mth.clamp((player.position().y - fbe.position().y) / 20, -1, 1);
+                    double z = Mth.clamp((player.position().z - fbe.position().z) / 25, -1, 1);
                     Vec3 vec3 = new Vec3(x, 0.7 + y, z);
                     itemFished.setDeltaMovement(vec3);
 
@@ -357,7 +359,7 @@ public class FishApi
 
                 //always consume bait if not bucket (fish don't eat buckets!)
                 ItemStack bait = SCDataComponents.getOrDefault(fbe.rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
-                if(!bait.is(Tags.Items.BUCKETS_EMPTY))
+                if (!bait.is(Items.BUCKET))
                 {
                     bait.shrink(1);
                     player.awardStat(SCStats.BAIT_USED.get(), 1);
@@ -366,8 +368,7 @@ public class FishApi
             }
 
             //sync stats to player for guide book
-            if(player instanceof ServerPlayer sp)
-                sp.getStats().sendStats(sp);
+            player.getStats().sendStats(player);
 
             //kill bobber entity
             fbe.kill();
@@ -403,10 +404,10 @@ public class FishApi
         ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
 
         //can be bucketed if has bucketed fish in fp, bait has bucket, and is not golden
-        boolean canBeBucketed = !fp.catchInfo().bucketedFish().toStack().isEmpty() && bait.is(Tags.Items.BUCKETS_EMPTY) && !golden;
+        boolean canBeBucketed = !fp.catchInfo().bucketedFish().toStack().isEmpty() && bait.is(Items.BUCKET) && !golden;
 
         //always consume bait if not bait is not a bucket
-        if(!bait.is(Tags.Items.BUCKETS_EMPTY))
+        if (!bait.is(Items.BUCKET))
         {
             bait.shrink(1);
             player.awardStat(SCStats.BAIT_USED.get(), 1);

@@ -22,6 +22,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,10 +110,10 @@ public class StarcatcherEmiPlugin implements EmiPlugin
 
 
         //add all smithing recipes
-        List<RecipeHolder<SmithingRecipe>> smithingRecipes = registry.getRecipeManager().getAllRecipesFor(RecipeType.SMITHING);
+        List<SmithingRecipe> smithingRecipes = registry.getRecipeManager().getAllRecipesFor(RecipeType.SMITHING);
         smithingRecipes.stream()
-                .filter(o -> o.value() instanceof StarcatcherRodRecipe)
-                .map(o -> (StarcatcherRodRecipe) o.value())
+                .filter(o -> o instanceof StarcatcherRodRecipe)
+                .map(o -> (StarcatcherRodRecipe) o)
                 .forEach(recipe -> registry.addRecipe(new StarcatcherEmiSmithingRecipe(recipe)));
 
     }

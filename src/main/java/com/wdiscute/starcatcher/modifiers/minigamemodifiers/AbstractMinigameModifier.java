@@ -31,7 +31,7 @@ public abstract class AbstractMinigameModifier implements Modifier
         return List.of(Component.translatable("tooltip.modifier." + getIdentifier().toLanguageKey()));
     }
 
-    public void mouseScrolled(FishingMinigameScreen instance, double mouseX, double mouseY, double scrollX, double scrollY)
+    public void mouseScrolled(FishingMinigameScreen instance, double mouseX, double mouseY, double delta)
     {
     }
 

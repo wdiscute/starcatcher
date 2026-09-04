@@ -22,16 +22,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
-import net.minecraft.world.level.levelgen.structure.Structure;
-import net.minecraft.world.level.levelgen.structure.StructureStart;
-import net.neoforged.fml.ISystemReportExtender;
-import net.neoforged.neoforge.registries.DeferredHolder;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 public class StructureRestriction extends AbstractFishRestriction
 {
@@ -63,7 +58,7 @@ public class StructureRestriction extends AbstractFishRestriction
         if (structures.isEmpty()) return Component.empty();
 
         if (structures.size() == 1)
-            return Component.translatable("structure." + structures.getFirst().toLanguageKey());
+            return Component.translatable("structure." + structures.get(0).toLanguageKey());
         else
             return Component.translatable("gui.guide.hover");
     }
@@ -130,7 +125,7 @@ public class StructureRestriction extends AbstractFishRestriction
         return -9999;
     }
 
-    public static final StructureRestriction TRIAL_CHAMBERS = new StructureRestriction(List.of(BuiltinStructures.TRIAL_CHAMBERS.location()), "");
+    //public static final StructureRestriction TRIAL_CHAMBERS = new StructureRestriction(List.of(BuiltinStructures.TRIAL_CHAMBERS.location()), "");
     public static final StructureRestriction OCEAN_MONUMENT = new StructureRestriction(List.of(BuiltinStructures.OCEAN_MONUMENT.location()), "");
     public static final StructureRestriction END_CITIES = new StructureRestriction(List.of(BuiltinStructures.END_CITY.location()), "");
     public static final StructureRestriction VILLAGES = new StructureRestriction(List.of(

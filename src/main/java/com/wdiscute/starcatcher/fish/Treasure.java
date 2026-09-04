@@ -6,9 +6,6 @@ import com.wdiscute.starcatcher.modifiers.catchmodifiers.AbstractCatchModifier;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -23,7 +20,9 @@ import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraftforge.common.Tags;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,12 +36,12 @@ public record Treasure
         )
 {
     public static final Treasure EMPTY = new Treasure(List.of(), List.of(), List.of());
-    public static final Treasure VANILLA_FISHING_LOOT_TABLE = Treasure.lootTable(List.of(BuiltInLootTables.FISHING_TREASURE.location()), Items.FISHING_ROD);
+    public static final Treasure VANILLA_FISHING_LOOT_TABLE = Treasure.lootTable(List.of(BuiltInLootTables.FISHING_TREASURE), Items.FISHING_ROD);
     public static final Treasure EXAMPLE_TREASURE =
             new Treasure(
                     List.of(
-                            new WeightedLootTable(BuiltInLootTables.FISHING.location(), 20),
-                            new WeightedLootTable(BuiltInLootTables.ANCIENT_CITY.location(), 1)
+                            new WeightedLootTable(BuiltInLootTables.FISHING, 20),
+                            new WeightedLootTable(BuiltInLootTables.ANCIENT_CITY, 1)
                     ),
                     List.of(
                             new WeightedStack(new MaybeStack(Items.DIAMOND), 2),
@@ -69,7 +68,7 @@ public record Treasure
             Ingredient.CODEC.listOf().optionalFieldOf("blacklist", List.of()).forGetter(Treasure::blacklist)
     ).apply(instance, Treasure::new));
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, Treasure> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<Treasure> STREAM_CODEC = StreamCodec.composite(
             WeightedLootTable.STREAM_CODEC.apply(ByteBufCodecs.list()), Treasure::lootTables,
             WeightedStack.STREAM_CODEC.apply(ByteBufCodecs.list()), Treasure::stacks,
             Ingredient.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()), Treasure::blacklist,
@@ -146,9 +145,7 @@ public record Treasure
                 .withLuck(player.getLuck())
                 .create(LootContextParamSets.FISHING);
 
-        LootTable table = player.level().getServer().reloadableRegistries().getLootTable(
-                ResourceKey.create(Registries.LOOT_TABLE, rl)
-        );
+        LootTable table = player.level().getServer().getLootData().getLootTable(rl);
 
         List<ItemStack> randomItems = table.getRandomItems(lootparams).stream().filter(o -> !o.isEmpty()).toList();
 

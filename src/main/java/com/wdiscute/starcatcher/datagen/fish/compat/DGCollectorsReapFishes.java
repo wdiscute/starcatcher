@@ -9,12 +9,13 @@ import com.wdiscute.starcatcher.fish.SizeAndWeight;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.DimensionRestriction;
 import com.wdiscute.utils.MaybeStack;
-import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.BootstapContext;
+import net.minecraft.data.worldgen.BootstapContext;
 import org.jetbrains.annotations.Nullable;
 
 public class DGCollectorsReapFishes
 {
-    public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
+    public static void bootstrap(@Nullable BootstapContext<FishProperties> context)
     {
         //
         // ,-----.         ,--. ,--.                  ,--.                   ,--.             ,------.
@@ -99,7 +100,7 @@ public class DGCollectorsReapFishes
 //                        new BiomeRestriction(List.of(), List.of(U.rl("collectorsreap", "biome/has_spawn/chieftain_crab")),
 //                                List.of(), List.of(), "")
                         )
-                        .withItemToOverrideWith(new MaybeStack(SCItems.UNKNOWN_FISH)),
+                        .withItemToOverrideWith(new MaybeStack(SCItems.UNKNOWN_FISH.asItem())),
                 "collectorsreap"
         );
     }

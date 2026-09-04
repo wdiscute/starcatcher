@@ -3,10 +3,9 @@ package com.wdiscute.starcatcher.data.attachments;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
-import net.neoforged.neoforge.attachment.AttachmentHolder;
+import net.minecraftforge.common.capabilities.CapabilityProvider;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.UUID;
 
@@ -25,7 +24,7 @@ public class FishingBobAttachment
             ).apply(instance, FishingBobAttachment::new)
     );
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, FishingBobAttachment> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<FishingBobAttachment> STREAM_CODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8, data -> data.uuid,
             FishingBobAttachment::new
     );
@@ -35,14 +34,15 @@ public class FishingBobAttachment
         return uuid.isEmpty();
     }
 
-    public void setUuid(AttachmentHolder holder, UUID uuid) {
+    public void setUuid(CapabilityProvider holder, UUID uuid)
+    {
         this.uuid = uuid.toString();
         holder.syncData(SCDataAttachments.FISHING_BOB);
     }
 
     public UUID getUuid()
     {
-        if(uuid.isEmpty()) return UUID.randomUUID();
+        if (uuid.isEmpty()) return UUID.randomUUID();
         return UUID.fromString(uuid);
     }
 

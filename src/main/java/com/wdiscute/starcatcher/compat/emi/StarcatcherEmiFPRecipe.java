@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.compat.emi;
 
+import com.google.common.collect.Lists;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.FishProperties;
@@ -60,7 +61,7 @@ public class StarcatcherEmiFPRecipe implements EmiRecipe
 
         List<WeightedLootTable> lts = new ArrayList<>(treasure.lootTables());
         lts.sort(Comparator.comparingInt(WeightedLootTable::weight));
-        lts = lts.reversed();
+        lts = Lists.reverse(lts);
 
         if (!lts.isEmpty())
         {
@@ -74,7 +75,7 @@ public class StarcatcherEmiFPRecipe implements EmiRecipe
 
         List<WeightedStack> stks = new ArrayList<>(treasure.stacks());
         stks.sort(Comparator.comparingInt(WeightedStack::weight));
-        stks = stks.reversed();
+        stks = Lists.reverse(stks);
 
         List<ItemStack> stacks = new ArrayList<>();
 
@@ -123,8 +124,8 @@ public class StarcatcherEmiFPRecipe implements EmiRecipe
         //Aurora
         restrictions.add(fp.getDisplayName());
 
-        //❌ Dimension
-        //✅ Biome
+        // Dimension
+        // Biome
         fp.restrictions().stream().filter(AbstractFishRestriction::isEnabled).forEach(o ->
                 restrictions.addAll(
                         o.getIndexHover(
@@ -192,7 +193,7 @@ public class StarcatcherEmiFPRecipe implements EmiRecipe
         if(!treasureTooltip.isEmpty())
         {
             widgets.addTexture(SLOT_BACKGROUND_FILLED, 64, 2).tooltipText(treasureTooltip);
-            widgets.add(new StarcatcherRenderItemEmiWidget(65, 3, treasureIngredient.getEmiStacks().getFirst().getItemStack()));
+            widgets.add(new StarcatcherRenderItemEmiWidget(65, 3, treasureIngredient.getEmiStacks().get(0).getItemStack()));
         }
 
 

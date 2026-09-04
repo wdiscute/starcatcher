@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.registry.SCMenuTypes;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.blocks.stand.StandBlockEntity;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -88,59 +89,59 @@ public class StandMenu extends AbstractContainerMenu
 
             //trash
             if (id == 200)
-                currentTournament.scoreSettings.trashScore = Math.clamp(currentTournament.scoreSettings.trashScore + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.trashScore = Mth.clamp(currentTournament.scoreSettings.trashScore + 0.1f, 0, 9.9f);
 
             if (id == 201)
-                currentTournament.scoreSettings.trashScore = Math.clamp(currentTournament.scoreSettings.trashScore - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.trashScore = Mth.clamp(currentTournament.scoreSettings.trashScore - 0.1f, 0, 9.9f);
 
             //common
             if (id == 210)
-                currentTournament.scoreSettings.commonScore = Math.clamp(currentTournament.scoreSettings.commonScore + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.commonScore = Mth.clamp(currentTournament.scoreSettings.commonScore + 0.1f, 0, 9.9f);
 
             if (id == 211)
-                currentTournament.scoreSettings.commonScore = Math.clamp(currentTournament.scoreSettings.commonScore - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.commonScore = Mth.clamp(currentTournament.scoreSettings.commonScore - 0.1f, 0, 9.9f);
 
             //uncommon
             if (id == 202)
-                currentTournament.scoreSettings.uncommonScore = Math.clamp(currentTournament.scoreSettings.uncommonScore + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.uncommonScore = Mth.clamp(currentTournament.scoreSettings.uncommonScore + 0.1f, 0, 9.9f);
 
             if (id == 221)
-                currentTournament.scoreSettings.uncommonScore = Math.clamp(currentTournament.scoreSettings.uncommonScore - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.uncommonScore = Mth.clamp(currentTournament.scoreSettings.uncommonScore - 0.1f, 0, 9.9f);
 
             //rare
             if (id == 230)
-                currentTournament.scoreSettings.rareScore = Math.clamp(currentTournament.scoreSettings.rareScore + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.rareScore = Mth.clamp(currentTournament.scoreSettings.rareScore + 0.1f, 0, 9.9f);
 
             if (id == 231)
-                currentTournament.scoreSettings.rareScore = Math.clamp(currentTournament.scoreSettings.rareScore - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.rareScore = Mth.clamp(currentTournament.scoreSettings.rareScore - 0.1f, 0, 9.9f);
 
             //epic
             if (id == 240)
-                currentTournament.scoreSettings.epicScore = Math.clamp(currentTournament.scoreSettings.epicScore + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.epicScore = Mth.clamp(currentTournament.scoreSettings.epicScore + 0.1f, 0, 9.9f);
 
             if (id == 241)
-                currentTournament.scoreSettings.epicScore = Math.clamp(currentTournament.scoreSettings.epicScore - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.epicScore = Mth.clamp(currentTournament.scoreSettings.epicScore - 0.1f, 0, 9.9f);
 
             //legendary
             if (id == 250)
-                currentTournament.scoreSettings.legendaryScore = Math.clamp(currentTournament.scoreSettings.legendaryScore + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.legendaryScore = Mth.clamp(currentTournament.scoreSettings.legendaryScore + 0.1f, 0, 9.9f);
 
             if (id == 251)
-                currentTournament.scoreSettings.legendaryScore = Math.clamp(currentTournament.scoreSettings.legendaryScore - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.legendaryScore = Mth.clamp(currentTournament.scoreSettings.legendaryScore - 0.1f, 0, 9.9f);
 
             //percentile
             if (id == 260)
-                currentTournament.scoreSettings.percentileMultiplier = Math.clamp(currentTournament.scoreSettings.percentileMultiplier + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.percentileMultiplier = Mth.clamp(currentTournament.scoreSettings.percentileMultiplier + 0.1f, 0, 9.9f);
 
             if (id == 261)
-                currentTournament.scoreSettings.percentileMultiplier = Math.clamp(currentTournament.scoreSettings.percentileMultiplier - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.percentileMultiplier = Mth.clamp(currentTournament.scoreSettings.percentileMultiplier - 0.1f, 0, 9.9f);
 
             //perfect catch
             if (id == 270)
-                currentTournament.scoreSettings.perfectCatchMultiplier = Math.clamp(currentTournament.scoreSettings.perfectCatchMultiplier + 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.perfectCatchMultiplier = Mth.clamp(currentTournament.scoreSettings.perfectCatchMultiplier + 0.1f, 0, 9.9f);
 
             if (id == 271)
-                currentTournament.scoreSettings.perfectCatchMultiplier = Math.clamp(currentTournament.scoreSettings.perfectCatchMultiplier - 0.1f, 0, 9.9f);
+                currentTournament.scoreSettings.perfectCatchMultiplier = Mth.clamp(currentTournament.scoreSettings.perfectCatchMultiplier - 0.1f, 0, 9.9f);
 
             //gold button owner + preparing status
             if (id == 67)
@@ -184,7 +185,7 @@ public class StandMenu extends AbstractContainerMenu
                 else
                 {
                     currentTournament.playerScores = currentTournament.playerScores.stream()
-                            .filter(o -> !o.equals(list.getFirst())).toList();
+                            .filter(o -> !o.equals(list.get(0))).toList();
                 }
             }
 

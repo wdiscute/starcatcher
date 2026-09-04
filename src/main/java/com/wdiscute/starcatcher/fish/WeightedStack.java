@@ -3,9 +3,8 @@ package com.wdiscute.starcatcher.fish;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.utils.MaybeStack;
-import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
+import net.nikdo53.neobackports.io.StreamCodec;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 public record WeightedStack(MaybeStack stack, int weight)
 {
@@ -16,7 +15,7 @@ public record WeightedStack(MaybeStack stack, int weight)
             ).apply(instance, WeightedStack::new));
 
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, WeightedStack> STREAM_CODEC = StreamCodec.composite(
+    public static final StreamCodec<WeightedStack> STREAM_CODEC = StreamCodec.composite(
             MaybeStack.STREAM_CODEC, WeightedStack::stack,
             ByteBufCodecs.INT, WeightedStack::weight,
             WeightedStack::new
