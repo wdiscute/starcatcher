@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 public class SCProcessors
 {
     public static final DeferredRegisterTyped<AbstractProcessor> SELLING_BIN_PROCESSORS =
-            DeferredRegisterTyped.create(SellingBin.SELLING_BIN_REGISTRY, Starcatcher.MOD_ID);
+            DeferredRegisterTyped.create(SellingBin.SELLING_BIN, Starcatcher.MOD_ID);
 
     public static DeferredHolder<AbstractProcessor, AbstractProcessor> FISHES_PROCESSOR = register("fishes_processor", () -> FishProcessor.DEFAULT);
 

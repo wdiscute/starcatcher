@@ -32,10 +32,9 @@ public class StarcatcherFishingRodItem extends Item
                 .rarity(Rarity.EPIC)
                 .fireResistant()
                 .durability(128)
-                .stacksTo(1)
-                .component(SCDataComponents.BOBBER.get(), new MaybeStack(SCItems.BOBBER.get()))
-                .component(SCDataComponents.BAIT.get(), MaybeStack.EMPTY)
-                .component(SCDataComponents.HOOK.get(), new MaybeStack(SCItems.HOOK.get()))
+                //.component(SCDataComponents.BOBBER.get(), new MaybeStack(SCItems.BOBBER.get()))
+                //.component(SCDataComponents.BAIT.get(), MaybeStack.EMPTY)
+                //.component(SCDataComponents.HOOK.get(), new MaybeStack(SCItems.HOOK.get()))
         );
     }
 
@@ -58,7 +57,7 @@ public class StarcatcherFishingRodItem extends Item
         FishingBobAttachment fishingBobAttachment = SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB.get());
 
         //get tackle skin
-        AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
+        AbstractTackleSkin tackleSkin = Starcatcher.TACKLE_SKIN_REGISTRY.getValue(SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.BASE));
 
         //if player is not fishing, cast
         if (fishingBobAttachment.isEmpty())

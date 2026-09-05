@@ -27,7 +27,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.fml.loading.FMLLoader;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.nikdo53.neobackports.registry.ForgeRegistryHelper;
 import org.apache.commons.lang3.tuple.Triple;
 import org.slf4j.Logger;
 
@@ -54,7 +56,7 @@ public class Starcatcher
             ResourceKey.createRegistryKey(Starcatcher.rl("sweetspot_behaviour"));
 
     public static final ResourceKey<Registry<AbstractTackleSkin>> TACKLE_SKIN =
-            ResourceKey.createRegistryKey(Starcatcher.rl("bobber_skin"));
+            ResourceKey.createRegistryKey(Starcatcher.rl("tackle_skin"));
 
     //registry
     public static IForgeRegistry<AbstractFishRestriction> FISH_RESTRICTIONS_REGISTRY;

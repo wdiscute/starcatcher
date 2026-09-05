@@ -83,8 +83,7 @@ public class SCTooltipEvents
         }
 
         //tackle skin data component
-        ResourceLocation tackleSkinDC = Starcatcher.TACKLE_SKIN_REGISTRY.getKey(
-                SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE)));
+        ResourceLocation tackleSkinDC = SCDataComponents.getOrDefault(stack, SCDataComponents.TACKLE_SKIN, Starcatcher.BASE);
         if (tackleSkinDC != null && !tackleSkinDC.equals(Starcatcher.BASE))
         {
             String s = I18n.get("tooltip.tackle." + tackleSkinDC.toLanguageKey());

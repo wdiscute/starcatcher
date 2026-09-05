@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 public interface SCSweetSpotsBehaviour
 {
     DeferredRegisterTyped<Supplier<? extends AbstractSweetSpotBehaviour>> REGISTRY =
-            DeferredRegisterTyped.create(Starcatcher.SWEETSPOT_BEHAVIOUR_REGISTRY, Starcatcher.MOD_ID);
+            DeferredRegisterTyped.create(Starcatcher.SWEETSPOT_BEHAVIOUR, Starcatcher.MOD_ID);
 
     ResourceLocation NORMAL = registerSweetspot("normal", () -> NormalSweetSpotBehaviour::new);
     ResourceLocation MUSHROOM = registerSweetspot("mushroom", () -> MushroomSweetSpotBehaviour::new);
@@ -31,7 +31,6 @@ public interface SCSweetSpotsBehaviour
         REGISTRY.register(name, supplier);
         return Starcatcher.rl(name);
     }
-
 
     static void register(IEventBus eventBus)
     {

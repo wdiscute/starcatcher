@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -66,9 +67,9 @@ public interface SCDataComponents
             "modifiers",
             builder -> builder.persistent(Modifier.CODEC.listOf()));
 
-    DeferredHolder<DataComponentType<?>, DataComponentType<AbstractTackleSkin>> TACKLE_SKIN = register(
+    DeferredHolder<DataComponentType<?>, DataComponentType<ResourceLocation>> TACKLE_SKIN = register(
             "tackle_skin",
-            builder -> builder.persistent(Starcatcher.TACKLE_SKIN_REGISTRY.getCodec()));
+            builder -> builder.persistent(ResourceLocation.CODEC));
 
     DeferredHolder<DataComponentType<?>, DataComponentType<Boolean>> NETHERITE_UPGRADE = register(
             "netherite_upgraded",
@@ -109,7 +110,7 @@ public interface SCDataComponents
     private static <T> DeferredHolder<DataComponentType<?>, DataComponentType<T>> register(String name,
                                                                                            UnaryOperator<DataComponentType.Builder<T>> builderOperator)
     {
-        return DATA_COMPONENT_TYPES.register(name, () -> builderOperator.apply(DataComponentType.builder()).build());
+        return DATA_COMPONENT_TYPES.registerComponentType(name, builderOperator);
     }
 
     static void register(IEventBus eventBus)

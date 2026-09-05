@@ -420,7 +420,7 @@ public class FishingBobEntity extends Projectile
     {
         if (currentState == FishHookState.BITING)
         {
-            AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
+            AbstractTackleSkin tackleSkin = Starcatcher.TACKLE_SKIN_REGISTRY.getValue(SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.BASE));
             tackleSkin.onMinigameStarted(player);
 
             currentState = FishHookState.FISHING;
@@ -445,7 +445,7 @@ public class FishingBobEntity extends Projectile
                 if (!level().isClientSide) currentState = FishHookState.BITING;
 
                 //trigger tackle skin on biting
-                AbstractTackleSkin tackleSkin = SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
+                AbstractTackleSkin tackleSkin = Starcatcher.TACKLE_SKIN_REGISTRY.getValue(SCDataComponents.getOrDefault(rod, SCDataComponents.TACKLE_SKIN, Starcatcher.BASE));
                 tackleSkin.onBiting(player, this);
             }
         }

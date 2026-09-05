@@ -50,7 +50,7 @@ public record CatchInfo(
             instance.group(
                     MaybeStack.CODEC.fieldOf("item").forGetter(CatchInfo::fish),
                     MaybeStack.CODEC.optionalFieldOf("fish_bucket", MaybeStack.EMPTY).forGetter(CatchInfo::bucketedFish),
-                    BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().optionalFieldOf("entity", SCEntities.FISH.get().builtInRegistryHolder()).forGetter(CatchInfo::entityToSpawn),
+                    BuiltInRegistries.ENTITY_TYPE.holderByNameCodec().optionalFieldOf("entity", (Holder<EntityType<?>>) (Object) SCEntities.FISH).forGetter(CatchInfo::entityToSpawn),
                     Codec.BOOL.optionalFieldOf("always_spawn_entity", false).forGetter(CatchInfo::alwaysSpawnEntity),
                     MaybeStack.CODEC.optionalFieldOf("override_minigame_item", MaybeStack.EMPTY).forGetter(CatchInfo::overrideMinigameWith),
                     FishEntryType.CODEC.optionalFieldOf("type", FishEntryType.FISH).forGetter(CatchInfo::fishEntryType)
@@ -69,7 +69,7 @@ public record CatchInfo(
     public static final CatchInfo DEFAULT = new CatchInfo(
             MaybeStack.EMPTY,
             MaybeStack.EMPTY,
-            SCEntities.FISH.get().builtInRegistryHolder(),
+            (Holder<EntityType<?>>) (Object) SCEntities.FISH,
             false,
             MaybeStack.EMPTY,
             FishEntryType.FISH

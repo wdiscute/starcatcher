@@ -26,16 +26,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
 {
-    EntityType<FishEntity> entity;
+    Supplier<EntityType<FishEntity>> entity;
 
     public StarcaughtBucket(Fluid fluid)
     {
         super(fluid, new Item.Properties().stacksTo(1));
 
-        entity = SCEntities.FISH.get();
+        entity = SCEntities.FISH;
     }
 
     public static Item getBucketForStack(ItemStack stack)
@@ -55,7 +56,7 @@ public class StarcaughtBucket extends BucketItem implements Tooltips.ItemTooltip
 
     private void spawn(ServerLevel serverLevel, ItemStack bucketedMobStack, BlockPos pos)
     {
-        FishEntity fishEntity = this.entity.spawn(serverLevel, bucketedMobStack, null, pos, MobSpawnType.BUCKET, true, false);
+        FishEntity fishEntity = this.entity.get().spawn(serverLevel, bucketedMobStack, null, pos, MobSpawnType.BUCKET, true, false);
         if (SCDataComponents.has(bucketedMobStack, SCDataComponents.BUCKETED_FISH))
             fishEntity.setFish(getFish(bucketedMobStack));
         else

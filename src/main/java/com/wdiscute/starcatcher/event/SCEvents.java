@@ -20,6 +20,7 @@ import com.wdiscute.starcatcher.tournament.TournamentHandler;
 import com.wdiscute.starcatcher.trigger.FishCaughtTrigger;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.packs.PackType;

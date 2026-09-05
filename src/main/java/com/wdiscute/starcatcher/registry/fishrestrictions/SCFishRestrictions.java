@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public interface SCFishRestrictions
 {
     DeferredRegisterTyped<AbstractFishRestriction> REGISTRY =
-            DeferredRegisterTyped.create(Starcatcher.FISH_RESTRICTIONS_REGISTRY, Starcatcher.MOD_ID);
+            DeferredRegisterTyped.create(Starcatcher.FISH_RESTRICTIONS, Starcatcher.MOD_ID);
 
 
     DeferredHolder<AbstractFishRestriction, AbstractFishRestriction> EMPTY =

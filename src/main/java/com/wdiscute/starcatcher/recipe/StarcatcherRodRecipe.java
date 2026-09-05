@@ -71,7 +71,7 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
         if (applySkin)
         {
             AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(input.template(), SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.BASE));
-            SCDataComponents.set(resultRod, SCDataComponents.TACKLE_SKIN, tackleSkin);
+            SCDataComponents.set(resultRod, SCDataComponents.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getKey(tackleSkin));
         }
 
         //set netherite upgrade
