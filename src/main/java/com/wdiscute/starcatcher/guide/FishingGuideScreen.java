@@ -712,6 +712,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
     {
+        super.renderBackground(g);
         super.render(g, mouseX, mouseY, partialTick);
         resolveTrackedFP();
 

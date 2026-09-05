@@ -23,19 +23,20 @@ public class GetNameMixin
 
         if (SCDataComponents.has(stack, SCDataComponents.CAUGHT_FISH_INFO))
         {
-            Component baseName;
-            Component customName = stack.get(DataComponents.CUSTOM_NAME.get());
-            Component itemName = stack.get(DataComponents.ITEM_NAME.get());
-
-            if (customName != null)
-            {
-                baseName = customName;
-            }
-            else if (itemName != null)
-            {
-                baseName = itemName;
-            }
-            else baseName = Component.translatable(stack.getDescriptionId());
+//            Component baseName;
+//            Component customName = stack.get(DataComponents.CUSTOM_NAME.get());
+//            Component itemName = stack.get(DataComponents.ITEM_NAME.get());
+//
+//            if (customName != null)
+//            {
+//                baseName = customName;
+//            }
+//            else if (itemName != null)
+//            {
+//                baseName = itemName;
+//            }
+//            else baseName = Component.translatable(stack.getDescriptionId());
+            Component baseName = Component.translatable(stack.getDescriptionId());
 
             //get cfi
             CaughtFishInfo caughtFishInfo = SCDataComponents.get(stack, SCDataComponents.CAUGHT_FISH_INFO);

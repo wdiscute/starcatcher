@@ -4,6 +4,7 @@ import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.data.attachments.FishingBobAttachment;
 import com.wdiscute.starcatcher.fish.FishApi;
 import com.wdiscute.starcatcher.data.network.CBFishingStartedPayload;
 import com.wdiscute.starcatcher.modifiers.Modifier;
@@ -147,7 +148,11 @@ public class FishingBobEntity extends Projectile
         this.xRotO = this.getXRot();
 
         if (!level.isClientSide)
-            SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB).setUuid(player, this.uuid);
+        {
+            FishingBobAttachment fishingBobAttachment = SCDataAttachments.get(player, SCDataAttachments.FISHING_BOB);
+            fishingBobAttachment.setUuid(player, this.uuid);
+            SCDataAttachments.set(player, SCDataAttachments.FISHING_BOB.get(), fishingBobAttachment);
+        }
 
         currentState = FishHookState.FLYING;
     }

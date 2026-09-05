@@ -78,7 +78,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
     @Override
     public boolean handleInput(Recipe recipe, double mouseX, double mouseY, InputConstants.Key input)
     {
-        if (mouseX > 90 && mouseX < 90 + 19 && mouseY > 0 && mouseY < 19)
+        if (mouseX > 83 && mouseX < 83 + 19 && mouseY > 0 && mouseY < 19)
         {
             Minecraft.getInstance().setScreen(new IsolatedJeiFPScreen(recipe, Minecraft.getInstance().screen));
             return true;
@@ -116,7 +116,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
     public void bookIcon(GuiGraphics g, int x, int y, int mouseX, int mouseY)
     {
-        SLOT_BACKGROUND_FILLED.render(g, x, y);
+        SLOT_BACKGROUND_FILLED.render(g, x + 1, y + 1);
         ScreenUtils.item(g, stack, x + 2, y + 2);
         if (mouseX > x && mouseX < x + 19 && mouseY > y && mouseY < y + 19)
         {

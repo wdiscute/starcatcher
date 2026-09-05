@@ -1,4 +1,8 @@
 {
+  "dimension.minecraft.overworld" : "Overworld",
+  "dimension.minecraft.the_nether" : "The Nether",
+  "dimension.minecraft.the_end" : "The End",
+
   "fluid.starcatcher.lava": "Lava",
   "fluid.starcatcher.water": "Water",
   "fluid.starcatcher.void": "Void",

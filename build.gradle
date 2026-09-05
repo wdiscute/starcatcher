@@ -89,13 +89,11 @@ dependencies {
 
     //JEI
     modCompileOnly "mezz.jei:jei-${mc_version}-forge:15.57.0.207"
-    //modRuntimeOnly "mezz.jei:jei-${mc_version}-forge:15.20.0.130"
+    modRuntimeOnly "mezz.jei:jei-${mc_version}-forge:15.57.0.207"
 
     //curios (check modifiers in curio slots)
     compileOnly "top.theillusivec4.curios:curios-forge:5.14.1+1.20.1:api"
     //runtimeOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2"
-
-
 
     //EclipticSeasons
     compileOnly files(".compatmods/Ecliptic-Seasons-1.20.1-forge-0.15.0-rc-3-all.jar")
@@ -138,7 +136,7 @@ legacyForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-    accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+    //accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
 
     // interfaceInjectionData.from "src/main/resources/starcatcher.interfaces.json"
 

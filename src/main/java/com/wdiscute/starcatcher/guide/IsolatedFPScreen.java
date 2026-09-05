@@ -66,6 +66,7 @@ public class IsolatedFPScreen extends Screen
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick)
     {
+        super.renderBackground(g);
         super.render(g, mouseX, mouseY, partialTick);
 
         BACKGROUND.render(g, uiX, uiY);

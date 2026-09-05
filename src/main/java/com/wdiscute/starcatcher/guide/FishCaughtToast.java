@@ -95,6 +95,6 @@ public class FishCaughtToast implements Toast
                         .append(Component.literal(" - " + size + " - " + weight))
                 , true);
 
-        Minecraft.getInstance().gui.vignetteBrightness = 180;
+        Minecraft.getInstance().gui.overlayMessageTime = 180;
     }
 }

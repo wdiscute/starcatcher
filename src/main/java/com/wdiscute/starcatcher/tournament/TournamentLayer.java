@@ -111,7 +111,7 @@ public class TournamentLayer implements LayeredDraw.Layer
 
             //render player score
             if (playerScore != null)
-                ScreenUtils.text(g, this.font, font.plainSubstrByWidth(playerScore.name + "wadawdadwadwaawdawdwad", 95), 48, 141, SCColors.WHITE, false);
+                ScreenUtils.text(g, this.font, font.plainSubstrByWidth(playerScore.name, 95), 48, 141, SCColors.WHITE, false);
             if (playerScore != null)
                 ScreenUtils.centeredText(g, this.font, Component.literal(FORMAT.format(playerScore.score)),
                         160, 141, SCColors.WHITE, false);

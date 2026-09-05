@@ -84,7 +84,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     @Override
     protected void renderBg(GuiGraphics guiGraphics, float partialTick, int mouseX, int mouseY)
     {
-
+        super.renderBackground(guiGraphics);
     }
 
     private void onFocusNameEditBox()

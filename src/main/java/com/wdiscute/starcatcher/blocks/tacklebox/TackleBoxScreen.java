@@ -30,8 +30,10 @@ public class TackleBoxScreen extends AbstractContainerScreen<TackleBoxMenu>
         this.renderTooltip(guiGraphics, mouseX, mouseY);
     }
 
+
     protected void renderBg(GuiGraphics g, float partialTick, int mouseX, int mouseY)
     {
+        super.renderBackground(g);
         int x = (this.width - this.imageWidth) / 2;
         int y = (this.height - this.imageHeight) / 2;
 
