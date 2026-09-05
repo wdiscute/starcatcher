@@ -459,17 +459,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 32, 0,
                 32, 96);
 
-        //render treasure on top of bar
-        ScreenUtils.item(g, treasureIS,
-                centerX - 163,
-                centerY - barSize + 16);
-
         //outline when treasure complete
         if (treasureProgress > 99)
             treasure.render(g, centerX - 16 - 155, centerY - 48,
                     0, 0,
                     32, 96);
 
+        //render treasure on top of bar
+        ScreenUtils.item(g, treasureIS,
+                centerX - 163,
+                centerY - barSize + 16);
     }
 
     public void renderKimbeMarker(GuiGraphics g)
