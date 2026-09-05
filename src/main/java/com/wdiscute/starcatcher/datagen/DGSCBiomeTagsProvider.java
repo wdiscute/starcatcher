@@ -30,7 +30,7 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
     protected void addTags(HolderLookup.Provider provider)
     {
         this.tag(create(SCTags.IS_BEACH))
-                .addOptional(BiomeTags.IS_BEACH.location())
+                .addOptionalTag(BiomeTags.IS_BEACH.location())
                 .addOptionalTag(tag("is_beach"))
         ;
 

@@ -7,6 +7,8 @@ import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.registry.SCBlocks;
+import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.utils.EntryOrTag;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.*;
@@ -86,6 +88,11 @@ public class BiomeRestriction extends AbstractFishRestriction
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
         Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
+
+        if(fp.catchInfo().fish().toStack().is(SCBlocks.CLAM.asItem()))
+        {
+            System.out.println("awda");
+        }
 
         //check biomes around the bobber
         for (int i = 0; i < 4; i++)

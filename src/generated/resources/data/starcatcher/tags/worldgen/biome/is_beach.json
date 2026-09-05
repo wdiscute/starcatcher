@@ -1,7 +1,7 @@
 {
   "values": [
     {
-      "id": "minecraft:is_beach",
+      "id": "#minecraft:is_beach",
       "required": false
     },
     {
