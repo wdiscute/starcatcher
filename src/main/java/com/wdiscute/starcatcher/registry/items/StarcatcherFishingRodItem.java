@@ -95,10 +95,10 @@ public class StarcatcherFishingRodItem extends Item
 
                 //kill bobber
                 fbe.kill();
-
-                //remove fishing bobber uuid data attachment
-                SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB.get());
             }
+
+            //remove fishing bobber uuid data attachment
+            SCDataAttachments.remove(player, SCDataAttachments.FISHING_BOB.get());
         }
 
         return InteractionResultHolder.success(stack);
