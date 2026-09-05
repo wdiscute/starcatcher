@@ -35,24 +35,24 @@ public interface SCCreativeModeTabs
                         .setTitle(Component.empty())
                         .setCollapsible(false)
                         .add(SCItems.ROD)
-                        .add(() ->
-                        {
-                            ItemStack devRod = SCItems.ICEBORN_ROD.toStack();
-                            SCDataComponents.set(devRod, SCDataComponents.MODIFIERS, List.of(
-                                    new NeverLoseModifier(""),
-                                    new AdjustLureTimeModifier(0.05f, 0.05f, 1f, "")
-                            ));
-                            return devRod;
-                        })
-                        .add(() ->
-                        {
-                            ItemStack devRod = SCItems.OBSIDIAN_ROD.toStack();
-                            SCDataComponents.set(devRod, SCDataComponents.MODIFIERS, List.of(
-                                    new ExtraGoldenChanceModifier(1, false, ""),
-                                    new AdjustLureTimeModifier(0.05f, 0.05f, 1f, "")
-                            ));
-                            return devRod;
-                        })
+                        //.add(() ->
+                        //{
+                        //    ItemStack devRod = SCItems.ICEBORN_ROD.toStack();
+                        //    SCDataComponents.set(devRod, SCDataComponents.MODIFIERS, List.of(
+                        //            new NeverLoseModifier(""),
+                        //            new AdjustLureTimeModifier(0.05f, 0.05f, 1f, "")
+                        //    ));
+                        //    return devRod;
+                        //})
+                        //.add(() ->
+                        //{
+                        //    ItemStack devRod = SCItems.OBSIDIAN_ROD.toStack();
+                        //    SCDataComponents.set(devRod, SCDataComponents.MODIFIERS, List.of(
+                        //            new ExtraGoldenChanceModifier(1, false, ""),
+                        //            new AdjustLureTimeModifier(0.05f, 0.05f, 1f, "")
+                        //    ));
+                        //    return devRod;
+                        //})
                         .add(SCItems.GUIDE)
                         .add(SCBlocks.STAND)
                         .add(SCBlocks.DISPLAY)
