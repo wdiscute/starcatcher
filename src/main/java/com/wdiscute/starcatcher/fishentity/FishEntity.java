@@ -27,6 +27,7 @@ import java.util.List;
 
 public class FishEntity extends AbstractFish
 {
+    boolean hasWarned = false;
     public FishEntity(EntityType<? extends FishEntity> entityType, Level level)
     {
         super(entityType, level);
