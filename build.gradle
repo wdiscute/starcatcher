@@ -71,7 +71,7 @@ dependencies {
 
     //FTS
     //jarJar(modImplementation("maven.modrinth:fancytabsections:5.0-FORGE-1.20.1"))
-    jarJar(modImplementation("maven.modrinth:fancytabsections:6.2-FORGE-1.20.1"))
+    jarJar(modImplementation("maven.modrinth:fancytabsections:6.2.1-FORGE-1.20.1"))
 
     //selling bin
     jarJar(modImplementation("maven.modrinth:wds-selling-bin:1.4.3-FORGE-1.20.1"))
