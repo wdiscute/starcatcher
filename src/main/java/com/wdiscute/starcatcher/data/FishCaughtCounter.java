@@ -47,7 +47,7 @@ public record FishCaughtCounter(
         if(fp.catchInfo().alwaysSpawnEntity()) return false;
 
         //can't catch golden if it has no guide entry
-        if(fp.hasGuideEntry()) return false;
+        if(!fp.hasGuideEntry()) return false;
 
         //returns false if player has already caught the golden fish of that fp
         Map<ResourceLocation, FishCaughtCounter> fishesCaught = FishingGuideAttachment.getFishesCaught(player);
