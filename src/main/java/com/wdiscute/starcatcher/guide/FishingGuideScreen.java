@@ -231,7 +231,7 @@ public class FishingGuideScreen extends Screen
         this.signedNameEditBox.setBordered(false);
         this.signedNameEditBox.setMaxLength(20);
         this.signedNameEditBox.setTextShadow(false);
-        this.signedNameEditBox.setCanLoseFocus(false);
+        this.signedNameEditBox.setCanLoseFocus(true);
         this.signedNameEditBox.setValue(signedGuide == null ? "" : signedGuide.signature());
         this.addWidget(this.signedNameEditBox);
         this.signedNameEditBox.setEditable(signedGuide == null);
@@ -608,6 +608,22 @@ public class FishingGuideScreen extends Screen
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
+        if (signedNameEditBox != null)
+        {
+            if(signedNameEditBox.isMouseOver(mouseX, mouseY))
+            {
+                this.setFocused(signedNameEditBox);
+                signedNameEditBox.setFocused(true);
+                signedNameEditBox.onClick(mouseX, mouseY);
+                return true;
+            }
+            else
+            {
+                this.setFocused(null);
+                signedNameEditBox.setFocused(false);
+            }
+        }
+
         //System.out.println("clicked on x :" + x);
         //System.out.println("clicked on y :" + y);
 
@@ -716,6 +732,8 @@ public class FishingGuideScreen extends Screen
         super.render(g, mouseX, mouseY, partialTick);
         resolveTrackedFP();
 
+        System.out.println(signedNameEditBox.isFocused());
+
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 
@@ -800,7 +818,7 @@ public class FishingGuideScreen extends Screen
 
                 renderEntry(g, mouseX, mouseY, 52, page * 2);
                 renderEntry(g, mouseX, mouseY, 212, page * 2 + 1);
-                ScreenUtils.text(g, this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0x9c897c, false);
+                ScreenUtils.text(g, this.font, page + 1 + "/" + ((entries.size() + 1) / 2), uiX + 213, uiY + 206, 0xff9c897c, false);
             }
 
             case LAST ->
@@ -869,7 +887,6 @@ public class FishingGuideScreen extends Screen
         int width1 = font.width(s) + 15;
 
         //draw fitting rectangle
-        //todo fix the width calculation here
         ScreenUtils.fill(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_BACKGROUND_DARK);
         ScreenUtils.centeredText(guiGraphics, font, s, uiX + 285, uiY + 119, SCColors.GUIDE_TEXT_SEMI_DARK, false);
         ScreenUtils.outline(guiGraphics, uiX + 285 - width1 / 2, uiY + 117, width1, 12, SCColors.GUIDE_TEXT);
@@ -923,7 +940,7 @@ public class FishingGuideScreen extends Screen
     private void renderTheBasics(GuiGraphics g, int mouseX, int mouseY)
     {
         //shitty workaround for signed guides
-        ScreenUtils.text(g, this.font, page + "/" + MAX_HELP_PAGES, uiX + 213, uiY + 206, 0x9c897c, false);
+        ScreenUtils.text(g, this.font, page + "/" + MAX_HELP_PAGES, uiX + 213, uiY + 206, 0xff9c897c, false);
 
         renderHelpText(g, page);
 
@@ -1299,7 +1316,7 @@ public class FishingGuideScreen extends Screen
         //[sort] text
         if (page == 0)
         {
-            ScreenUtils.centeredText(guiGraphics, this.font, translatable("gui.guide.sort"), uiX + 171, uiY + 88, 0x937d70, false);
+            ScreenUtils.centeredText(guiGraphics, this.font, translatable("gui.guide.sort"), uiX + 171, uiY + 88, 0xff937d70, false);
             if (mouseX > uiX + 145 && mouseX < uiX + 190 && mouseY > uiY + 86 && mouseY < uiY + 96)
             {
                 ScreenUtils.Tooltip.add(translatable(SCConfig.SORT.get().getTranslationKey()));
@@ -2017,18 +2034,18 @@ public class FishingGuideScreen extends Screen
 
         //render caught:
         //caught:
-        ScreenUtils.text(g, font, translatable("gui.guide.caught"), x + 73, y + 64, 0x9c897c, false);
+        ScreenUtils.text(g, font, translatable("gui.guide.caught"), x + 73, y + 64, 0xff9c897c, false);
 
         //render caught count
         if (fcc == null)
         {
             //------
-            ScreenUtils.text(g, font, translatable("gui.guide.not_caught"), x + 73, y + 73, 0x9c897c, false);
+            ScreenUtils.text(g, font, translatable("gui.guide.not_caught"), x + 73, y + 73, 0xff9c897c, false);
         }
         else
         {
             //[324]
-            Component c = Component.literal("[" + fcc.count() + "]").withStyle(Style.EMPTY.withColor(0x635040));
+            Component c = Component.literal("[" + fcc.count() + "]").withStyle(Style.EMPTY.withColor(0xff635040));
             ScreenUtils.text(g, font, Component.empty().append(c), x + 73, y + 73, 0, false);
         }
 
@@ -2036,7 +2053,7 @@ public class FishingGuideScreen extends Screen
         //rarity:
         ScreenUtils.text(g,
                 font, translatable("gui.guide.rarity"),
-                x + 73, y + 84, 0x9c897c, false);
+                x + 73, y + 84, 0xff9c897c, false);
 
         //common
         ScreenUtils.text(g,
