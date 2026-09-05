@@ -31,7 +31,7 @@ import net.minecraftforge.fml.common.Mod;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class SCTooltipEvents
 {
     static int cachedTimer = 0;

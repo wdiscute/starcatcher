@@ -66,8 +66,8 @@ dependencies {
     //jarJar(implementation("maven.modrinth:tiny-multiblock-lib:forge-1.20.1-4.0.0"))
 
     //NeoBackports
-    jarJar(modImplementation("net.nikdo53:NeoBackports:1.3.0"))
-    interfaceInjectionData("net.nikdo53:NeoBackports:1.3.0")
+    jarJar(modImplementation("net.nikdo53:NeoBackports:1.3.1"))
+    interfaceInjectionData("net.nikdo53:NeoBackports:1.3.1")
 
     //FTS
     //jarJar(modImplementation("maven.modrinth:fancytabsections:5.0-FORGE-1.20.1"))

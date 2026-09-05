@@ -77,7 +77,7 @@ public interface SCDataAttachments
             "tackle_skin", () ->
                     AttachmentType.builder(TACKLE_SKIN_CAP, () -> Starcatcher.BASE)
                             .serialize(ResourceLocation.CODEC)
-                            .canAttachTo(AdvancedCapabilityType.PLAYER)
+                            .canAttachTo(AdvancedCapabilityType.PLAYER, AdvancedCapabilityType.NON_LIVING_ENTITY)
                             .sync(ByteBufCodecs.RESOURCE_LOCATION)
                             .build()
     );

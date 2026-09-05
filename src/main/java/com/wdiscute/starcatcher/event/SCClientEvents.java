@@ -40,22 +40,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.nikdo53.neobackports.event.RegisterMenuScreensEvent;
 
-@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
+@Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SCClientEvents
 {
-    @SubscribeEvent
-    public static void keyPressed(InputEvent.Key event)
-    {
-        if (event.getAction() == 1)
-            KonamiDetector.keyPressed(event.getKey());
-
-        if (SCKeymappings.EXPAND_TOURNAMENT.consumeClick())
-            TournamentLayer.expandedType = TournamentLayer.expandedType.next();
-
-        if (SCKeymappings.OPEN_GUIDE.consumeClick() && SCConfig.ALLOW_GUIDE_KEYBIND.get())
-            Minecraft.getInstance().setScreen(new FishingGuideScreen(BlockPos.ZERO, null));
-
-    }
 
     @SubscribeEvent
     public static void onAssetReload(RegisterClientReloadListenersEvent event)

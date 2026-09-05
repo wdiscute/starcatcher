@@ -32,9 +32,9 @@ public class StarcatcherFishingRodItem extends Item
                 .rarity(Rarity.EPIC)
                 .fireResistant()
                 .durability(128)
-                //.component(SCDataComponents.BOBBER.get(), new MaybeStack(SCItems.BOBBER.get()))
-                //.component(SCDataComponents.BAIT.get(), MaybeStack.EMPTY)
-                //.component(SCDataComponents.HOOK.get(), new MaybeStack(SCItems.HOOK.get()))
+                .component(SCDataComponents.BOBBER.get(), new MaybeStack(SCItems.BOBBER.get()))
+                .component(SCDataComponents.BAIT.get(), MaybeStack.EMPTY)
+                .component(SCDataComponents.HOOK.get(), new MaybeStack(SCItems.HOOK.get()))
         );
     }
 
