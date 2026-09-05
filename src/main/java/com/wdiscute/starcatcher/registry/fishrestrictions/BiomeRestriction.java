@@ -89,11 +89,6 @@ public class BiomeRestriction extends AbstractFishRestriction
     {
         Registry<Biome> registry = level.registryAccess().registryOrThrow(Registries.BIOME);
 
-        if(fp.catchInfo().fish().toStack().is(SCBlocks.CLAM.asItem()))
-        {
-            System.out.println("awda");
-        }
-
         //check biomes around the bobber
         for (int i = 0; i < 4; i++)
         {

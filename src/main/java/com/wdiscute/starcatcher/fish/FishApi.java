@@ -454,6 +454,10 @@ public class FishApi
     public static ItemStack getTreasure(ServerPlayer player, FishProperties fp, List<AbstractCatchModifier> modifiers)
     {
         Registry<FishProperties> fishProperties = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
+
+        if(fishProperties.getKey(fp) == null)
+            return ItemStack.EMPTY;
+
         Treasure data = fishProperties.wrapAsHolder(fp).getData(SCDataMaps.TREASURE);
 
         if (data == null) return ItemStack.EMPTY;
