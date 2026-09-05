@@ -1,0 +1,18 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "addition": {
+    "item": "starcatcher:pearl"
+  },
+  "apply_skin": true,
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "keep_stack": true,
+  "result": {
+    "item": "starcatcher:missingno"
+  },
+  "template": {
+    "item": "starcatcher:pearl_smithing_template"
+  }
+}

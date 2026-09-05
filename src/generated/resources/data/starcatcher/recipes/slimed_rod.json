@@ -1,0 +1,21 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "addition": {
+    "item": "minecraft:slime_ball"
+  },
+  "apply_skin": true,
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "keep_stack": false,
+  "result": {
+    "item": "starcatcher:slimed_rod",
+    "tag": {
+      "Damage": 0
+    }
+  },
+  "template": {
+    "item": "starcatcher:slimed_skin_smithing_template"
+  }
+}

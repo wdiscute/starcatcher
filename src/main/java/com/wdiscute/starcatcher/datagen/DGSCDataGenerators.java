@@ -25,7 +25,7 @@ public class DGSCDataGenerators
 {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Starcatcher.FISH_REGISTRY_KEY, DGSCFishProperties::bootstrap)
-            .add(ForgeRegistries.Keys.BIOME_MODIFIERS, DGSCBiomeModifiers::bootstrap)
+            //.add(ForgeRegistries.Keys.BIOME_MODIFIERS, DGSCBiomeModifiers::bootstrap)
             ;
 
     @SubscribeEvent
@@ -59,7 +59,7 @@ public class DGSCDataGenerators
         //gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 
         //loot modifiers
-        gen.addProvider(event.includeServer(), new DGSCLootModifiers(output));
+        //gen.addProvider(event.includeServer(), new DGSCLootModifiers(output));
 
         //biome tags
         gen.addProvider(event.includeServer(), new DGSCBiomeTagsProvider(output, lookupProvider, existingFileHelper));

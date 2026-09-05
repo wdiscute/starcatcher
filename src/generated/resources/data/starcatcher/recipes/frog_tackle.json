@@ -1,0 +1,18 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "addition": {
+    "item": "minecraft:tadpole_bucket"
+  },
+  "apply_skin": true,
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "keep_stack": true,
+  "result": {
+    "item": "starcatcher:missingno"
+  },
+  "template": {
+    "item": "starcatcher:frog_smithing_template"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "starcatcher:starcaught_fishable"
+    }
+  ],
+  "result": {
+    "item": "starcatcher:starcaught_fish"
+  }
+}

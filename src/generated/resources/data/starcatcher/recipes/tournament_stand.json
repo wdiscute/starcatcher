@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:barrel"
+    },
+    "G": {
+      "item": "minecraft:book"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    " G ",
+    "PPP",
+    " B "
+  ],
+  "result": {
+    "item": "starcatcher:tournament_stand"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "starcatcher:worm"
+    },
+    {
+      "item": "starcatcher:worm"
+    },
+    {
+      "item": "starcatcher:worm"
+    },
+    {
+      "item": "starcatcher:worm"
+    }
+  ],
+  "result": {
+    "item": "starcatcher:almighty_worm"
+  }
+}

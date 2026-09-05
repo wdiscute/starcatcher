@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "tag": "starcatcher:epic_fishes"
+    }
+  ],
+  "result": {
+    "count": 8,
+    "item": "starcatcher:meteorological_bait"
+  }
+}

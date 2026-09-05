@@ -101,11 +101,10 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
             }
 
             //PLEASE FOR THE LOVE OF GOD DONT REMOVE THIS LINE JUST DONT PLEASE THIS TOOK TOO FUCKING LONG DONT YOU DARE TOUCH IT
-            vertexconsumer1.addVertex(NaN, NaN, NaN).setColor(0).setNormal(posestack$pose1, 0, 0, 0);
+            vertexconsumer1.vertex(NaN, NaN, NaN).color(0).normal(posestack$pose1.normal(), 0, 0, 0).endVertex();
 
             poseStack.popPose();
             super.render(fishingBobEntity, entityYaw, partialTicks, poseStack, buffer, packedLight);
-
         }
     }
 
@@ -123,7 +122,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity>
         f3 /= f6;
         f4 /= f6;
         f5 /= f6;
-        consumer.addVertex(pose, f, f1, f2).setColor(color).setNormal(pose, f3, f4, f5);
+        consumer.vertex(pose.pose(), f, f1, f2).color(color).normal(pose.normal(), f3, f4, f5).endVertex();
     }
 
     private static float fraction(int numerator, int denominator)

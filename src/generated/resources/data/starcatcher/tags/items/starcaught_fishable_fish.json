@@ -1,0 +1,10 @@
+{
+  "remove": [
+    "#starcatcher:crabs",
+    "#starcatcher:eels",
+    "#starcatcher:shrimps"
+  ],
+  "values": [
+    "#starcatcher:starcaught_fishable"
+  ]
+}

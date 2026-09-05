@@ -1,0 +1,116 @@
+{
+  "values": [
+    {
+      "id": "starcatcher:agave_bream",
+      "required": false
+    },
+    {
+      "id": "starcatcher:blue_crystal_fin",
+      "required": false
+    },
+    {
+      "id": "starcatcher:blue_herring",
+      "required": false
+    },
+    {
+      "id": "starcatcher:bluegigi",
+      "required": false
+    },
+    {
+      "id": "starcatcher:charfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:cinder_squid",
+      "required": false
+    },
+    {
+      "id": "starcatcher:cogtopus",
+      "required": false
+    },
+    {
+      "id": "starcatcher:crystalback_boreal",
+      "required": false
+    },
+    {
+      "id": "starcatcher:drive_pike",
+      "required": false
+    },
+    {
+      "id": "starcatcher:fossilized_angelfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowing_dark",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowstone_pufferfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:lily_snapper",
+      "required": false
+    },
+    {
+      "id": "starcatcher:mechanical_brass_snail",
+      "required": false
+    },
+    {
+      "id": "starcatcher:meka_agave_bream",
+      "required": false
+    },
+    {
+      "id": "starcatcher:molten_shrimp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:pale_pinfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:petal_bass",
+      "required": false
+    },
+    {
+      "id": "starcatcher:pipehead",
+      "required": false
+    },
+    {
+      "id": "starcatcher:ripple_catfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:spacejelly",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sporefish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sun_seeking_carp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:suneater",
+      "required": false
+    },
+    {
+      "id": "starcatcher:sunflower_carp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:the_quarrish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:twilight_koi",
+      "required": false
+    },
+    {
+      "id": "starcatcher:wintery_pike",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "starcatcher:item/humble_skin_smithing_template"
+  }
+}

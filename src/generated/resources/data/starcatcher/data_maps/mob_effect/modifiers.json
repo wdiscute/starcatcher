@@ -1,0 +1,10 @@
+{
+  "values": {
+    "minecraft:luck": [
+      {
+        "type": "starcatcher:adjust_handle_speed",
+        "multiplier": 1.25
+      }
+    ]
+  }
+}

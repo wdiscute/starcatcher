@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "minecraft:mushroom_fields",
+      "required": false
+    },
+    {
+      "id": "#forge:is_mushroom",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "addition": {
+    "item": "minecraft:bamboo"
+  },
+  "apply_skin": true,
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "keep_stack": false,
+  "result": {
+    "item": "starcatcher:bamboo_rod",
+    "tag": {
+      "Damage": 0
+    }
+  },
+  "template": {
+    "item": "starcatcher:bamboo_skin_smithing_template"
+  }
+}

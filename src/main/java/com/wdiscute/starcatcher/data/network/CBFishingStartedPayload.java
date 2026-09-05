@@ -49,7 +49,7 @@ public record CBFishingStartedPayload(FishProperties fp, MaybeStack treasure,
         ItemStack maybeRod = context.player().getMainHandItem().is(SCTags.RODS) ? context.player().getMainHandItem() : context.player().getOffhandItem();
 
         //get tackle skin, backup of default from registry
-        AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(maybeRod, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.rl("rod")));
+        AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(maybeRod, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.rl("base")));
 
         //start minigame
         Minecraft.getInstance().setScreen(new FishingMinigameScreen(data.fp(), data.treasure.toStack(), List.of(), tackleSkin));

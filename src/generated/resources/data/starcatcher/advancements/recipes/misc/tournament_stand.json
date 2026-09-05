@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_starcatcher_rod": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "starcatcher:rods"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "starcatcher:tournament_stand"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_starcatcher_rod",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "starcatcher:tournament_stand"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,0 +1,21 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "addition": {
+    "item": "minecraft:phantom_membrane"
+  },
+  "apply_skin": true,
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "keep_stack": false,
+  "result": {
+    "item": "starcatcher:sky_rod",
+    "tag": {
+      "Damage": 0
+    }
+  },
+  "template": {
+    "item": "starcatcher:sky_skin_smithing_template"
+  }
+}

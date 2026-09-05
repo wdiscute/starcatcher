@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "N": {
+      "item": "minecraft:iron_nugget"
+    },
+    "R": {
+      "item": "minecraft:fishing_rod"
+    }
+  },
+  "pattern": [
+    " N ",
+    " R "
+  ],
+  "result": {
+    "item": "starcatcher:vanilla_hook"
+  },
+  "show_notification": true
+}

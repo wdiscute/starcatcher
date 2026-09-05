@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "starcatcher:pearl"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "T": {
+      "item": "starcatcher:pearl_smithing_template"
+    }
+  },
+  "pattern": [
+    "DTD",
+    "DCD",
+    "DDD"
+  ],
+  "result": {
+    "count": 2,
+    "item": "starcatcher:pearl_smithing_template"
+  },
+  "show_notification": true
+}

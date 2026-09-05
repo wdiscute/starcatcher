@@ -1,0 +1,21 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "addition": {
+    "item": "starcatcher:lush_pike"
+  },
+  "apply_skin": true,
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "keep_stack": false,
+  "result": {
+    "item": "starcatcher:lush_glowberry_rod",
+    "tag": {
+      "Damage": 0
+    }
+  },
+  "template": {
+    "item": "starcatcher:lush_glowberry_skin_smithing_template"
+  }
+}

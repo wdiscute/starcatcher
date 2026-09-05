@@ -1,0 +1,16 @@
+{
+  "values": [
+    "minecraft:diamond_pickaxe",
+    "minecraft:diamond_shovel",
+    "minecraft:stone",
+    "minecraft:gravel",
+    "minecraft:sand",
+    "minecraft:red_sand",
+    "minecraft:kelp",
+    "minecraft:seagrass",
+    "minecraft:bucket",
+    "starcatcher:aurora",
+    "starcatcher:conch",
+    "starcatcher:clam"
+  ]
+}

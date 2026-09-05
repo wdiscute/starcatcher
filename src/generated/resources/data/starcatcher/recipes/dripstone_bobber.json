@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "starcatcher:bobber"
+    },
+    "D": {
+      "item": "minecraft:dripstone_block"
+    },
+    "P": {
+      "item": "minecraft:pointed_dripstone"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    " DS",
+    "DBD",
+    "SP "
+  ],
+  "result": {
+    "item": "starcatcher:dripstone_bobber"
+  },
+  "show_notification": true
+}

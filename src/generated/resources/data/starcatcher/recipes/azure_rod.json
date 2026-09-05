@@ -1,0 +1,21 @@
+{
+  "type": "starcatcher:starcatcher_rod_smithing_recipe",
+  "add_text": false,
+  "addition": {
+    "item": "starcatcher:azure_crystalback_minnow"
+  },
+  "apply_skin": true,
+  "base": {
+    "tag": "starcatcher:rods"
+  },
+  "keep_stack": false,
+  "result": {
+    "item": "starcatcher:azure_crystal_rod",
+    "tag": {
+      "Damage": 0
+    }
+  },
+  "template": {
+    "item": "starcatcher:azure_crystal_skin_smithing_template"
+  }
+}
