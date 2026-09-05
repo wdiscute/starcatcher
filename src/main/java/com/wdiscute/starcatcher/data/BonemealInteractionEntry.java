@@ -12,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 public record BonemealInteractionEntry(EntryOrTag<Block> block, MaybeStack stack, int weight)
 {

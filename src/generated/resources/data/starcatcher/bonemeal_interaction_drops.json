@@ -1,27 +1,27 @@
 [
   {
-    "block": "#minecraft:farmland",
+    "block": "minecraft:farmland",
     "item": {
       "identifier": "starcatcher:worm"
     },
     "weight": 1485
   },
   {
-    "block": "#minecraft:farmland",
+    "block": "minecraft:farmland",
     "item": {
       "identifier": "starcatcher:almighty_worm"
     },
     "weight": 396
   },
   {
-    "block": "#minecraft:farmland",
+    "block": "minecraft:farmland",
     "item": {
       "identifier": "starcatcher:seeking_worm"
     },
     "weight": 99
   },
   {
-    "block": "#minecraft:farmland",
+    "block": "minecraft:farmland",
     "item": {
       "data_components_patch": {
         "Count": 1,
@@ -43,7 +43,7 @@
     "weight": 15
   },
   {
-    "block": "#minecraft:farmland",
+    "block": "minecraft:farmland",
     "item": {
       "data_components_patch": {
         "Count": 1,
@@ -65,7 +65,7 @@
     "weight": 4
   },
   {
-    "block": "#minecraft:farmland",
+    "block": "minecraft:farmland",
     "item": {
       "data_components_patch": {
         "Count": 1,

@@ -732,8 +732,6 @@ public class FishingGuideScreen extends Screen
         super.render(g, mouseX, mouseY, partialTick);
         resolveTrackedFP();
 
-        System.out.println(signedNameEditBox.isFocused());
-
         double x = mouseX - uiX;
         double y = mouseY - uiY;
 

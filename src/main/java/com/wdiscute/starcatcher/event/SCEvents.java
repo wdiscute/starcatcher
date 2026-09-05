@@ -128,8 +128,9 @@ public class SCEvents
     {
         Level level = event.getLevel();
         BlockPos pos = event.getPos();
+        ItemStack itemStack = event.getItemStack();
 
-        if (event.getItemStack().is(SCTags.HAS_FARMLAND_INTERACTION) && !level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.get())
+        if (itemStack.is(SCTags.HAS_FARMLAND_INTERACTION) && !level.isClientSide && SCConfig.ENABLE_BONE_MEAL_ON_FARMLAND_FOR_WORMS.get())
         {
             ItemStack is = BonemealInteractionEntry.getRandom(level.getBlockState(pos).getBlockHolder(), level.getRandom()).toStack();
 
@@ -146,7 +147,7 @@ public class SCEvents
             {
                 player.swing(event.getHand(), true);
                 if (!player.isCreative())
-                    event.getItemStack().shrink(1);
+                    itemStack.shrink(1);
             }
         }
 

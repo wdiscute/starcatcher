@@ -92,34 +92,34 @@ public class SCDGDataEntriesProvider
                 List.of(
                         //base worms
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new EntryOrTag.Entry<>(ResourceKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(SCItems.WORM.asItem()),
                                 1485),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new EntryOrTag.Entry<>(ResourceKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(SCItems.ALMIGHTY_WORM.asItem()),
                                 396),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new EntryOrTag.Entry<>(ResourceKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(SCItems.SEEKING_WORM.asItem()),
                                 99),
 
 
                         //golden worms
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new EntryOrTag.Entry<>(ResourceKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(goldenWorm),
                                 15),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new EntryOrTag.Entry<>(ResourceKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(goldenAlmightyWorm),
                                 4),
 
                         new BonemealInteractionEntry(
-                                new EntryOrTag.Tag<>(TagKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
+                                new EntryOrTag.Entry<>(ResourceKey.create(ForgeRegistries.Keys.BLOCKS, Blocks.FARMLAND.builtInRegistryHolder().getKey().location())),
                                 new MaybeStack(goldenSeekingWorm),
                                 1),
 
