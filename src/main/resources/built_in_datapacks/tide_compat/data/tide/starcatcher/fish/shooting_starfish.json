@@ -1,10 +1,4 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "tide"
-    }
-  ],
   "base_chance": 40,
   "catch_info": {
     "entity": "tide:shooting_starfish",
@@ -44,6 +38,12 @@
       }
     ]
   },
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "tide"
+    }
+  ],
   "has_guide_entry": true,
   "rarity": "legendary",
   "restrictions": [
@@ -83,9 +83,12 @@
     },
     {
       "type": "starcatcher:bait",
-      "baits": {
-        "starcatcher:legendary_bait": 50
-      }
+      "baits": [
+        {
+          "extra_chance": 50,
+          "id": "starcatcher:legendary_bait"
+        }
+      ]
     },
     {
       "type": "starcatcher:fluid",

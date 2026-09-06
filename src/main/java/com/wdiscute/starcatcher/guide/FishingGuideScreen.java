@@ -2086,6 +2086,7 @@ public class FishingGuideScreen extends Screen
         //render debug fish name
         if (SCConfig.DEBUG_MINIGAME.get())
         {
+            ScreenUtils.text(g, font, level.registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY).getKey(fp) + "", x + 6, y + 50, SCColors.GUIDE_TEXT_DARK, false);
             ScreenUtils.text(g, font, fp.hashCode() + "", x + 6, y + 60, SCColors.GUIDE_TEXT_DARK, false);
             ScreenUtils.text(g, font, fp.getDisplayName(), x + 6, y + 70, SCColors.GUIDE_TEXT_DARK, false);
             ScreenUtils.text(g, font, fishToDisplay.toString(), x + 6, y + 80, SCColors.GUIDE_TEXT_DARK, false);

@@ -75,7 +75,7 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
                     "starcatcher",
 
                     //replace line under with the mod
-                    ""
+                    "tide"
 
 
                     , ""

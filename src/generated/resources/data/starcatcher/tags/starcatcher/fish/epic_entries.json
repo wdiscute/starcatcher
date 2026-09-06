@@ -171,10 +171,6 @@
     {
       "id": "tide:uranias_pisces",
       "required": false
-    },
-    {
-      "id": "tide:windbass",
-      "required": false
     }
   ]
 }

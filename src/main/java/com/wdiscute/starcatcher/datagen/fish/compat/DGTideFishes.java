@@ -761,19 +761,20 @@ public class DGTideFishes
                 "tide"
         );
 
-        FishRegistration.register(
-                context,
-                PresetRestrictions.empty(context)
-                        .withFish("tide", "windbass")
-                        .withBucketedFish("tide", "windbass_bucket")
-                        .withEntityToSpawn("tide", "windbass")
-                        .withSizeAndWeight(40, 12, 1600, 1100)
-                        .addRestriction(DimensionRestriction.OVERWORLD)
-                        .addRestriction(FluidRestriction.WATER)
-                        //.addRestriction(StructureRestriction.TRIAL_CHAMBERS)
-                        .withRarity(Rarity.EPIC),
-                "tide"
-        );
+        //not on 1.20
+        //FishRegistration.register(
+        //        context,
+        //        PresetRestrictions.empty(context)
+        //                .withFish("tide", "windbass")
+        //                .withBucketedFish("tide", "windbass_bucket")
+        //                .withEntityToSpawn("tide", "windbass")
+        //                .withSizeAndWeight(40, 12, 1600, 1100)
+        //                .addRestriction(DimensionRestriction.OVERWORLD)
+        //                .addRestriction(FluidRestriction.WATER)
+        //                //.addRestriction(StructureRestriction.TRIAL_CHAMBERS)
+        //                .withRarity(Rarity.EPIC),
+        //        "tide"
+        //);
 
         FishRegistration.register(
                 context,
