@@ -50,6 +50,12 @@ repositories
                 url = 'https://nikdo53.github.io'
             }
 
+            //wd github
+            maven {
+                name = 'wd Maven'
+                url = 'https://wdiscute.github.io'
+            }
+
             //sable-companion
             maven {
                 name = "RyanHCode Maven"
