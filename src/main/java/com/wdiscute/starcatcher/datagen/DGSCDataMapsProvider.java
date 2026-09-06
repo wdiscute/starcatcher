@@ -401,7 +401,7 @@ public class DGSCDataMapsProvider extends DataMapProvider
         modifiers.add(SCBlocks.FISHERMAN_HAT_LIGHT_BLUE.asItem().builtInRegistryHolder(),
                 List.of(
                         new AdjustLureTimeModifier(1.4f, 1.4f, 1.4f, ""),
-                        new AddBasicSweetSpotModifier(Difficulty.SweetSpot.DRIPSTONE, "tooltip.modifier.starcatcher.deepslate_bobber"),
+                        new AddBasicSweetSpotModifier(Difficulty.SweetSpot.DRIPSTONE, "tooltip.modifier.starcatcher.dripstone_bobber"),
                         new FreezeOnMissModifier(40, 10, "")
                 ), false);
 
@@ -418,10 +418,10 @@ public class DGSCDataMapsProvider extends DataMapProvider
         // `----' `--'   `--'    `----'  `---'   `--'   `----'
         //
 
-        modifiers_effects.add(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(MobEffects.LUCK.value()),
-                List.of(
-                        new AdjustBaseHandleSpeedModifier(1.25f, "")
-                ), false);
+        //modifiers_effects.add(BuiltInRegistries.MOB_EFFECT.wrapAsHolder(MobEffects.LUCK.value()),
+        //        List.of(
+        //                new AdjustBaseHandleSpeedModifier(1.25f, "")
+        //        ), false);
 
 
         //

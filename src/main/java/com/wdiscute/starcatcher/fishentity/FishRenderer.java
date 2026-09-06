@@ -8,12 +8,14 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
 import com.wdiscute.starcatcher.shaders.GoldRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemDisplayContext;
@@ -100,8 +102,15 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
     @Override
     public void render(FishEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
         model = map.get(entity.getFish().getItem());
-        if (model == null) {
-            return;
+
+        if (model == null)
+        {
+            model = map.get(SCItems.AGAVE_BREAM.asItem());
+            if (!entity.hasWarned)
+            {
+                entity.hasWarned = true;
+                Minecraft.getInstance().player.sendSystemMessage(Component.translatable(entity.getFish().getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
+            }
         }
 
         poseStack.pushPose();

@@ -9,12 +9,14 @@ import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
 import com.wdiscute.starcatcher.fish.CatchInfo;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.fish.Treasure;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -38,6 +40,14 @@ public class VanillaFishingLootModifier extends AbstractCatchModifier
     {
         super(translationOverride);
         this.chance = chance;
+    }
+
+    @Override
+    public ItemStack modifyTreasure(FishingBobEntity fbe, ItemStack originalTreasure, FishProperties fp)
+    {
+        if (fbe.player instanceof ServerPlayer sp)
+            return Treasure.VANILLA_FISHING_LOOT_TABLE.unpack(sp, fbe.modifiers);
+        return super.modifyTreasure(fbe, originalTreasure, fp);
     }
 
     @Override

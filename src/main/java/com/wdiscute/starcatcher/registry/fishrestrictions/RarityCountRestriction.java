@@ -200,10 +200,7 @@ public class RarityCountRestriction extends AbstractFishRestriction
                 if(rarityCount.countType.equals(RarityCount.CountType.UNIQUE))
                     return rarityCount.count <= raritiesCaught.get(Rarity.NONE).getFirst();
 
-                AtomicInteger totalCount = new AtomicInteger();
-                raritiesCaught.forEach((r, i) -> totalCount.addAndGet(i.getFirst()));
-
-                return rarityCount.count <= totalCount.get();
+                return rarityCount.count <= raritiesCaught.get(Rarity.NONE).getFirst();
             }
             else
             {

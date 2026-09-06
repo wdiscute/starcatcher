@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.utils.ScreenUtils;
 import com.wdiscute.utils.Utils;
@@ -14,7 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 public class BurnHandleWhileActiveModifier extends AbstractTimedModifier
 {
     public static final ScreenUtils.Image FIRE = new ScreenUtils.Image(
-            Utils.rl("textures/block/fire_1.png"), 16, 512
+            Starcatcher.rl("textures/gui/minigame/modifiers/burn_fire.png"), 16, 512
     );
 
     private final int rampTime;
