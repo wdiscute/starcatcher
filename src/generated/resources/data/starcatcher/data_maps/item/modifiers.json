@@ -196,7 +196,7 @@
           "texture_path": "starcatcher:textures/gui/minigame/spots/dripstone.png",
           "vanishing_rate": 0.0
         },
-        "translation_override": "tooltip.modifier.starcatcher.deepslate_bobber"
+        "translation_override": "tooltip.modifier.starcatcher.dripstone_bobber"
       },
       {
         "type": "starcatcher:freeze_on_miss",

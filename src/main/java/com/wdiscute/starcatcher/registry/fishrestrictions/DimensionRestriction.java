@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.registry.SCDataEntries;
+import com.wdiscute.utils.Utils;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.Style;
@@ -18,7 +19,6 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Map;
 
 public class DimensionRestriction extends AbstractFishRestriction
 {
@@ -57,8 +57,8 @@ public class DimensionRestriction extends AbstractFishRestriction
     @Override
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        Map<String, List<Identifier>> stringListMap = SCDataEntries.DIMENSION_TAGS.get();
-        List<Identifier> allowedDimensions = stringListMap.getOrDefault(dimensionEntry, List.of());
+        List<Utils.Duo<Identifier, String>> stringListMap = SCDataEntries.DIMENSION_TAGS.get();
+        var allowedDimensions = stringListMap.stream().filter(o -> o.second().equals(dimensionEntry)).map(Utils.Duo::first).toList();
 
         if(allowedDimensions.contains(level.dimension().identifier())) return 0;
 
@@ -83,7 +83,8 @@ public class DimensionRestriction extends AbstractFishRestriction
     @Override
     public MutableComponent getNonOverriddenDescription(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        List<Identifier> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
+        List<Utils.Duo<Identifier, String>> stringListMap = SCDataEntries.DIMENSION_TAGS.get();
+        var allowedDimensions = stringListMap.stream().filter(o -> o.second().equals(dimensionEntry)).map(Utils.Duo::first).toList();
 
         //Dimensions: [No Dimensions]
         if (allowedDimensions.isEmpty())
@@ -99,7 +100,8 @@ public class DimensionRestriction extends AbstractFishRestriction
     @Override
     public List<Component> getHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        List<Identifier> allowedDimensions = SCDataEntries.DIMENSION_TAGS.get().getOrDefault(dimensionEntry, List.of());
+        List<Utils.Duo<Identifier, String>> stringListMap = SCDataEntries.DIMENSION_TAGS.get();
+        var allowedDimensions = stringListMap.stream().filter(o -> o.second().equals(dimensionEntry)).map(Utils.Duo::first).toList();
 
         if(allowedDimensions.isEmpty()) return List.of();
         if(allowedDimensions.size() == 1) return List.of();
