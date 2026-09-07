@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.registry;
 
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.compat.CreateCompat;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
@@ -13,20 +12,13 @@ import com.wdiscute.starcatcher.messageinabottle.*;
 import com.wdiscute.utils.item.BasicItem;
 import com.wdiscute.utils.item.FireResistantBasicItem;
 import com.wdiscute.utils.item.SingleStackBasicItem;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.List;
 
 public interface SCItems
 {
