@@ -399,7 +399,7 @@
   "tooltip.modifier.number.32": "Thirty-two",
   "tooltip.modifier.number.64": "A stack",
 
-  "tooltip.modifier.starcatcher.adjust_handle_speed.big_increase": "Tremendously the handle's rotation speed",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.big_increase": "Tremendously increases the handle's rotation speed",
   "tooltip.modifier.starcatcher.adjust_handle_speed.increase": "Increases the handle's rotation speed",
   "tooltip.modifier.starcatcher.adjust_handle_speed.decrease": "Decreases the handle's rotation speed",
   "tooltip.modifier.starcatcher.adjust_handle_speed.big_decrease": "Tremendously decreases the handle's rotation speed",

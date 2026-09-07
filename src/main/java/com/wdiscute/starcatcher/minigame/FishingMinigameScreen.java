@@ -457,16 +457,16 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
                 32, 0,
                 32, 96);
 
-        //render treasure on top of bar
-        ScreenUtils.item(g, treasureIS,
-                centerX - 163,
-                centerY - barSize + 16);
-
         //outline when treasure complete
         if (treasureProgress > 99)
             treasure.render(g, centerX - 16 - 155, centerY - 48,
                     0, 0,
                     32, 96);
+
+        //render treasure on top of bar
+        ScreenUtils.item(g, treasureIS,
+                centerX - 163,
+                centerY - barSize + 16);
 
     }
 
@@ -783,7 +783,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         ItemStack maybeRod = context.player().getMainHandItem().is(SCTags.RODS) ? context.player().getMainHandItem() : context.player().getOffhandItem();
 
         //get tackle skin, backup of default from registry
-        AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(maybeRod, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.rl("rod")));
+        AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(maybeRod, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.rl("base")));
 
         //start minigame
         Minecraft.getInstance().setScreen(new FishingMinigameScreen(cbFishingStartedPayload.fp(), cbFishingStartedPayload.treasure().toStack(), List.of(), tackleSkin));

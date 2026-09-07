@@ -5,6 +5,7 @@ import net.minecraft.world.item.ItemStack;
 
 public class FishEntityRenderState extends LivingEntityRenderState
 {
+    boolean hasWarned;
     ItemStack fishStack;
 
 }

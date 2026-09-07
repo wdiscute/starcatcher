@@ -10,6 +10,7 @@ import com.wdiscute.starcatcher.fishentity.fishmodels.*;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.shaders.GoldRenderer;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.SubmitNodeCollector;
@@ -22,6 +23,7 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -114,6 +116,7 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
     {
         super.extractRenderState(entity, state, partialTicks);
         state.fishStack = entity.getFish() == null ? ItemStack.EMPTY : entity.getFish();
+        entity.hasWarned = true;
     }
 
     @Override
@@ -154,35 +157,27 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
 
     public static void renderFishFromItem(FishEntityRenderState ir, ItemStack itemStack, SubmitNodeCollector node, PoseStack poseStack)
     {
-        if (map.containsKey(itemStack.getItem()))
-        {
-            Item item = itemStack.getItem();
-            EntityModel<FishEntityRenderState> model = map.get(item);
+        EntityModel<FishEntityRenderState> model = map.get(itemStack.getItem());
 
-            Identifier rl = Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath());
+        if (model == null)
+            model = map.get(SCItems.AGAVE_BREAM.asItem());
 
-            node.submitModel(
-                    model, ir, poseStack, getGoldRendertype(rl, model, itemStack), ir.lightCoords, OverlayTexture.NO_OVERLAY,
-                    -1, null, ir.outlineColor, null
-            );
-        }
-        else
-        {
-            poseStack.translate(0F, 1F, 0.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
-            poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
-            //itemRenderer.appendItemLayers(itemStack, ItemDisplayContext.FIXED, packedLight,
-            //OverlayTexture.NO_OVERLAY, poseStack, buffer, level, U.r.nextInt());
-        }
+        Item item = itemStack.getItem();
+        if (!ir.hasWarned)
+            Minecraft.getInstance().player.sendSystemMessage(Component.translatable(item.getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
 
+        Identifier rl = Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath());
+
+        node.submitModel(
+                model, ir, poseStack, getGoldRendertype(rl, model, itemStack), ir.lightCoords, OverlayTexture.NO_OVERLAY,
+                -1, null, ir.outlineColor, null
+        );
     }
 
     public static RenderType getGoldRendertype(Identifier texture, EntityModel<FishEntityRenderState> model, ItemStack fishItem)
     {
         if (Rarity.isGolden(fishItem))
-        {
             return GoldRenderer.INSTANCE.getOrCreateEntity(texture, RenderTypes::entityCutout).renderType;
-        }
         return model.renderType(texture.withPrefix("textures/").withSuffix(".png"));
     }
 }

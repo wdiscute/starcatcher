@@ -111,7 +111,7 @@ public class ClamBlock extends HorizontalDirectionalBlock implements SimpleWater
     {
         BlockState bs = defaultBlockState();
         bs = bs.setValue(HAS_PEARL, false);
-        bs = bs.setValue(FACING, context.getHorizontalDirection());
+        bs = bs.setValue(FACING, context.getHorizontalDirection().getOpposite());
         bs = bs.setValue(BlockStateProperties.WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).is(Fluids.WATER));
         return bs;
     }

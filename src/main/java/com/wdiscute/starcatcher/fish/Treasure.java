@@ -139,7 +139,7 @@ public record Treasure
 
     private ItemStack unpackLootTable(ServerPlayer player, Identifier rl, List<Ingredient> blacklist)
     {
-        LootParams lootparams = new LootParams.Builder((ServerLevel) player.level())
+        LootParams lootparams = new LootParams.Builder(player.level())
                 .withParameter(LootContextParams.ORIGIN, player.position())
                 .withParameter(LootContextParams.TOOL, player.getMainHandItem().is(Tags.Items.RODS) ? player.getMainHandItem() : player.getOffhandItem())
                 .withParameter(LootContextParams.THIS_ENTITY, player)
@@ -150,17 +150,16 @@ public record Treasure
                 ResourceKey.create(Registries.LOOT_TABLE, rl)
         );
 
-        List<ItemStack> randomItems = table.getRandomItems(lootparams).stream().filter(o -> !o.isEmpty()).toList();
+        for (int i = 0; i < 100; i++)
+        {
+            List<ItemStack> randomItems = table.getRandomItems(lootparams).stream().filter(o -> !o.isEmpty()).toList();
+            List<ItemStack> validItems = randomItems.stream()
+                    .filter(stack -> blacklist.stream().noneMatch(ingredient -> ingredient.test(stack)))
+                    .toList();
+            if (validItems.isEmpty()) continue;
+            return validItems.get(player.getRandom().nextInt(validItems.size()));
+        }
 
-        if (randomItems.isEmpty()) return ItemStack.EMPTY;
-
-        List<ItemStack> validItems = randomItems.stream()
-                .filter(stack -> blacklist.stream().noneMatch(ingredient -> ingredient.test(stack)))
-                .toList();
-
-        if (validItems.isEmpty()) return ItemStack.EMPTY;
-
-        return validItems.get(player.getRandom().nextInt(validItems.size()));
+        return ItemStack.EMPTY;
     }
-
 }

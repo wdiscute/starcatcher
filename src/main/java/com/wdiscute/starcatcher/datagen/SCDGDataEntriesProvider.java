@@ -2,10 +2,8 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
-import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.FishMessagesModifier;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.LuckAttributeModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.KimbeMarkerModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.SpawnTreasureModifier;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
@@ -15,8 +13,6 @@ import com.wdiscute.utils.EntryOrTag;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
 import com.wdiscute.utils.datagen.DataEntryProvider;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -24,34 +20,26 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.CompletableFuture;
 
 public class SCDGDataEntriesProvider
 {
-    public static void start(DataGenerator gen, PackOutput output, CompletableFuture<HolderLookup.Provider> lookup)
+    public static void start(DataGenerator gen, PackOutput output, boolean includeServer)
     {
-        gen.addProvider(true, new DataEntryProvider<>(output, lookup, SCDataEntries.DIMENSION_TAGS,
-                        Map.of(
-                                "overworld", List.of(
-                                        Utils.rl("overworld")
-                                ),
-
-                                "the_nether", List.of(
-                                        Utils.rl("the_nether")
-                                ),
-
-                                "the_end", List.of(
-                                        Utils.rl("the_end")
-                                )
+        gen.addProvider(includeServer,
+                new DataEntryProvider.MultiEntry<>(output,
+                        SCDataEntries.DIMENSION_TAGS,
+                        List.of(
+                                new Utils.Duo<>(Utils.rl("overworld"), "overworld"),
+                                new Utils.Duo<>(Utils.rl("the_nether"), "the_nether"),
+                                new Utils.Duo<>(Utils.rl("the_end"), "the_end")
                         )
                 )
         );
 
-        gen.addProvider(true,
-                new DataEntryProvider<>(output, lookup, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
+        gen.addProvider(includeServer,
+                new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
                         List.of(
                                 new FishMessagesModifier(0.05f, ""),
                                 //new LuckAttributeModifier(new HashMap<>()
@@ -68,7 +56,7 @@ public class SCDGDataEntriesProvider
                 )
         );
 
-        gen.addProvider(true, new DataEntryProvider<>(output, lookup, SCDataEntries.DEFAULT_MINIGAME_MODIFIERS,
+        gen.addProvider(includeServer, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_MINIGAME_MODIFIERS,
                 List.of(
                         new KimbeMarkerModifier(""),
                         new SpawnTreasureModifier(0.02f, "")
@@ -76,28 +64,19 @@ public class SCDGDataEntriesProvider
         );
 
 
-        MaybeStack goldenWorm = new MaybeStack(SCItems.WORM.getId(), 0,
-                DataComponentPatch.builder()
-                        .set(SCDataComponents.CAUGHT_FISH_INFO.get(), CaughtFishInfo.GOLDEN)
-                        .set(SCDataComponents.MODIFIERS.get(), List.of(new ExtraGoldenChanceModifier(0.1f, false, "")))
-                        .build()
-        );
+        ItemStack goldenWorm = SCItems.WORM.toStack();
+        SCDataComponents.set(goldenWorm, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
+        SCDataComponents.set(goldenWorm, SCDataComponents.MODIFIERS, List.of(new ExtraGoldenChanceModifier(0.1f, false, "")));
 
-        MaybeStack goldenAlmightyWorm = new MaybeStack(SCItems.ALMIGHTY_WORM.getId(), 0,
-                DataComponentPatch.builder()
-                        .set(SCDataComponents.CAUGHT_FISH_INFO.get(), CaughtFishInfo.GOLDEN)
-                        .set(SCDataComponents.MODIFIERS.get(), List.of(new ExtraGoldenChanceModifier(0.1f, false, "")))
-                        .build()
-        );
+        ItemStack goldenAlmightyWorm = SCItems.ALMIGHTY_WORM.toStack();
+        SCDataComponents.set(goldenAlmightyWorm, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
+        SCDataComponents.set(goldenAlmightyWorm, SCDataComponents.MODIFIERS, List.of(new ExtraGoldenChanceModifier(0.1f, false, "")));
 
-        MaybeStack goldenSeekingWorm = new MaybeStack(SCItems.SEEKING_WORM.getId(), 0,
-                DataComponentPatch.builder()
-                        .set(SCDataComponents.CAUGHT_FISH_INFO.get(), CaughtFishInfo.GOLDEN)
-                        .set(SCDataComponents.MODIFIERS.get(), List.of(new ExtraGoldenChanceModifier(0.1f, false, "")))
-                        .build()
-        );
+        ItemStack goldenSeekingWorm = SCItems.SEEKING_WORM.toStack();
+        SCDataComponents.set(goldenSeekingWorm, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
+        SCDataComponents.set(goldenSeekingWorm, SCDataComponents.MODIFIERS, List.of(new ExtraGoldenChanceModifier(0.1f, false, "")));
 
-        gen.addProvider(true, new DataEntryProvider<>(output, lookup, SCDataEntries.BONEMEAL_INTERACTION_ENTRY,
+        gen.addProvider(includeServer, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.BONEMEAL_INTERACTION_ENTRY,
                 List.of(
                         //base worms
                         new BonemealInteractionEntry(
@@ -119,17 +98,17 @@ public class SCDGDataEntriesProvider
                         //golden worms
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
-                                goldenWorm,
+                                new MaybeStack(goldenWorm),
                                 15),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
-                                goldenAlmightyWorm,
+                                new MaybeStack(goldenAlmightyWorm),
                                 4),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Tag<>(Tags.Blocks.VILLAGER_FARMLANDS),
-                                goldenSeekingWorm,
+                                new MaybeStack(goldenSeekingWorm),
                                 1),
 
 
@@ -153,17 +132,17 @@ public class SCDGDataEntriesProvider
                         //golden worms on rich soil
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                goldenWorm,
+                                new MaybeStack(goldenWorm),
                                 5),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                goldenAlmightyWorm,
+                                new MaybeStack(goldenAlmightyWorm),
                                 3),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                goldenSeekingWorm,
+                                new MaybeStack(goldenSeekingWorm),
                                 2)
                 )
         ));

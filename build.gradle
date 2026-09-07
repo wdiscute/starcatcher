@@ -59,7 +59,7 @@ repositories {
 dependencies {
     //wdUtils
     //jarJar(implementation("com.wdiscute:wdUtils:1.6-NEOFORGE-26.1.2"))
-    jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-26.1.2"))
+    jarJar(implementation("com.wdiscute:wdUtils:1.9-NEOFORGE-26.1.2"))
 
     //FTS
     //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.1.2"))
