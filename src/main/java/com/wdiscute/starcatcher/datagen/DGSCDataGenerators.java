@@ -73,6 +73,6 @@ public class DGSCDataGenerators
         gen.addProvider(true, new DGSCDataMapsProvider(output, lookupProvider));
 
         //data entries
-        SCDGDataEntriesProvider.start(gen, output, lookupProvider);
+        SCDGDataEntriesProvider.start(gen, output, true);
     }
 }

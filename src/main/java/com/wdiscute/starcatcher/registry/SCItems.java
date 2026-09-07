@@ -305,8 +305,6 @@ public interface SCItems
     DeferredItem<Item> SCULKFISH = registerBucketFish("sculkfish");
     DeferredItem<Item> WARD = registerNonBucketFish("ward");
     DeferredItem<Item> GLOWING_DARK = registerNonBucketFish("glowing_dark");
-    //todo
-    //DeferredItem<Item> XXXXX = registerNonBucketFish("xxxxx");
 
     //overworld surface lava
     DeferredItem<Item> SUNEATER = registerLavaBucketFish("suneater");
