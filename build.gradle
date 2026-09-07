@@ -82,7 +82,7 @@ dependencies {
     //jarJar(implementation("com.wdiscute:libtooltips:2.3.1-NEOFORGE-1.21.1"))
 
     //wdutils
-    jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-1.21.1"))
+    jarJar(implementation("com.wdiscute:wdUtils:1.9-NEOFORGE-1.21.1"))
 
     //selling bin
     jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-1.21.1"))

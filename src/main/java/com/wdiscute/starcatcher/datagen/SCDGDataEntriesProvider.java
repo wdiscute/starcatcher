@@ -19,6 +19,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 
@@ -30,25 +31,18 @@ public class SCDGDataEntriesProvider
     public static void start(DataGenerator gen, PackOutput output, boolean includeServer)
     {
         gen.addProvider(includeServer,
-                new DataEntryProvider<>(output, SCDataEntries.DIMENSION_TAGS,
-                        Map.of(
-                                "overworld", List.of(
-                                        Utils.rl("overworld")
-                                ),
-
-                                "the_nether", List.of(
-                                        Utils.rl("the_nether")
-                                ),
-
-                                "the_end", List.of(
-                                        Utils.rl("the_end")
-                                )
+                new DataEntryProvider.MultiEntry<>(output,
+                        SCDataEntries.DIMENSION_TAGS,
+                        List.of(
+                                new Utils.Duo<>(Utils.rl("overworld"), "overworld"),
+                                new Utils.Duo<>(Utils.rl("the_nether"), "the_nether"),
+                                new Utils.Duo<>(Utils.rl("the_end"), "the_end")
                         )
                 )
         );
 
         gen.addProvider(includeServer,
-                new DataEntryProvider<>(output, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
+                new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
                         List.of(
                                 new FishMessagesModifier(0.05f, ""),
                                 //new LuckAttributeModifier(new HashMap<>()
@@ -65,7 +59,7 @@ public class SCDGDataEntriesProvider
                 )
         );
 
-        gen.addProvider(includeServer, new DataEntryProvider<>(output, SCDataEntries.DEFAULT_MINIGAME_MODIFIERS,
+        gen.addProvider(includeServer, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_MINIGAME_MODIFIERS,
                 List.of(
                         new KimbeMarkerModifier(""),
                         new SpawnTreasureModifier(0.02f, "")
@@ -85,7 +79,7 @@ public class SCDGDataEntriesProvider
         SCDataComponents.set(goldenSeekingWorm, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.GOLDEN);
         SCDataComponents.set(goldenSeekingWorm, SCDataComponents.MODIFIERS, List.of(new ExtraGoldenChanceModifier(0.1f, false, "")));
 
-        gen.addProvider(includeServer, new DataEntryProvider<>(output, SCDataEntries.BONEMEAL_INTERACTION_ENTRY,
+        gen.addProvider(includeServer, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.BONEMEAL_INTERACTION_ENTRY,
                 List.of(
                         //base worms
                         new BonemealInteractionEntry(
