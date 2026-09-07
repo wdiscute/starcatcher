@@ -144,7 +144,7 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
 
     public void bookIcon(GuiGraphicsExtractor g, int x, int y, int mouseX, int mouseY)
     {
-        SLOT_BACKGROUND_FILLED.render(g, x, y);
+        SLOT_BACKGROUND_FILLED.render(g, x + 1, y + 1);
         ScreenUtils.item(g, stack, x + 2, y + 2);
         if (mouseX > x && mouseX < x + 19 && mouseY > y && mouseY < y + 19)
         {

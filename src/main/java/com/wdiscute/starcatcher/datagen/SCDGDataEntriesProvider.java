@@ -120,12 +120,12 @@ public class SCDGDataEntriesProvider
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                new MaybeStack(SCItems.WORM),
+                                new MaybeStack(SCItems.ALMIGHTY_WORM),
                                 30),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                new MaybeStack(SCItems.WORM),
+                                new MaybeStack(SCItems.SEEKING_WORM),
                                 20),
 
 
