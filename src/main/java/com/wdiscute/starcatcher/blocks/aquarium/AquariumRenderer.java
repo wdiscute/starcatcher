@@ -27,7 +27,6 @@ import org.jspecify.annotations.Nullable;
 
 public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity, AquariumRenderState>
 {
-
     ItemModelResolver itemRenderer;
 
     public AquariumRenderer(BlockEntityRendererProvider.Context context)
@@ -91,7 +90,6 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
     @Override
     public void submit(AquariumRenderState be, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
     {
-
         ItemStack fish = be.fish;
 
         poseStack.pushPose();
@@ -102,7 +100,6 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
                 fish, SCDataComponents.CAUGHT_FISH_INFO,
                 new CaughtFishInfo(100, 100, 50, Rarity.COMMON)
         ).getScale();
-
 
         //offset from be
         LocalPlayer player = Minecraft.getInstance().player;
@@ -119,9 +116,13 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         //block centering
         poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
 
+
+        poseStack.mulPose(Axis.YN.rotationDegrees(180));
+
         //scaling + pivot adjusting
         poseStack.translate(0, 1, 0);
-        poseStack.scale(scale, -scale, scale);
+        poseStack.mulPose(Axis.XN.rotationDegrees(180));
+        poseStack.scale(scale, scale, scale);
         poseStack.translate(0, -1, 0);
 
         poseStack.rotateAround(Axis.YN.rotation((float) ((float) be.fishRotation + Math.PI / 2)), 0, 0, 0);
@@ -131,7 +132,6 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
             FishRenderer.renderFishFromItem(new FishEntityRenderState(), fish, submitNodeCollector, poseStack);
 
         poseStack.popPose();
-
     }
 
     @Override

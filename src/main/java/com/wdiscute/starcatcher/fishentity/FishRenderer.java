@@ -116,7 +116,9 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
     {
         super.extractRenderState(entity, state, partialTicks);
         state.fishStack = entity.getFish() == null ? ItemStack.EMPTY : entity.getFish();
+        state.hasWarned = entity.hasWarned;
         entity.hasWarned = true;
+        state.yRot = entity.getYRot(partialTicks);
     }
 
     @Override
@@ -128,25 +130,17 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
 
         poseStack.pushPose();
 
-        Vec3 offsetCenter = new Vec3(0f, -0.75f, 0f);
-
         float scale = SCDataComponents.getOrDefault(
                 fish, SCDataComponents.CAUGHT_FISH_INFO,
                 new CaughtFishInfo(100, 100, 50, Rarity.COMMON)
         ).getScale();
 
-        //todo needed?
-        //poseStack.translate(be.x, be.y, be.z);
-
-        //block centering
-        poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
+        poseStack.translate(0, -1.1f, 0);
 
         //scaling + pivot adjusting
-        poseStack.translate(0, 1, 0);
+        poseStack.translate(0, 1.225f, 0);
         poseStack.scale(scale, -scale, scale);
-        poseStack.translate(0, -1, 0);
-
-        poseStack.mulPose(Axis.YN.rotationDegrees(state.yRot + 180));
+        poseStack.translate(0, -1.225f, 0);
 
         // Render model here
         if (!fish.isEmpty())
@@ -158,13 +152,14 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
     public static void renderFishFromItem(FishEntityRenderState ir, ItemStack itemStack, SubmitNodeCollector node, PoseStack poseStack)
     {
         EntityModel<FishEntityRenderState> model = map.get(itemStack.getItem());
+        Item item = itemStack.getItem();
 
         if (model == null)
+        {
             model = map.get(SCItems.AGAVE_BREAM.asItem());
-
-        Item item = itemStack.getItem();
-        if (!ir.hasWarned)
-            Minecraft.getInstance().player.sendSystemMessage(Component.translatable(item.getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
+            if (!ir.hasWarned)
+                Minecraft.getInstance().player.sendSystemMessage(Component.translatable(item.getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
+        }
 
         Identifier rl = Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath());
 

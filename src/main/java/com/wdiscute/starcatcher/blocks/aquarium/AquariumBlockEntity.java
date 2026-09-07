@@ -1,7 +1,6 @@
 package com.wdiscute.starcatcher.blocks.aquarium;
 
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.data.NBTCodecHelper;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.registry.SCBlocks;
@@ -20,14 +19,12 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Containers;
 import net.minecraft.world.entity.EntitySpawnReason;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.TagValueOutput;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
 import net.minecraft.world.phys.Vec3;
@@ -56,6 +53,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     public void setFish(ItemStack fish)
     {
         this.fish = fish.copy();
+        sync();
     }
 
     public ItemStack getFish()
@@ -102,36 +100,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
                 Utils.r.nextFloat() / 3 - 0.17f
         ));
 
-        setChanged();
-
-        if (level instanceof ServerLevel serverLevel)
-            serverLevel.sendBlockUpdated(bp, this.getBlockState(), this.getBlockState(), 3);
-    }
-
-    @Override
-    protected void saveAdditional(ValueOutput output)
-    {
-        super.saveAdditional(output);
-
-        output.store("fish", MaybeStack.CODEC, new MaybeStack(getFish()));
-
-        output.putDouble("fish_target_x", fishTarget.x);
-        output.putDouble("fish_target_y", fishTarget.y);
-        output.putDouble("fish_target_z", fishTarget.z);
-    }
-
-    @Override
-    protected void loadAdditional(ValueInput input)
-    {
-        super.loadAdditional(input);
-
-        double x = input.getDoubleOr("fish_target_x", 0);
-        double y = input.getDoubleOr("fish_target_y", 0);
-        double z = input.getDoubleOr("fish_target_z", 0);
-
-        fishTarget = new Vec3(x, y, z);
-
-        fish = input.read("fish", MaybeStack.CODEC).orElse(MaybeStack.EMPTY).toStack();
+        sync();
     }
 
     @Override
@@ -170,6 +139,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
                 level.addFreshEntity(itementity);
                 abe.setFish(ItemStack.EMPTY);
             }
+            sync();
         }
     }
 
@@ -182,17 +152,50 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries)
     {
-        //todo 26
         CompoundTag tag = super.getUpdateTag(registries);
 
         RegistryOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
         if (!fish.isEmpty())
-            tag.store("item", ItemStack.CODEC, ops, getFish());
+            tag.store("fish", MaybeStack.CODEC, ops, new MaybeStack(getFish()));
 
         tag.putDouble("fish_target_x", fishTarget.x);
         tag.putDouble("fish_target_y", fishTarget.y);
         tag.putDouble("fish_target_z", fishTarget.z);
 
         return tag;
+    }
+
+    @Override
+    protected void saveAdditional(ValueOutput output)
+    {
+        super.saveAdditional(output);
+
+        output.store("fish", MaybeStack.CODEC, new MaybeStack(getFish()));
+
+        output.putDouble("fish_target_x", fishTarget.x);
+        output.putDouble("fish_target_y", fishTarget.y);
+        output.putDouble("fish_target_z", fishTarget.z);
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput input)
+    {
+        super.loadAdditional(input);
+
+        double x = input.getDoubleOr("fish_target_x", 0);
+        double y = input.getDoubleOr("fish_target_y", 0);
+        double z = input.getDoubleOr("fish_target_z", 0);
+
+        fishTarget = new Vec3(x, y, z);
+
+        fish = input.read("fish", MaybeStack.CODEC).orElse(MaybeStack.EMPTY).toStack();
+    }
+
+    public void sync()
+    {
+        setChanged();
+
+        if (level instanceof ServerLevel serverLevel)
+            serverLevel.sendBlockUpdated(getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
     }
 }

@@ -12,6 +12,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -129,12 +130,6 @@ public class DisplayBlockEntity extends BlockEntity
         sync();
     }
 
-    @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket()
-    {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
-
     public int getRedstoneSignal()
     {
         if (item.isEmpty()) return 0;
@@ -155,20 +150,6 @@ public class DisplayBlockEntity extends BlockEntity
         }
 
         return 15;
-    }
-
-    @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
-    {
-        CompoundTag tag = super.getUpdateTag(registries);
-
-        RegistryOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
-
-        tag.store("item", MaybeStack.CODEC, ops, this.item);
-
-        tag.putBoolean("rotating", fishRotating);
-
-        return tag;
     }
 
     @Override
@@ -216,6 +197,20 @@ public class DisplayBlockEntity extends BlockEntity
         output.putBoolean("rotating", fishRotating);
     }
 
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries)
+    {
+        CompoundTag tag = super.getUpdateTag(registries);
+
+        RegistryOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
+
+        tag.store("Book", MaybeStack.CODEC, ops, this.item);
+
+        tag.putBoolean("rotating", fishRotating);
+
+        return tag;
+    }
+
     public void clearContent()
     {
         item = MaybeStack.EMPTY;
@@ -224,6 +219,12 @@ public class DisplayBlockEntity extends BlockEntity
             level.setBlockAndUpdate(getBlockPos(), blockState.setValue(DisplayBlock.HAS_ITEM, false));
 
         sync();
+    }
+
+    @Override
+    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket()
+    {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     public void sync()

@@ -114,35 +114,36 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             poseStack.popPose();
         }
 
-
         if (state.stack.is(SCTags.BUCKETABLE_FISHES))
         {
             ItemStack fish = state.stack;
 
             poseStack.pushPose();
 
-            //block centering
-            Vec3 offsetCenter = new Vec3(0.5f, state.hasBlockAbove ? 0.2f : 0.5f, 0.5f);
-            poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
-
             float scale = SCDataComponents.getOrDefault(
                     fish, SCDataComponents.CAUGHT_FISH_INFO,
                     new CaughtFishInfo(100, 100, 50, Rarity.COMMON)
             ).getScale();
 
-            //scaling + pivot adjusting
-            poseStack.translate(0, 1, 0);
-            poseStack.scale(scale, -scale, scale);
-            poseStack.translate(0, -1, 0);
 
-            poseStack.translate(0, (-scale / 10) * (SCConfig.FISH_MAX_SCALE.getAsDouble() / 15), 0);
+            //block centering
+            poseStack.translate(0.5f, 0.2f, 0.5f);
+
+            //scaling + pivot adjusting
+            poseStack.translate(0, 1.2f, 0);
+            poseStack.mulPose(Axis.XN.rotationDegrees(180));
+            poseStack.scale(scale, scale, scale);
+            poseStack.translate(0, -1.2f, 0);
+
 
             if (state.fishRotating)
                 poseStack.rotateAround(Axis.YN.rotation((float) ((float) Util.getMillis() / 10000 + Math.PI / 2)), 0, 0, 0);
 
             // Render model here
-
-            FishRenderer.renderFishFromItem(new FishEntityRenderState(), fish, submitNodeCollector, poseStack);
+            FishEntityRenderState ir = new FishEntityRenderState();
+            ir.lightCoords = state.lightCoords;
+            ir.hasWarned = true;
+            FishRenderer.renderFishFromItem(ir, fish, submitNodeCollector, poseStack);
 
             poseStack.popPose();
         }

@@ -129,9 +129,15 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
     }
 
     @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket()
+    public void handleUpdateTag(ValueInput input)
     {
-        return ClientboundBlockEntityDataPacket.create(this);
+        super.handleUpdateTag(input);
+
+        if (!isCenter()) return;
+
+        tournamentUUID = input.read("tournament_uuid", UUIDUtil.CODEC).orElse(tournamentUUID);
+
+        tournament = input.read("preparing_tournament", Tournament.CODEC).orElse(tournament);
     }
 
     @Override
