@@ -19,12 +19,14 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Display;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.EnchantingTableBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.ValueInput;
 import net.minecraft.world.level.storage.ValueOutput;
@@ -34,6 +36,7 @@ public class DisplayBlockEntity extends BlockEntity
 {
     private MaybeStack item = MaybeStack.EMPTY;
 
+    private static final RandomSource RANDOM = RandomSource.create();
     public int time;
     public float flip;
     public float oFlip;
@@ -47,70 +50,62 @@ public class DisplayBlockEntity extends BlockEntity
 
     public boolean fishRotating = true;
 
-    public static void bookAnimationTick(Level level, BlockPos pos, BlockState state, DisplayBlockEntity enchantingTable)
+    //enchant table code
+    public static void bookAnimationTick(Level level, BlockPos worldPosition, BlockState state, DisplayBlockEntity entity)
     {
-        enchantingTable.oOpen = enchantingTable.open;
-        enchantingTable.oRot = enchantingTable.rot;
-        Player player = level.getNearestPlayer((double) pos.getX() + 0.5, (double) pos.getY() + 0.5, (double) pos.getZ() + 0.5, 3.0, false);
+        entity.oOpen = entity.open;
+        entity.oRot = entity.rot;
+        Player player = level.getNearestPlayer(worldPosition.getX() + 0.5, worldPosition.getY() + 0.5, worldPosition.getZ() + 0.5, 3.0, false);
         if (player != null)
         {
-            double d0;
-            double d1;
-
-            //if (SableCompat.isLoaded())
-            //    d0 = SableCompat.getPlayerX(player, pos) - ((double) pos.getX() + 0.5);
-            //else
-                d0 = player.getX() - ((double) pos.getX() + 0.5);
-
-            //if (SableCompat.isLoaded())
-            //    d1 = SableCompat.getPlayerZ(player, pos) - ((double) pos.getZ() + 0.5);
-            //else
-                d1 = player.getZ() - ((double) pos.getZ() + 0.5);
-
-            enchantingTable.tRot = (float) Mth.atan2(d1, d0);
-            enchantingTable.open += 0.1F;
-            if (enchantingTable.open < 0.5F || Utils.r.nextInt(40) == 0)
+            double xd = player.getX() - (worldPosition.getX() + 0.5);
+            double zd = player.getZ() - (worldPosition.getZ() + 0.5);
+            entity.tRot = (float) Mth.atan2(zd, xd);
+            entity.open += 0.1F;
+            if (entity.open < 0.5F || RANDOM.nextInt(40) == 0)
             {
-                float f1 = enchantingTable.flipT;
+                float old = entity.flipT;
 
                 do
                 {
-                    enchantingTable.flipT = enchantingTable.flipT + (float) (Utils.r.nextInt(4) - Utils.r.nextInt(4));
-                } while (f1 == enchantingTable.flipT);
+                    entity.flipT = entity.flipT + (RANDOM.nextInt(4) - RANDOM.nextInt(4));
+                } while (old == entity.flipT);
             }
         }
         else
-            //enchantingTable.tRot += 0.02F;
-            enchantingTable.open -= 0.1F;
+        {
+            entity.tRot += 0.02F;
+            entity.open -= 0.1F;
+        }
 
-        while (enchantingTable.rot >= (float) Math.PI)
-            enchantingTable.rot -= (float) (Math.PI * 2);
+        while (entity.rot >= (float) Math.PI)
+            entity.rot -= (float) (Math.PI * 2);
 
-        while (enchantingTable.rot < (float) -Math.PI)
-            enchantingTable.rot += (float) (Math.PI * 2);
+        while (entity.rot < (float) -Math.PI)
+            entity.rot += (float) (Math.PI * 2);
 
-        while (enchantingTable.tRot >= (float) Math.PI)
-            enchantingTable.tRot -= (float) (Math.PI * 2);
+        while (entity.tRot >= (float) Math.PI)
+            entity.tRot -= (float) (Math.PI * 2);
 
-        while (enchantingTable.tRot < (float) -Math.PI)
-            enchantingTable.tRot += (float) (Math.PI * 2);
+        while (entity.tRot < (float) -Math.PI)
+            entity.tRot += (float) (Math.PI * 2);
 
-        float f2 = enchantingTable.tRot - enchantingTable.rot;
+        float rotDir = entity.tRot - entity.rot;
 
-        while (f2 >= (float) Math.PI)
-            f2 -= (float) (Math.PI * 2);
+        while (rotDir >= (float) Math.PI)
+            rotDir -= (float) (Math.PI * 2);
 
-        while (f2 < (float) -Math.PI)
-            f2 += (float) (Math.PI * 2);
+        while (rotDir < (float) -Math.PI)
+            rotDir += (float) (Math.PI * 2);
 
-        enchantingTable.rot += f2 * 0.4F;
-        enchantingTable.open = Mth.clamp(enchantingTable.open, 0.0F, 1.0F);
-        enchantingTable.time++;
-        enchantingTable.oFlip = enchantingTable.flip;
-        float f = (enchantingTable.flipT - enchantingTable.flip) * 0.4F;
-        f = Mth.clamp(f, -0.2F, 0.2F);
-        enchantingTable.flipA = enchantingTable.flipA + (f - enchantingTable.flipA) * 0.9F;
-        enchantingTable.flip = enchantingTable.flip + enchantingTable.flipA;
+        entity.rot += rotDir * 0.4F;
+        entity.open = Mth.clamp(entity.open, 0.0F, 1.0F);
+        entity.time++;
+        entity.oFlip = entity.flip;
+        float diff = (entity.flipT - entity.flip) * 0.4F;
+        diff = Mth.clamp(diff, -0.2F, 0.2F);
+        entity.flipA = entity.flipA + (diff - entity.flipA) * 0.9F;
+        entity.flip = entity.flip + entity.flipA;
     }
 
     public DisplayBlockEntity(BlockPos pos, BlockState blockState)

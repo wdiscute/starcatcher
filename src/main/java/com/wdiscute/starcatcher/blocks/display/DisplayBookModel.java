@@ -12,15 +12,10 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.util.Mth;
 
-public class DisplayBookModel extends Model<DisplayBlockRenderer.State>
+public class DisplayBookModel extends Model<DisplayBookModel.State>
 {
     public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl("book"), "main");
 
-    private static final String LEFT_PAGES = "left_pages";
-    private static final String RIGHT_PAGES = "right_pages";
-    private static final String FLIP_PAGE_1 = "flip_page1";
-    private static final String FLIP_PAGE_2 = "flip_page2";
-    private final ModelPart root;
     private final ModelPart leftLid;
     private final ModelPart rightLid;
     private final ModelPart leftPages;
@@ -30,8 +25,7 @@ public class DisplayBookModel extends Model<DisplayBlockRenderer.State>
 
     public DisplayBookModel(ModelPart root)
     {
-        super(root, RenderTypes::entityCutout);
-        this.root = root;
+        super(root, RenderTypes::entitySolid);
         this.leftLid = root.getChild("left_lid");
         this.rightLid = root.getChild("right_lid");
         this.leftPages = root.getChild("left_pages");
@@ -42,40 +36,48 @@ public class DisplayBookModel extends Model<DisplayBlockRenderer.State>
 
     public static LayerDefinition createBodyLayer()
     {
-        MeshDefinition meshdefinition = new MeshDefinition();
-        PartDefinition partdefinition = meshdefinition.getRoot();
-        partdefinition.addOrReplaceChild(
+        MeshDefinition mesh = new MeshDefinition();
+        PartDefinition root = mesh.getRoot();
+        root.addOrReplaceChild(
                 "left_lid", CubeListBuilder.create().texOffs(0, 0).addBox(-6.0F, -5.0F, -0.005F, 6.0F, 10.0F, 0.005F), PartPose.offset(0.0F, 0.0F, -1.0F)
         );
-        partdefinition.addOrReplaceChild(
+        root.addOrReplaceChild(
                 "right_lid", CubeListBuilder.create().texOffs(16, 0).addBox(0.0F, -5.0F, -0.005F, 6.0F, 10.0F, 0.005F), PartPose.offset(0.0F, 0.0F, 1.0F)
         );
-        partdefinition.addOrReplaceChild(
+        root.addOrReplaceChild(
                 "seam",
                 CubeListBuilder.create().texOffs(12, 0).addBox(-1.0F, -5.0F, 0.0F, 2.0F, 10.0F, 0.005F),
                 PartPose.rotation(0.0F, (float) (Math.PI / 2), 0.0F)
         );
-        partdefinition.addOrReplaceChild("left_pages", CubeListBuilder.create().texOffs(0, 10).addBox(0.0F, -4.0F, -0.99F, 5.0F, 8.0F, 1.0F), PartPose.ZERO);
-        partdefinition.addOrReplaceChild("right_pages", CubeListBuilder.create().texOffs(12, 10).addBox(0.0F, -4.0F, -0.01F, 5.0F, 8.0F, 1.0F), PartPose.ZERO);
-        CubeListBuilder cubelistbuilder = CubeListBuilder.create().texOffs(24, 10).addBox(0.0F, -4.0F, 0.0F, 5.0F, 8.0F, 0.005F);
-        partdefinition.addOrReplaceChild("flip_page1", cubelistbuilder, PartPose.ZERO);
-        partdefinition.addOrReplaceChild("flip_page2", cubelistbuilder, PartPose.ZERO);
-        return LayerDefinition.create(meshdefinition, 64, 32);
+        root.addOrReplaceChild("left_pages", CubeListBuilder.create().texOffs(0, 10).addBox(0.0F, -4.0F, -0.99F, 5.0F, 8.0F, 1.0F), PartPose.ZERO);
+        root.addOrReplaceChild("right_pages", CubeListBuilder.create().texOffs(12, 10).addBox(0.0F, -4.0F, -0.01F, 5.0F, 8.0F, 1.0F), PartPose.ZERO);
+        CubeListBuilder page = CubeListBuilder.create().texOffs(24, 10).addBox(0.0F, -4.0F, 0.0F, 5.0F, 8.0F, 0.005F);
+        root.addOrReplaceChild("flip_page1", page, PartPose.ZERO);
+        root.addOrReplaceChild("flip_page2", page, PartPose.ZERO);
+        return LayerDefinition.create(mesh, 64, 32);
     }
 
-    public void setupAnim(float time, float rightPageFlipAmount, float leftPageFlipAmount, float bookOpenAmount)
+    public void setupAnim(State state)
     {
-        float f = (Mth.sin(time * 0.02F) * 0.1F + 1.25F) * bookOpenAmount;
-        this.leftLid.yRot = (float) Math.PI + f;
-        this.rightLid.yRot = -f;
-        this.leftPages.yRot = f;
+        super.setupAnim(state);
+        float openness = state.openness();
+        this.leftLid.yRot = (float) Math.PI + openness;
+        this.rightLid.yRot = -openness;
+        this.leftPages.yRot = openness;
+        this.rightPages.yRot = -openness;
+        this.flipPage1.yRot = openness - openness * 2.0F * state.pageFlip1();
+        this.flipPage2.yRot = openness - openness * 2.0F * state.pageFlip2();
+        this.leftPages.x = Mth.sin(openness);
+        this.rightPages.x = Mth.sin(openness);
+        this.flipPage1.x = Mth.sin(openness);
+        this.flipPage2.x = Mth.sin(openness);
+    }
 
-        this.rightPages.yRot = -f;
-        this.flipPage1.yRot = f - f * 2.0F * rightPageFlipAmount;
-        this.flipPage2.yRot = f - f * 2.0F * leftPageFlipAmount;
-        this.leftPages.x = Mth.sin(f) + 0.001f;
-        this.rightPages.x = Mth.sin(f) + 0.001f;
-        this.flipPage1.x = Mth.sin(f) + 0.001f;
-        this.flipPage2.x = Mth.sin(f) + 0.001f;
+    public record State(float openness, float pageFlip1, float pageFlip2)
+    {
+        public static State forAnimation(float progress, float pageFlip1, float pageFlip2, float openness)
+        {
+            return new State((Mth.sin(progress * 0.02F) * 0.1F + 1.25F) * openness, pageFlip1, pageFlip2);
+        }
     }
 }

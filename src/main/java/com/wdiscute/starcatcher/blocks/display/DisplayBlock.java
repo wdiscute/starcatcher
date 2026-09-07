@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.EnchantingTableBlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -255,10 +256,11 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     }
 
     @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
+    public <T extends BlockEntity> @Nullable BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type)
     {
-        return level.isClientSide() ? createTickerHelper(blockEntityType, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
+        return level.isClientSide() ? createTickerHelper(type, SCBlockEntities.DISPLAY.get(), DisplayBlockEntity::bookAnimationTick) : null;
     }
+
 
     @Override
     protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType)

@@ -4,23 +4,28 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.fishentity.FishEntityRenderState;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
+import net.minecraft.client.model.object.book.BookModel;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
 import net.minecraft.client.resources.model.sprite.SpriteId;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.ItemStack;
@@ -31,7 +36,7 @@ import org.jspecify.annotations.Nullable;
 public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEntity, DisplayBlockRenderState>
 {
     private final DisplayBookModel bookModel;
-    public static final SpriteId BOOK_TEXTURE = Sheets.BLOCK_ENTITIES_MAPPER.defaultNamespaceApply("enchantment/enchanting_table_book");
+    public static final Identifier BOOK_TEXTURE = Starcatcher.rl("textures/entity/book.png");
     private final SpriteGetter sprites;
 
     public DisplayBlockRenderer(BlockEntityRendererProvider.Context context)
@@ -44,19 +49,24 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
     public void extractRenderState(DisplayBlockEntity be, DisplayBlockRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress)
     {
         BlockEntityRenderer.super.extractRenderState(be, state, partialTicks, cameraPosition, breakProgress);
-        state.hasBlockAbove = !be.getLevel().getBlockState(be.getBlockPos().above()).isEmpty();
         state.stack = be.getImmutableItem() == null ? ItemStack.EMPTY : be.getImmutableItem();
-        state.time = be.time;
-        state.partialTick = partialTicks;
-        state.flip = be.flip;
-        state.oFlip = be.oFlip;
-        state.flipT = be.flipT;
-        state.flipA = be.flipA;
-        state.open = be.open;
-        state.oOpen = be.oOpen;
-        state.rot = be.rot;
-        state.oRot = be.oRot;
-        state.tRot = be.tRot;
+
+        //vanilla enchant table
+        {
+            state.flip = Mth.lerp(partialTicks, be.oFlip, be.flip);
+            state.open = Mth.lerp(partialTicks, be.oOpen, be.open);
+            state.time = be.time + partialTicks;
+            float or = be.rot - be.oRot;
+
+            while (or >= (float) Math.PI)
+                or -= (float) (Math.PI * 2);
+
+            while (or < (float) -Math.PI)
+                or += (float) (Math.PI * 2);
+
+            state.yRot = be.oRot + or * partialTicks;
+        }
+
         state.fishRotating = be.fishRotating;
     }
 
@@ -67,49 +77,23 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
         {
             poseStack.pushPose();
 
-            float ticks = (float) state.time + state.partialTick;
-            float openPartial = Math.clamp(state.open + (state.partialTick * (0.1f * Math.signum(state.open - state.oOpen))), 0, 1);
+            //vanilla enchant table
+            {
+                //todo 26 reimplement custom book movement
+                poseStack.translate(0.5F, 0.9F, 0.5F);
+                poseStack.translate(0.0F, 0.1F + Mth.sin(state.time * 0.1F) * 0.01F, 0.0F);
+                float yRot = state.yRot;
+                poseStack.mulPose(Axis.YP.rotation(-yRot));
+                poseStack.mulPose(Axis.ZP.rotationDegrees(80.0F));
+                float ff1 = Mth.frac(state.flip + 0.25F) * 1.6F - 0.3F;
+                float ff2 = Mth.frac(state.flip + 0.75F) * 1.6F - 0.3F;
 
-            //move up slightly when open
-            poseStack.translate(0.5F, 0.95F + 0.2f * (Math.clamp(openPartial * 4, 0, 1)), 0.5F);
-
-            //float up and down
-            poseStack.translate(0.0F, (0.1F + Mth.sin(ticks / 10 * 0.6F) * 0.03F) * openPartial, 0.0F);
-
-            double rotation = state.rot + (state.rot - state.oRot) * state.partialTick;
-            if (Math.abs(state.rot - state.oRot) > 3)
-                rotation = state.rot;
-
-            double x = Math.cos(rotation);
-            double y = Math.sin(rotation);
-
-
-            //move towards the player when open
-            poseStack.translate(((x / 3) * openPartial) + ((-x / 5) * (1 - openPartial)), 0f, ((y / 3) * openPartial) + ((-y / 5) * (1 - openPartial)));
-
-
-            float rotDiff = state.rot - state.oRot;
-
-            while (rotDiff >= (float) Math.PI) rotDiff -= (float) (Math.PI * 2);
-            while (rotDiff < (float) -Math.PI) rotDiff += (float) (Math.PI * 2);
-
-            float f2 = state.oRot + rotDiff * state.partialTick;
-            poseStack.mulPose(Axis.YP.rotation(-f2));
-
-            //rotate to lay down when closed
-            poseStack.mulPose(Axis.ZP.rotationDegrees(30.0F * (Math.clamp(openPartial * 2, 0, 1))));
-            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F * (1 - Math.clamp(openPartial * 2, 0, 1))));
-
-            float f3 = Mth.lerp(state.partialTick, state.oFlip, state.flip);
-            float f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
-            float f5 = Mth.frac(f3 + 0.75F) * 1.6F - 0.3F;
-            float f6 = Mth.lerp(state.partialTick, state.oOpen, openPartial);
-
-            State bookState = State.forAnimation(state.time, Mth.clamp(f4, 0.0F, 1.0F), Mth.clamp(f5, 0.0F, 1.0F), state.open);
-            submitNodeCollector.submitModel(
-                    this.bookModel, bookState, poseStack, state.lightCoords,
-                    OverlayTexture.NO_OVERLAY, -1, BOOK_TEXTURE, this.sprites, 0, state.breakProgress
-            );
+                DisplayBookModel.State bookState = DisplayBookModel.State.forAnimation(state.time, Mth.clamp(ff1, 0.0F, 1.0F), Mth.clamp(ff2, 0.0F, 1.0F), state.open);
+                submitNodeCollector.submitModel(
+                        this.bookModel, bookState, poseStack, RenderTypes.entityCutout(BOOK_TEXTURE), state.lightCoords,
+                        OverlayTexture.NO_OVERLAY, 0, state.breakProgress
+                );
+            }
 
             poseStack.popPose();
         }
@@ -160,11 +144,5 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
     public DisplayBlockRenderState createRenderState()
     {
         return new DisplayBlockRenderState();
-    }
-
-    public record State(float openness, float pageFlip1, float pageFlip2) {
-        public static State forAnimation(float progress, float pageFlip1, float pageFlip2, float openness) {
-            return new State((Mth.sin(progress * 0.02F) * 0.1F + 1.25F) * openness, pageFlip1, pageFlip2);
-        }
     }
 }
