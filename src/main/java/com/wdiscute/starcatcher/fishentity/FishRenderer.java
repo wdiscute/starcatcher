@@ -157,7 +157,7 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
         if (model == null)
         {
             model = map.get(SCItems.AGAVE_BREAM.asItem());
-            if (!ir.hasWarned)
+            if (!ir.hasWarned && itemStack.isEmpty())
                 Minecraft.getInstance().player.sendSystemMessage(Component.translatable(item.getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
         }
 
