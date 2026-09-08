@@ -62,8 +62,7 @@ dependencies {
     jarJar(implementation("com.wdiscute:wdUtils:1.9-NEOFORGE-26.1.2"))
 
     //FTS
-    //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.1.2"))
-    implementation "maven.modrinth:K0NYarUG:yWigbWI3"
+    jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.1.2"))
 
     //libtooltips
     jarJar(implementation("maven.modrinth:libtooltips:2.2-NEOFORGE-26.1.2"))
@@ -76,7 +75,7 @@ dependencies {
 
     //curios (check modifiers in curio slots)
     compileOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2:api"
-    runtimeOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2"
+    //runtimeOnly "top.theillusivec4.curios:curios-neoforge:15.0.0+26.1.2"
 
     //EclipticSeasons
     compileOnly files(".compatmods/EclipticSeasons-26.1.2-neoforge-0.15.0-rc.jar")
