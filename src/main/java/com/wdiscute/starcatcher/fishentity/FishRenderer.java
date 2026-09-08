@@ -100,13 +100,18 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
     }
 
     @Override
-    public void render(FishEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
-        model = map.get(entity.getFish().getItem());
+    public void render(FishEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
+    {
+        ItemStack fish = entity.getFish();
+        model = map.get(fish.getItem());
+
+        if (fish.isEmpty())
+            return;
 
         if (model == null)
         {
             model = map.get(SCItems.AGAVE_BREAM.asItem());
-            if (!entity.hasWarned && !entity.getFish().isEmpty())
+            if (!entity.hasWarned)
             {
                 entity.hasWarned = true;
                 Minecraft.getInstance().player.sendSystemMessage(Component.translatable(entity.getFish().getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
@@ -122,7 +127,8 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
     }
 
     @Override
-    protected @Nullable RenderType getRenderType(FishEntity livingEntity, boolean bodyVisible, boolean translucent, boolean glowing) {
+    protected @Nullable RenderType getRenderType(FishEntity livingEntity, boolean bodyVisible, boolean translucent, boolean glowing)
+    {
         ItemStack fish = livingEntity.getFish();
 
         return getGoldRendertype(getTextureLocation(livingEntity), model, fish);
@@ -133,13 +139,14 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
     {
         Item item = fish.getFish().getItem();
         if (map.containsKey(item))
-           return Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath());
+            return Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath());
 
-       return Starcatcher.MISSINGNO;
+        return Starcatcher.MISSINGNO;
     }
 
     @Override
-    protected void setupRotations(FishEntity entity, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale) {
+    protected void setupRotations(FishEntity entity, PoseStack poseStack, float bob, float yBodyRot, float partialTick, float scale)
+    {
         super.setupRotations(entity, poseStack, bob, yBodyRot, partialTick, scale);
 
     }
