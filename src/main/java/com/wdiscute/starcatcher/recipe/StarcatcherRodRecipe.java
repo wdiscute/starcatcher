@@ -15,9 +15,12 @@ import net.minecraft.world.Container;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
+import net.nikdo53.neobackports.extensions.IngredientExtension;
+import net.nikdo53.neobackports.extensions.ItemStackBackportExtension;
 import net.nikdo53.neobackports.io.StreamCodec;
 import net.nikdo53.neobackports.io.utils.BackportCodecs;
 import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
 import net.nikdo53.neobackports.utils.recipe.SmithingRecipeNeo;
 import net.nikdo53.neobackports.utils.recipe.holder.RecipeHolder;
@@ -138,8 +141,15 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
                 Codec.BOOL.fieldOf("apply_skin").forGetter(o -> o.applySkin)
         ).apply(instance, StarcatcherRodRecipe::new));
 
-        public static final StreamCodec<StarcatcherRodRecipe> STREAM_CODEC = StreamCodec.of(
-                StarcatcherRodRecipe.Serializer::toNetworkA, StarcatcherRodRecipe.Serializer::fromNetwork
+        public static final StreamCodec<StarcatcherRodRecipe> STREAM_CODEC = NeoForgeStreamCodecs.composite(
+                IngredientExtension.CONTENTS_STREAM_CODEC, (r) -> r.template,
+                IngredientExtension.CONTENTS_STREAM_CODEC, (r) -> r.rod,
+                IngredientExtension.CONTENTS_STREAM_CODEC, (r) -> r.material,
+                ItemStackBackportExtension.STREAM_CODEC, (r) -> r.result,
+                ByteBufCodecs.BOOL, (r) -> r.addText,
+                ByteBufCodecs.BOOL, (r) -> r.keepStack,
+                ByteBufCodecs.BOOL, (r) -> r.applySkin,
+                StarcatcherRodRecipe::new
         );
 
         @Override
@@ -157,26 +167,6 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
         @Override
         public RecipeHolder<? extends Container, ? extends Recipe<Container>> recipeHolderFactory(StarcatcherRodRecipe fishingRodSkinSmithingRecipe, ResourceLocation resourceLocation) {
             return new SmithingRecipeHolder(fishingRodSkinSmithingRecipe, resourceLocation);
-        }
-
-        private static StarcatcherRodRecipe fromNetwork(FriendlyByteBuf buffer)
-        {
-            Ingredient template = ByteBufCodecs.INGREDIENT.decode(buffer);
-            Ingredient base = ByteBufCodecs.INGREDIENT.decode(buffer);
-            Ingredient addition = ByteBufCodecs.INGREDIENT.decode(buffer);
-            ItemStack result = ByteBufCodecs.ITEM_STACK.decode(buffer);
-            boolean add_text = ByteBufCodecs.BOOL.decode(buffer);
-            boolean keep_stack = ByteBufCodecs.BOOL.decode(buffer);
-            boolean apply_skin = ByteBufCodecs.BOOL.decode(buffer);
-            return new StarcatcherRodRecipe(template, base, addition, result, add_text, keep_stack, apply_skin);
-        }
-
-        private static void toNetworkA(FriendlyByteBuf buffer, StarcatcherRodRecipe recipe)
-        {
-            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.template);
-            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.rod);
-            ByteBufCodecs.INGREDIENT.encode(buffer, recipe.material);
-            ByteBufCodecs.ITEM_STACK.encode(buffer, recipe.result);
         }
     }
 }

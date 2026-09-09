@@ -16,8 +16,11 @@ import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.RecipeMatcher;
 import net.nikdo53.neobackports.extensions.IngredientExtension;
+import net.nikdo53.neobackports.extensions.ItemStackBackportExtension;
 import net.nikdo53.neobackports.io.StreamCodec;
 import net.nikdo53.neobackports.io.utils.BackportCodecs;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
+import net.nikdo53.neobackports.io.utils.NeoForgeStreamCodecs;
 import net.nikdo53.neobackports.utils.recipe.CraftingRecipeNeo;
 import net.nikdo53.neobackports.utils.recipe.RecipeSerializerNeo;
 import net.nikdo53.neobackports.utils.recipe.holder.CraftingRecipeHolder;
@@ -148,8 +151,13 @@ public class BottledLetterRecipe implements CraftingRecipeNeo
                         )
                         .apply(p_340779_, BottledLetterRecipe::new)
         );
-        public static final StreamCodec< BottledLetterRecipe> STREAM_CODEC = StreamCodec.of(
-                BottledLetterRecipe.Serializer::toNetwork1, BottledLetterRecipe.Serializer::fromNetwork1
+
+        public static final StreamCodec<BottledLetterRecipe> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.STRING, t -> t.group,
+                NeoForgeStreamCodecs.enumCodec(CraftingBookCategory.class), t -> t.category,
+                ItemStackBackportExtension.STREAM_CODEC, t -> t.result,
+                IngredientExtension.CONTENTS_STREAM_CODEC.apply(ByteBufCodecs.list()).map(list -> new NonNullList<>(list, null), n -> n.list), t -> t.ingredients,
+                BottledLetterRecipe::new
         );
 
         @Override
@@ -167,31 +175,6 @@ public class BottledLetterRecipe implements CraftingRecipeNeo
         @Override
         public RecipeHolder<? extends Container, ? extends Recipe<? extends Container>> recipeHolderFactory(BottledLetterRecipe bottledLetterRecipe, ResourceLocation resourceLocation) {
             return new CraftingRecipeHolder(bottledLetterRecipe, resourceLocation);
-        }
-
-        private static BottledLetterRecipe fromNetwork1(FriendlyByteBuf buffer)
-        {
-            String s = buffer.readUtf();
-            CraftingBookCategory craftingbookcategory = buffer.readEnum(CraftingBookCategory.class);
-            int i = buffer.readVarInt();
-            NonNullList<Ingredient> nonnulllist = NonNullList.withSize(i, Ingredient.EMPTY);
-            nonnulllist.replaceAll(p_319735_ -> IngredientExtension.CONTENTS_STREAM_CODEC.decode(buffer));
-            ItemStack itemstack = ItemStack.STREAM_CODEC.decode(buffer);
-            return new BottledLetterRecipe(s, craftingbookcategory, itemstack, nonnulllist);
-        }
-
-        private static void toNetwork1(FriendlyByteBuf buffer, BottledLetterRecipe recipe)
-        {
-            buffer.writeUtf(recipe.group);
-            buffer.writeEnum(recipe.category);
-            buffer.writeVarInt(recipe.ingredients.size());
-
-            for (Ingredient ingredient : recipe.ingredients)
-            {
-                IngredientExtension.CONTENTS_STREAM_CODEC.encode(buffer, ingredient);
-            }
-
-            ItemStack.STREAM_CODEC.encode(buffer, recipe.result);
         }
     }
 }
