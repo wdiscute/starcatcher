@@ -52,3 +52,10 @@ mandatory=true
 versionRange="${minecraft_version_range}"
 ordering="NONE"
 side="BOTH"
+
+[[dependencies.starcatcher]]
+modId="saintsdragons"
+mandatory=false
+versionRange="[0,)"
+ordering="AFTER"
+side="BOTH"
