@@ -19,7 +19,7 @@ public interface SCDataEntries
 
     DataEntry.MultiEntry<Utils.Duo<ResourceLocation, String>> DIMENSION_TAGS = DataEntry.MultiEntry.register(Starcatcher.rl("dimension_entries"),
                     Utils.Duo.codec(ResourceLocation.CODEC, "dimension", Codec.STRING, "looks_like"))
-            .sync(Utils.Duo.streamCodec(ResourceLocation.STREAM_CODEC, ByteBufCodecs.STRING_UTF8));
+            .sync(Utils.Duo.streamCodec(ByteBufCodecs.RESOURCE_LOCATION, ByteBufCodecs.STRING_UTF8));
 
     //todo void fishing with this
     DataEntry<Map<String, Integer>> DIMENSION_VOID_LEVEL = DataEntry.register(Starcatcher.rl("dimension_void_level"),
@@ -27,14 +27,10 @@ public interface SCDataEntries
             Map.of());
 
     //this should be empty as defaults come from datapack!
-    DataEntry<List<Modifier>> DEFAULT_CATCH_MODIFIERS = DataEntry.register(Starcatcher.rl("default_catch_modifiers"), Modifier.CODEC.listOf(),
-            List.of());
+    DataEntry.MultiEntry<Modifier> DEFAULT_CATCH_MODIFIERS = DataEntry.MultiEntry.register(Starcatcher.rl("default_catch_modifiers"), Modifier.CODEC);
 
     //this should be empty as defaults come from datapack!
-    DataEntry<List<Modifier>> DEFAULT_MINIGAME_MODIFIERS = DataEntry.register(Starcatcher.rl("default_minigame_modifiers"), Modifier.CODEC.listOf(),
-            List.of());
+    DataEntry.MultiEntry<Modifier> DEFAULT_MINIGAME_MODIFIERS = DataEntry.MultiEntry.register(Starcatcher.rl("default_minigame_modifiers"), Modifier.CODEC);
 
-    DataEntry<List<BonemealInteractionEntry>> BONEMEAL_INTERACTION_ENTRY = DataEntry.register(Starcatcher.rl("bonemeal_interaction_drops"),
-            BonemealInteractionEntry.CODEC.listOf(),
-            List.of());
+    DataEntry.MultiEntry<BonemealInteractionEntry> BONEMEAL_INTERACTION_ENTRY = DataEntry.MultiEntry.register(Starcatcher.rl("bonemeal_interaction_drops"), BonemealInteractionEntry.CODEC);
 }
