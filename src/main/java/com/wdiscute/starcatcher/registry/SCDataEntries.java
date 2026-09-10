@@ -5,8 +5,10 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.utils.DataEntry;
+import com.wdiscute.utils.Utils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.nikdo53.neobackports.io.utils.ByteBufCodecs;
 
 import java.util.List;
 import java.util.Map;
@@ -15,10 +17,9 @@ public interface SCDataEntries
 {
     static void register(IEventBus eventBus){}
 
-    //todo tag-like loader system for this
-    DataEntry<Map<String, List<ResourceLocation>>> DIMENSION_TAGS = DataEntry.register(Starcatcher.rl("dimension_tags"),
-            Codec.unboundedMap(Codec.STRING, ResourceLocation.CODEC.listOf()),
-            Map.of());
+    DataEntry.MultiEntry<Utils.Duo<ResourceLocation, String>> DIMENSION_TAGS = DataEntry.MultiEntry.register(Starcatcher.rl("dimension_entries"),
+                    Utils.Duo.codec(ResourceLocation.CODEC, "dimension", Codec.STRING, "looks_like"))
+            .sync(Utils.Duo.streamCodec(ResourceLocation.STREAM_CODEC, ByteBufCodecs.STRING_UTF8));
 
     //todo void fishing with this
     DataEntry<Map<String, Integer>> DIMENSION_VOID_LEVEL = DataEntry.register(Starcatcher.rl("dimension_void_level"),

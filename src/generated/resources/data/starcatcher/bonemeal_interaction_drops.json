@@ -96,14 +96,14 @@
   {
     "block": "farmersdelight:rich_soil_farmland",
     "item": {
-      "identifier": "starcatcher:worm"
+      "identifier": "starcatcher:almighty_worm"
     },
     "weight": 30
   },
   {
     "block": "farmersdelight:rich_soil_farmland",
     "item": {
-      "identifier": "starcatcher:worm"
+      "identifier": "starcatcher:seeking_worm"
     },
     "weight": 20
   },
