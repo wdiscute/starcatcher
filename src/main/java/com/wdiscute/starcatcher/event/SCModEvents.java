@@ -33,7 +33,8 @@ import net.nikdo53.neobackports.io.networking.PayloadRegistrar;
 import net.nikdo53.neobackports.registry.ForgeRegistryHelper;
 
 @Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class SCModEvents {
+public class SCModEvents
+{
     @SubscribeEvent
     public static void commonSetup(FMLCommonSetupEvent event)
     {
@@ -42,10 +43,8 @@ public class SCModEvents {
             Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get(), StatFormatter.TIME);
             SCCriterionTriggers.FISH = CriteriaTriggers.register(new FishCaughtTrigger());
         });
-
-
-
     }
+
     @SubscribeEvent
     public static void addPackFinders(AddPackFindersEvent event)
     {
@@ -125,7 +124,6 @@ public class SCModEvents {
         event.dataPackRegistry(
                 Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC);
     }
-
 
     @SubscribeEvent
     public static void registerDataMaps(RegisterDataMapTypesEvent event)
@@ -228,7 +226,6 @@ public class SCModEvents {
                 CBPlayerStructuresPayload::handle
         );
     }
-
 
     @SubscribeEvent
     public static void modifyDefaultAttributes(EntityAttributeModificationEvent event)

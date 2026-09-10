@@ -27,10 +27,15 @@ public interface SCDataEntries
             Map.of());
 
     //this should be empty as defaults come from datapack!
-    DataEntry.MultiEntry<Modifier> DEFAULT_CATCH_MODIFIERS = DataEntry.MultiEntry.register(Starcatcher.rl("default_catch_modifiers"), Modifier.CODEC);
+    DataEntry.MultiEntry<Modifier> DEFAULT_CATCH_MODIFIERS =
+            DataEntry.MultiEntry.register(Starcatcher.rl("default_catch_modifiers"), Modifier.CODEC)
+                    .sync(ByteBufCodecs.fromCodec(Modifier.CODEC));
 
     //this should be empty as defaults come from datapack!
-    DataEntry.MultiEntry<Modifier> DEFAULT_MINIGAME_MODIFIERS = DataEntry.MultiEntry.register(Starcatcher.rl("default_minigame_modifiers"), Modifier.CODEC);
+    DataEntry.MultiEntry<Modifier> DEFAULT_MINIGAME_MODIFIERS =
+            DataEntry.MultiEntry.register(Starcatcher.rl("default_minigame_modifiers"), Modifier.CODEC)
+                    .sync(ByteBufCodecs.fromCodec(Modifier.CODEC));
 
-    DataEntry.MultiEntry<BonemealInteractionEntry> BONEMEAL_INTERACTION_ENTRY = DataEntry.MultiEntry.register(Starcatcher.rl("bonemeal_interaction_drops"), BonemealInteractionEntry.CODEC);
+    DataEntry.MultiEntry<BonemealInteractionEntry> BONEMEAL_INTERACTION_ENTRY = DataEntry.MultiEntry.register(Starcatcher.rl("bonemeal_interaction_drops"), BonemealInteractionEntry.CODEC)
+            .sync(ByteBufCodecs.fromCodec(BonemealInteractionEntry.CODEC));
 }
