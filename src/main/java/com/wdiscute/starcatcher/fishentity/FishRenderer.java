@@ -102,12 +102,16 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
     @Override
     public void render(FishEntity entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight)
     {
-        model = map.get(entity.getFish().getItem());
+        ItemStack fish = entity.getFish();
+        model = map.get(fish.getItem());
+
+        if (fish.isEmpty())
+            return;
 
         if (model == null)
         {
             model = map.get(SCItems.AGAVE_BREAM.asItem());
-            if (!entity.hasWarned)
+            if (!entity.hasWarned && !entity.getFish().isEmpty())
             {
                 entity.hasWarned = true;
                 Minecraft.getInstance().player.sendSystemMessage(Component.translatable(entity.getFish().getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));

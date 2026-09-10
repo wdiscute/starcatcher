@@ -28,6 +28,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.nikdo53.neobackports.io.components.DataComponents;
+import net.nikdo53.neobackports.io.components.DataDefault;
 import net.nikdo53.neobackports.io.components.ItemContainerContents;
 
 import javax.annotation.Nullable;
@@ -227,14 +228,16 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     {
         componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
         fishes = new ArrayList<>(componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of()));
-        this.name = componentInput.get(DataComponents.CUSTOM_NAME.get());
+        if (componentInput.hasCustomHoverName())
+            this.name = componentInput.getHoverName();
     }
 
     @Override
     public void saveToItem(ItemStack stack)
     {
         super.saveToItem(stack);
-        stack.set(DataComponents.CUSTOM_NAME, this.name);
+        if (name != null)
+            stack.set(DataComponents.CUSTOM_NAME, this.name);
         stack.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
         stack.set(SCDataComponents.TACKLE_BOX_FISHES, fishes);
     }
@@ -257,9 +260,7 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
         saveAllFishes(tag, fishes, false, registries);
 
         if (this.name != null)
-        {
             tag.putString("CustomName", Component.Serializer.toJson(this.name));
-        }
     }
 
     public static void saveAllFishes(CompoundTag tag, List<ItemStack> items, boolean alwaysPutTag, HolderLookup.Provider levelRegistry)

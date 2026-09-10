@@ -58,6 +58,8 @@ public class LightLevelRestriction extends AbstractFishRestriction
     @Override
     public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
+        if(context.equals(Context.GUIDE_FISHES_IN_AREA))
+            return 0;
         int lightLevel = level.getMaxLocalRawBrightness(entity.blockPosition());
         if (lightLevel > minLight && lightLevel < maxLight)
             return 0;
