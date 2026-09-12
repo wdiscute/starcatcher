@@ -340,6 +340,10 @@
 
   "tooltip.modifier.starcatcher.no_gravity": "Your bobber will no longer follow the laws of gravity",
 
+  "tooltip.modifier.starcatcher.allowed_rarities": "You can only catch %s fish",
+  "tooltip.modifier.starcatcher.allowed_rarities.list_last_separator": " and ",
+  "tooltip.modifier.starcatcher.allowed_rarities.list_separator": ", ",
+
   "tooltip.modifier.starcatcher.extra_golden_chance.perfect": "Perfect catches are more likely to become golden",
   "tooltip.modifier.starcatcher.extra_golden_chance.perfect.shift": "Perfect catches are %s%% more likely to become golden",
   "tooltip.modifier.starcatcher.extra_golden_chance.base": "A golden fish is more likely to bite",

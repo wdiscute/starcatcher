@@ -4,10 +4,7 @@
     "chance": 0.05
   },
   {
-    "type": "starcatcher:little_joys",
-    "chance_every_tick_multiplier": 1.0,
-    "max_ticks_multiplier": 0.5,
-    "min_ticks_multiplier": 0.2
+    "type": "starcatcher:little_joys"
   },
   {
     "type": "starcatcher:extra_golden_chance",
