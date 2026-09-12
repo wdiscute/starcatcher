@@ -104,9 +104,9 @@ public final class FishRegistration
 
     private static FishProperties applyBaits(FishProperties fp)
     {
-        if (fp.rarity().equals(Rarity.LEGENDARY) && fp.restrictions().stream().noneMatch(o -> o.equals(BaitRestriction.LEGENDARY_BAIT)))
+        if (fp.rarity().equals(Rarity.LEGENDARY) && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && fp.restrictions().stream().noneMatch(o -> o.equals(BaitRestriction.LEGENDARY_BAIT)))
         {
-            fp.addBait(BaitRestriction.LEGENDARY_BAIT);
+            fp = fp.addBait(BaitRestriction.LEGENDARY_BAIT);
         }
         return fp;
     }

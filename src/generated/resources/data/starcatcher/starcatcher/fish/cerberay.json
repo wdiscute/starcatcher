@@ -62,6 +62,12 @@
         "minecraft:lava"
       ],
       "translation_override": "fluid.starcatcher.lava"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:legendary_bait": 50
+      }
     }
   ],
   "size_and_weight": {

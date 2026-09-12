@@ -65,9 +65,7 @@ public interface Modifier
                         if (MODIFIERS.containsKey(rl))
                             return MODIFIERS.get(rl);
 
-                        if (FMLEnvironment.dist.isClient())
-                            LogUtils.getLogger().warn("Modifier [{}] not found. Using empty modifier instead.", rl);
-                        return EmptyModifier.CODEC;
+                        throw new IllegalStateException("Modifier [" + rl + "] not found. Double check your spelling.");
                     }
             );
 
@@ -174,7 +172,7 @@ public interface Modifier
 
     static void registerCatch()
     {
-        //catch modifier for codecs
+        //for translation override & non registered modifiers
         Modifier.MODIFIERS.put(Starcatcher.rl("empty"), EmptyModifier.CODEC);
 
         //defaults

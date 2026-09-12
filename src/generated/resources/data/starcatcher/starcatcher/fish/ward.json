@@ -60,11 +60,24 @@
       "translation_override": "gui.guide.elevation.deepslate"
     },
     {
+      "type": "starcatcher:structure_restriction",
+      "structure": [
+        "minecraft:ancient_city"
+      ]
+    },
+    {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
       ],
       "translation_override": "fluid.starcatcher.water"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:legendary_bait": 50,
+        "starcatcher:sculk_bait": 50
+      }
     }
   ],
   "size_and_weight": {

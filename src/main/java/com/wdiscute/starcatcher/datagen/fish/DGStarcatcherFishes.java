@@ -5,8 +5,13 @@ import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.Structures;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
+import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class DGStarcatcherFishes
 {
@@ -1073,6 +1078,7 @@ public class DGStarcatcherFishes
         //legendary
         FishRegistration.register(context,
                 PresetRestrictions.deepDark(context)
+                        .addRestriction(new StructureRestriction(List.of(BuiltinStructures.ANCIENT_CITY.location()), ""))
                         .withFish(SCItems.WARD)
                         .withSizeAndWeight(new SizeAndWeight(50, 10, 2600, 600))
                         .withRarity(Rarity.LEGENDARY)

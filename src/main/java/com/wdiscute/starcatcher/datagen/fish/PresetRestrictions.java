@@ -102,6 +102,7 @@ public class PresetRestrictions
                 .addRestriction(BiomeRestriction.swamps())
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.MURKWATER_BAIT)
                 ;
     }
 
@@ -133,6 +134,7 @@ public class PresetRestrictions
                 .addRestriction(BiomeRestriction.cherryGroves())
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.CHERRY_BAIT)
                 ;
     }
 
@@ -274,6 +276,7 @@ public class PresetRestrictions
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.dripstoneCaves())
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.DRIPSTONE_BAIT)
                 ;
     }
 
@@ -284,6 +287,7 @@ public class PresetRestrictions
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.lushCaves())
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.LUSH_BAIT)
                 ;
     }
 
@@ -305,6 +309,7 @@ public class PresetRestrictions
                 .addRestriction(BiomeRestriction.deepDark())
                 .addRestriction(ElevationRestriction.BELOW_ZERO)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.SCULK_BAIT)
                 ;
     }
 

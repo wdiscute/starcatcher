@@ -40,6 +40,13 @@
         "minecraft:water"
       ],
       "translation_override": "fluid.starcatcher.water"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:cherry_bait": 50,
+        "starcatcher:legendary_bait": 50
+      }
     }
   ],
   "size_and_weight": {

@@ -35,7 +35,8 @@
         "min_ticks_multiplier": 0.7
       },
       {
-        "type": "starcatcher:empty_catch_modifier"
+        "type": "starcatcher:empty",
+        "translation_override": "tooltip.modifier.starcatcher.cherry_bait"
       }
     ],
     "starcatcher:clear_bobber": [
@@ -63,7 +64,8 @@
         "min_ticks_multiplier": 0.7
       },
       {
-        "type": "starcatcher:empty_catch_modifier"
+        "type": "starcatcher:empty",
+        "translation_override": "tooltip.modifier.starcatcher.dripstone_bait"
       }
     ],
     "starcatcher:dripstone_bobber": [
@@ -367,7 +369,8 @@
         "min_ticks_multiplier": 0.7
       },
       {
-        "type": "starcatcher:empty_catch_modifier"
+        "type": "starcatcher:empty",
+        "translation_override": "tooltip.modifier.starcatcher.gunpowder_bait"
       }
     ],
     "starcatcher:heavy_hook": [
@@ -389,7 +392,8 @@
         "min_ticks_multiplier": 0.5
       },
       {
-        "type": "starcatcher:empty_catch_modifier"
+        "type": "starcatcher:empty",
+        "translation_override": "tooltip.modifier.starcatcher.legendary_bait"
       }
     ],
     "starcatcher:lush_bait": [
@@ -400,7 +404,8 @@
         "min_ticks_multiplier": 0.7
       },
       {
-        "type": "starcatcher:empty_catch_modifier"
+        "type": "starcatcher:empty",
+        "translation_override": "tooltip.modifier.starcatcher.lush_bait"
       }
     ],
     "starcatcher:meteorological_bait": [
@@ -433,7 +438,8 @@
         "min_ticks_multiplier": 0.7
       },
       {
-        "type": "starcatcher:empty_catch_modifier"
+        "type": "starcatcher:empty",
+        "translation_override": "tooltip.modifier.starcatcher.murkwater_bait"
       }
     ],
     "starcatcher:oxidised_copper_hook": [
@@ -460,7 +466,8 @@
         "min_ticks_multiplier": 0.7
       },
       {
-        "type": "starcatcher:empty_catch_modifier"
+        "type": "starcatcher:empty",
+        "translation_override": "tooltip.modifier.starcatcher.sculk_bait"
       }
     ],
     "starcatcher:seeking_worm": [

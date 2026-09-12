@@ -59,6 +59,12 @@
       "translation_override": "gui.guide.elevation.surface"
     },
     {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:cherry_bait": 50
+      }
+    },
+    {
       "type": "starcatcher:weather_restriction",
       "weather": "rain"
     },

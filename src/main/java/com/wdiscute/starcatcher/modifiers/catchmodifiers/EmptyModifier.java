@@ -7,14 +7,14 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.resources.ResourceLocation;
 
-public class EmptyCatchModifier extends AbstractCatchModifier
+public class EmptyModifier extends AbstractCatchModifier
 {
-    public static final MapCodec<EmptyCatchModifier> CODEC = RecordCodecBuilder.mapCodec(instance ->
+    public static final MapCodec<EmptyModifier> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
-            ).apply(instance, EmptyCatchModifier::new));
+            ).apply(instance, EmptyModifier::new));
 
-    public EmptyCatchModifier(String translationOverride)
+    public EmptyModifier(String translationOverride)
     {
         super(translationOverride);
     }
@@ -22,7 +22,7 @@ public class EmptyCatchModifier extends AbstractCatchModifier
     @Override
     public ResourceLocation getIdentifier()
     {
-        return Starcatcher.rl("empty_catch_modifier");
+        return Starcatcher.rl("empty");
     }
 
     @Override
