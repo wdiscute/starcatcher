@@ -67,7 +67,7 @@ public class LittleJoysModifier extends AbstractCatchModifier
                     .withLuck(player.getLuck())
                     .create(LootContextParamSets.FISHING);
 
-            LittleJoysAPI.claimFishingSpot((ServerLevel) fbe.level(), fbe.blockPosition());
+            LittleJoysAPI.findFishingSpot(sl, fbe.blockPosition()).ifPresent(o -> LittleJoysAPI.consumeFishingSpot(player, sl, o));
             return lootTable.getRandomItems(lootparams);
         }
         return List.of();
