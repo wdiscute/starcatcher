@@ -15,20 +15,20 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllowedRaritiesModifier extends AbstractCatchModifier
+public class RestrictedRaritiesModifier extends AbstractCatchModifier
 {
     final List<Rarity> rarities;
 
-    public static final MapCodec<AllowedRaritiesModifier> CODEC = RecordCodecBuilder.mapCodec(instance ->
+    public static final MapCodec<RestrictedRaritiesModifier> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Rarity.CODEC.listOf().fieldOf("rarities").forGetter(o -> o.rarities),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
-            ).apply(instance, AllowedRaritiesModifier::new));
+            ).apply(instance, RestrictedRaritiesModifier::new));
 
     @Override
     public ResourceLocation getIdentifier()
     {
-        return Starcatcher.rl("allowed_rarities");
+        return Starcatcher.rl("restricted_rarities");
     }
 
     @Override
@@ -37,7 +37,7 @@ public class AllowedRaritiesModifier extends AbstractCatchModifier
         return CODEC;
     }
 
-    public AllowedRaritiesModifier(List<Rarity> rarities, String translationOverride)
+    public RestrictedRaritiesModifier(List<Rarity> rarities, String translationOverride)
     {
         super(translationOverride);
         this.rarities = rarities;
@@ -48,7 +48,7 @@ public class AllowedRaritiesModifier extends AbstractCatchModifier
     {
         List<FishProperties> list = new ArrayList<>(available);
 
-        return list.stream().filter(o -> rarities.contains(o.rarity())).toList();
+        return list.stream().filter(o -> !rarities.contains(o.rarity())).toList();
     }
 
     @Override
@@ -80,6 +80,6 @@ public class AllowedRaritiesModifier extends AbstractCatchModifier
             text = list;
         }
 
-        return List.of(Component.translatable("tooltip.modifier.starcatcher.allowed_rarities", text));
+        return List.of(Component.translatable("tooltip.modifier.starcatcher.restricted_rarities", text));
     }
 }

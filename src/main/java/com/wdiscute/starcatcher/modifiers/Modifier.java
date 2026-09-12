@@ -183,6 +183,7 @@ public interface Modifier
         //Modifier.MODIFIERS.put(Starcatcher.rl("luck_attribute"), LuckAttributeModifier.CODEC);
 
         //others
+        Modifier.MODIFIERS.put(Starcatcher.rl("restricted_rarities"), RestrictedRaritiesModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("allowed_rarities"), AllowedRaritiesModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("adjust_lure_time"), AdjustLureTimeModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("remove_base_fished_item"), RemoveBaseFishedItemModifier.CODEC);

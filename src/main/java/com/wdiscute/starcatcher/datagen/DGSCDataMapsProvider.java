@@ -4,7 +4,9 @@ import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
+import com.wdiscute.starcatcher.modifiers.EmptyModifier;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCBlocks;
@@ -15,14 +17,9 @@ import com.wdiscute.starcatcher.modifiers.minigamemodifiers.*;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.dimension.LevelStem;
@@ -189,8 +186,8 @@ public class DGSCDataMapsProvider extends DataMapProvider
         ), false);
 
         modifiers.add(SCItems.RUSTY_HOOK, List.of(
-                new AdjustPenaltyModifier(3,""),
-                new AdjustHPModifier(0.75f,"")
+                new AdjustPenaltyModifier(3, ""),
+                new AdjustHPModifier(0.75f, "")
         ), false);
 
         modifiers.add(SCItems.SHINY_HOOK, List.of(
@@ -260,31 +257,38 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
         //baits
         modifiers.add(SCItems.GUNPOWDER_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyCatchModifier("tooltip.modifier.starcatcher.gunpowder_bait")
         ), false);
 
         modifiers.add(SCItems.CHERRY_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyCatchModifier("tooltip.modifier.starcatcher.cherry_bait")
         ), false);
 
         modifiers.add(SCItems.LUSH_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyCatchModifier("tooltip.modifier.starcatcher.lush_bait")
         ), false);
 
         modifiers.add(SCItems.SCULK_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyCatchModifier("tooltip.modifier.starcatcher.sculk_bait")
         ), false);
 
         modifiers.add(SCItems.DRIPSTONE_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyCatchModifier("tooltip.modifier.starcatcher.dripstone_bait")
         ), false);
 
         modifiers.add(SCItems.MURKWATER_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyCatchModifier("tooltip.modifier.starcatcher.murkwater_bait")
         ), false);
 
         modifiers.add(SCItems.LEGENDARY_BAIT, List.of(
-                new AdjustLureTimeModifier(0.5f, 0.6f, 1.5f, "")
+                new AdjustLureTimeModifier(0.5f, 0.6f, 1.5f, ""),
+                new EmptyCatchModifier("tooltip.modifier.starcatcher.legendary_bait")
         ), false);
 
         modifiers.add(SCItems.METEOROLOGICAL_BAIT, List.of(
@@ -321,7 +325,8 @@ public class DGSCDataMapsProvider extends DataMapProvider
         modifiers.add(SCBlocks.FISHERMAN_HAT_PINK.asItem().builtInRegistryHolder(),
                 List.of(
                         new AdjustBaseHandleSpeedModifier(5f, ""),
-                        new BurnOnMissModifier(20, 4, 30, "")
+                        new BurnOnMissModifier(20, 4, 30, ""),
+                        new AllowedRaritiesModifier(List.of(Rarity.TRASH), "")
                 ), false);
 
         modifiers.add(SCBlocks.FISHERMAN_HAT_BLACK.asItem().builtInRegistryHolder(),
@@ -352,6 +357,8 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
         modifiers.add(SCBlocks.FISHERMAN_HAT_GREEN.asItem().builtInRegistryHolder(),
                 List.of(
+                        new RestrictedRaritiesModifier(List.of(Rarity.EPIC, Rarity.LEGENDARY), ""),
+                        new AdjustHPModifier(0.5f, ""),
                         new ExtraExpBasedOnPerformanceModifier(""),
                         new AdjustDecayRateModifier(1.5f, "")
                 ), false);

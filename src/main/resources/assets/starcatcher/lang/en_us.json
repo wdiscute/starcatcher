@@ -340,6 +340,15 @@
 
   "tooltip.modifier.starcatcher.no_gravity": "Your bobber will no longer follow the laws of gravity",
 
+  "tooltip.modifier.starcatcher.gunpowder_bait": "Something... will be more likely to bite",
+  "tooltip.modifier.starcatcher.cherry_bait": "Cherry grove fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.lush_bait": "Lush cave fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.sculk_bait": "Deep Dark fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.dripstone_bait": "Dripstone Bait fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.murkwater_bait": "Swamp fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.legendary_bait": "Legendary fish will be more likely to bite",
+
+  "tooltip.modifier.starcatcher.restricted_rarities": "You can no longer catch %s fish",
   "tooltip.modifier.starcatcher.allowed_rarities": "You can only catch %s fish",
   "tooltip.modifier.starcatcher.allowed_rarities.list_last_separator": " and ",
   "tooltip.modifier.starcatcher.allowed_rarities.list_separator": ", ",
