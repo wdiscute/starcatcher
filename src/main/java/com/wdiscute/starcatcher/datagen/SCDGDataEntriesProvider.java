@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.FishMessagesModifier;
+import com.wdiscute.starcatcher.modifiers.catchmodifiers.LittleJoysModifier;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.LuckAttributeModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.KimbeMarkerModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.SpawnTreasureModifier;
@@ -45,6 +46,7 @@ public class SCDGDataEntriesProvider
                 new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
                         List.of(
                                 new FishMessagesModifier(0.05f, ""),
+                                new LittleJoysModifier(""),
                                 //new LuckAttributeModifier(new HashMap<>()
                                 //{{
                                 //    put(Rarity.COMMON, 16);

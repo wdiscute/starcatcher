@@ -193,6 +193,11 @@ dependencies {
     api "dev.ryanhcode.sable-companion:sable-companion-common-1.21.1:1.4.2"
     //runtimeOnly files(".compatmods/sable-neoforge-1.21.1-1.0.6.jar")
 
+    //little joys
+    compileOnly("maven.modrinth:little-joys:21.1.18+neoforge-1.21.1")
+    //runtimeOnly("maven.modrinth:little-joys:21.1.18+neoforge-1.21.1")
+
+
     implementation "curse.maven:sodium-394468:6382651"
     implementation "curse.maven:irisshaders-455508:6661598"
 }

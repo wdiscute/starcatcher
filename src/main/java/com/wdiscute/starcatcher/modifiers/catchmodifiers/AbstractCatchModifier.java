@@ -160,4 +160,9 @@ public abstract class AbstractCatchModifier implements Modifier
     {
         return List.of();
     }
+
+    public void tick(FishingBobEntity fishingBobEntity)
+    {
+
+    }
 }

@@ -179,6 +179,7 @@ public interface Modifier
 
         //defaults
         Modifier.MODIFIERS.put(Starcatcher.rl("fish_messages"), FishMessagesModifier.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("little_joys"), LittleJoysModifier.CODEC);
         //Modifier.MODIFIERS.put(Starcatcher.rl("luck_attribute"), LuckAttributeModifier.CODEC);
 
         //others

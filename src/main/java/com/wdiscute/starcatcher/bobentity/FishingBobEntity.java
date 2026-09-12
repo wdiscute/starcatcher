@@ -251,6 +251,8 @@ public class FishingBobEntity extends Projectile
         if (tackleSkin == null)
             tackleSkin = Starcatcher.TACKLE_SKIN_REGISTRY.get(SCDataAttachments.get(this, SCDataAttachments.TACKLE_SKIN));
 
+        modifiers.forEach(o -> o.tick(this));
+
         tackleSkin.onTick(this);
 
         noGravity = entityData.get(VOID);
