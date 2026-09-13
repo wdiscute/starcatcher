@@ -1,14 +1,16 @@
-[
-  {
-    "dimension": "minecraft:overworld",
-    "looks_like": "overworld"
-  },
-  {
-    "dimension": "minecraft:the_nether",
-    "looks_like": "the_nether"
-  },
-  {
-    "dimension": "minecraft:the_end",
-    "looks_like": "the_end"
-  }
-]
+{
+  "add": [
+    {
+      "dimension": "minecraft:overworld",
+      "looks_like": "overworld"
+    },
+    {
+      "dimension": "minecraft:the_nether",
+      "looks_like": "the_nether"
+    },
+    {
+      "dimension": "minecraft:the_end",
+      "looks_like": "the_end"
+    }
+  ]
+}

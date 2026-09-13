@@ -22,11 +22,6 @@ public interface SCDataEntries
             Utils.Duo.codec(ResourceLocation.CODEC, "dimension", Codec.STRING, "looks_like"))
             .sync(Utils.Duo.streamCodec(ResourceLocation.STREAM_CODEC, ByteBufCodecs.STRING_UTF8));
 
-    //todo void fishing with this
-    DataEntry<Map<String, Integer>> DIMENSION_VOID_LEVEL = DataEntry.register(Starcatcher.rl("dimension_void_level"),
-            Codec.unboundedMap(Codec.STRING, Codec.INT),
-            Map.of());
-
     //this should be empty as defaults come from datapack!
     DataEntry.MultiEntry<Modifier> DEFAULT_CATCH_MODIFIERS = DataEntry.MultiEntry.register(Starcatcher.rl("default_catch_modifiers"), Modifier.CODEC);
 
