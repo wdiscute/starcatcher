@@ -93,4 +93,11 @@ public class FishMessagesModifier extends AbstractCatchModifier
     {
         return CODEC;
     }
+
+    @Override
+    public String toString()
+    {
+        return "[FishMessagesModifier@" + Integer.toHexString(hashCode()) + "] (chance: " + chance
+               + " )";
+    }
 }

@@ -49,6 +49,12 @@ public class LittleJoysModifier extends AbstractCatchModifier
     }
 
     @Override
+    public boolean isEnabled()
+    {
+        return LittleJoysCompat.isLoaded();
+    }
+
+    @Override
     public List<ItemStack> addToFishedItems(FishingBobEntity fbe, FishProperties fp, int time, boolean perfectCatch, int hits, boolean completedTreasure)
     {
         if (fbe.level() instanceof ServerLevel sl &&
@@ -80,5 +86,11 @@ public class LittleJoysModifier extends AbstractCatchModifier
             if (LittleJoysCompat.isOnFishingSpot(fbe))
                 fbe.maxTicksToFish = 0;
         super.tick(fbe);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "[LittleJoysModifier@" + Integer.toHexString(hashCode()) + "]";
     }
 }

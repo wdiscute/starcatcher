@@ -7,8 +7,8 @@ import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.*;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.fish.Rarity;
-import com.wdiscute.starcatcher.fish.Textures;
 import com.wdiscute.starcatcher.modifiers.Modifier;
+import com.wdiscute.starcatcher.modifiers.catchmodifiers.AbstractCatchModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.Nikdo53Modifier;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.data.network.SBFishingCompletedPayload;
@@ -103,6 +103,7 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
     protected final List<ActiveSweetSpot> activeSweetSpots = new ArrayList<>();
     protected final List<ActiveSweetSpot> spotsToAdd = new ArrayList<>(); // delays the adding process to avoid concurrency exceptions
 
+    protected final List<AbstractCatchModifier> catchModifiers = new ArrayList<>();
     protected final List<AbstractMinigameModifier> modifiers = new ArrayList<>();
     protected final List<AbstractMinigameModifier> modifiersToAdd = new ArrayList<>(); // delays the adding process to avoid concurrency exceptions
 
@@ -162,6 +163,10 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
 
         //add modifiers in armor/curios/rod
         modifiersToAdd.addAll(Modifier.getMinigameModifiers(player));
+
+        //catch modifiers for debug
+        catchModifiers.addAll(Modifier.getCatchModifiers(player));
+        catchModifiers.addAll(Modifier.getDefaultCatchModifiers());
 
         tick();
 
@@ -340,9 +345,22 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         {
             int yOffsetMod = 10;
             ScreenUtils.text(g, font,
-                    "minigame modifiers: " + modifiers.size(), 10, yOffsetMod, 0xffffff00);
+                    "active minigame modifiers: " + modifiers.size(), 10, yOffsetMod, 0xffffff00);
 
             for (AbstractMinigameModifier modifier : modifiers)
+            {
+                yOffsetMod = yOffsetMod + 10;
+                ScreenUtils.text(g, font,
+                        modifier.toString(), 10, yOffsetMod, 0xffffffff);
+            }
+
+            yOffsetMod = yOffsetMod + 10;
+            yOffsetMod = yOffsetMod + 10;
+            ScreenUtils.text(g, font,
+                    "active catch modifiers: " + catchModifiers.size() + " (server might disagree!)", 10, yOffsetMod, 0xffffff00);
+
+
+            for (AbstractCatchModifier modifier : catchModifiers)
             {
                 yOffsetMod = yOffsetMod + 10;
                 ScreenUtils.text(g, font,

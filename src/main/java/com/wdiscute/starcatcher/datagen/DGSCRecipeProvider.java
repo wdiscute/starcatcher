@@ -2,6 +2,8 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.recipe.TargetedBaitRecipe;
+import com.wdiscute.starcatcher.recipe.TargetedBaitRecipeBuilder;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipeBuilder;
 import com.wdiscute.starcatcher.registry.SCItems;
@@ -61,6 +63,13 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .requires(SCItems.STARCATCHER_TWINE)
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
                 .save(output, Starcatcher.rl("rod_from_vanilla"));
+
+        //targeted bait
+        TargetedBaitRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.TARGETED_BAIT, 16, 50)
+                .requires(SCItems.SEEKING_WORM.get())
+                .requires(SCTags.STARCAUGHT_FISHABLE)
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
 
         //dripstone bait
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.DRIPSTONE_BAIT, 4)

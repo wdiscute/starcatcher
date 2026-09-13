@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -39,6 +40,11 @@ public abstract class AbstractCatchModifier implements Modifier
 
     public void onAdd(FishingBobEntity fishingBobEntity)
     {
+    }
+
+    public ItemStack modifyBaseItem(FishingBobEntity fishingBobEntity, Player player, ItemStack itemStack, boolean perfectCatch, boolean  golden, float percentile)
+    {
+        return itemStack;
     }
 
     public int adjustMinTicksToFish(FishingBobEntity fishingBobEntity, int minTicksToFish)

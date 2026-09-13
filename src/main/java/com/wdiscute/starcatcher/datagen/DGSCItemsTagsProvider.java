@@ -61,6 +61,11 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .remove(SCTags.SHRIMPS)
         ;
 
+        //starcaught fishable fish
+        tag(SCTags.HAS_TARGETED_BAIT)
+                .addTag(SCTags.STARCAUGHT_FISHABLE)
+        ;
+
         //cycle every FP
         for (FishProperties fp : FishRegistration.ALL_FISHABLE)
         {

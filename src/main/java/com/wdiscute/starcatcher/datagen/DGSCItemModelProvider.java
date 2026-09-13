@@ -106,6 +106,7 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(MURKWATER_BAIT);
         simpleItem(LEGENDARY_BAIT);
         simpleItem(METEOROLOGICAL_BAIT);
+        simpleItem(TARGETED_BAIT);
 
         //templates
         TEMPLATES_REGISTRY.getEntries().forEach(o -> simpleItem(((DeferredItem) o)));

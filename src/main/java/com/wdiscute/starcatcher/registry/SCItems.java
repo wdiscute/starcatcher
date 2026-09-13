@@ -92,6 +92,7 @@ public interface SCItems
     DeferredItem<Item> MURKWATER_BAIT = ITEMS.register("murkwater_bait", BasicItem::new);
     DeferredItem<Item> LEGENDARY_BAIT = ITEMS.register("legendary_bait", BasicItem::new);
     DeferredItem<Item> METEOROLOGICAL_BAIT = ITEMS.register("meteorological_bait", BasicItem::new);
+    DeferredItem<Item> TARGETED_BAIT = ITEMS.register("targeted_bait", BasicItem::new);
 
 
     //tackle templates

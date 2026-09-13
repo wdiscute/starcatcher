@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.modifiers;
 
-import com.mojang.logging.LogUtils;
 import com.mojang.serialization.*;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -18,7 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.neoforged.fml.ModList;
-import net.neoforged.fml.loading.FMLEnvironment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,22 +31,33 @@ public interface Modifier
     {
         List<Modifier> data = SCDataEntries.DEFAULT_MINIGAME_MODIFIERS.get();
 
-        if(data == null) data = List.of();
+        if (data == null) data = List.of();
 
         return data.stream()
-            .filter(AbstractMinigameModifier.class::isInstance)
-            .map(o -> (AbstractMinigameModifier) o).toList();
+                .filter(Modifier::isEnabled)
+                .filter(AbstractMinigameModifier.class::isInstance)
+                .map(o -> (AbstractMinigameModifier) o).toList();
     }
 
     static List<AbstractCatchModifier> getDefaultCatchModifiers()
     {
         List<Modifier> data = SCDataEntries.DEFAULT_CATCH_MODIFIERS.get();
 
-        if(data == null) data = List.of();
+        if (data == null) data = List.of();
 
         return data.stream()
+                .filter(Modifier::isEnabled)
                 .filter(AbstractCatchModifier.class::isInstance)
                 .map(o -> (AbstractCatchModifier) o).toList();
+    }
+
+    static void addModifierToItem(ItemStack stack, Modifier modifier)
+    {
+        List<Modifier> modifiers = new ArrayList<>(stack.getOrDefault(SCDataComponents.MODIFIERS, List.of()));
+
+        modifiers.add(modifier);
+
+        stack.set(SCDataComponents.MODIFIERS, modifiers);
     }
 
     List<Component> getDescription(boolean shift);
@@ -56,6 +65,11 @@ public interface Modifier
     ResourceLocation getIdentifier();
 
     MapCodec<? extends Modifier> getCodec();
+
+    default boolean isEnabled()
+    {
+        return true;
+    }
 
     Codec<Modifier> CODEC = ResourceLocation.CODEC
             .dispatch(
@@ -77,20 +91,6 @@ public interface Modifier
     static List<AbstractMinigameModifier> getMinigameModifiers(Player player)
     {
         return getModifiers(player).stream().filter(o -> o instanceof AbstractMinigameModifier).map(o -> (AbstractMinigameModifier) o).toList();
-    }
-
-    static List<AbstractCatchModifier> getCatchModifiers(ItemStack itemStack)
-    {
-        return getModifiers(itemStack).stream().filter(o -> o instanceof AbstractCatchModifier).map(o -> (AbstractCatchModifier) o).toList();
-    }
-
-    static List<AbstractMinigameModifier> getMinigameModifiers(ItemStack itemStack)
-    {
-        return getModifiers(itemStack).stream()
-                .filter(o -> o instanceof AbstractMinigameModifier)
-                .map(o -> (AbstractMinigameModifier) o)
-                .toList()
-                ;
     }
 
     static List<Modifier> getModifiers(Player player)
@@ -121,12 +121,12 @@ public interface Modifier
         {
             List<Modifier> list = activeEffect.getEffect().getData(SCDataMaps.EFFECT_MODIFIERS);
 
-            if(list != null && !list.isEmpty())
+            if (list != null && !list.isEmpty())
                 for (int i = 0; i < activeEffect.getAmplifier(); i++)
                     modifiers.addAll(list);
         }
 
-        return modifiers;
+        return modifiers.stream().filter(Modifier::isEnabled).toList();
     }
 
     static List<Modifier> getModifiers(ItemStack itemStack)
@@ -140,12 +140,12 @@ public interface Modifier
         modifiers.addAll(SCDataMaps.getOrDefault(itemStack, SCDataMaps.ITEM_MODIFIERS, List.of()));
 
         //enchants
-        if(itemStack.isEnchanted())
+        if (itemStack.isEnchanted())
         {
             for (Object2IntMap.Entry<Holder<Enchantment>> entry : itemStack.getTagEnchantments().entrySet())
             {
                 List<Modifier> list = entry.getKey().getData(SCDataMaps.ENCHANTMENT_MODIFIERS);
-                if(list != null && !list.isEmpty())
+                if (list != null && !list.isEmpty())
                 {
                     for (int i = 0; i < entry.getIntValue(); i++)
                     {
@@ -178,9 +178,12 @@ public interface Modifier
         //defaults
         Modifier.MODIFIERS.put(Starcatcher.rl("fish_messages"), FishMessagesModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("little_joys"), LittleJoysModifier.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("quality_food"), QualityFoodModifier.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("quality_food_roll"), QFRollImpl.CODEC);
         //Modifier.MODIFIERS.put(Starcatcher.rl("luck_attribute"), LuckAttributeModifier.CODEC);
 
         //others
+        Modifier.MODIFIERS.put(Starcatcher.rl("increase_chance"), IncreaseChanceModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("restricted_rarities"), RestrictedRaritiesModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("allowed_rarities"), AllowedRaritiesModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("adjust_lure_time"), AdjustLureTimeModifier.CODEC);

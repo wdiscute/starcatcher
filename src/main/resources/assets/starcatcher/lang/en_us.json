@@ -439,6 +439,9 @@
   "tooltip.modifier.starcatcher.adjust_lure_time.shift.max_ticks": "Adjusts maximum ticks to fish by %s%%",
   "tooltip.modifier.starcatcher.adjust_lure_time.shift.random": "Adjusts the chance of biting every tick by %s%%",
 
+  "tooltip.modifier.starcatcher.increase_chance": "You're more likely to catch a %s",
+  "tooltip.modifier.starcatcher.increase_chance.shift": "Increases the weight of catching a %s by %s",
+
   "tooltip.modifier.starcatcher.adjust_moving_sweetspots.increase": "Increases the speed of moving sweet-spots",
   "tooltip.modifier.starcatcher.adjust_moving_sweetspots.decrease": "Decreases the speed of moving sweet-spots",
   "tooltip.modifier.starcatcher.adjust_moving_sweetspots.shift": "Adjusts the speed of moving sweet-spots by %s%%",
@@ -545,6 +548,7 @@
 
 
   "item.starcatcher.gunpowder_bait": "Gunpowder Bait",
+  "item.starcatcher.targeted_bait": "Targeted Bait",
   "item.starcatcher.cherry_bait": "Cherry Bait",
   "item.starcatcher.lush_bait": "Lush Bait",
   "item.starcatcher.sculk_bait": "Sculk Bait",
@@ -689,18 +693,22 @@
   "gui.guide.seasons.around_autumn" : "Around Autumn",
   "gui.guide.seasons.around_winter" : "Around Winter",
 
+  "gui.guide.seasons.spring" : "Spring",
   "gui.guide.seasons.early_spring" : "Early Spring",
   "gui.guide.seasons.mid_spring" : "Mid Spring",
   "gui.guide.seasons.late_spring" : "Late Spring",
 
+  "gui.guide.seasons.summer" : "Summer",
   "gui.guide.seasons.early_summer" : "Early Summer",
   "gui.guide.seasons.mid_summer" : "Mid Summer",
   "gui.guide.seasons.late_summer" : "Late Summer",
 
+  "gui.guide.seasons.autumn" : "Autumn",
   "gui.guide.seasons.early_autumn" : "Early Autumn",
   "gui.guide.seasons.mid_autumn" : "Mid Autumn",
   "gui.guide.seasons.late_autumn" : "Late Autumn",
 
+  "gui.guide.seasons.winter" : "Winter",
   "gui.guide.seasons.early_winter" : "Early Winter",
   "gui.guide.seasons.mid_winter" : "Mid Winter",
   "gui.guide.seasons.late_winter" : "Late Winter",

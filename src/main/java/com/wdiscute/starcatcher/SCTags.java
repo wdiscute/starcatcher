@@ -50,6 +50,8 @@ public class SCTags
     public static final TagKey<Item> PLACEABLE_IN_TACKLE_BOX = ItemTags.create(Starcatcher.rl("placeable_in_tackle_box"));
     public static final TagKey<Item> WORMS = ItemTags.create(Starcatcher.rl("worms"));
 
+    public static final TagKey<Item> HAS_TARGETED_BAIT = ItemTags.create(Starcatcher.rl("has_targeted_bait"));
+
     public static final TagKey<Item> RODS = ItemTags.create(Starcatcher.rl("rods"));
 
     public static final TagKey<Item> BUCKETABLE_FISHES = ItemTags.create(Starcatcher.rl("bucketable_fishes"));

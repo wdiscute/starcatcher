@@ -63,10 +63,7 @@ public class BaitRestriction extends AbstractFishRestriction
 
         Item bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack().getItem();
 
-        if (baits.containsKey(BuiltInRegistries.ITEM.getKey(bait)))
-            return baits.get(BuiltInRegistries.ITEM.getKey(bait));
-
-        return 0;
+        return baits.getOrDefault(BuiltInRegistries.ITEM.getKey(bait), 0);
     }
 
     @Override

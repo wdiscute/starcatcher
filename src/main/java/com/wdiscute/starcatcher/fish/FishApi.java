@@ -144,7 +144,7 @@ public class FishApi
 
         return chance;
     }
- 
+
     /**
      * Spawns the fished (item)entity using the FishingBobEntity linked in the player DataAttachment.
      */
@@ -248,7 +248,7 @@ public class FishApi
 
                     //set fish item if it's a starcatcher fish entity
                     if (entity instanceof FishEntity fe)
-                        fe.setFish(makeItemStackNonBucket(fp, percentile, golden, player, perfectCatch));
+                        fe.setFish(makeItemStackNonBucket(fbe, fp, percentile, golden, player, perfectCatch));
 
                     entity.setPos(fbe.position().add(0, 1.2f, 0));
 
@@ -258,17 +258,17 @@ public class FishApi
 
                     //consume bait if not bucket
                     ItemStack bait = SCDataComponents.getOrDefault(fbe.rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
-                    if(!bait.is(Tags.Items.BUCKETS_EMPTY))
+                    if (!bait.is(Tags.Items.BUCKETS_EMPTY))
                     {
                         bait.shrink(1);
                         player.awardStat(SCStats.BAIT_USED.get(), 1);
                         SCDataComponents.set(fbe.rod, SCDataComponents.BAIT, new MaybeStack(bait));
                     }
                 }
-                //if not entity then add rod item resourceLocation
+                //if not entity then add base item
                 else
                 {
-                    ItemStack is = makeItemStack(fbe.rod, fbe.fpToFish, percentile, golden, player, perfectCatch);
+                    ItemStack is = makeItemStack(fbe, fbe.rod, fbe.fpToFish, percentile, golden, player, perfectCatch);
 
                     if (fbe.modifiers.stream().noneMatch(acm -> acm.shouldSkipAddingBaseItem(fbe, is)))
                         items.add(is);
@@ -357,7 +357,7 @@ public class FishApi
 
                 //always consume bait if not bucket (fish don't eat buckets!)
                 ItemStack bait = SCDataComponents.getOrDefault(fbe.rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
-                if(!bait.is(Tags.Items.BUCKETS_EMPTY))
+                if (!bait.is(Tags.Items.BUCKETS_EMPTY))
                 {
                     bait.shrink(1);
                     player.awardStat(SCStats.BAIT_USED.get(), 1);
@@ -366,7 +366,7 @@ public class FishApi
             }
 
             //sync stats to player for guide book
-            if(player instanceof ServerPlayer sp)
+            if (player instanceof ServerPlayer sp)
                 sp.getStats().sendStats(sp);
 
             //kill bobber entity
@@ -377,15 +377,14 @@ public class FishApi
     }
 
 
-    public static ItemStack makeItemStackNonBucket(FishProperties fp, float percentile,
-                                                   boolean golden, Player player, boolean perfectCatch)
+    public static ItemStack makeItemStackNonBucket(FishingBobEntity fbe, FishProperties fp, float percentile, boolean golden, Player player, boolean perfectCatch)
     {
         //normal itemstack
         ItemStack fish = fp.catchInfo().fish().toStack();
 
-        //quality food compat
-        if (ModList.get().isLoaded("quality_food"))
-            QualityFoodCompat.addQuality(fish, player, golden, perfectCatch, percentile);
+        //trigger modifiers to modify baseItem
+        for (AbstractCatchModifier modifier : fbe.modifiers)
+            fish = modifier.modifyBaseItem(fbe, player, fish, perfectCatch, golden, percentile);
 
         //store caught fish info data component
         if (fp.hasGuideEntry() && SCConfig.SAVE_DATA_TO_ITEMS.get() && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH))
@@ -397,7 +396,7 @@ public class FishApi
     /**
      * Generates the itemstack for fishing taking into account bucketability
      */
-    public static ItemStack makeItemStack(ItemStack rod, FishProperties fp, float percentile,
+    public static ItemStack makeItemStack(FishingBobEntity fbe, ItemStack rod, FishProperties fp, float percentile,
                                           boolean golden, Player player, boolean perfectCatch)
     {
         ItemStack bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack();
@@ -406,7 +405,7 @@ public class FishApi
         boolean canBeBucketed = !fp.catchInfo().bucketedFish().toStack().isEmpty() && bait.is(Tags.Items.BUCKETS_EMPTY) && !golden;
 
         //always consume bait if not bait is not a bucket
-        if(!bait.is(Tags.Items.BUCKETS_EMPTY))
+        if (!bait.is(Tags.Items.BUCKETS_EMPTY))
         {
             bait.shrink(1);
             player.awardStat(SCStats.BAIT_USED.get(), 1);
@@ -430,13 +429,13 @@ public class FishApi
             {
                 ItemStack bucket = StarcaughtBucket.getBucketForStack(baseFish).getDefaultInstance();
 
-                //quality food compat
-                if (ModList.get().isLoaded("quality_food") && SCConfig.SAVE_DATA_TO_ITEMS.get())
-                    QualityFoodCompat.addQuality(baseFish, player, golden, perfectCatch, percentile);
-
                 //only save data on fish resourceLocation if config is enabled
                 if (SCConfig.SAVE_DATA_TO_ITEMS.get())
                     SCDataComponents.set(baseFish, SCDataComponents.CAUGHT_FISH_INFO, caughtFishInfo);
+
+                //trigger modifiers to modify baseItem
+                for (AbstractCatchModifier modifier : fbe.modifiers)
+                    baseFish = modifier.modifyBaseItem(fbe, player, baseFish, perfectCatch, golden, percentile);
 
                 SCDataComponents.set(bucket, SCDataComponents.BUCKETED_FISH, new MaybeStack(baseFish));
                 return bucket;
@@ -447,14 +446,14 @@ public class FishApi
         }
 
         //if non bucket fish, make normal itemstack
-        return makeItemStackNonBucket(fp, percentile, golden, player, perfectCatch);
+        return makeItemStackNonBucket(fbe, fp, percentile, golden, player, perfectCatch);
     }
 
     public static ItemStack getTreasure(ServerPlayer player, FishProperties fp, List<AbstractCatchModifier> modifiers)
     {
         Registry<FishProperties> fishProperties = player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY);
 
-        if(fishProperties.getKey(fp) == null)
+        if (fishProperties.getKey(fp) == null)
             return ItemStack.EMPTY;
 
         Treasure data = fishProperties.wrapAsHolder(fp).getData(SCDataMaps.TREASURE);

@@ -2,11 +2,7 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
-import com.wdiscute.starcatcher.fish.Rarity;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.FishMessagesModifier;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.LittleJoysModifier;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.LuckAttributeModifier;
+import com.wdiscute.starcatcher.modifiers.catchmodifiers.*;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.KimbeMarkerModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.SpawnTreasureModifier;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
@@ -20,12 +16,10 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
-import java.util.Map;
 
 public class SCDGDataEntriesProvider
 {
@@ -47,14 +41,14 @@ public class SCDGDataEntriesProvider
                         List.of(
                                 new FishMessagesModifier(0.05f, ""),
                                 new LittleJoysModifier(""),
-                                //new LuckAttributeModifier(new HashMap<>()
-                                //{{
-                                //    put(Rarity.COMMON, 16);
-                                //    put(Rarity.UNCOMMON, 17);
-                                //    put(Rarity.RARE, 18);
-                                //    put(Rarity.EPIC, 19);
-                                //    put(Rarity.LEGENDARY, 20);
-                                //}}, "tooltip.modifier.starcatcher.luck_attribute"),
+
+                                new QualityFoodModifier(""),
+
+                                new QFRollImpl(0, 1, false, false, 100, ""),
+                                new QFRollImpl(0, 4, true, false, 100, ""),
+                                new QFRollImpl(1, 0, false, true, 100, ""),
+                                new QFRollImpl(0.5f, 3, false, false, 20, ""),
+
                                 new ExtraGoldenChanceModifier(0.01f, false, ""),
                                 new ExtraGoldenChanceModifier(0.01f, true, "")
                         )

@@ -1,0 +1,17 @@
+{
+  "type": "starcatcher:targeted_bait",
+  "category": "misc",
+  "extra_chance": 50,
+  "ingredients": [
+    {
+      "item": "starcatcher:seeking_worm"
+    },
+    {
+      "tag": "starcatcher:starcaught_fishable"
+    }
+  ],
+  "result": {
+    "count": 16,
+    "id": "starcatcher:targeted_bait"
+  }
+}
