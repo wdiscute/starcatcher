@@ -1,0 +1,6 @@
+{
+  "type": "forge:add_features",
+  "biomes": "#minecraft:is_beach",
+  "features": "starcatcher:clams",
+  "step": "vegetal_decoration"
+}
