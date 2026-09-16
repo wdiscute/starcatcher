@@ -73,7 +73,7 @@ public class SCEvents
 
         //create
         event.addPackFinders(
-                Starcatcher.rl("built_in_datapacks/create_compat"),
+                Starcatcher.rl("compat/create"),
                 PackType.SERVER_DATA,
                 Component.literal("Starcatcher - Create Compat"),
                 packSource,
@@ -83,7 +83,7 @@ public class SCEvents
 
         //tide
         event.addPackFinders(
-                Starcatcher.rl("built_in_datapacks/tide_compat"),
+                Starcatcher.rl("compat/tide"),
                 PackType.SERVER_DATA,
                 Component.literal("Starcatcher - Tide Compat"),
                 packSource,
@@ -101,7 +101,7 @@ public class SCEvents
         //                                         `---'
 
         event.addPackFinders(
-                Starcatcher.rl("built_in_datapacks/selling_bin_starcatcher_emeralds"),
+                Starcatcher.rl("compat/selling_bin_emeralds"),
                 PackType.SERVER_DATA,
                 Component.literal("Starcatcher - Emeralds"),
                 packSource,
@@ -110,7 +110,7 @@ public class SCEvents
         );
 
         event.addPackFinders(
-                Starcatcher.rl("built_in_datapacks/selling_bin_fishes"),
+                Starcatcher.rl("compat/selling_bin_fishes"),
                 PackType.SERVER_DATA,
                 Component.literal("Selling Bin - Fishes"),
                 packSource,
