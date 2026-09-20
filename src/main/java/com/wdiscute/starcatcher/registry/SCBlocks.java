@@ -28,12 +28,12 @@ public interface SCBlocks
     DeferredRegister.Blocks HATS = DeferredRegister.createBlocks(Starcatcher.MOD_ID);
     DeferredRegister.Blocks TACKLE_BOXES = DeferredRegister.createBlocks(Starcatcher.MOD_ID);
 
-    DeferredBlock<Block> TROPHY_OF_THE_OLDER_ANGLER = registerBlock("trophy_of_the_older_angler", TrophyOfTheOlderAngler::new);
-    DeferredBlock<Block> TROPHY_DIAMOND = registerBlock("trophy_diamond", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_EMERALD = registerBlock("trophy_emerald", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_GOLD = registerBlock("trophy_gold", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_IRON = registerBlock("trophy_iron", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_COPPER = registerBlock("trophy_copper", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_OF_THE_OLDER_ANGLER = registerTrophy("trophy_of_the_older_angler", TrophyOfTheOlderAngler::new);
+    DeferredBlock<Block> TROPHY_DIAMOND = registerTrophy("trophy_diamond", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_EMERALD = registerTrophy("trophy_emerald", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_GOLD = registerTrophy("trophy_gold", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_IRON = registerTrophy("trophy_iron", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_COPPER = registerTrophy("trophy_copper", TrophyBlock::new);
 
     DeferredBlock<Block> STAND = registerBlock("tournament_stand", StandBlock::new);
 
@@ -86,6 +86,13 @@ public interface SCBlocks
     {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
         SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties()));
+        return toReturn;
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerTrophy(String name, Supplier<T> block)
+    {
+        DeferredBlock<T> toReturn = BLOCKS.register(name, block);
+        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties().fireResistant()));
         return toReturn;
     }
 

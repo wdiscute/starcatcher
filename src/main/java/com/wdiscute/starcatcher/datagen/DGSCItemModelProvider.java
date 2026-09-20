@@ -39,6 +39,7 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(DRIED_SEAWEED);
         simpleItem(LAVA_CRAB_CLAW);
         simpleItem(MOSSY_BOOT);
+        simpleItem(OCULI);
 
         //items
         simpleItem(MISSINGNO);

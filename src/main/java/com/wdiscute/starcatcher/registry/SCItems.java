@@ -263,7 +263,15 @@ public interface SCItems
     DeferredItem<Item> REDSCALED_TUNA = registerBucketFish("redscaled_tuna");
     DeferredItem<Item> BIGEYE_TUNA = registerBucketFish("bigeye_tuna");
     DeferredItem<Item> SEA_BASS = registerNonBucketFish("sea_bass");
-    //DeferredItem<Item> SHARK = registerBucketFish("shark");
+
+    //icy ocean
+    DeferredItem<Item> GLIMMERGILL = registerNonBucketFish("glimmergill");
+    DeferredItem<Item> CRYOSPINE = registerNonBucketFish("cryospine");
+    DeferredItem<Item> LILAC_MINNOW = registerNonBucketFish("lilac_minnow");
+    DeferredItem<Item> FROSTBIT_JELLY = registerNonBucketFish("frostbit_jelly");
+    DeferredItem<Item> KING_OF_THE_FROST = registerNonBucketFish("king_of_the_frost");
+    DeferredItem<Item> OCULI = ITEMS.register("oculi", BasicItem::new);
+
 
     //mushroom islands
     DeferredItem<Item> SHROOMFISH = registerNonBucketFish("shroomfish");

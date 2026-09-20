@@ -1,14 +1,14 @@
 package com.wdiscute.starcatcher.datagen.fish;
 
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.*;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.data.worldgen.Structures;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
-import net.neoforged.neoforge.common.Tags;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -241,6 +241,69 @@ public class DGStarcatcherFishes
                         .withRarity(Rarity.LEGENDARY)
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
                         .withDifficulty(Difficulty.AURORA)
+        );
+
+        //
+        //               ,--.    ,--.
+        // ,---.  ,---.  |  |  ,-|  |      ,---.   ,---.  ,---.   ,--,--. ,--,--,   ,---.
+        //| .--' | .-. | |  | ' .-. |     | .-. | | .--' | .-. : ' ,-.  | |      \ (  .-'
+        //\ `--. ' '-' ' |  | \ `-' |     ' '-' ' \ `--. \   --. \ '-'  | |  ||  | .-'  `)
+        // `---'  `---'  `--'  `---'       `---'   `---'  `----'  `--`--' `--''--' `----'
+        //
+
+        //trash
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.OCULI)
+                        .withDifficulty(Difficulty.TRASH)
+                        .withRarity(Rarity.TRASH)
+                        .withHasGuideEntry(false)
+        );
+
+        //common
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.GLIMMERGILL)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.EASY_FROZEN.withHP(150))
+        );
+
+        //uncommon
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.CRYOSPINE)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.EASY_FROZEN.withHP(150))
+                        .withRarity(Rarity.UNCOMMON)
+        );
+
+        //rare
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.LILAC_MINNOW)
+                        .withSizeAndWeight(new SizeAndWeight(6, 4, 5, 3))
+                        .withDifficulty(Difficulty.EASY_FROZEN.withHP(150))
+                        .withRarity(Rarity.RARE)
+        );
+
+        //epic
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.FROSTBIT_JELLY)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.MEDIUM_FROZEN.withHP(150))
+                        .withRarity(Rarity.EPIC)
+        );
+
+        //legendary
+        FishRegistration.registerRaw(context, ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("king_of_the_frost")),
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.KING_OF_THE_FROST)
+                        .withBaseChance(0)
+                        .addRestriction(BaitRestriction.KING_OF_THE_FROST)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.KING_OF_THE_FROST)
+                        .withRarity(Rarity.LEGENDARY)
         );
 
         //

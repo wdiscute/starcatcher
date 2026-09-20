@@ -10,7 +10,7 @@ public class SCTags
 {
     public static final ResourceLocation IS_COLD_LAKE = Starcatcher.rl("is_cold_lake");
     public static final ResourceLocation IS_COLD_RIVER = Starcatcher.rl("is_cold_river");
-    public static final ResourceLocation IS_COLD_OCEAN = Starcatcher.rl("is_cold_ocean");
+    public static final ResourceLocation IS_FROZEN_OCEAN = Starcatcher.rl("is_frozen_ocean");
 
     public static final ResourceLocation IS_WARM_LAKE = Starcatcher.rl("is_warm_lake");
     public static final ResourceLocation IS_WARM_RIVER = Starcatcher.rl("is_warm_river");

@@ -49,6 +49,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:glimmergill",
+      "required": false
+    },
+    {
       "id": "starcatcher:glowstone_seeker",
       "required": false
     },

@@ -327,6 +327,9 @@
   "tooltip.starcatcher.modifiers": "Fishing Modifiers:",
   "tooltip.starcatcher.modifiers.active": "<scepic>§lActive Modifiers:</scepic>",
 
+  "tooltip.modifier.starcatcher.quality_food_roll": "Your catches will be of higher quality",
+  "tooltip.modifier.starcatcher.quality_food_roll.shift": "Your catches will roll for quality an extra %s times",
+
   "tooltip.modifier.starcatcher.prevent_frozen": "Prevents your handle from freezing up",
 
   "tooltip.modifier.starcatcher.never_lose": "Fish are no longer able to swim away",
@@ -1700,6 +1703,36 @@
   "tooltip.starcatcher.aurora.0" : "The most beautiful <sclegendary>legendary</sclegendary> fish there is.",
   "tooltip.starcatcher.aurora.1" : "Its size and crystal-frozen body make it one of the most elusive catches known.",
 
+
+
+
+  "item.starcatcher.oculi" : "Oculi",
+  "tooltip.starcatcher.oculi.0" : "This weird fish reminds you of something you've seen before,",
+  "tooltip.starcatcher.oculi.1" : "yet you can't quite see it.",
+  "tooltip.starcatcher.oculi.2" : "Regardless, it is certainly a fish.",
+
+  "item.starcatcher.glimmergill" : "Glimmergill",
+  "tooltip.starcatcher.glimmergill.0" : "This fish's scales are covered in a type of ice",
+  "tooltip.starcatcher.glimmergill.1" : "which reflects light in a very particular way.",
+  "tooltip.starcatcher.glimmergill.2" : "Curious pray wander into its body and get cut in its sharp scales.",
+
+  "item.starcatcher.cryospine" : "Cryospine",
+  "tooltip.starcatcher.cryospine.0" : "A half-frozen fish often ignored due to its low nutritional value.",
+  "tooltip.starcatcher.cryospine.1" : "It is said fisherman stuck on icebergs would catch 100 of them,",
+  "tooltip.starcatcher.cryospine.2" : "just to make a single meal.",
+
+  "item.starcatcher.lilac_minnow" : "Lilac Minnow",
+  "tooltip.starcatcher.lilac_minnow.0" : "A species of minnow turned lilac due to the freezing temperatures it habitats.",
+  "tooltip.starcatcher.lilac_minnow.1" : "Using it as bait is said to be the only way to catch a King of the Frost.",
+
+  "item.starcatcher.frostbit_jelly" : "Frostbit Jelly",
+  "tooltip.starcatcher.frostbit_jelly.0" : "A jellyfish species which uses icebergs for long term hibernation.",
+  "tooltip.starcatcher.frostbit_jelly.1" : "Since they spend most of their life.",
+
+  "item.starcatcher.king_of_the_frost" : "King of the Frost",
+  "tooltip.starcatcher.king_of_the_frost.0" : "The <sclegendary>legendary</sclegendary> King of the Frost, ruling over all the icebergs.",
+  "tooltip.starcatcher.king_of_the_frost.1" : "Its tentacles wrap around pray and bring them to the depths of the oceans until they drown.",
+  "tooltip.starcatcher.king_of_the_frost.2" : "Anglers are extremely cautious of it when sailing through the Icebergs of the Overworld.",
 
 
 

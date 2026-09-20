@@ -336,7 +336,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("hybrid_aquatic", "herring")
                         .withEntityToSpawn("hybrid_aquatic", "herring")
                         .withSizeAndWeight(40, 12, 663.4f, 436.6f)

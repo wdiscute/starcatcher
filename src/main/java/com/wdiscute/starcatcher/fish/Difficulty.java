@@ -406,7 +406,7 @@ public record Difficulty(
     public static Difficulty VOIDBITER = new Difficulty(
             500, 10, 30, 1,
             List.of(
-                    new FreezeOnMissModifier(40, 10, ""),
+                    new BurnOnMissModifier(40, 10, 10, ""),
                     new Nikdo53Modifier(1, ""),
                     new DeepDarkModifier(""),
                     new SpawnSweetSpotsModifier(100, 0.3f, SweetSpot.MIRAGE_NORMAL, false, ""),
@@ -414,6 +414,14 @@ public record Difficulty(
             ),
             SweetSpot.SCULK, SweetSpot.TNT, SweetSpot.DRIPSTONE, SweetSpot.GLOWING, SweetSpot.FROZEN, SweetSpot.VOIDBITER_SPOT, SweetSpot.DEEPSLATE, SweetSpot.STONE_LOW_REWARD);
 
+    public static Difficulty KING_OF_THE_FROST = new Difficulty(
+            1000, 14, 40, 1.5f,
+            List.of(new FreezeOnMissModifier(40, 10, "")),
+            SweetSpot.KING_OF_THE_FROST.withTexture(SweetSpot.RL_KING_OF_THE_FROST_1),
+            SweetSpot.KING_OF_THE_FROST.withTexture(SweetSpot.RL_KING_OF_THE_FROST_2),
+            SweetSpot.KING_OF_THE_FROST.withTexture(SweetSpot.RL_KING_OF_THE_FROST_3),
+            SweetSpot.KING_OF_THE_FROST.withTexture(SweetSpot.RL_KING_OF_THE_FROST_4)
+    );
 
     public static final Codec<Difficulty> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -460,41 +468,44 @@ public record Difficulty(
 
 
         private static final ScreenUtils.Image RL_NORMAL = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/normal.png"), 96, 96);
-        private static final ScreenUtils.Image RL_NORMAL_STEADY =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/normal_steady.png"), 96, 96);
-        private static final ScreenUtils.Image RL_THIN =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/thin.png"), 96, 96);
-        private static final ScreenUtils.Image RL_THIN_STEADY =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/thin_steady.png"), 96, 96);
-        private static final ScreenUtils.Image RL_FREEZE =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/frozen.png"), 96, 96);
-        private static final ScreenUtils.Image RL_TREASURE =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/treasure.png"), 96, 96);
-        private static final ScreenUtils.Image RL_RED_MUSHROOM =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/red_mushroom.png"), 96, 96);
-        private static final ScreenUtils.Image RL_BROWN_MUSHROOM =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/brown_mushroom.png"), 96, 96);
-        private static final ScreenUtils.Image RL_WITHER =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/wither.png"), 96, 96);
-        private static final ScreenUtils.Image RL_SCULK =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/sculk.png"), 96, 96);
-        private static final ScreenUtils.Image RL_WITHER_BIG =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/wither_big.png"), 96, 96);
-        private static final ScreenUtils.Image RL_CREEPER =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/creeper.png"), 96, 96);
-        private static final ScreenUtils.Image RL_TNT =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/tnt.png"), 96, 96);
-        private static final ScreenUtils.Image RL_STONE =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/stone.png"), 96, 96);
-        private static final ScreenUtils.Image RL_DEEPSLATE =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/deepslate.png"), 96, 96);
-        private static final ScreenUtils.Image RL_DRIPSTONE =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/dripstone.png"), 96, 96);
-        private static final ScreenUtils.Image RL_GLOWING =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/glowing.png"), 96, 96);
-        private static final ScreenUtils.Image RL_LEAF =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/leaf.png"), 96, 96);
-        private static final ScreenUtils.Image RL_CLOUD_1 =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_1.png"), 96, 96);
-        private static final ScreenUtils.Image RL_CLOUD_2 =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_2.png"), 96, 96);
-        private static final ScreenUtils.Image RL_CLOUD_3 =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_3.png"), 96, 96);
-        private static final ScreenUtils.Image RL_CLOUD_4 =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_4.png"), 96, 96);
+        private static final ScreenUtils.Image RL_NORMAL_STEADY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/normal_steady.png"), 96, 96);
+        private static final ScreenUtils.Image RL_THIN = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/thin.png"), 96, 96);
+        private static final ScreenUtils.Image RL_THIN_STEADY = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/thin_steady.png"), 96, 96);
+        private static final ScreenUtils.Image RL_FREEZE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/frozen.png"), 96, 96);
+        private static final ScreenUtils.Image RL_TREASURE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/treasure.png"), 96, 96);
+        private static final ScreenUtils.Image RL_RED_MUSHROOM = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/red_mushroom.png"), 96, 96);
+        private static final ScreenUtils.Image RL_BROWN_MUSHROOM = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/brown_mushroom.png"), 96, 96);
+        private static final ScreenUtils.Image RL_WITHER = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/wither.png"), 96, 96);
+        private static final ScreenUtils.Image RL_SCULK = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/sculk.png"), 96, 96);
+        private static final ScreenUtils.Image RL_WITHER_BIG = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/wither_big.png"), 96, 96);
+        private static final ScreenUtils.Image RL_CREEPER = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/creeper.png"), 96, 96);
+        private static final ScreenUtils.Image RL_TNT = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/tnt.png"), 96, 96);
+        private static final ScreenUtils.Image RL_STONE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/stone.png"), 96, 96);
+        private static final ScreenUtils.Image RL_DEEPSLATE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/deepslate.png"), 96, 96);
+        private static final ScreenUtils.Image RL_DRIPSTONE = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/dripstone.png"), 96, 96);
+        private static final ScreenUtils.Image RL_GLOWING = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/glowing.png"), 96, 96);
+        private static final ScreenUtils.Image RL_LEAF = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/leaf.png"), 96, 96);
+        private static final ScreenUtils.Image RL_CLOUD_1 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_1.png"), 96, 96);
+        private static final ScreenUtils.Image RL_CLOUD_2 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_2.png"), 96, 96);
+        private static final ScreenUtils.Image RL_CLOUD_3 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_3.png"), 96, 96);
+        private static final ScreenUtils.Image RL_CLOUD_4 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/cloud_4.png"), 96, 96);
 
-        private static final ScreenUtils.Image RL_NETHER_CRAB_CLAW =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/nether_crab_claw.png"), 96, 96);
-        private static final ScreenUtils.Image RL_NETHER_CRAB_LEG =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/nether_crab_leg.png"), 96, 96);
+        private static final ScreenUtils.Image RL_NETHER_CRAB_CLAW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/nether_crab_claw.png"), 96, 96);
+        private static final ScreenUtils.Image RL_NETHER_CRAB_LEG = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/nether_crab_leg.png"), 96, 96);
 
-        private static final ScreenUtils.Image RL_END_CRAB_LEG =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/end_crab_leg.png"), 96, 96);
-        private static final ScreenUtils.Image RL_END_CRAB_CLAW =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/end_crab_claw.png"), 96, 96);
+        private static final ScreenUtils.Image RL_END_CRAB_LEG = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/end_crab_leg.png"), 96, 96);
+        private static final ScreenUtils.Image RL_END_CRAB_CLAW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/end_crab_claw.png"), 96, 96);
 
-        private static final ScreenUtils.Image RL_DEEPSLATE_CRAB_LEG =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_leg.png"), 96, 96);
-        private static final ScreenUtils.Image RL_DEEPSLATE_CRAB_CLAW =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_claw.png"), 96, 96);
+        private static final ScreenUtils.Image RL_DEEPSLATE_CRAB_LEG = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_leg.png"), 96, 96);
+        private static final ScreenUtils.Image RL_DEEPSLATE_CRAB_CLAW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/deepslate_crab_claw.png"), 96, 96);
 
-        private static final ScreenUtils.Image RL_OBSIDIAN_CRAB_LEG =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_leg.png"), 96, 96);
-        private static final ScreenUtils.Image RL_OBSIDIAN_CRAB_CLAW =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_claw.png"), 96, 96);
+        private static final ScreenUtils.Image RL_OBSIDIAN_CRAB_LEG = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_leg.png"), 96, 96);
+        private static final ScreenUtils.Image RL_OBSIDIAN_CRAB_CLAW = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/obsidian_crab_claw.png"), 96, 96);
 
-        private static final ScreenUtils.Image RL_THIN_STEADY_MOSSY =new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/thin_mossy.png"), 96, 96);
+        private static final ScreenUtils.Image RL_KING_OF_THE_FROST_1 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/king_of_the_frost_1.png"), 96, 96);
+        private static final ScreenUtils.Image RL_KING_OF_THE_FROST_2 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/king_of_the_frost_2.png"), 96, 96);
+        private static final ScreenUtils.Image RL_KING_OF_THE_FROST_3 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/king_of_the_frost_3.png"), 96, 96);
+        private static final ScreenUtils.Image RL_KING_OF_THE_FROST_4 = new ScreenUtils.Image(Starcatcher.rl("textures/gui/minigame/spots/king_of_the_frost_4.png"), 96, 96);
 
 
         public SweetSpot flip()
@@ -510,6 +521,12 @@ public record Difficulty(
         public SweetSpot moving(float movingRate)
         {
             return new SweetSpot(this.sweetSpotType, this.texturePath, this.size, this.reward, this.isFlip, this.vanishingRate, movingRate, this.particleColor, this.modifiers);
+        }
+
+        public SweetSpot withTexture(ScreenUtils.Image texture)
+        {
+            return new SweetSpot(this.sweetSpotType, texture,
+                    this.size, this.reward, this.isFlip, this.vanishingRate, this.movingRate, this.particleColor, this.modifiers);
         }
 
         public static SweetSpot TRASH = new SweetSpot(
@@ -556,6 +573,14 @@ public record Difficulty(
                 SCSweetSpotsBehaviour.NORMAL,
                 RL_THIN,
                 15,
+                20,
+                SCColors.GREEN
+        );
+
+        public static SweetSpot KING_OF_THE_FROST = new SweetSpot(
+                SCSweetSpotsBehaviour.NORMAL,
+                RL_KING_OF_THE_FROST_1,
+                20,
                 20,
                 SCColors.GREEN
         );

@@ -8,6 +8,14 @@
         "type": "starcatcher:extra_golden_chance",
         "only_for_perfect_catch": true,
         "weight": 0.1
+      },
+      {
+        "type": "starcatcher:quality_food_roll",
+        "add_rolls": 5.0
+      },
+      {
+        "type": "starcatcher:adjust_hp",
+        "multiplier": 0.75
       }
     ],
     "starcatcher:almighty_worm": [

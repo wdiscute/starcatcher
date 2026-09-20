@@ -32,6 +32,7 @@ import java.util.List;
 public class FishEntity extends AbstractFish
 {
     boolean hasWarned = false;
+
     public FishEntity(EntityType<? extends FishEntity> entityType, Level level)
     {
         super(entityType, level);
@@ -77,7 +78,8 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    public boolean fireImmune() {
+    public boolean fireImmune()
+    {
         return getFish().has(DataComponents.FIRE_RESISTANT);
     }
 
@@ -87,8 +89,12 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    public boolean isInWater() {
-        return !fireImmune() ? super.isInWater() : isInLava();
+    public boolean isInWater()
+    {
+        if (fireImmune())
+            return !this.firstTick && this.forgeFluidTypeHeight.getDouble(net.neoforged.neoforge.common.NeoForgeMod.LAVA_TYPE.value()) > 0.0D;
+        else
+            return super.isInWater();
     }
 
     @Override
@@ -118,7 +124,8 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
-    public float getScale() {
+    public float getScale()
+    {
         return SCDataComponents.getOrDefault(
                 getFish(), SCDataComponents.CAUGHT_FISH_INFO,
                 CaughtFishInfo.AVERAGE

@@ -57,7 +57,7 @@ public class FishRadarLayer implements LayeredDraw.Layer
         lastRefreshMS = System.currentTimeMillis();
 
         for (FishProperties fp : player.level().registryAccess().registryOrThrow(Starcatcher.FISH_REGISTRY_KEY))
-            if (fp.hasGuideEntry() && fp.calculateChance(player, player.level(), ItemStack.EMPTY, AbstractFishRestriction.Context.RADAR) > 0)
+            if (fp.hasGuideEntry() && fp.calculateChance(player, player.level(), player.getMainHandItem(), AbstractFishRestriction.Context.RADAR) > 0)
                 fpsInArea.add(fp);
 
         fishesCaught.clear();

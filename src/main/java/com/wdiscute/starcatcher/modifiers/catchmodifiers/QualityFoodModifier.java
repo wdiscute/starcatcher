@@ -14,7 +14,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.neoforged.fml.ModList;
 
 import java.util.List;
 
@@ -44,19 +43,19 @@ public class QualityFoodModifier extends AbstractCatchModifier
             is = itemStack.getOrDefault(SCDataComponents.BUCKETED_FISH, new MaybeStack(itemStack)).toStack();
 
         RandomSource r = fbe.level().getRandom();
-        List<QualityFoodModifierRoll> rollModifiers = fbe.modifiers
+        List<Modify> rollModifiers = fbe.modifiers
                 .stream()
-                .filter(o -> o instanceof QualityFoodModifierRoll)
-                .map(o -> (QualityFoodModifierRoll) o)
+                .filter(o -> o instanceof Modify)
+                .map(o -> (Modify) o)
                 .toList();
 
         float rolls = 0;
         double minChance = r.nextDouble();
 
-        for (QualityFoodModifierRoll rollModifier : rollModifiers)
+        for (Modify rollModifier : rollModifiers)
             rolls += rollModifier.addToRolls(fbe, is, rolls, perfectCatch, golden, percentile);
 
-        for (QualityFoodModifierRoll rollModifier : rollModifiers)
+        for (Modify rollModifier : rollModifiers)
             minChance += rollModifier.addToMinChance(fbe, is, minChance, perfectCatch, golden, percentile);
 
         int finalRolls = ((int) Math.floor(rolls)) + (r.nextFloat() < rolls % 1 ? 1 : 0);
@@ -100,5 +99,12 @@ public class QualityFoodModifier extends AbstractCatchModifier
     public String toString()
     {
         return "[QualityFoodModifier@" + Integer.toHexString(hashCode()) + "]";
+    }
+
+    public interface Modify
+    {
+        float addToRolls(FishingBobEntity fishingBobEntity, ItemStack itemStack, double currentRolls, boolean perfectCatch, boolean golden, float percentile);
+
+        double addToMinChance(FishingBobEntity fishingBobEntity, ItemStack itemStack, double currentMinChance, boolean perfectCatch, boolean golden, float percentile);
     }
 }

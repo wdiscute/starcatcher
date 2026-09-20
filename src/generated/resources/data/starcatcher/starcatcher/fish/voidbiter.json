@@ -17,9 +17,10 @@
         "type": "starcatcher:teleport"
       },
       {
-        "type": "starcatcher:freeze_on_miss",
+        "type": "starcatcher:burn_on_miss",
+        "extra_speed": 10,
         "length": 40,
-        "rampTime": 10
+        "ramp_time": 10
       },
       {
         "type": "starcatcher:multi_layer",

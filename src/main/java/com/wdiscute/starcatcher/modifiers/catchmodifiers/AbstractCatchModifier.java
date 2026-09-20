@@ -31,9 +31,7 @@ public abstract class AbstractCatchModifier implements Modifier
         if(translationOverride.equals("hide")) return List.of();
 
         if(translationOverride.isEmpty())
-        {
             return getNonOverriddenDescription(shift);
-        }
 
         return List.of(Component.translatable(translationOverride));
     }

@@ -29,6 +29,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:king_of_the_frost",
+      "required": false
+    },
+    {
       "id": "starcatcher:oasis_sturgeon",
       "required": false
     },

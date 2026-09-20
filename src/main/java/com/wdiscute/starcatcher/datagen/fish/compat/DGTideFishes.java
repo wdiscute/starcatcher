@@ -1321,7 +1321,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("tide", "pentapus")
                         .withBucketedFish("tide", "pentapus_bucket")
                         .withEntityToSpawn("tide", "pentapus")
@@ -1412,7 +1412,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("tide", "alpha_fish")
                         .withBucketedFish("tide", "alpha_fish_bucket")
                         .withEntityToSpawn("tide", "alpha_fish")

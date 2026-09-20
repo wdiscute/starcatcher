@@ -179,7 +179,7 @@ public interface Modifier
         Modifier.MODIFIERS.put(Starcatcher.rl("fish_messages"), FishMessagesModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("little_joys"), LittleJoysModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("quality_food"), QualityFoodModifier.CODEC);
-        Modifier.MODIFIERS.put(Starcatcher.rl("quality_food_roll"), QFRollImpl.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("quality_food_roll"), QualityFoodRollModifier.CODEC);
         //Modifier.MODIFIERS.put(Starcatcher.rl("luck_attribute"), LuckAttributeModifier.CODEC);
 
         //others

@@ -159,7 +159,7 @@ public class BiomeRestriction extends AbstractFishRestriction
                 Optional<HolderSet.Named<Biome>> optional = level.registryAccess().registryOrThrow(Registries.BIOME).getTag(tag.tag());
                 optional.ifPresent(holders ->
                         holders.forEach(o ->
-                                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey("biome." + o.getRegisteredName().replace(":", "." )))));
+                                biomes.add(Tooltips.resolveTagsToComponentFromTranslationKey("biome." + o.getRegisteredName().replace(":", ".")))));
 
             }
 
@@ -250,251 +250,135 @@ public class BiomeRestriction extends AbstractFishRestriction
         return new BiomeRestriction(new ArrayList<>(), new ArrayList<>(), "", "");
     }
 
-    public static BiomeRestriction lakes()
-    {
-        return empty()
-                .blacklistedTag(SCTags.IS_OCEAN)
-                .blacklistedTag(SCTags.IS_RIVER)
-                .blacklistedTag(SCTags.IS_MUSHROOM_FIELDS)
-                .blacklistedTag(SCTags.IS_COLD_LAKE)
-                .blacklistedTag(SCTags.IS_WARM_LAKE)
-                .blacklistedTag(SCTags.IS_CHERRY_GROVE)
-                .hover("gui.guide.lakes.hover")
-                .translation("gui.guide.lakes");
-    }
+    public static final BiomeRestriction LAKES = empty()
+            .blacklistedTag(SCTags.IS_OCEAN)
+            .blacklistedTag(SCTags.IS_RIVER)
+            .blacklistedTag(SCTags.IS_MUSHROOM_FIELDS)
+            .blacklistedTag(SCTags.IS_COLD_LAKE)
+            .blacklistedTag(SCTags.IS_WARM_LAKE)
+            .blacklistedTag(SCTags.IS_CHERRY_GROVE)
+            .hover("gui.guide.lakes.hover")
+            .translation("gui.guide.lakes");
 
-    public static BiomeRestriction warmLakes()
-    {
-        return empty()
-                .tag(SCTags.IS_WARM_LAKE);
-    }
+    public static final BiomeRestriction WARM_LAKES = empty()
+            .tag(SCTags.IS_WARM_LAKE);
 
-    public static BiomeRestriction coldLakes()
-    {
-        return empty()
-                .tag(SCTags.IS_COLD_LAKE);
-    }
+    public static final BiomeRestriction COLD_LAKES = empty()
+            .tag(SCTags.IS_COLD_LAKE);
 
-    public static BiomeRestriction iceSpikes()
-    {
-        return empty()
-                .biome(Biomes.ICE_SPIKES.location());
-    }
+    public static final BiomeRestriction ICE_SPIKES = empty()
+            .biome(Biomes.ICE_SPIKES.location());
 
-    public static BiomeRestriction flowerForest()
-    {
-        return empty()
-                .biome(Biomes.FLOWER_FOREST.location());
-    }
+    public static final BiomeRestriction FLOWER_FOREST = empty()
+            .biome(Biomes.FLOWER_FOREST.location());
 
-    public static BiomeRestriction sunflowerPlains()
-    {
-        return empty()
-                .biome(Biomes.SUNFLOWER_PLAINS.location());
-    }
+    public static final BiomeRestriction SUNFLOWER_PLAINS = empty()
+            .biome(Biomes.SUNFLOWER_PLAINS.location());
 
-    public static BiomeRestriction swampOnly()
-    {
-        return empty()
-                .biome(Biomes.SWAMP.location());
-    }
+    public static final BiomeRestriction SWAMP_ONLY = empty()
+            .biome(Biomes.SWAMP.location());
 
-    public static BiomeRestriction bambooJungle()
-    {
-        return empty()
+    public static final BiomeRestriction BAMBOO_JUNGLE = empty()
                 .biome(Biomes.BAMBOO_JUNGLE.location());
-    }
 
-    // underground
-    public static BiomeRestriction lushCaves()
-    {
-        return empty()
+    public static final BiomeRestriction LUSH_CAVES = empty()
                 .biome(Biomes.LUSH_CAVES.location());
-    }
 
-    public static BiomeRestriction underground()
-    {
-        return empty()
+    public static final BiomeRestriction UNDERGROUND = empty()
                 .blacklisted(Biomes.DRIPSTONE_CAVES.location())
                 .blacklisted(Biomes.LUSH_CAVES.location())
                 .blacklisted(Biomes.DEEP_DARK.location())
                 .translation("gui.guide.caves")
                 ;
-    }
 
-    public static BiomeRestriction dripstoneCaves()
-    {
-        return empty()
+    public static final BiomeRestriction DRIPSTONE_CAVES = empty()
                 .biome(Biomes.DRIPSTONE_CAVES.location());
-    }
 
-    public static BiomeRestriction deepDark()
-    {
-        return empty()
+    public static final BiomeRestriction DEEP_DARK = empty()
                 .biome(Biomes.DEEP_DARK.location());
-    }
 
-    // oceans
-    public static BiomeRestriction coldOceans()
-    {
-        return empty()
-                .tag(SCTags.IS_COLD_OCEAN);
-    }
+    public static final BiomeRestriction FROZEN_OCEAN = empty()
+                .tag(SCTags.IS_FROZEN_OCEAN);
 
-    public static BiomeRestriction allOceans()
-    {
-        return empty()
+    public static final BiomeRestriction ALL_OCEANS = empty()
                 .tag(SCTags.IS_OCEAN);
-    }
 
-    public static BiomeRestriction normalOceans()
-    {
-        return empty()
+    public static final BiomeRestriction NORMAL_OCEANS = empty()
                 .tag(SCTags.IS_NORMAL_OCEAN);
-    }
 
-    public static BiomeRestriction lukewarmOcean()
-    {
-        return empty()
+    public static final BiomeRestriction LUKEWARM_OCEAN = empty()
                 .tag(SCTags.IS_LUKEWARM_OCEAN);
-    }
 
-    public static BiomeRestriction coldAndLukewarmOcean()
-    {
-        return empty()
+    public static final BiomeRestriction COLD_AND_LUKEWARM_OCEAN = empty()
                 .tag(SCTags.IS_LUKEWARM_OCEAN)
-                .tag(SCTags.IS_COLD_OCEAN);
-    }
+                .tag(SCTags.IS_FROZEN_OCEAN);
 
-    public static BiomeRestriction warmOceans()
-    {
-        return empty()
+    public static final BiomeRestriction WARM_OCEANS = empty()
                 .tag(SCTags.IS_WARM_OCEAN);
-    }
 
-    public static BiomeRestriction deepOceans()
-    {
-        return empty()
+    public static final BiomeRestriction DEEP_OCEANS = empty()
                 .tag(SCTags.IS_DEEP_OCEAN);
-    }
 
-    // rivers
-    public static BiomeRestriction coldRivers()
-    {
-        return empty()
+    public static final BiomeRestriction COLD_RIVERS = empty()
                 .tag(SCTags.IS_COLD_RIVER);
-    }
 
-    public static BiomeRestriction rivers()
-    {
-        return empty()
+    public static final BiomeRestriction RIVERS = empty()
                 .tag(SCTags.IS_RIVER)
                 .blacklistedTag(SCTags.IS_COLD_RIVER);
-    }
 
-    public static BiomeRestriction savannas()
-    {
-        return empty()
+    public static final BiomeRestriction SAVANNAS = empty()
                 .tag(BiomeTags.IS_SAVANNA.location());
-    }
 
-    public static BiomeRestriction beaches()
-    {
-        return empty()
+    public static final BiomeRestriction BEACHES = empty()
                 .tag(SCTags.IS_BEACH);
-    }
 
-    public static BiomeRestriction mushroomFields()
-    {
-        return empty()
+    public static final BiomeRestriction MUSHROOM_FIELDS = empty()
                 .tag(SCTags.IS_MUSHROOM_FIELDS);
-    }
 
-    public static BiomeRestriction jungles()
-    {
-        return empty()
+    public static final BiomeRestriction JUNGLES = empty()
                 .tag(BiomeTags.IS_JUNGLE.location());
-    }
 
-    public static BiomeRestriction taigas()
-    {
-        return empty()
+    public static final BiomeRestriction TAIGAS = empty()
                 .tag(BiomeTags.IS_TAIGA.location());
-    }
 
-    public static BiomeRestriction cherryGroves()
-    {
-        return empty()
+    public static final BiomeRestriction CHERRY_GROVES = empty()
                 .tag(SCTags.IS_CHERRY_GROVE);
-    }
 
-    public static BiomeRestriction junglesAndSwamps()
-    {
-        return empty()
+    public static final BiomeRestriction JUNGLES_AND_SWAMPS = empty()
                 .tag(BiomeTags.IS_JUNGLE.location())
                 .tag(SCTags.IS_SWAMP);
-    }
 
-    public static BiomeRestriction swamps()
-    {
-        return empty()
+    public static final BiomeRestriction SWAMPS = empty()
                 .tag(SCTags.IS_SWAMP);
-    }
 
-    public static BiomeRestriction mangroveSwamp()
-    {
-        return empty()
+    public static final BiomeRestriction MANGROVE_SWAMP = empty()
                 .biome(Biomes.MANGROVE_SWAMP.location());
-    }
 
-    public static BiomeRestriction darkForest()
-    {
-        return empty()
+    public static final BiomeRestriction DARK_FOREST = empty()
                 .tag(SCTags.IS_DARK_FOREST);
-    }
 
-    public static BiomeRestriction forest()
-    {
-        return empty()
+    public static final BiomeRestriction FOREST = empty()
                 .tag(BiomeTags.IS_FOREST.location());
-    }
 
-    public static BiomeRestriction lushCavesAndJungles()
-    {
-        return empty()
+    public static final BiomeRestriction LUSH_CAVES_AND_JUNGLES = empty()
                 .biome(Biomes.LUSH_CAVES.location())
                 .tag(BiomeTags.IS_JUNGLE.location());
-    }
 
-    public static BiomeRestriction crimsonForest()
-    {
-        return empty()
+    public static final BiomeRestriction CRIMSON_FOREST = empty()
                 .tag(SCTags.IS_CRIMSON_FOREST);
-    }
 
-    public static BiomeRestriction warpedForest()
-    {
-        return empty()
+    public static final BiomeRestriction WARPED_FOREST = empty()
                 .tag(SCTags.IS_WARPED_FOREST);
-    }
 
-    public static BiomeRestriction soulSandValley()
-    {
-        return empty()
+    public static final BiomeRestriction SOUL_SAND_VALLEY = empty()
                 .tag(SCTags.IS_SOUL_SAND_VALLEY);
-    }
 
-    public static BiomeRestriction basaltDeltas()
-    {
-        return empty()
+    public static final BiomeRestriction BASALT_DELTAS = empty()
                 .tag(SCTags.IS_BASALT_DELTAS);
-    }
 
-    public static BiomeRestriction outerIslands()
-    {
-        return empty()
+    public static final BiomeRestriction OUTER_ISLANDS = empty()
                 .tag(BiomeTags.IS_END.location())
                 .blacklisted(Biomes.THE_END.location())
                 .translation("gui.guide.outer_end_islands");
-    }
+
 }

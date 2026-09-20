@@ -69,9 +69,7 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
                 .addOptional(Biomes.JAGGED_PEAKS.location())
         ;
 
-        this.tag(create(SCTags.IS_COLD_OCEAN))
-                .addOptional(Biomes.COLD_OCEAN.location())
-                .addOptional(Biomes.DEEP_COLD_OCEAN.location())
+        this.tag(create(SCTags.IS_FROZEN_OCEAN))
                 .addOptional(Biomes.FROZEN_OCEAN.location())
                 .addOptional(Biomes.DEEP_FROZEN_OCEAN.location())
         ;

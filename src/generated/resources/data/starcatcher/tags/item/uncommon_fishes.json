@@ -21,6 +21,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:cryospine",
+      "required": false
+    },
+    {
       "id": "starcatcher:crystalback_minnow",
       "required": false
     },

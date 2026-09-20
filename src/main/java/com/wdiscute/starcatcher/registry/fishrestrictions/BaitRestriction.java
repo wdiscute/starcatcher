@@ -120,13 +120,5 @@ public class BaitRestriction extends AbstractFishRestriction
 
     public static final BaitRestriction WITHER_SKELETON_SKULL = new BaitRestriction(Map.of(Utils.rl("wither_skeleton_skull"), 50), "");
 
-    public static final BaitRestriction FISH_OF_THIEVES = new BaitRestriction(
-            Map.of(
-                    Utils.rl("fishofthieves", "earthworms"), 50,
-                    Utils.rl("fishofthieves", "grubs"), 50,
-                    Utils.rl("fishofthieves", "leeches"), 50),
-            "");
-
-    public static final BaitRestriction ALMIGHTY_WORM = new BaitRestriction(Map.of(SCItems.ALMIGHTY_WORM.getId(), 5), "");
-
+    public static final BaitRestriction KING_OF_THE_FROST = new BaitRestriction(Map.of(SCItems.LILAC_MINNOW.getId(), 5), "");
 }

@@ -44,10 +44,10 @@ public class SCDGDataEntriesProvider
 
                                 new QualityFoodModifier(""),
 
-                                new QFRollImpl(0, 1, false, false, 100, ""),
-                                new QFRollImpl(0, 4, true, false, 100, ""),
-                                new QFRollImpl(1, 0, false, true, 100, ""),
-                                new QFRollImpl(0.5f, 3, false, false, 20, ""),
+                                new QualityFoodRollModifier(0, 1, false, false, 100, ""),
+                                new QualityFoodRollModifier(0, 4, true, false, 100, ""),
+                                new QualityFoodRollModifier(1, 0, false, true, 100, ""),
+                                new QualityFoodRollModifier(0.5f, 3, false, false, 20, ""),
 
                                 new ExtraGoldenChanceModifier(0.01f, false, ""),
                                 new ExtraGoldenChanceModifier(0.01f, true, "")

@@ -41,6 +41,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:frostbit_jelly",
+      "required": false
+    },
+    {
       "id": "starcatcher:geode_eel",
       "required": false
     },

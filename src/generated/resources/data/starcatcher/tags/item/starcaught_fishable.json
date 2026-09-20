@@ -101,6 +101,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:cryospine",
+      "required": false
+    },
+    {
       "id": "starcatcher:crystalback_boreal",
       "required": false
     },
@@ -173,6 +177,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:frostbit_jelly",
+      "required": false
+    },
+    {
       "id": "starcatcher:frostgill_chub",
       "required": false
     },
@@ -190,6 +198,10 @@
     },
     {
       "id": "starcatcher:ghostly_pike",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glimmergill",
       "required": false
     },
     {
@@ -225,11 +237,19 @@
       "required": false
     },
     {
+      "id": "starcatcher:king_of_the_frost",
+      "required": false
+    },
+    {
       "id": "starcatcher:lava_crab",
       "required": false
     },
     {
       "id": "starcatcher:lightning_bass",
+      "required": false
+    },
+    {
+      "id": "starcatcher:lilac_minnow",
       "required": false
     },
     {

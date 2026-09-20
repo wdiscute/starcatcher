@@ -86,7 +86,7 @@ public class DGUnusualFishFishes
 //        );
 
         FishRegistration.register(context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("unusualfishmod", "raw_frosty_fin")
                         .withBucketedFish("unusualfishmod", "frosty_fin_fish_bucket")
                         .withEntityToSpawn("unusualfishmod", "frostyfin")

@@ -186,7 +186,7 @@ public class DGAquacultureFishes
         //cold ocean
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "atlantic_cod")
                         .withBucketedFish("aquaculture", "atlantic_cod_bucket")
                         .withEntityToSpawn("aquaculture", "atlantic_cod")
@@ -199,7 +199,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "blackfish")
                         .withBucketedFish("aquaculture", "blackfish_bucket")
                         .withEntityToSpawn("aquaculture", "blackfish")
@@ -213,7 +213,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "pacific_halibut")
                         .withBucketedFish("aquaculture", "pacific_halibut_bucket")
                         .withEntityToSpawn("aquaculture", "pacific_halibut")
@@ -225,7 +225,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "atlantic_halibut")
                         .withBucketedFish("aquaculture", "atlantic_halibut_bucket")
                         .withEntityToSpawn("aquaculture", "atlantic_halibut")

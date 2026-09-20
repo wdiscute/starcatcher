@@ -5,11 +5,15 @@ import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.bobentity.FishingBobEntity;
+import com.wdiscute.starcatcher.compat.QualityFoodCompat;
 import com.wdiscute.starcatcher.modifiers.Modifier;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
-public class QFRollImpl extends AbstractCatchModifier implements QualityFoodModifierRoll
+import java.util.List;
+
+public class QualityFoodRollModifier extends AbstractCatchModifier implements QualityFoodModifier.Modify
 {
     final float minChance;
     final float rollsToAdd;
@@ -19,7 +23,7 @@ public class QFRollImpl extends AbstractCatchModifier implements QualityFoodModi
 
     final float maxPercentile;
 
-    public static final MapCodec<QFRollImpl> CODEC = RecordCodecBuilder.mapCodec(instance ->
+    public static final MapCodec<QualityFoodRollModifier> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
                     Codec.FLOAT.optionalFieldOf("add_min_chance", 0f).forGetter(o -> o.minChance),
                     Codec.FLOAT.optionalFieldOf("add_rolls", 0f).forGetter(o -> o.rollsToAdd),
@@ -27,9 +31,9 @@ public class QFRollImpl extends AbstractCatchModifier implements QualityFoodModi
                     Codec.BOOL.optionalFieldOf("only_for_golden", false).forGetter(o -> o.goldenOnly),
                     Codec.FLOAT.optionalFieldOf("only_for_percentile_below", 100f).forGetter(o -> o.maxPercentile),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
-            ).apply(instance, QFRollImpl::new));
+            ).apply(instance, QualityFoodRollModifier::new));
 
-    public QFRollImpl(float minChance, float rollsToAdd, boolean perfectOnly, boolean goldenOnly, float belowPercent, String translationOverride)
+    public QualityFoodRollModifier(float minChance, float rollsToAdd, boolean perfectOnly, boolean goldenOnly, float belowPercent, String translationOverride)
     {
         super(translationOverride);
 
@@ -46,6 +50,21 @@ public class QFRollImpl extends AbstractCatchModifier implements QualityFoodModi
     public ResourceLocation getIdentifier()
     {
         return Starcatcher.rl("quality_food_roll");
+    }
+
+    @Override
+    public boolean isEnabled()
+    {
+        return QualityFoodCompat.isLoaded();
+    }
+
+    @Override
+    public List<Component> getNonOverriddenDescription(boolean shift)
+    {
+        if(shift)
+            return List.of(Component.translatable("tooltip.modifier.starcatcher.quality_food_roll.shift", Starcatcher.FORMAT.format(rollsToAdd)));
+        else
+            return List.of(Component.translatable("tooltip.modifier.starcatcher.quality_food_roll"));
     }
 
     @Override

@@ -236,7 +236,9 @@ public class DGSCDataMapsProvider extends DataMapProvider
         //templates
         modifiers.add(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE.builtInRegistryHolder(), List.of(
                 new SurvivesLavaModifier(""),
-                new ExtraGoldenChanceModifier(0.1f, true, "")
+                new ExtraGoldenChanceModifier(0.1f, true, ""),
+                new QualityFoodRollModifier(0, 5, false, false, 100, ""),
+                new AdjustHPModifier(0.75f, "")
         ), false);
 
         //worms

@@ -146,6 +146,7 @@ public interface SCCreativeModeTabs
                         .add(SCItems.MOSSY_BOOT)
                         .add(SCItems.DRIED_SEAWEED)
                         .add(SCItems.LAVA_CRAB_CLAW)
+                        .add(SCItems.OCULI)
 
                         .add(SCItems.FISH_BONES)
 
