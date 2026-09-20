@@ -197,11 +197,11 @@ public class PresetRestrictions
                 ;
     }
 
-    public static FishProperties allOceans(BootstrapContext<FishProperties> context)
+    public static FishProperties normalOceans(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.ALL_OCEANS)
+                .addRestriction(BiomeRestriction.NORMAL_OCEANS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -212,6 +212,16 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.DEEP_OCEANS)
+                .addRestriction(ElevationRestriction.ABOVE_FIFTY)
+                .addRestriction(FluidRestriction.WATER)
+                ;
+    }
+
+    public static FishProperties allOceans(BootstrapContext<FishProperties> context)
+    {
+        return FishProperties.empty()
+                .addRestriction(DimensionRestriction.OVERWORLD)
+                .addRestriction(BiomeRestriction.ALL_OCEANS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;

@@ -306,7 +306,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("hybrid_aquatic", "tuna")
                         .withEntityToSpawn("hybrid_aquatic", "tuna")
                         .withSizeAndWeight(300, 100, 680250, 226750)
@@ -316,7 +316,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("hybrid_aquatic", "mahi")
                         .withEntityToSpawn("hybrid_aquatic", "mahi")
                         .withSizeAndWeight(90, 10, 4300, 2500)
@@ -326,7 +326,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("hybrid_aquatic", "mackerel")
                         .withEntityToSpawn("hybrid_aquatic", "mackerel")
                         .withSizeAndWeight(48, 18, 1250, 750)
@@ -346,7 +346,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("hybrid_aquatic", "sea_bass")
                         .withEntityToSpawn("hybrid_aquatic", "sea_bass")
                         .withSizeAndWeight(40, 12, 1600, 1100)
@@ -356,7 +356,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("hybrid_aquatic", "sheepshead_wrasse")
                         .withEntityToSpawn("hybrid_aquatic", "wrasse")
                         .withSizeAndWeight(90, 10, 4300, 2500)
@@ -366,7 +366,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("hybrid_aquatic", "pearlfish")
                         .withEntityToSpawn("hybrid_aquatic", "pearlfish")
                         .withSizeAndWeight(14.45f, 2.15f, 2.675f, 1.435f)
@@ -376,7 +376,7 @@ public class DGHybridAquaticFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("hybrid_aquatic", "rockfish")
                         .withEntityToSpawn("hybrid_aquatic", "rockfish")
                         .withSizeAndWeight(90, 10, 4300, 2500)

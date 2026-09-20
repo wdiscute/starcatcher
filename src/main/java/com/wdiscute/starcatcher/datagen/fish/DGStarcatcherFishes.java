@@ -771,14 +771,14 @@ public class DGStarcatcherFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.DEEPJAW_HERRING)
                         .withSizeAndWeight(new SizeAndWeight(30, 8, 300, 100))
                         .withDifficulty(Difficulty.EASY)
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.DUSKTAIL_SNAPPER)
                         .withSizeAndWeight(new SizeAndWeight(60, 20, 7000, 2000))
                         .withDifficulty(Difficulty.EASY.moving())
@@ -786,7 +786,7 @@ public class DGStarcatcherFishes
 
         //uncommon
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.IRONJAW_HERRING)
                         .withSizeAndWeight(new SizeAndWeight(30, 8, 300, 100))
                         .withRarity(Rarity.UNCOMMON)
@@ -794,7 +794,7 @@ public class DGStarcatcherFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.REDSCALED_TUNA)
                         .withSizeAndWeight(new SizeAndWeight(150, 50, 120000, 60000))
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
@@ -804,7 +804,7 @@ public class DGStarcatcherFishes
 
         //rare
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.BLUE_HERRING)
                         .withSizeAndWeight(new SizeAndWeight(40, 12, 1600, 1100))
                         .withRarity(Rarity.RARE)
@@ -814,7 +814,7 @@ public class DGStarcatcherFishes
 
         //epic
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.BIGEYE_TUNA)
                         .withSizeAndWeight(new SizeAndWeight(150, 50, 120000, 60000))
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
@@ -824,7 +824,7 @@ public class DGStarcatcherFishes
 
         //legendary
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.JOEL)
                         .withBaseChance(1)
                         .withSizeAndWeight(new SizeAndWeight(69, 0, 2000, 600))

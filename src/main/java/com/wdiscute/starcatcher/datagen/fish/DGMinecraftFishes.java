@@ -19,7 +19,7 @@ public class DGMinecraftFishes
     public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
     {
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(Items.COD)
                         .withBucketedFish(new MaybeStack(Items.COD_BUCKET))
                         .withEntityToSpawn(EntityType.COD.builtInRegistryHolder())
@@ -28,7 +28,7 @@ public class DGMinecraftFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(Items.PUFFERFISH)
                         .withBucketedFish(new MaybeStack(Items.PUFFERFISH_BUCKET))
                         .withEntityToSpawn(EntityType.PUFFERFISH.builtInRegistryHolder())

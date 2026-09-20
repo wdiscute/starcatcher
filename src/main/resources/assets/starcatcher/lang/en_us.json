@@ -457,8 +457,8 @@
   "tooltip.modifier.starcatcher.adjust_penalty_rate.decrease": "Decreases the penalty for missing sweet-spots",
   "tooltip.modifier.starcatcher.adjust_penalty_rate.shift": "Adjusts the penalty of missing sweet-spots by %s%%",
 
-  "tooltip.modifier.starcatcher.adjust_hp.increase": "Fish will be easier to reel in",
-  "tooltip.modifier.starcatcher.adjust_hp.decrease": "Fish will be harder to reel in",
+  "tooltip.modifier.starcatcher.adjust_hp.increase": "Fish will be harder to reel in",
+  "tooltip.modifier.starcatcher.adjust_hp.decrease": "Fish will be easier to reel in",
   "tooltip.modifier.starcatcher.adjust_hp.shift": "Adjusts the hp of fish by %s%%",
 
   "tooltip.modifier.starcatcher.vanilla_fishing_loot": "Restores vanilla fishing loot",

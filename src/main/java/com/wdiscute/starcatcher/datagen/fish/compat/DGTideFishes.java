@@ -361,7 +361,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "mackerel")
                         .withBucketedFish("tide", "mackerel_bucket")
                         .withEntityToSpawn("tide", "mackerel")
@@ -373,7 +373,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "ocean_perch")
                         .withBucketedFish("tide", "ocean_perch_bucket")
                         .withEntityToSpawn("tide", "ocean_perch")
@@ -385,7 +385,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "tuna")
                         .withBucketedFish("tide", "tuna_bucket")
                         .withEntityToSpawn("tide", "tuna")
@@ -397,7 +397,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "red_snapper")
                         .withBucketedFish("tide", "red_snapper_bucket")
                         .withEntityToSpawn("tide", "red_snapper")
@@ -409,7 +409,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "snook")
                         .withBucketedFish("tide", "snook_bucket")
                         .withEntityToSpawn("tide", "snook")
@@ -421,7 +421,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "anchovy")
                         .withBucketedFish("tide", "anchovy_bucket")
                         .withEntityToSpawn("tide", "anchovy")
@@ -433,7 +433,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "flounder")
                         .withBucketedFish("tide", "flounder_bucket")
                         .withEntityToSpawn("tide", "flounder")
@@ -533,7 +533,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "aquathorn")
                         .withBucketedFish("tide", "aquathorn_bucket")
                         .withEntityToSpawn("tide", "aquathorn")
@@ -547,7 +547,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "neptune_koi")
                         .withBucketedFish("tide", "neptune_koi_bucket")
                         .withEntityToSpawn("tide", "neptune_koi")
@@ -561,7 +561,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "pluto_snail")
                         .withBucketedFish("tide", "pluto_snail_bucket")
                         .withEntityToSpawn("tide", "pluto_snail")
@@ -574,7 +574,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "sun_emblem")
                         .withBucketedFish("tide", "sun_emblem_bucket")
                         .withEntityToSpawn("tide", "sun_emblem")
@@ -588,7 +588,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "saturn_cuttlefish")
                         .withBucketedFish("tide", "saturn_cuttlefish_bucket")
                         .withEntityToSpawn("tide", "saturn_cuttlefish")
@@ -601,7 +601,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "marstilus")
                         .withBucketedFish("tide", "marstilus_bucket")
                         .withEntityToSpawn("tide", "marstilus")
@@ -614,7 +614,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "uranias_pisces")
                         .withBucketedFish("tide", "uranias_pisces_bucket")
                         .withEntityToSpawn("tide", "uranias_pisces")
@@ -627,7 +627,7 @@ public class DGTideFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("tide", "great_white_shark")
                         .withBucketedFish("tide", "great_white_shark_bucket")
                         .withEntityToSpawn("tide", "great_white_shark")

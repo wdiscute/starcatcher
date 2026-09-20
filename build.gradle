@@ -151,7 +151,7 @@ dependencies {
 
     //quality foods compat
     compileOnly("maven.modrinth:quality-food:vLFBpk1n")
-    runtimeOnly("maven.modrinth:quality-food:vLFBpk1n")
+    //runtimeOnly("maven.modrinth:quality-food:vLFBpk1n")
 
     //shaders
     compileOnly "curse.maven:irisshaders-455508:6661598"

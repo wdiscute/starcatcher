@@ -28,7 +28,7 @@ public class DGFishOfThievesFishes
         //
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("fishofthieves", "splashtail")
                         .withBucketedFish("fishofthieves", "splashtail_bucket")
                         .withEntityToSpawn("fishofthieves", "splashtail")
@@ -60,7 +60,7 @@ public class DGFishOfThievesFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("fishofthieves", "ancientscale")
                         .withBucketedFish("fishofthieves", "ancientscale_bucket")
                         .withEntityToSpawn("fishofthieves", "ancientscale")
@@ -71,7 +71,7 @@ public class DGFishOfThievesFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("fishofthieves", "plentifin")
                         .withBucketedFish("fishofthieves", "plentifin_bucket")
                         .withEntityToSpawn("fishofthieves", "plentifin")
@@ -104,7 +104,7 @@ public class DGFishOfThievesFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("fishofthieves", "battlegill")
                         .withBucketedFish("fishofthieves", "battlegill_bucket")
                         .withEntityToSpawn("fishofthieves", "battlegill")

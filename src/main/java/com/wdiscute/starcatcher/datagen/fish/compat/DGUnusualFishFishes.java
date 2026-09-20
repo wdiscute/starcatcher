@@ -41,7 +41,7 @@ public class DGUnusualFishFishes
 //        );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("unusualfishmod", "raw_aero_mono")
                         .withBucketedFish("unusualfishmod", "aero_mono_bucket")
                         .withEntityToSpawn("unusualfishmod", "aero_mono")
@@ -51,7 +51,7 @@ public class DGUnusualFishFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("unusualfishmod", "raw_beaked_herring")
                         .withBucketedFish("unusualfishmod", "beaked_herring_bucket")
                         .withEntityToSpawn("unusualfishmod", "beaked_herring")
