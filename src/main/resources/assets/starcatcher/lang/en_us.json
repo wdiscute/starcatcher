@@ -1677,7 +1677,7 @@
 
 
   "item.starcatcher.crystalback_boreal" : "Crystalback Boreal",
-  "tooltip.starcatcher.crystalback_boreal.0" : "Named after the legendary <sclegendary>Boreal</sclegendary>, this fish is far easier to catch.",
+  "tooltip.starcatcher.crystalback_boreal.0" : "Named after the Boreal, this fish is far easier to catch.",
   "tooltip.starcatcher.crystalback_boreal.1" : "Its crystal-covered back glitters brightly, making hiding nearly impossible.",
 
   "item.starcatcher.wintery_pike" : "Wintery Pike",
@@ -1695,7 +1695,7 @@
 
 
   "item.starcatcher.boreal" : "Boreal",
-  "tooltip.starcatcher.boreal.0" : "A <sclegendary>legendary</sclegendary> fish found in icy mountain lakes.",
+  "tooltip.starcatcher.boreal.0" : "A fish found in icy mountain lakes.",
   "tooltip.starcatcher.boreal.1" : "Its crystal-covered body blends seamlessly into the water,",
   "tooltip.starcatcher.boreal.2" : "making it a true challenge even for seasoned anglers.",
 
