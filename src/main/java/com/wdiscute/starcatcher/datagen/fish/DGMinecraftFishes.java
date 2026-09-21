@@ -8,7 +8,10 @@ import com.wdiscute.starcatcher.fish.Textures;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.Utils;
+import net.dries007.tfc.client.overworld.Star;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Items;
 import org.jetbrains.annotations.Nullable;
@@ -54,7 +57,7 @@ public class DGMinecraftFishes
                         .withSizeAndWeight(80, 40, 10000, 8000)
         );
 
-        FishRegistration.register(context,
+        FishRegistration.registerRaw(context, ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Utils.rl("wither")),
                 FishProperties.empty()
                         .withFish(Items.NETHER_STAR)
                         .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))

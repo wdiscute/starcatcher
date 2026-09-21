@@ -62,8 +62,7 @@
     {
       "type": "starcatcher:bait",
       "baits": {
-        "minecraft:wither_skeleton_skull": 50,
-        "starcatcher:legendary_bait": 50
+        "minecraft:wither_skeleton_skull": 50
       }
     }
   ],

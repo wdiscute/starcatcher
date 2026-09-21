@@ -44,8 +44,7 @@
     {
       "type": "starcatcher:bait",
       "baits": {
-        "starcatcher:cherry_bait": 50,
-        "starcatcher:legendary_bait": 50
+        "starcatcher:cherry_bait": 50
       }
     }
   ],

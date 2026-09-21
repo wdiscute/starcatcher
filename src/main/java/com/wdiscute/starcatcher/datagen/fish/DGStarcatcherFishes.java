@@ -515,7 +515,7 @@ public class DGStarcatcherFishes
         );
 
         //legendary
-        FishRegistration.register(context,
+        FishRegistration.registerRaw(context, ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("vesani")),
                 PresetRestrictions.cherryGrove(context)
                         .withFish(SCItems.VESANI)
                         .withSizeAndWeight(new SizeAndWeight(10, 3, 67, 0))

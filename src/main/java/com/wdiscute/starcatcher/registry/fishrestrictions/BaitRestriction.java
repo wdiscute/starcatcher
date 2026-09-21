@@ -83,12 +83,6 @@ public class BaitRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public MutableComponent getDescriptionPrefix()
-    {
-        return Component.translatable("gui.guide.bait");
-    }
-
-    @Override
     public int getColor(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
         return SCColors.GUIDE_TEXT_DARK;
@@ -99,7 +93,12 @@ public class BaitRestriction extends AbstractFishRestriction
     {
         //bait name / [hover]
         if (baits.size() == 1)
-            return MutableComponent.create(BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getDescription().getContents());
+        {
+            if (fp.baseChance() == 0)
+                return Component.translatable("gui.guide.bait.require").append(BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getDescription());
+            else
+                return Component.translatable("gui.guide.bait.prefer").append(BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getDescription());
+        }
         else
             return Component.translatable("gui.guide.hover");
     }
@@ -119,12 +118,6 @@ public class BaitRestriction extends AbstractFishRestriction
                     .append(Component.translatable(o.getDescriptionId()))));
         });
         return hover;
-    }
-
-    @Override
-    public List<Component> getBlacklist(Level level, FishProperties fp, @NotNull Player player, Context context)
-    {
-        return fp.baseChance() == 0 ? List.of(Component.translatable("gui.guide.bait_required")) : List.of();
     }
 
     public static final BaitRestriction CHERRY_BAIT = new BaitRestriction(Map.of(SCItems.CHERRY_BAIT.getId(), 50), false, "");
