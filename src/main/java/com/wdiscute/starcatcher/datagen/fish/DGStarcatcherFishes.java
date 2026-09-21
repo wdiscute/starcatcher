@@ -227,7 +227,7 @@ public class DGStarcatcherFishes
                 PresetRestrictions.coldLakeMountain(context)
                         .withFish(SCItems.BOREAL)
                         .withSizeAndWeight(new SizeAndWeight(30, 15, 1000, 200))
-                        .withRarity(Rarity.LEGENDARY)
+                        .withRarity(Rarity.EPIC)
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
                         .withDifficulty(Difficulty.BOREAL)
                         

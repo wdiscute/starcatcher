@@ -76,7 +76,7 @@ public class DGMinecraftFishes
                         .withBaseChance(0)
                         .addRestrictions(DimensionRestriction.OVERWORLD)
                         .addRestrictions(FluidRestriction.WATER)
-                        .addRestrictions(new BaitRestriction(java.util.Map.of(Starcatcher.rl("gunpowder_bait"), 200), ""))
+                        .addRestrictions(new BaitRestriction(java.util.Map.of(Starcatcher.rl("gunpowder_bait"), 200), false, ""))
                         .withDifficulty(Difficulty.CREEPER)
                         .withItemToOverrideWith(new MaybeStack(SCItems.UNKNOWN_FISH))
                         .withRarity(Rarity.EPIC)

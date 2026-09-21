@@ -138,6 +138,8 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .add(MURKWATER_BAIT.get())
                 .add(LEGENDARY_BAIT.get())
                 .add(METEOROLOGICAL_BAIT.get())
+                .add(TARGETED_BAIT.get())
+                .add(LILAC_MINNOW.get())
                 .add(Items.WITHER_SKELETON_SKULL)
                 .addTag(Tags.Items.BUCKETS_EMPTY)
 

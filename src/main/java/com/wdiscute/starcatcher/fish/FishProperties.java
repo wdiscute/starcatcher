@@ -292,7 +292,7 @@ public record FishProperties(
         List<AbstractFishRestriction> list = new ArrayList<>(this.restrictions);
 
         list.removeIf(o -> o instanceof BaitRestriction);
-        list.add(new BaitRestriction(map, override.get()));
+        list.add(new BaitRestriction(map, bait.forceAdd, override.get()));
 
         return withRestrictions(list);
     }

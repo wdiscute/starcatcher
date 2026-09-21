@@ -13,10 +13,6 @@
       "required": false
     },
     {
-      "id": "starcatcher:boreal",
-      "required": false
-    },
-    {
       "id": "starcatcher:cerberay",
       "required": false
     },

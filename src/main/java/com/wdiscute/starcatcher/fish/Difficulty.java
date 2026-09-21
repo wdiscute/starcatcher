@@ -322,9 +322,9 @@ public record Difficulty(
     ).moving();
 
     public static Difficulty AZURE_CRYSTALBACK_MINNOW = new Difficulty(
-            300, 14, 75, 3f,
+            300, 29, 75, 3f,
             List.of(new FreezeOnMissModifier(40, 10, "")),
-            SweetSpot.FROZEN, SweetSpot.FROZEN
+            SweetSpot.THIN, SweetSpot.THIN
     ).vanishing();
 
     public static Difficulty JOEL = new Difficulty(

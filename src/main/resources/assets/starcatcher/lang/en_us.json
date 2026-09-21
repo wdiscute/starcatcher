@@ -1267,6 +1267,7 @@
   "gui.guide.hover.elevation.incorrect" : "❌ Elevation",
   "gui.guide.hover.light_level.correct" : "✅ Light",
   "gui.guide.hover.light_level.incorrect" : "❌ Light",
+  "gui.guide.hover.bait" : "Bait",
   "gui.guide.hover.caught_limit" : "Caught Limit: %s",
 
   "gui.guide.dimension" : "Dimension: ",

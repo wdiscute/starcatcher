@@ -17,6 +17,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:boreal",
+      "required": false
+    },
+    {
       "id": "starcatcher:bright_amethyst_snapper",
       "required": false
     },
