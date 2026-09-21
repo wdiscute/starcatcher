@@ -12,7 +12,7 @@
       "item": "minecraft:stick"
     },
     "T": {
-      "item": "starcatcher:starcatcher_twine"
+      "item": "minecraft:string"
     }
   },
   "pattern": [

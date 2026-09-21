@@ -73,6 +73,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:mothfish",
+      "required": false
+    },
+    {
       "id": "starcatcher:pale_pinfish",
       "required": false
     },

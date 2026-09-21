@@ -161,6 +161,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:dreamliner",
+      "required": false
+    },
+    {
       "id": "starcatcher:driftfin",
       "required": false
     },
@@ -326,6 +330,10 @@
     },
     {
       "id": "starcatcher:mossfin",
+      "required": false
+    },
+    {
+      "id": "starcatcher:mothfish",
       "required": false
     },
     {

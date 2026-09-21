@@ -316,10 +316,6 @@
 
   "tooltip.starcatcher.letter": "Written by: %s",
 
-  "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
-  "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine wrapped around a stick.",
-  "tooltip.starcatcher.starcatcher_twine.1": "Vansire used these for string instruments once upon a time.",
-
   "block.starcatcher.tournament_stand": "Tournament Stand",
   "tooltip.starcatcher.tournament_stand.0": "A stand used to host fishing tournaments.",
 
@@ -1912,6 +1908,10 @@
   "item.starcatcher.blue_crystal_fin" : "Blue Crystal Fin",
   "tooltip.starcatcher.blue_crystal_fin.0" : "An uncommon fish most commonly found during daytime.",
 
+  "item.starcatcher.mothfish" : "Blue Crystal Fin",
+  "tooltip.starcatcher.mothfish.0" : "This fish has developed a layer of fur to help it overcome the cold.",
+  "tooltip.starcatcher.mothfish.1" : "How it keeps this fur dry in the first place is a mystery...",
+
 
   "item.starcatcher.morganite" : "Morganite",
   "tooltip.starcatcher.morganite.0" : "An ocean fish resembling Morganite gemstones.",
@@ -2156,6 +2156,10 @@
   "item.starcatcher.end_glow" : "End Glow",
   "tooltip.starcatcher.end_glow.0" : "A tricky fish only found in The End.",
   "tooltip.starcatcher.end_glow.1" : "Enderman don't seem to mind it.",
+
+  "item.starcatcher.dreamliner" : "Dreamliner",
+  "tooltip.starcatcher.dreamliner.0" : "A fish found swimming through the endless void of The End.",
+  "tooltip.starcatcher.dreamliner.1" : "It's said to be a 787 in its past life.",
 
   "item.starcatcher.voidbiter" : "Voidbiter",
   "tooltip.starcatcher.voidbiter.0" : "A <sclegendary>legendary</sclegendary> fish found floating in the vast void of The End.",

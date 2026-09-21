@@ -48,7 +48,7 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .define('S', Items.STICK)
                 .define('B', SCItems.BOBBER)
                 .define('H', SCItems.HOOK)
-                .define('T', SCItems.STARCATCHER_TWINE)
+                .define('T', Items.STRING)
                 .pattern("  S")
                 .pattern(" ST")
                 .pattern("SHB")
@@ -60,7 +60,7 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .requires(Items.FISHING_ROD)
                 .requires(SCItems.HOOK)
                 .requires(SCItems.BOBBER)
-                .requires(SCItems.STARCATCHER_TWINE)
+                .requires(Items.STRING)
                 .unlockedBy("in_water", insideOf(Blocks.WATER))
                 .save(output, Starcatcher.rl("rod_from_vanilla"));
 
@@ -533,16 +533,6 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .pattern("G G")
                 .pattern("GGG")
                 .unlockedBy("has_glass", has(Items.GLASS))
-                .save(output);
-
-        //twine
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCItems.STARCATCHER_TWINE)
-                .define('S', Items.STICK)
-                .define('T', Items.STRING)
-                .pattern(" T ")
-                .pattern("TST")
-                .pattern(" T ")
-                .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
                 .save(output);
 
         //bonemeal from clam

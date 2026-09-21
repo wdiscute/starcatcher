@@ -46,7 +46,6 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleItem(UNKNOWN_FISH);
         simpleItem(GUIDE);
         simpleItem(FISH_RADAR);
-        simpleItem(STARCATCHER_TWINE);
         simpleItem(FISH_BONES);
         simpleItem(PEARL);
         simpleItem(STARCAUGHT_BUCKET);

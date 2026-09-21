@@ -152,7 +152,6 @@ public interface SCCreativeModeTabs
 
                         .add(SCItems.FISH_RADAR)
                         .add(SCItems.PEARL)
-                        .add(SCItems.STARCATCHER_TWINE)
                         .add(SCItems.MISSINGNO)
                         .add(SCItems.UNKNOWN_FISH)
                         .add(SCItems.STARCAUGHT_BUCKET)

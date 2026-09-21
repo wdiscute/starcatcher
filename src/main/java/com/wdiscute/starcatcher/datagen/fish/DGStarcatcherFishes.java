@@ -741,6 +741,17 @@ public class DGStarcatcherFishes
                         .withRarity(Rarity.RARE)
         );
 
+        //rare
+        FishRegistration.register(
+                context,
+                PresetRestrictions.coldRiver(context)
+                        .withFish(SCItems.MOTHFISH)
+                        .withSizeAndWeight(new SizeAndWeight(12, 4, 70, 30))
+                        .withDaytimeRestriction(DaytimeRestriction.NIGHT)
+                        .withDifficulty(Difficulty.MEDIUM_FROZEN.vanishing())
+                        .withRarity(Rarity.RARE)
+        );
+
         //legendary
         FishRegistration.register(
                 context,
@@ -1386,6 +1397,16 @@ public class DGStarcatcherFishes
                         .withSizeAndWeight(new SizeAndWeight(235, 25, 7000, 700))
                         .withRarity(Rarity.UNCOMMON)
                         .addRestriction(LightLevelRestriction.BRIGHT)
+                        .withDifficulty(Difficulty.MEDIUM.withHP(250))
+        );
+
+        FishRegistration.register(context,
+                PresetRestrictions.endAir(context)
+                        .withFish(SCItems.DREAMLINER)
+                        .withBaseChance(10)
+                        .withSizeAndWeight(new SizeAndWeight(235, 25, 7000, 700))
+                        .withRarity(Rarity.UNCOMMON)
+                        .addRestriction(ElevationBias.DREAMLINER)
                         .withDifficulty(Difficulty.MEDIUM.withHP(250))
         );
 

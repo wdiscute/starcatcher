@@ -33,6 +33,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:dreamliner",
+      "required": false
+    },
+    {
       "id": "starcatcher:elderscale",
       "required": false
     },
