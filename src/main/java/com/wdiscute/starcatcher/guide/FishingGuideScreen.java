@@ -518,7 +518,7 @@ public class FishingGuideScreen extends Screen
         }
 
         //index arrow
-        if (!menu.equals(MenuEntry.INDEX) && x > 174 && x < 196 && y > 202 && y < 216)
+        if (!(menu.equals(MenuEntry.INDEX) && page == 0) && !menu.equals(MenuEntry.COVER) && x > 174 && x < 196 && y > 202 && y < 216)
         {
             player.playSound(SoundEvents.BOOK_PAGE_TURN);
             menu = MenuEntry.INDEX;
