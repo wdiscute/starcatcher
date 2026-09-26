@@ -19,7 +19,7 @@ import java.time.Instant;
 import java.util.*;
 
 public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> fishesCaught, String signature,
-                          long date, FishingGuideScreen.StatsData stats, List<Utils.Duo<UUID, String>> visitors)
+                          long date, StatsData stats, List<Utils.Duo<UUID, String>> visitors)
 {
     public static final Codec<SignedGuide> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(
@@ -28,7 +28,7 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
                             .fieldOf("fishes_caught").forGetter(SignedGuide::fishesCaught),
                     Codec.STRING.fieldOf("signature").forGetter(SignedGuide::signature),
                     Codec.LONG.fieldOf("date_signed").forGetter(SignedGuide::date),
-                    FishingGuideScreen.StatsData.CODEC.fieldOf("stats").forGetter(SignedGuide::stats),
+                    StatsData.CODEC.fieldOf("stats").forGetter(SignedGuide::stats),
                     Utils.Duo.codec(UUIDUtil.CODEC, Codec.STRING).listOf().optionalFieldOf("visitors", List.of()).forGetter(SignedGuide::visitors)
             ).apply(instance, SignedGuide::new)
     );
@@ -52,7 +52,7 @@ public record SignedGuide(UUID owner, Map<ResourceLocation, FishCaughtCounter> f
 
         if (player instanceof ServerPlayer sp)
         {
-            FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
+            StatsData statsData = new StatsData(
                     sp.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get())),
                     sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get())),
                     sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get())),

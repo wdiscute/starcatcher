@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.data.SignedGuide;
+import com.wdiscute.starcatcher.data.StatsData;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.registry.SCDataAttachments;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
@@ -70,7 +71,7 @@ public record SignGuidePayload(String signature, BlockPos bp) implements CustomP
 
                         if (player instanceof ServerPlayer sp)
                         {
-                            FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
+                            StatsData statsData = new StatsData(
                                     sp.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get())),
                                     sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get())),
                                     sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get())),

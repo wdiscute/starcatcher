@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.wdiscute.starcatcher.data.FishCaughtCounter;
+import com.wdiscute.starcatcher.data.StatsData;
 import com.wdiscute.starcatcher.data.network.CBPlayerStructuresPayload;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
@@ -118,7 +119,7 @@ public class FishingGuideItem extends Item
 
                 if (player instanceof ServerPlayer sp)
                 {
-                    FishingGuideScreen.StatsData statsData = new FishingGuideScreen.StatsData(
+                    StatsData statsData = new StatsData(
                             sp.getStats().getValue(Stats.CUSTOM.get(SCStats.TICKS_SPENT_FISHING.get())),
                             sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_TREASURES.get())),
                             sp.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get())),

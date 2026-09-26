@@ -1995,10 +1995,10 @@ public class FishingGuideScreen extends Screen
 
         if (signedGuide != null)
         {
-            timeSpent = signedGuide.stats().timeSpent;
-            treasuresCaught = signedGuide.stats().treasuresCaught;
-            fishMissed = signedGuide.stats().fishMissed;
-            baitUsed = signedGuide.stats().baitUsed;
+            timeSpent = signedGuide.stats().timeSpent();
+            treasuresCaught = signedGuide.stats().treasuresCaught();
+            fishMissed = signedGuide.stats().fishMissed();
+            baitUsed = signedGuide.stats().baitUsed();
         }
         else
         {
@@ -2007,18 +2007,6 @@ public class FishingGuideScreen extends Screen
             fishMissed = player.getStats().getValue(Stats.CUSTOM.get(SCStats.STARCAUGHT_FISH_MISSED.get()));
             baitUsed = player.getStats().getValue(Stats.CUSTOM.get(SCStats.BAIT_USED.get()));
         }
-    }
-
-    public record StatsData(int timeSpent, int treasuresCaught, int fishMissed, int baitUsed)
-    {
-        public static final Codec<StatsData> CODEC = RecordCodecBuilder.create(instance ->
-                instance.group(
-                        Codec.INT.fieldOf("time_spent").forGetter(StatsData::timeSpent),
-                        Codec.INT.fieldOf("treasures_caught").forGetter(StatsData::treasuresCaught),
-                        Codec.INT.fieldOf("fish_missed").forGetter(StatsData::fishMissed),
-                        Codec.INT.fieldOf("bait_used").forGetter(StatsData::baitUsed)
-                ).apply(instance, StatsData::new)
-        );
     }
 
     public static void renderFishEntryPage(GuiGraphics g, FishProperties fp, ItemStack fishToDisplay,
