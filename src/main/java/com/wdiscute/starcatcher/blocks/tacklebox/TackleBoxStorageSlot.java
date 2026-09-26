@@ -8,12 +8,9 @@ import net.minecraft.world.item.ItemStack;
 
 public class TackleBoxStorageSlot extends Slot
 {
-    private final TackleBoxBlockEntity tbbe;
-
-    public TackleBoxStorageSlot(Container container, int slot, int x, int y, TackleBoxBlockEntity tbbe)
+    public TackleBoxStorageSlot(Container container, int slot, int x, int y)
     {
         super(container, slot, x, y);
-        this.tbbe = tbbe;
     }
 
     @Override
@@ -26,6 +23,7 @@ public class TackleBoxStorageSlot extends Slot
     public void set(ItemStack stack)
     {
         super.set(stack);
-        if(tbbe != null) tbbe.updateFishSlot();
+        if(container instanceof TackleBoxContainer tbc)
+            tbc.updateFishSlot();
     }
 }

@@ -1,0 +1,2265 @@
+{
+  "fluid.starcatcher.lava": "Лава",
+  "fluid.starcatcher.water": "Вода",
+  "fluid.starcatcher.void": "Пустота",
+  "fluid.starcatcher.air": "Воздух",
+
+  "fluid.starcatcher.acid": "Кислота",
+  "fluid.starcatcher.purple_soda": "Фиолетовая газировка",
+
+  "bountiful.decree.starcatcher.name": "Звездолов",
+
+  "structure.minecraft.ancient_city": "Древний город",
+  "structure.minecraft.monument": "Подводная крепость",
+  "structure.minecraft.trial_chambers": "Испытательные камеры",
+  "structure.minecraft.end_city": "Города Края",
+  "structure.minecraft.village_desert": "Пустынные деревни",
+  "structure.minecraft.village_plains": "Равнинные деревни",
+  "structure.minecraft.village_savanna": "Саванновые деревни",
+  "structure.minecraft.village_taiga": "Таёжные деревни",
+  "structure.minecraft.village_snowy": "Снежные деревни",
+
+  "advancements.husbandry.starcatcher.fisherman.title": "Рыбак",
+  "advancements.husbandry.starcatcher.fisherman.description": "Поймайте рыбу, не промахнувшись ни разу",
+
+  "key.category.starcatcher.starcatcher": "Звездолов",
+  "key.starcatcher.minigame_hit": "Удар мини-игры",
+  "key.starcatcher.expand_tournament": "Переключить оверлей турнира",
+  "key.starcatcher.open_guide": "Открыть путеводитель",
+
+  "itemGroup.starcatcher.starcatcher": "Starcatcher",
+  "section.starcatcher.fish": "Рыба",
+  "section.starcatcher.hooks_bobbers": "Крючки, поплавки и наживки",
+  "section.starcatcher.cosmetics": "Косметика",
+  "section.starcatcher.must_have": "Самое необходимое",
+  "section.starcatcher.trophies": "Статистика и трофеи",
+  "section.starcatcher.miscellaneous": "Разное",
+  "section.starcatcher.tackle_boxes": "Ящики для снастей",
+
+  "stat.starcatcher.starcaught_fish": "Звездолов - Поймано рыбы",
+  "stat.starcatcher.starcaught_fish_missed": "Звездолов - Упущено рыбы",
+  "stat.starcatcher.starcaught_treasures": "Звездолов - Поймано сокровищ",
+
+  "stat.starcatcher.sticks_spent_fishing": "Звездолов - Тиков за рыбалкой",
+  "stat.starcatcher.sbait_used": "Звездолов - Израсходовано наживки",
+
+  "stat.starcatcher.trash_caught": "Звездолов - Выловлено мусора",
+  "stat.starcatcher.common_caught": "Звездолов - Поймано обычной рыбы",
+  "stat.starcatcher.uncommon_caught": "Звездолов - Поймано необычной рыбы",
+  "stat.starcatcher.rare_caught": "Звездолов - Поймано редкой рыбы",
+  "stat.starcatcher.epic_caught": "Звездолов - Поймано эпической рыбы",
+  "stat.starcatcher.legendary_caught": "Звездолов - Поймано легендарной рыбы",
+
+  "stat.starcatcher.golden_catches": "Звездолов - Найдено золотых рыб",
+  "stat.starcatcher.perfect_catches": "Звездолов - Идеальных уловов",
+
+  "emi.starcatcher.fp.loot_tables" : "Таблицы добычи:",
+  "emi.starcatcher.fp.individual_items" : "Отдельные предметы:",
+  "emi.starcatcher.fp.blacklisted_items" : "Исключённые предметы:",
+  "emi.starcatcher.fp.weight" : " вес - предмет",
+
+  "emi.starcatcher.open_as_guide_entry" : "Открыть как запись путеводителя",
+  "emi.starcatcher.entity_entry" : "Эта запись всегда призывает %s",
+
+  "emi.category.starcatcher.fishing" : "Рыбалка Ловца Звёзд",
+  "emi.category.starcatcher.smithing" : "Кузнечное дело Ловца Звёзд",
+
+  "emi.info.starcatcher.worms.0" : "Черви имеют разные рыболовные модификаторы при использовании в качестве наживки.",
+  "emi.info.starcatcher.worms.1" : "Можно компостировать.",
+
+  "emi.info.starcatcher.bonemeal_farmland" : "Удобрение грядки костной мукой может дать несколько разных предметов.",
+
+  "emi.info.starcatcher.pearls.0" : "Моллюски, размещённые на песке, медленно создают жемчуг.",
+  "emi.info.starcatcher.pearls.1" : "Когда моллюск откроется, нажмите на него, чтобы собрать жемчуг.",
+
+  "emi.info.starcatcher.attachments.0" : "Крючки, поплавки и наживки можно присоединить к удочке с помощью ящика для снастей.",
+  "emi.info.starcatcher.attachments.1" : "Они дают различные «модификаторы», помогающие по-разному: от сокращения времени клёва до бонусов, снижающих сложность.",
+
+  "emi.info.starcatcher.fish_bones.0" : "Рыбьи кости появляются после того, как съедена пойманная рыба.",
+
+  "emi.info.starcatcher.pearl_template.0" : "Этот шаблон можно редко найти при сборе жемчуга из моллюсков.",
+
+  "emi.info.starcatcher.hat.0" : "Рыбацкие шляпы редко встречаются в сундуках кораблекрушений.",
+
+  "starcatcher.tip.legendary_fish" : "Большинство легендарных рыб обожает легендарную наживку!",
+  "starcatcher.tip.too_hard" : "Рыба кажется слишком сложной? Пересмотрите, какие поплавок и крючок вы используете!",
+  "starcatcher.tip.fisherman_hat" : "Рыбацкие шляпы изредка встречаются в затонувших кораблях.",
+  "starcatcher.tip.templates" : "С помощью рыболовных шаблонов можно изменить внешний вид удочки!",
+  "starcatcher.tip.tackle_box" : "Рыба забивает весь инвентарь? Сложите её в ящик для снастей!",
+  "starcatcher.tip.secret_messages" : "Иногда можно выловить секретные послания! Кто знает, какие истории они расскажут...",
+  "starcatcher.tip.clam" : "Моллюски, размещённые на песке, могут создавать жемчуг!",
+  "starcatcher.tip.aquarium" : "Слишком много рыбы и негде её показать? Почему бы не построить аквариум!",
+  "starcatcher.tip.weather" : "Некоторые рыбы появляются только при определённой погоде и времени суток.",
+  "starcatcher.tip.golden" : "Каждую золотую рыбу можно поймать лишь один раз!",
+  "starcatcher.tip.wither" : "Использование черепа скелета-иссушителя в качестве наживки может привести к... нежелательным последствиям...",
+  "starcatcher.tip.sell" : "Рыба продаётся дороже, если у неё низкий процентиль. И ещё дороже, если она золотая",
+  "starcatcher.tip.dimension" : "Рыбу можно найти везде, даже в Нижнем мире и Крае",
+  "starcatcher.tip.ice" : "Ледяные рыбы замораживают катушку при промахах!",
+
+
+
+  "tag.starcatcher.is_overworld" : "Подобные Верхнему миру",
+  "tag.starcatcher.is_nether" : "Подобные Нижнему миру",
+  "tag.starcatcher.is_end" : "Подобные Краю",
+
+  "tag.starcatcher.is_beach" : "Пляжи",
+  "tag.starcatcher.is_birch_forest" : "Берёзовые леса",
+  "tag.starcatcher.is_cherry_grove" : "Вишнёвые рощи",
+  "tag.starcatcher.is_crimson_forest" : "Багровый лес",
+  "tag.starcatcher.is_warped_forest" : "Искажённый лес",
+  "tag.starcatcher.is_cold_lake" : "Холодные озёра",
+  "tag.starcatcher.is_cold_ocean" : "Холодные океаны",
+  "tag.starcatcher.is_frozen_ocean" : "Замёрзшие океаны",
+  "tag.starcatcher.is_cold_river" : "Холодные реки",
+  "tag.starcatcher.is_dark_forest" : "Тёмные леса",
+  "tag.starcatcher.is_deep_ocean" : "Глубокие океаны",
+  "tag.starcatcher.is_mushroom_fields" : "Грибные острова",
+  "tag.starcatcher.is_ocean" : "Океаны",
+  "tag.starcatcher.is_normal_ocean" : "Океан",
+  "tag.starcatcher.is_river" : "Реки",
+  "tag.starcatcher.is_swamp" : "Болота",
+  "tag.starcatcher.is_warm_lake" : "Тёплый климат",
+  "tag.starcatcher.is_lukewarm_ocean" : "Тепловатые океаны",
+  "tag.starcatcher.is_warm_ocean" : "Тёплые океаны",
+  "tag.starcatcher.is_warm_river" : "Тёплые реки",
+  "tag.starcatcher.is_basalt_deltas" : "Базальтовые дельты",
+  "tag.starcatcher.is_soul_sand_valley" : "Долины песка душ",
+
+  "tag.minecraft.is_badlands" : "Месы",
+  "tag.minecraft.is_beach" : "Пляжи",
+  "tag.minecraft.is_deep_ocean" : "Глубокие океаны",
+  "tag.minecraft.is_end" : "Биомы Края",
+  "tag.minecraft.is_forest" : "Леса",
+  "tag.minecraft.is_hill" : "Холмы",
+  "tag.minecraft.is_jungle" : "Джунгли",
+  "tag.starcatcher.lush_and_jungle" : "Джунгли и Пышные пещеры",
+  "tag.minecraft.is_mountain" : "Горы",
+  "tag.minecraft.is_nether" : "Биомы Нижнего мира",
+  "tag.minecraft.is_ocean" : "Океаны",
+  "tag.minecraft.is_overworld" : "Биомы Верхнего мира",
+  "tag.minecraft.is_river" : "Реки",
+  "tag.minecraft.is_savanna" : "Саванны",
+  "tag.minecraft.is_taiga" : "Тайги",
+
+  "tag.starcatcher.baits" : "Рыболовные наживки",
+  "tag.starcatcher.hooks" : "Рыболовные крючки",
+  "tag.starcatcher.bobbers" : "Поплавки",
+  "tag.starcatcher.equipments" : "Рыболовное снаряжение",
+  "tag.starcatcher.gadgets" : "Рыболовные гаджеты",
+  "tag.starcatcher.rods" : "Удочки Звездолова",
+  "tag.starcatcher.templates" : "Шаблоны удочек",
+  "tag.starcatcher.bucketable_fishes" : "Рыбы Звездолова для вёдер",
+  "tag.starcatcher.fishable" : "Вылавливаемое",
+  "tag.starcatcher.starcaught_fishable" : "Вылавливаемое Ловцом Звёзд",
+  "tag.starcatcher.starcaught_fishable_fish" : "Рыба, вылавливаемая Ловцом Звёзд",
+  "tag.starcatcher.hats" : "Шляпы",
+
+  "tag.starcatcher.common_fishes" : "Обычные рыбы",
+  "tag.starcatcher.uncommon_fishes" : "Необычные рыбы",
+  "tag.starcatcher.rare_fishes" : "Редкие рыбы",
+  "tag.starcatcher.epic_fishes" : "Эпические рыбы",
+  "tag.starcatcher.legendary_fishes" : "Легендарные рыбы",
+
+  "tag.starcatcher.common_starcaught_fishes" : "Обычные рыбы",
+  "tag.starcatcher.uncommon_starcaught_fishes" : "Необычные рыбы",
+  "tag.starcatcher.rare_starcaught_fishes" : "Редкие рыбы",
+  "tag.starcatcher.epic_starcaught_fishes" : "Эпические рыбы",
+  "tag.starcatcher.legendary_starcaught_fishes" : "Легендарные рыбы",
+
+
+  "tag.starcatcher.aquarium_guide_display" : "Взаимодействия аквариума для путеводителя",
+  "tag.starcatcher.placeable_in_display" : "Размещаемое в блоке дисплея",
+  "tag.starcatcher.placeable_in_tackle_box" : "Размещаемое в ящике для снастей",
+  "tag.starcatcher.placeable_in_tackle_box_fish_slot" : "Размещаемое в слот рыбы ящика для снастей",
+  "tag.starcatcher.tackle_boxes" : "Ящики для снастей",
+  "tag.starcatcher.tackle_skins" : "образы снастей",
+  "tag.starcatcher.trash" : "Мусор",
+  "tag.starcatcher.worms" : "Черви",
+
+  "tag.starcatcher.crabs" : "Крабы",
+  "tag.starcatcher.eels" : "Угри",
+  "tag.starcatcher.shrimps" : "Креветки",
+
+  "tag.starcatcher.has_radar_layer" : "Отображается на рыбном радаре",
+  "tag.starcatcher.has_tracker_layer" : "Отображается на рыбном трекере",
+  "tag.starcatcher.has_farmland_interaction" : "Взаимодействует с грядкой",
+
+
+
+
+  "sounds.starcatcher.king_cry" : "Плачущие звуки",
+  "sounds.starcatcher.king_grr" : "Злые звуки",
+  "sounds.starcatcher.king_heheha" : "Звуки ХЕХЕХЕХА",
+
+  "sounds.starcatcher.biting" : "Рыба клюёт!",
+  "sounds.starcatcher.cast" : "Заброс удочки",
+  "sounds.starcatcher.failed" : "Провал мини-игры рыбалки",
+  "sounds.starcatcher.missed" : "Рыба уплыла",
+  "sounds.starcatcher.boop" : "Рыболовный буп",
+  "sounds.starcatcher.reel" : "Удочка смотана",
+
+  "commands.starcatcher.fish_entry_not_found" : "Запись о рыбе %s не найдена",
+  "commands.starcatcher.modifier_not_found" : "Модификатор %s не найден",
+  "commands.starcatcher.rod_not_found" : "У вас должна быть StarcatcherCompatible™ удочка в руке",
+  "commands.starcatcher.nothing_there" : "В текущем месте нет доступной рыбы. Убедитесь, что стоите в правильной жидкости.",
+  "commands.starcatcher.item_empty" : "У вас должен быть предмет в руке для применения модификатора",
+
+  "starcatcher.configuration.ui_settings": "§3!!! [Положение и масштаб интерфейса] !!!",
+
+  "starcatcher.configuration.minigame_x_offset": "Смещение мини-игры по X",
+  "starcatcher.configuration.minigame_y_offset": "Смещение мини-игры по Y",
+  "starcatcher.configuration.minigame_scale": "Масштаб мини-игры",
+
+  "starcatcher.configuration.tournament_x_offset": "Смещение турнира по X",
+  "starcatcher.configuration.tournament_y_offset": "Смещение турнира по Y",
+  "starcatcher.configuration.tournament_scale": "Масштаб турнира",
+
+  "starcatcher.configuration.radar_x_offset": "Смещение радара по X",
+  "starcatcher.configuration.radar_y_offset": "Смещение радара по Y",
+  "starcatcher.configuration.radar_scale": "Масштаб радара",
+
+  "starcatcher.configuration.tracker_x_offset": "Смещение трекера по X",
+  "starcatcher.configuration.tracker_y_offset": "Смещение трекера по Y",
+  "starcatcher.configuration.tracker_scale": "Масштаб трекера",
+
+
+  "starcatcher.configuration.debug": "Отладочная информация мини-игры",
+
+  "starcatcher.configuration.hit_delay" : "Задержка удара мини-игры",
+  "starcatcher.configuration.units" : "Единицы измерения",
+  "starcatcher.configuration.sort" : "Порядок сортировки путеводителя",
+  "starcatcher.configuration.enable_villager_sounds" : "Звук жителя мини-игры",
+  "starcatcher.configuration.enable_hit_sounds" : "Звуки попадания по точкам",
+  "starcatcher.configuration.enable_miss_sound" : "Звук промаха мини-игры",
+  "starcatcher.configuration.remove_notif_on_hover" : "Убрать уведомление о новой рыбе при наведении",
+  "starcatcher.configuration.overlay_update_frequency" : "Частота обновления оверлея",
+
+  "starcatcher.configuration.give_guide" : "Выдать путеводитель",
+  "starcatcher.configuration.give_rod" : "Выдать удочку",
+  "starcatcher.configuration.enable_worms" : "Черви при удобрении грядки",
+  "starcatcher.configuration.enable_minigame" : "Включить мини-игру рыбалки",
+  "starcatcher.configuration.enable_guide_help_pages" : "Включить справку путеводителя",
+  "starcatcher.configuration.enable_ftb_team_sharing" : "Включить обмен FTBTeams",
+  "starcatcher.configuration.enable_seasons" : "Включить совместимость с сезонами",
+  "starcatcher.configuration.vanishing_rate_multiplier" : "Глобальный множитель скорости исчезновения",
+  "starcatcher.configuration.moving_speed_multiplier" : "Глобальный множитель скорости движения",
+  "starcatcher.configuration.penalty_multiplier" : "Глобальный множитель штрафа",
+  "starcatcher.configuration.decay_multiplier" : "Глобальный множитель убывания",
+  "starcatcher.configuration.hp_multiplier" : "Глобальный множитель ОЗ",
+  "starcatcher.configuration.handle_speed_multiplier" : "Глобальный множитель скорости катушки",
+  "starcatcher.configuration.hide_entries_until_found" : "Скрывать записи путеводителя до нахождения",
+  "starcatcher.configuration.save_data_to_items" : "Сохранение NBT размера, веса, редкости и золота",
+  "starcatcher.configuration.base_min_ticks" : "Минимальные тики до клёва",
+  "starcatcher.configuration.base_max_ticks" : "Максимальные тики до клёва",
+  "starcatcher.configuration.base_chance" : "Базовый шанс клёва за тик",
+  "starcatcher.configuration.restrict_tackle_box_to_tag" : "Ограничить ящик снасти тегом",
+  "starcatcher.configuration.fish_percentile_size_max_scale" : "Максимальный масштаб модели рыбы",
+  "starcatcher.configuration.fish_percentile_size_min_scale" : "Минимальный масштаб модели рыбы",
+  "starcatcher.configuration.max_tackle_box_fish_storage" : "Макс. рыбы в ящике для снастей",
+  "starcatcher.configuration.hide_treasures" : "Скрывать сокровища",
+  "starcatcher.configuration.hide_catches" : "Скрывать улов",
+  "starcatcher.configuration.enable_rod_durability" : "Включить прочность удочки",
+  "starcatcher.configuration.allow_guide_keybind" : "Разрешить клавишу открытия путеводителя",
+
+
+
+  "gui.starcatcher.processor.fishes_processor.percentile" : "- Цена увеличена на +%s%% для топ 50%%",
+  "gui.starcatcher.processor.fishes_processor.golden" : "- Цена умножается на %sx если золотая.",
+
+
+
+
+
+
+
+
+
+  "entity.starcatcher.fish" : "Звёздная рыба",
+
+  "gui.starcatcher.bait_out" : "Наживка закончилась...",
+  "gui.starcatcher.bait_running_low" : "Наживка заканчивается...",
+  "gui.starcatcher.reel_no_fish" : "Здесь нет рыбы...",
+  "gui.starcatcher.no_hook_or_bobber" : "Удочка не работает без крючка и поплавка...",
+
+
+  "tooltip.minecraft.fishing_rod.0": "Простая удочка для ловли",
+  "tooltip.minecraft.fishing_rod.1": "самой обычной рыбы.",
+  "tooltip.minecraft.fishing_rod.2": "Можно только мечтать улучшить",
+  "tooltip.minecraft.fishing_rod.3": "её до <sclegendary>Удочки Ловца Звёзд</sclegendary>.",
+
+
+
+  "tooltip.starcatcher.rod.netherite" : "<sclegendary>Незеритовое улучшение</sclegendary>",
+
+  "item.starcatcher.starcatcher_rod": "Удочка Ловца Звёзд",
+
+  "item.starcatcher.naturalist_rod": "Удочка натуралиста",
+  "item.starcatcher.iceborn_rod": "Ледорождённая удочка",
+  "item.starcatcher.magmaforged_rod": "Магмовая удочка",
+  "item.starcatcher.slimed_rod": "Слизистая удочка",
+  "item.starcatcher.sharktooth_rod": "Удочка из Акульего Зуба",
+  "item.starcatcher.azure_crystal_rod": "Лазуритовая удочка",
+  "item.starcatcher.bamboo_rod": "Бамбуковая удочка",
+  "item.starcatcher.obsidian_rod": "Обсидиановая удочка",
+  "item.starcatcher.boner_rod": "Костяная удочка",
+  "item.starcatcher.sky_rod": "Небесная удочка",
+  "item.starcatcher.lush_glowberry_rod": "Светоягодная удочка",
+  "item.starcatcher.humble_rod": "Скромная удочка",
+
+  "item.starcatcher.starcatcher_guide": "Путеводитель Ловца Звёзд",
+  "tooltip.starcatcher.starcatcher_guide.0": "Лучший спутник рыбака, который ведёт учёт",
+  "tooltip.starcatcher.starcatcher_guide.1": "всей пойманной рыбы, а также той,",
+  "tooltip.starcatcher.starcatcher_guide.2": "что ещё только ждёт на крючке!",
+
+  "tooltip.starcatcher.starcatcher_guide.signed": "Эта книга принадлежит: %s",
+  "tooltip.starcatcher.starcatcher_guide.signed_shift": "Подписана: %s",
+
+  "tooltip.starcatcher.letter": "Автор: %s",
+
+  "block.starcatcher.tournament_stand": "Турнирный стенд",
+  "tooltip.starcatcher.tournament_stand.0": "Стенд для проведения рыболовных турниров.",
+
+
+  "tooltip.starcatcher.modifiers": "Рыболовные модификаторы:",
+  "tooltip.starcatcher.modifiers.active": "<scepic>§lАктивные модификаторы:</scepic>",
+
+  "tooltip.modifier.starcatcher.quality_food_roll": "Ваш улов будет более высокого качества",
+  "tooltip.modifier.starcatcher.quality_food_roll.shift": "Качество улова будет определяться дополнительно %s раз",
+
+  "tooltip.modifier.starcatcher.prevent_frozen": "Предотвращает замерзание катушки",
+
+  "tooltip.modifier.starcatcher.never_lose": "Позволяет никогда не проигрывать мини-игру",
+
+  "tooltip.modifier.starcatcher.bounce_back": "Один раз предотвращает побег рыбы, отбрасывая её назад",
+
+  "tooltip.modifier.starcatcher.boost_throw_speed": "Ваш поплавок улетит ОЧЕНЬ далеко",
+
+  "tooltip.modifier.starcatcher.survives_lava": "Позволяет рыбачить в лаве",
+
+  "tooltip.modifier.starcatcher.add_creeper": "Может появиться раздражённый друг",
+
+  "tooltip.modifier.starcatcher.no_gravity": "Ваш поплавок больше не подчиняется законам гравитации",
+
+  "tooltip.modifier.starcatcher.gunpowder_bait": "Что-то... будет клевать охотнее",
+  "tooltip.modifier.starcatcher.cherry_bait": "Рыба вишнёвых рощ будет клевать охотнее",
+  "tooltip.modifier.starcatcher.lush_bait": "Рыба Пышных пещер будет клевать охотнее",
+  "tooltip.modifier.starcatcher.sculk_bait": "Рыба Глубокой тьмы будет клевать охотнее",
+  "tooltip.modifier.starcatcher.dripstone_bait": "Рыба капельниковых пещер будет клевать охотнее",
+  "tooltip.modifier.starcatcher.murkwater_bait": "Болотная рыба будет клевать охотнее",
+  "tooltip.modifier.starcatcher.legendary_bait": "Легендарная рыба будет клевать охотнее",
+
+  "tooltip.modifier.starcatcher.restricted_rarities": "Больше нельзя поймать рыбу редкости: %s",
+  "tooltip.modifier.starcatcher.allowed_rarities": "Можно поймать только рыбу редкости: %s",
+  "tooltip.modifier.starcatcher.allowed_rarities.list_last_separator": " и ",
+  "tooltip.modifier.starcatcher.allowed_rarities.list_separator": ", ",
+
+  "tooltip.modifier.starcatcher.extra_golden_chance.perfect": "Идеальный улов с большей вероятностью станет золотым",
+  "tooltip.modifier.starcatcher.extra_golden_chance.perfect.shift": "Идеальный улов на %s%% вероятнее станет золотым",
+  "tooltip.modifier.starcatcher.extra_golden_chance.base": "Золотая рыба будет клевать охотнее",
+  "tooltip.modifier.starcatcher.extra_golden_chance.base.shift": "Золотая рыба клюёт на %s%% чаще",
+
+  "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch": "Идеальный улов может принести сокровище",
+  "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.always": "Идеальный улов приносит сокровище",
+  "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.shift": "Идеальный улов приносит сокровище с шансом %s%%",
+
+  "tooltip.modifier.starcatcher.spawn_treasure_on_hit_x": "Сокровище появляется после %s попаданий подряд",
+
+  "tooltip.modifier.starcatcher.roll_percentile": "Рыба будет крупнее и тяжелее",
+  "tooltip.modifier.starcatcher.roll_percentile.shift": "Процентиль определяется дополнительно %s раз, выбирается наименьший.",
+
+  "tooltip.modifier.starcatcher.anglers_hat": "",
+
+  "tooltip.modifier.starcatcher.hide_catch": "Больше нельзя видеть улов во время рыбалки",
+
+  "tooltip.modifier.starcatcher.freeze_on_miss": "Промах по точке заморозит катушку на короткое время",
+
+  "tooltip.modifier.starcatcher.spawn_frozen_sweetspots": "Время от времени может появиться замороженная точка",
+
+  "tooltip.modifier.starcatcher.spawn_tnt_sweetspots": "Могут появляться взрывные точки",
+
+  "tooltip.modifier.starcatcher.spawn_treasure_on_three_hits": "Три успешных попадания подряд призовут сундук с сокровищами",
+
+  "tooltip.modifier.starcatcher.slower_moving_sweetspots": "Замедляет движущиеся точки",
+
+  "tooltip.modifier.starcatcher.stop_decay_on_hit": "Ненадолго не даёт рыбе уплыть после попадания по точке",
+
+  "tooltip.modifier.starcatcher.harder_with_treasure_on_perfect": "Улов будет сложнее обычного, но идеальная поимка даёт сокровище",
+
+  "tooltip.modifier.starcatcher.no_flip": "Точки больше не переворачиваются при попадании",
+
+  "tooltip.modifier.starcatcher.slower_vanishing": "Исчезающие точки исчезают дольше",
+
+  "tooltip.modifier.starcatcher.bigger_green_sweetspots": "Зелёные точки будут немного больше",
+
+  "tooltip.modifier.starcatcher.add_leaves_spots": "В случайные моменты появляются листяные точки",
+
+  "tooltip.modifier.starcatcher.add_aqua_sweetspot": "Добавляется дополнительная водяная точка",
+
+  "tooltip.modifier.starcatcher.add_three_aqua_sweetspot": "Добавляются три дополнительные водяные точки",
+
+  "tooltip.modifier.starcatcher.flip_every_hit": "При каждом попадании по точке происходит переворот",
+
+  "tooltip.modifier.number.1": "одна",
+  "tooltip.modifier.number.2": "две",
+  "tooltip.modifier.number.3": "три",
+  "tooltip.modifier.number.4": "четыре",
+  "tooltip.modifier.number.5": "пять",
+  "tooltip.modifier.number.6": "шесть",
+  "tooltip.modifier.number.7": "семь",
+  "tooltip.modifier.number.8": "восемь",
+  "tooltip.modifier.number.9": "девять",
+  "tooltip.modifier.number.10": "десять",
+  "tooltip.modifier.number.11": "одиннадцать",
+  "tooltip.modifier.number.12": "двенадцать",
+  "tooltip.modifier.number.32": "тридцать две",
+  "tooltip.modifier.number.64": "целая стопка",
+
+  "tooltip.modifier.starcatcher.adjust_handle_speed.big_increase": "Колоссально увеличивает скорость вращения катушки",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.increase": "Увеличивает скорость вращения катушки",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.decrease": "Уменьшает скорость вращения катушки",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.big_decrease": "Колоссально уменьшает скорость вращения катушки",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.shift": "Изменяет скорость вращения катушки на %s%%",
+
+  "tooltip.modifier.starcatcher.add_basic_sweetspot": "Добавляет идеальную точку",
+  "tooltip.modifier.starcatcher.dripstone_bobber": "Добавляет капельниковую точку",
+  "tooltip.modifier.starcatcher.glowing_bobber": "Добавляет светящуюся точку",
+
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.big_increase": "Колоссально увеличивает скорость исчезновения точек",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.increase": "Увеличивает скорость исчезновения точек",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.decrease": "Уменьшает скорость исчезновения точек",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.big_decrease": "Колоссально уменьшает скорость исчезновения точек",
+  "tooltip.modifier.starcatcher.adjust_vanishing_rate.shift": "Изменяет скорость исчезновения точек на %s%%",
+
+  "tooltip.modifier.starcatcher.adjust_lure_time.big_increase": "Колоссально увеличивает время клёва",
+  "tooltip.modifier.starcatcher.adjust_lure_time.increase": "Увеличивает время клёва",
+  "tooltip.modifier.starcatcher.adjust_lure_time.decrease": "Уменьшает время клёва",
+  "tooltip.modifier.starcatcher.adjust_lure_time.big_decrease": "Колоссально уменьшает время клёва",
+  "tooltip.modifier.starcatcher.adjust_lure_time.shift.min_ticks": "Изменяет минимальное число тиков до клёва на %s%%",
+  "tooltip.modifier.starcatcher.adjust_lure_time.shift.max_ticks": "Изменяет максимальное число тиков до клёва на %s%%",
+  "tooltip.modifier.starcatcher.adjust_lure_time.shift.random": "Изменяет шанс поклёвки за каждый тик на %s%%",
+
+  "tooltip.modifier.starcatcher.increase_chance": "Повышает шанс поймать: %s",
+  "tooltip.modifier.starcatcher.increase_chance.shift": "Увеличивает вес поимки «%s» на %s",
+
+  "tooltip.modifier.starcatcher.adjust_moving_sweetspots.increase": "Увеличивает скорость движущихся точек",
+  "tooltip.modifier.starcatcher.adjust_moving_sweetspots.decrease": "Уменьшает скорость движущихся точек",
+  "tooltip.modifier.starcatcher.adjust_moving_sweetspots.shift": "Изменяет скорость движущихся точек на %s%%",
+
+  "tooltip.modifier.starcatcher.adjust_decay_rate.increase": "Рыба будет быстрее уплывать",
+  "tooltip.modifier.starcatcher.adjust_decay_rate.decrease": "Рыба будет медленнее уплывать",
+  "tooltip.modifier.starcatcher.adjust_decay_rate.shift": "Изменяет скорость ухода рыбы на %s%%",
+
+  "tooltip.modifier.starcatcher.adjust_penalty_rate.increase": "Увеличивает штраф за промах по точкам",
+  "tooltip.modifier.starcatcher.adjust_penalty_rate.decrease": "Уменьшает штраф за промах по точкам",
+  "tooltip.modifier.starcatcher.adjust_penalty_rate.shift": "Изменяет штраф за промах по точкам на %s%%",
+
+  "tooltip.modifier.starcatcher.adjust_hp.increase": "Рыбу будет сложнее вытащить",
+  "tooltip.modifier.starcatcher.adjust_hp.decrease": "Рыбу будет легче вытащить",
+  "tooltip.modifier.starcatcher.adjust_hp.shift": "Изменяет ОЗ рыбы на %s%%",
+
+  "tooltip.modifier.starcatcher.vanilla_fishing_loot": "Восстанавливает ванильную добычу рыбалки",
+  "tooltip.modifier.starcatcher.skip_minigame_if_vanilla_bobber": "Пропускает мини-игру при использовании вместе с ванильным поплавком",
+
+
+  "tooltip.modifier.starcatcher.luck_attribute": "Шанс поимки рыбы зависит от вашей удачи",
+
+  "tooltip.modifier.starcatcher.burn_on_miss": "Промах подожжёт вашу катушку",
+
+  "tooltip.modifier.starcatcher.deep_dark": "Попадания по точкам окутают вас тьмой",
+
+  "tooltip.modifier.starcatcher.ignore_daytime_restrictions": "Игнорирует ограничения рыбы по времени суток",
+  "tooltip.modifier.starcatcher.ignore_daytime_restrictions.maybe": "Ограничения по времени суток иногда будут игнорироваться",
+  "tooltip.modifier.starcatcher.ignore_daytime_restrictions.shift": "%s%% шанс проигнорировать ограничения по времени суток",
+
+  "tooltip.modifier.starcatcher.ignore_weather_restrictions": "Игнорирует ограничения рыбы по погоде",
+  "tooltip.modifier.starcatcher.ignore_weather_restrictions.maybe": "Ограничения по погоде иногда будут игнорироваться",
+  "tooltip.modifier.starcatcher.ignore_weather_restrictions.shift": "%s%% шанс проигнорировать ограничения по погоде",
+
+  "tooltip.modifier.starcatcher.new_catch_increase.shift" : "Увеличивает базовый шанс каждой непойманной рыбы на %s",
+  "tooltip.modifier.starcatcher.new_catch_increase" : "Повышает шанс, что клюнет новая рыба",
+
+  "tooltip.modifier.starcatcher.cancel_golden" : "Больше нельзя поймать золотых рыб",
+
+  "tooltip.modifier.starcatcher.extra_exp_based_on_performance": "Дополнительный опыт за хорошую игру",
+
+  "tooltip.modifier.starcatcher.force_fish_entity": "Если возможно, поймается живая рыба",
+
+  "tooltip.modifier.starcatcher.guarantee_new_fish_always": "Если возможно, клюнет неоткрытая рыба",
+  "tooltip.modifier.starcatcher.guarantee_new_fish_half": "Неоткрытая рыба клюёт с большей вероятностью",
+
+  "tooltip.modifier.starcatcher.extra_base_catch": "Дополнительных рыб вместе с уловом: %s",
+  "tooltip.modifier.starcatcher.extra_base_catch.1": "одна",
+
+  "tooltip.tackle.starcatcher.kimbe": "Кимбе",
+  "tooltip.tackle.starcatcher.clear": "Прозрачный",
+  "tooltip.tackle.starcatcher.colorful": "Красочный",
+  "tooltip.tackle.starcatcher.pearl": "Жемчужный",
+  "tooltip.tackle.starcatcher.base": "Простой",
+  "tooltip.tackle.starcatcher.frog": "Лягушачий",
+  "tooltip.tackle.starcatcher.king": "Королевский",
+  "tooltip.tackle.starcatcher.valley": "Долина",
+  "tooltip.tackle.starcatcher.survivor": "Выживший",
+
+
+  "item.starcatcher.hook": "Железный крючок",
+  "tooltip.starcatcher.hook.0": "Простой железный крючок для твоей удочки.",
+  "tooltip.starcatcher.hook.1": "Кто-то ведь должен с чего-то начинать.",
+
+  "item.starcatcher.shiny_hook": "Блестящий крючок",
+  "item.starcatcher.gold_hook": "Золотой крючок",
+  "item.starcatcher.mossy_hook": "Мшистый крючок",
+  "item.starcatcher.amethyst_hook": "Аметистовый крючок",
+  "item.starcatcher.stone_hook": "Каменный крючок",
+  "item.starcatcher.split_hook": "Раздвоенный крючок",
+  "item.starcatcher.stabilizing_hook": "Стабилизирующий крючок",
+  "item.starcatcher.heavy_hook": "Тяжёлый крючок",
+  "item.starcatcher.vanilla_hook": "Крючок ванильного вкуса",
+  "item.starcatcher.copper_hook": "Медный крючок",
+  "item.starcatcher.exposed_copper_hook": "Слегка окислённый медный крючок",
+  "item.starcatcher.weathered_copper_hook": "Выветрившийся медный крючок",
+  "item.starcatcher.oxidised_copper_hook": "Полностью окислённый медный крючок",
+  "item.starcatcher.echoing_hook": "Эхо-крючок",
+  "item.starcatcher.frozen_hook": "Замороженный крючок",
+  "item.starcatcher.rusty_hook": "Ржавый крючок",
+
+
+
+  "item.starcatcher.bobber": "Поплавок",
+  "tooltip.starcatcher.bobber.0": "Базовый поплавок для вашей удочки.",
+  "tooltip.starcatcher.bobber.1": "Лучший друг крючка.",
+
+  "item.starcatcher.steady_bobber": "Устойчивый поплавок",
+  "item.starcatcher.leaf_bobber": "Листяной поплавок",
+  "item.starcatcher.clear_bobber": "Прозрачный поплавок",
+  "item.starcatcher.deep_dark_bobber": "Поплавок Глубокой тьмы",
+  "item.starcatcher.vanilla_bobber": "Ванильный поплавок",
+  "item.starcatcher.slimey_bobber": "Слизистый поплавок",
+  "item.starcatcher.glowing_bobber": "Светящийся поплавок",
+  "item.starcatcher.golden_bobber": "Золотой поплавок",
+  "item.starcatcher.dripstone_bobber": "Капельниковый поплавок",
+  "item.starcatcher.cloud_bobber": "Облачный поплавок",
+
+
+
+  "item.starcatcher.worm": "Червь",
+  "item.starcatcher.seeking_worm": "Ищущий червь",
+  "item.starcatcher.almighty_worm": "Всесильный червь",
+
+
+  "item.starcatcher.gunpowder_bait": "Пороховая наживка",
+  "item.starcatcher.targeted_bait": "Целевая наживка",
+  "item.starcatcher.cherry_bait": "Вишнёвая наживка",
+  "item.starcatcher.lush_bait": "Пышная наживка",
+  "item.starcatcher.sculk_bait": "Скалковая наживка",
+  "item.starcatcher.dripstone_bait": "Капельниковая наживка",
+  "item.starcatcher.murkwater_bait": "Болотная наживка",
+  "item.starcatcher.meteorological_bait": "Метеорологическая наживка",
+  "item.starcatcher.legendary_bait": "Легендарная наживка",
+
+
+  "tooltip.starcatcher.templates": "Косметический шаблон:",
+  "tooltip.starcatcher.tackle": "образ снасти:",
+
+  "item.starcatcher.kimbe_smithing_template": "Кузнечный шаблон снасти Кимбе",
+  "item.starcatcher.king_smithing_template": "Королевский кузнечный шаблон снасти",
+  "item.starcatcher.valley_smithing_template": "Кузнечный шаблон снасти «Долина»",
+  "item.starcatcher.survivor_smithing_template": "Кузнечный шаблон снасти «Выживший»",
+  "item.starcatcher.frog_smithing_template": "Лягушачий кузнечный шаблон снасти",
+  "item.starcatcher.clear_smithing_template": "Прозрачный кузнечный шаблон снасти",
+  "item.starcatcher.pearl_smithing_template": "Жемчужный кузнечный шаблон снасти",
+  "item.starcatcher.colorful_smithing_template": "Красочный кузнечный шаблон снасти",
+
+  "item.starcatcher.naturalist_skin_smithing_template": "Шаблон образа «Натуралиста»",
+  "item.starcatcher.iceborn_skin_smithing_template": "Шаблон образа «Ледорождённого»",
+  "item.starcatcher.magmaforged_skin_smithing_template": "Шаблон образа «Магмованного»",
+  "item.starcatcher.slimed_skin_smithing_template": "Шаблон образа «Слизистого»",
+  "item.starcatcher.sharktooth_skin_smithing_template": "Шаблон образа «Акульего Зуба»",
+  "item.starcatcher.azure_crystal_skin_smithing_template": "Шаблон образа «Лазуритового кристалла»",
+  "item.starcatcher.bamboo_skin_smithing_template": "Шаблон образа «Бамбука»",
+  "item.starcatcher.obsidian_skin_smithing_template": "Шаблон образа «Обсидиана»",
+  "item.starcatcher.boner_skin_smithing_template": "Шаблон образа «Кости»",
+  "item.starcatcher.sky_skin_smithing_template": "Шаблон образа «Небеса»",
+  "item.starcatcher.lush_glowberry_skin_smithing_template": "Шаблон образа «Светоягода»",
+  "item.starcatcher.humble_skin_smithing_template": "Шаблон образа «Скромная»",
+
+
+
+  "item.starcatcher.missingno": "???",
+  "item.starcatcher.unknown_fish": "Неизвестная рыба",
+  "tooltips.starcatcher.unknown_fish.0": "Шаблон-рыба для мини-игры, скрывающая добычу.",
+
+
+
+
+
+  "container.starcatcher.tackle_box.itemCount" : "%s x%s",
+  "container.starcatcher.tackle_box.unknownContents" : "%s x%s",
+  "container.starcatcher.tackle_box.more" : "и ещё %s...",
+
+  "block.starcatcher.tackle_box" : "Ящик для снастей",
+  "block.starcatcher.tackle_box_white" : "Белый ящик для снастей",
+  "block.starcatcher.tackle_box_lime" : "Лаймовый ящик для снастей",
+  "block.starcatcher.tackle_box_orange" : "Оранжевый ящик для снастей",
+  "block.starcatcher.tackle_box_red" : "Красный ящик для снастей",
+  "block.starcatcher.tackle_box_gray" : "Серый ящик для снастей",
+  "block.starcatcher.tackle_box_light_gray" : "Светло-серый ящик для снастей",
+  "block.starcatcher.tackle_box_black" : "Чёрный ящик для снастей",
+  "block.starcatcher.tackle_box_brown" : "Коричневый ящик для снастей",
+  "block.starcatcher.tackle_box_yellow" : "Жёлтый ящик для снастей",
+  "block.starcatcher.tackle_box_pink" : "Розовый ящик для снастей",
+  "block.starcatcher.tackle_box_magenta" : "Пурпурный ящик для снастей",
+  "block.starcatcher.tackle_box_purple" : "Фиолетовый ящик для снастей",
+  "block.starcatcher.tackle_box_blue" : "Синий ящик для снастей",
+  "block.starcatcher.tackle_box_light_blue" : "Голубой ящик для снастей",
+  "block.starcatcher.tackle_box_cyan" : "Бирюзовый ящик для снастей",
+  "block.starcatcher.tackle_box_green" : "Зелёный ящик для снастей",
+
+  "block.starcatcher.aquarium" : "Аквариум",
+
+  "block.starcatcher.fisherman_hat_black": "Чёрная рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_blue": "Синяя рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_brown": "Коричневая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_cyan": "Бирюзовая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_gray": "Серая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_green": "Зелёная рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_light_blue": "Голубая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_light_gray": "Светло-серая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_lime": "Лаймовая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_magenta": "Пурпурная рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_orange": "Оранжевая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_pink": "Розовая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_purple": "Фиолетовая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_red": "Красная рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_white": "Белая рыбацкая шляпа",
+  "block.starcatcher.fisherman_hat_yellow": "Жёлтая рыбацкая шляпа",
+
+  "item.starcatcher.fish_radar": "Рыбный радар",
+  "tooltip.starcatcher.fish_radar.0": "Удобный радар, показывающий рыбу",
+  "tooltip.starcatcher.fish_radar.1": "в округе абсолютно футуристичным способом.",
+
+  "item.starcatcher.pearl" : "Жемчуг",
+  "tooltip.starcatcher.pearl.0" : "Красивая жемчужина, полученная из моллюска.",
+
+  "item.starcatcher.fish_bones" : "Рыбьи кости",
+  "tooltip.starcatcher.fish_bones.0" : "Пара рыбьих костей.",
+  "tooltip.starcatcher.fish_bones.1" : "Всё, что осталось от когда-то счастливой рыбы.",
+
+  "item.starcatcher.waterlogged_satchel" : "Промокшая сумка",
+  "tooltip.starcatcher.waterlogged_satchel.0" : "Сумка, хранящая немало тайн",
+  "tooltip.starcatcher.waterlogged_satchel.1" : "подводных глубин.",
+
+  "item.starcatcher.treasure" : "Сокровище",
+  "tooltip.starcatcher.treasure.0" : "Блестящее сокровище, выловленное умелым рыбаком.",
+  "tooltip.starcatcher.treasure.1" : "Что же скрыто внутри?",
+
+  "item.starcatcher.scalding_treasure" : "Обжигающее сокровище",
+  "tooltip.starcatcher.scalding_treasure.0" : "Сокровище, выловленное прямо из",
+  "tooltip.starcatcher.scalding_treasure.1" : "обжигающих земель Незера. Что внутри?",
+
+  "block.starcatcher.trophy_copper" : "Медный трофей",
+  "block.starcatcher.trophy_iron" : "Железный трофей",
+  "block.starcatcher.trophy_gold" : "Золотой трофей",
+  "block.starcatcher.trophy_emerald" : "Изумрудный трофей",
+  "block.starcatcher.trophy_diamond" : "Алмазный трофей",
+  "block.starcatcher.trophy_of_the_older_angler" : "Трофей Старшего Рыбака",
+
+  "block.starcatcher.display" : "Дисплей Ловца Звёзд",
+
+  "gui.starcatcher.toast.fish_caught" : "Поймана новая рыба!",
+
+  "gui.guide.disabled_by_server" : "[отключено сервером]",
+  "gui.guide.visitors" : "Подглядывали:",
+  "gui.guide.sign" : "Подписать",
+  "gui.guide.season" : "Сезон: ",
+  "gui.guide.seasons" : "Сезоны:",
+
+  "gui.guide.seasons.all" : "Все",
+
+  "gui.guide.seasons.not_spring" : "Не весна",
+  "gui.guide.seasons.not_summer" : "Не лето",
+  "gui.guide.seasons.not_autumn" : "Не осень",
+  "gui.guide.seasons.not_winter" : "Не зима",
+
+  "gui.guide.seasons.spring_summer" : "Весна и лето",
+  "gui.guide.seasons.spring_autumn" : "Весна и осень",
+  "gui.guide.seasons.spring_winter" : "Весна и зима",
+  "gui.guide.seasons.summer_autumn" : "Лето и осень",
+  "gui.guide.seasons.summer_winter" : "Лето и зима",
+  "gui.guide.seasons.autumn_winter" : "Осень и зима",
+
+  "gui.guide.seasons.around_spring" : "Около весны",
+  "gui.guide.seasons.around_summer" : "Около лета",
+  "gui.guide.seasons.around_autumn" : "Около осени",
+  "gui.guide.seasons.around_winter" : "Около зимы",
+
+  "gui.guide.seasons.spring" : "Весна",
+  "gui.guide.seasons.early_spring" : "Ранняя весна",
+  "gui.guide.seasons.mid_spring" : "Середина весны",
+  "gui.guide.seasons.late_spring" : "Поздняя весна",
+
+  "gui.guide.seasons.summer" : "Лето",
+  "gui.guide.seasons.early_summer" : "Раннее лето",
+  "gui.guide.seasons.mid_summer" : "Середина лета",
+  "gui.guide.seasons.late_summer" : "Позднее лето",
+
+  "gui.guide.seasons.autumn" : "Осень",
+  "gui.guide.seasons.early_autumn" : "Ранняя осень",
+  "gui.guide.seasons.mid_autumn" : "Середина осени",
+  "gui.guide.seasons.late_autumn" : "Поздняя осень",
+
+  "gui.guide.seasons.winter" : "Зима",
+  "gui.guide.seasons.early_winter" : "Ранняя зима",
+  "gui.guide.seasons.mid_winter" : "Середина зимы",
+  "gui.guide.seasons.late_winter" : "Поздняя зима",
+
+
+  "gui.guide.seasons.in_season" : "✅ Сейчас сезон!",
+  "gui.guide.seasons.not_in_season" : "❌ Не сезон",
+
+  "gui.guide.weather.clear" : "Ясная погода",
+  "gui.guide.weather.rain" : "Дождь",
+  "gui.guide.weather.thunder" : "Гроза",
+  "gui.guide.weather.clear_or_rain" : "Ясно или дождь",
+  "gui.guide.weather.clear_or_thunder" : "Ясно или гроза",
+  "gui.guide.weather.rain_or_thunder" : "Дождь или гроза",
+
+  "gui.guide.elevation.surface" : "Поверхность",
+  "gui.guide.elevation.mountains" : "Горы",
+  "gui.guide.elevation.skies" : "Небеса",
+  "gui.guide.elevation.deepslate" : "Глубинный сланец",
+  "gui.guide.elevation.void" : "Пустота",
+  "gui.guide.elevation.stone_caves" : "Каменные пещеры",
+  "gui.guide.elevation.underground" : "Под землёй",
+
+  "gui.guide.light_level.darkness" : "Темнота",
+  "gui.guide.light_level.bright" : "Светло",
+
+  "gui.guide.sort" : "  [Сорт.]",
+
+  "gui.guide.sort.alphabetical_up" : "⏬ По алфавиту",
+  "gui.guide.sort.alphabetical_down" : "⏫ По алфавиту",
+  "gui.guide.sort.mod_up" : "⏬ По модам",
+  "gui.guide.sort.mod_down" : "⏫ По модам",
+  "gui.guide.sort.rarity_up" : "⏬ По редкости",
+  "gui.guide.sort.rarity_down" : "⏫ По редкости",
+  "gui.guide.sort.caught_up" : "⏬ По поимке",
+  "gui.guide.sort.caught_down" : "⏫ По поимке",
+  "gui.guide.sort.caught_golden_up" : "⏬ По золотым",
+  "gui.guide.sort.caught_golden_down" : "⏫ По золотым",
+
+  "gui.guide.units.metric" : "Метрическая (см и кг)",
+  "gui.guide.units.imperial" : "Имперская (дюймы и фунты)",
+
+  "gui.guide.units.cheeseburger" : "Чизбургер",
+  "gui.guide.units.cheeseburger.size" : "Чизбургеры",
+  "gui.guide.units.cheeseburger.weight" : "Чизбургеры",
+
+  "gui.guide.units.developer" : "Разработчик",
+  "gui.guide.units.developer.size" : "wds",
+  "gui.guide.units.developer.weight" : "wds",
+
+  "gui.guide.units.banana" : "Банан",
+  "gui.guide.units.banana.size" : "Бананы",
+  "gui.guide.units.banana.weight" : "Бананы",
+
+  "gui.guide.units.duck" : "Средняя утка",
+  "gui.guide.units.duck.size" : "Утки",
+  "gui.guide.units.duck.weight" : "Утки",
+
+  "gui.guide.units.space_whale" : "Космический кит",
+  "gui.guide.units.scientific" : "Научная",
+
+
+
+
+  "gui.guide.not_caught_yet_fish_name" : "-------",
+  "gui.guide.not_caught_fish_name" : "???",
+  "gui.guide.caught" : "Поймано:",
+  "gui.guide.not_caught" : "------",
+  "gui.guide.not_caught_yet" : "Ещё не поймана!",
+  "gui.guide.click" : "Нажмите, чтобы открыть запись",
+  "gui.guide.rarity" : "Редкость:",
+
+  "gui.guide.first" : "Первый улов:",
+  "gui.guide.fastest" : "Быстрейший: ",
+  "gui.guide.average" : "Средний: ",
+  "gui.guide.biggest" : "Наибольший: ",
+  "gui.guide.heaviest" : "Наитяжелейший: ",
+  "gui.guide.percentile" : "Лучший: топ ",
+
+  "gui.guide.track" : "Нажмите, чтобы отслеживать эту рыбу!",
+  "gui.guide.bucketable" : "Можно поймать в ведро, используя его как наживку!",
+  "gui.guide.entity" : "Можно поймать живой, используя Всесильного червя как наживку!",
+  "gui.guide.always_entity" : "Эта рыба живее, чем обычно!",
+
+  "gui.guide.fishing" : "Всё о рыбалке:",
+  "gui.guide.index.basics" : "Основы",
+  "gui.guide.index.sweetspots" : "Типы идеальных зон",
+  "gui.guide.index.treasures" : "Сокровища",
+  "gui.guide.index.upgrades" : "Улучшения и модификаторы",
+  "gui.guide.index.tackle_box" : "Ящики для снастей и насадки",
+  "gui.guide.index.hooks_bobbers_baits" : "Крючки, поплавки и наживки",
+  "gui.guide.index.settings" : "Настройки",
+
+  "gui.guide.index.cosmetics" : "Косметика, шаблоны и снаряжение",
+  "gui.guide.index.tournaments" : "Рыболовные турниры",
+  "gui.guide.index.messages" : "Письма и послания в бутылке",
+  "gui.guide.index.selling_bin" : "Продажа рыбы!",
+  "gui.guide.index.aquarium" : "Аквариумы",
+  "gui.guide.index.display" : "Дисплей",
+  "gui.guide.index.trophies_and_secrets" : "Трофеи и секреты",
+
+
+
+  "gui.guide.stats.fishes_caught" : "Поймано рыбы",
+  "gui.guide.stats.trash_caught" : "Выловлено мусора",
+  "gui.guide.stats.common_caught" : "Обычные рыбы",
+  "gui.guide.stats.uncommon_caught" : "Необычные рыбы",
+  "gui.guide.stats.rare_caught" : "Редкие рыбы",
+  "gui.guide.stats.epic_caught" : "Эпические рыбы",
+  "gui.guide.stats.legendary_caught" : "Легендарные рыбы",
+  "gui.guide.stats.golden_fishes_caught" : "Золотые рыбы",
+  "gui.guide.stats.perfect_fishes_caught" : "Идеальные уловы",
+  "gui.guide.stats.treasures_caught" : "Поймано сокровищ",
+  "gui.guide.stats.starcaught_fish_missed" : "Упущено рыбы",
+  "gui.guide.stats.bait_used" : "Израсходовано наживки",
+  "gui.guide.stats.time_spent" : "Время игры",
+
+
+  "gui.guide.page.0.left.title" : "Основы",
+  "gui.guide.page.0.left.0" : "",
+  "gui.guide.page.0.left.1" : "",
+  "gui.guide.page.0.left.2" : "",
+  "gui.guide.page.0.left.3" : "",
+  "gui.guide.page.0.left.4" : "",
+  "gui.guide.page.0.left.5" : "  Если вы хотите выловить",
+  "gui.guide.page.0.left.6" : "больше, чем лосось или",
+  "gui.guide.page.0.left.7" : "треска, вам понадобится",
+  "gui.guide.page.0.left.8" : "<sclegendary>Удочка звездолова</sclegendary>!",
+  "gui.guide.page.0.left.9" : "  Как только она окажется ",
+  "gui.guide.page.0.left.10" : "у вас, пора рыбачить!",
+  "gui.guide.page.0.left.11" : "  Следите за поплавком",
+  "gui.guide.page.0.left.12" : "и терпеливо ждите",
+  "gui.guide.page.0.left.13" : "момента для подсечки.",
+
+  "gui.guide.page.0.right.0" : "",
+  "gui.guide.page.0.right.1" : "",
+  "gui.guide.page.0.right.2" : "",
+  "gui.guide.page.0.right.3" : "  Эти рыбы не сдадутся",
+  "gui.guide.page.0.right.4" : "так просто, обязательно",
+  "gui.guide.page.0.right.5" : "попадайте по всем их",
+  "gui.guide.page.0.right.6" : "идеальным точкам!",
+  "gui.guide.page.0.right.7" : "",
+  "gui.guide.page.0.right.8" : "",
+  "gui.guide.page.0.right.9" : "",
+  "gui.guide.page.0.right.10" : "",
+  "gui.guide.page.0.right.11" : "",
+  "gui.guide.page.0.right.12" : "",
+  "gui.guide.page.0.right.13" : "",
+  "gui.guide.page.0.right.14" : "  Возможно, набравшись",
+  "gui.guide.page.0.right.15" : "достаточно опыта, вы",
+  "gui.guide.page.0.right.16" : "будете готовы ко всему!",
+  "gui.guide.page.0.right.17" : "Даже к ловле",
+  "gui.guide.page.0.right.18" : "<sclegendary>легендарных</sclegendary> рыб!",
+
+
+
+  "gui.guide.page.1.left.title" : "Ящики для снастей",
+  "gui.guide.page.1.left.0" : "",
+  "gui.guide.page.1.left.1" : "",
+  "gui.guide.page.1.left.2" : "",
+  "gui.guide.page.1.left.3" : "",
+  "gui.guide.page.1.left.4" : "",
+  "gui.guide.page.1.left.5" : "  Ящик для снастей станет",
+  "gui.guide.page.1.left.6" : "вашим лучшим другом!",
+  "gui.guide.page.1.left.7" : "",
+  "gui.guide.page.1.left.8" : "  Он служит хранилищем",
+  "gui.guide.page.1.left.9" : "для рыбы и других рыбо-",
+  "gui.guide.page.1.left.10" : "ловных принадлежностей,",
+  "gui.guide.page.1.left.11" : "таких как крючки,",
+  "gui.guide.page.1.left.12" : "поплавки и наживки.",
+  "gui.guide.page.1.left.13" : "",
+  "gui.guide.page.1.left.14" : "",
+
+  "gui.guide.page.1.right.0" : "",
+  "gui.guide.page.1.right.1" : "",
+  "gui.guide.page.1.right.2" : "",
+  "gui.guide.page.1.right.3" : "",
+  "gui.guide.page.1.right.4" : "  Помимо хранения вещей,",
+  "gui.guide.page.1.right.5" : "ящик также позволяет",
+  "gui.guide.page.1.right.6" : "менять оснастку вашей",
+  "gui.guide.page.1.right.7" : "удочки!",
+  "gui.guide.page.1.right.8" : "",
+  "gui.guide.page.1.right.9" : "  Незаменимая вещь, если",
+  "gui.guide.page.1.right.10" : "вы решили порыбачить в самых",
+  "gui.guide.page.1.right.11" : "разных уголках верхнего мира.",
+
+
+  "gui.guide.page.2.left.title" : "Сокровища",
+  "gui.guide.page.2.left.0" : "",
+  "gui.guide.page.2.left.1" : "",
+  "gui.guide.page.2.left.2" : "",
+  "gui.guide.page.2.left.3" : "",
+  "gui.guide.page.2.left.4" : "",
+  "gui.guide.page.2.left.5" : "  При ловле одной из",
+  "gui.guide.page.2.left.6" : "сложных рыб вы можете",
+  "gui.guide.page.2.left.7" : "почувствовать, что что-то",
+  "gui.guide.page.2.left.8" : "тянет крючок вниз!",
+  "gui.guide.page.2.left.9" : "",
+  "gui.guide.page.2.left.10" : "Вы нашли <scgolden>сокровище</scgolden>!",
+
+  "gui.guide.page.2.right.0" : "",
+  "gui.guide.page.2.right.1" : "",
+  "gui.guide.page.2.right.2" : "",
+  "gui.guide.page.2.right.3" : "",
+  "gui.guide.page.2.right.4" : "  Но хватит ли у вас умения",
+  "gui.guide.page.2.right.5" : "поймать его, не дав рыбе",
+  "gui.guide.page.2.right.6" : "уплыть?",
+  "gui.guide.page.2.right.7" : "",
+  "gui.guide.page.2.right.8" : "  Сильные рыбы могут",
+  "gui.guide.page.2.right.9" : "скрывать хорошую добычу!",
+  "gui.guide.page.2.right.10" : " Готовьтесь к трудной",
+  "gui.guide.page.2.right.11" : "борьбе, если хотите",
+  "gui.guide.page.2.right.12" : "поймать лучшие сокровища",
+  "gui.guide.page.2.right.13" : "и иногда даже уникальную",
+  "gui.guide.page.2.right.14" : "косметику!",
+  "gui.guide.page.2.right.15" : "",
+  "gui.guide.page.2.right.16" : "",
+  "gui.guide.page.2.right.17" : "",
+
+
+
+  "gui.guide.page.3.left.title" : "Идеальные точки",
+  "gui.guide.page.3.left.0" : "",
+  "gui.guide.page.3.left.1" : "",
+  "gui.guide.page.3.left.2" : "",
+  "gui.guide.page.3.left.3" : "",
+  "gui.guide.page.3.left.4" : "",
+  "gui.guide.page.3.left.5" : "  Разные рыбы будут",
+  "gui.guide.page.3.left.6" : "сопротивляться по-разному",
+  "gui.guide.page.3.left.7" : "при вываживании!",
+  "gui.guide.page.3.left.8" : "",
+  "gui.guide.page.3.left.9" : "  Знание всех повадок",
+  "gui.guide.page.3.left.10" : "рыбы - это половина успеха!",
+  "gui.guide.page.3.left.11" : "",
+  "gui.guide.page.3.left.12" : "",
+  "gui.guide.page.3.left.13" : "",
+
+  "gui.guide.page.3.right.0" : "",
+  "gui.guide.page.3.right.1" : "",
+  "gui.guide.page.3.right.2" : "",
+  "gui.guide.page.3.right.3" : "    Базовая идеальная точка.",
+  "gui.guide.page.3.right.4" : "    Ничего особенного.",
+  "gui.guide.page.3.right.5" : "",
+  "gui.guide.page.3.right.6" : "    Замороженная точка.",
+  "gui.guide.page.3.right.7" : "    Лучше её избегать.",
+  "gui.guide.page.3.right.8" : "",
+  "gui.guide.page.3.right.9" : "    Сланцевые точки одноразовые",
+  "gui.guide.page.3.right.10" : "    и исчезают навсегда.",
+  "gui.guide.page.3.right.11" : "",
+  "gui.guide.page.3.right.12" : "    Каменные точки почти",
+  "gui.guide.page.3.right.13" : "    не дают прогресса.",
+  "gui.guide.page.3.right.14" : "",
+  "gui.guide.page.3.right.15" : "    Золотые точки дают",
+  "gui.guide.page.3.right.16" : "    прогресс сокровищ.",
+  "gui.guide.page.3.right.17" : "    ",
+  "gui.guide.page.3.right.18" : "        И многое другое!",
+
+
+
+  "gui.guide.page.4.left.title" : "Улучшения",
+  "gui.guide.page.4.left.0" : "",
+  "gui.guide.page.4.left.1" : "",
+  "gui.guide.page.4.left.2" : "",
+  "gui.guide.page.4.left.3" : "",
+  "gui.guide.page.4.left.4" : "",
+  "gui.guide.page.4.left.5" : "  Улучшение удочки станет",
+  "gui.guide.page.4.left.6" : "неотъемлемой частью",
+  "gui.guide.page.4.left.7" : "вашего рыболовного пути.",
+  "gui.guide.page.4.left.8" : "   Предел мечтаний",
+  "gui.guide.page.4.left.9" : "любого рыболова,",
+  "gui.guide.page.4.left.10" : "это <sclegendary>Незеритовая Удочка</sclegendary>",
+  "gui.guide.page.4.left.11" : "Она повышает ваши хар-ки,",
+  "gui.guide.page.4.left.12" : "и открывает возможность",
+  "gui.guide.page.4.left.13" : "рыбалки в лаве, но до её",
+  "gui.guide.page.4.left.14" : "получения пройдёт немало",
+  "gui.guide.page.4.left.15" : "времени.",
+  "gui.guide.page.4.left.16" : "До тех пор, для ловли в лаве",
+  "gui.guide.page.4.left.17" : "хватит <scrare>Аметистового Крючка</scrare>.",
+
+  "gui.guide.page.4.right.0" : "",
+  "gui.guide.page.4.right.1" : "",
+  "gui.guide.page.4.right.2" : "",
+  "gui.guide.page.4.right.3" : "",
+  "gui.guide.page.4.right.4" : "  Лучший способ сделать",
+  "gui.guide.page.4.right.5" : "рыбалку эффективнее, это",
+  "gui.guide.page.4.right.6" : "использовать различные",
+  "gui.guide.page.4.right.7" : "Крючки, Поплавки, и Наживки.",
+  "gui.guide.page.4.right.8" : "",
+  "gui.guide.page.4.right.9" : "  Они дают разные",
+  "gui.guide.page.4.right.10" : "модификаторы, начиная от",
+  "gui.guide.page.4.right.11" : "сокращения времени клёва,",
+  "gui.guide.page.4.right.12" : "до полного изменения",
+  "gui.guide.page.4.right.13" : "поведения рыбы!",
+  "gui.guide.page.4.right.14" : "",
+  "gui.guide.page.4.right.15" : "  Косметические предметы,",
+  "gui.guide.page.4.right.16" : "такие как рыболовные шляпы",
+  "gui.guide.page.4.right.17" : "также имеют модификаторы!",
+
+
+
+  "gui.guide.page.5.left.title" : "Крючки и поплавки",
+  "gui.guide.page.5.left.0" : "",
+  "gui.guide.page.5.left.1" : "",
+  "gui.guide.page.5.left.2" : "",
+  "gui.guide.page.5.left.3" : "",
+  "gui.guide.page.5.left.4" : "",
+  "gui.guide.page.5.left.5" : "  Крючки и поплавки дают",
+  "gui.guide.page.5.left.6" : "вам широкий выбор разных",
+  "gui.guide.page.5.left.7" : "модификаторов.",
+  "gui.guide.page.5.left.8" : "",
+  "gui.guide.page.5.left.9" : "  Важно подобрать верную",
+  "gui.guide.page.5.left.10" : "комбинацию для текущей",
+  "gui.guide.page.5.left.11" : "задачи!",
+  "gui.guide.page.5.left.12" : "",
+  "gui.guide.page.5.left.13" : "Меняйте их в ящике снастей.",
+
+  "gui.guide.page.5.right.title" : "Наживки",
+  "gui.guide.page.5.right.0" : "",
+  "gui.guide.page.5.right.1" : "",
+  "gui.guide.page.5.right.2" : "",
+  "gui.guide.page.5.right.3" : "",
+  "gui.guide.page.5.right.4" : "",
+  "gui.guide.page.5.right.5" : "  Почти любая наживка",
+  "gui.guide.page.5.right.6" : "ускоряет клёв, но бывают",
+  "gui.guide.page.5.right.7" : "и редкие модификаторы!",
+  "gui.guide.page.5.right.8" : "",
+  "gui.guide.page.5.right.9" : "  Некоторых рыб манят",
+  "gui.guide.page.5.right.10" : "особые наживки, а",
+  "gui.guide.page.5.right.11" : "использование вёдер",
+  "gui.guide.page.5.right.12" : "позволит выловить рыбу",
+  "gui.guide.page.5.right.13" : "сразу в ведре!",
+
+
+  "gui.guide.page.6.left.title" : "Косметика",
+  "gui.guide.page.6.left.0" : "",
+  "gui.guide.page.6.left.1" : "",
+  "gui.guide.page.6.left.2" : "",
+  "gui.guide.page.6.left.3" : "",
+  "gui.guide.page.6.left.4" : "",
+  "gui.guide.page.6.left.5" : "  В игре есть множество",
+  "gui.guide.page.6.left.6" : "косметических вещей:",
+  "gui.guide.page.6.left.7" : "от брони до стильных",
+  "gui.guide.page.6.left.8" : "обликов для вашей",
+  "gui.guide.page.6.left.9" : "удочки.",
+  "gui.guide.page.6.left.10" : "",
+  "gui.guide.page.6.left.11" : "  Собрать их все — это",
+  "gui.guide.page.6.left.12" : "вызов, на который решатся",
+  "gui.guide.page.6.left.13" : "лишь самые заядлые",
+  "gui.guide.page.6.left.14" : "рыболовы-модники!",
+
+  "gui.guide.page.6.right.title" : "Облики снастей",
+  "gui.guide.page.6.right.0" : "",
+  "gui.guide.page.6.right.1" : "",
+  "gui.guide.page.6.right.2" : "",
+  "gui.guide.page.6.right.3" : "",
+  "gui.guide.page.6.right.4" : "",
+  "gui.guide.page.6.right.5" : "  Надоел скучный вид",
+  "gui.guide.page.6.right.6" : "снаряжения? Если вам",
+  "gui.guide.page.6.right.7" : "повезёт, вы можете найти",
+  "gui.guide.page.6.right.8" : "кузнечный шаблон для",
+  "gui.guide.page.6.right.9" : "облика снастей!",
+  "gui.guide.page.6.right.10" : "",
+  "gui.guide.page.6.right.11" : "  Как и с другими шаблонами,",
+  "gui.guide.page.6.right.12" : "просто совместите его на",
+  "gui.guide.page.6.right.13" : "кузнечном столе и новый",
+  "gui.guide.page.6.right.14" : "образ готов.",
+
+
+  "gui.guide.page.7.left.title" : "Турниры",
+  "gui.guide.page.7.left.0" : "",
+  "gui.guide.page.7.left.1" : "",
+  "gui.guide.page.7.left.2" : "",
+  "gui.guide.page.7.left.3" : "",
+  "gui.guide.page.7.left.4" : "",
+  "gui.guide.page.7.left.5" : "  Рыболовные турниры — это",
+  "gui.guide.page.7.left.6" : "шанс испытать свои навыки",
+  "gui.guide.page.7.left.7" : "в состязании с другими",
+  "gui.guide.page.7.left.8" : "рыболовами!",
+  "gui.guide.page.7.left.9" : "",
+  "gui.guide.page.7.left.10" : "",
+  "gui.guide.page.7.left.11" : "  Настройте турнир по",
+  "gui.guide.page.7.left.12" : "своему вкусу и позовите",
+  "gui.guide.page.7.left.13" : "друзей для дружеского",
+  "gui.guide.page.7.left.14" : "соревнования по рыбной",
+  "gui.guide.page.7.left.15" : "ловле.",
+
+  "gui.guide.page.7.right.0" : "",
+  "gui.guide.page.7.right.1" : "",
+  "gui.guide.page.7.right.2" : "",
+  "gui.guide.page.7.right.3" : "",
+  "gui.guide.page.7.right.4" : "  За победу в турнире",
+  "gui.guide.page.7.right.5" : "можно даже получить",
+  "gui.guide.page.7.right.6" : "особые награды!",
+  "gui.guide.page.7.right.7" : "",
+  "gui.guide.page.7.right.8" : "  Для начала вам всего",
+  "gui.guide.page.7.right.9" : "лишь понадобится",
+  "gui.guide.page.7.right.10" : "турнирный стенд.",
+
+
+
+  "gui.guide.page.8.left.messages_found" : "Найдено посланий",
+  "gui.guide.page.8.left.title" : "Послания",
+  "gui.guide.page.8.left.0" : "",
+  "gui.guide.page.8.left.1" : "",
+  "gui.guide.page.8.left.2" : "",
+  "gui.guide.page.8.left.3" : "",
+  "gui.guide.page.8.left.4" : "",
+  "gui.guide.page.8.left.5" : "  Время от времени вам",
+  "gui.guide.page.8.left.6" : "могут попадаться давно",
+  "gui.guide.page.8.left.7" : "забытые истории,",
+  "gui.guide.page.8.left.8" : "заключённые в бутылки,",
+  "gui.guide.page.8.left.9" : "дрейфующие среди волн.",
+
+  "gui.guide.page.8.right.0" : "",
+  "gui.guide.page.8.right.1" : "",
+  "gui.guide.page.8.right.2" : "",
+  "gui.guide.page.8.right.3" : "",
+  "gui.guide.page.8.right.4" : "",
+  "gui.guide.page.8.right.5" : "  Тех, кто их оставил,",
+  "gui.guide.page.8.right.6" : "уже давно нет в живых.",
+  "gui.guide.page.8.right.7" : "Однако и вы можете",
+  "gui.guide.page.8.right.8" : "записать свою историю",
+  "gui.guide.page.8.right.9" : "в <sclegendary>письмо</sclegendary>, положить его",
+  "gui.guide.page.8.right.10" : "в бутылку и бросить",
+  "gui.guide.page.8.right.11" : "её в океан!",
+  "gui.guide.page.8.right.12" : "",
+  "gui.guide.page.8.right.13" : "",
+  "gui.guide.page.8.right.14" : "",
+  "gui.guide.page.8.right.15" : "  Какой-нибудь одинокий",
+  "gui.guide.page.8.right.16" : "рыбак обязательно найдёт её...",
+
+  "gui.guide.page.9.left.title" : "Ящик для продажи",
+  "gui.guide.page.9.left.0" : "",
+  "gui.guide.page.9.left.1" : "",
+  "gui.guide.page.9.left.2" : "",
+  "gui.guide.page.9.left.3" : "",
+  "gui.guide.page.9.left.4" : "",
+  "gui.guide.page.9.left.5" : "  Бывало ли так, что вы",
+  "gui.guide.page.9.left.6" : "рыбачили до тех пор, пока",
+  "gui.guide.page.9.left.7" : "сундуки не забились",
+  "gui.guide.page.9.left.8" : "уловом до отказа?",
+  "gui.guide.page.9.left.9" : "",
+  "gui.guide.page.9.left.10" : "  Пора отправить всю",
+  "gui.guide.page.9.left.11" : "рыбу в ящик для продажи!",
+
+
+  "gui.guide.page.9.right.0" : "",
+  "gui.guide.page.9.right.1" : "",
+  "gui.guide.page.9.right.2" : "",
+  "gui.guide.page.9.right.3" : "",
+  "gui.guide.page.9.right.4" : "  Продавая рыбу, вы",
+  "gui.guide.page.9.right.5" : "можете получить ценные",
+  "gui.guide.page.9.right.6" : "награды взамен.",
+  "gui.guide.page.9.right.7" : "",
+  "gui.guide.page.9.right.8" : "  Цена зависит от ред-",
+  "gui.guide.page.9.right.9" : "кости и размера рыбы.",
+  "gui.guide.page.9.right.10" : "За суперредкие золотые",
+  "gui.guide.page.9.right.11" : "варианты полагается",
+  "gui.guide.page.9.right.12" : "дополнительный бонус!",
+  "gui.guide.page.9.right.13" : "",
+  "gui.guide.page.9.right.14" : "  Создайте рыбную моно-",
+  "gui.guide.page.9.right.15" : "полию и захватите рынок",
+  "gui.guide.page.9.right.16" : "силой рыбы!",
+
+  "gui.guide.page.10.left.title" : "Аквариумы",
+  "gui.guide.page.10.left.0" : "",
+  "gui.guide.page.10.left.1" : "",
+  "gui.guide.page.10.left.2" : "",
+  "gui.guide.page.10.left.3" : "",
+  "gui.guide.page.10.left.4" : "",
+  "gui.guide.page.10.left.5" : "  Аквариум станет отличным",
+  "gui.guide.page.10.left.6" : "дополнением для любого",
+  "gui.guide.page.10.left.7" : "дома и оживит ваше",
+  "gui.guide.page.10.left.8" : "жилое пространство!",
+  "gui.guide.page.10.left.9" : "",
+  "gui.guide.page.10.left.10" : "  Их можно украсить",
+  "gui.guide.page.10.left.11" : "самыми разными",
+  "gui.guide.page.10.left.12" : "декорациями под любой",
+  "gui.guide.page.10.left.13" : "интерьер и стиль.",
+
+  "gui.guide.page.10.right.0" : "",
+  "gui.guide.page.10.right.1" : "",
+  "gui.guide.page.10.right.2" : "",
+  "gui.guide.page.10.right.3" : "",
+  "gui.guide.page.10.right.4" : "  Используйте ведро во",
+  "gui.guide.page.10.right.5" : "время рыбалки, чтобы",
+  "gui.guide.page.10.right.6" : "сразу поймать рыбу в",
+  "gui.guide.page.10.right.7" : "него. Ей наверняка",
+  "gui.guide.page.10.right.8" : "понравится новый дом!",
+
+  "gui.guide.page.11.left.title" : "Витрины",
+  "gui.guide.page.11.left.0" : "",
+  "gui.guide.page.11.left.1" : "",
+  "gui.guide.page.11.left.2" : "",
+  "gui.guide.page.11.left.3" : "",
+  "gui.guide.page.11.left.4" : "",
+  "gui.guide.page.11.left.5" : "  Если вы хотите, чтобы",
+  "gui.guide.page.11.left.6" : "друзья завидовали вашим",
+  "gui.guide.page.11.left.7" : "навыкам рыбалки, нет",
+  "gui.guide.page.11.left.8" : "лучшего способа, чем",
+  "gui.guide.page.11.left.9" : "показать коллекцию с",
+  "gui.guide.page.11.left.10" : "помощью витрины!",
+  "gui.guide.page.11.left.11" : "",
+  "gui.guide.page.11.left.12" : "  Витрины могут выставлять",
+  "gui.guide.page.11.left.13" : "эту книгу, а также",
+  "gui.guide.page.11.left.14" : "звёздную рыбу!",
+
+
+  "gui.guide.page.11.right.title" : "Подпись книги",
+  "gui.guide.page.11.right.0" : "",
+  "gui.guide.page.11.right.1" : "",
+  "gui.guide.page.11.right.2" : "",
+  "gui.guide.page.11.right.3" : "",
+  "gui.guide.page.11.right.4" : "",
+  "gui.guide.page.11.right.5" : "  Прежде чем выставить",
+  "gui.guide.page.11.right.6" : "книгу, обязательно под-",
+  "gui.guide.page.11.right.7" : "пишите её, чтобы привя-",
+  "gui.guide.page.11.right.8" : "зать к ней коллекцию!",
+  "gui.guide.page.11.right.9" : "Иначе другие игроки",
+  "gui.guide.page.11.right.10" : "увидят свои достижения",
+  "gui.guide.page.11.right.11" : "вместо ваших.",
+  "gui.guide.page.11.right.12" : "",
+  "gui.guide.page.11.right.13" : "  Просто перейдите в начало",
+  "gui.guide.page.11.right.14" : "книги, чтобы подписаться,",
+  "gui.guide.page.11.right.15" : "и вы сможете делиться",
+  "gui.guide.page.11.right.16" : "успехами с друзьями!",
+
+
+
+
+  "gui.guide.page.12.left.title" : "Статистика",
+
+  "gui.guide.page.12.right.title" : "Трофеи",
+  "gui.guide.page.12.right.0" : "",
+  "gui.guide.page.12.right.1" : "",
+  "gui.guide.page.12.right.2" : "",
+  "gui.guide.page.12.right.3" : "",
+  "gui.guide.page.12.right.4" : "",
+  "gui.guide.page.12.right.5" : "  Трофеи — это символ",
+  "gui.guide.page.12.right.6" : "вашего мастерства.",
+  "gui.guide.page.12.right.7" : "Пусть другие кусают",
+  "gui.guide.page.12.right.8" : "локти от своей полной",
+  "gui.guide.page.12.right.9" : "безтрофейности!",
+  "gui.guide.page.12.right.10" : "",
+  "gui.guide.page.12.right.11" : "  Трофейная рыба клюнет",
+  "gui.guide.page.12.right.12" : "незамедлительно, как",
+  "gui.guide.page.12.right.13" : "только будут соблюдены",
+  "gui.guide.page.12.right.14" : "все условия.",
+
+  "gui.guide.hover.dimension.correct" : "✅ Измерение",
+  "gui.guide.hover.dimension.incorrect" : "❌ Измерение",
+  "gui.guide.hover.biome.correct" : "✅ Биом",
+  "gui.guide.hover.biome.incorrect" : "❌ Биом",
+  "gui.guide.hover.daytime.correct" : "✅ Время суток",
+  "gui.guide.hover.daytime.incorrect" : "❌ Время суток",
+  "gui.guide.hover.structure.correct" : "✅ Структура",
+  "gui.guide.hover.structure.incorrect" : "❌ Структура",
+  "gui.guide.hover.moon_phase.incorrect" : "❌ Фаза луны",
+  "gui.guide.hover.moon_phase.correct" : "✅ Фаза луны",
+  "gui.guide.hover.luck_restriction.incorrect" : "❌ Удача",
+  "gui.guide.hover.luck_restriction.correct" : "✅ Удача",
+  "gui.guide.hover.weather.correct" : "✅ Погода",
+  "gui.guide.hover.weather.incorrect" : "❌ Погода",
+  "gui.guide.hover.elevation.correct" : "✅ Высота",
+  "gui.guide.hover.elevation.incorrect" : "❌ Высота",
+  "gui.guide.hover.light_level.correct" : "✅ Освещение",
+  "gui.guide.hover.light_level.incorrect" : "❌ Освещение",
+  "gui.guide.hover.bait" : "Наживка",
+  "gui.guide.hover.caught_limit" : "Лимит улова: %s",
+
+  "gui.guide.dimension" : "Измерение: ",
+  "gui.guide.dimension_tags" : "Теги измерений: ",
+  "gui.guide.dimensions" : "Измерения: ",
+  "gui.guide.dimension.empty" : "[Нет измерений]",
+  "gui.guide.biome" : "Биом: ",
+  "gui.guide.biome_tags" : "Теги биома: ",
+  "gui.guide.biomes" : "Биомы: ",
+  "gui.guide.biomes.empty" : "[Нет биомов]",
+  "gui.guide.blacklisted_biomes" : "Запрещённые биомы: ",
+  "gui.guide.blacklisted_biome_tags" : "Запрещённые теги биомов: ",
+  "gui.guide.blacklisted_dimensions" : "Запрещённые измерения: ",
+  "gui.guide.bait.prefer" : "Предпочитает: ",
+  "gui.guide.bait.require" : "Требует: ",
+  "gui.guide.weather" : "Погода: ",
+  "gui.guide.raining" : "Дождь",
+  "gui.guide.thundering" : "Гроза",
+  "gui.guide.clear_chance" : "Добавленный шанс ясной погоды: %s",
+  "gui.guide.rain_chance" : "Добавленный шанс дождя: %s",
+  "gui.guide.thunder_chance" : "Добавленный шанс грозы: %s",
+  "gui.guide.daytime" : "Время суток: ",
+  "gui.guide.moon_phase" : "Фаза луны: ",
+  "gui.guide.luck" : "Удача: ",
+  "gui.guide.structure" : "Структура: ",
+  "gui.guide.elevation" : "Высота: ",
+  "gui.guide.light_level" : "Уровень света: ",
+  "gui.guide.elevation_bias" : "Около %s",
+  "gui.guide.elevation_bias.hover" : "От %s до %s, лучше всего на %s",
+  "gui.guide.caught_limit" : "Лимит улова: ",
+  "gui.guide.caught_limit.caught" : "Уже поймана",
+  "gui.guide.caught_limit.not_caught" : "Не поймана",
+  "gui.guide.rarity_count.caught" : "Поймано: ",
+  "gui.guide.fluid" : "Жидкость: ",
+  "gui.guide.chance" : "%s шанс",
+
+  "gui.guide.full_moon" : "Полнолуние",
+  "gui.guide.waning_gibbous" : "Убывающая луна",
+  "gui.guide.third_quarter" : "Последняя четверть",
+  "gui.guide.waning_crescent" : "Убывающий серп",
+  "gui.guide.new_moon" : "Новолуние",
+  "gui.guide.waxing_crescent" : "Растущий серп",
+  "gui.guide.first_quarter" : "Первая четверть",
+  "gui.guide.waxing_gibbous" : "Растущая луна",
+
+  "gui.guide.day" : "День",
+  "gui.guide.dawn_and_dusk" : "Рассвет и закат",
+  "gui.guide.noon" : "Полдень",
+  "gui.guide.night" : "Ночь",
+  "gui.guide.midnight" : "Полночь",
+  "gui.guide.below" : "Ниже %s",
+  "gui.guide.above" : "Выше %s",
+  "gui.guide.around" : "Около %s",
+  "gui.guide.between" : "Между %s и %s",
+  "gui.guide.no_restriction" : "-------",
+  "gui.guide.rarity_count.single" : "%s рыб",
+  "gui.guide.bait_chance_added" : "Шанс, добавленный наживкой:",
+  "gui.guide.rarity_count.all" : "Все %s рыб",
+
+  "gui.guide.hover" : "[навести]",
+
+  "gui.guide.caves" : "Пещеры",
+
+  "gui.guide.outer_end_islands" : "Внешние острова Края",
+
+  "gui.guide.lakes" : "Озёра",
+  "gui.guide.lakes.hover" : "Поверхностные биомы, кроме рек и океанов",
+
+  "gui.guide.rarity.golden" : "Золотая",
+
+  "gui.guide.rarity.trash" : "Мусор",
+  "gui.guide.rarity.common" : "Обычная",
+  "gui.guide.rarity.uncommon" : "<scuncommon>Необычная</scuncommon>",
+  "gui.guide.rarity.rare" : "<scrare>Редкая</scrare>",
+  "gui.guide.rarity.epic" : "<scepic>Эпическая</scepic>",
+  "gui.guide.rarity.legendary" : "<sclegendary>Легендарная</sclegendary>",
+
+
+
+  "gui.starcatcher.tournament.organizer" : "Организатор",
+  "gui.starcatcher.tournament.status" : "Статус",
+  "gui.starcatcher.tournament.duration" : "Длительность",
+  "gui.starcatcher.tournament.start_date" : "Дата начала",
+  "gui.starcatcher.tournament.previous_tournaments" : "Прошедшие турниры",
+  "gui.starcatcher.tournament.signed_up" : "Записавшиеся игроки",
+  "gui.starcatcher.tournament.scores" : "Очки игроков",
+
+  "gui.starcatcher.tournament.button.unsign" : "Выйти",
+  "gui.starcatcher.tournament.button.sign_up" : "Записаться",
+  "gui.starcatcher.tournament.button.back" : "Назад к текущему турниру",
+  "gui.starcatcher.tournament.button.start" : "Начать",
+  "gui.starcatcher.tournament.button.cancel" : "Отменить",
+
+  "gui.starcatcher.tournament.ended" : "%s завершён! Победитель — %s с результатом %s!",
+  "gui.starcatcher.tournament.ended.no_winner" : "%s завершён! Никто не поймал ни одной рыбы :(",
+
+  "gui.starcatcher.tournament.scoring" : "Система очков",
+
+  "gui.starcatcher.tournament.scoring.percentile" : "Множитель процентиля",
+  "gui.starcatcher.tournament.scoring.perfect" : "Множитель идеального улова",
+
+  "gui.starcatcher.tournament.started" : "%s начался!",
+  "gui.starcatcher.tournament.press_tab" : "Нажмите [Tab] для переключения таблицы турнира.",
+
+  "gui.starcatcher.tournament.duration.days" : "Майнкрафт-дней",
+
+
+  "gui.starcatcher.tournament.status.preparing" : "Подготовка",
+  "gui.starcatcher.tournament.status.active" : "В процессе",
+  "gui.starcatcher.tournament.status.finished" : "Завершён",
+
+  "gui.starcatcher.tournament.scoring.simple" : "Простая",
+  "gui.starcatcher.tournament.scoring.weight" : "По весу",
+  "gui.starcatcher.tournament.scoring.rarity" : "По редкости",
+  "gui.starcatcher.tournament.scoring.golden" : "Золотая",
+  "gui.starcatcher.tournament.scoring.advanced" : "Продвинутая",
+
+
+  "starcatcher.message.amethyst_hook.0" : "День 34",
+  "starcatcher.message.amethyst_hook.1" : "",
+  "starcatcher.message.amethyst_hook.2" : "После вчерашних неприятностей я решил,",
+  "starcatcher.message.amethyst_hook.3" : "что мне пора добыть алмазные инструменты.",
+  "starcatcher.message.amethyst_hook.4" : "",
+  "starcatcher.message.amethyst_hook.5" : "По крайней мере, так я думал раньше.",
+  "starcatcher.message.amethyst_hook.6" : "Знал бы я, что случайно уроню свой аметистовый",
+  "starcatcher.message.amethyst_hook.7" : "крючок у глубинных сланцевых озёр,",
+  "starcatcher.message.amethyst_hook.8" : "ни за что бы туда не спустился.",
+  "starcatcher.message.amethyst_hook.9" : "",
+  "starcatcher.message.amethyst_hook.10" : "Если кто-то найдёт это письмо, дрейфующее",
+  "starcatcher.message.amethyst_hook.11" : "среди океанов, можешь забрать мой драгоценный",
+  "starcatcher.message.amethyst_hook.12" : "Аметистовый крючок. Когда поймаешь хотя бы",
+  "starcatcher.message.amethyst_hook.13" : "одну эпическую рыбу, <scuncommon>Старшие Рыбаки</scuncommon>",
+  "starcatcher.message.amethyst_hook.14" : "ниспошлют тебе своё благословение, и",
+  "starcatcher.message.amethyst_hook.15" : "мой аметистовый крючок клюнет на твой.",
+  "starcatcher.message.amethyst_hook.sender" : "Рогуй",
+
+  "starcatcher.message.lava_proof_1.0" : "",
+  "starcatcher.message.lava_proof_1.1" : "'Покупайте мои бутылки! Покупайте мои бутылки!'",
+  "starcatcher.message.lava_proof_1.2" : "'Они <sclava>Лавоустойчивые™</sclava>!!'",
+  "starcatcher.message.lava_proof_1.3" : "",
+  "starcatcher.message.lava_proof_1.4" : "'Обещаю, они правда <sclava>Лавоустойчивые™</sclava>!'",
+  "starcatcher.message.lava_proof_1.5" : "",
+  "starcatcher.message.lava_proof_1.6" : "Я так устал от этих МОШЕННИКОВ, обещающих",
+  "starcatcher.message.lava_proof_1.7" : "<sclava>Лавоустойчивые™</sclava> бутылки, будто что-то может",
+  "starcatcher.message.lava_proof_1.8" : "уцелеть, погрузившись в лаву! Хотите знать,",
+  "starcatcher.message.lava_proof_1.9" : "что я думаю о ваших тупых <sclava>Лавоустойчивых™</sclava>",
+  "starcatcher.message.lava_proof_1.10" : "бутылках??",
+  "starcatcher.message.lava_proof_1.11" : "",
+  "starcatcher.message.lava_proof_1.12" : "Это письмо отправится прямо в эту так называемую",
+  "starcatcher.message.lava_proof_1.13" : "'<sclava>Лавоустойчивую™</sclava> бутылку' и прямиком в",
+  "starcatcher.message.lava_proof_1.14" : "ближайшее озеро лавы, какое найду! Хех, вот это",
+  "starcatcher.message.lava_proof_1.15" : "им покажет.",
+  "starcatcher.message.lava_proof_1.sender" : "Арн Скептик",
+
+  "starcatcher.message.lava_proof_2.0" : "",
+  "starcatcher.message.lava_proof_2.1" : "Если кто-нибудь найдёт это письмо, я хотел бы",
+  "starcatcher.message.lava_proof_2.2" : "извиниться за своё прошлое письмо.",
+  "starcatcher.message.lava_proof_2.3" : "",
+  "starcatcher.message.lava_proof_2.4" : "Эти <sclava>Лавоустойчивые™</sclava> бутылки правда работают.",
+  "starcatcher.message.lava_proof_2.5" : "",
+  "starcatcher.message.lava_proof_2.6" : "Должен признать: после стольких обманов и",
+  "starcatcher.message.lava_proof_2.7" : "обещаний <sclava>Лавоустойчивых™</sclava> бутылок я",
+  "starcatcher.message.lava_proof_2.8" : "сомневался и даже не дал им шанса.",
+  "starcatcher.message.lava_proof_2.9" : "",
+  "starcatcher.message.lava_proof_2.10" : "Что тут скажешь — век живи, век учись.",
+  "starcatcher.message.lava_proof_2.11" : "",
+  "starcatcher.message.lava_proof_2.12" : "Мне пора, я слышал, что появилось новое,",
+  "starcatcher.message.lava_proof_2.13" : "так называемое «лавоустойчивое» зачарование.",
+  "starcatcher.message.lava_proof_2.14" : "Ага, конечно.",
+  "starcatcher.message.lava_proof_2.15" : "",
+  "starcatcher.message.lava_proof_2.sender" : "Арн Скептик",
+
+  "starcatcher.message.hopeful.0" : "",
+  "starcatcher.message.hopeful.1" : "",
+  "starcatcher.message.hopeful.2" : "",
+  "starcatcher.message.hopeful.3" : "День 201",
+  "starcatcher.message.hopeful.4" : "",
+  "starcatcher.message.hopeful.5" : "Прошло уже больше полугода с тех пор,",
+  "starcatcher.message.hopeful.6" : "как я отправился на поиски",
+  "starcatcher.message.hopeful.7" : "<scrare>Сердца Моря</scrare>. Надежда меркнет, но",
+  "starcatcher.message.hopeful.8" : "я буду искать его до конца своих дней.",
+  "starcatcher.message.hopeful.9" : "",
+  "starcatcher.message.hopeful.10" : "",
+  "starcatcher.message.hopeful.11" : "",
+  "starcatcher.message.hopeful.12" : "",
+  "starcatcher.message.hopeful.13" : "",
+  "starcatcher.message.hopeful.14" : "",
+  "starcatcher.message.hopeful.15" : "",
+  "starcatcher.message.hopeful.sender" : "Гауорд",
+
+  "starcatcher.message.hopeless.0" : "",
+  "starcatcher.message.hopeless.1" : "",
+  "starcatcher.message.hopeless.2" : "",
+  "starcatcher.message.hopeless.3" : "День 202",
+  "starcatcher.message.hopeless.4" : "",
+  "starcatcher.message.hopeless.5" : "Это бесполезно. Нет никакого <scrare>Сердца</scrare>",
+  "starcatcher.message.hopeless.6" : "<scrare>Моря</scrare>. Эти УБЛЮДКИ солгали мне.",
+  "starcatcher.message.hopeless.7" : "Я никогда не вернусь домой. Маленький Джимми",
+  "starcatcher.message.hopeless.8" : "навсегда будет жить с мыслью, что его отец",
+  "starcatcher.message.hopeless.9" : "погнался за вымышленным всесильным предметом.",
+  "starcatcher.message.hopeless.10" : "",
+  "starcatcher.message.hopeless.11" : "Это полностью моя вина. Как я мог быть таким",
+  "starcatcher.message.hopeless.12" : "глупцом, чтобы поверить, что предмет может",
+  "starcatcher.message.hopeless.13" : "позволить дышать под водой. Невероятно.",
+  "starcatcher.message.hopeless.14" : "",
+  "starcatcher.message.hopeless.15" : "",
+  "starcatcher.message.hopeless.sender" : "Гауорд",
+
+  "starcatcher.message.true_blue.0"  : "   Что-то вставлено,",
+  "starcatcher.message.true_blue.1"  : "   или вынуто, или изучено.",
+  "starcatcher.message.true_blue.2"  : "",
+  "starcatcher.message.true_blue.3"  : "               Что-то скрыто глубоко внутри,",
+  "starcatcher.message.true_blue.4"  : "               и всегда там было.",
+  "starcatcher.message.true_blue.5"  : "",
+  "starcatcher.message.true_blue.6"  : "   Или ты проглотил это,",
+  "starcatcher.message.true_blue.7"  : "   или выплюнул наружу.",
+  "starcatcher.message.true_blue.8"  : "",
+  "starcatcher.message.true_blue.9"  : "               Десять лет или десять мгновений",
+  "starcatcher.message.true_blue.10" : "               назад, отражённое в моих глазах,",
+  "starcatcher.message.true_blue.11" : "               или плавающее за твоими.",
+  "starcatcher.message.true_blue.12" : "",
+  "starcatcher.message.true_blue.13" : "   В матери твоей матери,",
+  "starcatcher.message.true_blue.14" : "   или ребёнке твоего ребёнка,",
+  "starcatcher.message.true_blue.15" : "   во сне или наяву.",
+  "starcatcher.message.true_blue.sender" : "",
+
+  "starcatcher.message.wither.0"  : "",
+  "starcatcher.message.wither.1"  : "",
+  "starcatcher.message.wither.2"  : "",
+  "starcatcher.message.wither.3"  : "",
+  "starcatcher.message.wither.4"  : "На твоём месте я был бы осторожнее...",
+  "starcatcher.message.wither.5"  : "",
+  "starcatcher.message.wither.6"  : "",
+  "starcatcher.message.wither.7"  : "Никогда не знаешь, что можешь выловить,",
+  "starcatcher.message.wither.8"  : "дрейфующее посреди океана.",
+  "starcatcher.message.wither.9"  : "",
+  "starcatcher.message.wither.10" : "",
+  "starcatcher.message.wither.11" : "",
+  "starcatcher.message.wither.12" : "",
+  "starcatcher.message.wither.13" : "",
+  "starcatcher.message.wither.14" : "",
+  "starcatcher.message.wither.15" : "",
+  "starcatcher.message.wither.sender" : "",
+
+
+  "item.starcatcher.letter" : "Письмо",
+  "tooltip.starcatcher.letter.0" : "Письмо, ожидающее, когда его напишут и отправят.",
+
+  "item.starcatcher.bottled_letter" : "Запечатанное письмо",
+  "tooltip.starcatcher.bottled_letter.0" : "Письмо, заключённое в бутылку.",
+  "tooltip.starcatcher.bottled_letter.1" : "Осталось только бросить его в океан",
+  "tooltip.starcatcher.bottled_letter.2" : "и дать ему начать своё путешествие.",
+
+  "item.starcatcher.bottled_letter.thrown" : "Ваше запечатанное письмо отправляется в путь...",
+  "item.starcatcher.bottled_letter.dropped" : "Выброшенное запечатанное письмо далеко не уплывёт...",
+  "item.starcatcher.bottled_letter.thrown.fail" : "Кажется, ваше запечатанное письмо съел краб... [В предмете не найден компонент Editable Message Data, сообщите разработчику, если предмет не был получен читами!]",
+
+  "item.starcatcher.message_in_a_bottle" : "Послание в бутылке",
+  "tooltip.starcatcher.message_in_a_bottle.0" : "Бутылка с посланием, написанным много лун назад.",
+  "tooltip.starcatcher.message_in_a_bottle.1" : "Похоже, единственный способ достать его — разбить бутылку.",
+
+  "item.starcatcher.message" : "Послание",
+  "tooltip.starcatcher.message.0" : "Послание из бутылки.",
+  "tooltip.starcatcher.message.1" : "Кто знает, сколько оно плыло, чтобы добраться до вас.",
+
+  "item.starcatcher.broken_bottle" : "Разбитая бутылка",
+  "tooltip.starcatcher.broken_bottle.0" : "Остатки когда-то целой бутылки.",
+  "tooltip.starcatcher.broken_bottle.1" : "Некоторые вещи уже никогда не станут прежними.",
+
+  "item.starcatcher.secret_note" : "Секретная записка",
+  "tooltip.starcatcher.secret_note.0" : "Старая секретная записка, почти утерянная временем.",
+  "tooltip.starcatcher.secret_note.1" : "Хранящая лишь мысли тех, кого",
+  "tooltip.starcatcher.secret_note.2" : "скорее всего уже нет среди нас.",
+
+  "item.starcatcher.settings" : "Настройки",
+
+  "item.starcatcher.starcaught_fish" : "Звёздная рыба",
+  "tooltip.starcatcher.starcaught_fish.0" : "Звёздная рыба, лишённая своей уникальности, чтобы уместиться в стопку.",
+  "tooltip.starcatcher.starcaught_fish.1" : "Жаль, что всё закончилось именно так.",
+
+  "item.starcatcher.cooked_starcaught_fish" : "Приготовленная рыба",
+  "tooltip.starcatcher.cooked_starcaught_fish.0" : "Звёздная рыба, но приготовленная.",
+  "tooltip.starcatcher.cooked_starcaught_fish.1" : "От этой некогда прекрасной рыбы не осталось ничего уникального.",
+
+  "item.starcatcher.starcaught_bucket" : "Ведро Ловца Звёзд",
+  "tooltip.starcatcher.starcaught_bucket.name" : "Ведро с %s",
+
+  "item.starcatcher.starcaught_lava_bucket" : "Лавовое ведро Ловца Звёзд",
+  "tooltip.starcatcher.starcaught_lava_bucket.name" : "Ведро лавы с %s",
+
+  "tooltip.starcatcher.starcaught_bucket.creative.0" : "[ТВОРЧЕСКИЙ РЕЖИМ] Это ведро всегда вызывает Аврору. Чтобы получить соответствующее [Ведро с Х], необходимо поймать её обычным способом, используя ведро как наживку.",
+  "tooltip.starcatcher.starcaught_bucket.creative.1" : "Если вы хотите призвать сущность рыбы, вы можете нажать ПКМ по земле предметом рыбы в творческом режиме.",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  "item.starcatcher.boot" : "Ботинок",
+  "tooltip.starcatcher.boot.0" : "Невероятно качественный ботинок, выловленный в озере.",
+  "tooltip.starcatcher.boot.1" : "Мечта каждого рыбака.",
+
+
+
+  "item.starcatcher.obidontiee" : "Кривоговорка",
+  "tooltip.starcatcher.obidontiee.0" : "Маленькая хитрая рыбка.",
+  "tooltip.starcatcher.obidontiee.1" : "Говорят, она часто коверкала слова.",
+
+  "item.starcatcher.driftfin" : "Плавник-скиталец",
+  "tooltip.starcatcher.driftfin.0" : "Маленькая рыбка, которая любит дрейфовать рядом",
+  "tooltip.starcatcher.driftfin.1" : "с поверхностью в ясную погоду.",
+
+  "item.starcatcher.rainfin" : "Дождепёр",
+  "tooltip.starcatcher.rainfin.0" : "Рыба, обычная для озёр Верхнего мира, появляется лишь в дождливые дни.",
+  "tooltip.starcatcher.rainfin.1" : "Вопреки названию, её плавники сделаны вовсе не из дождя.",
+
+  "item.starcatcher.peakdweller" : "Горник",
+  "tooltip.starcatcher.peakdweller.0" : "Золотистая рыба, обитающая в горах.",
+  "tooltip.starcatcher.peakdweller.1" : "Не самый простой улов для неопытных рыбаков.",
+
+  "item.starcatcher.rockgill" : "Камножабр",
+  "tooltip.starcatcher.rockgill.0" : "Каменно-твёрдая рыба, обитающая высоко в горах.",
+  "tooltip.starcatcher.rockgill.1" : "Говорят, из неё получается отличный рагу…",
+  "tooltip.starcatcher.rockgill.2" : "если у вас хватит зубов прокусить её кожу.",
+
+
+
+  "item.starcatcher.silverveil_perch" : "Серебряный окунь",
+  "tooltip.starcatcher.silverveil_perch.0" : "Небольшой окунь с чешуёй, напоминающей серебро.",
+  "tooltip.starcatcher.silverveil_perch.1" : "Чаще всего встречается в дождливые дни.",
+
+  "item.starcatcher.elderscale" : "Древнечешуй",
+  "tooltip.starcatcher.elderscale.0" : "Обманчивая рыба, которую можно встретить в озёрах.",
+  "tooltip.starcatcher.elderscale.1" : "Старочешуи могут жить несколько десятилетий и часто",
+  "tooltip.starcatcher.elderscale.2" : "проводят всю молодость в укрытии, заставляя считать",
+  "tooltip.starcatcher.elderscale.3" : "молодых особей лишь слухами — отсюда и название.",
+
+  "item.starcatcher.sunny_sturgeon" : "Солнечный осётр",
+  "tooltip.starcatcher.sunny_sturgeon.0" : "Редкий осётр, которого часто можно встретить высоко",
+  "tooltip.starcatcher.sunny_sturgeon.1" : "в горах в солнечные дни. Из-за своих размеров",
+  "tooltip.starcatcher.sunny_sturgeon.2" : "его нелегко выловить — нужна крепкая хватка.",
+
+
+
+  "item.starcatcher.twilight_koi" : "Сумеречный Кои",
+  "tooltip.starcatcher.twilight_koi.0" : "Довольно редкий вид карпов, который, как говорят,",
+  "tooltip.starcatcher.twilight_koi.1" : "появляется в озёрах только в полночные часы.",
+
+  "item.starcatcher.ripple_catfish" : "Рябчатый сом",
+  "tooltip.starcatcher.ripple_catfish.0" : "Игривый вид сома,",
+  "tooltip.starcatcher.ripple_catfish.1" : "которого привлекает лёгкая рябь от капель дождя.",
+
+  "item.starcatcher.sun_seeking_carp" : "Солнцелюбивый карп",
+  "tooltip.starcatcher.sun_seeking_carp.0" : "Редкий карп, обожающий солнце. Его можно поймать",
+  "tooltip.starcatcher.sun_seeking_carp.1" : "только когда солнце находится прямо над головой.",
+
+
+
+  "item.starcatcher.thunder_bass" : "Грозовой Окунь",
+  "tooltip.starcatcher.thunder_bass.0" : "Уникальный вид окуня, которого, похоже,",
+  "tooltip.starcatcher.thunder_bass.1" : "привлекают звуки грома во время бурь.",
+  "tooltip.starcatcher.thunder_bass.2" : "Часто плавает возле Молниевого Окуня.",
+
+  "item.starcatcher.lightning_bass" : "Молниевый Окунь",
+  "tooltip.starcatcher.lightning_bass.0" : "Уникальный вид окуня, который, похоже,",
+  "tooltip.starcatcher.lightning_bass.1" : "привлекают вспышки молний во время бурь.",
+  "tooltip.starcatcher.lightning_bass.2" : "Часто плавает возле Грозового Окуня.",
+
+
+
+
+
+
+
+
+
+  "item.starcatcher.frostjaw_trout" : "Ледяная форель",
+  "tooltip.starcatcher.frostjaw_trout.0" : "Вид форели, известный своими острыми",
+  "tooltip.starcatcher.frostjaw_trout.1" : "челюстями из окаменевших ледяных кристаллов.",
+
+  "item.starcatcher.crystalback_sturgeon" : "Кристалоспинный осётр",
+  "tooltip.starcatcher.crystalback_sturgeon.0" : "Осётр, которого часто можно встретить на больших высотах,",
+  "tooltip.starcatcher.crystalback_sturgeon.1" : "известный своим кристальным панцирем, который позволяет ему пассивно",
+  "tooltip.starcatcher.crystalback_sturgeon.2" : "защищаться от атакующих во время охоты.",
+
+
+
+
+
+  "item.starcatcher.icetooth_sturgeon" : "Ледозубый осётр",
+  "tooltip.starcatcher.icetooth_sturgeon.0" : "Обитающий высоко в горах, этот осётр",
+  "tooltip.starcatcher.icetooth_sturgeon.1" : "использует свои острые окаменевшие ледяные зубы, чтобы хватать добычу.",
+
+  "item.starcatcher.crystalback_trout" : "Форель с кристальной спиной",
+  "tooltip.starcatcher.crystalback_trout.0" : "Выносливый вид форели, который использует",
+  "tooltip.starcatcher.crystalback_trout.1" : "свою спину для защиты во время нападения.",
+
+
+
+
+
+  "item.starcatcher.crystalback_boreal" : "Кристалоспинный Бореаль",
+  "tooltip.starcatcher.crystalback_boreal.0" : "Названная в честь Бореаля, эта рыба ловится куда проще.",
+  "tooltip.starcatcher.crystalback_boreal.1" : "Её покрытая кристаллами спина ярко блестит, так что спрятаться ей почти невозможно.",
+
+  "item.starcatcher.wintery_pike" : "Зимняя Щука",
+  "tooltip.starcatcher.wintery_pike.0" : "Хищная рыба. Этот вид обожает холодный климат",
+  "tooltip.starcatcher.wintery_pike.1" : "и часто встречается в промёрзших озёрах.",
+
+
+
+
+
+  "item.starcatcher.blue_ice_pike" : "Щука синего льда",
+  "tooltip.starcatcher.blue_ice_pike.0" : "Хищная рыба с чешуёй, напоминающей синий лёд.",
+  "tooltip.starcatcher.blue_ice_pike.1" : "При первых признаках опасности она исчезает в ледяных водах.",
+
+
+
+  "item.starcatcher.boreal" : "Бореаль",
+  "tooltip.starcatcher.boreal.0" : "Рыба, обитающая в ледяных горных озёрах.",
+  "tooltip.starcatcher.boreal.1" : "Её покрытое кристаллами тело почти сливается с водой,",
+  "tooltip.starcatcher.boreal.2" : "что делает её настоящим испытанием даже для опытных рыболовов.",
+
+
+  "item.starcatcher.aurora" : "Аврора",
+  "tooltip.starcatcher.aurora.0" : "Красивая <sclegendary>легендарная</sclegendary> рыба. Из-за своих размеров",
+  "tooltip.starcatcher.aurora.1" : "её чрезвычайно сложно поймать — она не даёт рыболову",
+  "tooltip.starcatcher.aurora.2" : "ни секунды отдыха, если он хочет принести её домой",
+
+
+
+
+  "item.starcatcher.oculi" : "Окули",
+  "tooltip.starcatcher.oculi.0" : "Эта странная рыба напоминает вам что-то, что вы уже видели,",
+  "tooltip.starcatcher.oculi.1" : "но никак не можете разглядеть.",
+  "tooltip.starcatcher.oculi.2" : "Как бы то ни было, это определённо рыба.",
+
+  "item.starcatcher.glimmergill" : "Мерцежабр",
+  "tooltip.starcatcher.glimmergill.0" : "Чешуя этой рыбы покрыта особым льдом,",
+  "tooltip.starcatcher.glimmergill.1" : "который отражает свет весьма необычным образом.",
+  "tooltip.starcatcher.glimmergill.2" : "Любопытная добыча подплывает к ней и ранится об острую чешую.",
+
+  "item.starcatcher.cryospine" : "Криохребет",
+  "tooltip.starcatcher.cryospine.0" : "Полузамёрзшая рыба, которую часто игнорируют из-за низкой питательности.",
+  "tooltip.starcatcher.cryospine.1" : "Говорят, рыбаки, застрявшие на айсбергах, ловили по сотне таких,",
+  "tooltip.starcatcher.cryospine.2" : "лишь чтобы приготовить один обед.",
+
+  "item.starcatcher.lilac_minnow" : "Сиреневая мелочь",
+  "tooltip.starcatcher.lilac_minnow.0" : "Вид мелочи, ставший сиреневым из-за морозов в местах её обитания.",
+  "tooltip.starcatcher.lilac_minnow.1" : "Говорят, наживка из неё — единственный способ поймать Короля Мороза.",
+
+  "item.starcatcher.frostbit_jelly" : "Обмороженная медуза",
+  "tooltip.starcatcher.frostbit_jelly.0" : "Вид медуз, использующих айсберги для долгой спячки.",
+  "tooltip.starcatcher.frostbit_jelly.1" : "Ведь большую часть своей жизни они проводят.",
+
+  "item.starcatcher.king_of_the_frost" : "Король Мороза",
+  "tooltip.starcatcher.king_of_the_frost.0" : "<sclegendary>Легендарный</sclegendary> Король Мороза, повелевающий всеми айсбергами.",
+  "tooltip.starcatcher.king_of_the_frost.1" : "Его щупальца обвивают добычу и утаскивают в глубины океанов, пока та не утонет.",
+  "tooltip.starcatcher.king_of_the_frost.2" : "Рыболовы крайне осторожны, проплывая мимо айсбергов Верхнего мира.",
+
+
+
+
+
+  "item.starcatcher.sandtail" : "Песчанохвостка",
+  "tooltip.starcatcher.sandtail.0" : "Длинная рыбка, покрытая песком. Хотя её чаще",
+  "tooltip.starcatcher.sandtail.1" : "встречают в тёплом климате, она любит холод ночи.",
+
+  "item.starcatcher.scorchfish" : "Жарорыба",
+  "tooltip.starcatcher.scorchfish.0" : "Рыба, которая ненавидит дождь",
+  "tooltip.starcatcher.scorchfish.1" : "и предпочитает оставаться в более жарких местах.",
+
+
+
+  "item.starcatcher.mirage_carp" : "Миражный карп",
+  "tooltip.starcatcher.mirage_carp.0" : "Вид карпа, встречающийся тёплыми солнечными днями",
+  "tooltip.starcatcher.mirage_carp.1" : "в жарком климате. Говорят, он получил своё название",
+  "tooltip.starcatcher.mirage_carp.2" : "от жителей пустыни — увидеть его часто было лишь миражом.",
+
+
+
+  "item.starcatcher.agave_bream" : "Агавовый лещ",
+  "tooltip.starcatcher.agave_bream.0" : "Редкий лещ, который выходит только ночью",
+  "tooltip.starcatcher.agave_bream.1" : "в ясную погоду. Длинные плавники помогают ему",
+  "tooltip.starcatcher.agave_bream.2" : "пробиваться через мутные пустынные озёра.",
+  "tooltip.starcatcher.agave_bream.3" : "Говорят, эта рыба обожает мангостины",
+
+
+
+  "item.starcatcher.cactifish" : "Какторыба",
+  "tooltip.starcatcher.cactifish.0" : "Хотя название может намекать на связь",
+  "tooltip.starcatcher.cactifish.1" : "с кактусами, это лишь совпадение —",
+  "tooltip.starcatcher.cactifish.2" : "у неё просто зелёная чешуя.",
+
+
+
+  "item.starcatcher.oasis_sturgeon" : "Оазисный осётр",
+  "tooltip.starcatcher.oasis_sturgeon.0" : "Величественный <sclegendary>легендарный</sclegendary> осётр.",
+  "tooltip.starcatcher.oasis_sturgeon.1" : "Его видели столь немногие, что его существование не до конца доказано.",
+  "tooltip.starcatcher.oasis_sturgeon.2" : "Легенда гласит, что каждый оазис охраняет такой осётр, молча наблюдая из-под воды.",
+
+
+
+
+
+  "item.starcatcher.mossy_boot" : "Мшистый ботинок",
+  "tooltip.starcatcher.mossy_boot.0" : "Ботинок… но на этот раз мшистый!",
+
+
+
+  "item.starcatcher.sludge_catfish" : "Болотный сом",
+  "tooltip.starcatcher.sludge_catfish.0" : "Грязноватый вид сома, обитающий в мутных водах",
+  "tooltip.starcatcher.sludge_catfish.1" : "болот. Говорят, если его хорошо промыть — выйдет отличное блюдо.",
+
+
+
+  "item.starcatcher.lily_snapper" : "Лилийный щелкун",
+  "tooltip.starcatcher.lily_snapper.0" : "Редкий вытянутый вид щуки/щелкуна, живущий в болотах.",
+  "tooltip.starcatcher.lily_snapper.1" : "Охотится на других рыб своим острым ртом.",
+
+
+
+  "item.starcatcher.sage_catfish" : "Травяной сом",
+  "tooltip.starcatcher.sage_catfish.0" : "Красивый сом травяного цвета, встречается в болотах.",
+  "tooltip.starcatcher.sage_catfish.1" : "Покидает укрытие только в ясные ночи, чтобы любоваться",
+  "tooltip.starcatcher.sage_catfish.2" : "спокойствием ночных болот.",
+
+
+
+
+
+
+  "item.starcatcher.pale_pinfish" : "Бледнопёрка",
+  "tooltip.starcatcher.pale_pinfish.0" : "Крошечная бледная рыбка, встречается только в полночь",
+  "tooltip.starcatcher.pale_pinfish.1" : "в тёмных лесах. Мечтает о мире,",
+  "tooltip.starcatcher.pale_pinfish.2" : "где есть бледные сады.",
+
+  "item.starcatcher.pinfish" : "Пёрка",
+  "tooltip.starcatcher.pinfish.0" : "Крошечная бледная рыбка, встречается только в полночь.",
+
+  "item.starcatcher.pale_carp" : "Бледный карп",
+  "tooltip.starcatcher.pale_carp.0" : "Вид карпа, распространённый в [удалено].",
+  "tooltip.starcatcher.pale_carp.1" : "Их среда обитания всё ещё строится",
+  "tooltip.starcatcher.pale_carp.2" : "в этой вселенной, так что пока они живут в тёмном лесу.",
+
+
+
+
+  "item.starcatcher.blossomfish" : "Цветочная рыба",
+  "tooltip.starcatcher.blossomfish.0" : "Красивая рыба, напоминающая розовые лепестки вишнёвых рощ.",
+  "tooltip.starcatcher.blossomfish.1" : "Она предпочитает плавать в тёплом солнечном свете.",
+
+  "item.starcatcher.vesani" : "Весани",
+  "tooltip.starcatcher.vesani.0" : "Этот вид рыбы хорошо",
+  "tooltip.starcatcher.vesani.1" : "маскируется под другие виды.",
+  "tooltip.starcatcher.vesani.2" : "Её редко можно увидеть",
+  "tooltip.starcatcher.vesani.3" : "в обычном виде.",
+
+  "item.starcatcher.petaldrift_carp" : "Лепестковый карп",
+  "tooltip.starcatcher.petaldrift_carp.0" : "Розовый карп, распространённый в вишнёвых рощах, который",
+  "tooltip.starcatcher.petaldrift_carp.1" : "предпочитает появляться во время дождя.",
+
+  "item.starcatcher.pink_koi" : "Розовый Кои",
+  "tooltip.starcatcher.pink_koi.0" : "Розовый кои, чаще всего встречающийся в вишнёвых рощах.",
+  "tooltip.starcatcher.pink_koi.1" : "Выходит в дождливые дни, чтобы кормиться.",
+
+  "item.starcatcher.rose_siamese_fish" : "Розовая сиамская рыба",
+  "tooltip.starcatcher.rose_siamese_fish.0" : "Редкая великолепная рыба, встречающаяся в дождливые дни.",
+  "tooltip.starcatcher.rose_siamese_fish.1" : "Достаточно сложный улов даже для опытных рыболовов.",
+
+
+  "item.starcatcher.livid_bamboo" : "Синюшный бамбук",
+  "tooltip.starcatcher.livid_bamboo.0" : "Кусок бамбука, но в виде рыбы. Во всяком случае, так говорят.",
+
+  "item.starcatcher.petal_bass" : "Лепестковый окунь",
+  "tooltip.starcatcher.petal_bass.0" : "Вид окуня, приспособившийся к жизни среди цветов Верхнего мира.",
+
+
+  "item.starcatcher.sunflower_carp" : "Подсолнечный карп",
+  "tooltip.starcatcher.sunflower_carp.0" : "Особый вид карпа, встречающийся только на подсолнечных полях.",
+
+  "item.starcatcher.cloudfin" : "Облакопёр",
+  "tooltip.starcatcher.cloudfin.0" : "<sclegendary>Легендарная</sclegendary> рыба, известная тем, что уносит ваши данные в облака.",
+  "tooltip.starcatcher.cloudfin.1" : "Говорят, поймать её удаётся лишь худшим из рыболовов, но никто не знает почему.",
+
+
+
+
+  "item.starcatcher.silverfin_pike" : "Серебропёрая щука",
+  "tooltip.starcatcher.silverfin_pike.0" : "Крупная щука, обычная для речных вод.",
+
+  "item.starcatcher.carpenjoe" : "Карпенджо",
+  "tooltip.starcatcher.carpenjoe.0" : "Величественный карп, светящийся знаниями о моддинге.",
+  "tooltip.starcatcher.carpenjoe.1" : "Говорят, рыбаки едят его на удачу перед отладкой.",
+
+  "item.starcatcher.willow_bream" : "Ивовый лещ",
+  "tooltip.starcatcher.willow_bream.0" : "Очень хитрая рыба, которую трудно поймать,",
+  "tooltip.starcatcher.willow_bream.1" : "она появляется только ночью.",
+
+  "item.starcatcher.drifting_bream" : "Дрейфующий лещ",
+  "tooltip.starcatcher.drifting_bream.0" : "Вид леща, известный тем, что медленно",
+  "tooltip.starcatcher.drifting_bream.1" : "дрейфует по поверхности рек ночью.",
+
+  "item.starcatcher.downfall_bream" : "Дождевой лещ",
+  "tooltip.starcatcher.downfall_bream.0" : "Трудно заметный, но легко ловящийся лещ,",
+  "tooltip.starcatcher.downfall_bream.1" : "выходит только в дождливые ночи.",
+
+  "item.starcatcher.hollowbelly_darter" : "Пустобрюхий дартер",
+  "tooltip.starcatcher.hollowbelly_darter.0" : "Очень маленькая и лёгкая для поимки речная рыбка.",
+
+  "item.starcatcher.mistback_chub" : "Туманный голавль",
+  "tooltip.starcatcher.mistback_chub.0" : "Речная рыба, известная своими серебристыми чешуями.",
+
+  "item.starcatcher.bluegigi" : "Синежабрик",
+  "tooltip.starcatcher.bluegigi.0" : "Не путать с обычным синежабриком,",
+  "tooltip.starcatcher.bluegigi.1" : "эта маленькая рыбка часто встречается в реках.",
+
+  "item.starcatcher.dried_seaweed" : "Сушёная морская водоросль",
+  "tooltip.starcatcher.dried_seaweed.0" : "Кусочек мёртвой водоросли, который",
+  "tooltip.starcatcher.dried_seaweed.1" : "случайно зацепился за ваш крючок.",
+
+
+
+
+  "item.starcatcher.frostgill_chub" : "Морозожабрый голавль",
+  "tooltip.starcatcher.frostgill_chub.0" : "Популярная среди рыболовов рыба,",
+  "tooltip.starcatcher.frostgill_chub.1" : "обычно встречающаяся в реках.",
+
+  "item.starcatcher.crystalback_minnow" : "Кристалоспинная мелочь",
+  "tooltip.starcatcher.crystalback_minnow.0" : "Очень маленькая рыбка, часто используемая как наживка.",
+  "tooltip.starcatcher.crystalback_minnow.1" : "Этот вид чаще всего встречается ночью.",
+
+  "item.starcatcher.azure_crystalback_minnow" : "Лазурная кристалоспинная мелочь",
+  "tooltip.starcatcher.azure_crystalback_minnow.0" : "Редкая мутация кристалоспинной мелочи,",
+  "tooltip.starcatcher.azure_crystalback_minnow.1" : "которая мягко светится голубым оттенком в полночь.",
+  "tooltip.starcatcher.azure_crystalback_minnow.2" : "Сложная добыча из-за крайне маленького размера.",
+
+  "item.starcatcher.blue_crystal_fin" : "Сине-кристаловый плавник",
+  "tooltip.starcatcher.blue_crystal_fin.0" : "Необычная рыба, чаще всего встречаемая днём.",
+
+  "item.starcatcher.mothfish" : "Сине-кристаловый плавник",
+  "tooltip.starcatcher.mothfish.0" : "У этой рыбы появился слой меха, помогающий ей переносить холод.",
+  "tooltip.starcatcher.mothfish.1" : "Как ей вообще удаётся держать мех сухим — загадка...",
+
+
+  "item.starcatcher.morganite" : "Морганит",
+  "tooltip.starcatcher.morganite.0" : "Морская рыба, напоминающая камень морганит.",
+
+  "item.starcatcher.ironjaw_herring" : "Железночелюстная сельдь",
+  "tooltip.starcatcher.ironjaw_herring.0" : "Этот вид океанической сельди часто",
+  "tooltip.starcatcher.ironjaw_herring.1" : "имеет окаменелую серебристую челюсть, похожую на железо.",
+
+  "item.starcatcher.blue_herring" : "Голубая сельдь",
+  "tooltip.starcatcher.blue_herring.0" : "Крайне неуловимая рыба, вечно ищущая 46-й океан.",
+  "tooltip.starcatcher.blue_herring.1" : "Рыбаки используют его для ориентации, так как он всегда возвращается туда, откуда начал свой путь.",
+
+  "item.starcatcher.deepjaw_herring" : "Глубинночелюстная сельдь",
+  "tooltip.starcatcher.deepjaw_herring.0" : "Океаническая рыба, высоко ценящаяся в торговле.",
+
+  "item.starcatcher.dusktail_snapper" : "Сумеречный луциан",
+  "tooltip.starcatcher.dusktail_snapper.0" : "Тяжёлая для своего размера рыба, часто используемая в блюдах.",
+
+  "item.starcatcher.joel" : "Джоэл",
+  "tooltip.starcatcher.joel.0" : "Редкая <sclegendary>легендарная</sclegendary> рыба, найденная в океанах.",
+  "tooltip.starcatcher.joel.1" : "Обладает <sclegendary>приятным</sclegendary> крупным размером.",
+
+  "item.starcatcher.redscaled_tuna" : "Красночешуйный тунец",
+  "tooltip.starcatcher.redscaled_tuna.0" : "Крупный тунец с красными чешуями.",
+  "tooltip.starcatcher.redscaled_tuna.1" : "Одного такого достаточно, чтобы накормить целую деревню.",
+
+  "item.starcatcher.sea_bass" : "Морской окунь",
+  "tooltip.starcatcher.sea_bass.0" : "Популярный вид окуня, обитающий в океанах.",
+  "tooltip.starcatcher.sea_bass.1" : "Прячется ночью из-за отсутствия храбрости.",
+
+  "item.starcatcher.waterlogged_bottle" : "Затонувшая бутылка",
+  "tooltip.starcatcher.waterlogged_bottle.0" : "Бутылка, брошенная в океан много лет назад.",
+  "tooltip.starcatcher.waterlogged_bottle.1" : "Что бы ни было внутри — давно пропало.",
+
+  "item.starcatcher.bigeye_tuna" : "Большеглазый тунец",
+  "tooltip.starcatcher.bigeye_tuna.0" : "Большая, тяжёлая рыба, известная своим огромным глазом.",
+  "tooltip.starcatcher.bigeye_tuna.1" : "Этот вид встречается только в глубоких океанских водах.",
+  "tooltip.starcatcher.bigeye_tuna.2" : "Говорят, она держится рядом с другими рыбами Каупена.",
+
+  "block.starcatcher.conch" : "Раковина",
+  "tooltip.starcatcher.conch.0" : "Остатки моллюска со спиральной раковиной, часто используемой как украшение.",
+
+  "block.starcatcher.clam" : "Ракушка моллюска",
+  "tooltip.starcatcher.clam.0" : "Когда-то двустворчатый моллюск на песчаных берегах, теперь лишь пустая раковина.",
+
+  "item.starcatcher.shroomfish" : "Грибная рыба",
+  "tooltip.starcatcher.shroomfish.0" : "Древний <sclegendary>легендарный</sclegendary> вид рыбы, захваченный спорами",
+  "tooltip.starcatcher.shroomfish.1" : "Грибных островов. Отличное блюдо для любителей грибов.",
+
+  "item.starcatcher.sporefish" : "Споровая рыба",
+  "tooltip.starcatcher.sporefish.0" : "Редкая рыба, встречающаяся на Грибных островах, может",
+  "tooltip.starcatcher.sporefish.1" : "оказаться трудным уловом для неопытных рыболовов.",
+
+
+
+
+  "item.starcatcher.gold_fan" : "Золотистый веерохвост",
+  "tooltip.starcatcher.gold_fan.0" : "Подземная рыба с хвостом в форме веера.",
+  "tooltip.starcatcher.gold_fan.1" : "И хотя выглядит забавно, хвост у неё не вращается как веер.",
+
+  "item.starcatcher.geode_eel" : "Геодовый угорь",
+  "tooltip.starcatcher.geode_eel.0" : "Блестящий, тяжёлый и длинный угорь.",
+  "tooltip.starcatcher.geode_eel.1" : "Свою окраску получает благодаря аметисту,",
+  "tooltip.starcatcher.geode_eel.2" : "поскольку его яйца вынашиваются внутри аметистовых геод.",
+
+
+
+  "item.starcatcher.whiteveil" : "Белая вуаль",
+  "tooltip.starcatcher.whiteveil.0" : "Бледная длинноплавниковая рыба, обычная для подземелий.",
+  "tooltip.starcatcher.whiteveil.1" : "Удивительно тяжёлая для рыбы, похожей на призрак.",
+
+  "item.starcatcher.black_eel" : "Чёрный угорь",
+  "tooltip.starcatcher.black_eel.0" : "Плотоядный чёрный угорь, распространённый под землёй.",
+
+  "item.starcatcher.amethystback" : "Аметистоспин",
+  "tooltip.starcatcher.amethystback.0" : "Редкая, трудная в поимке рыба, встречается рядом с аметистовыми геодами.",
+
+  "item.starcatcher.stonefish" : "Каменная рыба",
+  "tooltip.starcatcher.stonefish.0" : "Огромная тяжёлая рыба, словно сделанная из камня.",
+  "tooltip.starcatcher.stonefish.1" : "Часто обеспечивает шахтёров пищей на несколько дней.",
+
+
+
+
+  "item.starcatcher.dripfin" : "Капельник",
+  "tooltip.starcatcher.dripfin.0" : "Простая рыба, обитающая в",
+  "tooltip.starcatcher.dripfin.1" : "лужах сталактитовых пещер.",
+
+  "item.starcatcher.yellowstone_fish" : "Жёлтокаменная рыба",
+  "tooltip.starcatcher.yellowstone_fish.0" : "Красивая рыба золотистого цвета,",
+  "tooltip.starcatcher.yellowstone_fish.1" : "обычная для сталактитовых пещер.",
+
+  "item.starcatcher.fossilized_angelfish" : "Окаменевшая скалярия",
+  "tooltip.starcatcher.fossilized_angelfish.0" : "Скалярия, напоминающая окаменелость.",
+  "tooltip.starcatcher.fossilized_angelfish.1" : "На самом деле не окаменевшая и часто игнорируется",
+  "tooltip.starcatcher.fossilized_angelfish.2" : "из-за низкой пищевой ценности,",
+  "tooltip.starcatcher.fossilized_angelfish.3" : "большого веса и сложности поимки.",
+
+
+
+
+
+  "item.starcatcher.vivid_moss" : "Живой мох",
+  "tooltip.starcatcher.vivid_moss.0" : "Кусок мха, напоминающий рыбу, найденный в Пышных пещерах.",
+  "tooltip.starcatcher.vivid_moss.1" : "А может, это рыба, покрытая мхом?",
+  "tooltip.starcatcher.vivid_moss.2" : "В любом случае поймать трудно — слишком скользкий.",
+
+  "item.starcatcher.the_quarrish" : "Карриш",
+  "tooltip.starcatcher.the_quarrish.0" : "Рыба, встречающаяся возле заросших Пышных пещер.",
+  "tooltip.starcatcher.the_quarrish.1" : "Её большой вес делает поимку утомительной.",
+
+  "item.starcatcher.lush_pike" : "Мшистая щука",
+  "tooltip.starcatcher.lush_pike.0" : "Мшистая щука, изредка встречающаяся в Пышных пещерах.",
+  "tooltip.starcatcher.lush_pike.1" : "Очень сложная добыча даже для опытных рыболовов.",
+
+  "item.starcatcher.shadowfin" : "Тенепёр",
+  "tooltip.starcatcher.shadowfin.0" : "Ворчливая рыба, недолюбливающая большинство сородичей.",
+  "tooltip.starcatcher.shadowfin.1" : "Она проводит дни в тени,",
+  "tooltip.starcatcher.shadowfin.2" : "покидая её лишь ради встречи со своим Мохопёром.",
+
+  "item.starcatcher.mossfin" : "Мохопёр",
+  "tooltip.starcatcher.mossfin.0" : "У неё странно большие глаза, которые нужны лишь для того, чтобы быть милой.",
+  "tooltip.starcatcher.mossfin.1" : "Она обожает всё яркое и мшистое.",
+  "tooltip.starcatcher.mossfin.2" : "В тень она заплывает лишь в поисках своего Тенепёра.",
+
+
+
+
+  "item.starcatcher.ghostly_pike" : "Призрачная щука",
+  "tooltip.starcatcher.ghostly_pike.0" : "Щука, напоминающая призрак; редко встречается глубоко под землёй.",
+
+  "item.starcatcher.aquamarine_pike" : "Аквамариновая щука",
+  "tooltip.starcatcher.aquamarine_pike.0" : "Хищная щука, обитающая глубоко под землёй.",
+
+  "item.starcatcher.garnet_mackerel" : "Гранатовая макрель",
+  "tooltip.starcatcher.garnet_mackerel.0" : "Сложная в поимке макрель, встречающаяся в глубоких пещерах.",
+
+  "item.starcatcher.bright_amethyst_snapper" : "Яркий аметистовый луциан",
+  "tooltip.starcatcher.bright_amethyst_snapper.0" : "Красивая розовая рыба, найденная на уровне глубокого сланца.",
+  "tooltip.starcatcher.bright_amethyst_snapper.1" : "Плавает парами с Тёмным аметистовым луцианом.",
+
+  "item.starcatcher.dark_amethyst_snapper" : "Тёмный аметистовый луциан",
+  "tooltip.starcatcher.dark_amethyst_snapper.0" : "Красивая тёмно-синяя рыба, найденная на уровне глубокого сланца.",
+  "tooltip.starcatcher.dark_amethyst_snapper.1" : "Плавает рядом с Ярким аметистовым луцианом.",
+
+  "item.starcatcher.deepslatefish" : "Глубокосланцевик",
+  "tooltip.starcatcher.deepslatefish.0" : "<sclegendary>Легендарная</sclegendary> рыба, встречающаяся лишь высоко в горах.",
+  "tooltip.starcatcher.deepslatefish.1" : "Шутка. На самом деле она живёт в глубоком сланце.",
+  "tooltip.starcatcher.deepslatefish.2" : "Её очень сложно поймать из-за исчезающей сланцевой чешуи.",
+
+
+
+
+  "item.starcatcher.sculkfish" : "Скалк-рыба",
+  "tooltip.starcatcher.sculkfish.0" : "Коварная рыба, искажённая скалком.",
+
+  "item.starcatcher.ward" : "Вард",
+  "tooltip.starcatcher.ward.0" : "<sclegendary>Легендарная</sclegendary> рыба — говорят, лучший друг вардена.",
+  "tooltip.starcatcher.ward.1" : "Она приняла силу скалка и стала лишь сильнее.",
+
+  "item.starcatcher.glowing_dark" : "Светотень",
+  "tooltip.starcatcher.glowing_dark.0" : "Быстрая рыба, встречающаяся только в глубокой тьме.",
+  "tooltip.starcatcher.glowing_dark.1" : "Её трудно заметить, но легко потерять.",
+
+
+
+  "item.starcatcher.suneater" : "Солнцеед",
+  "tooltip.starcatcher.suneater.0" : "Редкая рыба, встречающаяся в лавовых озёрах Верхнего мира.",
+  "tooltip.starcatcher.suneater.1" : "Она охотится на рыб-лун ради пищи.",
+
+  "item.starcatcher.pyrotrout" : "Пирокумжа",
+  "tooltip.starcatcher.pyrotrout.0" : "Кумжа, адаптированная к жизни в поверхностной лаве.",
+
+  "item.starcatcher.obsidian_eel" : "Обсидиановый угорь",
+  "tooltip.starcatcher.obsidian_eel.0" : "<sclegendary>Легендарный</sclegendary> угорь, состоящий из обсидиана,",
+  "tooltip.starcatcher.obsidian_eel.1" : "встречается в лавовых озёрах Верхнего мира во время дождя.",
+  "tooltip.starcatcher.obsidian_eel.2" : "Иногда требуется несколько рыболовов, чтобы",
+  "tooltip.starcatcher.obsidian_eel.3" : "перетащить его обратно в деревню.",
+
+
+
+
+  "item.starcatcher.molten_shrimp" : "Плавневая креветка",
+  "tooltip.starcatcher.molten_shrimp.0" : "Маленькая креветка, живущая в подземных лавовых реках.",
+
+  "item.starcatcher.obsidian_crab" : "Обсидиановый краб",
+  "tooltip.starcatcher.obsidian_crab.0" : "Неуловимый краб, встречающийся у лавовых озёр под землёй.",
+
+
+
+
+  "item.starcatcher.scorched_bloodsucker" : "Обожжённый кровосос",
+  "tooltip.starcatcher.scorched_bloodsucker.0" : "Трудноуловимый паразит из лавовых озёр глубокого сланца.",
+
+  "item.starcatcher.molten_deepslate_crab" : "Плавневый сланцевый краб",
+  "tooltip.starcatcher.molten_deepslate_crab.0" : "Золотистый краб, встречающийся рядом с лавовыми реками в глубоком сланце.",
+
+
+
+  "item.starcatcher.cerberay" : "Церберай",
+  "tooltip.starcatcher.cerberay.0" : "Жалящая рыба с 3 головами.",
+  "tooltip.starcatcher.cerberay.1" : "2 меньшие головы делят один мозг на двоих",
+
+  "item.starcatcher.embergill" : "Пеплоплавник",
+  "tooltip.starcatcher.embergill.0" : "Рыба, обитающая в огромных лавовых океанах Нижнего мира.",
+
+  "item.starcatcher.scalding_pike" : "Обжигающая щука",
+  "tooltip.starcatcher.scalding_pike.0" : "Хищная щука, встречающаяся только в Нижнем мире.",
+
+  "item.starcatcher.cinder_squid" : "Угольный кальмар",
+  "tooltip.starcatcher.cinder_squid.0" : "Скользкий кальмар из Нижнего мира.",
+
+  "item.starcatcher.lava_crab" : "Лавовый краб",
+  "tooltip.starcatcher.lava_crab.0" : "Как-то попал в Нижний мир и развил панцирь из адского камня.",
+  "tooltip.starcatcher.lava_crab.1" : "Теперь чувствует себя как дома.",
+
+  "item.starcatcher.magma_fish" : "Магмовая рыба",
+  "tooltip.starcatcher.magma_fish.0" : "Рыба Нижнего мира с красными светящимися плавниками.",
+
+  "item.starcatcher.glowstone_seeker" : "Светокаменный искатель",
+  "tooltip.starcatcher.glowstone_seeker.0" : "Рыба, странно притягиваемая к светокамню.",
+  "tooltip.starcatcher.glowstone_seeker.1" : "Обычно плавает прямо под ним.",
+
+  "item.starcatcher.glowstone_pufferfish" : "Светокаменный иглобрюх",
+  "tooltip.starcatcher.glowstone_pufferfish.0" : "Иглобрюх, сверкающий как светокамень.",
+
+  "item.starcatcher.willish" : "Уиллишь",
+  "tooltip.starcatcher.willish.0" : "Рыба, известная тем, что ворует еду у других.",
+  "tooltip.starcatcher.willish.1" : "Крайне уродлива.",
+  "tooltip.starcatcher.willish.2" : "Лучше выбросить назад в Нижний мир,",
+  "tooltip.starcatcher.willish.3" : "где ей самое место.",
+
+  "item.starcatcher.lava_crab_claw" : "Клешня лавового краба",
+  "tooltip.starcatcher.lava_crab_claw.0" : "Клешня, оторванная у лавового краба.",
+  "tooltip.starcatcher.lava_crab_claw.1" : "Из-за агрессивности крабов находится довольно часто.",
+  "tooltip.starcatcher.lava_crab_claw.2" : "Особенно в Нижнем мире.",
+
+
+
+  "item.starcatcher.charfish" : "Угольная рыба",
+  "tooltip.starcatcher.charfish.0" : "Фиолетовая рыба, встречающаяся только в Краю.",
+
+  "item.starcatcher.chorus_crab" : "Хорусовый краб",
+  "tooltip.starcatcher.chorus_crab.0" : "Питается хорус-фруктами.",
+  "tooltip.starcatcher.chorus_crab.1" : "Говорят, способен телепортироваться после еды.",
+
+  "item.starcatcher.end_glow" : "Край-свет",
+  "tooltip.starcatcher.end_glow.0" : "Хитрая рыба, живущая только в Краю.",
+  "tooltip.starcatcher.end_glow.1" : "Эндерменов абсолютно не беспокоит.",
+
+  "item.starcatcher.dreamliner" : "Дримлайнер",
+  "tooltip.starcatcher.dreamliner.0" : "Рыба, плавающая в бескрайней пустоте Края.",
+  "tooltip.starcatcher.dreamliner.1" : "Говорят, в прошлой жизни она была Боингом 787.",
+
+  "item.starcatcher.voidbiter" : "Пустотыкус",
+  "tooltip.starcatcher.voidbiter.0" : "<sclegendary>Легендарная</sclegendary> рыба с внешних островов Края.",
+  "tooltip.starcatcher.voidbiter.1" : "Настолько редкая, что многие считают её мифом.",
+  "tooltip.starcatcher.voidbiter.2" : "Говорят, только <scuncommon>старшие рыболовы</scuncommon>",
+  "tooltip.starcatcher.voidbiter.3" : "смогли поймать её хотя бы раз.",
+
+  "item.starcatcher.purple_carp" : "Фиолетовый карп",
+  "tooltip.starcatcher.purple_carp.0" : "Этот вид карпа приспособился к холодной пустоте Края.",
+  "tooltip.starcatcher.purple_carp.1" : "Говорят, из него получается отличная похлёбка,",
+  "tooltip.starcatcher.purple_carp.2" : "хотя никто толком не знает, как её готовят.",
+
+  "item.starcatcher.voidfin" : "Пустопёр",
+  "tooltip.starcatcher.voidfin.0" : "Бледно-фиолетовая рыба, известная большими плавниками, которыми она парит над пустотой.",
+
+  "item.starcatcher.spacejelly" : "Космомедуза",
+  "tooltip.starcatcher.spacejelly.0" : "Невероятно лёгкая розовая медуза.",
+  "tooltip.starcatcher.spacejelly.1" : "Она парит у внешних островов Края в поисках Городов Края.",
+
+  "item.starcatcher.chorus_minnow" : "Хорусовая мелочь",
+  "tooltip.starcatcher.chorus_minnow.0" : "Вид мелочи, поглощённый хорусом.",
+  "tooltip.starcatcher.chorus_minnow.1" : "Неизвестно, родом ли она из Края.",
+
+  "item.starcatcher.nebula_squid" : "Кальмар-туманность",
+  "tooltip.starcatcher.nebula_squid.0" : "В отличие от Угольного кальмара, кальмары-туманности довольно липкие",
+  "tooltip.starcatcher.nebula_squid.1" : "и во время кормёжки часто обвивают щупальцами плоды хоруса.",
+
+
+  
+  "item.starcatcher.coggill" : "Шестержабр",
+  "tooltip.starcatcher.coggill.0" : "Пыльная конструкция из латунных шестерёнок, часто используемая в засушливых краях для перемещения воздуха.",
+
+  "item.starcatcher.mechanical_brass_snail" : "Механическая латунная улитка",
+  "tooltip.starcatcher.mechanical_brass_snail.0" : "Машина, созданная для очистки пляжей от нефти.",
+  "tooltip.starcatcher.mechanical_brass_snail.1" : "Эту, похоже, улучшили до латуни, что сделало её эффективнее.",
+
+  "item.starcatcher.mechanical_snail" : "Механическая улитка",
+  "tooltip.starcatcher.mechanical_snail.0" : "Машина, созданная для очистки пляжей от нефти.",
+  "tooltip.starcatcher.mechanical_snail.1" : "Она медленно ползает туда-сюда, убирая загрязнения,",
+  "tooltip.starcatcher.mechanical_snail.2" : "оставленные тем, кто её создал.",
+
+
+  "item.starcatcher.phillipsfish" : "Крестоголовка",
+  "tooltip.starcatcher.phillipsfish.0" : "Эта машина дрейфует по океану и затыкает собой любую щель, в которую влезет.",
+
+  "item.starcatcher.valve" : "Вентиль",
+  "tooltip.starcatcher.valve.0" : "Разболтавшийся вентиль, прикреплённый к трубе.",
+  "tooltip.starcatcher.valve.1" : "Где-то кто-то гадает, куда он подевался.",
+
+  "item.starcatcher.pipehead" : "Трубоголов",
+  "tooltip.starcatcher.pipehead.0" : "Этот тип машин, иногда называемый трубососом,",
+  "tooltip.starcatcher.pipehead.1" : "часто используется для соединения разных механизмов под водой.",
+  "tooltip.starcatcher.pipehead.2" : "Похоже, этот оторвался и начал дрейфовать по океанам.",
+
+  "item.starcatcher.cogtopus" : "Шестерёнконог",
+  "tooltip.starcatcher.cogtopus.0" : "Очень умная машина, созданная подражать поведению осьминогов.",
+  "tooltip.starcatcher.cogtopus.1" : "Каждый её мозг (шестерёнка) управляет отдельным щупальцем, позволяя ей пробраться куда угодно.",
+
+  "item.starcatcher.eel_dynamo" : "Угорь-динамо",
+  "tooltip.starcatcher.eel_dynamo.0" : "Маслянистый скользкий угорь, работающий на шестерёнках.",
+
+  "item.starcatcher.drive_pike" : "Приводная щука",
+  "tooltip.starcatcher.drive_pike.0" : "Агрессивная машина, созданная для контроля численности рыбы в реках",
+
+  "item.starcatcher.brassgill" : "Латунежабр",
+  "tooltip.starcatcher.brassgill.0" : "Механическая конструкция, напоминающая Пеплоплавника,",
+  "tooltip.starcatcher.brassgill.1" : "созданная выдерживать высокотемпературные жидкости.",
+  "tooltip.starcatcher.brassgill.2" : "Её предназначение неизвестно.",
+
+  "item.starcatcher.meka_agave_bream" : "Мека-агавовый лещ",
+  "tooltip.starcatcher.meka_agave_bream.0" : "Механическая версия Агавового леща, созданная для контроля численности лещей.",
+  "tooltip.starcatcher.meka_agave_bream.1" : "Если он не находит подходящего Агавового леща вовремя, то впадает в спячку до следующего нереста."
+}

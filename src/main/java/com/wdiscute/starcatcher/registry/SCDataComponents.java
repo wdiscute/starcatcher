@@ -77,9 +77,13 @@ public interface SCDataComponents
             builder -> builder.persistent(Codec.BOOL));
 
     //tackle box
-    DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> TACKLE_BOX_FISHES = register(
+    DeferredHolder<DataComponentType<?>, DataComponentType<List<Utils.Duo<Integer, MaybeStack>>>> TACKLE_BOX_ITEMS = register(
+            "tackle_box_items",
+            builder -> builder.persistent(Utils.Duo.codec(Codec.INT, MaybeStack.CODEC).listOf()));
+
+    DeferredHolder<DataComponentType<?>, DataComponentType<List<MaybeStack>>> TACKLE_BOX_FISHES = register(
             "tackle_box_fishes",
-            builder -> builder.persistent(ItemStack.OPTIONAL_CODEC.listOf()));
+            builder -> builder.persistent(MaybeStack.CODEC.listOf()));
 
     static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {

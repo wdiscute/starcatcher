@@ -162,13 +162,21 @@ public class SCEvents
                 {
                     if (container instanceof TackleBoxBlockEntity be)
                     {
-                        return new SidedInvWrapper(container, side)
+                        return new SidedInvWrapper(be.container, side)
                         {
                             @Override
                             public void setStackInSlot(int slot, ItemStack stack)
                             {
                                 super.setStackInSlot(slot, stack);
-                                be.updateFishSlot();
+                                be.container.updateFishSlot();
+                            }
+
+                            @Override
+                            public ItemStack extractItem(int slot, int amount, boolean simulate)
+                            {
+                                ItemStack itemStack = super.extractItem(slot, amount, simulate);
+                                be.container.updateFishSlot();
+                                return itemStack;
                             }
                         };
                     }

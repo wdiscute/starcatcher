@@ -153,7 +153,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof TackleBoxBlockEntity tbbe)
         {
-            if (!level.isClientSide && player.isCreative() && !tbbe.isEmpty())
+            if (!level.isClientSide && player.isCreative() && !tbbe.container.isEmpty())
             {
                 ItemStack itemstack = getColoredItemStack(this.getColor());
                 itemstack.applyComponents(blockentity.collectComponents());
@@ -176,7 +176,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             {
                 for (int i = 0; i < tbbe.getContainerSize(); ++i)
                 {
-                    consumer.accept(tbbe.getItem(i));
+                    consumer.accept(tbbe.container.getItem(i));
                 }
 
             });
@@ -311,14 +311,5 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     protected BlockState mirror(BlockState state, Mirror mirror)
     {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    @Override
-    public @org.jetbrains.annotations.Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
-    {
-        return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) ->
-        {
-            if (blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
-        };
     }
 }
