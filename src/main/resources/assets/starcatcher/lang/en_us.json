@@ -614,6 +614,16 @@
   "block.starcatcher.tackle_box_cyan" : "Cyan Tackle Box",
   "block.starcatcher.tackle_box_green" : "Green Tackle Box",
 
+  "item.starcatcher.oak_tackle_box_boat" : "Oak Tackle box Boat",
+  "item.starcatcher.dark_oak_tackle_box_boat" : "Dark Oak Tackle box Boat",
+  "item.starcatcher.cherry_tackle_box_boat" : "Cherry Tackle box Boat",
+  "item.starcatcher.bamboo_tackle_box_boat" : "Bamboo Tackle box Raft",
+  "item.starcatcher.spruce_tackle_box_boat" : "Spruce Tackle box Boat",
+  "item.starcatcher.birch_tackle_box_boat" : "Birch Tackle box Boat",
+  "item.starcatcher.mangrove_tackle_box_boat" : "Mangrove Tackle box Boat",
+  "item.starcatcher.acacia_tackle_box_boat" : "Acacia Tackle box Boat",
+  "item.starcatcher.jungle_tackle_box_boat" : "Jungle Tackle box Boat",
+
   "block.starcatcher.aquarium" : "Aquarium",
 
   "block.starcatcher.fisherman_hat_black": "Black Fisherman's Hat",

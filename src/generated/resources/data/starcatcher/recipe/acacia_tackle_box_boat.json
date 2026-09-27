@@ -1,0 +1,17 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "category": "misc",
+  "extra_chance": 50,
+  "ingredients": [
+    {
+      "item": "minecraft:acacia_boat"
+    },
+    {
+      "tag": "starcatcher:tackle_boxes"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:acacia_tackle_box_boat"
+  }
+}

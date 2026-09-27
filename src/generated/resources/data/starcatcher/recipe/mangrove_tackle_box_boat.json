@@ -1,0 +1,17 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "category": "misc",
+  "extra_chance": 50,
+  "ingredients": [
+    {
+      "item": "minecraft:mangrove_boat"
+    },
+    {
+      "tag": "starcatcher:tackle_boxes"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:mangrove_tackle_box_boat"
+  }
+}

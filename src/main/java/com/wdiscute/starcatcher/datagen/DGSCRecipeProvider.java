@@ -2,10 +2,8 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.recipe.TargetedBaitRecipe;
-import com.wdiscute.starcatcher.recipe.TargetedBaitRecipeBuilder;
+import com.wdiscute.starcatcher.recipe.*;
 import com.wdiscute.starcatcher.registry.SCBlocks;
-import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipeBuilder;
 import com.wdiscute.starcatcher.registry.SCItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -69,6 +67,61 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .requires(SCItems.SEEKING_WORM.get())
                 .requires(SCTags.STARCAUGHT_FISHABLE)
                 .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        //tackle box boats
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.ACACIA_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.ACACIA_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.OAK_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.OAK_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.DARK_OAK_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.DARK_OAK_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.JUNGLE_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.JUNGLE_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.BAMBOO_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.BAMBOO_RAFT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.CHERRY_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.CHERRY_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.MANGROVE_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.MANGROVE_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.BIRCH_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.BIRCH_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.SPRUCE_TACKLE_BOX_BOAT, 1, 50)
+                .requires(Items.SPRUCE_BOAT)
+                .requires(SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
                 .save(output);
 
         //dripstone bait
@@ -1035,17 +1088,6 @@ public class DGSCRecipeProvider extends RecipeProvider
                     .unlockedBy("has_fish", has(ItemTags.FISHES))
                     .save(output);
         }
-
-        //tackle box
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.TACKLE_BOX, 1)
-                .define('C', Items.COPPER_INGOT)
-                .define('H', Items.CHAIN)
-                .define('I', Items.IRON_INGOT)
-                .pattern("CCC")
-                .pattern("H H")
-                .pattern("III")
-                .unlockedBy("has_fish", has(ItemTags.FISHES))
-                .save(output);
 
         //letter
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.LETTER, 1)

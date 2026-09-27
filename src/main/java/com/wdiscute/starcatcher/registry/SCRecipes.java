@@ -23,6 +23,9 @@ public interface SCRecipes
     Supplier<RecipeSerializer<TargetedBaitRecipe>> TARGETED_BAIT =
             REGISTRY.register("targeted_bait", TargetedBaitRecipe.Serializer::new);
 
+    Supplier<RecipeSerializer<TackleBoxBoatRecipe>> TACKLE_BOX_BOAT =
+            REGISTRY.register("tackle_box_boat", TackleBoxBoatRecipe.Serializer::new);
+
     static void register(IEventBus eventBus)
     {
         REGISTRY.register(eventBus);

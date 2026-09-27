@@ -50,7 +50,7 @@ public abstract class TackleBoxContainer implements WorldlyContainer
     @Override
     public int getContainerSize()
     {
-        return 18;
+        return 19;
     }
 
     @Override

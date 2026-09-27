@@ -8,6 +8,7 @@ import com.wdiscute.starcatcher.blocks.clam.ConchBlock;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
 import com.wdiscute.starcatcher.blocks.stand.StandBlock;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlock;
+import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockItem;
 import com.wdiscute.starcatcher.registry.items.HatItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
@@ -106,7 +107,7 @@ public interface SCBlocks
     private static <T extends Block> DeferredBlock<T> registerTackleBox(String name, Supplier<T> block)
     {
         DeferredBlock<T> toReturn = TACKLE_BOXES.register(name, block);
-        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties()
+        SCItems.ITEMS.register(name, () -> new TackleBoxBlockItem(toReturn.get(), new Item.Properties()
                 .stacksTo(1)
                 .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
         ));

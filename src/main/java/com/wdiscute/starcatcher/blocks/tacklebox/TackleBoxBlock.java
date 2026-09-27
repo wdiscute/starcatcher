@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.blocks.tacklebox;
 import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.registry.SCBlocks;
+import com.wdiscute.starcatcher.registry.items.StarcatcherFishingRodItem;
 import com.wdiscute.utils.Utils;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -17,6 +18,7 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -46,6 +48,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Optional;
 
 public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
@@ -201,34 +204,6 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltipComponents, TooltipFlag tooltipFlag)
-    {
-        super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
-        if (stack.has(DataComponents.CONTAINER_LOOT))
-        {
-            tooltipComponents.add(UNKNOWN_CONTENTS);
-        }
-
-        int i = 0;
-        int j = 0;
-
-        for (ItemStack itemstack : stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).nonEmptyItems())
-        {
-            ++j;
-            if (i <= 4)
-            {
-                ++i;
-                tooltipComponents.add(Component.translatable("container.starcatcher.tackle_box.itemCount", itemstack.getHoverName(), itemstack.getCount()));
-            }
-        }
-
-        if (j - i > 0)
-        {
-            tooltipComponents.add(Component.translatable("container.starcatcher.tackle_box.more", j - i).withStyle(ChatFormatting.ITALIC));
-        }
-    }
-
-    @Override
     protected boolean hasAnalogOutputSignal(BlockState state)
     {
         return true;
@@ -257,7 +232,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     @Nullable
     public static DyeColor getColorFromBlock(Block block)
     {
-        return block instanceof TackleBoxBlock ? ((TackleBoxBlock) block).getColor() : null;
+        return block instanceof TackleBoxBlock tbb ? tbb.getColor() : DyeColor.CYAN;
     }
 
     public static DeferredBlock<Block> getBlockByColor(@Nullable DyeColor color)

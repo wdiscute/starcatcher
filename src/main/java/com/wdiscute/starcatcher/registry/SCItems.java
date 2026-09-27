@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatItem;
 import com.wdiscute.starcatcher.compat.CreateCompat;
 import com.wdiscute.starcatcher.guide.FishingGuideItem;
 import com.wdiscute.starcatcher.messageinabottle.letter.BottledLetterItem;
@@ -12,6 +13,7 @@ import com.wdiscute.starcatcher.messageinabottle.*;
 import com.wdiscute.utils.item.BasicItem;
 import com.wdiscute.utils.item.FireResistantBasicItem;
 import com.wdiscute.utils.item.SingleStackBasicItem;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
@@ -37,6 +39,7 @@ public interface SCItems
     DeferredRegister.Items RODS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
     DeferredRegister.Items HOOKS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
     DeferredRegister.Items BOBBERS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
+    DeferredRegister.Items TACKLE_BOX_BOAT_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
 
     DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", BasicItem::new);
     DeferredItem<Item> UNKNOWN_FISH = ITEMS.register("unknown_fish", BasicItem::new);
@@ -47,6 +50,17 @@ public interface SCItems
 
     DeferredItem<Item> SETTINGS = ITEMS.register("settings", BasicItem::new);
     DeferredItem<Item> TREASURE = ITEMS.register("treasure", BasicItem::new);
+
+    //tackle box boats
+    DeferredItem<Item> OAK_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("oak_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.OAK));
+    DeferredItem<Item> SPRUCE_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("spruce_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.SPRUCE));
+    DeferredItem<Item> BIRCH_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("birch_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.BIRCH));
+    DeferredItem<Item> JUNGLE_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("jungle_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.JUNGLE));
+    DeferredItem<Item> ACACIA_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("acacia_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.ACACIA));
+    DeferredItem<Item> CHERRY_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("cherry_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.CHERRY));
+    DeferredItem<Item> DARK_OAK_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("dark_oak_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.DARK_OAK));
+    DeferredItem<Item> MANGROVE_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("mangrove_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.MANGROVE));
+    DeferredItem<Item> BAMBOO_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("bamboo_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.BAMBOO));
 
     //hooks
     DeferredItem<Item> HOOK = HOOKS_REGISTRY.register("hook", SingleStackBasicItem::new);
@@ -407,5 +421,6 @@ public interface SCItems
         BOBBERS_REGISTRY.register(modEventBus);
         HOOKS_REGISTRY.register(modEventBus);
         RODS_REGISTRY.register(modEventBus);
+        TACKLE_BOX_BOAT_REGISTRY.register(modEventBus);
     }
 }

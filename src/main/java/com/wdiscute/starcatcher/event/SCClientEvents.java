@@ -2,6 +2,10 @@ package com.wdiscute.starcatcher.event;
 
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockItem;
+import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxTooltipRenderer;
+import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatModel;
+import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatRenderer;
 import com.wdiscute.starcatcher.bobentity.FishingBobRenderer;
 import com.wdiscute.starcatcher.bobentity.tackles.*;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
@@ -28,6 +32,8 @@ import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.blockentity.ChestRenderer;
+import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.BlockPos;
@@ -81,12 +87,12 @@ public class SCClientEvents
         EntityRenderers.register(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.FISH.get(), FishRenderer::new);
+        EntityRenderers.register(SCEntities.TACKLE_BOX_BOAT_ENTITY.get(), TackleBoxBoatRenderer::new);
+
         event.enqueueWork(SCItemProperties::addCustomItemProperties);
 
         if (ModList.get().isLoaded("curios"))
-        {
             CuriosEvents.registerRenderers();
-        }
     }
 
     @SubscribeEvent
@@ -125,6 +131,7 @@ public class SCClientEvents
         event.registerLayerDefinition(PearlModel.LAYER_LOCATION, PearlModel::createBodyLayer);
         event.registerLayerDefinition(ValleyModel.LAYER_LOCATION, ValleyModel::createBodyLayer);
         event.registerLayerDefinition(SurvivorModel.LAYER_LOCATION, SurvivorModel::createBodyLayer);
+        event.registerLayerDefinition(TackleBoxBoatModel.LAYER_LOCATION, TackleBoxBoatModel::createBodyLayer);
 
         //tackle box
         //event.registerLayerDefinition(TackleBoxRenderer.LAYER_LOCATION, TackleBoxRenderer::createBodyLayer);
@@ -205,6 +212,7 @@ public class SCClientEvents
     {
         event.register(StarcaughtBucket.BucketTooltip.class, BucketTooltipRenderer::new);
         event.register(StarcatcherFishingRodItem.RodSlotTooltip.class, RodSlotTooltipRenderer::new);
+        event.register(TackleBoxBlockItem.TackleBoxTooltip.class, TackleBoxTooltipRenderer::new);
     }
 
 }
