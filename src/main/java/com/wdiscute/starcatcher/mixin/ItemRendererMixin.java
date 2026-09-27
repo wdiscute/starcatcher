@@ -6,6 +6,7 @@ import com.llamalad7.mixinextras.sugar.Local;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.wdiscute.starcatcher.fish.Rarity;
+import com.wdiscute.starcatcher.registry.SCRenderTypes;
 import com.wdiscute.starcatcher.shaders.BakedModelRemapper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.ItemRenderer;
@@ -33,5 +34,17 @@ public class ItemRendererMixin
                 poseStack,
                 vertexConsumer
         );
+
+        if (isGolden)
+            original.call(
+                    instance,
+                    bakedModel,
+                    stack,
+                    combinedLight,
+                    combinedOverlay,
+                    poseStack,
+                    bufferSource.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT)
+            );
+
     }
 }
