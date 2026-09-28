@@ -624,6 +624,16 @@
   "item.starcatcher.acacia_tackle_box_boat" : "Acacia Tackle box Boat",
   "item.starcatcher.jungle_tackle_box_boat" : "Jungle Tackle box Boat",
 
+  "block.starcatcher.oak_fish_plaque" : "Oak Fish Plaque",
+  "block.starcatcher.dark_oak_fish_plaque" : "Dark Oak Fish Plaque",
+  "block.starcatcher.cherry_fish_plaque" : "Cherry Fish Plaque",
+  "block.starcatcher.acacia_fish_plaque" : "Acacia Fish Plaque",
+  "block.starcatcher.bamboo_fish_plaque" : "Bamboo Fish Plaque",
+  "block.starcatcher.jungle_fish_plaque" : "Jungle Fish Plaque",
+  "block.starcatcher.birch_fish_plaque" : "Birch Fish Plaque",
+  "block.starcatcher.spruce_fish_plaque" : "Spruce Fish Plaque",
+  "block.starcatcher.mangrove_fish_plaque" : "Mangrove Fish Plaque",
+
   "block.starcatcher.aquarium" : "Aquarium",
 
   "block.starcatcher.fisherman_hat_black": "Black Fisherman's Hat",

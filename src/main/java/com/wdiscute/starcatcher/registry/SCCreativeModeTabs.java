@@ -61,6 +61,7 @@ public interface SCCreativeModeTabs
                         .add(SCBlocks.TACKLE_BOX_CYAN)
                         .add(SCBlocks.AQUARIUM)
                         .add(SBBlocks.SELLING_BIN)
+                        .add(SCBlocks.OAK_FISH_PLAQUE)
         );
 
 
@@ -81,6 +82,7 @@ public interface SCCreativeModeTabs
                         .add(SCItems.RODS_REGISTRY)
                         .add(SCItems.TEMPLATES_REGISTRY)
                         .add((d) -> SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
+                        .add((d) -> SCBlocks.FISH_PLAQUES.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
         );
 
         //tackle boxes

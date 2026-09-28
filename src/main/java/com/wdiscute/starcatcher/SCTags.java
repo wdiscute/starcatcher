@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher;
 
+import com.jcraft.jorbis.Block;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -34,6 +35,7 @@ public class SCTags
     public static final ResourceLocation IS_SOUL_SAND_VALLEY = Starcatcher.rl("is_soul_sand_valley");
     public static final ResourceLocation IS_BASALT_DELTAS = Starcatcher.rl("is_basalt_deltas");
 
+    public static final TagKey<Item> FISH_PLAQUES = ItemTags.create(Starcatcher.rl("fish_plaques"));
     public static final TagKey<Item> TACKLE_BOXES = ItemTags.create(Starcatcher.rl("tackle_boxes"));
     public static final TagKey<Item> HOOKS = ItemTags.create(Starcatcher.rl("hooks"));
     public static final TagKey<Item> BOBBERS = ItemTags.create(Starcatcher.rl("bobbers"));

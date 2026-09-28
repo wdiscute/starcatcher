@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.event;
 
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockRenderer;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockItem;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxTooltipRenderer;
 import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatModel;
@@ -75,6 +76,7 @@ public class SCClientEvents
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event)
     {
+        event.registerBlockEntityRenderer(SCBlockEntities.FISH_PLAQUE.get(), PlaqueBlockRenderer::new);
         event.registerBlockEntityRenderer(SCBlockEntities.DISPLAY.get(), DisplayBlockRenderer::new);
         event.registerBlockEntityRenderer(SCBlockEntities.AQUARIUM.get(), AquariumRenderer::new);
         //event.registerBlockEntityRenderer(ModBlockEntities.TACKLE_BOX.get(), TackleBoxRenderer::new);

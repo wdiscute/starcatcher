@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "starcatcher:block/bamboo_fish_plaque"
+    },
+    "facing=east": {
+      "model": "starcatcher:block/bamboo_fish_plaque",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "starcatcher:block/bamboo_fish_plaque",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "starcatcher:block/bamboo_fish_plaque",
+      "y": 270
+    }
+  }
+}

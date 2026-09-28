@@ -30,6 +30,7 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
     protected void generate()
     {
         HATS.getEntries().forEach(o -> dropSelf(o.get()));
+
         TACKLE_BOXES.getEntries().forEach(o ->
                 add(o.get(), LootTable.lootTable().withPool(this.applyExplosionCondition(
                                         o.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
@@ -43,6 +44,7 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
                 ));
 
 
+        FISH_PLAQUES.getEntries().forEach(o -> dropSelf(o.get()));
 
 
         dropSelf(AQUARIUM.get());
@@ -65,6 +67,7 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
         List<Block> list = new ArrayList<>();
         list.addAll(HATS.getEntries().stream().map(Holder::value).toList());
         list.addAll(TACKLE_BOXES.getEntries().stream().map(Holder::value).toList());
+        list.addAll(FISH_PLAQUES.getEntries().stream().map(Holder::value).toList());
 
         list.add(TROPHY_COPPER.get());
         list.add(TROPHY_IRON.get());

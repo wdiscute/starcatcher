@@ -166,6 +166,17 @@ public class DGSCItemModelProvider extends ItemModelProvider
         simpleBlockItem(TACKLE_BOX_CYAN.get());
         simpleBlockItem(TACKLE_BOX_GREEN.get());
 
+        //tacklebox
+        simpleBlockItem(OAK_FISH_PLAQUE.get());
+        simpleBlockItem(DARK_OAK_FISH_PLAQUE.get());
+        simpleBlockItem(BIRCH_FISH_PLAQUE.get());
+        simpleBlockItem(SPRUCE_FISH_PLAQUE.get());
+        simpleBlockItem(JUNGLE_FISH_PLAQUE.get());
+        simpleBlockItem(CHERRY_FISH_PLAQUE.get());
+        simpleBlockItem(BAMBOO_FISH_PLAQUE.get());
+        simpleBlockItem(ACACIA_FISH_PLAQUE.get());
+        simpleBlockItem(MANGROVE_FISH_PLAQUE.get());
+
     }
 
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item)

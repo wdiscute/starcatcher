@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.sellingbin.registry.SBBlocks;
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import net.minecraft.core.HolderLookup;
@@ -29,6 +30,9 @@ public class DGSCBlocksTagsProvider extends BlockTagsProvider
     {
         for (DeferredHolder<Block, ? extends Block> entry : SCBlocks.TACKLE_BOXES.getEntries())
             tag(BlockTags.MINEABLE_WITH_PICKAXE).add(entry.value());
+
+        for (DeferredHolder<Block, ? extends Block> entry : SCBlocks.FISH_PLAQUES.getEntries())
+            tag(BlockTags.MINEABLE_WITH_AXE).add(entry.value());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(SCBlocks.AQUARIUM.get());
