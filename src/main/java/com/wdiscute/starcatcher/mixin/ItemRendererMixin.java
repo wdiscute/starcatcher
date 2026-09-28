@@ -43,7 +43,7 @@ public class ItemRendererMixin
                     combinedLight,
                     combinedOverlay,
                     poseStack,
-                    bufferSource.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT)
+                    bufferSource.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT_ITEM)
             );
 
     }

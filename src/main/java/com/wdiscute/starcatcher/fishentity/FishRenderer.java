@@ -2,11 +2,13 @@ package com.wdiscute.starcatcher.fishentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
+import com.wdiscute.starcatcher.registry.SCRenderTypes;
 import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -157,8 +159,9 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         {
             Item item = itemStack.getItem();
             EntityModel<FishEntity> model = map.get(item);
-            VertexConsumer vertexconsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
-            model.renderToBuffer(poseStack, vertexconsumer, packedLight, overlay);
+            VertexConsumer vertexConsumer = getGlintVertexConsumer(buffer, Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack);
+
+            model.renderToBuffer(poseStack, vertexConsumer, packedLight, overlay);
         }
         else
         {
@@ -175,5 +178,12 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         return Rarity.isGolden(fishItem)
                 ? GoldRenderer.INSTANCE.getOrCreateEntity(texture, model::renderType).renderType
                 : model.renderType(GoldRenderer.getTextureLoc(texture));
+    }
+
+    public static VertexConsumer getGlintVertexConsumer(MultiBufferSource buffer, ResourceLocation texture, EntityModel<FishEntity> model, ItemStack fishItem){
+        VertexConsumer glint = buffer.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT_ENTITY);
+        VertexConsumer textureConsumer = buffer.getBuffer(getGoldRendertype(texture, model, fishItem));
+
+        return VertexMultiConsumer.create(textureConsumer, glint);
     }
 }
