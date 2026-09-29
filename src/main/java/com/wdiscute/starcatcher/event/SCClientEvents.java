@@ -198,6 +198,35 @@ public class SCClientEvents
         event.registerLayerDefinition(TwilightKoi.LAYER_LOCATION, TwilightKoi::createBodyLayer);
         event.registerLayerDefinition(WillowBream.LAYER_LOCATION, WillowBream::createBodyLayer);
         event.registerLayerDefinition(Cerberay.LAYER_LOCATION, Cerberay::createBodyLayer);
+        event.registerLayerDefinition(Amethystback.LAYER_LOCATION, Amethystback::createBodyLayer);
+        event.registerLayerDefinition(AquamarinePike.LAYER_LOCATION, AquamarinePike::createBodyLayer);
+        event.registerLayerDefinition(Blossomfish.LAYER_LOCATION, Blossomfish::createBodyLayer);
+        event.registerLayerDefinition(BlueIcePike.LAYER_LOCATION, BlueIcePike::createBodyLayer);
+        event.registerLayerDefinition(Bluegigi.LAYER_LOCATION, Bluegigi::createBodyLayer);
+        event.registerLayerDefinition(ChorusMinnow.LAYER_LOCATION, ChorusMinnow::createBodyLayer);
+        event.registerLayerDefinition(Cryospine.LAYER_LOCATION, Cryospine::createBodyLayer);
+        event.registerLayerDefinition(CrystalbackSturgeon.LAYER_LOCATION, CrystalbackSturgeon::createBodyLayer);
+        event.registerLayerDefinition(DarkAmethystSnapper.LAYER_LOCATION, DarkAmethystSnapper::createBodyLayer);
+        event.registerLayerDefinition(Dreamliner.LAYER_LOCATION, Dreamliner::createBodyLayer);
+        event.registerLayerDefinition(Dripfin.LAYER_LOCATION, Dripfin::createBodyLayer);
+        event.registerLayerDefinition(EndGlow.LAYER_LOCATION, EndGlow::createBodyLayer);
+        event.registerLayerDefinition(FossilizedAngelfish.LAYER_LOCATION, FossilizedAngelfish::createBodyLayer);
+        event.registerLayerDefinition(GarnetMackerel.LAYER_LOCATION, GarnetMackerel::createBodyLayer);
+        event.registerLayerDefinition(Glimmergill.LAYER_LOCATION, Glimmergill::createBodyLayer);
+        event.registerLayerDefinition(GlowingDark.LAYER_LOCATION, GlowingDark::createBodyLayer);
+        event.registerLayerDefinition(GlowstonePufferfish.LAYER_LOCATION, GlowstonePufferfish::createBodyLayer);
+        event.registerLayerDefinition(GlowstoneSeeker.LAYER_LOCATION, GlowstoneSeeker::createBodyLayer);
+        event.registerLayerDefinition(GoldFan.LAYER_LOCATION, GoldFan::createBodyLayer);
+        event.registerLayerDefinition(LilacMinnow.LAYER_LOCATION, LilacMinnow::createBodyLayer);
+        event.registerLayerDefinition(LividBamboo.LAYER_LOCATION, LividBamboo::createBodyLayer);
+        event.registerLayerDefinition(Mossfin.LAYER_LOCATION, Mossfin::createBodyLayer);
+        event.registerLayerDefinition(Mothfish.LAYER_LOCATION, Mothfish::createBodyLayer);
+        event.registerLayerDefinition(PaleCarp.LAYER_LOCATION, PaleCarp::createBodyLayer);
+        event.registerLayerDefinition(Peakdweller.LAYER_LOCATION, Peakdweller::createBodyLayer);
+        event.registerLayerDefinition(PetalBass.LAYER_LOCATION, PetalBass::createBodyLayer);
+        event.registerLayerDefinition(PurpleCarp.LAYER_LOCATION, PurpleCarp::createBodyLayer);
+        event.registerLayerDefinition(Rainfin.LAYER_LOCATION, Rainfin::createBodyLayer);
+        event.registerLayerDefinition(Shadowfin.LAYER_LOCATION, Shadowfin::createBodyLayer);
 
     }
 

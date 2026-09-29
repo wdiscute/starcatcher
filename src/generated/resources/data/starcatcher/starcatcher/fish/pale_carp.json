@@ -1,6 +1,9 @@
 {
   "base_chance": 6,
   "catch_info": {
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:pale_carp"
     }

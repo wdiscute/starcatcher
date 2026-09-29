@@ -99,6 +99,35 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         map.put(SCItems.TWILIGHT_KOI.get(), new TwilightKoi<>(modelSet.bakeLayer(TwilightKoi.LAYER_LOCATION)));
         map.put(SCItems.WILLOW_BREAM.get(), new WillowBream<>(modelSet.bakeLayer(WillowBream.LAYER_LOCATION)));
         map.put(SCItems.CERBERAY.get(), new Cerberay<>(modelSet.bakeLayer(Cerberay.LAYER_LOCATION)));
+        map.put(SCItems.AMETHYSTBACK.get(), new Amethystback<>(modelSet.bakeLayer(Amethystback.LAYER_LOCATION)));
+        map.put(SCItems.AQUAMARINE_PIKE.get(), new AquamarinePike<>(modelSet.bakeLayer(AquamarinePike.LAYER_LOCATION)));
+        map.put(SCItems.BLOSSOMFISH.get(), new Blossomfish<>(modelSet.bakeLayer(Blossomfish.LAYER_LOCATION)));
+        map.put(SCItems.BLUE_ICE_PIKE.get(), new BlueIcePike<>(modelSet.bakeLayer(BlueIcePike.LAYER_LOCATION)));
+        map.put(SCItems.BLUEGIGI.get(), new Bluegigi<>(modelSet.bakeLayer(Bluegigi.LAYER_LOCATION)));
+        map.put(SCItems.CHORUS_MINNOW.get(), new ChorusMinnow<>(modelSet.bakeLayer(ChorusMinnow.LAYER_LOCATION)));
+        map.put(SCItems.CRYOSPINE.get(), new Cryospine<>(modelSet.bakeLayer(Cryospine.LAYER_LOCATION)));
+        map.put(SCItems.CRYSTALBACK_STURGEON.get(), new CrystalbackSturgeon<>(modelSet.bakeLayer(CrystalbackSturgeon.LAYER_LOCATION)));
+        map.put(SCItems.DARK_AMETHYST_SNAPPER.get(), new DarkAmethystSnapper<>(modelSet.bakeLayer(DarkAmethystSnapper.LAYER_LOCATION)));
+        map.put(SCItems.DREAMLINER.get(), new Dreamliner<>(modelSet.bakeLayer(Dreamliner.LAYER_LOCATION)));
+        map.put(SCItems.DRIPFIN.get(), new Dripfin<>(modelSet.bakeLayer(Dripfin.LAYER_LOCATION)));
+        map.put(SCItems.END_GLOW.get(), new EndGlow<>(modelSet.bakeLayer(EndGlow.LAYER_LOCATION)));
+        map.put(SCItems.FOSSILIZED_ANGELFISH.get(), new FossilizedAngelfish<>(modelSet.bakeLayer(FossilizedAngelfish.LAYER_LOCATION)));
+        map.put(SCItems.GARNET_MACKEREL.get(), new GarnetMackerel<>(modelSet.bakeLayer(GarnetMackerel.LAYER_LOCATION)));
+        map.put(SCItems.GLIMMERGILL.get(), new Glimmergill<>(modelSet.bakeLayer(Glimmergill.LAYER_LOCATION)));
+        map.put(SCItems.GLOWING_DARK.get(), new GlowingDark<>(modelSet.bakeLayer(GlowingDark.LAYER_LOCATION)));
+        map.put(SCItems.GLOWSTONE_PUFFERFISH.get(), new GlowstonePufferfish<>(modelSet.bakeLayer(GlowstonePufferfish.LAYER_LOCATION)));
+        map.put(SCItems.GLOWSTONE_SEEKER.get(), new GlowstoneSeeker<>(modelSet.bakeLayer(GlowstoneSeeker.LAYER_LOCATION)));
+        map.put(SCItems.GOLD_FAN.get(), new GoldFan<>(modelSet.bakeLayer(GoldFan.LAYER_LOCATION)));
+        map.put(SCItems.LILAC_MINNOW.get(), new LilacMinnow<>(modelSet.bakeLayer(LilacMinnow.LAYER_LOCATION)));
+        map.put(SCItems.LIVID_BAMBOO.get(), new LividBamboo<>(modelSet.bakeLayer(LividBamboo.LAYER_LOCATION)));
+        map.put(SCItems.MOSSFIN.get(), new Mossfin<>(modelSet.bakeLayer(Mossfin.LAYER_LOCATION)));
+        map.put(SCItems.MOTHFISH.get(), new Mothfish<>(modelSet.bakeLayer(Mothfish.LAYER_LOCATION)));
+        map.put(SCItems.PALE_CARP.get(), new PaleCarp<>(modelSet.bakeLayer(PaleCarp.LAYER_LOCATION)));
+        map.put(SCItems.PEAKDWELLER.get(), new Peakdweller<>(modelSet.bakeLayer(Peakdweller.LAYER_LOCATION)));
+        map.put(SCItems.PETAL_BASS.get(), new PetalBass<>(modelSet.bakeLayer(PetalBass.LAYER_LOCATION)));
+        map.put(SCItems.PURPLE_CARP.get(), new PurpleCarp<>(modelSet.bakeLayer(PurpleCarp.LAYER_LOCATION)));
+        map.put(SCItems.RAINFIN.get(), new Rainfin<>(modelSet.bakeLayer(Rainfin.LAYER_LOCATION)));
+        map.put(SCItems.SHADOWFIN.get(), new Shadowfin<>(modelSet.bakeLayer(Shadowfin.LAYER_LOCATION)));
     }
 
     @Override

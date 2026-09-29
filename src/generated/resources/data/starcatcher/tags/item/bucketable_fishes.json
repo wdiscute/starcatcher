@@ -9,6 +9,14 @@
       "required": false
     },
     {
+      "id": "starcatcher:rainfin",
+      "required": false
+    },
+    {
+      "id": "starcatcher:peakdweller",
+      "required": false
+    },
+    {
       "id": "starcatcher:silverveil_perch",
       "required": false
     },
@@ -45,6 +53,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:blue_ice_pike",
+      "required": false
+    },
+    {
       "id": "starcatcher:mirage_carp",
       "required": false
     },
@@ -65,11 +77,19 @@
       "required": false
     },
     {
+      "id": "starcatcher:pale_carp",
+      "required": false
+    },
+    {
       "id": "starcatcher:pale_pinfish",
       "required": false
     },
     {
       "id": "starcatcher:pinfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:blossomfish",
       "required": false
     },
     {
@@ -82,6 +102,14 @@
     },
     {
       "id": "starcatcher:morganite",
+      "required": false
+    },
+    {
+      "id": "starcatcher:petal_bass",
+      "required": false
+    },
+    {
+      "id": "starcatcher:crystalback_sturgeon",
       "required": false
     },
     {
@@ -125,11 +153,19 @@
       "required": false
     },
     {
+      "id": "starcatcher:bluegigi",
+      "required": false
+    },
+    {
       "id": "starcatcher:frostgill_chub",
       "required": false
     },
     {
       "id": "starcatcher:crystalback_minnow",
+      "required": false
+    },
+    {
+      "id": "starcatcher:mothfish",
       "required": false
     },
     {
@@ -161,7 +197,35 @@
       "required": false
     },
     {
+      "id": "starcatcher:glimmergill",
+      "required": false
+    },
+    {
+      "id": "starcatcher:cryospine",
+      "required": false
+    },
+    {
+      "id": "starcatcher:lilac_minnow",
+      "required": false
+    },
+    {
+      "id": "starcatcher:gold_fan",
+      "required": false
+    },
+    {
       "id": "starcatcher:whiteveil",
+      "required": false
+    },
+    {
+      "id": "starcatcher:amethystback",
+      "required": false
+    },
+    {
+      "id": "starcatcher:fossilized_angelfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:dripfin",
       "required": false
     },
     {
@@ -189,11 +253,31 @@
       "required": false
     },
     {
+      "id": "starcatcher:livid_bamboo",
+      "required": false
+    },
+    {
       "id": "starcatcher:ghostly_pike",
       "required": false
     },
     {
+      "id": "starcatcher:aquamarine_pike",
+      "required": false
+    },
+    {
+      "id": "starcatcher:garnet_mackerel",
+      "required": false
+    },
+    {
+      "id": "starcatcher:dark_amethyst_snapper",
+      "required": false
+    },
+    {
       "id": "starcatcher:sculkfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowing_dark",
       "required": false
     },
     {
@@ -213,6 +297,14 @@
       "required": false
     },
     {
+      "id": "starcatcher:glowstone_seeker",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowstone_pufferfish",
+      "required": false
+    },
+    {
       "id": "starcatcher:willish",
       "required": false
     },
@@ -225,7 +317,23 @@
       "required": false
     },
     {
+      "id": "starcatcher:end_glow",
+      "required": false
+    },
+    {
+      "id": "starcatcher:dreamliner",
+      "required": false
+    },
+    {
       "id": "starcatcher:voidbiter",
+      "required": false
+    },
+    {
+      "id": "starcatcher:purple_carp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:chorus_minnow",
       "required": false
     }
   ]

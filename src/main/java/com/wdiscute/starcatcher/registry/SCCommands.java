@@ -16,6 +16,7 @@ import com.wdiscute.starcatcher.data.FishCaughtCounter;
 import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.data.network.CBFishingStartedPayload;
 import com.wdiscute.starcatcher.fish.FishProperties;
+import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.utils.MaybeStack;
@@ -28,8 +29,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.server.command.EnumArgument;
 
 import java.util.ArrayList;
@@ -150,13 +154,13 @@ public interface SCCommands
                                 .then(Commands.argument("ticks", IntegerArgumentType.integer())
                                         .then(Commands.argument("percentile", FloatArgumentType.floatArg())
                                                 .then(Commands.argument("golden", BoolArgumentType.bool())
-                                                                .executes(c -> awardRandomFish(
-                                                                                c.getSource().getPlayerOrException(),
-                                                                                IntegerArgumentType.getInteger(c, "ticks"),
-                                                                                FloatArgumentType.getFloat(c, "percentile"),
-                                                                                BoolArgumentType.getBool(c, "golden")
-                                                                        )
+                                                        .executes(c -> awardRandomFish(
+                                                                        c.getSource().getPlayerOrException(),
+                                                                        IntegerArgumentType.getInteger(c, "ticks"),
+                                                                        FloatArgumentType.getFloat(c, "percentile"),
+                                                                        BoolArgumentType.getBool(c, "golden")
                                                                 )
+                                                        )
                                                 )
                                         )
                                 )
@@ -200,9 +204,46 @@ public interface SCCommands
                                         ResourceArgument.getResource(c, "fish", Starcatcher.FISH_REGISTRY_KEY).key()
                                 ))
                         )
+                )
 
+
+                //starcatcher spawn_entities
+                .then(Commands.literal("spawn_entities")
+                        .executes(c ->
+                                spawnAllEntities(
+                                        c.getSource().getPlayerOrException()
+                                )
+                        )
                 )
         );
+    }
+
+    private static int spawnAllEntities(ServerPlayer player)
+    {
+        List<DeferredHolder<Item, ? extends Item>> list = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().toList();
+
+        player.sendSystemMessage(Component.literal("Summoned " + list.size() + " fish"));
+
+        int side = (int) Math.ceil(Math.sqrt(list.size()));
+
+        for (int y = 0; y < side; y++)
+        {
+            for (int x = 0; x < side; x++)
+            {
+                int index = y * side + x;
+
+                if (index < list.size())
+                {
+                    FishEntity fishEntity = SCEntities.FISH.get().create(player.level());
+                    fishEntity.setFish(list.get(index).get().getDefaultInstance());
+                    fishEntity.moveTo(player.position().add(new Vec3(x * 1.5f, 0, y * 1.5f)));
+                    fishEntity.setNoAi(true);
+                    player.level().addFreshEntity(fishEntity);
+                }
+            }
+        }
+
+        return 0;
     }
 
     private static int revokeAllFish(ServerPlayer player)

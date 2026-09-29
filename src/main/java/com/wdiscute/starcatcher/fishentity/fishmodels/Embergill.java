@@ -13,7 +13,7 @@ import net.minecraft.world.entity.Entity;
 
 public class Embergill<T extends Entity> extends EntityModel<T>
 {
-	private static final String NAME = "dusktail_snapper";
+	private static final String NAME = "embergill";
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl(NAME), "main");
 	private final ModelPart fish;
 
