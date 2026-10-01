@@ -69,6 +69,88 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
                 .save(output);
 
+        //fish plaques
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.OAK_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.OAK_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.DARK_OAK_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.DARK_OAK_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.CHERRY_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.CHERRY_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.MANGROVE_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.MANGROVE_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.BAMBOO_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.BAMBOO_PLANKS)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.SPRUCE_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.SPRUCE_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.ACACIA_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.ACACIA_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.BIRCH_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.BIRCH_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, SCBlocks.JUNGLE_FISH_PLAQUE)
+                .define('S', Items.STICK)
+                .define('L', Items.JUNGLE_LOG)
+                .pattern("SSS")
+                .pattern("SLS")
+                .pattern("SSS")
+                .unlockedBy("has_fish", has(SCTags.STARCAUGHT_FISHABLE))
+                .save(output);
+
         //tackle box boats
         TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.ACACIA_TACKLE_BOX_BOAT, 1, 50)
                 .requires(Items.ACACIA_BOAT)

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": {
+      "item": "minecraft:spruce_log"
+    },
+    "S": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "SSS",
+    "SLS",
+    "SSS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "starcatcher:spruce_fish_plaque"
+  }
+}
