@@ -38,7 +38,8 @@ public class GoldFan<T extends Entity> extends EntityModel<T>
 		PartDefinition fin1 = fish.addOrReplaceChild("fin1", CubeListBuilder.create().texOffs(16, 17).addBox(0.0F, -9.0F, -4.0F, 0.0F, 5.0F, 6.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 		PartDefinition fin2 = fish.addOrReplaceChild("fin2", CubeListBuilder.create().texOffs(18, 0).addBox(0.0F, 0.0F, -4.0F, 0.0F, 2.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 		PartDefinition fin3 = fish.addOrReplaceChild("fin3", CubeListBuilder.create().texOffs(0, -1).addBox(0.0F, -7.0F, 1.0F, 0.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
-		PartDefinition cube_r1 = fin3.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, -1).addBox(1.0F, -9.0F, -7.0F, 0.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, -1.0F, 8.0F, 0.0F, 0.0F, -1.5708F));
+		//second fin with z fighting ugh
+		//PartDefinition cube_r1 = fin3.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(0, -1).addBox(1.0F, -9.0F, -7.0F, 0.0F, 9.0F, 9.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(5.0F, -1.0F, 8.0F, 0.0F, 0.0F, -1.5708F));
 
 		return LayerDefinition.create(meshdefinition, 32, 32);
 	}

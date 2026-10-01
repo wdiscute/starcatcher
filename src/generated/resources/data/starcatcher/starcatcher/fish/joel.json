@@ -1,6 +1,9 @@
 {
   "base_chance": 1,
   "catch_info": {
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:joel"
     }
