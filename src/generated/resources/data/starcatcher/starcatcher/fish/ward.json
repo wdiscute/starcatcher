@@ -78,8 +78,7 @@
     {
       "type": "starcatcher:bait",
       "baits": {
-        "starcatcher:legendary_bait": 50,
-        "starcatcher:sculk_bait": 50
+        "starcatcher:legendary_bait": 50
       }
     }
   ],

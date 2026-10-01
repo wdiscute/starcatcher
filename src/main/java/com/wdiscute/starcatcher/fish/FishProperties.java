@@ -166,14 +166,12 @@ public record FishProperties(
 
     public FishProperties addRestriction(AbstractFishRestriction restriction)
     {
-        this.restrictions.add(restriction);
-        return this;
+        return withRestrictions(new ArrayList<>(restrictions){{add(restriction);}});
     }
 
     public FishProperties addRestrictions(AbstractFishRestriction... restriction)
     {
-        this.restrictions.addAll(List.of(restriction));
-        return this;
+        return withRestrictions(new ArrayList<>(restrictions){{addAll(List.of(restriction));}});
     }
 
     public FishProperties withEntityToSpawn(Holder<EntityType<?>> entityTypeHolder)
