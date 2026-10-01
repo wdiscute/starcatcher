@@ -240,6 +240,7 @@ public class PresetRestrictions
     public static FishProperties frozenOceans(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
+                .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(BiomeRestriction.FROZEN_OCEAN)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
