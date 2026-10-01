@@ -92,7 +92,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             poseStack.pushPose();
 
             //block centering
-            Vec3 offsetCenter = new Vec3(0.5f, be.getLevel().getBlockState(be.getBlockPos().above()).isEmpty() ? 0.2f : 0.5f, 0.5f);
+            Vec3 offsetCenter = new Vec3(0.5f, 0.5f, 0.5f);
             poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
 
             float scale = SCDataComponents.getOrDefault(

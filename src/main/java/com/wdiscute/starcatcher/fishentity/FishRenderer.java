@@ -212,7 +212,12 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         {
             Item item = itemStack.getItem();
             EntityModel<FishEntity> model = map.get(item);
-            VertexConsumer vertexConsumer = getGlintVertexConsumer(buffer, Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack);
+
+            VertexConsumer vertexConsumer;
+            if (Rarity.isGolden(itemStack))
+                vertexConsumer = getGlintVertexConsumer(buffer, Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack);
+            else
+                vertexConsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
 
             model.renderToBuffer(poseStack, vertexConsumer, packedLight, overlay);
         }
@@ -233,7 +238,8 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
                 : model.renderType(GoldRenderer.getTextureLoc(texture));
     }
 
-    public static VertexConsumer getGlintVertexConsumer(MultiBufferSource buffer, ResourceLocation texture, EntityModel<FishEntity> model, ItemStack fishItem){
+    public static VertexConsumer getGlintVertexConsumer(MultiBufferSource buffer, ResourceLocation texture, EntityModel<FishEntity> model, ItemStack fishItem)
+    {
         VertexConsumer glint = buffer.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT_ENTITY);
         VertexConsumer textureConsumer = buffer.getBuffer(getGoldRendertype(texture, model, fishItem));
 

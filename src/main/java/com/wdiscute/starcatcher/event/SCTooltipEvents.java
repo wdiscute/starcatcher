@@ -72,10 +72,10 @@ public class SCTooltipEvents
         }
 
         //tackle box boat color
-        if (SCDataComponents.has(stack, SCDataComponents.TACKLE_BOX_COLOR))
-        {
-            comp.add(Component.translatable("color.minecraft." + SCDataComponents.get(stack, SCDataComponents.TACKLE_BOX_COLOR).getName()).withStyle(ChatFormatting.GRAY));
-        }
+        //if (SCDataComponents.has(stack, SCDataComponents.TACKLE_BOX_COLOR))
+        //{
+        //    comp.add(Component.translatable("color.minecraft." + SCDataComponents.get(stack, SCDataComponents.TACKLE_BOX_COLOR).getName()).withStyle(ChatFormatting.GRAY));
+        //}
 
         //signed guide
         if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))

@@ -1341,7 +1341,7 @@
   "gui.guide.between" : "Between %s and %s",
   "gui.guide.no_restriction" : "-------",
   "gui.guide.rarity_count.single" : "%s fishes",
-  "gui.guide.bait_chance_added" : "Chance added by bait:",
+  "gui.guide.bait_chance_added" : "Weight added by bait:",
   "gui.guide.rarity_count.all" : "All %s fishes",
 
   "gui.guide.hover" : "[hover]",
