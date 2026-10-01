@@ -1929,7 +1929,7 @@
   "item.starcatcher.blue_crystal_fin" : "Blue Crystal Fin",
   "tooltip.starcatcher.blue_crystal_fin.0" : "An uncommon fish most commonly found during daytime.",
 
-  "item.starcatcher.mothfish" : "Blue Crystal Fin",
+  "item.starcatcher.mothfish" : "Mothfish",
   "tooltip.starcatcher.mothfish.0" : "This fish has developed a layer of fur to help it overcome the cold.",
   "tooltip.starcatcher.mothfish.1" : "How it keeps this fur dry in the first place is a mystery...",
 
@@ -2077,7 +2077,7 @@
   "tooltip.starcatcher.dark_amethyst_snapper.1" : "It's said to always swim around with a Bright Amethyst Snapper.",
 
   "item.starcatcher.deepslatefish" : "Deepslatefish",
-  "tooltip.starcatcher.deepslatefish.0" : "A <sclegendary>legendary</sclegenday> fish only found high up in the mountains.",
+  "tooltip.starcatcher.deepslatefish.0" : "A <sclegendary>legendary</sclegendary> fish only found high up in the mountains.",
   "tooltip.starcatcher.deepslatefish.1" : "Just kidding. It's found at deepslate.",
   "tooltip.starcatcher.deepslatefish.2" : "An incredibly tough catch due to its vanishing deepslate scales.",
 

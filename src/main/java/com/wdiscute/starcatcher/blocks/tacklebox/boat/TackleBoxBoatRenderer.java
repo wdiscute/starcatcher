@@ -37,11 +37,22 @@ public class TackleBoxBoatRenderer extends EntityRenderer<TackleBoxBoatEntity>
                 .collect(
                         ImmutableMap.toImmutableMap(
                                 type -> type,
-                                type -> Pair.of(Utils.rl(type.getName()).withPrefix("textures/entity/boat/").withSuffix(".png"),
-                                        type.isRaft() ? new RaftModel(context.bakeLayer(ModelLayers.createBoatModelName(type)))
-                                                : new BoatModel(context.bakeLayer(ModelLayers.createBoatModelName(type)))
-                                )
-                        )
+                                type ->
+                                {
+                                    ResourceLocation rl = ResourceLocation.tryParse(type.getName());
+                                    if (rl == null)
+                                        throw new RuntimeException("Starcatcher couldn't parse boat type " + rl);
+                                    else
+                                        rl = rl.withPrefix("textures/entity/boat/").withSuffix(".png");
+
+
+                                    return Pair.of(rl,
+                                            type.isRaft() ? new RaftModel(context.bakeLayer(ModelLayers.createBoatModelName(type)))
+                                                    : new BoatModel(context.bakeLayer(ModelLayers.createBoatModelName(type))));
+
+
+                                })
+
                 );
     }
 
@@ -78,7 +89,7 @@ public class TackleBoxBoatRenderer extends EntityRenderer<TackleBoxBoatEntity>
         poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
         poseStack.translate(0, -1.32, 0.5);
 
-        if(entity.getVariant().isRaft())
+        if (entity.getVariant().isRaft())
             poseStack.translate(0, -0.31, 0);
 
         boxModel.setupAnim(entity, partialTicks, 0.0F, entity.tickCount + partialTicks, 0.0F, 0.0F);
