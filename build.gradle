@@ -88,7 +88,7 @@ dependencies {
     jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-1.21.1"))
 
     //tiny multiblock lib
-    jarJar(implementation("net.nikdo53:tiny-multiblock-lib-neoforge-1.21.1:4.0.0"))
+    jarJar(implementation("net.nikdo53:tiny-multiblock-lib-neoforge-1.21.1:4.0.1"))
 
     //fancy tab sections
     //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-1.21.1"))
