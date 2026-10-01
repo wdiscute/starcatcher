@@ -1,6 +1,9 @@
 {
   "base_chance": 20,
   "catch_info": {
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:azure_crystalback_minnow"
     }

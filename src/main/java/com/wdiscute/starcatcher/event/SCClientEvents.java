@@ -228,6 +228,31 @@ public class SCClientEvents
         event.registerLayerDefinition(Rainfin.LAYER_LOCATION, Rainfin::createBodyLayer);
         event.registerLayerDefinition(Shadowfin.LAYER_LOCATION, Shadowfin::createBodyLayer);
 
+        //10/oct update
+        event.registerLayerDefinition(Aurora.LAYER_LOCATION, Aurora::createBodyLayer);
+        event.registerLayerDefinition(AzureCrystalbackMinnow.LAYER_LOCATION, AzureCrystalbackMinnow::createBodyLayer);
+        event.registerLayerDefinition(Cloudfin.LAYER_LOCATION, Cloudfin::createBodyLayer);
+        event.registerLayerDefinition(Deepslatefish.LAYER_LOCATION, Deepslatefish::createBodyLayer);
+        event.registerLayerDefinition(Joel.LAYER_LOCATION, Joel::createBodyLayer);
+        event.registerLayerDefinition(OasisSturgeon.LAYER_LOCATION, OasisSturgeon::createBodyLayer);
+        event.registerLayerDefinition(Rockgill.LAYER_LOCATION, Rockgill::createBodyLayer);
+        event.registerLayerDefinition(RoseSiameseFish.LAYER_LOCATION, RoseSiameseFish::createBodyLayer);
+        event.registerLayerDefinition(SageCatfish.LAYER_LOCATION, SageCatfish::createBodyLayer);
+        event.registerLayerDefinition(Sandtail.LAYER_LOCATION, Sandtail::createBodyLayer);
+        event.registerLayerDefinition(ScaldingPike.LAYER_LOCATION, ScaldingPike::createBodyLayer);
+        event.registerLayerDefinition(Scorchfish.LAYER_LOCATION, Scorchfish::createBodyLayer);
+        event.registerLayerDefinition(SeaBass.LAYER_LOCATION, SeaBass::createBodyLayer);
+        event.registerLayerDefinition(Shroomfish.LAYER_LOCATION, Shroomfish::createBodyLayer);
+        event.registerLayerDefinition(Sporefish.LAYER_LOCATION, Sporefish::createBodyLayer);
+        event.registerLayerDefinition(Stonefish.LAYER_LOCATION, Stonefish::createBodyLayer);
+        event.registerLayerDefinition(SunflowerCarp.LAYER_LOCATION, SunflowerCarp::createBodyLayer);
+        event.registerLayerDefinition(Vesani.LAYER_LOCATION, Vesani::createBodyLayer);
+        event.registerLayerDefinition(Voidfin.LAYER_LOCATION, Voidfin::createBodyLayer);
+        event.registerLayerDefinition(Ward.LAYER_LOCATION, Ward::createBodyLayer);
+        event.registerLayerDefinition(RippleCatfish.LAYER_LOCATION, RippleCatfish::createBodyLayer);
+        event.registerLayerDefinition(BrightAmethystSnapper.LAYER_LOCATION, BrightAmethystSnapper::createBodyLayer);
+
+
     }
 
     @SubscribeEvent

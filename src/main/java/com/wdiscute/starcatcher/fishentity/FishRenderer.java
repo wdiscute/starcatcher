@@ -128,6 +128,30 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         map.put(SCItems.PURPLE_CARP.get(), new PurpleCarp<>(modelSet.bakeLayer(PurpleCarp.LAYER_LOCATION)));
         map.put(SCItems.RAINFIN.get(), new Rainfin<>(modelSet.bakeLayer(Rainfin.LAYER_LOCATION)));
         map.put(SCItems.SHADOWFIN.get(), new Shadowfin<>(modelSet.bakeLayer(Shadowfin.LAYER_LOCATION)));
+
+        //10/oct update
+        map.put(SCItems.AURORA.get(), new Aurora<>(modelSet.bakeLayer(Aurora.LAYER_LOCATION)));
+        map.put(SCItems.AZURE_CRYSTALBACK_MINNOW.get(), new AzureCrystalbackMinnow<>(modelSet.bakeLayer(AzureCrystalbackMinnow.LAYER_LOCATION)));
+        map.put(SCItems.CLOUDFIN.get(), new Cloudfin<>(modelSet.bakeLayer(Cloudfin.LAYER_LOCATION)));
+        map.put(SCItems.DEEPSLATEFISH.get(), new Deepslatefish<>(modelSet.bakeLayer(Deepslatefish.LAYER_LOCATION)));
+        map.put(SCItems.JOEL.get(), new Joel<>(modelSet.bakeLayer(Joel.LAYER_LOCATION)));
+        map.put(SCItems.OASIS_STURGEON.get(), new OasisSturgeon<>(modelSet.bakeLayer(OasisSturgeon.LAYER_LOCATION)));
+        map.put(SCItems.ROCKGILL.get(), new Rockgill<>(modelSet.bakeLayer(Rockgill.LAYER_LOCATION)));
+        map.put(SCItems.ROSE_SIAMESE_FISH.get(), new RoseSiameseFish<>(modelSet.bakeLayer(RoseSiameseFish.LAYER_LOCATION)));
+        map.put(SCItems.SAGE_CATFISH.get(), new SageCatfish<>(modelSet.bakeLayer(SageCatfish.LAYER_LOCATION)));
+        map.put(SCItems.SANDTAIL.get(), new Sandtail<>(modelSet.bakeLayer(Sandtail.LAYER_LOCATION)));
+        map.put(SCItems.SCALDING_PIKE.get(), new ScaldingPike<>(modelSet.bakeLayer(ScaldingPike.LAYER_LOCATION)));
+        map.put(SCItems.SCORCHFISH.get(), new Scorchfish<>(modelSet.bakeLayer(Scorchfish.LAYER_LOCATION)));
+        map.put(SCItems.SEA_BASS.get(), new SeaBass<>(modelSet.bakeLayer(SeaBass.LAYER_LOCATION)));
+        map.put(SCItems.SHROOMFISH.get(), new Shroomfish<>(modelSet.bakeLayer(Shroomfish.LAYER_LOCATION)));
+        map.put(SCItems.SPOREFISH.get(), new Sporefish<>(modelSet.bakeLayer(Sporefish.LAYER_LOCATION)));
+        map.put(SCItems.STONEFISH.get(), new Stonefish<>(modelSet.bakeLayer(Stonefish.LAYER_LOCATION)));
+        map.put(SCItems.SUNFLOWER_CARP.get(), new SunflowerCarp<>(modelSet.bakeLayer(SunflowerCarp.LAYER_LOCATION)));
+        map.put(SCItems.VESANI.get(), new Vesani<>(modelSet.bakeLayer(Vesani.LAYER_LOCATION)));
+        map.put(SCItems.VOIDFIN.get(), new Voidfin<>(modelSet.bakeLayer(Voidfin.LAYER_LOCATION)));
+        map.put(SCItems.WARD.get(), new Ward<>(modelSet.bakeLayer(Ward.LAYER_LOCATION)));
+        map.put(SCItems.BRIGHT_AMETHYST_SNAPPER.get(), new BrightAmethystSnapper<>(modelSet.bakeLayer(BrightAmethystSnapper.LAYER_LOCATION)));
+        map.put(SCItems.RIPPLE_CATFISH.get(), new RippleCatfish<>(modelSet.bakeLayer(RippleCatfish.LAYER_LOCATION)));
     }
 
     @Override

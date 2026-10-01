@@ -175,7 +175,7 @@ public interface SCItems
     DeferredItem<Item> OBIDONTIEE = registerBucketFish("obidontiee"); //kimbe
     DeferredItem<Item> DRIFTFIN = registerBucketFish("driftfin");
     DeferredItem<Item> RAINFIN = registerBucketFish("rainfin");
-    DeferredItem<Item> ROCKGILL = registerNonBucketFish("rockgill");
+    DeferredItem<Item> ROCKGILL = registerBucketFish("rockgill");
     DeferredItem<Item> PEAKDWELLER = registerBucketFish("peakdweller");
 
     DeferredItem<Item> SILVERVEIL_PERCH = registerBucketFish("silverveil_perch");
@@ -183,14 +183,14 @@ public interface SCItems
     DeferredItem<Item> SUNNY_STURGEON = registerBucketFish("sunny_sturgeon");
 
     DeferredItem<Item> TWILIGHT_KOI = registerBucketFish("twilight_koi");
-    DeferredItem<Item> RIPPLE_CATFISH = registerNonBucketFish("ripple_catfish");
+    DeferredItem<Item> RIPPLE_CATFISH = registerBucketFish("ripple_catfish");
     DeferredItem<Item> SUN_SEEKING_CARP = registerBucketFish("sun_seeking_carp");
 
     DeferredItem<Item> THUNDER_BASS = registerBucketFish("thunder_bass");
     DeferredItem<Item> LIGHTNING_BASS = registerBucketFish("lightning_bass");
 
     //cold lake
-    DeferredItem<Item> FROSTJAW_TROUT = registerNonBucketFish("frostjaw_trout");
+    DeferredItem<Item> FROSTJAW_TROUT = registerBucketFish("frostjaw_trout");
 
     DeferredItem<Item> CRYSTALBACK_TROUT = registerBucketFish("crystalback_trout");
 
@@ -198,11 +198,11 @@ public interface SCItems
 
     DeferredItem<Item> BLUE_ICE_PIKE = registerBucketFish("blue_ice_pike");
 
-    DeferredItem<Item> AURORA = registerNonBucketFish("aurora");
+    DeferredItem<Item> AURORA = registerBucketFish("aurora");
 
     //warm lake (desert/badlands etc)
-    DeferredItem<Item> SANDTAIL = registerNonBucketFish("sandtail");
-    DeferredItem<Item> SCORCHFISH = registerNonBucketFish("scorchfish");
+    DeferredItem<Item> SANDTAIL = registerBucketFish("sandtail");
+    DeferredItem<Item> SCORCHFISH = registerBucketFish("scorchfish");
 
     DeferredItem<Item> MIRAGE_CARP = registerBucketFish("mirage_carp");
 
@@ -210,7 +210,7 @@ public interface SCItems
 
     DeferredItem<Item> CACTIFISH = registerBucketFish("cactifish");
 
-    DeferredItem<Item> OASIS_STURGEON = registerNonBucketFish("oasis_sturgeon");
+    DeferredItem<Item> OASIS_STURGEON = registerBucketFish("oasis_sturgeon");
 
     //swamp
     DeferredItem<Item> MOSSY_BOOT = ITEMS.register("mossy_boot", MossyBootItem::new);
@@ -219,7 +219,7 @@ public interface SCItems
 
     DeferredItem<Item> LILY_SNAPPER = registerBucketFish("lily_snapper");
 
-    DeferredItem<Item> SAGE_CATFISH = registerNonBucketFish("sage_catfish");
+    DeferredItem<Item> SAGE_CATFISH = registerBucketFish("sage_catfish");
 
     //darkoak_forest
     DeferredItem<Item> PALE_CARP = registerBucketFish("pale_carp");
@@ -232,17 +232,17 @@ public interface SCItems
     DeferredItem<Item> PETALDRIFT_CARP = registerBucketFish("petaldrift_carp");
     DeferredItem<Item> PINK_KOI = registerBucketFish("pink_koi");
     DeferredItem<Item> MORGANITE = registerBucketFish("morganite");
-    DeferredItem<Item> ROSE_SIAMESE_FISH = registerNonBucketFish("rose_siamese_fish");
-    DeferredItem<Item> VESANI = registerNonBucketFish("vesani"); //vesani (my sister)
+    DeferredItem<Item> ROSE_SIAMESE_FISH = registerBucketFish("rose_siamese_fish");
+    DeferredItem<Item> VESANI = registerBucketFish("vesani"); //vesani (my sister)
 
     //flower forest
     DeferredItem<Item> PETAL_BASS = registerBucketFish("petal_bass");
 
     //sunflower field
-    DeferredItem<Item> SUNFLOWER_CARP = registerNonBucketFish("sunflower_carp");
+    DeferredItem<Item> SUNFLOWER_CARP = registerBucketFish("sunflower_carp");
 
     //clouds
-    DeferredItem<Item> CLOUDFIN = registerNonBucketFish("cloudfin"); //wd
+    DeferredItem<Item> CLOUDFIN = registerBucketFish("cloudfin"); //wd
 
     //icy mountain
     DeferredItem<Item> CRYSTALBACK_STURGEON = registerBucketFish("crystalback_sturgeon");
@@ -265,7 +265,7 @@ public interface SCItems
     DeferredItem<Item> FROSTGILL_CHUB = registerBucketFish("frostgill_chub");
     DeferredItem<Item> CRYSTALBACK_MINNOW = registerBucketFish("crystalback_minnow");
     DeferredItem<Item> MOTHFISH = registerBucketFish("mothfish"); //UrMoth on discord
-    DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = registerNonBucketFish("azure_crystalback_minnow");
+    DeferredItem<Item> AZURE_CRYSTALBACK_MINNOW = registerBucketFish("azure_crystalback_minnow");
     DeferredItem<Item> BLUE_CRYSTAL_FIN = registerBucketFish("blue_crystal_fin");
 
     //ocean
@@ -273,23 +273,23 @@ public interface SCItems
     DeferredItem<Item> IRONJAW_HERRING = registerBucketFish("ironjaw_herring");
     DeferredItem<Item> DEEPJAW_HERRING = registerBucketFish("deepjaw_herring");
     DeferredItem<Item> DUSKTAIL_SNAPPER = registerBucketFish("dusktail_snapper");
-    DeferredItem<Item> JOEL = registerNonBucketFish("joel");
+    DeferredItem<Item> JOEL = registerBucketFish("joel");
     DeferredItem<Item> REDSCALED_TUNA = registerBucketFish("redscaled_tuna");
     DeferredItem<Item> BIGEYE_TUNA = registerBucketFish("bigeye_tuna");
-    DeferredItem<Item> SEA_BASS = registerNonBucketFish("sea_bass");
+    DeferredItem<Item> SEA_BASS = registerBucketFish("sea_bass");
 
     //icy ocean
     DeferredItem<Item> GLIMMERGILL = registerBucketFish("glimmergill");
     DeferredItem<Item> CRYOSPINE = registerBucketFish("cryospine");
     DeferredItem<Item> LILAC_MINNOW = registerBucketFish("lilac_minnow");
-    DeferredItem<Item> FROSTBIT_JELLY = registerNonBucketFish("frostbit_jelly");
-    DeferredItem<Item> KING_OF_THE_FROST = registerNonBucketFish("king_of_the_frost");
+    DeferredItem<Item> FROSTBIT_JELLY = registerNonFishFish("frostbit_jelly");
+    DeferredItem<Item> KING_OF_THE_FROST = registerNonFishFish("king_of_the_frost");
     DeferredItem<Item> OCULI = ITEMS.register("oculi", BasicItem::new);
 
 
     //mushroom islands
-    DeferredItem<Item> SHROOMFISH = registerNonBucketFish("shroomfish");
-    DeferredItem<Item> SPOREFISH = registerNonBucketFish("sporefish");
+    DeferredItem<Item> SHROOMFISH = registerBucketFish("shroomfish");
+    DeferredItem<Item> SPOREFISH = registerBucketFish("sporefish");
 
     //underground
     DeferredItem<Item> GOLD_FAN = registerBucketFish("gold_fan");
@@ -299,7 +299,7 @@ public interface SCItems
     DeferredItem<Item> WHITEVEIL = registerBucketFish("whiteveil");
     DeferredItem<Item> BLACK_EEL = registerNonFishFish("black_eel");
     DeferredItem<Item> AMETHYSTBACK = registerBucketFish("amethystback");
-    DeferredItem<Item> STONEFISH = registerNonBucketFish("stonefish");
+    DeferredItem<Item> STONEFISH = registerBucketFish("stonefish");
 
     //dripstone caves
     DeferredItem<Item> FOSSILIZED_ANGELFISH = registerBucketFish("fossilized_angelfish");
@@ -320,13 +320,13 @@ public interface SCItems
     DeferredItem<Item> GHOSTLY_PIKE = registerBucketFish("ghostly_pike");
     DeferredItem<Item> AQUAMARINE_PIKE = registerBucketFish("aquamarine_pike");
     DeferredItem<Item> GARNET_MACKEREL = registerBucketFish("garnet_mackerel");
-    DeferredItem<Item> BRIGHT_AMETHYST_SNAPPER = registerNonBucketFish("bright_amethyst_snapper");
+    DeferredItem<Item> BRIGHT_AMETHYST_SNAPPER = registerBucketFish("bright_amethyst_snapper");
     DeferredItem<Item> DARK_AMETHYST_SNAPPER = registerBucketFish("dark_amethyst_snapper");
-    DeferredItem<Item> DEEPSLATEFISH = registerNonBucketFish("deepslatefish");
+    DeferredItem<Item> DEEPSLATEFISH = registerBucketFish("deepslatefish");
 
     //deep dark
     DeferredItem<Item> SCULKFISH = registerBucketFish("sculkfish");
-    DeferredItem<Item> WARD = registerNonBucketFish("ward");
+    DeferredItem<Item> WARD = registerBucketFish("ward");
     DeferredItem<Item> GLOWING_DARK = registerBucketFish("glowing_dark");
 
     //overworld surface lava
@@ -344,8 +344,8 @@ public interface SCItems
 
     //nether
     DeferredItem<Item> EMBERGILL = registerLavaBucketFish("embergill");
-    DeferredItem<Item> SCALDING_PIKE = registerNonBucketFish("scalding_pike", true);
-    DeferredItem<Item> CINDER_SQUID = registerNonBucketFish("cinder_squid", true);
+    DeferredItem<Item> SCALDING_PIKE = registerLavaBucketFish("scalding_pike");
+    DeferredItem<Item> CINDER_SQUID = registerNonFishFish("cinder_squid", true);
     DeferredItem<Item> LAVA_CRAB = registerNonFishFish("lava_crab", true);
     DeferredItem<Item> MAGMA_FISH = registerLavaBucketFish("magma_fish");
     DeferredItem<Item> GLOWSTONE_SEEKER = registerLavaBucketFish("glowstone_seeker");
@@ -363,10 +363,10 @@ public interface SCItems
     DeferredItem<Item> DREAMLINER = registerBucketFish("dreamliner"); //_void_pointer on discord
     DeferredItem<Item> VOIDBITER = registerBucketFish("voidbiter");
     DeferredItem<Item> PURPLE_CARP = registerBucketFish("purple_carp");
-    DeferredItem<Item> VOIDFIN = registerNonBucketFish("voidfin");
-    DeferredItem<Item> SPACEJELLY = registerNonBucketFish("spacejelly");
+    DeferredItem<Item> VOIDFIN = registerBucketFish("voidfin");
+    DeferredItem<Item> SPACEJELLY = registerNonFishFish("spacejelly");
     DeferredItem<Item> CHORUS_MINNOW = registerBucketFish("chorus_minnow");
-    DeferredItem<Item> NEBULA_SQUID = registerNonBucketFish("nebula_squid");
+    DeferredItem<Item> NEBULA_SQUID = registerNonFishFish("nebula_squid");
 
     //bucket
     DeferredItem<Item> STARCAUGHT_BUCKET = ITEMS.register("starcaught_bucket", () -> new StarcaughtBucket(Fluids.WATER));
