@@ -1,7 +1,6 @@
 {
 	"format_version": "1.9.0",
 	"credit": "Made with Blockbench",
-	"parent": "minecraft:block",
 	"textures": {
 		"0": "block/mangrove_log_top",
 		"particle": "block/mangrove_log_top"
