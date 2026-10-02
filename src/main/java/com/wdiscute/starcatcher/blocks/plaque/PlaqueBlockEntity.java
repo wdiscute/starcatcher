@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlaqueBlockEntity extends BlockEntity
 {
-    MaybeStack item = MaybeStack.EMPTY;
+    public MaybeStack item = MaybeStack.EMPTY;
 
     public PlaqueBlockEntity(BlockPos pos, BlockState blockState)
     {

@@ -24,7 +24,7 @@ public class Cerberay<T extends Entity> extends EntityModel<T> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition bb_main = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+        PartDefinition bb_main = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 20.0F, 0.0F));
 
         PartDefinition cube_r1 = bb_main.addOrReplaceChild("cube_r1", CubeListBuilder.create().texOffs(-11, 0).mirror().addBox(0.0F, -0.001F, -5.5F, 8.0F, 0.0F, 11.0F, new CubeDeformation(0.0F)).mirror(false)
                 .texOffs(2, 11).addBox(-2.0F, 0.0F, -5.5F, 4.0F, 1.0F, 11.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -3.0F, -0.5F, 0.0F, 3.1416F, 0.0F));

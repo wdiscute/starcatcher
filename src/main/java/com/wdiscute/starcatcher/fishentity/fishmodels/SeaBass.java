@@ -30,7 +30,7 @@ public class SeaBass<T extends Entity> extends EntityModel<T>
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.5F, 21.0F, -2.0F));
+		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.5F, 18.0F, -2.0F));
 		PartDefinition body = fish.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -5.0F, -5.0F, 3.0F, 5.0F, 11.0F, new CubeDeformation(0.0F))
 				.texOffs(26, 26).addBox(-2.0F, -4.0F, -6.0F, 3.0F, 4.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 		PartDefinition rfin = body.addOrReplaceChild("rfin", CubeListBuilder.create().texOffs(0, 27).addBox(-3.4617F, 1.0F, -0.888F, 3.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -4.0F, -1.999F, 0.0F, 1.0908F, 0.0F));

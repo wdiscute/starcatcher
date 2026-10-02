@@ -21,18 +21,31 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntity>
 {
     ItemRenderer itemRenderer;
 
+    Map<Item, Float> rotation = new HashMap<>();
+    Map<Item, Vec3> offsets = new HashMap<>();
+
     public PlaqueBlockRenderer(BlockEntityRendererProvider.Context context)
     {
         itemRenderer = context.getItemRenderer();
+
+        rotation.put(SCItems.CERBERAY.get(), 90f);
+
+        offsets.put(SCItems.CERBERAY.get(), new Vec3(0.05, 0, 0));
+        offsets.put(SCItems.MAGMA_FISH.get(), new Vec3(0.05, 0, 0));
+        offsets.put(SCItems.PETALDRIFT_CARP.get(), new Vec3(0.08, 0, 0));
     }
 
     public void render(PlaqueBlockEntity be, float partialTick, PoseStack poseStack, MultiBufferSource buffer, int packedLight, int packedOverlay)
@@ -46,10 +59,10 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
             //block centering
             switch (be.getBlockState().getOptionalValue(HorizontalDirectionalBlock.FACING).orElse(Direction.NORTH))
             {
-                case NORTH -> poseStack.translate(0.5f, -0.5f, 0.9f);
-                case SOUTH -> poseStack.translate(0.5f, -0.5f, 0.1f);
-                case EAST -> poseStack.translate(0.1f, -0.5f, 0.5f);
-                default -> poseStack.translate(0.9f, -0.5f, 0.5f);
+                case NORTH -> poseStack.translate(0.501f, -0.501f, 0.901f);
+                case SOUTH -> poseStack.translate(0.501f, -0.501f, 0.101f);
+                case EAST -> poseStack.translate(0.101f, -0.501f, 0.501f);
+                default -> poseStack.translate(0.901f, -0.501f, 0.501f);
             }
 
             switch (be.getBlockState().getOptionalValue(HorizontalDirectionalBlock.FACING).orElse(Direction.NORTH))
@@ -68,6 +81,19 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
 
             //scaling + pivot adjusting
             poseStack.translate(0, 1, 0);
+
+            Item item = fish.getItem();
+
+            if (offsets.containsKey(item))
+            {
+                Vec3 offset = offsets.getOrDefault(item, Vec3.ZERO);
+                poseStack.translate(offset.x, offset.y, offset.z);
+            }
+
+            if (rotation.containsKey(item))
+                poseStack.mulPose(Axis.ZN.rotation((float) Math.toRadians(rotation.getOrDefault(item, 0f))));
+
+
             poseStack.scale(scale, -scale, scale);
             poseStack.translate(0, -1, 0);
 

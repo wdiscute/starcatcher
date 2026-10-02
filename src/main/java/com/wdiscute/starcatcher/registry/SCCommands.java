@@ -9,6 +9,8 @@ import com.mojang.brigadier.exceptions.DynamicCommandExceptionType;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
+import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockEntity;
 import com.wdiscute.starcatcher.fish.FishApi;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
@@ -25,12 +27,14 @@ import net.minecraft.commands.CommandBuildContext;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.ResourceArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -215,7 +219,89 @@ public interface SCCommands
                                 )
                         )
                 )
+
+                //starcatcher place_all_fish_plaques
+                .then(Commands.literal("place_all_fish_plaques")
+                        .executes(c ->
+                                placeFishPlaques(
+                                        c.getSource().getPlayerOrException()
+                                )
+                        )
+                )
+
+                //starcatcher place_all_fish_display
+                .then(Commands.literal("place_all_fish_display")
+                        .executes(c ->
+                                placeFishDisplay(
+                                        c.getSource().getPlayerOrException()
+                                )
+                        )
+                )
         );
+    }
+
+    private static int placeFishDisplay(ServerPlayer player)
+    {
+        List<DeferredHolder<Item, ? extends Item>> list = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().toList();
+
+        player.sendSystemMessage(Component.literal("Placed " + list.size() + " displays"));
+        Level level = player.level();
+        BlockPos pos = player.blockPosition();
+
+        for (int i = 0; i < list.size(); i++)
+        {
+            ItemStack stackTiny = list.get(i).value().getDefaultInstance();
+            SCDataComponents.set(stackTiny, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.TINY);
+            level.setBlockAndUpdate(pos.offset(i * 2, 0, 0), SCBlocks.DISPLAY.get().defaultBlockState());
+            if (level.getBlockEntity(pos.offset(i * 2, 0, 0)) instanceof DisplayBlockEntity be)
+                be.setItem(stackTiny);
+
+            ItemStack stack = list.get(i).value().getDefaultInstance();
+            level.setBlockAndUpdate(pos.offset(i * 2, 0, 2), SCBlocks.DISPLAY.get().defaultBlockState());
+            if (level.getBlockEntity(pos.offset(i * 2, 0, 2)) instanceof DisplayBlockEntity be)
+                be.setItem(stack);
+
+            ItemStack stackHuge = list.get(i).value().getDefaultInstance();
+            SCDataComponents.set(stackHuge, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.HUGE);
+            level.setBlockAndUpdate(pos.offset(i * 2, 0, 4), SCBlocks.DISPLAY.get().defaultBlockState());
+            if (level.getBlockEntity(pos.offset(i * 2, 0, 4)) instanceof DisplayBlockEntity be)
+                be.setItem(stackHuge);
+
+        }
+
+        return 0;
+    }
+
+    private static int placeFishPlaques(ServerPlayer player)
+    {
+        List<DeferredHolder<Item, ? extends Item>> list = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().toList();
+
+        player.sendSystemMessage(Component.literal("Placed " + list.size() + " fish plaques"));
+        Level level = player.level();
+        BlockPos pos = player.blockPosition();
+
+        for (int i = 0; i < list.size(); i++)
+        {
+            ItemStack stackTiny = list.get(i).value().getDefaultInstance();
+            SCDataComponents.set(stackTiny, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.TINY);
+            level.setBlockAndUpdate(pos.offset(i * 2, 0, 0), SCBlocks.OAK_FISH_PLAQUE.get().defaultBlockState());
+            if (level.getBlockEntity(pos.offset(i * 2, 0, 0)) instanceof PlaqueBlockEntity be)
+                be.item = new MaybeStack(stackTiny);
+
+            ItemStack stack = list.get(i).value().getDefaultInstance();
+            level.setBlockAndUpdate(pos.offset(i * 2, 1, 0), SCBlocks.OAK_FISH_PLAQUE.get().defaultBlockState());
+            if (level.getBlockEntity(pos.offset(i * 2, 1, 0)) instanceof PlaqueBlockEntity be)
+                be.item = new MaybeStack(stack);
+
+            ItemStack stackHuge = list.get(i).value().getDefaultInstance();
+            SCDataComponents.set(stackHuge, SCDataComponents.CAUGHT_FISH_INFO, CaughtFishInfo.HUGE);
+            level.setBlockAndUpdate(pos.offset(i * 2, 2, 0), SCBlocks.OAK_FISH_PLAQUE.get().defaultBlockState());
+            if (level.getBlockEntity(pos.offset(i * 2, 2, 0)) instanceof PlaqueBlockEntity be)
+                be.item = new MaybeStack(stackHuge);
+
+        }
+
+        return 0;
     }
 
     private static int spawnAllEntities(ServerPlayer player)

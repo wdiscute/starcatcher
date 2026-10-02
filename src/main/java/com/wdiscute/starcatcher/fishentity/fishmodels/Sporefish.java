@@ -30,7 +30,7 @@ public class Sporefish<T extends Entity> extends EntityModel<T>
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(-0.5F, 20.0F, -2.0F));
+		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(-0.5F, 18.0F, -2.0F));
 		PartDefinition body = fish.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -3.0F, -6.0F, 3.0F, 3.0F, 12.0F, new CubeDeformation(0.0F))
 				.texOffs(26, 15).addBox(1.5F, -2.0F, -6.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
 				.texOffs(26, 17).addBox(-1.5F, -2.0F, -6.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
