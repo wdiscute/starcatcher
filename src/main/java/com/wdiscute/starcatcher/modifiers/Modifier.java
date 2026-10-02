@@ -34,22 +34,33 @@ public interface Modifier
     {
         List<Modifier> data = SCDataEntries.DEFAULT_MINIGAME_MODIFIERS.get();
 
-        if(data == null) data = List.of();
+        if (data == null) data = List.of();
 
         return data.stream()
-            .filter(AbstractMinigameModifier.class::isInstance)
-            .map(o -> (AbstractMinigameModifier) o).toList();
+                .filter(Modifier::isEnabled)
+                .filter(AbstractMinigameModifier.class::isInstance)
+                .map(o -> (AbstractMinigameModifier) o).toList();
     }
 
     static List<AbstractCatchModifier> getDefaultCatchModifiers()
     {
         List<Modifier> data = SCDataEntries.DEFAULT_CATCH_MODIFIERS.get();
 
-        if(data == null) data = List.of();
+        if (data == null) data = List.of();
 
         return data.stream()
+                .filter(Modifier::isEnabled)
                 .filter(AbstractCatchModifier.class::isInstance)
                 .map(o -> (AbstractCatchModifier) o).toList();
+    }
+
+    static void addModifierToItem(ItemStack stack, Modifier modifier)
+    {
+        List<Modifier> modifiers = new ArrayList<>(stack.getOrDefault(SCDataComponents.MODIFIERS, List.of()));
+
+        modifiers.add(modifier);
+
+        stack.set(SCDataComponents.MODIFIERS, modifiers);
     }
 
     List<Component> getDescription(boolean shift);
@@ -57,6 +68,11 @@ public interface Modifier
     Identifier getIdentifier();
 
     MapCodec<? extends Modifier> getCodec();
+
+    default boolean isEnabled()
+    {
+        return true;
+    }
 
     Codec<Modifier> CODEC = Identifier.CODEC
             .dispatch(
@@ -66,9 +82,7 @@ public interface Modifier
                         if (MODIFIERS.containsKey(rl))
                             return MODIFIERS.get(rl);
 
-                        if (FMLEnvironment.getDist().isClient())
-                            LogUtils.getLogger().warn("Modifier [{}] not found. Using empty modifier instead.", rl);
-                        return EmptyModifier.CODEC;
+                        throw new IllegalStateException("Modifier [" + rl + "] not found. Double check your spelling.");
                     }
             );
 
@@ -80,20 +94,6 @@ public interface Modifier
     static List<AbstractMinigameModifier> getMinigameModifiers(Player player)
     {
         return getModifiers(player).stream().filter(o -> o instanceof AbstractMinigameModifier).map(o -> (AbstractMinigameModifier) o).toList();
-    }
-
-    static List<AbstractCatchModifier> getCatchModifiers(ItemStack itemStack)
-    {
-        return getModifiers(itemStack).stream().filter(o -> o instanceof AbstractCatchModifier).map(o -> (AbstractCatchModifier) o).toList();
-    }
-
-    static List<AbstractMinigameModifier> getMinigameModifiers(ItemStack itemStack)
-    {
-        return getModifiers(itemStack).stream()
-                .filter(o -> o instanceof AbstractMinigameModifier)
-                .map(o -> (AbstractMinigameModifier) o)
-                .toList()
-                ;
     }
 
     static List<Modifier> getModifiers(Player player)
@@ -132,7 +132,7 @@ public interface Modifier
                     modifiers.addAll(list);
         }
 
-        return modifiers;
+        return modifiers.stream().filter(Modifier::isEnabled).toList();
     }
 
     static List<Modifier> getModifiers(ItemStack itemStack)
@@ -178,14 +178,18 @@ public interface Modifier
 
     static void registerCatch()
     {
-        //catch modifier for codecs
+        //for translation override & non registered modifiers
         Modifier.MODIFIERS.put(Starcatcher.rl("empty"), EmptyModifier.CODEC);
 
         //defaults
         Modifier.MODIFIERS.put(Starcatcher.rl("fish_messages"), FishMessagesModifier.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("little_joys"), LittleJoysModifier.CODEC);
         //Modifier.MODIFIERS.put(Starcatcher.rl("luck_attribute"), LuckAttributeModifier.CODEC);
 
         //others
+        Modifier.MODIFIERS.put(Starcatcher.rl("increase_chance"), IncreaseChanceModifier.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("restricted_rarities"), RestrictedRaritiesModifier.CODEC);
+        Modifier.MODIFIERS.put(Starcatcher.rl("allowed_rarities"), AllowedRaritiesModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("adjust_lure_time"), AdjustLureTimeModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("remove_base_fished_item"), RemoveBaseFishedItemModifier.CODEC);
         Modifier.MODIFIERS.put(Starcatcher.rl("vanilla_fishing_loot"), VanillaFishingLootModifier.CODEC);

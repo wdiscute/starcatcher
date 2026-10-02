@@ -39,14 +39,15 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
                                         .apply(
                                                 CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
                                                         .include(DataComponents.CUSTOM_NAME)
-                                                        .include(DataComponents.CONTAINER)
                                                         .include(DataComponents.LOCK)
                                                         .include(DataComponents.CONTAINER_LOOT)
                                                         .include(SCDataComponents.TACKLE_BOX_FISHES.get())
+                                                        .include(SCDataComponents.TACKLE_BOX_ITEMS.get())
                                         ))))
                 )
         );
 
+        FISH_PLAQUES.getEntries().forEach(o -> dropSelf(o.get()));
 
         dropSelf(AQUARIUM.get());
 
@@ -68,6 +69,7 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
         List<Block> list = new ArrayList<>();
         list.addAll(HATS.getEntries().stream().map(Holder::value).toList());
         list.addAll(TACKLE_BOXES.getEntries().stream().map(Holder::value).toList());
+        list.addAll(FISH_PLAQUES.getEntries().stream().map(Holder::value).toList());
 
         list.add(TROPHY_COPPER.get());
         list.add(TROPHY_IRON.get());

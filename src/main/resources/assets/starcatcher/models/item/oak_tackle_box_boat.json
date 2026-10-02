@@ -1,0 +1,72 @@
+{
+  "parent": "item/handheld_rod",
+  "textures": {
+    "layer0": "starcatcher:item/oak_tackle_box_boat_cyan"
+  },
+  "overrides": [
+    {
+      "predicate": {"starcatcher:tackle_box_color": 0},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_white"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 1},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_orange"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 2},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_magenta"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 3},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_light_blue"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 4},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_yellow"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 5},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_lime"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 6},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_pink"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 7},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_gray"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 8},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_light_gray"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 9},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_cyan"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 10},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_purple"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 11},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_blue"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 12},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_brown"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 13},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_green"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 14},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_red"
+    },
+    {
+      "predicate": {"starcatcher:tackle_box_color": 15},
+      "model": "starcatcher:item/boat/oak_tackle_box_boat_black"
+    }
+  ]
+}

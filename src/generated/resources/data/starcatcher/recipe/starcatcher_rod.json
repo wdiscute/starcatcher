@@ -5,7 +5,7 @@
     "B": "starcatcher:bobber",
     "H": "starcatcher:hook",
     "S": "minecraft:stick",
-    "T": "starcatcher:starcatcher_twine"
+    "T": "minecraft:string"
   },
   "pattern": [
     "  S",

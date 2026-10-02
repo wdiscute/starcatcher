@@ -237,7 +237,9 @@ public class DGSCDataMapsProvider extends DataMapProvider
         //templates
         modifiers.add(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE.builtInRegistryHolder(), List.of(
                 new SurvivesLavaModifier(""),
-                new ExtraGoldenChanceModifier(0.1f, true, "")
+                new ExtraGoldenChanceModifier(0.1f, true, ""),
+                //new QualityFoodRollModifier(0, 5, false, false, 100, ""), - not on 26+
+                new AdjustHPModifier(0.75f, "")
         ), false);
 
         //worms
@@ -257,31 +259,38 @@ public class DGSCDataMapsProvider extends DataMapProvider
 
         //baits
         modifiers.add(SCItems.GUNPOWDER_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyModifier("tooltip.modifier.starcatcher.gunpowder_bait")
         ), false);
 
         modifiers.add(SCItems.CHERRY_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyModifier("tooltip.modifier.starcatcher.cherry_bait")
         ), false);
 
         modifiers.add(SCItems.LUSH_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyModifier("tooltip.modifier.starcatcher.lush_bait")
         ), false);
 
         modifiers.add(SCItems.SCULK_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyModifier("tooltip.modifier.starcatcher.sculk_bait")
         ), false);
 
         modifiers.add(SCItems.DRIPSTONE_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyModifier("tooltip.modifier.starcatcher.dripstone_bait")
         ), false);
 
         modifiers.add(SCItems.MURKWATER_BAIT, List.of(
-                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, "")
+                new AdjustLureTimeModifier(0.7f, 0.8f, 1.3f, ""),
+                new EmptyModifier("tooltip.modifier.starcatcher.murkwater_bait")
         ), false);
 
         modifiers.add(SCItems.LEGENDARY_BAIT, List.of(
-                new AdjustLureTimeModifier(0.5f, 0.6f, 1.5f, "")
+                new AdjustLureTimeModifier(0.5f, 0.6f, 1.5f, ""),
+                new EmptyModifier("tooltip.modifier.starcatcher.legendary_bait")
         ), false);
 
         modifiers.add(SCItems.METEOROLOGICAL_BAIT, List.of(

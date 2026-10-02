@@ -1,6 +1,9 @@
 {
   "base_chance": 5,
   "catch_info": {
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:ward"
     }
@@ -60,11 +63,23 @@
       "translation_override": "gui.guide.elevation.deepslate"
     },
     {
+      "type": "starcatcher:structure_restriction",
+      "structure": [
+        "minecraft:ancient_city"
+      ]
+    },
+    {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"
       ],
       "translation_override": "fluid.starcatcher.water"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:legendary_bait": 50
+      }
     }
   ],
   "size_and_weight": {

@@ -48,7 +48,7 @@
     {
       "type": "starcatcher:biome",
       "biomes": [
-        "#starcatcher:is_ocean"
+        "#starcatcher:is_normal_ocean"
       ],
       "blacklist": []
     },

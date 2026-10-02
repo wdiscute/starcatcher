@@ -88,7 +88,7 @@ public final class FishRegistration
         fp = applyModifiers(fp);
         fp = applyStarcaughtLogic(fp);
         fp = applyChanceModifiers(fp);
-        fp = applyBaits(fp);
+        fp = applyLegendaryBait(fp);
         return fp;
     }
 
@@ -103,11 +103,12 @@ public final class FishRegistration
         return fp;
     }
 
-    private static FishProperties applyBaits(FishProperties fp)
+    private static FishProperties applyLegendaryBait(FishProperties fp)
     {
-        if (fp.rarity().equals(Rarity.LEGENDARY) && fp.restrictions().stream().noneMatch(o -> o.equals(BaitRestriction.LEGENDARY_BAIT)))
+        if (fp.rarity().equals(Rarity.LEGENDARY) && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && fp.restrictions().stream().noneMatch(o -> o.equals(BaitRestriction.LEGENDARY_BAIT)))
         {
-            fp.addBait(BaitRestriction.LEGENDARY_BAIT);
+            fp = fp.withRestrictions(fp.restrictions().stream().filter(o -> !(o instanceof BaitRestriction)).toList());
+            fp = fp.addRestriction(BaitRestriction.LEGENDARY_BAIT);
         }
         return fp;
     }

@@ -9,6 +9,9 @@
 
     "bountiful.decree.starcatcher.name": "스타캐쳐",
 
+    "structure.minecraft.ancient_city": "고대 도시",
+    "structure.minecraft.monument": "바다 유적",
+    "structure.minecraft.trial_chambers": "시련의 회당",
     "structure.minecraft.end_city": "엔드 도시",
     "structure.minecraft.village_desert": "사막 마을",
     "structure.minecraft.village_plains": "평원 마을",
@@ -22,13 +25,14 @@
     "key.category.starcatcher.starcatcher": "스타캐쳐",
     "key.starcatcher.minigame_hit": "미니게임 히트",
     "key.starcatcher.expand_tournament": "토너먼트 오버레이 토글",
+    "key.starcatcher.open_guide": "안내서 열기",
 
-    "itemGroup.starcatcher": "스타캐쳐",
+    "itemGroup.starcatcher.starcatcher": "스타캐쳐",
     "section.starcatcher.fish": "물고기",
     "section.starcatcher.hooks_bobbers": "낚싯바늘, 낚시찌 & 미끼",
     "section.starcatcher.cosmetics": "장식",
     "section.starcatcher.must_have": "필수",
-    "section.starcatcher.trophies": "트로피 및 통계",
+    "section.starcatcher.trophies": "통계 & 트로피",
     "section.starcatcher.miscellaneous": "기타",
     "section.starcatcher.tackle_boxes": "낚시 도구 상자",
 
@@ -58,10 +62,12 @@
     "emi.starcatcher.entity_entry": "이 항목은 항상 %s를 생성합니다.",
 
     "emi.category.starcatcher.fishing": "스타캐쳐 낚시",
+    "emi.category.starcatcher.smithing": "스타캐쳐 형판",
 
     "emi.info.starcatcher.worms.0": "지렁이는 미끼로 사용시 여러 가지 낚시 특성을 가집니다.",
-    "emi.info.starcatcher.worms.1": "경작지에 뼈가루를 뿌려 얻을 수 있습니다.",
-    "emi.info.starcatcher.worms.2": "퇴비화 가능.",
+    "emi.info.starcatcher.worms.1": "퇴비화 가능.",
+
+    "emi.info.starcatcher.bonemeal_farmland": "뼛가루를 뿌린 경작지에서는 몇 종류의 아이템을 얻을 수 있습니다.",
 
     "emi.info.starcatcher.pearls.0": "조개는 모래 위에 있으면 천천히 진주를 만들어냅니다.",
     "emi.info.starcatcher.pearls.1": "조개가 입을 벌리면 클릭하여 진주를 채취할 수 있습니다.",
@@ -73,11 +79,11 @@
 
     "emi.info.starcatcher.pearl_template.0": "이 형판은 조개에서 진주를 채취할 때 드물게 발견할 수 있습니다.",
 
-    "emi.info.starcatcher.hat.0": "어부의 모자는 난파선의 상자에서 드물게 발견할 수 있습니다.",
+    "emi.info.starcatcher.hat.0": "낚시꾼 모자는 난파선의 상자에서 드물게 발견할 수 있습니다.",
 
     "starcatcher.tip.legendary_fish": "전설적인 물고기들은 대부분 전설적인 미끼를 좋아합니다!",
     "starcatcher.tip.too_hard": "낚시가 너무 어렵게 느껴지나요? 사용 중인 찌와 낚싯바늘을 다시 확인해 보세요!",
-    "starcatcher.tip.fisherman_hat": "어부 모자는 난파선 내부에서 드물게 발견됩니다.",
+    "starcatcher.tip.fisherman_hat": "낚시꾼 모자는 난파선 내부에서 드물게 발견됩니다.",
     "starcatcher.tip.templates": "낚시용 템플릿을 사용하면 낚싯대의 외관을 변경할 수 있습니다!",
     "starcatcher.tip.tackle_box": "물고기가 인벤토리를 가득 채웠나요? 그럼 낚시 도구 상자에 넣어두세요!",
     "starcatcher.tip.secret_messages": "비밀 메시지가 때때로 발견될 수도 있습니다! 어떤 이야기를 담고 있을지 누가 ​​알겠어요...",
@@ -99,6 +105,8 @@
     "tag.starcatcher.is_beach": "해변",
     "tag.starcatcher.is_birch_forest": "자작나무 숲",
     "tag.starcatcher.is_cherry_grove": "벚나무 숲",
+    "tag.starcatcher.is_crimson_forest": "진홍빛 숲",
+    "tag.starcatcher.is_warped_forest": "뒤틀린 숲",
     "tag.starcatcher.is_cold_lake": "차가운 호수",
     "tag.starcatcher.is_cold_ocean": "차가운 바다",
     "tag.starcatcher.is_frozen_ocean": "얼어붙은 바다",
@@ -152,6 +160,13 @@
     "tag.starcatcher.epic_fishes": "영웅 물고기",
     "tag.starcatcher.legendary_fishes": "전설 물고기",
 
+    "tag.starcatcher.common_starcaught_fishes": "일반 물고기",
+    "tag.starcatcher.uncommon_starcaught_fishes": "고급 물고기",
+    "tag.starcatcher.rare_starcaught_fishes": "희귀 물고기",
+    "tag.starcatcher.epic_starcaught_fishes": "영웅 물고기",
+    "tag.starcatcher.legendary_starcaught_fishes": "전설 물고기",
+
+
     "tag.starcatcher.aquarium_guide_display": "수족관 이용 가이드",
     "tag.starcatcher.placeable_in_display": "디스플레이 블록에 배치 가능",
     "tag.starcatcher.placeable_in_tackle_box": "낚시 도구 상자에 넣을 수 있음",
@@ -161,6 +176,13 @@
     "tag.starcatcher.trash": "쓰레기",
     "tag.starcatcher.worms": "지렁이",
 
+    "tag.starcatcher.crabs": "게",
+    "tag.starcatcher.eels": "장어",
+    "tag.starcatcher.shrimps": "새우",
+
+    "tag.starcatcher.has_radar_layer": "어군 탐지기 레이어 소유",
+    "tag.starcatcher.has_tracker_layer": "어류 추적기 레이어 소유",
+    "tag.starcatcher.has_farmland_interaction": "경작지 상호작용 가능",
 
 
 
@@ -196,20 +218,27 @@
     "starcatcher.configuration.radar_y_offset": "레이더 Y 오프셋",
     "starcatcher.configuration.radar_scale": "레이더 창 배율",
 
+    "starcatcher.configuration.tracker_x_offset": "트래커 X 오프셋",
+    "starcatcher.configuration.tracker_y_offset": "트래커 Y 오프셋",
+    "starcatcher.configuration.tracker_scale": "트래커 배율",
+
+
     "starcatcher.configuration.debug": "미니게임 정보 디버그",
 
     "starcatcher.configuration.hit_delay": "미니게임 입력 주기",
     "starcatcher.configuration.units": "측정 단위",
     "starcatcher.configuration.sort": "가이드 정렬 순서",
-    "starcatcher.configuration.enable_tackle_sounds": "낚시 찌 스킨 음성",
-    "starcatcher.configuration.enable_hit_sounds": "캐치포인트 타격음",
+    "starcatcher.configuration.enable_villager_sounds": "마을 주민 소리 활성화",
+    "starcatcher.configuration.enable_hit_sounds": "스위트스팟 타격음",
     "starcatcher.configuration.enable_miss_sound": "미니게임 실패 소리",
     "starcatcher.configuration.remove_notif_on_hover": "마우스 오버 시 새 물고기 알림 제거",
     "starcatcher.configuration.overlay_update_frequency": "오버레이 업데이트 빈도",
 
     "starcatcher.configuration.give_guide": "가이드 제공",
+    "starcatcher.configuration.give_rod": "낚싯대 제공",
     "starcatcher.configuration.enable_worms": "경작지에 뼛가루를 뿌려 지렁이 획득",
     "starcatcher.configuration.enable_minigame": "낚시 미니게임 활성화",
+    "starcatcher.configuration.enable_guide_help_pages": "가이드 도움말 활성화",
     "starcatcher.configuration.enable_ftb_team_sharing": "FTB 팀 공유 활성화",
     "starcatcher.configuration.enable_seasons": "Seasons 모드 호환 활성화",
     "starcatcher.configuration.vanishing_rate_multiplier": "전역 소멸률 배율",
@@ -230,6 +259,7 @@
     "starcatcher.configuration.hide_treasures": "보물 숨기기",
     "starcatcher.configuration.hide_catches": "낚음 숨기기",
     "starcatcher.configuration.enable_rod_durability": "낚싯대 내구도 활성화",
+    "starcatcher.configuration.allow_guide_keybind": "안내서 단축키 허용",
 
 
 
@@ -252,8 +282,8 @@
     "gui.starcatcher.no_hook_or_bobber": "낚싯대는 낚싯바늘과 찌 없이는 작동하지 않는다...",
 
 
-    "tooltip.minecraft.fishing_rod.0": "그것을 <sclegendary>스타캐쳐의 낚싯대</sclegendary>로",
-    "tooltip.minecraft.fishing_rod.1": "사용되는 간단한 낚싯대.",
+    "tooltip.minecraft.fishing_rod.0": "가장 기본적인 물고기를 잡을 때",
+    "tooltip.minecraft.fishing_rod.1": "쓰는 간단한 낚싯대.",
     "tooltip.minecraft.fishing_rod.2": "그것을 <gradient-67>스타캐쳐의 낚싯대</gradient-90>로",
     "tooltip.minecraft.fishing_rod.3": "업그레이드하는 것은 그저 꿈일 뿐.",
 
@@ -284,11 +314,7 @@
     "tooltip.starcatcher.starcatcher_guide.signed": "이 책의 소유자: %s",
     "tooltip.starcatcher.starcatcher_guide.signed_shift": "서명자: %s",
 
-    "tooltip.starcatcher.letter": "작성됨: ",
-
-    "item.starcatcher.starcatcher_twine": "스타캐쳐의 낚싯줄",
-    "tooltip.starcatcher.starcatcher_twine.0": "막대기에 가느다란 끈이 감겨 있다.",
-    "tooltip.starcatcher.starcatcher_twine.1": "한때 밴시르는 현악기에 이런 재료들을 사용했었다.",
+    "tooltip.starcatcher.letter": "작성자: %s",
 
     "block.starcatcher.tournament_stand": "토너먼트 단상",
     "tooltip.starcatcher.tournament_stand.0": "낚시 토너먼트를 개최하는 데 사용하는 단상.",
@@ -296,6 +322,9 @@
 
     "tooltip.starcatcher.modifiers": "낚싯대에 장착 시:",
     "tooltip.starcatcher.modifiers.active": "<scepic>§l활성화 된 특성:</scepic>",
+
+    "tooltip.modifier.starcatcher.quality_food_roll": "잡은 물고기의 품질이 더 높아진다.",
+    "tooltip.modifier.starcatcher.quality_food_roll.shift": "잡은 물고기의 품질이 추가로 %s배 더 높아진다.",
 
     "tooltip.modifier.starcatcher.prevent_frozen": "손잡이가 얼어붙는 것을 방지한다",
 
@@ -311,13 +340,26 @@
 
     "tooltip.modifier.starcatcher.no_gravity": "당신의 찌는 더 이상 중력의 법칙을 따르지 않는다",
 
-    "tooltip.modifier.starcatcher.extra_golden_chance.perfect": "완벽한 캐치가 황금 물고기를 낚을 가능성이 더 높아진다",
-    "tooltip.modifier.starcatcher.extra_golden_chance.perfect.shift": "완벽한 캐치가 황금 물고기를 낚을 확률이 %s%% 더 높아진다",
+    "tooltip.modifier.starcatcher.gunpowder_bait": "...이 미끼를 더 잘 물게 된다",
+    "tooltip.modifier.starcatcher.cherry_bait": "벚나무 숲 물고기가 미끼를 더 잘 물게 된다",
+    "tooltip.modifier.starcatcher.lush_bait": "무성한 동굴 물고기가 미끼를 더 잘 물게 된다",
+    "tooltip.modifier.starcatcher.sculk_bait": "깊은 어둠 물고기가 미끼를 더 잘 물게 된다",
+    "tooltip.modifier.starcatcher.dripstone_bait": "점적석 동굴 물고기가 미끼를 더 잘 물게 된다",
+    "tooltip.modifier.starcatcher.murkwater_bait": "늪 물고기가 미끼를 더 잘 물게 된다",
+    "tooltip.modifier.starcatcher.legendary_bait": "전설 물고기가 미끼를 더 잘 물게 된다",
+
+    "tooltip.modifier.starcatcher.restricted_rarities": "더 이상 %s 종류의 물고기를 잡을 수 없습니다",
+    "tooltip.modifier.starcatcher.allowed_rarities": "%s 종류의 물고기만 잡을 수 있습니다",
+    "tooltip.modifier.starcatcher.allowed_rarities.list_last_separator": " 그리고 ",
+    "tooltip.modifier.starcatcher.allowed_rarities.list_separator": ", ",
+
+    "tooltip.modifier.starcatcher.extra_golden_chance.perfect": "완벽한 낚시가 황금 물고기를 낚을 가능성이 더 높아진다",
+    "tooltip.modifier.starcatcher.extra_golden_chance.perfect.shift": "완벽한 낚시가 황금 물고기를 낚을 확률이 %s%% 더 높아진다",
     "tooltip.modifier.starcatcher.extra_golden_chance.base": "황금 물고기가 더 잘 문다",
     "tooltip.modifier.starcatcher.extra_golden_chance.base.shift": "황금 물고기가 %s%% 더 잘 문다",
 
-    "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch": "완벽한 캐치가 보물을 줄 수도 있다",
-    "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.always": "완벽한 캐치가 보물을 준다",
+    "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch": "완벽한 낚시가 보물을 줄 수도 있다",
+    "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.always": "완벽한 낚시가 보물을 준다",
     "tooltip.modifier.starcatcher.award_treasure_on_perfect_catch.shift": "완벽한 낚시가 %s%%확률로 보물을 준다",
 
     "tooltip.modifier.starcatcher.spawn_treasure_on_hit_x": "%s번 연속 타격 후 보물이 나타난다",
@@ -357,12 +399,6 @@
 
     "tooltip.modifier.starcatcher.flip_every_hit": "스위트스팟을 타격할 때마다 방향을 뒤집습니다",
 
-
-    "tooltip.modifier.keyword.big_decrease": "엄청나게 감소",
-    "tooltip.modifier.keyword.decrease": "감소",
-    "tooltip.modifier.keyword.increase": "증가",
-    "tooltip.modifier.keyword.big_increase": "엄청나게 증가",
-
     "tooltip.modifier.number.1": "일",
     "tooltip.modifier.number.2": "이",
     "tooltip.modifier.number.3": "삼",
@@ -378,32 +414,48 @@
     "tooltip.modifier.number.32": "삼십이",
     "tooltip.modifier.number.64": "한 세트",
 
-    "tooltip.modifier.starcatcher.adjust_handle_speed": " 손잡이의 회전 속도",
-    "tooltip.modifier.starcatcher.adjust_handle_speed.shift": "손잡이의 회전 속도를 %s%%만큼 조절한다.",
+    "tooltip.modifier.starcatcher.adjust_handle_speed.big_increase": "손잡이의 회전 속도를 엄청나게 증가시킨다",
+    "tooltip.modifier.starcatcher.adjust_handle_speed.increase": "손잡이의 회전 속도를 증가한다",
+    "tooltip.modifier.starcatcher.adjust_handle_speed.decrease": "손잡이의 회전 속도를 감소합니다",
+    "tooltip.modifier.starcatcher.adjust_handle_speed.big_decrease": "손잡이의 회전 속도가 엄청나게 감소한다",
+    "tooltip.modifier.starcatcher.adjust_handle_speed.shift": "손잡이의 회전 속도를 %s%%만큼 조절한다",
 
-    "tooltip.modifier.starcatcher.add_basic_sweetspot": "캐치포인트를 추가한다",
-    "tooltip.modifier.starcatcher.dripstone_bobber": "심해 캐치포인트를 추가한다",
-    "tooltip.modifier.starcatcher.glowing_bobber": "발광 캐치포인트를 추가한다",
+    "tooltip.modifier.starcatcher.add_basic_sweetspot": "스위트스팟을 추가한다",
+    "tooltip.modifier.starcatcher.dripstone_bobber": "점적석 스위트스팟을 추가한다",
+    "tooltip.modifier.starcatcher.glowing_bobber": "발광 스위트스팟을 추가한다",
 
-    "tooltip.modifier.starcatcher.adjust_vanishing_rate": " 캐치포인트가 사라지는 속도",
-    "tooltip.modifier.starcatcher.adjust_vanishing_rate.shift": "캐치포인트가 사라지는 속도를 %s%%만큼 조절한다.",
+    "tooltip.modifier.starcatcher.adjust_vanishing_rate.big_increase": "스위트스팟이 사라지는 속도가 엄청나게 증가한다",
+    "tooltip.modifier.starcatcher.adjust_vanishing_rate.increase": "스위트스팟이 사라지는 속도가 증가한다",
+    "tooltip.modifier.starcatcher.adjust_vanishing_rate.decrease": "스위트스팟이 사라지는 속도가 감소한다",
+    "tooltip.modifier.starcatcher.adjust_vanishing_rate.big_decrease": "스위트스팟이 사라지는 속도가 엄청나게 감소한다",
+    "tooltip.modifier.starcatcher.adjust_vanishing_rate.shift": "스위트스팟이 사라지는 속도를 %s%%만큼 조절한다",
 
-    "tooltip.modifier.starcatcher.adjust_lure_time.base": " 미끼 시간",
-    "tooltip.modifier.starcatcher.adjust_lure_time.shift.min_ticks": "물고기의 최소 틱 수를 %s%%만큼 조정한다",
-    "tooltip.modifier.starcatcher.adjust_lure_time.shift.max_ticks": "물고기에 대한 최대 틱 수를 %s%%만큼 조정한다",
-    "tooltip.modifier.starcatcher.adjust_lure_time.shift.random": "틱당 미끼를 물 확률을 %s%%만큼 조정한다",
+    "tooltip.modifier.starcatcher.adjust_lure_time.big_increase": "입질 대기 시간이 엄청나게 증가한다",
+    "tooltip.modifier.starcatcher.adjust_lure_time.increase": "입질 대기 시간이 증가한다",
+    "tooltip.modifier.starcatcher.adjust_lure_time.decrease": "입질 대기 시간이 감소한다",
+    "tooltip.modifier.starcatcher.adjust_lure_time.big_decrease": "입질 대기 시간이 엄청나게 감소한다",
+    "tooltip.modifier.starcatcher.adjust_lure_time.shift.min_ticks": "입질까지의 최소 대기 시간(틱)을 %s%%만큼 조정한다",
+    "tooltip.modifier.starcatcher.adjust_lure_time.shift.max_ticks": "입질까지의 최대 대기 시간(틱)을 %s%%만큼 조정한다",
+    "tooltip.modifier.starcatcher.adjust_lure_time.shift.random": "틱 당 입질할 확률을 %s%%만큼 조정한다",
 
-    "tooltip.modifier.starcatcher.adjust_moving_sweetspots.increase": "움직이는 캐치포인트의 이동속도를 증가시킨다",
-    "tooltip.modifier.starcatcher.adjust_moving_sweetspots.decrease": "움직이는 캐치포인트의 이동속도를 감소시킨다",
-    "tooltip.modifier.starcatcher.adjust_moving_sweetspots.shift": "움직이는 캐치포인트의 이동 속도를 %s%%만큼 조정한다",
+    "tooltip.modifier.starcatcher.increase_chance": "%s를 잡을 확률이 늘어난다",
+    "tooltip.modifier.starcatcher.increase_chance.shift": "%s를 잡을 확률이 %s만큼 늘어난다",
+
+    "tooltip.modifier.starcatcher.adjust_moving_sweetspots.increase": "움직이는 스위트스팟의 이동속도를 증가시킨다",
+    "tooltip.modifier.starcatcher.adjust_moving_sweetspots.decrease": "움직이는 스위트스팟의 이동속도를 감소시킨다",
+    "tooltip.modifier.starcatcher.adjust_moving_sweetspots.shift": "움직이는 스위트스팟의 이동 속도를 %s%%만큼 조정한다",
 
     "tooltip.modifier.starcatcher.adjust_decay_rate.increase": "물고기가 도망가는 속도를 높인다",
     "tooltip.modifier.starcatcher.adjust_decay_rate.decrease": "물고기가 도망가는 속도를 감소시킨다",
-    "tooltip.modifier.starcatcher.adjust_decay_rate.shift": "생선의 부패 속도를 %s%%만큼 조정한다",
+    "tooltip.modifier.starcatcher.adjust_decay_rate.shift": "물고기가 도망가는 속도를 %s%%만큼 조정한다",
 
-    "tooltip.modifier.starcatcher.adjust_penalty_rate.increase": "캐치포인트를 놓쳤을 때의 패널티를 증가시킨다",
-    "tooltip.modifier.starcatcher.adjust_penalty_rate.decrease": "캐치포인트를 놓쳤을 때의 패널티를 감소시킨다",
-    "tooltip.modifier.starcatcher.adjust_penalty_rate.shift": "캐치포인트를 ​​놓쳤을 때의 패널티를 %s%%만큼 조정한다",
+    "tooltip.modifier.starcatcher.adjust_penalty_rate.increase": "스위트스팟을 놓쳤을 때의 패널티를 증가시킨다",
+    "tooltip.modifier.starcatcher.adjust_penalty_rate.decrease": "스위트스팟을 놓쳤을 때의 패널티를 감소시킨다",
+    "tooltip.modifier.starcatcher.adjust_penalty_rate.shift": "스위트스팟을 ​​놓쳤을 때의 패널티를 %s%%만큼 조정한다",
+
+    "tooltip.modifier.starcatcher.adjust_hp.increase": "물고기를 감아올리는게 어려워진다",
+    "tooltip.modifier.starcatcher.adjust_hp.decrease": "물고기를 감아올리는게 쉬워진다",
+    "tooltip.modifier.starcatcher.adjust_hp.shift": "물고기의 체력을 %s%%만큼 조정합니다.",
 
     "tooltip.modifier.starcatcher.vanilla_fishing_loot": "바닐라 낚시 보상으로 복원한다",
     "tooltip.modifier.starcatcher.skip_minigame_if_vanilla_bobber": "바닐라-향 낚시찌와 함께 장착하면 미니게임을 건너뛴다",
@@ -413,7 +465,7 @@
 
     "tooltip.modifier.starcatcher.burn_on_miss": "놓치면 손잡이에 불이 붙는다",
 
-    "tooltip.modifier.starcatcher.deep_dark": "캐치포인트를 타격하면 암흑에 휩싸인다.",
+    "tooltip.modifier.starcatcher.deep_dark": "스위트스팟을 타격하면 암흑에 휩싸인다.",
 
     "tooltip.modifier.starcatcher.ignore_daytime_restrictions": "낮 시간 낚시 제한을 무시함",
     "tooltip.modifier.starcatcher.ignore_daytime_restrictions.maybe": "낚시 시간 제한을 때때로 무시한다",
@@ -423,7 +475,7 @@
     "tooltip.modifier.starcatcher.ignore_weather_restrictions.maybe": "낚시 날씨 제한을 가끔 무시한다",
     "tooltip.modifier.starcatcher.ignore_weather_restrictions.shift": "낚시 날씨 제한을 %s%%확률로 무시한다",
 
-    "tooltip.modifier.starcatcher.new_catch_increase.shift": "잡지 못한 모든 물고기의 기본 획득 확률을 추가로 1%씩 증가시킨다",
+    "tooltip.modifier.starcatcher.new_catch_increase.shift": "잡지 못한 모든 물고기의 기본 획득 확률을 추가로 %s씩 증가시킨다",
     "tooltip.modifier.starcatcher.new_catch_increase": "새로운 물고기가 입질할 확률을 높인다",
 
     "tooltip.modifier.starcatcher.cancel_golden": "이제 황금 물고기를 잡을 수 없습니다",
@@ -436,7 +488,7 @@
     "tooltip.modifier.starcatcher.guarantee_new_fish_half": "아직 발견되지 않은 물고기가 더 쉽게 뭅니다",
 
     "tooltip.modifier.starcatcher.extra_base_catch": "%s마리의 추가 물고기가 함께 잡힌다.",
-    "tooltip.modifier.starcatcher.extra_base_catch.1": "한",
+    "tooltip.modifier.starcatcher.extra_base_catch.1": "일",
 
     "tooltip.tackle.starcatcher.kimbe": "킴베",
     "tooltip.tackle.starcatcher.clear": "깨끗한",
@@ -468,6 +520,7 @@
     "item.starcatcher.oxidised_copper_hook": "산화된 구리 낚싯바늘",
     "item.starcatcher.echoing_hook": "메아리치는 낚싯바늘",
     "item.starcatcher.frozen_hook": "얼어붙은 낚싯바늘",
+    "item.starcatcher.rusty_hook": "녹슨 낚싯바늘",
 
 
 
@@ -476,14 +529,14 @@
     "tooltip.starcatcher.bobber.1": "낚싯바늘의 절친.",
 
     "item.starcatcher.steady_bobber": "꾸준한 낚시찌",
-    "item.starcatcher.leaf_bobber": "잎파리 낚시찌",
+    "item.starcatcher.leaf_bobber": "이파리 낚시찌",
     "item.starcatcher.clear_bobber": "투명한 낚시찌",
     "item.starcatcher.deep_dark_bobber": "깊은 어둠 낚시찌",
     "item.starcatcher.vanilla_bobber": "바닐라-향 낚시찌",
     "item.starcatcher.slimey_bobber": "끈적한 낚시찌",
     "item.starcatcher.glowing_bobber": "발광 낚시찌",
     "item.starcatcher.golden_bobber": "황금 낚시찌",
-    "item.starcatcher.dripstone_bobber": "심해 낚시찌",
+    "item.starcatcher.dripstone_bobber": "점적석 낚시찌",
     "item.starcatcher.cloud_bobber": "구름 낚시찌",
 
 
@@ -494,6 +547,7 @@
 
 
     "item.starcatcher.gunpowder_bait": "화약 미끼",
+    "item.starcatcher.targeted_bait": "표적 미끼",
     "item.starcatcher.cherry_bait": "벚꽃 미끼",
     "item.starcatcher.lush_bait": "무성한 미끼",
     "item.starcatcher.sculk_bait": "스컬크 미끼",
@@ -530,7 +584,7 @@
 
 
 
-    "item.starcatcher.missingno": "???",
+    "item.starcatcher.missingno": "공기",
     "item.starcatcher.unknown_fish": "알 수 없는 물고기",
     "tooltips.starcatcher.unknown_fish.0": "미니게임에서 낚시로 잡은 아이템을 숨기는 데 사용되는 템플릿 물고기",
 
@@ -562,22 +616,22 @@
 
     "block.starcatcher.aquarium": "수족관",
 
-    "block.starcatcher.fisherman_hat_black": "검은색 어부 모자",
-    "block.starcatcher.fisherman_hat_blue": "파란색 어부 모자",
-    "block.starcatcher.fisherman_hat_brown": "갈색 어부 모자",
-    "block.starcatcher.fisherman_hat_cyan": "청록색 어부 모자",
-    "block.starcatcher.fisherman_hat_gray": "회색 어부 모자",
-    "block.starcatcher.fisherman_hat_green": "초록색 어부 모자",
-    "block.starcatcher.fisherman_hat_light_blue": "하늘색 어부 모자",
-    "block.starcatcher.fisherman_hat_light_gray": "회백색 어부 모자",
-    "block.starcatcher.fisherman_hat_lime": "연두색 어부 모자",
-    "block.starcatcher.fisherman_hat_magenta": "자홍색 어부 모자",
-    "block.starcatcher.fisherman_hat_orange": "주황색 어부 모자",
-    "block.starcatcher.fisherman_hat_pink": "분홍색 어부 모자",
-    "block.starcatcher.fisherman_hat_purple": "보라색 어부 모자",
-    "block.starcatcher.fisherman_hat_red": "빨간색 어부 모자",
-    "block.starcatcher.fisherman_hat_white": "하얀색 어부 모자",
-    "block.starcatcher.fisherman_hat_yellow": "노란색 어부 모자",
+    "block.starcatcher.fisherman_hat_black": "검은색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_blue": "파란색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_brown": "갈색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_cyan": "청록색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_gray": "회색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_green": "초록색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_light_blue": "하늘색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_light_gray": "회백색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_lime": "연두색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_magenta": "자홍색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_orange": "주황색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_pink": "분홍색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_purple": "보라색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_red": "빨간색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_white": "하얀색 낚시꾼 모자",
+    "block.starcatcher.fisherman_hat_yellow": "노란색 낚시꾼 모자",
 
     "item.starcatcher.fish_radar": "어류 레이더",
     "tooltip.starcatcher.fish_radar.0": "주변 지역의 물고기를 미래지향적인 방식으로 ",
@@ -609,16 +663,13 @@
     "block.starcatcher.trophy_diamond": "다이아몬드 트로피",
     "block.starcatcher.trophy_of_the_older_angler": "고대 낚시꾼의 트로피",
 
-    "block.starcatcher.display": "스타캐처의 전시대",
+    "block.starcatcher.display": "스타캐쳐의 전시대",
 
     "gui.starcatcher.toast.fish_caught": "새로 잡은 물고기!",
 
-    "gui.guide.signed.0": "이 책은 서명되어 있어,",
-    "gui.guide.signed.1": "새로운 물고기를 낚았거나 크기, 무게를 갱신했더라도 내용을 갱신하지 않습니다",
-
+    "gui.guide.disabled_by_server": "[서버에 의해 비활성화됨]",
+    "gui.guide.visitors": "감시 당함:",
     "gui.guide.sign": "서명",
-    "gui.guide.sign.locked.0": "서명하면 현재까지 잡은 모든 물고기의 기록이 고정됩니다.",
-    "gui.guide.sign.locked.1": "서명 후 이 책은 내용이 변경되지 않습니다.",
     "gui.guide.season": "계절:",
     "gui.guide.seasons": "계절:",
 
@@ -641,18 +692,22 @@
     "gui.guide.seasons.around_autumn": "가을 즈음",
     "gui.guide.seasons.around_winter": "겨울 즈음",
 
+    "gui.guide.seasons.spring": "봄",
     "gui.guide.seasons.early_spring": "초봄",
     "gui.guide.seasons.mid_spring": "봄",
     "gui.guide.seasons.late_spring": "늦봄",
 
+    "gui.guide.seasons.summer": "여름",
     "gui.guide.seasons.early_summer": "초여름",
     "gui.guide.seasons.mid_summer": "한여름",
     "gui.guide.seasons.late_summer": "늦여름",
 
+    "gui.guide.seasons.autumn": "가을",
     "gui.guide.seasons.early_autumn": "초가을",
     "gui.guide.seasons.mid_autumn": "한가을",
     "gui.guide.seasons.late_autumn": "늦가을",
 
+    "gui.guide.seasons.winter": "겨울",
     "gui.guide.seasons.early_winter": "초겨울",
     "gui.guide.seasons.mid_winter": "한겨울",
     "gui.guide.seasons.late_winter": "늦겨울",
@@ -676,6 +731,9 @@
     "gui.guide.elevation.stone_caves": "돌 동굴",
     "gui.guide.elevation.underground": "지하",
 
+    "gui.guide.light_level.darkness": "어두움",
+    "gui.guide.light_level.bright": "밝음",
+
     "gui.guide.sort": "[정렬]",
 
     "gui.guide.sort.alphabetical_up": "⏬ 알파벳순",
@@ -686,10 +744,8 @@
     "gui.guide.sort.rarity_down": "⏫ 희귀도",
     "gui.guide.sort.caught_up": "⏬ 잡음",
     "gui.guide.sort.caught_down": "⏫ 잡음",
-    "gui.guide.sort.fluid_up": "⏬ 액체",
-    "gui.guide.sort.fluid_down": "⏫ 액체",
-    "gui.guide.sort.season_up": "⏬ 계절",
-    "gui.guide.sort.season_down": "⏫ 계절",
+    "gui.guide.sort.caught_golden_up": "⏬ 황금 물고기를 잡음",
+    "gui.guide.sort.caught_golden_down": "⏫ 황금 물고기를 잡음",
 
     "gui.guide.units.metric": "미터법 (cm & kg)",
     "gui.guide.units.imperial": "임페리얼  (in & lb)",
@@ -717,7 +773,7 @@
 
 
     "gui.guide.not_caught_yet_fish_name": "-------",
-    "gui.guide.not_caught_fish_name": "???",
+    "gui.guide.not_caught_fish_name": "공기",
     "gui.guide.caught": "잡음:",
     "gui.guide.not_caught": "------",
     "gui.guide.not_caught_yet": "아직 잡지 못함!",
@@ -747,7 +803,7 @@
 
     "gui.guide.index.cosmetics": "장식",
     "gui.guide.index.tournaments": "낚시 대회",
-    "gui.guide.index.messages": "편지와 병 속에 담긴 메시지",
+    "gui.guide.index.messages": "병 속에 담긴 편지 & 비밀",
     "gui.guide.index.selling_bin": "물고기를 판매하세요!",
     "gui.guide.index.aquarium": "수족관",
     "gui.guide.index.display": "전시장 및 책 서명",
@@ -779,7 +835,7 @@
     "gui.guide.page.0.left.5": "  만약 연어나 대구 같은",
     "gui.guide.page.0.left.6": "보잘것없는 물고기보다",
     "gui.guide.page.0.left.7": " 더 대단한 물고기를 잡고 싶다면,",
-    "gui.guide.page.0.left.8": "먼저 <sclegendary>스타캐처의 낚싯대</sclegendary>가 필요합니다!",
+    "gui.guide.page.0.left.8": "먼저 <sclegendary>스타캐쳐의 낚싯대</sclegendary>가 필요합니다!",
     "gui.guide.page.0.left.9": "",
     "gui.guide.page.0.left.10": "  찌를 계속 주시하며,",
     "gui.guide.page.0.left.11": "스위트스팟을 낚아챌 순간을",
@@ -917,7 +973,7 @@
     "gui.guide.page.4.left.6": "당신의 낚시 여정에 있어",
     "gui.guide.page.4.left.7": "필수적인 부분입니다.",
     "gui.guide.page.4.left.8": "",
-    "gui.guide.page.4.left.9": "낚시꾼이라면 누구나",
+    "gui.guide.page.4.left.9": "낚시꾼이 바랄 수 있는 최고의 것",
     "gui.guide.page.4.left.10": "<sclegendary>네더라이트 강화</sclegendary>된 낚싯대를 가지고",
     "gui.guide.page.4.left.11": "싶어할 것입니다. 이 낚싯대는",
     "gui.guide.page.4.left.12": "능력치를 향상시켜주고,",
@@ -942,7 +998,7 @@
     "gui.guide.page.4.right.12": "여러 가지 다양한 특성을",
     "gui.guide.page.4.right.13": "제공합니다",
     "gui.guide.page.4.right.14": "",
-    "gui.guide.page.4.right.15": "  낚시 모자와 같은 꾸미기",
+    "gui.guide.page.4.right.15": "  낚시꾼의 모자와 같은 꾸미기",
     "gui.guide.page.4.right.16": "아이템에도 특성이",
     "gui.guide.page.4.right.17": "있을 수 있습니다!",
 
@@ -1125,13 +1181,13 @@
     "gui.guide.page.10.right.1": "",
     "gui.guide.page.10.right.2": "",
     "gui.guide.page.10.right.3": "",
-    "gui.guide.page.10.right.4": "물고기를 가득 담아",
-    "gui.guide.page.10.right.5": "수족관에 넣어보세요.",
+    "gui.guide.page.10.right.4": "  낚시할 때 양동이를 사용해",
+    "gui.guide.page.10.right.5": "물고기를 양동이에 담아 낚아보세요.",
     "gui.guide.page.10.right.6": "물고기들은 새 보금자리를 ",
-    "gui.guide.page.10.right.7": "아주 좋아할 거에요!",
+    "gui.guide.page.10.right.7": "아주 좋아할 거예요!",
     "gui.guide.page.10.right.8": "",
 
-    "gui.guide.page.11.left.title": "책 진열대",
+    "gui.guide.page.11.left.title": "책 전시대",
     "gui.guide.page.11.left.0": "",
     "gui.guide.page.11.left.1": "",
     "gui.guide.page.11.left.2": "",
@@ -1140,11 +1196,11 @@
     "gui.guide.page.11.left.5": "  만약 친구들에게 ",
     "gui.guide.page.11.left.6": "나의 뛰어난 낚시 실력을 ",
     "gui.guide.page.11.left.7": "뽐내길 원하신다면, ",
-    "gui.guide.page.11.left.8": "진열대를 이용해",
+    "gui.guide.page.11.left.8": "전시대를 이용해",
     "gui.guide.page.11.left.9": "수집품을 전시하는 것보다",
     "gui.guide.page.11.left.10": "좋은 방법은 없을거에요!",
     "gui.guide.page.11.left.11": "",
-    "gui.guide.page.11.left.12": "  진열대에는 이 책뿐만",
+    "gui.guide.page.11.left.12": "  전시대에는 이 책뿐만",
     "gui.guide.page.11.left.13": "아니라 스타캐쳐 물고기도",
     "gui.guide.page.11.left.14": "멋지게 전시할 수 있답니다!",
 
@@ -1195,10 +1251,19 @@
     "gui.guide.hover.biome.incorrect": "❌ 생물군계",
     "gui.guide.hover.daytime.correct": "✅ 시간대",
     "gui.guide.hover.daytime.incorrect": "❌ 시간대",
+    "gui.guide.hover.structure.correct": "✅ 구조물",
+    "gui.guide.hover.structure.incorrect": "❌ 구조물",
+    "gui.guide.hover.moon_phase.incorrect": "❌ 달 위상",
+    "gui.guide.hover.moon_phase.correct": "✅ 달 위상",
+    "gui.guide.hover.luck_restriction.incorrect": "❌ 행운",
+    "gui.guide.hover.luck_restriction.correct": "✅ 행운",
     "gui.guide.hover.weather.correct": "✅ 날씨",
     "gui.guide.hover.weather.incorrect": "❌ 날씨",
     "gui.guide.hover.elevation.correct": "✅ 고도",
     "gui.guide.hover.elevation.incorrect": "❌ 고도",
+    "gui.guide.hover.light_level.correct": "✅ 밝기",
+    "gui.guide.hover.light_level.incorrect": "❌ 밝기",
+    "gui.guide.hover.bait": "미끼",
     "gui.guide.hover.caught_limit": "포획 제한: %s",
 
     "gui.guide.dimension": "차원: ",
@@ -1211,8 +1276,9 @@
     "gui.guide.biomes.empty": "[생물군계 없음]",
     "gui.guide.blacklisted_biomes": "제외된 생물군계: ",
     "gui.guide.blacklisted_biome_tags": "제외된 생물군계 태그: ",
-    "gui.guide.blacklisted_dimensions": "제외된 생물군계: ",
-    "gui.guide.bait": "선호:",
+    "gui.guide.blacklisted_dimensions": "제외된 차원: ",
+    "gui.guide.bait.prefer": "선호:",
+    "gui.guide.bait.require": "필수:",
     "gui.guide.weather": "날씨: ",
     "gui.guide.raining": "비",
     "gui.guide.thundering": "천둥",
@@ -1220,8 +1286,11 @@
     "gui.guide.rain_chance": "비로 인한 확률 증가: %s",
     "gui.guide.thunder_chance": "천둥으로 인한 확률 증가: %s",
     "gui.guide.daytime": "시간대: ",
+    "gui.guide.moon_phase": "달 위상: ",
+    "gui.guide.luck": "행운: ",
     "gui.guide.structure": "구조물:",
     "gui.guide.elevation": "고도: ",
+    "gui.guide.light_level": "밝기:",
     "gui.guide.elevation_bias": "%s 근처",
     "gui.guide.elevation_bias.hover": "%s에서 %s까지, %s에서 가장 좋음",
     "gui.guide.caught_limit": "포획 한도:",
@@ -1231,7 +1300,17 @@
     "gui.guide.fluid": "액체: ",
     "gui.guide.chance": "%s 확률",
 
+    "gui.guide.full_moon": "보름달",
+    "gui.guide.waning_gibbous": "하현망",
+    "gui.guide.third_quarter": "하현달",
+    "gui.guide.waning_crescent": "그믐달",
+    "gui.guide.new_moon": "신월",
+    "gui.guide.waxing_crescent": "초승달",
+    "gui.guide.first_quarter": "상현달",
+    "gui.guide.waxing_gibbous": "상현망",
+
     "gui.guide.day": "낮",
+    "gui.guide.dawn_and_dusk": "새벽과 황혼",
     "gui.guide.noon": "정오",
     "gui.guide.night": "밤",
     "gui.guide.midnight": "자정",
@@ -1240,8 +1319,7 @@
     "gui.guide.around": "%s 근처",
     "gui.guide.between": "%s와 %s 사이",
     "gui.guide.no_restriction": "-------",
-    "gui.guide.bait_required": "이 물고기를 잡으려면 적절한 미끼가 필요합니다!",
-    "gui.guide.rarity_count.single": "%s 낚시",
+    "gui.guide.rarity_count.single": "%s 물고기",
     "gui.guide.bait_chance_added": "미끼로 추가된 확률:",
     "gui.guide.rarity_count.all": "모든 %s 물고기",
 
@@ -1287,7 +1365,7 @@
     "gui.starcatcher.tournament.scoring.percentile": "백분위수 배율",
     "gui.starcatcher.tournament.scoring.perfect": "완벽한 낚시 배율",
 
-    "gui.starcatcher.tournament.started": "%s님이 시작했습니다!",
+    "gui.starcatcher.tournament.started": "%s 대회가 시작되었다!",
     "gui.starcatcher.tournament.press_tab": "[Tab] 키를 눌러 토너먼트 점수판을 켜고 끌 수 있습니다.",
 
     "gui.starcatcher.tournament.duration.days": "마인크래프트 일 수",
@@ -1324,17 +1402,17 @@
 
     "starcatcher.message.lava_proof_1.0": "",
     "starcatcher.message.lava_proof_1.1": "병 사세요! 병 사세요!",
-    "starcatcher.message.lava_proof_1.2": "이건 <sclava>방열™</sclava4>이라구요!!'",
+    "starcatcher.message.lava_proof_1.2": "이건 <sclava>방열™</sclava>이라구요!!'",
     "starcatcher.message.lava_proof_1.3": "",
-    "starcatcher.message.lava_proof_1.4": "정말 <sclava>방열™</sclava4>이에요!'",
+    "starcatcher.message.lava_proof_1.4": "정말 <sclava>방열™</sclava>이에요!'",
     "starcatcher.message.lava_proof_1.5": "",
-    "starcatcher.message.lava_proof_1.6": "<sclava>방열™</sclava4> 병이라고 광고하는",
+    "starcatcher.message.lava_proof_1.6": "<sclava>방열™</sclava> 병이라고 광고하는",
     "starcatcher.message.lava_proof_1.7": "사기꾼들에 정말 질렸어, 용암에 잠겨도",
     "starcatcher.message.lava_proof_1.8": "멀쩡할 수 있는게 어디있겠냐고! 내가",
-    "starcatcher.message.lava_proof_1.9": "당신네 그 멍청한 <sclava>방열™</sclava4>병에 대해",
+    "starcatcher.message.lava_proof_1.9": "당신네 그 멍청한 <sclava>방열™</sclava>병에 대해",
     "starcatcher.message.lava_proof_1.10": "어떻게 생각하는지 보여줘??",
     "starcatcher.message.lava_proof_1.11": "",
-    "starcatcher.message.lava_proof_1.12": "이 편지를 곧장 이 <sclava>방열™</sclava4>병에 넣어서 ",
+    "starcatcher.message.lava_proof_1.12": "이 편지를 곧장 이 <sclava>방열™</sclava>병에 넣어서 ",
     "starcatcher.message.lava_proof_1.13": "내가 찾을 수 있는 제일 가까운",
     "starcatcher.message.lava_proof_1.14": "용암 웅덩이에 직행시킬거야. 하,",
     "starcatcher.message.lava_proof_1.15": "그러면 제대로 보여줄 수 있겠지.",
@@ -1344,9 +1422,9 @@
     "starcatcher.message.lava_proof_2.1": "혹시라도 이 편지를 발견하신 분이 있다면,",
     "starcatcher.message.lava_proof_2.2": "이전 편지에 대해 사과드리고 싶습니다.",
     "starcatcher.message.lava_proof_2.3": "",
-    "starcatcher.message.lava_proof_2.4": "이 <sclava>방열™</sclava4> 병은 진짜였네요.",
+    "starcatcher.message.lava_proof_2.4": "이 <sclava>방열™</sclava> 병은 진짜였네요.",
     "starcatcher.message.lava_proof_2.5": "",
-    "starcatcher.message.lava_proof_2.6": "<sclava>방열™</sclava4> 병에 대한 수많은 사기와",
+    "starcatcher.message.lava_proof_2.6": "<sclava>방열™</sclava> 병에 대한 수많은 사기와",
     "starcatcher.message.lava_proof_2.7": "과대 광고들을 접한 후라 솔직히 믿지 않았고,",
     "starcatcher.message.lava_proof_2.8": "시도조차 하지 않았습니다.",
     "starcatcher.message.lava_proof_2.9": "",
@@ -1518,8 +1596,8 @@
     "tooltip.starcatcher.rainfin.1": "이름과 달리 지느러미가 빗물로 만들어진 것은 아니다.",
 
     "item.starcatcher.peakdweller": "봉우리살이",
-    "tooltip.starcatcher.peakdweller.0": "산에서 흔히 볼 수 있는 황금빛 물고기.",
-    "tooltip.starcatcher.peakdweller.1": "경험이 부족한 낚시꾼에게는 어려운 낚싯감이다.",
+    "tooltip.starcatcher.peakdweller.0": "산에서 흔히 볼 수 있는 황금색 물고기.",
+    "tooltip.starcatcher.peakdweller.1": "단단한 비늘 때문에 요리에 사용하기 어려워 대개 외면당한다.",
 
     "item.starcatcher.rockgill": "바위아가미",
     "tooltip.starcatcher.rockgill.0": "높은 산에 흔한 돌처럼 단단한 물고기.",
@@ -1549,8 +1627,8 @@
     "tooltip.starcatcher.ripple_catfish.1": "내리는 빗줄기의 잔잔한 파문에 이끌린다.",
 
     "item.starcatcher.sun_seeking_carp": "햇볕맞이잉어",
-    "tooltip.starcatcher.sun_seeking_carp.0": "햇볕을 좋아하는 희귀한 잉어, 태양이 ",
-    "tooltip.starcatcher.sun_seeking_carp.1": "머리 바로 위에 있을 때만 발견된다.",
+    "tooltip.starcatcher.sun_seeking_carp.0": "햇볕을 좋아하는 희귀한 잉어, ",
+    "tooltip.starcatcher.sun_seeking_carp.1": "낮에만 물 위로 머리를 내밀고 있는 모습이 목격된다.",
 
 
 
@@ -1571,8 +1649,8 @@
 
 
     "item.starcatcher.frostjaw_trout": "서리턱송어",
-    "tooltip.starcatcher.frostjaw_trout.0": "면도날처럼 날카로운, 화석화된 얼음 결정으로",
-    "tooltip.starcatcher.frostjaw_trout.1": "이루어진 턱을 가진 것으로 유명한 송어.",
+    "tooltip.starcatcher.frostjaw_trout.0": "면도날처럼 날카로운, 경화된 얼음 결정으로 이루어진 턱을 가진 것으로 유명한 송어.",
+    "tooltip.starcatcher.frostjaw_trout.1": "아무리 대담한 포식자라도 이 물고기를 물기 전에는 망설인다.",
 
     "item.starcatcher.crystalback_sturgeon": "수정등철갑상어",
     "tooltip.starcatcher.crystalback_sturgeon.0": "산 높은 곳의 호수에서 흔히 볼 수 있는 철갑상어.",
@@ -1595,7 +1673,7 @@
 
 
     "item.starcatcher.crystalback_boreal": "수정등북방어",
-    "tooltip.starcatcher.crystalback_boreal.0": "전설적인 <sclegendary>북방어</sclegendary>의 이름을 딴 이 물고기는 훨씬 쉽게 잡을 수 있다.",
+    "tooltip.starcatcher.crystalback_boreal.0": "북방어의 이름을 딴 이 물고기는 훨씬 쉽게 잡힌다.",
     "tooltip.starcatcher.crystalback_boreal.1": "뒷면이 크리스털로 덮여 있어 눈부시게 반짝이기 때문에 숨기기가 거의 불가능합니다.",
 
     "item.starcatcher.wintery_pike": "겨울꼬치고기",
@@ -1613,7 +1691,7 @@
 
 
     "item.starcatcher.boreal": "북방어",
-    "tooltip.starcatcher.boreal.0": "얼음으로 뒤덮인 산의 호수에서 발견되는  <sclegendary>전설</sclegendary> 물고기.",
+    "tooltip.starcatcher.boreal.0": "얼음으로 뒤덮인 산의 호수에서 발견되는 물고기.",
     "tooltip.starcatcher.boreal.1": "수정처럼 투명한 몸은 물과 완벽하게 어우러져,",
     "tooltip.starcatcher.boreal.2": "노련한 낚시꾼에게조차 진정한 도전이 된다.",
 
@@ -1622,6 +1700,36 @@
     "tooltip.starcatcher.aurora.0": "세상에서 가장 아름다운  <sclegendary>전설</sclegendary> 물고기.",
     "tooltip.starcatcher.aurora.1": "그 크기와 수정처럼 얼어붙은 몸 때문에 알려진 가장 잡기 어려운 물고기 중 하나이다.",
 
+
+
+
+    "item.starcatcher.oculi": "오쿨리",
+    "tooltip.starcatcher.oculi.0": "이 기묘한 물고기는 어디선가 본 듯한 느낌을 주지만,",
+    "tooltip.starcatcher.oculi.1": "정확히 무엇인지 알 수는 없습니다.",
+    "tooltip.starcatcher.oculi.2": "어쨌든, 분명 물고기입니다.",
+
+    "item.starcatcher.glimmergill": "깜빡지느러미",
+    "tooltip.starcatcher.glimmergill.0": "이 물고기의 비늘은 일종의 얼음으로 덮여 있는데,",
+    "tooltip.starcatcher.glimmergill.1": "이 얼음은 아주 특별한 방식으로 빛을 반사한다.",
+    "tooltip.starcatcher.glimmergill.2": "호기심 많은 먹잇감들이 몸으로 다가가 날카로운 비늘에 베이곤 한다.",
+
+    "item.starcatcher.cryospine": "극한가시",
+    "tooltip.starcatcher.cryospine.0": "영양가가 낮아 대체로 외면받는 반쯤 얼어붙은 물고기.",
+    "tooltip.starcatcher.cryospine.1": "빙산에 갇힌 어부들이 단 한 끼 식사를 위해",
+    "tooltip.starcatcher.cryospine.2": "100마리를 잡아야 했다는 일화가 전해진다.",
+
+    "item.starcatcher.lilac_minnow": "라일락 피라미",
+    "tooltip.starcatcher.lilac_minnow.0": "서식지의 영하의 온도 때문에 몸이 라일락색으로 변한 피라미.",
+    "tooltip.starcatcher.lilac_minnow.1": "이 피라미를 미끼로 사용하는 것이 서리의 왕을 잡는 유일한 방법이라고 한다.",
+
+    "item.starcatcher.frostbit_jelly": "서리조각 해파리",
+    "tooltip.starcatcher.frostbit_jelly.0": "빙산에서 장기간 동면하는 해파리.",
+    "tooltip.starcatcher.frostbit_jelly.1": "삶의 대부분을 빙산에서 보낸다.",
+
+    "item.starcatcher.king_of_the_frost": "서리의 왕",
+    "tooltip.starcatcher.king_of_the_frost.0": "모든 빙산을 다스린다는  <sclegendary>전설</sclegendary>적인 서리의 왕.",
+    "tooltip.starcatcher.king_of_the_frost.1": "그의 촉수는 먹잇감을 감싸 심해로 끌고 가 익사시킨다.",
+    "tooltip.starcatcher.king_of_the_frost.2": "낚시꾼들은 오버월드의 빙산 사이를 항해할 때 그것을 극도로 조심한다.",
 
 
 
@@ -1800,6 +1908,10 @@
     "item.starcatcher.blue_crystal_fin": "푸른수정지느러미",
     "tooltip.starcatcher.blue_crystal_fin.0": "주로 낮에 발견되는 흔하지 않은 물고기.",
 
+    "item.starcatcher.mothfish": "푸른수정지느러미",
+    "tooltip.starcatcher.mothfish.0": "추위를 이겨내기 위해 털 같은 보호층을 발달시켰다.",
+    "tooltip.starcatcher.mothfish.1": "하지만 이 털이 어떻게 처음부터 건조하게 유지되는지는 미스터리다...",
+
 
     "item.starcatcher.morganite": "모가나이트",
     "tooltip.starcatcher.morganite.0": "모가나이트 보석을 닮은 바다 물고기.",
@@ -1840,7 +1952,7 @@
     "tooltip.starcatcher.bigeye_tuna.2": "다른 카우펜 어종과 어울려 다닌다고 알려져있다.",
 
     "block.starcatcher.conch": "소라껍질",
-    "tooltip.starcatcher.conch.0": "한때 모래사장에 살던 이매패류 연체동물이었지만, 이제는 껍데기만 남았다.",
+    "tooltip.starcatcher.conch.0": "장식품으로 자주 쓰이는, 나선형 껍데기를 가진 연체동물의 흔적.",
 
     "block.starcatcher.clam": "조개",
     "tooltip.starcatcher.clam.0": "한 때 모래사장에 살던 어패류 연체동물, 이제는 껍데기뿐이다.",
@@ -1910,8 +2022,19 @@
     "tooltip.starcatcher.the_quarrish.1": "덩치가 커서 잡는 게 몹시 지루하다.",
 
     "item.starcatcher.lush_pike": "무성한꼬치고기",
-    "tooltip.starcatcher.lush_pike.0": "무성한 동굴에서 드물게 발견되는 이끼로 뒤덮인 <sclegendary>전설</sclegendary> 꼬치고기.",
+    "tooltip.starcatcher.lush_pike.0": "무성한 동굴에서 발견되는 희귀한 이끼색 꼬치고기.",
     "tooltip.starcatcher.lush_pike.1": "경험 많은 낚시꾼들도 잡기 몹시 어려운 물고기다.",
+
+    "item.starcatcher.shadowfin": "그림자지느러미",
+    "tooltip.starcatcher.shadowfin.0": "대부분의 다른 물고기들을 싫어하는 심술궂은 물고기.",
+    "tooltip.starcatcher.shadowfin.1": "낮에는 그림자 속에서 시간을 보내며,",
+    "tooltip.starcatcher.shadowfin.2": "이끼지느러미를 만나러 갈 때만 밖으로 나온다.",
+
+    "item.starcatcher.mossfin": "이끼지느러미",
+    "tooltip.starcatcher.mossfin.0": "이상하게 큰 눈을 가지고 있는데, 귀여움을 더하기 위한 용도 외에는 아무런 기능이 없다.",
+    "tooltip.starcatcher.mossfin.1": "밝고 이끼가 많은 모든 것을 좋아한다.",
+    "tooltip.starcatcher.mossfin.2": "그림자 속으로 들어가는 유일한 이유는 그림자지느러미를 찾기 위해서라고.",
+
 
 
 
@@ -1922,7 +2045,7 @@
     "tooltip.starcatcher.aquamarine_pike.0": "지하 깊은 곳에서 발견되는 육식성 물고기.",
 
     "item.starcatcher.garnet_mackerel": "가넷고등어",
-    "tooltip.starcatcher.garnet_mackerel.0": "동굴 깊숙한 곳에서 발견되는 잡기 힘든 고등어 종.",
+    "tooltip.starcatcher.garnet_mackerel.0": "동굴 깊숙한 곳에서 발견되는 잡기 쉬운 고등어 종.",
 
     "item.starcatcher.bright_amethyst_snapper": "빛나는 자수정도미",
     "tooltip.starcatcher.bright_amethyst_snapper.0": "심층암 층에서 발견되는 우아한 분홍색 물고기.",
@@ -2034,10 +2157,14 @@
     "tooltip.starcatcher.end_glow.0": "엔드에서 발견되는 까다로운 물고기.",
     "tooltip.starcatcher.end_glow.1": "엔더맨들은 별로 신경쓰지 않는 듯 하다.",
 
+    "item.starcatcher.dreamliner": "드림라이너",
+    "tooltip.starcatcher.dreamliner.0": "엔드의 끝없는 공허를 헤엄쳐다니는 물고기.",
+    "tooltip.starcatcher.dreamliner.1": "전생에는 787 기종이었다고 한다.",
+
     "item.starcatcher.voidbiter": "공허이빨",
     "tooltip.starcatcher.voidbiter.0": "엔드의 광활한 공허 속에서 떠다니는 게 발견된 <sclegendary>전설</sclegendary> 물고기.",
     "tooltip.starcatcher.voidbiter.1": "본 낚시꾼이 너무 적어 존재한다는 소문만 무성하다.",
-    "tooltip.starcatcher.voidbiter.2": "만약 누군가가 그것을 잡는다면, 그 사람은 <scuncommon>고대 낚시꾼</scuncommon>의 후손이라고 가정하는 것이 안전할 것이다.",
+    "tooltip.starcatcher.voidbiter.2": "만약 누군가가 그것을 잡는다면, 그 사람은 <scuncommon>고대 낚시꾼</scuncommon>의 후손이라고 봐도 무방할 것이다.",
 
     "item.starcatcher.purple_carp": "보라잉어",
     "tooltip.starcatcher.purple_carp.0": "이 잉어들은 엔드의 차가운 공허에 적응했다.",
@@ -2096,7 +2223,7 @@
     "item.starcatcher.drive_pike": "드라이브꼬치고기",
     "tooltip.starcatcher.drive_pike.0": "강 주변의 물고기 개체수를 조절하기 위해 만들어진 공격적인 기계.",
 
-    "item.starcatcher.brassgill": "금관아가미",
+    "item.starcatcher.brassgill": "황동아가미",
     "tooltip.starcatcher.brassgill.0": "잉걸불아가미를 닮은 기계 구조물로,",
     "tooltip.starcatcher.brassgill.1": "고온의 유체에서도 생존할 수 있도록 만들어졌다.",
     "tooltip.starcatcher.brassgill.2": "용도는 알려지지 않았다.",

@@ -9,10 +9,6 @@
       "required": false
     },
     {
-      "id": "starcatcher:boreal",
-      "required": false
-    },
-    {
       "id": "starcatcher:cerberay",
       "required": false
     },
@@ -26,6 +22,10 @@
     },
     {
       "id": "starcatcher:joel",
+      "required": false
+    },
+    {
+      "id": "starcatcher:king_of_the_frost",
       "required": false
     },
     {

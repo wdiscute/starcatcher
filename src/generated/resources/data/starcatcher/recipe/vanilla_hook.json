@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "N": "minecraft:iron_nugget",
     "R": "minecraft:fishing_rod"

@@ -2,7 +2,6 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "bonus_rolls": 0.0,
       "conditions": [
         {
           "condition": "minecraft:survives_explosion"
@@ -16,9 +15,10 @@
               "function": "minecraft:copy_components",
               "include": [
                 "minecraft:custom_name",
-                "minecraft:container",
                 "minecraft:lock",
-                "minecraft:container_loot"
+                "minecraft:container_loot",
+                "starcatcher:tackle_box_fishes",
+                "starcatcher:tackle_box_items"
               ],
               "source": "block_entity"
             }

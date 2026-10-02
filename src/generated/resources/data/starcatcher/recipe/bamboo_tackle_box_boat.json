@@ -1,0 +1,11 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "group": "boat",
+  "ingredients": [
+    "minecraft:bamboo_raft",
+    "#starcatcher:tackle_boxes"
+  ],
+  "result": {
+    "id": "starcatcher:bamboo_tackle_box_boat"
+  }
+}

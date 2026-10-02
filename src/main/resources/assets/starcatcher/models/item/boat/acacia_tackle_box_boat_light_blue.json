@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "starcatcher:item/acacia_tackle_box_boat_light_blue"
+  }
+}

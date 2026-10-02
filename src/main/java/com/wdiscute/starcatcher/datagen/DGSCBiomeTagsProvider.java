@@ -67,9 +67,7 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
                 .addOptional(Biomes.JAGGED_PEAKS)
         ;
 
-        this.tag(create(SCTags.IS_COLD_OCEAN))
-                .addOptional(Biomes.COLD_OCEAN)
-                .addOptional(Biomes.DEEP_COLD_OCEAN)
+        this.tag(create(SCTags.IS_FROZEN_OCEAN))
                 .addOptional(Biomes.FROZEN_OCEAN)
                 .addOptional(Biomes.DEEP_FROZEN_OCEAN)
         ;
@@ -102,6 +100,10 @@ public class DGSCBiomeTagsProvider extends BiomeTagsProvider
         ;
 
         this.tag(create(SCTags.IS_NORMAL_OCEAN))
+                .addOptional(Biomes.LUKEWARM_OCEAN)
+                .addOptional(Biomes.DEEP_LUKEWARM_OCEAN)
+                .addOptional(Biomes.COLD_OCEAN)
+                .addOptional(Biomes.DEEP_COLD_OCEAN)
                 .addOptional(Biomes.OCEAN)
                 .addOptional(Biomes.DEEP_OCEAN)
         ;

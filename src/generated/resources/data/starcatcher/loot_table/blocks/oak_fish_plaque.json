@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "starcatcher:oak_fish_plaque"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "starcatcher:blocks/oak_fish_plaque"
+}

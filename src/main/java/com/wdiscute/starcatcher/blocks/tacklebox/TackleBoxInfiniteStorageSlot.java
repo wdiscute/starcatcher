@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.Container;
@@ -11,18 +12,16 @@ import org.jetbrains.annotations.Nullable;
 public class TackleBoxInfiniteStorageSlot extends Slot
 {
     private static final Identifier BACKGROUND = Starcatcher.rl("fish");
-    private final TackleBoxMenu menu;
 
-    public TackleBoxInfiniteStorageSlot(TackleBoxMenu menu, Container container, int slot, int x, int y)
+    public TackleBoxInfiniteStorageSlot(Container container, int slot, int x, int y)
     {
         super(container, slot, x, y);
-        this.menu = menu;
     }
 
     @Override
     public boolean mayPlace(ItemStack stack)
     {
-        return false;
+        return container.getItem(index).isEmpty() && stack.is(SCTags.FISHABLE);
     }
 
     @Override
@@ -35,12 +34,7 @@ public class TackleBoxInfiniteStorageSlot extends Slot
     public void onTake(Player player, ItemStack stack)
     {
         super.onTake(player, stack);
-        menu.be.updateFishSlot();
-    }
-
-    @Override
-    public ItemStack safeTake(int count, int decrement, Player player)
-    {
-        return super.safeTake(count, decrement, player);
+        if(container instanceof TackleBoxContainer tbc)
+            tbc.updateFishSlot();
     }
 }

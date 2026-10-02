@@ -3,6 +3,7 @@ package com.wdiscute.starcatcher.registry;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlockEntity;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
+import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockEntity;
 import com.wdiscute.starcatcher.blocks.stand.StandBlockEntity;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -49,6 +50,19 @@ public interface SCBlockEntities
                     SCBlocks.TACKLE_BOX_GREEN.get()
             ));
 
+    Supplier<BlockEntityType<PlaqueBlockEntity>> FISH_PLAQUE = BLOCK_ENTITIES.register("fish_plaque",
+            () -> new BlockEntityType<>(PlaqueBlockEntity::new,
+                    SCBlocks.OAK_FISH_PLAQUE.get(),
+                    SCBlocks.DARK_OAK_FISH_PLAQUE.get(),
+                    SCBlocks.CHERRY_FISH_PLAQUE.get(),
+                    SCBlocks.ACACIA_FISH_PLAQUE.get(),
+                    SCBlocks.BAMBOO_FISH_PLAQUE.get(),
+                    SCBlocks.JUNGLE_FISH_PLAQUE.get(),
+                    SCBlocks.BIRCH_FISH_PLAQUE.get(),
+                    SCBlocks.MANGROVE_FISH_PLAQUE.get(),
+                    SCBlocks.SPRUCE_FISH_PLAQUE.get(),
+                    SCBlocks.PALE_OAK_FISH_PLAQUE.get()
+            ));
 
     static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

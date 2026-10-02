@@ -1,0 +1,119 @@
+{
+  "model": {
+    "type": "minecraft:range_dispatch",
+    "property": "starcatcher:box_color",
+    "entries": [
+      {
+        "threshold": 0.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_white"
+        }
+      },
+      {
+        "threshold": 1.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_orange"
+        }
+      },
+      {
+        "threshold": 2.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_magenta"
+        }
+      },
+      {
+        "threshold": 3.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_light_blue"
+        }
+      },      {
+        "threshold": 4.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_yellow"
+        }
+      },      {
+        "threshold": 5.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_lime"
+        }
+      },
+      {
+        "threshold": 6.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_pink"
+        }
+      },
+      {
+        "threshold": 7.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_gray"
+        }
+      },      {
+        "threshold": 8.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_light_gray"
+        }
+      },
+      {
+        "threshold": 9.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_cyan"
+        }
+      },
+      {
+        "threshold": 10.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_purple"
+        }
+      },
+      {
+        "threshold": 11.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_blue"
+        }
+      },
+      {
+        "threshold": 12.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_brown"
+        }
+      },      {
+        "threshold": 13.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_green"
+        }
+      },      {
+        "threshold": 14.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_red"
+        }
+      },
+      {
+        "threshold": 15.0,
+        "model": {
+          "type": "minecraft:model",
+          "model": "starcatcher:item/boat/birch_tackle_box_boat_black"
+        }
+      }
+    ],
+    "fallback": {
+      "type": "minecraft:model",
+      "model": "starcatcher:item/boat/birch_tackle_box_boat_cyan"
+    }
+  }
+}

@@ -140,9 +140,9 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             if (state.fishRotating)
                 poseStack.rotateAround(Axis.YN.rotation((float) ((float) Util.getMillis() / 10000 + Math.PI / 2)), 0, 0, 0);
 
-            // Render model here
-
-            FishRenderer.renderFishFromItem(new FishEntityRenderState(), fish, submitNodeCollector, poseStack);
+            FishEntityRenderState ir = new FishEntityRenderState();
+            ir.lightCoords = state.lightCoords;
+            FishRenderer.renderFishFromItem(ir, fish, submitNodeCollector, poseStack);
 
             poseStack.popPose();
         }

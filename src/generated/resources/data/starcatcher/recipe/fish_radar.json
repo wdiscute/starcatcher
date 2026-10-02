@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "E": "minecraft:echo_shard",
     "F": "#starcatcher:legendary_fishes",

@@ -1,0 +1,11 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "group": "boat",
+  "ingredients": [
+    "minecraft:dark_oak_boat",
+    "#starcatcher:tackle_boxes"
+  ],
+  "result": {
+    "id": "starcatcher:dark_oak_tackle_box_boat"
+  }
+}

@@ -9,6 +9,7 @@
 
   "bountiful.decree.starcatcher.name": "Starcatcher",
 
+  "structure.minecraft.ancient_city": "Ancient City",
   "structure.minecraft.monument": "Ocean Monument",
   "structure.minecraft.trial_chambers": "Trial Chambers",
   "structure.minecraft.end_city": "End Cities",
@@ -184,6 +185,7 @@
 
 
 
+  "sounds.starcatcher.minigame_starts" : "Fishing Starts!",
 
   "sounds.starcatcher.king_cry" : "Crying noises",
   "sounds.starcatcher.king_grr" : "Angry noises",
@@ -272,6 +274,7 @@
 
 
   "entity.starcatcher.fish" : "Starcaught Fish",
+  "entity.starcatcher.tackle_box_boat" : "Tackle Box Boat",
 
   "gui.starcatcher.bait_out" : "You've ran out of bait...",
   "gui.starcatcher.bait_running_low" : "Your bait is running low...",
@@ -313,16 +316,15 @@
 
   "tooltip.starcatcher.letter": "Written by: %s",
 
-  "item.starcatcher.starcatcher_twine": "Starcatcher's Twine",
-  "tooltip.starcatcher.starcatcher_twine.0": "A delicate twine wrapped around a stick.",
-  "tooltip.starcatcher.starcatcher_twine.1": "Vansire used these for string instruments once upon a time.",
-
   "item.starcatcher.tournament_stand": "Tournament Stand",
   "tooltip.starcatcher.tournament_stand.0": "A stand used to host fishing tournaments.",
 
 
   "tooltip.starcatcher.modifiers": "Fishing Modifiers:",
   "tooltip.starcatcher.modifiers.active": "<scepic>§lActive Modifiers:</scepic>",
+
+  "tooltip.modifier.starcatcher.quality_food_roll": "Your catches will be of higher quality",
+  "tooltip.modifier.starcatcher.quality_food_roll.shift": "Your catches will roll for quality an extra %s times",
 
   "tooltip.modifier.starcatcher.prevent_frozen": "Prevents your handle from freezing up",
 
@@ -337,6 +339,19 @@
   "tooltip.modifier.starcatcher.add_creeper": "An ill-tempered friend might show up",
 
   "tooltip.modifier.starcatcher.no_gravity": "Your bobber will no longer follow the laws of gravity",
+
+  "tooltip.modifier.starcatcher.gunpowder_bait": "Something... will be more likely to bite",
+  "tooltip.modifier.starcatcher.cherry_bait": "Cherry grove fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.lush_bait": "Lush cave fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.sculk_bait": "Deep Dark fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.dripstone_bait": "Dripstone Bait fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.murkwater_bait": "Swamp fish will be more likely to bite",
+  "tooltip.modifier.starcatcher.legendary_bait": "Legendary fish will be more likely to bite",
+
+  "tooltip.modifier.starcatcher.restricted_rarities": "You can no longer catch %s fish",
+  "tooltip.modifier.starcatcher.allowed_rarities": "You can only catch %s fish",
+  "tooltip.modifier.starcatcher.allowed_rarities.list_last_separator": " and ",
+  "tooltip.modifier.starcatcher.allowed_rarities.list_separator": ", ",
 
   "tooltip.modifier.starcatcher.extra_golden_chance.perfect": "Perfect catches are more likely to become golden",
   "tooltip.modifier.starcatcher.extra_golden_chance.perfect.shift": "Perfect catches are %s%% more likely to become golden",
@@ -423,6 +438,9 @@
   "tooltip.modifier.starcatcher.adjust_lure_time.shift.max_ticks": "Adjusts maximum ticks to fish by %s%%",
   "tooltip.modifier.starcatcher.adjust_lure_time.shift.random": "Adjusts the chance of biting every tick by %s%%",
 
+  "tooltip.modifier.starcatcher.increase_chance": "You're more likely to catch a %s",
+  "tooltip.modifier.starcatcher.increase_chance.shift": "Increases the weight of catching a %s by %s",
+
   "tooltip.modifier.starcatcher.adjust_moving_sweetspots.increase": "Increases the speed of moving sweet-spots",
   "tooltip.modifier.starcatcher.adjust_moving_sweetspots.decrease": "Decreases the speed of moving sweet-spots",
   "tooltip.modifier.starcatcher.adjust_moving_sweetspots.shift": "Adjusts the speed of moving sweet-spots by %s%%",
@@ -435,8 +453,8 @@
   "tooltip.modifier.starcatcher.adjust_penalty_rate.decrease": "Decreases the penalty for missing sweet-spots",
   "tooltip.modifier.starcatcher.adjust_penalty_rate.shift": "Adjusts the penalty of missing sweet-spots by %s%%",
 
-  "tooltip.modifier.starcatcher.adjust_hp.increase": "Fish will be easier to reel in",
-  "tooltip.modifier.starcatcher.adjust_hp.decrease": "Fish will be harder to reel in",
+  "tooltip.modifier.starcatcher.adjust_hp.increase": "Fish will be harder to reel in",
+  "tooltip.modifier.starcatcher.adjust_hp.decrease": "Fish will be easier to reel in",
   "tooltip.modifier.starcatcher.adjust_hp.shift": "Adjusts the hp of fish by %s%%",
 
   "tooltip.modifier.starcatcher.vanilla_fishing_loot": "Restores vanilla fishing loot",
@@ -529,6 +547,7 @@
 
 
   "item.starcatcher.gunpowder_bait": "Gunpowder Bait",
+  "item.starcatcher.targeted_bait": "Targeted Bait",
   "item.starcatcher.cherry_bait": "Cherry Bait",
   "item.starcatcher.lush_bait": "Lush Bait",
   "item.starcatcher.sculk_bait": "Sculk Bait",
@@ -594,6 +613,28 @@
   "item.starcatcher.tackle_box_light_blue" : "Light Blue Tackle Box",
   "item.starcatcher.tackle_box_cyan" : "Cyan Tackle Box",
   "item.starcatcher.tackle_box_green" : "Green Tackle Box",
+
+  "item.starcatcher.oak_tackle_box_boat" : "Oak Tackle box Boat",
+  "item.starcatcher.dark_oak_tackle_box_boat" : "Dark Oak Tackle box Boat",
+  "item.starcatcher.cherry_tackle_box_boat" : "Cherry Tackle box Boat",
+  "item.starcatcher.bamboo_tackle_box_boat" : "Bamboo Tackle box Raft",
+  "item.starcatcher.spruce_tackle_box_boat" : "Spruce Tackle box Boat",
+  "item.starcatcher.birch_tackle_box_boat" : "Birch Tackle box Boat",
+  "item.starcatcher.mangrove_tackle_box_boat" : "Mangrove Tackle box Boat",
+  "item.starcatcher.acacia_tackle_box_boat" : "Acacia Tackle box Boat",
+  "item.starcatcher.jungle_tackle_box_boat" : "Jungle Tackle box Boat",
+  "item.starcatcher.pale_oak_tackle_box_boat" : "Pale Oak Tackle box Boat",
+
+  "item.starcatcher.oak_fish_plaque" : "Oak Fish Plaque",
+  "item.starcatcher.dark_oak_fish_plaque" : "Dark Oak Fish Plaque",
+  "item.starcatcher.cherry_fish_plaque" : "Cherry Fish Plaque",
+  "item.starcatcher.acacia_fish_plaque" : "Acacia Fish Plaque",
+  "item.starcatcher.bamboo_fish_plaque" : "Bamboo Fish Plaque",
+  "item.starcatcher.jungle_fish_plaque" : "Jungle Fish Plaque",
+  "item.starcatcher.birch_fish_plaque" : "Birch Fish Plaque",
+  "item.starcatcher.spruce_fish_plaque" : "Spruce Fish Plaque",
+  "item.starcatcher.mangrove_fish_plaque" : "Mangrove Fish Plaque",
+  "item.starcatcher.pale_oak_fish_plaque" : "Pale Oak Fish Plaque",
 
   "item.starcatcher.aquarium" : "Aquarium",
 
@@ -673,18 +714,22 @@
   "gui.guide.seasons.around_autumn" : "Around Autumn",
   "gui.guide.seasons.around_winter" : "Around Winter",
 
+  "gui.guide.seasons.spring" : "Spring",
   "gui.guide.seasons.early_spring" : "Early Spring",
   "gui.guide.seasons.mid_spring" : "Mid Spring",
   "gui.guide.seasons.late_spring" : "Late Spring",
 
+  "gui.guide.seasons.summer" : "Summer",
   "gui.guide.seasons.early_summer" : "Early Summer",
   "gui.guide.seasons.mid_summer" : "Mid Summer",
   "gui.guide.seasons.late_summer" : "Late Summer",
 
+  "gui.guide.seasons.autumn" : "Autumn",
   "gui.guide.seasons.early_autumn" : "Early Autumn",
   "gui.guide.seasons.mid_autumn" : "Mid Autumn",
   "gui.guide.seasons.late_autumn" : "Late Autumn",
 
+  "gui.guide.seasons.winter" : "Winter",
   "gui.guide.seasons.early_winter" : "Early Winter",
   "gui.guide.seasons.mid_winter" : "Mid Winter",
   "gui.guide.seasons.late_winter" : "Late Winter",
@@ -950,7 +995,7 @@
   "gui.guide.page.4.left.6" : "will be an essential part",
   "gui.guide.page.4.left.7" : "of your fishing journey.",
   "gui.guide.page.4.left.8" : "",
-  "gui.guide.page.4.left.9" : "The best a angler can wish",
+  "gui.guide.page.4.left.9" : "The best an angler can wish",
   "gui.guide.page.4.left.10" : "for is a <sclegendary>Netherite Upgraded</sclegendary>",
   "gui.guide.page.4.left.11" : "rod, boosting your stats,",
   "gui.guide.page.4.left.12" : "and unlocking for lava",
@@ -973,10 +1018,10 @@
   "gui.guide.page.4.right.10" : "modifiers which range from",
   "gui.guide.page.4.right.11" : "decreasing lure time,",
   "gui.guide.page.4.right.12" : "to completely changing",
-  "gui.guide.page.4.right.13" : "the fish's behaviour!",
+  "gui.guide.page.4.right.13" : "the fish behaviour!",
   "gui.guide.page.4.right.14" : "",
   "gui.guide.page.4.right.15" : "  Cosmetics such as",
-  "gui.guide.page.4.right.16" : "fishing hat's may also",
+  "gui.guide.page.4.right.16" : "fishing hats may also",
   "gui.guide.page.4.right.17" : "contain modifiers!",
 
 
@@ -1240,6 +1285,7 @@
   "gui.guide.hover.elevation.incorrect" : "❌ Elevation",
   "gui.guide.hover.light_level.correct" : "✅ Light",
   "gui.guide.hover.light_level.incorrect" : "❌ Light",
+  "gui.guide.hover.bait" : "Bait",
   "gui.guide.hover.caught_limit" : "Caught Limit: %s",
 
   "gui.guide.dimension" : "Dimension: ",
@@ -1253,7 +1299,8 @@
   "gui.guide.blacklisted_biomes" : "Blacklisted Biomes: ",
   "gui.guide.blacklisted_biome_tags" : "Blacklisted Biome Tags: ",
   "gui.guide.blacklisted_dimensions" : "Blacklisted Dimensions: ",
-  "gui.guide.bait" : "Prefers: ",
+  "gui.guide.bait.prefer" : "Prefers: ",
+  "gui.guide.bait.require" : "Requires: ",
   "gui.guide.weather" : "Weather: ",
   "gui.guide.raining" : "Raining",
   "gui.guide.thundering" : "Thundering",
@@ -1294,9 +1341,8 @@
   "gui.guide.around" : "Around %s",
   "gui.guide.between" : "Between %s and %s",
   "gui.guide.no_restriction" : "-------",
-  "gui.guide.bait_required" : "The correct bait is required for this catch!",
   "gui.guide.rarity_count.single" : "%s fishes",
-  "gui.guide.bait_chance_added" : "Chance added by bait:",
+  "gui.guide.bait_chance_added" : "Weight added by bait:",
   "gui.guide.rarity_count.all" : "All %s fishes",
 
   "gui.guide.hover" : "[hover]",
@@ -1647,7 +1693,7 @@
 
 
   "item.starcatcher.crystalback_boreal" : "Crystalback Boreal",
-  "tooltip.starcatcher.crystalback_boreal.0" : "Named after the legendary <sclegendary>Boreal</sclegendary>, this fish is far easier to catch.",
+  "tooltip.starcatcher.crystalback_boreal.0" : "Named after the Boreal, this fish is far easier to catch.",
   "tooltip.starcatcher.crystalback_boreal.1" : "Its crystal-covered back glitters brightly, making hiding nearly impossible.",
 
   "item.starcatcher.wintery_pike" : "Wintery Pike",
@@ -1665,7 +1711,7 @@
 
 
   "item.starcatcher.boreal" : "Boreal",
-  "tooltip.starcatcher.boreal.0" : "A <sclegendary>legendary</sclegendary> fish found in icy mountain lakes.",
+  "tooltip.starcatcher.boreal.0" : "A fish found in icy mountain lakes.",
   "tooltip.starcatcher.boreal.1" : "Its crystal-covered body blends seamlessly into the water,",
   "tooltip.starcatcher.boreal.2" : "making it a true challenge even for seasoned anglers.",
 
@@ -1674,6 +1720,36 @@
   "tooltip.starcatcher.aurora.0" : "The most beautiful <sclegendary>legendary</sclegendary> fish there is.",
   "tooltip.starcatcher.aurora.1" : "Its size and crystal-frozen body make it one of the most elusive catches known.",
 
+
+
+
+  "item.starcatcher.oculi" : "Oculi",
+  "tooltip.starcatcher.oculi.0" : "This weird fish reminds you of something you've seen before,",
+  "tooltip.starcatcher.oculi.1" : "yet you can't quite see it.",
+  "tooltip.starcatcher.oculi.2" : "Regardless, it is certainly a fish.",
+
+  "item.starcatcher.glimmergill" : "Glimmergill",
+  "tooltip.starcatcher.glimmergill.0" : "This fish's scales are covered in a type of ice",
+  "tooltip.starcatcher.glimmergill.1" : "which reflects light in a very particular way.",
+  "tooltip.starcatcher.glimmergill.2" : "Curious pray wander into its body and get cut in its sharp scales.",
+
+  "item.starcatcher.cryospine" : "Cryospine",
+  "tooltip.starcatcher.cryospine.0" : "A half-frozen fish often ignored due to its low nutritional value.",
+  "tooltip.starcatcher.cryospine.1" : "It is said fisherman stuck on icebergs would catch 100 of them,",
+  "tooltip.starcatcher.cryospine.2" : "just to make a single meal.",
+
+  "item.starcatcher.lilac_minnow" : "Lilac Minnow",
+  "tooltip.starcatcher.lilac_minnow.0" : "A species of minnow turned lilac due to the freezing temperatures it habitats.",
+  "tooltip.starcatcher.lilac_minnow.1" : "Using it as bait is said to be the only way to catch a King of the Frost.",
+
+  "item.starcatcher.frostbit_jelly" : "Frostbit Jelly",
+  "tooltip.starcatcher.frostbit_jelly.0" : "A jellyfish species which uses icebergs for long term hibernation.",
+  "tooltip.starcatcher.frostbit_jelly.1" : "Since they spend most of their life.",
+
+  "item.starcatcher.king_of_the_frost" : "King of the Frost",
+  "tooltip.starcatcher.king_of_the_frost.0" : "The <sclegendary>legendary</sclegendary> King of the Frost, ruling over all the icebergs.",
+  "tooltip.starcatcher.king_of_the_frost.1" : "Its tentacles wrap around pray and bring them to the depths of the oceans until they drown.",
+  "tooltip.starcatcher.king_of_the_frost.2" : "Anglers are extremely cautious of it when sailing through the Icebergs of the Overworld.",
 
 
 
@@ -1761,7 +1837,7 @@
 
 
   "item.starcatcher.blossomfish" : "Blossomfish",
-  "tooltip.starcatcher.blossomfish.0" : "A beautiful fish resembling the pink petals of Cherry Grooves.",
+  "tooltip.starcatcher.blossomfish.0" : "A beautiful fish resembling the pink petals of Cherry Groves.",
   "tooltip.starcatcher.blossomfish.1" : "It prefers to swim around in the warm sunlight.",
 
   "item.starcatcher.vesani" : "Vesani",
@@ -1771,11 +1847,11 @@
   "tooltip.starcatcher.vesani.3" : "open with it's normal appearance.",
 
   "item.starcatcher.petaldrift_carp" : "Petaldrift Carp",
-  "tooltip.starcatcher.petaldrift_carp.0" : "A pink carp common to Cherry Grooves which",
+  "tooltip.starcatcher.petaldrift_carp.0" : "A pink carp common to Cherry Groves which",
   "tooltip.starcatcher.petaldrift_carp.1" : "prefers to come out during the rain.",
 
   "item.starcatcher.pink_koi" : "Pink Koi",
-  "tooltip.starcatcher.pink_koi.0" : "A pink koi most commonly found in Cherry Grooves.",
+  "tooltip.starcatcher.pink_koi.0" : "A pink koi most commonly found in Cherry Groves.",
   "tooltip.starcatcher.pink_koi.1" : "It comes out during rainy days to feed.",
 
   "item.starcatcher.rose_siamese_fish" : "Rose Siamese Fish",
@@ -1851,6 +1927,11 @@
 
   "item.starcatcher.blue_crystal_fin" : "Blue Crystal Fin",
   "tooltip.starcatcher.blue_crystal_fin.0" : "An uncommon fish most commonly found during daytime.",
+
+  "item.starcatcher.mothfish" : "Mothfish",
+  "tooltip.starcatcher.mothfish.0" : "This fish has developed a layer of fur to help it overcome the cold.",
+  "tooltip.starcatcher.mothfish.1" : "How it keeps this fur dry in the first place is a mystery...",
+
 
 
   "item.starcatcher.morganite" : "Morganite",

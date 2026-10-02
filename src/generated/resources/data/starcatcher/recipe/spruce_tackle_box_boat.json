@@ -1,0 +1,11 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "group": "boat",
+  "ingredients": [
+    "minecraft:spruce_boat",
+    "#starcatcher:tackle_boxes"
+  ],
+  "result": {
+    "id": "starcatcher:spruce_tackle_box_boat"
+  }
+}

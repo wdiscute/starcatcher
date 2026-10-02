@@ -1,0 +1,11 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "group": "boat",
+  "ingredients": [
+    "minecraft:acacia_boat",
+    "#starcatcher:tackle_boxes"
+  ],
+  "result": {
+    "id": "starcatcher:acacia_tackle_box_boat"
+  }
+}

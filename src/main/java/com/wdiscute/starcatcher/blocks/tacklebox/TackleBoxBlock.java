@@ -1,14 +1,10 @@
 package com.wdiscute.starcatcher.blocks.tacklebox;
 
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.utils.Utils;
-import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.component.DataComponents;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -20,16 +16,11 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.ItemContainerContents;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -49,7 +40,6 @@ import java.util.List;
 
 public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
 {
-    private static final Component UNKNOWN_CONTENTS = Component.translatable("container.starcatcher.tackle_box.unknownContents");
     public static final EnumProperty<Direction> FACING = HorizontalDirectionalBlock.FACING;
     public static final Identifier CONTENTS = Utils.rl("minecraft", "contents");
     @javax.annotation.Nullable
@@ -146,14 +136,13 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         builder.add(BlockStateProperties.WATERLOGGED);
     }
 
-
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
     {
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof TackleBoxBlockEntity tbbe)
         {
-            if (!level.isClientSide() && player.isCreative() && !tbbe.isEmpty())
+            if (!level.isClientSide() && player.isCreative() && !tbbe.container.isEmpty())
             {
                 ItemStack itemstack = getColoredItemStack(this.getColor());
                 itemstack.applyComponents(blockentity.collectComponents());
@@ -176,7 +165,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             {
                 for (int i = 0; i < tbbe.getContainerSize(); ++i)
                 {
-                    consumer.accept(tbbe.getItem(i));
+                    consumer.accept(tbbe.container.getItem(i));
                 }
 
             });
@@ -198,9 +187,15 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Nullable
+    public static DyeColor getColorFromItem(Item item)
+    {
+        return getColorFromBlock(Block.byItem(item));
+    }
+
+    @Nullable
     public static DyeColor getColorFromBlock(Block block)
     {
-        return block instanceof TackleBoxBlock ? ((TackleBoxBlock) block).getColor() : null;
+        return block instanceof TackleBoxBlock tbb ? tbb.getColor() : DyeColor.CYAN;
     }
 
     public static DeferredBlock<Block> getBlockByColor(@Nullable DyeColor color)
@@ -254,14 +249,5 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     protected BlockState mirror(BlockState state, Mirror mirror)
     {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    @Override
-    public @org.jetbrains.annotations.Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
-    {
-        return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) ->
-        {
-            if (blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
-        };
     }
 }

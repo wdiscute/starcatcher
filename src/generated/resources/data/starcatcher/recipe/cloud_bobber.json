@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "B": "starcatcher:bobber",
     "F": "minecraft:phantom_membrane",

@@ -58,8 +58,7 @@ repositories {
 
 dependencies {
     //wdUtils
-    //jarJar(implementation("com.wdiscute:wdUtils:1.6-NEOFORGE-26.1.2"))
-    jarJar(implementation("com.wdiscute:wdUtils:1.8-NEOFORGE-26.2"))
+    jarJar(implementation("com.wdiscute:wdUtils:2.0.2-NEOFORGE-26.2"))
 
     //FTS
     jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.2"))
@@ -76,6 +75,13 @@ dependencies {
 
     //JEI
     compileOnly "mezz.jei:jei-26.2-neoforge:30.30.0.204"
+
+    //little joys
+    compileOnly "maven.modrinth:little-joys:26.2.0.4+neoforge-26.2"
+    runtimeOnly "maven.modrinth:little-joys:26.2.0.4+neoforge-26.2"
+
+    //little joys
+    runtimeOnly "maven.modrinth:balm:26.2.0.9+neoforge-26.2"
 
     //curios (check modifiers in curio slots)
     compileOnly "top.theillusivec4.curios:curios-neoforge:16.0.0+26.2:api"
@@ -96,6 +102,9 @@ dependencies {
 
     //sodium
     //runtimeOnly "maven.modrinth:AANobbMI:UETw0GTI"
+
+    //jade
+    runtimeOnly "maven.modrinth:jade:26.2.10+neoforge"
 }
 
 base {

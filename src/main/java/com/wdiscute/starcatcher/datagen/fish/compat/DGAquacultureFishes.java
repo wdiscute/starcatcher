@@ -186,7 +186,7 @@ public class DGAquacultureFishes
         //cold ocean
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "atlantic_cod")
                         .withBucketedFish("aquaculture", "atlantic_cod_bucket")
                         .withEntityToSpawn("aquaculture", "atlantic_cod")
@@ -199,7 +199,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "blackfish")
                         .withBucketedFish("aquaculture", "blackfish_bucket")
                         .withEntityToSpawn("aquaculture", "blackfish")
@@ -213,7 +213,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "pacific_halibut")
                         .withBucketedFish("aquaculture", "pacific_halibut_bucket")
                         .withEntityToSpawn("aquaculture", "pacific_halibut")
@@ -225,7 +225,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.coldOcean(context)
+                PresetRestrictions.frozenOceans(context)
                         .withFish("aquaculture", "atlantic_halibut")
                         .withBucketedFish("aquaculture", "atlantic_halibut_bucket")
                         .withEntityToSpawn("aquaculture", "atlantic_halibut")
@@ -238,7 +238,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "atlantic_herring")
                         .withBucketedFish("aquaculture", "atlantic_herring_bucket")
                         .withEntityToSpawn("aquaculture", "atlantic_herring")
@@ -251,7 +251,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "pink_salmon")
                         .withBucketedFish("aquaculture", "pink_salmon_bucket")
                         .withEntityToSpawn("aquaculture", "pink_salmon")
@@ -264,7 +264,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "pollock")
                         .withBucketedFish("aquaculture", "pollock_bucket")
                         .withEntityToSpawn("aquaculture", "pollock")
@@ -275,7 +275,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "rainbow_trout")
                         .withBucketedFish("aquaculture", "rainbow_trout_bucket")
                         .withEntityToSpawn("aquaculture", "rainbow_trout")
@@ -289,7 +289,7 @@ public class DGAquacultureFishes
         //ocean
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "jellyfish")
                         .withBucketedFish("aquaculture", "jellyfish_bucket")
                         .withEntityToSpawn("aquaculture", "jellyfish")
@@ -302,7 +302,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "red_grouper")
                         .withBucketedFish("aquaculture", "red_grouper_bucket")
                         .withEntityToSpawn("aquaculture", "red_grouper")
@@ -314,7 +314,7 @@ public class DGAquacultureFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "tuna")
                         .withBucketedFish("aquaculture", "tuna_bucket")
                         .withEntityToSpawn("aquaculture", "tuna")
@@ -400,7 +400,7 @@ public class DGAquacultureFishes
         //anywhere
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "goldfish")
                         .withSizeAndWeight(15, 5, 100, 5)
                         .withBaseChance(1)
@@ -414,7 +414,7 @@ public class DGAquacultureFishes
         //neptunium ingot
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("aquaculture", "neptunium_ingot")
                         .withMaxLimit(5)
                         .withDifficulty(Difficulty.TRASH)

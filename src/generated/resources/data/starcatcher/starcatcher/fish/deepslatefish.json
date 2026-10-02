@@ -1,6 +1,9 @@
 {
   "base_chance": 2,
   "catch_info": {
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:deepslatefish"
     }
@@ -74,6 +77,12 @@
         "minecraft:water"
       ],
       "translation_override": "fluid.starcatcher.water"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:legendary_bait": 50
+      }
     }
   ],
   "size_and_weight": {

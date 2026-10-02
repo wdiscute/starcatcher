@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "H": "starcatcher:hook",
     "M": "minecraft:moss_block",

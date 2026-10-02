@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "C": "starcatcher:azure_crystalback_minnow",
     "D": "minecraft:diamond",

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tackle_box": {
+      "conditions": {
+        "items": [
+          {
+            "items": "#starcatcher:tackle_boxes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "starcatcher:acacia_tackle_box_boat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_tackle_box"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "starcatcher:acacia_tackle_box_boat"
+    ]
+  }
+}

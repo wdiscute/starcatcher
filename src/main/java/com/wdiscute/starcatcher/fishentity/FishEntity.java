@@ -20,6 +20,7 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.fish.AbstractFish;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.PathType;
@@ -86,9 +87,24 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
+    public void die(DamageSource source)
+    {
+        if (!this.isRemoved() && !this.dead)
+        {
+            //spawn item
+            ItemEntity itemEntity = new ItemEntity(level(), position().x, position().y, position().z, getFish());
+            level().addFreshEntity(itemEntity);
+        }
+        super.die(source);
+    }
+
+    @Override
     public boolean isInWater()
     {
-        return !fireImmune() ? super.isInWater() : isInLava();
+        if (fireImmune())
+            return !this.firstTick && this.getFluidTypeHeight(net.neoforged.neoforge.common.NeoForgeMod.LAVA_TYPE.value()) > 0.0D;
+        else
+            return super.isInWater();
     }
 
     @Override

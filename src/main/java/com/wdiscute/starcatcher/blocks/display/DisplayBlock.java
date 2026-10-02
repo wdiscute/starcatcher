@@ -63,7 +63,10 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
                 .sound(SoundType.WOOD)
         );
         this.registerDefaultState(
-                this.stateDefinition.any().setValue(POWERED, false).setValue(HAS_ITEM, false)
+                this.stateDefinition.any()
+                        .setValue(POWERED, false)
+                        .setValue(HAS_ITEM, false)
+                        .setValue(BlockStateProperties.WATERLOGGED, false)
         );
     }
 

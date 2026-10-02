@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "key": {
     "C": "starcatcher:lush_pike",
     "D": "minecraft:diamond",

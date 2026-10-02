@@ -13,6 +13,7 @@ import com.wdiscute.utils.Utils;
 import net.minecraft.core.UUIDUtil;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -77,9 +78,17 @@ public interface SCDataComponents
             builder -> builder.persistent(Codec.BOOL));
 
     //tackle box
-    DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> TACKLE_BOX_FISHES = register(
+    DeferredHolder<DataComponentType<?>, DataComponentType<List<Utils.Duo<Integer, MaybeStack>>>> TACKLE_BOX_ITEMS = register(
+            "tackle_box_items",
+            builder -> builder.persistent(Utils.Duo.codec(Codec.INT, MaybeStack.CODEC).listOf()));
+
+    DeferredHolder<DataComponentType<?>, DataComponentType<List<MaybeStack>>> TACKLE_BOX_FISHES = register(
             "tackle_box_fishes",
-            builder -> builder.persistent(ItemStack.OPTIONAL_CODEC.listOf()));
+            builder -> builder.persistent(MaybeStack.CODEC.listOf()));
+
+    DeferredHolder<DataComponentType<?>, DataComponentType<DyeColor>> TACKLE_BOX_COLOR = register(
+            "tackle_box_color",
+            builder -> builder.persistent(DyeColor.CODEC));
 
     static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {

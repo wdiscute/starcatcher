@@ -164,7 +164,7 @@ public class DisplayBlockEntity extends BlockEntity
 
         RegistryOps<Tag> ops = registries.createSerializationContext(NbtOps.INSTANCE);
 
-        tag.store("item", MaybeStack.CODEC, ops, this.item);
+        tag.store("Book", MaybeStack.CODEC, ops, this.item);
 
         tag.putBoolean("rotating", fishRotating);
 

@@ -1,12 +1,17 @@
 package com.wdiscute.starcatcher.datagen.fish;
 
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.*;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.registry.fishrestrictions.*;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.levelgen.structure.BuiltinStructures;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public class DGStarcatcherFishes
 {
@@ -222,7 +227,7 @@ public class DGStarcatcherFishes
                 PresetRestrictions.coldLakeMountain(context)
                         .withFish(SCItems.BOREAL)
                         .withSizeAndWeight(new SizeAndWeight(30, 15, 1000, 200))
-                        .withRarity(Rarity.LEGENDARY)
+                        .withRarity(Rarity.EPIC)
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
                         .withDifficulty(Difficulty.BOREAL)
                         
@@ -236,6 +241,69 @@ public class DGStarcatcherFishes
                         .withRarity(Rarity.LEGENDARY)
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
                         .withDifficulty(Difficulty.AURORA)
+        );
+
+        //
+        //               ,--.    ,--.
+        // ,---.  ,---.  |  |  ,-|  |      ,---.   ,---.  ,---.   ,--,--. ,--,--,   ,---.
+        //| .--' | .-. | |  | ' .-. |     | .-. | | .--' | .-. : ' ,-.  | |      \ (  .-'
+        //\ `--. ' '-' ' |  | \ `-' |     ' '-' ' \ `--. \   --. \ '-'  | |  ||  | .-'  `)
+        // `---'  `---'  `--'  `---'       `---'   `---'  `----'  `--`--' `--''--' `----'
+        //
+
+        //trash
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.OCULI)
+                        .withDifficulty(Difficulty.TRASH)
+                        .withRarity(Rarity.TRASH)
+                        .withHasGuideEntry(false)
+        );
+
+        //common
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.GLIMMERGILL)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.EASY_FROZEN.withHP(150))
+        );
+
+        //uncommon
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.CRYOSPINE)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.EASY_FROZEN.withHP(150))
+                        .withRarity(Rarity.UNCOMMON)
+        );
+
+        //rare
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.LILAC_MINNOW)
+                        .withSizeAndWeight(new SizeAndWeight(6, 4, 5, 3))
+                        .withDifficulty(Difficulty.EASY_FROZEN.withHP(150))
+                        .withRarity(Rarity.RARE)
+        );
+
+        //epic
+        FishRegistration.register(context,
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.FROSTBIT_JELLY)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.MEDIUM_FROZEN.withHP(150))
+                        .withRarity(Rarity.EPIC)
+        );
+
+        //legendary
+        FishRegistration.registerRaw(context, ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Starcatcher.rl("king_of_the_frost")),
+                PresetRestrictions.frozenOceans(context)
+                        .withFish(SCItems.KING_OF_THE_FROST)
+                        .withBaseChance(0)
+                        .addRestriction(BaitRestriction.KING_OF_THE_FROST)
+                        .withSizeAndWeight(new SizeAndWeight(35, 8, 1600, 1200))
+                        .withDifficulty(Difficulty.KING_OF_THE_FROST)
+                        .withRarity(Rarity.LEGENDARY)
         );
 
         //
@@ -673,6 +741,17 @@ public class DGStarcatcherFishes
                         .withRarity(Rarity.RARE)
         );
 
+        //rare
+        FishRegistration.register(
+                context,
+                PresetRestrictions.coldRiver(context)
+                        .withFish(SCItems.MOTHFISH)
+                        .withSizeAndWeight(new SizeAndWeight(12, 4, 70, 30))
+                        .withDaytimeRestriction(DaytimeRestriction.NIGHT)
+                        .withDifficulty(Difficulty.MEDIUM_FROZEN.vanishing())
+                        .withRarity(Rarity.RARE)
+        );
+
         //legendary
         FishRegistration.register(
                 context,
@@ -703,14 +782,14 @@ public class DGStarcatcherFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.DEEPJAW_HERRING)
                         .withSizeAndWeight(new SizeAndWeight(30, 8, 300, 100))
                         .withDifficulty(Difficulty.EASY)
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.DUSKTAIL_SNAPPER)
                         .withSizeAndWeight(new SizeAndWeight(60, 20, 7000, 2000))
                         .withDifficulty(Difficulty.EASY.moving())
@@ -718,7 +797,7 @@ public class DGStarcatcherFishes
 
         //uncommon
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.IRONJAW_HERRING)
                         .withSizeAndWeight(new SizeAndWeight(30, 8, 300, 100))
                         .withRarity(Rarity.UNCOMMON)
@@ -726,7 +805,7 @@ public class DGStarcatcherFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.REDSCALED_TUNA)
                         .withSizeAndWeight(new SizeAndWeight(150, 50, 120000, 60000))
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
@@ -736,7 +815,7 @@ public class DGStarcatcherFishes
 
         //rare
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.BLUE_HERRING)
                         .withSizeAndWeight(new SizeAndWeight(40, 12, 1600, 1100))
                         .withRarity(Rarity.RARE)
@@ -746,7 +825,7 @@ public class DGStarcatcherFishes
 
         //epic
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.BIGEYE_TUNA)
                         .withSizeAndWeight(new SizeAndWeight(150, 50, 120000, 60000))
                         .withDaytimeRestriction(DaytimeRestriction.NIGHT)
@@ -756,7 +835,7 @@ public class DGStarcatcherFishes
 
         //legendary
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(SCItems.JOEL)
                         .withBaseChance(1)
                         .withSizeAndWeight(new SizeAndWeight(69, 0, 2000, 600))
@@ -1073,6 +1152,7 @@ public class DGStarcatcherFishes
         //legendary
         FishRegistration.register(context,
                 PresetRestrictions.deepDark(context)
+                        .addRestriction(new StructureRestriction(List.of(BuiltinStructures.ANCIENT_CITY.identifier()), ""))
                         .withFish(SCItems.WARD)
                         .withSizeAndWeight(new SizeAndWeight(50, 10, 2600, 600))
                         .withRarity(Rarity.LEGENDARY)
@@ -1317,6 +1397,16 @@ public class DGStarcatcherFishes
                         .withSizeAndWeight(new SizeAndWeight(235, 25, 7000, 700))
                         .withRarity(Rarity.UNCOMMON)
                         .addRestriction(LightLevelRestriction.BRIGHT)
+                        .withDifficulty(Difficulty.MEDIUM.withHP(250))
+        );
+
+        FishRegistration.register(context,
+                PresetRestrictions.endAir(context)
+                        .withFish(SCItems.DREAMLINER)
+                        .withBaseChance(10)
+                        .withSizeAndWeight(new SizeAndWeight(235, 25, 7000, 700))
+                        .withRarity(Rarity.UNCOMMON)
+                        .addRestriction(ElevationBias.DREAMLINER)
                         .withDifficulty(Difficulty.MEDIUM.withHP(250))
         );
 
