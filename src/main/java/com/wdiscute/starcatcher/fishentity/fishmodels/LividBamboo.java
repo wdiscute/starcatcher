@@ -33,7 +33,8 @@ public class LividBamboo<T extends Entity> extends EntityModel<T>
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition body = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, -1.5F, -8.0F, 3.0F, 3.0F, 16.0F, new CubeDeformation(0.002F)), PartPose.offsetAndRotation(0.0F, 16.0F, 0.0F, -1.2654F, 0.0F, 0.0F));
+		PartDefinition body = partdefinition.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-1.5F, 0.502F, -8.0F, 3.0F, 0.998F, 16.0F, new CubeDeformation(0.002F))
+				.texOffs(0, 0).addBox(-1.5F, -1.5F, -8.0F, 3.0F, 1.998F, 16.0F, new CubeDeformation(0.01F)), PartPose.offsetAndRotation(0.0F, 16.0F, 0.0F, -1.2654F, 0.0F, 0.0F));
 		PartDefinition fin1 = body.addOrReplaceChild("fin1", CubeListBuilder.create().texOffs(0, 36).addBox(0.0F, -3.0F, -1.0F, 0.0F, 3.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -1.5F, 1.0F));
 		PartDefinition fin2 = body.addOrReplaceChild("fin2", CubeListBuilder.create().texOffs(34, 35).addBox(0.0F, 0.0F, -3.0F, 0.0F, 5.0F, 7.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 1.5F, 0.0F));
 		PartDefinition front = body.addOrReplaceChild("front", CubeListBuilder.create().texOffs(0, 19).addBox(-1.5F, -1.5F, -14.0F, 3.0F, 3.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, 0.0F, -8.0F, 1.7017F, 0.0F, 0.0F));
