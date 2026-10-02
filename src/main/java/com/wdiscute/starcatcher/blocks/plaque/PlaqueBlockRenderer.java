@@ -108,7 +108,6 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
     @Override
     public AABB getRenderBoundingBox(PlaqueBlockEntity blockEntity)
     {
-        BlockPos pos = blockEntity.getBlockPos();
-        return new AABB(pos.getX(), pos.getY(), pos.getZ(), pos.getX() + 1.0F, pos.getY() + 1.5F, pos.getZ() + 1.0F);
+        return new AABB(blockEntity.getBlockPos()).inflate(2);
     }
 }
