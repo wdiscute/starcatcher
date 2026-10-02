@@ -276,6 +276,7 @@
 
 
   "entity.starcatcher.fish" : "Starcaught Fish",
+  "entity.starcatcher.tackle_box_boat" : "Tackle Box Boat",
 
   "gui.starcatcher.bait_out" : "You've ran out of bait...",
   "gui.starcatcher.bait_running_low" : "Your bait is running low...",
