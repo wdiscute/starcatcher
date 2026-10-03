@@ -580,7 +580,7 @@ public class StandScreen extends AbstractContainerScreen<StandMenu>
     @Override
     public boolean mouseReleased(MouseButtonEvent event)
     {
-        if (event.button() == 0)
+        if (event.button() == 1)
         {
             double x = event.x() - uiX;
             double y = event.y() - uiY;

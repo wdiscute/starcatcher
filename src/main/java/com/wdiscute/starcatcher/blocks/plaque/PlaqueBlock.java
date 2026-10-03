@@ -1,6 +1,6 @@
 package com.wdiscute.starcatcher.blocks.plaque;
 
-import com.mojang.serialization.MapCodec;
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.BlockPos;
@@ -57,9 +57,9 @@ public class PlaqueBlock extends HorizontalDirectionalBlock implements EntityBlo
     @Override
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
     {
-        if(level.getBlockEntity(pos) instanceof PlaqueBlockEntity pbe)
+        if (level.getBlockEntity(pos) instanceof PlaqueBlockEntity pbe)
         {
-            if(!pbe.item.isEmpty())
+            if (!pbe.item.isEmpty())
             {
                 ItemStack itemstack = pbe.getImmutableItem();
                 ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
@@ -75,30 +75,35 @@ public class PlaqueBlock extends HorizontalDirectionalBlock implements EntityBlo
     @Override
     protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
-        if(level.getBlockEntity(pos) instanceof PlaqueBlockEntity pbe)
+        if (level.getBlockEntity(pos) instanceof PlaqueBlockEntity pbe)
         {
-            if(pbe.item.isEmpty())
+            if (pbe.item.isEmpty())
             {
-                if (level.isClientSide()) return InteractionResult.SUCCESS;
-
-                //only place item if stack in hand is not empty
-                if(!stack.isEmpty())
+                if(stack.is(SCTags.BUCKETABLE_FISHES))
                 {
-                    pbe.item = new MaybeStack(stack.copyWithCount(1));
-                    stack.shrink(1);
-                    pbe.sync();
-                }
+                    if (level.isClientSide()) return InteractionResult.SUCCESS;
 
-                return InteractionResult.SUCCESS;
+                    //only place item if stack in hand is not empty
+                    if (!stack.isEmpty())
+                    {
+                        pbe.item = new MaybeStack(stack.copyWithCount(1));
+                        stack.shrink(1);
+                        pbe.sync();
+                    }
+
+                    return InteractionResult.SUCCESS;
+                }
             }
             else
             {
+
                 if (level.isClientSide()) return InteractionResult.SUCCESS;
 
                 player.addItem(pbe.getImmutableItem().copy());
                 pbe.clearContent();
                 pbe.sync();
                 return InteractionResult.SUCCESS;
+
             }
         }
 

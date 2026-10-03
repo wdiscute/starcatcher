@@ -500,6 +500,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public boolean mouseReleased(MouseButtonEvent event)
     {
+        if(event.button() != 1) return super.mouseReleased(event);
         double x = event.x() - uiX;
         double y = event.y() - uiY;
 
@@ -552,7 +553,7 @@ public class FishingGuideScreen extends Screen
             player.playSound(SoundEvents.AMETHYST_BLOCK_HIT, 0.3f, 0.6f);
         }
 
-        if (event.button() == 0)
+        if (event.button() == 1)
             clicked = true;
 
         return super.mouseReleased(event);
@@ -608,6 +609,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
+        if(event.button() != 1) return super.mouseClicked(event, doubleClick);
         double x = event.x() - uiX;
         double y = event.y() - uiY;
 
@@ -1050,8 +1052,6 @@ public class FishingGuideScreen extends Screen
                     int x = uiX + 238 + (i * 20);
                     int y = uiY + 170;
                     ItemStack stack = messages.get(Math.abs((rightPageScroll + i) % messages.size()));
-                    //render item
-                    ScreenUtils.item(g, stack, x, y);
                     //render hover item tooltip
                     if (mouseX > x - 2 && mouseX < x + 16 + 2 && mouseY > y - 2 && mouseY < y + 16 + 2)
                     {
@@ -1066,6 +1066,8 @@ public class FishingGuideScreen extends Screen
                     }
                     //scrollable background fill
                     ScreenUtils.fill(g, x - 1, y - 1, 18, 18, 0xffb4a697);
+                    //render item
+                    ScreenUtils.item(g, stack, x, y);
                 }
             }
 
@@ -1190,8 +1192,6 @@ public class FishingGuideScreen extends Screen
                     int y = uiY + 170;
                     ItemStack stack = trophiesIS.get(Math.abs((rightPageScroll + i) % trophiesIS.size()));
                     FishProperties fp = trophies.get(Math.abs((rightPageScroll + i) % trophies.size()));
-                    //render item
-                    ScreenUtils.item(g, stack, x, y);
                     //render hover item tooltip
                     if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16)
                     {
@@ -1207,6 +1207,8 @@ public class FishingGuideScreen extends Screen
                     }
                     //scrollable background fill
                     ScreenUtils.fill(g, x - 1, y - 1, 18, 18, 0xffb4a697);
+                    //render item
+                    ScreenUtils.item(g, stack, x, y);
                 }
             }
         }

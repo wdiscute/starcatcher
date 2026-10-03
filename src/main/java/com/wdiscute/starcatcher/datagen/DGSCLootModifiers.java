@@ -7,6 +7,7 @@ import com.wdiscute.starcatcher.registry.SCBlocks;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import net.minecraft.core.HolderLookup;
+import net.neoforged.neoforge.common.loot.LootTableIdCondition;
 
 public class DGSCLootModifiers extends GlobalLootModifierProvider
 {
@@ -34,7 +36,16 @@ public class DGSCLootModifiers extends GlobalLootModifierProvider
     {
         this.add(
                 "hat_from_shipwreck_map",
-                new AddHatModifier(Optional.empty(), 0)
+                new AddHatModifier(
+                        Optional.of(
+                                Holder.direct(
+                                        LootTableIdCondition.builder(
+                                                Identifier.withDefaultNamespace("chests/shipwreck")
+                                        ).build()
+                                )
+                        ),
+                        0
+                )
         );
     }
 

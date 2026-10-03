@@ -92,8 +92,8 @@
   "starcatcher.tip.weather" : "Some fish will only come out during specific Weather and Daytime conditions.",
   "starcatcher.tip.golden" : "Golden Fishes can only be caught once!",
   "starcatcher.tip.wither" : "Using a wither skeleton skull as a bait might produce... undesirable results...",
-  "starcatcher.tip.sell" : "Fishes will sell for more if they are a low percentile. And even more if they are golden",
-  "starcatcher.tip.dimension" : "You can find fishes everywhere, even in The Nether and The End",
+  "starcatcher.tip.sell" : "Fishes will sell for more if they are a low percentile. And even more if they are golden.",
+  "starcatcher.tip.dimension" : "You can find fishes everywhere, even in the Nether and the End!",
   "starcatcher.tip.ice" : "Icy fishes will freeze your handle on misses!",
 
 
@@ -166,6 +166,7 @@
   "tag.starcatcher.epic_starcaught_fishes" : "Epic Fishes",
   "tag.starcatcher.legendary_starcaught_fishes" : "Legendary Fishes",
 
+
   "tag.starcatcher.aquarium_guide_display" : "Aquarium Interactions For The Guide",
   "tag.starcatcher.placeable_in_display" : "Placeable In The Display Block",
   "tag.starcatcher.placeable_in_tackle_box" : "Placeable In Tackle Box",
@@ -222,6 +223,7 @@
   "starcatcher.configuration.tracker_y_offset": "Tracker Y Offset",
   "starcatcher.configuration.tracker_scale": "Tracker Scale",
 
+
   "starcatcher.configuration.debug": "Debug Minigame Info",
 
   "starcatcher.configuration.hit_delay" : "Minigame Hit Delay",
@@ -276,7 +278,7 @@
   "entity.starcatcher.fish" : "Starcaught Fish",
   "entity.starcatcher.tackle_box_boat" : "Tackle Box Boat",
 
-  "gui.starcatcher.bait_out" : "You've ran out of bait...",
+  "gui.starcatcher.bait_out" : "You've run out of bait...",
   "gui.starcatcher.bait_running_low" : "Your bait is running low...",
   "gui.starcatcher.reel_no_fish" : "There are no fishes here...",
   "gui.starcatcher.no_hook_or_bobber" : "A fishing rod won't work without a hook and a bobber...",
@@ -395,7 +397,7 @@
 
   "tooltip.modifier.starcatcher.add_aqua_sweetspot": "An extra aqua sweet-spot is added",
 
-  "tooltip.modifier.starcatcher.add_three_aqua_sweetspot": "Three extra aqua sweet-spot are added",
+  "tooltip.modifier.starcatcher.add_three_aqua_sweetspot": "Three extra aqua sweet-spots are added",
 
   "tooltip.modifier.starcatcher.flip_every_hit": "Flip every time you hit a sweet-spot",
 
@@ -414,7 +416,7 @@
   "tooltip.modifier.number.32": "Thirty-two",
   "tooltip.modifier.number.64": "A stack",
 
-  "tooltip.modifier.starcatcher.adjust_handle_speed.big_increase": "Tremendously the handle's rotation speed",
+  "tooltip.modifier.starcatcher.adjust_handle_speed.big_increase": "Tremendously increases the handle's rotation speed",
   "tooltip.modifier.starcatcher.adjust_handle_speed.increase": "Increases the handle's rotation speed",
   "tooltip.modifier.starcatcher.adjust_handle_speed.decrease": "Decreases the handle's rotation speed",
   "tooltip.modifier.starcatcher.adjust_handle_speed.big_decrease": "Tremendously decreases the handle's rotation speed",
@@ -463,9 +465,9 @@
 
   "tooltip.modifier.starcatcher.luck_attribute": "Adjusts fish chance based on your luck",
 
-  "tooltip.modifier.starcatcher.burn_on_miss": "Missing will cause your handle to lit on fire",
+  "tooltip.modifier.starcatcher.burn_on_miss": "Missing will cause your handle to light on fire",
 
-  "tooltip.modifier.starcatcher.deep_dark": "Hitting sweet-spots will consume you by darkness",
+  "tooltip.modifier.starcatcher.deep_dark": "Hitting sweet-spots will consume you in darkness",
 
   "tooltip.modifier.starcatcher.ignore_daytime_restrictions": "Ignores fishing daytime restrictions",
   "tooltip.modifier.starcatcher.ignore_daytime_restrictions.maybe": "Fishing daytime restrictions will sometimes be bypassed",
@@ -537,7 +539,7 @@
   "item.starcatcher.glowing_bobber": "Glowing Bobber",
   "item.starcatcher.golden_bobber": "Golden Bobber",
   "item.starcatcher.dripstone_bobber": "Dripstone Bobber",
-  "item.starcatcher.cloud_bobber": "Cloud Bobber",
+  "item.starcatcher.cloud_bobber": "Cloudy Bobber",
 
 
 
@@ -657,7 +659,7 @@
 
   "item.starcatcher.fish_radar": "Fish Radar",
   "tooltip.starcatcher.fish_radar.0": "A handy radar which displays the fishes",
-  "tooltip.starcatcher.fish_radar.1": "around the area in a total futuristic way.",
+  "tooltip.starcatcher.fish_radar.1": "around the area in a totally futuristic way.",
 
   "item.starcatcher.pearl" : "Pearl",
   "tooltip.starcatcher.pearl.0" : "A beautiful pearl obtained from a clam.",
@@ -676,7 +678,7 @@
 
   "item.starcatcher.scalding_treasure" : "Scalding Treasure",
   "tooltip.starcatcher.scalding_treasure.0" : "A treasure fished directly from the scalding",
-  "tooltip.starcatcher.scalding_treasure.1" : "lands of The Nether. What's inside?",
+  "tooltip.starcatcher.scalding_treasure.1" : "lands of the Nether. What's inside?",
 
   "item.starcatcher.trophy_copper" : "Copper Trophy",
   "item.starcatcher.trophy_iron" : "Iron Trophy",
@@ -856,7 +858,7 @@
   "gui.guide.page.0.left.4" : "",
   "gui.guide.page.0.left.5" : "  If you wish to catch more",
   "gui.guide.page.0.left.6" : "than measly salmon or cod",
-  "gui.guide.page.0.left.7" : "you'll  first need a",
+  "gui.guide.page.0.left.7" : "you'll first need a",
   "gui.guide.page.0.left.8" : "<sclegendary>Starcatcher's rod</sclegendary>!",
   "gui.guide.page.0.left.9" : "",
   "gui.guide.page.0.left.10" : "  Keep your eyes on the",
@@ -969,7 +971,7 @@
   "gui.guide.page.3.right.3" : "    The basic sweetspot.",
   "gui.guide.page.3.right.4" : "    Not much else to it.",
   "gui.guide.page.3.right.5" : "",
-  "gui.guide.page.3.right.6" : "    A frozen Sweetspot.",
+  "gui.guide.page.3.right.6" : "    A frozen sweetspot.",
   "gui.guide.page.3.right.7" : "    Best to avoid it.",
   "gui.guide.page.3.right.8" : "",
   "gui.guide.page.3.right.9" : "    Deepslate sweetspots are",
@@ -1002,7 +1004,7 @@
   "gui.guide.page.4.left.13" : "fishing, but that will",
   "gui.guide.page.4.left.14" : "take a while to get to.",
   "gui.guide.page.4.left.15" : "",
-  "gui.guide.page.4.left.16" : "Until then a <scrare>Amethyst Hook</scrare>",
+  "gui.guide.page.4.left.16" : "Until then an <scrare>Amethyst Hook</scrare>",
   "gui.guide.page.4.left.17" : "will suffice for lava fishing.",
 
   "gui.guide.page.4.right.0" : "",
@@ -1181,7 +1183,7 @@
   "gui.guide.page.9.right.13" : "",
   "gui.guide.page.9.right.14" : "  Create the ultimate fish",
   "gui.guide.page.9.right.15" : "monopoly and control the",
-  "gui.guide.page.9.right.16" : "market with the power of fish",
+  "gui.guide.page.9.right.16" : "market with the power of fish.",
 
   "gui.guide.page.10.left.title" : "Aquariums",
   "gui.guide.page.10.left.0" : "",
@@ -1218,7 +1220,7 @@
   "gui.guide.page.11.left.5" : "  If you ever want to",
   "gui.guide.page.11.left.6" : "make your friends jealous",
   "gui.guide.page.11.left.7" : "of your incredible angling",
-  "gui.guide.page.11.left.8" : "skills there's no better",
+  "gui.guide.page.11.left.8" : "skills, there's no better",
   "gui.guide.page.11.left.9" : "way than to display your",
   "gui.guide.page.11.left.10" : "collection using a Display!",
   "gui.guide.page.11.left.11" : "",
@@ -1235,14 +1237,14 @@
   "gui.guide.page.11.right.4" : "",
   "gui.guide.page.11.right.5" : "  When displaying your book",
   "gui.guide.page.11.right.6" : "make sure to first sign it",
-  "gui.guide.page.11.right.7" : "to bound your collection",
+  "gui.guide.page.11.right.7" : "to bind your collection",
   "gui.guide.page.11.right.8" : "to the book! Otherwise",
   "gui.guide.page.11.right.9" : "the book will show the",
   "gui.guide.page.11.right.10" : "player their own collection",
   "gui.guide.page.11.right.11" : "instead of yours.",
   "gui.guide.page.11.right.12" : "",
   "gui.guide.page.11.right.13" : "  Simply head to the start",
-  "gui.guide.page.11.right.14" : "of the book to sign in",
+  "gui.guide.page.11.right.14" : "of the book to sign it",
   "gui.guide.page.11.right.15" : "and you'll be able to share",
   "gui.guide.page.11.right.16" : "the book with your friends!",
 
@@ -1371,7 +1373,7 @@
   "gui.starcatcher.tournament.start_date" : "Start Date",
   "gui.starcatcher.tournament.previous_tournaments" : "Previous Tournaments",
   "gui.starcatcher.tournament.signed_up" : "Players Signed Up",
-  "gui.starcatcher.tournament.scores" : "Players Scores",
+  "gui.starcatcher.tournament.scores" : "Players' Scores",
 
   "gui.starcatcher.tournament.button.unsign" : "Withdraw",
   "gui.starcatcher.tournament.button.sign_up" : "Sign Up",
@@ -1436,7 +1438,7 @@
   "starcatcher.message.lava_proof_1.11" : "",
   "starcatcher.message.lava_proof_1.12" : "This letter is going right into this so-called",
   "starcatcher.message.lava_proof_1.13" : "'<sclava>Lava-Proof™</sclava> Bottle' and straight to the",
-  "starcatcher.message.lava_proof_1.14" : "nearest lava pool I can find! Heh that will",
+  "starcatcher.message.lava_proof_1.14" : "nearest lava pool I can find! Heh, that will",
   "starcatcher.message.lava_proof_1.15" : "show them.",
   "starcatcher.message.lava_proof_1.sender" : "Arn the Skeptic",
 
@@ -1484,7 +1486,7 @@
   "starcatcher.message.hopeless.5" : "This is hopeless. There is no <scrare>Heart of the</scrare>",
   "starcatcher.message.hopeless.6" : "<scrare>Sea</scrare>. Those BASTARDS lied to me. I am",
   "starcatcher.message.hopeless.7" : "never returning home. Little Jimmy will forever",
-  "starcatcher.message.hopeless.8" : "live with the thought his dad went after an",
+  "starcatcher.message.hopeless.8" : "live with the thought that his dad went after an",
   "starcatcher.message.hopeless.9" : "imaginary all-powerful item.",
   "starcatcher.message.hopeless.10" : "",
   "starcatcher.message.hopeless.11" : "It really is my fault. How could I be such a",
@@ -1549,7 +1551,7 @@
 
   "item.starcatcher.message" : "Message",
   "tooltip.starcatcher.message.0" : "The message half of a message-in-a-bottle.",
-  "tooltip.starcatcher.message.1" : "Who knows how long it's been drifting the waves to reach you.",
+  "tooltip.starcatcher.message.1" : "Who knows how long it's been drifting in the waves to reach you.",
 
   "item.starcatcher.broken_bottle" : "Broken Bottle",
   "tooltip.starcatcher.broken_bottle.0" : "A broken bottle reminiscing the times it was unbroken.",
@@ -1576,8 +1578,10 @@
   "item.starcatcher.starcaught_lava_bucket" : "Starcaught Lava Bucket",
   "tooltip.starcatcher.starcaught_lava_bucket.name" : "Bucket of %s",
 
-  "tooltip.starcatcher.starcaught_bucket.creative.0" : "[CREATIVE MODE] This bucket will always spawn the same fish. To get the corresponding [Bucket of X] you must catch it through normal means using a bucket as a bait.",
+  "tooltip.starcatcher.starcaught_bucket.creative.0" : "[CREATIVE MODE] This bucket will always spawn a CERBERAY. To get the corresponding [Bucket of X] you must catch it through normal means using a bucket as bait.",
   "tooltip.starcatcher.starcaught_bucket.creative.1" : "If you wish to summon the fish entity, you can right click on the ground with the fish item in creative mode.",
+
+
 
 
 
@@ -1609,10 +1613,10 @@
   "tooltip.starcatcher.obidontiee.1" : "Said to often mispronounce words.",
 
   "item.starcatcher.driftfin" : "Driftfin",
-  "tooltip.starcatcher.driftfin.0" : "A small fish which spends most of its time in overworld lakes.",
+  "tooltip.starcatcher.driftfin.0" : "A small fish which spends most of its time in Overworld lakes.",
 
   "item.starcatcher.rainfin" : "Rainfin",
-  "tooltip.starcatcher.rainfin.0" : "A fish common to overworld lakes only seen during rainy days.",
+  "tooltip.starcatcher.rainfin.0" : "A fish common to Overworld lakes only seen during rainy days.",
   "tooltip.starcatcher.rainfin.1" : "Unlike what its name would suggest, the fins are not made of rain.",
 
   "item.starcatcher.peakdweller" : "Peakdweller",
@@ -1731,20 +1735,20 @@
   "item.starcatcher.glimmergill" : "Glimmergill",
   "tooltip.starcatcher.glimmergill.0" : "This fish's scales are covered in a type of ice",
   "tooltip.starcatcher.glimmergill.1" : "which reflects light in a very particular way.",
-  "tooltip.starcatcher.glimmergill.2" : "Curious pray wander into its body and get cut in its sharp scales.",
+  "tooltip.starcatcher.glimmergill.2" : "Curious prey wander into its body and get cut in its sharp scales.",
 
   "item.starcatcher.cryospine" : "Cryospine",
   "tooltip.starcatcher.cryospine.0" : "A half-frozen fish often ignored due to its low nutritional value.",
-  "tooltip.starcatcher.cryospine.1" : "It is said fisherman stuck on icebergs would catch 100 of them,",
+  "tooltip.starcatcher.cryospine.1" : "It is said fishermen stuck on icebergs would catch 100 of them,",
   "tooltip.starcatcher.cryospine.2" : "just to make a single meal.",
 
   "item.starcatcher.lilac_minnow" : "Lilac Minnow",
-  "tooltip.starcatcher.lilac_minnow.0" : "A species of minnow turned lilac due to the freezing temperatures it habitats.",
+  "tooltip.starcatcher.lilac_minnow.0" : "A species of minnow turned lilac due to the freezing temperatures it inhabits.",
   "tooltip.starcatcher.lilac_minnow.1" : "Using it as bait is said to be the only way to catch a King of the Frost.",
 
   "item.starcatcher.frostbit_jelly" : "Frostbit Jelly",
   "tooltip.starcatcher.frostbit_jelly.0" : "A jellyfish species which uses icebergs for long term hibernation.",
-  "tooltip.starcatcher.frostbit_jelly.1" : "Since they spend most of their life.",
+  "tooltip.starcatcher.frostbit_jelly.1" : "There they spend most of their life.",
 
   "item.starcatcher.king_of_the_frost" : "King of the Frost",
   "tooltip.starcatcher.king_of_the_frost.0" : "The <sclegendary>legendary</sclegendary> King of the Frost, ruling over all the icebergs.",
@@ -1756,7 +1760,7 @@
 
 
   "item.starcatcher.sandtail" : "Sandtail",
-  "tooltip.starcatcher.sandtail.0" : "A long sand-covered fish, fond only in warm climates",
+  "tooltip.starcatcher.sandtail.0" : "A long sand-covered fish, found only in warm climates",
 
   "item.starcatcher.scorchfish" : "Scorchfish",
   "tooltip.starcatcher.scorchfish.0" : "A fish species which despises the rain,",
@@ -1766,15 +1770,15 @@
 
   "item.starcatcher.mirage_carp" : "Mirage Carp",
   "tooltip.starcatcher.mirage_carp.0" : "A carp species found on hot sunny days in warm climates.",
-  "tooltip.starcatcher.mirage_carp.1" : "Its said desert villagers gave it its name,,",
+  "tooltip.starcatcher.mirage_carp.1" : "It's said desert villagers gave it its name,",
   "tooltip.starcatcher.mirage_carp.2" : "as spotting one was often just a mirage.",
 
 
 
   "item.starcatcher.agave_bream" : "Agave Bream",
-  "tooltip.starcatcher.agave_bream.0" : "A rare bream which emerges only on clear nights",
-  "tooltip.starcatcher.agave_bream.1" : "Its long fins help it navigate the murky waters of desert oases",
-  "tooltip.starcatcher.agave_bream.2" : "It is said to have a fondness for mangosteens",
+  "tooltip.starcatcher.agave_bream.0" : "A rare bream which emerges only on clear nights.",
+  "tooltip.starcatcher.agave_bream.1" : "Its long fins help it navigate the murky waters of desert oases.",
+  "tooltip.starcatcher.agave_bream.2" : "It is said to have a fondness for mangosteens.",
 
 
 
@@ -1800,7 +1804,7 @@
 
   "item.starcatcher.sludge_catfish" : "Sludge Catfish",
   "tooltip.starcatcher.sludge_catfish.0" : "A dirty catfish species common in murky swamp waters.",
-  "tooltip.starcatcher.sludge_catfish.1" : "It makes a surprisingly good meal if cleaned properly.",
+  "tooltip.starcatcher.sludge_catfish.1" : "It makes for a surprisingly good meal if cleaned properly.",
 
 
 
@@ -1826,32 +1830,32 @@
   "tooltip.starcatcher.pale_pinfish.2" : "where pale gardens exist.",
 
   "item.starcatcher.pinfish" : "Pinfish",
-  "tooltip.starcatcher.pinfish.0" : "A tiny pale pinfish, only found around midnight",
+  "tooltip.starcatcher.pinfish.0" : "A tiny pale pinfish, only found around midnight.",
 
   "item.starcatcher.pale_carp" : "Pale Carp",
   "tooltip.starcatcher.pale_carp.0" : "A carp species common to the [redacted].",
   "tooltip.starcatcher.pale_carp.1" : "Their habitat is still under construction in this",
-  "tooltip.starcatcher.pale_carp.2" : "universe so instead they stick to the dark forest.",
+  "tooltip.starcatcher.pale_carp.2" : "universe, so instead they stick to the dark forest.",
 
 
 
 
   "item.starcatcher.blossomfish" : "Blossomfish",
-  "tooltip.starcatcher.blossomfish.0" : "A beautiful fish resembling the pink petals of Cherry Groves.",
+  "tooltip.starcatcher.blossomfish.0" : "A beautiful fish resembling the pink petals of cherry groves.",
   "tooltip.starcatcher.blossomfish.1" : "It prefers to swim around in the warm sunlight.",
 
   "item.starcatcher.vesani" : "Vesani",
   "tooltip.starcatcher.vesani.0" : "This species of fish is really good",
   "tooltip.starcatcher.vesani.1" : "at camouflaging as other species.",
   "tooltip.starcatcher.vesani.2" : "It's unusual to see them out in the",
-  "tooltip.starcatcher.vesani.3" : "open with it's normal appearance.",
+  "tooltip.starcatcher.vesani.3" : "open with its normal appearance.",
 
   "item.starcatcher.petaldrift_carp" : "Petaldrift Carp",
-  "tooltip.starcatcher.petaldrift_carp.0" : "A pink carp common to Cherry Groves which",
+  "tooltip.starcatcher.petaldrift_carp.0" : "A pink carp common to cherry groves which",
   "tooltip.starcatcher.petaldrift_carp.1" : "prefers to come out during the rain.",
 
   "item.starcatcher.pink_koi" : "Pink Koi",
-  "tooltip.starcatcher.pink_koi.0" : "A pink koi most commonly found in Cherry Groves.",
+  "tooltip.starcatcher.pink_koi.0" : "A pink koi most commonly found in cherry groves.",
   "tooltip.starcatcher.pink_koi.1" : "It comes out during rainy days to feed.",
 
   "item.starcatcher.rose_siamese_fish" : "Rose Siamese Fish",
@@ -1871,7 +1875,7 @@
 
   "item.starcatcher.cloudfin" : "Cloudfin",
   "tooltip.starcatcher.cloudfin.0" : "A <sclegendary>legendary</sclegendary> fish known for carrying your data up to the clouds.",
-  "tooltip.starcatcher.cloudfin.1" : "It is said only the worse of anglers manage to catch them, but no one knows why.",
+  "tooltip.starcatcher.cloudfin.1" : "It is said only the worst of anglers manage to catch them, but no one knows why.",
 
 
 
@@ -1889,7 +1893,7 @@
 
   "item.starcatcher.drifting_bream" : "Drifting Bream",
   "tooltip.starcatcher.drifting_bream.0" : "A species of bream known for slowly",
-  "tooltip.starcatcher.drifting_bream.1" : "drifting atop rivers during nighttime",
+  "tooltip.starcatcher.drifting_bream.1" : "drifting atop rivers during nighttime.",
 
   "item.starcatcher.downfall_bream" : "Downfall Bream",
   "tooltip.starcatcher.downfall_bream.0" : "A hard to spot but easy to catch bream,",
@@ -1899,7 +1903,7 @@
   "tooltip.starcatcher.hollowbelly_darter.0" : "A really small easy to catch river fish.",
 
   "item.starcatcher.mistback_chub" : "Mistback Chub",
-  "tooltip.starcatcher.mistback_chub.0" : "A river fish known for its silver colored scaled",
+  "tooltip.starcatcher.mistback_chub.0" : "A river fish known for its silver colored scales.",
 
   "item.starcatcher.bluegigi" : "Bluegigi",
   "tooltip.starcatcher.bluegigi.0" : "Not to be confused with a bluegill,",
@@ -1914,16 +1918,16 @@
 
   "item.starcatcher.frostgill_chub" : "Frostgill Chub",
   "tooltip.starcatcher.frostgill_chub.0" : "A popular fish amongst anglers",
-  "tooltip.starcatcher.frostgill_chub.1" : "commonly found in rivers",
+  "tooltip.starcatcher.frostgill_chub.1" : "which is commonly found in rivers.",
 
   "item.starcatcher.crystalback_minnow" : "Crystalback Minnow",
   "tooltip.starcatcher.crystalback_minnow.0" : "A really small fish often used as bait.",
   "tooltip.starcatcher.crystalback_minnow.1" : "This specific species is most common at nighttime.",
 
   "item.starcatcher.azure_crystalback_minnow" : "Azure Crystalback Minnow",
-  "tooltip.starcatcher.azure_crystalback_minnow.0" : "A rare mutation of crystalback minnow's",
-  "tooltip.starcatcher.azure_crystalback_minnow.1" : "which glows a soft blue tone during midnight.",
-  "tooltip.starcatcher.azure_crystalback_minnow.2" : "A challenging catch due to it's tiny size.",
+  "tooltip.starcatcher.azure_crystalback_minnow.0" : "A rare mutation of the crystalback minnow",
+  "tooltip.starcatcher.azure_crystalback_minnow.1" : "which glows a soft blue tone at midnight.",
+  "tooltip.starcatcher.azure_crystalback_minnow.2" : "A challenging catch due to its tiny size.",
 
   "item.starcatcher.blue_crystal_fin" : "Blue Crystal Fin",
   "tooltip.starcatcher.blue_crystal_fin.0" : "An uncommon fish most commonly found during daytime.",
@@ -1933,23 +1937,22 @@
   "tooltip.starcatcher.mothfish.1" : "How it keeps this fur dry in the first place is a mystery...",
 
 
-
   "item.starcatcher.morganite" : "Morganite",
-  "tooltip.starcatcher.morganite.0" : "An ocean fish resembling Morganite gemstones.",
+  "tooltip.starcatcher.morganite.0" : "An ocean fish resembling morganite gemstones.",
 
   "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
-  "tooltip.starcatcher.ironjaw_herring.0" : "This type of herring common to the ocean and often",
+  "tooltip.starcatcher.ironjaw_herring.0" : "This type of herring is common to the ocean and often",
   "tooltip.starcatcher.ironjaw_herring.1" : "has a petrified silvery jaw resembling iron.",
 
   "item.starcatcher.blue_herring" : "Blue Herring",
   "tooltip.starcatcher.blue_herring.0" : "A very illusive fish, always searching for the 46th ocean.",
-  "tooltip.starcatcher.blue_herring.1" : "Fisherman use it for directions as it always goes back to where it all started.",
+  "tooltip.starcatcher.blue_herring.1" : "Fishermen use it for directions, as it always goes back to where it all started.",
 
   "item.starcatcher.deepjaw_herring" : "Deepjaw Herring",
   "tooltip.starcatcher.deepjaw_herring.0" : "A fish common to oceans, often regarded highly for trading.",
 
   "item.starcatcher.dusktail_snapper" : "Dusktail Snapper",
-  "tooltip.starcatcher.dusktail_snapper.0" : "A heavy fish for it's size often used in dishes.",
+  "tooltip.starcatcher.dusktail_snapper.0" : "A heavy fish for its size often used in dishes.",
 
   "item.starcatcher.joel" : "Joel",
   "tooltip.starcatcher.joel.0" : "A rare <sclegendary>legendary</sclegendary> fish found in oceans.",
@@ -1965,10 +1968,10 @@
 
   "item.starcatcher.waterlogged_bottle" : "Waterlogged Bottle",
   "tooltip.starcatcher.waterlogged_bottle.0" : "A bottle thrown into the ocean many moons ago.",
-  "tooltip.starcatcher.waterlogged_bottle.1" : "Whatever it once held, it's long gone by now.",
+  "tooltip.starcatcher.waterlogged_bottle.1" : "Whatever it once held is long gone by now.",
 
   "item.starcatcher.bigeye_tuna" : "Bigeye Tuna",
-  "tooltip.starcatcher.bigeye_tuna.0" : "A big heavy fish known for it's big eye.",
+  "tooltip.starcatcher.bigeye_tuna.0" : "A big heavy fish known for its big eye.",
   "tooltip.starcatcher.bigeye_tuna.1" : "This species is only found in deep ocean waters.",
   "tooltip.starcatcher.bigeye_tuna.2" : "It's said to hang around other Kaupen fish.",
 
@@ -1980,10 +1983,10 @@
 
   "item.starcatcher.shroomfish" : "Shroomfish",
   "tooltip.starcatcher.shroomfish.0" : "An antique <sclegendary>legendary</sclegendary> fish species taken over by the spores",
-  "tooltip.starcatcher.shroomfish.1" : "of the Mushroom Islands. A really tasty dish for mushroom enjoyers.",
+  "tooltip.starcatcher.shroomfish.1" : "of the mushroom islands. A really tasty dish for mushroom enjoyers.",
 
   "item.starcatcher.sporefish" : "Sporefish",
-  "tooltip.starcatcher.sporefish.0" : "A rare fish found in the Mushroom Islands, may prove a",
+  "tooltip.starcatcher.sporefish.0" : "A rare fish found in the mushroom islands, may prove a",
   "tooltip.starcatcher.sporefish.1" : "tough catch for inexperienced anglers.",
 
 
@@ -2027,14 +2030,14 @@
   "tooltip.starcatcher.fossilized_angelfish.0" : "An angelfish resembling a fossil.",
   "tooltip.starcatcher.fossilized_angelfish.1" : "It is not actually fossilised and is often",
   "tooltip.starcatcher.fossilized_angelfish.2" : "ignored due to its low nutritional value,",
-  "tooltip.starcatcher.fossilized_angelfish.3" : "heavy weight and high difficulty to catch.",
+  "tooltip.starcatcher.fossilized_angelfish.3" : "heavy weight, and high difficulty to catch.",
 
 
 
 
 
   "item.starcatcher.vivid_moss" : "Vivid Moss",
-  "tooltip.starcatcher.vivid_moss.0" : "A piece of moss resembling a fish found in Lush Caves.",
+  "tooltip.starcatcher.vivid_moss.0" : "A piece of moss resembling a fish found in lush caves.",
   "tooltip.starcatcher.vivid_moss.1" : "Or perhaps an actual fish consumed in moss?",
   "tooltip.starcatcher.vivid_moss.2" : "Either way it shouldn't give you much trouble catching it.",
 
@@ -2043,18 +2046,18 @@
   "tooltip.starcatcher.the_quarrish.1" : "Its heavy size makes for a very tedious catch.",
 
   "item.starcatcher.lush_pike" : "Lush Pike",
-  "tooltip.starcatcher.lush_pike.0" : "A mossy pike found rarity in the Lush Caves.",
+  "tooltip.starcatcher.lush_pike.0" : "A mossy pike found rarely in the Lush Caves.",
   "tooltip.starcatcher.lush_pike.1" : "A real tough catch even for experienced anglers.",
 
   "item.starcatcher.shadowfin" : "Shadowfin",
   "tooltip.starcatcher.shadowfin.0" : "A grumpy fish that dislikes most others.",
   "tooltip.starcatcher.shadowfin.1" : "It spends its days in the shadows,",
-  "tooltip.starcatcher.shadowfin.2" : "only leaving to meet its Mossfin.",
+  "tooltip.starcatcher.shadowfin.2" : "only leaving to meet its mossfin.",
 
   "item.starcatcher.mossfin" : "Mossfin",
   "tooltip.starcatcher.mossfin.0" : "Has strangely large eyes, serving no purpose beyond being cute.",
   "tooltip.starcatcher.mossfin.1" : "It enjoys all things bright and mossy.",
-  "tooltip.starcatcher.mossfin.2" : "The only time it enters the shadows is to search for its Shadowfin.",
+  "tooltip.starcatcher.mossfin.2" : "The only time it enters the shadows is to search for its shadowfin.",
 
 
 
@@ -2070,14 +2073,14 @@
 
   "item.starcatcher.bright_amethyst_snapper" : "Bright Amethyst Snapper",
   "tooltip.starcatcher.bright_amethyst_snapper.0" : "A gorgeous pink colored fish found at deepslate level.",
-  "tooltip.starcatcher.bright_amethyst_snapper.1" : "It's said to always swim around with a Dark Amethyst Snapper.",
+  "tooltip.starcatcher.bright_amethyst_snapper.1" : "It's said to always swim around with a dark amethyst snapper.",
 
   "item.starcatcher.dark_amethyst_snapper" : "Dark Amethyst Snapper",
   "tooltip.starcatcher.dark_amethyst_snapper.0" : "A gorgeous dark blue colored fish found at deepslate level.",
-  "tooltip.starcatcher.dark_amethyst_snapper.1" : "It's said to always swim around with a Bright Amethyst Snapper.",
+  "tooltip.starcatcher.dark_amethyst_snapper.1" : "It's said to always swim around with a bright amethyst snapper.",
 
   "item.starcatcher.deepslatefish" : "Deepslatefish",
-  "tooltip.starcatcher.deepslatefish.0" : "A <sclegendary>legendary</sclegenday> fish only found high up in the mountains.",
+  "tooltip.starcatcher.deepslatefish.0" : "A <sclegendary>legendary</sclegendary> fish only found high up in the mountains.",
   "tooltip.starcatcher.deepslatefish.1" : "Just kidding. It's found at deepslate.",
   "tooltip.starcatcher.deepslatefish.2" : "An incredibly tough catch due to its vanishing deepslate scales.",
 
@@ -2085,11 +2088,11 @@
 
 
   "item.starcatcher.sculkfish" : "Sculkfish",
-  "tooltip.starcatcher.sculkfish.0" : "A tricky fish corrupted by Sculk.",
+  "tooltip.starcatcher.sculkfish.0" : "A tricky fish corrupted by sculk.",
 
   "item.starcatcher.ward" : "Ward",
-  "tooltip.starcatcher.ward.0" : "A <sclegendary>legendary</sclegendary> fish said to be best friends with the warden.",
-  "tooltip.starcatcher.ward.1" : "Instead of resisting Sculk, this fish embraced it and became stronger for it.",
+  "tooltip.starcatcher.ward.0" : "A <sclegendary>legendary</sclegendary> fish said to be best friends with The Warden.",
+  "tooltip.starcatcher.ward.1" : "Instead of resisting sculk, this fish embraced it and became stronger for it.",
 
   "item.starcatcher.glowing_dark" : "Glowing Dark",
   "tooltip.starcatcher.glowing_dark.0" : "A fast fish only found in the deep dark.",
@@ -2098,7 +2101,7 @@
 
   "item.starcatcher.suneater" : "Suneater",
   "tooltip.starcatcher.suneater.0" : "A rare fish found in the lava lakes of the Overworld.",
-  "tooltip.starcatcher.suneater.1" : "It hunts down sunfishes for food.",
+  "tooltip.starcatcher.suneater.1" : "It hunts down sunfish for food.",
 
   "item.starcatcher.pyrotrout" : "Pyrotrout",
   "tooltip.starcatcher.pyrotrout.0" : "A trout adapted to live in the surface lava of the Overworld.",
@@ -2131,23 +2134,23 @@
 
   "item.starcatcher.cerberay" : "Cerberay",
   "tooltip.starcatcher.cerberay.0" : "A stinging fish with 3 heads.",
-  "tooltip.starcatcher.cerberay.1" : "The 2 smaller ones only share 1 brain",
+  "tooltip.starcatcher.cerberay.1" : "The 2 smaller ones only share 1 brain.",
 
   "item.starcatcher.embergill" : "Embergill",
-  "tooltip.starcatcher.embergill.0" : "A fish found in the vast lava oceans of The Nether.",
+  "tooltip.starcatcher.embergill.0" : "A fish found in the vast lava oceans of the Nether.",
 
   "item.starcatcher.scalding_pike" : "Scalding Pike",
-  "tooltip.starcatcher.scalding_pike.0" : "A predatory fish only found in The Nether.",
+  "tooltip.starcatcher.scalding_pike.0" : "A predatory fish only found in the Nether.",
 
   "item.starcatcher.cinder_squid" : "Cinder Squid",
-  "tooltip.starcatcher.cinder_squid.0" : "A slippery squid found in The Nether.",
+  "tooltip.starcatcher.cinder_squid.0" : "A slippery squid found in the Nether.",
 
   "item.starcatcher.lava_crab" : "Lava Crab",
-  "tooltip.starcatcher.lava_crab.0" : "This particular species of crab somehow entered The Nether",
+  "tooltip.starcatcher.lava_crab.0" : "This particular species of crab somehow entered the Nether",
   "tooltip.starcatcher.lava_crab.1" : "and evolved a protective shell out of netherrack.",
 
   "item.starcatcher.magma_fish" : "Magma Fish",
-  "tooltip.starcatcher.magma_fish.0" : "A common Nether fish known for it's red glowing fins.",
+  "tooltip.starcatcher.magma_fish.0" : "A common Nether fish known for its red glowing fins.",
 
   "item.starcatcher.glowstone_seeker" : "Glowstone Seeker",
   "tooltip.starcatcher.glowstone_seeker.0" : "A fish which seems to be weirdly attracted",
@@ -2158,53 +2161,57 @@
 
   "item.starcatcher.willish" : "Willish",
   "tooltip.starcatcher.willish.0" : "A fish known for scamming other fishes out of their food.",
-  "tooltip.starcatcher.willish.1" : "It is incredibly ugly and should be discarded back to The Nether where it belongs.",
+  "tooltip.starcatcher.willish.1" : "It is incredibly ugly and should be discarded back to the Nether where it belongs.",
 
   "item.starcatcher.lava_crab_claw" : "Lava Crab Claw",
-  "tooltip.starcatcher.lava_crab_claw.0" : "A claw ripped off from a Lava Crab.",
-  "tooltip.starcatcher.lava_crab_claw.1" : "Due to the aggressive nature of Lava Crabs,",
-  "tooltip.starcatcher.lava_crab_claw.2" : "it's quite a common find in The Nether.",
+  "tooltip.starcatcher.lava_crab_claw.0" : "A claw ripped off from a lava crab.",
+  "tooltip.starcatcher.lava_crab_claw.1" : "Due to the aggressive nature of lava crabs,",
+  "tooltip.starcatcher.lava_crab_claw.2" : "it's quite a common find in the Nether.",
 
 
 
   "item.starcatcher.charfish" : "Charfish",
-  "tooltip.starcatcher.charfish.0" : "A purple fish only found in The End.",
+  "tooltip.starcatcher.charfish.0" : "A purple fish only found in the End.",
 
   "item.starcatcher.chorus_crab" : "Chorus Crab",
-  "tooltip.starcatcher.chorus_crab.0" : "This crab species uses Chorus fruit as it's main source of food.",
-  "tooltip.starcatcher.chorus_crab.1" : "It is said it can teleport around at will after feeding.",
+  "tooltip.starcatcher.chorus_crab.0" : "This crab species uses chorus fruit as its main source of food.",
+  "tooltip.starcatcher.chorus_crab.1" : "It is said that it can teleport around at will after feeding.",
 
   "item.starcatcher.end_glow" : "End Glow",
-  "tooltip.starcatcher.end_glow.0" : "A tricky fish only found in The End.",
-  "tooltip.starcatcher.end_glow.1" : "Enderman don't seem to mind it.",
+  "tooltip.starcatcher.end_glow.0" : "A tricky fish only found in the End.",
+  "tooltip.starcatcher.end_glow.1" : "Endermen don't seem to mind it.",
+
+  "item.starcatcher.dreamliner" : "Dreamliner",
+  "tooltip.starcatcher.dreamliner.0" : "A fish found swimming through the endless void of the End.",
+  "tooltip.starcatcher.dreamliner.1" : "It's said to be a 787 in its past life.",
 
   "item.starcatcher.voidbiter" : "Voidbiter",
-  "tooltip.starcatcher.voidbiter.0" : "A <sclegendary>legendary</sclegendary> fish found floating in the vast void of The End.",
+  "tooltip.starcatcher.voidbiter.0" : "A <sclegendary>legendary</sclegendary> fish found floating in the vast void of the End.",
   "tooltip.starcatcher.voidbiter.1" : "So few anglers have seen it that it is merely rumored to exist.",
-  "tooltip.starcatcher.voidbiter.2" : "If one were to catch it, it would be safe to assume they are an <scuncommon>Older Anglers</scuncommon> descendant.",
+  "tooltip.starcatcher.voidbiter.2" : "If one were to catch it, it would be safe to assume they are an <scuncommon>Older Angler's</scuncommon> descendant.",
 
   "item.starcatcher.purple_carp" : "Purple Carp",
-  "tooltip.starcatcher.purple_carp.0" : "These species of carp have adapted to the cold void of The End.",
-  "tooltip.starcatcher.purple_carp.1" : "It is said to make a great stew,",
-  "tooltip.starcatcher.purple_carp.2" : "although no one is sure how they cook it.",
+  "tooltip.starcatcher.purple_carp.0" : "This species of carp has adapted to the cold void of the End.",
+  "tooltip.starcatcher.purple_carp.1" : "It is said to make for a great stew,",
+  "tooltip.starcatcher.purple_carp.2" : "although no one is sure how to cook it.",
 
   "item.starcatcher.voidfin" : "Voidfin",
   "tooltip.starcatcher.voidfin.0" : "A pale purple fish known for its large fins used to glide the void.",
 
   "item.starcatcher.spacejelly" : "Spacejelly",
   "tooltip.starcatcher.spacejelly.0" : "An incredibly light pink jellyfish.",
-  "tooltip.starcatcher.spacejelly.1" : "It floats around the outer islands of The End in search of End Cities.",
+  "tooltip.starcatcher.spacejelly.1" : "It floats around the outer islands of the End in search of end cities.",
 
   "item.starcatcher.chorus_minnow" : "Chorus Minnow",
-  "tooltip.starcatcher.chorus_minnow.0" : "A species of Minnor consumed by Chorus.",
-  "tooltip.starcatcher.chorus_minnow.1" : "It is unknown if they are native to The End.",
+  "tooltip.starcatcher.chorus_minnow.0" : "A species of minnow consumed by chorus.",
+  "tooltip.starcatcher.chorus_minnow.1" : "It is unknown if they are native to the End.",
 
   "item.starcatcher.nebula_squid" : "Nebula Squid",
-  "tooltip.starcatcher.nebula_squid.0" : "Unlike the Cinder Squid, Nebula Squids are quite sticky,",
+  "tooltip.starcatcher.nebula_squid.0" : "Unlike the cinder squid, nebula squids are quite sticky,",
   "tooltip.starcatcher.nebula_squid.1" : "and often use their tentacles to wrap around chorus fruits whilst feeding.",
 
 
-  
+
   "item.starcatcher.coggill" : "Coggill",
   "tooltip.starcatcher.coggill.0" : "A dusty construct made of brass gears and cogs often used in arid areas to move air around.",
 
@@ -2214,7 +2221,7 @@
 
   "item.starcatcher.mechanical_snail" : "Mechanical Snail",
   "tooltip.starcatcher.mechanical_snail.0" : "A machine made to clean oil off of beaches.",
-  "tooltip.starcatcher.mechanical_snail.1" : "It slowly moves back and forth cleaning up polution,",
+  "tooltip.starcatcher.mechanical_snail.1" : "It slowly moves back and forth cleaning up pollution,",
   "tooltip.starcatcher.mechanical_snail.2" : "left behind by whoever made it.",
 
 
@@ -2231,21 +2238,21 @@
   "tooltip.starcatcher.pipehead.2" : "It would appear this one got loose and started drifting the oceans.",
 
   "item.starcatcher.cogtopus" : "Cogtopus",
-  "tooltip.starcatcher.cogtopus.0" : "A very intelligent machine made to mimic the behaviour of octopus.",
+  "tooltip.starcatcher.cogtopus.0" : "A very intelligent machine made to mimic the behaviour of octopuses.",
   "tooltip.starcatcher.cogtopus.1" : "Each of its brains (cogs) controls a different arm, making it able to maneuver anywhere it pleases.",
 
   "item.starcatcher.eel_dynamo" : "Eel Dynamo",
   "tooltip.starcatcher.eel_dynamo.0" : "A oily slippery eel ran by gears.",
 
   "item.starcatcher.drive_pike" : "Drive Pike",
-  "tooltip.starcatcher.drive_pike.0" : "An aggressive machine made to control the fish population around rivers",
+  "tooltip.starcatcher.drive_pike.0" : "An aggressive machine made to control the fish population around rivers.",
 
   "item.starcatcher.brassgill" : "Brassgill",
-  "tooltip.starcatcher.brassgill.0" : "A mechanical construct resembling the Embergill,",
+  "tooltip.starcatcher.brassgill.0" : "A mechanical construct resembling the embergill,",
   "tooltip.starcatcher.brassgill.1" : "made to survive high temperature fluids.",
-  "tooltip.starcatcher.brassgill.2" : "It's use is unknown.",
+  "tooltip.starcatcher.brassgill.2" : "Its use is unknown.",
 
   "item.starcatcher.meka_agave_bream" : "Meka Agave Bream",
-  "tooltip.starcatcher.meka_agave_bream.0" : "The mechanical version of an Agave Bream made for controlling bream population.",
-  "tooltip.starcatcher.meka_agave_bream.1" : "If it's unable to find a suitable Agave Bream in time it will hibernate until next mating season."
+  "tooltip.starcatcher.meka_agave_bream.0" : "The mechanical version of an agave bream made for controlling bream population.",
+  "tooltip.starcatcher.meka_agave_bream.1" : "If it's unable to find a suitable agave bream in time it will hibernate until next mating season."
 }

@@ -36,7 +36,7 @@ public class MoraJaiScreen extends Screen
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
-        if(event.button() == 0 && grid.click(event.x() - width / 2f, event.y() - height / 2f)) return true;
+        if(event.button() == 1 && grid.click(event.x() - width / 2f, event.y() - height / 2f)) return true;
         return super.mouseClicked(event, doubleClick);
     }
 
