@@ -1,6 +1,8 @@
 package com.wdiscute.starcatcher.guide;
 
 import com.mojang.blaze3d.platform.InputConstants;
+import com.mojang.blaze3d.platform.cursor.CursorType;
+import com.mojang.blaze3d.platform.cursor.CursorTypes;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.datafixers.util.Pair;
@@ -500,6 +502,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public boolean mouseReleased(MouseButtonEvent event)
     {
+        if (event.button() != 0) return super.mouseReleased(event);
         double x = event.x() - uiX;
         double y = event.y() - uiY;
 
@@ -608,6 +611,7 @@ public class FishingGuideScreen extends Screen
     @Override
     public boolean mouseClicked(MouseButtonEvent event, boolean doubleClick)
     {
+        if (event.button() != 0) return super.mouseClicked(event, doubleClick);
         double x = event.x() - uiX;
         double y = event.y() - uiY;
 
@@ -808,7 +812,10 @@ public class FishingGuideScreen extends Screen
         {
             //previous arrow
             if (x > 49 && x < 69 && y > 203 && y < 217)
+            {
+                g.requestCursor(CursorTypes.POINTING_HAND);
                 ARROW_PREVIOUS_HIGHLIGHT.render(g, uiX, uiY);
+            }
 
             if (arrowPreviousPressed)
                 ARROW_PREVIOUS_PRESSED.render(g, uiX, uiY);
@@ -820,7 +827,10 @@ public class FishingGuideScreen extends Screen
         if (!menu.equals(MenuEntry.COVER) && !(menu.equals(MenuEntry.INDEX) && page == 0))
         {
             if (x > 174 && x < 196 && y > 202 && y < 216)
+            {
+                g.requestCursor(CursorTypes.POINTING_HAND);
                 ARROW_INDEX_HIGHLIGHT.render(g, uiX, uiY);
+            }
 
             if (arrowIndexPressed)
                 ARROW_INDEX_PRESSED.render(g, uiX, uiY);
@@ -832,7 +842,10 @@ public class FishingGuideScreen extends Screen
         if (!(menu.equals(MenuEntry.LAST)))
         {
             if (x > 336 && x < 356 && y > 202 && y < 216)
+            {
+                g.requestCursor(CursorTypes.POINTING_HAND);
                 ARROW_NEXT_HIGHLIGHT.render(g, uiX, uiY);
+            }
 
             if (arrowNextPressed)
                 ARROW_NEXT_PRESSED.render(g, uiX, uiY);
@@ -1022,6 +1035,7 @@ public class FishingGuideScreen extends Screen
                 //if clicked on left arrow
                 if (mouseX > uiX + 219 && mouseX < uiX + 235 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
+                    g.requestCursor(CursorTypes.POINTING_HAND);
                     ARROW_LEFT_HIGHLIGHT.render(g, uiX + 219, uiY + 170);
                     if (clicked)
                     {
@@ -1032,6 +1046,7 @@ public class FishingGuideScreen extends Screen
                 //if clicked on right arrow
                 if (mouseX > uiX + 337 && mouseX < uiX + 353 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
+                    g.requestCursor(CursorTypes.POINTING_HAND);
                     ARROW_RIGHT_HIGHLIGHT.render(g, uiX + 337, uiY + 170);
                     if (clicked)
                     {
@@ -1050,13 +1065,12 @@ public class FishingGuideScreen extends Screen
                     int x = uiX + 238 + (i * 20);
                     int y = uiY + 170;
                     ItemStack stack = messages.get(Math.abs((rightPageScroll + i) % messages.size()));
-                    //render item
-                    ScreenUtils.item(g, stack, x, y);
                     //render hover item tooltip
                     if (mouseX > x - 2 && mouseX < x + 16 + 2 && mouseY > y - 2 && mouseY < y + 16 + 2)
                     {
                         ScreenUtils.outline(g, x - 2, y - 2, 20, 20, SCColors.GUIDE_HIGHLIGHT);
 
+                        g.requestCursor(CursorTypes.POINTING_HAND);
                         ScreenUtils.Tooltip.set(stack);
                         Message message = SCDataComponents.getOrDefault(stack, SCDataComponents.MESSAGE, Message.DEFAULT);
                         //if clicked open message screen
@@ -1066,6 +1080,8 @@ public class FishingGuideScreen extends Screen
                     }
                     //scrollable background fill
                     ScreenUtils.fill(g, x - 1, y - 1, 18, 18, 0xffb4a697);
+                    //render item
+                    ScreenUtils.item(g, stack, x, y);
                 }
             }
 
@@ -1165,6 +1181,7 @@ public class FishingGuideScreen extends Screen
                 //if clicked on left arrow
                 if (mouseX > uiX + 219 && mouseX < uiX + 235 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
+                    g.requestCursor(CursorTypes.POINTING_HAND);
                     ARROW_LEFT_HIGHLIGHT.render(g, uiX + 219, uiY + 170);
                     if (clicked)
                     {
@@ -1175,6 +1192,7 @@ public class FishingGuideScreen extends Screen
                 //if clicked on right arrow
                 if (mouseX > uiX + 337 && mouseX < uiX + 353 && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
                 {
+                    g.requestCursor(CursorTypes.POINTING_HAND);
                     ARROW_RIGHT_HIGHLIGHT.render(g, uiX + 337, uiY + 170);
                     if (clicked)
                     {
@@ -1190,13 +1208,12 @@ public class FishingGuideScreen extends Screen
                     int y = uiY + 170;
                     ItemStack stack = trophiesIS.get(Math.abs((rightPageScroll + i) % trophiesIS.size()));
                     FishProperties fp = trophies.get(Math.abs((rightPageScroll + i) % trophies.size()));
-                    //render item
-                    ScreenUtils.item(g, stack, x, y);
                     //render hover item tooltip
                     if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16)
                     {
                         ScreenUtils.outline(g, x - 2, y - 2, 20, 20, SCColors.GUIDE_HIGHLIGHT);
 
+                        g.requestCursor(CursorTypes.POINTING_HAND);
                         FishCaughtCounter fishCaughtCounter = fishCaughtCounterMap.get(fp.toLoc(level));
                         if (!fp.equals(FishProperties.empty()))
                             ScreenUtils.Tooltip.set(getCachedTooltipForHoverEntry(fp, fishCaughtCounter == null ? 0 : fishCaughtCounter.count()));
@@ -1207,6 +1224,8 @@ public class FishingGuideScreen extends Screen
                     }
                     //scrollable background fill
                     ScreenUtils.fill(g, x - 1, y - 1, 18, 18, 0xffb4a697);
+                    //render item
+                    ScreenUtils.item(g, stack, x, y);
                 }
             }
         }
@@ -1226,7 +1245,10 @@ public class FishingGuideScreen extends Screen
                     ScreenUtils.item(guiGraphics, indexEntries.get(i).getFirst(), xx + i * 20, uiY + 47);
 
                     if (mouseX > xx + (i * 20) - 2 && mouseX < xx + (i * 20) + 17 && mouseY > uiY + 47 - 2 && mouseY < uiY + 47 + 17)
+                    {
+                        guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
                         ScreenUtils.Tooltip.add(translatable(indexEntries.get(i).getSecond()));
+                    }
 
                     if (clicked && mouseX > xx + (i * 20) - 2 && mouseX < xx + (i * 20) + 17 && mouseY > uiY + 47 - 2 && mouseY < uiY + 47 + 17)
                     {
@@ -1255,6 +1277,7 @@ public class FishingGuideScreen extends Screen
 
                     if (mouseX > xx + ((i - 7) * 20) - 2 && mouseX < xx + ((i - 7) * 20) + 17 && mouseY > uiY + 47 + 20 - 2 && mouseY < uiY + 47 + 20 + 17)
                     {
+                        guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
                         ScreenUtils.Tooltip.add(translatable(indexEntries.get(i).getSecond()));
                         if (clicked)
                         {
@@ -1288,9 +1311,10 @@ public class FishingGuideScreen extends Screen
         //[sort] text
         if (page == 0)
         {
-            ScreenUtils.centeredText(guiGraphics, this.font, translatable("gui.guide.sort"), uiX + 171, uiY + 88, 0x937d70, false);
+            ScreenUtils.centeredText(guiGraphics, this.font, translatable("gui.guide.sort"), uiX + 171, uiY + 88, 0xff937d70, false);
             if (mouseX > uiX + 145 && mouseX < uiX + 190 && mouseY > uiY + 86 && mouseY < uiY + 96)
             {
+                guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
                 ScreenUtils.Tooltip.add(translatable(SCConfig.SORT.get().getTranslationKey()));
                 if (clicked)
                 {
@@ -1387,6 +1411,7 @@ public class FishingGuideScreen extends Screen
         //if hovering on left arrow
         if (mouseX > uiX + 53 + offset && mouseX < uiX + 69 + offset && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
         {
+            guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
             ARROW_LEFT_HIGHLIGHT.render(guiGraphics, uiX + 53 + offset, uiY + 170);
             if (clicked)
             {
@@ -1400,6 +1425,7 @@ public class FishingGuideScreen extends Screen
         //if hovering on right arrow
         if (mouseX > uiX + 171 + offset && mouseX < uiX + 185 + offset && mouseY > uiY + 170 && mouseY < uiY + 170 + 16)
         {
+            guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
             ARROW_RIGHT_HIGHLIGHT.render(guiGraphics, uiX + 171 + offset, uiY + 170);
             if (clicked)
             {
@@ -1422,6 +1448,7 @@ public class FishingGuideScreen extends Screen
             //render hover item tooltip
             if (mouseX > x - 2 && mouseX < x + 16 + 2 && mouseY > y - 2 && mouseY < y + 16 + 2)
             {
+                guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
                 ScreenUtils.outline(guiGraphics, x - 2, y - 2, 20, 20, SCColors.GUIDE_HIGHLIGHT);
                 ScreenUtils.Tooltip.set(stack);
                 ;
@@ -1447,16 +1474,21 @@ public class FishingGuideScreen extends Screen
         int caught = fcc == null ? 0 : fcc.count();
 
         //handle click
-        if (clicked && mouseX > xOffset - 3 && mouseX < xOffset + 21 - 3 && mouseY > yOffset - 3 && mouseY < yOffset + 21 - 3)
+        boolean hovering = mouseX > xOffset - 3 && mouseX < xOffset + 21 - 3 && mouseY > yOffset - 3 && mouseY < yOffset + 21 - 3;
+        if (hovering)
         {
-            player.playSound(SoundEvents.BOOK_PAGE_TURN);
-            menu = MenuEntry.ENTRY;
-            page = entries.indexOf(fp) / 2;
+            guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
+            if (clicked)
+            {
+                player.playSound(SoundEvents.BOOK_PAGE_TURN);
+                menu = MenuEntry.ENTRY;
+                page = entries.indexOf(fp) / 2;
 
-            if (entries.indexOf(fp) % 2 == 0)
-                highlightLeftAlpha = 0.5f;
-            else
-                highlightRightAlpha = 0.5f;
+                if (entries.indexOf(fp) % 2 == 0)
+                    highlightLeftAlpha = 0.5f;
+                else
+                    highlightRightAlpha = 0.5f;
+            }
         }
 
         //render fill
@@ -1497,7 +1529,7 @@ public class FishingGuideScreen extends Screen
             ScreenUtils.outline(guiGraphics, xOffset - 1, yOffset - 1, 18, 18, 0xffc58c44);
 
         //render tooltip
-        if (mouseX > xOffset - 3 && mouseX < xOffset + 21 - 3 && mouseY > yOffset - 3 && mouseY < yOffset + 21 - 3)
+        if (hovering)
         {
             ScreenUtils.Tooltip.set(getCachedTooltipForHoverEntry(fp, caught));
             ScreenUtils.Tooltip.add(1, translatable("gui.guide.rarity." + fp.rarity().getSerializedName()));
@@ -1609,7 +1641,10 @@ public class FishingGuideScreen extends Screen
 
         //render spyglass hover text
         if (x > xOffset - 3 && x < 17 + xOffset - 2 && y > 111 && y < 128)
+        {
             ScreenUtils.Tooltip.add(translatable("gui.guide.track"));
+            guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
+        }
 
         //white highlight on jumping to
         if (highlightRightAlpha > 0)
@@ -1631,6 +1666,7 @@ public class FishingGuideScreen extends Screen
         ScreenUtils.item(guiGraphics, stack, x, y);
         if (mouseX > x && mouseX < x + 16 && mouseY > y && mouseY < y + 16)
         {
+            guiGraphics.requestCursor(CursorTypes.POINTING_HAND);
             ScreenUtils.Tooltip.set(stack);
             if (clicked)
                 ScreenUtils.displayRecipe(stack);
@@ -2197,7 +2233,7 @@ public class FishingGuideScreen extends Screen
 
     public static void onStructuresReceived()
     {
-        if(Minecraft.getInstance().gui.screen() instanceof FishingGuideScreen screen)
+        if (Minecraft.getInstance().gui.screen() instanceof FishingGuideScreen screen)
             screen.init();
     }
 }

@@ -67,6 +67,8 @@ public class IsolatedFPScreen extends Screen
     {
         super.extractRenderState(g, mouseX, mouseY, a);
 
+        BACKGROUND.render(g, uiX, uiY);
+
         FishingGuideScreen.renderFishEntryPage(
                 g,
                 fp,
