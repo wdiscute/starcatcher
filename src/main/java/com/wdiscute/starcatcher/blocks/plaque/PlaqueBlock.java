@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.blocks.plaque;
 
 import com.mojang.serialization.MapCodec;
+import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.core.BlockPos;
@@ -87,17 +88,20 @@ public class PlaqueBlock extends HorizontalDirectionalBlock implements EntityBlo
         {
             if(pbe.item.isEmpty())
             {
-                if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
-
-                //only place item if stack in hand is not empty
-                if(!stack.isEmpty())
+                if(stack.is(SCTags.BUCKETABLE_FISHES))
                 {
-                    pbe.item = new MaybeStack(stack.copyWithCount(1));
-                    stack.shrink(1);
-                    pbe.sync();
-                }
+                    if (level.isClientSide()) return ItemInteractionResult.SUCCESS;
 
-                return ItemInteractionResult.SUCCESS;
+                    //only place item if stack in hand is not empty
+                    if(!stack.isEmpty())
+                    {
+                        pbe.item = new MaybeStack(stack.copyWithCount(1));
+                        stack.shrink(1);
+                        pbe.sync();
+                    }
+
+                    return ItemInteractionResult.SUCCESS;
+                }
             }
             else
             {

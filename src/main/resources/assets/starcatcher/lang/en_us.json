@@ -1939,8 +1939,8 @@
   "tooltip.starcatcher.morganite.0" : "An ocean fish resembling Morganite gemstones.",
 
   "item.starcatcher.ironjaw_herring" : "Ironjaw Herring",
-  "tooltip.starcatcher.ironjaw_herring.0" : "This type of herring common to the ocean and often",
-  "tooltip.starcatcher.ironjaw_herring.1" : "has a petrified silvery jaw resembling iron.",
+  "tooltip.starcatcher.ironjaw_herring.0" : "This type of herring is common to the ocean,",
+  "tooltip.starcatcher.ironjaw_herring.1" : "with its petrified silvery jaw resembling iron.",
 
   "item.starcatcher.blue_herring" : "Blue Herring",
   "tooltip.starcatcher.blue_herring.0" : "A very illusive fish, always searching for the 46th ocean.",
@@ -1969,7 +1969,7 @@
   "tooltip.starcatcher.waterlogged_bottle.1" : "Whatever it once held, it's long gone by now.",
 
   "item.starcatcher.bigeye_tuna" : "Bigeye Tuna",
-  "tooltip.starcatcher.bigeye_tuna.0" : "A big heavy fish known for it's big eye.",
+  "tooltip.starcatcher.bigeye_tuna.0" : "A big heavy fish known for its big eye.",
   "tooltip.starcatcher.bigeye_tuna.1" : "This species is only found in deep ocean waters.",
   "tooltip.starcatcher.bigeye_tuna.2" : "It's said to hang around other Kaupen fish.",
 
