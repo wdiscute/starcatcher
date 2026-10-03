@@ -14,6 +14,10 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.BIN
 }
 
+tasks.named('processResources') {
+    exclude '**/*.ase', '**/*.aseprite'
+}
+
 version = mod_version
 group = mod_group_id
 

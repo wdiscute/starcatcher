@@ -2,17 +2,17 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
-import com.wdiscute.starcatcher.messageinabottle.message.Message;
-import com.wdiscute.starcatcher.registry.SCDataMaps;
-import com.wdiscute.starcatcher.registry.SCItems;
-import com.wdiscute.starcatcher.registry.SCBlocks;
-import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
 import com.wdiscute.starcatcher.fish.Treasure;
+import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.*;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.*;
+import com.wdiscute.starcatcher.registry.SCBlocks;
+import com.wdiscute.starcatcher.registry.SCDataMaps;
+import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
@@ -21,7 +21,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.level.dimension.LevelStem;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
@@ -51,9 +51,9 @@ public class DGSCDataMapsProvider extends DataMapProvider
         var messages = this.builder(SCDataMaps.MESSAGE_BACKGROUND);
 
         //messages background
-        messages.add(LevelStem.OVERWORLD, Message.BACKGROUND_OVERWORLD, false);
-        messages.add(LevelStem.NETHER, Message.BACKGROUND_NETHER, false);
-        messages.add(LevelStem.END, Message.BACKGROUND_END, false);
+        messages.add(BuiltinDimensionTypes.OVERWORLD, Message.BACKGROUND_OVERWORLD, false);
+        messages.add(BuiltinDimensionTypes.NETHER, Message.BACKGROUND_NETHER, false);
+        messages.add(BuiltinDimensionTypes.END, Message.BACKGROUND_END, false);
 
         //ground
         aquarium.add(Items.GRAVEL.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_GRAVEL, false);

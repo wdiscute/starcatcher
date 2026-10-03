@@ -6,12 +6,9 @@ import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCEntities;
 import com.wdiscute.starcatcher.registry.SCItems;
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -26,7 +23,6 @@ import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.dimension.LevelStem;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -68,12 +64,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
                     {
                         sp.displayClientMessage(Component.translatable("item.starcatcher.bottled_letter.thrown"), true);
 
-                        Registry<LevelStem> levelStemRegistry = level().registryAccess().registryOrThrow(Registries.LEVEL_STEM);
-                        LevelStem levelStem = levelStemRegistry.get(level().dimension().location());
-
-                        Holder<LevelStem> levelStemHolder = levelStemRegistry.wrapAsHolder(levelStem);
-
-                        ResourceLocation data = levelStemHolder.getData(SCDataMaps.MESSAGE_BACKGROUND);
+                        ResourceLocation data = level().dimensionTypeRegistration().getData(SCDataMaps.MESSAGE_BACKGROUND);
 
                         if(data == null)
                             data = Message.BACKGROUND_OVERWORLD;

@@ -38,7 +38,7 @@ public class SCRenderTypes
             1536,
             RenderType.CompositeState.builder()
                     .setShaderState(RENDERTYPE_GLINT_SHADER)
-                    .setTextureState(new RenderStateShard.TextureStateShard(Starcatcher.rl("textures/item/gold_fish_shine.png"), false, true))
+                    .setTextureState(new RenderStateShard.TextureStateShard(Starcatcher.rl("textures/misc/gold_fish_shine.png"), false, true))
                     .setTransparencyState(GLINT_TRANSPARENCY)
                     .setOutputState(ITEM_ENTITY_TARGET)
                     .setLightmapState(LIGHTMAP)
@@ -56,7 +56,7 @@ public class SCRenderTypes
             1536,
             RenderType.CompositeState.builder()
                     .setShaderState(RENDERTYPE_ENTITY_GLINT_DIRECT_SHADER)
-                    .setTextureState(new RenderStateShard.TextureStateShard(Starcatcher.rl("textures/item/gold_fish_shine.png"), false, true))
+                    .setTextureState(new RenderStateShard.TextureStateShard(Starcatcher.rl("textures/misc/gold_fish_shine.png"), false, true))
                     .setTransparencyState(GLINT_TRANSPARENCY)
                     .setLightmapState(LIGHTMAP)
                     .setOverlayState(OVERLAY)
