@@ -23,8 +23,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Unit;
 import net.minecraft.world.item.DyeColor;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.api.distmarker.OnlyIn;
 import org.joml.Quaternionf;
 
 import javax.swing.*;
@@ -32,7 +30,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.stream.Stream;
 
-@OnlyIn(Dist.CLIENT)
 public class TackleBoxBoatRenderer extends EntityRenderer<TackleBoxBoatEntity, TackleBoxBoatState>
 {
     private final Map<TackleBoxBoatEntity.Type, Pair<Identifier, AbstractBoatModel>> boatResources;
@@ -68,24 +65,24 @@ public class TackleBoxBoatRenderer extends EntityRenderer<TackleBoxBoatEntity, T
     {
         poseStack.pushPose();
         poseStack.translate(0.0F, 0.375F, 0.0F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - state.yRot));
+        poseStack.rotate(Axis.YP.rotationDegrees(180.0F - state.yRot));
         float hurt = state.hurtTime;
         if (hurt > 0.0F)
-            poseStack.mulPose(Axis.XP.rotationDegrees(Mth.sin(hurt) * hurt * state.damageTime / 10.0F * state.hurtDir));
+            poseStack.rotate(Axis.XP.rotationDegrees(Mth.sin(hurt) * hurt * state.damageTime / 10.0F * state.hurtDir));
 
         if (!state.isUnderWater && !Mth.equal(state.bubbleAngle, 0.0F))
-            poseStack.mulPose(new Quaternionf().setAngleAxis(state.bubbleAngle * (float) (Math.PI / 180.0), 1.0F, 0.0F, 1.0F));
+            poseStack.rotate(new Quaternionf().setAngleAxis(state.bubbleAngle * (float) (Math.PI / 180.0), 1.0F, 0.0F, 1.0F));
 
         Pair<Identifier, AbstractBoatModel> pair = boatResources.get(state.type);
 
         poseStack.scale(-1.0F, -1.0F, 1.0F);
-        poseStack.mulPose(Axis.YP.rotationDegrees(90.0F));
+        poseStack.rotate(Axis.YP.rotationDegrees(90.0F));
 
         //render tackle box
         {
             poseStack.pushPose();
 
-            poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
+            poseStack.rotate(Axis.YP.rotationDegrees(270.0F));
             poseStack.translate(0, -1.32, 0.5);
 
             if(state.type.isRaft())
@@ -93,11 +90,11 @@ public class TackleBoxBoatRenderer extends EntityRenderer<TackleBoxBoatEntity, T
 
             submitNodeCollector.submitModel(boxModel, state, poseStack,
                     Starcatcher.rl("textures/entity/tackle_box_boat/tackle_box_" + state.color + ".png"),
-                    state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+                    state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
             poseStack.popPose();
         }
 
-        submitNodeCollector.submitModel(pair.getSecond(), state, poseStack, pair.getFirst(), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        submitNodeCollector.submitModel(pair.getSecond(), state, poseStack, pair.getFirst(), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor);
 
         if(state.type.isRaft)
             poseStack.translate(0, 0.1, 0);
@@ -111,7 +108,7 @@ public class TackleBoxBoatRenderer extends EntityRenderer<TackleBoxBoatEntity, T
     {
         if (!state.isUnderWater)
             submitNodeCollector.submitModel(
-                    this.waterPatchModel, Unit.INSTANCE, poseStack, Starcatcher.MISSINGNO, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null
+                    this.waterPatchModel, Unit.INSTANCE, poseStack, Starcatcher.MISSINGNO, lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor
             );
     }
 

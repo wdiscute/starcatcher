@@ -13,6 +13,7 @@ import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import com.wdiscute.starcatcher.tournament.TournamentScoreSettings;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.ScreenUtils;
+import com.wdiscute.utils.Utils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -116,7 +117,7 @@ public class SettingsScreen extends FishingMinigameScreen
             //left button
             if (mouseX > x && mouseX < x + 10 && mouseY > y && mouseY < y + 10)
             {
-                if (hasShiftDown())
+                if (Utils.hasShiftDown())
                     configSpec.set(configSpec.get() - increase * 10);
                 else
                     configSpec.set(configSpec.get() - increase);
@@ -125,7 +126,7 @@ public class SettingsScreen extends FishingMinigameScreen
             //right button
             if (mouseX > x + 10 && mouseX < x + 20 && mouseY > y && mouseY < y + 10)
             {
-                if (hasShiftDown())
+                if (Utils.hasShiftDown())
                     configSpec.set(configSpec.get() + increase * 10);
                 else
                     configSpec.set(configSpec.get() + increase);
@@ -139,17 +140,12 @@ public class SettingsScreen extends FishingMinigameScreen
             configSpec.save();
         }
 
-        private boolean hasShiftDown()
-        {
-            return InputConstants.isKeyDown(Minecraft.getInstance().getWindow(), 340) || InputConstants.isKeyDown(Minecraft.getInstance().getWindow(), 344);
-        }
-
         public void mouseScrolled(double mouseX, double mouseY, double scroll)
         {
             //scroll
             if (mouseX > x && mouseX < x + 70 && mouseY > y && mouseY < y + 10)
             {
-                if (hasShiftDown())
+                if (Utils.hasShiftDown())
                     configSpec.set(configSpec.get() + (increase * 10) * scroll);
                 else
                     configSpec.set(configSpec.get() + (increase) * scroll);

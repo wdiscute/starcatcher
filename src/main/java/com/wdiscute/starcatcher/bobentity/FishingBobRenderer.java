@@ -52,11 +52,6 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
         BOB_MODELS.put(Starcatcher.rl("pearl"), new PearlModel(modelSet.bakeLayer(PearlModel.LAYER_LOCATION)));
     }
 
-    public boolean shouldRender(FishingBobEntity entity, Frustum culler, double camX, double camY, double camZ)
-    {
-        return super.shouldRender(entity, culler, camX, camY, camZ) && entity.getOwner() != null;
-    }
-
     public void submit(FishingBobRenderState state, PoseStack poseStack, SubmitNodeCollector node, CameraRenderState camera)
     {
         //render line
@@ -80,17 +75,17 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
 
         //render tackle
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(180));
+        poseStack.rotate(Axis.YP.rotationDegrees(180));
         poseStack.translate(0, 1.5, 0);
-        poseStack.mulPose(Axis.XP.rotationDegrees(180));
-        poseStack.mulPose(Axis.YP.rotationDegrees(-state.entityYaw));
+        poseStack.rotate(Axis.XP.rotationDegrees(180));
+        poseStack.rotate(Axis.YP.rotationDegrees(-state.entityYaw));
 
         //starcatcher:base
         node.submitModel(
                 state.skin, state, poseStack,
                 RenderTypes.entityCutout(state.skinRL.withPrefix("textures/entity/tackle/").withSuffix(".png")),
                 state.lightCoords,
-                OverlayTexture.NO_OVERLAY, 0xffffffff, null, state.outlineColor, null
+                OverlayTexture.NO_OVERLAY, 0xffffffff, null, state.outlineColor
         );
 
         poseStack.popPose();
@@ -164,7 +159,7 @@ public class FishingBobRenderer extends EntityRenderer<FishingBobEntity, Fishing
 
         if (entity.getOwner() instanceof Player player)
         {
-            float swing = player.getAttackAnim(partialTicks);
+            float swing = player.getSwingAnimation(partialTicks);
             float swing2 = Mth.sin(Mth.sqrt(swing) * (float) Math.PI);
             Vec3 playerPos = this.getPlayerHandPos(player, swing2, partialTicks);
             Vec3 hookPos = entity.getPosition(partialTicks).add(0.0, 0.25, 0.0);

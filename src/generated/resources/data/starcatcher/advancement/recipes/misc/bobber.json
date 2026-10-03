@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:bobber"
+        "recipes": "starcatcher:bobber"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

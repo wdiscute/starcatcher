@@ -65,7 +65,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     public AquariumBlock(Properties p)
     {
         super(p
-                .pushReaction(PushReaction.IGNORE)
+                .pushReaction(PushReaction.IMMOVEABLE)
                 .sound(SoundType.GLASS)
                 .strength(2.0F)
                 .noOcclusion());
@@ -337,12 +337,6 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     protected RenderShape getRenderShape(BlockState state)
     {
         return RenderShape.MODEL;
-    }
-
-    @Override
-    protected MapCodec<? extends BaseEntityBlock> codec()
-    {
-        return null;
     }
 
     @Override

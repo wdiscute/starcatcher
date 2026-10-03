@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:survivor_tackle"
+        "recipes": "starcatcher:survivor_tackle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

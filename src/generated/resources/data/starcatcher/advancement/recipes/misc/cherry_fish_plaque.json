@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:cherry_fish_plaque"
+        "recipes": "starcatcher:cherry_fish_plaque"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

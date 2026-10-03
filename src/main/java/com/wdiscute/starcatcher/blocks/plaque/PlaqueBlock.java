@@ -37,12 +37,6 @@ public class PlaqueBlock extends HorizontalDirectionalBlock implements EntityBlo
         );
     }
 
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
-    {
-        return null;
-    }
-
     private static final VoxelShape NORTH_SHAPE = Block.box(1, 3, 15, 15, 13, 16);
     private static final VoxelShape SOUTH_SHAPE = Block.box(1, 3, 0, 15, 13, 1);
     private static final VoxelShape EAST_SHAPE = Block.box(15, 3, 1, 16, 13, 15);

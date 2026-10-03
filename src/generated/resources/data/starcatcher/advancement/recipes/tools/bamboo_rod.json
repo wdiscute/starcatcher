@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:bamboo_rod"
+        "recipes": "starcatcher:bamboo_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

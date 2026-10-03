@@ -50,12 +50,6 @@ public class DisplayBlock extends BaseEntityBlock implements SimpleWaterloggedBl
     private static final VoxelShape SHAPE_TOP_PLATE = Block.box(0.0, 10.0, 0.0, 16.0, 14.0, 16.0);
     private static final VoxelShape SHAPE = Shapes.or(SHAPE_BASE, SHAPE_POST, SHAPE_TOP_PLATE);
 
-    @Override
-    public MapCodec<DisplayBlock> codec()
-    {
-        return null;
-    }
-
     public DisplayBlock(Properties p)
     {
         super(p

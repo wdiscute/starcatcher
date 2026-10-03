@@ -21,11 +21,11 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.component.Compostable;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.DataMapProvider;
-import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
 
 import java.util.List;
@@ -44,7 +44,6 @@ public class DGSCDataMapsProvider extends DataMapProvider
         var aquarium = this.builder(SCDataMaps.AQUARIUM_INTERACTION);
         //var currencies = this.builder(SBDataMaps.SELLING_BIN_CURRENCIES);
         //var sellable = this.builder(SBDataMaps.SELLING_BIN_VALUE);
-        var compostable = this.builder(NeoForgeDataMaps.COMPOSTABLES);
         var modifiers = this.builder(SCDataMaps.ITEM_MODIFIERS);
         var modifiers_effects = this.builder(SCDataMaps.EFFECT_MODIFIERS);
         var modifiers_enchants = this.builder(SCDataMaps.ENCHANTMENT_MODIFIERS);
@@ -76,9 +75,9 @@ public class DGSCDataMapsProvider extends DataMapProvider
         aquarium.add(SCTags.BUCKETABLE_FISHES, AquariumBlock.Interaction.PLACE_FISH_CREATIVE, false);
         aquarium.add(Tags.Items.BUCKETS_EMPTY, AquariumBlock.Interaction.RETRIEVE_FISH, false);
 
-        //compostable
-        compostable.add(SCTags.WORMS, new Compostable(0.65F, false), false);
-        compostable.add(SCTags.BUCKETABLE_FISHES, new Compostable(0.9F, false), false);
+        //compostable - part of a data component in 26.3+
+        //compostable.add(SCTags.WORMS, new Compostable(0.65F, false), false);
+        //compostable.add(SCTags.BUCKETABLE_FISHES, new Compostable(0.9F, false), false);
 
         //selling sellable datagen
         //shouldn't be run as the JSONs are manually moved to a

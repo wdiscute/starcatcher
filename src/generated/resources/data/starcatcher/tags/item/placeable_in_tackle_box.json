@@ -3,7 +3,10 @@
     "#starcatcher:baits",
     "#starcatcher:hooks",
     "#starcatcher:bobbers",
-    "#starcatcher:fishable",
+    {
+      "id": "#starcatcher:fishable",
+      "required": false
+    },
     "#starcatcher:hats",
     "#minecraft:fishes",
     "starcatcher:starcatcher_guide",

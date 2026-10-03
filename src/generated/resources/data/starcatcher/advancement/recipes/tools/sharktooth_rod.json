@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:sharktooth_rod"
+        "recipes": "starcatcher:sharktooth_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

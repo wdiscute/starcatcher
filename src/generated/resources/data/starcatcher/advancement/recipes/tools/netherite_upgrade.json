@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:netherite_upgrade"
+        "recipes": "starcatcher:netherite_upgrade"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:obsidian_rod"
+        "recipes": "starcatcher:obsidian_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

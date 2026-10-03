@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:letter"
+        "recipes": "starcatcher:letter"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

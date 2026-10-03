@@ -29,11 +29,11 @@ public class CurioHatRenderer implements ICurioRenderer
         float yOffset = entity.isCrouching() ? 25 : 0F;
         poseStack.translate(0.0, yOffset, 0.0); //sneak offset is off by like the tiniest bit.
 
-        poseStack.mulPose(Axis.YP.rotationDegrees(yRotation));
-        poseStack.mulPose(Axis.XP.rotationDegrees(xRotation));
+        poseStack.rotate(Axis.YP.rotationDegrees(yRotation));
+        poseStack.rotate(Axis.XP.rotationDegrees(xRotation));
 
-        poseStack.mulPose(Axis.XP.rotationDegrees(180f));
-        poseStack.mulPose(Axis.YP.rotationDegrees(180f));
+        poseStack.rotate(Axis.XP.rotationDegrees(180f));
+        poseStack.rotate(Axis.YP.rotationDegrees(180f));
 
         poseStack.translate(0.0, 0.25, 0.0);
         poseStack.scale(0.62f, 0.62f, 0.62f);

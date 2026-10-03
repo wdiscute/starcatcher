@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:murkwater_bait_from_mangrove_roots"
+        "recipes": "starcatcher:murkwater_bait_from_mangrove_roots"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

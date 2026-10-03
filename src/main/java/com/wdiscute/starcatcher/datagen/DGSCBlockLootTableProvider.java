@@ -5,6 +5,7 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.data.loot.BlockLootSubProvider;
+import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -12,7 +13,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.CopyComponentsFunction;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +23,13 @@ import static com.wdiscute.starcatcher.registry.SCBlocks.*;
 
 public class DGSCBlockLootTableProvider extends BlockLootSubProvider
 {
-    protected DGSCBlockLootTableProvider(HolderLookup.Provider registries)
+    public DGSCBlockLootTableProvider(LootTableSubProvider.Context output)
     {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+        super(
+                Set.of(),
+                FeatureFlags.REGISTRY.allFlags(),
+                output
+        );
     }
 
     @Override
@@ -34,7 +39,7 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
         TACKLE_BOXES.getEntries().forEach(o ->
                 add(o.get(), LootTable.lootTable().withPool(this.applyExplosionCondition(
                         o.get(), LootPool.lootPool()
-                                .setRolls(ConstantValue.exactly(1.0F))
+                                .setRolls(ContextIntProviders.exactly(1))
                                 .add(LootItem.lootTableItem(o.get())
                                         .apply(
                                                 CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)

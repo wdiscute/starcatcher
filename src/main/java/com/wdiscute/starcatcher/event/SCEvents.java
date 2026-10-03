@@ -32,6 +32,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FishingHook;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.SwingAnimation;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
@@ -53,7 +54,7 @@ import net.neoforged.neoforge.event.tick.ServerTickEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
+import net.neoforged.neoforge.registries.NewDatapackRegistryEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 import net.neoforged.neoforge.transfer.item.VanillaContainerWrapper;
@@ -261,9 +262,9 @@ public class SCEvents
     }
 
     @SubscribeEvent
-    public static void addDatapackRegistry(DataPackRegistryEvent.NewRegistry event)
+    public static void addDatapackRegistry(NewDatapackRegistryEvent event)
     {
-        event.dataPackRegistry(
+        event.worldRegistry(
                 Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC,
                 builder -> builder.maxId(512));
     }
@@ -289,7 +290,7 @@ public class SCEvents
 
             if (event.getEntity() instanceof ServerPlayer player)
             {
-                player.swing(event.getHand(), true);
+                player.swing(event.getHand(), SwingAnimation.DEFAULT, true);
                 if (!player.hasInfiniteMaterials())
                     event.getItemStack().shrink(1);
             }

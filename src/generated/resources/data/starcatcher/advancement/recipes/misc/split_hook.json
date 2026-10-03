@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:split_hook"
+        "recipes": "starcatcher:split_hook"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

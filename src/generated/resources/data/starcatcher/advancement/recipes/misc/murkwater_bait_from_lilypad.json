@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:murkwater_bait_from_lilypad"
+        "recipes": "starcatcher:murkwater_bait_from_lilypad"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -107,7 +107,7 @@ public class Starcatcher
         Modifier.registerMinigame();
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, SCConfig.SPEC);
-        modContainer.registerConfig(ModConfig.Type.SERVER, SCConfig.SPEC_SERVER);
+        modContainer.registerConfig(ModConfig.Type.SYNCED, SCConfig.SPEC_SERVER);
 
         //register mod-specific fishes
         SCItems.registerExtraItems();

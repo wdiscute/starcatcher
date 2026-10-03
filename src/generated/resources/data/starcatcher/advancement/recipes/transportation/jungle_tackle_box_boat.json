@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:jungle_tackle_box_boat"
+        "recipes": "starcatcher:jungle_tackle_box_boat"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

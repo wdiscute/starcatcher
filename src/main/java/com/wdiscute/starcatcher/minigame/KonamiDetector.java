@@ -1,23 +1,23 @@
 package com.wdiscute.starcatcher.minigame;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.SCConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import org.lwjgl.glfw.GLFW;
 
 public class KonamiDetector
 {
     private static final int[] CODE = {
-            GLFW.GLFW_KEY_UP,
-            GLFW.GLFW_KEY_UP,
-            GLFW.GLFW_KEY_DOWN,
-            GLFW.GLFW_KEY_DOWN,
-            GLFW.GLFW_KEY_LEFT,
-            GLFW.GLFW_KEY_RIGHT,
-            GLFW.GLFW_KEY_LEFT,
-            GLFW.GLFW_KEY_RIGHT,
-            GLFW.GLFW_KEY_B,
-            GLFW.GLFW_KEY_A
+            InputConstants.KEY_UP,
+            InputConstants.KEY_UP,
+            InputConstants.KEY_DOWN,
+            InputConstants.KEY_DOWN,
+            InputConstants.KEY_LEFT,
+            InputConstants.KEY_RIGHT,
+            InputConstants.KEY_LEFT,
+            InputConstants.KEY_RIGHT,
+            InputConstants.KEY_B,
+            InputConstants.KEY_A
     };
 
     private static int progress = 0;

@@ -5,6 +5,7 @@ import com.wdiscute.starcatcher.minigame.ActiveSweetSpot;
 import com.wdiscute.starcatcher.minigame.FishingMinigameScreen;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.network.chat.Component;
 import org.joml.Matrix3x2fStack;
 
@@ -82,7 +83,7 @@ public abstract class AbstractMinigameModifier implements Modifier
     {
     }
 
-    public void onKeyPress(FishingMinigameScreen instance, int key, int scanCode, int keyModifiers)
+    public void onKeyPress(FishingMinigameScreen instance, KeyEvent event)
     {
     }
 
@@ -91,7 +92,7 @@ public abstract class AbstractMinigameModifier implements Modifier
         return false;
     }
 
-    public void onKeyReleased(FishingMinigameScreen instance, int key, int scanCode, int keyModifiers)
+    public void onKeyReleased(FishingMinigameScreen instance, KeyEvent event)
     {
     }
 

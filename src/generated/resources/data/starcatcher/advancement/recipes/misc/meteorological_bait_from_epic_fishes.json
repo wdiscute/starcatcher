@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:meteorological_bait_from_epic_fishes"
+        "recipes": "starcatcher:meteorological_bait_from_epic_fishes"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

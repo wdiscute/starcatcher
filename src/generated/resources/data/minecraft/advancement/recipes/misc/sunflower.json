@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sunflower"
+        "recipes": "minecraft:sunflower"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

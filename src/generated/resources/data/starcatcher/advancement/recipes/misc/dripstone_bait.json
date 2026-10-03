@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:dripstone_bait"
+        "recipes": "starcatcher:dripstone_bait"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

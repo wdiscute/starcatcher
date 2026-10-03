@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:rusty_hook"
+        "recipes": "starcatcher:rusty_hook"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

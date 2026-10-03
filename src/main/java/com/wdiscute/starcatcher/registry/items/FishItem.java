@@ -12,13 +12,17 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.minecraft.world.phys.Vec3;
 
 public class FishItem extends Item
 {
     public FishItem(Item.Properties properties)
     {
-        super(properties.usingConvertsTo(SCItems.FISH_BONES.asItem()));
+        super(properties
+                .compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)
+                .usingConvertsTo(SCItems.FISH_BONES.asItem()
+                ));
     }
 
     @Override

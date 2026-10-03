@@ -4,11 +4,13 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.Rarity;
-import net.minecraft.advancements.predicates.ContextAwarePredicate;
 import net.minecraft.advancements.predicates.entity.EntityPredicate;
+import net.minecraft.advancements.triggers.PlayerInteractTrigger;
 import net.minecraft.advancements.triggers.SimpleCriterionTrigger;
+import net.minecraft.core.Holder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 
 import java.util.Optional;
 
@@ -26,7 +28,7 @@ public class FishCaughtTrigger extends SimpleCriterionTrigger<FishCaughtTrigger.
     }
 
     public record FishCaughtTriggerInstance(
-            Optional<ContextAwarePredicate> player,
+            Optional<Holder<LootItemCondition>> player,
             Identifier rl,
             Rarity rarity,
             int time,
@@ -54,7 +56,7 @@ public class FishCaughtTrigger extends SimpleCriterionTrigger<FishCaughtTrigger.
 
         public static final Codec<FishCaughtTriggerInstance> CODEC =
                 RecordCodecBuilder.create(instance -> instance.group(
-                        EntityPredicate.ADVANCEMENT_CODEC.optionalFieldOf("player").forGetter(FishCaughtTriggerInstance::player),
+                        LootItemCondition.CODEC.optionalFieldOf("player").forGetter(FishCaughtTriggerInstance::player),
                         Identifier.CODEC.optionalFieldOf("fish", Starcatcher.MISSINGNO).forGetter(FishCaughtTriggerInstance::rl),
                         Rarity.CODEC.optionalFieldOf("rarity", Rarity.NONE).forGetter(FishCaughtTriggerInstance::rarity),
                         Codec.INT.optionalFieldOf("max_time", 999999).forGetter(FishCaughtTriggerInstance::time),

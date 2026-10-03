@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:sky_rod"
+        "recipes": "starcatcher:sky_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

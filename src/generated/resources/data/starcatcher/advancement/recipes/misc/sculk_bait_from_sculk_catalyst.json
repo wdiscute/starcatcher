@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:sculk_bait_from_sculk_catalyst"
+        "recipes": "starcatcher:sculk_bait_from_sculk_catalyst"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

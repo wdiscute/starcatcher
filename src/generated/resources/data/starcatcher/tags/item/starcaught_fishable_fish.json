@@ -5,6 +5,9 @@
     "#starcatcher:shrimps"
   ],
   "values": [
-    "#starcatcher:starcaught_fishable"
+    {
+      "id": "#starcatcher:starcaught_fishable",
+      "required": false
+    }
   ]
 }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:lust_bait_from_moss_carpet"
+        "recipes": "starcatcher:lust_bait_from_moss_carpet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -202,7 +202,7 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
         poseStack.scale(scale, -scale, scale);
         poseStack.translate(0, -1, 0);
 
-        poseStack.mulPose(Axis.YN.rotationDegrees(state.yRot + 180));
+        poseStack.rotate(Axis.YN.rotationDegrees(state.yRot + 180));
 
         // Render model here
         if (!fish.isEmpty())
@@ -223,14 +223,14 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
             node.submitModel(
                     model, ir, poseStack, getGoldRendertype(rl, model, itemStack), ir.lightCoords,
                     LivingEntityRenderer.getOverlayCoords(ir, 0),
-                    -1, null, ir.outlineColor, null
+                    -1, null, ir.outlineColor
             );
         }
         else
         {
             poseStack.translate(0F, 1F, 0.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
-            poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
+            poseStack.rotate(Axis.YP.rotationDegrees(270.0F));
+            poseStack.rotate(Axis.ZP.rotationDegrees(45.0F));
             //itemRenderer.appendItemLayers(itemStack, ItemDisplayContext.FIXED, packedLight,
             //OverlayTexture.NO_OVERLAY, poseStack, buffer, level, U.r.nextInt());
         }

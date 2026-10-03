@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:seeking_worm"
+        "recipes": "starcatcher:seeking_worm"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -16,7 +16,7 @@ public interface SCLootModifiers
             DeferredRegister.create(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, Starcatcher.MOD_ID);
 
     Supplier<MapCodec<? extends IGlobalLootModifier>> ADD_ITEM =
-            LOOT_MODIFIER_SERIALIZERS.register("add_item", () -> DGSCLootModifiers.AddItemModifier.CODEC);
+            LOOT_MODIFIER_SERIALIZERS.register("add_item", () -> DGSCLootModifiers.AddHatModifier.CODEC);
 
     static void register(IEventBus eventBus)
     {

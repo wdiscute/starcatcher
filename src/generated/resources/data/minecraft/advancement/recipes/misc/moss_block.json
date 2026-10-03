@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:moss_block"
+        "recipes": "minecraft:moss_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

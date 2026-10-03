@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:oak_fish_plaque"
+        "recipes": "starcatcher:oak_fish_plaque"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

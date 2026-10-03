@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:iceborn_rod"
+        "recipes": "starcatcher:iceborn_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

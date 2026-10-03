@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.blocks.clam;
 
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -11,17 +12,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.chunk.ChunkGenerator;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraft.world.level.levelgen.feature.Feature;
-import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 
-public class ClamFeature extends Feature<NoneFeatureConfiguration>
+public class ClamFeature implements Feature
 {
-    public ClamFeature(Codec<NoneFeatureConfiguration> p_66219_)
-    {
-        super(p_66219_);
-    }
+    public static final MapCodec<ClamFeature> CODEC = MapCodec.unit(ClamFeature::new);
 
     private boolean hasWater(WorldGenLevel level, BlockPos origin)
     {
@@ -34,12 +31,14 @@ public class ClamFeature extends Feature<NoneFeatureConfiguration>
     }
 
     @Override
-    public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context)
+    public MapCodec<? extends Feature> codec()
     {
-        WorldGenLevel level = context.level();
-        BlockPos originBP = context.origin();
-        RandomSource r = context.random();
+        return CODEC;
+    }
 
+    @Override
+    public boolean place(WorldGenLevel level, ChunkGenerator chunkGenerator, RandomSource r, BlockPos originBP)
+    {
         int originHeight = level.getHeight(Heightmap.Types.WORLD_SURFACE, originBP.getX(), originBP.getZ());
         originBP = new BlockPos(originBP.getX(), originHeight, originBP.getZ());
 

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:lush_rod"
+        "recipes": "starcatcher:lush_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

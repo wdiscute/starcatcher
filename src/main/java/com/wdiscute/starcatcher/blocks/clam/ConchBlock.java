@@ -33,7 +33,7 @@ public class ConchBlock extends HorizontalDirectionalBlock implements SimpleWate
                 .destroyTime(0.2f)
                 .noOcclusion()
                 .noCollision()
-                .pushReaction(PushReaction.DESTROY)
+                .pushReaction(PushReaction.POPPED)
                 .sound(SoundType.BONE_BLOCK)
         );
     }
@@ -62,12 +62,6 @@ public class ConchBlock extends HorizontalDirectionalBlock implements SimpleWate
     protected FluidState getFluidState(BlockState state)
     {
         return state.getValue(BlockStateProperties.WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
-    }
-
-    @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
-    {
-        return null;
     }
 
     @Override

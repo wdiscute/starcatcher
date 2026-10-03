@@ -19,6 +19,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.conditions.NeoForgeConditions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,15 +60,6 @@ public final class FishRegistration
                                          FishProperties fp,
                                          String requiredModId)
     {
-        //if running during conditions generation, dont register as context is null
-        if (DGSCFishProperties.runningOnlyForConditions)
-        {
-            //if has a required modid,
-            if (!requiredModId.isEmpty())
-                DGSCFishProperties.conditionsFps.add(Pair.of(key, requiredModId));
-            return;
-        }
-
         if (fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && fp.restrictions().stream().noneMatch(o -> o instanceof FluidRestriction))
             throw new IllegalStateException("No Fluid Restriction found for " + fp);
 
@@ -79,7 +71,12 @@ public final class FishRegistration
             STARCATCHER_FISHABLE.add(fp);
 
         if (DGSCFishProperties.MODS_TO_ACTUALLY_DATAGEN.contains(requiredModId))
-            context.register(key, fp);
+        {
+            if (requiredModId.isEmpty())
+                context.register(key, fp);
+            else
+                context.register(key, fp, NeoForgeConditions.modLoaded(requiredModId));
+        }
     }
 
     private static FishProperties prepare(FishProperties fp)
@@ -176,7 +173,7 @@ public final class FishRegistration
     public static ResourceKey<FishProperties> key(FishProperties fp)
     {
         //if starcatcher create compat fish, make key have create instead
-        if(CreateCompat.CREATE_COMPAT_FISH.stream().anyMatch(o -> fp.catchInfo().fish().identifier().equals(o.getId())))
+        if (CreateCompat.CREATE_COMPAT_FISH.stream().anyMatch(o -> fp.catchInfo().fish().identifier().equals(o.getId())))
             return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, Utils.rl("create", fp.catchInfo().fish().identifier().getPath()));
 
         return ResourceKey.create(Starcatcher.FISH_REGISTRY_KEY, fp.catchInfo().fish().identifier());

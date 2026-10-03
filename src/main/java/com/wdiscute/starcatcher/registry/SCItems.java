@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.registry;
 
-import com.wdiscute.libtooltips.Tooltips;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatEntity;
 import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatItem;
@@ -15,8 +14,12 @@ import com.wdiscute.starcatcher.messageinabottle.*;
 import com.wdiscute.utils.item.BasicItem;
 import com.wdiscute.utils.item.FireResistantBasicItem;
 import com.wdiscute.utils.item.SingleStackBasicItem;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.component.Compostable;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
+import net.minecraft.world.level.storage.loot.providers.number.ints.ContextIntProviders;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.data.loading.DatagenModLoader;
@@ -25,7 +28,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public interface SCItems
 {
-
     static void registerExtraItems()
     {
         if (ModList.get().isLoaded("create") || DatagenModLoader.isRunningDataGen())
@@ -95,9 +97,9 @@ public interface SCItems
     DeferredItem<Item> CLOUD_BOBBER = BOBBERS_REGISTRY.registerItem("cloud_bobber", SingleStackBasicItem::new);
 
     //baits
-    DeferredItem<Item> WORM = ITEMS.registerItem("worm", BasicItem::new);
-    DeferredItem<Item> ALMIGHTY_WORM = ITEMS.registerItem("almighty_worm", BasicItem::new);
-    DeferredItem<Item> SEEKING_WORM = ITEMS.registerItem("seeking_worm", BasicItem::new);
+    DeferredItem<Item> WORM = ITEMS.registerItem("worm", (p) -> new BasicItem(p.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)));
+    DeferredItem<Item> ALMIGHTY_WORM = ITEMS.registerItem("almighty_worm", (p) -> new BasicItem(p.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)));
+    DeferredItem<Item> SEEKING_WORM = ITEMS.registerItem("seeking_worm", (p) -> new BasicItem(p.compostable(ContextIntProviders.COMPOSTABLE_MEDIUM)));
 
     DeferredItem<Item> GUNPOWDER_BAIT = ITEMS.registerItem("gunpowder_bait", BasicItem::new);
     DeferredItem<Item> CHERRY_BAIT = ITEMS.registerItem("cherry_bait", BasicItem::new);

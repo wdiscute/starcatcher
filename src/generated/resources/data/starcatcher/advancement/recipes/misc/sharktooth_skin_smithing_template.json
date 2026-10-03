@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:sharktooth_skin_smithing_template"
+        "recipes": "starcatcher:sharktooth_skin_smithing_template"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -2,31 +2,27 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "conditions": [
-        {
-          "condition": "minecraft:survives_explosion"
-        }
-      ],
+      "condition": {
+        "type": "minecraft:survives_explosion"
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:copy_components",
-              "include": [
-                "minecraft:custom_name",
-                "minecraft:lock",
-                "minecraft:container_loot",
-                "starcatcher:tackle_box_fishes",
-                "starcatcher:tackle_box_items"
-              ],
-              "source": "block_entity"
-            }
-          ],
+          "modifier": {
+            "type": "minecraft:copy_components",
+            "include": [
+              "minecraft:custom_name",
+              "minecraft:lock",
+              "minecraft:container_loot",
+              "starcatcher:tackle_box_fishes",
+              "starcatcher:tackle_box_items"
+            ],
+            "source": "block_entity"
+          },
           "name": "starcatcher:tackle_box_cyan"
         }
       ],
-      "rolls": 1.0
+      "rolls": 1
     }
   ],
   "random_sequence": "starcatcher:blocks/tackle_box_cyan"

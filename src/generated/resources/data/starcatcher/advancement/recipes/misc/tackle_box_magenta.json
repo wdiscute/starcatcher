@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:tackle_box_magenta"
+        "recipes": "starcatcher:tackle_box_magenta"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

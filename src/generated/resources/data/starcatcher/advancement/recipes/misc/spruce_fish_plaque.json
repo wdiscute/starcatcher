@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:spruce_fish_plaque"
+        "recipes": "starcatcher:spruce_fish_plaque"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

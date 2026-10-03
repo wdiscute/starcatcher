@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:weathered_copper_hook"
+        "recipes": "starcatcher:weathered_copper_hook"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:almighty_worm"
+        "recipes": "starcatcher:almighty_worm"
       },
       "trigger": "minecraft:recipe_unlocked"
     },

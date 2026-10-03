@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:fish_radar"
+        "recipes": "starcatcher:fish_radar"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

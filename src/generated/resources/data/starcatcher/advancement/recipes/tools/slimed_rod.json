@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:slimed_rod"
+        "recipes": "starcatcher:slimed_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

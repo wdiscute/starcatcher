@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:magmaforged_rod"
+        "recipes": "starcatcher:magmaforged_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

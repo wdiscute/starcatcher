@@ -61,12 +61,6 @@ public class TrophyBlock extends HorizontalDirectionalBlock implements SimpleWat
     }
 
     @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
-    {
-        return null;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);

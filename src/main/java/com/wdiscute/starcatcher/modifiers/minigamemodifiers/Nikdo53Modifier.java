@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.modifiers.minigamemodifiers;
 
+import com.mojang.blaze3d.platform.InputConstants;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
@@ -13,6 +14,7 @@ import com.wdiscute.utils.ScreenUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
+import net.minecraft.client.input.KeyEvent;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvents;
 import org.joml.Matrix3x2fStack;
@@ -69,12 +71,12 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void onKeyReleased(FishingMinigameScreen instance, int key, int scanCode, int keyModifiers)
+    public void onKeyReleased(FishingMinigameScreen instance, KeyEvent event)
     {
-        if (key == getOptions().keyLeft.getKey().getValue())
+        if (event.key() == InputConstants.KEY_LEFT)
             isHoldingLeft = false;
 
-        if (key == getOptions().keyRight.getKey().getValue())
+        if (event.key() == InputConstants.KEY_RIGHT)
             isHoldingRight = false;
     }
 
@@ -108,16 +110,16 @@ public class Nikdo53Modifier extends AbstractMinigameModifier
     }
 
     @Override
-    public void onKeyPress(FishingMinigameScreen instance, int key, int scanCode, int keyModifiers)
+    public void onKeyPress(FishingMinigameScreen instance, KeyEvent event)
     {
-        if (key == getOptions().keyLeft.getKey().getValue())
+        if (event.key() == InputConstants.KEY_LEFT)
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
             handleLayer--;
             isHoldingLeft = true;
         }
 
-        if (key == getOptions().keyRight.getKey().getValue())
+        if (event.key() == InputConstants.KEY_RIGHT)
         {
             Minecraft.getInstance().player.playSound(SoundEvents.BAMBOO_WOOD_BUTTON_CLICK_ON, 0.6f, 1f);
             handleLayer++;

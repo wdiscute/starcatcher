@@ -6,10 +6,12 @@ import com.wdiscute.utils.MaybeStack;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRequirements;
 import net.minecraft.advancements.AdvancementRewards;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeUnlockAdvancementBuilder;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.TagKey;
@@ -30,7 +32,7 @@ public class TackleBoxBoatRecipeBuilder
 {
     private final List<Ingredient> ingredients;
     private final MaybeStack result;
-    private final Map<String, net.minecraft.advancements.triggers.Criterion<?>> criteria = new LinkedHashMap<>();
+    private final RecipeUnlockAdvancementBuilder advancementBuilder = new RecipeUnlockAdvancementBuilder();
 
     public TackleBoxBoatRecipeBuilder(MaybeStack result)
     {
@@ -54,7 +56,7 @@ public class TackleBoxBoatRecipeBuilder
         return this;
     }
 
-    public TackleBoxBoatRecipeBuilder requires(HolderLookup.RegistryLookup<Item> reg, TagKey<Item> tag)
+    public TackleBoxBoatRecipeBuilder requires(HolderGetter<Item> reg, TagKey<Item> tag)
     {
         ingredients.add(Ingredient.of(reg.getOrThrow(tag)));
         return this;
@@ -63,7 +65,7 @@ public class TackleBoxBoatRecipeBuilder
 
     public TackleBoxBoatRecipeBuilder unlockedBy(String key, net.minecraft.advancements.triggers.Criterion<?> criterion)
     {
-        this.criteria.put(key, criterion);
+        this.advancementBuilder.unlockedBy(key, criterion);
         return this;
     }
 
@@ -76,24 +78,9 @@ public class TackleBoxBoatRecipeBuilder
     {
         ResourceKey<Recipe<?>> recipeResourceKey = ResourceKey.create(Registries.RECIPE, recipeId);
 
-        this.ensureValid(recipeId);
-        Advancement.Builder advancement$builder = recipeOutput.advancement()
-                .addCriterion("has_the_recipe", net.minecraft.advancements.triggers.RecipeUnlockedTrigger.unlocked(recipeResourceKey))
-                .rewards(AdvancementRewards.Builder.recipe(recipeResourceKey))
-                .requirements(AdvancementRequirements.Strategy.OR);
-        this.criteria.forEach(advancement$builder::addCriterion);
-
         TackleBoxBoatRecipe netheriteUpgradeSmithingRecipe = new TackleBoxBoatRecipe(
                 new Recipe.CommonInfo(true), new CraftingRecipe.CraftingBookInfo(CraftingBookCategory.MISC, "boat"), new ItemStackTemplate(result.toItem(), result.count(), result.patch()), ingredients);
 
-        recipeOutput.accept(recipeResourceKey, netheriteUpgradeSmithingRecipe, advancement$builder.build(recipeId.withPrefix("recipes/" + RecipeCategory.TRANSPORTATION.getFolderName() + "/")));
-    }
-
-    private void ensureValid(Identifier location)
-    {
-        if (this.criteria.isEmpty())
-        {
-            throw new IllegalStateException("No way of obtaining recipe " + location);
-        }
+        recipeOutput.accept(recipeResourceKey, netheriteUpgradeSmithingRecipe, advancementBuilder.build(recipeOutput, recipeResourceKey, RecipeCategory.TRANSPORTATION));
     }
 }

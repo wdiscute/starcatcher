@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:tournament_stand"
+        "recipes": "starcatcher:tournament_stand"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

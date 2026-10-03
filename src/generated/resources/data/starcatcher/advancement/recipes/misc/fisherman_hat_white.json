@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:fisherman_hat_white"
+        "recipes": "starcatcher:fisherman_hat_white"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

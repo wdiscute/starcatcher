@@ -55,7 +55,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
         //starcaught fishable fish
         tag(SCTags.STARCAUGHT_FISHABLE_FISH)
-                .addTag(SCTags.STARCAUGHT_FISHABLE)
+                .addOptionalTag(SCTags.STARCAUGHT_FISHABLE)
                 .remove(SCTags.CRABS)
                 .remove(SCTags.EELS)
                 .remove(SCTags.SHRIMPS)
@@ -63,7 +63,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
 
         //starcaught fishable fish
         tag(SCTags.HAS_TARGETED_BAIT)
-                .addTag(SCTags.STARCAUGHT_FISHABLE)
+                .addOptionalTag(SCTags.STARCAUGHT_FISHABLE)
         ;
 
         //cycle every FP
@@ -218,7 +218,7 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .addTag(SCTags.BAITS)
                 .addTag(SCTags.HOOKS)
                 .addTag(SCTags.BOBBERS)
-                .addTag(SCTags.FISHABLE)
+                .addOptionalTag(SCTags.FISHABLE)
                 .addTag(SCTags.HATS)
                 .addTag(ItemTags.FISHES)
                 .add(rk(GUIDE.get()))

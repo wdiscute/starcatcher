@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:frog_tackle"
+        "recipes": "starcatcher:frog_tackle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

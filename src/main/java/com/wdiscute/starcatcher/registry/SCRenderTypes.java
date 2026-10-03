@@ -1,17 +1,11 @@
 package com.wdiscute.starcatcher.registry;
 
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.DefaultVertexFormat;
-import com.mojang.blaze3d.vertex.VertexFormat;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.Starcatcher;
-import net.minecraft.client.renderer.rendertype.RenderType;
 import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import org.joml.Matrix4f;
 
-import java.io.IOException;
 
 @EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
 public class SCRenderTypes

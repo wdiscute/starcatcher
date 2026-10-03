@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:dripstone_bobber"
+        "recipes": "starcatcher:dripstone_bobber"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

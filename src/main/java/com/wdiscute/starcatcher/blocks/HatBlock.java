@@ -40,12 +40,6 @@ public class HatBlock extends HorizontalDirectionalBlock implements SimpleWaterl
     }
 
     @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec()
-    {
-        return null;
-    }
-
-    @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);

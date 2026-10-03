@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '2.0.142'
+    id 'net.neoforged.moddev' version '2.0.147'
     id 'idea'
 }
 
@@ -58,40 +58,42 @@ repositories {
 
 dependencies {
     //wdUtils
-    jarJar(implementation("com.wdiscute:wdUtils:2.0.2-NEOFORGE-26.2"))
+    jarJar(implementation("com.wdiscute:wdUtils:2.0-NEOFORGE-26.3"))
 
     //FTS
-    jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.2"))
-    //jarJar(implementation("net.mcexpanded:Fancy-Tabs-Neo:5.0-NEOFORGE-26.2"))
+    jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.3"))
 
     //libtooltips
-    jarJar(implementation("maven.modrinth:libtooltips:2.3-NEOFORGE-26.2"))
+    jarJar(implementation("maven.modrinth:libtooltips:2.3-NEOFORGE-26.3"))
 
     //selling bin
-    jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-26.2"))
+    jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-26.3"))
 
     //tiny multiblock lib
-    jarJar(implementation("maven.modrinth:tiny-multiblock-lib:neo-26.2-4.0.0"))
+    jarJar(implementation("net.nikdo53:tiny-multiblock-lib-neoforge-26.3:4.0.1"))
 
     //JEI
-    compileOnly "mezz.jei:jei-26.2-neoforge:30.30.0.204"
+    compileOnly "mezz.jei:jei-26.3-neoforge:31.9.0.56"
 
     //little joys
-    compileOnly "maven.modrinth:little-joys:26.2.0.4+neoforge-26.2"
-    runtimeOnly "maven.modrinth:little-joys:26.2.0.4+neoforge-26.2"
+    compileOnly "maven.modrinth:little-joys:26.3.0.1+neoforge-26.3"
+    runtimeOnly "maven.modrinth:little-joys:26.3.0.1+neoforge-26.3"
 
     //little joys
-    runtimeOnly "maven.modrinth:balm:26.2.0.9+neoforge-26.2"
+    runtimeOnly "maven.modrinth:balm:26.3.0.3+neoforge-26.3"
+    runtimeOnly "maven.modrinth:shogi:26.3.0.3+neoforge-26.3"
+
+
 
     //curios (check modifiers in curio slots)
-    compileOnly "top.theillusivec4.curios:curios-neoforge:16.0.0+26.2:api"
+    compileOnly "top.theillusivec4.curios:curios-neoforge:17.0.0-beta.2+26.3:api"
     //runtimeOnly "top.theillusivec4.curios:curios-neoforge:16.0.0+26.2"
 
     //EclipticSeasons
-    compileOnly files(".compatmods/EclipticSeasons-26.2-neoforge-0.15.0-rc-3.jar")
+    compileOnly "maven.modrinth:ecliptic-seasons:0.15.3.1"
 
     //Serene Seasons
-    compileOnly files(".compatmods/SereneSeasons-neoforge-26.2-26.1.2.0.5.jar")
+    compileOnly "maven.modrinth:serene-seasons:26.1.2.0.7"
 
     //ftb teams not on 26.2 yet
     //compileOnly files(".compatmods/ftb-teams-neoforge-26.1.2.4.jar")
@@ -104,7 +106,7 @@ dependencies {
     //runtimeOnly "maven.modrinth:AANobbMI:UETw0GTI"
 
     //jade
-    runtimeOnly "maven.modrinth:jade:26.2.10+neoforge"
+    runtimeOnly "maven.modrinth:jade:26.3.5+neoforge"
 }
 
 base {

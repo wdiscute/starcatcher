@@ -79,10 +79,10 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
 
             switch (state.direction)
             {
-                case NORTH -> poseStack.mulPose(Axis.YP.rotation((float) Math.PI / 2));
-                case SOUTH -> poseStack.mulPose(Axis.YP.rotation((float) Math.PI / 2));
-                case EAST -> poseStack.mulPose(Axis.YP.rotation((float) Math.PI));
-                default -> poseStack.mulPose(Axis.YP.rotation((float) Math.PI));
+                case NORTH -> poseStack.rotate(Axis.YP.rotation((float) Math.PI / 2));
+                case SOUTH -> poseStack.rotate(Axis.YP.rotation((float) Math.PI / 2));
+                case EAST -> poseStack.rotate(Axis.YP.rotation((float) Math.PI));
+                default -> poseStack.rotate(Axis.YP.rotation((float) Math.PI));
             }
 
             float scale = SCDataComponents.getOrDefault(
@@ -102,7 +102,7 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
             }
 
             if (rotation.containsKey(item))
-                poseStack.mulPose(Axis.ZN.rotation((float) Math.toRadians(rotation.getOrDefault(item, 0f))));
+                poseStack.rotate(Axis.ZN.rotation((float) Math.toRadians(rotation.getOrDefault(item, 0f))));
 
             poseStack.scale(scale, -scale, scale);
             poseStack.translate(0, -1, 0);

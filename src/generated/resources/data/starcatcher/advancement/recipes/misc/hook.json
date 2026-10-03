@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:hook"
+        "recipes": "starcatcher:hook"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

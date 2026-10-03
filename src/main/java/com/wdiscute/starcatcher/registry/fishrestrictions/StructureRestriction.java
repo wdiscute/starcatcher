@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import it.unimi.dsi.fastutil.longs.LongSet;
+import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -27,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class StructureRestriction extends AbstractFishRestriction
 {
@@ -112,13 +114,14 @@ public class StructureRestriction extends AbstractFishRestriction
         for (Identifier structureId : structures)
         {
             //get structure from rl
-            var structure = structureRegistry.get(ResourceKey.create(Registries.STRUCTURE, structureId));
+            Optional<Holder.Reference<Structure>> structure = structureRegistry.get(ResourceKey.create(Registries.STRUCTURE, structureId));
 
+            //todo 26 test this
             //if structure exists
-            if (structure.isPresent())
-                //if structure is at blockpos
-                if (structureManager.getStructureWithPieceAt(entity.blockPosition(), structure.get().value()).isValid())
-                    return 0;
+            if (structure.isPresent() && structureManager
+                    .getStructureWithPieceAt(entity.blockPosition(),
+                            holder -> holder.is(structure.get().key())).isValid())
+                return 0;
         }
 
         return -9999;
@@ -133,5 +136,5 @@ public class StructureRestriction extends AbstractFishRestriction
             BuiltinStructures.VILLAGE_SAVANNA.identifier(),
             BuiltinStructures.VILLAGE_PLAINS.identifier(),
             BuiltinStructures.VILLAGE_DESERT.identifier()
-            ), "");
+    ), "");
 }

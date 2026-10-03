@@ -1,44 +1,41 @@
 package com.wdiscute.starcatcher.datagen.fish;
 
-import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.datagen.DGSCBiomeModifiers;
-import com.wdiscute.starcatcher.datagen.DGSCDataGenerators;
 import com.wdiscute.starcatcher.datagen.fish.compat.*;
 import com.wdiscute.starcatcher.fish.*;
-import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.registries.RegistryPatchGenerator;
 import net.minecraft.data.worldgen.BootstrapContext;
-import net.minecraft.resources.ResourceKey;
-import net.neoforged.neoforge.common.conditions.ModLoadedCondition;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
+import net.neoforged.neoforge.registries.DataPackRegistriesHooks;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
+public final class DGSCFishProperties
 {
-    public DGSCFishProperties(
-            PackOutput output,
-            CompletableFuture<HolderLookup.Provider> registries)
+
+    private DGSCFishProperties()
     {
-        super(
+    }
+
+    public static DatapackBuiltinEntriesProvider create(
+            PackOutput output,
+            CompletableFuture<HolderLookup.Provider> worldRegistries,
+            CompletableFuture<HolderLookup.Provider> reloadableRegistries,
+            RegistrySetBuilder setBuilder
+    )
+    {
+        return DatapackBuiltinEntriesProvider.forReloadableLayer(
                 output,
-                registries,
-                DGSCDataGenerators.BUILDER,
-                (consumer) ->
-                {
-                    runningOnlyForConditions = true;
-                    bootstrap(null);
-                    conditionsFps.forEach(pair -> consumer.accept(pair.getFirst(), new ModLoadedCondition(pair.getSecond())));
-                    runningOnlyForConditions = false;
-                },
+                "FishingProperties",
+                worldRegistries,
+                reloadableRegistries,
+                setBuilder,
                 Set.of(
                         "minecraft",
 
@@ -65,10 +62,6 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
         );
     }
 
-    static boolean runningOnlyForConditions = false;
-    static List<Pair<ResourceKey<FishProperties>, String>> conditionsFps = new ArrayList<>();
-
-
     public static final List<String> MODS_TO_ACTUALLY_DATAGEN =
             List.of(
                     "minecraft",
@@ -83,7 +76,6 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
 
     public static void bootstrap(@Nullable BootstrapContext<FishProperties> context)
     {
-
         //vanilla
         DGTrophies.bootstrap(context);
         DGMinecraftFishes.bootstrap(context);
@@ -127,11 +119,5 @@ public class DGSCFishProperties extends DatapackBuiltinEntriesProvider
                         (a, b) -> a,
                         LinkedHashMap::new
                 ));
-    }
-
-    @Override
-    public String getName()
-    {
-        return "FishingProperties";
     }
 }

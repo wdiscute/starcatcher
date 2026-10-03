@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:acacia_fish_plaque"
+        "recipes": "starcatcher:acacia_fish_plaque"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

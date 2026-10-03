@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:legendary_bait_from_legendary_fish"
+        "recipes": "starcatcher:legendary_bait_from_legendary_fish"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:colorful_tackle"
+        "recipes": "starcatcher:colorful_tackle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

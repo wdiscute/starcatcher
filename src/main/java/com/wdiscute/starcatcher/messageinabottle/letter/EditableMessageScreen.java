@@ -13,8 +13,6 @@ import net.minecraft.client.input.MouseButtonEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.neoforged.neoforge.client.network.ClientPacketDistributor;
-import net.neoforged.neoforge.network.PacketDistributor;
-import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -120,9 +118,9 @@ public class EditableMessageScreen extends Screen
         }
 
         //if pressed enter, send arrow down to go to next line
-        if (event.key() == GLFW.GLFW_KEY_ENTER)
+        if (event.key() == InputConstants.KEY_RETURN)
         {
-            keyPressed(new KeyEvent(GLFW.GLFW_KEY_DOWN, 0, 0));
+            keyPressed(new KeyEvent(InputConstants.KEY_DOWN, 0, 0));
             return true;
         }
 

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:murkwater_bait"
+        "recipes": "starcatcher:murkwater_bait"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

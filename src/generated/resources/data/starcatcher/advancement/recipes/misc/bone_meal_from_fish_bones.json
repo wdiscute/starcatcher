@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:bone_meal_from_fish_bones"
+        "recipes": "starcatcher:bone_meal_from_fish_bones"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

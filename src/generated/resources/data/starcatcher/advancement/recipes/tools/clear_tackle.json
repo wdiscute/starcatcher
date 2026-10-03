@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:clear_tackle"
+        "recipes": "starcatcher:clear_tackle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

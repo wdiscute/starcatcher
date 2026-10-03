@@ -16,6 +16,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
+import net.minecraft.client.renderer.rendertype.RenderType;
+import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.sprite.SpriteGetter;
@@ -94,11 +96,11 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             while (rotDiff < (float) -Math.PI) rotDiff += (float) (Math.PI * 2);
 
             float f2 = state.oRot + rotDiff * state.partialTick;
-            poseStack.mulPose(Axis.YP.rotation(-f2));
+            poseStack.rotate(Axis.YP.rotation(-f2));
 
             //rotate to lay down when closed
-            poseStack.mulPose(Axis.ZP.rotationDegrees(30.0F * (Math.clamp(openPartial * 2, 0, 1))));
-            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F * (1 - Math.clamp(openPartial * 2, 0, 1))));
+            poseStack.rotate(Axis.ZP.rotationDegrees(30.0F * (Math.clamp(openPartial * 2, 0, 1))));
+            poseStack.rotate(Axis.XP.rotationDegrees(90.0F * (1 - Math.clamp(openPartial * 2, 0, 1))));
 
             float f3 = Mth.lerp(state.partialTick, state.oFlip, state.flip);
             float f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
@@ -107,8 +109,16 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
             State bookState = State.forAnimation(state.time, Mth.clamp(f4, 0.0F, 1.0F), Mth.clamp(f5, 0.0F, 1.0F), state.open);
             submitNodeCollector.submitModel(
-                    this.bookModel, bookState, poseStack, state.lightCoords,
-                    OverlayTexture.NO_OVERLAY, -1, BOOK_TEXTURE, this.sprites, 0, state.breakProgress
+                    this.bookModel,
+                    bookState,
+                    poseStack,
+                    //todo 26
+                    RenderTypes.entityCutout(BOOK_TEXTURE.texture()),
+                    state.lightCoords,
+                    OverlayTexture.NO_OVERLAY,
+                    -1,
+                    null,
+                    0
             );
 
             poseStack.popPose();

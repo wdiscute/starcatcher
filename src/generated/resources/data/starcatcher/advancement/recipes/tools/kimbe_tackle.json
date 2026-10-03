@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:kimbe_tackle"
+        "recipes": "starcatcher:kimbe_tackle"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

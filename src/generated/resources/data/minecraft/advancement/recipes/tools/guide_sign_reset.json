@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:guide_sign_reset"
+        "recipes": "minecraft:guide_sign_reset"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:cherry_bait"
+        "recipes": "starcatcher:cherry_bait"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -60,7 +60,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
                 .strength(2.0F)
                 .dynamicShape()
                 .noOcclusion()
-                .pushReaction(PushReaction.DESTROY));
+                .pushReaction(PushReaction.POPPED));
         this.color = color;
     }
 

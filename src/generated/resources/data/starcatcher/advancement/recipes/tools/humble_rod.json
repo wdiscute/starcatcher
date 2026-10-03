@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:humble_rod"
+        "recipes": "starcatcher:humble_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

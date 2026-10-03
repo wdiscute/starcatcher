@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:leaf_bobber"
+        "recipes": "starcatcher:leaf_bobber"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

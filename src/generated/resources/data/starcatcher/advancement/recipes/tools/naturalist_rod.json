@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:naturalist_rod"
+        "recipes": "starcatcher:naturalist_rod"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
