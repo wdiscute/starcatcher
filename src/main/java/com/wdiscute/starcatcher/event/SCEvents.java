@@ -264,9 +264,7 @@ public class SCEvents
     @SubscribeEvent
     public static void addDatapackRegistry(NewDatapackRegistryEvent event)
     {
-        event.worldRegistry(
-                Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC,
-                builder -> builder.maxId(512));
+        event.worldRegistry(Starcatcher.FISH_REGISTRY_KEY, FishProperties.CODEC, FishProperties.CODEC);
     }
 
     @SubscribeEvent
