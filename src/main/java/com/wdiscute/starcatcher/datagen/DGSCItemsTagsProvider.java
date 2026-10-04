@@ -12,12 +12,14 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.KeyTagProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
 import java.util.concurrent.CompletableFuture;
@@ -58,6 +60,11 @@ public class DGSCItemsTagsProvider extends KeyTagProvider<Item>
                 .remove(SCTags.CRABS)
                 .remove(SCTags.EELS)
                 .remove(SCTags.SHRIMPS)
+        ;
+
+        //starcaught fishable fish
+        tag(SCTags.HAS_TARGETED_BAIT)
+                .addTag(SCTags.STARCAUGHT_FISHABLE)
         ;
 
         //cycle every FP
@@ -132,6 +139,8 @@ public class DGSCItemsTagsProvider extends KeyTagProvider<Item>
                 .add(rk(MURKWATER_BAIT.get()))
                 .add(rk(LEGENDARY_BAIT.get()))
                 .add(rk(METEOROLOGICAL_BAIT.get()))
+                .add(rk(TARGETED_BAIT.get()))
+                .add(rk(LILAC_MINNOW.get()))
                 .add(rk(Items.WITHER_SKELETON_SKULL))
                 .addTag(Tags.Items.BUCKETS_EMPTY)
 
@@ -237,6 +246,20 @@ public class DGSCItemsTagsProvider extends KeyTagProvider<Item>
                 .add(rk(TACKLE_BOX_PURPLE.asItem()))
                 .add(rk(TACKLE_BOX_WHITE.asItem()))
         ;
+
+        //fish plaques
+        tag(SCTags.FISH_PLAQUES)
+                .add(rk(OAK_FISH_PLAQUE.asItem()))
+                .add(rk(DARK_OAK_FISH_PLAQUE.asItem()))
+                .add(rk(JUNGLE_FISH_PLAQUE.asItem()))
+                .add(rk(ACACIA_FISH_PLAQUE.asItem()))
+                .add(rk(MANGROVE_FISH_PLAQUE.asItem()))
+                .add(rk(BAMBOO_FISH_PLAQUE.asItem()))
+                .add(rk(SPRUCE_FISH_PLAQUE.asItem()))
+                .add(rk(BIRCH_FISH_PLAQUE.asItem()))
+                .add(rk(CHERRY_FISH_PLAQUE.asItem()))
+        ;
+
 
         tag(ItemTags.BOOKSHELF_BOOKS)
                 .add(rk(GUIDE.get()));

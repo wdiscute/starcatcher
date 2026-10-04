@@ -1,0 +1,49 @@
+package com.wdiscute.starcatcher.fishentity.fishmodels;
+
+import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.fishentity.FishEntityRenderState;
+import net.minecraft.client.model.EntityModel;
+import net.minecraft.client.model.geom.ModelLayerLocation;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.model.geom.PartPose;
+import net.minecraft.client.model.geom.builders.*;
+import net.minecraft.resources.Identifier;
+
+public class Sporefish extends EntityModel<FishEntityRenderState>
+{
+    private static final String NAME = "sporefish";
+    public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl(NAME), "main");
+    private final ModelPart fish;
+
+    public Sporefish(ModelPart root)
+    {
+        super(root);
+        this.fish = root.getChild("fish");
+    }
+
+    public static Identifier getTexture()
+    {
+        return Starcatcher.rl("textures/entity/fishes/" + NAME + ".png");
+    }
+
+    public static LayerDefinition createBodyLayer() {
+        MeshDefinition meshdefinition = new MeshDefinition();
+        PartDefinition partdefinition = meshdefinition.getRoot();
+
+        PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(-0.5F, 18.0F, -2.0F));
+        PartDefinition body = fish.addOrReplaceChild("body", CubeListBuilder.create().texOffs(0, 0).addBox(-1.0F, -3.0F, -6.0F, 3.0F, 3.0F, 12.0F, new CubeDeformation(0.0F))
+                .texOffs(26, 15).addBox(1.5F, -2.0F, -6.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(26, 17).addBox(-1.5F, -2.0F, -6.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(26, 19).addBox(0.0F, -0.5F, -6.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(26, 21).addBox(0.0F, -3.5F, -6.5F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+                .texOffs(8, 25).addBox(1.1F, -2.5F, -5.0F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(24, 25).addBox(-1.1F, -2.5F, -5.0F, 1.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
+        PartDefinition rfin = body.addOrReplaceChild("rfin", CubeListBuilder.create().texOffs(24, 23).addBox(-4.0F, 1.0F, -0.001F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(-1.0F, -3.0F, -1.999F, 0.0F, 1.0908F, 0.0F));
+        PartDefinition lfin = body.addOrReplaceChild("lfin", CubeListBuilder.create().texOffs(0, 25).addBox(0.4617F, 1.0F, -0.888F, 4.0F, 2.0F, 0.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(1.0F, -3.0F, -1.999F, 0.0F, -1.0908F, 0.0F));
+        PartDefinition fin1 = fish.addOrReplaceChild("fin1", CubeListBuilder.create().texOffs(16, 15).addBox(0.0F, -3.0F, -3.0F, 0.0F, 3.0F, 5.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -3.0F, 0.0F));
+        PartDefinition fin2 = fish.addOrReplaceChild("fin2", CubeListBuilder.create().texOffs(0, 15).addBox(0.0F, 0.0F, -3.0F, 0.0F, 2.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, 0.0F, 0.0F));
+        PartDefinition fin3 = fish.addOrReplaceChild("fin3", CubeListBuilder.create().texOffs(16, 23).addBox(0.0F, -2.0F, 0.0F, 0.0F, 5.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.5F, -2.0F, 6.0F));
+
+        return LayerDefinition.create(meshdefinition, 32, 32);
+    }
+}

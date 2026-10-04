@@ -32,7 +32,7 @@ public class PinkKoi<T extends Entity> extends EntityModel<FishEntityRenderState
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 19.0F, -1.0F));
+		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 18.0F, -1.0F));
 
 		PartDefinition fin1 = fish.addOrReplaceChild("fin1", CubeListBuilder.create(), PartPose.offset(0.0F, 0.0F, 0.0F));
 

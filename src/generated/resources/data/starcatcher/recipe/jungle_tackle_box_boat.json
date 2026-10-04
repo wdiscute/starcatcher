@@ -1,0 +1,12 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "category": "misc",
+  "group": "boat",
+  "ingredients": [
+    "minecraft:jungle_boat",
+    "#starcatcher:tackle_boxes"
+  ],
+  "result": {
+    "id": "starcatcher:jungle_tackle_box_boat"
+  }
+}

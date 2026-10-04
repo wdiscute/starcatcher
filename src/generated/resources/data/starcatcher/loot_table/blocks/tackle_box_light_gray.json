@@ -16,10 +16,10 @@
               "function": "minecraft:copy_components",
               "include": [
                 "minecraft:custom_name",
-                "minecraft:container",
                 "minecraft:lock",
                 "minecraft:container_loot",
-                "starcatcher:tackle_box_fishes"
+                "starcatcher:tackle_box_fishes",
+                "starcatcher:tackle_box_items"
               ],
               "source": "block_entity"
             }

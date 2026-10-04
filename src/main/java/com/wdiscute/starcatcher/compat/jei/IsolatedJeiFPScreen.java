@@ -22,7 +22,7 @@ public class IsolatedJeiFPScreen extends IsolatedFPScreen
     public void onClose()
     {
         super.onClose();
-        Minecraft.getInstance().setScreen(screen);
+        Minecraft.getInstance().setScreenAndShow(screen);
     }
 
     @Override

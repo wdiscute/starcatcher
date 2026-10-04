@@ -11,14 +11,12 @@ import com.wdiscute.starcatcher.fishentity.FishEntityRenderState;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
-import net.minecraft.client.model.object.book.BookModel;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
-import net.minecraft.client.renderer.rendertype.RenderType;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -49,24 +47,19 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
     public void extractRenderState(DisplayBlockEntity be, DisplayBlockRenderState state, float partialTicks, Vec3 cameraPosition, ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress)
     {
         BlockEntityRenderer.super.extractRenderState(be, state, partialTicks, cameraPosition, breakProgress);
+        state.hasBlockAbove = !be.getLevel().getBlockState(be.getBlockPos().above()).isEmpty();
         state.stack = be.getImmutableItem() == null ? ItemStack.EMPTY : be.getImmutableItem();
-
-        //vanilla enchant table
-        {
-            state.flip = Mth.lerp(partialTicks, be.oFlip, be.flip);
-            state.open = Mth.lerp(partialTicks, be.oOpen, be.open);
-            state.time = be.time + partialTicks;
-            float or = be.rot - be.oRot;
-
-            while (or >= (float) Math.PI)
-                or -= (float) (Math.PI * 2);
-
-            while (or < (float) -Math.PI)
-                or += (float) (Math.PI * 2);
-
-            state.yRot = be.oRot + or * partialTicks;
-        }
-
+        state.time = be.time;
+        state.partialTick = partialTicks;
+        state.flip = be.flip;
+        state.oFlip = be.oFlip;
+        state.flipT = be.flipT;
+        state.flipA = be.flipA;
+        state.open = be.open;
+        state.oOpen = be.oOpen;
+        state.rot = be.rot;
+        state.oRot = be.oRot;
+        state.tRot = be.tRot;
         state.fishRotating = be.fishRotating;
     }
 
@@ -77,26 +70,53 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
         {
             poseStack.pushPose();
 
-            //vanilla enchant table
-            {
-                //todo 26 reimplement custom book movement
-                poseStack.translate(0.5F, 0.9F, 0.5F);
-                poseStack.translate(0.0F, 0.1F + Mth.sin(state.time * 0.1F) * 0.01F, 0.0F);
-                float yRot = state.yRot;
-                poseStack.mulPose(Axis.YP.rotation(-yRot));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(80.0F));
-                float ff1 = Mth.frac(state.flip + 0.25F) * 1.6F - 0.3F;
-                float ff2 = Mth.frac(state.flip + 0.75F) * 1.6F - 0.3F;
+            float ticks = (float) state.time + state.partialTick;
+            float openPartial = Math.clamp(state.open + (state.partialTick * (0.1f * Math.signum(state.open - state.oOpen))), 0, 1);
 
-                DisplayBookModel.State bookState = DisplayBookModel.State.forAnimation(state.time, Mth.clamp(ff1, 0.0F, 1.0F), Mth.clamp(ff2, 0.0F, 1.0F), state.open);
-                submitNodeCollector.submitModel(
-                        this.bookModel, bookState, poseStack, RenderTypes.entityCutout(BOOK_TEXTURE), state.lightCoords,
-                        OverlayTexture.NO_OVERLAY, 0, state.breakProgress
-                );
-            }
+            //move up slightly when open
+            poseStack.translate(0.5F, 0.95F + 0.2f * (Math.clamp(openPartial * 4, 0, 1)), 0.5F);
+
+            //float up and down
+            poseStack.translate(0.0F, (0.1F + Mth.sin(ticks / 10 * 0.6F) * 0.03F) * openPartial, 0.0F);
+
+            double rotation = state.rot + (state.rot - state.oRot) * state.partialTick;
+            if (Math.abs(state.rot - state.oRot) > 3)
+                rotation = state.rot;
+
+            double x = Math.cos(rotation);
+            double y = Math.sin(rotation);
+
+
+            //move towards the player when open
+            poseStack.translate(((x / 3) * openPartial) + ((-x / 5) * (1 - openPartial)), 0f, ((y / 3) * openPartial) + ((-y / 5) * (1 - openPartial)));
+
+
+            float rotDiff = state.rot - state.oRot;
+
+            while (rotDiff >= (float) Math.PI) rotDiff -= (float) (Math.PI * 2);
+            while (rotDiff < (float) -Math.PI) rotDiff += (float) (Math.PI * 2);
+
+            float f2 = state.oRot + rotDiff * state.partialTick;
+            poseStack.mulPose(Axis.YP.rotation(-f2));
+
+            //rotate to lay down when closed
+            poseStack.mulPose(Axis.ZP.rotationDegrees(30.0F * (Math.clamp(openPartial * 2, 0, 1))));
+            poseStack.mulPose(Axis.XP.rotationDegrees(90.0F * (1 - Math.clamp(openPartial * 2, 0, 1))));
+
+            float f3 = Mth.lerp(state.partialTick, state.oFlip, state.flip);
+            float f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
+            float f5 = Mth.frac(f3 + 0.75F) * 1.6F - 0.3F;
+            float f6 = Mth.lerp(state.partialTick, state.oOpen, openPartial);
+
+            DisplayBookModel.State bookState = DisplayBookModel.State.forAnimation(state.time, Mth.clamp(f3, 0.0F, 1.0F), Mth.clamp(f4, 0.0F, 1.0F), state.open);
+            submitNodeCollector.submitModel(
+                    this.bookModel, bookState, poseStack, RenderTypes.entityCutout(BOOK_TEXTURE), state.lightCoords,
+                    OverlayTexture.NO_OVERLAY, 0, state.breakProgress
+            );
 
             poseStack.popPose();
         }
+
 
         if (state.stack.is(SCTags.BUCKETABLE_FISHES))
         {
@@ -104,29 +124,27 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
             poseStack.pushPose();
 
+            //block centering
+            Vec3 offsetCenter = new Vec3(0.5f, state.hasBlockAbove ? 0.2f : 0.5f, 0.5f);
+            poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
+
             float scale = SCDataComponents.getOrDefault(
                     fish, SCDataComponents.CAUGHT_FISH_INFO,
                     new CaughtFishInfo(100, 100, 50, Rarity.COMMON)
             ).getScale();
 
-
-            //block centering
-            poseStack.translate(0.5f, 0.2f, 0.5f);
-
             //scaling + pivot adjusting
-            poseStack.translate(0, 1.2f, 0);
-            poseStack.mulPose(Axis.XN.rotationDegrees(180));
-            poseStack.scale(scale, scale, scale);
-            poseStack.translate(0, -1.2f, 0);
+            poseStack.translate(0, 1, 0);
+            poseStack.scale(scale, -scale, scale);
+            poseStack.translate(0, -1, 0);
 
+            poseStack.translate(0, (-scale / 10) * (SCConfig.FISH_MAX_SCALE.getAsDouble() / 15), 0);
 
             if (state.fishRotating)
                 poseStack.rotateAround(Axis.YN.rotation((float) ((float) Util.getMillis() / 10000 + Math.PI / 2)), 0, 0, 0);
 
-            // Render model here
             FishEntityRenderState ir = new FishEntityRenderState();
             ir.lightCoords = state.lightCoords;
-            ir.hasWarned = true;
             FishRenderer.renderFishFromItem(ir, fish, submitNodeCollector, poseStack);
 
             poseStack.popPose();
@@ -144,5 +162,11 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
     public DisplayBlockRenderState createRenderState()
     {
         return new DisplayBlockRenderState();
+    }
+
+    public record State(float openness, float pageFlip1, float pageFlip2) {
+        public static State forAnimation(float progress, float pageFlip1, float pageFlip2, float openness) {
+            return new State((Mth.sin(progress * 0.02F) * 0.1F + 1.25F) * openness, pageFlip1, pageFlip2);
+        }
     }
 }

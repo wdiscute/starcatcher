@@ -1,6 +1,9 @@
 {
   "base_chance": 5,
   "catch_info": {
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:glowing_dark"
     }
@@ -78,6 +81,12 @@
       "max_y": 0,
       "min_y": -2147483648,
       "translation_override": "gui.guide.elevation.deepslate"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:sculk_bait": 50
+      }
     },
     {
       "type": "starcatcher:fluid",

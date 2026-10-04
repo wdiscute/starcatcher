@@ -44,7 +44,7 @@
     ]
   },
   "has_guide_entry": true,
-  "rarity": "legendary",
+  "rarity": "epic",
   "restrictions": [
     {
       "type": "starcatcher:dimension",

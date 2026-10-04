@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "starcatcher:block/birch_fish_plaque",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "starcatcher:block/birch_fish_plaque"
+    },
+    "facing=south": {
+      "model": "starcatcher:block/birch_fish_plaque",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "starcatcher:block/birch_fish_plaque",
+      "y": 270
+    }
+  }
+}

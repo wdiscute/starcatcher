@@ -79,6 +79,12 @@ public class SCTooltipEvents
             comp.add(Component.translatable("tooltip.starcatcher.starcaught_bucket.creative.1").withColor(SCColors.TOOLTIP_GRAY));
         }
 
+        //tackle box boat color
+        //if (SCDataComponents.has(stack, SCDataComponents.TACKLE_BOX_COLOR))
+        //{
+        //    comp.add(Component.translatable("color.minecraft." + SCDataComponents.get(stack, SCDataComponents.TACKLE_BOX_COLOR).getName()).withStyle(ChatFormatting.GRAY));
+        //}
+
         //signed guide
         if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))
         {

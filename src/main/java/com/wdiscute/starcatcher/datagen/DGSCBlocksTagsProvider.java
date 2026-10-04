@@ -25,7 +25,10 @@ public class DGSCBlocksTagsProvider extends BlockTagsProvider
     protected void addTags(HolderLookup.Provider provider)
     {
         for (DeferredHolder<Block, ? extends Block> entry : SCBlocks.TACKLE_BOXES.getEntries())
-            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(entry.value());
+            tag(BlockTags.MINEABLE_WITH_PICKAXE).add(entry.get());
+
+        for (DeferredHolder<Block, ? extends Block> entry : SCBlocks.FISH_PLAQUES.getEntries())
+            tag(BlockTags.MINEABLE_WITH_AXE).add(entry.get());
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(SCBlocks.AQUARIUM.get());

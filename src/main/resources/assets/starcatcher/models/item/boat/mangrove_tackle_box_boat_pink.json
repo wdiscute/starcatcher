@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "starcatcher:item/mangrove_tackle_box_boat_pink"
+  }
+}

@@ -35,6 +35,7 @@ public class DGSCModelProvider extends ModelProvider
         List<Holder<Block>> list = new ArrayList<>();
         list.addAll(HATS.getEntries().stream().toList());
         list.addAll(TACKLE_BOXES.getEntries().stream().toList());
+        list.addAll(FISH_PLAQUES.getEntries().stream().toList());
 
         list.add(TROPHY_COPPER);
         list.add(TROPHY_IRON);
@@ -56,6 +57,7 @@ public class DGSCModelProvider extends ModelProvider
         list.addAll(BOBBERS_REGISTRY.getEntries().stream().toList());
         list.addAll(HATS.getEntries().stream().map(o -> o.get().asItem().builtInRegistryHolder()).toList());
         list.addAll(TACKLE_BOXES.getEntries().stream().map(o -> o.get().asItem().builtInRegistryHolder()).toList());
+        list.addAll(FISH_PLAQUES.getEntries().stream().map(o -> o.get().asItem().builtInRegistryHolder()).toList());
 
         list.add(TROPHY_COPPER.asItem().builtInRegistryHolder());
         list.add(TROPHY_IRON.asItem().builtInRegistryHolder());
@@ -89,13 +91,13 @@ public class DGSCModelProvider extends ModelProvider
         simpleItem(DRIED_SEAWEED);
         simpleItem(LAVA_CRAB_CLAW);
         simpleItem(MOSSY_BOOT);
+        simpleItem(OCULI);
 
         //items
         simpleItem(MISSINGNO);
         simpleItem(UNKNOWN_FISH);
         simpleItem(GUIDE);
         simpleItem(FISH_RADAR);
-        simpleItem(STARCATCHER_TWINE);
         simpleItem(FISH_BONES);
         simpleItem(PEARL);
         simpleItem(STARCAUGHT_BUCKET);
@@ -156,6 +158,7 @@ public class DGSCModelProvider extends ModelProvider
         simpleItem(MURKWATER_BAIT);
         simpleItem(LEGENDARY_BAIT);
         simpleItem(METEOROLOGICAL_BAIT);
+        simpleItem(TARGETED_BAIT);
 
         //templates
         TEMPLATES_REGISTRY.getEntries().forEach(o -> simpleItem(((DeferredItem) o)));
@@ -210,6 +213,18 @@ public class DGSCModelProvider extends ModelProvider
         simpleBlockItem(TACKLE_BOX_LIGHT_BLUE);
         simpleBlockItem(TACKLE_BOX_CYAN);
         simpleBlockItem(TACKLE_BOX_GREEN);
+
+        //plaque
+        simpleBlockItem(OAK_FISH_PLAQUE);
+        simpleBlockItem(DARK_OAK_FISH_PLAQUE);
+        simpleBlockItem(BIRCH_FISH_PLAQUE);
+        simpleBlockItem(SPRUCE_FISH_PLAQUE);
+        simpleBlockItem(JUNGLE_FISH_PLAQUE);
+        simpleBlockItem(CHERRY_FISH_PLAQUE);
+        simpleBlockItem(BAMBOO_FISH_PLAQUE);
+        simpleBlockItem(ACACIA_FISH_PLAQUE);
+        simpleBlockItem(MANGROVE_FISH_PLAQUE);
+        simpleBlockItem(PALE_OAK_FISH_PLAQUE);
 
     }
 

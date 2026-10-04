@@ -59,7 +59,7 @@ repositories {
 dependencies {
     //wdUtils
     //jarJar(implementation("com.wdiscute:wdUtils:1.6-NEOFORGE-26.1.2"))
-    jarJar(implementation("com.wdiscute:wdUtils:1.9-NEOFORGE-26.1.2"))
+    jarJar(implementation("com.wdiscute:wdUtils:2.0-NEOFORGE-26.1.2"))
 
     //FTS
     jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.1.2"))
@@ -83,6 +83,12 @@ dependencies {
     //Serene Seasons
     compileOnly files(".compatmods/SereneSeasons-neoforge-26.1.2-26.1.2.0.4.jar")
 
+    //little joys
+    compileOnly "maven.modrinth:little-joys:26.1.2.5+neoforge-26.1.2"
+    runtimeOnly "maven.modrinth:little-joys:26.1.2.5+neoforge-26.1.2"
+
+    //little joys
+    runtimeOnly "maven.modrinth:balm:26.1.2.15+neoforge-26.1.2"
 
     //ftb teams
     compileOnly files(".compatmods/ftb-teams-neoforge-26.1.2.4.jar")

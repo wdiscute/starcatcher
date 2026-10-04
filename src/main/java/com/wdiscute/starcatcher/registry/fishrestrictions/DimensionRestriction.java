@@ -19,6 +19,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+import java.util.Map;
 
 public class DimensionRestriction extends AbstractFishRestriction
 {
@@ -108,6 +109,7 @@ public class DimensionRestriction extends AbstractFishRestriction
 
         return allowedDimensions.stream().map(o -> (Component) Component.translatable("dimension." + o.toLanguageKey())).toList();
     }
+
 
     public static final DimensionRestriction OVERWORLD = new DimensionRestriction("overworld", "dimension.minecraft.overworld");
     public static final DimensionRestriction NETHER = new DimensionRestriction("the_nether", "dimension.minecraft.the_nether");

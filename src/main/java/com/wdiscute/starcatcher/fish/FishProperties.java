@@ -166,14 +166,12 @@ public record FishProperties(
 
     public FishProperties addRestriction(AbstractFishRestriction restriction)
     {
-        this.restrictions.add(restriction);
-        return this;
+        return withRestrictions(new ArrayList<>(restrictions){{add(restriction);}});
     }
 
     public FishProperties addRestrictions(AbstractFishRestriction... restriction)
     {
-        this.restrictions.addAll(List.of(restriction));
-        return this;
+        return withRestrictions(new ArrayList<>(restrictions){{addAll(List.of(restriction));}});
     }
 
     public FishProperties withEntityToSpawn(Holder<EntityType<?>> entityTypeHolder)
@@ -292,7 +290,7 @@ public record FishProperties(
         List<AbstractFishRestriction> list = new ArrayList<>(this.restrictions);
 
         list.removeIf(o -> o instanceof BaitRestriction);
-        list.add(new BaitRestriction(map, override.get()));
+        list.add(new BaitRestriction(map, bait.forceAdd, override.get()));
 
         return withRestrictions(list);
     }

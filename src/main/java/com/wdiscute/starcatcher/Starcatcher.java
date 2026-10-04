@@ -15,11 +15,13 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.tooltips.SCLegendary;
 import com.wdiscute.starcatcher.tooltips.SCTooltipGradient;
 import com.wdiscute.utils.Utils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.level.Level;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -159,6 +161,11 @@ public class Starcatcher
                             Triple.of(219, 91, 41),
                             Triple.of(219, 129, 41)
                     ));
+        }
+
+        public static Level getLevel()
+        {
+            return Minecraft.getInstance().level;
         }
     }
 }

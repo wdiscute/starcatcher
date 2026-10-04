@@ -6,11 +6,17 @@ import net.minecraft.world.item.ItemStack;
 public class DisplayBlockRenderState extends BlockEntityRenderState
 {
     boolean fishRotating = true;
+    boolean hasBlockAbove = true;
     ItemStack stack = ItemStack.EMPTY;
-
-    //enchant table
-    public float time;
-    public float yRot;
+    int time = 0;
+    float partialTick = 0;
     public float flip;
+    public float oFlip;
+    public float flipT;
+    public float flipA;
     public float open;
+    public float oOpen;
+    public float rot;
+    public float oRot;
+    public float tRot;
 }

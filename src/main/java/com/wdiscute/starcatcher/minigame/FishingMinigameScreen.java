@@ -786,6 +786,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         AbstractTackleSkin tackleSkin = SCDataMaps.getOrDefault(maybeRod, SCDataMaps.TACKLE_SKIN, Starcatcher.TACKLE_SKIN_REGISTRY.getValue(Starcatcher.rl("base")));
 
         //start minigame
-        Minecraft.getInstance().setScreen(new FishingMinigameScreen(cbFishingStartedPayload.fp(), cbFishingStartedPayload.treasure().toStack(), List.of(), tackleSkin));
+        Minecraft.getInstance().setScreenAndShow(new FishingMinigameScreen(cbFishingStartedPayload.fp(), cbFishingStartedPayload.treasure().toStack(), List.of(), tackleSkin));
     }
 }

@@ -32,7 +32,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.lakes())
+                .addRestriction(BiomeRestriction.LAKES)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -43,19 +43,18 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withBaseChance(10)
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.lakes())
+                .addRestriction(BiomeRestriction.LAKES)
                 .addRestriction(ElevationBias.MOUNTAIN)
                 .addRestriction(FluidRestriction.WATER)
                 ;
     }
-
 
     public static FishProperties coldLake(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.coldLakes())
+                .addRestriction(BiomeRestriction.COLD_LAKES)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -66,7 +65,7 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.iceSpikes())
+                .addRestriction(BiomeRestriction.ICE_SPIKES)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -79,7 +78,7 @@ public class PresetRestrictions
                 .withBaseChance(10)
                 .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.coldLakes())
+                .addRestriction(BiomeRestriction.COLD_LAKES)
                 .addRestriction(ElevationBias.MOUNTAIN)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -89,7 +88,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.warmLakes())
+                .addRestriction(BiomeRestriction.WARM_LAKES)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -99,9 +98,10 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.swamps())
+                .addRestriction(BiomeRestriction.SWAMPS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.MURKWATER_BAIT)
                 ;
     }
 
@@ -109,7 +109,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.darkForest())
+                .addRestriction(BiomeRestriction.DARK_FOREST)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -119,7 +119,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.forest())
+                .addRestriction(BiomeRestriction.FOREST)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -130,9 +130,10 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.cherryGroves())
+                .addRestriction(BiomeRestriction.CHERRY_GROVES)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.CHERRY_BAIT)
                 ;
     }
 
@@ -140,7 +141,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.jungles())
+                .addRestriction(BiomeRestriction.JUNGLES)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -150,7 +151,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.bambooJungle())
+                .addRestriction(BiomeRestriction.BAMBOO_JUNGLE)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -160,7 +161,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.flowerForest())
+                .addRestriction(BiomeRestriction.FLOWER_FOREST)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -170,7 +171,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.sunflowerPlains())
+                .addRestriction(BiomeRestriction.SUNFLOWER_PLAINS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -180,7 +181,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.rivers())
+                .addRestriction(BiomeRestriction.RIVERS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -190,17 +191,17 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.coldRivers())
+                .addRestriction(BiomeRestriction.COLD_RIVERS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
     }
 
-    public static FishProperties allOceans(BootstrapContext<FishProperties> context)
+    public static FishProperties normalOceans(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.allOceans())
+                .addRestriction(BiomeRestriction.NORMAL_OCEANS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -210,7 +211,17 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.deepOceans())
+                .addRestriction(BiomeRestriction.DEEP_OCEANS)
+                .addRestriction(ElevationRestriction.ABOVE_FIFTY)
+                .addRestriction(FluidRestriction.WATER)
+                ;
+    }
+
+    public static FishProperties allOceans(BootstrapContext<FishProperties> context)
+    {
+        return FishProperties.empty()
+                .addRestriction(DimensionRestriction.OVERWORLD)
+                .addRestriction(BiomeRestriction.ALL_OCEANS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -220,17 +231,18 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.warmOceans())
+                .addRestriction(BiomeRestriction.WARM_OCEANS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
     }
 
-    public static FishProperties coldOcean(BootstrapContext<FishProperties> context)
+    public static FishProperties frozenOceans(BootstrapContext<FishProperties> context)
     {
         return FishProperties.empty()
+                .withTextures(Textures.DEFAULT.withTank(Textures.ICY))
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.coldOceans())
+                .addRestriction(BiomeRestriction.FROZEN_OCEAN)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -240,7 +252,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.beaches())
+                .addRestriction(BiomeRestriction.BEACHES)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -250,7 +262,7 @@ public class PresetRestrictions
     {
         return FishProperties.empty()
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.mushroomFields())
+                .addRestriction(BiomeRestriction.MUSHROOM_FIELDS)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
                 ;
@@ -263,7 +275,7 @@ public class PresetRestrictions
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(ElevationRestriction.ZERO_TO_FIFTY)
                 .addRestriction(FluidRestriction.WATER)
-                .addRestriction(BiomeRestriction.underground())
+                .addRestriction(BiomeRestriction.UNDERGROUND)
                 ;
     }
 
@@ -272,8 +284,9 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.dripstoneCaves())
+                .addRestriction(BiomeRestriction.DRIPSTONE_CAVES)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.DRIPSTONE_BAIT)
                 ;
     }
 
@@ -282,8 +295,9 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.CAVE))
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.lushCaves())
+                .addRestriction(BiomeRestriction.LUSH_CAVES)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.LUSH_BAIT)
                 ;
     }
 
@@ -302,9 +316,10 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.DEEP_DARK))
                 .addRestriction(DimensionRestriction.OVERWORLD)
-                .addRestriction(BiomeRestriction.deepDark())
+                .addRestriction(BiomeRestriction.DEEP_DARK)
                 .addRestriction(ElevationRestriction.BELOW_ZERO)
                 .addRestriction(FluidRestriction.WATER)
+                .addRestriction(BaitRestriction.SCULK_BAIT)
                 ;
     }
 
@@ -314,7 +329,7 @@ public class PresetRestrictions
                 .withTextures(Textures.DEFAULT.withTank(Textures.LAVA_OVERWORLD))
                 .addRestriction(DimensionRestriction.OVERWORLD)
                 .addRestriction(ElevationRestriction.ABOVE_FIFTY)
-                .addRestriction(BiomeRestriction.lakes())
+                .addRestriction(BiomeRestriction.LAKES)
                 .addRestriction(FluidRestriction.LAVA)
                 ;
     }
@@ -353,7 +368,7 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
-                .addRestriction(BiomeRestriction.crimsonForest())
+                .addRestriction(BiomeRestriction.CRIMSON_FOREST)
                 .addRestriction(FluidRestriction.LAVA)
                 ;
     }
@@ -363,7 +378,7 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
-                .addRestriction(BiomeRestriction.warpedForest())
+                .addRestriction(BiomeRestriction.WARPED_FOREST)
                 .addRestriction(FluidRestriction.LAVA)
                 ;
     }
@@ -373,7 +388,7 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
-                .addRestriction(BiomeRestriction.basaltDeltas())
+                .addRestriction(BiomeRestriction.BASALT_DELTAS)
                 .addRestriction(FluidRestriction.LAVA)
                 ;
     }
@@ -383,7 +398,7 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.NETHER))
                 .addRestriction(DimensionRestriction.NETHER)
-                .addRestriction(BiomeRestriction.soulSandValley())
+                .addRestriction(BiomeRestriction.SOUL_SAND_VALLEY)
                 .addRestriction(FluidRestriction.LAVA)
                 ;
     }
@@ -412,7 +427,7 @@ public class PresetRestrictions
         return FishProperties.empty()
                 .withTextures(Textures.DEFAULT.withTank(Textures.END_VOID))
                 .addRestriction(DimensionRestriction.END)
-                .addRestriction(BiomeRestriction.outerIslands())
+                .addRestriction(BiomeRestriction.OUTER_ISLANDS)
                 .addRestriction(FluidRestriction.AIR)
                 ;
     }

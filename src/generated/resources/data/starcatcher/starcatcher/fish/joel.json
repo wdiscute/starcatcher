@@ -1,6 +1,9 @@
 {
   "base_chance": 1,
   "catch_info": {
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:joel"
     }
@@ -105,7 +108,7 @@
     {
       "type": "starcatcher:biome",
       "biomes": [
-        "#starcatcher:is_ocean"
+        "#starcatcher:is_normal_ocean"
       ],
       "blacklist": []
     },
@@ -121,6 +124,12 @@
         "minecraft:water"
       ],
       "translation_override": "fluid.starcatcher.water"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:legendary_bait": 50
+      }
     }
   ],
   "size_and_weight": {

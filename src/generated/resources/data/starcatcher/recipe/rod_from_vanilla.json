@@ -5,7 +5,7 @@
     "minecraft:fishing_rod",
     "starcatcher:hook",
     "starcatcher:bobber",
-    "starcatcher:starcatcher_twine"
+    "minecraft:string"
   ],
   "result": {
     "id": "starcatcher:starcatcher_rod"

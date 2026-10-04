@@ -33,7 +33,7 @@ public class DGSpawnFishes
         );
 
         FishRegistration.register(context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish("spawn", "herring")
                         .withBucketedFish("spawn", "herring_bucket")
                         .withEntityToSpawn("spawn", "herring")

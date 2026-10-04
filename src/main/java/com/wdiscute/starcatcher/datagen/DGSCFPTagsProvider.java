@@ -9,6 +9,7 @@ import com.wdiscute.starcatcher.fish.Rarity;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.KeyTagProvider;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 

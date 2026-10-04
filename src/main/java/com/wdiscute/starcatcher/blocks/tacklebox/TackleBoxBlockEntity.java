@@ -6,6 +6,8 @@ import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
+import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -15,6 +17,7 @@ import net.minecraft.core.component.DataComponentMap;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.ComponentSerialization;
 import net.minecraft.server.level.ServerLevel;
@@ -37,139 +40,42 @@ import net.minecraft.world.level.storage.ValueOutput;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContainer, TickableBlockEntity, MenuProvider
+public class TackleBoxBlockEntity extends BlockEntity implements MenuProvider, TackleBoxWorldlyContainerHelper
 {
-    private NonNullList<ItemStack> itemStacks;
-    private List<ItemStack> fishes;
+    Codec<List<Utils.Duo<Integer, MaybeStack>>> ITEMS_CODEC = Utils.Duo.codec(Codec.INT, MaybeStack.CODEC).listOf();
+    public TackleBoxContainer container = new TackleBoxContainer()
+    {
+        @Override
+        public void setChanged()
+        {
+            TackleBoxBlockEntity.this.setChanged();
+        }
+
+        @Override
+        public boolean stillValid(Player player)
+        {
+            return Container.stillValidBlockEntity(TackleBoxBlockEntity.this, player);
+        }
+
+        @Override
+        public void startOpen(ContainerUser containerUser)
+        {
+            TackleBoxBlockEntity.this.startOpen(containerUser);
+        }
+
+        @Override
+        public void stopOpen(ContainerUser containerUser)
+        {
+            TackleBoxBlockEntity.this.stopOpen(containerUser);
+        }
+    };
+
     public int openCount;
     @Nullable
     private final DyeColor color;
-    private Component name = Component.empty();
-
-    @Override
-    public void tick()
-    {
-        if (getItem(TackleBoxMenu.FISH_SLOT).isEmpty() && !fishes.isEmpty()) updateFishSlot();
-    }
-
-    public void updateFishSlot()
-    {
-        if (level.isClientSide()) return;
-
-        //store & remove fish placed
-        ItemStack itemInFishSlot = getItem(TackleBoxMenu.FISH_SLOT);
-        //only runs if fishes stored is less than the max set by config
-        for (int i = 5; SCConfig.MAX_TACKLE_BOX_FISH_STORAGE.get() - 1 > fishes.size() && i < itemStacks.size(); i++)
-        {
-            ItemStack item = itemStacks.get(i).copy();
-            if (item.is(SCTags.FISHABLE))
-            {
-                //if slot is not empty, add the fish previously there to stored fishes
-                if (!itemInFishSlot.isEmpty())
-                    fishes.add(itemInFishSlot.copy());
-                //remove the fish item found and put it on the fish slot
-                itemStacks.get(i).setCount(0);
-                itemStacks.set(i, ItemStack.EMPTY);
-                setItem(i, ItemStack.EMPTY);
-                setItem(TackleBoxMenu.FISH_SLOT, item);
-                break;
-            }
-        }
-
-        //refill fish slot from fishes stored
-        if (itemInFishSlot.isEmpty() && !fishes.isEmpty())
-        {
-            setItem(TackleBoxMenu.FISH_SLOT, fishes.getLast());
-            fishes.removeLast();
-        }
-
-        //todo re-resourceLocation fishes stored for better hopper and stuff interaction
-
-        setChanged();
-        if (level instanceof ServerLevel serverLevel)
-        {
-            serverLevel.sendBlockUpdated(getBlockPos(), this.getBlockState(), this.getBlockState(), 3);
-        }
-    }
-
-    @Override
-    public int getContainerSize()
-    {
-        return this.itemStacks.size();
-    }
-
-    @Override
-    public boolean isEmpty()
-    {
-        for (ItemStack itemstack : this.getItems())
-            if (!itemstack.isEmpty())
-                return false;
-
-        return true;
-    }
-
-    @Override
-    public ItemStack getItem(int i)
-    {
-        return this.getItems().get(i);
-    }
-
-    @Override
-    public ItemStack removeItem(int slot, int amount)
-    {
-        ItemStack itemstack = ContainerHelper.removeItem(this.getItems(), slot, amount);
-        if (!itemstack.isEmpty())
-            this.setChanged();
-
-        return itemstack;
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int slot)
-    {
-        return ContainerHelper.takeItem(this.getItems(), slot);
-    }
-
-    @Override
-    public void setItem(int slot, ItemStack stack)
-    {
-        this.getItems().set(slot, stack);
-        stack.limitSize(this.getMaxStackSize(stack));
-        this.setChanged();
-    }
-
-    @Override
-    public boolean stillValid(Player player)
-    {
-        return Container.stillValidBlockEntity(this, player);
-    }
-
-    @Override
-    public int[] getSlotsForFace(Direction side)
-    {
-        return new int[]{5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
-    }
-
-    @Override
-    public boolean canPlaceItemThroughFace(int slot, ItemStack itemStack, Direction direction)
-    {
-        updateFishSlot();
-        return slot >= 5 && direction != Direction.DOWN;
-    }
-
-    @Override
-    public boolean canTakeItemThroughFace(int slot, ItemStack itemStack, Direction direction)
-    {
-        updateFishSlot();
-        return direction == Direction.DOWN && slot > 4;
-    }
-
-    @Override
-    public boolean canPlaceItem(int slot, ItemStack stack)
-    {
-        return WorldlyContainer.super.canPlaceItem(slot, stack);
-    }
+    private Component name;
 
     @Override
     public boolean triggerEvent(int id, int type)
@@ -186,63 +92,79 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     }
 
     @Override
-    public void startOpen(ContainerUser containerUser)
+    public void preRemoveSideEffects(BlockPos pos, BlockState state)
     {
-        if (!this.remove && !containerUser.getLivingEntity().isSpectator())
+    }
+
+    @Override
+    public void startOpen(ContainerUser player)
+    {
+        if (!this.remove && !player.getLivingEntity().isSpectator())
         {
             if (this.openCount < 0)
-            {
                 this.openCount = 0;
-            }
 
             ++this.openCount;
             this.level.blockEvent(this.worldPosition, this.getBlockState().getBlock(), 1, this.openCount);
             if (this.openCount == 1)
             {
-                this.level.gameEvent(containerUser.getLivingEntity(), GameEvent.CONTAINER_OPEN, this.worldPosition);
+                this.level.gameEvent(player.getLivingEntity(), GameEvent.CONTAINER_OPEN, this.worldPosition);
                 this.level.playSound(null, this.worldPosition, SoundEvents.SHULKER_BOX_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_OPEN, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_BREAK, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
             }
         }
-
     }
 
     @Override
-    public void stopOpen(ContainerUser containerUser)
+    public void stopOpen(ContainerUser player)
     {
-        if (!this.remove && !containerUser.getLivingEntity().isSpectator())
+        if (!this.remove && !player.getLivingEntity().isSpectator())
         {
             --this.openCount;
             this.level.blockEvent(this.worldPosition, this.getBlockState().getBlock(), 1, this.openCount);
             if (this.openCount <= 0)
             {
-                this.level.gameEvent(containerUser.getLivingEntity(), GameEvent.CONTAINER_CLOSE, this.worldPosition);
+                this.level.gameEvent(player.getLivingEntity(), GameEvent.CONTAINER_CLOSE, this.worldPosition);
                 this.level.playSound(null, this.worldPosition, SoundEvents.BARREL_CLOSE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.9F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.CHAIN_PLACE, SoundSource.BLOCKS, 0.2F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
                 this.level.playSound(null, this.worldPosition, SoundEvents.SNOW_BREAK, SoundSource.BLOCKS, 1.3F, this.level.getRandom().nextFloat() * 0.1F + 0.4F);
             }
         }
-
     }
 
     @Override
     protected void applyImplicitComponents(DataComponentGetter componentInput)
     {
         super.applyImplicitComponents(componentInput);
-        componentInput.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyInto(this.getItems());
-        fishes = new ArrayList<>(componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.of()));
-        this.name = componentInput.getOrDefault(DataComponents.CUSTOM_NAME, Component.empty());
+
+        //apply fishes
+        container.fishes.clear();
+        for (MaybeStack fish : componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_FISHES, List.<MaybeStack>of()))
+            container.fishes.add(fish.toStack());
+
+        //apply items
+        for (Utils.Duo<Integer, MaybeStack> duo : componentInput.getOrDefault(SCDataComponents.TACKLE_BOX_ITEMS, List.<Utils.Duo<Integer, MaybeStack>>of()))
+            container.items.put(duo.first(), duo.second().toStack());
+
+        //apply name
+        this.name = componentInput.get(DataComponents.CUSTOM_NAME);
     }
 
     @Override
     protected void collectImplicitComponents(DataComponentMap.Builder components)
     {
         super.collectImplicitComponents(components);
-        if (!name.equals(Component.empty()))
-            components.set(DataComponents.CUSTOM_NAME, this.name);
-        components.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(this.getItems()));
-        components.set(SCDataComponents.TACKLE_BOX_FISHES, fishes);
+        components.set(DataComponents.CUSTOM_NAME, this.name);
+
+        //store fishes
+        components.set(SCDataComponents.TACKLE_BOX_FISHES, container.fishes.stream().map(MaybeStack::new).toList());
+
+        //store items
+        List<Utils.Duo<Integer, MaybeStack>> list = new ArrayList<>();
+        for (Map.Entry<Integer, ItemStack> entry : container.items.entrySet())
+            list.add(new Utils.Duo<>(entry.getKey(), new MaybeStack(entry.getValue())));
+        components.set(SCDataComponents.TACKLE_BOX_ITEMS, list);
     }
 
     @Override
@@ -250,16 +172,19 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     {
         super.loadAdditional(input);
 
-        this.name = input.read("CustomName", ComponentSerialization.CODEC).orElse(Component.empty());
+        Component customName = parseCustomNameSafe(input, "CustomName");
+        if (customName != null)
+            this.name = customName;
+        else
+            this.name = null;
 
         //load normal slots
-        this.itemStacks = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-        ContainerHelper.loadAllItems(input, this.itemStacks);
+        for (Utils.Duo<Integer, MaybeStack> duo : input.read("Items", ITEMS_CODEC).orElse(List.of()))
+            container.items.put(duo.first(), duo.second().toStack());
 
-        //load fishes
-        this.fishes = new ArrayList<>();
-        for (int i = 0; i < input.getIntOr("fish_size", 0); i++)
-            fishes.add(input.read("fish_" + i, ItemStack.CODEC).orElse(ItemStack.EMPTY));
+        container.fishes.clear();
+        for (MaybeStack fish : input.read("Fishes", MaybeStack.CODEC.listOf()).orElse(List.of()))
+            container.fishes.add(fish.toStack());
     }
 
     @Override
@@ -267,26 +192,17 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     {
         super.saveAdditional(output);
 
-        //save normal slots
-        ContainerHelper.saveAllItems(output, this.itemStacks);
+        //store fishes
+        output.store("Fishes", MaybeStack.CODEC.listOf(), container.fishes.stream().map(MaybeStack::new).toList());
 
-        //save fishes
-        output.putInt("fish_size", fishes.size());
-        for (int i = 0; i < fishes.size(); i++)
-            if(!fishes.get(i).isEmpty())
-                output.store("fish_" + i, ItemStack.CODEC, fishes.get(i));
+        //store items
+        List<Utils.Duo<Integer, MaybeStack>> list = new ArrayList<>();
+        for (Map.Entry<Integer, ItemStack> entry : container.items.entrySet())
+            list.add(new Utils.Duo<>(entry.getKey(), new MaybeStack(entry.getValue())));
+        output.store("Items", ITEMS_CODEC, list);
 
-        output.store("CustomName", ComponentSerialization.CODEC, name);
-    }
-
-    @Override
-    public void preRemoveSideEffects(BlockPos pos, BlockState state)
-    {
-    }
-
-    protected NonNullList<ItemStack> getItems()
-    {
-        return this.itemStacks;
+        if (name != null)
+            output.store("CustomName", ComponentSerialization.CODEC, name);
     }
 
     @Nullable
@@ -298,23 +214,13 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     public TackleBoxBlockEntity(@Nullable DyeColor color, BlockPos pos, BlockState blockState)
     {
         super(SCBlockEntities.TACKLE_BOX.get(), pos, blockState);
-        this.itemStacks = NonNullList.withSize(TackleBoxMenu.CONTAINER_SIZE, ItemStack.EMPTY);
-        this.fishes = new ArrayList<>();
         this.color = color;
     }
 
     public TackleBoxBlockEntity(BlockPos pos, BlockState blockState)
     {
         super(SCBlockEntities.TACKLE_BOX.get(), pos, blockState);
-        this.itemStacks = NonNullList.withSize(TackleBoxMenu.CONTAINER_SIZE, ItemStack.EMPTY);
-        this.fishes = new ArrayList<>();
         this.color = TackleBoxBlock.getColorFromBlock(blockState.getBlock());
-    }
-
-    @Override
-    public void clearContent()
-    {
-        this.getItems().clear();
     }
 
     @Override
@@ -327,8 +233,14 @@ public class TackleBoxBlockEntity extends BlockEntity implements WorldlyContaine
     public @org.jetbrains.annotations.Nullable AbstractContainerMenu createMenu(int containerId, Inventory playerInventory, Player player)
     {
         if (!player.isSpectator())
-            return new TackleBoxMenu(containerId, playerInventory, this, this);
+            return new TackleBoxMenu(containerId, playerInventory, container);
         else
             return null;
+    }
+
+    @Override
+    public TackleBoxContainer getTackleBoxContainer()
+    {
+        return container;
     }
 }

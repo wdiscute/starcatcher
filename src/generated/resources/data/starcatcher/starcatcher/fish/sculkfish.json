@@ -73,6 +73,12 @@
       "translation_override": "gui.guide.elevation.deepslate"
     },
     {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:sculk_bait": 50
+      }
+    },
+    {
       "type": "starcatcher:fluid",
       "fluids": [
         "minecraft:water"

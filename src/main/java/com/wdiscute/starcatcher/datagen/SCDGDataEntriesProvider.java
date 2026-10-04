@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
 import com.wdiscute.starcatcher.modifiers.catchmodifiers.FishMessagesModifier;
+import com.wdiscute.starcatcher.modifiers.catchmodifiers.LittleJoysModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.KimbeMarkerModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.SpawnTreasureModifier;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
@@ -13,6 +14,7 @@ import com.wdiscute.utils.EntryOrTag;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
 import com.wdiscute.utils.datagen.DataEntryProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentPatch;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
@@ -21,13 +23,16 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.Tags;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class SCDGDataEntriesProvider
 {
-    public static void start(DataGenerator gen, PackOutput output, boolean includeServer)
+    public static void start(DataGenerator gen, PackOutput output, CompletableFuture<HolderLookup.Provider> lookup)
     {
-        gen.addProvider(includeServer,
+        gen.addProvider(true,
                 new DataEntryProvider.MultiEntry<>(output,
                         SCDataEntries.DIMENSION_TAGS,
                         List.of(
@@ -38,32 +43,31 @@ public class SCDGDataEntriesProvider
                 )
         );
 
-        gen.addProvider(includeServer,
+        gen.addProvider(true,
                 new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
                         List.of(
                                 new FishMessagesModifier(0.05f, ""),
-                                //new LuckAttributeModifier(new HashMap<>()
-                                //{{
-                                //    put(Rarity.COMMON, 16);
-                                //    put(Rarity.UNCOMMON, 17);
-                                //    put(Rarity.RARE, 18);
-                                //    put(Rarity.EPIC, 19);
-                                //    put(Rarity.LEGENDARY, 20);
-                                //}}, "tooltip.modifier.starcatcher.luck_attribute"),
+                                new LittleJoysModifier(""),
+
+                                //new QualityFoodModifier(""),
+
+                                //new QualityFoodRollModifier(0, 1, false, false, 100, ""),
+                                //new QualityFoodRollModifier(0, 4, true, false, 100, ""),
+                                //new QualityFoodRollModifier(1, 0, false, true, 100, ""),
+                                //new QualityFoodRollModifier(0.5f, 3, false, false, 20, ""),
+
                                 new ExtraGoldenChanceModifier(0.01f, false, ""),
                                 new ExtraGoldenChanceModifier(0.01f, true, "")
                         )
                 )
         );
 
-        gen.addProvider(includeServer, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_MINIGAME_MODIFIERS,
+        gen.addProvider(true, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_MINIGAME_MODIFIERS,
                 List.of(
                         new KimbeMarkerModifier(""),
                         new SpawnTreasureModifier(0.02f, "")
                 ))
         );
-
-
 
         MaybeStack goldenWorm = new MaybeStack(SCItems.WORM.getId(), 0,
                 DataComponentPatch.builder()
@@ -86,7 +90,7 @@ public class SCDGDataEntriesProvider
                         .build()
         );
 
-        gen.addProvider(includeServer, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.BONEMEAL_INTERACTION_ENTRY,
+        gen.addProvider(true, new DataEntryProvider.MultiEntry<>(output, SCDataEntries.BONEMEAL_INTERACTION_ENTRY,
                 List.of(
                         //base worms
                         new BonemealInteractionEntry(
@@ -130,12 +134,12 @@ public class SCDGDataEntriesProvider
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                new MaybeStack(SCItems.ALMIGHTY_WORM),
+                                new MaybeStack(SCItems.WORM),
                                 30),
 
                         new BonemealInteractionEntry(
                                 new EntryOrTag.Entry<>(ResourceKey.create(Registries.BLOCK, Utils.rl("farmersdelight", "rich_soil_farmland"))),
-                                new MaybeStack(SCItems.SEEKING_WORM),
+                                new MaybeStack(SCItems.WORM),
                                 20),
 
 

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "L": "minecraft:acacia_log",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "SSS",
+    "SLS",
+    "SSS"
+  ],
+  "result": {
+    "id": "starcatcher:acacia_fish_plaque"
+  }
+}

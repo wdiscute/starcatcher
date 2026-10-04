@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher;
 
+import com.jcraft.jorbis.Block;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.ItemTags;
@@ -10,7 +11,7 @@ public class SCTags
 {
     public static final Identifier IS_COLD_LAKE = Starcatcher.rl("is_cold_lake");
     public static final Identifier IS_COLD_RIVER = Starcatcher.rl("is_cold_river");
-    public static final Identifier IS_COLD_OCEAN = Starcatcher.rl("is_cold_ocean");
+    public static final Identifier IS_FROZEN_OCEAN = Starcatcher.rl("is_frozen_ocean");
 
     public static final Identifier IS_WARM_LAKE = Starcatcher.rl("is_warm_lake");
     public static final Identifier IS_WARM_RIVER = Starcatcher.rl("is_warm_river");
@@ -34,6 +35,7 @@ public class SCTags
     public static final Identifier IS_SOUL_SAND_VALLEY = Starcatcher.rl("is_soul_sand_valley");
     public static final Identifier IS_BASALT_DELTAS = Starcatcher.rl("is_basalt_deltas");
 
+    public static final TagKey<Item> FISH_PLAQUES = ItemTags.create(Starcatcher.rl("fish_plaques"));
     public static final TagKey<Item> TACKLE_BOXES = ItemTags.create(Starcatcher.rl("tackle_boxes"));
     public static final TagKey<Item> HOOKS = ItemTags.create(Starcatcher.rl("hooks"));
     public static final TagKey<Item> BOBBERS = ItemTags.create(Starcatcher.rl("bobbers"));
@@ -49,6 +51,8 @@ public class SCTags
     public static final TagKey<Item> PLACEABLE_IN_DISPLAY = ItemTags.create(Starcatcher.rl("placeable_in_display"));
     public static final TagKey<Item> PLACEABLE_IN_TACKLE_BOX = ItemTags.create(Starcatcher.rl("placeable_in_tackle_box"));
     public static final TagKey<Item> WORMS = ItemTags.create(Starcatcher.rl("worms"));
+
+    public static final TagKey<Item> HAS_TARGETED_BAIT = ItemTags.create(Starcatcher.rl("has_targeted_bait"));
 
     public static final TagKey<Item> RODS = ItemTags.create(Starcatcher.rl("rods"));
 

@@ -57,6 +57,12 @@
       "translation_override": "gui.guide.elevation.surface"
     },
     {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:murkwater_bait": 50
+      }
+    },
+    {
       "type": "starcatcher:percentage_chance",
       "chance": 0.01
     },
