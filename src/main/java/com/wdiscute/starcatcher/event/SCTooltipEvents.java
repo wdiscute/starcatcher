@@ -75,6 +75,8 @@ public class SCTooltipEvents
         if (SCDataComponents.has(stack, SCDataComponents.SIGNED_GUIDE))
         {
             var sign = SCDataComponents.get(stack, SCDataComponents.SIGNED_GUIDE);
+            if(sign == null)
+                return;
 
             if (hasShiftDown)
                 comp.add(Component.translatable("tooltip.starcatcher.starcatcher_guide.signed_shift", sign.owner().toString()).withStyle(Style.EMPTY.withColor(ChatFormatting.DARK_GRAY)));
