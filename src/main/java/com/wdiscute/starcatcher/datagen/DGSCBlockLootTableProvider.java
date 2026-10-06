@@ -32,16 +32,15 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
         HATS.getEntries().forEach(o -> dropSelf(o.get()));
 
         TACKLE_BOXES.getEntries().forEach(o ->
-                add(o.get(), LootTable.lootTable().withPool(this.applyExplosionCondition(
-                                        o.get(), LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                                                .add(LootItem.lootTableItem(o.get())
-                                                        .apply(CopyComponentsFunction
-                                                                .copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
-                                                                .include(DataComponents.CONTAINER)
-                                                                .include(SCDataComponents.TACKLE_BOX_FISHES.get())
-                                                                .include(SCDataComponents.TACKLE_BOX_ITEMS.get())
-                                                        ))))
-                ));
+                add(o.get(), LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                        .add(LootItem.lootTableItem(o.get())
+                                .apply(CopyComponentsFunction
+                                        .copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
+                                        .include(DataComponents.CONTAINER)
+                                        .include(SCDataComponents.TACKLE_BOX_FISHES.get())
+                                        .include(SCDataComponents.TACKLE_BOX_ITEMS.get())
+                                ))))
+        );
 
 
         FISH_PLAQUES.getEntries().forEach(o -> dropSelf(o.get()));
