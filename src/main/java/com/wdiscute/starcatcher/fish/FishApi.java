@@ -134,14 +134,6 @@ public class FishApi
             if (chanceToAdd == -9999) break;
         }
 
-        for (var restriction : fp.restrictions())
-        {
-            int chanceToAdd = restriction.adjustChance(chance, level, fp, entity, rod, context);
-            chance += chanceToAdd;
-            //if restriction doesn't allow for fish, skip remaining conditions
-            if (chanceToAdd == -9999) break;
-        }
-
         return chance;
     }
  

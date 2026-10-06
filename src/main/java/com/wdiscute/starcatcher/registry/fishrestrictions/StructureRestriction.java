@@ -117,7 +117,7 @@ public class StructureRestriction extends AbstractFishRestriction
             //if structure exists
             if (structure.isPresent())
                 //if structure is at blockpos
-                if (structureManager.getStructureWithPieceAt(entity.blockPosition(), structure.get().value()).isValid())
+                if (structureManager.getAllStructuresAt(entity.blockPosition()).containsKey(structure.get().value()))
                     return 0;
         }
 
