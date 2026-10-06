@@ -37,9 +37,9 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
                                                 .add(LootItem.lootTableItem(o.get())
                                                         .apply(CopyComponentsFunction
                                                                 .copyComponents(CopyComponentsFunction.Source.BLOCK_ENTITY)
-                                                                .include(DataComponents.CUSTOM_NAME)
                                                                 .include(DataComponents.CONTAINER)
                                                                 .include(SCDataComponents.TACKLE_BOX_FISHES.get())
+                                                                .include(SCDataComponents.TACKLE_BOX_ITEMS.get())
                                                         ))))
                 ));
 

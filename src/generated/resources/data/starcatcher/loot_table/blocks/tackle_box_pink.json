@@ -15,9 +15,9 @@
             {
               "function": "minecraft:copy_components",
               "include": [
-                "minecraft:custom_name",
                 "minecraft:container",
-                "starcatcher:tackle_box_fishes"
+                "starcatcher:tackle_box_fishes",
+                "starcatcher:tackle_box_items"
               ],
               "source": "block_entity"
             }
