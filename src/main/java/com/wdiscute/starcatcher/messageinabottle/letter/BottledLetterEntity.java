@@ -70,12 +70,7 @@ public class BottledLetterEntity extends ThrowableItemProjectile
                     {
                         sp.sendOverlayMessage(Component.translatable("item.starcatcher.bottled_letter.thrown"));
 
-                        Registry<LevelStem> levelStemRegistry = level().registryAccess().lookupOrThrow(Registries.LEVEL_STEM);
-                        LevelStem levelStem = levelStemRegistry.getValue(level().dimension().identifier());
-
-                        Holder<LevelStem> levelStemHolder = levelStemRegistry.wrapAsHolder(levelStem);
-
-                        Identifier data = levelStemHolder.getData(SCDataMaps.MESSAGE_BACKGROUND);
+                        Identifier data = level().dimensionTypeRegistration().getData(SCDataMaps.MESSAGE_BACKGROUND);
 
                         if (data == null)
                             data = Message.BACKGROUND_OVERWORLD;

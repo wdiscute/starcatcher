@@ -23,6 +23,7 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Compostable;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.DataMapProvider;
@@ -51,9 +52,9 @@ public class DGSCDataMapsProvider extends DataMapProvider
         var messages = this.builder(SCDataMaps.MESSAGE_BACKGROUND);
 
         //messages background
-        messages.add(LevelStem.OVERWORLD, Message.BACKGROUND_OVERWORLD, false);
-        messages.add(LevelStem.NETHER, Message.BACKGROUND_NETHER, false);
-        messages.add(LevelStem.END, Message.BACKGROUND_END, false);
+        messages.add(BuiltinDimensionTypes.OVERWORLD, Message.BACKGROUND_OVERWORLD, false);
+        messages.add(BuiltinDimensionTypes.NETHER, Message.BACKGROUND_NETHER, false);
+        messages.add(BuiltinDimensionTypes.END, Message.BACKGROUND_END, false);
 
         //ground
         aquarium.add(Items.GRAVEL.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_GRAVEL, false);

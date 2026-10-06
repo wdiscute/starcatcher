@@ -12,6 +12,7 @@ import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.level.dimension.DimensionType;
 import net.minecraft.world.level.dimension.LevelStem;
 import net.neoforged.neoforge.registries.datamaps.DataMapType;
 
@@ -43,8 +44,8 @@ public interface SCDataMaps
             Starcatcher.rl("treasures"), Starcatcher.FISH_REGISTRY_KEY, Treasure.CODEC
     ).synced(Treasure.CODEC, true).build();
 
-    DataMapType<LevelStem, Identifier> MESSAGE_BACKGROUND = DataMapType.builder(
-            Starcatcher.rl("message_background"), Registries.LEVEL_STEM, Identifier.CODEC
+    DataMapType<DimensionType, Identifier> MESSAGE_BACKGROUND = DataMapType.builder(
+            Starcatcher.rl("message_background"), Registries.DIMENSION_TYPE, Identifier.CODEC
     ).build();
 
     static <T> T getOrDefault(ItemStack stack, DataMapType<Item, T> dataMap, T d)

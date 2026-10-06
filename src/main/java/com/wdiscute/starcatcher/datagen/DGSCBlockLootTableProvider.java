@@ -37,18 +37,17 @@ public class DGSCBlockLootTableProvider extends BlockLootSubProvider
     {
         HATS.getEntries().forEach(o -> dropSelf(o.get()));
         TACKLE_BOXES.getEntries().forEach(o ->
-                add(o.get(), LootTable.lootTable().withPool(this.applyExplosionCondition(
-                        o.get(), LootPool.lootPool()
-                                .setRolls(ContextIntProviders.exactly(1))
-                                .add(LootItem.lootTableItem(o.get())
-                                        .apply(
-                                                CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
-                                                        .include(DataComponents.CUSTOM_NAME)
-                                                        .include(DataComponents.LOCK)
-                                                        .include(DataComponents.CONTAINER_LOOT)
-                                                        .include(SCDataComponents.TACKLE_BOX_FISHES.get())
-                                                        .include(SCDataComponents.TACKLE_BOX_ITEMS.get())
-                                        ))))
+                add(o.get(), LootTable.lootTable().withPool(LootPool.lootPool()
+                        .setRolls(ContextIntProviders.exactly(1))
+                        .add(LootItem.lootTableItem(o.get())
+                                .apply(
+                                        CopyComponentsFunction.copyComponentsFromBlockEntity(LootContextParams.BLOCK_ENTITY)
+                                                .include(DataComponents.CUSTOM_NAME)
+                                                .include(DataComponents.LOCK)
+                                                .include(DataComponents.CONTAINER_LOOT)
+                                                .include(SCDataComponents.TACKLE_BOX_FISHES.get())
+                                                .include(SCDataComponents.TACKLE_BOX_ITEMS.get())
+                                )))
                 )
         );
 

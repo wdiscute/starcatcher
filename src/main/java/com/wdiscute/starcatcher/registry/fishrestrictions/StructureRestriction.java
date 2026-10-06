@@ -116,12 +116,11 @@ public class StructureRestriction extends AbstractFishRestriction
             //get structure from rl
             Optional<Holder.Reference<Structure>> structure = structureRegistry.get(ResourceKey.create(Registries.STRUCTURE, structureId));
 
-            //todo 26 test this
             //if structure exists
-            if (structure.isPresent() && structureManager
-                    .getStructureWithPieceAt(entity.blockPosition(),
-                            holder -> holder.is(structure.get().key())).isValid())
-                return 0;
+            if (structure.isPresent())
+                //if structure is at blockpos
+                if (structureManager.getAllStructuresAt(entity.blockPosition()).containsKey(structure.get().value()))
+                    return 0;
         }
 
         return -9999;

@@ -236,7 +236,7 @@ public class DGSCModelProvider extends ModelProvider
     private void simpleBlockItem(Holder<Block> block)
     {
         blockModels.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block.value(),
-                        BlockModelGenerators.plainVariant(Starcatcher.rl("block/" + block.getKey().identifier().getPath())))
+                        BlockModelGenerators.plainVariant(Starcatcher.rl("block/" + block.key().identifier().getPath())))
                 .with(BlockModelGenerators.ROTATION_HORIZONTAL_FACING));
     }
 }

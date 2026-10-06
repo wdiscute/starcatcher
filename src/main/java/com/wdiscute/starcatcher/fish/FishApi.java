@@ -134,14 +134,6 @@ public class FishApi
             if (chanceToAdd == -9999) break;
         }
 
-        for (var restriction : fp.restrictions())
-        {
-            int chanceToAdd = restriction.adjustChance(chance, level, fp, entity, rod, context);
-            chance += chanceToAdd;
-            //if restriction doesn't allow for fish, skip remaining conditions
-            if (chanceToAdd == -9999) break;
-        }
-
         return chance;
     }
  
@@ -204,7 +196,7 @@ public class FishApi
 
                 //check if it can spawn entity
                 boolean canSpawnEntity;
-                Identifier location = fp.catchInfo().entityToSpawn().getKey().identifier();
+                Identifier location = fp.catchInfo().entityToSpawn().key().identifier();
                 if (location.getNamespace().equals("starcatcher"))
                     //if entity is from starcatcher, can only spawn if it's a bucketable fish (aka has a model)
                     canSpawnEntity = SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries().stream().map(
