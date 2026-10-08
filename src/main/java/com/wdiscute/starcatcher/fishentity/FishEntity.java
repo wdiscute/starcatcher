@@ -40,6 +40,12 @@ public class FishEntity extends AbstractFish
     }
 
     @Override
+    public void checkDespawn()
+    {
+
+    }
+
+    @Override
     public boolean isPersistenceRequired()
     {
         return false;

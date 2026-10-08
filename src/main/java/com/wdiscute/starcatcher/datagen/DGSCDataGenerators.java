@@ -44,7 +44,7 @@ public class DGSCDataGenerators
         //fp tags
         gen.addProvider(event.includeServer(), new DGSCFPTagsProvider(output, lookupProvider, existingFileHelper));
 
-        //fish models
+        //block models
         gen.addProvider(event.includeServer(), new DGSCItemModelProvider(output, existingFileHelper));
 
         //block tags
