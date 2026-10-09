@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sunflower_carp": {
+    "has_livid_bamboo": {
       "conditions": {
         "items": [
           {
-            "items": "starcatcher:sunflower_carp"
+            "items": "starcatcher:livid_bamboo"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "minecraft:sunflower"
+        "recipes": "starcatcher:bamboo_from_livid_bamboo"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_sunflower_carp"
+      "has_livid_bamboo"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sunflower"
+      "starcatcher:bamboo_from_livid_bamboo"
     ]
   }
 }

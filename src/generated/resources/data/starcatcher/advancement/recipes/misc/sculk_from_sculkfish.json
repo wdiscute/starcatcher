@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "minecraft:sculk"
+        "recipes": "starcatcher:sculk_from_sculkfish"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sculk"
+      "starcatcher:sculk_from_sculkfish"
     ]
   }
 }

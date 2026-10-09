@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_starcatcher_rod": {
+    "has_sunflower_carp": {
       "conditions": {
         "items": [
           {
-            "items": "#starcatcher:rods"
+            "items": "starcatcher:sunflower_carp"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "minecraft:moss_block"
+        "recipes": "starcatcher:sunglower_from_sunglower_carp"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_starcatcher_rod"
+      "has_sunflower_carp"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:moss_block"
+      "starcatcher:sunglower_from_sunglower_carp"
     ]
   }
 }

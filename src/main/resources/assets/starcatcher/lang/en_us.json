@@ -276,6 +276,7 @@
 
 
   "entity.starcatcher.fish" : "Starcaught Fish",
+  "entity.starcatcher.fish.no_model" : "%s does not have a model made! Summoning fish through the fish item is a creative-only feature. Do not report this to the developer if the fish was summoned in creative mode.",
   "entity.starcatcher.tackle_box_boat" : "Tackle Box Boat",
 
   "gui.starcatcher.bait_out" : "You've run out of bait...",
@@ -639,6 +640,7 @@
   "item.starcatcher.pale_oak_fish_plaque" : "Pale Oak Fish Plaque",
 
   "item.starcatcher.aquarium" : "Aquarium",
+  "block.starcatcher.aquarium.dead_fish" : "Dead fish don't go in an aquarium...",
 
   "item.starcatcher.fisherman_hat_black": "Black Fisherman's Hat",
   "item.starcatcher.fisherman_hat_blue": "Blue Fisherman's Hat",

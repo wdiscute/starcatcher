@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_livid_bamboo": {
+    "has_oculi": {
       "conditions": {
         "items": [
           {
-            "items": "starcatcher:livid_bamboo"
+            "items": "starcatcher:oculi"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "minecraft:bamboo"
+        "recipes": "starcatcher:glass_panes_from_oculi"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_livid_bamboo"
+      "has_oculi"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:bamboo"
+      "starcatcher:glass_panes_from_oculi"
     ]
   }
 }

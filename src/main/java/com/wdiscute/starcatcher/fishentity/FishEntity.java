@@ -46,6 +46,12 @@ public class FishEntity extends AbstractFish
     private boolean shouldDropItem = true;
 
     @Override
+    public void checkDespawn()
+    {
+
+    }
+
+    @Override
     protected SoundEvent getAmbientSound()
     {
         return SoundEvents.TROPICAL_FISH_AMBIENT;

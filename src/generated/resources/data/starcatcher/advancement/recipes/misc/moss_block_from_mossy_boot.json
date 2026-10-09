@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_dried_seaweed": {
+    "has_starcatcher_rod": {
       "conditions": {
         "items": [
           {
-            "items": "starcatcher:dried_seaweed"
+            "items": "#starcatcher:rods"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "minecraft:seagrass"
+        "recipes": "starcatcher:moss_block_from_mossy_boot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_dried_seaweed"
+      "has_starcatcher_rod"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:seagrass"
+      "starcatcher:moss_block_from_mossy_boot"
     ]
   }
 }

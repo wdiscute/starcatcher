@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_guide": {
+    "has_boot": {
       "conditions": {
         "items": [
           {
-            "items": "starcatcher:starcatcher_guide"
+            "items": "starcatcher:boot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "minecraft:guide_sign_reset"
+        "recipes": "starcatcher:leather_from_boot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_guide"
+      "has_boot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:guide_sign_reset"
+      "starcatcher:leather_from_boot"
     ]
   }
 }

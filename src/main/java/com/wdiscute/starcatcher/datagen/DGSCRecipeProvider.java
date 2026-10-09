@@ -72,7 +72,7 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.TOOLS, SCItems.GUIDE)
                 .requires(SCItems.GUIDE)
                 .unlockedBy("has_guide", has(SCItems.GUIDE))
-                .save(output, "guide_sign_reset");
+                .save(output, Starcatcher.rl("guide_sign_reset").toString());
 
         //rod
         ShapedRecipeBuilder.shaped(items, RecipeCategory.TOOLS, SCItems.ROD)
@@ -317,13 +317,13 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.MOSS_BLOCK, 1)
                 .requires(SCItems.MOSSY_BOOT)
                 .unlockedBy("has_starcatcher_rod", has(SCTags.RODS))
-                .save(output);
+                .save(output, Starcatcher.rl("moss_block_from_mossy_boot").toString());
 
         //leather from boot
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.LEATHER, 1)
                 .requires(SCItems.BOOT)
                 .unlockedBy("has_boot", has(SCItems.BOOT))
-                .save(output);
+                .save(output, Starcatcher.rl("leather_from_boot").toString());
 
 
         //sculk
@@ -1251,28 +1251,33 @@ public class DGSCRecipeProvider extends RecipeProvider
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.SUNFLOWER, 1)
                 .requires(SCItems.SUNFLOWER_CARP)
                 .unlockedBy("has_sunflower_carp", has(SCItems.SUNFLOWER_CARP))
-                .save(output);
+                .save(output, Starcatcher.rl("sunglower_from_sunglower_carp").toString());
 
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.BAMBOO, 1)
                 .requires(SCItems.LIVID_BAMBOO)
                 .unlockedBy("has_livid_bamboo", has(SCItems.LIVID_BAMBOO))
-                .save(output);
+                .save(output, Starcatcher.rl("bamboo_from_livid_bamboo").toString());
 
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.OBSIDIAN, 4)
                 .requires(SCItems.OBSIDIAN_CRAB)
                 .unlockedBy("has_obsidian_crab", has(SCItems.OBSIDIAN_CRAB))
-                .save(output);
+                .save(output, Starcatcher.rl("obsidian_from_obsidian_crab").toString());
 
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.SEAGRASS, 1)
                 .requires(SCItems.DRIED_SEAWEED)
                 .requires(Items.POTION)
                 .unlockedBy("has_dried_seaweed", has(SCItems.DRIED_SEAWEED))
-                .save(output);
+                .save(output, Starcatcher.rl("seagrass_from_dried_seaweed").toString());
+
+        ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.GLASS_PANE, 2)
+                .requires(SCItems.OCULI)
+                .unlockedBy("has_oculi", has(SCItems.OCULI))
+                .save(output, Starcatcher.rl("glass_panes_from_oculi").toString());
 
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, Items.SCULK, 1)
                 .requires(SCItems.SCULKFISH)
                 .unlockedBy("has_sculkfish", has(SCItems.SCULKFISH))
-                .save(output);
+                .save(output, Starcatcher.rl("sculk_from_sculkfish").toString());
     }
 
     List<Item> dyes = List.of(

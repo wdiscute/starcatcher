@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_obsidian_crab": {
+    "has_dried_seaweed": {
       "conditions": {
         "items": [
           {
-            "items": "starcatcher:obsidian_crab"
+            "items": "starcatcher:dried_seaweed"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipes": "minecraft:obsidian"
+        "recipes": "starcatcher:seagrass_from_dried_seaweed"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_obsidian_crab"
+      "has_dried_seaweed"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:obsidian"
+      "starcatcher:seagrass_from_dried_seaweed"
     ]
   }
 }
