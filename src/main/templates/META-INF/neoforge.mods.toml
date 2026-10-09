@@ -2,7 +2,7 @@ modLoader="javafml" #mandatory
 
 loaderVersion="[2,]" #mandatory
 
-license="MIT"
+license="wd's license of doom and despair"
 
 issueTrackerURL="https://discord.gg/WsuFsGSegD" #optional
 
