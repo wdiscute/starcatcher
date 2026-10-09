@@ -147,11 +147,14 @@ public class TackleBoxTooltipRenderer implements ClientTooltipComponent
             for (Utils.Duo<Integer, MaybeStack> item : items)
             {
                 Integer slot = item.first();
-                yOffset = slot == 12 ? yOffset + 18 : yOffset;
+                //if rod & fish slots continue
                 if (slot < 5) continue;
+
                 ItemStack stack = item.second().toStack();
-                ScreenUtils.item(g, stack, x + 4 + (((slot - 5) % 7) * 18), y + 4 + yOffset);
-                g.itemDecorations(font, stack, x + 18 + 18 + 2, y + 1);
+                int xToRenderAt = x + 4 + (((slot - 5) % 7) * 18);
+                int yToRenderAt = y + 4 + (slot < 12 ? yOffset : yOffset + 18);
+                ScreenUtils.item(g, stack, xToRenderAt, yToRenderAt);
+                g.itemDecorations(font, stack, xToRenderAt, yToRenderAt);
             }
             yOffset += 28;
         }
