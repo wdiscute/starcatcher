@@ -101,7 +101,7 @@ public class StarcatcherJeiPlugin implements IModPlugin
         attachments.addAll(BuiltInRegistries.ITEM.getTag(SCTags.HOOKS).get()
                 .stream().map(o -> o.value().getDefaultInstance()).toList());
 
-        attachments.addAll(BuiltInRegistries.ITEM.getTag(SCTags.WORMS).get()
+        attachments.addAll(BuiltInRegistries.ITEM.getTag(SCTags.BOBBERS).get()
                 .stream().map(o -> o.value().getDefaultInstance()).toList());
 
         attachments.addAll(BuiltInRegistries.ITEM.getTag(SCTags.BAITS).get()

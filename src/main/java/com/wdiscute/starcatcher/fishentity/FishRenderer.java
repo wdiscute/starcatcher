@@ -169,7 +169,7 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
             if (!entity.hasWarned)
             {
                 entity.hasWarned = true;
-                Minecraft.getInstance().player.sendSystemMessage(Component.translatable(entity.getFish().getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
+                Minecraft.getInstance().player.sendSystemMessage(Component.translatable("entity.starcatcher.fish.no_model", entity.getFish().getDescriptionId()));
             }
         }
 

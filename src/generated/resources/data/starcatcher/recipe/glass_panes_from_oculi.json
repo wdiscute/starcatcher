@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "starcatcher:oculi"
+    }
+  ],
+  "result": {
+    "count": 2,
+    "id": "minecraft:glass_pane"
+  }
+}
