@@ -12,15 +12,21 @@ import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCRecipes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.*;
+import net.minecraft.world.item.crafting.display.RecipeDisplay;
+import net.minecraft.world.item.crafting.display.ShapelessCraftingRecipeDisplay;
+import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TackleBoxBoatRecipe extends NormalCraftingRecipe
@@ -49,9 +55,23 @@ public class TackleBoxBoatRecipe extends NormalCraftingRecipe
             TackleBoxBoatRecipe::new
     );
 
+    public List<RecipeDisplay> display()
+    {
+        List<SlotDisplay> list = new ArrayList<>();
+        for (Ingredient ingredient : ingredients)
+            list.add(ingredient.display());
+
+        return List.of(
+                new ShapelessCraftingRecipeDisplay(list,
+                new SlotDisplay.ItemStackSlotDisplay(result),
+                new SlotDisplay.ItemSlotDisplay(Items.CRAFTING_TABLE)
+                )
+        );
+    }
+
     public static final RecipeSerializer<TackleBoxBoatRecipe> SERIALIZER = new RecipeSerializer<>(MAP_CODEC, STREAM_CODEC);
     private final ItemStackTemplate result;
-    private final List<Ingredient> ingredients;
+    public final List<Ingredient> ingredients;
     private final boolean isSimple;
 
     public TackleBoxBoatRecipe(Recipe.CommonInfo commonInfo, CraftingRecipe.CraftingBookInfo bookInfo, ItemStackTemplate result, List<Ingredient> ingredients)
