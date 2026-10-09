@@ -51,7 +51,6 @@ public class StarcatcherJeiPlugin implements IModPlugin
     public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration)
     {
         registration.getSmithingCategory().addExtension(StarcatcherRodRecipe.class, new StarcatcherJeiSmithingCategoryExtension());
-        registration.getCraftingCategory().addExtension(TackleBoxBoatRecipe.class, new StarcatcherJeiCraftingCategoryExtension());
     }
 
     @Override
