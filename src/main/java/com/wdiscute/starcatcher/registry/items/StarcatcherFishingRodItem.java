@@ -34,6 +34,7 @@ public class StarcatcherFishingRodItem extends Item
                 .component(SCDataComponents.BOBBER.get(), new MaybeStack(SCItems.BOBBER.get()))
                 .component(SCDataComponents.BAIT.get(), MaybeStack.EMPTY)
                 .component(SCDataComponents.HOOK.get(), new MaybeStack(SCItems.HOOK.get()))
+                .setNoCombineRepair()
         );
     }
 

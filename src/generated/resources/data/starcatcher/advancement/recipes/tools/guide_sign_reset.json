@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_sunflower_carp": {
+    "has_guide": {
       "conditions": {
         "items": [
           {
-            "items": "starcatcher:sunflower_carp"
+            "items": "starcatcher:starcatcher_guide"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:sunflower"
+        "recipe": "starcatcher:guide_sign_reset"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_sunflower_carp"
+      "has_guide"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:sunflower"
+      "starcatcher:guide_sign_reset"
     ]
   }
 }

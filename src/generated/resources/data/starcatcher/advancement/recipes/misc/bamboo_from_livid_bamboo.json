@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_fish": {
+    "has_livid_bamboo": {
       "conditions": {
         "items": [
           {
-            "items": "#minecraft:fishes"
+            "items": "starcatcher:livid_bamboo"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "starcatcher:tackle_box"
+        "recipe": "starcatcher:bamboo_from_livid_bamboo"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_fish"
+      "has_livid_bamboo"
     ]
   ],
   "rewards": {
     "recipes": [
-      "starcatcher:tackle_box"
+      "starcatcher:bamboo_from_livid_bamboo"
     ]
   }
 }

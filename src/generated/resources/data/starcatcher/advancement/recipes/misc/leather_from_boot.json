@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_obsidian_crab": {
+    "has_boot": {
       "conditions": {
         "items": [
           {
-            "items": "starcatcher:obsidian_crab"
+            "items": "starcatcher:boot"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:obsidian"
+        "recipe": "starcatcher:leather_from_boot"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_obsidian_crab"
+      "has_boot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:obsidian"
+      "starcatcher:leather_from_boot"
     ]
   }
 }

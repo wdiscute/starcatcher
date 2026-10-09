@@ -75,6 +75,7 @@ dependencies {
 
     //JEI
     compileOnly "mezz.jei:jei-26.2-neoforge:30.30.0.204"
+    runtimeOnly "mezz.jei:jei-26.2-neoforge:30.30.0.204"
 
     //little joys
     compileOnly "maven.modrinth:little-joys:26.2.0.4+neoforge-26.2"

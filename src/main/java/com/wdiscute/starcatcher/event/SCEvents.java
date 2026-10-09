@@ -184,6 +184,13 @@ public class SCEvents
     }
 
     @SubscribeEvent
+    public static void onAnvilUpdateEvent(AnvilUpdateEvent event)
+    {
+        if (event.getLeft().is(SCTags.RODS) && event.getRight().is(SCTags.RODS))
+            event.setCanceled(true);
+    }
+
+    @SubscribeEvent
     public static void onDatapackSync(OnDatapackSyncEvent event)
     {
         if (ModList.get().isLoaded("jei"))

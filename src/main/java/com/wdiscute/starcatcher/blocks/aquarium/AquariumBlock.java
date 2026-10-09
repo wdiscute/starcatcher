@@ -16,6 +16,7 @@ import com.wdiscute.utils.Utils;
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -455,7 +456,12 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
 
         PLACE_FISH_CREATIVE("place_fish_creative", SoundEvents.DOLPHIN_SPLASH, (l, bp, bs, is, p) ->
         {
-            if (!p.isCreative()) return false;
+            if (!p.isCreative())
+            {
+                p.sendOverlayMessage(Component.translatable("block.starcatcher.aquarium.dead_fish"));
+                return false;
+            }
+
             if (l.getBlockEntity(bp) instanceof AquariumBlockEntity abe)
             {
                 abe.setFish(is);

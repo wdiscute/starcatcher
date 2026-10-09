@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_starcatcher_rod": {
+    "has_obsidian_crab": {
       "conditions": {
         "items": [
           {
-            "items": "#starcatcher:rods"
+            "items": "starcatcher:obsidian_crab"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:moss_block"
+        "recipe": "starcatcher:obsidian_from_obsidian_crab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_starcatcher_rod"
+      "has_obsidian_crab"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:moss_block"
+      "starcatcher:obsidian_from_obsidian_crab"
     ]
   }
 }

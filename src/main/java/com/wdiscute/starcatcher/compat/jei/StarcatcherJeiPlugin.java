@@ -4,6 +4,7 @@ import com.wdiscute.sellingbin.SellingBin;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.recipe.StarcatcherRodRecipe;
+import com.wdiscute.starcatcher.recipe.TackleBoxBoatRecipe;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.registry.SCDataEntries;
@@ -50,6 +51,7 @@ public class StarcatcherJeiPlugin implements IModPlugin
     public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration)
     {
         registration.getSmithingCategory().addExtension(StarcatcherRodRecipe.class, new StarcatcherJeiSmithingCategoryExtension());
+        registration.getCraftingCategory().addExtension(TackleBoxBoatRecipe.class, new StarcatcherJeiCraftingCategoryExtension());
     }
 
     @Override
