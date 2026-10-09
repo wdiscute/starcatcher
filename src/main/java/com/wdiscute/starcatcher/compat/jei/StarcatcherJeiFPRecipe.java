@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.compat.jei;
 
-import com.mojang.blaze3d.platform.InputConstants;
 import com.wdiscute.starcatcher.SCColors;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fish.FishProperties;
@@ -22,6 +21,7 @@ import mezz.jei.api.recipe.category.AbstractRecipeCategory;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.MouseHandler;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.navigation.ScreenRectangle;
@@ -32,7 +32,6 @@ import net.minecraft.network.chat.Style;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import org.jspecify.annotations.Nullable;
 
@@ -139,7 +138,10 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
                 ScreenUtils.Tooltip.set(Component.translatable("emi.starcatcher.entity_entry", recipe.fp.getDisplayName()));
         }
 
-        ScreenUtils.Tooltip.render(g, font, (int) mouseX, (int) mouseY);
+        MouseHandler mouseHandler = Minecraft.getInstance().mouseHandler;
+        ScreenUtils.Tooltip.render(g, font,
+                (int) mouseHandler.getScaledXPos(Minecraft.getInstance().getWindow()),
+                (int) mouseHandler.getScaledYPos(Minecraft.getInstance().getWindow()));
     }
 
     public void bookIcon(GuiGraphicsExtractor g, int x, int y, int mouseX, int mouseY)
@@ -149,7 +151,10 @@ public class StarcatcherJeiFPRecipe extends AbstractRecipeCategory<StarcatcherJe
         if (mouseX > x && mouseX < x + 19 && mouseY > y && mouseY < y + 19)
         {
             ScreenUtils.Tooltip.set(Component.translatable("emi.starcatcher.open_as_guide_entry"));
-            ScreenUtils.Tooltip.render(g, Minecraft.getInstance().font, mouseX, mouseY);
+            Minecraft minecraft = Minecraft.getInstance();
+            ScreenUtils.Tooltip.render(g, minecraft.font,
+                    (int) minecraft.mouseHandler.getScaledXPos(minecraft.getWindow()),
+                    (int) minecraft.mouseHandler.getScaledYPos(minecraft.getWindow()));
         }
     }
 

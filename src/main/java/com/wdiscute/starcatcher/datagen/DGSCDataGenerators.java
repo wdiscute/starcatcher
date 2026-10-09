@@ -59,7 +59,6 @@ public class DGSCDataGenerators
         //fish properties
         worldRegistry.add(Starcatcher.FISH_REGISTRY_KEY, DGSCFishProperties::bootstrap);
 
-
         //biome modifiers
         worldRegistry.add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, DGSCBiomeModifiers::bootstrap);
 
@@ -86,10 +85,16 @@ public class DGSCDataGenerators
             );
         });
 
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getReloadableLookupProvider();
+        event.createWorldRegistryObjects(
+                worldRegistry,
+                Set.of(
+                        "minecraft",
+                        Starcatcher.MOD_ID
+                )
+        );
 
         //fp tags
-        //gen.addProvider(true, new DGSCFPTagsProvider(output, lookupProvider));
+        event.createProvider(DGSCFPTagsProvider::new);
 
         //fish models
         gen.addProvider(true, new DGSCModelProvider(output));
@@ -104,24 +109,16 @@ public class DGSCDataGenerators
         //gen.addProvider(event.includeServer(), new DGSCAdvancementProvider(output, lookupProvider, existingFileHelper));
 
         //loot modifiers
-        gen.addProvider(true, new DGSCLootModifiers(output, lookupProvider));
+        event.createProvider(DGSCLootModifiers::new);
 
         //biome tags
-        gen.addProvider(true, new DGSCBiomeTagsProvider(output, lookupProvider));
+        event.createProvider(DGSCBiomeTagsProvider::new);
 
         //data maps
-        gen.addProvider(true, new DGSCDataMapsProvider(output, lookupProvider));
+        event.createProvider(DGSCDataMapsProvider::new);
 
         //data entries
-        SCDGDataEntriesProvider.start(gen, output, lookupProvider);
-
-        event.createWorldRegistryObjects(
-                worldRegistry,
-                Set.of(
-                        "minecraft",
-                        Starcatcher.MOD_ID
-                )
-        );
+        SCDGDataEntriesProvider.start(gen, output, event.getReloadableLookupProvider());
 
         event.createReloadableRegistryObjects(
                 reloadableRegistry,
