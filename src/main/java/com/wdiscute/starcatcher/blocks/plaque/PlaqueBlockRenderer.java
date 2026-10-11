@@ -104,7 +104,9 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
             if (rotation.containsKey(item))
                 poseStack.rotate(Axis.ZN.rotation((float) Math.toRadians(rotation.getOrDefault(item, 0f))));
 
-            poseStack.scale(scale, -scale, scale);
+            poseStack.rotate(Axis.YN.rotationDegrees(180));
+            poseStack.rotate(Axis.XN.rotationDegrees(180));
+            poseStack.scale(scale, scale, scale);
             poseStack.translate(0, -1, 0);
 
             poseStack.translate(0, (-scale / 10) * (SCConfig.FISH_MAX_SCALE.getAsDouble() / 15), 0);

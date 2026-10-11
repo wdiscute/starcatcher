@@ -4,9 +4,13 @@ import com.wdiscute.starcatcher.Starcatcher;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelLocationUtils;
+import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.core.Holder;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -14,6 +18,7 @@ import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import static com.wdiscute.starcatcher.registry.SCItems.*;
@@ -76,7 +81,7 @@ public class DGSCModelProvider extends ModelProvider
 
         //bucket fishes
         for (DeferredHolder<Item, ? extends Item> item : BUCKETABLE_FISHES_REGISTRY.getEntries())
-            simpleItem((DeferredItem<? extends Item>) item);
+            simpleFish((DeferredItem<? extends Item>) item);
 
         //non bucket fishes
         for (DeferredHolder<Item, ? extends Item> item : NON_BUCKETABLE_FISH_REGISTRY.getEntries())
@@ -231,6 +236,11 @@ public class DGSCModelProvider extends ModelProvider
     private void simpleItem(DeferredItem<? extends Item> item)
     {
         itemModels.generateFlatItem(item.get(), ModelTemplates.FLAT_ITEM);
+    }
+
+    private void simpleFish(DeferredItem<? extends Item> item)
+    {
+        itemModels.generateFlatItem(item.get(), new ModelTemplate(Optional.of(Starcatcher.rl("item/fish")), Optional.empty(), TextureSlot.LAYER0));
     }
 
     private void simpleBlockItem(Holder<Block> block)

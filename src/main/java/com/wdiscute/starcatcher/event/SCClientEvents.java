@@ -1,5 +1,6 @@
 package com.wdiscute.starcatcher.event;
 
+import com.google.common.reflect.TypeToken;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockRenderer;
@@ -11,6 +12,8 @@ import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatRenderer;
 import com.wdiscute.starcatcher.bobentity.FishingBobRenderer;
 import com.wdiscute.starcatcher.bobentity.tackles.*;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
+import com.wdiscute.starcatcher.fishentity.HeldFishLayer;
+import com.wdiscute.starcatcher.fishentity.SCArmPoses;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.locators.FishRadarLayer;
@@ -31,16 +34,33 @@ import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.ClientAvatarEntity;
+import net.minecraft.client.model.HumanoidModel;
+import net.minecraft.client.player.AbstractClientPlayer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.player.AvatarRenderer;
+import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.Avatar;
+import net.minecraft.world.entity.HumanoidArm;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.PlayerModelType;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.*;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
+import net.neoforged.neoforge.client.renderstate.AvatarRenderStateModifier;
+import net.neoforged.neoforge.client.renderstate.RegisterRenderStateModifiersEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 @EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
 public class SCClientEvents
@@ -261,6 +281,54 @@ public class SCClientEvents
         event.registerLayerDefinition(Ward.LAYER_LOCATION, Ward::createBodyLayer);
         event.registerLayerDefinition(RippleCatfish.LAYER_LOCATION, RippleCatfish::createBodyLayer);
         event.registerLayerDefinition(BrightAmethystSnapper.LAYER_LOCATION, BrightAmethystSnapper::createBodyLayer);
+    }
+
+    private static final IClientItemExtensions HOLD_ABOVE_HEAD = new IClientItemExtensions()
+    {
+        @Override
+        public HumanoidModel.ArmPose getArmPose(LivingEntity entity, InteractionHand hand, ItemStack stack)
+        {
+            return SCArmPoses.HOLD_ABOVE_HEAD.getValue();
+        }
+    };
+
+    @SubscribeEvent
+    public static void onClientExtensions(RegisterClientExtensionsEvent event)
+    {
+        event.registerItem(HOLD_ABOVE_HEAD, SCItems.BUCKETABLE_FISHES_REGISTRY.getEntries()
+                .stream()
+                .map(DeferredHolder::value)
+                .toArray(Item[]::new)
+        );
+    }
+
+    @SubscribeEvent
+    public static void addLayers(EntityRenderersEvent.AddLayers event)
+    {
+        for (PlayerModelType type : event.getSkins())
+        {
+            AvatarRenderer<AbstractClientPlayer> renderer = event.getPlayerRenderer(type);
+            if (renderer != null)
+                renderer.addLayer(new HeldFishLayer(renderer, event.getEntityModels()));
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerRenderStateModifiers(RegisterRenderStateModifiersEvent event)
+    {
+        event.registerAvatarEntityModifier(new AvatarRenderStateModifier()
+        {
+            @Override
+            public <T extends Avatar & ClientAvatarEntity> void accept(T avatar, AvatarRenderState state)
+            {
+                ItemStack right = avatar.getItemHeldByArm(HumanoidArm.RIGHT);
+                ItemStack left = avatar.getItemHeldByArm(HumanoidArm.LEFT);
+
+                boolean holdingFish = FishRenderer.canRender(right) || FishRenderer.canRender(left);
+
+                state.setRenderData(HeldFishLayer.HeldFishRenderData.KEY, holdingFish ? new HeldFishLayer.HeldFishRenderData(right, left) : null);
+            }
+        });
     }
 
     @SubscribeEvent
