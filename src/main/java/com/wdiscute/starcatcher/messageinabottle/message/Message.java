@@ -73,6 +73,7 @@ public record Message(
         Message HOPELESS = create("hopeless", Message.BACKGROUND_OVERWORLD, 16);
         Message TRUE_BLUE = create("true_blue", Message.BACKGROUND_OVERWORLD, 16);
         Message WITHER = create("wither", Message.BACKGROUND_NETHER, 16);
+        Message THE_END = create("the_end", Message.BACKGROUND_END, 16);
 
         //creates a built-in message from a translation key
         static Message create(String translationKey, ResourceLocation background, int length)
