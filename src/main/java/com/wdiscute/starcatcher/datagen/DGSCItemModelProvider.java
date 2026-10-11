@@ -24,7 +24,7 @@ public class DGSCItemModelProvider extends ItemModelProvider
     {
         //bucket fishes
         for (DeferredHolder<Item, ? extends Item> item : BUCKETABLE_FISHES_REGISTRY.getEntries())
-            simpleItem((DeferredItem<? extends Item>) item);
+            simpleFish((DeferredItem<? extends Item>) item);
 
         //non bucket fishes
         for (DeferredHolder<Item, ? extends Item> item : NON_BUCKETABLE_FISH_REGISTRY.getEntries())
@@ -182,5 +182,10 @@ public class DGSCItemModelProvider extends ItemModelProvider
     private ItemModelBuilder simpleItem(DeferredItem<? extends Item> item)
     {
         return withExistingParent(item.getId().getPath(), mcLoc("item/generated")).texture("layer0", modLoc("item/" + item.getId().getPath()));
+    }
+
+    private ItemModelBuilder simpleFish(DeferredItem<? extends Item> item)
+    {
+        return withExistingParent(item.getId().getPath(), Starcatcher.rl("item/fish")).texture("layer0", modLoc("item/" + item.getId().getPath()));
     }
 }

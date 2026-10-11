@@ -112,7 +112,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
             // Render model here
 
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY, be.getLevel());
+            FishRenderer.renderFishFromItem(fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY);
 
             poseStack.popPose();
         }

@@ -112,7 +112,7 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         // Render model here
 
         if (!be.getFish().isEmpty())
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY, be.getLevel());
+            FishRenderer.renderFishFromItem(fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY);
 
         poseStack.popPose();
     }

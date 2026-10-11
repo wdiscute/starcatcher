@@ -206,9 +206,9 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
 
     }
 
-    public static void renderFishFromItem(ItemRenderer itemRenderer, Map<Item, EntityModel<FishEntity>> map, ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, int overlay, Level level)
+    public static void renderFishFromItem(ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, int overlay)
     {
-        if (map.containsKey(itemStack.getItem()))
+        if (FishRenderer.map.containsKey(itemStack.getItem()))
         {
             Item item = itemStack.getItem();
             EntityModel<FishEntity> model = map.get(item);
@@ -220,14 +220,6 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
                 vertexConsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
 
             model.renderToBuffer(poseStack, vertexConsumer, packedLight, overlay);
-        }
-        else
-        {
-            poseStack.translate(0F, 1F, 0.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
-            poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
-            itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight,
-                    overlay, poseStack, buffer, level, 0);
         }
     }
 

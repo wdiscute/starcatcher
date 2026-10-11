@@ -7,6 +7,7 @@ license="MIT"
 issueTrackerURL="https://discord.gg/WsuFsGSegD" #optional
 
 [[mods]] #mandatory
+enumExtensions = "META-INF/enumextensions.json"
 modId="starcatcher"
 version="${mod_version}"
 displayName="${mod_name}"

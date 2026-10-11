@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "starcatcher:item/fish",
   "textures": {
     "layer0": "starcatcher:item/bigeye_tuna"
   }
