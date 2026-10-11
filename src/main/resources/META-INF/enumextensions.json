@@ -1,0 +1,13 @@
+{
+  "entries": [
+    {
+      "enum": "net/minecraft/client/model/HumanoidModel$ArmPose",
+      "name": "STARCATCHER_HOLD_ABOVE_HEAD",
+      "constructor": "(ZZLnet/neoforged/neoforge/client/IArmPoseTransformer;)V",
+      "parameters": {
+        "class": "com/wdiscute/starcatcher/fishentity/SCArmPoses",
+        "field": "HOLD_ABOVE_HEAD"
+      }
+    }
+  ]
+}

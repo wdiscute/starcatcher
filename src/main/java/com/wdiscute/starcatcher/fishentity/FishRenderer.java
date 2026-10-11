@@ -199,7 +199,8 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
 
         //scaling + pivot adjusting
         poseStack.translate(0, 1, 0);
-        poseStack.scale(scale, -scale, scale);
+        poseStack.mulPose(Axis.XP.rotationDegrees(180));
+        poseStack.scale(scale, scale, scale);
         poseStack.translate(0, -1, 0);
 
         poseStack.mulPose(Axis.YN.rotationDegrees(state.yRot + 180));
@@ -209,6 +210,11 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
             FishRenderer.renderFishFromItem(state, fish, submitNodeCollector, poseStack);
 
         poseStack.popPose();
+    }
+
+    public static boolean canRender(ItemStack stack)
+    {
+        return map.containsKey(stack.getItem());
     }
 
     public static void renderFishFromItem(FishEntityRenderState ir, ItemStack itemStack, SubmitNodeCollector node, PoseStack poseStack)
@@ -226,15 +232,6 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
                     -1, null, ir.outlineColor, null
             );
         }
-        else
-        {
-            poseStack.translate(0F, 1F, 0.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
-            poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
-            //itemRenderer.appendItemLayers(itemStack, ItemDisplayContext.FIXED, packedLight,
-            //OverlayTexture.NO_OVERLAY, poseStack, buffer, level, U.r.nextInt());
-        }
-
     }
 
     public static RenderType getGoldRendertype(Identifier texture, EntityModel<FishEntityRenderState> model, ItemStack fishItem)

@@ -12,6 +12,7 @@
   },
   "client": [
     "GetNameMixin",
+    "HumanoidModelMixin",
     "gold.CuboidItemModelWrapperMixin"
   ]
 }
