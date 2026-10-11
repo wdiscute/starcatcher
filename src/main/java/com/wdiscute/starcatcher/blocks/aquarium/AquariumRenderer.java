@@ -88,9 +88,9 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
     }
 
     @Override
-    public void submit(AquariumRenderState be, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
+    public void submit(AquariumRenderState state, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, CameraRenderState camera)
     {
-        ItemStack fish = be.fish;
+        ItemStack fish = state.fish;
 
         poseStack.pushPose();
 
@@ -107,11 +107,11 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         {
             if (!player.getMainHandItem().is(Items.BUCKET) && !player.getOffhandItem().is(Items.BUCKET))
             {
-                poseStack.translate(be.x, be.y, be.z);
+                poseStack.translate(state.x, state.y, state.z);
             }
         }
         else
-            poseStack.translate(be.x, be.y, be.z);
+            poseStack.translate(state.x, state.y, state.z);
 
         //block centering
         poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
@@ -125,11 +125,15 @@ public class AquariumRenderer implements BlockEntityRenderer<AquariumBlockEntity
         poseStack.scale(scale, scale, scale);
         poseStack.translate(0, -1, 0);
 
-        poseStack.rotateAround(Axis.YN.rotation((float) ((float) be.fishRotation + Math.PI / 2)), 0, 0, 0);
+        poseStack.rotateAround(Axis.YN.rotation((float) ((float) state.fishRotation + Math.PI / 2)), 0, 0, 0);
 
         // Render model
         if (!fish.isEmpty())
-            FishRenderer.renderFishFromItem(new FishEntityRenderState(), fish, submitNodeCollector, poseStack);
+        {
+            FishEntityRenderState ir = new FishEntityRenderState();
+            ir.lightCoords = state.lightCoords;
+            FishRenderer.renderFishFromItem(ir, fish, submitNodeCollector, poseStack);
+        }
 
         poseStack.popPose();
     }

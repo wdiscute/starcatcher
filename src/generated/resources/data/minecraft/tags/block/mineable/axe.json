@@ -1,5 +1,15 @@
 {
   "values": [
+    "starcatcher:oak_fish_plaque",
+    "starcatcher:dark_oak_fish_plaque",
+    "starcatcher:cherry_fish_plaque",
+    "starcatcher:acacia_fish_plaque",
+    "starcatcher:bamboo_fish_plaque",
+    "starcatcher:jungle_fish_plaque",
+    "starcatcher:birch_fish_plaque",
+    "starcatcher:spruce_fish_plaque",
+    "starcatcher:mangrove_fish_plaque",
+    "starcatcher:pale_oak_fish_plaque",
     "starcatcher:tournament_stand",
     "starcatcher:display",
     "selling_bin:selling_bin"

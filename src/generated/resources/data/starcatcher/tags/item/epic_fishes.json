@@ -13,6 +13,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:boreal",
+      "required": false
+    },
+    {
       "id": "starcatcher:bright_amethyst_snapper",
       "required": false
     },
@@ -34,6 +38,10 @@
     },
     {
       "id": "starcatcher:eel_dynamo",
+      "required": false
+    },
+    {
+      "id": "starcatcher:frostbit_jelly",
       "required": false
     },
     {
