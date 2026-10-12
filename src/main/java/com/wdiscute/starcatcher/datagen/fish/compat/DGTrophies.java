@@ -391,6 +391,21 @@ public class DGTrophies
             );
         }
 
+        //the end
+        {
+            FishRegistration.registerRaw(context,
+                    FishRegistration.key("message/the_end"),
+                    PresetRestrictions.empty(context)
+                            .withFish(new MaybeStack(SCItems.MESSAGE_IN_A_BOTTLE.getId(), 1,
+                                    DataComponentPatch.builder().set(SCDataComponents.MESSAGE.get(), Message.BuiltIn.THE_END).build()))
+                            .addRestriction(DimensionRestriction.END)
+                            .withPercentageChance(0.0001f)
+                            .withMaxLimit(1)
+                            .withDifficulty(Difficulty.TRASH)
+                            .withHasGuideEntry(false)
+                            .message()
+            );
+        }
 
         //
         //  ,-----.                               ,--.
