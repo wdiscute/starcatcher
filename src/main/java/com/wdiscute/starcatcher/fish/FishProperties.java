@@ -78,7 +78,7 @@ public record FishProperties(
         if (catchInfo.alwaysSpawnEntity())
             return Component.translatable("entity." + catchInfo.entityToSpawn().getRegisteredName().replace(":", "."));
         else
-            return Component.translatable(catchInfo.fish().toStack().getItem().getDescriptionId());
+            return Component.translatable(catchInfo.fish().toItem().getDescriptionId());
     }
 
     public Identifier toLoc(Level level)

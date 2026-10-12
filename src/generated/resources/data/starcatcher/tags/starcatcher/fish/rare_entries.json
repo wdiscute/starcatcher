@@ -25,6 +25,14 @@
       "required": false
     },
     {
+      "id": "starcatcher:charfish",
+      "required": false
+    },
+    {
+      "id": "starcatcher:cinder_squid",
+      "required": false
+    },
+    {
       "id": "starcatcher:cinder_squid",
       "required": false
     },
@@ -41,11 +49,19 @@
       "required": false
     },
     {
+      "id": "create:drive_pike",
+      "required": false
+    },
+    {
       "id": "starcatcher:fossilized_angelfish",
       "required": false
     },
     {
       "id": "starcatcher:glowing_dark",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowstone_pufferfish",
       "required": false
     },
     {
@@ -66,6 +82,10 @@
     },
     {
       "id": "create:meka_agave_bream",
+      "required": false
+    },
+    {
+      "id": "starcatcher:molten_shrimp",
       "required": false
     },
     {
@@ -97,11 +117,19 @@
       "required": false
     },
     {
+      "id": "starcatcher:spacejelly",
+      "required": false
+    },
+    {
       "id": "starcatcher:sporefish",
       "required": false
     },
     {
       "id": "starcatcher:sun_seeking_carp",
+      "required": false
+    },
+    {
+      "id": "starcatcher:suneater",
       "required": false
     },
     {
@@ -141,11 +169,23 @@
       "required": false
     },
     {
+      "id": "tide:crimson_fangjaw",
+      "required": false
+    },
+    {
       "id": "tide:crystalline_carp",
       "required": false
     },
     {
       "id": "tide:dutchman_sock",
+      "required": false
+    },
+    {
+      "id": "tide:dutchman_sock",
+      "required": false
+    },
+    {
+      "id": "tide:elytrout",
       "required": false
     },
     {
@@ -158,6 +198,10 @@
     },
     {
       "id": "tide:gilded_minnow",
+      "required": false
+    },
+    {
+      "id": "tide:inferno_guppy",
       "required": false
     },
     {
@@ -185,6 +229,10 @@
       "required": false
     },
     {
+      "id": "tide:red_40",
+      "required": false
+    },
+    {
       "id": "tide:sailfish",
       "required": false
     },
@@ -194,6 +242,10 @@
     },
     {
       "id": "tide:slimy_salmon",
+      "required": false
+    },
+    {
+      "id": "tide:soulscale",
       "required": false
     },
     {
@@ -218,6 +270,14 @@
     },
     {
       "id": "tide:warped_guppy",
+      "required": false
+    },
+    {
+      "id": "tide:warped_guppy",
+      "required": false
+    },
+    {
+      "id": "tide:witherfin",
       "required": false
     },
     {

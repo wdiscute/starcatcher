@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.datagen.fish;
 
-import com.mojang.datafixers.util.Pair;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.compat.CreateCompat;
 import com.wdiscute.starcatcher.fish.CatchInfo;
@@ -18,19 +17,17 @@ import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.common.conditions.NeoForgeConditions;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public final class FishRegistration
 {
-    public static List<FishProperties> ALL_FISHABLE = new ArrayList<>();
+    public static Map<ResourceKey<FishProperties>, FishProperties> ALL_FISHABLE = new LinkedHashMap<>();
     public static Map<FishProperties, Identifier> ALL_FISHABLE_MAP = new HashMap<>();
-    public static List<FishProperties> STARCATCHER_FISHABLE = new ArrayList<>();
+    public static Map<ResourceKey<FishProperties>, FishProperties> STARCATCHER_FISHABLE = new LinkedHashMap<>();
 
     //apply fp specific stuff and register
     public static void register(BootstrapContext<FishProperties> context, FishProperties fp)
@@ -64,11 +61,11 @@ public final class FishRegistration
             throw new IllegalStateException("No Fluid Restriction found for " + fp);
 
         //add to lists and maps
-        ALL_FISHABLE.add(fp);
+        ALL_FISHABLE.put(key, fp);
         ALL_FISHABLE_MAP.put(fp, key.identifier());
         //add every starcatcher fish that is not trash to STARCATCHER_FISHABLE tag
         if (fp.catchInfo().fish().identifier().getNamespace().equals("starcatcher") && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.rarity().equals(Rarity.TRASH))
-            STARCATCHER_FISHABLE.add(fp);
+            STARCATCHER_FISHABLE.put(key, fp);
 
         if (DGSCFishProperties.MODS_TO_ACTUALLY_DATAGEN.contains(requiredModId))
         {

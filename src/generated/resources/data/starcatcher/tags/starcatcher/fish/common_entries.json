@@ -49,6 +49,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:embergill",
+      "required": false
+    },
+    {
       "id": "starcatcher:frostgill_chub",
       "required": false
     },
@@ -62,6 +66,10 @@
     },
     {
       "id": "starcatcher:glimmergill",
+      "required": false
+    },
+    {
+      "id": "starcatcher:glowstone_seeker",
       "required": false
     },
     {
@@ -137,7 +145,15 @@
       "required": false
     },
     {
+      "id": "tide:amber_rockfish",
+      "required": false
+    },
+    {
       "id": "tide:anchovy",
+      "required": false
+    },
+    {
+      "id": "tide:ash_perch",
       "required": false
     },
     {
@@ -177,6 +193,14 @@
       "required": false
     },
     {
+      "id": "tide:ember_koi",
+      "required": false
+    },
+    {
+      "id": "tide:enderfin",
+      "required": false
+    },
+    {
       "id": "tide:enderfin",
       "required": false
     },
@@ -197,7 +221,15 @@
       "required": false
     },
     {
+      "id": "tide:magma_mackerel",
+      "required": false
+    },
+    {
       "id": "tide:ocean_perch",
+      "required": false
+    },
+    {
+      "id": "tide:pale_clubfish",
       "required": false
     },
     {

@@ -5,11 +5,19 @@
       "required": false
     },
     {
+      "id": "minecraft:wither",
+      "required": false
+    },
+    {
       "id": "starcatcher:aurora",
       "required": false
     },
     {
       "id": "starcatcher:azure_crystalback_minnow",
+      "required": false
+    },
+    {
+      "id": "starcatcher:cerberay",
       "required": false
     },
     {
@@ -41,6 +49,14 @@
       "required": false
     },
     {
+      "id": "starcatcher:obsidian_eel",
+      "required": false
+    },
+    {
+      "id": "starcatcher:scorched_bloodsucker",
+      "required": false
+    },
+    {
       "id": "starcatcher:scorched_bloodsucker",
       "required": false
     },
@@ -61,6 +77,14 @@
       "required": false
     },
     {
+      "id": "starcatcher:voidbiter",
+      "required": false
+    },
+    {
+      "id": "starcatcher:ward",
+      "required": false
+    },
+    {
       "id": "starcatcher:ward",
       "required": false
     },
@@ -77,6 +101,14 @@
       "required": false
     },
     {
+      "id": "tide:devils_hole_pupfish",
+      "required": false
+    },
+    {
+      "id": "tide:dragon_fish",
+      "required": false
+    },
+    {
       "id": "tide:dragon_fish",
       "required": false
     },
@@ -85,7 +117,15 @@
       "required": false
     },
     {
+      "id": "tide:midas_fish",
+      "required": false
+    },
+    {
       "id": "tide:shooting_starfish",
+      "required": false
+    },
+    {
+      "id": "tide:voidseeker",
       "required": false
     },
     {

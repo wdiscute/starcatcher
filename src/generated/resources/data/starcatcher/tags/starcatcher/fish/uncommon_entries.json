@@ -13,6 +13,14 @@
       "required": false
     },
     {
+      "id": "create:brassgill",
+      "required": false
+    },
+    {
+      "id": "starcatcher:chorus_minnow",
+      "required": false
+    },
+    {
       "id": "starcatcher:chorus_minnow",
       "required": false
     },
@@ -41,7 +49,15 @@
       "required": false
     },
     {
+      "id": "starcatcher:dreamliner",
+      "required": false
+    },
+    {
       "id": "starcatcher:elderscale",
+      "required": false
+    },
+    {
+      "id": "starcatcher:end_glow",
       "required": false
     },
     {
@@ -58,6 +74,10 @@
     },
     {
       "id": "starcatcher:ironjaw_herring",
+      "required": false
+    },
+    {
+      "id": "starcatcher:magma_fish",
       "required": false
     },
     {
@@ -93,7 +113,15 @@
       "required": false
     },
     {
+      "id": "starcatcher:pyrotrout",
+      "required": false
+    },
+    {
       "id": "starcatcher:redscaled_tuna",
+      "required": false
+    },
+    {
+      "id": "starcatcher:scalding_pike",
       "required": false
     },
     {
@@ -125,6 +153,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:willish",
+      "required": false
+    },
+    {
       "id": "starcatcher:yellowstone_fish",
       "required": false
     },
@@ -145,11 +177,19 @@
       "required": false
     },
     {
+      "id": "tide:blue_neonfish",
+      "required": false
+    },
+    {
       "id": "tide:carp",
       "required": false
     },
     {
       "id": "tide:catfish",
+      "required": false
+    },
+    {
+      "id": "tide:chorus_cod",
       "required": false
     },
     {
@@ -173,6 +213,14 @@
       "required": false
     },
     {
+      "id": "tide:ender_glider",
+      "required": false
+    },
+    {
+      "id": "tide:endergazer",
+      "required": false
+    },
+    {
       "id": "tide:endergazer",
       "required": false
     },
@@ -186,6 +234,10 @@
     },
     {
       "id": "tide:iron_tetra",
+      "required": false
+    },
+    {
+      "id": "tide:judgment_fish",
       "required": false
     },
     {
@@ -209,6 +261,10 @@
       "required": false
     },
     {
+      "id": "tide:obsidian_pike",
+      "required": false
+    },
+    {
       "id": "tide:pike",
       "required": false
     },
@@ -218,6 +274,14 @@
     },
     {
       "id": "tide:violet_carp",
+      "required": false
+    },
+    {
+      "id": "tide:violet_carp",
+      "required": false
+    },
+    {
+      "id": "tide:volcano_tuna",
       "required": false
     },
     {

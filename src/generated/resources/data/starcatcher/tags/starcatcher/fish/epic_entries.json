@@ -5,6 +5,10 @@
       "required": false
     },
     {
+      "id": "minecraft:creeper_head",
+      "required": false
+    },
+    {
       "id": "starcatcher:amethystback",
       "required": false
     },
@@ -37,6 +41,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:chorus_crab",
+      "required": false
+    },
+    {
       "id": "starcatcher:dark_amethyst_snapper",
       "required": false
     },
@@ -50,6 +58,10 @@
     },
     {
       "id": "starcatcher:geode_eel",
+      "required": false
+    },
+    {
+      "id": "starcatcher:lava_crab",
       "required": false
     },
     {
@@ -73,11 +85,27 @@
       "required": false
     },
     {
+      "id": "starcatcher:molten_deepslate_crab",
+      "required": false
+    },
+    {
+      "id": "starcatcher:nebula_squid",
+      "required": false
+    },
+    {
       "id": "starcatcher:nebula_squid",
       "required": false
     },
     {
       "id": "starcatcher:obsidian_crab",
+      "required": false
+    },
+    {
+      "id": "starcatcher:obsidian_crab",
+      "required": false
+    },
+    {
+      "id": "starcatcher:purple_carp",
       "required": false
     },
     {
@@ -105,11 +133,19 @@
       "required": false
     },
     {
+      "id": "starcatcher:voidfin",
+      "required": false
+    },
+    {
       "id": "starcatcher:willow_bream",
       "required": false
     },
     {
       "id": "tide:aquathorn",
+      "required": false
+    },
+    {
+      "id": "tide:blazing_swordfish",
       "required": false
     },
     {
@@ -134,6 +170,10 @@
     },
     {
       "id": "tide:great_white_shark",
+      "required": false
+    },
+    {
+      "id": "tide:mantyvern",
       "required": false
     },
     {
@@ -166,6 +206,10 @@
     },
     {
       "id": "tide:shadow_shark",
+      "required": false
+    },
+    {
+      "id": "tide:snatcher_squid",
       "required": false
     },
     {

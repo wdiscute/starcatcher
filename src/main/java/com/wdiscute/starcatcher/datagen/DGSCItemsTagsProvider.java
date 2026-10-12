@@ -21,7 +21,12 @@ import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import net.neoforged.neoforge.registries.DeferredBlock;
 
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.stream.Collectors;
 
 import static com.wdiscute.starcatcher.registry.SCItems.*;
 import static com.wdiscute.starcatcher.registry.SCBlocks.*;
@@ -47,11 +52,21 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         tag(Tags.Items.FOODS_RAW_FISH).addTag(SCTags.STARCAUGHT_FISHABLE_FISH);
 
         //add every starcatcher FP of STARCAUGHT_FISHABLES to STARCAUGHT_FISHABLES item tag
-        for (FishProperties fp : FishRegistration.STARCATCHER_FISHABLE)
-        {
-            Identifier key = BuiltInRegistries.ITEM.getKey(fp.catchInfo().fish().toItem());
-            tag(SCTags.STARCAUGHT_FISHABLE).addOptional(rk(key));
-        }
+        FishRegistration.STARCATCHER_FISHABLE.entrySet().stream()
+                .sorted(Comparator.comparing(
+                        entry -> entry.getValue()
+                                .catchInfo().fish().identifier().toLanguageKey()
+                ))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (a, b) -> a,
+                        LinkedHashMap::new
+                )).forEach((o, fp) ->
+                {
+                    Identifier key = BuiltInRegistries.ITEM.getKey(fp.catchInfo().fish().toItem());
+                    tag(SCTags.STARCAUGHT_FISHABLE).addOptional(rk(key));
+                });
 
         //starcaught fishable fish
         tag(SCTags.STARCAUGHT_FISHABLE_FISH)
@@ -67,36 +82,46 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         ;
 
         //cycle every FP
-        for (FishProperties fp : FishRegistration.ALL_FISHABLE)
-        {
-            Identifier key = fp.catchInfo().fish().identifier();
-
-            //add all non-trophy non-message non-extra to rarity tags
-            if (fp.hasGuideEntry() && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.catchInfo().alwaysSpawnEntity())
-            {
-                //fishable for tackle box
-                tag(SCTags.FISHABLE).addOptional(rk(key));
-
-                switch (fp.rarity())
+        FishRegistration.ALL_FISHABLE.entrySet().stream()
+                .sorted(Comparator.comparing(
+                        entry -> entry.getValue()
+                                .catchInfo().fish().identifier().toLanguageKey()
+                ))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (a, b) -> a,
+                        LinkedHashMap::new
+                )).forEach((o, fp) ->
                 {
-                    case COMMON -> tag(SCTags.COMMON_FISHES).addOptional(rk(key));
-                    case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).addOptional(rk(key));
-                    case RARE -> tag(SCTags.RARE_FISHES).addOptional(rk(key));
-                    case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(rk(key));
-                    case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(rk(key));
-                }
+                    Identifier key = fp.catchInfo().fish().identifier();
 
-                if (key.getNamespace().equals("starcatcher"))
-                    switch (fp.rarity())
+                    //add all non-trophy non-message non-extra to rarity tags
+                    if (fp.hasGuideEntry() && fp.catchInfo().fishEntryType().equals(CatchInfo.FishEntryType.FISH) && !fp.catchInfo().alwaysSpawnEntity())
                     {
-                        case COMMON -> tag(SCTags.COMMON_STARCAUGHT_FISHES).addOptional(rk(key));
-                        case UNCOMMON -> tag(SCTags.UNCOMMON_STARCAUGHT_FISHES).addOptional(rk(key));
-                        case RARE -> tag(SCTags.RARE_STARCAUGHT_FISHES).addOptional(rk(key));
-                        case EPIC -> tag(SCTags.EPIC_STARCAUGHT_FISHES).addOptional(rk(key));
-                        case LEGENDARY -> tag(SCTags.LEGENDARY_STARCAUGHT_FISHES).addOptional(rk(key));
+                        //fishable for tackle box
+                        tag(SCTags.FISHABLE).addOptional(rk(key));
+
+                        switch (fp.rarity())
+                        {
+                            case COMMON -> tag(SCTags.COMMON_FISHES).addOptional(rk(key));
+                            case UNCOMMON -> tag(SCTags.UNCOMMON_FISHES).addOptional(rk(key));
+                            case RARE -> tag(SCTags.RARE_FISHES).addOptional(rk(key));
+                            case EPIC -> tag(SCTags.EPIC_FISHES).addOptional(rk(key));
+                            case LEGENDARY -> tag(SCTags.LEGENDARY_FISHES).addOptional(rk(key));
+                        }
+
+                        if (key.getNamespace().equals("starcatcher"))
+                            switch (fp.rarity())
+                            {
+                                case COMMON -> tag(SCTags.COMMON_STARCAUGHT_FISHES).addOptional(rk(key));
+                                case UNCOMMON -> tag(SCTags.UNCOMMON_STARCAUGHT_FISHES).addOptional(rk(key));
+                                case RARE -> tag(SCTags.RARE_STARCAUGHT_FISHES).addOptional(rk(key));
+                                case EPIC -> tag(SCTags.EPIC_STARCAUGHT_FISHES).addOptional(rk(key));
+                                case LEGENDARY -> tag(SCTags.LEGENDARY_STARCAUGHT_FISHES).addOptional(rk(key));
+                            }
                     }
-            }
-        }
+                });
 
         //crabs
         tag(SCTags.CRABS)
