@@ -410,5 +410,11 @@ public class SCEvents
                 CBOpenMessagePayload.STREAM_CODEC,
                 CBOpenMessagePayload::handle
         );
+
+        registrar.playToClient(
+                CBPlayerStructuresPayload.TYPE,
+                CBPlayerStructuresPayload.STREAM_CODEC,
+                CBPlayerStructuresPayload::handle
+        );
     }
 }
