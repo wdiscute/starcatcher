@@ -1,7 +1,7 @@
 {
   "values": [
     {
-      "id": "minecraft:nether_star",
+      "id": "minecraft:wither",
       "required": false
     },
     {
@@ -10,10 +10,6 @@
     },
     {
       "id": "starcatcher:azure_crystalback_minnow",
-      "required": false
-    },
-    {
-      "id": "starcatcher:boreal",
       "required": false
     },
     {
@@ -30,6 +26,10 @@
     },
     {
       "id": "starcatcher:joel",
+      "required": false
+    },
+    {
+      "id": "starcatcher:king_of_the_frost",
       "required": false
     },
     {

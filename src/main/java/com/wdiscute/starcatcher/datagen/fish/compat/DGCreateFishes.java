@@ -53,7 +53,7 @@ public class DGCreateFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(CreateCompat.PHILLIPSFISH)
                         .withSizeAndWeight(7, 1, 100, 60)
                         .withRarity(Rarity.COMMON)
@@ -73,7 +73,7 @@ public class DGCreateFishes
 
         FishRegistration.register(
                 context,
-                PresetRestrictions.allOceans(context)
+                PresetRestrictions.normalOceans(context)
                         .withFish(CreateCompat.PIPEHEAD)
                         .withSizeAndWeight(7, 1, 2400, 400)
                         .withRarity(Rarity.RARE)

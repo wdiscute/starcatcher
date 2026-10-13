@@ -79,12 +79,9 @@
     },
     {
       "type": "starcatcher:bait",
-      "baits": [
-        {
-          "extra_chance": 50,
-          "id": "minecraft:wither_skeleton_skull"
-        }
-      ]
+      "baits": {
+        "minecraft:wither_skeleton_skull": 50
+      }
     }
   ],
   "size_and_weight": {

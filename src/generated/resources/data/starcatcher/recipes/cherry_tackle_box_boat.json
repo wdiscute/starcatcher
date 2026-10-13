@@ -1,0 +1,17 @@
+{
+  "type": "starcatcher:tackle_box_boat",
+  "category": "misc",
+  "group": "boat",
+  "ingredients": [
+    {
+      "item": "minecraft:cherry_boat"
+    },
+    {
+      "tag": "starcatcher:tackle_boxes"
+    }
+  ],
+  "result": {
+    "Count": 1,
+    "id": "starcatcher:cherry_tackle_box_boat"
+  }
+}

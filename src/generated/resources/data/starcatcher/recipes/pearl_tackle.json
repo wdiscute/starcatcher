@@ -1,12 +1,12 @@
 {
   "type": "starcatcher:starcatcher_rod_smithing_recipe",
   "add_text": false,
-  "addition": {
-    "item": "starcatcher:pearl"
-  },
   "apply_skin": true,
   "base": {
     "tag": "starcatcher:rods"
+  },
+  "ingredients": {
+    "item": "starcatcher:pearl"
   },
   "keep_stack": true,
   "result": {

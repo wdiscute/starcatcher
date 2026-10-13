@@ -59,6 +59,11 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .remove(SCTags.SHRIMPS)
         ;
 
+        //starcaught fishable fish
+        tag(SCTags.HAS_TARGETED_BAIT)
+                .addTag(SCTags.STARCAUGHT_FISHABLE)
+        ;
+
         //cycle every FP
         for (FishProperties fp : FishRegistration.ALL_FISHABLE)
         {
@@ -131,6 +136,8 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .add(MURKWATER_BAIT.get())
                 .add(LEGENDARY_BAIT.get())
                 .add(METEOROLOGICAL_BAIT.get())
+                .add(TARGETED_BAIT.get())
+                .add(LILAC_MINNOW.get())
                 .add(Items.WITHER_SKELETON_SKULL)
                 .add(Items.BUCKET)
 
@@ -235,6 +242,19 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
                 .add(TACKLE_BOX_MAGENTA.asItem())
                 .add(TACKLE_BOX_PURPLE.asItem())
                 .add(TACKLE_BOX_WHITE.asItem())
+        ;
+
+        //fish plaques
+        tag(SCTags.FISH_PLAQUES)
+                .add(OAK_FISH_PLAQUE.asItem())
+                .add(DARK_OAK_FISH_PLAQUE.asItem())
+                .add(JUNGLE_FISH_PLAQUE.asItem())
+                .add(ACACIA_FISH_PLAQUE.asItem())
+                .add(MANGROVE_FISH_PLAQUE.asItem())
+                .add(BAMBOO_FISH_PLAQUE.asItem())
+                .add(SPRUCE_FISH_PLAQUE.asItem())
+                .add(BIRCH_FISH_PLAQUE.asItem())
+                .add(CHERRY_FISH_PLAQUE.asItem())
         ;
 
         tag(ItemTags.BOOKSHELF_BOOKS)

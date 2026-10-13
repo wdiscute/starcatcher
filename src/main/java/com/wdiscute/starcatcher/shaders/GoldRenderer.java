@@ -82,12 +82,10 @@ public class GoldRenderer implements AutoCloseable
         {
             try (InputStream stream = Minecraft.getInstance().getResourceManager().getResource(loc).orElseThrow().open())
             {
-
                 return NativeImage.read(stream);
 
             } catch (Exception e)
             {
-                ;
                 throw new RuntimeException(e);
             }
         }

@@ -27,8 +27,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -133,14 +131,6 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @org.jetbrains.annotations.Nullable LivingEntity placer, ItemStack stack)
-    {
-        super.setPlacedBy(level, pos, state, placer, stack);
-        if (level.getBlockEntity(pos) instanceof TackleBoxBlockEntity blockEntity)
-            blockEntity.applyImplicitComponents(stack);
-    }
-
-    @Override
     public BlockState getStateForPlacement(BlockPlaceContext context)
     {
         BlockState bs = defaultBlockState();
@@ -164,18 +154,14 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
         BlockEntity blockentity = level.getBlockEntity(pos);
         if (blockentity instanceof TackleBoxBlockEntity tbbe)
         {
-            if (!level.isClientSide)
-            {
-                if(player.isCreative() && tbbe.isEmpty())
-                    super.playerWillDestroy(level, pos, state, player);
-
-                ItemStack itemstack = getColoredItemStack(this.getColor());
-                //save tackle box data to stack
-                tbbe.saveToItem(itemstack);
-                ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (double) pos.getY() + (double) 0.5F, (double) pos.getZ() + (double) 0.5F, itemstack);
-                itementity.setDefaultPickUpDelay();
-                level.addFreshEntity(itementity);
-            }
+            if(player.isCreative() && tbbe.container.isEmpty())
+                return;
+            ItemStack itemstack = getColoredItemStack(this.getColor());
+            //save tackle box data to stack
+            tbbe.saveToItem(itemstack);
+            ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (double) pos.getY() + (double) 0.5F, (double) pos.getZ() + (double) 0.5F, itemstack);
+            itementity.setDefaultPickUpDelay();
+            level.addFreshEntity(itementity);
         }
 
         super.playerWillDestroy(level, pos, state, player);
@@ -191,7 +177,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
             {
                 for (int i = 0; i < tbbe.getContainerSize(); ++i)
                 {
-                    consumer.accept(tbbe.getItem(i));
+                    consumer.accept(tbbe.container.getItem(i));
                 }
 
             });
@@ -216,29 +202,11 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     }
 
     @Override
-    public void appendHoverText(ItemStack stack, @org.jetbrains.annotations.Nullable BlockGetter level, List<Component> tooltip, TooltipFlag flag)
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @org.jetbrains.annotations.Nullable LivingEntity placer, ItemStack stack)
     {
-        super.appendHoverText(stack, level, tooltip, flag);
-        if (stack.has(DataComponents.CONTAINER_LOOT.get()))
-        {
-            tooltip.add(UNKNOWN_CONTENTS);
-        }
-
-        int i = 0;
-        int j = 0;
-
-        for (ItemStack itemstack : stack.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).nonEmptyItems())
-        {
-            ++j;
-            if (i <= 4)
-            {
-                ++i;
-                tooltip.add(Component.translatable("container.starcatcher.tackle_box.itemCount", itemstack.getHoverName(), itemstack.getCount()));
-            }
-        }
-
-        if (j - i > 0)
-            tooltip.add(Component.translatable("container.starcatcher.tackle_box.more", j - i).withStyle(ChatFormatting.ITALIC));
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (level.getBlockEntity(pos) instanceof TackleBoxBlockEntity blockEntity)
+            blockEntity.applyImplicitComponents(stack);
     }
 
     @Override
@@ -257,8 +225,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player)
     {
         ItemStack itemstack = super.getCloneItemStack(level, pos, state);
-        level.getBlockEntity(pos, SCBlockEntities.TACKLE_BOX.get())
-                .ifPresent((ebbe) -> ebbe.saveToItem(itemstack));
+        level.getBlockEntity(pos, SCBlockEntities.TACKLE_BOX.get()).ifPresent((ebbe) -> ebbe.saveToItem(itemstack));
         return itemstack;
     }
 
@@ -271,7 +238,7 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     @Nullable
     public static DyeColor getColorFromBlock(Block block)
     {
-        return block instanceof TackleBoxBlock ? ((TackleBoxBlock) block).getColor() : null;
+        return block instanceof TackleBoxBlock tbb ? tbb.getColor() : DyeColor.CYAN;
     }
 
     public static DeferredBlock<Block> getBlockByColor(@Nullable DyeColor color)
@@ -325,14 +292,5 @@ public class TackleBoxBlock extends BaseEntityBlock implements SimpleWaterlogged
     public BlockState mirror(BlockState state, Mirror mirror)
     {
         return state.rotate(mirror.getRotation(state.getValue(FACING)));
-    }
-
-    @Override
-    public @org.jetbrains.annotations.Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
-    {
-        return level.isClientSide() ? null : (level0, pos0, state0, blockEntity) ->
-        {
-            if (blockEntity instanceof TackleBoxBlockEntity tbbe && tbbe.openCount > 0) tbbe.tick();
-        };
     }
 }

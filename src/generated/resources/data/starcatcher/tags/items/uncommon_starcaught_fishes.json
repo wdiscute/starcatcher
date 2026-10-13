@@ -17,6 +17,10 @@
       "required": false
     },
     {
+      "id": "starcatcher:cryospine",
+      "required": false
+    },
+    {
       "id": "starcatcher:crystalback_minnow",
       "required": false
     },
@@ -26,6 +30,10 @@
     },
     {
       "id": "starcatcher:downfall_bream",
+      "required": false
+    },
+    {
+      "id": "starcatcher:dreamliner",
       "required": false
     },
     {

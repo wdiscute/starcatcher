@@ -20,6 +20,12 @@ public interface SCRecipes
      Supplier<RecipeSerializer<BottledLetterRecipe>> BOTTLED_LETTER =
             REGISTRY.register("bottled_letter", BottledLetterRecipe.Serializer::new);
 
+    Supplier<RecipeSerializer<TargetedBaitRecipe>> TARGETED_BAIT =
+            REGISTRY.register("targeted_bait", TargetedBaitRecipe.Serializer::new);
+
+    Supplier<RecipeSerializer<TackleBoxBoatRecipe>> TACKLE_BOX_BOAT =
+            REGISTRY.register("tackle_box_boat", TackleBoxBoatRecipe.Serializer::new);
+
     static void register(IEventBus eventBus)
     {
         REGISTRY.register(eventBus);

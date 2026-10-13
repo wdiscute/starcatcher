@@ -2,11 +2,13 @@ package com.wdiscute.starcatcher.fishentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.blaze3d.vertex.VertexMultiConsumer;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
+import com.wdiscute.starcatcher.registry.SCRenderTypes;
 import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.EntityModel;
@@ -97,6 +99,59 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         map.put(SCItems.TWILIGHT_KOI.get(), new TwilightKoi<>(modelSet.bakeLayer(TwilightKoi.LAYER_LOCATION)));
         map.put(SCItems.WILLOW_BREAM.get(), new WillowBream<>(modelSet.bakeLayer(WillowBream.LAYER_LOCATION)));
         map.put(SCItems.CERBERAY.get(), new Cerberay<>(modelSet.bakeLayer(Cerberay.LAYER_LOCATION)));
+        map.put(SCItems.AMETHYSTBACK.get(), new Amethystback<>(modelSet.bakeLayer(Amethystback.LAYER_LOCATION)));
+        map.put(SCItems.AQUAMARINE_PIKE.get(), new AquamarinePike<>(modelSet.bakeLayer(AquamarinePike.LAYER_LOCATION)));
+        map.put(SCItems.BLOSSOMFISH.get(), new Blossomfish<>(modelSet.bakeLayer(Blossomfish.LAYER_LOCATION)));
+        map.put(SCItems.BLUE_ICE_PIKE.get(), new BlueIcePike<>(modelSet.bakeLayer(BlueIcePike.LAYER_LOCATION)));
+        map.put(SCItems.BLUEGIGI.get(), new Bluegigi<>(modelSet.bakeLayer(Bluegigi.LAYER_LOCATION)));
+        map.put(SCItems.CHORUS_MINNOW.get(), new ChorusMinnow<>(modelSet.bakeLayer(ChorusMinnow.LAYER_LOCATION)));
+        map.put(SCItems.CRYOSPINE.get(), new Cryospine<>(modelSet.bakeLayer(Cryospine.LAYER_LOCATION)));
+        map.put(SCItems.CRYSTALBACK_STURGEON.get(), new CrystalbackSturgeon<>(modelSet.bakeLayer(CrystalbackSturgeon.LAYER_LOCATION)));
+        map.put(SCItems.DARK_AMETHYST_SNAPPER.get(), new DarkAmethystSnapper<>(modelSet.bakeLayer(DarkAmethystSnapper.LAYER_LOCATION)));
+        map.put(SCItems.DREAMLINER.get(), new Dreamliner<>(modelSet.bakeLayer(Dreamliner.LAYER_LOCATION)));
+        map.put(SCItems.DRIPFIN.get(), new Dripfin<>(modelSet.bakeLayer(Dripfin.LAYER_LOCATION)));
+        map.put(SCItems.END_GLOW.get(), new EndGlow<>(modelSet.bakeLayer(EndGlow.LAYER_LOCATION)));
+        map.put(SCItems.FOSSILIZED_ANGELFISH.get(), new FossilizedAngelfish<>(modelSet.bakeLayer(FossilizedAngelfish.LAYER_LOCATION)));
+        map.put(SCItems.GARNET_MACKEREL.get(), new GarnetMackerel<>(modelSet.bakeLayer(GarnetMackerel.LAYER_LOCATION)));
+        map.put(SCItems.GLIMMERGILL.get(), new Glimmergill<>(modelSet.bakeLayer(Glimmergill.LAYER_LOCATION)));
+        map.put(SCItems.GLOWING_DARK.get(), new GlowingDark<>(modelSet.bakeLayer(GlowingDark.LAYER_LOCATION)));
+        map.put(SCItems.GLOWSTONE_PUFFERFISH.get(), new GlowstonePufferfish<>(modelSet.bakeLayer(GlowstonePufferfish.LAYER_LOCATION)));
+        map.put(SCItems.GLOWSTONE_SEEKER.get(), new GlowstoneSeeker<>(modelSet.bakeLayer(GlowstoneSeeker.LAYER_LOCATION)));
+        map.put(SCItems.GOLD_FAN.get(), new GoldFan<>(modelSet.bakeLayer(GoldFan.LAYER_LOCATION)));
+        map.put(SCItems.LILAC_MINNOW.get(), new LilacMinnow<>(modelSet.bakeLayer(LilacMinnow.LAYER_LOCATION)));
+        map.put(SCItems.LIVID_BAMBOO.get(), new LividBamboo<>(modelSet.bakeLayer(LividBamboo.LAYER_LOCATION)));
+        map.put(SCItems.MOSSFIN.get(), new Mossfin<>(modelSet.bakeLayer(Mossfin.LAYER_LOCATION)));
+        map.put(SCItems.MOTHFISH.get(), new Mothfish<>(modelSet.bakeLayer(Mothfish.LAYER_LOCATION)));
+        map.put(SCItems.PALE_CARP.get(), new PaleCarp<>(modelSet.bakeLayer(PaleCarp.LAYER_LOCATION)));
+        map.put(SCItems.PEAKDWELLER.get(), new Peakdweller<>(modelSet.bakeLayer(Peakdweller.LAYER_LOCATION)));
+        map.put(SCItems.PETAL_BASS.get(), new PetalBass<>(modelSet.bakeLayer(PetalBass.LAYER_LOCATION)));
+        map.put(SCItems.PURPLE_CARP.get(), new PurpleCarp<>(modelSet.bakeLayer(PurpleCarp.LAYER_LOCATION)));
+        map.put(SCItems.RAINFIN.get(), new Rainfin<>(modelSet.bakeLayer(Rainfin.LAYER_LOCATION)));
+        map.put(SCItems.SHADOWFIN.get(), new Shadowfin<>(modelSet.bakeLayer(Shadowfin.LAYER_LOCATION)));
+
+        //10/oct update
+        map.put(SCItems.AURORA.get(), new Aurora<>(modelSet.bakeLayer(Aurora.LAYER_LOCATION)));
+        map.put(SCItems.AZURE_CRYSTALBACK_MINNOW.get(), new AzureCrystalbackMinnow<>(modelSet.bakeLayer(AzureCrystalbackMinnow.LAYER_LOCATION)));
+        map.put(SCItems.CLOUDFIN.get(), new Cloudfin<>(modelSet.bakeLayer(Cloudfin.LAYER_LOCATION)));
+        map.put(SCItems.DEEPSLATEFISH.get(), new Deepslatefish<>(modelSet.bakeLayer(Deepslatefish.LAYER_LOCATION)));
+        map.put(SCItems.JOEL.get(), new Joel<>(modelSet.bakeLayer(Joel.LAYER_LOCATION)));
+        map.put(SCItems.OASIS_STURGEON.get(), new OasisSturgeon<>(modelSet.bakeLayer(OasisSturgeon.LAYER_LOCATION)));
+        map.put(SCItems.ROCKGILL.get(), new Rockgill<>(modelSet.bakeLayer(Rockgill.LAYER_LOCATION)));
+        map.put(SCItems.ROSE_SIAMESE_FISH.get(), new RoseSiameseFish<>(modelSet.bakeLayer(RoseSiameseFish.LAYER_LOCATION)));
+        map.put(SCItems.SAGE_CATFISH.get(), new SageCatfish<>(modelSet.bakeLayer(SageCatfish.LAYER_LOCATION)));
+        map.put(SCItems.SANDTAIL.get(), new Sandtail<>(modelSet.bakeLayer(Sandtail.LAYER_LOCATION)));
+        map.put(SCItems.SCALDING_PIKE.get(), new ScaldingPike<>(modelSet.bakeLayer(ScaldingPike.LAYER_LOCATION)));
+        map.put(SCItems.SCORCHFISH.get(), new Scorchfish<>(modelSet.bakeLayer(Scorchfish.LAYER_LOCATION)));
+        map.put(SCItems.SEA_BASS.get(), new SeaBass<>(modelSet.bakeLayer(SeaBass.LAYER_LOCATION)));
+        map.put(SCItems.SHROOMFISH.get(), new Shroomfish<>(modelSet.bakeLayer(Shroomfish.LAYER_LOCATION)));
+        map.put(SCItems.SPOREFISH.get(), new Sporefish<>(modelSet.bakeLayer(Sporefish.LAYER_LOCATION)));
+        map.put(SCItems.STONEFISH.get(), new Stonefish<>(modelSet.bakeLayer(Stonefish.LAYER_LOCATION)));
+        map.put(SCItems.SUNFLOWER_CARP.get(), new SunflowerCarp<>(modelSet.bakeLayer(SunflowerCarp.LAYER_LOCATION)));
+        map.put(SCItems.VESANI.get(), new Vesani<>(modelSet.bakeLayer(Vesani.LAYER_LOCATION)));
+        map.put(SCItems.VOIDFIN.get(), new Voidfin<>(modelSet.bakeLayer(Voidfin.LAYER_LOCATION)));
+        map.put(SCItems.WARD.get(), new Ward<>(modelSet.bakeLayer(Ward.LAYER_LOCATION)));
+        map.put(SCItems.BRIGHT_AMETHYST_SNAPPER.get(), new BrightAmethystSnapper<>(modelSet.bakeLayer(BrightAmethystSnapper.LAYER_LOCATION)));
+        map.put(SCItems.RIPPLE_CATFISH.get(), new RippleCatfish<>(modelSet.bakeLayer(RippleCatfish.LAYER_LOCATION)));
     }
 
     @Override
@@ -114,7 +169,7 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
             if (!entity.hasWarned && !entity.getFish().isEmpty())
             {
                 entity.hasWarned = true;
-                Minecraft.getInstance().player.sendSystemMessage(Component.translatable(entity.getFish().getDescriptionId()).append(Component.literal(" does not have a model made yet! Using agave bream model instead")));
+                Minecraft.getInstance().player.sendSystemMessage(Component.translatable("entity.starcatcher.fish.no_model", entity.getFish().getDescriptionId()));
             }
         }
 
@@ -144,22 +199,19 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
             return Starcatcher.rl("entity/fishes/agave_bream");
     }
 
-    public static void renderFishFromItem(ItemRenderer itemRenderer, Map<Item, EntityModel<FishEntity>> map, ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, int overlay, Level level)
+    public static void renderFishFromItem(ItemStack itemStack, MultiBufferSource buffer, PoseStack poseStack, int packedLight, int overlay)
     {
-        if (map.containsKey(itemStack.getItem()))
+        if (FishRenderer.map.containsKey(itemStack.getItem()))
         {
             Item item = itemStack.getItem();
             EntityModel<FishEntity> model = map.get(item);
-            VertexConsumer vertexconsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
-            model.renderToBuffer(poseStack, vertexconsumer, packedLight, overlay);
-        }
-        else
-        {
-            poseStack.translate(0F, 1F, 0.0F);
-            poseStack.mulPose(Axis.YP.rotationDegrees(270.0F));
-            poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
-            itemRenderer.renderStatic(itemStack, ItemDisplayContext.FIXED, packedLight,
-                    overlay, poseStack, buffer, level, 0);
+            VertexConsumer vertexConsumer;
+            if (Rarity.isGolden(itemStack))
+                vertexConsumer = getGlintVertexConsumer(buffer, Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack);
+            else
+                vertexConsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
+
+            model.renderToBuffer(poseStack, vertexConsumer, packedLight, overlay);
         }
     }
 
@@ -168,5 +220,15 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         return Rarity.isGolden(fishItem)
                 ? GoldRenderer.INSTANCE.getOrCreateEntity(texture, model::renderType).renderType
                 : model.renderType(GoldRenderer.getTextureLoc(texture));
+    }
+
+    public static VertexConsumer getGlintVertexConsumer(MultiBufferSource buffer, ResourceLocation texture, EntityModel<FishEntity> model, ItemStack fishItem)
+    {
+        //todo fix this
+        VertexConsumer glint = buffer.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT_ENTITY);
+        VertexConsumer textureConsumer = buffer.getBuffer(getGoldRendertype(texture, model, fishItem));
+
+        return textureConsumer;
+        //return VertexMultiConsumer.create(textureConsumer, glint);
     }
 }

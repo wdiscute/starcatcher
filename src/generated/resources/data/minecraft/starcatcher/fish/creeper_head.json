@@ -66,12 +66,9 @@
     },
     {
       "type": "starcatcher:bait",
-      "baits": [
-        {
-          "extra_chance": 200,
-          "id": "starcatcher:gunpowder_bait"
-        }
-      ]
+      "baits": {
+        "starcatcher:gunpowder_bait": 200
+      }
     },
     {
       "type": "starcatcher:fluid",

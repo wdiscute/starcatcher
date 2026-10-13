@@ -1,6 +1,10 @@
 {
   "base_chance": 10,
   "catch_info": {
+    "entity": "starcatcher:fish",
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:crystalback_sturgeon"
     }

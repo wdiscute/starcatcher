@@ -1,6 +1,10 @@
 {
   "base_chance": 5,
   "catch_info": {
+    "entity": "starcatcher:fish",
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_lava_bucket"
+    },
     "item": {
       "identifier": "starcatcher:scalding_pike"
     }

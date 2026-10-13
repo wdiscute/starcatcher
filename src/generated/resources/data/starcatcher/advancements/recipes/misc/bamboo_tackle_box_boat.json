@@ -1,0 +1,33 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_tackle_box": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "starcatcher:tackle_boxes"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "starcatcher:bamboo_tackle_box_boat"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_tackle_box",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "starcatcher:bamboo_tackle_box_boat"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -397,6 +397,22 @@ public class DGTrophies
             );
         }
 
+        //the end
+        {
+            ItemStack stack = SCItems.MESSAGE_IN_A_BOTTLE.toStack();
+            SCDataComponents.set(stack, SCDataComponents.MESSAGE, Message.BuiltIn.THE_END);
+            FishRegistration.registerRaw(context,
+                    FishRegistration.key("message/the_end"),
+                    PresetRestrictions.empty(context)
+                            .addRestriction(DimensionRestriction.END)
+                            .withFish(stack)
+                            .withPercentageChance(0.0001f)
+                            .withMaxLimit(1)
+                            .withDifficulty(Difficulty.TRASH)
+                            .withHasGuideEntry(false)
+                            .message()
+            );
+        }
 
         //
         //  ,-----.                               ,--.

@@ -166,14 +166,12 @@ public record FishProperties(
 
     public FishProperties addRestriction(AbstractFishRestriction restriction)
     {
-        this.restrictions.add(restriction);
-        return this;
+        return withRestrictions(new ArrayList<>(restrictions){{add(restriction);}});
     }
 
     public FishProperties addRestrictions(AbstractFishRestriction... restriction)
     {
-        this.restrictions.addAll(List.of(restriction));
-        return this;
+        return withRestrictions(new ArrayList<>(restrictions){{addAll(List.of(restriction));}});
     }
 
     public FishProperties withEntityToSpawn(Holder<EntityType<?>> entityTypeHolder)
@@ -271,7 +269,7 @@ public record FishProperties(
 
     public FishProperties addBait(BaitRestriction bait)
     {
-        List<Utils.Duo<ResourceLocation, Integer>> map = new ArrayList<>();
+        Map<ResourceLocation, Integer> map = new HashMap<>();
         AtomicReference<String> override = new AtomicReference<>();
         override.set("");
 
@@ -280,19 +278,19 @@ public record FishProperties(
         {
             if (o instanceof BaitRestriction be)
             {
-                map.addAll(be.baits);
+                map.putAll(be.baits);
                 override.set(be.translationOverride);
             }
         });
 
         //put baits from method param
-        map.addAll(bait.baits);
+        map.putAll(bait.baits);
         override.set(bait.translationOverride);
 
         List<AbstractFishRestriction> list = new ArrayList<>(this.restrictions);
 
         list.removeIf(o -> o instanceof BaitRestriction);
-        list.add(new BaitRestriction(map, override.get()));
+        list.add(new BaitRestriction(map, bait.forceAdd, override.get()));
 
         return withRestrictions(list);
     }

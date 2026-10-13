@@ -6,6 +6,7 @@ import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 
@@ -30,15 +31,18 @@ public abstract class AbstractCatchModifier implements Modifier
         if(translationOverride.equals("hide")) return List.of();
 
         if(translationOverride.isEmpty())
-        {
             return getNonOverriddenDescription(shift);
-        }
 
         return List.of(Component.translatable(translationOverride));
     }
 
     public void onAdd(FishingBobEntity fishingBobEntity)
     {
+    }
+
+    public ItemStack modifyBaseItem(FishingBobEntity fishingBobEntity, Player player, ItemStack itemStack, boolean perfectCatch, boolean  golden, float percentile)
+    {
+        return itemStack;
     }
 
     public int adjustMinTicksToFish(FishingBobEntity fishingBobEntity, int minTicksToFish)
@@ -159,5 +163,10 @@ public abstract class AbstractCatchModifier implements Modifier
     public List<ItemStack> addToTreasureWeightedList()
     {
         return List.of();
+    }
+
+    public void tick(FishingBobEntity fishingBobEntity)
+    {
+
     }
 }

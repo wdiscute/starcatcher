@@ -1,12 +1,12 @@
 {
   "type": "starcatcher:starcatcher_rod_smithing_recipe",
   "add_text": false,
-  "addition": {
-    "tag": "minecraft:saplings"
-  },
   "apply_skin": true,
   "base": {
     "tag": "starcatcher:rods"
+  },
+  "ingredients": {
+    "tag": "minecraft:saplings"
   },
   "keep_stack": false,
   "result": {

@@ -80,7 +80,7 @@ dependencies {
     modImplementation("maven.modrinth:libtooltips:2.3-FORGE-1.20.1")
 
     //wdutils
-    jarJar(modImplementation("com.wdiscute:wdUtils:1.9.3-FORGE-1.20.1"))
+    jarJar(modImplementation("com.wdiscute:wdUtils:2.1-FORGE-1.20.1"))
     //jarJar(modImplementation("com.wdiscute:wdUtils:1.9.2-FORGE-1.20.1"))
 
     //EMI
@@ -106,6 +106,13 @@ dependencies {
 
     //quality food
     compileOnly files(".compatmods/quality_food-1.20.1-2.4.3-all.jar")
+
+    //little joys
+    modCompileOnly("maven.modrinth:little-joys:20.1.20+forge-1.20.1")
+    modRuntimeOnly("maven.modrinth:little-joys:20.1.20+forge-1.20.1")
+
+    //balm
+    modRuntimeOnly("maven.modrinth:balm:7.3.44+forge-1.20.1")
 
 
     //mixin

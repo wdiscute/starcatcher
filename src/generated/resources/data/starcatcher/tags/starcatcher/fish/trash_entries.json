@@ -31,6 +31,10 @@
     {
       "id": "starcatcher:mossy_boot",
       "required": false
+    },
+    {
+      "id": "starcatcher:oculi",
+      "required": false
     }
   ]
 }

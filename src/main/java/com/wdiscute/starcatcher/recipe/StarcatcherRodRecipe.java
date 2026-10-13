@@ -134,7 +134,7 @@ public record StarcatcherRodRecipe(Ingredient template, Ingredient rod, Ingredie
         public static final MapCodec<StarcatcherRodRecipe> CODEC = RecordCodecBuilder.mapCodec((instance) -> instance.group(
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("template").forGetter((o) -> o.template),
                 BackportCodecs.IngredientCodecs.CODEC.fieldOf("base").forGetter((o) -> o.rod),
-                BackportCodecs.IngredientCodecs.CODEC.fieldOf("addition").forGetter((o) -> o.material),
+                BackportCodecs.IngredientCodecs.CODEC.fieldOf("ingredients").forGetter((o) -> o.material),
                 BackportCodecs.ITEM_STACK_RECIPE.fieldOf("result").forGetter(o -> o.result),
                 Codec.BOOL.fieldOf("add_text").forGetter(o -> o.addText),
                 Codec.BOOL.fieldOf("keep_stack").forGetter(o -> o.keepStack),

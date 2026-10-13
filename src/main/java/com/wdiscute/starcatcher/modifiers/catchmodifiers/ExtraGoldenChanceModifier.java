@@ -77,4 +77,10 @@ public class ExtraGoldenChanceModifier extends AbstractCatchModifier
     {
         return CODEC;
     }
+
+    @Override
+    public String toString()
+    {
+        return "[ExtraGoldenChanceModifier@" + Integer.toHexString(hashCode()) + "] (chance: " + risk + " / onlyForPerfect: " + onlyForPerfectCatch + ")";
+    }
 }

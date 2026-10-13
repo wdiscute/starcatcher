@@ -9,8 +9,10 @@ import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.utils.MaybeStack;
+import com.wdiscute.utils.Utils;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -76,9 +78,17 @@ public interface SCDataComponents
             builder -> builder.persistent(Codec.BOOL));
 
     //tackle box
-    DeferredHolder<DataComponentType<?>, DataComponentType<List<ItemStack>>> TACKLE_BOX_FISHES = register(
+    DeferredHolder<DataComponentType<?>, DataComponentType<List<Utils.Duo<Integer, MaybeStack>>>> TACKLE_BOX_ITEMS = register(
+            "tackle_box_items",
+            builder -> builder.persistent(Utils.Duo.codec(Codec.INT, MaybeStack.CODEC).listOf()));
+
+    DeferredHolder<DataComponentType<?>, DataComponentType<List<MaybeStack>>> TACKLE_BOX_FISHES = register(
             "tackle_box_fishes",
-            builder -> builder.persistent(ItemStack.CODEC.listOf()));
+            builder -> builder.persistent(MaybeStack.CODEC.listOf()));
+
+    DeferredHolder<DataComponentType<?>, DataComponentType<DyeColor>> TACKLE_BOX_COLOR = register(
+            "tackle_box_color",
+            builder -> builder.persistent(DyeColor.CODEC));
 
     static <T> void set(ItemStack stack, Supplier<DataComponentType<T>> component, T data)
     {

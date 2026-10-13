@@ -54,7 +54,7 @@ public class ExtraBaseCatchModifier extends AbstractCatchModifier
         {
             float percentile = fbe.level().random.nextFloat() * 100;
 
-            ItemStack itemStack = FishApi.makeItemStackNonBucket(fp, percentile, false, fbe.player, perfectCatch);
+            ItemStack itemStack = FishApi.makeItemStackNonBucket(fbe, fp, percentile, false, fbe.player, perfectCatch);
 
             list.add(itemStack);
         }

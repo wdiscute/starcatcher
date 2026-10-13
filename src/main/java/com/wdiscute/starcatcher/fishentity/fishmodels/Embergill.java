@@ -14,7 +14,7 @@ import net.minecraft.world.entity.Entity;
 
 public class Embergill<T extends Entity> extends EntityModel<T>
 {
-	private static final String NAME = "dusktail_snapper";
+	private static final String NAME = "embergill";
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(Starcatcher.rl(NAME), "main");
 	private final ModelPart fish;
 
@@ -33,7 +33,7 @@ public class Embergill<T extends Entity> extends EntityModel<T>
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, -1.0F));
+		PartDefinition fish = partdefinition.addOrReplaceChild("fish", CubeListBuilder.create(), PartPose.offset(0.0F, 20.0F, -1.0F));
 
 		PartDefinition fin1 = fish.addOrReplaceChild("fin1", CubeListBuilder.create().texOffs(22, 0).addBox(1.0F, 0.0F, -3.0F, 0.0F, 2.0F, 4.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 0.0F, 0.0F));
 

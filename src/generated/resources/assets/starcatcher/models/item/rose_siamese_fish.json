@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:item/generated",
+  "parent": "starcatcher:item/fish",
   "textures": {
     "layer0": "starcatcher:item/rose_siamese_fish"
   }

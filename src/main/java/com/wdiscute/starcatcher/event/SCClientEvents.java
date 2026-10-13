@@ -2,9 +2,16 @@ package com.wdiscute.starcatcher.event;
 
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockRenderer;
+import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockItem;
+import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxTooltipRenderer;
+import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatModel;
+import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatRenderer;
 import com.wdiscute.starcatcher.bobentity.FishingBobRenderer;
 import com.wdiscute.starcatcher.bobentity.tackles.*;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
+import com.wdiscute.starcatcher.fishentity.HeldFishLayer;
+import com.wdiscute.starcatcher.fishentity.SCArmPoses;
 import com.wdiscute.starcatcher.fishentity.fishmodels.*;
 import com.wdiscute.starcatcher.guide.FishingGuideScreen;
 import com.wdiscute.starcatcher.locators.FishRadarLayer;
@@ -28,17 +35,25 @@ import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.*;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.nikdo53.neobackports.event.RegisterMenuScreensEvent;
+import net.nikdo53.neobackports.registry.DeferredHolder;
 
 @Mod.EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class SCClientEvents
@@ -57,6 +72,7 @@ public class SCClientEvents
     @SubscribeEvent
     public static void registerBER(EntityRenderersEvent.RegisterRenderers event)
     {
+        event.registerBlockEntityRenderer(SCBlockEntities.FISH_PLAQUE.get(), PlaqueBlockRenderer::new);
         event.registerBlockEntityRenderer(SCBlockEntities.DISPLAY.get(), DisplayBlockRenderer::new);
         event.registerBlockEntityRenderer(SCBlockEntities.AQUARIUM.get(), AquariumRenderer::new);
         //event.registerBlockEntityRenderer(ModBlockEntities.TACKLE_BOX.get(), TackleBoxRenderer::new);
@@ -69,6 +85,7 @@ public class SCClientEvents
         EntityRenderers.register(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
         EntityRenderers.register(SCEntities.FISH.get(), FishRenderer::new);
+        EntityRenderers.register(SCEntities.TACKLE_BOX_BOAT_ENTITY.get(), TackleBoxBoatRenderer::new);
         event.enqueueWork(SCItemProperties::addCustomItemProperties);
 
         if (ModList.get().isLoaded("curios"))
@@ -113,6 +130,7 @@ public class SCClientEvents
         event.registerLayerDefinition(PearlModel.LAYER_LOCATION, PearlModel::createBodyLayer);
         event.registerLayerDefinition(ValleyModel.LAYER_LOCATION, ValleyModel::createBodyLayer);
         event.registerLayerDefinition(SurvivorModel.LAYER_LOCATION, SurvivorModel::createBodyLayer);
+        event.registerLayerDefinition(TackleBoxBoatModel.LAYER_LOCATION, TackleBoxBoatModel::createBodyLayer);
 
         //tackle box
         //event.registerLayerDefinition(TackleBoxRenderer.LAYER_LOCATION, TackleBoxRenderer::createBodyLayer);
@@ -177,7 +195,73 @@ public class SCClientEvents
         event.registerLayerDefinition(TwilightKoi.LAYER_LOCATION, TwilightKoi::createBodyLayer);
         event.registerLayerDefinition(WillowBream.LAYER_LOCATION, WillowBream::createBodyLayer);
         event.registerLayerDefinition(Cerberay.LAYER_LOCATION, Cerberay::createBodyLayer);
+        event.registerLayerDefinition(Amethystback.LAYER_LOCATION, Amethystback::createBodyLayer);
+        event.registerLayerDefinition(AquamarinePike.LAYER_LOCATION, AquamarinePike::createBodyLayer);
+        event.registerLayerDefinition(Blossomfish.LAYER_LOCATION, Blossomfish::createBodyLayer);
+        event.registerLayerDefinition(BlueIcePike.LAYER_LOCATION, BlueIcePike::createBodyLayer);
+        event.registerLayerDefinition(Bluegigi.LAYER_LOCATION, Bluegigi::createBodyLayer);
+        event.registerLayerDefinition(ChorusMinnow.LAYER_LOCATION, ChorusMinnow::createBodyLayer);
+        event.registerLayerDefinition(Cryospine.LAYER_LOCATION, Cryospine::createBodyLayer);
+        event.registerLayerDefinition(CrystalbackSturgeon.LAYER_LOCATION, CrystalbackSturgeon::createBodyLayer);
+        event.registerLayerDefinition(DarkAmethystSnapper.LAYER_LOCATION, DarkAmethystSnapper::createBodyLayer);
+        event.registerLayerDefinition(Dreamliner.LAYER_LOCATION, Dreamliner::createBodyLayer);
+        event.registerLayerDefinition(Dripfin.LAYER_LOCATION, Dripfin::createBodyLayer);
+        event.registerLayerDefinition(EndGlow.LAYER_LOCATION, EndGlow::createBodyLayer);
+        event.registerLayerDefinition(FossilizedAngelfish.LAYER_LOCATION, FossilizedAngelfish::createBodyLayer);
+        event.registerLayerDefinition(GarnetMackerel.LAYER_LOCATION, GarnetMackerel::createBodyLayer);
+        event.registerLayerDefinition(Glimmergill.LAYER_LOCATION, Glimmergill::createBodyLayer);
+        event.registerLayerDefinition(GlowingDark.LAYER_LOCATION, GlowingDark::createBodyLayer);
+        event.registerLayerDefinition(GlowstonePufferfish.LAYER_LOCATION, GlowstonePufferfish::createBodyLayer);
+        event.registerLayerDefinition(GlowstoneSeeker.LAYER_LOCATION, GlowstoneSeeker::createBodyLayer);
+        event.registerLayerDefinition(GoldFan.LAYER_LOCATION, GoldFan::createBodyLayer);
+        event.registerLayerDefinition(LilacMinnow.LAYER_LOCATION, LilacMinnow::createBodyLayer);
+        event.registerLayerDefinition(LividBamboo.LAYER_LOCATION, LividBamboo::createBodyLayer);
+        event.registerLayerDefinition(Mossfin.LAYER_LOCATION, Mossfin::createBodyLayer);
+        event.registerLayerDefinition(Mothfish.LAYER_LOCATION, Mothfish::createBodyLayer);
+        event.registerLayerDefinition(PaleCarp.LAYER_LOCATION, PaleCarp::createBodyLayer);
+        event.registerLayerDefinition(Peakdweller.LAYER_LOCATION, Peakdweller::createBodyLayer);
+        event.registerLayerDefinition(PetalBass.LAYER_LOCATION, PetalBass::createBodyLayer);
+        event.registerLayerDefinition(PurpleCarp.LAYER_LOCATION, PurpleCarp::createBodyLayer);
+        event.registerLayerDefinition(Rainfin.LAYER_LOCATION, Rainfin::createBodyLayer);
+        event.registerLayerDefinition(Shadowfin.LAYER_LOCATION, Shadowfin::createBodyLayer);
 
+        //10/oct update
+        event.registerLayerDefinition(Aurora.LAYER_LOCATION, Aurora::createBodyLayer);
+        event.registerLayerDefinition(AzureCrystalbackMinnow.LAYER_LOCATION, AzureCrystalbackMinnow::createBodyLayer);
+        event.registerLayerDefinition(Cloudfin.LAYER_LOCATION, Cloudfin::createBodyLayer);
+        event.registerLayerDefinition(Deepslatefish.LAYER_LOCATION, Deepslatefish::createBodyLayer);
+        event.registerLayerDefinition(Joel.LAYER_LOCATION, Joel::createBodyLayer);
+        event.registerLayerDefinition(OasisSturgeon.LAYER_LOCATION, OasisSturgeon::createBodyLayer);
+        event.registerLayerDefinition(Rockgill.LAYER_LOCATION, Rockgill::createBodyLayer);
+        event.registerLayerDefinition(RoseSiameseFish.LAYER_LOCATION, RoseSiameseFish::createBodyLayer);
+        event.registerLayerDefinition(SageCatfish.LAYER_LOCATION, SageCatfish::createBodyLayer);
+        event.registerLayerDefinition(Sandtail.LAYER_LOCATION, Sandtail::createBodyLayer);
+        event.registerLayerDefinition(ScaldingPike.LAYER_LOCATION, ScaldingPike::createBodyLayer);
+        event.registerLayerDefinition(Scorchfish.LAYER_LOCATION, Scorchfish::createBodyLayer);
+        event.registerLayerDefinition(SeaBass.LAYER_LOCATION, SeaBass::createBodyLayer);
+        event.registerLayerDefinition(Shroomfish.LAYER_LOCATION, Shroomfish::createBodyLayer);
+        event.registerLayerDefinition(Sporefish.LAYER_LOCATION, Sporefish::createBodyLayer);
+        event.registerLayerDefinition(Stonefish.LAYER_LOCATION, Stonefish::createBodyLayer);
+        event.registerLayerDefinition(SunflowerCarp.LAYER_LOCATION, SunflowerCarp::createBodyLayer);
+        event.registerLayerDefinition(Vesani.LAYER_LOCATION, Vesani::createBodyLayer);
+        event.registerLayerDefinition(Voidfin.LAYER_LOCATION, Voidfin::createBodyLayer);
+        event.registerLayerDefinition(Ward.LAYER_LOCATION, Ward::createBodyLayer);
+        event.registerLayerDefinition(RippleCatfish.LAYER_LOCATION, RippleCatfish::createBodyLayer);
+        event.registerLayerDefinition(BrightAmethystSnapper.LAYER_LOCATION, BrightAmethystSnapper::createBodyLayer);
+    }
+
+    @SubscribeEvent
+    public static void addLayers(EntityRenderersEvent.AddLayers event)
+    {
+        for (String skin : event.getSkins())
+        {
+            if (event.getSkin(skin) instanceof PlayerRenderer renderer)
+            {
+                renderer.addLayer(
+                        new HeldFishLayer(renderer, event.getEntityModels())
+                );
+            }
+        }
     }
 
     @SubscribeEvent
@@ -193,6 +277,6 @@ public class SCClientEvents
     {
         event.register(StarcaughtBucket.BucketTooltip.class, BucketTooltipRenderer::new);
         event.register(StarcatcherFishingRodItem.RodSlotTooltip.class, RodSlotTooltipRenderer::new);
+        event.register(TackleBoxBlockItem.TackleBoxTooltip.class, TackleBoxTooltipRenderer::new);
     }
-
 }

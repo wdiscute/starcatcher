@@ -92,7 +92,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
             poseStack.pushPose();
 
             //block centering
-            Vec3 offsetCenter = new Vec3(0.5f, be.getLevel().getBlockState(be.getBlockPos().above()).isAir() ? 0.2f : 0.5f, 0.5f);
+            Vec3 offsetCenter = new Vec3(0.5f, 0.5f, 0.5f);
             poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
 
             float scale = SCDataComponents.getOrDefault(
@@ -102,7 +102,9 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
             //scaling + pivot adjusting
             poseStack.translate(0, 1, 0);
-            poseStack.scale(scale, -scale, scale);
+            poseStack.mulPose(Axis.YN.rotationDegrees(180));
+            poseStack.mulPose(Axis.XN.rotationDegrees(180));
+            poseStack.scale(scale, scale, scale);
             poseStack.translate(0, -1, 0);
 
             poseStack.translate(0, (-scale / 10) * (SCConfig.FISH_MAX_SCALE.get() / 15), 0);
@@ -112,7 +114,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
             // Render model here
 
-            FishRenderer.renderFishFromItem(itemRenderer, FishRenderer.map, fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY, be.getLevel());
+            FishRenderer.renderFishFromItem(fish, buffer, poseStack, packedLight, OverlayTexture.NO_OVERLAY);
 
             poseStack.popPose();
         }

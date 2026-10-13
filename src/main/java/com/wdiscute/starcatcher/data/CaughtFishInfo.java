@@ -14,6 +14,8 @@ public record CaughtFishInfo(
 {
     public static final CaughtFishInfo GOLDEN = new CaughtFishInfo(0, 0, 0, Rarity.GOLDEN);
     public static final CaughtFishInfo AVERAGE = new CaughtFishInfo(0, 0, 50, Rarity.COMMON);
+    public static final CaughtFishInfo TINY = new CaughtFishInfo(0, 0, 100, Rarity.COMMON);
+    public static final CaughtFishInfo HUGE = new CaughtFishInfo(0, 0, 0, Rarity.COMMON);
 
     public static final Codec<CaughtFishInfo> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(

@@ -1,13 +1,30 @@
 package com.wdiscute.starcatcher;
 
 import com.wdiscute.libtooltips.Tooltips;
+import com.wdiscute.starcatcher.fishentity.SCArmPoses;
 import com.wdiscute.starcatcher.tooltips.SCLegendary;
 import com.wdiscute.starcatcher.tooltips.SCTooltipGradient;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.apache.commons.lang3.tuple.Triple;
 
 public class StarcatcherClient
 {
+    public static final IClientItemExtensions HOLD_ABOVE_HEAD = new IClientItemExtensions()
+    {
+        @Override
+        public HumanoidModel.ArmPose getArmPose(LivingEntity entity, InteractionHand hand, ItemStack stack)
+        {
+            return SCArmPoses.HOLD_ABOVE_HEAD;
+        }
+    };
+
     public StarcatcherClient()
     {
         //modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
@@ -53,5 +70,10 @@ public class StarcatcherClient
                         Triple.of(219, 91, 41),
                         Triple.of(219, 129, 41)
                 ));
+    }
+
+    public static Level getLevel()
+    {
+        return Minecraft.getInstance().level;
     }
 }

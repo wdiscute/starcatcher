@@ -3,9 +3,7 @@ package com.wdiscute.starcatcher.datagen;
 import com.wdiscute.starcatcher.data.BonemealInteractionEntry;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
 import com.wdiscute.starcatcher.fish.Rarity;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.ExtraGoldenChanceModifier;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.FishMessagesModifier;
-import com.wdiscute.starcatcher.modifiers.catchmodifiers.LuckAttributeModifier;
+import com.wdiscute.starcatcher.modifiers.catchmodifiers.*;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.KimbeMarkerModifier;
 import com.wdiscute.starcatcher.modifiers.minigamemodifiers.SpawnTreasureModifier;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
@@ -47,14 +45,15 @@ public class SCDGDataEntriesProvider
                 new DataEntryProvider.MultiEntry<>(output, SCDataEntries.DEFAULT_CATCH_MODIFIERS,
                         List.of(
                                 new FishMessagesModifier(0.05f, ""),
-                                //new LuckAttributeModifier(new HashMap<>()
-                                //{{
-                                //    put(Rarity.COMMON, 16);
-                                //    put(Rarity.UNCOMMON, 17);
-                                //    put(Rarity.RARE, 18);
-                                //    put(Rarity.EPIC, 19);
-                                //    put(Rarity.LEGENDARY, 20);
-                                //}}, "tooltip.modifier.starcatcher.luck_attribute"),
+                                new LittleJoysModifier(""),
+
+                                new QualityFoodModifier(""),
+
+                                new QualityFoodRollModifier(0, 1, false, false, 100, ""),
+                                new QualityFoodRollModifier(0, 4, true, false, 100, ""),
+                                new QualityFoodRollModifier(1, 0, false, true, 100, ""),
+                                new QualityFoodRollModifier(0.5f, 3, false, false, 20, ""),
+
                                 new ExtraGoldenChanceModifier(0.01f, false, ""),
                                 new ExtraGoldenChanceModifier(0.01f, true, "")
                         )

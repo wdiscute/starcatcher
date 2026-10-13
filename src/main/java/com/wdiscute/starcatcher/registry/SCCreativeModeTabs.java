@@ -13,6 +13,7 @@ import net.mcexpanded.fancytabsections.FancyTabSections;
 import net.mcexpanded.fancytabsections.Section.SectionAnimatedTextured;
 import net.mcexpanded.fancytabsections.Section.SectionColored;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 
@@ -56,9 +57,10 @@ public interface SCCreativeModeTabs
                         .add(SCItems.GUIDE)
                         .add(SCBlocks.STAND)
                         .add(SCBlocks.DISPLAY)
-                        .add(SCBlocks.TACKLE_BOX)
+                        .add(SCBlocks.TACKLE_BOX_CYAN)
                         .add(SCBlocks.AQUARIUM)
                         .add(SBBlocks.SELLING_BIN)
+                        .add(SCBlocks.OAK_FISH_PLAQUE)
         );
 
 
@@ -79,13 +81,33 @@ public interface SCCreativeModeTabs
                         .add((d) -> SCItems.RODS_REGISTRY.getEntries().stream().map(o -> o.getDelegate().value().getDefaultInstance()).toList())
                         .add((d) -> SCItems.TEMPLATES_REGISTRY.getEntries().stream().map(o -> o.getDelegate().value().getDefaultInstance()).toList())
                         .add((d) -> SCBlocks.HATS.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
+                        .add((d) -> SCBlocks.FISH_PLAQUES.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
         );
 
         //tackle boxes
         FancyTabSections.addSection(Starcatcher.rl("starcatcher"),
                 new SectionColored(Starcatcher.rl("tackle_boxes"))
                         .setBannerColor(SCColors.BANNER_COLOR)
-                        .add((d) -> SCBlocks.TACKLE_BOXES.getEntries().stream().map(o -> o.get().asItem().getDefaultInstance()).toList())
+                        //add all tackle boxes besides non-colored one
+                        .add((d) -> SCBlocks.TACKLE_BOXES.getEntries().stream().filter(o -> !o.equals(SCBlocks.TACKLE_BOX)).map(o -> o.get().asItem().getDefaultInstance()).toList())
+
+                        //add all boats + tackle box variants
+                        .add((d) ->
+                        {
+                            List<ItemStack> list = new ArrayList<>();
+
+                            for (ItemStack stack : SCItems.TACKLE_BOX_BOAT_REGISTRY.getEntries().stream().map(o -> o.get().getDefaultInstance()).toList())
+                            {
+                                for (DyeColor dye : DyeColor.values())
+                                {
+                                    SCDataComponents.set(stack, SCDataComponents.TACKLE_BOX_COLOR, dye);
+                                    list.add(0, stack.copy());
+                                }
+                                SCDataComponents.remove(stack, SCDataComponents.TACKLE_BOX_COLOR);
+                                list.add(0, stack);
+                            }
+                            return list;
+                        })
         );
 
         //Trophies & Secrets
@@ -145,12 +167,12 @@ public interface SCCreativeModeTabs
                         .add(SCItems.MOSSY_BOOT)
                         .add(SCItems.DRIED_SEAWEED)
                         .add(SCItems.LAVA_CRAB_CLAW)
+                        .add(SCItems.OCULI)
 
                         .add(SCItems.FISH_BONES)
 
                         .add(SCItems.FISH_RADAR)
                         .add(SCItems.PEARL)
-                        .add(SCItems.STARCATCHER_TWINE)
                         .add(SCItems.MISSINGNO)
                         .add(SCItems.UNKNOWN_FISH)
                         .add(SCItems.STARCAUGHT_BUCKET)

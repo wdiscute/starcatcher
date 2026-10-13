@@ -20,6 +20,7 @@ import net.minecraft.world.entity.animal.AbstractFish;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraftforge.common.ForgeMod;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -32,6 +33,12 @@ public class FishEntity extends AbstractFish
     {
         super(entityType, level);
         if (fireImmune()) this.setPathfindingMalus(BlockPathTypes.LAVA, 0.0F);
+    }
+
+    @Override
+    public void checkDespawn()
+    {
+
     }
 
     @Override
@@ -86,7 +93,10 @@ public class FishEntity extends AbstractFish
     @Override
     public boolean isInWater()
     {
-        return !fireImmune() ? super.isInWater() : isInLava();
+        if (fireImmune())
+            return !this.firstTick && this.forgeFluidTypeHeight.getDouble(ForgeMod.LAVA_TYPE.get()) > 0.0D;
+        else
+            return super.isInWater();
     }
 
     @Override

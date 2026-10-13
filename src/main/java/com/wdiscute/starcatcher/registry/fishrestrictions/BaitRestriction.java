@@ -30,24 +30,21 @@ import java.util.Optional;
 
 public class BaitRestriction extends AbstractFishRestriction
 {
-    public final List<Utils.Duo<ResourceLocation, Integer>> baits;
+    public final Map<ResourceLocation, Integer> baits;
+    public final boolean forceAdd;
 
     public static final MapCodec<BaitRestriction> CODEC = RecordCodecBuilder.mapCodec(instance ->
             instance.group(
-                    Utils.Duo.codec(ResourceLocation.CODEC, "id", Codec.INT, "extra_chance").listOf().fieldOf("baits").forGetter(o -> o.baits),
+                    Utils.strictUnboundedMap(ResourceLocation.CODEC, Codec.INT).fieldOf("baits").forGetter(o -> o.baits),
+                    Codec.BOOL.optionalFieldOf("force_add_to_fish_in_area", false).forGetter(o -> o.forceAdd),
                     Codec.STRING.optionalFieldOf("translation_override", "").forGetter(o -> o.translationOverride)
             ).apply(instance, BaitRestriction::new));
 
-    public BaitRestriction(List<Utils.Duo<ResourceLocation, Integer>> baits, String translationOverride)
+    public BaitRestriction(Map<ResourceLocation, Integer> baits, boolean forceAdd, String translationOverride)
     {
         super(translationOverride);
         this.baits = baits;
-    }
-
-    public BaitRestriction(Utils.Duo<ResourceLocation, Integer> baits, String translationOverride)
-    {
-        super(translationOverride);
-        this.baits = List.of(baits);
+        this.forceAdd = forceAdd;
     }
 
     @Override
@@ -63,21 +60,26 @@ public class BaitRestriction extends AbstractFishRestriction
     }
 
     @Override
-    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
+    public List<Component> getIndexHover(Level level, FishProperties fp, @NotNull Player player, Context context)
     {
-        //if (context.equals(Context.GUIDE_FISHES_HOVER)) return fp.baseChance() == 0 ? -9999 : 0;
+        if (baits.size() == 1)
+            return List.of(Component.literal("? ").withStyle(Style.EMPTY.withBold(true).withColor(SCColors.GUIDE_YELLOW)).append(Component.translatable("gui.guide.hover.bait").withStyle(Style.EMPTY.withBold(false).withColor(SCColors.GUIDE_YELLOW))));
 
-        Item bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack().getItem();
-
-        return baits.stream()
-                .filter(o -> o.first().equals(BuiltInRegistries.ITEM.getKey(bait)))
-                .findAny().map(Utils.Duo::second).orElse(0);
+        return List.of();
     }
 
     @Override
-    public MutableComponent getDescriptionPrefix()
+    public int adjustChance(int currentChance, Level level, FishProperties fp, @NotNull Entity entity, ItemStack rod, Context context)
     {
-        return Component.translatable("gui.guide.bait");
+        if (context.equals(Context.GUIDE_FISHES_IN_AREA) && forceAdd)
+            return 1;
+
+        if (context.equals(Context.RADAR) && forceAdd)
+            return 1;
+
+        Item bait = SCDataComponents.getOrDefault(rod, SCDataComponents.BAIT, MaybeStack.EMPTY).toStack().getItem();
+
+        return baits.getOrDefault(BuiltInRegistries.ITEM.getKey(bait), 0);
     }
 
     @Override
@@ -91,7 +93,12 @@ public class BaitRestriction extends AbstractFishRestriction
     {
         //bait name / [hover]
         if (baits.size() == 1)
-            return MutableComponent.create(BuiltInRegistries.ITEM.get(baits.get(0).first()).getDescription().getContents());
+        {
+            if (fp.baseChance() == 0)
+                return Component.translatable("gui.guide.bait.require").append(BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getDescription());
+            else
+                return Component.translatable("gui.guide.bait.prefer").append(BuiltInRegistries.ITEM.get(baits.keySet().stream().findFirst().get()).getDescription());
+        }
         else
             return Component.translatable("gui.guide.hover");
     }
@@ -104,37 +111,23 @@ public class BaitRestriction extends AbstractFishRestriction
         hover.add(Component.translatable("gui.guide.bait_chance_added").withStyle(Style.EMPTY.withBold(true)));
         hover.add(Component.empty());
 
-        baits.forEach((duo) ->
+        baits.forEach((item, value) ->
         {
-            Optional<Item> optional = BuiltInRegistries.ITEM.getOptional(duo.first());
-            optional.ifPresent(o -> hover.add(Component.literal(duo.second() + " - ")
+            Optional<Item> optional = BuiltInRegistries.ITEM.getOptional(item);
+            optional.ifPresent(o -> hover.add(Component.literal(value + " - ")
                     .append(Component.translatable(o.getDescriptionId()))));
         });
         return hover;
     }
 
-    @Override
-    public List<Component> getBlacklist(Level level, FishProperties fp, @NotNull Player player, Context context)
-    {
-        return fp.baseChance() == 0 ? List.of(Component.translatable("gui.guide.bait_required")) : List.of();
-    }
+    public static final BaitRestriction CHERRY_BAIT = new BaitRestriction(Map.of(SCItems.CHERRY_BAIT.getId(), 50), false, "");
+    public static final BaitRestriction LUSH_BAIT = new BaitRestriction(Map.of(SCItems.LUSH_BAIT.getId(), 50), false, "");
+    public static final BaitRestriction SCULK_BAIT = new BaitRestriction(Map.of(SCItems.SCULK_BAIT.getId(), 50), false, "");
+    public static final BaitRestriction DRIPSTONE_BAIT = new BaitRestriction(Map.of(SCItems.DRIPSTONE_BAIT.getId(), 50), false, "");
+    public static final BaitRestriction MURKWATER_BAIT = new BaitRestriction(Map.of(SCItems.MURKWATER_BAIT.getId(), 50), false, "");
+    public static final BaitRestriction LEGENDARY_BAIT = new BaitRestriction(Map.of(SCItems.LEGENDARY_BAIT.getId(), 50), false, "");
 
-    public static final BaitRestriction CHERRY_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.CHERRY_BAIT.getId(), 50), "");
-    public static final BaitRestriction LUSH_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.LUSH_BAIT.getId(), 50), "");
-    public static final BaitRestriction SCULK_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.SCULK_BAIT.getId(), 50), "");
-    public static final BaitRestriction DRIPSTONE_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.DRIPSTONE_BAIT.getId(), 50), "");
-    public static final BaitRestriction MURKWATER_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.MURKWATER_BAIT.getId(), 50), "");
-    public static final BaitRestriction LEGENDARY_BAIT = new BaitRestriction(new Utils.Duo<>(SCItems.LEGENDARY_BAIT.getId(), 50), "");
+    public static final BaitRestriction WITHER_SKELETON_SKULL = new BaitRestriction(Map.of(Utils.rl("wither_skeleton_skull"), 50), false, "");
 
-    public static final BaitRestriction WITHER_SKELETON_SKULL = new BaitRestriction(new Utils.Duo<>(Utils.rl("wither_skeleton_skull"), 50), "");
-
-    public static final BaitRestriction FISH_OF_THIEVES = new BaitRestriction(
-            List.of(
-                    new Utils.Duo<>(Utils.rl("fishofthieves", "earthworms"), 50),
-                    new Utils.Duo<>(Utils.rl("fishofthieves", "grubs"), 50),
-                    new Utils.Duo<>(Utils.rl("fishofthieves", "leeches"), 50)),
-            "");
-
-    public static final BaitRestriction ALMIGHTY_WORM = new BaitRestriction(new Utils.Duo<>(SCItems.ALMIGHTY_WORM.getId(), 5), "");
-
+    public static final BaitRestriction KING_OF_THE_FROST = new BaitRestriction(Map.of(SCItems.LILAC_MINNOW.getId(), 5), true, "");
 }

@@ -13,6 +13,7 @@
   },
   "client": [
     "GetNameMixin",
+    "HumanoidModelMixin",
     "ItemRendererMixin",
     "RenderTypeHelperMixin"
   ]

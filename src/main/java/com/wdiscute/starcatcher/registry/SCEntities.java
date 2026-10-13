@@ -1,6 +1,7 @@
 package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.tacklebox.boat.TackleBoxBoatEntity;
 import com.wdiscute.starcatcher.messageinabottle.letter.BottledLetterEntity;
 import com.wdiscute.starcatcher.messageinabottle.BrokenBottleEntity;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
@@ -37,6 +38,11 @@ public interface SCEntities
             register("bottled_letter", BottledLetterEntity::new, MobCategory.MISC,
                     b -> b.sized(0.25f, 0.25f)
                             .clientTrackingRange(4).updateInterval(10));
+
+    DeferredHolder<EntityType<?>, EntityType<TackleBoxBoatEntity>> TACKLE_BOX_BOAT_ENTITY =
+            register("tackle_box_boat", TackleBoxBoatEntity::new, MobCategory.MISC, b -> b
+                    .sized(1.375F, 0.5625F)
+                    .clientTrackingRange(10));
 
     static void register(IEventBus eventBus)
     {

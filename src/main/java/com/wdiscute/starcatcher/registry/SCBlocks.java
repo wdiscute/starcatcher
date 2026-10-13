@@ -6,20 +6,25 @@ import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
 import com.wdiscute.starcatcher.blocks.clam.ClamBlock;
 import com.wdiscute.starcatcher.blocks.clam.ConchBlock;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlock;
+import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlock;
 import com.wdiscute.starcatcher.blocks.stand.StandBlock;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlock;
+import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockItem;
 import com.wdiscute.starcatcher.registry.items.HatItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
 import net.nikdo53.neobackports.io.components.DataComponents;
 import net.nikdo53.neobackports.io.components.ItemContainerContents;
 import net.nikdo53.neobackports.registry.DeferredBlock;
 import net.nikdo53.neobackports.registry.DeferredRegisterTyped;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public interface SCBlocks
@@ -27,13 +32,14 @@ public interface SCBlocks
     DeferredRegisterTyped.Blocks BLOCKS = DeferredRegisterTyped.createBlocks(Starcatcher.MOD_ID);
     DeferredRegisterTyped.Blocks HATS = DeferredRegisterTyped.createBlocks(Starcatcher.MOD_ID);
     DeferredRegisterTyped.Blocks TACKLE_BOXES = DeferredRegisterTyped.createBlocks(Starcatcher.MOD_ID);
+    DeferredRegisterTyped.Blocks FISH_PLAQUES = DeferredRegisterTyped.createBlocks(Starcatcher.MOD_ID);
 
-    DeferredBlock<Block> TROPHY_OF_THE_OLDER_ANGLER = registerBlock("trophy_of_the_older_angler", TrophyOfTheOlderAngler::new);
-    DeferredBlock<Block> TROPHY_DIAMOND = registerBlock("trophy_diamond", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_EMERALD = registerBlock("trophy_emerald", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_GOLD = registerBlock("trophy_gold", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_IRON = registerBlock("trophy_iron", TrophyBlock::new);
-    DeferredBlock<Block> TROPHY_COPPER = registerBlock("trophy_copper", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_OF_THE_OLDER_ANGLER = registerTrophy("trophy_of_the_older_angler", TrophyOfTheOlderAngler::new);
+    DeferredBlock<Block> TROPHY_DIAMOND = registerTrophy("trophy_diamond", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_EMERALD = registerTrophy("trophy_emerald", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_GOLD = registerTrophy("trophy_gold", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_IRON = registerTrophy("trophy_iron", TrophyBlock::new);
+    DeferredBlock<Block> TROPHY_COPPER = registerTrophy("trophy_copper", TrophyBlock::new);
 
     DeferredBlock<Block> STAND = registerBlock("tournament_stand", StandBlock::new);
 
@@ -44,6 +50,17 @@ public interface SCBlocks
     DeferredBlock<Block> CLAM = registerBlock("clam", ClamBlock::new);
 
     DeferredBlock<Block> CONCH = registerBlock("conch", ConchBlock::new);
+
+    //plaques
+    DeferredBlock<Block> OAK_FISH_PLAQUE = registerPlaque("oak_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> DARK_OAK_FISH_PLAQUE = registerPlaque("dark_oak_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> CHERRY_FISH_PLAQUE = registerPlaque("cherry_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> ACACIA_FISH_PLAQUE = registerPlaque("acacia_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> BAMBOO_FISH_PLAQUE = registerPlaque("bamboo_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> JUNGLE_FISH_PLAQUE = registerPlaque("jungle_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> BIRCH_FISH_PLAQUE = registerPlaque("birch_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> SPRUCE_FISH_PLAQUE = registerPlaque("spruce_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> MANGROVE_FISH_PLAQUE = registerPlaque("mangrove_fish_plaque", PlaqueBlock::new);
 
     //tackle boxes
     DeferredBlock<Block> TACKLE_BOX = registerTackleBox("tackle_box", () -> new TackleBoxBlock(null, MapColor.TERRACOTTA_WHITE));
@@ -89,6 +106,20 @@ public interface SCBlocks
         return toReturn;
     }
 
+    private static DeferredBlock<Block> registerPlaque(String name, Function<BlockBehaviour.Properties, Block> block)
+    {
+        DeferredBlock<Block> toReturn = FISH_PLAQUES.registerBlock(name, block);
+        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties()));
+        return toReturn;
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerTrophy(String name, Supplier<T> block)
+    {
+        DeferredBlock<T> toReturn = BLOCKS.register(name, block);
+        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties().fireResistant()));
+        return toReturn;
+    }
+
     private static <T extends Block> DeferredBlock<T> registerHat(String name, Supplier<T> block)
     {
         DeferredBlock<T> toReturn = HATS.register(name, block);
@@ -99,7 +130,7 @@ public interface SCBlocks
     private static <T extends Block> DeferredBlock<T> registerTackleBox(String name, Supplier<T> block)
     {
         DeferredBlock<T> toReturn = TACKLE_BOXES.register(name, block);
-        SCItems.ITEMS.register(name, () -> new BlockItem(toReturn.get(), new Item.Properties()
+        SCItems.ITEMS.register(name, () -> new TackleBoxBlockItem(toReturn.get(), new Item.Properties()
                 .stacksTo(1)
                 .component(DataComponents.CONTAINER, ItemContainerContents.EMPTY)
         ));
@@ -111,5 +142,6 @@ public interface SCBlocks
         BLOCKS.register(eventBus);
         HATS.register(eventBus);
         TACKLE_BOXES.register(eventBus);
+        FISH_PLAQUES.register(eventBus);
     }
 }

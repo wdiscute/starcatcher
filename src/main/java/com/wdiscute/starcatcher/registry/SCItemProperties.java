@@ -4,6 +4,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.utils.MaybeStack;
 import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.nikdo53.neobackports.registry.DeferredHolder;
 
@@ -25,6 +26,40 @@ public interface SCItemProperties
                         if (SCDataComponents.getOrDefault(stack, SCDataComponents.HOOK, MaybeStack.EMPTY).isEmpty())
                             return 1f;
                         return !SCDataAttachments.get(entity, SCDataAttachments.FISHING_BOB).isEmpty() && (entity.getMainHandItem() == stack || (entity.getOffhandItem() == stack)) ? 1.0f : 0.0f;
+                    }
+            );
+        }
+
+        for (DeferredHolder<Item, ? extends Item> item : SCItems.TACKLE_BOX_BOAT_REGISTRY.getEntries())
+        {
+            ItemProperties.register(
+                    item.get(),
+                    Starcatcher.rl("tackle_box_color"),
+                    (stack, level, entity, seed) ->
+                    {
+                        DyeColor color = stack.get(SCDataComponents.TACKLE_BOX_COLOR.get());
+                        if (color == null)
+                            return 9;
+
+                        return switch (color)
+                        {
+                            case WHITE -> 0;
+                            case ORANGE -> 1;
+                            case MAGENTA -> 2;
+                            case LIGHT_BLUE -> 3;
+                            case YELLOW -> 4;
+                            case LIME -> 5;
+                            case PINK -> 6;
+                            case GRAY -> 7;
+                            case LIGHT_GRAY -> 8;
+                            case CYAN -> 9;
+                            case PURPLE -> 10;
+                            case BLUE -> 11;
+                            case BROWN -> 12;
+                            case GREEN -> 13;
+                            case RED -> 14;
+                            default -> 15;
+                        };
                     }
             );
         }

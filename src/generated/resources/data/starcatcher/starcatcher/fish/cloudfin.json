@@ -1,6 +1,10 @@
 {
   "base_chance": 5,
   "catch_info": {
+    "entity": "starcatcher:fish",
+    "fish_bucket": {
+      "identifier": "starcatcher:starcaught_bucket"
+    },
     "item": {
       "identifier": "starcatcher:cloudfin"
     }
@@ -88,6 +92,12 @@
         "minecraft:empty"
       ],
       "translation_override": "fluid.starcatcher.air"
+    },
+    {
+      "type": "starcatcher:bait",
+      "baits": {
+        "starcatcher:legendary_bait": 50
+      }
     }
   ],
   "size_and_weight": {

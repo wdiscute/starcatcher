@@ -1,12 +1,12 @@
 {
   "type": "starcatcher:starcatcher_rod_smithing_recipe",
   "add_text": true,
-  "addition": {
-    "item": "minecraft:netherite_ingot"
-  },
   "apply_skin": false,
   "base": {
     "tag": "starcatcher:rods"
+  },
+  "ingredients": {
+    "item": "minecraft:netherite_ingot"
   },
   "keep_stack": true,
   "result": {

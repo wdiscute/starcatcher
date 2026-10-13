@@ -1,0 +1,6 @@
+{
+  "parent": "starcatcher:item/fish",
+  "textures": {
+    "layer0": "starcatcher:item/dreamliner"
+  }
+}
