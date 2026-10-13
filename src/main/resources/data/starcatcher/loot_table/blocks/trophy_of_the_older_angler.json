@@ -11,15 +11,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "starcatcher:trophy_of_the_older_angler",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "center": "true"
-              }
+          "condition": {
+            "type": "minecraft:match_block",
+            "blocks": "starcatcher:trophy_of_the_older_angler",
+            "state": {
+              "center": "true"
             }
-          ],
+          },
           "name": "starcatcher:trophy_of_the_older_angler"
         }
       ],
