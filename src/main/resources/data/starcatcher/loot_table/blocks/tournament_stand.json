@@ -11,15 +11,13 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "conditions": [
-            {
-              "block": "starcatcher:tournament_stand",
-              "condition": "minecraft:block_state_property",
-              "properties": {
-                "stand_part": "bottom_left"
-              }
+          "condition": {
+            "type": "minecraft:match_block",
+            "blocks": "starcatcher:tournament_stand",
+            "state": {
+              "stand_part": "bottom_left"
             }
-          ],
+          },
           "name": "starcatcher:tournament_stand"
         }
       ],
