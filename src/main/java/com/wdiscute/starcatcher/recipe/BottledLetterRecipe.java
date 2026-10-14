@@ -102,9 +102,9 @@ public class BottledLetterRecipe implements CraftingRecipeNeo
         ItemStack is = this.result.copy();
         for (int i = 0; i < input.size(); i++)
         {
-            if(SCDataComponents.has(input.getItem(i), SCDataComponents.MESSAGE))
+            if(SCDataComponents.has(input.getItem(i), SCDataComponents.EDITABLE_MESSAGE))
             {
-                SCDataComponents.set(is, SCDataComponents.MESSAGE, SCDataComponents.get(input.getItem(i), SCDataComponents.MESSAGE));
+                SCDataComponents.set(is, SCDataComponents.EDITABLE_MESSAGE, SCDataComponents.get(input.getItem(i), SCDataComponents.EDITABLE_MESSAGE));
                 break;
             }
         }

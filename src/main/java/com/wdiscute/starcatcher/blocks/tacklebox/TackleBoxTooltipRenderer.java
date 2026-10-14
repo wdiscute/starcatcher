@@ -140,7 +140,7 @@ public class TackleBoxTooltipRenderer implements ClientTooltipComponent
             yOffset += 20;
         }
 
-        //render fish
+        //render items
         if (!items.isEmpty())
         {
             BOX_TEXTURE.render(g, x, y + yOffset);
@@ -156,7 +156,7 @@ public class TackleBoxTooltipRenderer implements ClientTooltipComponent
                 ScreenUtils.item(g, stack, xToRenderAt, yToRenderAt);
                 g.renderItemDecorations(font, stack, xToRenderAt, yToRenderAt);
             }
-            yOffset += 28;
+            yOffset += 42;
         }
 
         if (!fishes.isEmpty())

@@ -11,6 +11,7 @@ import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
 import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockEntity;
+import com.wdiscute.starcatcher.data.MessagesSavedData;
 import com.wdiscute.starcatcher.fish.FishApi;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
@@ -19,6 +20,7 @@ import com.wdiscute.starcatcher.data.attachments.FishingGuideAttachment;
 import com.wdiscute.starcatcher.data.network.CBFishingStartedPayload;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fishentity.FishEntity;
+import com.wdiscute.starcatcher.messageinabottle.message.Message;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.utils.MaybeStack;
@@ -34,6 +36,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.network.PacketDistributor;
@@ -237,8 +240,39 @@ public interface SCCommands
                                 )
                         )
                 )
+
+                //starcatcher get_all_player_letters
+                .then(Commands.literal("get_all_player_letters_available")
+                        .executes(c ->
+                                getPlayerLetters(
+                                        c.getSource().getPlayerOrException()
+                                )
+                        )
+                )
         );
     }
+
+    private static int getPlayerLetters(ServerPlayer player)
+    {
+        ItemStack stack = SCBlocks.TACKLE_BOX.asItem().getDefaultInstance();
+
+        List<MaybeStack> list = new ArrayList<>();
+
+        for (Message message : MessagesSavedData.get(player.serverLevel()).getMessages())
+        {
+            ItemStack bottle = SCItems.MESSAGE_IN_A_BOTTLE.toStack();
+            bottle.set(SCDataComponents.MESSAGE, message);
+            list.add(new MaybeStack(bottle));
+        }
+
+        stack.set(SCDataComponents.TACKLE_BOX_ITEMS,
+                List.of(new Utils.Duo<>(4, new MaybeStack(SCItems.AURORA.asItem()))));
+
+        stack.set(SCDataComponents.TACKLE_BOX_FISHES.get(), list);
+        player.addItem(stack);
+        return 0;
+    }
+
 
     private static int placeFishDisplay(ServerPlayer player)
     {
