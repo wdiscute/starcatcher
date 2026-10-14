@@ -82,7 +82,7 @@ repositories
 
 dependencies {
     //libtooltips
-    jarJar(implementation("maven.modrinth:libtooltips:2.3.1-NEOFORGE-1.21.1"))
+    jarJar(implementation("maven.modrinth:libtooltips:2.3.2-NEOFORGE-1.21.1"))
     //jarJar(implementation("com.wdiscute:libtooltips:2.3.1-NEOFORGE-1.21.1"))
 
     //wdutils
@@ -96,7 +96,7 @@ dependencies {
 
     //fancy tab sections
     //jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-1.21.1"))
-    jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-1.21.1"))
+    jarJar(implementation("maven.modrinth:fancytabsections:6.2.1-NEOFORGE-1.21.1"))
 
 
     //EMI
