@@ -88,7 +88,8 @@ public class TackleBoxBoatEntity extends Boat implements HasCustomInventoryScree
         DARK_OAK(6, SCItems.DARK_OAK_TACKLE_BOX_BOAT, false),
         MANGROVE(7, SCItems.MANGROVE_TACKLE_BOX_BOAT, false),
         BAMBOO(8, SCItems.BAMBOO_TACKLE_BOX_BOAT, true),
-        PALE_OAK(9, SCItems.PALE_OAK_TACKLE_BOX_BOAT, false);
+        PALE_OAK(9, SCItems.PALE_OAK_TACKLE_BOX_BOAT, false),
+        POPLAR(10, SCItems.POPLAR_TACKLE_BOX_BOAT, false);
 
         final int index;
         final Supplier<Item> supplier;

@@ -230,6 +230,7 @@ public class DGSCModelProvider extends ModelProvider
         simpleBlockItem(ACACIA_FISH_PLAQUE);
         simpleBlockItem(MANGROVE_FISH_PLAQUE);
         simpleBlockItem(PALE_OAK_FISH_PLAQUE);
+        simpleBlockItem(POPLAR_FISH_PLAQUE);
 
     }
 

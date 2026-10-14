@@ -16,6 +16,7 @@ import com.wdiscute.utils.item.FireResistantBasicItem;
 import com.wdiscute.utils.item.SingleStackBasicItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.component.Compostable;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.storage.loot.providers.number.floats.ContextFloatProviders;
@@ -65,6 +66,7 @@ public interface SCItems
     DeferredItem<Item> MANGROVE_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("mangrove_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, TackleBoxBoatEntity.Type.MANGROVE));
     DeferredItem<Item> BAMBOO_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("bamboo_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, TackleBoxBoatEntity.Type.BAMBOO));
     DeferredItem<Item> PALE_OAK_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("pale_oak_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, TackleBoxBoatEntity.Type.PALE_OAK));
+    DeferredItem<Item> POPLAR_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("poplar_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, TackleBoxBoatEntity.Type.POPLAR));
 
     //hooks
     DeferredItem<Item> HOOK = HOOKS_REGISTRY.registerItem("hook", SingleStackBasicItem::new);

@@ -480,7 +480,6 @@ public class FishingMinigameScreen extends Screen implements GuiEventListener
         float centerY = (float) height / 2;
 
         poseStack.translate(centerX, centerY);
-        //todo 26
         poseStack.rotate((float) Math.toRadians(kimbeMarkerPos));
         poseStack.translate(-centerX, -centerY);
 

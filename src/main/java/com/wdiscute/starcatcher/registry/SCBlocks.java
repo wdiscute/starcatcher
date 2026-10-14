@@ -62,6 +62,7 @@ public interface SCBlocks
     DeferredBlock<Block> SPRUCE_FISH_PLAQUE = registerPlaque("spruce_fish_plaque", PlaqueBlock::new);
     DeferredBlock<Block> MANGROVE_FISH_PLAQUE = registerPlaque("mangrove_fish_plaque", PlaqueBlock::new);
     DeferredBlock<Block> PALE_OAK_FISH_PLAQUE = registerPlaque("pale_oak_fish_plaque", PlaqueBlock::new);
+    DeferredBlock<Block> POPLAR_FISH_PLAQUE = registerPlaque("poplar_fish_plaque", PlaqueBlock::new);
 
     //tackle boxes
     DeferredBlock<Block> TACKLE_BOX = registerTackleBox("tackle_box", (p) -> new TackleBoxBlock(p, null, MapColor.TERRACOTTA_WHITE));

@@ -248,6 +248,18 @@ public class DGSCRecipeProvider extends RecipeProvider
                 .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
                 .save(output);
 
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.PALE_OAK_TACKLE_BOX_BOAT)
+                .requires(Items.PALE_OAK_BOAT)
+                .requires(items, SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
+        TackleBoxBoatRecipeBuilder.shapeless(RecipeCategory.MISC, SCItems.POPLAR_TACKLE_BOX_BOAT)
+                .requires(Items.POPLAR_BOAT)
+                .requires(items, SCTags.TACKLE_BOXES)
+                .unlockedBy("has_tackle_box", has(SCTags.TACKLE_BOXES))
+                .save(output);
+
         //dripstone bait
         ShapelessRecipeBuilder.shapeless(items, RecipeCategory.MISC, SCItems.DRIPSTONE_BAIT, 4)
                 .requires(Items.BONE_MEAL)

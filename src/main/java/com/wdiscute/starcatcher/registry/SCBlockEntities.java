@@ -61,7 +61,8 @@ public interface SCBlockEntities
                     SCBlocks.BIRCH_FISH_PLAQUE.get(),
                     SCBlocks.MANGROVE_FISH_PLAQUE.get(),
                     SCBlocks.SPRUCE_FISH_PLAQUE.get(),
-                    SCBlocks.PALE_OAK_FISH_PLAQUE.get()
+                    SCBlocks.PALE_OAK_FISH_PLAQUE.get(),
+                    SCBlocks.POPLAR_FISH_PLAQUE.get()
             ));
 
     static void register(IEventBus eventBus) {

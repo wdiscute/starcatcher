@@ -627,6 +627,7 @@
   "item.starcatcher.acacia_tackle_box_boat" : "Acacia Tackle box Boat",
   "item.starcatcher.jungle_tackle_box_boat" : "Jungle Tackle box Boat",
   "item.starcatcher.pale_oak_tackle_box_boat" : "Pale Oak Tackle box Boat",
+  "item.starcatcher.poplar_tackle_box_boat" : "Poplar Tackle box Boat",
 
   "item.starcatcher.oak_fish_plaque" : "Oak Fish Plaque",
   "item.starcatcher.dark_oak_fish_plaque" : "Dark Oak Fish Plaque",
@@ -638,6 +639,7 @@
   "item.starcatcher.spruce_fish_plaque" : "Spruce Fish Plaque",
   "item.starcatcher.mangrove_fish_plaque" : "Mangrove Fish Plaque",
   "item.starcatcher.pale_oak_fish_plaque" : "Pale Oak Fish Plaque",
+  "item.starcatcher.poplar_fish_plaque" : "Poplar Fish Plaque",
 
   "item.starcatcher.aquarium" : "Aquarium",
   "block.starcatcher.aquarium.dead_fish" : "Dead fish don't go in an aquarium...",
