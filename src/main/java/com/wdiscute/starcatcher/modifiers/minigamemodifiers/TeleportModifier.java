@@ -114,7 +114,6 @@ public class TeleportModifier extends AbstractMinigameModifier
         float centerY = height / 2f;
 
         poseStack.translate(centerX, centerY);
-        //todo 26
         poseStack.rotate((float) Math.toRadians(kimbePosition + 180));
         poseStack.translate(-centerX, -centerY);
 
