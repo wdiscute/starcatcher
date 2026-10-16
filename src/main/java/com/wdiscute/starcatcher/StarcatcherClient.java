@@ -29,6 +29,8 @@ public class StarcatcherClient
     {
         //modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
+        SCArmPoses.register();
+
         //register tooltip tag processors
         Tooltips.registerProcessor("scgolden",
                 (t, s, e) -> SCTooltipGradient.process(t,

@@ -86,7 +86,6 @@ public class Starcatcher
         SCDataComponents.register(modEventBus);
         SCSounds.register(modEventBus);
         SCEntities.register(modEventBus);
-        SCArmPoses.register(modEventBus);
         SCParticles.register(modEventBus);
         SCRecipes.register(modEventBus);
         SCMenuTypes.register(modEventBus);

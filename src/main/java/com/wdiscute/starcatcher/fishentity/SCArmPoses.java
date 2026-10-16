@@ -9,7 +9,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 
 public interface SCArmPoses
 {
-    static void register(IEventBus eventBus)
+    static void register()
     {
 
     }
