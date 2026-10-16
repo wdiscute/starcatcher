@@ -88,7 +88,6 @@ public class Starcatcher
         SCDataComponents.register(modEventBus);
         SCSounds.register(modEventBus);
         SCEntities.register(modEventBus);
-        SCArmPoses.register(modEventBus);
         SCParticles.register(modEventBus);
         SCRecipes.register(modEventBus);
         SCMenuTypes.register(modEventBus);
@@ -119,6 +118,8 @@ public class Starcatcher
     {
         public Client(ModContainer modContainer)
         {
+            SCArmPoses.register();
+
             modContainer.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
 
             //register tooltip tag processors
