@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher;
 
 import com.mojang.logging.LogUtils;
 import com.wdiscute.libtooltips.Tooltips;
+import com.wdiscute.starcatcher.fishentity.SCArmPoses;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.SCFishRestrictions;
@@ -85,6 +86,7 @@ public class Starcatcher
         SCDataComponents.register(modEventBus);
         SCSounds.register(modEventBus);
         SCEntities.register(modEventBus);
+        SCArmPoses.register(modEventBus);
         SCParticles.register(modEventBus);
         SCRecipes.register(modEventBus);
         SCMenuTypes.register(modEventBus);

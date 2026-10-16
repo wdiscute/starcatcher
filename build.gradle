@@ -77,7 +77,7 @@ dependencies {
     modImplementation("maven.modrinth:wds-selling-bin:1.4.3-FORGE-1.20.1")
 
     //tooltips
-    modImplementation("maven.modrinth:libtooltips:2.3-FORGE-1.20.1")
+    modImplementation("maven.modrinth:libtooltips:2.3.2-FORGE-1.20.1")
 
     //wdutils
     jarJar(modImplementation("com.wdiscute:wdUtils:2.1-FORGE-1.20.1"))

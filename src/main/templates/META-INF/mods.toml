@@ -51,13 +51,6 @@ ordering="NONE"
 side="BOTH"
 
 [[dependencies.starcatcher]]
-modId="saintsdragons"
-mandatory=false
-versionRange="[0,)"
-ordering="AFTER"
-side="BOTH"
-
-[[dependencies.starcatcher]]
 modId="selling_bin"
 mandatory=true
 versionRange="[0,)"

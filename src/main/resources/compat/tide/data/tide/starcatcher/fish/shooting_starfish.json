@@ -83,12 +83,9 @@
     },
     {
       "type": "starcatcher:bait",
-      "baits": [
-        {
-          "extra_chance": 50,
-          "id": "starcatcher:legendary_bait"
-        }
-      ]
+      "baits": {
+        "starcatcher:legendary_bait": 50
+      }
     },
     {
       "type": "starcatcher:fluid",

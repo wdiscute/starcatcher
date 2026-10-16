@@ -2,8 +2,6 @@ package com.wdiscute.starcatcher.fishentity;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.blaze3d.vertex.VertexMultiConsumer;
-import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.registry.SCItems;
 import com.wdiscute.starcatcher.Starcatcher;
@@ -20,18 +18,16 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity>>
 {
-    public static Map<Item, EntityModel<FishEntity>> map = new HashMap<>();
+    public static Map<Item, EntityModel<FishEntity>> map = new ConcurrentHashMap<>();
 
     public FishRenderer(EntityRendererProvider.Context context)
     {
@@ -205,11 +201,8 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         {
             Item item = itemStack.getItem();
             EntityModel<FishEntity> model = map.get(item);
-            VertexConsumer vertexConsumer;
-            if (Rarity.isGolden(itemStack))
-                vertexConsumer = getGlintVertexConsumer(buffer, Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack);
-            else
-                vertexConsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
+
+            VertexConsumer vertexConsumer = buffer.getBuffer(getGoldRendertype(Starcatcher.rl("entity/fishes/" + BuiltInRegistries.ITEM.getKey(item).getPath()), model, itemStack));
 
             model.renderToBuffer(poseStack, vertexConsumer, packedLight, overlay);
         }
@@ -220,15 +213,5 @@ public class FishRenderer extends MobRenderer<FishEntity, EntityModel<FishEntity
         return Rarity.isGolden(fishItem)
                 ? GoldRenderer.INSTANCE.getOrCreateEntity(texture, model::renderType).renderType
                 : model.renderType(GoldRenderer.getTextureLoc(texture));
-    }
-
-    public static VertexConsumer getGlintVertexConsumer(MultiBufferSource buffer, ResourceLocation texture, EntityModel<FishEntity> model, ItemStack fishItem)
-    {
-        //todo fix this
-        VertexConsumer glint = buffer.getBuffer(SCRenderTypes.RENDERTYPE_GOLD_FISH_GLINT_ENTITY);
-        VertexConsumer textureConsumer = buffer.getBuffer(getGoldRendertype(texture, model, fishItem));
-
-        return textureConsumer;
-        //return VertexMultiConsumer.create(textureConsumer, glint);
     }
 }
