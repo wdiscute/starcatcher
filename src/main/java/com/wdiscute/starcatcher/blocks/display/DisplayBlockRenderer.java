@@ -39,6 +39,7 @@ public class DisplayBlockRenderer implements BlockEntityRenderer<DisplayBlockEnt
 
     public DisplayBlockRenderer(BlockEntityRendererProvider.Context context)
     {
+        FishRenderer.createMap(context.entityModelSet());
         this.bookModel = new DisplayBookModel(context.bakeLayer(DisplayBookModel.LAYER_LOCATION));
         this.sprites = context.sprites();
     }

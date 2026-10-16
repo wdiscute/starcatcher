@@ -44,6 +44,7 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
 
     public PlaqueBlockRenderer(BlockEntityRendererProvider.Context context)
     {
+        FishRenderer.createMap(context.entityModelSet());
         rotation.put(SCItems.CERBERAY.get(), 90f);
 
         offsets.put(SCItems.CERBERAY.get(), new Vec3(0.05, 0, 0));
