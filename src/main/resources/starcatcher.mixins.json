@@ -14,7 +14,6 @@
     "GetNameMixin",
     "HumanoidModelMixin",
     "ItemRendererMixin",
-    "LivingEntityRendererMixin",
     "RenderTypeHelperMixin"
   ]
 }
