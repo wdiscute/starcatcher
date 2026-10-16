@@ -4,29 +4,18 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.blocks.display.DisplayBlockEntity;
-import com.wdiscute.starcatcher.blocks.display.DisplayBlockRenderState;
-import com.wdiscute.starcatcher.blocks.display.DisplayBookModel;
 import com.wdiscute.starcatcher.data.CaughtFishInfo;
-import com.wdiscute.starcatcher.fish.Rarity;
 import com.wdiscute.starcatcher.fishentity.FishEntityRenderState;
 import com.wdiscute.starcatcher.fishentity.FishRenderer;
 import com.wdiscute.starcatcher.registry.SCDataComponents;
 import com.wdiscute.starcatcher.registry.SCItems;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.entity.state.EntityRenderState;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
-import net.minecraft.client.renderer.texture.OverlayTexture;
-import net.minecraft.client.resources.model.sprite.SpriteGetter;
-import net.minecraft.client.resources.model.sprite.SpriteId;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.Mth;
-import net.minecraft.util.Util;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
@@ -44,6 +33,7 @@ public class PlaqueBlockRenderer implements BlockEntityRenderer<PlaqueBlockEntit
 
     public PlaqueBlockRenderer(BlockEntityRendererProvider.Context context)
     {
+        FishRenderer.createMap(context.entityModelSet());
         rotation.put(SCItems.CERBERAY.get(), 90f);
 
         offsets.put(SCItems.CERBERAY.get(), new Vec3(0.05, 0, 0));

@@ -64,7 +64,7 @@ dependencies {
     jarJar(implementation("maven.modrinth:fancytabsections:6.2-NEOFORGE-26.3"))
 
     //libtooltips
-    jarJar(implementation("maven.modrinth:libtooltips:2.3-NEOFORGE-26.3"))
+    jarJar(implementation("maven.modrinth:libtooltips:2.3.2-NEOFORGE-26.3"))
 
     //selling bin
     jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-26.3"))

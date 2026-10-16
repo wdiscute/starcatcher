@@ -21,7 +21,6 @@ import com.wdiscute.starcatcher.locators.FishTrackerLayer;
 import com.wdiscute.starcatcher.minigame.KonamiDetector;
 import com.wdiscute.starcatcher.blocks.aquarium.AquariumRenderer;
 import com.wdiscute.starcatcher.blocks.display.DisplayBlockRenderer;
-import com.wdiscute.starcatcher.blocks.display.DisplayBookModel;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxScreen;
 import com.wdiscute.starcatcher.registry.items.*;
 import com.wdiscute.starcatcher.particles.FishingBitingLavaParticles;
@@ -29,8 +28,6 @@ import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.compat.curios.CuriosEvents;
-import com.wdiscute.starcatcher.shaders.BakedModelRemapper;
-import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
@@ -165,9 +162,6 @@ public class SCClientEvents
 
         //tackle box
         //event.registerLayerDefinition(TackleBoxRenderer.LAYER_LOCATION, TackleBoxRenderer::createBodyLayer);
-
-        //book model
-        event.registerLayerDefinition(DisplayBookModel.LAYER_LOCATION, DisplayBookModel::createBodyLayer);
 
         //fishes
         event.registerLayerDefinition(AgaveBream.LAYER_LOCATION, AgaveBream::createBodyLayer);

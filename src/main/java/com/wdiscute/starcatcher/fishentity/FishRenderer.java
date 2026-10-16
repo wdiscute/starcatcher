@@ -191,9 +191,6 @@ public class FishRenderer extends EntityRenderer<FishEntity, FishEntityRenderSta
                 new CaughtFishInfo(100, 100, 50, Rarity.COMMON)
         ).getScale();
 
-        //todo needed?
-        //poseStack.translate(be.x, be.y, be.z);
-
         //block centering
         poseStack.translate(offsetCenter.x, offsetCenter.y, offsetCenter.z);
 
