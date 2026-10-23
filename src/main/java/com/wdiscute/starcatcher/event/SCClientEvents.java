@@ -1,6 +1,5 @@
 package com.wdiscute.starcatcher.event;
 
-import com.google.common.reflect.TypeToken;
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockRenderer;
@@ -29,20 +28,16 @@ import com.wdiscute.starcatcher.particles.FishingBitingParticles;
 import com.wdiscute.starcatcher.particles.FishingNotificationParticles;
 import com.wdiscute.starcatcher.registry.*;
 import com.wdiscute.starcatcher.compat.curios.CuriosEvents;
-import com.wdiscute.starcatcher.shaders.BakedModelRemapper;
-import com.wdiscute.starcatcher.shaders.GoldRenderer;
 import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.ClientAvatarEntity;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.player.AbstractClientPlayer;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.AvatarRenderer;
 import net.minecraft.client.renderer.entity.state.AvatarRenderState;
 import net.minecraft.core.BlockPos;
-import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.HumanoidArm;
@@ -113,16 +108,22 @@ public class SCClientEvents
     }
 
     @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event)
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
-        EntityRenderers.register(SCEntities.FISHING_BOB.get(), FishingBobRenderer::new);
-        EntityRenderers.register(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(SCEntities.FISH.get(), FishRenderer::new);
-        EntityRenderers.register(SCEntities.TACKLE_BOX_BOAT_ENTITY.get(), TackleBoxBoatRenderer::new);
+        event.registerEntityRenderer(SCEntities.FISHING_BOB.get(), FishingBobRenderer::new);
+        event.registerEntityRenderer(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(SCEntities.FISH.get(), FishRenderer::new);
+        event.registerEntityRenderer(SCEntities.TACKLE_BOX_BOAT_ENTITY.get(), TackleBoxBoatRenderer::new);
 
         if (ModList.get().isLoaded("curios"))
             CuriosEvents.registerRenderers();
+    }
+
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event)
+    {
+
     }
 
     @SubscribeEvent
