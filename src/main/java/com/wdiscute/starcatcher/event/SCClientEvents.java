@@ -110,13 +110,13 @@ public class SCClientEvents
     }
 
     @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event)
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event)
     {
-        EntityRenderers.register(SCEntities.FISHING_BOB.get(), FishingBobRenderer::new);
-        EntityRenderers.register(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
-        EntityRenderers.register(SCEntities.FISH.get(), FishRenderer::new);
-        EntityRenderers.register(SCEntities.TACKLE_BOX_BOAT_ENTITY.get(), TackleBoxBoatRenderer::new);
+        event.registerEntityRenderer(SCEntities.FISHING_BOB.get(), FishingBobRenderer::new);
+        event.registerEntityRenderer(SCEntities.BROKEN_BOTTLE.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(SCEntities.BOTTLED_LETTER.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(SCEntities.FISH.get(), FishRenderer::new);
+        event.registerEntityRenderer(SCEntities.TACKLE_BOX_BOAT_ENTITY.get(), TackleBoxBoatRenderer::new);
 
         if (ModList.get().isLoaded("curios"))
             CuriosEvents.registerRenderers();
