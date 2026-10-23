@@ -332,7 +332,8 @@ public class FishingBobEntity extends Projectile
                     SCDataComponents.set(rod, SCDataComponents.BAIT, new MaybeStack(bait));
                 }
 
-                kill((ServerLevel) level());
+                if (level() instanceof ServerLevel sl)
+                    kill(sl);
             }
         }
         else
