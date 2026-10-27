@@ -13,9 +13,9 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 public class MessageItem extends Item
 {
-    public MessageItem()
+    public MessageItem(Properties p)
     {
-        super(new Properties().stacksTo(1).fireResistant());
+        super(p.stacksTo(1).fireResistant());
     }
 
     @Override

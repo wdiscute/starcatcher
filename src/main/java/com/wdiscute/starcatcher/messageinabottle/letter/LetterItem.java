@@ -15,9 +15,9 @@ import java.util.List;
 
 public class LetterItem extends Item
 {
-    public LetterItem()
+    public LetterItem(Properties p)
     {
-        super(new Properties().stacksTo(1).fireResistant());
+        super(p.stacksTo(1).fireResistant());
     }
 
     @Override
