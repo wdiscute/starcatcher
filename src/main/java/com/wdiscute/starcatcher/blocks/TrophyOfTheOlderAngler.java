@@ -77,7 +77,7 @@ public class TrophyOfTheOlderAngler extends AbstractMultiBlock implements IPrevi
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context)
     {
-        if (state.getOptionalValue(BaseMultiblock.CENTER).orElse(false))
+        if (state.getOptionalValue(CENTER).orElse(false))
             return BOTTOM;
         else
             return TOP;
