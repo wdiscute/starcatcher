@@ -1,7 +1,0 @@
-{
-	"render_type": "cutout_mipped",
-	"parent": "minecraft:block/cross",
-	"textures": {
-		"cross": "minecraft:block/kelp_plant"
-	}
-}

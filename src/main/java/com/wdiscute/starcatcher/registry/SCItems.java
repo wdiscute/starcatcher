@@ -41,15 +41,15 @@ public interface SCItems
     DeferredRegister.Items BOBBERS_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
     DeferredRegister.Items TACKLE_BOX_BOAT_REGISTRY = DeferredRegister.createItems(Starcatcher.MOD_ID);
 
-    DeferredItem<Item> MISSINGNO = ITEMS.register("missingno", BasicItem::new);
-    DeferredItem<Item> UNKNOWN_FISH = ITEMS.register("unknown_fish", BasicItem::new);
+    DeferredItem<Item> MISSINGNO = ITEMS.registerItem("missingno", BasicItem::new);
+    DeferredItem<Item> UNKNOWN_FISH = ITEMS.registerItem("unknown_fish", BasicItem::new);
 
     DeferredItem<Item> GUIDE = ITEMS.registerItem("starcatcher_guide", FishingGuideItem::new);
 
     DeferredItem<Item> FISH_RADAR = ITEMS.register("fish_radar", SingleStackBasicItem::new);
 
-    DeferredItem<Item> SETTINGS = ITEMS.register("settings", BasicItem::new);
-    DeferredItem<Item> TREASURE = ITEMS.register("treasure", BasicItem::new);
+    DeferredItem<Item> SETTINGS = ITEMS.registerItem("settings", BasicItem::new);
+    DeferredItem<Item> TREASURE = ITEMS.registerItem("treasure", BasicItem::new);
 
     //tackle box boats
     DeferredItem<Item> OAK_TACKLE_BOX_BOAT = TACKLE_BOX_BOAT_REGISTRY.registerItem("oak_tackle_box_boat", (p) -> new TackleBoxBoatItem(p, Boat.Type.OAK));
@@ -93,44 +93,44 @@ public interface SCItems
     DeferredItem<Item> CLOUD_BOBBER = BOBBERS_REGISTRY.register("cloud_bobber", SingleStackBasicItem::new);
 
     //baits
-    DeferredItem<Item> WORM = ITEMS.register("worm", BasicItem::new);
-    DeferredItem<Item> ALMIGHTY_WORM = ITEMS.register("almighty_worm", BasicItem::new);
-    DeferredItem<Item> SEEKING_WORM = ITEMS.register("seeking_worm", BasicItem::new);
+    DeferredItem<Item> WORM = ITEMS.registerItem("worm", BasicItem::new);
+    DeferredItem<Item> ALMIGHTY_WORM = ITEMS.registerItem("almighty_worm", BasicItem::new);
+    DeferredItem<Item> SEEKING_WORM = ITEMS.registerItem("seeking_worm", BasicItem::new);
 
-    DeferredItem<Item> GUNPOWDER_BAIT = ITEMS.register("gunpowder_bait", BasicItem::new);
-    DeferredItem<Item> CHERRY_BAIT = ITEMS.register("cherry_bait", BasicItem::new);
-    DeferredItem<Item> LUSH_BAIT = ITEMS.register("lush_bait", BasicItem::new);
-    DeferredItem<Item> SCULK_BAIT = ITEMS.register("sculk_bait", BasicItem::new);
-    DeferredItem<Item> DRIPSTONE_BAIT = ITEMS.register("dripstone_bait", BasicItem::new);
-    DeferredItem<Item> MURKWATER_BAIT = ITEMS.register("murkwater_bait", BasicItem::new);
-    DeferredItem<Item> LEGENDARY_BAIT = ITEMS.register("legendary_bait", BasicItem::new);
-    DeferredItem<Item> METEOROLOGICAL_BAIT = ITEMS.register("meteorological_bait", BasicItem::new);
-    DeferredItem<Item> TARGETED_BAIT = ITEMS.register("targeted_bait", BasicItem::new);
+    DeferredItem<Item> GUNPOWDER_BAIT = ITEMS.registerItem("gunpowder_bait", BasicItem::new);
+    DeferredItem<Item> CHERRY_BAIT = ITEMS.registerItem("cherry_bait", BasicItem::new);
+    DeferredItem<Item> LUSH_BAIT = ITEMS.registerItem("lush_bait", BasicItem::new);
+    DeferredItem<Item> SCULK_BAIT = ITEMS.registerItem("sculk_bait", BasicItem::new);
+    DeferredItem<Item> DRIPSTONE_BAIT = ITEMS.registerItem("dripstone_bait", BasicItem::new);
+    DeferredItem<Item> MURKWATER_BAIT = ITEMS.registerItem("murkwater_bait", BasicItem::new);
+    DeferredItem<Item> LEGENDARY_BAIT = ITEMS.registerItem("legendary_bait", BasicItem::new);
+    DeferredItem<Item> METEOROLOGICAL_BAIT = ITEMS.registerItem("meteorological_bait", BasicItem::new);
+    DeferredItem<Item> TARGETED_BAIT = ITEMS.registerItem("targeted_bait", BasicItem::new);
 
 
     //tackle templates
-    DeferredItem<Item> PEARL_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("pearl_smithing_template", BasicItem::new);
-    DeferredItem<Item> KIMBE_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("kimbe_smithing_template", BasicItem::new);
-    DeferredItem<Item> COLORFUL_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("colorful_smithing_template", BasicItem::new);
-    DeferredItem<Item> CLEAR_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("clear_smithing_template", BasicItem::new);
-    DeferredItem<Item> FROG_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("frog_smithing_template", BasicItem::new);
-    DeferredItem<Item> KING_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("king_smithing_template", BasicItem::new);
-    DeferredItem<Item> VALLEY_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("valley_smithing_template", BasicItem::new);
-    DeferredItem<Item> SURVIVOR_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("survivor_smithing_template", BasicItem::new);
+    DeferredItem<Item> PEARL_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("pearl_smithing_template", BasicItem::new);
+    DeferredItem<Item> KIMBE_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("kimbe_smithing_template", BasicItem::new);
+    DeferredItem<Item> COLORFUL_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("colorful_smithing_template", BasicItem::new);
+    DeferredItem<Item> CLEAR_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("clear_smithing_template", BasicItem::new);
+    DeferredItem<Item> FROG_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("frog_smithing_template", BasicItem::new);
+    DeferredItem<Item> KING_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("king_smithing_template", BasicItem::new);
+    DeferredItem<Item> VALLEY_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("valley_smithing_template", BasicItem::new);
+    DeferredItem<Item> SURVIVOR_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("survivor_smithing_template", BasicItem::new);
 
     //skin templates
-    DeferredItem<Item> NATURALIST_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("naturalist_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> ICEBORN_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("iceborn_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> MAGMAFORGED_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("magmaforged_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> SLIMED_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("slimed_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> SHARKTOOTH_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("sharktooth_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("azure_crystal_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> BAMBOO_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("bamboo_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> OBSIDIAN_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("obsidian_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> BONER_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("boner_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> SKY_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("sky_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("lush_glowberry_skin_smithing_template", BasicItem::new);
-    DeferredItem<Item> HUMBLE_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.register("humble_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> NATURALIST_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("naturalist_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> ICEBORN_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("iceborn_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> MAGMAFORGED_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("magmaforged_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> SLIMED_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("slimed_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> SHARKTOOTH_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("sharktooth_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> AZURE_CRYSTAL_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("azure_crystal_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> BAMBOO_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("bamboo_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> OBSIDIAN_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("obsidian_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> BONER_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("boner_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> SKY_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("sky_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> LUSH_GLOWBERRY_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("lush_glowberry_skin_smithing_template", BasicItem::new);
+    DeferredItem<Item> HUMBLE_SKIN_SMITHING_TEMPLATE = TEMPLATES_REGISTRY.registerItem("humble_skin_smithing_template", BasicItem::new);
 
 
     //rods
@@ -149,17 +149,17 @@ public interface SCItems
     DeferredItem<Item> HUMBLE_ROD = RODS_REGISTRY.register("humble_rod", StarcatcherFishingRodItem::new);
 
     //secrets
-    DeferredItem<Item> LETTER = ITEMS.register("letter", LetterItem::new);
-    DeferredItem<Item> BOTTLED_LETTER = ITEMS.register("bottled_letter", BottledLetterItem::new);
+    DeferredItem<Item> LETTER = ITEMS.registerItem("letter", LetterItem::new);
+    DeferredItem<Item> BOTTLED_LETTER = ITEMS.registerItem("bottled_letter", BottledLetterItem::new);
 
-    DeferredItem<Item> MESSAGE_IN_A_BOTTLE = ITEMS.register("message_in_a_bottle", MessageInABottleItem::new);
-    DeferredItem<Item> MESSAGE = ITEMS.register("message", MessageItem::new);
+    DeferredItem<Item> MESSAGE_IN_A_BOTTLE = ITEMS.registerItem("message_in_a_bottle", MessageInABottleItem::new);
+    DeferredItem<Item> MESSAGE = ITEMS.registerItem("message", MessageItem::new);
 
-    DeferredItem<Item> BROKEN_BOTTLE = ITEMS.register("broken_bottle", BrokenBottleItem::new);
+    DeferredItem<Item> BROKEN_BOTTLE = ITEMS.registerItem("broken_bottle", BrokenBottleItem::new);
 
 
-    DeferredItem<Item> FISH_BONES = ITEMS.register("fish_bones", BasicItem::new);
-    DeferredItem<Item> PEARL = ITEMS.register("pearl", BasicItem::new);
+    DeferredItem<Item> FISH_BONES = ITEMS.registerItem("fish_bones", BasicItem::new);
+    DeferredItem<Item> PEARL = ITEMS.registerItem("pearl", BasicItem::new);
 
     //
     //  ,---. ,--.         ,--.
@@ -170,7 +170,7 @@ public interface SCItems
     //
 
     //lake
-    DeferredItem<Item> BOOT = ITEMS.register("boot", BasicItem::new);
+    DeferredItem<Item> BOOT = ITEMS.registerItem("boot", BasicItem::new);
 
     DeferredItem<Item> OBIDONTIEE = registerBucketFish("obidontiee"); //kimbe
     DeferredItem<Item> DRIFTFIN = registerBucketFish("driftfin");
@@ -259,7 +259,7 @@ public interface SCItems
     DeferredItem<Item> HOLLOWBELLY_DARTER = registerBucketFish("hollowbelly_darter");
     DeferredItem<Item> MISTBACK_CHUB = registerBucketFish("mistback_chub");
     DeferredItem<Item> BLUEGIGI = registerBucketFish("bluegigi");
-    DeferredItem<Item> DRIED_SEAWEED = ITEMS.register("dried_seaweed", BasicItem::new);
+    DeferredItem<Item> DRIED_SEAWEED = ITEMS.registerItem("dried_seaweed", BasicItem::new);
 
     //icy river
     DeferredItem<Item> FROSTGILL_CHUB = registerBucketFish("frostgill_chub");
@@ -284,7 +284,7 @@ public interface SCItems
     DeferredItem<Item> LILAC_MINNOW = registerBucketFish("lilac_minnow");
     DeferredItem<Item> FROSTBIT_JELLY = registerNonFishFish("frostbit_jelly");
     DeferredItem<Item> KING_OF_THE_FROST = registerNonFishFish("king_of_the_frost");
-    DeferredItem<Item> OCULI = ITEMS.register("oculi", BasicItem::new);
+    DeferredItem<Item> OCULI = ITEMS.registerItem("oculi", BasicItem::new);
 
 
     //mushroom islands
@@ -385,7 +385,7 @@ public interface SCItems
         if (fireResistant)
             return NON_FISH_FISH_REGISTRY.register(name, FireResistantBasicItem::new);
         else
-            return NON_FISH_FISH_REGISTRY.register(name, BasicItem::new);
+            return NON_FISH_FISH_REGISTRY.registerItem(name, BasicItem::new);
     }
 
     static DeferredItem<Item> registerBucketFish(String name)

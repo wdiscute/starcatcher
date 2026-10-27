@@ -2,7 +2,7 @@ package com.wdiscute.starcatcher.datagen;
 
 import com.wdiscute.starcatcher.SCTags;
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
+import com.wdiscute.starcatcher.blocks.aquarium.Decoration;
 import com.wdiscute.starcatcher.fish.Difficulty;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Rarity;
@@ -13,16 +13,16 @@ import com.wdiscute.starcatcher.modifiers.minigamemodifiers.*;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.SCItems;
+import com.wdiscute.starcatcher.registry.interaction.SCAquariumInteractions;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.utils.Utils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
-import net.neoforged.neoforge.common.Tags;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.data.DataMapProvider;
 import net.neoforged.neoforge.registries.datamaps.builtin.Compostable;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
@@ -40,7 +40,8 @@ public class DGSCDataMapsProvider extends DataMapProvider
     @Override
     protected void gather(HolderLookup.Provider provider)
     {
-        var aquarium = this.builder(SCDataMaps.AQUARIUM_INTERACTION);
+        var decoration = this.builder(SCDataMaps.AQUARIUM_DECORATION);
+        var ground = this.builder(SCDataMaps.AQUARIUM_GROUND);
         //var currencies = this.builder(SBDataMaps.SELLING_BIN_CURRENCIES);
         //var sellable = this.builder(SBDataMaps.SELLING_BIN_VALUE);
         var compostable = this.builder(NeoForgeDataMaps.COMPOSTABLES);
@@ -55,25 +56,68 @@ public class DGSCDataMapsProvider extends DataMapProvider
         messages.add(BuiltinDimensionTypes.NETHER, Message.BACKGROUND_NETHER, false);
         messages.add(BuiltinDimensionTypes.END, Message.BACKGROUND_END, false);
 
+
+        //
+        //                                           ,--.
+        // ,--,--.  ,---.  ,--.,--.  ,--,--. ,--.--. `--' ,--.,--. ,--,--,--.
+        //' ,-.  | | .-. | |  ||  | ' ,-.  | |  .--' ,--. |  ||  | |        |
+        //\ '-'  | ' '-' | '  ''  ' \ '-'  | |  |    |  | '  ''  ' |  |  |  |
+        // `--`--'  `-|  |  `----'   `--`--' `--'    `--'  `----'  `--`--`--'
+        //,--.        `--',--.                                     ,--.   ,--.
+        //`--' ,--,--,  ,-'  '-.  ,---.  ,--.--.  ,--,--.  ,---. ,-'  '-. `--'  ,---.  ,--,--,   ,---.
+        //,--. |      \ '-.  .-' | .-. : |  .--' ' ,-.  | | .--' '-.  .-' ,--. | .-. | |      \ (  .-'
+        //|  | |  ||  |   |  |   \   --. |  |    \ '-'  | \ `--.   |  |   |  | ' '-' ' |  ||  | .-'  `)
+        //`--' `--''--'   `--'    `----' `--'     `--`--'  `---'   `--'   `--'  `---'  `--''--' `----'
+        //
+
+        //simple
+        decoration.add(Items.SMALL_AMETHYST_BUD.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.MEDIUM_AMETHYST_BUD.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.LARGE_AMETHYST_BUD.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.AMETHYST_CLUSTER.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.TORCH.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+
+        //non-fan coral
+        decoration.add(Items.BRAIN_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.BUBBLE_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.FIRE_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.HORN_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.TUBE_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+
+        //dead non-fan coral
+        decoration.add(Items.DEAD_BRAIN_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.DEAD_BUBBLE_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.DEAD_FIRE_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.DEAD_HORN_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+        decoration.add(Items.DEAD_TUBE_CORAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SIMPLE.get()), false);
+
+
+
+        //corals
+        decoration.add(Items.BRAIN_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.BUBBLE_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.FIRE_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.HORN_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.TUBE_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+
+        //dead corals
+        decoration.add(Items.DEAD_BRAIN_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.DEAD_BUBBLE_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.DEAD_FIRE_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.DEAD_HORN_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+        decoration.add(Items.DEAD_TUBE_CORAL_FAN.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.CORAL_FAN.get()), false);
+
+        //uniques
+        decoration.add(Items.KELP.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.KELP.get(), Vec3.ZERO, new Vec3(0.3d, 0, 0.3d)), false);
+        decoration.add(Items.SEAGRASS.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SEAGRASS.get(), Vec3.ZERO, new Vec3(0.3d, 0, 0.3d)), false);
+        decoration.add(Items.SEA_PICKLE.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.SEA_PICKLE.get(), Vec3.ZERO, new Vec3(0.3d, 0, 0.3d)), false);
+        decoration.add(Items.BONE_MEAL.builtInRegistryHolder(), new Decoration(SCAquariumInteractions.BONE_MEAL.get()), false);
+
         //ground
-        aquarium.add(Items.GRAVEL.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_GRAVEL, false);
-        aquarium.add(Items.SAND.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_SAND, false);
-        aquarium.add(Items.RED_SAND.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_RED_SAND, false);
-        aquarium.add(Items.STONE.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_STONE, false);
+        ground.add(SCTags.AQUARIUM_GROUND, Starcatcher.MISSINGNO, false);
 
-        //decorations
-        aquarium.add(ItemTags.SHOVELS, AquariumBlock.Interaction.BUILD_CASTLE, false);
-        aquarium.add(ItemTags.PICKAXES, AquariumBlock.Interaction.BUILD_CAVE, false);
-        aquarium.add(Items.KELP.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_KELP, false);
-        aquarium.add(Items.SEAGRASS.builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_SEAGRASS, false);
-        aquarium.add(SCBlocks.CONCH.get().asItem().builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_CONCH, false);
-        aquarium.add(SCBlocks.CLAM.get().asItem().builtInRegistryHolder(), AquariumBlock.Interaction.PLACE_CLAM, false);
 
-        aquarium.add(SCItems.STARCAUGHT_BUCKET, AquariumBlock.Interaction.PLACE_FISH, false);
-        aquarium.add(SCItems.STARCAUGHT_LAVA_BUCKET, AquariumBlock.Interaction.PLACE_FISH, false);
 
-        aquarium.add(SCTags.BUCKETABLE_FISHES, AquariumBlock.Interaction.PLACE_FISH_CREATIVE, false);
-        aquarium.add(Tags.Items.BUCKETS_EMPTY, AquariumBlock.Interaction.RETRIEVE_FISH, false);
 
         //compostable
         compostable.add(SCTags.WORMS, new Compostable(0.65F, false), false);

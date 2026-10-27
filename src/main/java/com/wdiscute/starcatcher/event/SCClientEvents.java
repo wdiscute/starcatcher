@@ -2,6 +2,7 @@ package com.wdiscute.starcatcher.event;
 
 import com.wdiscute.starcatcher.SCConfig;
 import com.wdiscute.starcatcher.Starcatcher;
+import com.wdiscute.starcatcher.blocks.aquarium.AquariumGroundModel;
 import com.wdiscute.starcatcher.blocks.plaque.PlaqueBlockRenderer;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxBlockItem;
 import com.wdiscute.starcatcher.blocks.tacklebox.TackleBoxTooltipRenderer;
@@ -36,8 +37,6 @@ import com.wdiscute.starcatcher.tournament.StandScreen;
 import com.wdiscute.starcatcher.tournament.TournamentLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.client.renderer.blockentity.ChestRenderer;
-import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
@@ -57,8 +56,6 @@ import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
-
-import java.util.List;
 
 @EventBusSubscriber(modid = Starcatcher.MOD_ID, value = Dist.CLIENT)
 public class SCClientEvents
@@ -154,6 +151,9 @@ public class SCClientEvents
 
         //book model
         event.registerLayerDefinition(DisplayBookModel.LAYER_LOCATION, DisplayBookModel::createBodyLayer);
+
+        //aquarium ground
+        event.registerLayerDefinition(AquariumGroundModel.LAYER_LOCATION, AquariumGroundModel::createBodyLayer);
 
         //fishes
         event.registerLayerDefinition(AgaveBream.LAYER_LOCATION, AgaveBream::createBodyLayer);

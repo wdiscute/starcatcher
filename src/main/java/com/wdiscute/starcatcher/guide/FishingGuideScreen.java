@@ -34,7 +34,6 @@ import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -44,7 +43,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.FastColor;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
@@ -1899,8 +1897,13 @@ public class FishingGuideScreen extends Screen
         BuiltInRegistries.ITEM.getTag(SCTags.EQUIPMENTS).ifPresent(o -> o.stream().forEach(i -> cosmetics.add(i.value().getDefaultInstance())));
         BuiltInRegistries.ITEM.getTag(SCTags.HATS).ifPresent(o -> o.stream().forEach(i -> cosmetics.add(i.value().getDefaultInstance())));
 
-        Optional<HolderSet.Named<Item>> interactions = BuiltInRegistries.ITEM.getTag(SCTags.AQUARIUM_INTERACTIONS);
-        interactions.ifPresent(h -> h.stream().forEach(o -> aquariumInteractions.add(new ItemStack(o.value()))));
+
+        BuiltInRegistries.ITEM.forEach(o ->
+        {
+            if(o.builtInRegistryHolder().getData(SCDataMaps.AQUARIUM_DECORATION) != null)
+                aquariumInteractions.add(o.getDefaultInstance());
+        });
+
         if (aquariumInteractions.isEmpty()) aquariumInteractions.add(ItemStack.EMPTY);
 
         indexEntries = new ArrayList<>(List.of(

@@ -17,9 +17,9 @@ import net.minecraft.world.level.Level;
 
 public class BottledLetterItem extends Item implements ProjectileItem
 {
-    public BottledLetterItem()
+    public BottledLetterItem(Properties p)
     {
-        super(new Properties().stacksTo(1));
+        super(p.stacksTo(1));
     }
 
     @Override

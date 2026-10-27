@@ -253,6 +253,7 @@ public class SCEvents
         event.register(Starcatcher.SWEETSPOT_BEHAVIOUR_REGISTRY);
         event.register(Starcatcher.TACKLE_SKIN_REGISTRY);
         event.register(Starcatcher.FISH_RESTRICTIONS_REGISTRY);
+        event.register(Starcatcher.AQUARIUM_INTERACTION);
     }
 
     @SubscribeEvent
@@ -307,7 +308,8 @@ public class SCEvents
     @SubscribeEvent
     public static void registerDataMaps(RegisterDataMapTypesEvent event)
     {
-        event.register(SCDataMaps.AQUARIUM_INTERACTION);
+        event.register(SCDataMaps.AQUARIUM_DECORATION);
+        event.register(SCDataMaps.AQUARIUM_GROUND);
         event.register(SCDataMaps.TACKLE_SKIN);
         event.register(SCDataMaps.TREASURE);
         event.register(SCDataMaps.MESSAGE_BACKGROUND);

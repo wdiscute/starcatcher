@@ -66,6 +66,12 @@ repositories
                 url = "https://maven.ryanhcode.dev/releases"
             }
 
+            //Kaupen
+            maven {
+                name = "Kaupenjoe"
+                url = "https://maven.kaupenjoe.net/releases"
+            }
+
             repositories {
                 exclusiveContent {
                     forRepository {
@@ -86,7 +92,7 @@ dependencies {
     //jarJar(implementation("com.wdiscute:libtooltips:2.3.1-NEOFORGE-1.21.1"))
 
     //wdutils
-    jarJar(implementation("com.wdiscute:wdUtils:2.0-NEOFORGE-1.21.1"))
+    jarJar(implementation("com.wdiscute:wdUtils:2.3-NEOFORGE-1.21.1"))
 
     //selling bin
     jarJar(implementation("maven.modrinth:wds-selling-bin:1.6-NEOFORGE-1.21.1"))

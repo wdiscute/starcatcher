@@ -1,11 +1,14 @@
 package com.wdiscute.starcatcher.blocks.aquarium;
 
-import com.wdiscute.starcatcher.data.NBTCodecHelper;
+import com.wdiscute.starcatcher.SCTags;
+import com.wdiscute.starcatcher.fishentity.FishEntity;
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
+import com.wdiscute.starcatcher.registry.SCEntities;
 import com.wdiscute.utils.MaybeStack;
 import com.wdiscute.utils.Utils;
+import com.wdiscute.utils.ValueHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -13,16 +16,22 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 
 public class AquariumBlockEntity extends BlockEntity implements TickableBlockEntity
 {
-    ItemStack fish = ItemStack.EMPTY;
     //server synced to client
+    public Decoration.Placed decoration = null;
+    public ResourceLocation ground = null;
+
+    ItemStack fish = ItemStack.EMPTY;
     public Vec3 fishTarget = new Vec3(0, 0, 0);
     public BlockPos fishTargetBP = BlockPos.ZERO;
     private int cooldown = 0;
@@ -50,6 +59,11 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
         return fish;
     }
 
+    public boolean hasGround()
+    {
+        return ground != null;
+    }
+
     @Override
     public void tick()
     {
@@ -59,7 +73,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
         if (!(cooldown < 0)) return;
 
         cooldown = 150 + Utils.r.nextInt(100);
-        Direction dir = Direction.getRandom(level.random);
+        Direction dir = Direction.getRandom(getLevel().random);
         BlockPos bp = getBlockPos();
         if (fishTargetBP == BlockPos.ZERO) fishTargetBP = bp;
         BlockPos bpToMoveTo = fishTargetBP;
@@ -69,8 +83,7 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
             BlockState bsToMoveTo = level.getBlockState(bpToMoveTo.relative(dir));
             if (bsToMoveTo.is(SCBlocks.AQUARIUM) && level.random.nextFloat() > 0.5f)
             {
-                //only move if decoration allows swimming inside
-                if(bsToMoveTo.getValue(AquariumBlock.DECORATION).canFishSwimInside) bpToMoveTo = bpToMoveTo.relative(dir);
+                bpToMoveTo = bpToMoveTo.relative(dir);
             }
         }
 
@@ -96,12 +109,60 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
         }
     }
 
+    //@Override
+    public void preRemoveSideEffects(BlockPos pos, BlockState state)
+    {
+        if (this.level != null && level.getBlockEntity(pos) instanceof AquariumBlockEntity abe)
+        {
+            if (!level.isClientSide())
+                popItem(abe);
+
+            if (abe.decoration != null)
+                abe.decoration.type().onDestroyed(abe.decoration, abe, null);
+        }
+    }
+
+    private void popItem(AquariumBlockEntity abe)
+    {
+        BlockPos pos = abe.getBlockPos();
+        if (abe.getFish().is(SCTags.BUCKETABLE_FISHES))
+        {
+            ItemStack itemstack = abe.getFish().copy();
+            FishEntity entity = SCEntities.FISH.get().create(level);
+
+            entity.setFish(itemstack);
+
+            entity.setPos(
+                    abe.getBlockPos().getX() + abe.fishTarget.x + 0.5F,
+                    abe.getBlockPos().getY() + abe.fishTarget.y + 0.5F,
+                    abe.getBlockPos().getZ() + abe.fishTarget.z + 0.5F
+            );
+
+            level.addFreshEntity(entity);
+
+        }
+        else
+        {
+            ItemStack itemstack = abe.getFish().copy();
+            ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
+            itementity.setDefaultPickUpDelay();
+            level.addFreshEntity(itementity);
+            abe.setFish(ItemStack.EMPTY);
+        }
+    }
+
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries)
     {
         super.saveAdditional(tag, registries);
 
-        NBTCodecHelper.encode(MaybeStack.CODEC, new MaybeStack(getFish().copy()), tag, "fish");
+        ValueHelper.store("fish", MaybeStack.CODEC, new MaybeStack(getFish().copy()), tag);
+
+        if (decoration != null)
+            ValueHelper.store("decoration", Decoration.Placed.CODEC, decoration, tag);
+
+        if (ground != null)
+            ValueHelper.store("ground", ResourceLocation.CODEC, ground, tag);
 
         tag.putDouble("fish_target_x", fishTarget.x);
         tag.putDouble("fish_target_y", fishTarget.y);
@@ -117,13 +178,16 @@ public class AquariumBlockEntity extends BlockEntity implements TickableBlockEnt
         double y = 0;
         double z = 0;
 
+        decoration = ValueHelper.read("decoration", Decoration.Placed.CODEC, tag).orElse(null);
+        ground = ValueHelper.read("ground", ResourceLocation.CODEC, tag).orElse(null);
+
         if (tag.contains("fish_target_x")) x = tag.getDouble("fish_target_x");
         if (tag.contains("fish_target_y")) y = tag.getDouble("fish_target_y");
         if (tag.contains("fish_target_z")) z = tag.getDouble("fish_target_z");
 
         fishTarget = new Vec3(x, y, z);
 
-        fish = NBTCodecHelper.decode(MaybeStack.CODEC, tag, "fish").toStack();
+        fish = ValueHelper.read("fish", MaybeStack.CODEC, tag).orElse(MaybeStack.EMPTY).toStack();
     }
 
     @Override

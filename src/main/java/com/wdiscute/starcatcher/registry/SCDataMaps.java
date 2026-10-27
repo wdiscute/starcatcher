@@ -1,7 +1,7 @@
 package com.wdiscute.starcatcher.registry;
 
 import com.wdiscute.starcatcher.Starcatcher;
-import com.wdiscute.starcatcher.blocks.aquarium.AquariumBlock;
+import com.wdiscute.starcatcher.blocks.aquarium.Decoration;
 import com.wdiscute.starcatcher.fish.FishProperties;
 import com.wdiscute.starcatcher.fish.Treasure;
 import com.wdiscute.starcatcher.modifiers.Modifier;
@@ -19,9 +19,13 @@ import java.util.List;
 
 public interface SCDataMaps
 {
-    DataMapType<Item, AquariumBlock.Interaction> AQUARIUM_INTERACTION = DataMapType.builder(
-            Starcatcher.rl("aquarium_interaction"), Registries.ITEM, AquariumBlock.Interaction.CODEC)
-            .synced(AquariumBlock.Interaction.CODEC, true).build();
+    DataMapType<Item, Decoration> AQUARIUM_DECORATION = DataMapType.builder(
+            Starcatcher.rl("aquarium_decoration"), Registries.ITEM, Decoration.CODEC)
+            .synced(Decoration.CODEC, true).build();
+
+    DataMapType<Item, ResourceLocation> AQUARIUM_GROUND = DataMapType.builder(
+                    Starcatcher.rl("aquarium_ground"), Registries.ITEM, ResourceLocation.CODEC)
+            .synced(ResourceLocation.CODEC, true).build();
 
     DataMapType<Item, List<Modifier>> ITEM_MODIFIERS = DataMapType.builder(
             Starcatcher.rl("modifiers"), Registries.ITEM, Modifier.CODEC.listOf()

@@ -1,10 +1,11 @@
 package com.wdiscute.starcatcher.blocks.stand;
 
-import com.wdiscute.starcatcher.data.NBTCodecHelper;
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.tournament.StandMenu;
 import com.wdiscute.starcatcher.tournament.Tournament;
 import com.wdiscute.starcatcher.tournament.TournamentHandler;
+import com.wdiscute.utils.Utils;
+import com.wdiscute.utils.ValueHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -90,7 +91,7 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
             tournamentUUID = tag.getUUID("tournament_uuid");
 
         if (tag.contains("preparing_tournament"))
-            tournament = NBTCodecHelper.decode(Tournament.CODEC, tag, "preparing_tournament");
+            tournament = ValueHelper.read("preparing_tournament", Tournament.CODEC, tag).orElse(null);
 
     }
 
@@ -106,7 +107,7 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
 
         //if status is preparing, we need to save the tournament as it's not stored in SavedData yet
         if (tournament != null && tournament.status.equals(Tournament.Status.PREPARING))
-            NBTCodecHelper.encode(Tournament.CODEC, tournament, tag, "preparing_tournament");
+            ValueHelper.store("preparing_tournament", Tournament.CODEC, tournament, tag);
 
     }
 
@@ -119,15 +120,10 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
         if (!isCenter()) return;
 
         //client needs to receive current tournament and tournament history
-        Tournament tournament = NBTCodecHelper.decode(Tournament.CODEC, tag, "current_tournament");
+        this.tournament = ValueHelper.read("current_tournament", Tournament.CODEC, tag).orElse(null);
 
         if (tournament == null)
             this.tournament = Tournament.empty(UUID.randomUUID(), UUID.randomUUID(), "Unknown Owner");
-        else
-            this.tournament = tournament;
-
-        //todo add tournament history
-
     }
 
     @Override
@@ -136,9 +132,8 @@ public class StandBlockEntity extends AbstractMultiBlockEntity implements MenuPr
         CompoundTag tag = super.getUpdateTag(registries);
 
         if (tournament != null)
-            NBTCodecHelper.encode(Tournament.CODEC, tournament, tag, "current_tournament");
+            ValueHelper.store("current_tournament", Tournament.CODEC, tournament, tag);
 
-        //todo add tournament history
         return tag;
     }
 

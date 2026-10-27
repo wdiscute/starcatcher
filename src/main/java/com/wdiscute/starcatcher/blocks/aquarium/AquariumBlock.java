@@ -1,29 +1,22 @@
 package com.wdiscute.starcatcher.blocks.aquarium;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
-import com.wdiscute.starcatcher.SCTags;
-import com.wdiscute.starcatcher.fishentity.FishEntity;
-import com.wdiscute.starcatcher.registry.SCDataComponents;
-import com.wdiscute.starcatcher.registry.SCDataMaps;
+import com.wdiscute.starcatcher.Starcatcher;
 import com.wdiscute.starcatcher.registry.SCBlockEntities;
 import com.wdiscute.starcatcher.registry.SCBlocks;
 import com.wdiscute.starcatcher.blocks.TickableBlockEntity;
-import com.wdiscute.starcatcher.registry.SCEntities;
+import com.wdiscute.starcatcher.registry.SCDataMaps;
 import com.wdiscute.starcatcher.registry.items.StarcaughtBucket;
-import com.wdiscute.utils.MaybeStack;
-import com.wdiscute.utils.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -39,7 +32,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
@@ -47,7 +39,6 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.*;
 import net.neoforged.neoforge.common.Tags;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedBlock
@@ -59,8 +50,6 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     public static final BooleanProperty TOP = BooleanProperty.create("top");
     public static final BooleanProperty NORTH = BooleanProperty.create("north");
     public static final BooleanProperty SOUTH = BooleanProperty.create("south");
-    public static final EnumProperty<Decoration> DECORATION = EnumProperty.create("decoration", Decoration.class);
-    public static final EnumProperty<Ground> GROUND = EnumProperty.create("ground", Ground.class);
 
     public AquariumBlock()
     {
@@ -82,45 +71,13 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
         return Shapes.empty();
     }
 
-    @Override
-    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving)
+    @Override //1.21 only
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player)
     {
-        if (!state.is(newState.getBlock()))
-        {
-            this.popItem(level, pos);
-            super.onRemove(state, level, pos, newState, isMoving);
-        }
-    }
+        if(level.getBlockEntity(pos) instanceof AquariumBlockEntity abe)
+            abe.preRemoveSideEffects(pos, state);
 
-    private void popItem(Level level, BlockPos pos)
-    {
-        if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe && !level.isClientSide)
-        {
-            if (abe.getFish().is(SCTags.BUCKETABLE_FISHES))
-            {
-                ItemStack itemstack = abe.getFish().copy();
-                FishEntity entity = SCEntities.FISH.get().create(level);
-
-                entity.setFish(itemstack);
-
-                entity.setPos(
-                        abe.getBlockPos().getX() + abe.fishTarget.x + 0.5F,
-                        abe.getBlockPos().getY() + abe.fishTarget.y + 0.5F,
-                        abe.getBlockPos().getZ() + abe.fishTarget.z + 0.5F
-                );
-
-                level.addFreshEntity(entity);
-
-            }
-            else
-            {
-                ItemStack itemstack = abe.getFish().copy();
-                ItemEntity itementity = new ItemEntity(level, (double) pos.getX() + (double) 0.5F, (pos.getY() + 1), (double) pos.getZ() + (double) 0.5F, itemstack);
-                itementity.setDefaultPickUpDelay();
-                level.addFreshEntity(itementity);
-                abe.setFish(ItemStack.EMPTY);
-            }
-        }
+        return super.playerWillDestroy(level, pos, state, player);
     }
 
     @Override
@@ -147,7 +104,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
         return level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
     }
 
-    private static final VoxelShape BOTTOM_SHAPE = Block.box(-2, -2, -2, 18, 2, 18);
+    private static final VoxelShape BOTTOM_SHAPE = Block.box(0, 0, 0, 16, 2, 16);
 
     private static final VoxelShape NORTH_SHAPE = Block.box(0, 0, 0, 16, 16, 2);
     private static final VoxelShape SOUTH_SHAPE = Block.box(0, 0, 14, 16, 16, 16);
@@ -247,6 +204,27 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult)
     {
+        //remove
+        if (hand.equals(InteractionHand.MAIN_HAND) && stack.isEmpty() && player.isCrouching())
+        {
+            if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe)
+            {
+                if (abe.decoration != null)
+                {
+                    abe.decoration.type().onDestroyed(abe.decoration, abe, player);
+                    abe.setChanged();
+                    return ItemInteractionResult.SUCCESS;
+                }
+
+                if (abe.ground != null)
+                {
+                    abe.ground = null;
+                    abe.setChanged();
+                    return ItemInteractionResult.SUCCESS;
+                }
+            }
+        }
+
         if (stack.getItem() instanceof BucketItem bucket && !(stack.getItem() instanceof StarcaughtBucket) && !stack.is(Tags.Items.BUCKETS_EMPTY))
         {
             bucket.checkExtraContent(player, level, stack, pos);
@@ -254,11 +232,36 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
             return ItemInteractionResult.SUCCESS;
         }
 
-        Interaction interaction = SCDataMaps.getOrDefault(stack, SCDataMaps.AQUARIUM_INTERACTION, Interaction.NOTHING);
-        if (interaction.executePlace(level, pos, state, stack, player))
+        if (level.getBlockEntity(pos) instanceof AquariumBlockEntity abe)
         {
-            if (interaction.sound != null) player.playSound(interaction.sound);
-            return ItemInteractionResult.SUCCESS;
+            Decoration dec = SCDataMaps.getOrDefault(stack, SCDataMaps.AQUARIUM_DECORATION, null);
+            //if can place
+            if (dec != null && dec.place(abe, stack, player))
+            {
+                if(!level.isClientSide())
+                    level.sendBlockUpdated(pos, state, state, 0);
+
+                abe.setChanged();
+                return ItemInteractionResult.SUCCESS;
+            }
+
+            ResourceLocation ground = SCDataMaps.getOrDefault(stack, SCDataMaps.AQUARIUM_GROUND, null);
+            if (ground != null)
+            {
+                if (ground.equals(Starcatcher.MISSINGNO))
+                    if (stack.getItem() instanceof BlockItem bi)
+                        abe.ground = BuiltInRegistries.BLOCK.getKey(bi.getBlock()).withPrefix("textures/block/").withSuffix(".png");
+                    else
+                        player.displayClientMessage(Component.literal("something went wrong. report to wd on discord"), true);
+                else
+                    abe.ground = ground;
+
+                if(!level.isClientSide())
+                    level.sendBlockUpdated(pos, state, state, 0);
+
+                abe.setChanged();
+                return ItemInteractionResult.SUCCESS;
+            }
         }
 
         return super.useItemOn(stack, state, level, pos, player, hand, hitResult);
@@ -289,9 +292,6 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
         BlockState bs = defaultBlockState();
 
         bs = bs.setValue(WATERLOGGED, true);
-        bs = bs.setValue(DECORATION, Decoration.NOTHING);
-        bs = bs.setValue(GROUND, Ground.NOTHING);
-        if (!level.getBlockState(pos.below()).is(SCBlocks.AQUARIUM)) bs = bs.setValue(GROUND, Ground.SAND);
 
         bs = bs.setValue(BOTTOM, level.getBlockState(pos.below()).is(SCBlocks.AQUARIUM));
         bs = bs.setValue(TOP, level.getBlockState(pos.above()).is(SCBlocks.AQUARIUM));
@@ -307,7 +307,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder)
     {
         super.createBlockStateDefinition(builder);
-        builder.add(WATERLOGGED, DECORATION, GROUND, NORTH, SOUTH, EAST, WEST, BOTTOM, TOP);
+        builder.add(WATERLOGGED, NORTH, SOUTH, EAST, WEST, BOTTOM, TOP);
     }
 
     @Override
@@ -315,15 +315,7 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     {
         super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
 
-        Decoration decoration = state.getValue(DECORATION);
-        Ground ground = state.getValue(GROUND);
-
         BlockState stateBellow = level.getBlockState(pos.below());
-        Decoration decorationBelow = stateBellow.is(SCBlocks.AQUARIUM) ? stateBellow.getValue(DECORATION) : Decoration.NOTHING;
-        Ground groundBelow = stateBellow.is(SCBlocks.AQUARIUM) ? stateBellow.getValue(GROUND) : Ground.NOTHING;
-
-        BlockState stateAbove = level.getBlockState(pos.above());
-        Decoration decorationAbove = stateAbove.is(SCBlocks.AQUARIUM) ? stateAbove.getValue(DECORATION) : Decoration.NOTHING;
 
         //update connections
         state = state.setValue(BOTTOM, level.getBlockState(pos.below()).is(SCBlocks.AQUARIUM));
@@ -334,35 +326,6 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
         state = state.setValue(SOUTH, level.getBlockState(pos.south()).is(SCBlocks.AQUARIUM));
 
         level.setBlockAndUpdate(pos, state);
-
-        //update ground
-        if (!ground.isEmpty())
-            if (stateBellow.is(SCBlocks.AQUARIUM))
-                level.setBlockAndUpdate(pos, state.setValue(GROUND, Ground.NOTHING));
-
-        if (ground.isEmpty())
-            if (!stateBellow.is(SCBlocks.AQUARIUM))
-                level.setBlockAndUpdate(pos, state.setValue(GROUND, Ground.SAND));
-
-        //update kelp top
-        if (decoration == Decoration.KELP_TOP)
-            if (decorationBelow != Decoration.KELP && ground.isEmpty())
-                level.setBlockAndUpdate(pos, state.setValue(DECORATION, Decoration.NOTHING));
-
-        //update kelp
-        if (decoration == Decoration.KELP)
-            if (decorationAbove != Decoration.KELP && decorationAbove != Decoration.KELP_TOP)
-                level.setBlockAndUpdate(pos, state.setValue(DECORATION, Decoration.NOTHING));
-
-        //update kelp
-        if (decoration == Decoration.KELP)
-            if (decorationBelow != Decoration.KELP && ground.isEmpty())
-                level.setBlockAndUpdate(pos, state.setValue(DECORATION, Decoration.NOTHING));
-
-        //update seagrass/castle/cave
-        if (decoration.requiresGround() && ground.isEmpty())
-            level.setBlockAndUpdate(pos, state.setValue(DECORATION, Decoration.NOTHING));
-
     }
 
     @Override
@@ -393,240 +356,5 @@ public class AquariumBlock extends BaseEntityBlock implements SimpleWaterloggedB
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> blockEntityType)
     {
         return TickableBlockEntity.getTicketHelper(level);
-    }
-
-    public enum Ground implements StringRepresentable
-    {
-        NOTHING("nothing"),
-        SAND("sand"),
-        RED_SAND("red_sand"),
-        GRAVEL("gravel"),
-        STONE("stone");
-
-        final String name;
-
-        Ground(String name)
-        {
-            this.name = name;
-        }
-
-        @Override
-        public @NotNull String getSerializedName()
-        {
-            return name;
-        }
-
-        public boolean isEmpty()
-        {
-            return this == NOTHING;
-        }
-    }
-
-    public enum Decoration implements StringRepresentable
-    {
-        NOTHING("nothing", false, true),
-        CLAM("clam", true, true),
-        CONCH("conch", true, true),
-        SEAGRASS("seagrass", true, true),
-        KELP("kelp", false, true),
-        KELP_TOP("kelp_top", false, true),
-        CAVE("cave", true, false),
-        CASTLE_SAND("castle_sand", true, false),
-        CASTLE_RED_SAND("castle_red_sand", true, false);
-
-        final String name;
-        final boolean requiresGround;
-        final boolean canFishSwimInside;
-
-        Decoration(String name, boolean requiresGround, boolean canFishSwimInside)
-        {
-            this.name = name;
-            this.requiresGround = requiresGround;
-            this.canFishSwimInside = canFishSwimInside;
-        }
-
-        public boolean requiresGround()
-        {
-            return requiresGround;
-        }
-
-        @Override
-        public @NotNull String getSerializedName()
-        {
-            return name;
-        }
-
-        public boolean isEmpty(Object... o)
-        {
-            return this == NOTHING;
-        }
-    }
-
-    public enum Interaction implements StringRepresentable
-    {
-        NOTHING("nothing", null, Utils::alwaysFalse),
-
-        PLACE_FISH("place_fish", SoundEvents.DOLPHIN_SPLASH, (l, bp, bs, is, p) ->
-        {
-            if (l.getBlockEntity(bp) instanceof AquariumBlockEntity abe)
-            {
-                if (!abe.getFish().isEmpty()) return false;
-                if (SCDataComponents.has(is, SCDataComponents.BUCKETED_FISH))
-                {
-                    abe.setFish(SCDataComponents.get(is, SCDataComponents.BUCKETED_FISH).toStack());
-                    if (is.getItem() instanceof BucketItem)
-                    {
-                        ItemStack emptySuccessItem = BucketItem.getEmptySuccessItem(is, p);
-                        if (p.getMainHandItem().equals(is))
-                            p.setItemInHand(InteractionHand.MAIN_HAND, emptySuccessItem);
-                        else
-                            p.setItemInHand(InteractionHand.OFF_HAND, emptySuccessItem);
-                    }
-                }
-                else
-                    abe.setFish(is);
-                return true;
-            }
-
-            return false;
-        }),
-
-        PLACE_FISH_CREATIVE("place_fish_creative", SoundEvents.DOLPHIN_SPLASH, (l, bp, bs, is, p) ->
-        {
-            if (!p.isCreative())
-            {
-                p.displayClientMessage(Component.translatable("block.starcatcher.aquarium.dead_fish"), true);
-                return false;
-            }
-
-            if (l.getBlockEntity(bp) instanceof AquariumBlockEntity abe)
-            {
-                abe.setFish(is);
-                return true;
-            }
-
-            return false;
-
-        }),
-
-        RETRIEVE_FISH("remove_fish", SoundEvents.DOLPHIN_SPLASH, (l, bp, bs, is, p) ->
-        {
-            if (l.getBlockEntity(bp) instanceof AquariumBlockEntity abe)
-            {
-                if (abe.getFish().isEmpty()) return false;
-                is.shrink(1);
-
-                ItemStack bucketToReturn = new ItemStack(StarcaughtBucket.getBucketForStack(abe.fish));
-
-                SCDataComponents.set(bucketToReturn, SCDataComponents.BUCKETED_FISH, new MaybeStack(abe.fish));
-                p.addItem(bucketToReturn);
-
-                abe.setFish(ItemStack.EMPTY);
-                return true;
-            }
-
-            return false;
-        }),
-
-        PLACE_SAND("place_sand", SoundEvents.SAND_PLACE, (l, bp, bs, is, p) -> placeGround(l, bp, bs, Ground.SAND)),
-        PLACE_RED_SAND("place_red_sand", SoundEvents.SAND_PLACE, (l, bp, bs, is, p) -> placeGround(l, bp, bs, Ground.RED_SAND)),
-        PLACE_STONE("place_stone", SoundEvents.STONE_PLACE, (l, bp, bs, is, p) -> placeGround(l, bp, bs, Ground.STONE)),
-        PLACE_GRAVEL("place_gravel", SoundEvents.GRAVEL_PLACE, (l, bp, bs, is, p) -> placeGround(l, bp, bs, Ground.GRAVEL)),
-
-        PLACE_KELP("place_kelp", SoundEvents.WET_GRASS_PLACE, (l, bp, bs, is, p) ->
-        {
-            if (bs.getValue(DECORATION) == Decoration.KELP) return false;
-            if (bs.getValue(DECORATION) == Decoration.KELP_TOP) return false;
-            if (!bs.getValue(GROUND).isEmpty())
-                return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.KELP_TOP));
-
-            BlockState stateUnder = l.getBlockState(bp.below());
-            if (stateUnder.is(SCBlocks.AQUARIUM))
-                if (stateUnder.getValue(DECORATION) == Decoration.KELP_TOP)
-                {
-                    l.setBlockAndUpdate(bp.below(), stateUnder.setValue(DECORATION, Decoration.KELP));
-                    return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.KELP_TOP));
-                }
-
-            return false;
-        }),
-
-        PLACE_SEAGRASS("place_seagrass", SoundEvents.WET_GRASS_PLACE, (l, bp, bs, is, p) ->
-        {
-            if (!bs.getValue(GROUND).isEmpty())
-                return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.SEAGRASS));
-            else return false;
-        }),
-
-        PLACE_CLAM("place_clam", SoundEvents.BONE_BLOCK_PLACE, (l, bp, bs, is, p) ->
-        {
-            if (!bs.getValue(GROUND).isEmpty())
-                return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.CLAM));
-            else return false;
-        }),
-
-        PLACE_CONCH("place_conch", SoundEvents.BONE_BLOCK_PLACE, (l, bp, bs, is, p) ->
-        {
-            if (!bs.getValue(GROUND).isEmpty())
-                return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.CONCH));
-            else return false;
-        }),
-
-        BUILD_CASTLE("build_castle", SoundEvents.SAND_HIT, (l, bp, bs, is, p) ->
-        {
-            if (!bs.getValue(GROUND).isEmpty())
-            {
-                Ground ground = bs.getValue(GROUND);
-                if (ground == Ground.SAND && bs.getValue(DECORATION) != Decoration.CASTLE_SAND)
-                    return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.CASTLE_SAND));
-
-                if (ground == Ground.RED_SAND && bs.getValue(DECORATION) != Decoration.CASTLE_RED_SAND)
-                    return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.CASTLE_RED_SAND));
-            }
-            return false;
-        }),
-
-        BUILD_CAVE("build_cave", SoundEvents.STONE_HIT, (l, bp, bs, is, p) ->
-        {
-            if (bs.getValue(GROUND) == Ground.STONE && bs.getValue(DECORATION) != Decoration.CAVE)
-                return l.setBlockAndUpdate(bp, bs.setValue(DECORATION, Decoration.CAVE));
-
-            return false;
-        });
-
-        final String name;
-        final SoundEvent sound;
-        final Consumer<Level, BlockPos, BlockState, ItemStack, Player, Boolean> place;
-
-        public static final Codec<Interaction> CODEC = StringRepresentable.fromEnum(Interaction::values);
-
-        Interaction(String name, SoundEvent sound, Consumer<Level, BlockPos, BlockState, ItemStack, Player, Boolean> place)
-        {
-            this.name = name;
-            this.sound = sound;
-            this.place = place;
-        }
-
-        static boolean placeGround(Level l, BlockPos pos, BlockState bs, Ground ground)
-        {
-            if (bs.getValue(GROUND) == ground) return false;
-            return l.setBlockAndUpdate(pos, bs.setValue(GROUND, ground));
-        }
-
-        @Override
-        public @NotNull String getSerializedName()
-        {
-            return name;
-        }
-
-        public boolean executePlace(Level level, BlockPos pos, BlockState state, ItemStack is, Player player)
-        {
-            return place.place(level, pos, state, is, player);
-        }
-    }
-
-    public interface Consumer<P1, P2, P3, P4, P5, R>
-    {
-        R place(P1 p1, P2 p2, P3 p3, P4 p4, P5 p5);
     }
 }

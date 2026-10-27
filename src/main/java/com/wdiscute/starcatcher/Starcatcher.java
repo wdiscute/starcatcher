@@ -2,10 +2,12 @@ package com.wdiscute.starcatcher;
 
 import com.mojang.logging.LogUtils;
 import com.wdiscute.libtooltips.Tooltips;
+import com.wdiscute.starcatcher.registry.interaction.AbstractInteraction;
 import com.wdiscute.starcatcher.fishentity.SCArmPoses;
 import com.wdiscute.starcatcher.modifiers.Modifier;
 import com.wdiscute.starcatcher.registry.fishrestrictions.AbstractFishRestriction;
 import com.wdiscute.starcatcher.registry.fishrestrictions.SCFishRestrictions;
+import com.wdiscute.starcatcher.registry.interaction.SCAquariumInteractions;
 import com.wdiscute.starcatcher.registry.tackleskin.AbstractTackleSkin;
 import com.wdiscute.starcatcher.registry.tackleskin.SCTackleSkins;
 import com.wdiscute.starcatcher.registry.sweetspotbehaviour.SCSweetSpotsBehaviour;
@@ -58,6 +60,9 @@ public class Starcatcher
     public static final ResourceKey<Registry<AbstractTackleSkin>> TACKLE_SKIN =
             ResourceKey.createRegistryKey(Starcatcher.rl("bobber_skin"));
 
+    public static final ResourceKey<Registry<AbstractInteraction>> AQUARIUM_INTERACTION_KEY =
+            ResourceKey.createRegistryKey(Starcatcher.rl("aquarium_interaction"));
+
     //registry
     public static final Registry<AbstractFishRestriction> FISH_RESTRICTIONS_REGISTRY = new RegistryBuilder<>(FISH_RESTRICTIONS)
             .sync(true)
@@ -72,6 +77,11 @@ public class Starcatcher
     public static final Registry<AbstractTackleSkin> TACKLE_SKIN_REGISTRY = new RegistryBuilder<>(TACKLE_SKIN)
             .sync(true)
             .defaultKey(Starcatcher.BASE)
+            .create();
+
+    public static final Registry<AbstractInteraction> AQUARIUM_INTERACTION = new RegistryBuilder<>(AQUARIUM_INTERACTION_KEY)
+            .sync(true)
+            .defaultKey(Starcatcher.rl("simple"))
             .create();
 
     public static ResourceLocation rl(String s)
@@ -102,6 +112,7 @@ public class Starcatcher
         SCDataEntries.register(modEventBus);
         SCCriterionTriggers.register(modEventBus);
         SCFeatures.register(modEventBus);
+        SCAquariumInteractions.register(modEventBus);
 
         Modifier.registerCatch();
         Modifier.registerMinigame();

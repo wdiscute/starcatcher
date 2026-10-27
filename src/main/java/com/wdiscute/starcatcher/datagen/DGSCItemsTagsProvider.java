@@ -13,6 +13,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -183,19 +184,28 @@ public class DGSCItemsTagsProvider extends ItemTagsProvider
         RODS_REGISTRY.getEntries().forEach(o -> tag(SCTags.RODS).add(o.get()));
         RODS_REGISTRY.getEntries().forEach(o -> tag(Tags.Items.TOOLS_FISHING_ROD).add(o.get()));
 
-        tag(SCTags.AQUARIUM_INTERACTIONS)
-                .add(Items.DIAMOND_PICKAXE)
-                .add(Items.DIAMOND_SHOVEL)
-                .add(Items.STONE)
-                .add(Items.GRAVEL)
-                .add(Items.SAND)
-                .add(Items.RED_SAND)
-                .add(Items.KELP)
-                .add(Items.SEAGRASS)
-                .addTag(Tags.Items.BUCKETS_EMPTY)
-                .add(AURORA.get())
-                .add(CONCH.asItem())
-                .add(CLAM.asItem())
+        tag(SCTags.AQUARIUM_GROUND)
+                .add(Items.COBBLESTONE)
+                .add(Items.AMETHYST_BLOCK)
+                .add(Items.DEEPSLATE)
+                .add(Items.MOSS_BLOCK)
+                .add(Items.MOSSY_COBBLESTONE)
+                .add(Items.MOSSY_STONE_BRICKS)
+                .addTag(ItemTags.WOOL)
+                .addTag(ItemTags.TERRACOTTA)
+                .addTag(ItemTags.LOGS)
+                .addTag(ItemTags.LEAVES)
+                .addTag(Tags.Items.GLAZED_TERRACOTTAS)
+                .addTag(Tags.Items.CONCRETES)
+                .addTag(Tags.Items.CONCRETE_POWDERS)
+                .addTag(Tags.Items.GRAVELS)
+                .addTag(Tags.Items.SANDS)
+                .addTag(Tags.Items.STONES)
+                .addTag(Tags.Items.ORES)
+                .addTag(Tags.Items.NETHERRACKS)
+                .addTag(Tags.Items.GLASS_BLOCKS)
+                .addTag(Tags.Items.STRIPPED_LOGS)
+                .addTag(Tags.Items.STRIPPED_WOODS)
         ;
 
         //hats

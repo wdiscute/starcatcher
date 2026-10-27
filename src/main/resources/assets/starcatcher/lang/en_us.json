@@ -639,6 +639,7 @@
 
   "block.starcatcher.aquarium" : "Aquarium",
   "block.starcatcher.aquarium.dead_fish" : "Dead fish don't go in an aquarium...",
+  "block.starcatcher.aquarium.needs_ground" : "The aquarium needs a ground block to place this...",
 
   "block.starcatcher.fisherman_hat_black": "Black Fisherman's Hat",
   "block.starcatcher.fisherman_hat_blue": "Blue Fisherman's Hat",

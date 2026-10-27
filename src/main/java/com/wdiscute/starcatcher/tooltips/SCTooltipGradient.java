@@ -51,7 +51,7 @@ public class SCTooltipGradient
         int g2 = secondColor.getMiddle();
         int b2 = secondColor.getRight();
 
-        //ThapPGT bit shifting bs
+        //ThapPGT bit shifting rl
         int r = (int) (r1 + (r2 - r1) * blend);
         int g = (int) (g1 + (g2 - g1) * blend);
         int b = (int) (b1 + (b2 - b1) * blend);

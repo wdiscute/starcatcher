@@ -1,0 +1,25 @@
+{
+  "values": [
+    "minecraft:cobblestone",
+    "minecraft:amethyst_block",
+    "minecraft:deepslate",
+    "minecraft:moss_block",
+    "minecraft:mossy_cobblestone",
+    "minecraft:mossy_stone_bricks",
+    "#minecraft:wool",
+    "#minecraft:terracotta",
+    "#minecraft:logs",
+    "#minecraft:leaves",
+    "#c:glazed_terracottas",
+    "#c:concretes",
+    "#c:concrete_powders",
+    "#c:gravels",
+    "#c:sands",
+    "#c:stones",
+    "#c:ores",
+    "#c:netherracks",
+    "#c:glass_blocks",
+    "#c:stripped_logs",
+    "#c:stripped_woods"
+  ]
+}
