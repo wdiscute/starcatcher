@@ -64,19 +64,17 @@ public class SeasonRestriction extends AbstractFishRestriction
 
         //Serene Seasons check
         if (ModList.get().isLoaded("sereneseasons"))
-        {
             currentSeason = SereneSeasonsCompat.getSeason(level);
-        }
 
         //Ecliptic Seasons check
         if (ModList.get().isLoaded("eclipticseasons"))
-        {
             currentSeason = EclipticSeasonsCompat.getSeason(level);
-        }
 
-        if (currentSeason.equals(Seasons.ALL)) return 0;
+        if (currentSeason.equals(Seasons.ALL))
+            return 0;
 
-        if (seasons.containsKey(currentSeason)) return seasons.get(currentSeason);
+        if (seasons.containsKey(currentSeason))
+            return seasons.get(currentSeason);
 
         //not in season
         return -9999;
