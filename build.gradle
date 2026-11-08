@@ -52,6 +52,12 @@ repositories {
         url = 'https://nikdo53.github.io'
     }
 
+    //Kaupen
+    maven {
+        name = "Kaupenjoe"
+        url = "https://maven.kaupenjoe.net/releases"
+    }
+
     //wd github
     maven {
         name = 'wd Maven'
